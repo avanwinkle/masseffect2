@@ -1,0 +1,141 @@
+#config_version=5
+mode:
+  start_events:
+    start_mode_shopping
+  stop_events:
+    stop_mode_shopping
+  priority: 400
+
+event_player:
+  mode_shopping_started: enable_storetargets
+  store_complete: reset_storetargets
+  slide_store_enabled_slide_removed: post_store_complete
+  all_storetargets_storetarget_profile_hit_complete: enable_store_shot
+
+queue_relay_player:
+  show_store:
+    post: start_store
+    wait_for: post_store_complete
+
+queue_event_player:
+  lock_ball_for_store_storeshot_profile_lit_hit:
+    queue_event: show_store
+    events_when_finished: store_complete
+
+shot_groups:
+  all_storetargets:
+    shots: showtarget1, showtarget2, showtarget3, showtarget4, showtarget5
+    profile: storetarget_profile
+    enable_events: enable_storetargets
+    reset_events: reset_storetargets
+
+shot_profiles:
+  storetarget_profile:
+    states:
+      - name: unhit
+        show: storetarget_unhit
+      - name: hit
+        show: storetarget_hit
+  storeshot_profile:
+    advance_on_hit: false
+    show_when_disabled: false
+    states:
+      - name: unlit
+        show: storeunlit_show
+      - name: lit
+        show: storelit_show
+
+shots:
+  lock_ball_for_store:
+    switch: s_kickback
+    profile: storeshot_profile
+    advance_events: enable_store_shot
+    reset_events: store_complete
+    enable_events: enable_storetargets
+    disable_events: disable_storetargets
+  showtarget1:
+    switch: s_target1
+    show_tokens:
+      led: l_standup_1
+  showtarget2:
+    switch: s_target2
+    show_tokens:
+      led: l_standup_2
+  showtarget3:
+    switch: s_target3
+    show_tokens:
+      led: l_standup_3
+  showtarget4:
+    switch: s_target4
+    show_tokens:
+      led: l_standup_4
+  showtarget5:
+    switch: s_target5
+    show_tokens:
+      led: l_standup_5
+
+shows:
+  storetarget_unhit:
+    - lights:
+        (led): black
+  storetarget_hit:
+    - lights:
+        (led): white
+  storelit_show:
+    - time: 0
+      lights:
+        l_store: white
+    - time: 1
+      lights:
+        l_store: black
+  storeunlit_show:
+    - lights:
+        l_store: black
+
+slide_player:
+  start_store:
+    store_enabled_slide:
+      expire: 3s
+
+slides:
+  store_enabled_slide:
+    widgets:
+      - type: text
+        text: PURCHASE
+        style: dmd_med
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: UPGRADES
+        style: dmd_med
+        anchor_y: top
+        y: middle-2
+
+# sound_player:
+#   start_store:
+#     shep_fave_store:
+#       action: play
+
+# sound_pools:
+#   shep_fave_store:
+#     type: random_force_all
+#     sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
+
+# sounds:
+#   shep_fave_store_1:
+#     file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
+#     track: voice
+#   shep_fave_store_2:
+#     file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
+#     track: voice
+#   shep_fave_store_3:
+#     file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
+#     track: voice
+#   shep_fave_store_4:
+#     file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
+#     track: voice
+
+scoring:
+  all_storetargets_hit:
+    credits: 1000
+    block: false

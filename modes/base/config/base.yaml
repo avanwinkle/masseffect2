@@ -1,0 +1,236 @@
+# config_version=5
+mode:
+  start_events: ball_starting
+  priority: 100
+
+
+achievements:
+  collectorship:
+    enable_events: enable_collectorship
+
+event_player:
+  mode_base_started:
+    - start_mode_recruitbase
+    - reenable_nonrecruit_modes
+    # - enable_collectorship
+  disable_nonrecruit_modes:
+    - stop_mode_overlord
+    - stop_mode_arrival
+    - stop_mode_shopping
+  reenable_nonrecruit_modes:
+    - start_mode_shopping
+  # Prior to collector attack: overlord; after: arrival
+  reenable_nonrecruit_modes{current_player.mission_count < 4}:
+    - start_mode_overlord
+  reenable_nonrecruit_modes{current_player.mission_count > 5}:
+    - start_mode_arrival
+  # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
+  player_squadmates_count{current_player.squadmates_count == 6}:
+    - enable_collectorship
+
+accruals:
+  recruitment_missions:
+    persist_state: true
+    reset_on_complete: false
+    events:
+      - recruit_garrus_complete
+      - recruit_grunt_complete
+      - recruit_jack_complete
+      - recruit_kasumi_complete
+      - recruit_legion_complete
+      - recruit_mordin_complete
+      - recruit_samara_complete
+      - recruit_tali_complete
+      - recruit_thane_complete
+      - recruit_zaeed_complete
+counters:
+  recruited_count:
+    starting_count: 2
+    count_events: recruit_mission_success
+    count_complete_value: 12
+    disable_on_complete: true
+    reset_on_complete: false
+    persist_state: true
+  mission_count:
+    starting_count: 0
+    count_events: recruit_mission_success
+    persist_state: true
+
+scoring:
+  sw_target:
+    score: 100
+  levelup:
+    level: 1
+    available_missions: -1
+  enable_collectorship:
+    available_missions: 1
+
+slide_player:
+  mode_base_started:
+    base_slide:
+      target: dmd
+  levelup:
+    levelup_slide:
+      expire: 5s
+
+
+slides:
+  base_slide:
+    widgets:
+      - type: text
+        text: (score)
+        number_grouping: true
+        min_digits: 2
+        font_size: 14
+        style: dmd_big
+        anchor_y: top
+        y: top-6
+      - type: text
+        text: LVL (player|level)
+        style: dmd_small
+        anchor_x: left
+        anchor_y: bottom
+        x: left+2
+        y: 2
+      - type: text
+        text: BALL (ball)
+        style: dmd_small
+        x: right-2
+        y: 2
+        anchor_x: right
+        anchor_y: bottom
+  levelup_slide:
+    widgets:
+      - type: text
+        text: LEVEL UP!
+        font_size: 14
+        style: dmd_big
+        anchor_y: bottom
+        y: 10
+
+
+
+widget_player:
+  mode_base_started:
+    squad_debug:
+      target: window
+    vars_debug:
+      target: window
+  levelup{current_player.last_mission=="__recruitment__"}:
+    levelup_recruit:
+      slide: levelup_slide
+  levelup{current_player.last_mission!="__recruitment__"}:
+    levelup_mission:
+      slide: levelup_slide
+
+
+widgets:
+  levelup_mission:
+    - type: text
+      text: (last_mission)
+      style: dmd_small
+      anchor_y: bottom
+      y: 3
+  levelup_recruit:
+    - type: text
+      text: (last_recruit) Recruited
+      style: dmd_small
+      anchor_y: bottom
+      y: 3
+  squad_debug:
+    - type: text
+      text: "SQUAD STATUS:"
+      style: squad_debug_style
+      x: 10
+      y: top-24
+    - type: text
+      text: "Garrus: (player|status_garrus)"
+      style: squad_debug_style
+      x: 160
+      y: top-24
+    - type: text
+      text: "Grunt: (player|status_grunt)"
+      style: squad_debug_style
+      x: 260
+      y: top-24
+    - type: text
+      text: "Jack: (player|status_jack)"
+      style: squad_debug_style
+      y: top-24
+      x: 360
+    - type: text
+      text: "Jacob: (player|status_jacob)"
+      style: squad_debug_style
+      x: 460
+      y: top-24
+    - type: text
+      text: "Kasumi: (player|status_kasumi)"
+      style: squad_debug_style
+      x: 560
+      y: top-24
+    - type: text
+      text: "Legion: (player|status_legion)"
+      style: squad_debug_style
+      y: top-24
+      x: 660
+    - type: text
+      text: "Miranda: (player|status_miranda)"
+      style: squad_debug_style
+      y: top-44
+      x: 160
+    - type: text
+      text: "Mordin: (player|status_mordin)"
+      style: squad_debug_style
+      y: top-44
+      x: 260
+    - type: text
+      text: "Samara: (player|status_samara)"
+      style: squad_debug_style
+      y: top-44
+      x: 360
+    - type: text
+      text: "Tali: (player|status_tali)"
+      style: squad_debug_style
+      y: top-44
+      x: 460
+    - type: text
+      text: "Thane: (player|status_thane)"
+      style: squad_debug_style
+      y: top-44
+      x: 560
+    - type: text
+      text: "Zaeed: (player|status_zaeed)"
+      style: squad_debug_style
+      y: top-44
+      x: 660
+  vars_debug:
+    - type: text
+      text: "PLAYER VARS:"
+      style: squad_debug_style
+      x: 10
+      y: top-84
+    - type: text
+      text: "Level: (player|level)"
+      style: squad_debug_style
+      x: 160
+      y: top-84
+    - type: text
+      text: "Squadmates: (player|squadmates_count)"
+      style: squad_debug_style
+      x: 360
+      y: top-84
+    - type: text
+      text: "Credits: (player|credits)"
+      style: squad_debug_style
+      x: 560
+      y: top-84
+    - type: text
+      text: "Missions Lit: (player|available_missions)"
+      style: squad_debug_style
+      x: 160
+      y: top-104
+    - type: text
+      text: "Recruits Lit: (player|recruits_lit_count)"
+      style: squad_debug_style
+      x: 360
+      y: top-104

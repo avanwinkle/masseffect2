@@ -1,0 +1,94 @@
+#config_version=4
+mode:
+  start_events: start_mode_recruitgrunt
+  stop_events: stop_mode_recruitgrunt
+  priority: 500
+
+event_player:
+  grunt_shots_complete: recruit_grunt_complete
+  recruit_grunt_complete:
+    recruit_mission_success:
+      squadmate: grunt
+    stop_mode_recruitgrunt:
+      delay: 2s
+  timer_grunttimer_complete: stop_mode_recruitgrunt
+  mode_recruitgrunt_stopping: recruit_mission_ended
+
+shot_groups:
+  grunt_shots:
+    shots: grunt_left_ramp, grunt_left_orbit, grunt_right_ramp, grunt_right_orbit, grunt_kickback
+    profile: grunt_shot_profile
+
+shot_profiles:
+  grunt_shot_profile:
+    states:
+      - name: lit
+        show: grunt_lit_show
+      - name: hit
+        show: off
+
+shots:
+  grunt_left_ramp:
+    switch: s_left_ramp_exit
+    profile: grunt_shot_profile
+    show_tokens:
+      led: l_left_ramp_shield_r
+  grunt_left_orbit:
+    switch: s_left_orbit
+    profile: grunt_shot_profile
+    show_tokens:
+      led: l_left_orbit_shield_r
+  grunt_right_ramp:
+    switch: s_right_ramp_exit
+    profile: grunt_shot_profile
+    show_tokens:
+      led: l_right_ramp_shield_r
+  grunt_right_orbit:
+    switch: s_right_orbit
+    profile: grunt_shot_profile
+    show_tokens:
+      led: l_right_orbit_shield_r
+  grunt_kickback:
+    switch: s_kickback
+    profile: grunt_shot_profile
+    show_tokens:
+      led: l_kickback_shield_r
+
+shows:
+  grunt_lit_show:
+    - time: 0
+      leds:
+        (led): orange
+    - time: +1
+      leds:
+        (led): black
+
+timers:
+  grunttimer:
+    start_value: 12
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: yes
+    control_events:
+      - event: grunt_shots_hit
+        action: add
+        value: 2
+      - event: recruit_grunt_complete
+        action: stop
+
+widget_player:
+  timer_grunttimer_start: time_remaining_widget
+  timer_grunttimer_tick:
+    time_remaining_widget:
+      action: update
+
+widgets:
+  time_remaining_widget:
+    - type: text
+      text: (ticks_remaining)
+      anchor_x: left
+      anchor_y: top
+      x: left+2
+      y: top-2
+      font_size: 8

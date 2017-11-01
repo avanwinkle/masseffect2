@@ -1,0 +1,29 @@
+#config_version=4
+mode:
+  start_events: start_mode_collectorship_base
+  stop_events: stop_mode_collectorship_base
+  priority: 300
+
+event_player:
+  mode_collectorship_base_started:
+    - start_mode_collectorship_ambush
+  mode_collectorship_ambush_complete:
+    - start_mode_collectorship_husk
+  mode_collectorship_husk_complete:
+    - start_mode_collectorship_praetorian
+  mode_collectorship_praetorian_complete:
+    - start_mode_collectorship_ambush
+  mode_collectorship_praetorian_failed:
+    - start_mode_collectorship_husk
+
+slide_player:
+  mode_collectorship_base_started:
+    collectorship_started_slide:
+      expire: 5s
+
+slides:
+  collectorship_started_slide:
+    widgets:
+      - type: text
+        text: Collector Ship
+        style: dmd_small

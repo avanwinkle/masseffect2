@@ -1,0 +1,125 @@
+#config_version=5
+
+mode:
+  start_events: start_mode_missionselect
+  stop_events: stop_mode_missionselect, missionselect_item_selected
+  priority: 1000
+  code: mpf.modes.carousel.code.carousel.Carousel
+
+mode_settings:
+  selectable_items: pass, suicide, garrus, grunt, jack, kasumi, legion, mordin, samara, tali, thane, zaeed,
+  select_item_events: s_action_button_active
+  next_item_events: s_flipper_right_active, missionselect_skip_forwards, mode_missionselect_started
+  previous_item_events: s_flipper_left_active, missionselect_skip_backwards
+
+event_player:
+  mode_missionselect_started: flippers_off
+  mode_missionselect_stopped: flippers_on
+  missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="backwards"}: missionselect_skip_backwards
+  # This is all an excessive amount of logic to skip recruitment missions that aren't available
+  missionselect_garrus_highlighted{current_player.status_garrus!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_garrus_highlighted{current_player.status_garrus!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_grunt_highlighted{current_player.status_grunt!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_grunt_highlighted{current_player.status_grunt!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_jack_highlighted{current_player.status_jack!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_jack_highlighted{current_player.status_jack!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_kasumi_highlighted{current_player.status_kasumi!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_kasumi_highlighted{current_player.status_kasumi!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_legion_highlighted{current_player.status_legion!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_legion_highlighted{current_player.status_legion!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_mordin_highlighted{current_player.status_mordin!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_mordin_highlighted{current_player.status_mordin!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_samara_highlighted{current_player.status_samara!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_samara_highlighted{current_player.status_samara!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_tali_highlighted{current_player.status_tali!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_tali_highlighted{current_player.status_tali!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_thane_highlighted{current_player.status_thane!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_thane_highlighted{current_player.status_thane!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_zaeed_highlighted{current_player.status_zaeed!=1 and direction=="forwards"}: missionselect_skip_forwards
+  missionselect_zaeed_highlighted{current_player.status_zaeed!=1 and direction=="backwards"}: missionselect_skip_backwards
+  missionselect_garrus_highlighted{current_player.status_garrus==1}: set_last_recruit_garrus
+  missionselect_grunt_highlighted{current_player.status_grunt==1}: set_last_recruit_grunt
+  missionselect_jack_highlighted{current_player.status_jack==1}: set_last_recruit_jack
+  missionselect_kasumi_highlighted{current_player.status_kasumi==1}: set_last_recruit_kasumi
+  missionselect_legion_highlighted{current_player.status_legion==1}: set_last_recruit_legion
+  missionselect_mordin_highlighted{current_player.status_mordin==1}: set_last_recruit_mordin
+  missionselect_samara_highlighted{current_player.status_samara==1}: set_last_recruit_samara
+  missionselect_tali_highlighted{current_player.status_tali==1}: set_last_recruit_tali
+  missionselect_thane_highlighted{current_player.status_thane==1}: set_last_recruit_thane
+  missionselect_zaeed_highlighted{current_player.status_zaeed==1}: set_last_recruit_zaeed
+
+slide_player:
+  missionselect_pass_highlighted{current_player.missionselect_init==0}: missionselect_intro_slide
+  missionselect_pass_highlighted{current_player.missionselect_init!=0}: missionselect_pass_slide
+  missionselect_suicide_highlighted: missionselect_suicide_slide
+  missionselect_garrus_highlighted: missionselect_recruit_slide
+  missionselect_grunt_highlighted: missionselect_recruit_slide
+  missionselect_jack_highlighted: missionselect_recruit_slide
+  missionselect_kasumi_highlighted: missionselect_recruit_slide
+  missionselect_legion_highlighted: missionselect_recruit_slide
+  missionselect_mordin_highlighted: missionselect_recruit_slide
+  missionselect_samara_highlighted: missionselect_recruit_slide
+  missionselect_tali_highlighted: missionselect_recruit_slide
+  missionselect_thane_highlighted: missionselect_recruit_slide
+  missionselect_zaeed_highlighted: missionselect_recruit_slide
+
+slides:
+  missionselect_intro_slide:
+    priority: 100
+    widgets:
+      - type: text
+        text: Select a Mission
+        style: dmd_big
+        anchor_y: bottom
+        y: bottom+45%
+      - type: text
+        text: < FLIPPERS >
+        anchor_y: bottom
+        style: dmd_small
+        y: 3
+  missionselect_recruit_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: (last_recruit)
+        style: dmd_big
+        anchor_y: bottom
+        y: bottom+45%
+      - type: text
+        text: Start Recruitment Mission
+        style: dmd_small
+        anchor_y: bottom
+        y: 3
+  missionselect_suicide_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: LAUNCH THE
+        style: dmd_small
+        bold: true
+        anchor_y: top
+        y: top-3
+      - type: text
+        text: SUICIDE MISSION
+        font_size: 14
+        style: dmd_big
+        anchor_y: bottom
+        y: 3
+  missionselect_pass_slide:
+    priority: 10
+    widgets:
+      - type: text
+        text: Pass for Now
+        style: dmd_big
+        anchor_y: bottom
+        y: bottom+45%
+
+
+scoring:
+  mode_missionselect_started:
+    missionselect_init:
+      action: set
+      score: 0
+  slide_missionselect_recruit_slide_active:
+    missionselect_init: 1

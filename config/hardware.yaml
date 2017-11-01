@@ -1,0 +1,498 @@
+# config_version=5
+# Game of Thrones [Pro]
+
+machine:
+  balls_installed: 5
+  min_balls: 1
+
+
+virtual_platform_start_active_switches:
+  s_trough1
+  s_trough2
+  s_trough3
+  s_trough4
+  s_trough5
+  s_trough6
+
+
+mpf-mc:
+  fps: 60
+
+window:
+  width: 800
+  height: 600
+  title: Mission Pinball Framework - Demo Man
+  resizable: true
+  fullscreen: false
+  borderless: false
+  exit_on_escape: true
+  source_display: window
+
+displays:
+  window:
+    width: 800
+    height: 600
+  dmd:
+    width: 128
+    height: 32
+    default: true
+
+switches:
+  s_start_button:
+    number: 100
+    tags: start
+  s_action_button:
+    number: 101
+  s_flipper_left:
+    number: 8-SW-2
+    tags: flipper_left
+  s_flipper_right:
+    number: 8-SW-3
+    tags: flipper_right
+  s_plunger_lane:
+    number: 11
+  s_launch_button:
+    number: 12
+  s_trough1:
+    number: 8a-SW-14
+    type: NC
+  s_trough2:
+    number: 8a-SW-13
+    type: NC
+  s_trough3:
+    number: 8a-SW-12
+    type: NC
+  s_trough4:
+    number: 8a-SW-11
+    type: NC
+  s_trough5:
+    number: 8a-SW-10
+    type: NC
+  s_trough6:
+    number: 8a-SW-9
+    type: NC
+  s_trough_jam:
+    number: 8a-SW-15
+    type: NC
+  s_shooter_lane:
+    number: 9-SW-1
+  s_bumper_left:
+    number: 10-SW-1
+    tags: playfield_active
+  s_bumper_right:
+    number: 10-SW-2
+    tags: playfield_active
+  s_bumper_bottom:
+    number: 10-SW-3
+    tags: playfield_active
+  s_return_lane_left:
+    number: 9-SW-5
+    tags: playfield_active
+  s_return_lane_right:
+    number: 8-SW-6
+    tags: playfield_active
+  s_outlane_left:
+    number: 9-SW-4
+  s_outlane_right:
+    number: 8-SW-7
+  s_battering_ram:
+    number: 10-SW-4
+    tags: playfield_active
+  s_spinner_left:
+    number: 10-SW-7
+    tags: playfield_active
+  s_left_orbit:
+    number: 10-SW-10
+    tags: playfield_active
+  s_right_orbit:
+    number: 10-SW-11
+    tags: playfield_active
+  s_left_ramp_entrance:
+    number: 10-SW-5
+    tags: playfield_active
+  s_left_ramp_exit:
+    number: 10-SW-6
+    tags: playfield_active
+  s_right_ramp_entrance:
+    number: 9-SW-7
+    tags: playfield_active
+  s_right_ramp_exit:
+    number: 10-SW-15
+    tags: playfield_active
+  s_top_lane_left:
+    number: 10-SW-12
+    tags: playfield_active
+  s_top_lane_right:
+    number: 10-SW-13
+    tags: playfield_active
+  s_dropbank_bottom:
+    number: 9-SW-15
+    tags: playfield_active, dropbank
+  s_dropbank_middle:
+    number: 9-SW-14
+    tags: playfield_active, dropbank
+  s_dropbank_top:
+    number: 9-SW-13
+    tags: playfield_active, dropbank
+  s_hitbank_top:
+    number: 9-SW-10
+    tags: playfield_active, hitbank
+  s_hitbank_bottom:
+    number: 9-SW-11
+    tags: playfield_active, hitbank
+  s_target1:
+    number: 10-SW-8
+    tags: playfield_active, standuptarget
+  s_target2:
+    number: 10-SW-9
+    tags: playfield_active, standuptarget
+  s_target3:
+    number: 10-SW-0
+    tags: playfield_active, standuptarget
+  s_target4:
+    number: 9-SW-8
+    tags: playfield_active, standuptarget
+  s_target5:
+    number: 9-SW-9
+    tags: playfield_active, standuptarget
+  s_kickback:
+    number: 10-SW-14
+    tags: playfield_active
+  s_lock_1:
+    number: 9-SW-0
+    tags: lock
+  s_lock_2:
+    number: 9-SW-2
+    tags: lock
+  s_lock_3:
+    number: 9-SW-3
+    tags: lock
+
+lights:
+  l_2x_multiplier: # 2x Multiplier [#28]
+    number: 9-LP-10
+  l_3x_multiplier: # 3x Multiplier [#29]
+    number: 9-LP-11
+  l_4x_multiplier: # 4x Multiplier [#30]
+    number: 9-LP-12
+  l_5x_multiplier: # 5x Multiplier [#31]
+    number: 9-LP-13
+  l_battering_ram_arrow: # Battering Ram Arrow [#63]
+    number: 10-LP-22
+  l_battering_ram_bot: # Battering Ram 3 (Bot) [#60]
+    number: 10-LP-19
+  l_battering_ram_mid: # Battering Ram 2 (Mid) [#61]
+    number: 10-LP-20
+  l_battering_ram_top: # Battering Ram 1 (Top) [#62]
+    number: 10-LP-21
+  l_coin_enable: # Coin Enable [#1]
+    number: 1-LP-0
+  l_dragon_fire: # Dragon Fire [#51]
+    number: 10-LP-29
+  l_dropbank_bot: # Left 3-Bank (Bot) [#13]
+    number: 9-LP-34
+  l_dropbank_mid: # Left 3-Bank (Mid) [#14]
+    number: 9-LP-34
+  l_dropbank_shield_r: # Left Bank Sigil R [#16]
+    number: 9-LP-42
+  l_dropbank_shield_g: # Left Bank Sigil G [#17]
+    number: 9-LP-43
+  l_dropbank_shield_b: # Left Bank Sigil B [#18]
+    number: 9-LP-44
+  l_dropbank_top: # Left 3-Bank (Top) [#15]
+    number: 9-LP-35
+  l_flash_back_panel_left: # Back Panel Left [#100]
+    number: 10-LP-7
+  l_flash_back_panel_right: # Back Panel Right [#101]
+    number: 10-LP-8
+  l_flash_battering_ram: # Battering Ram [#103]
+    number: 10-LP-6
+  l_flash_kickback_lane: # Kickback Lane [#99]
+    number: 10-LP-26
+  l_flash_left_loop: # Left Loop [#102]
+    number: 10-LP-13
+  l_flash_left_ramp: # Left Ramp [#98]
+    number: 10-LP-27
+  l_flash_pop_bumpers: # Pop Bumpers [#97]
+    number: 10-LP-5
+  l_flash_right_ramp: # Right Ramp [#96]
+    number: 10-LP-4
+  l_flash_slingshots: # Left/Right Sling [#104]
+    number: 8-LP-2
+  l_flash_sword_lock: # Sword Lock [#95]
+    number: 9-LP-14
+  l_flash_throne: # Throne [#105]
+    number: 10-LP-30
+  l_gi_coin_door: # Coin Door GI [#85]
+    number: 1-LP-1
+  l_gi_left_playfield: # Left Playfield GI [#87]
+    number: 9-LP-0
+  l_gi_lower_playfield: # Lower Playfield GI [#86]
+    number: 8-LP-4
+  l_gi_upper: # Upper GI [#88]
+    number: 10-LP-0
+  l_hand_of_the_king: # Hand of the King [#19]
+    number: 9-LP-1
+  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
+    number: 9-LP-22
+  l_hitbank_shield_r: # Right 2-Bank Sigil R [#35]
+    number: 9-LP-29
+  l_hitbank_shield_g: # Right 2-Bank Sigil G [#36]
+    number: 9-LP-30
+  l_hitbank_shield_b: # Right 2-Bank Sigil B [#37]
+    number: 9-LP-31
+  l_hitbank_top: # Right 2-Bank (Top) [#38]
+    number: 9-LP-21
+  l_iron_throne: # Iron Throne [#21]
+    number: 9-LP-3
+  l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
+    number: 9-LP-40
+  l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
+    number: 9-LP-39
+    tags: l_store
+  l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
+    number: 9-LP-41
+  l_kickback_shield_r: # Kickback Sigil R [#47]
+    number: 9-LP-45
+    tags: shot_shields, shot_shield_jack, shot_shield_legion
+    type: rgb
+  l_kickback_shield_g: # Kickback Sigil G [#48]
+    number: 9-LP-46
+  l_kickback_shield_b: # Kickback Sigil B [#49]
+    number: 9-LP-47
+  l_left_orbit_arrow: # Left Loop Arrow [#43]
+    number: 10-LP-12
+  l_left_orbit_shield_r: # Left Loop Sigil R [#40]
+    number: 10-LP-9
+    tags: shot_shields, shot_shield_grunt, shot_shield_zaeed
+    type: rgb
+  l_left_orbit_shield_g: # Left Loop Sigil G [#41]
+    number: 10-LP-10
+  l_left_orbit_shield_b: # Left Loop Sigil B [#42]
+    number: 10-LP-11
+  l_left_outlane: # Left Outlane [#11]
+    number: 9-LP-32
+  l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
+    number: 10-LP-16
+  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
+    number: 10-LP-17
+  l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
+    number: 10-LP-18
+  l_left_ramp_shield_r: # Left Ramp Sigil R [#55]
+    number: 10-LP-23 # -24, -25
+    tags: shot_shields, shot_shield_garrus, shot_shield_samara
+    type: rgb
+  l_left_ramp_shield_g: # Left Ramp Sigil G [#56]
+    number: 10-LP-24
+  l_left_ramp_shield_b: # Left Ramp Sigil B [#57]
+    number: 10-LP-25
+  l_left_return_lane: # Left Return Lane [#12]
+    number: 9-LP-33
+  l_left_top_lane: # Left Top Lane [#75]
+    number: 10-LP-14
+  l_lockdown_r: # Lockdown R [#4]
+    number: 1-LP-5
+  l_lockdown_g: # Lockdown G [#5]
+    number: 1-LP-4
+  l_lockdown_b: # Lockdown B [#6]
+    number: 1-LP-7
+  l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
+    number: 10-LP-3
+  l_pop_bumper_left: # Pop Bumper Left [#77]
+    number: 10-LP-1
+  l_pop_bumper_right: # Pop Bumper Right [#78]
+    number: 10-LP-2
+  l_right_orbit_arrow: # Right Loop Arrow [#74]
+    number: 9-LP-20
+  l_right_orbit_shield_r: # Right Loop Sigil R [#71]
+    number: 9-LP-26
+    tags: shot_shields, shot_shield_mordin, shot_shield_tali
+    type: rgb
+  l_right_orbit_shield_g: # Right Loop Sigil G [#72]
+    number: 9-LP-27
+  l_right_orbit_shield_b: # Right Loop Sigil B [#73]
+    number: 9-LP-28
+  l_right_outlane: # Right Outlane [#34]
+    number: 8-LP-1
+  l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
+    number: 9-LP-18
+  l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
+    number: 9-LP-17
+  l_right_ramp_shield_r: # Right Ramp Sigil R [#66]
+    number: 9-LP-23
+    tags: shot_shields, shot_shield_kasumi, shot_shield_thane
+    type: rgb
+  l_right_ramp_shield_g: # Right Ramp Sigil G [#67]
+    number: 9-LP-24
+  l_right_ramp_shield_b: # Right Ramp Sigil B [#68]
+    number: 9-LP-25
+  l_right_return_lane: # Right Return Lane [#33]
+    number: 8-LP-0
+  l_right_top_lane: # Right Top Lane [#76]
+    number: 10-LP-15
+  l_shoot_again: # Shoot Again [#32]
+    number: 8-LP-3
+  l_shield_baratheon: # Sigil Baratheon [#23]
+    number: 9-LP-5
+  l_shield_greyjoy: # Sigil Greyjoy [#25]
+    number: 9-LP-7
+  l_shield_lannister: # Sigil Lannister [#24]
+    number: 9-LP-6
+  l_shield_martell: # Sigil Martell [#27]
+    number: 9-LP-9
+  l_shield_stark: # Sigil Stark [#22]
+    number: 9-LP-4
+  l_shield_targaryen: # Sigil Targaryen [#20]
+    number: 9-LP-2
+  l_shield_tyrell: # Sigil Tyrell [#26]
+    number: 9-LP-8
+  l_standup_1: # Standup 1 [#44]
+    number: 9-LP-37
+    tags: target_lights
+  l_standup_2: # Standup 2 [#52]
+    number: 9-LP-38
+    tags: target_lights
+  l_standup_3: # Standup 3 [#59]
+    number: 10-LP-28
+    tags: target_lights
+  l_standup_4: # Standup 4 [#64]
+    number: 9-LP-16
+    tags: target_lights
+  l_standup_5: # Standup 5 [#70]
+    number: 9-LP-19
+    tags: target_lights
+  l_start_button: # Start Button [#2]
+    number: 1-LP-2
+  l_tournament_start: # Tournament Start [#3]
+    number: 1-LP-3
+
+
+coils:
+  c_flipper_left_main:
+    number: 0
+  c_flipper_left_hold:
+    number: 1
+    allow_enable: true
+  c_flipper_right_main:
+    number: 2
+  c_flipper_right_hold:
+    number: 3
+    allow_enable: true
+  c_plunger:
+    number: 13
+    default_pulse_ms: 10 # this is the default, tho
+  c_trough_eject:
+    number: 20
+    default_pulse_ms: 10
+  c_bumper_left:
+    number: 10-DR-1
+  c_bumper_right:
+    number: 10-DR-2
+  c_bumper_bottom:
+    number: 10-DR-3
+  c_up_post:
+    number: 8-DR-7
+  c_lock_release_post:
+    number: 9-DR-3
+  c_sword:
+    number: 9-DR-0
+  c_dragon:
+    number: 8-DR-6
+
+playfields:
+  playfield:
+    default_source_device: bd_plunger
+    tags: default
+
+ball_devices:
+  bd_plunger:
+    ball_switches: s_plunger_lane
+    eject_coil: c_plunger
+    mechanical_eject: true
+    player_controlled_eject_event: s_action_button_active
+    confirm_eject_type: target # default
+    eject_timeouts: 3s
+    tags: ball_add_live
+  bd_trough:
+    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
+    eject_coil: c_trough_eject
+    entrance_count_delay: 300ms
+    tags: trough, home, drain
+    jam_switch: s_trough_jam
+    eject_coil_jam_pulse: 15ms
+    eject_targets: bd_plunger
+  bd_lock:
+    ball_switches: s_lock_1, s_lock_2, s_lock_3
+    hold_coil: c_lock_release_post # Is this a hold coil or eject coil?
+
+
+flippers:
+  left_flipper:
+    main_coil: c_flipper_left_main
+    hold_coil: c_flipper_left_hold
+    activation_switch: s_flipper_left
+    enable_events: flippers_on
+    disable_events: flippers_off
+  right_flipper:
+    main_coil: c_flipper_right_main
+    hold_coil: c_flipper_right_hold
+    activation_switch: s_flipper_right
+    enable_events: flippers_on
+    disable_events: flippers_off
+
+sound_system:
+  tracks:
+    voice:
+      volume: 1
+      priority: 2
+      simultaneous_sounds: 1
+      preload: true
+    sfx:
+      volume: 1
+      priority: 1
+      preload: true
+      simultaneous_sounds: 7
+    music:
+      volume: 0.5
+      simultaneous_sounds: 1
+  buffer: 2048  # previous value was 512
+  frequency: 44100
+  channels: 1
+  master_volume: 1
+  enabled: true
+
+assets:
+  sounds:
+    default:
+      track: sfx
+    music:
+      track: music
+    sfx:
+      track: sfx
+    voice:
+      track: voice
+
+slides:
+  window_slide_1:
+  - type: display
+    width: 768
+    height: 192
+    effects:
+      - type: color_dmd
+        gain: 1.2
+        dot_filter: true
+  - type: rectangle
+    width: 772
+    height: 196
+    color: 444444
+
+  waiting_for_connection:
+  - type: text
+    text: WAITING FOR MPF CONNECTION
+
+slide_player:
+  mc_ready:
+    window_slide_1:
+      target: window
+
+

@@ -1,0 +1,254 @@
+#config_version=5
+mode:
+  start_events: start_mode_recruitfield
+  stop_events: stop_mode_recruitfield
+  priority: 400
+
+event_player:
+  recruit_garrus_shot_hit: set_last_recruit_garrus
+  recruit_grunt_shot_hit: set_last_recruit_grunt
+  recruit_jack_shot_hit: set_last_recruit_jack
+  recruit_kasumi_shot_hit: set_last_recruit_kasumi
+  recruit_legion_shot_hit: set_last_recruit_legion
+  recruit_mordin_shot_hit: set_last_recruit_mordin
+  recruit_samara_shot_hit: set_last_recruit_samara
+  recruit_tali_shot_hit: set_last_recruit_tali
+  recruit_thane_shot_hit: set_last_recruit_thane
+  recruit_zaeed_shot_hit: set_last_recruit_zaeed
+
+counters:
+  recruit_garrus_counter:
+    count_events: recruit_garrus_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_garrus
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_garrus_lit
+  recruit_grunt_counter:
+    count_events: recruit_grunt_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_grunt
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_grunt_lit
+  recruit_jack_counter:
+    count_events: recruit_jack_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_jack
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_jack_lit
+  recruit_kasumi_counter:
+    count_events: recruit_kasumi_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_kasumi
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_kasumi_lit
+  recruit_legion_counter:
+    count_events: recruit_legion_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_legion
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_legion_lit
+  recruit_mordin_counter:
+    count_events: recruit_mordin_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_mordin
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_mordin_lit
+  recruit_samara_counter:
+    count_events: recruit_samara_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_samara
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_samara_lit
+  recruit_tali_counter:
+    count_events: recruit_tali_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_tali
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_tali_lit
+  recruit_thane_counter:
+    count_events: recruit_thane_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_thane
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_thane_lit
+  recruit_zaeed_counter:
+    count_events: recruit_zaeed_shot_hit
+    events_when_hit: recruit_advance, recruit_advance_zaeed
+    starting_count: 4
+    count_complete_value: 1
+    direction: down
+    multiple_hit_window: 500ms
+    persist_state: true
+    disable_on_complete: true
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_zaeed_lit
+
+scoring:
+  recruit_advance_garrus:
+    status_garrus: -1
+  recruit_advance_grunt:
+    status_grunt: -1
+  recruit_advance_jack:
+    status_jack: -1
+  recruit_advance_kasumi:
+    status_kasumi: -1
+  recruit_advance_legion:
+    status_legion: -1
+  recruit_advance_mordin:
+    status_mordin: -1
+  recruit_advance_samara:
+    status_samara: -1
+  recruit_advance_tali:
+    status_tali: -1
+  recruit_advance_thane:
+    status_thane: -1
+  recruit_advance_zaeed:
+    status_zaeed: -1
+
+slide_player:
+  recruit_advance{count==3}:
+    recruiting_advance_slide_2:
+      expire: 1s
+  recruit_advance{count==2}:
+    recruiting_advance_slide_1:
+      expire: 1s
+  recruit_advance{count==1}:
+    recruiting_advance_slide_lit:
+      expire: 2s
+
+slides:
+  recruiting_advance_slide_2:
+    widgets:
+      - type: text
+        text: Recruit (last_recruit)
+        bold: true
+        style: dmd_big
+        anchor_y: bottom
+        y: bottom+45%
+      - type: text
+        text: 2 shots to light
+        anchor_y: bottom
+        style: dmd_small
+        y: 3
+  recruiting_advance_slide_1:
+    widgets:
+      - type: text
+        text: Recruit (last_recruit)
+        style: dmd_big
+        bold: true
+        anchor_y: bottom
+        y: bottom+45%
+      - type: text
+        text: 1 shot to light
+        style: dmd_small
+        anchor_y: bottom
+        y: 3
+  recruiting_advance_slide_lit:
+    widgets:
+      - type: text
+        text: (last_recruit) Ready!
+        style: dmd_big
+        bold: true
+        anchor_y: bottom
+        y: bottom+45%
+      - type: text
+        text: Left Ramp to Start Mission
+        style: dmd_small
+        anchor_y: bottom
+        y: 3
+
+
+# sound_player:
+#   recruit_jack_shot_hit{current_player.status_jack>0 and state!="lit"}:
+#     shot_hit_jack:
+#       action: play
+#       max_queue_time: 1s
+#   recruit_mordin_shot_hit{current_player.status_mordin>0 and state!="lit"}:
+#     shot_hit_mordin:
+#       action: play
+#       max_queue_time: 1s
+
+# sound_pools:
+#   shot_hit_jack:
+#     # type: random_force_all
+#     sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
+#   # shot_hit_mordin:
+#   #   type: random_force_all
+#   #   sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
+
+sounds:
+  jack_shot_sound_1:
+    file: en_us_hench_convict_ss_global_hench_convict_00286790_m.ogg
+    track: voice
+  jack_shot_sound_2:
+    file: en_us_hench_convict_ss_global_hench_convict_00286854_m.ogg
+    track: voice
+  jack_shot_sound_3:
+    file: en_us_hench_convict_ss_global_hench_convict_00286835_m.ogg
+    track: voice
+  jack_shot_sound_4:
+    file: en_us_hench_convict_ss_global_hench_convict_00286855_m.ogg
+    track: voice
+  jack_shot_sound_5:
+    file: en_us_hench_convict_ss_global_hench_convict_00286853_m.ogg
+    track: voice
+  mordin_shot_sound_1:
+    file: en_us_hench_professor_ss_global_hench_professor_00316910_m.ogg
+    track: voice
+  mordin_shot_sound_2:
+    file: en_us_hench_professor_ss_global_hench_professor_00316952_m.ogg
+    track: voice
+  mordin_shot_sound_3:
+    file: en_us_hench_professor_ss_global_hench_professor_00316963_m.ogg
+    track: voice
+  mordin_shot_sound_4:
+    file: en_us_hench_professor_ss_global_hench_professor_00316964_m.ogg
+    track: voice
+  mordin_shot_sound_5:
+    file: en_us_hench_professor_ss_global_hench_professor_00331211_m.ogg
+    track: voice

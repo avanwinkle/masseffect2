@@ -1,0 +1,70 @@
+#config_version=4
+mode:
+  start_events: start_mode_overlord
+  priority: 200
+
+event_player:
+  multiball_lock_overlord_full: overlord_multiball_begin|1s
+
+multiball_locks:
+  overlord:
+    balls_to_lock: 3
+    lock_devices: bd_lock
+    enable_events: light_lock_overlord_hit
+    disable_events: multiball_lock_overlord_locked_ball
+
+
+shots:
+  light_lock_overlord:
+    switch: s_hitbank_top, s_hitbank_bottom
+
+slide_player:
+  multiball_lock_overlord_locked_ball:
+    overlord_ball_locked_slide:
+      expire: 1.5s
+  overlord_multiball_begin:
+    overlord_ball_locked_slide_full:
+      expire: 4s
+
+slides:
+  overlord_ball_locked_slide:
+    widgets:
+      - type: text
+        text: OVERLORD
+        font_size: 16
+        anchor_y: bottom
+        y: bottom+50%
+      - type: text
+        text: Ball (total_balls_locked) Locked!
+        font_size: 10
+        y: 2
+  overlord_ball_locked_slide_full:
+    widgets:
+      - type: text
+        text: OVERLORD
+        font_size: 16
+        anchor_y: bottom
+        y: bottom+50%
+      - type: text
+        text: MULTIBALL
+        font_size: 16
+        y: 2
+
+widget_player:
+  multiball_lock_overlord_locked_ball{total_balls_locked==1}: station_widget_1
+  multiball_lock_overlord_locked_ball{total_balls_locked==2}: station_widget_2
+  multiball_lock_overlord_locked_ball{total_balls_locked==3}: station_widget_3
+
+widgets:
+  station_widget_1:
+    - type: text
+      text: Vulcan Station
+      font_size: 50
+  station_widget_2:
+    - type: text
+      text: Prometheus Station
+      font_size: 50
+  station_widget_3:
+    - type: text
+      text: Atlas Station
+      font_size: 50

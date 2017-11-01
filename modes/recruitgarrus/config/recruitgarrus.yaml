@@ -1,0 +1,163 @@
+#config_version=4
+mode:
+  start_events: start_mode_recruitgarrus
+  stop_events: stop_mode_recruitgarrus
+  priority: 500
+
+event_player:
+  door_closed: add_time
+  clear_upstairs_complete: recruit_garrus_complete
+  recruit_garrus_complete:
+    recruit_mission_success:
+      squadmate: garrus
+    stop_mode_recruitgarrus:
+      delay: 2s
+  timer_garrustimer_complete: stop_mode_recruitgarrus
+  mode_recruitgarrus_stopping: recruit_mission_ended
+
+logic_blocks:
+  counters:
+    doors_closed_counter:
+      starting_count: 0
+      count_complete_value: 3
+      count_events: close_doors_flashing_hit_shot_lit_hit
+      events_when_hit: door_closed
+      direction: up
+      disable_on_complete: true
+      reset_events: mode_recruitgarrus_started
+      reset_on_complete: false
+
+timers:
+  garrustimer:
+    start_value: 16
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: yes
+    control_events:
+      - event: add_time
+        action: add
+        value: 2
+      - event: clear_upstairs_complete
+        action: stop
+
+led_player:
+  close_doors_complete:
+    l_right_ramp_shield_r:
+      color: red
+  clear_upstairs_complete:
+    l_right_ramp_shield_r:
+      color: black
+  stop_mode_recruitgarrus:
+    l_left_orbit_shield_r:
+      color: black
+    l_right_orbit_shield_r:
+      color: black
+    l_kickback_shield_r:
+      color: black
+    l_right_ramp_shield_r:
+      color: black
+
+sound_player:
+  mode_recruitgarrus_started:
+    music_recruit_garrus:
+      action: play
+      loops: -1
+    garrus_upstairs_complete:
+      action: play
+  door_closed{count==1}: garrus_two_more_shutters
+  door_closed{count==2}: garrus_one_more_shutter
+  door_closed{count==3}: garrus_last_shutter
+  clear_upstairs_complete:
+    garrus_upstairs_complete:
+      action: play
+    music_recruit_garrus:
+      action: stop
+
+sounds:
+  music_recruit_garrus:
+    file: mus_garrus_acq_combat_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+  garrus_mission_start:
+    file: en_us_hench_garrus_omggra_garrus_intro_d_00206435_m.ogg
+    track: voice
+  garrus_two_more_shutters:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205199_m.ogg
+    track: voice
+  garrus_one_more_shutter:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205200_m.ogg
+    track: voice
+  garrus_last_shutter:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206067_m.ogg
+    track: voice
+  garrus_upstairs_complete:
+    file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.ogg
+    track: voice
+
+
+shots:
+  center_door:
+    switch: s_kickback
+    show_tokens:
+      led: l_kickback_shield_r
+  left_door:
+    switch: s_left_orbit
+    show_tokens:
+      led: l_left_orbit_shield_r
+  right_door:
+    switch: s_right_orbit
+    show_tokens:
+      led: l_right_orbit_shield_r
+  stairs:
+    switch: s_right_ramp_exit
+    show_tokens:
+      led: l_right_ramp_shield_r
+
+shot_groups:
+  close_doors:
+    shots: center_door, left_door, right_door
+    profile: flashing_hit_shot
+    reset_events: mode_recruitgarrus_started
+    disable_events: close_doors_complete
+  clear_upstairs:
+    shots: stairs
+    profile: disabled_flashing_hit_shot
+    reset_events: mode_recruitgarrus_started
+    enable_events: close_doors_complete
+
+slide_player:
+  close_doors_complete:
+    doors_closed_slide:
+      expire: 2s
+
+slides:
+  doors_closed_slide:
+    widgets:
+      - type: text
+        text: Shutters Closed
+        style: dmd_med
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: Get Back Upstairs!
+        style: dmd_med
+        anchor_y: top
+        y: middle-2
+
+widget_player:
+  timer_garrustimer_start: time_remaining_widget
+  timer_garrustimer_tick:
+    time_remaining_widget:
+      action: update
+
+widgets:
+  time_remaining_widget:
+    - type: text
+      text: (ticks_remaining)
+      anchor_x: left
+      anchor_y: top
+      x: left+2
+      y: top-2
+      font_size: 8

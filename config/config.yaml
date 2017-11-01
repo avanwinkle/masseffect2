@@ -1,0 +1,137 @@
+# config_version=5
+config:
+- hardware.yaml
+- keyboard.yaml
+
+smart_virtual:
+  file_log: full
+
+mpf:
+  default_pulse_ms: 10
+
+game:
+  balls_per_game: 3
+  max_players: 4
+
+modes:
+- base
+- recruitbase
+- recruitfield
+- recruitjack
+- missionselect
+- shopping
+
+player_vars:
+  available_missions:
+    initial_value: 0
+  credits:
+    initial_value: 0
+  last_recruit:
+    initial_value: "Somebody"
+    value_type: str
+  last_mission:
+    initial_value: "Mission Complete"
+    value_type: str
+  level:
+    initial_value: 1
+  recruits_lit_count:
+    initial_value: 0
+  squadmates_count:
+    initial_value: 2
+  status_garrus:
+    initial_value: 4
+  status_grunt:
+    initial_value: 4
+  status_jack:
+    initial_value: 4
+  status_jacob:
+    initial_value: 0
+  status_kasumi:
+    initial_value: 4
+  status_legion:
+    initial_value: 4
+  status_miranda:
+    initial_value: 0
+  status_mordin:
+    initial_value: 4
+  status_samara:
+    initial_value: 4
+  status_tali:
+    initial_value: 4
+  status_thane:
+    initial_value: 4
+  status_zaeed:
+    initial_value: 4
+
+sound_system:
+  master_volume: 0.75
+  tracks:
+    music:
+      simultaneous_sounds: 1
+      volume: 0.5
+    voice:
+      simultaneous_sounds: 1
+      volume: 0.7
+    sfx:
+      simultaneous_sounds: 8
+      volume: 0.4
+
+assets:
+  sounds:
+    default:
+      load: on_demand
+    voice:
+      track: voice
+    music:
+      track: music
+
+
+sounds:
+  music_normandy_walkin_intro:
+    file: mus_nor_normandy_walkin_intro.ogg
+    track: music
+  music_recruit_mordin:
+    file: mus_mordin_acq_combat_1.ogg
+    track: music
+  music_long_walk_low:
+    file: mus_endgm2_tension_2.ogg
+    track: music
+  music_long_walk:
+    file: mus_endgm2_combat_2_low.ogg
+    track: music
+
+widget_styles:
+  text_default:
+    font_name: Quadrit
+    font_size: 10
+    adjust_top: 2
+    adjust_bottom: 3
+  space title huge:
+    font_name: DEADJIM
+    font_size: 29
+    antialias: true
+    adjust_top: 3
+    adjust_bottom: 3
+  space title:
+    font_name: DEADJIM
+    font_size: 21
+    antialias: true
+    adjust_top: 2
+    adjust_bottom: 3
+  medium:
+    font_name: pixelmix
+    font_size: 8
+    adjust_top: 1
+    adjust_bottom: 1
+  small:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+  tall title:
+    font_name: big_noodle_titling
+    font_size: 20
+  squad_debug_style:
+    font_size: 18
+    anchor_x: top
+    anchor_y: left

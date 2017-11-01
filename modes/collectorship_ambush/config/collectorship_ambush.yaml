@@ -1,0 +1,116 @@
+#config_version=4
+mode:
+  start_events: start_mode_collectorship_ambush
+  stop_events: stop_mode_collectorship_ambush
+  priority: 500
+
+event_player:
+  ship_shots_complete: mode_collectorship_ambush_complete
+  mode_collectorship_ambush_complete: stop_mode_collectorship_ambush
+
+scoring:
+  mode_collectorship_ambush_started:
+    ambush_buildvalue:
+      score: 0
+  ship_shots_ship_shot_profile_lit_hit:
+   ambush_buildvalue: 1000 * current_player.collectorship_ambush_shipshottimer_tick
+  ship_shots_complete:
+    score: current_player.ambush_buildvalue
+
+shot_groups:
+  ship_shots:
+    shots: ship_left_ramp, ship_left_orbit, ship_right_ramp, ship_right_orbit, ship_kickback
+    profile: ship_shot_profile
+
+shot_profiles:
+  ship_shot_profile:
+    states:
+      - name: lit
+        show: ship_lit_show
+      - name: hit
+        show: off
+
+shots:
+  ship_left_ramp:
+    switch: s_left_ramp_exit
+    profile: ship_shot_profile
+    show_tokens:
+      led: l_left_ramp_shield_r
+  ship_left_orbit:
+    switch: s_left_orbit
+    profile: ship_shot_profile
+    show_tokens:
+      led: l_left_orbit_shield_r
+  ship_right_ramp:
+    switch: s_right_ramp_exit
+    profile: ship_shot_profile
+    show_tokens:
+      led: l_right_ramp_shield_r
+  ship_right_orbit:
+    switch: s_right_orbit
+    profile: ship_shot_profile
+    show_tokens:
+      led: l_right_orbit_shield_r
+  ship_kickback:
+    switch: s_kickback
+    profile: ship_shot_profile
+    show_tokens:
+      led: l_kickback_shield_r
+
+shows:
+  ship_lit_show:
+    - time: 0
+      leds:
+        (led): brown
+    - time: 0.5s
+      leds:
+        (led): black
+
+timers:
+  shipshottimer:
+    start_value: 24
+    end_value: 0
+    tick_interval: 0.5s
+    direction: down
+    start_running: yes
+    control_events:
+      - event: ship_shots_ship_shot_profile_lit_hit
+        action: add
+        value: 24
+      - event: stop_mode_collectorship_ambush
+        action: stop
+
+widget_player:
+  mode_collectorship_ambush_started:
+    collectorship_debug:
+      target: window
+  shipshottimer_start: time_remaining_widget
+  shipshottimer_tick:
+    time_remaining_widget:
+      action: update
+  stop_mode_collectorship_ambush:
+    collectorship_debug:
+      action: remove
+
+widgets:
+  time_remaining_widget:
+    - type: text
+      text: (ticks_remaining)
+      anchor_x: left
+      anchor_y: top
+      x: left+2
+      y: top-2
+      font_size: 8
+  collectorship_debug:
+    - type: text
+      text: "Build Value: (player|ambush_buildvalue)"
+      anchor_x: left
+      anchor_y: bottom
+      x: 10
+      y: 10
+    - type: text
+      text: "Timer: (player|collectorship_ambush_shipshottimer_tick)"
+      anchor_x: left
+      anchor_y: bottom
+      x: 460
+      y: 10

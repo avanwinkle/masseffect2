@@ -1,0 +1,9 @@
+#config_version=5
+show_player:
+  mode_attract_started:
+    attract_dmd_loop:
+      loops: -1
+      speed: 1
+  mode_attract_stopped:
+    attract_dmd_loop:
+      action: stop

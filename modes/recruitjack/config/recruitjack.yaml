@@ -1,0 +1,15 @@
+#config_version=5
+mode:
+  start_events: start_mode_recruitjack
+  stop_events: stop_mode_recruitjack
+  priority: 500
+
+event_player:
+  mode_recruitjack_started:
+    recruit_jack_complete
+  recruit_jack_complete:
+    recruit_mission_success:
+      squadmate: jack
+    stop_mode_recruitjack:
+      delay: 2s
+  mode_recruitjack_stopping: recruit_mission_ended

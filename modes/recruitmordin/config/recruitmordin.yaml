@@ -1,0 +1,324 @@
+#config_version=4
+mode:
+  start_events: start_mode_recruitmordin
+  stop_events: stop_mode_recruitmordin
+  priority: 500
+
+event_player:
+  logicblock_spinner_counter_complete: enable_cure
+  counter_cure_counter_hit{count==2}: enable_fans
+  logicblock_fans_counter_complete:
+    recruit_mordin_complete
+  recruit_mordin_complete:
+    recruit_mission_success:
+      squadmate: mordin
+    stop_mode_recruitmordin:
+      delay: 2s
+  timer_mordin_complete: stop_mode_recruitmordin
+  mode_recruitmordin_stopping: recruit_mission_ended
+
+logic_blocks:
+  counters:
+    cure_counter:
+      starting_count: 1
+      count_complete_value: 5
+      count_events: cure_shot_hit
+      direction: up
+      disable_on_complete: true
+      reset_on_complete: false
+      reset_events: mode_recruitmordin_started
+    fans_counter:
+      starting_count: 0
+      count_complete_value: 2
+      count_events: fan_shots_fanprofile_lit_hit
+      direction: up
+      disable_on_complete: true
+      reset_on_complete: false
+      reset_events: mode_recruitmordin_started
+    spinner_counter:
+      starting_count: 0
+      count_complete_value: 1
+      disable_on_complete: false
+      reset_on_complete: false
+      count_events: spinner_hit
+      reset_events: mode_recruitmordin_started
+      direction: up
+
+shot_groups:
+  cure_shot:
+    shots: cure
+    profile: spinnerprofile
+  fan_shots:
+    shots: fan_left, fan_right
+    profile: fanprofile
+
+shot_profiles:
+  spinnerprofile:
+    states:
+      - name: flashing
+        show: spinner_flash_show
+      - name: lit
+        show: spinner_lit_show
+
+  fanprofile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: fan_lit_show
+      - name: hit
+        show: fan_hit_show
+
+shots:
+  spinner:
+    switch: s_spinner_left
+    profile: spinnerprofile
+    show_tokens:
+      led: l_left_orbit_shield_r
+  cure:
+    switch: s_right_orbit
+    enable_events: enable_cure
+    show_tokens:
+      led: l_right_orbit_shield_r
+  fan_left:
+    switch: s_left_ramp_exit
+    enable_events: enable_fans
+    show_tokens:
+      led: l_left_ramp_shield_r
+  fan_right:
+    switch: s_right_ramp_exit
+    enable_events: enable_fans
+    show_tokens:
+      led: l_right_ramp_shield_r
+
+shows:
+  spinner_flash_show:
+    - time: 0
+      leds:
+        (led): red
+    - time: +1
+      leds:
+        (led): black
+  spinner_lit_show:
+    - leds:
+        (led): red
+  fan_lit_show:
+    - time: 0
+      leds:
+        (led): green
+    - time: +1
+      leds:
+        (led): black
+  fan_hit_show:
+    - leds:
+        (led): black
+
+sound_player:
+  counter_cure_counter_hit{count==2 and current_player.status_garrus==0}: step1_voice_garrus
+  counter_cure_counter_hit{count==2 and current_player.status_kasumi==0}: step1_voice_kasumi
+  counter_cure_counter_hit{count==2 and current_player.status_grunt==0}: step1_voice_grunt
+  counter_cure_counter_hit{count==2 and current_player.status_zaeed==0}: step1_voice_zaeed
+  counter_cure_counter_hit{count==2 and current_player.status_tali==0}: step1_voice_tali
+  counter_cure_counter_hit{count==2 and current_player.status_jack==0}: step1_voice_jack
+  counter_cure_counter_hit{count==2}: step1_voice_default
+  counter_fans_counter_hit{count==1 and current_player.status_grunt==0}: step2_voice_grunt
+  counter_fans_counter_hit{count==1 and current_player.status_garrus==0}: step2_voice_garrus
+  counter_fans_counter_hit{count==1 and current_player.status_jack==0}: step2_voice_jack
+  counter_fans_counter_hit{count==1 and current_player.status_tali==0}: step2_voice_tali
+  counter_fans_counter_hit{count==1 and current_player.status_zaeed==0}: step2_voice_zaeed
+  counter_fans_counter_hit{count==1 and current_player.status_kasumi==0}: step2_voice_kasumi
+  counter_fans_counter_hit{count==1}: step2_voice_default
+  logicblock_fans_counter_complete{current_player.status_tali==0}: step3_voice_tali
+  logicblock_fans_counter_complete{current_player.status_jack==0}: step3_voice_jack
+  logicblock_fans_counter_complete{current_player.status_kasumi==0}: step3_voice_kasumi
+  logicblock_fans_counter_complete{current_player.status_grunt==0}: step3_voice_grunt
+  logicblock_fans_counter_complete{current_player.status_zaeed==0}: step3_voice_zaeed
+  logicblock_fans_counter_complete{current_player.status_garrus==0}: step3_voice_garrus
+  logicblock_fans_counter_complete: step3_voice_default
+
+sound_pools:
+  step1_voice_default:
+    type: random
+    track: voice
+    sounds: step1_voice_miranda, step1_voice_jacob
+    max_queue_time: 1s
+  step2_voice_default:
+    type: random
+    track: voice
+    sounds: step2_voice_miranda, step2_voice_jacob
+    max_queue_time: 1s
+  step3_voice_default:
+    type: random
+    track: voice
+    sounds: step3_voice_miranda, step3_voice_jacob
+    max_queue_time: 1s
+
+sounds:
+  step1_voice_garrus:
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_garrus:
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235498_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_garrus:
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235488_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_grunt:
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235486_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_grunt:
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235504_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_grunt:
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235494_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_jack:
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235485_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_jack:
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235503_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_jack:
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235493_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_jacob:
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235509_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_jacob:
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235499_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_jacob:
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235489_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_kasumi:
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235511_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_kasumi:
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235501_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_kasumi:
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235491_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_miranda:
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235510_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_miranda:
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235500_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_miranda:
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235490_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_tali:
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235507_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_tali:
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235497_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_tali:
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235483_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step1_voice_zaeed:
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235484_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step2_voice_zaeed:
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235502_m.ogg
+    track: voice
+    max_queue_time: 1s
+  step3_voice_zaeed:
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235492_m.ogg
+    track: voice
+    max_queue_time: 1s
+
+
+slide_player:
+  mode_recruitmordin_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: SPINNER BUILDS VALUE
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+      - type: text
+        text: HIT RAMPS TO ENABLE FANS
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+
+
+timers:
+  mordintimer:
+    start_value: 40
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: yes
+    control_events:
+      - event: recruit_mordin_complete
+        action: stop
+
+widget_player:
+  mode_recruitmordin_started:
+    recruitmordin_debug:
+      target: window
+  timer_mordintimer_start: time_remaining_widget
+  timer_mordintimer_tick:
+    time_remaining_widget:
+      action: update
+  stop_mode_recruitmordin:
+    recruitmordin_debug:
+      action: remove
+
+widgets:
+  time_remaining_widget:
+    - type: text
+      text: (ticks_remaining)
+      anchor_x: left
+      anchor_y: top
+      x: left+2
+      y: top-2
+      font_size: 8
+  recruitmordin_debug:
+    - type: text
+      text: Spin Count (player|spinner_counter_count)
+      y: 10
+      x: 10
+      anchor_x: left
+      anchor_y: bottom
+    - type: text
+      text: Cure Count (player|cure_counter_count)
+      y: 10
+      x: 210
+      anchor_x: left
+      anchor_y: bottom
+    - type: text
+      text: Fans Count (player|fans_counter_count)
+      y: 10
+      x: 410
+      anchor_x: left
+      anchor_y: bottom

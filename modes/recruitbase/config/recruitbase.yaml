@@ -1,0 +1,284 @@
+#config_version=5
+mode:
+  start_events:
+    start_mode_recruitbase
+  stop_events:
+    stop_mode_recruitbase
+  priority: 300
+
+event_player:
+  mode_recruitbase_started:
+    - start_mode_recruitfield
+  choose_mission_shot_hit{current_player.available_missions>0}:
+    - stop_mode_recruitfield
+    - disable_nonrecruit_modes
+  # If missions are available and we don't force the collector attack or derelict reaper:
+  choose_mission_shot_hit{current_player.available_missions>0 and device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
+    - start_mode_missionselect
+  # After enough squadmates: collector ship
+  choose_mission_shot_hit{device.achievements.collectorship.state=="enabled"}:
+    - start_mode_collectorship_base
+  # At level 9: derelict reaper
+  choose_mission_shot_hit{current_player.level==9}:
+    - start_mode_derelictreaper
+  missionselect_pass_selected:
+    - start_mode_recruitfield
+    - reenable_nonrecruit_modes
+  missionselect_garrus_selected:
+    - recruit_mission_starting
+    - start_mode_recruitgarrus
+  missionselect_grunt_selected:
+    - recruit_mission_starting
+    - start_mode_recruitgrunt
+  missionselect_jack_selected:
+    recruit_mission_starting:
+      squadmate: jack
+    start_mode_recruitjack:
+      delay: 0
+  missionselect_kasumi_selected:
+    - recruit_mission_starting
+    - start_mode_recruitkasumi
+  missionselect_legion_selected:
+    - recruit_mission_starting
+    - start_mode_recruitlegion
+  missionselect_mordin_selected:
+    - recruit_mission_starting
+    - start_mode_recruitmordin
+  missionselect_samara_selected:
+    - recruit_mission_starting
+    - start_mode_recruitsamara
+  missionselect_tali_selected:
+    - recruit_mission_starting
+    - start_mode_recruittali
+  missionselect_thane_selected:
+    - recruit_mission_starting
+    - start_mode_recruitthane
+  missionselect_zaeed_selected:
+    - recruit_mission_starting
+    - start_mode_recruitzaeed
+  recruit_mission_starting:
+    - disable_nonrecruit_modes
+  recruit_mission_success:
+    - levelup
+  recruit_mission_ended:
+    - start_mode_recruitfield
+    - reenable_nonrecruit_modes
+
+# sound_player:
+#   mode_recruitbase_started:
+#     music_normandy_walkin_intro:
+#       action: play
+#       loops: -1
+#       mode_end_action: stop
+
+
+scoring:
+  recruit_advance{count==1}:
+    recruits_lit_count: 1
+    available_missions: 1
+  recruit_mission_success:
+    recruits_lit_count: -1
+    squadmates_count: 1
+    last_mission:
+      string: "__recruitment__"
+  recruit_mission_success{squadmate=="garrus"}:
+    status_garrus: -1
+  recruit_mission_success{squadmate=="grunt"}:
+    status_grunt: -1
+  recruit_mission_success{squadmate=="jack"}:
+    status_jack: -1
+  recruit_mission_success{squadmate=="legion"}:
+    status_legion: -1
+  recruit_mission_success{squadmate=="mordin"}:
+    status_mordin: -1
+  recruit_mission_success{squadmate=="samara"}:
+    status_samara: -1
+  recruit_mission_success{squadmate=="tali"}:
+    status_tali: -1
+  recruit_mission_success{squadmate=="thane"}:
+    status_thane: -1
+  recruit_mission_success{squadmate=="zaeed"}:
+    status_zaeed: -1
+  set_last_recruit_garrus:
+    last_recruit:
+      string: "Garrus"
+  set_last_recruit_grunt:
+    last_recruit:
+      string: "Grunt"
+  set_last_recruit_jack:
+    last_recruit:
+      string: "Jack"
+  set_last_recruit_kasumi:
+    last_recruit:
+      string: "Kasumi"
+  set_last_recruit_legion:
+    last_recruit:
+      string: "Legion"
+  set_last_recruit_mordin:
+    last_recruit:
+      string: "Mordin"
+  set_last_recruit_samara:
+    last_recruit:
+      string: "Samara"
+  set_last_recruit_tali:
+    last_recruit:
+      string: "Tali"
+  set_last_recruit_thane:
+    last_recruit:
+      string: "Thane"
+  set_last_recruit_zaeed:
+    last_recruit:
+      string: "Zaeed"
+
+shot_profiles:
+  recruit_profile:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: unlit
+        show: recruitshow_on
+      - name: lit
+        show: recruitshow_flash
+      - name: recruited
+        show: recruitshow_off
+
+# These shots need to exist in base so mission events will advance them
+# even when the field mode is not running
+shots:
+  choose_mission_shot:
+    switch: s_lock_3
+    enable_events: start_mode_recruitfield
+    disable_events: achievement_collectorship_state_enabled
+  collectorship_mission_shot:
+    switch: s_lock_3
+    enable_events: achievement_collectorship_state_enabled
+  recruit_garrus_shot:
+    switch: s_left_ramp_exit
+    profile: recruit_profile
+    advance_events: recruit_garrus_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_garrus>0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_garrus
+      color: blue
+  recruit_grunt_shot:
+    switch: s_left_orbit
+    profile: recruit_profile
+    advance_events: recruit_grunt_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_grunt>0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_grunt
+      color: orange
+  recruit_jack_shot:
+    switch: s_kickback
+    profile: recruit_profile
+    advance_events: recruit_jack_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_jack>0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_jack
+      color: purple
+  recruit_kasumi_shot:
+    switch: s_right_ramp_exit
+    profile: recruit_profile
+    advance_events: recruit_kasumi_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_kasumi>0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_kasumi
+      color: yellow
+  recruit_legion_shot:
+    switch: s_kickback
+    profile: recruit_profile
+    advance_events: recruit_legion_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_jack<=0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_legion
+      color: white
+  recruit_mordin_shot:
+    switch: s_right_orbit
+    profile: recruit_profile
+    advance_events: recruit_mordin_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_mordin>0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_mordin
+      color: red
+  recruit_samara_shot:
+    switch: s_left_ramp_exit
+    profile: recruit_profile
+    advance_events: recruit_samara_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_garrus<=0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_samara
+      color: teal
+  recruit_tali_shot:
+    switch: s_right_orbit
+    profile: recruit_profile
+    advance_events: recruit_tali_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_mordin<=0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_tali
+      color: pink
+  recruit_thane_shot:
+    switch: s_right_ramp_exit
+    profile: recruit_profile
+    advance_events: recruit_thane_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_kasumi<=0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_thane
+      color: green
+  recruit_zaeed_shot:
+    switch: s_left_orbit
+    profile: recruit_profile
+    advance_events: recruit_zaeed_lit
+    enable_events:
+      start_mode_recruitfield{current_player.status_grunt<=0}: 0
+    disable_events: stop_mode_recruitfield
+    show_tokens:
+      led: shot_shield_zaeed
+      color: red
+
+
+shows:
+  recruitshow_off:
+    - lights:
+        (led): black
+        (color): black
+  recruitshow_flash:
+    - time: 0
+      lights:
+        (led): (color)
+    - time: +1
+      lights:
+        (led): black
+        (color): black
+  recruitshow_on:
+    - lights:
+        (led): (color)
+
+slide_player:
+  mode_recruitbase_started:
+    recruiting_started_slide:
+      expire: 2s
+
+slides:
+  recruiting_started_slide:
+    widgets:
+      - type: text
+        text: Recruit Your Squad
+        style: dmd_big
