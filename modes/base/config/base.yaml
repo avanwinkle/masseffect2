@@ -20,9 +20,9 @@ event_player:
   reenable_nonrecruit_modes:
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
-  reenable_nonrecruit_modes{current_player.mission_count < 4}:
+  reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
     - start_mode_overlord
-  reenable_nonrecruit_modes{current_player.mission_count > 5}:
+  reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
     - start_mode_arrival
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
@@ -73,7 +73,6 @@ slide_player:
     levelup_slide:
       expire: 5s
 
-
 slides:
   base_slide:
     widgets:
@@ -108,7 +107,16 @@ slides:
         anchor_y: bottom
         y: 10
 
+sound_player:
+  levelup:
+    music_mission_success:
+      action: play
 
+sounds:
+  music_mission_success:
+    file: mus_gui_mission_completion.ogg
+    track: music
+    loop: 0
 
 widget_player:
   mode_base_started:

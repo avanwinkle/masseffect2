@@ -1,4 +1,4 @@
-#config_version=4
+#config_version=5
 mode:
   start_events: start_mode_recruitgrunt
   stop_events: stop_mode_recruitgrunt
@@ -57,10 +57,10 @@ shots:
 shows:
   grunt_lit_show:
     - time: 0
-      leds:
+      lights:
         (led): orange
     - time: +1
-      leds:
+      lights:
         (led): black
 
 timers:

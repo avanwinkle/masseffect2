@@ -21,7 +21,7 @@ mpf-mc:
 window:
   width: 800
   height: 600
-  title: Mission Pinball Framework - Demo Man
+  title: Mission Pinball Framework - Mass Effect 2
   resizable: true
   fullscreen: false
   borderless: false
@@ -365,7 +365,6 @@ lights:
     number: 1-LP-2
   l_tournament_start: # Tournament Start [#3]
     number: 1-LP-3
-
 
 coils:
   c_flipper_left_main:

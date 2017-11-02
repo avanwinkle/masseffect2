@@ -1,4 +1,4 @@
-#config_version=4
+#config_version=5
 mode:
   start_events: start_mode_recruitmordin
   stop_events: stop_mode_recruitmordin
@@ -17,32 +17,31 @@ event_player:
   timer_mordin_complete: stop_mode_recruitmordin
   mode_recruitmordin_stopping: recruit_mission_ended
 
-logic_blocks:
-  counters:
-    cure_counter:
-      starting_count: 1
-      count_complete_value: 5
-      count_events: cure_shot_hit
-      direction: up
-      disable_on_complete: true
-      reset_on_complete: false
-      reset_events: mode_recruitmordin_started
-    fans_counter:
-      starting_count: 0
-      count_complete_value: 2
-      count_events: fan_shots_fanprofile_lit_hit
-      direction: up
-      disable_on_complete: true
-      reset_on_complete: false
-      reset_events: mode_recruitmordin_started
-    spinner_counter:
-      starting_count: 0
-      count_complete_value: 1
-      disable_on_complete: false
-      reset_on_complete: false
-      count_events: spinner_hit
-      reset_events: mode_recruitmordin_started
-      direction: up
+counters:
+  cure_counter:
+    starting_count: 1
+    count_complete_value: 5
+    count_events: cure_shot_hit
+    direction: up
+    disable_on_complete: true
+    reset_on_complete: false
+    reset_events: mode_recruitmordin_started
+  fans_counter:
+    starting_count: 0
+    count_complete_value: 2
+    count_events: fan_shots_fanprofile_lit_hit
+    direction: up
+    disable_on_complete: true
+    reset_on_complete: false
+    reset_events: mode_recruitmordin_started
+  spinner_counter:
+    starting_count: 0
+    count_complete_value: 1
+    disable_on_complete: false
+    reset_on_complete: false
+    count_events: spinner_hit
+    reset_events: mode_recruitmordin_started
+    direction: up
 
 shot_groups:
   cure_shot:
@@ -59,7 +58,6 @@ shot_profiles:
         show: spinner_flash_show
       - name: lit
         show: spinner_lit_show
-
   fanprofile:
     show_when_disabled: false
     states:
@@ -93,23 +91,23 @@ shots:
 shows:
   spinner_flash_show:
     - time: 0
-      leds:
+      lights:
         (led): red
     - time: +1
-      leds:
+      lights:
         (led): black
   spinner_lit_show:
-    - leds:
+    - lights:
         (led): red
   fan_lit_show:
     - time: 0
-      leds:
+      lights:
         (led): green
     - time: +1
-      leds:
+      lights:
         (led): black
   fan_hit_show:
-    - leds:
+    - lights:
         (led): black
 
 sound_player:

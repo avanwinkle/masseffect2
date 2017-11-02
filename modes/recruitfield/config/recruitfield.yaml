@@ -166,7 +166,6 @@ slides:
     widgets:
       - type: text
         text: Recruit (last_recruit)
-        bold: true
         style: dmd_big
         anchor_y: bottom
         y: bottom+45%
@@ -180,7 +179,6 @@ slides:
       - type: text
         text: Recruit (last_recruit)
         style: dmd_big
-        bold: true
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -193,7 +191,6 @@ slides:
       - type: text
         text: (last_recruit) Ready!
         style: dmd_big
-        bold: true
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -203,23 +200,25 @@ slides:
         y: 3
 
 
-# sound_player:
-#   recruit_jack_shot_hit{current_player.status_jack>0 and state!="lit"}:
-#     shot_hit_jack:
-#       action: play
-#       max_queue_time: 1s
-#   recruit_mordin_shot_hit{current_player.status_mordin>0 and state!="lit"}:
-#     shot_hit_mordin:
-#       action: play
-#       max_queue_time: 1s
+sound_player:
+  recruit_jack_shot_hit{current_player.status_jack>0 and state!="lit"}:
+    shot_hit_jack:
+      action: play
+      max_queue_time: 1s
+  recruit_mordin_shot_hit{current_player.status_mordin>0 and state!="lit"}:
+    shot_hit_mordin:
+      action: play
+      max_queue_time: 1s
 
-# sound_pools:
-#   shot_hit_jack:
-#     # type: random_force_all
-#     sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
-#   # shot_hit_mordin:
-#   #   type: random_force_all
-#   #   sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
+sound_pools:
+  shot_hit_jack:
+    type: random_force_all
+    sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
+    track: voice
+  shot_hit_mordin:
+    type: random_force_all
+    sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
+    track: voice
 
 sounds:
   jack_shot_sound_1:

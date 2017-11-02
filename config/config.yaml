@@ -15,10 +15,16 @@ game:
 
 modes:
 - base
+- collectorship_ambush
+- collectorship_base
 - recruitbase
 - recruitfield
+- recruitgarrus
+- recruitgrunt
 - recruitjack
+- recruitmordin
 - missionselect
+- overlord
 - shopping
 
 player_vars:
@@ -84,7 +90,6 @@ assets:
       track: voice
     music:
       track: music
-
 
 sounds:
   music_normandy_walkin_intro:

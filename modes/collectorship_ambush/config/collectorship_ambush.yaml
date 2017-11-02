@@ -1,4 +1,4 @@
-#config_version=4
+#config_version=5
 mode:
   start_events: start_mode_collectorship_ambush
   stop_events: stop_mode_collectorship_ambush
@@ -60,10 +60,10 @@ shots:
 shows:
   ship_lit_show:
     - time: 0
-      leds:
+      lights:
         (led): brown
     - time: 0.5s
-      leds:
+      lights:
         (led): black
 
 timers:

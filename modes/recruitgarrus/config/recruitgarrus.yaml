@@ -1,4 +1,4 @@
-#config_version=4
+#config_version=5
 mode:
   start_events: start_mode_recruitgarrus
   stop_events: stop_mode_recruitgarrus
@@ -15,17 +15,16 @@ event_player:
   timer_garrustimer_complete: stop_mode_recruitgarrus
   mode_recruitgarrus_stopping: recruit_mission_ended
 
-logic_blocks:
-  counters:
-    doors_closed_counter:
-      starting_count: 0
-      count_complete_value: 3
-      count_events: close_doors_flashing_hit_shot_lit_hit
-      events_when_hit: door_closed
-      direction: up
-      disable_on_complete: true
-      reset_events: mode_recruitgarrus_started
-      reset_on_complete: false
+counters:
+  doors_closed_counter:
+    starting_count: 0
+    count_complete_value: 3
+    count_events: close_doors_door_shot_profile_lit_hit
+    events_when_hit: door_closed
+    direction: up
+    disable_on_complete: true
+    reset_events: mode_recruitgarrus_started
+    reset_on_complete: false
 
 timers:
   garrustimer:
@@ -40,23 +39,6 @@ timers:
         value: 2
       - event: clear_upstairs_complete
         action: stop
-
-led_player:
-  close_doors_complete:
-    l_right_ramp_shield_r:
-      color: red
-  clear_upstairs_complete:
-    l_right_ramp_shield_r:
-      color: black
-  stop_mode_recruitgarrus:
-    l_left_orbit_shield_r:
-      color: black
-    l_right_orbit_shield_r:
-      color: black
-    l_kickback_shield_r:
-      color: black
-    l_right_ramp_shield_r:
-      color: black
 
 sound_player:
   mode_recruitgarrus_started:
@@ -112,20 +94,45 @@ shots:
       led: l_right_orbit_shield_r
   stairs:
     switch: s_right_ramp_exit
+    enable_events: close_doors_complete
     show_tokens:
       led: l_right_ramp_shield_r
 
 shot_groups:
   close_doors:
     shots: center_door, left_door, right_door
-    profile: flashing_hit_shot
+    profile: door_shot_profile
     reset_events: mode_recruitgarrus_started
     disable_events: close_doors_complete
   clear_upstairs:
     shots: stairs
-    profile: disabled_flashing_hit_shot
+    profile: upstairs_shot_profile
     reset_events: mode_recruitgarrus_started
-    enable_events: close_doors_complete
+
+
+shot_profiles:
+  door_shot_profile:
+    states:
+      - name: lit
+        show: door_shot_show
+      - name: hit
+        show: off
+  upstairs_shot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: door_shot_show
+      - name: hit
+        show: on
+
+shows:
+  door_shot_show:
+    - time: 0
+      lights:
+        (led): green
+    - time: +1
+      lights:
+        (led): black
 
 slide_player:
   close_doors_complete:

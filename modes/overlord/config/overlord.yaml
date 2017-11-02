@@ -1,18 +1,28 @@
-#config_version=4
+#config_version=5
 mode:
   start_events: start_mode_overlord
-  priority: 200
+  stop_events: stop_mode_overlord
+  priority: 1200
 
 event_player:
   multiball_lock_overlord_full: overlord_multiball_begin|1s
+
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    ball_count_type: total
+    shoot_again: 10s
+    enable_events: multiball_lock_overlord_full
+    start_events: overlord_multiball_begin
 
 multiball_locks:
   overlord:
     balls_to_lock: 3
     lock_devices: bd_lock
     enable_events: light_lock_overlord_hit
+    debug: true
+    source_playfield: playfield
     disable_events: multiball_lock_overlord_locked_ball
-
 
 shots:
   light_lock_overlord:
@@ -31,40 +41,52 @@ slides:
     widgets:
       - type: text
         text: OVERLORD
-        font_size: 16
-        anchor_y: bottom
-        y: bottom+50%
+        style: dmd_small
+        anchor_y: top
+        y: top-2
       - type: text
         text: Ball (total_balls_locked) Locked!
-        font_size: 10
+        style: dmd_small
+        anchor_y: bottom
         y: 2
   overlord_ball_locked_slide_full:
     widgets:
       - type: text
         text: OVERLORD
-        font_size: 16
+        style: dmd_big
         anchor_y: bottom
-        y: bottom+50%
+        y: middle+2
       - type: text
         text: MULTIBALL
-        font_size: 16
-        y: 2
+        style: dmd_big
+        anchor_y: top
+        y: middle-2
 
 widget_player:
-  multiball_lock_overlord_locked_ball{total_balls_locked==1}: station_widget_1
-  multiball_lock_overlord_locked_ball{total_balls_locked==2}: station_widget_2
-  multiball_lock_overlord_locked_ball{total_balls_locked==3}: station_widget_3
+  multiball_lock_overlord_locked_ball{total_balls_locked==1}:
+    station_widget_1:
+      slide: overlord_ball_locked_slide
+  multiball_lock_overlord_locked_ball{total_balls_locked==2}:
+    station_widget_2:
+      slide: overlord_ball_locked_slide
+    station_widget_1:
+      action: remove
+  multiball_lock_overlord_locked_ball{total_balls_locked==3}:
+    station_widget_3:
+      slide: overlord_ball_locked_slide
+    station_widget_2:
+      action: remove
 
 widgets:
   station_widget_1:
     - type: text
       text: Vulcan Station
-      font_size: 50
+      style: dmd_big
   station_widget_2:
     - type: text
       text: Prometheus Station
-      font_size: 50
+      style: dmd_big
   station_widget_3:
     - type: text
       text: Atlas Station
-      font_size: 50
+      style: dmd_big
