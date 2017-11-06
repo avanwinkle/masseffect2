@@ -32,33 +32,33 @@ shots:
     switch: s_left_ramp_exit
     profile: grunt_shot_profile
     show_tokens:
-      led: l_left_ramp_shield_r
+      led: l_left_ramp_shield_rgb
   grunt_left_orbit:
     switch: s_left_orbit
     profile: grunt_shot_profile
     show_tokens:
-      led: l_left_orbit_shield_r
+      led: l_left_orbit_shield_rgb
   grunt_right_ramp:
     switch: s_right_ramp_exit
     profile: grunt_shot_profile
     show_tokens:
-      led: l_right_ramp_shield_r
+      led: l_right_ramp_shield_rgb
   grunt_right_orbit:
     switch: s_right_orbit
     profile: grunt_shot_profile
     show_tokens:
-      led: l_right_orbit_shield_r
+      led: l_right_orbit_shield_rgb
   grunt_kickback:
     switch: s_kickback
     profile: grunt_shot_profile
     show_tokens:
-      led: l_kickback_shield_r
+      led: l_kickback_shield_rgb
 
 shows:
   grunt_lit_show:
     - time: 0
       lights:
-        (led): orange
+        (led): EF521F #color_grunt
     - time: +1
       lights:
         (led): black

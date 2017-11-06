@@ -4,6 +4,11 @@ show_player:
     attract_dmd_loop:
       loops: -1
       speed: 1
+    middle_circle_sweep:
+      loops: -1
+      speed: 6
   mode_attract_stopped:
     attract_dmd_loop:
+      action: stop
+    middle_circle_sweep:
       action: stop

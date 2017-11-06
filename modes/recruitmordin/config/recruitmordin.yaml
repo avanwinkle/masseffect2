@@ -71,22 +71,22 @@ shots:
     switch: s_spinner_left
     profile: spinnerprofile
     show_tokens:
-      led: l_left_orbit_shield_r
+      led: l_left_orbit_shield_rgb
   cure:
     switch: s_right_orbit
     enable_events: enable_cure
     show_tokens:
-      led: l_right_orbit_shield_r
+      led: l_right_orbit_shield_rgb
   fan_left:
     switch: s_left_ramp_exit
     enable_events: enable_fans
     show_tokens:
-      led: l_left_ramp_shield_r
+      led: l_left_ramp_shield_rgb
   fan_right:
     switch: s_right_ramp_exit
     enable_events: enable_fans
     show_tokens:
-      led: l_right_ramp_shield_r
+      led: l_right_ramp_shield_rgb
 
 shows:
   spinner_flash_show:

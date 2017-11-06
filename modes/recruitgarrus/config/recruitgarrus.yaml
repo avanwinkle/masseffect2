@@ -83,20 +83,20 @@ shots:
   center_door:
     switch: s_kickback
     show_tokens:
-      led: l_kickback_shield_r
+      led: l_kickback_shield_rgb
   left_door:
     switch: s_left_orbit
     show_tokens:
-      led: l_left_orbit_shield_r
+      led: l_left_orbit_shield_rgb
   right_door:
     switch: s_right_orbit
     show_tokens:
-      led: l_right_orbit_shield_r
+      led: l_right_orbit_shield_rgb
   stairs:
     switch: s_right_ramp_exit
     enable_events: close_doors_complete
     show_tokens:
-      led: l_right_ramp_shield_r
+      led: l_right_ramp_shield_rgb
 
 shot_groups:
   close_doors:

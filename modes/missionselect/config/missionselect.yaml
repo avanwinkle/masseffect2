@@ -14,7 +14,7 @@ mode_settings:
 
 event_player:
   mode_missionselect_started: flippers_off
-  mode_missionselect_stopped: flippers_on
+  mode_missionselect_will_stop: flippers_on
   missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="forwards"}: missionselect_skip_forwards
   missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="backwards"}: missionselect_skip_backwards
   # This is all an excessive amount of logic to skip recruitment missions that aren't available

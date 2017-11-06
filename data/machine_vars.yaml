@@ -1,0 +1,5 @@
+color_garrus: !!python/object/new:mpf.core.case_insensitive_dict.CaseInsensitiveDict
+  dictitems:
+    value: 0e1b4f
+player1_score:
+  value: 0

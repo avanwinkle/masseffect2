@@ -37,3 +37,7 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
+  l:
+    event: lock_release_one_ball_enable #test_lock_release_pulse
+  n:
+    event: cancel_lock_release_pulse

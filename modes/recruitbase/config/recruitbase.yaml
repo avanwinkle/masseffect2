@@ -15,6 +15,8 @@ event_player:
   # If missions are available and we don't force the collector attack or derelict reaper:
   choose_mission_shot_hit{current_player.available_missions>0 and device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
     - start_mode_missionselect
+  choose_mission_shot_hit{current_player.available_missions==0}:
+    - lock_release_one_ball_enable
   # After enough squadmates: collector ship
   choose_mission_shot_hit{device.achievements.collectorship.state=="enabled"}:
     - start_mode_collectorship_base
@@ -81,23 +83,23 @@ scoring:
     squadmates_count: 1
     last_mission:
       string: "__recruitment__"
-  recruit_mission_success{squadmate=="garrus"}:
+  recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
     status_garrus: -1
-  recruit_mission_success{squadmate=="grunt"}:
+  recruit_grunt_complete: #recruit_mission_success{squadmate=="grunt"}:
     status_grunt: -1
-  recruit_mission_success{squadmate=="jack"}:
+  recruit_jack_complete: #recruit_mission_success{squadmate=="jack"}:
     status_jack: -1
-  recruit_mission_success{squadmate=="legion"}:
+  recruit_legion_complete: #recruit_mission_success{squadmate=="legion"}:
     status_legion: -1
-  recruit_mission_success{squadmate=="mordin"}:
+  recruit_mordin_complete: #recruit_mission_success{squadmate=="mordin"}:
     status_mordin: -1
-  recruit_mission_success{squadmate=="samara"}:
+  recruit_samara_complete: #recruit_mission_success{squadmate=="samara"}:
     status_samara: -1
-  recruit_mission_success{squadmate=="tali"}:
+  recruit_tali_complete: #recruit_mission_success{squadmate=="tali"}:
     status_tali: -1
-  recruit_mission_success{squadmate=="thane"}:
+  recruit_thane_complete: #recruit_mission_success{squadmate=="thane"}:
     status_thane: -1
-  recruit_mission_success{squadmate=="zaeed"}:
+  recruit_zaeed_complete: #recruit_mission_success{squadmate=="zaeed"}:
     status_zaeed: -1
   set_last_recruit_garrus:
     last_recruit:
@@ -161,7 +163,7 @@ shots:
     disable_events: stop_mode_recruitfield
     show_tokens:
       led: shot_shield_garrus
-      color: blue
+      color: 0E1B4F #color_garrus
   recruit_grunt_shot:
     switch: s_left_orbit
     profile: recruit_profile
@@ -171,7 +173,7 @@ shots:
     disable_events: stop_mode_recruitfield
     show_tokens:
       led: shot_shield_grunt
-      color: orange
+      color: EF521F #color_grunt
   recruit_jack_shot:
     switch: s_kickback
     profile: recruit_profile
@@ -181,7 +183,7 @@ shots:
     disable_events: stop_mode_recruitfield
     show_tokens:
       led: shot_shield_jack
-      color: purple
+      color: 7B3FB8 #color_jack
   recruit_kasumi_shot:
     switch: s_right_ramp_exit
     profile: recruit_profile
@@ -191,7 +193,7 @@ shots:
     disable_events: stop_mode_recruitfield
     show_tokens:
       led: shot_shield_kasumi
-      color: yellow
+      color: F7F315 #color_kasumi
   recruit_legion_shot:
     switch: s_kickback
     profile: recruit_profile
@@ -211,7 +213,7 @@ shots:
     disable_events: stop_mode_recruitfield
     show_tokens:
       led: shot_shield_mordin
-      color: red
+      color: BD000A #color_mordin
   recruit_samara_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile

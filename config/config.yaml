@@ -9,8 +9,23 @@ smart_virtual:
 mpf:
   default_pulse_ms: 10
 
+virtual_platform_start_active_switches:
+  s_trough1
+  s_trough2
+  s_trough3
+  s_trough4
+  s_trough5
+  s_trough6
+
+event_player:
+  lock_release_one_ball_enable:
+    lock_release_disable|1200ms
+
+mpf-mc:
+  fps: 60
+
 game:
-  balls_per_game: 3
+  balls_per_game: 5
   max_players: 4
 
 modes:
@@ -24,8 +39,36 @@ modes:
 - recruitjack
 - recruitmordin
 - missionselect
-- overlord
+# - overlord
 - shopping
+
+window:
+  width: 800
+  height: 600
+  title: Mission Pinball Framework - Mass Effect 2
+  resizable: true
+  fullscreen: false
+  borderless: false
+  exit_on_escape: true
+  source_display: window
+
+displays:
+  window:
+    width: 800
+    height: 600
+  dmd:
+    width: 128
+    height: 32
+    default: true
+
+
+light_player:
+  game_will_start:
+    gi:
+      color: white
+  game_ended:
+    gi:
+      color: black
 
 player_vars:
   available_missions:
