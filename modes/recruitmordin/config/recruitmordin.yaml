@@ -271,7 +271,7 @@ slides:
 
 timers:
   mordintimer:
-    start_value: 40
+    start_value: 60
     end_value: 0
     tick_interval: 1s
     direction: down

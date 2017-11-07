@@ -41,3 +41,7 @@ keyboard:
     event: lock_release_one_ball_enable #test_lock_release_pulse
   n:
     event: cancel_lock_release_pulse
+  r:
+    event: ball_hold_enable
+  t:
+    event: ball_hold_disable

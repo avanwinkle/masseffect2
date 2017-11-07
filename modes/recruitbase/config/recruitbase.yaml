@@ -15,7 +15,7 @@ event_player:
   # If missions are available and we don't force the collector attack or derelict reaper:
   choose_mission_shot_hit{current_player.available_missions>0 and device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
     - start_mode_missionselect
-  choose_mission_shot_hit{current_player.available_missions==0}:
+  skip_mission_shot_hit{current_player.available_missions==0 and current_player.status_garrus > 2}:
     - lock_release_one_ball_enable
   # After enough squadmates: collector ship
   choose_mission_shot_hit{device.achievements.collectorship.state=="enabled"}:
@@ -60,10 +60,12 @@ event_player:
     - start_mode_recruitzaeed
   recruit_mission_starting:
     - disable_nonrecruit_modes
+    - stop_mode_missionselect
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
+    - start_mode_missionselect
     - reenable_nonrecruit_modes
 
 # sound_player:
@@ -149,111 +151,129 @@ shot_profiles:
 shots:
   choose_mission_shot:
     switch: s_lock_3
-    enable_events: start_mode_recruitfield
-    disable_events: achievement_collectorship_state_enabled
+    enable_events:
+      start_mode_recruitfield{current_player.available_missions>0 or current_player.status_garrus == 2}: 0
+    disable_events: recruit_mission_starting, achievement_collectorship_state_enabled
   collectorship_mission_shot:
     switch: s_lock_3
     enable_events: achievement_collectorship_state_enabled
+  skip_mission_shot:
+    switch: s_left_ramp_exit
+    enable_events:
+      start_mode_recruitfield{current_player.available_missions==0 and (current_player.status_garrus < 1 or current_player.status_garrus > 2)}: 0
+      recruit_mission_starting: 0
+    disable_events:
+      start_mode_recruitfield{current_player.available_missions>0 or current_player.status_garrus == 2}: 0
   recruit_garrus_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile
     advance_events: recruit_garrus_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_garrus>0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_garrus>0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_garrus
       color: 0E1B4F #color_garrus
+    tags: recruit_shot
   recruit_grunt_shot:
     switch: s_left_orbit
     profile: recruit_profile
     advance_events: recruit_grunt_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_grunt>0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_grunt>0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_grunt
       color: EF521F #color_grunt
+    tags: recruit_shot
   recruit_jack_shot:
     switch: s_kickback
     profile: recruit_profile
     advance_events: recruit_jack_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_jack>0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_jack>0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_jack
       color: 7B3FB8 #color_jack
+    tags: recruit_shot
   recruit_kasumi_shot:
     switch: s_right_ramp_exit
     profile: recruit_profile
     advance_events: recruit_kasumi_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_kasumi>0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_kasumi>0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_kasumi
       color: F7F315 #color_kasumi
+    tags: recruit_shot
   recruit_legion_shot:
     switch: s_kickback
     profile: recruit_profile
     advance_events: recruit_legion_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_jack<=0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_jack<=0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_legion
       color: white
+    tags: recruit_shot
   recruit_mordin_shot:
     switch: s_right_orbit
     profile: recruit_profile
     advance_events: recruit_mordin_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_mordin>0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_mordin>0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_mordin
       color: BD000A #color_mordin
+    tags: recruit_shot
   recruit_samara_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile
     advance_events: recruit_samara_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_garrus<=0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_garrus<=0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_samara
       color: teal
+    tags: recruit_shot
   recruit_tali_shot:
     switch: s_right_orbit
     profile: recruit_profile
     advance_events: recruit_tali_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_mordin<=0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_mordin<=0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_tali
       color: pink
+    tags: recruit_shot
   recruit_thane_shot:
     switch: s_right_ramp_exit
     profile: recruit_profile
     advance_events: recruit_thane_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_kasumi<=0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_kasumi<=0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_thane
       color: green
+    tags: recruit_shot
   recruit_zaeed_shot:
     switch: s_left_orbit
     profile: recruit_profile
     advance_events: recruit_zaeed_lit
     enable_events:
-      start_mode_recruitfield{current_player.status_grunt<=0}: 0
-    disable_events: stop_mode_recruitfield
+      enable_recruit_shots{current_player.status_grunt<=0}: 0
+    disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_zaeed
       color: red
+    tags: recruit_shot
 
 
 shows:

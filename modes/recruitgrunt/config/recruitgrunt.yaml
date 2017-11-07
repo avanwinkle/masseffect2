@@ -73,7 +73,7 @@ timers:
     control_events:
       - event: grunt_shots_hit
         action: add
-        value: 2
+        value: 12
       - event: recruit_grunt_complete
         action: stop
 

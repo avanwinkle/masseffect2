@@ -5,6 +5,8 @@ mode:
   priority: 400
 
 event_player:
+  mode_recruitfield_started: enable_recruit_shots
+  mode_recruitfield_will_stop: disable_recruit_shots
   recruit_garrus_shot_hit: set_last_recruit_garrus
   recruit_grunt_shot_hit: set_last_recruit_grunt
   recruit_jack_shot_hit: set_last_recruit_jack
@@ -39,6 +41,8 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_grunt_lit
+    enable_events: playfield_active
+    disable_events: ball_started
   recruit_jack_counter:
     count_events: recruit_jack_shot_hit
     events_when_hit: recruit_advance, recruit_advance_jack
@@ -83,6 +87,8 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
+    enable_events: playfield_active
+    disable_events: ball_started
   recruit_samara_counter:
     count_events: recruit_samara_shot_hit
     events_when_hit: recruit_advance, recruit_advance_samara

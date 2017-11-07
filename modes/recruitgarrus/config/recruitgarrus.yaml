@@ -28,7 +28,7 @@ counters:
 
 timers:
   garrustimer:
-    start_value: 16
+    start_value: 40
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -36,7 +36,7 @@ timers:
     control_events:
       - event: add_time
         action: add
-        value: 2
+        value: 12
       - event: clear_upstairs_complete
         action: stop
 

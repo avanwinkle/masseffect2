@@ -129,15 +129,19 @@ switches:
     tags: playfield_active, standuptarget
   s_kickback:
     number: 10-14
+    ignore_window_ms: 200ms
     tags: playfield_active
   s_lock_1:
     number: 9-0
+    debounce: normal
     tags: lock
   s_lock_2:
     number: 9-2
+    debounce: normal
     tags: lock
   s_lock_3:
     number: 9-3
+    debounce: normal
     tags: lock
 
 lights:
@@ -250,22 +254,29 @@ lights:
     number: 8-0
   l_right_top_lane: # Right Top Lane [#76]
     number: 10-15
-  l_shoot_again: # Shoot Again [#32]
+  l_ball_save: # Shoot Again [#32]
     number: 8-3
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 9-5
+    tags: color_shield_yellow
   l_shield_greyjoy: # Sigil Greyjoy [#25]
     number: 9-7
+    tags: color_shield_purple
   l_shield_lannister: # Sigil Lannister [#24]
     number: 9-6
+    tags: color_shield_red
   l_shield_martell: # Sigil Martell [#27]
     number: 9-9
+    tags: color_shield_orange
   l_shield_stark: # Sigil Stark [#22]
     number: 9-4
+    tags: color_shield_white
   l_shield_targaryen: # Sigil Targaryen [#20]
     number: 9-2
+    tags: color_shield_blue
   l_shield_tyrell: # Sigil Tyrell [#26]
     number: 9-8
+    tags: color_shield_green
   l_standup_1: # Standup 1 [#44]
     number: 9-37
     tags: target_lights
@@ -388,15 +399,15 @@ coils:
     number: 10-3
   c_up_post:
     number: 8-7
-    default_hold_power: 0.1
+    default_hold_power: 0.3
+    enable_events: ball_hold_enable
+    disable_events: ball_hold_disable
   c_lock_release_post:
     number: 9-3
     default_pulse_ms: 30
-    # pulse_power: 2
     default_hold_power: 0.1
     enable_events: test_lock_release_pulse, lock_release_one_ball_enable
     disable_events: cancel_lock_release_pulse, lock_release_disable
-    #recycle: true
   c_sword:
     number: 9-0
   c_dragon:
@@ -430,11 +441,12 @@ ball_devices:
     eject_targets: bd_plunger
     auto_fire_on_unexpected_ball: false
   bd_lock:
-    entrance_count_delay: 500ms # Default: 500ms
+    entrance_count_delay: 1000ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
     eject_coil: c_lock_release_post # Is this a hold coil or eject coil?
     eject_events: drop_lock_release_post
     eject_all_events: game_ended
+    auto_fire_on_unexpected_ball: false
   bd_hold:
     ball_capacity: 1
     entrance_switch: s_kickback

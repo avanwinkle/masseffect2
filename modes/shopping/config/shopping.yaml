@@ -8,7 +8,8 @@ mode:
 
 event_player:
   mode_shopping_started: enable_storetargets
-  store_complete: reset_storetargets
+  lock_ball_for_store_hit: ball_hold_enable
+  store_complete: reset_storetargets, ball_hold_disable
   slide_store_enabled_slide_removed: post_store_complete
   all_storetargets_storetarget_profile_hit_complete: enable_store_shot
 
@@ -20,7 +21,7 @@ queue_relay_player:
 queue_event_player:
   lock_ball_for_store_storeshot_profile_lit_hit:
     queue_event: show_store
-    events_when_finished: store_complete
+    events_when_finished: store_complete|5s
 
 shot_groups:
   all_storetargets:

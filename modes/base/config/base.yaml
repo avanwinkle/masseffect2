@@ -43,6 +43,17 @@ accruals:
       - recruit_tali_complete
       - recruit_thane_complete
       - recruit_zaeed_complete
+
+ball_saves:
+  default:
+    active_time: 20s
+    grace_period: 2s
+    enable_events: mode_base_started
+    timer_start_events: playfield_active
+    auto_launch: true
+    balls_to_save: 1
+    early_ball_save_events: s_outlane_left, s_outlane_right
+
 counters:
   recruited_count:
     starting_count: 2
@@ -64,6 +75,29 @@ scoring:
     available_missions: -1
   enable_collectorship:
     available_missions: 1
+
+show_player:
+  ball_save_default_timer_start:
+    ball_save_show:
+      action: play
+      speed: 3
+  ball_save_default_timer_grace_period:
+    ball_save_show:
+      action: stop
+  ball_save_default_disabled:
+    ball_save_show:
+      action: stop
+
+shows:
+  ball_save_show:
+    - time: 0
+      lights:
+        l_ball_save:
+          color: white
+    - time: '+1'
+      lights:
+        l_ball_save:
+          color: black
 
 slide_player:
   mode_base_started:
