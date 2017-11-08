@@ -138,4 +138,3 @@ slides:
 scoring:
   all_storetargets_hit:
     credits: 1000
-    block: false

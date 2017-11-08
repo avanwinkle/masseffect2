@@ -4,7 +4,8 @@ mode:
   start_events: start_mode_missionselect
   stop_events: stop_mode_missionselect, missionselect_item_selected
   priority: 1000
-  code: mpf.modes.carousel.code.carousel.Carousel
+  code: missionselect.MissionSelect
+  use_wait_queue: true
 
 mode_settings:
   selectable_items: pass, suicide, garrus, grunt, jack, kasumi, legion, mordin, samara, tali, thane, zaeed,
@@ -14,40 +15,17 @@ mode_settings:
 
 event_player:
   mode_missionselect_started: flippers_off
-  mode_missionselect_will_stop: flippers_on, lock_release_one_ball_enable
-  missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_suicide_highlighted{current_player.mission_count<9 and direction=="backwards"}: missionselect_skip_backwards
-  # This is all an excessive amount of logic to skip recruitment missions that aren't available
-  missionselect_garrus_highlighted{current_player.status_garrus!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_garrus_highlighted{current_player.status_garrus!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_grunt_highlighted{current_player.status_grunt!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_grunt_highlighted{current_player.status_grunt!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_jack_highlighted{current_player.status_jack!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_jack_highlighted{current_player.status_jack!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_kasumi_highlighted{current_player.status_kasumi!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_kasumi_highlighted{current_player.status_kasumi!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_legion_highlighted{current_player.status_legion!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_legion_highlighted{current_player.status_legion!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_mordin_highlighted{current_player.status_mordin!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_mordin_highlighted{current_player.status_mordin!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_samara_highlighted{current_player.status_samara!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_samara_highlighted{current_player.status_samara!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_tali_highlighted{current_player.status_tali!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_tali_highlighted{current_player.status_tali!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_thane_highlighted{current_player.status_thane!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_thane_highlighted{current_player.status_thane!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_zaeed_highlighted{current_player.status_zaeed!=1 and direction=="forwards"}: missionselect_skip_forwards
-  missionselect_zaeed_highlighted{current_player.status_zaeed!=1 and direction=="backwards"}: missionselect_skip_backwards
-  missionselect_garrus_highlighted{current_player.status_garrus==1}: set_last_recruit_garrus
-  missionselect_grunt_highlighted{current_player.status_grunt==1}: set_last_recruit_grunt
-  missionselect_jack_highlighted{current_player.status_jack==1}: set_last_recruit_jack
-  missionselect_kasumi_highlighted{current_player.status_kasumi==1}: set_last_recruit_kasumi
-  missionselect_legion_highlighted{current_player.status_legion==1}: set_last_recruit_legion
-  missionselect_mordin_highlighted{current_player.status_mordin==1}: set_last_recruit_mordin
-  missionselect_samara_highlighted{current_player.status_samara==1}: set_last_recruit_samara
-  missionselect_tali_highlighted{current_player.status_tali==1}: set_last_recruit_tali
-  missionselect_thane_highlighted{current_player.status_thane==1}: set_last_recruit_thane
-  missionselect_zaeed_highlighted{current_player.status_zaeed==1}: set_last_recruit_zaeed
+  mode_missionselect_will_stop: flippers_on, mainlock_release
+  missionselect_garrus_highlighted: set_last_recruit_garrus
+  missionselect_grunt_highlighted: set_last_recruit_grunt
+  missionselect_jack_highlighted: set_last_recruit_jack
+  missionselect_kasumi_highlighted: set_last_recruit_kasumi
+  missionselect_legion_highlighted: set_last_recruit_legion
+  missionselect_mordin_highlighted: set_last_recruit_mordin
+  missionselect_samara_highlighted: set_last_recruit_samara
+  missionselect_tali_highlighted: set_last_recruit_tali
+  missionselect_thane_highlighted: set_last_recruit_thane
+  missionselect_zaeed_highlighted: set_last_recruit_zaeed
 
 slide_player:
   missionselect_pass_highlighted{current_player.missionselect_init==0}: missionselect_intro_slide
