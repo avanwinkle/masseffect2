@@ -144,7 +144,7 @@ shot_profiles:
       - name: lit
         show: recruitshow_flash
       - name: recruited
-        show: recruitshow_off
+        show: recruitshow_complete
 
 # These shots need to exist in base so mission events will advance them
 # even when the field mode is not running
@@ -173,6 +173,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_garrus
+      lit: color_shield_blue
       color: 0E1B4F #color_garrus
     tags: recruit_shot
   recruit_grunt_shot:
@@ -184,6 +185,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_grunt
+      lit: color_shield_orange
       color: EF521F #color_grunt
     tags: recruit_shot
   recruit_jack_shot:
@@ -195,6 +197,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_jack
+      lit: color_shield_purple
       color: 7B3FB8 #color_jack
     tags: recruit_shot
   recruit_kasumi_shot:
@@ -206,6 +209,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_kasumi
+      lit: color_shield_yellow
       color: F7F315 #color_kasumi
     tags: recruit_shot
   recruit_legion_shot:
@@ -217,6 +221,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_legion
+      lit: color_shield_white
       color: white
     tags: recruit_shot
   recruit_mordin_shot:
@@ -228,6 +233,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_mordin
+      lit: color_shield_red
       color: BD000A #color_mordin
     tags: recruit_shot
   recruit_samara_shot:
@@ -261,6 +267,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_thane
+      lit: color_shield_green
       color: green
     tags: recruit_shot
   recruit_zaeed_shot:
@@ -281,17 +288,26 @@ shows:
     - lights:
         (led): black
         (color): black
+        (lit): black
   recruitshow_flash:
     - time: 0
       lights:
-        (led): (color)
+        (led): black
+        (color): black
+        (lit): white
     - time: +1
       lights:
         (led): black
         (color): black
+        (lit): black
   recruitshow_on:
     - lights:
         (led): (color)
+        (lit): black
+  recruitshow_complete:
+    - lights:
+        (led): (color)
+        (lit): white
 
 slide_player:
   mode_recruitbase_started:

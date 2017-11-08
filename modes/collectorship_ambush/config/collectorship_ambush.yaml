@@ -20,7 +20,6 @@ scoring:
 shot_groups:
   ship_shots:
     shots: ship_left_ramp, ship_left_orbit, ship_right_ramp, ship_right_orbit, ship_kickback
-    profile: ship_shot_profile
 
 shot_profiles:
   ship_shot_profile:

@@ -17,7 +17,6 @@ event_player:
 shot_groups:
   grunt_shots:
     shots: grunt_left_ramp, grunt_left_orbit, grunt_right_ramp, grunt_right_orbit, grunt_kickback
-    profile: grunt_shot_profile
 
 shot_profiles:
   grunt_shot_profile:

@@ -46,10 +46,8 @@ counters:
 shot_groups:
   cure_shot:
     shots: cure
-    profile: spinnerprofile
   fan_shots:
     shots: fan_left, fan_right
-    profile: fanprofile
 
 shot_profiles:
   spinnerprofile:

@@ -11,7 +11,7 @@ event_player:
   lock_ball_for_store_hit: ball_hold_enable
   store_complete: reset_storetargets, ball_hold_disable
   slide_store_enabled_slide_removed: post_store_complete
-  all_storetargets_storetarget_profile_hit_complete: enable_store_shot
+  all_storetargets_hit_complete: enable_store_shot
 
 queue_relay_player:
   show_store:
@@ -26,7 +26,6 @@ queue_event_player:
 shot_groups:
   all_storetargets:
     shots: showtarget1, showtarget2, showtarget3, showtarget4, showtarget5
-    profile: storetarget_profile
     enable_events: enable_storetargets
     reset_events: reset_storetargets
 

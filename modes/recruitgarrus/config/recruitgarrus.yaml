@@ -82,18 +82,22 @@ sounds:
 shots:
   center_door:
     switch: s_kickback
+    profile: door_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
   left_door:
     switch: s_left_orbit
+    profile: door_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
   right_door:
     switch: s_right_orbit
+    profile: door_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
   stairs:
     switch: s_right_ramp_exit
+    profile: upstairs_shot_profile
     enable_events: close_doors_complete
     show_tokens:
       led: l_right_ramp_shield_rgb
@@ -101,12 +105,10 @@ shots:
 shot_groups:
   close_doors:
     shots: center_door, left_door, right_door
-    profile: door_shot_profile
     reset_events: mode_recruitgarrus_started
     disable_events: close_doors_complete
   clear_upstairs:
     shots: stairs
-    profile: upstairs_shot_profile
     reset_events: mode_recruitgarrus_started
 
 
