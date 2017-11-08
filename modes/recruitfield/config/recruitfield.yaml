@@ -41,8 +41,6 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_grunt_lit
-    enable_events: playfield_active
-    disable_events: ball_started
   recruit_jack_counter:
     count_events: recruit_jack_shot_hit
     events_when_hit: recruit_advance, recruit_advance_jack
@@ -87,8 +85,9 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
-    enable_events: playfield_active
-    disable_events: ball_started
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      playfield_active: 300ms
   recruit_samara_counter:
     count_events: recruit_samara_shot_hit
     events_when_hit: recruit_advance, recruit_advance_samara
@@ -207,11 +206,11 @@ slides:
 
 
 sound_player:
-  recruit_jack_shot_hit{current_player.status_jack>0 and state!="lit"}:
+  recruit_advance_jack:
     shot_hit_jack:
       action: play
       max_queue_time: 1s
-  recruit_mordin_shot_hit{current_player.status_mordin>0 and state!="lit"}:
+  recruit_advance_mordin:
     shot_hit_mordin:
       action: play
       max_queue_time: 1s

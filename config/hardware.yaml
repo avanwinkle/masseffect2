@@ -400,14 +400,14 @@ coils:
   c_up_post:
     number: 8-7
     default_hold_power: 0.3
-    enable_events: ball_hold_enable
-    disable_events: ball_hold_disable
+    # enable_events: ball_hold_enable
+    # disable_events: ball_hold_disable
   c_lock_release_post:
     number: 9-3
-    default_pulse_ms: 30
+    default_pulse_ms: 25
     default_hold_power: 0.1
-    enable_events: test_lock_release_pulse, lock_release_one_ball_enable
-    disable_events: cancel_lock_release_pulse, lock_release_disable
+    enable_events: bypass_lock_release_pulse
+    disable_events: cancel_lock_release_pulse
   c_sword:
     number: 9-0
   c_dragon:
@@ -432,26 +432,17 @@ ball_devices:
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
-    # entrance_count_delay: 300ms
-    # confirm_eject_type: switch
-    # confirm_eject_switch: s_plunger_lane
     tags: trough, home, drain
     jam_switch: s_trough_jam
-    # eject_coil_jam_pulse: 15ms
     eject_targets: bd_plunger
     auto_fire_on_unexpected_ball: false
   bd_lock:
-    entrance_count_delay: 1000ms # Default: 500ms
+    entrance_count_delay: 400ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
-    eject_coil: c_lock_release_post # Is this a hold coil or eject coil?
-    eject_events: drop_lock_release_post
+    eject_coil: c_lock_release_post
     eject_all_events: game_ended
+    eject_coil_release_time: 400ms
     auto_fire_on_unexpected_ball: false
-  bd_hold:
-    ball_capacity: 1
-    entrance_switch: s_kickback
-    hold_coil: c_up_post
-
 
 flippers:
   left_flipper:

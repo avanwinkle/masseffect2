@@ -7,6 +7,12 @@ mode:
 achievements:
   collectorship:
     enable_events: enable_collectorship
+  derelictreaper:
+    enable_events: enable_derelictreaper
+  collectorattack:
+    enable_events: enable_collectorattack
+  suicidemission:
+    enable_events: enable_suicidemission
 
 event_player:
   mode_base_started:
@@ -52,7 +58,7 @@ ball_saves:
     timer_start_events: playfield_active
     auto_launch: true
     balls_to_save: 1
-    early_ball_save_events: s_outlane_left, s_outlane_right
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
 counters:
   recruited_count:
@@ -164,7 +170,6 @@ widget_player:
   levelup{current_player.last_mission!="__recruitment__"}:
     levelup_mission:
       slide: levelup_slide
-
 
 widgets:
   levelup_mission:

@@ -9,20 +9,22 @@ mode:
 event_player:
   mode_recruitbase_started:
     - start_mode_recruitfield
-  choose_mission_shot_hit{current_player.available_missions>0}:
+  player_available_missions{value>0}:
+    - enable_missionselector
+  ball_hold_missionselect_hold_held_ball:
+    - start_mode_missionselect
+  start_mode_missionselect:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
   # If missions are available and we don't force the collector attack or derelict reaper:
-  choose_mission_shot_hit{current_player.available_missions>0 and device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
-    - start_mode_missionselect
-  skip_mission_shot_hit{current_player.available_missions==0 and current_player.status_garrus > 2}:
-    - lock_release_one_ball_enable
+  #enable_missionselector{device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
+  #  - start_mode_missionselect
   # After enough squadmates: collector ship
-  choose_mission_shot_hit{device.achievements.collectorship.state=="enabled"}:
-    - start_mode_collectorship_base
+  #enable_missionselector{device.achievements.collectorship.state=="enabled"}:
+  #  - start_mode_collectorship_base
   # At level 9: derelict reaper
-  choose_mission_shot_hit{current_player.level==9}:
-    - start_mode_derelictreaper
+  #enable_missionselector{current_player.level==9}:
+  #  - start_mode_derelictreaper
   missionselect_pass_selected:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
@@ -65,8 +67,18 @@ event_player:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
-    - start_mode_missionselect
     - reenable_nonrecruit_modes
+
+ball_holds:
+  missionselect_hold:
+    balls_to_hold: 1
+    hold_devices: bd_lock
+    enable_events:
+      enable_missionselector: 0
+      start_mode_recruitfield{current_player.available_missions>0}: 0
+    release_one_events: mode_missionselect_will_stop
+    disable_events: mode_missionselect_stopping
+    debug: true
 
 # sound_player:
 #   mode_recruitbase_started:
@@ -152,7 +164,7 @@ shots:
   choose_mission_shot:
     switch: s_lock_3
     enable_events:
-      start_mode_recruitfield{current_player.available_missions>0 or current_player.status_garrus == 2}: 0
+      start_mode_recruitfield{current_player.available_missions>0}: 0
     disable_events: recruit_mission_starting, achievement_collectorship_state_enabled
   collectorship_mission_shot:
     switch: s_lock_3
@@ -164,6 +176,7 @@ shots:
       recruit_mission_starting: 0
     disable_events:
       start_mode_recruitfield{current_player.available_missions>0 or current_player.status_garrus == 2}: 0
+      logicblock_recruit_garrus_counter_updated{value==2}: 0
   recruit_garrus_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile

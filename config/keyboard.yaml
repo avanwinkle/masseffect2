@@ -38,10 +38,13 @@ keyboard:
   5:
     switch: s_right_orbit
   l:
-    event: lock_release_one_ball_enable #test_lock_release_pulse
+    event: bypass_lock_release_pulse
   n:
     event: cancel_lock_release_pulse
   r:
     event: ball_hold_enable
   t:
     event: ball_hold_disable
+  m:
+    event: mainlock_release
+

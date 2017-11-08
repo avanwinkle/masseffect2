@@ -17,16 +17,16 @@ virtual_platform_start_active_switches:
   s_trough5
   s_trough6
 
-event_player:
-  lock_release_one_ball_enable:
-    lock_release_disable|1200ms
-
 mpf-mc:
   fps: 60
 
 game:
   balls_per_game: 5
   max_players: 4
+
+event_player:
+  bypass_lock_release_pulse:
+    cancel_lock_release_pulse|500ms
 
 modes:
 - base

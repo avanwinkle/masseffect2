@@ -15,7 +15,7 @@ mode_settings:
 
 event_player:
   mode_missionselect_started: flippers_off
-  mode_missionselect_will_stop: flippers_on, mainlock_release
+  mode_missionselect_will_stop: flippers_on
   missionselect_garrus_highlighted: set_last_recruit_garrus
   missionselect_grunt_highlighted: set_last_recruit_grunt
   missionselect_jack_highlighted: set_last_recruit_jack
