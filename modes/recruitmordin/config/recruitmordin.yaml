@@ -109,6 +109,10 @@ shows:
         (led): black
 
 sound_player:
+  mode_recruitmordin_started:
+    music_recruit_mordin:
+      action: play
+      loops: -1
   counter_cure_counter_hit{count==2 and current_player.status_garrus==0}: step1_voice_garrus
   counter_cure_counter_hit{count==2 and current_player.status_kasumi==0}: step1_voice_kasumi
   counter_cure_counter_hit{count==2 and current_player.status_grunt==0}: step1_voice_grunt
@@ -129,7 +133,11 @@ sound_player:
   logicblock_fans_counter_complete{current_player.status_grunt==0}: step3_voice_grunt
   logicblock_fans_counter_complete{current_player.status_zaeed==0}: step3_voice_zaeed
   logicblock_fans_counter_complete{current_player.status_garrus==0}: step3_voice_garrus
-  logicblock_fans_counter_complete: step3_voice_default
+  logicblock_fans_counter_complete:
+    step3_voice_default:
+      action: play
+    music_recruit_mordin:
+      action: stop
 
 sound_pools:
   step1_voice_default:
@@ -149,6 +157,11 @@ sound_pools:
     max_queue_time: 1s
 
 sounds:
+  music_recruit_mordin:
+    file: mus_mordin_acq_bossbattle_a.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
   step1_voice_garrus:
     file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.ogg
     track: voice

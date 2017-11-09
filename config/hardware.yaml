@@ -13,6 +13,71 @@ machine:
   balls_installed: 6
   min_balls: 6
 
+ball_devices:
+  bd_plunger:
+    ball_switches: s_plunger_lane
+    eject_coil: c_plunger
+    mechanical_eject: true
+    player_controlled_eject_event: s_action_button_active
+    confirm_eject_type: target # default
+    eject_timeouts: 3s
+    tags: ball_add_live
+  bd_trough:
+    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
+    eject_coil: c_trough_eject
+    tags: trough, home, drain
+    jam_switch: s_trough_jam
+    eject_targets: bd_plunger
+    auto_fire_on_unexpected_ball: false
+  bd_lock:
+    entrance_count_delay: 400ms # Default: 500ms
+    ball_switches: s_lock_1, s_lock_2, s_lock_3
+    eject_coil: c_lock_release_post
+    eject_all_events: game_ended
+    eject_coil_release_time: 400ms
+    auto_fire_on_unexpected_ball: false
+
+flippers:
+  left_flipper:
+    main_coil: c_flipper_left_main
+    activation_switch: s_flipper_left
+    enable_events: machine_reset_phase_3, ball_starting, flippers_on
+    disable_events: flippers_off
+  right_flipper:
+    main_coil: c_flipper_right_main
+    activation_switch: s_flipper_right
+    enable_events: machine_reset_phase_3, ball_starting, flippers_on
+    disable_events: flippers_off
+
+drop_targets:
+  drop_target_bottom:
+    switch: s_dropbank_bottom
+  drop_target_middle:
+    switch: s_dropbank_middle
+  drop_target_top:
+    switch: s_dropbank_top
+
+drop_target_banks:
+  dropbank:
+    drop_targets: drop_target_bottom, drop_target_middle, drop_target_top
+    reset_coils: c_dropbank_reset
+    reset_on_complete: 1s
+
+kickbacks:
+  dragon_kickback:
+    coil: c_kickback
+    switch: s_kickback
+    enable_events: kickback_enable
+    disable_events: kickback_disable
+
+autofire_coils:
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
+  right_slingshot:
+    switch: s_right_slingshot
+    coil: c_slingshot_right
+
 switches:
   s_start_button:
     number: 1-11
@@ -127,9 +192,17 @@ switches:
   s_target5:
     number: 9-9
     tags: playfield_active, standuptarget
+  s_left_slingshot:
+    number: 8-1
+    ignore_window_ms: 300ms
+    tags: playfield_active
+  s_right_slingshot:
+    number: 8-4
+    ignore_window_ms: 300ms
+    tags: playfield_active
   s_kickback:
     number: 10-14
-    ignore_window_ms: 200ms
+    ignore_window_ms: 300ms
     tags: playfield_active
   s_lock_1:
     number: 9-0
@@ -168,12 +241,12 @@ lights:
     number: 1-0
   l_dragon_fire: # Dragon Fire [#51]
     number: 10-29
-  l_dropbank_bot: # Left 3-Bank (Bot) [#13]
+  l_dropbank_bottom: # Left 3-Bank (Bot) [#13]
     number: 9-34
-  l_dropbank_mid: # Left 3-Bank (Mid) [#14]
-    number: 9-34
-  l_dropbank_top: # Left 3-Bank (Top) [#15]
+  l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 9-35
+  l_dropbank_top: # Left 3-Bank (Top) [#15]
+    number: 9-36
   l_flash_back_panel_left: # Back Panel Left [#100]
     number: 10-7
   l_flash_back_panel_right: # Back Panel Right [#101]
@@ -397,6 +470,15 @@ coils:
     number: 10-2
   c_bumper_bottom:
     number: 10-3
+  c_slingshot_left:
+    number: 8-1
+    default_pulse_ms: 12
+  c_slingshot_right:
+    number: 8-4
+    default_pulse_ms: 12
+  c_dropbank_reset:
+    number: 8-2
+    default_pulse_ms: 1
   c_up_post:
     number: 8-7
     default_hold_power: 0.3
@@ -426,48 +508,6 @@ playfields:
     default_source_device: bd_plunger
     tags: default
 
-ball_devices:
-  bd_plunger:
-    ball_switches: s_plunger_lane
-    eject_coil: c_plunger
-    mechanical_eject: true
-    player_controlled_eject_event: s_action_button_active
-    confirm_eject_type: target # default
-    eject_timeouts: 3s
-    tags: ball_add_live
-  bd_trough:
-    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
-    eject_coil: c_trough_eject
-    tags: trough, home, drain
-    jam_switch: s_trough_jam
-    eject_targets: bd_plunger
-    auto_fire_on_unexpected_ball: false
-  bd_lock:
-    entrance_count_delay: 400ms # Default: 500ms
-    ball_switches: s_lock_1, s_lock_2, s_lock_3
-    eject_coil: c_lock_release_post
-    eject_all_events: game_ended
-    eject_coil_release_time: 400ms
-    auto_fire_on_unexpected_ball: false
-
-flippers:
-  left_flipper:
-    main_coil: c_flipper_left_main
-    activation_switch: s_flipper_left
-    enable_events: machine_reset_phase_3, ball_starting, flippers_on
-    disable_events: flippers_off
-  right_flipper:
-    main_coil: c_flipper_right_main
-    activation_switch: s_flipper_right
-    enable_events: machine_reset_phase_3, ball_starting, flippers_on
-    disable_events: flippers_off
-
-kickbacks:
-  dragon_kickback:
-    coil: c_kickback
-    switch: s_kickback
-    enable_events: kickback_enable
-    disable_events: kickback_disable
 
 sound_system:
   tracks:

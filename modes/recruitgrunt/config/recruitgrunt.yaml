@@ -62,9 +62,36 @@ shows:
       lights:
         (led): black
 
+sound_player:
+  mode_recruitgrunt_started:
+    music_recruit_grunt:
+      action: play
+      loops: -1
+  grunt_shots_complete:
+    music_recruit_grunt:
+      action: stop
+
+sound_pools:
+  music_recruit_grunt:
+    type: random
+    sounds: music_recruit_grunt_1, music_recruit_grunt_2
+    track: music
+
+sounds:
+  music_recruit_grunt_1:
+    file: mus_grunt_acq_combat_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+  music_recruit_grunt_2:
+    file: mus_grunt_acq_combat_2b.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+
 timers:
   grunttimer:
-    start_value: 12
+    start_value: 18
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -72,7 +99,7 @@ timers:
     control_events:
       - event: grunt_shots_hit
         action: add
-        value: 12
+        value: 18
       - event: recruit_grunt_complete
         action: stop
 

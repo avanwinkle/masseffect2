@@ -1,0 +1,15 @@
+#config_version=5
+mode:
+  start_events: start_mode_lockbypass
+  stop_events: stop_mode_lockbypass
+  priority: 500
+
+shots:
+  lockbypass_shot:
+    switch: s_left_ramp_exit
+
+event_player:
+  lockbypass_shot_hit:
+    bypass_lock_release_pulse
+  bypass_lock_release_pulse:
+    cancel_lock_release_pulse|800ms

@@ -21,44 +21,44 @@ event_player:
 counters:
   recruit_garrus_counter:
     count_events: recruit_garrus_shot_hit
+    multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_garrus
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_garrus_lit
   recruit_grunt_counter:
     count_events: recruit_grunt_shot_hit
+    multiple_hit_window: 1000ms
     events_when_hit: recruit_advance, recruit_advance_grunt
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_grunt_lit
   recruit_jack_counter:
     count_events: recruit_jack_shot_hit
+    multiple_hit_window: 300ms
     events_when_hit: recruit_advance, recruit_advance_jack
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_jack_lit
   recruit_kasumi_counter:
     count_events: recruit_kasumi_shot_hit
+    multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_kasumi
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
@@ -66,68 +66,68 @@ counters:
   recruit_legion_counter:
     count_events: recruit_legion_shot_hit
     events_when_hit: recruit_advance, recruit_advance_legion
+    multiple_hit_window: 500ms
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_legion_lit
   recruit_mordin_counter:
     count_events: recruit_mordin_shot_hit
+    multiple_hit_window: 800ms
     events_when_hit: recruit_advance, recruit_advance_mordin
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
     disable_events: s_plunger_lane_inactive
     enable_events:
-      playfield_active: 300ms
+      playfield_active: 500ms
   recruit_samara_counter:
     count_events: recruit_samara_shot_hit
+    multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_samara
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_samara_lit
   recruit_tali_counter:
     count_events: recruit_tali_shot_hit
+    multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_tali
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_tali_lit
   recruit_thane_counter:
     count_events: recruit_thane_shot_hit
+    multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_thane
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_thane_lit
   recruit_zaeed_counter:
     count_events: recruit_zaeed_shot_hit
+    multiple_hit_window: 1000ms
     events_when_hit: recruit_advance, recruit_advance_zaeed
     starting_count: 4
     count_complete_value: 1
     direction: down
-    multiple_hit_window: 500ms
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
@@ -210,6 +210,14 @@ slides:
 
 
 sound_player:
+  recruit_advance_garrus:
+    shot_hit_garrus:
+      action: play
+      max_queue_time: 1s
+  recruit_advance_grunt:
+    shot_hit_grunt:
+      action: play
+      max_queue_time: 1s
   recruit_advance_jack:
     shot_hit_jack:
       action: play
@@ -220,6 +228,14 @@ sound_player:
       max_queue_time: 1s
 
 sound_pools:
+  shot_hit_garrus:
+    type: random_force_all
+    sounds: garrus_shot_sound_1, garrus_shot_sound_2, garrus_shot_sound_3
+    track: voice
+  shot_hit_grunt:
+    type: random_force_all
+    sounds: grunt_shot_sound_1, grunt_shot_sound_2, grunt_shot_sound_3, grunt_shot_sound_4, grunt_shot_sound_5
+    track: voice
   shot_hit_jack:
     type: random_force_all
     sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
@@ -230,6 +246,30 @@ sound_pools:
     track: voice
 
 sounds:
+  garrus_shot_sound_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
+    track: voice
+  garrus_shot_sound_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330893_m.ogg
+    track: voice
+  garrus_shot_sound_3:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.ogg
+    track: voice
+  grunt_shot_sound_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00316600_m.ogg
+    track: voice
+  grunt_shot_sound_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00317212_m.ogg
+    track: voice
+  grunt_shot_sound_3:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331036_m.ogg
+    track: voice
+  grunt_shot_sound_4:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331040_m.ogg
+    track: voice
+  grunt_shot_sound_5:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295739_m.ogg
+    track: voice
   jack_shot_sound_1:
     file: en_us_hench_convict_ss_global_hench_convict_00286790_m.ogg
     track: voice

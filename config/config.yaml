@@ -34,6 +34,7 @@ modes:
 - base
 - collectorship_ambush
 - collectorship_base
+- lockbypass
 - recruitbase
 - recruitfield
 - recruitgarrus
@@ -42,6 +43,7 @@ modes:
 - recruitmordin
 - missionselect
 # - overlord
+- shadowbroker
 - shopping
 
 window:

@@ -9,8 +9,6 @@ mode:
 event_player:
   mode_recruitbase_started:
     - start_mode_recruitfield
-  player_available_missions{value>0}:
-    - enable_missionselector
   ball_hold_missionselect_hold_held_ball:
     - start_mode_missionselect
   start_mode_missionselect:
@@ -27,6 +25,7 @@ event_player:
   #  - start_mode_derelictreaper
   missionselect_pass_selected:
     - start_mode_recruitfield
+    - start_mode_lockbypass
     - reenable_nonrecruit_modes
   missionselect_garrus_selected:
     - recruit_mission_starting
@@ -35,10 +34,8 @@ event_player:
     - recruit_mission_starting
     - start_mode_recruitgrunt
   missionselect_jack_selected:
-    recruit_mission_starting:
-      squadmate: jack
-    start_mode_recruitjack:
-      delay: 0
+    - recruit_mission_starting
+    - start_mode_recruitjack
   missionselect_kasumi_selected:
     - recruit_mission_starting
     - start_mode_recruitkasumi
@@ -62,12 +59,22 @@ event_player:
     - start_mode_recruitzaeed
   recruit_mission_starting:
     - disable_nonrecruit_modes
+    - start_mode_lockbypass
     - stop_mode_missionselect
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
+    - stop_mode_lockbypass
+  start_mode_recruitfield{current_player.available_missions==0 and current_player.status_garrus!=2}:
+    - start_mode_lockbypass
+  player_status_garrus{value==2}:
+    - stop_mode_lockbypass
+  player_available_missions{value>0}:
+    - stop_mode_lockbypass
+    - enable_missionselector
+
 
 ball_holds:
   missionselect_hold:
@@ -101,23 +108,41 @@ scoring:
     last_mission:
       string: "__recruitment__"
   recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
-    status_garrus: -1
+    status_garrus:
+      score: 0
+      action: set
   recruit_grunt_complete: #recruit_mission_success{squadmate=="grunt"}:
-    status_grunt: -1
+    status_grunt:
+      score: 0
+      action: set
   recruit_jack_complete: #recruit_mission_success{squadmate=="jack"}:
-    status_jack: -1
+    status_jack:
+      score: 0
+      action: set
   recruit_legion_complete: #recruit_mission_success{squadmate=="legion"}:
-    status_legion: -1
+    status_legion:
+      score: 0
+      action: set
   recruit_mordin_complete: #recruit_mission_success{squadmate=="mordin"}:
-    status_mordin: -1
+    status_mordin:
+      score: 0
+      action: set
   recruit_samara_complete: #recruit_mission_success{squadmate=="samara"}:
-    status_samara: -1
+    status_samara:
+      score: 0
+      action: set
   recruit_tali_complete: #recruit_mission_success{squadmate=="tali"}:
-    status_tali: -1
+    status_tali:
+      score: 0
+      action: set
   recruit_thane_complete: #recruit_mission_success{squadmate=="thane"}:
-    status_thane: -1
+    status_thane:
+      score: 0
+      action: set
   recruit_zaeed_complete: #recruit_mission_success{squadmate=="zaeed"}:
-    status_zaeed: -1
+    status_zaeed:
+      score: 0
+      action: set
   set_last_recruit_garrus:
     last_recruit:
       string: "Garrus"
@@ -297,7 +322,6 @@ shots:
       led: shot_shield_zaeed
       color: red
     tags: recruit_shot
-
 
 shows:
   recruitshow_off:

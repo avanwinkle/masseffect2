@@ -22,8 +22,10 @@ event_player:
   disable_nonrecruit_modes:
     - stop_mode_overlord
     - stop_mode_arrival
+    - stop_mode_shadowbroker
     - stop_mode_shopping
   reenable_nonrecruit_modes:
+    - start_mode_shadowbroker
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
   reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
@@ -79,6 +81,10 @@ scoring:
     available_missions: -1
   enable_collectorship:
     available_missions: 1
+  skip_mission_scoring: # Mock values so we can skip missions and keep accurate counts
+    recruits_lit_count: 1
+    available_missions: 1
+
 
 show_player:
   ball_save_default_timer_start:

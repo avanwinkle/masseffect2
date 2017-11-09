@@ -15,6 +15,17 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
+  shift+1:
+    event: skip_recruit_mission_grunt
+  shift+2:
+    event: skip_recruit_mission_jack
+  shift+3:
+    event: skip_recruit_mission_garrus
+  shift+4:
+    event: skip_recruit_mission_kasumi
+  shift+5:
+    event: skip_recruit_mission_mordin
+
   l:
     event: bypass_lock_release_pulse
   n:
@@ -33,3 +44,9 @@ keyboard:
     event: gi_on
 
 
+event_player:
+  skip_recruit_mission_garrus: recruit_mission_success, skip_mission_scoring, recruit_garrus_complete
+  skip_recruit_mission_grunt: recruit_mission_success, skip_mission_scoring, recruit_grunt_complete
+  skip_recruit_mission_jack: recruit_mission_success, skip_mission_scoring, recruit_jack_complete
+  skip_recruit_mission_kasumi: recruit_mission_success, skip_mission_scoring, recruit_kasumi_complete
+  skip_recruit_mission_mordin: recruit_mission_success, skip_mission_scoring, recruit_mordin_complete
