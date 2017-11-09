@@ -74,8 +74,6 @@ counters:
     persist_state: true
 
 scoring:
-  sw_target:
-    score: 100
   levelup:
     level: 1
     available_missions: -1

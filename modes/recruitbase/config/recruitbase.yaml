@@ -78,7 +78,6 @@ ball_holds:
       start_mode_recruitfield{current_player.available_missions>0}: 0
     release_one_events: mode_missionselect_will_stop
     disable_events: mode_missionselect_stopping
-    debug: true
 
 # sound_player:
 #   mode_recruitbase_started:
@@ -89,10 +88,14 @@ ball_holds:
 
 
 scoring:
+  sw_standuptarget_active:
+    score: 200
   recruit_advance{count==1}:
     recruits_lit_count: 1
     available_missions: 1
+    score: 1000
   recruit_mission_success:
+    score: 100000
     recruits_lit_count: -1
     squadmates_count: 1
     last_mission:

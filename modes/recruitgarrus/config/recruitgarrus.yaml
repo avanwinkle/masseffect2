@@ -19,7 +19,7 @@ counters:
   doors_closed_counter:
     starting_count: 0
     count_complete_value: 3
-    count_events: close_doors_door_shot_profile_lit_hit
+    count_events: close_doors_hit
     events_when_hit: door_closed
     direction: up
     disable_on_complete: true

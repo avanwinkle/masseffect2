@@ -25,6 +25,8 @@ game:
   max_players: 4
 
 event_player:
+  game_will_start: gi_on
+  game_ended: gi_off
   bypass_lock_release_pulse:
     cancel_lock_release_pulse|500ms
 
@@ -61,12 +63,11 @@ displays:
     height: 32
     default: true
 
-
 light_player:
-  game_will_start:
+  gi_on:
     gi:
       color: white
-  game_ended:
+  gi_off:
     gi:
       color: black
 

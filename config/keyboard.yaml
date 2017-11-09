@@ -1,27 +1,5 @@
 #config_version=5
 keyboard:
-  s:
-    switch: s_start
-  ";":
-    switch: s_flipper_left
-  q:
-    switch: s_flipper_right
-  a:
-    switch: s_action_button
-  o:
-    switch: s_start_button
-  ctrl+1:
-    switch: s_trough1
-  ctrl+2:
-    switch: s_trough2
-  ctrl+3:
-    switch: s_trough3
-  ctrl+4:
-    switch: s_trough4
-  ctrl+5:
-    switch: s_trough5
-  ctrl+6:
-    switch: s_trough6
   p:
     event: recruiting_start
   y:
@@ -47,4 +25,11 @@ keyboard:
     event: ball_hold_disable
   m:
     event: mainlock_release
+  a:
+    event: enable_gates
+  o:
+    event: disable_gates
+  i:
+    event: gi_on
+
 

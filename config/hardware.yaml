@@ -408,6 +408,12 @@ coils:
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
+  c_orbit_gates:
+    number: 10-0
+    default_pulse_ms: 50
+    default_hold_power: 0.4
+    enable_events: enable_gates
+    disable_events: disable_gates
   c_sword:
     number: 9-0
   c_dragon:
