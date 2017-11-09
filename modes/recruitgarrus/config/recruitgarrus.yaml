@@ -6,7 +6,7 @@ mode:
 
 event_player:
   door_closed: add_time
-  clear_upstairs_complete: recruit_garrus_complete
+  clear_upstairs_hit_complete: recruit_garrus_complete
   recruit_garrus_complete:
     recruit_mission_success:
       squadmate: garrus
@@ -28,6 +28,9 @@ counters:
     disable_on_complete: true
     reset_events: mode_recruitgarrus_started
     reset_on_complete: false
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      playfield_active: 500ms
 
 timers:
   garrustimer:
@@ -40,7 +43,7 @@ timers:
       - event: add_time
         action: add
         value: 12
-      - event: clear_upstairs_complete
+      - event: clear_upstairs_hit_complete
         action: stop
 
 sound_player:
@@ -48,16 +51,21 @@ sound_player:
     music_recruit_garrus:
       action: play
       loops: -1
-    garrus_upstairs_complete:
+    garrus_mission_start:
       action: play
   door_closed{count==1}: garrus_two_more_shutters
   door_closed{count==2}: garrus_one_more_shutter
   door_closed{count==3}: garrus_last_shutter
-  clear_upstairs_complete:
-    garrus_upstairs_complete:
-      action: play
+  clear_upstairs_hit_complete:
     music_recruit_garrus:
       action: stop
+
+sound_pools:
+  garrus_last_shutter:
+    type: random
+    track: voice
+    sounds: garrus_final_1, garrus_final_2, garrus_final_3
+    max_queue_time: 1s
 
 sounds:
   music_recruit_garrus:
@@ -74,13 +82,15 @@ sounds:
   garrus_one_more_shutter:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00205200_m.ogg
     track: voice
-  garrus_last_shutter:
+  garrus_final_1:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00206067_m.ogg
     track: voice
-  garrus_upstairs_complete:
-    file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.ogg
+  garrus_final_2:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206056_m.ogg
     track: voice
-
+  garrus_final_3:
+    file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.ogg
+    track: voice
 
 shots:
   center_door:
@@ -101,7 +111,7 @@ shots:
   stairs:
     switch: s_right_ramp_exit
     profile: upstairs_shot_profile
-    enable_events: close_doors_complete
+    enable_events: close_doors_hit_complete
     show_tokens:
       led: l_right_ramp_shield_rgb
 
@@ -109,7 +119,7 @@ shot_groups:
   close_doors:
     shots: center_door, left_door, right_door
     reset_events: mode_recruitgarrus_started
-    disable_events: close_doors_complete
+    disable_events: close_doors_hit_complete
   clear_upstairs:
     shots: stairs
     reset_events: mode_recruitgarrus_started
@@ -140,7 +150,7 @@ shows:
         (led): black
 
 slide_player:
-  close_doors_complete:
+  close_doors_hit_complete:
     doors_closed_slide:
       expire: 2s
 

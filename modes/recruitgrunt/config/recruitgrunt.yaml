@@ -47,6 +47,9 @@ shots:
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      playfield_active: 500ms
   grunt_kickback:
     switch: s_kickback
     profile: grunt_shot_profile

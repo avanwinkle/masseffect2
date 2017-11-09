@@ -75,6 +75,14 @@ event_player:
     - stop_mode_lockbypass
     - enable_missionselector
 
+ball_saves:
+  debug_recruitmission_ballsave:
+    active_time: 60s
+    enable_events: recruit_mission_starting
+    disable_events: recruit_mission_ended
+    hurry_up_time: 10s
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+    balls_to_save: -1
 
 ball_holds:
   missionselect_hold:
@@ -323,6 +331,20 @@ shots:
       color: red
     tags: recruit_shot
 
+
+show_player:
+  ball_save_debug_recruitmission_ballsave_timer_start:
+    ball_save_show:
+      action: play
+      speed: 3
+  ball_save_debug_recruitmission_ballsave_huryr_up:
+    ball_save_show:
+      action: play
+      speed: 9
+  ball_save_debug_recruitmission_ballsave_disabled:
+    ball_save_show:
+      action: stop
+
 shows:
   recruitshow_off:
     - lights:
@@ -360,3 +382,38 @@ slides:
       - type: text
         text: Recruit Your Squad
         style: dmd_big
+
+
+sound_player:
+  recruit_garrus_complete: missioncomplete_voice_garrus
+  recruit_mordin_complete: missioncomplete_voice_mordin
+
+sound_pools:
+  missioncomplete_voice_garrus:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2
+    max_queue_time: 1s
+  missioncomplete_voice_mordin:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_mordin_1, missioncomplete_voice_mordin_2
+    max_queue_time: 1s
+
+sounds:
+  missioncomplete_voice_garrus_1:
+    file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_garrus_2:
+    file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_mordin_1:
+    file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_mordin_2:
+    file: en_us_hench_professor_omgpra_mordin_d_00210653_m.ogg
+    track: voice
+    max_queue_time: 1s

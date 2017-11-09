@@ -71,9 +71,9 @@ kickbacks:
     disable_events: kickback_disable
 
 autofire_coils:
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
+  # left_slingshot:
+  #   switch: s_left_slingshot
+  #   coil: c_slingshot_left
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
@@ -130,8 +130,10 @@ switches:
     tags: playfield_active
   s_outlane_left:
     number: 9-4
+    tags: playfield_active
   s_outlane_right:
     number: 8-7
+    tags: playfield_active
   s_battering_ram:
     number: 10-4
     tags: playfield_active
@@ -473,9 +475,11 @@ coils:
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12
+    default_recycle: true
   c_slingshot_right:
     number: 8-4
     default_pulse_ms: 12
+    default_recycle: true
   c_dropbank_reset:
     number: 8-2
     default_pulse_ms: 1

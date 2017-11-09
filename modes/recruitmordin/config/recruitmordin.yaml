@@ -29,7 +29,7 @@ counters:
   fans_counter:
     starting_count: 0
     count_complete_value: 2
-    count_events: fan_shots_fanprofile_lit_hit
+    count_events: fan_left_lit_hit, fan_right_lit_hit
     direction: up
     disable_on_complete: true
     reset_on_complete: false
@@ -51,6 +51,7 @@ shot_groups:
 
 shot_profiles:
   spinnerprofile:
+    show_when_disabled: false
     states:
       - name: flashing
         show: spinner_flash_show
@@ -73,15 +74,21 @@ shots:
   cure:
     switch: s_right_orbit
     enable_events: enable_cure
+    profile: spinnerprofile
     show_tokens:
       led: l_right_orbit_shield_rgb
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      playfield_active: 500ms
   fan_left:
     switch: s_left_ramp_exit
+    profile: fanprofile
     enable_events: enable_fans
     show_tokens:
       led: l_left_ramp_shield_rgb
   fan_right:
     switch: s_right_ramp_exit
+    profile: fanprofile
     enable_events: enable_fans
     show_tokens:
       led: l_right_ramp_shield_rgb
@@ -110,6 +117,8 @@ shows:
 
 sound_player:
   mode_recruitmordin_started:
+    mission_intro:
+      action: play
     music_recruit_mordin:
       action: play
       loops: -1
@@ -119,23 +128,21 @@ sound_player:
   counter_cure_counter_hit{count==2 and current_player.status_zaeed==0}: step1_voice_zaeed
   counter_cure_counter_hit{count==2 and current_player.status_tali==0}: step1_voice_tali
   counter_cure_counter_hit{count==2 and current_player.status_jack==0}: step1_voice_jack
-  counter_cure_counter_hit{count==2}: step1_voice_default
+  counter_cure_counter_hit{count==2 and current_player.squadmates_count==2}: step1_voice_default
   counter_fans_counter_hit{count==1 and current_player.status_grunt==0}: step2_voice_grunt
   counter_fans_counter_hit{count==1 and current_player.status_garrus==0}: step2_voice_garrus
   counter_fans_counter_hit{count==1 and current_player.status_jack==0}: step2_voice_jack
   counter_fans_counter_hit{count==1 and current_player.status_tali==0}: step2_voice_tali
   counter_fans_counter_hit{count==1 and current_player.status_zaeed==0}: step2_voice_zaeed
   counter_fans_counter_hit{count==1 and current_player.status_kasumi==0}: step2_voice_kasumi
-  counter_fans_counter_hit{count==1}: step2_voice_default
-  logicblock_fans_counter_complete{current_player.status_tali==0}: step3_voice_tali
-  logicblock_fans_counter_complete{current_player.status_jack==0}: step3_voice_jack
-  logicblock_fans_counter_complete{current_player.status_kasumi==0}: step3_voice_kasumi
-  logicblock_fans_counter_complete{current_player.status_grunt==0}: step3_voice_grunt
-  logicblock_fans_counter_complete{current_player.status_zaeed==0}: step3_voice_zaeed
-  logicblock_fans_counter_complete{current_player.status_garrus==0}: step3_voice_garrus
-  logicblock_fans_counter_complete:
-    step3_voice_default:
-      action: play
+  counter_fans_counter_hit{count==1 and current_player.squadmates_count==2}: step2_voice_default
+  # logicblock_fans_counter_complete{current_player.status_tali==0}: step3_voice_tali
+  # logicblock_fans_counter_complete{current_player.status_jack==0}: step3_voice_jack
+  # logicblock_fans_counter_complete{current_player.status_kasumi==0}: step3_voice_kasumi
+  # logicblock_fans_counter_complete{current_player.status_grunt==0}: step3_voice_grunt
+  # logicblock_fans_counter_complete{current_player.status_zaeed==0}: step3_voice_zaeed
+  # logicblock_fans_counter_complete{current_player.status_garrus==0}: step3_voice_garrus
+  recruit_mordin_complete:
     music_recruit_mordin:
       action: stop
 
@@ -162,6 +169,10 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  mission_intro:
+    file: en_us_hench_professor_omgpra_mordin_d_00210618_m.ogg
+    track: voice
+    max_queue_time: 1s
   step1_voice_garrus:
     file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.ogg
     track: voice

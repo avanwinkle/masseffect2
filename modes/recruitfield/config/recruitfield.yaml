@@ -208,7 +208,6 @@ slides:
         anchor_y: bottom
         y: 3
 
-
 sound_player:
   recruit_advance_garrus:
     shot_hit_garrus:
