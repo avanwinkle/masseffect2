@@ -29,7 +29,7 @@ event_player:
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
   reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
-    - start_mode_overlord
+    - start_mode_overlordlight
   reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
     - start_mode_arrival
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship

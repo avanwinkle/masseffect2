@@ -73,13 +73,13 @@ shots:
       led: l_left_orbit_shield_rgb
   cure:
     switch: s_right_orbit
-    enable_events: enable_cure
     profile: spinnerprofile
+    enable_events:
+      enable_cure: 0
+      playfield_active: 500ms
+    disable_events: s_plunger_lane_inactive
     show_tokens:
       led: l_right_orbit_shield_rgb
-    disable_events: s_plunger_lane_inactive
-    enable_events:
-      playfield_active: 500ms
   fan_left:
     switch: s_left_ramp_exit
     profile: fanprofile

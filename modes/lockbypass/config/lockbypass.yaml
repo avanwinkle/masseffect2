@@ -9,7 +9,17 @@ shots:
     switch: s_left_ramp_exit
 
 event_player:
-  lockbypass_shot_hit:
-    bypass_lock_release_pulse
+  lockbypass_shot_hit{device.multiball_locks.overlordlock.locked_balls<1}:
+    - bypass_lock_release_pulse
+    - device_multiball_locks_lessthanone
+  lockbypass_shot_hit{device.multiball_locks.overlordlock.locked_balls>=1}:
+    - eject_one_ball_from_virtual_lock
+    - device_multiball_locks_greaterthanone
+  lockbypass_shot_hit{machine.multiball_locks.overlordlock.locked_balls<1}:
+    - bypass_lock_release_pulse
+    - machine_multiball_locks_lessthanone
+  lockbypass_shot_hit{machine.multiball_locks.overlordlock.locked_balls>=1}:
+    - eject_one_ball_from_virtual_lock
+    - machine_multiball_locks_greaterthanone
   bypass_lock_release_pulse:
     cancel_lock_release_pulse|800ms

@@ -15,7 +15,7 @@ event_player:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
   # If missions are available and we don't force the collector attack or derelict reaper:
-  #enable_missionselector{device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
+  # enable_missionselector{device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
   #  - start_mode_missionselect
   # After enough squadmates: collector ship
   #enable_missionselector{device.achievements.collectorship.state=="enabled"}:
@@ -74,6 +74,8 @@ event_player:
   player_available_missions{value>0}:
     - stop_mode_lockbypass
     - enable_missionselector
+  reenable_lockbypass{curent_player.available_missions==0 and current_player.status_garrus!=2}:
+    - start_mode_lockbypass
 
 ball_saves:
   debug_recruitmission_ballsave:

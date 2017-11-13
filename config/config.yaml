@@ -4,6 +4,7 @@ config:
 - keyboard.yaml
 
 smart_virtual:
+  console_log: basic
   file_log: full
 
 mpf:
@@ -23,6 +24,7 @@ mpf-mc:
 game:
   balls_per_game: 5
   max_players: 4
+  debug: True
 
 event_player:
   game_will_start: gi_on
@@ -42,7 +44,7 @@ modes:
 - recruitjack
 - recruitmordin
 - missionselect
-# - overlord
+# - overlordlight
 - shadowbroker
 - shopping
 

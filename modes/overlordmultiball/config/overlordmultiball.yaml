@@ -1,0 +1,46 @@
+#config_version=5
+mode:
+  start_events: start_mode_overlordmultiball
+  stop_events: stop_mode_overlordmultiball
+  priority: 500
+
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    ball_count_type: total
+    ball_locks: bd_virtual_lock
+    shoot_again: 10s
+    enable_events: multiball_lock_overlord_full
+    start_events: overlord_multiball_begin
+
+slide_player:
+  mode_overlordmultiball_started:
+    overlord_ball_locked_slide_full:
+      expire: 4s
+
+slides:
+  overlord_ball_locked_slide_full:
+    widgets:
+      - type: text
+        text: OVERLORD
+        style: dmd_big
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: MULTIBALL
+        style: dmd_big
+        anchor_y: top
+        y: middle-2
+
+sound_player:
+  mode_overlordmultiball_started:
+    overlord_music:
+      action: play
+      loops: -1
+
+sounds:
+  overlord_music:
+    file: Combat_Troops.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s

@@ -18,7 +18,7 @@ ball_devices:
     ball_switches: s_plunger_lane
     eject_coil: c_plunger
     mechanical_eject: true
-    player_controlled_eject_event: s_action_button_active
+    # player_controlled_eject_event: s_action_button_inactive
     confirm_eject_type: target # default
     eject_timeouts: 3s
     tags: ball_add_live
@@ -32,10 +32,21 @@ ball_devices:
   bd_lock:
     entrance_count_delay: 400ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
+    # entrance_switch: s_left_ramp_exit
     eject_coil: c_lock_release_post
     eject_all_events: game_ended
-    eject_coil_release_time: 400ms
+    eject_coil_release_time: 200ms
     auto_fire_on_unexpected_ball: false
+  # bd_virtual_lock:
+  #   # ball_capacity: 3
+  #   entrance_count_delay: 500ms
+  #   ball_switches: s_lock_1, s_lock_2, s_lock_3 # TODO: use events
+  #   eject_coil: c_lock_release_post
+  #   eject_events: eject_one_ball_from_virtual_lock
+  #   eject_all_events: game_ended
+  #   eject_coil_release_time: 200ms
+  #   # auto_fire_on_unexpected_ball: false
+  #   debug: true
 
 flippers:
   left_flipper:
@@ -151,13 +162,11 @@ switches:
     tags: playfield_active
   s_left_ramp_exit:
     number: 10-6
-    tags: playfield_active
   s_right_ramp_entrance:
     number: 9-7
     tags: playfield_active
   s_right_ramp_exit:
     number: 10-15
-    tags: playfield_active
   s_top_lane_left:
     number: 10-12
     tags: playfield_active
@@ -204,19 +213,19 @@ switches:
     tags: playfield_active
   s_kickback:
     number: 10-14
-    ignore_window_ms: 300ms
+    ignore_window_ms: 300
     tags: playfield_active
   s_lock_1:
     number: 9-0
-    debounce: normal
+    ignore_window_ms: 400
     tags: lock
   s_lock_2:
     number: 9-2
-    debounce: normal
+    ignore_window_ms: 400
     tags: lock
   s_lock_3:
     number: 9-3
-    debounce: normal
+    ignore_window_ms: 400
     tags: lock
 
 lights:
@@ -305,6 +314,7 @@ lights:
     number: 10-16
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
     number: 10-17
+    tags: l_lock_lit
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
   l_left_return_lane: # Left Return Lane [#12]
@@ -511,6 +521,7 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
+    debug: true
 
 
 sound_system:
