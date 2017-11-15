@@ -24,29 +24,29 @@ mpf-mc:
 game:
   balls_per_game: 5
   max_players: 4
-  debug: True
+  # debug: True
 
 event_player:
   game_will_start: gi_on
   game_ended: gi_off
   bypass_lock_release_pulse:
-    cancel_lock_release_pulse|500ms
+    cancel_lock_release_pulse|200ms
 
 modes:
 - base
-- collectorship_ambush
-- collectorship_base
-- lockbypass
-- recruitbase
-- recruitfield
-- recruitgarrus
-- recruitgrunt
-- recruitjack
-- recruitmordin
-- missionselect
-# - overlordlight
-- shadowbroker
-- shopping
+# - collectorship_ambush
+# - collectorship_base
+# - lockbypass
+# - recruitbase
+# - recruitfield
+# - recruitgarrus
+# - recruitgrunt
+# - recruitjack
+# - recruitmordin
+# - missionselect
+- overlordlight
+# - shadowbroker
+# - shopping
 
 window:
   width: 800

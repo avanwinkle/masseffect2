@@ -6,10 +6,7 @@ mode:
 
 event_player:
   overlord_light_shot_hit: stop_mode_lockbypass
-  multiball_lock_overlordlock_locked_ball: ball_lock_success
-  ball_lock_success: reenable_lockbypass
-  # Attempt to get past the balls_in_play deducting from the balls adding to playfield
-  multiball_overlord_multiball_started: eject_one_ball_from_virtual_lock
+  multiball_lock_overlordlock_locked_ball: reenable_lockbypass
 
 multiballs:
   overlord_multiball:
@@ -18,6 +15,7 @@ multiballs:
     ball_locks: bd_virtual_lock
     shoot_again: 10s
     start_events: multiball_lock_overlordlock_full
+    reset_events: machine_reset_phase_3, ball_starting, multiball_overlord_multiball_ended
     debug: true
 
 multiball_locks:
@@ -27,7 +25,7 @@ multiball_locks:
     reset_count_for_current_player_events: multiball_overlord_multiball_ended
     enable_events: overlord_light_shot_hit
     disable_events:
-      ball_lock_success|500
+      multiball_lock_overlordlock_locked_ball|500
       ball_started{ball==1}|0
     debug: true
 
@@ -36,7 +34,7 @@ shot_groups:
     shots: light_lock_overlord_top, light_lock_overlord_bottom
     enable_events: mode_overlordlight_started, multiball_overlord_multiball_ended
     disable_events: mode_overlordlight_stopping, multiball_overlord_multiball_started
-    reset_events: ball_lock_success
+    reset_events: multiball_lock_overlordlock_locked_ball
 
 shot_profiles:
   overlord_light_profile:
@@ -57,7 +55,7 @@ shots:
     switch: s_left_ramp_exit
     profile: overlord_lock_profile
     enable_events: overlord_light_shot_hit
-    disable_events: ball_lock_success
+    disable_events: multiball_lock_overlordlock_locked_ball
   light_lock_overlord_top:
     switch: s_hitbank_top
     profile: overlord_light_profile
@@ -103,7 +101,7 @@ shows:
 
 
 slide_player:
-  ball_lock_success:
+  multiball_lock_overlordlock_locked_ball:
     overlord_ball_locked_slide:
       expire: 1.5s
       priority: 100

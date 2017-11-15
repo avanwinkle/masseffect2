@@ -22,6 +22,7 @@ ball_devices:
     confirm_eject_type: target # default
     eject_timeouts: 3s
     tags: ball_add_live
+    debug: true
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
@@ -29,36 +30,37 @@ ball_devices:
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
     auto_fire_on_unexpected_ball: false
-  bd_lock:
-    entrance_count_delay: 400ms # Default: 500ms
-    ball_switches: s_lock_1, s_lock_2, s_lock_3
-    # entrance_switch: s_left_ramp_exit
+    debug: true
+  # bd_lock:
+  #   entrance_count_delay: 400ms # Default: 500ms
+  #   ball_switches: s_lock_1, s_lock_2, s_lock_3
+  #   # entrance_switch: s_left_ramp_exit
+  #   eject_coil: c_lock_release_post
+  #   eject_all_events: game_ended
+  #   eject_coil_release_time: 200ms
+  #   auto_fire_on_unexpected_ball: false
+  bd_virtual_lock:
+    entrance_count_delay: 1000ms
+    exit_count_delay: 1000ms
+    ball_switches: s_lock_1, s_lock_2, s_lock_3 # TODO: use events
     eject_coil: c_lock_release_post
     eject_all_events: game_ended
     eject_coil_release_time: 200ms
-    auto_fire_on_unexpected_ball: false
-  # bd_virtual_lock:
-  #   # ball_capacity: 3
-  #   entrance_count_delay: 500ms
-  #   ball_switches: s_lock_1, s_lock_2, s_lock_3 # TODO: use events
-  #   eject_coil: c_lock_release_post
-  #   eject_events: eject_one_ball_from_virtual_lock
-  #   eject_all_events: game_ended
-  #   eject_coil_release_time: 200ms
-  #   # auto_fire_on_unexpected_ball: false
-  #   debug: true
+    confirm_eject_type: event
+    confirm_eject_event: s_lock_1_inactive
+    debug: true
 
 flippers:
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
-    enable_events: machine_reset_phase_3, ball_starting, flippers_on
+    enable_events: ball_starting, flippers_on
     disable_events: flippers_off
   right_flipper:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
-    enable_events: machine_reset_phase_3, ball_starting, flippers_on
-    disable_events: flippers_off
+    enable_events: ball_starting, flippers_on
+    disable_events: ball_ending, flippers_off
 
 drop_targets:
   drop_target_bottom:
@@ -217,15 +219,15 @@ switches:
     tags: playfield_active
   s_lock_1:
     number: 9-0
-    ignore_window_ms: 400
+    # ignore_window_ms: 1000
     tags: lock
   s_lock_2:
     number: 9-2
-    ignore_window_ms: 400
+    # ignore_window_ms: 1000
     tags: lock
   s_lock_3:
     number: 9-3
-    ignore_window_ms: 400
+    # ignore_window_ms: 1000
     tags: lock
 
 lights:
@@ -471,10 +473,10 @@ coils:
     default_hold_power: 0.1
   c_plunger:
     number: 9-1
-    default_pulse_ms: 20
+    default_pulse_ms: 18
   c_trough_eject:
     number: 9-2
-    default_pulse_ms: 30
+    default_pulse_ms: 25
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
