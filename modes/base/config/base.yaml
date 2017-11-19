@@ -17,6 +17,7 @@ achievements:
 event_player:
   mode_base_started:
     - start_mode_recruitbase
+    - start_mode_lockhandler
     - reenable_nonrecruit_modes
     # - enable_collectorship
   disable_nonrecruit_modes:

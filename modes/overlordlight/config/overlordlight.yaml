@@ -4,31 +4,6 @@ mode:
   stop_events: stop_mode_overlordlight
   priority: 1200
 
-event_player:
-  overlord_light_shot_hit: stop_mode_lockbypass
-  multiball_lock_overlordlock_locked_ball: reenable_lockbypass
-
-multiballs:
-  overlord_multiball:
-    ball_count: 3
-    ball_count_type: total
-    ball_locks: bd_virtual_lock
-    shoot_again: 10s
-    start_events: multiball_lock_overlordlock_full
-    reset_events: machine_reset_phase_3, ball_starting, multiball_overlord_multiball_ended
-    debug: true
-
-multiball_locks:
-  overlordlock:
-    balls_to_lock: 3
-    lock_devices: bd_virtual_lock
-    reset_count_for_current_player_events: multiball_overlord_multiball_ended
-    enable_events: overlord_light_shot_hit
-    disable_events:
-      multiball_lock_overlordlock_locked_ball|500
-      ball_started{ball==1}|0
-    debug: true
-
 shot_groups:
   overlord_light_shot:
     shots: light_lock_overlord_top, light_lock_overlord_bottom

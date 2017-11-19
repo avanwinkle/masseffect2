@@ -25,7 +25,6 @@ event_player:
   #  - start_mode_derelictreaper
   missionselect_pass_selected:
     - start_mode_recruitfield
-    - start_mode_lockbypass
     - reenable_nonrecruit_modes
   missionselect_garrus_selected:
     - recruit_mission_starting
@@ -59,23 +58,12 @@ event_player:
     - start_mode_recruitzaeed
   recruit_mission_starting:
     - disable_nonrecruit_modes
-    - start_mode_lockbypass
     - stop_mode_missionselect
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
-    - stop_mode_lockbypass
-  start_mode_recruitfield{current_player.available_missions==0 and current_player.status_garrus!=2}:
-    - start_mode_lockbypass
-  player_status_garrus{value==2}:
-    - stop_mode_lockbypass
-  player_available_missions{value>0}:
-    - stop_mode_lockbypass
-    - enable_missionselector
-  reenable_lockbypass{curent_player.available_missions==0 and current_player.status_garrus!=2}:
-    - start_mode_lockbypass
 
 ball_saves:
   debug_recruitmission_ballsave:
@@ -85,16 +73,6 @@ ball_saves:
     hurry_up_time: 10s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: -1
-
-ball_holds:
-  missionselect_hold:
-    balls_to_hold: 1
-    hold_devices: bd_lock
-    enable_events:
-      enable_missionselector: 0
-      start_mode_recruitfield{current_player.available_missions>0}: 0
-    release_one_events: mode_missionselect_will_stop
-    disable_events: mode_missionselect_stopping
 
 # sound_player:
 #   mode_recruitbase_started:
@@ -207,14 +185,6 @@ shots:
   collectorship_mission_shot:
     switch: s_lock_3
     enable_events: achievement_collectorship_state_enabled
-  skip_mission_shot:
-    switch: s_left_ramp_exit
-    enable_events:
-      start_mode_recruitfield{current_player.available_missions==0 and (current_player.status_garrus < 1 or current_player.status_garrus > 2)}: 0
-      recruit_mission_starting: 0
-    disable_events:
-      start_mode_recruitfield{current_player.available_missions>0 or current_player.status_garrus == 2}: 0
-      logicblock_recruit_garrus_counter_updated{value==2}: 0
   recruit_garrus_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile

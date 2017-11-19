@@ -30,21 +30,22 @@ event_player:
   game_will_start: gi_on
   game_ended: gi_off
   bypass_lock_release_pulse:
-    cancel_lock_release_pulse|200ms
+    cancel_lock_release_pulse|800ms
 
 modes:
-- base
+  - base
+  - lockhandler
 # - collectorship_ambush
 # - collectorship_base
 # - lockbypass
-# - recruitbase
-# - recruitfield
-# - recruitgarrus
-# - recruitgrunt
-# - recruitjack
-# - recruitmordin
-# - missionselect
-- overlordlight
+  - recruitbase
+  - recruitfield
+  - recruitgarrus
+  - recruitgrunt
+  - recruitjack
+  - recruitmordin
+  - missionselect
+  - overlordlight
 # - shadowbroker
 # - shopping
 

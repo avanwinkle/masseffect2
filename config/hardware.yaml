@@ -18,37 +18,28 @@ ball_devices:
     ball_switches: s_plunger_lane
     eject_coil: c_plunger
     mechanical_eject: true
-    # player_controlled_eject_event: s_action_button_inactive
     confirm_eject_type: target # default
     eject_timeouts: 3s
     tags: ball_add_live
-    debug: true
+    # debug: true
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
     tags: trough, home, drain
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
-    auto_fire_on_unexpected_ball: false
-    debug: true
-  # bd_lock:
-  #   entrance_count_delay: 400ms # Default: 500ms
-  #   ball_switches: s_lock_1, s_lock_2, s_lock_3
-  #   # entrance_switch: s_left_ramp_exit
-  #   eject_coil: c_lock_release_post
-  #   eject_all_events: game_ended
-  #   eject_coil_release_time: 200ms
-  #   auto_fire_on_unexpected_ball: false
-  bd_virtual_lock:
-    entrance_count_delay: 1000ms
-    exit_count_delay: 1000ms
-    ball_switches: s_lock_1, s_lock_2, s_lock_3 # TODO: use events
+    auto_fire_on_unexpected_ball: False
+    # debug: true
+  bd_lock:
+    entrance_count_delay: 500ms # Default: 500ms
+    ball_switches: s_lock_1, s_lock_2, s_lock_3
     eject_coil: c_lock_release_post
+    eject_events: lock_eject_one_ball
     eject_all_events: game_ended
     eject_coil_release_time: 200ms
-    confirm_eject_type: event
-    confirm_eject_event: s_lock_1_inactive
-    debug: true
+    eject_timeouts: 3s
+    auto_fire_on_unexpected_ball: False
+    debug: True
 
 flippers:
   left_flipper:
@@ -473,10 +464,10 @@ coils:
     default_hold_power: 0.1
   c_plunger:
     number: 9-1
-    default_pulse_ms: 18
+    default_pulse_ms: 15
   c_trough_eject:
     number: 9-2
-    default_pulse_ms: 25
+    default_pulse_ms: 24
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
