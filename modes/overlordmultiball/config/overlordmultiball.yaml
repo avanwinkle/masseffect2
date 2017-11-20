@@ -8,10 +8,9 @@ multiballs:
   overlord_multiball:
     ball_count: 3
     ball_count_type: total
-    ball_locks: bd_virtual_lock
+    ball_locks: bd_lock
     shoot_again: 10s
-    enable_events: multiball_lock_overlord_full
-    start_events: overlord_multiball_begin
+    start_events: mode_overlordmultiball_started
 
 slide_player:
   mode_overlordmultiball_started:
@@ -37,6 +36,9 @@ sound_player:
     overlord_music:
       action: play
       loops: -1
+  multiball_overlord_multiball_ended:
+    overlord_music:
+      action: stop
 
 sounds:
   overlord_music:

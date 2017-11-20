@@ -115,13 +115,6 @@ sound_player:
     geth_hit_sfx:
       action: play
       max_queue_time: 1s
-  multiball_overlord_multiball_started:
-    overlord_music:
-      action: play
-      loops: -1
-  multiball_overlord_multiball_ended:
-    overlord_music:
-      action: stop
 
 sound_pools:
   geth_hit_sfx:
@@ -142,11 +135,6 @@ sounds:
   geth_hit_4:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307899_m.ogg
     track: sfx
-  overlord_music:
-    file: Combat_Troops.ogg
-    track: music
-    mode_end_action: stop
-    fade_out: 1s
 
 widget_player:
   multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:

@@ -159,6 +159,24 @@ scoring:
   recruit_lit:
     score: 50000
 
+show_player:
+  mode_recruitfield_started{current_player.available_missions>0}:
+    missions_available_show:
+      action: play
+  player_available_missions{value>0}:
+    missions_available_show:
+      action: play
+
+shows:
+  missions_available_show:
+    - time: 0
+      lights:
+        l_left_ramp_arrow_clear: white
+    - time: '+1'
+      lights:
+        l_left_ramp_arrow_clear: black
+
+
 slide_player:
   recruit_advance{count==3}:
     recruiting_advance_slide_2:

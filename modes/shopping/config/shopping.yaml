@@ -25,7 +25,7 @@ queue_event_player:
 
 shot_groups:
   all_storetargets:
-    shots: showtarget1, showtarget2, showtarget3, showtarget4, showtarget5
+    shots: storetarget1, storetarget2, storetarget3, storetarget4, storetarget5
     enable_events: enable_storetargets
     reset_events: reset_storetargets
 
@@ -53,31 +53,50 @@ shots:
     reset_events: store_complete
     enable_events: enable_storetargets
     disable_events: disable_storetargets
-  showtarget1:
+  storetarget1:
     switch: s_target1
+    tags: storetarget
     show_tokens:
       led: l_standup_1
-  showtarget2:
+  storetarget2:
     switch: s_target2
+    tags: storetarget
     show_tokens:
       led: l_standup_2
-  showtarget3:
+  storetarget3:
     switch: s_target3
+    tags: storetarget
     show_tokens:
       led: l_standup_3
-  showtarget4:
+  storetarget4:
     switch: s_target4
+    tags: storetarget
     show_tokens:
       led: l_standup_4
-  showtarget5:
+  storetarget5:
     switch: s_target5
+    tags: storetarget
     show_tokens:
       led: l_standup_5
+
+show_player:
+  all_storetargets_hit:
+    storetargets_flash:
+      priority: 100
+      loops: 6
+      speed: 10
 
 shows:
   storetarget_unhit:
     - lights:
         (led): black
+  storetargets_flash:
+    - time: 0
+      lights:
+        target_lights: white
+    - time: '+1'
+      lights:
+        target_lights: black
   storetarget_hit:
     - lights:
         (led): white

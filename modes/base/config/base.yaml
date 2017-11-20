@@ -20,6 +20,14 @@ event_player:
     - start_mode_lockhandler
     - reenable_nonrecruit_modes
     # - enable_collectorship
+  mode_overlordmultiball_started:
+    - stop_mode_recruitbase
+    - stop_mode_lockhandler
+    - disable_nonrecruit_modes
+  mode_overlordmultiball_stopped:
+    - start_mode_recruitbase
+    - start_mode_lockhandler
+    - reenable_nonrecruit_modes
   disable_nonrecruit_modes:
     - stop_mode_overlord
     - stop_mode_arrival
@@ -173,10 +181,7 @@ widget_player:
       target: window
     vars_debug:
       target: window
-  levelup{current_player.last_mission=="__recruitment__"}:
-    levelup_recruit:
-      slide: levelup_slide
-  levelup{current_player.last_mission!="__recruitment__"}:
+  levelup:
     levelup_mission:
       slide: levelup_slide
 
@@ -184,12 +189,6 @@ widgets:
   levelup_mission:
     - type: text
       text: (last_mission)
-      style: dmd_small
-      anchor_y: bottom
-      y: 3
-  levelup_recruit:
-    - type: text
-      text: (last_recruit) Recruited
       style: dmd_small
       anchor_y: bottom
       y: 3

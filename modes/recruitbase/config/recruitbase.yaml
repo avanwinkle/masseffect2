@@ -9,20 +9,9 @@ mode:
 event_player:
   mode_recruitbase_started:
     - start_mode_recruitfield
-  ball_hold_missionselect_hold_held_ball:
-    - start_mode_missionselect
   start_mode_missionselect:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
-  # If missions are available and we don't force the collector attack or derelict reaper:
-  # enable_missionselector{device.achievements.collectorship.state!="enabled" and current_player.level!=9}:
-  #  - start_mode_missionselect
-  # After enough squadmates: collector ship
-  #enable_missionselector{device.achievements.collectorship.state=="enabled"}:
-  #  - start_mode_collectorship_base
-  # At level 9: derelict reaper
-  #enable_missionselector{current_player.level==9}:
-  #  - start_mode_derelictreaper
   missionselect_pass_selected:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
@@ -94,7 +83,7 @@ scoring:
     recruits_lit_count: -1
     squadmates_count: 1
     last_mission:
-      string: "__recruitment__"
+      string: (player|last_recruit) Recruited
   recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
     status_garrus:
       score: 0
@@ -177,14 +166,6 @@ shot_profiles:
 # These shots need to exist in base so mission events will advance them
 # even when the field mode is not running
 shots:
-  choose_mission_shot:
-    switch: s_lock_3
-    enable_events:
-      start_mode_recruitfield{current_player.available_missions>0}: 0
-    disable_events: recruit_mission_starting, achievement_collectorship_state_enabled
-  collectorship_mission_shot:
-    switch: s_lock_3
-    enable_events: achievement_collectorship_state_enabled
   recruit_garrus_shot:
     switch: s_left_ramp_exit
     profile: recruit_profile

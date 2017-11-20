@@ -36,8 +36,9 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_release_time: 200ms
+    eject_coil_release_time: 220ms
     eject_timeouts: 3s
+    exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
     debug: True
 
@@ -493,7 +494,7 @@ coils:
     # disable_events: ball_hold_disable
   c_lock_release_post:
     number: 9-3
-    default_pulse_ms: 25
+    default_pulse_ms: 23
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse

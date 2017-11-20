@@ -59,11 +59,16 @@ shots:
     reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
 
 show_player:
+  sbdroptarget_group_hit:
+    sbdrops_flash:
+      priority: 100
+      loops: 6
+      speed: 10
   sbdroptarget_group_complete:
     sbdrops_flash:
       priority: 100
       loops: 12
-      speed: 8
+      speed: 10
 
 shows:
   sbdrops_flash:

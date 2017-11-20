@@ -48,6 +48,9 @@ light:
   l_left_orbit_shield_rgb:
     x: 0.2937911442310269
     y: 0.5076741440377803
+  l_left_ramp_arrow_clear:
+    x: 0.4580365870688451
+    y: 0.4557260920897284
   l_left_ramp_arrow_green:
     x: 0.4534099548762305
     y: 0.4155844155844156
