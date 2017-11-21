@@ -224,7 +224,7 @@ shots:
     show_tokens:
       led: shot_shield_legion
       lit: color_shield_white
-      color: white
+      color: FFFFFF #color_legion
     tags: recruit_shot
   recruit_mordin_shot:
     switch: s_right_orbit
@@ -247,7 +247,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_samara
-      color: teal
+      color: 0037FF #color_samara
     tags: recruit_shot
   recruit_tali_shot:
     switch: s_right_orbit
@@ -258,7 +258,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_tali
-      color: pink
+      color: D323FF #color_tali
     tags: recruit_shot
   recruit_thane_shot:
     switch: s_right_ramp_exit
@@ -270,7 +270,7 @@ shots:
     show_tokens:
       led: shot_shield_thane
       lit: color_shield_green
-      color: green
+      color: 00FF00 #color_thane
     tags: recruit_shot
   recruit_zaeed_shot:
     switch: s_left_orbit
@@ -281,7 +281,7 @@ shots:
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_zaeed
-      color: red
+      color: FF0000 #color_zaeed
     tags: recruit_shot
 
 
@@ -302,18 +302,18 @@ shows:
   recruitshow_off:
     - lights:
         (led): black
-        (color): black
+        l_null: (color)
         (lit): black
   recruitshow_flash:
     - time: 0
       lights:
         (led): black
-        (color): black
+        l_null: (color)
         (lit): white
     - time: +1
       lights:
         (led): black
-        (color): black
+        l_null: (color)
         (lit): black
   recruitshow_on:
     - lights:

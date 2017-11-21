@@ -13,6 +13,37 @@ machine:
   balls_installed: 6
   min_balls: 6
 
+dmds:
+  spike_dmd:  # name of this DMD which can be whatever you want
+    fps: 5
+    gamma: 1.5
+    only_send_changes: true
+    # source_display: dmd
+    # platform: spike
+
+slides:
+  window_slide_1:
+  - type: display
+    width: 768
+    height: 192
+    effects:
+      - type: color_dmd
+        gain: 1.2
+        dot_filter: true
+  - type: rectangle
+    width: 772
+    height: 196
+    color: 444444
+  waiting_for_connection:
+  - type: text
+    text: WAITING FOR MPF CONNECTION
+
+slide_player:
+  mc_ready:
+    window_slide_1:
+      target: window
+
+
 ball_devices:
   bd_plunger:
     ball_switches: s_plunger_lane
@@ -36,7 +67,7 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_release_time: 220ms
+    eject_coil_enable_time: 220ms
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
@@ -223,6 +254,8 @@ switches:
     tags: lock
 
 lights:
+  l_null:
+    number: 0-9999
   l_backbox:
     number: 0-0
     tags: backbox
@@ -517,7 +550,6 @@ playfields:
     tags: default
     debug: true
 
-
 sound_system:
   tracks:
     voice:
@@ -549,28 +581,3 @@ assets:
       track: sfx
     voice:
       track: voice
-
-slides:
-  window_slide_1:
-  - type: display
-    width: 768
-    height: 192
-    effects:
-      - type: color_dmd
-        gain: 1.2
-        dot_filter: true
-  - type: rectangle
-    width: 772
-    height: 196
-    color: 444444
-
-  waiting_for_connection:
-  - type: text
-    text: WAITING FOR MPF CONNECTION
-
-slide_player:
-  mc_ready:
-    window_slide_1:
-      target: window
-
-
