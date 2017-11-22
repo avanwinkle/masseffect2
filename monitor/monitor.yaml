@@ -36,12 +36,18 @@ light:
   l_kickback_arrow_clear:
     x: 0.39326373637224077
     y: 0.4946871310507674
+  l_kickback_arrow_red:
+    x: 0.3354308339645583
+    y: 0.38016528925619836
   l_kickback_shield_r:
     x: 0.3469974144460948
     y: 0.40731995277449823
   l_kickback_shield_rgb:
     x: 0.3469974144460948
     y: 0.40731995277449823
+  l_left_orbit_arrow_red:
+    x: 0.2683446671716466
+    y: 0.473435655253837
   l_left_orbit_shield_r:
     x: 0.28222456374949045
     y: 0.5053128689492326
@@ -54,6 +60,9 @@ light:
   l_left_ramp_arrow_green:
     x: 0.4534099548762305
     y: 0.4155844155844156
+  l_left_ramp_arrow_red:
+    x: 0.43953005829838676
+    y: 0.33412042502951594
   l_left_ramp_shield_r:
     x: 0.4510966387799232
     y: 0.3707201889020071
@@ -63,12 +72,18 @@ light:
   l_lockdown_rgb:
     x: 0.5066162250912983
     y: 0.9409681227863046
+  l_right_orbit_arrow_red:
+    x: 0.7495144152035648
+    y: 0.4297520661157025
   l_right_orbit_shield_r:
     x: 0.7217546220478772
     y: 0.46162927981109797
   l_right_orbit_shield_rgb:
     x: 0.7194413059515699
     y: 0.46162927981109797
+  l_right_ramp_arrow_red:
+    x: 0.6500418230623509
+    y: 0.4155844155844156
   l_right_ramp_arrow_yellow:
     x: 0.5968355528472831
     y: 0.4946871310507674

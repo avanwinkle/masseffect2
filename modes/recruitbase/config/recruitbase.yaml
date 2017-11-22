@@ -6,6 +6,10 @@ mode:
     stop_mode_recruitbase
   priority: 300
 
+config:
+  - recruittimer.yaml
+  - recruitscoring.yaml
+
 event_player:
   mode_recruitbase_started:
     - start_mode_recruitfield
@@ -70,86 +74,6 @@ ball_saves:
 #       loops: -1
 #       mode_end_action: stop
 
-
-scoring:
-  sw_standuptarget_active:
-    score: 200
-  recruit_advance{count==1}:
-    recruits_lit_count: 1
-    available_missions: 1
-    score: 1000
-  recruit_mission_success:
-    score: 100000
-    recruits_lit_count: -1
-    squadmates_count: 1
-    last_mission:
-      string: (player|last_recruit) Recruited
-  recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
-    status_garrus:
-      score: 0
-      action: set
-  recruit_grunt_complete: #recruit_mission_success{squadmate=="grunt"}:
-    status_grunt:
-      score: 0
-      action: set
-  recruit_jack_complete: #recruit_mission_success{squadmate=="jack"}:
-    status_jack:
-      score: 0
-      action: set
-  recruit_legion_complete: #recruit_mission_success{squadmate=="legion"}:
-    status_legion:
-      score: 0
-      action: set
-  recruit_mordin_complete: #recruit_mission_success{squadmate=="mordin"}:
-    status_mordin:
-      score: 0
-      action: set
-  recruit_samara_complete: #recruit_mission_success{squadmate=="samara"}:
-    status_samara:
-      score: 0
-      action: set
-  recruit_tali_complete: #recruit_mission_success{squadmate=="tali"}:
-    status_tali:
-      score: 0
-      action: set
-  recruit_thane_complete: #recruit_mission_success{squadmate=="thane"}:
-    status_thane:
-      score: 0
-      action: set
-  recruit_zaeed_complete: #recruit_mission_success{squadmate=="zaeed"}:
-    status_zaeed:
-      score: 0
-      action: set
-  set_last_recruit_garrus:
-    last_recruit:
-      string: "Garrus"
-  set_last_recruit_grunt:
-    last_recruit:
-      string: "Grunt"
-  set_last_recruit_jack:
-    last_recruit:
-      string: "Jack"
-  set_last_recruit_kasumi:
-    last_recruit:
-      string: "Kasumi"
-  set_last_recruit_legion:
-    last_recruit:
-      string: "Legion"
-  set_last_recruit_mordin:
-    last_recruit:
-      string: "Mordin"
-  set_last_recruit_samara:
-    last_recruit:
-      string: "Samara"
-  set_last_recruit_tali:
-    last_recruit:
-      string: "Tali"
-  set_last_recruit_thane:
-    last_recruit:
-      string: "Thane"
-  set_last_recruit_zaeed:
-    last_recruit:
-      string: "Zaeed"
 
 shot_profiles:
   recruit_profile:

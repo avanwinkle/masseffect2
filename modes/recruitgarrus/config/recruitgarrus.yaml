@@ -1,19 +1,15 @@
 #config_version=5
 mode:
   start_events: start_mode_recruitgarrus
-  stop_events: stop_mode_recruitgarrus
+  stop_events: stop_mode_recruitgarrus, stop_recruitmission
   priority: 500
 
 event_player:
-  door_closed: add_time
+  door_closed: recruittimer_add_time
   clear_upstairs_hit_complete: recruit_garrus_complete
   recruit_garrus_complete:
     recruit_mission_success:
       squadmate: garrus
-    stop_mode_recruitgarrus:
-      delay: 2s
-  timer_garrustimer_complete: stop_mode_recruitgarrus
-  mode_recruitgarrus_stopping: recruit_mission_ended
 
 counters:
   doors_closed_counter:
@@ -30,21 +26,85 @@ counters:
     reset_on_complete: false
     disable_events: s_plunger_lane_inactive
     enable_events:
-      playfield_active: 500ms
+      sw_playfield_active: 500ms
 
-timers:
-  garrustimer:
-    start_value: 40
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: yes
-    control_events:
-      - event: add_time
-        action: add
-        value: 12
-      - event: clear_upstairs_hit_complete
-        action: stop
+shot_groups:
+  close_doors:
+    shots: center_door, left_door, right_door
+    reset_events: mode_recruitgarrus_started
+    disable_events: close_doors_hit_complete
+  clear_upstairs:
+    shots: stairs
+    reset_events: mode_recruitgarrus_started
+
+shot_profiles:
+  door_shot_profile:
+    states:
+      - name: lit
+        show: door_shot_show
+      - name: hit
+        show: off
+  upstairs_shot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: door_shot_show
+      - name: hit
+        show: on
+
+shots:
+  center_door:
+    switch: s_kickback
+    profile: door_shot_profile
+    show_tokens:
+      led: l_kickback_shield_rgb
+  left_door:
+    switch: s_left_orbit
+    profile: door_shot_profile
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  right_door:
+    switch: s_right_orbit
+    enable_events:
+      playfield_active: 500ms
+    disable_events: s_plunger_lane_inactive
+    profile: door_shot_profile
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+  stairs:
+    switch: s_right_ramp_exit
+    profile: upstairs_shot_profile
+    enable_events: close_doors_hit_complete
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+
+shows:
+  door_shot_show:
+    - time: 0
+      lights:
+        (led): green
+    - time: +1
+      lights:
+        (led): black
+
+slide_player:
+  close_doors_hit_complete:
+    doors_closed_slide:
+      expire: 2s
+
+slides:
+  doors_closed_slide:
+    widgets:
+      - type: text
+        text: Shutters Closed
+        style: dmd_med
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: Get Back Upstairs!
+        style: dmd_med
+        anchor_y: top
+        y: middle-2
 
 sound_player:
   mode_recruitgarrus_started:
@@ -91,98 +151,3 @@ sounds:
   garrus_final_3:
     file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.ogg
     track: voice
-
-shots:
-  center_door:
-    switch: s_kickback
-    profile: door_shot_profile
-    show_tokens:
-      led: l_kickback_shield_rgb
-  left_door:
-    switch: s_left_orbit
-    profile: door_shot_profile
-    show_tokens:
-      led: l_left_orbit_shield_rgb
-  right_door:
-    switch: s_right_orbit
-    enable_events:
-      playfield_active: 500ms
-    disable_events: s_plunger_lane_inactive
-    profile: door_shot_profile
-    show_tokens:
-      led: l_right_orbit_shield_rgb
-  stairs:
-    switch: s_right_ramp_exit
-    profile: upstairs_shot_profile
-    enable_events: close_doors_hit_complete
-    show_tokens:
-      led: l_right_ramp_shield_rgb
-
-shot_groups:
-  close_doors:
-    shots: center_door, left_door, right_door
-    reset_events: mode_recruitgarrus_started
-    disable_events: close_doors_hit_complete
-  clear_upstairs:
-    shots: stairs
-    reset_events: mode_recruitgarrus_started
-
-
-shot_profiles:
-  door_shot_profile:
-    states:
-      - name: lit
-        show: door_shot_show
-      - name: hit
-        show: off
-  upstairs_shot_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: door_shot_show
-      - name: hit
-        show: on
-
-shows:
-  door_shot_show:
-    - time: 0
-      lights:
-        (led): green
-    - time: +1
-      lights:
-        (led): black
-
-slide_player:
-  close_doors_hit_complete:
-    doors_closed_slide:
-      expire: 2s
-
-slides:
-  doors_closed_slide:
-    widgets:
-      - type: text
-        text: Shutters Closed
-        style: dmd_med
-        anchor_y: bottom
-        y: middle+2
-      - type: text
-        text: Get Back Upstairs!
-        style: dmd_med
-        anchor_y: top
-        y: middle-2
-
-widget_player:
-  timer_garrustimer_start: time_remaining_widget
-  timer_garrustimer_tick:
-    time_remaining_widget:
-      action: update
-
-widgets:
-  time_remaining_widget:
-    - type: text
-      text: (ticks_remaining)
-      anchor_x: left
-      anchor_y: top
-      x: left+2
-      y: top-2
-      font_size: 8

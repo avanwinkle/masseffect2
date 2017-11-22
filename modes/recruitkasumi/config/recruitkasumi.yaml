@@ -1,0 +1,187 @@
+#config_version=5
+mode:
+  start_events: start_mode_recruitkasumi
+  stop_events: stop_mode_recruitkasumi, stop_recruitmission
+  priority: 500
+
+counters:
+  kasumi_shots_counter:
+    persist_state: true
+    count_complete_value: 4
+    count_events:
+      - left_orbit_unalarmed_hit
+      - left_ramp_unalarmed_hit
+      - right_orbit_unalarmed_hit
+      - right_ramp_unalarmed_hit
+      - kickback_unalarmed_hit
+    disable_on_complete: true
+    # reset_events: mode_recruitkasumi_started
+    reset_on_complete: false
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      playfield_active: 500ms
+
+event_player:
+  mode_recruitkasumi_started:
+    - sweep_alarms
+    - set_alarm_left_ramp
+  # kasumi_failed:
+  #   - stop_recruitmission
+  #   - recruit_mission_ended
+  logicblock_kasumi_shots_counter_complete:
+    - recruit_kasumi_complete
+  recruit_kasumi_complete:
+    recruit_mission_complete:
+      squadmate: kasumi
+  # I hate having to explicitly call out each shot, but without shot_group profiles...
+  left_orbit_alarmed_hit: kasumi_failed
+  left_ramp_alarmed_hit: kasumi_failed
+  right_orbit_alarmed_hit: kasumi_failed
+  right_ramp_alarmed_hit: kasumi_failed
+  kickback_alarmed_hit: kasumi_failed
+
+
+light_player:
+  mode_recruitkasumi_started:
+    l_gi_upper: off
+  mode_recruitkasumi_stopping:
+    l_gi_upper: on
+
+shot_groups:
+  kasumi_shots:
+    shots: left_orbit, left_ramp, right_orbit, right_ramp, kickback
+
+shot_profiles:
+  alarmed_shot_profile:
+    show_when_disabled: false
+    states:
+      - name: unalarmed
+        show: unalarmed_show
+      - name: alarmed
+        show: alarmed_show
+
+shots:
+  left_orbit:
+    switch: s_left_orbit
+    profile: alarmed_shot_profile
+    tags: alarmshot
+    advance_events: set_alarm_left_orbit
+    show_tokens:
+      led: l_left_orbit_arrow_red
+  left_ramp:
+    switch: s_left_ramp_exit
+    profile: alarmed_shot_profile
+    tags: alarmshot
+    advance_events: set_alarm_left_ramp
+    show_tokens:
+      led: l_left_ramp_arrow_red
+  right_orbit:
+    switch: s_right_orbit
+    profile: alarmed_shot_profile
+    tags: alarmshot
+    advance_events: set_alarm_right_orbit
+    disable_events: s_plunger_lane_inactive
+    enable_events:
+      sw_playfield_active: 500ms
+    show_tokens:
+      led: l_right_orbit_arrow_red
+  right_ramp:
+    switch: s_right_ramp_exit
+    profile: alarmed_shot_profile
+    tags: alarmshot
+    advance_events: set_alarm_right_ramp
+    reset_events: counter_kasumi_shots_counter_complete
+    show_tokens:
+      led: l_right_ramp_arrow_red
+  kickback:
+    switch: s_kickback
+    profile: alarmed_shot_profile
+    tags: alarmshot
+    advance_events: set_alarm_kickback
+    show_tokens:
+      led: l_kickback_arrow_red
+
+show_player:
+  sweep_alarms:
+    alarm_sweep_show:
+      action: play
+      priority: 100
+      loops: 1
+      speed: 10
+
+shows:
+  unalarmed_show:
+    - time: 0
+      lights:
+        (led): black
+  alarmed_show:
+    - time: 0
+      lights:
+        (led): FFFFFF
+    - time: '+1'
+      lights:
+        (led): 888888
+  alarm_sweep_show:
+    - time: 0
+      lights:
+        l_left_ramp_arrow_red: white
+        l_left_orbit_arrow_red: black
+        l_right_orbit_arrow_red: black
+        l_right_ramp_arrow_red: black
+        l_kickback_arrow_red: black
+    - time: '+1'
+      lights:
+        l_left_ramp_arrow_red: black
+        l_right_orbit_arrow_red: white
+    - time: '+2'
+      lights:
+        l_left_orbit_arrow_red: black
+        l_kickback_arrow_red: white
+    - time: '+3'
+      lights:
+        l_right_ramp_arrow_red: white
+        l_kickback_arrow_red: black
+    - time: '+4'
+      lights:
+        l_left_orbit_arrow_red: white
+        l_right_ramp_arrow_red: black
+
+slide_player:
+  mode_recruitkasumi_started: kasumi_instructions_slide
+  kasumi_failed:
+    kasumi_failed_slide:
+      expire: 5s
+  counter_kasumi_shots_counter_hit{count==1}:
+    kasumi_slide_1:
+      expire: 3s
+  counter_kasumi_shots_counter_hit{count==2}:
+    kasumi_slide_2:
+      expire: 3s
+  counter_kasumi_shots_counter_hit{count==3}:
+    kasumi_slide_3:
+      expire: 3s
+
+slides:
+  kasumi_instructions_slide:
+    widgets:
+      - type: text
+        text: Infiltrate Donovan's Vault
+      - type: text
+        text: Avoid the Alarms
+  kasumi_slide_1:
+    widgets:
+      - type: text
+        text: Voiceprint Recorded
+  kasumi_slide_2:
+    widgets:
+      - type: text
+        text: DNA Sample Obtained
+  kasumi_slide_3:
+    widgets:
+      - type: text
+        text: "Password: Perrugia"
+  kasumi_failed_slide:
+    widgets:
+      - type: text
+        text: FAILED!
+

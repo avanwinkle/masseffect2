@@ -31,7 +31,7 @@ event_player:
   game_ended: gi_off
   bypass_lock_release_pulse_short:
     - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|220ms
+    - cancel_lock_release_pulse|210ms
   bypass_lock_release_pulse_long:
     - bypass_lock_release_pulse|0
     - cancel_lock_release_pulse|800ms
@@ -46,7 +46,10 @@ modes:
   - recruitgarrus
   - recruitgrunt
   - recruitjack
+  - recruitkasumi
   - recruitmordin
+  - recruittali
+  - recruitthane
   - missionselect
   - overlordlight
   - overlordmultiball

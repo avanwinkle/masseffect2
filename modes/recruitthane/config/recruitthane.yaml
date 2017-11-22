@@ -1,0 +1,88 @@
+#config_version=5
+mode:
+  start_events: start_mode_recruitthane
+  stop_events: stop_mode_recruitthane, stop_recruitmission
+  priority: 500
+
+event_player:
+  tower_complete_shot_hit: recruit_thane_complete
+  recruit_thane_complete:
+    recruit_mission_success:
+      squadmate: thane
+
+counters:
+  thane_ascent_counter:
+    # The first time it takes three shots to light, otherwise just one
+    starting_count: 0 if player.counter_thane_ascent_counter_count < 2 else 2
+    count_complete_value: 3
+    disable_on_complete: false
+    count_events: tower_ascent_shot_hit
+    reset_events: mode_recruitthane_started
+
+scoring:
+  mode_recruitthane_started:
+    temp_build_value:
+      action: set
+      score: 0
+  recruit_thane_complete:
+    score: current_player.temp_build_value
+  tower_ascent_shot_hit:
+    temp_build_value: current_player.thane_ascent_counter_count * 10000
+
+shot_groups:
+  tower_ascent_shot:
+    shots: tower_shot_left, tower_shot_right
+
+shots:
+  tower_shot_left:
+    switch: s_left_ramp_exit
+  tower_shot_right:
+    switch: s_right_ramp_exit
+  tower_complete_shot:
+    switch: s_left_orbit, s_right_orbit
+    enable_events: counter_thane_ascent_counter_complete
+    disable_events: mode_recruitthane_started
+
+show_player:
+  mode_recruitthane_started:
+    tower_shots_show:
+      speed: 2
+  tower_ascent_shot_hit:
+    tower_flash_show:
+      speed: 10
+      loops: 6
+      priority: 100
+  counter_thane_ascent_counter_complete:
+    tower_shots_show:
+      action: stop
+    tower_complete_show:
+      speed: 2
+
+shows:
+  tower_shots_show:
+    - time: 0
+      lights:
+        l_left_ramp_shield_rgb: green
+        l_right_ramp_shield_rgb: green
+    - time: '+1'
+      lights:
+        l_left_ramp_shield_rgb: black
+        l_right_ramp_shield_rgb: black
+  tower_flash_show:
+    - time: 0
+      lights:
+        shot_shields: green
+    - time: '+1'
+      lights:
+        shot_shields: black
+  tower_complete_show:
+    - time: 0
+      lights:
+        l_left_ramp_shield_rgb: green
+        l_right_ramp_shield_rgb: green
+        l_left_orbit_shield_rgb: green
+        l_right_orbit_shield_rgb: green
+    - time: '+1'
+      lights:
+        l_left_orbit_shield_rgb: black
+        l_right_orbit_shield_rgb: black

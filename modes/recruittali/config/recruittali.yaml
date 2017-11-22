@@ -1,0 +1,102 @@
+#config_version=5
+mode:
+  start_events: start_mode_recruittali
+  stop_events: stop_mode_recruittali, stop_recruitmission
+  priority: 500
+
+
+event_player:
+  geth_colossus_shot_geth_colossus_profile_depleted_armor_hit: recruit_tali_complete
+  recruit_tali_complete:
+    recruit_mission_success:
+      squadmate: tali
+  drop_target_bank_dropbank_complete: recruittimer_add_time
+  drop_target_bank_hitbank_complete: recruittimer_add_time
+
+scoring:
+  mode_recruittali_started:
+    temp_build_value:
+      action: set
+      score: 0
+  recruit_tali_complete:
+    score: current_player.temp_build_value
+  geth_colossus_shot_hit:
+    temp_build_value: current_player.recruittali_recruittimer_tick * 1000
+  geth_target_shot_hit:
+    score: 150
+
+shot_profiles:
+  geth_colossus_profile:
+    show: geth_colossus_show
+    states:
+      - name: full_shields
+        speed: 3
+        show_tokens:
+          fade: 1s
+          color: blue
+          undercolor: yellow
+      - name: partial_shields
+        speed: 6
+        show_tokens:
+          fade: 500ms
+          color: blue
+          undercolor: yellow
+      - name: depleted_shields
+        speed: 12
+        show_tokens:
+          fade: 0
+          color: blue
+          undercolor: yellow
+      - name: full_armor
+        speed: 3
+        show_tokens:
+          fade: 1s
+          color: yellow
+          undercolor: black
+      - name: partial_armor
+        speed: 6
+        show_tokens:
+          fade: 500ms
+          color: yellow
+          undercolor: black
+      - name: depleted_armor
+        speed: 12
+        show_tokens:
+          fade: 0
+          color: yellow
+          undercolor: black
+
+shots:
+  geth_colossus_shot:
+    switch: s_left_ramp_exit
+    profile: geth_colossus_profile
+    reset_events: mode_recruittali_started
+  geth_target_shot:
+    switches: s_target1, s_target2, s_target3, s_target4, s_target5
+
+show_player:
+  geth_target_shot_hit:
+    geth_target_show:
+      speed: 12
+      loops: 6
+
+shows:
+  geth_colossus_show:
+    - time: 0
+      lights:
+        fade: (fade)
+        l_left_ramp_shield_rgb: (color)
+        l_null: (undercolor)
+    - time: '+1'
+      lights:
+        fade: (fade)
+        l_left_ramp_shield_rgb: (undercolor)
+        l_null: (color)
+  geth_target_show:
+    - time: 0
+      lights:
+        target_lights: white
+    - time: '+1'
+      lights:
+        target_lights: black
+

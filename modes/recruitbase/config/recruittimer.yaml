@@ -1,0 +1,47 @@
+#config_version=5
+event_player:
+  timer_recruittimer_complete:
+    - stop_recruitmission
+    - recruit_mission_ended
+  recruit_mission_success:
+    - stop_recruitmission
+    - recruit_mission_ended
+
+timers:
+  recruittimer:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - event: recruittimer_set_twelve
+        action: jump
+        value: 12
+      - event: recruittimer_add_time
+        action: add
+        value: 10
+      - event: recruit_mission_starting
+        action: restart
+      - event: recruit_mission_ended
+        action: stop
+
+widget_player:
+  timer_recruittimer_started:
+    time_remaining_widget:
+      action: add
+  timer_recruittimer_stopped:
+    time_remaining_widget:
+      action: remove
+  timer_recruittimer_tick:
+    time_remaining_widget:
+      action: update
+
+widgets:
+  time_remaining_widget:
+    - type: text
+      text: (ticks_remaining)
+      anchor_x: left
+      anchor_y: top
+      x: 2
+      y: top-2
+      font_size: 8
