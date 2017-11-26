@@ -243,6 +243,10 @@ sound_player:
     shot_hit_mordin:
       action: play
       max_queue_time: 1s
+  recruit_advance_tali:
+    shot_hit_tali:
+      action: play
+      max_queue_time: 1s
 
 sound_pools:
   shot_hit_garrus:
@@ -260,6 +264,10 @@ sound_pools:
   shot_hit_mordin:
     type: random_force_all
     sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
+    track: voice
+  shot_hit_tali:
+    type: random_force_all
+    sounds: tali_shot_sound_1, tali_shot_sound_2, tali_shot_sound_3, tali_shot_sound_4
     track: voice
 
 sounds:
@@ -317,3 +325,16 @@ sounds:
   mordin_shot_sound_5:
     file: en_us_hench_professor_ss_global_hench_professor_00331211_m.ogg
     track: voice
+  tali_shot_sound_1:
+    file: en_us_hench_tali_ss_global_hench_tali_00285102_m.ogg
+    track: voice
+  tali_shot_sound_2:
+    file: en_us_hench_tali_ss_global_hench_tali_00285168_m.ogg
+    track: voice
+  tali_shot_sound_3:
+    file: en_us_hench_tali_ss_global_hench_tali_00289284_m.ogg
+    track: voice
+  tali_shot_sound_4:
+    file: en_us_hench_tali_ss_global_hench_tali_00289285_m.ogg
+    track: voice
+

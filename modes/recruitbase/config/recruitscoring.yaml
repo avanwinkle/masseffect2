@@ -10,8 +10,6 @@ scoring:
     score: 100000
     recruits_lit_count: -1
     squadmates_count: 1
-    last_mission:
-      string: (player|last_recruit) Recruited
   recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
     status_garrus:
       score: 0
@@ -51,30 +49,50 @@ scoring:
   set_last_recruit_garrus:
     last_recruit:
       string: "Garrus"
+    last_mission:
+      string: "Garrus Recruited"
   set_last_recruit_grunt:
     last_recruit:
       string: "Grunt"
+    last_mission:
+      string: "Grunt Recruited"
   set_last_recruit_jack:
     last_recruit:
       string: "Jack"
+    last_mission:
+      string: "Jack Recruited"
   set_last_recruit_kasumi:
     last_recruit:
       string: "Kasumi"
+    last_mission:
+      string: "Kasumi Recruited"
   set_last_recruit_legion:
     last_recruit:
       string: "Legion"
+    last_mission:
+      string: "Legion Recruited"
   set_last_recruit_mordin:
     last_recruit:
       string: "Mordin"
+    last_mission:
+      string: "Mordin Recruited"
   set_last_recruit_samara:
     last_recruit:
       string: "Samara"
+    last_mission:
+      string: "Samara Recruited"
   set_last_recruit_tali:
     last_recruit:
       string: "Tali"
+    last_mission:
+      string: "Tali Recruited"
   set_last_recruit_thane:
     last_recruit:
       string: "Thane"
+    last_mission:
+      string: "Thane Recruited"
   set_last_recruit_zaeed:
     last_recruit:
       string: "Zaeed"
+    last_mission:
+      string: "Zaeed Recruited"

@@ -263,13 +263,23 @@ slides:
 
 sound_player:
   recruit_garrus_complete: missioncomplete_voice_garrus
+  recruit_jack_complete:
+    missioncomplete_voice_jack:
+      action: play
+      priority: 100
   recruit_mordin_complete: missioncomplete_voice_mordin
+  recruit_tali_complete: missioncomplete_voice_tali
 
 sound_pools:
   missioncomplete_voice_garrus:
     type: random
     track: voice
     sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2
+    max_queue_time: 1s
+  missioncomplete_voice_jack:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_jack_1, missioncomplete_voice_jack_2
     max_queue_time: 1s
   missioncomplete_voice_mordin:
     type: random
@@ -286,11 +296,23 @@ sounds:
     file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
     track: voice
     max_queue_time: 1s
+  missioncomplete_voice_jack_1:
+    file: en_us_hench_convict_prscva_cv_join_d_00198389_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_jack_2:
+    file: en_us_hench_convict_prscva_cv_join_d_00200320_m.ogg
+    track: voice
+    max_queue_time: 1s
   missioncomplete_voice_mordin_1:
     file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
     track: voice
     max_queue_time: 1s
   missioncomplete_voice_mordin_2:
     file: en_us_hench_professor_omgpra_mordin_d_00210653_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_tali:
+    file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.ogg
     track: voice
     max_queue_time: 1s

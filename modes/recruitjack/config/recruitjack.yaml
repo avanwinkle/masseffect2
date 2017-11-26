@@ -1,15 +1,208 @@
 #config_version=5
 mode:
   start_events: start_mode_recruitjack
-  stop_events: stop_mode_recruitjack
+  stop_events: stop_mode_recruitjack, stop_recruitmission
   priority: 500
 
 event_player:
-  mode_recruitjack_started:
-    recruit_jack_complete
+  # mode_recruitjack_started:
+  #   recruit_jack_complete
   recruit_jack_complete:
     recruit_mission_success:
       squadmate: jack
-    stop_mode_recruitjack:
-      delay: 2s
-  mode_recruitjack_stopping: recruit_mission_ended
+
+counters:
+  jack_rounds_counter:
+    starting_count: 0
+    count_complete_value: 3
+    count_events: jack_hitbank_shot_hit
+    events_when_complete: recruit_jack_complete
+    direction: up
+    disable_on_complete: true
+    reset_on_complete: false
+    # disable_events: s_plunger_lane_active
+    # enable_events:
+    #   s_plunger_lane_inactive: 500ms
+    #   player_shot_jack_hitbank_shot_enabled: 0ms
+    debug: true
+
+shot_profiles:
+  jack_shots_one_profile:
+    show_when_disabled: false
+    show: jack_shots_one_show
+    states:
+      - name: lit
+        speed: 3
+        loops: -1
+  jack_shots_two_profile:
+    show_when_disabled: false
+    show: jack_shots_two_show
+    states:
+      - name: lit
+        speed: 6
+        loops: -1
+  jack_shots_three_profile:
+    show_when_disabled: false
+    show: jack_shots_three_show
+    states:
+      - name: lit
+        speed: 9
+  jack_hitbank_profile:
+    show_when_disabled: false
+    show: jack_hitbank_show
+    states:
+      - name: lit
+        speed: 3
+
+shots:
+  jack_shots_one:
+    switches: s_kickback, s_left_orbit s_right_orbit
+    profile: jack_shots_one_profile
+    enable_events:
+      - mode_recruitjack_started{current_player.jack_rounds_counter_state==0}
+    disable_events: jack_shots_one_hit
+  jack_shots_two:
+    switches: s_left_ramp_exit, s_right_ramp_exit
+    profile: jack_shots_two_profile
+    enable_events:
+      - mode_recruitjack_started{current_player.jack_rounds_counter_state==1}
+      - logicblock_jack_rounds_counter_hit{count==1}
+    disable_events: jack_shots_two_hit
+  jack_shots_three:
+    switches: s_left_orbit, s_right_orbit
+    profile: jack_shots_three_profile
+    enable_events:
+      - mode_recruitjack_started{current_player.jack_rounds_counter_state==2}
+      - logicblock_jack_rounds_counter_hit{count==2}
+    disable_events: jack_shots_three_hit
+  jack_hitbank_shot:
+    switches: s_hitbank_top, s_hitbank_bottom
+    profile: jack_hitbank_profile
+    enable_events: jack_shots_one_hit, jack_shots_two_hit, jack_shots_three_hit
+    disable_events: jack_hitbank_shot_hit
+
+shows:
+  jack_shots_one_show:
+    - time: 0
+      lights:
+        l_kickback_shield_rgb: 7B3FB8 #color_jack
+        l_left_orbit_shield_rgb: 7B3FB8 #color_jack
+        l_right_orbit_shield_rgb: 7B3FB8 #color_jack
+    - time: '+1'
+      lights:
+        l_kickback_shield_rgb: black
+        l_left_orbit_shield_rgb: black
+        l_right_orbit_shield_rgb: black
+  jack_shots_two_show:
+    - time: 0
+      lights:
+        l_left_ramp_shield_rgb: 7B3FB8 #color_jack
+        l_right_ramp_shield_rgb: 7B3FB8 #color_jack
+    - time: '+1'
+      lights:
+        l_left_ramp_shield_rgb: black
+        l_right_ramp_shield_rgb: black
+  jack_shots_three_show:
+    - time: 0
+      lights:
+        l_left_orbit_shield_rgb: 7B3FB8 #color_jack
+        l_right_orbit_shield_rgb: 7B3FB8 #color_jack
+    - time: '+1'
+      lights:
+        l_left_orbit_shield_rgb: black
+        l_right_orbit_shield_rgb: black
+  jack_hitbank_show:
+    - time: 0
+      lights:
+        l_hitbank_shield_rgb: 7B3FB8 #color_jack
+    - time: '+1'
+      lights:
+        l_hitbank_shield_rgb: black
+
+sound_player:
+  jack_shots_one_hit:
+    jack_shot_hit_sound:
+      action: play
+      max_queue_time: 1s
+      priority: 100
+  jack_shots_two_hit:
+    jack_shot_hit_sound:
+      action: play
+      max_queue_time: 1s
+      priority: 100
+  jack_shots_three_hit:
+    jack_shot_hit_sound:
+      action: play
+      max_queue_time: 1s
+      priority: 100
+  logicblock_jack_rounds_counter_hit{count==1}:
+    warden_shepard_1:
+      action: play
+      max_queue_time: 1s
+      priority: 100
+  logicblock_jack_rounds_counter_hit{count==2}:
+    warden_shepard_2:
+      action: play
+      max_queue_time: 1s
+      priority: 100
+  mode_recruitjack_started:
+    music_recruit_jack:
+      action: play
+      loops: -1
+    warden_start:
+      action: play
+  recruit_jack_complete:
+    music_recruit_jack:
+      action: stop
+
+sound_pools:
+  jack_shot_hit_sound:
+    sounds: warden_guards_1, warden_guards_2, warden_guards_3
+    type: random_force_all
+    track: voice
+
+sounds:
+  music_recruit_jack:
+    file: mus_jack_acq_combat_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+  warden_start:
+    file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.ogg
+    track: voice
+  warden_guards_1:
+    file: en_us_prscva_warden_prscva_warden_pa_a_00254121_m.ogg
+    track: voice
+  warden_guards_2:
+    file: en_us_prscva_warden_prscva_warden_pa_a_00254124_m.ogg
+    track: voice
+  warden_guards_3:
+    file: en_us_prscva_warden_prscva_warden_pa_a_00271737_m.ogg
+    track: voice
+  warden_shepard_1:
+    file: en_us_prscva_warden_prscva_boss_c_00198326_m.ogg
+    track: voice
+  warden_shepard_2:
+    file: en_us_player_f_prscva_boss_c_00198332_f.ogg
+    track: voice
+
+widget_player:
+  mode_recruitjack_started:
+    counter_widget:
+      action: add
+  logicblock_jack_rounds_counter_updated:
+    counter_widget:
+      action: update
+  mode_recruitjack_stopping:
+    counter_widget:
+      action: remove
+
+widgets:
+  counter_widget:
+    - type: text
+      text: (player|jack_rounds_counter_state)
+      anchor_x: right
+      anchor_y: top
+      x: right-2
+      y: top-2
+      font_size: 8

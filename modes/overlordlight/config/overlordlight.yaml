@@ -4,6 +4,11 @@ mode:
   stop_events: stop_mode_overlordlight
   priority: 1200
 
+event_player:
+  # This needs to be in event_player because mpf-mc controls sound_player and
+  # doesn't have access to machine modes
+  overlord_light_shot_hit{mode.recruitfield.active}: play_overlord_hit_sound
+
 shot_groups:
   overlord_light_shot:
     shots: light_lock_overlord_top, light_lock_overlord_bottom
@@ -111,7 +116,7 @@ slides:
         y: middle-2
 
 sound_player:
-  overlord_light_shot_hit:
+  play_overlord_hit_sound:
     geth_hit_sfx:
       action: play
       max_queue_time: 1s

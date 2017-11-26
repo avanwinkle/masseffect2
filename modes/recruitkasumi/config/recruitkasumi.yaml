@@ -15,15 +15,12 @@ counters:
       - right_ramp_unalarmed_hit
       - kickback_unalarmed_hit
     disable_on_complete: true
-    # reset_events: mode_recruitkasumi_started
     reset_on_complete: false
-    disable_events: s_plunger_lane_inactive
-    enable_events:
-      playfield_active: 500ms
+    restart_events: mode_recruitkasumi_started
 
 event_player:
   mode_recruitkasumi_started:
-    - sweep_alarms
+    # - sweep_alarms
     - set_alarm_left_ramp
   # kasumi_failed:
   #   - stop_recruitmission
@@ -31,7 +28,7 @@ event_player:
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
   recruit_kasumi_complete:
-    recruit_mission_complete:
+    recruit_mission_success:
       squadmate: kasumi
   # I hate having to explicitly call out each shot, but without shot_group profiles...
   left_orbit_alarmed_hit: kasumi_failed
@@ -39,7 +36,6 @@ event_player:
   right_orbit_alarmed_hit: kasumi_failed
   right_ramp_alarmed_hit: kasumi_failed
   kickback_alarmed_hit: kasumi_failed
-
 
 light_player:
   mode_recruitkasumi_started:
@@ -59,6 +55,7 @@ shot_profiles:
         show: unalarmed_show
       - name: alarmed
         show: alarmed_show
+        sync_ms: 700
 
 shots:
   left_orbit:
@@ -115,12 +112,16 @@ shows:
       lights:
         (led): black
   alarmed_show:
-    - time: 0
+    - duration: 300ms
       lights:
-        (led): FFFFFF
-    - time: '+1'
+        (led):
+          color: FFFFFF
+          fade: 150ms
+    - duration: 300ms
       lights:
-        (led): 888888
+        (led):
+          color: 888888
+          fade: 150ms
   alarm_sweep_show:
     - time: 0
       lights:
@@ -166,8 +167,14 @@ slides:
     widgets:
       - type: text
         text: Infiltrate Donovan's Vault
+        style: dmd_med
+        anchor_y: bottom
+        y: middle+2
       - type: text
         text: Avoid the Alarms
+        style: dmd_med
+        anchor_y: top
+        y: middle-2
   kasumi_slide_1:
     widgets:
       - type: text
