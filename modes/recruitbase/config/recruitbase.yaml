@@ -263,10 +263,8 @@ slides:
 
 sound_player:
   recruit_garrus_complete: missioncomplete_voice_garrus
-  recruit_jack_complete:
-    missioncomplete_voice_jack:
-      action: play
-      priority: 100
+  recruit_grunt_complete: missioncomplete_voice_grunt
+  recruit_jack_complete: missioncomplete_voice_jack
   recruit_mordin_complete: missioncomplete_voice_mordin
   recruit_tali_complete: missioncomplete_voice_tali
 
@@ -275,6 +273,11 @@ sound_pools:
     type: random
     track: voice
     sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2
+    max_queue_time: 1s
+  missioncomplete_voice_grunt:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_grunt_1, missioncomplete_voice_grunt_2, missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_4, missioncomplete_voice_grunt_5
     max_queue_time: 1s
   missioncomplete_voice_jack:
     type: random
@@ -294,6 +297,26 @@ sounds:
     max_queue_time: 1s
   missioncomplete_voice_garrus_2:
     file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_grunt_1:
+    file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_grunt_2:
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274203_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_grunt_3:
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274197_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_grunt_4:
+    file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_grunt_5:
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274200_m.ogg
     track: voice
     max_queue_time: 1s
   missioncomplete_voice_jack_1:

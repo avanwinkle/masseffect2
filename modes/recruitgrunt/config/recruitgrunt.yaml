@@ -12,6 +12,19 @@ event_player:
     recruit_mission_success:
       squadmate: grunt
 
+counters:
+  grunt_shots_counter:
+    starting_count: 0
+    count_complete_value: 5
+    count_events:
+      - grunt_right_orbit_lit_hit
+      - grunt_right_ramp_lit_hit
+      - grunt_left_orbit_lit_hit
+      - grunt_left_ramp_lit_hit
+      - grunt_kickback_lit_hit
+    disable_on_complete: true
+    reset_on_complete: false
+
 shot_groups:
   grunt_shots:
     shots: grunt_left_ramp, grunt_left_orbit, grunt_right_ramp, grunt_right_orbit, grunt_kickback
@@ -45,14 +58,19 @@ shots:
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
-    disable_events: s_plunger_lane_inactive
-    enable_events:
-      playfield_active: 500ms
   grunt_kickback:
     switch: s_kickback
     profile: grunt_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
+
+show_player:
+  grunt_shots_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 6
+      show_tokens:
+        color: Ef521F #color_grunt
 
 shows:
   grunt_lit_show:
@@ -68,6 +86,9 @@ sound_player:
     music_recruit_grunt:
       action: play
       loops: -1
+  logicblock_grunt_shots_counter_hit{count<3}: grunt_dialogue
+  logicblock_grunt_shots_counter_hit{count==3}: grunt_dialogue_4
+  logicblock_grunt_shots_counter_hit{count==4}: grunt_bossdialogue
   grunt_shots_complete:
     music_recruit_grunt:
       action: stop
@@ -77,6 +98,14 @@ sound_pools:
     type: random
     sounds: music_recruit_grunt_1, music_recruit_grunt_2
     track: music
+  grunt_bossdialogue:
+    type: random
+    sounds: grunt_bossdialogue_1, grunt_bossdialogue_2
+    track: voice
+  grunt_dialogue:
+    type: random_force_all
+    sounds: grunt_dialogue_1, grunt_dialogue_2, grunt_dialogue_3
+    track: voice
 
 sounds:
   music_recruit_grunt_1:
@@ -89,3 +118,27 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  grunt_bossdialogue_1:
+    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
+    track: voice
+    max_queue_time: 1s
+  grunt_bossdialogue_2:
+    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282306_m.ogg
+    track: voice
+    max_queue_time: 1s
+  grunt_dialogue_1:
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310955_m.ogg
+    track: voice
+    max_queue_time: 1s
+  grunt_dialogue_2:
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310956_m.ogg
+    track: voice
+    max_queue_time: 1s
+  grunt_dialogue_3:
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310953_m.ogg
+    track: voice
+    max_queue_time: 1s
+  grunt_dialogue_4:
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.ogg
+    track: voice
+    max_queue_time: 1s

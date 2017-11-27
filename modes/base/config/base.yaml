@@ -121,6 +121,26 @@ shows:
       lights:
         l_ball_save:
           color: black
+  flash_all_shields_show:
+    - time: 0
+      lights:
+        l_left_orbit_shield_rgb: (color)
+        l_left_ramp_shield_rgb: (color)
+        l_kickback_shield_rgb: (color)
+        l_right_ramp_shield_rgb: (color)
+        l_right_orbit_shield_rgb: (color)
+        l_dropbank_shield_rgb: (color)
+        l_hitbank_shield_rgb: (color)
+    - time: '+1'
+      lights:
+        l_left_orbit_shield_rgb: black
+        l_left_ramp_shield_rgb: black
+        l_kickback_shield_rgb: black
+        l_right_ramp_shield_rgb: black
+        l_right_orbit_shield_rgb: black
+        l_dropbank_shield_rgb: black
+        l_hitbank_shield_rgb: black
+        l_null: (color)
 
 slide_player:
   mode_base_started:
