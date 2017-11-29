@@ -1,0 +1,90 @@
+#config_version=5
+mode:
+  start_events: start_mode_upgrades
+  stop_events: stop_mode_upgrades
+  priority: 400
+
+event_player:
+  recruit_garrus_completed:
+    enable_upgrade:
+      upgrade_name: "Omni-Tool Damage"
+  recruit_grunt_completed:
+    enable_upgrade:
+      upgrade_name: "Shotgun Damage"
+  recruit_jack_completed:
+    enable_upgrade:
+      upgrade_name: "Bio-Amp Interface"
+  recruit_kasumi_completed:
+    enable_upgrade:
+      upgrade_name: "M22 Locust SMG"
+  recruit_legion_completed:
+    enable_upgrade:
+      upgrade_name: "M80 Widow Rifle"
+  recruit_mordin_completed:
+    enable_upgrade:
+      upgrade_name: "M16 Carnifax Pistol"
+  recruit_samara_completed:
+    enable_upgrade:
+      upgrade_name: "Assault Rifle Damage"
+  recruit_tali_completed:
+    enable_upgrade:
+      upgrade_name: "Geth Plasma Shotgun"
+  recruit_thane_complete:
+    enable_upgrade:
+      upgrade_name: "M17 Viper Rifle"
+  recruit_zaeed_completed:
+    enable_upgrade:
+      upgrade_name: "Heavy Weapon Ammo"
+
+
+scoring:
+  collect_upgrade_shot_hit:
+    upgrades_researched: 1
+    score: 4000 * (1 + 0.25 * current_player.upgrades_researched)
+
+shot_profiles:
+  upgrade_shot_profile:
+    show_when_disabled: False
+    show: flash
+    show_tokens:
+      leds: l_right_ramp_arrow_yellow
+
+shots:
+  collect_upgrade_shot:
+    switch: s_right_ramp_exit
+    profile: upgrade_shot_profile
+    enable_events: enable_upgrade
+    disable_events: collect_upgrade_shot_hit
+
+slide_player:
+  collect_upgrade_shot_hit:
+    upgrade_slide:
+      expire: 3s
+
+slides:
+  upgrade_slide:
+    widgets: upgrade_base_widget, upgrade_title_widget
+
+widget_player:
+  enable_upgrade:
+    upgrade_title_widget:
+      action: update
+
+widgets:
+  upgrade_base_widget:
+    - type: text
+      text: "Upgrade Researched"
+      style: dmd_small
+      anchor_x: left
+      anchor_y: top
+      x: 25%
+      y: top-2
+  upgrade_title_widget:
+    - type: text
+      text: (upgrade_name)
+      style: dmd_med
+      anchor_x: left
+      anchor_y: top
+      x: 25%
+      y: top-12
+

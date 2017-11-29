@@ -52,11 +52,13 @@ event_player:
   recruit_mission_starting:
     - disable_nonrecruit_modes
     - stop_mode_missionselect
+    - stop_mode_n7_assignments
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
+    - start_mode_n7_assignments
 
 ball_saves:
   debug_recruitmission_ballsave:

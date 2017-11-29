@@ -17,6 +17,10 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
 
+scoring:
+  sbdroptarget_group_complete:
+    intel: 1
+
 shot_groups:
   sbdroptarget_group:
     shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot

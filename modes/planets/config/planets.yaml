@@ -1,0 +1,94 @@
+#config_version=5
+mode:
+  start_events: start_mode_planets
+  stop_events: stop_mode_planets
+  priority: 400
+
+scoring:
+  planet_shots_hit_complete:
+    planets: 1
+  mineral_shot_palladium_hit:
+    mineral_palladium: 71 * (1 + current_player.planets)
+  mineral_shot_platinum_hit:
+    mineral_platinum: 73 * (1 + current_player.planets)
+  mineral_shot_iridium_hit:
+    mineral_iridium: 79 * (1 + current_player.planets)
+  player_mineral_palladium:
+    mineral_total: (change)
+  player_mineral_platinum:
+    mineral_total: (change)
+  player_mineral_iridium:
+    mineral_total: (change)
+
+shot_groups:
+  planet_shots:
+    shots: left_planet_shot, right_planet_shot
+    reset_events: planet_shots_hit_complete
+
+shot_profiles:
+  planet_bumper_profile:
+    show_when_disabled: True
+    states:
+      - name: lit
+        show: on
+  planet_shot_profile:
+    show_when_disabled: False
+    states:
+      - name: lit
+        show: on
+      - name: hit
+        show: off
+
+shots:
+  left_planet_shot:
+    switch: s_top_lane_left
+    profile: planet_shot_profile
+    show_tokens:
+      leds: l_left_top_lane
+  right_planet_shot:
+    switch: s_top_lane_right
+    profile: planet_shot_profile
+    show_tokens:
+      leds: l_right_top_lane
+  mineral_shot_palladium:
+    switch: s_bumper_bottom
+    tags: mineral_shot
+    profile: planet_bumper_profile
+    show_tokens:
+      leds: l_pop_bumper_bottom
+  mineral_shot_platinum:
+    switch: s_bumper_right
+    tags: mineral_shot
+    profile: planet_bumper_profile
+    show_tokens:
+      leds: l_pop_bumper_right
+  mineral_shot_iridium:
+    switch: s_bumper_left
+    tags: mineral_shot
+    profile: planet_bumper_profile
+    show_tokens:
+      leds: l_pop_bumper_left
+
+show_player:
+  # This is a tag-based event, will it work?
+  mineral_shot_hit: bumper_flash_show
+  planet_shots_hit_complete:
+    planet_complete_show:
+      loops: 6
+      speed: 12
+      priority: 100
+
+shows:
+  bumper_flash_show:
+    - duration: 50ms
+      lights:
+        l_flash_pop_bumpers: white
+  planet_complete_show:
+    - time: 0
+      lights:
+        l_left_top_lane: white
+        l_right_top_lane: white
+    - time: '+1'
+      lights:
+        l_left_top_lane: black
+        l_right_top_lane: black

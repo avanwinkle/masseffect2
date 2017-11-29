@@ -18,6 +18,8 @@ event_player:
   mode_base_started:
     - start_mode_recruitbase
     - start_mode_lockhandler
+    - start_mode_planets
+    - start_mode_n7_assignments
     - reenable_nonrecruit_modes
     # - enable_collectorship
   mode_overlordmultiball_started:
@@ -29,8 +31,8 @@ event_player:
     - start_mode_lockhandler
     - reenable_nonrecruit_modes
   disable_nonrecruit_modes:
-    - stop_mode_overlord
     - stop_mode_arrival
+    - stop_mode_overlord
     - stop_mode_shadowbroker
     - stop_mode_shopping
   reenable_nonrecruit_modes:
@@ -284,6 +286,7 @@ widgets:
       style: squad_debug_style
       x: 10
       y: top-84
+    # Column One
     - type: text
       text: "Level: (player|level)"
       style: squad_debug_style
@@ -292,20 +295,59 @@ widgets:
     - type: text
       text: "Squadmates: (player|squadmates_count)"
       style: squad_debug_style
-      x: 360
-      y: top-84
-    - type: text
-      text: "Credits: (player|credits)"
-      style: squad_debug_style
-      x: 560
-      y: top-84
+      x: 160
+      y: top-104
     - type: text
       text: "Missions Lit: (player|available_missions)"
       style: squad_debug_style
       x: 160
-      y: top-104
+      y: top-124
     - type: text
       text: "Recruits Lit: (player|recruits_lit_count)"
       style: squad_debug_style
+      x: 160
+      y: top-144
+
+    # Column Two
+    - type: text
+      text: "Credits: (player|credits)"
+      style: squad_debug_style
+      x: 360
+      y: top-84
+    - type: text
+      text: "Planets: (player|planets)"
+      style: squad_debug_style
       x: 360
       y: top-104
+    - type: text
+      text: "Intel: (player|intel)"
+      style: squad_debug_style
+      x: 360
+      y: top-124
+    - type: text
+      text: "Upgrades: (player|upgrade_researched)"
+      style: squad_debug_style
+      x: 360
+      y: top-144
+
+    # Column Three
+    - type: text
+      text: "Reputation: (player|reputation)"
+      style: squad_debug_style
+      x: 560
+      y: top-84
+    - type: text
+      text: "N7 Hits to Start: (player|n7_hits_counter_count)"
+      style: squad_debug_style
+      x: 560
+      y: top-104
+    - type: text
+      text: "N7 Completed: (player|assignments_completed)"
+      style: squad_debug_style
+      x: 560
+      y: top-124
+    - type: text
+      text: "Minerals: (player|mineral_iridium)/(player|mineral_palladium)/(player|mineral_platinum)"
+      style: squad_debug_style
+      x: 560
+      y: top-144

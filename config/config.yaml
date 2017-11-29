@@ -31,13 +31,14 @@ event_player:
   game_ended: gi_off
   bypass_lock_release_pulse_short:
     - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|210ms
+    - cancel_lock_release_pulse|190ms
   bypass_lock_release_pulse_long:
     - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|800ms
+    - cancel_lock_release_pulse|700ms
 
 modes:
   - base
+  - bonus
   - lockhandler
 # - collectorship_ambush
 # - collectorship_base
@@ -51,8 +52,10 @@ modes:
   - recruittali
   - recruitthane
   - missionselect
-  - overlordlight
-  - overlordmultiball
+  - n7_assignments
+  # - overlordlight
+  # - overlordmultiball
+  - planets
   - shadowbroker
   - shopping
 
@@ -84,6 +87,8 @@ light_player:
       color: black
 
 player_vars:
+  assignments_completed:
+    initial_value: 0
   available_missions:
     initial_value: 0
   credits:
@@ -94,12 +99,26 @@ player_vars:
   last_mission:
     initial_value: "Mission Complete"
     value_type: str
+  intel:
+    initial_value: 0
   level:
     initial_value: 1
+  minerals_total:
+    initial_value: 0
+  mineral_iridium:
+    initial_value: 0
+  mineral_palladium:
+    initial_value: 0
+  mineral_platinum:
+    initial_value: 0
   recruits_lit_count:
+    initial_value: 0
+  reputation:
     initial_value: 0
   squadmates_count:
     initial_value: 2
+  upgrades_researched:
+    initial_value: 0
   status_garrus:
     initial_value: 4
   status_grunt:
@@ -124,6 +143,7 @@ player_vars:
     initial_value: 4
   status_zaeed:
     initial_value: 4
+
 
 sound_system:
   master_volume: 0.75
@@ -196,3 +216,13 @@ widget_styles:
     font_size: 18
     anchor_x: top
     anchor_y: left
+  bonus_title_style:
+    font_name: Quadrit
+    font_size: 10
+    anchor_y: bottom
+    y: middle+2
+  bonus_score_style:
+    font_name: pixelmix
+    font_size: 8
+    anchor_y: top
+    y: middle-2

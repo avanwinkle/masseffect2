@@ -1,0 +1,100 @@
+#config_version=5
+mode_settings:
+  display_delay_ms: 2s
+  hurry_up_delay_ms: 0
+  bonus_entries:
+    - event: bonus_level
+      score: 1000
+      player_score_entry: level
+    - event: bonus_squadmates
+      score: 500
+      player_score_entry: squadmates_count
+    - event: bonus_credits
+      score: 2
+      player_score_entry: credits
+    - event: bonus_minerals
+      score: (current_player.planets * current_player.mineral_total)
+    - event: bonus_assignments
+      score: 2000
+      player_score_entry: assigments_completed
+    - event: bonus_intel
+      score: 500
+      player_score_entry: intel
+    - event: bonus_upgrades
+      score: 500
+      player_score_entry: upgrades_researched
+
+
+slide_player:
+  bonus_level: bonus_level_slide
+  bonus_squadmates: bonus_squadmates_slide
+  bonus_credits: bonus_credits_slide
+  bonus_minerals: bonus_minerals_slide
+  bonus_assignments: bonus_assignments_slide
+  bonus_intel: bonus_intel_slide
+  bonus_upgrades: bonus_upgrades_slide
+
+slides:
+  bonus_level_slide:
+    - type: text
+      text: "Level (player|level)"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_squadmates_slide:
+    - type: text
+      text: "(player|squadmates_count) Squadmates"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_credits_slide:
+    - type: text
+      text: "(player|credits) Credits Earned"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_minerals_slide:
+    - type: text
+      text: "(player|mineral_total) Minerals Collected"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_assignments_slide:
+    - type: text
+      text: "(player|assignments_completed) N7 Assignments"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_intel_slide:
+    - type: text
+      text: "(player|intel) Intel Gathered"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_upgrades_slide:
+    - type: text
+      text: "(player|upgrades_researched) Upgrades Researched"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style
+  bonus_multiplier_slide:
+    - type: text
+      text: "Reputation Multiplier"
+      style: bonus_title_style
+    - type: text
+      text: "(multiplier)X"
+      style: bonus_score_style
+  bonus_total_slide:
+    - type: text
+      text: "Total Bonus:"
+      style: bonus_title_style
+    - type: text
+      text: (score)
+      style: bonus_score_style

@@ -1,0 +1,307 @@
+#config_version=5
+mode:
+  start_events: start_mode_n7_assignments
+  stop_events: stop_mode_n7_assignments
+  priority: 400
+
+event_player:
+  logicblock_n7_hits_counter_complete: start_n7_assignment
+  start_n7_assignment:
+    - restart_n7timer|500ms
+    - stop_mode_recruitfield
+    - disable_nonrecruit_modes
+  n7_assignment_stopped:
+    - start_mode_recruitfield
+    - reenable_nonrecruit_modes
+  n7_assignment_completed:
+    - n7_assignment_stopped
+  achievement_n7_anomalous_weather_state_started:
+    set_n7_mission:
+      title: "Anomalous Weather Detected"
+  achievement_n7_eclipse_smuggling_depot_state_started:
+    set_n7_mission:
+      title: "Eclipse Smuggling Depot"
+  achievement_n7_hahne_kedar_facility_state_started:
+    set_n7_mission:
+      title: "Hahne-Kedar Facility"
+  achievement_n7_imminent_ship_crash_state_started:
+    set_n7_mission:
+      title: "Imminent Ship Crash"
+  achievement_n7_javelin_missiles_launched_state_started:
+    set_n7_mission:
+      title: "Javelin Missiles Launched"
+  achievement_n7_lost_operative_state_started:
+    set_n7_mission:
+      title: "Lost Operative"
+  achievement_n7_msv_strontium_mule_state_started:
+    set_n7_mission:
+      title: "MSV Strontium Mule"
+
+achievement_groups:
+  n7_assignments:
+    achievements: n7_anomalous_weather, n7_eclipse_smuggling_depot, n7_hahne_kedar_facility, n7_imminent_ship_crash, n7_javelin_missiles_launched, n7_lost_operative, n7_msv_strontium_mule
+    auto_select: True
+    start_selected_events: start_n7_assignment
+    events_when_all_completed: all_n7_completed
+
+achievements:
+  n7_anomalous_weather:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_anomalous_weather_shot_hit
+    events_when_started: achievement_n7_anomalous_weather_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_eclipse_smuggling_depot:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_eclipse_smuggling_depot_shot_hit
+    events_when_started: achievement_n7_eclipse_smuggling_depot_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_hahne_kedar_facility:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_hahne_kedar_facility_shot_hit
+    events_when_started: achievement_n7_hahne_kedar_facility_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_imminent_ship_crash:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_imminent_ship_crash_shot_hit
+    events_when_started: achievement_n7_imminent_ship_crash_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_javelin_missiles_launched:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_javelin_missiles_launched_shot_hit
+    events_when_started: achievement_n7_javelin_missiles_launched_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_lost_operative:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_lost_operative_shot_hit
+    events_when_started: achievement_n7_lost_operative_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+  n7_msv_strontium_mule:
+    stop_events: timer_n7timer_complete
+    complete_events: n7_msv_strontium_mule_shot_hit
+    events_when_started: achievement_n7_msv_strontium_mule_state_started, n7_assignment_started
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_completed
+    restart_on_next_ball_when_started: false
+    debug: true
+
+counters:
+  n7_hits_counter:
+    starting_count: 6
+    count_complete_value: 0
+    count_events: n7_advance_shot_hit
+    direction: down
+    disable_on_complete: true
+    enable_events: mode_n7_assignments_started, n7_assignment_completed
+    reset_on_complete: true
+
+scoring:
+  start_n7_assignment:
+    temp_build_value:
+      action: set
+      # Max value is 12000 plus 25% per mission completed
+      score: 12000 * (1 + (0.25 * current_player.assignments_completed))
+  timer_n7timer_tick:
+    temp_build_value:
+      action: add
+      # Each tick is 1/2s, so burn 1/60th (200 + 25%) each time
+      score: (1 + (0.25 * current_player.assignments_completed)) * -200
+  n7_assignment_completed:
+    score: current_player.temp_build_value
+    assignments_completed: 1
+
+shots:
+  n7_advance_shot:
+    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
+    enable_events: mode_n7_assignments_started, n7_assignment_stopped
+    disable_events: start_n7_assignment
+  n7_anomalous_weather_shot:
+    switch: s_right_ramp_exit
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_anomalous_weather_state_started
+    reset_events: achievement_n7_anomalous_weather_state_stopped
+    disable_events: achievement_n7_anomalous_weather_state_stopped
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  n7_eclipse_smuggling_depot_shot:
+    switch: s_kickback
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_eclipse_smuggling_depot_state_started
+    reset_events: achievement_n7_eclipse_smuggling_depot_state_stopped
+    disable_events: achievement_n7_eclipse_smuggling_depot_state_stopped
+    show_tokens:
+      leds: l_kickback_shield_rgb
+  n7_hahne_kedar_facility_shot:
+    switch: s_left_orbit
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_hahne_kedar_facility_state_started
+    reset_events: achievement_n7_hahne_kedar_facility_state_stopped
+    disable_events: achievement_n7_hahne_kedar_facility_state_stopped
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+  n7_imminent_ship_crash_shot:
+    switch: s_right_orbit
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_imminent_ship_crash_state_started
+    reset_events: achievement_n7_imminent_ship_crash_state_stopped
+    disable_events: achievement_n7_imminent_ship_crash_state_stopped
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  n7_javelin_missiles_launched_shot:
+    switch: s_right_orbit
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_javelin_missiles_launched_state_started
+    reset_events: achievement_n7_javelin_missiles_launched_state_stopped
+    disable_events: achievement_n7_javelin_missiles_launched_state_stopped
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  n7_lost_operative_shot:
+    switch: s_hitbank_top, s_hitbank_bottom
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_lost_operative_state_started
+    reset_events: achievement_n7_lost_operative_state_stopped
+    disable_events: achievement_n7_lost_operative_state_stopped
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+  n7_msv_strontium_mule_shot:
+    switch: s_right_ramp_exit
+    tags: n7_completion_shot
+    profile: n7_shot_profile
+    enable_events: achievement_n7_msv_strontium_mule_state_started
+    reset_events: achievement_n7_msv_strontium_mule_state_stopped
+    disable_events: achievement_n7_msv_strontium_mule_state_stopped
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+
+shot_profiles:
+  n7_shot_profile:
+    show_when_disabled: False
+    states:
+      - name: lit
+        show: n7_show
+      - name: hit
+        show: off
+
+shows:
+  n7_show:
+    - time: 0
+      lights:
+        (leds): red
+    - time: '+1'
+      lights:
+        (leds): white
+    - time: '+2'
+      lights:
+        (leds): red
+    - time: '+3'
+      lights:
+        (leds): black
+
+slide_player:
+  n7_assignment_started: n7_slide
+  n7_assignment_stopped:
+    n7_slide:
+      action: remove
+
+slides:
+  n7_slide:
+    - type: image
+      image: n7_logo_33x11
+      width: 33
+      height: 11
+      anchor_x: left
+      anchor_y: top
+      x: 2
+      y: middle-2
+
+timers:
+  n7timer:
+    start_value: 60 # 2x the number of seconds
+    end_value: 1
+    direction: down
+    tick_interval: 250ms
+    control_events:
+      - event: start_n7_assignment
+        action: reset
+      - event: restart_n7timer # Give a delay to start the mission
+        action: restart
+      - event: n7_assignment_completed
+        action: stop
+
+widget_player:
+  logicblock_n7_hits_counter_updated:
+    n7_progress_widget:
+      action: update
+      widget_settings:
+        expire: 2s
+  set_n7_mission:
+    missionname_widget:
+      action: update
+  player_temp_build_value:
+    hurryup_widget:
+      action: update
+  n7_assignment_stopped:
+    missionname_widget:
+      action: remove
+    hurryup_widget:
+      action: remove
+
+widgets:
+  n7_progress_widget:
+    - type: text
+      text: "(value) hits to N7 assignment"
+      font_size: 5
+      anchor_y: bottom
+      y: 2
+      z: 2
+    - type: rectangle
+      width: 128
+      height: 8
+      color: 000000
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 0
+      z: 1
+  missionname_widget:
+    - type: text
+      text: (title)
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: middle+4
+      font_size: 5
+      font_name: pixelmix
+  hurryup_widget:
+    - type: text
+      text: (value)
+      anchor_x: left
+      anchor_y: top
+      x: 42
+      y: middle-3
+      font_size: 10
+      font_name: quadrit
+

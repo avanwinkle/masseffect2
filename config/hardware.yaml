@@ -108,12 +108,22 @@ kickbacks:
     disable_events: kickback_disable
 
 autofire_coils:
-  # left_slingshot:
-  #   switch: s_left_slingshot
-  #   coil: c_slingshot_left
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+  left_bumper:
+    switch: s_bumper_left
+    coil: c_bumper_left
+  right_bumper:
+    switch: s_bumper_right
+    coil: c_bumper_right
+  bottom_bumper:
+    switch: s_bumper_bottom
+    coil: c_bumper_bottom
+
 
 switches:
   s_start_button:
@@ -506,10 +516,13 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
+    default_pulse_ms: 10
   c_bumper_right:
     number: 10-2
+    default_pulse_ms: 10
   c_bumper_bottom:
     number: 10-3
+    default_pulse_ms: 10
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12
