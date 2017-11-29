@@ -23,12 +23,15 @@ class LockHandler(Mode):
       elif device.name == 'overlordlock':
         self._overlordlock = device
 
-    lockshot = self.machine.shots.overlord_lock_ball_shot
-    self.debug_log("LockHandler is looking for overlord lock shot. " +
-      "state: {}, state_name: {}, enabled: {}".format(lockshot.state, lockshot.state_name,lockshot.enabled)
-      )
-    if self.machine.shots.overlord_lock_ball_shot.enabled:
-      self._post_event('enable_overlord_lock')
+    try:
+      lockshot = self.machine.shots.overlord_lock_ball_shot
+      self.debug_log("LockHandler is looking for overlord lock shot. " +
+        "state: {}, state_name: {}, enabled: {}".format(lockshot.state, lockshot.state_name,lockshot.enabled)
+        )
+      if self.machine.shots.overlord_lock_ball_shot.enabled:
+        self._post_event('enable_overlord_lock')
+    except KeyError:
+      self.debug_log("LockHandler has no overlord lock shot, locking will be disabled")
 
     self._register_handlers()
 

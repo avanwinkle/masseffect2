@@ -6,7 +6,7 @@ mode:
 
 event_player:
   mode_recruitgrunt_starting: recruittimer_set_twelve
-  grunt_shots_hit: recruittimer_set_twelve
+  logicblock_grunt_shots_counter_hit: recruittimer_set_twelve
   grunt_shots_complete: recruit_grunt_complete
   recruit_grunt_complete:
     recruit_mission_success:
@@ -65,18 +65,18 @@ shots:
       led: l_kickback_shield_rgb
 
 show_player:
-  grunt_shots_hit:
+  logicblock_grunt_shots_counter_hit:
     flash_all_shields_show:
       loops: 6
       speed: 6
       show_tokens:
-        color: Ef521F #color_grunt
+        color: ED3A00 #color_grunt
 
 shows:
   grunt_lit_show:
     - time: 0
       lights:
-        (led): EF521F #color_grunt
+        (led): ED3A00 #color_grunt
     - time: +1
       lights:
         (led): black

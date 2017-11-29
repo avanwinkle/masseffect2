@@ -5,6 +5,7 @@ hardware:
 
 spike:
   port: /dev/tty.usbserial-FTA6MU05
+  flow_control: true
   baud: 115200
   debug: true
   nodes: 0, 1, 8, 9, 10
@@ -15,11 +16,11 @@ machine:
 
 # dmds:
 #   spike_dmd:  # name of this DMD which can be whatever you want
-#     fps: 5
+#     fps: 15
 #     gamma: 1.5
 #     only_send_changes: true
-#     # source_display: dmd
-#     # platform: spike
+#     source_display: dmd
+#     platform: spike
 
 slides:
   window_slide_1:
@@ -67,7 +68,7 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_enable_time: 210ms
+    eject_coil_enable_time: 190ms
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False

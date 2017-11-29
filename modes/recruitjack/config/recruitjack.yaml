@@ -20,6 +20,7 @@ counters:
     direction: up
     disable_on_complete: true
     reset_on_complete: false
+    persist_state: true
     # disable_events: s_plunger_lane_active
     # enable_events:
     #   s_plunger_lane_inactive: 500ms
@@ -59,7 +60,7 @@ shots:
     switches: s_kickback, s_left_orbit s_right_orbit
     profile: jack_shots_one_profile
     enable_events:
-      - mode_recruitjack_started{current_player.jack_rounds_counter_state==0}
+      - mode_recruitjack_started{current_player.jack_rounds_counter_state!=1}
     disable_events: jack_shots_one_hit
   jack_shots_two:
     switches: s_left_ramp_exit, s_right_ramp_exit
@@ -85,10 +86,10 @@ shows:
   jack_shots_one_show:
     - time: 0
       lights:
-        l_kickback_shield_rgb: 7B3FB8 #color_jack
-        l_left_orbit_shield_rgb: 7B3FB8 #color_jack
-        l_right_orbit_shield_rgb: 7B3FB8 #color_jack
-    - time: '+1'
+        l_kickback_shield_rgb: 6000BB #color_jack
+        l_left_orbit_shield_rgb: 6000BB #color_jack
+        l_right_orbit_shield_rgb: 6000BB #color_jack
+    - time: +1
       lights:
         l_kickback_shield_rgb: black
         l_left_orbit_shield_rgb: black
@@ -96,17 +97,17 @@ shows:
   jack_shots_two_show:
     - time: 0
       lights:
-        l_left_ramp_shield_rgb: 7B3FB8 #color_jack
-        l_right_ramp_shield_rgb: 7B3FB8 #color_jack
-    - time: '+1'
+        l_left_ramp_shield_rgb: 6000BB #color_jack
+        l_right_ramp_shield_rgb: 6000BB #color_jack
+    - time: +1
       lights:
         l_left_ramp_shield_rgb: black
         l_right_ramp_shield_rgb: black
   jack_shots_three_show:
     - time: 0
       lights:
-        l_left_orbit_shield_rgb: 7B3FB8 #color_jack
-        l_right_orbit_shield_rgb: 7B3FB8 #color_jack
+        l_left_orbit_shield_rgb: 6000BB #color_jack
+        l_right_orbit_shield_rgb: 6000BB #color_jack
     - time: '+1'
       lights:
         l_left_orbit_shield_rgb: black
@@ -114,7 +115,7 @@ shows:
   jack_hitbank_show:
     - time: 0
       lights:
-        l_hitbank_shield_rgb: 7B3FB8 #color_jack
+        l_hitbank_shield_rgb: 6000BB #color_jack
     - time: '+1'
       lights:
         l_hitbank_shield_rgb: black
@@ -190,7 +191,7 @@ widget_player:
   mode_recruitjack_started:
     counter_widget:
       action: add
-  logicblock_jack_rounds_counter_updated:
+  logicblock_jack_rounds_counter_hit:
     counter_widget:
       action: update
   mode_recruitjack_stopping:
@@ -205,4 +206,11 @@ widgets:
       anchor_y: top
       x: right-2
       y: top-2
-      font_size: 8
+      style: dmd_small
+    - type: text
+      text: (count)
+      anchor_x: right
+      anchor_y: top
+      style: dmd_small
+      x: right-2
+      y: top-9

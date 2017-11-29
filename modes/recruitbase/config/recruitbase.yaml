@@ -112,7 +112,7 @@ shots:
     show_tokens:
       led: shot_shield_grunt
       lit: color_shield_orange
-      color: EF521F #color_grunt
+      color: ED3A00 #color_grunt
     tags: recruit_shot
   recruit_jack_shot:
     switch: s_kickback
@@ -124,7 +124,7 @@ shots:
     show_tokens:
       led: shot_shield_jack
       lit: color_shield_purple
-      color: 7B3FB8 #color_jack
+      color: 6000BB #color_jack
     tags: recruit_shot
   recruit_kasumi_shot:
     switch: s_right_ramp_exit

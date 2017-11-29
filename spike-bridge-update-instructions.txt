@@ -1,0 +1,21 @@
+Spike Bridge Instructions (OSX):
+
+1. Install FUSE-ext2
+2. Insert SD Card
+3. Open "Disk Utility"
+  - Select the mounted (OSX-visible) volume (NOT the disk)
+  - Unmount the volume (do NOT eject)
+4. Mount the ext2 partition to the folder of your choosing
+  - sudo fuse-ext2 /dev/disk2s3 ~/mnt -o force
+      - sudo is likely required for disk mounting permissions
+      - -o means include read/write
+      - force may be required to override filesystem warnings
+5. Remove the old version of bridge (copy-overwrite may not work with fuse-ext2)
+  - rm ~/mnt/bridge
+6. Copy the new version of bridge
+  - cp ~/mpf-spike-bridge/bridge ~/mnt/bridge
+7. Set the new version to be executable
+  - chmod 755 ~/mnt/bridge
+8. Unmount the volume
+  - sudo umount /dev/disk2s3
+9. From "Disk Utility", eject the disk
