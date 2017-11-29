@@ -219,10 +219,21 @@ widget_styles:
   bonus_title_style:
     font_name: Quadrit
     font_size: 10
+    adjust_bottom: 3
+    adjust_top: 2
     anchor_y: bottom
-    y: middle+2
+    y: middle
   bonus_score_style:
     font_name: pixelmix
     font_size: 8
     anchor_y: top
-    y: middle-2
+    adjust_top: 1
+    adjust_bottom: 1
+    y: middle-4
+    number_grouping: true
+  quadrit_big:
+    font_name: quadrit
+    font_size: 10
+    adjust_bottom: 3
+    adjust_top: 2
+

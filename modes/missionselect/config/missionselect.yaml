@@ -48,7 +48,7 @@ slides:
     widgets:
       - type: text
         text: Select a Mission
-        style: dmd_big
+        style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -61,7 +61,7 @@ slides:
     widgets:
       - type: text
         text: (last_recruit)
-        style: dmd_big
+        style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -81,7 +81,7 @@ slides:
       - type: text
         text: SUICIDE MISSION
         font_size: 14
-        style: dmd_big
+        style: quadrit_big
         anchor_y: bottom
         y: 3
   missionselect_pass_slide:
@@ -89,7 +89,7 @@ slides:
     widgets:
       - type: text
         text: Pass for Now
-        style: dmd_big
+        style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
 

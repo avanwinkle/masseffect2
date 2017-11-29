@@ -159,8 +159,8 @@ slides:
         text: (score)
         number_grouping: true
         min_digits: 2
-        font_size: 14
-        style: dmd_big
+        font_size: 10
+        font_name: Quadrit
         anchor_y: top
         y: top-6
       - type: text

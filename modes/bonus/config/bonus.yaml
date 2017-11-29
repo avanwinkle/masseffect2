@@ -1,6 +1,6 @@
 #config_version=5
 mode_settings:
-  display_delay_ms: 2s
+  display_delay_ms: 1s
   hurry_up_delay_ms: 0
   bonus_entries:
     - event: bonus_level
@@ -51,35 +51,35 @@ slides:
       style: bonus_score_style
   bonus_credits_slide:
     - type: text
-      text: "(player|credits) Credits Earned"
+      text: "Credits Bonus"
       style: bonus_title_style
     - type: text
       text: (score)
       style: bonus_score_style
   bonus_minerals_slide:
     - type: text
-      text: "(player|mineral_total) Minerals Collected"
+      text: "Minerals Collected"
       style: bonus_title_style
     - type: text
       text: (score)
       style: bonus_score_style
   bonus_assignments_slide:
     - type: text
-      text: "(player|assignments_completed) N7 Assignments"
+      text: "N7 Bonus"
       style: bonus_title_style
     - type: text
       text: (score)
       style: bonus_score_style
   bonus_intel_slide:
     - type: text
-      text: "(player|intel) Intel Gathered"
+      text: "Intel Gathered"
       style: bonus_title_style
     - type: text
       text: (score)
       style: bonus_score_style
   bonus_upgrades_slide:
     - type: text
-      text: "(player|upgrades_researched) Upgrades Researched"
+      text: "Upgrades Researched"
       style: bonus_title_style
     - type: text
       text: (score)

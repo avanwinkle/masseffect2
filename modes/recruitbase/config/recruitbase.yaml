@@ -260,7 +260,9 @@ slides:
     widgets:
       - type: text
         text: Recruit Your Squad
-        style: dmd_big
+        style: text_default
+        anchor_x: left
+        x: 10
 
 
 sound_player:

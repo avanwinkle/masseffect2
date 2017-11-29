@@ -193,7 +193,8 @@ slides:
     widgets:
       - type: text
         text: Recruit (last_recruit)
-        style: dmd_big
+        font_name: Quadrit
+        font_size: 10
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -205,7 +206,8 @@ slides:
     widgets:
       - type: text
         text: Recruit (last_recruit)
-        style: dmd_big
+        font_name: Quadrit
+        font_size: 10
         anchor_y: bottom
         y: bottom+45%
       - type: text
@@ -217,7 +219,8 @@ slides:
     widgets:
       - type: text
         text: (last_recruit) Ready!
-        style: dmd_big
+        font_name: Quadrit
+        font_size: 10
         anchor_y: bottom
         y: bottom+45%
       - type: text

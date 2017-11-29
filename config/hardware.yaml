@@ -6,7 +6,7 @@ hardware:
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
-  baud: 115200
+  baud: 230400 #115200
   debug: true
   nodes: 0, 1, 8, 9, 10
 
@@ -14,13 +14,13 @@ machine:
   balls_installed: 6
   min_balls: 6
 
-# dmds:
-#   spike_dmd:  # name of this DMD which can be whatever you want
-#     fps: 15
-#     gamma: 1.5
-#     only_send_changes: true
-#     source_display: dmd
-#     platform: spike
+dmds:
+  spike_dmd:  # name of this DMD which can be whatever you want
+    fps: 15
+    gamma: 1.5
+    only_send_changes: true
+    source_display: dmd
+    platform: spike
 
 slides:
   window_slide_1:
@@ -79,7 +79,7 @@ flippers:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
     enable_events: ball_starting, flippers_on
-    disable_events: flippers_off
+    disable_events: ball_ending, flippers_off
   right_flipper:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
@@ -516,13 +516,13 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
-    default_pulse_ms: 10
+    default_pulse_ms: 20
   c_bumper_right:
     number: 10-2
-    default_pulse_ms: 10
+    default_pulse_ms: 20
   c_bumper_bottom:
     number: 10-3
-    default_pulse_ms: 10
+    default_pulse_ms: 20
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12

@@ -13,23 +13,21 @@ event_player:
   n7_assignment_stopped:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
-  n7_assignment_completed:
-    - n7_assignment_stopped
   achievement_n7_anomalous_weather_state_started:
     set_n7_mission:
-      title: "Anomalous Weather Detected"
+      title: "Anomalous Weather\nDetected"
   achievement_n7_eclipse_smuggling_depot_state_started:
     set_n7_mission:
       title: "Eclipse Smuggling Depot"
   achievement_n7_hahne_kedar_facility_state_started:
     set_n7_mission:
-      title: "Hahne-Kedar Facility"
+      title: "Hahne-Kedar\nFacility"
   achievement_n7_imminent_ship_crash_state_started:
     set_n7_mission:
       title: "Imminent Ship Crash"
   achievement_n7_javelin_missiles_launched_state_started:
     set_n7_mission:
-      title: "Javelin Missiles Launched"
+      title: "Javelin Missiles\nLaunched"
   achievement_n7_lost_operative_state_started:
     set_n7_mission:
       title: "Lost Operative"
@@ -49,56 +47,56 @@ achievements:
     stop_events: timer_n7timer_complete
     complete_events: n7_anomalous_weather_shot_hit
     events_when_started: achievement_n7_anomalous_weather_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_eclipse_smuggling_depot:
     stop_events: timer_n7timer_complete
     complete_events: n7_eclipse_smuggling_depot_shot_hit
     events_when_started: achievement_n7_eclipse_smuggling_depot_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_hahne_kedar_facility:
     stop_events: timer_n7timer_complete
     complete_events: n7_hahne_kedar_facility_shot_hit
     events_when_started: achievement_n7_hahne_kedar_facility_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_imminent_ship_crash:
     stop_events: timer_n7timer_complete
     complete_events: n7_imminent_ship_crash_shot_hit
     events_when_started: achievement_n7_imminent_ship_crash_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_javelin_missiles_launched:
     stop_events: timer_n7timer_complete
     complete_events: n7_javelin_missiles_launched_shot_hit
     events_when_started: achievement_n7_javelin_missiles_launched_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_lost_operative:
     stop_events: timer_n7timer_complete
     complete_events: n7_lost_operative_shot_hit
     events_when_started: achievement_n7_lost_operative_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_msv_strontium_mule:
     stop_events: timer_n7timer_complete
     complete_events: n7_msv_strontium_mule_shot_hit
     events_when_started: achievement_n7_msv_strontium_mule_state_started, n7_assignment_started
-    events_when_stopped: n7_assignment_stopped
-    events_when_completed: n7_assignment_completed
+    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
+    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
 
@@ -109,7 +107,8 @@ counters:
     count_events: n7_advance_shot_hit
     direction: down
     disable_on_complete: true
-    enable_events: mode_n7_assignments_started, n7_assignment_completed
+    enable_events: mode_n7_assignments_started, n7_assignment_stopped
+    disable_events: n7_assignment_started
     reset_on_complete: true
 
 scoring:
@@ -138,7 +137,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_anomalous_weather_state_started
     reset_events: achievement_n7_anomalous_weather_state_stopped
-    disable_events: achievement_n7_anomalous_weather_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_right_ramp_shield_rgb
   n7_eclipse_smuggling_depot_shot:
@@ -147,7 +146,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_eclipse_smuggling_depot_state_started
     reset_events: achievement_n7_eclipse_smuggling_depot_state_stopped
-    disable_events: achievement_n7_eclipse_smuggling_depot_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_kickback_shield_rgb
   n7_hahne_kedar_facility_shot:
@@ -156,7 +155,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_hahne_kedar_facility_state_started
     reset_events: achievement_n7_hahne_kedar_facility_state_stopped
-    disable_events: achievement_n7_hahne_kedar_facility_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_left_orbit_shield_rgb
   n7_imminent_ship_crash_shot:
@@ -165,7 +164,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_imminent_ship_crash_state_started
     reset_events: achievement_n7_imminent_ship_crash_state_stopped
-    disable_events: achievement_n7_imminent_ship_crash_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_javelin_missiles_launched_shot:
@@ -174,7 +173,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_javelin_missiles_launched_state_started
     reset_events: achievement_n7_javelin_missiles_launched_state_stopped
-    disable_events: achievement_n7_javelin_missiles_launched_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_lost_operative_shot:
@@ -183,7 +182,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_lost_operative_state_started
     reset_events: achievement_n7_lost_operative_state_stopped
-    disable_events: achievement_n7_lost_operative_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_hitbank_shield_rgb
   n7_msv_strontium_mule_shot:
@@ -192,7 +191,7 @@ shots:
     profile: n7_shot_profile
     enable_events: achievement_n7_msv_strontium_mule_state_started
     reset_events: achievement_n7_msv_strontium_mule_state_stopped
-    disable_events: achievement_n7_msv_strontium_mule_state_stopped
+    disable_events: n7_assignment_stopped
     show_tokens:
       leds: l_right_ramp_shield_rgb
 
@@ -202,6 +201,7 @@ shot_profiles:
     states:
       - name: lit
         show: n7_show
+        speed: 6
       - name: hit
         show: off
 
@@ -210,15 +210,15 @@ shows:
     - time: 0
       lights:
         (leds): red
-    - time: '+1'
+    - time: '+5'
       lights:
         (leds): white
-    - time: '+2'
+    - time: '+6'
       lights:
         (leds): red
-    - time: '+3'
+    - time: '+7'
       lights:
-        (leds): black
+        (leds): white
 
 slide_player:
   n7_assignment_started: n7_slide
@@ -232,10 +232,10 @@ slides:
       image: n7_logo_33x11
       width: 33
       height: 11
-      anchor_x: left
+      anchor_x: right
       anchor_y: top
-      x: 2
-      y: middle-2
+      x: right-2
+      y: 3
 
 timers:
   n7timer:
@@ -250,6 +250,8 @@ timers:
         action: restart
       - event: n7_assignment_completed
         action: stop
+      - event: ball_will_end
+        action: stop
 
 widget_player:
   logicblock_n7_hits_counter_updated:
@@ -260,9 +262,14 @@ widget_player:
   set_n7_mission:
     missionname_widget:
       action: update
+    n7_progress_widget:
+      action: remove
   player_temp_build_value:
     hurryup_widget:
       action: update
+  n7_assignment_started:
+    n7_progress_widget:
+      action: remove
   n7_assignment_stopped:
     missionname_widget:
       action: remove
@@ -275,7 +282,9 @@ widgets:
       text: "(value) hits to N7 assignment"
       font_size: 5
       anchor_y: bottom
+      anchor_x: left
       y: 2
+      x: 22
       z: 2
     - type: rectangle
       width: 128
@@ -290,18 +299,19 @@ widgets:
     - type: text
       text: (title)
       anchor_x: left
-      anchor_y: bottom
+      anchor_y: top
       x: 2
-      y: middle+4
-      font_size: 5
+      y: top-2
+      font_size: 8
       font_name: pixelmix
   hurryup_widget:
     - type: text
       text: (value)
+      number_grouping: true
       anchor_x: left
       anchor_y: top
-      x: 42
-      y: middle-3
+      x: 2
+      y: 3
       font_size: 10
       font_name: quadrit
 
