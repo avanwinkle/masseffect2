@@ -14,8 +14,8 @@ mode_settings:
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards
 
 event_player:
-  mode_missionselect_started: flippers_off
-  mode_missionselect_will_stop: flippers_on
+  mode_missionselect_started: flippers_off, stop_mode_pause
+  mode_missionselect_will_stop: flippers_on, start_mode_pause
   missionselect_garrus_highlighted: set_last_recruit_garrus
   missionselect_grunt_highlighted: set_last_recruit_grunt
   missionselect_jack_highlighted: set_last_recruit_jack

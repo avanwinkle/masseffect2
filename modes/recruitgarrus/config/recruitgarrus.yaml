@@ -54,25 +54,22 @@ shot_profiles:
 
 shots:
   center_door:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: door_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
   left_door:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: door_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
   right_door:
-    switch: s_right_orbit
-    enable_events:
-      playfield_active: 500ms
-    disable_events: s_plunger_lane_inactive
+    hit_events: sh_right_orbit_hit
     profile: door_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
   stairs:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_exit_hit
     profile: upstairs_shot_profile
     enable_events: close_doors_hit_complete
     show_tokens:

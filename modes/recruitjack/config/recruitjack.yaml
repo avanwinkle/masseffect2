@@ -5,8 +5,6 @@ mode:
   priority: 500
 
 event_player:
-  # mode_recruitjack_started:
-  #   recruit_jack_complete
   recruit_jack_complete:
     recruit_mission_success:
       squadmate: jack
@@ -21,63 +19,58 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
-    # disable_events: s_plunger_lane_active
-    # enable_events:
-    #   s_plunger_lane_inactive: 500ms
-    #   player_shot_jack_hitbank_shot_enabled: 0ms
     debug: true
 
 shot_profiles:
   jack_shots_one_profile:
     show_when_disabled: false
-    show: jack_shots_one_show
     states:
       - name: lit
-        speed: 3
-        loops: -1
+        show: jack_shots_one_show
+        speed: 6
   jack_shots_two_profile:
     show_when_disabled: false
-    show: jack_shots_two_show
     states:
       - name: lit
-        speed: 6
+        show: jack_shots_two_show
+        speed: 9
         loops: -1
   jack_shots_three_profile:
     show_when_disabled: false
-    show: jack_shots_three_show
     states:
       - name: lit
-        speed: 9
+        show: jack_shots_three_show
+        speed: 12
   jack_hitbank_profile:
     show_when_disabled: false
-    show: jack_hitbank_show
     states:
       - name: lit
-        speed: 3
+        show: jack_hitbank_show
+        speed: 12
 
 shots:
   jack_shots_one:
-    switches: s_kickback, s_left_orbit s_right_orbit
+    hit_events: sh_kickback_hit, sh_left_orbit_hit sh_right_orbit_hit
     profile: jack_shots_one_profile
     enable_events:
-      - mode_recruitjack_started{current_player.jack_rounds_counter_state!=1}
+      - logicblock_jack_rounds_counter_updated{value==0}
     disable_events: jack_shots_one_hit
   jack_shots_two:
-    switches: s_left_ramp_exit, s_right_ramp_exit
+    hit_events: sh_left_ramp_hit, sh_right_ramp_hit
     profile: jack_shots_two_profile
     enable_events:
-      - mode_recruitjack_started{current_player.jack_rounds_counter_state==1}
-      - logicblock_jack_rounds_counter_hit{count==1}
+      - logicblock_jack_rounds_counter_updated{value==1}
+      # - logicblock_jack_rounds_counter_hit{count==1}
     disable_events: jack_shots_two_hit
   jack_shots_three:
-    switches: s_left_orbit, s_right_orbit
+    hit_events: sh_left_orbit_hit, sh_right_orbit_hit
     profile: jack_shots_three_profile
     enable_events:
-      - mode_recruitjack_started{current_player.jack_rounds_counter_state==2}
-      - logicblock_jack_rounds_counter_hit{count==2}
+      - logicblock_jack_rounds_counter_updated{value==2}
+      # - logicblock_jack_rounds_counter_hit{count==2}
     disable_events: jack_shots_three_hit
   jack_hitbank_shot:
-    switches: s_hitbank_top, s_hitbank_bottom
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: jack_hitbank_profile
     enable_events: jack_shots_one_hit, jack_shots_two_hit, jack_shots_three_hit
     disable_events: jack_hitbank_shot_hit
@@ -89,7 +82,7 @@ shows:
         l_kickback_shield_rgb: 6000BB #color_jack
         l_left_orbit_shield_rgb: 6000BB #color_jack
         l_right_orbit_shield_rgb: 6000BB #color_jack
-    - time: +1
+    - time: '+1'
       lights:
         l_kickback_shield_rgb: black
         l_left_orbit_shield_rgb: black
@@ -99,7 +92,7 @@ shows:
       lights:
         l_left_ramp_shield_rgb: 6000BB #color_jack
         l_right_ramp_shield_rgb: 6000BB #color_jack
-    - time: +1
+    - time: '+1'
       lights:
         l_left_ramp_shield_rgb: black
         l_right_ramp_shield_rgb: black
@@ -201,16 +194,16 @@ widget_player:
 widgets:
   counter_widget:
     - type: text
-      text: (player|jack_rounds_counter_state)
-      anchor_x: right
-      anchor_y: top
-      x: right-2
-      y: top-2
+      text: "State: (player|jack_rounds_counter_state)"
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 8
       style: dmd_small
     - type: text
-      text: (count)
-      anchor_x: right
-      anchor_y: top
+      text: "(3 - count) Hits"
+      anchor_x: left
+      anchor_y: bottom
       style: dmd_small
-      x: right-2
-      y: top-9
+      x: 2
+      y: 2

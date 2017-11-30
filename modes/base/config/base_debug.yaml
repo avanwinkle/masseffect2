@@ -1,0 +1,146 @@
+#config_version=5
+widget_player:
+  mode_base_started:
+    squad_debug:
+      target: window
+    vars_debug:
+      target: window
+
+widgets:
+  squad_debug:
+    - type: text
+      text: "SQUAD STATUS:"
+      style: squad_debug_style
+      x: 10
+      y: top-24
+    - type: text
+      text: "Garrus: (player|status_garrus)"
+      style: squad_debug_style
+      x: 160
+      y: top-24
+    - type: text
+      text: "Grunt: (player|status_grunt)"
+      style: squad_debug_style
+      x: 260
+      y: top-24
+    - type: text
+      text: "Jack: (player|status_jack)"
+      style: squad_debug_style
+      y: top-24
+      x: 360
+    - type: text
+      text: "Jacob: (player|status_jacob)"
+      style: squad_debug_style
+      x: 460
+      y: top-24
+    - type: text
+      text: "Kasumi: (player|status_kasumi)"
+      style: squad_debug_style
+      x: 560
+      y: top-24
+    - type: text
+      text: "Legion: (player|status_legion)"
+      style: squad_debug_style
+      y: top-24
+      x: 660
+    - type: text
+      text: "Miranda: (player|status_miranda)"
+      style: squad_debug_style
+      y: top-44
+      x: 160
+    - type: text
+      text: "Mordin: (player|status_mordin)"
+      style: squad_debug_style
+      y: top-44
+      x: 260
+    - type: text
+      text: "Samara: (player|status_samara)"
+      style: squad_debug_style
+      y: top-44
+      x: 360
+    - type: text
+      text: "Tali: (player|status_tali)"
+      style: squad_debug_style
+      y: top-44
+      x: 460
+    - type: text
+      text: "Thane: (player|status_thane)"
+      style: squad_debug_style
+      y: top-44
+      x: 560
+    - type: text
+      text: "Zaeed: (player|status_zaeed)"
+      style: squad_debug_style
+      y: top-44
+      x: 660
+  vars_debug:
+    - type: text
+      text: "PLAYER VARS:"
+      style: squad_debug_style
+      x: 10
+      y: top-84
+    # Column One
+    - type: text
+      text: "Level: (player|level)"
+      style: squad_debug_style
+      x: 160
+      y: top-84
+    - type: text
+      text: "Squadmates: (player|squadmates_count)"
+      style: squad_debug_style
+      x: 160
+      y: top-104
+    - type: text
+      text: "Missions Lit: (player|available_missions)"
+      style: squad_debug_style
+      x: 160
+      y: top-124
+    - type: text
+      text: "Recruits Lit: (player|recruits_lit_count)"
+      style: squad_debug_style
+      x: 160
+      y: top-144
+
+    # Column Two
+    - type: text
+      text: "Credits: (player|credits)"
+      style: squad_debug_style
+      x: 360
+      y: top-84
+    - type: text
+      text: "Planets: (player|planets)"
+      style: squad_debug_style
+      x: 360
+      y: top-104
+    - type: text
+      text: "Intel: (player|intel)"
+      style: squad_debug_style
+      x: 360
+      y: top-124
+    - type: text
+      text: "Upgrades: (player|upgrade_researched)"
+      style: squad_debug_style
+      x: 360
+      y: top-144
+
+    # Column Three
+    - type: text
+      text: "Reputation: (player|reputation)"
+      style: squad_debug_style
+      x: 560
+      y: top-84
+    - type: text
+      text: "N7 Hits to Start: (player|n7_hits_counter_count)"
+      style: squad_debug_style
+      x: 560
+      y: top-104
+    - type: text
+      text: "N7 Completed: (player|assignments_completed)"
+      style: squad_debug_style
+      x: 560
+      y: top-124
+    - type: text
+      text: "Minerals: (player|mineral_iridium)/(player|mineral_palladium)/(player|mineral_platinum)"
+      style: squad_debug_style
+      x: 560
+      y: top-144

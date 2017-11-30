@@ -17,31 +17,13 @@ timers:
       - event: recruittimer_set_twelve
         action: jump
         value: 12
-      - event: recruittimer_add_time
+      - event: recruittimer_add_ten
         action: add
         value: 10
+      - event: recruittimer_add_twelve
+        action: add
+        value: 12
       - event: recruit_mission_starting
         action: restart
       - event: recruit_mission_ended
         action: stop
-
-widget_player:
-  timer_recruittimer_started:
-    time_remaining_widget:
-      action: add
-  timer_recruittimer_stopped:
-    time_remaining_widget:
-      action: remove
-  timer_recruittimer_tick:
-    time_remaining_widget:
-      action: update
-
-widgets:
-  time_remaining_widget:
-    - type: text
-      text: (ticks_remaining)
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-2
-      font_size: 8

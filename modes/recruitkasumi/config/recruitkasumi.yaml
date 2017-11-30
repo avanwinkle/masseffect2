@@ -59,21 +59,21 @@ shot_profiles:
 
 shots:
   left_orbit:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_left_orbit
     show_tokens:
       led: l_left_orbit_arrow_red
   left_ramp:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_left_ramp
     show_tokens:
       led: l_left_ramp_arrow_red
   right_orbit:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_right_orbit
@@ -83,7 +83,7 @@ shots:
     show_tokens:
       led: l_right_orbit_arrow_red
   right_ramp:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_right_ramp
@@ -91,7 +91,7 @@ shots:
     show_tokens:
       led: l_right_ramp_arrow_red
   kickback:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_kickback

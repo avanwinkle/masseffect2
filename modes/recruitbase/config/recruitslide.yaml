@@ -1,0 +1,94 @@
+#config_version=5
+event_player:
+  mode_recruitgarrus_started:
+    set_recruitwidget:
+      missionname: "Defend Archangel"
+  mode_recruitgrunt_started:
+    set_recruitwidget:
+      missionname: "Defeat the Tank-Bred"
+  mode_recruitjack_started:
+    set_recruitwidget:
+      missionname: "Escape from Purgatory"
+  mode_recruitkasumi_started:
+    set_recruitwidget:
+      missionname: "Infiltrate the Vault"
+  mode_recruitlegion_started:
+    set_recruitwidget:
+      missionname: "Stop the Heretics"
+  mode_recruitmordin_started:
+    set_recruitwidget:
+      missionname: "Disburse the Cure"
+  mode_recruitsamara_started:
+    set_recruitwidget:
+      missionname: "Chase Morinth"
+  mode_recruittali_started:
+    set_recruitwidget:
+      missionname: "Destroy the Colossus"
+  mode_recruitthane_started:
+    set_recruitwidget:
+      missionname: "Assault Dantius Towers"
+  mode_recruitzaeed_started:
+    set_recruitwidget:
+      missionname: "Storm the Refinery"
+
+slide_player:
+  recruit_mission_starting: recruitslide
+  recruit_mission_ended:
+    recruitslide:
+      action: remove
+
+slides:
+  recruitslide: []
+    # - type: image
+    #   image: miranda
+    #   width: 34
+    #   height: 32
+    #   anchor_x: left
+    #   anchor_y: bottom
+    #   x: 0
+    #   y: 0
+
+
+widget_player:
+  set_recruitwidget:
+    recruitwidget_mission:
+      action: update
+  set_recruitscore:
+    recruitwidget_score:
+      action: update
+  timer_recruittimer_started:
+    time_remaining_widget:
+      action: add
+  timer_recruittimer_tick:
+    time_remaining_widget:
+      action: update
+
+widgets:
+  recruitwidget_mission:
+    - type: text
+      text: (missionname)
+      font_name: pixelmix
+      font_size: 8
+      anchor_x: left
+      anchor_y: top
+      x: 2
+      y: top-4
+  recruitwidget_score:
+    - type: text
+      text: (score)
+      number_grouping: true
+      font_size: 5
+      font_name: Quadrit
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 4
+  time_remaining_widget:
+    - type: text
+      text: "(ticks_remaining)"
+      font_name: pixelmix
+      font_size: 8
+      anchor_x: right
+      anchor_y: bottom
+      x: right-4
+      y: 4

@@ -83,16 +83,16 @@ widget_player:
   mode_collectorship_ambush_started:
     collectorship_debug:
       target: window
-  shipshottimer_start: time_remaining_widget
+  shipshottimer_start: shipshottimer_remaining_widget
   shipshottimer_tick:
-    time_remaining_widget:
+    shipshottimer_remaining_widget:
       action: update
   stop_mode_collectorship_ambush:
     collectorship_debug:
       action: remove
 
 widgets:
-  time_remaining_widget:
+  shipshottimer_remaining_widget:
     - type: text
       text: (ticks_remaining)
       anchor_x: left

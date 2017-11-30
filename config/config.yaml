@@ -19,7 +19,7 @@ virtual_platform_start_active_switches:
   s_trough6
 
 mpf-mc:
-  fps: 30
+  fps: 15
 
 game:
   balls_per_game: 5
@@ -42,6 +42,7 @@ modes:
   - lockhandler
 # - collectorship_ambush
 # - collectorship_base
+  - pause
   - recruitbase
   - recruitfield
   - recruitgarrus
@@ -236,4 +237,5 @@ widget_styles:
     font_size: 10
     adjust_bottom: 3
     adjust_top: 2
+
 

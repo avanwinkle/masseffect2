@@ -1,7 +1,7 @@
 #config_version=5
 mode:
   start_events: start_mode_recruitmordin
-  stop_events: stop_mode_recruitmordin
+  stop_events: stop_mode_recruitmordin, stop_recruitmission
   priority: 500
 
 event_player:
@@ -12,10 +12,6 @@ event_player:
   recruit_mordin_complete:
     recruit_mission_success:
       squadmate: mordin
-    stop_mode_recruitmordin:
-      delay: 2s
-  timer_mordin_complete: stop_mode_recruitmordin
-  mode_recruitmordin_stopping: recruit_mission_ended
 
 counters:
   cure_counter:
@@ -72,22 +68,18 @@ shots:
     show_tokens:
       led: l_left_orbit_shield_rgb
   cure:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: spinnerprofile
-    enable_events:
-      enable_cure: 0
-      playfield_active: 500ms
-    disable_events: s_plunger_lane_inactive
     show_tokens:
       led: l_right_orbit_shield_rgb
   fan_left:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: fanprofile
     enable_events: enable_fans
     show_tokens:
       led: l_left_ramp_shield_rgb
   fan_right:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: fanprofile
     enable_events: enable_fans
     show_tokens:
@@ -270,7 +262,6 @@ sounds:
     track: voice
     max_queue_time: 1s
 
-
 slide_player:
   mode_recruitmordin_started:
     instructions_slide:
@@ -290,39 +281,15 @@ slides:
         anchor_y: top
         y: middle-4
 
-
-timers:
-  mordintimer:
-    start_value: 60
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: yes
-    control_events:
-      - event: recruit_mordin_complete
-        action: stop
-
 widget_player:
   mode_recruitmordin_started:
     recruitmordin_debug:
       target: window
-  timer_mordintimer_start: time_remaining_widget
-  timer_mordintimer_tick:
-    time_remaining_widget:
-      action: update
   stop_mode_recruitmordin:
     recruitmordin_debug:
       action: remove
 
 widgets:
-  time_remaining_widget:
-    - type: text
-      text: (ticks_remaining)
-      anchor_x: left
-      anchor_y: top
-      x: left+2
-      y: top-2
-      font_size: 8
   recruitmordin_debug:
     - type: text
       text: Spin Count (player|spinner_counter_count)

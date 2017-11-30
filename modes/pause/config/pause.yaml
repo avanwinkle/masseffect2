@@ -1,0 +1,72 @@
+#config_version=5
+mode:
+  start_events: start_mode_pause
+  stop_events: stop_mode_pause
+  priority: 1000
+
+event_player:
+  pause_button_pausetoggle_disabled_hit: pause_enabled
+  pause_button_pausetoggle_enabled_hit: pause_disabled
+
+queue_relay_player:
+   ball_drain:
+      post: pause_ballend
+      wait_for: pause_disabled
+
+ball_saves:
+  pause_ballsave:
+    active_time: 1s
+    enable_events: pause_enabled
+
+shot_profiles:
+  pausetoggle:
+    loop: true
+    states:
+      - name: disabled
+      - name: enabled
+
+shots:
+  pause_button:
+    switch: s_action_button
+    profile: pausetoggle
+
+widget_player:
+  pause_enabled: pause_widget
+  pause_disabled:
+    pause_widget:
+      action: remove
+
+widgets:
+  pause_widget:
+      - type: text
+        text: GAME PAUSED
+        font_size: 20
+        z: 2
+      - type: rectangle
+        width: 128
+        height: 32
+        z: 0
+
+show_player:
+  pause_enabled:
+    paused_show:
+      action: play
+      priority: 1000
+  pause_disabled:
+    paused_show:
+      action: stop
+
+shows:
+  paused_show:
+    - time: 0
+      lights:
+        gi: black
+        l_lockdown_rgb:
+          color: orange
+          fade: 1s
+    - time: '+1'
+      lights:
+        l_lockdown_rgb:
+          color: black
+          fade: 1s
+

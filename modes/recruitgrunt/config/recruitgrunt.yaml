@@ -39,27 +39,27 @@ shot_profiles:
 
 shots:
   grunt_left_ramp:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_left_ramp_shield_rgb
   grunt_left_orbit:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
   grunt_right_ramp:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_ramp_shield_rgb
   grunt_right_orbit:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
   grunt_kickback:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb

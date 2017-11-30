@@ -35,11 +35,11 @@ shot_groups:
 
 shots:
   tower_shot_left:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
   tower_shot_right:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
   tower_complete_shot:
-    switch: s_left_orbit, s_right_orbit
+    hit_events: sh_left_orbit_hit, s_right_orbit_hit
     enable_events: counter_thane_ascent_counter_complete
     disable_events: mode_recruitthane_started
 

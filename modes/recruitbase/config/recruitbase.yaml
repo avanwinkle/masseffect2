@@ -7,8 +7,9 @@ mode:
   priority: 300
 
 config:
-  - recruittimer.yaml
   - recruitscoring.yaml
+  - recruitslide.yaml
+  - recruittimer.yaml
 
 event_player:
   mode_recruitbase_started:
@@ -263,7 +264,6 @@ slides:
         style: text_default
         anchor_x: left
         x: 10
-
 
 sound_player:
   recruit_garrus_complete: missioncomplete_voice_garrus

@@ -52,7 +52,7 @@ shot_profiles:
 
 shots:
   geth_colossus_shot:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: geth_colossus_profile
     reset_events: mode_recruittali_started
     debug: true
