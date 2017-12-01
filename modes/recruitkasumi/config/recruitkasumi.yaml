@@ -6,8 +6,9 @@ mode:
 
 counters:
   kasumi_shots_counter:
-    persist_state: true
+    starting_count: 0
     count_complete_value: 4
+    persist_state: true
     count_events:
       - left_orbit_unalarmed_hit
       - left_ramp_unalarmed_hit
@@ -16,15 +17,15 @@ counters:
       - kickback_unalarmed_hit
     disable_on_complete: true
     reset_on_complete: false
-    restart_events: mode_recruitkasumi_started
+    direction: up
 
 event_player:
   mode_recruitkasumi_started:
     # - sweep_alarms
     - set_alarm_left_ramp
-  # kasumi_failed:
-  #   - stop_recruitmission
-  #   - recruit_mission_ended
+  kasumi_failed:
+    - stop_recruitmission
+    - recruit_mission_ended
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
   recruit_kasumi_complete:
@@ -37,11 +38,24 @@ event_player:
   right_ramp_alarmed_hit: kasumi_failed
   kickback_alarmed_hit: kasumi_failed
 
-light_player:
+scoring:
   mode_recruitkasumi_started:
-    l_gi_upper: off
-  mode_recruitkasumi_stopping:
-    l_gi_upper: on
+    temp_hurryup_value:
+      action: set
+      score: 8000
+    temp_multiplier:
+      action: set
+      score: 8000 / 59
+  timer_recruittimer_tick{current_player.temp_multiplier>0}:
+    temp_hurryup_value: -1 * current_player.temp_multiplier
+  logicblock_kasumi_shots_counter_hit:
+    score: current_player.temp_hurryup_value
+    temp_hurryup_value:
+      action: set
+      score: current_player.temp_hurryup_value + 8000
+    temp_multiplier:
+      action: set
+      score: (current_player.temp_hurryup_value + 8000) / 59
 
 shot_groups:
   kasumi_shots:
@@ -99,6 +113,13 @@ shots:
       led: l_kickback_arrow_red
 
 show_player:
+  mode_recruitkasumi_started:
+    kasumi_gi_show:
+      action: play
+      loops: 0
+  mode_recruitkasumi_stopping:
+    kasumi_gi_show:
+      action: stop
   sweep_alarms:
     alarm_sweep_show:
       action: play
@@ -107,6 +128,22 @@ show_player:
       speed: 10
 
 shows:
+  kasumi_gi_show:
+    - time: 0
+      lights:
+        gi: on
+    - time: 1s
+      lights:
+        l_gi_upper:
+          color: 444444
+          fade: 1s
+        l_gi_left_playfield:
+          color: 888888
+          fade: 1s
+        l_gi_lower_playfield:
+          color: BBBBBB
+          fade: 1s
+
   unalarmed_show:
     - time: 0
       lights:
@@ -148,7 +185,9 @@ shows:
         l_right_ramp_arrow_red: black
 
 slide_player:
-  mode_recruitkasumi_started: kasumi_instructions_slide
+  mode_recruitkasumi_started:
+    kasumi_instructions_slide:
+      expire: 3s
   kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
@@ -166,22 +205,19 @@ slides:
   kasumi_instructions_slide:
     widgets:
       - type: text
-        text: Infiltrate Donovan's Vault
-        style: dmd_med
+        text: Infiltrate Hock's Vault
+        font_name: pixelmix
+        font_size: 8
         anchor_y: bottom
         y: middle+2
         z: 1
       - type: text
         text: Avoid the Alarms
-        style: dmd_med
+        font_name: pixelmix
+        font_size: 8
         anchor_y: top
         y: middle-2
         z: 1
-      - type: rectangle
-        color: 000000
-        width: 128
-        height: 32
-        z: 0
   kasumi_slide_1:
     widgets:
       - type: text
@@ -199,3 +235,15 @@ slides:
       - type: text
         text: FAILED!
 
+sound_player:
+  mode_recruitkasumi_started:
+    recruit_music_kasumi:
+      action: play
+      loops: -1
+
+sounds:
+  recruit_music_kasumi:
+    file: Infiltration.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s

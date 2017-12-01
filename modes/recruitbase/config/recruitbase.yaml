@@ -17,6 +17,12 @@ event_player:
   start_mode_missionselect:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
+  start_mode_n7_assignments:
+    - stop_mode_recruitfield
+    - disable_nonrecruit_modes
+  mode_n7_assignments_stopping:
+    - start_mode_recruitfield
+    - reenable_nonrecruit_modes
   missionselect_pass_selected:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
@@ -53,13 +59,11 @@ event_player:
   recruit_mission_starting:
     - disable_nonrecruit_modes
     - stop_mode_missionselect
-    - stop_mode_n7_assignments
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
-    - start_mode_n7_assignments
 
 ball_saves:
   debug_recruitmission_ballsave:
@@ -69,14 +73,6 @@ ball_saves:
     hurry_up_time: 10s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: -1
-
-# sound_player:
-#   mode_recruitbase_started:
-#     music_normandy_walkin_intro:
-#       action: play
-#       loops: -1
-#       mode_end_action: stop
-
 
 shot_profiles:
   recruit_profile:
@@ -89,128 +85,6 @@ shot_profiles:
         show: recruitshow_flash
       - name: recruited
         show: recruitshow_complete
-
-# These shots need to exist in base so mission events will advance them
-# even when the field mode is not running
-shots:
-  recruit_garrus_shot:
-    hit_events: sh_left_ramp_hit
-    profile: recruit_profile
-    advance_events: recruit_garrus_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_garrus>0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_garrus
-      lit: color_shield_blue
-      color: 0E1B4F #color_garrus
-    tags: recruit_shot
-  recruit_grunt_shot:
-    hit_events: sh_left_orbit_hit
-    profile: recruit_profile
-    advance_events: recruit_grunt_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_grunt>0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_grunt
-      lit: color_shield_orange
-      color: ED3A00 #color_grunt
-    tags: recruit_shot
-  recruit_jack_shot:
-    hit_events: sh_kickback_hit
-    profile: recruit_profile
-    advance_events: recruit_jack_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_jack>0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_jack
-      lit: color_shield_purple
-      color: 6000BB #color_jack
-    tags: recruit_shot
-  recruit_kasumi_shot:
-    hit_events: sh_right_ramp_hit
-    profile: recruit_profile
-    advance_events: recruit_kasumi_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_kasumi>0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_kasumi
-      lit: color_shield_yellow
-      color: F7F315 #color_kasumi
-    tags: recruit_shot
-  recruit_legion_shot:
-    hit_events: sh_kickback_hit
-    profile: recruit_profile
-    advance_events: recruit_legion_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_jack<=0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_legion
-      lit: color_shield_white
-      color: FFFFFF #color_legion
-    tags: recruit_shot
-  recruit_mordin_shot:
-    hit_events: sh_right_orbit_hit
-    profile: recruit_profile
-    advance_events: recruit_mordin_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_mordin>0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_mordin
-      lit: color_shield_red
-      color: BD000A #color_mordin
-    tags: recruit_shot
-  recruit_samara_shot:
-    hit_events: sh_left_ramp_hit
-    profile: recruit_profile
-    advance_events: recruit_samara_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_garrus<=0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_samara
-      color: 0037FF #color_samara
-    tags: recruit_shot
-  recruit_tali_shot:
-    hit_events: sh_right_orbit_hit
-    profile: recruit_profile
-    advance_events: recruit_tali_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_mordin<=0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_tali
-      color: D323FF #color_tali
-    tags: recruit_shot
-  recruit_thane_shot:
-    hit_events: sh_right_ramp_hit
-    profile: recruit_profile
-    advance_events: recruit_thane_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_kasumi<=0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_thane
-      lit: color_shield_green
-      color: 00FF00 #color_thane
-    tags: recruit_shot
-  recruit_zaeed_shot:
-    hit_events: sh_left_orbit_hit
-    profile: recruit_profile
-    advance_events: recruit_zaeed_lit
-    enable_events:
-      enable_recruit_shots{current_player.status_grunt<=0}: 0
-    disable_events: disable_recruit_shots
-    show_tokens:
-      led: shot_shield_zaeed
-      color: FF0000 #color_zaeed
-    tags: recruit_shot
-
 
 show_player:
   ball_save_debug_recruitmission_ballsave_timer_start:

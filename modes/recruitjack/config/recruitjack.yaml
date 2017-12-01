@@ -21,6 +21,35 @@ counters:
     persist_state: true
     debug: true
 
+scoring:
+  mode_recruitjack_started:
+    temp_hurryup_value:
+      action: set
+      score: 10000
+    # Store the multiplier as the "base" hurryup value to tick off 1/60th of it
+    temp_multiplier:
+      action: set
+      score: 10000
+  timer_recruittimer_tick{current_player.temp_multiplier>0}:
+    temp_hurryup_value: -1 * current_player.temp_multiplier / 600 * 10
+  # Store the build value as the value of the hurry-up at the time it's hit
+  jack_hurryup_shots_hit:
+    temp_build_value:
+      action: set
+      score: current_player.temp_hurryup_value
+    temp_multiplier:
+      action: set
+      score: 0
+  # Capture the build value and add it to the new hurryup
+  jack_hitbank_shot_hit:
+    score: current_player.temp_build_value
+    temp_hurryup_value:
+      action: set
+      score: current_player.temp_build_value * 2
+    temp_multiplier:
+      action: set
+      score: current_player.temp_build_value * 2
+
 shot_profiles:
   jack_shots_one_profile:
     show_when_disabled: false
@@ -48,32 +77,37 @@ shot_profiles:
         show: jack_hitbank_show
         speed: 12
 
+shot_groups:
+  jack_hurryup_shots:
+    shots: jack_shots_one, jack_shots_two, jack_shots_three
+
 shots:
   jack_shots_one:
     hit_events: sh_kickback_hit, sh_left_orbit_hit sh_right_orbit_hit
     profile: jack_shots_one_profile
     enable_events:
       - logicblock_jack_rounds_counter_updated{value==0}
-    disable_events: jack_shots_one_hit
+    disable_events: jack_shots_one_hit, mode_recruitjack_started
   jack_shots_two:
     hit_events: sh_left_ramp_hit, sh_right_ramp_hit
     profile: jack_shots_two_profile
     enable_events:
       - logicblock_jack_rounds_counter_updated{value==1}
       # - logicblock_jack_rounds_counter_hit{count==1}
-    disable_events: jack_shots_two_hit
+    disable_events: jack_shots_two_hit, mode_recruitjack_started
   jack_shots_three:
     hit_events: sh_left_orbit_hit, sh_right_orbit_hit
     profile: jack_shots_three_profile
     enable_events:
       - logicblock_jack_rounds_counter_updated{value==2}
       # - logicblock_jack_rounds_counter_hit{count==2}
-    disable_events: jack_shots_three_hit
+    disable_events: jack_shots_three_hit, mode_recruitjack_started
   jack_hitbank_shot:
-    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    switches: s_hitbank_top, s_hitbank_bottom
+    # hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit #hit_event_shot_disabled_bug
     profile: jack_hitbank_profile
-    enable_events: jack_shots_one_hit, jack_shots_two_hit, jack_shots_three_hit
-    disable_events: jack_hitbank_shot_hit
+    enable_events: jack_hurryup_shots_hit
+    disable_events: jack_hitbank_shot_hit, mode_recruitjack_started
 
 shows:
   jack_shots_one_show:
@@ -179,31 +213,3 @@ sounds:
   warden_shepard_2:
     file: en_us_player_f_prscva_boss_c_00198332_f.ogg
     track: voice
-
-widget_player:
-  mode_recruitjack_started:
-    counter_widget:
-      action: add
-  logicblock_jack_rounds_counter_hit:
-    counter_widget:
-      action: update
-  mode_recruitjack_stopping:
-    counter_widget:
-      action: remove
-
-widgets:
-  counter_widget:
-    - type: text
-      text: "State: (player|jack_rounds_counter_state)"
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 8
-      style: dmd_small
-    - type: text
-      text: "(3 - count) Hits"
-      anchor_x: left
-      anchor_y: bottom
-      style: dmd_small
-      x: 2
-      y: 2

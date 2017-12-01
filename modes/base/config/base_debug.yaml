@@ -79,6 +79,11 @@ widgets:
       style: squad_debug_style
       x: 10
       y: top-84
+    - type: text
+      text: "(player|score)"
+      style: squad_debug_style
+      x: 10
+      y: top-104
     # Column One
     - type: text
       text: "Level: (player|level)"
@@ -130,7 +135,7 @@ widgets:
       x: 560
       y: top-84
     - type: text
-      text: "N7 Hits to Start: (player|n7_hits_counter_count)"
+      text: "N7 Hits to Start: (player|n7_hits_counter)"
       style: squad_debug_style
       x: 560
       y: top-104

@@ -7,21 +7,20 @@ mode_settings:
       score: 1000
       player_score_entry: level
     - event: bonus_squadmates
-      score: 500
+      score: 200
       player_score_entry: squadmates_count
     - event: bonus_credits
-      score: 2
-      player_score_entry: credits
+      score: (current_player.credits * 0.25)
     - event: bonus_minerals
       score: (current_player.planets * current_player.mineral_total)
     - event: bonus_assignments
-      score: 2000
+      score: 1000
       player_score_entry: assigments_completed
     - event: bonus_intel
-      score: 500
+      score: 800
       player_score_entry: intel
     - event: bonus_upgrades
-      score: 500
+      score: 750
       player_score_entry: upgrades_researched
 
 

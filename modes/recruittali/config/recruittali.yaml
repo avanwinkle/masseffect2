@@ -55,7 +55,6 @@ shots:
     hit_events: sh_left_ramp_hit
     profile: geth_colossus_profile
     reset_events: mode_recruittali_started
-    debug: true
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
 

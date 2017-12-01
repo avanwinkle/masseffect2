@@ -1,20 +1,16 @@
 #config_version=5
 mode:
   start_events: start_mode_n7_assignments
-  stop_events: stop_mode_n7_assignments
-  priority: 400
+  stop_events: stop_mode_n7_assignments, ball_will_end
+  priority: 500
 
 event_player:
-  logicblock_n7_hits_counter_complete: start_n7_assignment
   n7_assignment_shot_hit: n7_assignment_ended
   timer_n7timer_complete: n7_assignment_ended
-  start_n7_assignment:
+  mode_n7_assignments_started:
     - restart_n7timer|500ms
-    - stop_mode_recruitfield
-    - disable_nonrecruit_modes
   n7_assignment_ended:
-    - start_mode_recruitfield
-    - reenable_nonrecruit_modes
+    - stop_mode_n7_assignments
   player_shot_n7_anomalous_weather_shot_enabled:
     set_n7_mission:
       title: "Anomalous Weather Detected"
@@ -38,7 +34,7 @@ event_player:
       title: "MSV Strontium Mule"
 
 random_event_player:
-  start_n7_assignment:
+  mode_n7_assignments_started:
     force_all: true
     events:
       - start_n7_anomalous_weather
@@ -49,17 +45,8 @@ random_event_player:
       - start_n7_lost_operative
       - start_n7_msv_strontium_mule
 
-counters:
-  n7_hits_counter:
-    starting_count: 4
-    count_complete_value: 0
-    direction: down
-    count_events: n7_advance_shot_hit
-    restart_events: n7_assignment_ended
-    persist_state: true
-
 scoring:
-  start_n7_assignment:
+  mode_n7_assignments_started:
     temp_build_value:
       action: set
       # Max value is 12000 plus 25% per mission completed
@@ -80,54 +67,50 @@ shot_groups:
     rotate_left_events: s_bumber_left_active
 
 shots:
-  n7_advance_shot:
-    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: mode_n7_assignments_started, n7_assignment_ended
-    disable_events: start_n7_assignment
   n7_anomalous_weather_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_anomalous_weather
     disable_events: n7_assignment_ended
     show_tokens:
       leds: l_right_ramp_shield_rgb
   n7_eclipse_smuggling_depot_shot:
-    switch: s_kickback
+    hit_events: sh_left_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_eclipse_smuggling_depot
     disable_events: n7_assignment_ended
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_left_ramp_shield_rgb
   n7_hahne_kedar_facility_shot:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_hahne_kedar_facility
     disable_events: n7_assignment_ended
     show_tokens:
       leds: l_left_orbit_shield_rgb
   n7_imminent_ship_crash_shot:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_imminent_ship_crash
     disable_events: n7_assignment_ended
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_javelin_missiles_launched_shot:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_javelin_missiles_launched
     disable_events: n7_assignment_ended
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_lost_operative_shot:
-    switch: s_hitbank_top, s_hitbank_bottom
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: n7_shot_profile
     enable_events: start_n7_lost_operative
     disable_events: n7_assignment_ended
     show_tokens:
       leds: l_hitbank_shield_rgb
   n7_msv_strontium_mule_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_msv_strontium_mule
     disable_events: n7_assignment_ended
@@ -146,19 +129,22 @@ shows:
   n7_show:
     - time: 0
       lights:
+        gi:
+          color: 444444
+          fade: 1s
+        (leds): red
+    - time: '+3'
+      lights:
+        (leds): white
+    - time: '+4'
+      lights:
         (leds): red
     - time: '+5'
       lights:
         (leds): white
-    - time: '+6'
-      lights:
-        (leds): red
-    - time: '+7'
-      lights:
-        (leds): white
 
 slide_player:
-  n7_assignment_started:
+  mode_n7_assignments_started:
     n7_intro_slide:
       action: play
       expire: 3s
@@ -171,7 +157,6 @@ slide_player:
 
 slides:
   n7_intro_slide:
-    priority: 100
     widgets:
       - type: image
         image: n7_logo_33x11
@@ -190,7 +175,6 @@ slides:
         font_size: 8
         font_name: pixelmix
   n7_hurryupslide:
-    priority: 0
     widgets:
       - type: image
         image: n7_logo_33x11
@@ -216,7 +200,7 @@ timers:
     direction: down
     tick_interval: 500ms
     control_events:
-      - event: start_n7_assignment
+      - event: mode_n7_assignments_started
         action: reset
       - event: restart_n7timer # Give a delay to start the mission
         action: restart
@@ -226,43 +210,20 @@ timers:
         action: stop
 
 widget_player:
-  logicblock_n7_hits_counter_updated:
-    n7_progress_widget:
-      action: update
-      widget_settings:
-        expire: 2s
   player_temp_build_value:
     hurryup_widget:
       action: update
       slide: n7_hurryupslide
 
 widgets:
-  n7_progress_widget:
-    - type: text
-      text: "(value) hits to N7 assignment"
-      style: dmd_small
-      anchor_y: bottom
-      anchor_x: left
-      y: 2
-      x: 22
-      z: 2
-    - type: rectangle
-      width: 128
-      height: 8
-      color: 000000
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 0
-      z: 1
   hurryup_widget:
     - type: text
       text: (value)
       number_grouping: true
       anchor_x: left
       anchor_y: bottom
-      x: 37
-      y: 3
+      x: 40
+      y: 2
       font_size: 10
       font_name: quadrit
 

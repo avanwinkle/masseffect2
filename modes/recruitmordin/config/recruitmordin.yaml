@@ -18,6 +18,10 @@ event_player:
     recruit_mission_success:
       squadmate: mordin
 
+counters:
+  fans_counter:
+    count_events: fan_left_lit_hit, fan_right_lit_hit
+
 scoring:
   # temp_build_value is the accumulated spinner value, temp_multiplier is the cure hits
   mode_recruitmordin_started:
@@ -39,6 +43,8 @@ scoring:
     temp_hurryup_value:
       action: set
       score: current_player.temp_build_value * value
+  recruit_mordin_complete:
+    score: current_player.temp_hurryup_value
 
 shot_groups:
   cure_shot:
@@ -73,7 +79,7 @@ shots:
     profile: spinnerprofile
     reset_events: mode_recruitmordin_started
     enable_events: spinner_hit
-    disable_events: mode_recruitmordin_started
+    # disable_events: mode_recruitmordin_started
     show_tokens:
       led: l_right_orbit_shield_rgb
   fan_left:
@@ -81,7 +87,7 @@ shots:
     profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
-    disable_events: mode_recruitmordin_started
+    # disable_events: mode_recruitmordin_started
     show_tokens:
       led: l_left_ramp_shield_rgb
   fan_right:
@@ -89,7 +95,7 @@ shots:
     profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
-    disable_events: mode_recruitmordin_started
+    # disable_events: mode_recruitmordin_started
     show_tokens:
       led: l_right_ramp_shield_rgb
 
@@ -122,13 +128,13 @@ sound_player:
     music_recruit_mordin:
       action: play
       loops: -1
-  counter_cure_counter_hit{count==2 and current_player.status_garrus==0}: step1_voice_garrus
-  counter_cure_counter_hit{count==2 and current_player.status_kasumi==0}: step1_voice_kasumi
-  counter_cure_counter_hit{count==2 and current_player.status_grunt==0}: step1_voice_grunt
-  counter_cure_counter_hit{count==2 and current_player.status_zaeed==0}: step1_voice_zaeed
-  counter_cure_counter_hit{count==2 and current_player.status_tali==0}: step1_voice_tali
-  counter_cure_counter_hit{count==2 and current_player.status_jack==0}: step1_voice_jack
-  counter_cure_counter_hit{count==2 and current_player.squadmates_count==2}: step1_voice_default
+  cure_shot_lit_complete{current_player.status_garrus==0}: step1_voice_garrus
+  cure_shot_lit_complete{current_player.status_kasumi==0}: step1_voice_kasumi
+  cure_shot_lit_complete{current_player.status_grunt==0}: step1_voice_grunt
+  cure_shot_lit_complete{current_player.status_zaeed==0}: step1_voice_zaeed
+  cure_shot_lit_complete{current_player.status_tali==0}: step1_voice_tali
+  cure_shot_lit_complete{current_player.status_jack==0}: step1_voice_jack
+  cure_shot_lit_complete{current_player.squadmates_count==2}: step1_voice_default
   counter_fans_counter_hit{count==1 and current_player.status_grunt==0}: step2_voice_grunt
   counter_fans_counter_hit{count==1 and current_player.status_garrus==0}: step2_voice_garrus
   counter_fans_counter_hit{count==1 and current_player.status_jack==0}: step2_voice_jack
