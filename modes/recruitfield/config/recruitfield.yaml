@@ -18,6 +18,8 @@ event_player:
   recruit_thane_shot_hit: set_last_recruit_thane
   recruit_zaeed_shot_hit: set_last_recruit_zaeed
 
+# These are used to track how many times each recruitment shot has been hit.
+# Could maybe be replaced with better shot profile implementation?
 counters:
   recruit_garrus_counter:
     count_events: recruit_garrus_shot_hit
@@ -85,9 +87,6 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
-    disable_events: s_plunger_lane_inactive
-    enable_events:
-      playfield_active: 500ms
   recruit_samara_counter:
     count_events: recruit_samara_shot_hit
     multiple_hit_window: 500ms

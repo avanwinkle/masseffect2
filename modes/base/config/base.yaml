@@ -23,6 +23,7 @@ event_player:
     - start_mode_lockhandler
     - start_mode_planets
     - start_mode_n7_assignments
+    - enable_orbitswitches
     - reenable_nonrecruit_modes
     # - enable_collectorship
   mode_overlordmultiball_started:
@@ -51,10 +52,14 @@ event_player:
     - enable_collectorship
   fullorbit_enter_hit:
     - enable_gates
+    - disable_orbitswitches
     - disable_gates|900ms
+    - enable_orbitswitches|900ms
   fullorbit_fromplunger_hit:
     - enable_gates
+    - disable_orbitswitches
     - disable_gates|1200ms
+    - enable_orbitswitches|1200ms
 
 accruals:
   recruitment_missions:
@@ -116,26 +121,18 @@ shots:
     switch: s_left_ramp_exit
   sh_left_orbit:
     switch: s_left_orbit
-    # Orbit "entrance" shots should never count as hits while the gates are open
-    # or immediately after an ejection from the plunger lane
-    enable_events:
-      disable_gates: 0
-      playfield_active: 1100ms
-    disable_events: enable_gates, s_plunger_lane_inactive
+    enable_events: enable_orbitswitches
+    disable_events: disable_orbitswitches
   sh_right_ramp:
     switch: s_right_ramp_exit
   sh_right_orbit:
     switch: s_right_orbit
-    enable_events:
-      disable_gates: 0
-      playfield_active: 900ms
-    disable_events: enable_gates, s_plunger_lane_inactive
+    enable_events: enable_orbitswitches
+    disable_events: disable_orbitswitches
   sh_spinner:
     switch: s_spinner_left
-    enable_events:
-      disable_gates: 0
-      playfield_active: 1100ms
-    disable_events: enable_gates, s_plunger_lane_inactive
+    enable_events: enable_orbitswitches
+    disable_events: disable_orbitswitches
   sh_kickback:
     switch: s_kickback
   sh_hitbank_top:
