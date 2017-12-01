@@ -8,11 +8,11 @@ scoring:
   planet_shots_hit_complete:
     planets: 1
   mineral_shot_palladium_hit:
-    mineral_palladium: 71 * (1 + current_player.planets)
+    mineral_palladium: 71 * (1 + current_player.planets * 0.25)
   mineral_shot_platinum_hit:
-    mineral_platinum: 73 * (1 + current_player.planets)
+    mineral_platinum: 73 * (1 + current_player.planets * 0.25)
   mineral_shot_iridium_hit:
-    mineral_iridium: 79 * (1 + current_player.planets)
+    mineral_iridium: 79 * (1 + current_player.planets * 0.25)
   player_mineral_palladium:
     mineral_total: (change)
   player_mineral_platinum:

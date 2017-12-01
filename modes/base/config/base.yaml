@@ -52,6 +52,9 @@ event_player:
   fullorbit_enter_hit:
     - enable_gates
     - disable_gates|900ms
+  fullorbit_fromplunger_hit:
+    - enable_gates
+    - disable_gates|1200ms
 
 accruals:
   recruitment_missions:
@@ -127,6 +130,12 @@ shots:
       disable_gates: 0
       playfield_active: 900ms
     disable_events: enable_gates, s_plunger_lane_inactive
+  sh_spinner:
+    switch: s_spinner_left
+    enable_events:
+      disable_gates: 0
+      playfield_active: 1100ms
+    disable_events: enable_gates, s_plunger_lane_inactive
   sh_kickback:
     switch: s_kickback
   sh_hitbank_top:
@@ -136,6 +145,10 @@ shots:
   # Other commonly-used or commonly-behaving shots
   fullorbit_enter:
     switches: s_left_orbit, s_right_orbit
+    enable_events: enable_fullorbit
+    disable_events: disable_fullorbit
+  fullorbit_fromplunger:
+    hit_events: balldevice_bd_plunger_ejecting_ball
     enable_events: enable_fullorbit
     disable_events: disable_fullorbit
 

@@ -35,12 +35,13 @@ widget_player:
 widgets:
   pause_widget:
       - type: text
-        text: GAME PAUSED
+        text: PAUSED
         font_size: 20
         z: 2
       - type: rectangle
         width: 128
         height: 32
+        color: 000000
         z: 0
 
 show_player:

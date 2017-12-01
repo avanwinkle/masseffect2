@@ -64,7 +64,7 @@ shot_profiles:
 
 shots:
   spinner:
-    switch: s_spinner_left
+    hit_events: sh_spinner_hit
     profile: spinnerprofile
     show_tokens:
       led: l_left_orbit_shield_rgb
