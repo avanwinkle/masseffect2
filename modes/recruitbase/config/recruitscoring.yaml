@@ -5,9 +5,10 @@ scoring:
   recruit_advance{count==1}:
     recruits_lit_count: 1
     available_missions: 1
-    score: 1000
+  recruit_lit:
+    score: 5000
   recruit_mission_success:
-    score: 100000
+    score: 10000
     recruits_lit_count: -1
     squadmates_count: 1
   recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:

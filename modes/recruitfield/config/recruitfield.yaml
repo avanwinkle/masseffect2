@@ -162,10 +162,6 @@ scoring:
     status_thane: -1
   recruit_advance_zaeed:
     status_zaeed: -1
-  sw_standuptarget_hit:
-    score: 1000
-  recruit_lit:
-    score: 50000
 
 shots:
   n7_advance_shot:

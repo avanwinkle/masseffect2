@@ -18,15 +18,20 @@ event_player:
 
 scoring:
   mode_recruittali_started:
-    temp_build_value:
+    temp_hurryup_value:
       action: set
-      score: 0
-  recruit_tali_complete:
-    score: current_player.temp_build_value
+      score: 6000
+  timer_recruittimer_tick:
+    temp_hurryup_value: -100
   geth_colossus_shot_hit:
-    temp_build_value: current_player.recruittali_recruittimer_tick * 1000
+    temp_hurryup_value: current_player.recruitbase_recruittimer_tick * 100
+    temp_multiplier:
+      action: set
+      score: current_player.recruitbase_recruittimer_tick
   geth_target_shot_hit:
     score: 150
+  recruit_tali_complete:
+    score: current_player.temp_hurryup_value
 
 shot_profiles:
   geth_colossus_profile:
@@ -146,7 +151,10 @@ sound_player:
       loops: -1
     # reegar_missionstart|1s:
     #   action: play
-  geth_colossus_shot_hit: colossus_hit_sound
+  geth_colossus_shot_hit:
+    colossus_hit_sound:
+      action: play
+      volume: 0.25
   timer_recruittimer_tick{ticks < 60 and ticks%10 == 0 and current_player.shot_geth_colossus_shot < 3}:
     tali_attack_shield:
       action: play
@@ -290,7 +298,7 @@ widget_player:
 widgets:
   colossus_widget:
     - type: text
-      text: (player|shot_geth_colossus_shot)
+      text: (6 - (player|shot_geth_colossus_shot))
       anchor_x: right
       anchor_y: top
       x: right-2
