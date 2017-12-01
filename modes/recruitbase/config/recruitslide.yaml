@@ -17,10 +17,10 @@ event_player:
       missionname: "Stop the Heretics"
   mode_recruitmordin_started:
     set_recruitwidget:
-      missionname: "Disburse the Cure"
+      missionname: "Cure the Plague"
   mode_recruitsamara_started:
     set_recruitwidget:
-      missionname: "Chase Morinth"
+      missionname: "Find Morinth"
   mode_recruittali_started:
     set_recruitwidget:
       missionname: "Destroy the Colossus"
@@ -60,6 +60,7 @@ widget_player:
   player_temp_hurryup_value:
     recruitwidget_score:
       action: update
+      slide: recruitslide
   timer_recruittimer_started:
     time_remaining_widget:
       action: add
@@ -67,6 +68,12 @@ widget_player:
   timer_recruittimer_tick:
     time_remaining_widget:
       action: update
+      slide: recruitslide
+  recruit_mission_ended:
+    recruitwidget_mission:
+      action: remove
+    recruitwidget_score:
+      action: remove
 
 widgets:
   recruitwidget_mission:
@@ -96,4 +103,4 @@ widgets:
       anchor_x: right
       anchor_y: bottom
       x: right-4
-      y: 2
+      y: 4

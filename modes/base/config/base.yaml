@@ -22,7 +22,6 @@ event_player:
     - start_mode_recruitbase
     - start_mode_lockhandler
     - start_mode_planets
-    - start_mode_n7_assignments
     - enable_orbitswitches
     - reenable_nonrecruit_modes
     # - enable_collectorship
@@ -58,8 +57,11 @@ event_player:
   fullorbit_fromplunger_hit:
     - enable_gates
     - disable_orbitswitches
-    - disable_gates|1200ms
-    - enable_orbitswitches|1200ms
+    - disable_gates|1500ms
+    - enable_orbitswitches|2000ms
+  s_plunger_lane_inactive:
+    - disable_orbitswitches
+    - enable_orbitswitches|1000ms
 
 accruals:
   recruitment_missions:

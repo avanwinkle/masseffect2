@@ -1,12 +1,13 @@
 #config_version=5
 mode:
   start_events: start_mode_recruitfield
-  stop_events: stop_mode_recruitfield
+  stop_events: stop_mode_recruitfield, ball_will_end
   priority: 400
 
 event_player:
   mode_recruitfield_started: enable_recruit_shots, disable_fullorbit
   mode_recruitfield_will_stop: disable_recruit_shots, enable_fullorbit
+  logicblock_n7_hits_counter_complete: start_mode_n7_assignments
   recruit_garrus_shot_hit: set_last_recruit_garrus
   recruit_grunt_shot_hit: set_last_recruit_grunt
   recruit_jack_shot_hit: set_last_recruit_jack
@@ -21,6 +22,14 @@ event_player:
 # These are used to track how many times each recruitment shot has been hit.
 # Could maybe be replaced with better shot profile implementation?
 counters:
+  n7_hits_counter:
+    starting_count: 20
+    count_complete_value: 0
+    direction: down
+    count_events: n7_advance_shot_hit
+    disable_on_complete: false
+    reset_on_complete: true
+    persist_state: true
   recruit_garrus_counter:
     count_events: recruit_garrus_shot_hit
     multiple_hit_window: 500ms
@@ -158,6 +167,134 @@ scoring:
   recruit_lit:
     score: 50000
 
+shots:
+  n7_advance_shot:
+    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
+    enable_events: enable_recruit_shots
+    disable_events: disable_recruit_shots
+  # These shots need to exist in base so mission events will advance them
+  # even when the field mode is not running
+  recruit_garrus_shot:
+    hit_events: sh_left_ramp_hit
+    profile: recruit_profile
+    advance_events: recruit_garrus_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_garrus>0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_garrus
+      lit: color_shield_blue
+      color: 0E1B4F #color_garrus
+    tags: recruit_shot
+    debug: true
+  recruit_grunt_shot:
+    hit_events: sh_left_orbit_hit
+    profile: recruit_profile
+    advance_events: recruit_grunt_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_grunt>0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_grunt
+      lit: color_shield_orange
+      color: ED3A00 #color_grunt
+    tags: recruit_shot
+    debug: true
+  recruit_jack_shot:
+    hit_events: sh_kickback_hit
+    profile: recruit_profile
+    advance_events: recruit_jack_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_jack>0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_jack
+      lit: color_shield_purple
+      color: 6F00FF #color_jack
+    tags: recruit_shot
+  recruit_kasumi_shot:
+    hit_events: sh_right_ramp_hit
+    profile: recruit_profile
+    advance_events: recruit_kasumi_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_kasumi>0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_kasumi
+      lit: color_shield_yellow
+      color: F7F315 #color_kasumi
+    tags: recruit_shot
+  recruit_legion_shot:
+    hit_events: sh_kickback_hit
+    profile: recruit_profile
+    advance_events: recruit_legion_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_jack<=0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_legion
+      lit: color_shield_white
+      color: FFFFFF #color_legion
+    tags: recruit_shot
+  recruit_mordin_shot:
+    hit_events: sh_right_orbit_hit
+    profile: recruit_profile
+    advance_events: recruit_mordin_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_mordin>0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_mordin
+      lit: color_shield_red
+      color: BD000A #color_mordin
+    tags: recruit_shot
+  recruit_samara_shot:
+    hit_events: sh_left_ramp_hit
+    profile: recruit_profile
+    advance_events: recruit_samara_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_garrus<=0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_samara
+      color: 8C00BB #color_samara
+    tags: recruit_shot
+  recruit_tali_shot:
+    hit_events: sh_right_orbit_hit
+    profile: recruit_profile
+    advance_events: recruit_tali_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_mordin<=0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_tali
+      color: D323FF #color_tali
+    tags: recruit_shot
+  recruit_thane_shot:
+    hit_events: sh_right_ramp_hit
+    profile: recruit_profile
+    advance_events: recruit_thane_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_kasumi<=0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_thane
+      lit: color_shield_green
+      color: 00FF00 #color_thane
+    tags: recruit_shot
+  recruit_zaeed_shot:
+    hit_events: sh_left_orbit_hit
+    profile: recruit_profile
+    advance_events: recruit_zaeed_lit
+    enable_events:
+      enable_recruit_shots{current_player.status_grunt<=0}: 0
+    disable_events: disable_recruit_shots
+    show_tokens:
+      led: shot_shield_zaeed
+      color: FF0000 #color_zaeed
+    tags: recruit_shot
+
+
 show_player:
   mode_recruitfield_started{current_player.available_missions>0}:
     missions_available_show:
@@ -174,7 +311,6 @@ shows:
     - time: '+1'
       lights:
         l_left_ramp_arrow_clear: black
-
 
 slide_player:
   recruit_advance{count==3}:
@@ -229,6 +365,11 @@ slides:
         y: 3
 
 sound_player:
+  mode_recruitbase_started:
+    music_normandy_walkin_intro:
+      action: play
+      loops: -1
+      mode_end_action: stop
   recruit_advance_garrus:
     shot_hit_garrus:
       action: play
@@ -340,3 +481,29 @@ sounds:
     file: en_us_hench_tali_ss_global_hench_tali_00289285_m.ogg
     track: voice
 
+widget_player:
+  logicblock_n7_hits_counter_hit:
+    n7_progress_widget:
+      action: update
+      widget_settings:
+        expire: 2s
+
+widgets:
+  n7_progress_widget:
+    - type: text
+      text: "N7 assignment in (count)"
+      style: dmd_small
+      anchor_y: bottom
+      anchor_x: left
+      y: 2
+      x: 2
+      z: 2
+    - type: rectangle
+      width: 128
+      height: 8
+      color: 000000
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 0
+      z: 1
