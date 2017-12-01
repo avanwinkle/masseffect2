@@ -5,8 +5,8 @@ mode:
   priority: 400
 
 event_player:
-  mode_recruitfield_started: enable_recruit_shots
-  mode_recruitfield_will_stop: disable_recruit_shots
+  mode_recruitfield_started: enable_recruit_shots, disable_fullorbit
+  mode_recruitfield_will_stop: disable_recruit_shots, enable_fullorbit
   recruit_garrus_shot_hit: set_last_recruit_garrus
   recruit_grunt_shot_hit: set_last_recruit_grunt
   recruit_jack_shot_hit: set_last_recruit_jack
@@ -22,35 +22,35 @@ counters:
   recruit_garrus_counter:
     count_events: recruit_garrus_shot_hit
     multiple_hit_window: 500ms
-    events_when_hit: recruit_advance, recruit_advance_garrus
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_garrus
     events_when_complete: recruit_lit, recruit_garrus_lit
   recruit_grunt_counter:
     count_events: recruit_grunt_shot_hit
     multiple_hit_window: 1000ms
-    events_when_hit: recruit_advance, recruit_advance_grunt
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_grunt
     events_when_complete: recruit_lit, recruit_grunt_lit
   recruit_jack_counter:
     count_events: recruit_jack_shot_hit
     multiple_hit_window: 300ms
-    events_when_hit: recruit_advance, recruit_advance_jack
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
     disable_on_complete: true
     reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_jack
     events_when_complete: recruit_lit, recruit_jack_lit
   recruit_kasumi_counter:
     count_events: recruit_kasumi_shot_hit

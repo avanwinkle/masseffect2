@@ -94,7 +94,7 @@ shot_profiles:
 # even when the field mode is not running
 shots:
   recruit_garrus_shot:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: recruit_profile
     advance_events: recruit_garrus_lit
     enable_events:
@@ -106,7 +106,7 @@ shots:
       color: 0E1B4F #color_garrus
     tags: recruit_shot
   recruit_grunt_shot:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: recruit_profile
     advance_events: recruit_grunt_lit
     enable_events:
@@ -118,7 +118,7 @@ shots:
       color: ED3A00 #color_grunt
     tags: recruit_shot
   recruit_jack_shot:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: recruit_profile
     advance_events: recruit_jack_lit
     enable_events:
@@ -130,7 +130,7 @@ shots:
       color: 6000BB #color_jack
     tags: recruit_shot
   recruit_kasumi_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: recruit_profile
     advance_events: recruit_kasumi_lit
     enable_events:
@@ -142,7 +142,7 @@ shots:
       color: F7F315 #color_kasumi
     tags: recruit_shot
   recruit_legion_shot:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: recruit_profile
     advance_events: recruit_legion_lit
     enable_events:
@@ -154,7 +154,7 @@ shots:
       color: FFFFFF #color_legion
     tags: recruit_shot
   recruit_mordin_shot:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: recruit_profile
     advance_events: recruit_mordin_lit
     enable_events:
@@ -166,7 +166,7 @@ shots:
       color: BD000A #color_mordin
     tags: recruit_shot
   recruit_samara_shot:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: recruit_profile
     advance_events: recruit_samara_lit
     enable_events:
@@ -177,7 +177,7 @@ shots:
       color: 0037FF #color_samara
     tags: recruit_shot
   recruit_tali_shot:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: recruit_profile
     advance_events: recruit_tali_lit
     enable_events:
@@ -188,7 +188,7 @@ shots:
       color: D323FF #color_tali
     tags: recruit_shot
   recruit_thane_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: recruit_profile
     advance_events: recruit_thane_lit
     enable_events:
@@ -200,7 +200,7 @@ shots:
       color: 00FF00 #color_thane
     tags: recruit_shot
   recruit_zaeed_shot:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: recruit_profile
     advance_events: recruit_zaeed_lit
     enable_events:

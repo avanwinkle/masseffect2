@@ -75,16 +75,18 @@ ball_devices:
     debug: True
 
 flippers:
-  left_flipper:
-    main_coil: c_flipper_left_main
-    activation_switch: s_flipper_left
-    enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, flippers_off
   right_flipper:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
     enable_events: ball_starting, flippers_on
     disable_events: ball_ending, flippers_off
+    debug: true
+  left_flipper:
+    main_coil: c_flipper_left_main
+    activation_switch: s_flipper_left
+    enable_events: ball_starting, flippers_on
+    disable_events: ball_ending, flippers_off
+    debug: true
 
 drop_targets:
   drop_target_bottom:
@@ -501,15 +503,15 @@ lights:
 coils:
   c_flipper_left_main:
     number: 8-0
-    default_pulse_ms: 25
+    default_pulse_ms: 26
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 8-5
-    default_pulse_ms: 25
+    default_pulse_ms: 26
     default_hold_power: 0.1
   c_plunger:
     number: 9-1
-    default_pulse_ms: 15
+    default_pulse_ms: 20
   c_trough_eject:
     number: 9-2
     default_pulse_ms: 24
@@ -547,7 +549,7 @@ coils:
     disable_events: cancel_lock_release_pulse
   c_orbit_gates:
     number: 10-0
-    default_pulse_ms: 50
+    default_pulse_ms: 55
     default_hold_power: 0.4
     enable_events: enable_gates
     disable_events: disable_gates

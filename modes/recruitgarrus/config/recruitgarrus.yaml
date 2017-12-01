@@ -69,7 +69,7 @@ shots:
     show_tokens:
       led: l_right_orbit_shield_rgb
   stairs:
-    hit_events: sh_right_ramp_exit_hit
+    hit_events: sh_right_ramp_hit
     profile: upstairs_shot_profile
     enable_events: close_doors_hit_complete
     show_tokens:

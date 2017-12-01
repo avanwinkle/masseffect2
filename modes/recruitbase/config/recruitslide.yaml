@@ -52,13 +52,18 @@ slides:
 widget_player:
   set_recruitwidget:
     recruitwidget_mission:
-      action: update
-  set_recruitscore:
+      action: add
+      slide: recruitslide
+    recruitwidget_score:
+      action: add
+      slide: recruitslide
+  player_temp_hurryup_value:
     recruitwidget_score:
       action: update
   timer_recruittimer_started:
     time_remaining_widget:
       action: add
+      slide: recruitslide
   timer_recruittimer_tick:
     time_remaining_widget:
       action: update
@@ -75,14 +80,14 @@ widgets:
       y: top-4
   recruitwidget_score:
     - type: text
-      text: (score)
+      text: (player|temp_hurryup_value)
       number_grouping: true
-      font_size: 5
+      font_size: 10
       font_name: Quadrit
       anchor_x: left
       anchor_y: bottom
       x: 2
-      y: 4
+      y: 0
   time_remaining_widget:
     - type: text
       text: "(ticks_remaining)"
@@ -91,4 +96,4 @@ widgets:
       anchor_x: right
       anchor_y: bottom
       x: right-4
-      y: 4
+      y: 2

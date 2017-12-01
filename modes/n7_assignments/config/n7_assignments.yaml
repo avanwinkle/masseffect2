@@ -44,65 +44,65 @@ achievement_groups:
 
 achievements:
   n7_anomalous_weather:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_anomalous_weather_shot_hit
     events_when_started: achievement_n7_anomalous_weather_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_eclipse_smuggling_depot:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_eclipse_smuggling_depot_shot_hit
     events_when_started: achievement_n7_eclipse_smuggling_depot_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_hahne_kedar_facility:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_hahne_kedar_facility_shot_hit
     events_when_started: achievement_n7_hahne_kedar_facility_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_imminent_ship_crash:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_imminent_ship_crash_shot_hit
     events_when_started: achievement_n7_imminent_ship_crash_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_javelin_missiles_launched:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_javelin_missiles_launched_shot_hit
     events_when_started: achievement_n7_javelin_missiles_launched_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_lost_operative:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_lost_operative_shot_hit
     events_when_started: achievement_n7_lost_operative_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
   n7_msv_strontium_mule:
-    stop_events: timer_n7timer_complete
+    stop_events: ball_will_end, timer_n7timer_complete
     complete_events: n7_msv_strontium_mule_shot_hit
     events_when_started: achievement_n7_msv_strontium_mule_state_started, n7_assignment_started
-    events_when_stopped: test_n7_achievetment_events_when_stopped, n7_assignment_stopped
-    events_when_completed: test_n7_achievement_events_when_completed, n7_assignment_stopped, n7_assignment_completed
+    events_when_stopped: n7_assignment_stopped
+    events_when_completed: n7_assignment_stopped, n7_assignment_completed
     restart_on_next_ball_when_started: false
     debug: true
 
 counters:
   n7_hits_counter:
-    starting_count: 6
+    starting_count: 20
     count_complete_value: 0
     count_events: n7_advance_shot_hit
     direction: down
@@ -110,6 +110,7 @@ counters:
     enable_events: mode_n7_assignments_started, n7_assignment_stopped
     disable_events: n7_assignment_started
     reset_on_complete: true
+    persist_state: true
 
 scoring:
   start_n7_assignment:

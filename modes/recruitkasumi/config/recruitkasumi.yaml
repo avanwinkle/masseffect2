@@ -170,11 +170,18 @@ slides:
         style: dmd_med
         anchor_y: bottom
         y: middle+2
+        z: 1
       - type: text
         text: Avoid the Alarms
         style: dmd_med
         anchor_y: top
         y: middle-2
+        z: 1
+      - type: rectangle
+        color: 000000
+        width: 128
+        height: 32
+        z: 0
   kasumi_slide_1:
     widgets:
       - type: text

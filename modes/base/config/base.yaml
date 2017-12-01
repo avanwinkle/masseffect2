@@ -5,8 +5,6 @@ mode:
 
 config:
   - base_debug.yaml
-  - base_shots.yaml
-
 
 achievements:
   collectorship:
@@ -44,13 +42,16 @@ event_player:
     - start_mode_shadowbroker
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
-  reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
-    - start_mode_overlordlight
-  reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
-    - start_mode_arrival
+  # reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
+  #   - start_mode_overlordlight
+  # reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
+  #   - start_mode_arrival
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
+  fullorbit_enter_hit:
+    - enable_gates
+    - disable_gates|900ms
 
 accruals:
   recruitment_missions:
@@ -102,7 +103,47 @@ scoring:
     recruits_lit_count: 1
     available_missions: 1
 
+shots:
+# These "core" shots for the main shots
+# This way, the mode-specific shots can always be enabled and show shows, but
+# they won't trigger hits unless the underlying core shot is enabled. This allows
+# us to use global methods of disabling core shots, e.g. ball save and full orbit,
+# without having to duplicate the logic in modes or re-sync mode shot shows.
+  sh_left_ramp:
+    switch: s_left_ramp_exit
+  sh_left_orbit:
+    switch: s_left_orbit
+    # Orbit "entrance" shots should never count as hits while the gates are open
+    # or immediately after an ejection from the plunger lane
+    enable_events:
+      disable_gates: 0
+      playfield_active: 1100ms
+    disable_events: enable_gates, s_plunger_lane_inactive
+  sh_right_ramp:
+    switch: s_right_ramp_exit
+  sh_right_orbit:
+    switch: s_right_orbit
+    enable_events:
+      disable_gates: 0
+      playfield_active: 900ms
+    disable_events: enable_gates, s_plunger_lane_inactive
+  sh_kickback:
+    switch: s_kickback
+  sh_hitbank_top:
+    switch: s_hitbank_top
+  sh_hitbank_bottom:
+    switch: s_hitbank_bottom
+  # Other commonly-used or commonly-behaving shots
+  fullorbit_enter:
+    switches: s_left_orbit, s_right_orbit
+    enable_events: enable_fullorbit
+    disable_events: disable_fullorbit
+
 show_player:
+  ball_save_default_enabled:
+    ball_save_show:
+      action: play
+      loops: 0
   ball_save_default_timer_start:
     ball_save_show:
       action: play
@@ -123,11 +164,11 @@ shows:
     - time: 0
       lights:
         l_ball_save:
-          color: white
+          color: black
     - time: '+1'
       lights:
         l_ball_save:
-          color: black
+          color: white
   flash_all_shields_show:
     - time: 0
       lights:

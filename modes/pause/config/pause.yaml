@@ -8,14 +8,10 @@ event_player:
   pause_button_pausetoggle_disabled_hit: pause_enabled
   pause_button_pausetoggle_enabled_hit: pause_disabled
 
-queue_relay_player:
-   ball_drain:
-      post: pause_ballend
-      wait_for: pause_disabled
-
 ball_saves:
   pause_ballsave:
-    active_time: 1s
+    active_time: 5s
+    auto_launch: false
     enable_events: pause_enabled
 
 shot_profiles:

@@ -19,7 +19,7 @@ virtual_platform_start_active_switches:
   s_trough6
 
 mpf-mc:
-  fps: 15
+  fps: 60
 
 game:
   balls_per_game: 5
