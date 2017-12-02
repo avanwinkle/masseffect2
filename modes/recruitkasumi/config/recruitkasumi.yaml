@@ -131,17 +131,17 @@ shows:
   kasumi_gi_show:
     - time: 0
       lights:
-        gi: on
+        gi: FFFFFF
     - time: 1s
       lights:
         l_gi_upper:
-          color: 444444
+          color: 000000
           fade: 1s
         l_gi_left_playfield:
-          color: 888888
+          color: 444444
           fade: 1s
         l_gi_lower_playfield:
-          color: BBBBBB
+          color: 888888
           fade: 1s
 
   unalarmed_show:

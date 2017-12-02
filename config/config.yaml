@@ -151,7 +151,7 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 1
-      volume: 0.5
+      volume: 0.8
     voice:
       simultaneous_sounds: 1
       volume: 0.7

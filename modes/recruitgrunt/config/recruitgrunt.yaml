@@ -5,8 +5,8 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruitgrunt_starting: recruittimer_set_twelve
-  logicblock_grunt_shots_counter_hit: recruittimer_set_twelve
+  recruittimer_start: recruittimer_set_twelve
+  logicblock_grunt_shots_counter_hit: recruittimer_add_twelve
   grunt_shots_complete: recruit_grunt_complete
   recruit_grunt_complete:
     recruit_mission_success:
@@ -24,6 +24,7 @@ counters:
       - grunt_kickback_lit_hit
     disable_on_complete: true
     reset_on_complete: false
+    persist_state: true
 
 shot_groups:
   grunt_shots:

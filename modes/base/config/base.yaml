@@ -252,6 +252,8 @@ sounds:
     file: mus_gui_mission_completion.ogg
     track: music
     loop: 0
+    fade_in: 1s
+    fade_out: 1s
 
 widget_player:
   levelup:

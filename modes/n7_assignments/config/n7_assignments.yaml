@@ -193,6 +193,24 @@ slides:
         font_size: 8
         font_name: pixelmix
 
+sound_player:
+  mode_n7_assignments_started:
+    music_n7:
+      action: play
+      loops: -1
+  mode_n7_assignments_will_stop:
+    music_n7:
+      action: stop
+
+sounds:
+  music_n7:
+    file: StationAlert.ogg
+    track: music
+    mode_end_action: stop
+    start_at: 35s
+    fade_in: 1s
+    fade_out: 1s
+
 timers:
   n7timer:
     start_value: 60 # 2x the number of seconds

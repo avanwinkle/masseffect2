@@ -361,7 +361,7 @@ slides:
         y: 3
 
 sound_player:
-  mode_recruitbase_started:
+  mode_recruitfield_started:
     music_normandy_walkin_intro:
       action: play
       loops: -1
