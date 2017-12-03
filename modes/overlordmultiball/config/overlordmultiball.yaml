@@ -1,16 +1,168 @@
 #config_version=5
 mode:
   start_events: start_mode_overlordmultiball
-  stop_events: stop_mode_overlordmultiball
+  stop_events: stop_mode_overlordmultiball, multiball_overloard_multiball_ended
   priority: 500
 
 multiballs:
   overlord_multiball:
     ball_count: 3
-    ball_count_type: total
+    # Should be total, but can't figure out why the active ball count is messed up
+    ball_count_type: add
     ball_locks: bd_lock
     shoot_again: 10s
     start_events: mode_overlordmultiball_started
+
+counters:
+  hackshots_hit_counter:
+    starting_count: 1
+    count_events: hackshots_hit
+    debug: true
+  jackpots_hit_counter:
+    starting_count: 0
+    count_events: jackpotshot_hit
+    debug: true
+
+timers:
+  overlord_timer:
+    start_value: 1
+    direction: up
+    tick_interval: 5s
+
+event_player:
+  # We want to use the bumpers for our own purposes
+  mode_overlordmultiball_started:
+    - stop_mode_planets
+    - enable_hackshot_right_orbit
+    - enable_hackshot_left_ramp
+    - enable_hackshot_left_orbit
+    - change_random_hackshot|15s
+    - change_random_hackshot|30s
+    - change_random_hackshot|45s
+  change_random_hackshot:
+    - disable_random_hackshot
+    - enable_random_hackshot|100ms
+  jackpotshot_hit: enable_random_hackshot
+  mode_overlordmultiball_stopping: start_mode_planets
+  hackshots_hit:
+    - enable_jackpotshot
+    - disable_jackpotshot|15s
+  mode_overlordmultiball_will_stop{device.counters.jackpots_hit_counter.value==3}:
+    - levelup
+
+
+random_event_player:
+  enable_random_hackshot:
+    events:
+      - enable_hackshot_left_orbit
+      - enable_hackshot_left_ramp
+      - enable_hackshot_kickback
+      - enable_hackshot_right_ramp
+      - enable_hackshot_right_orbit
+  disable_random_hackshot:
+    events:
+      - disable_hackshot_left_orbit
+      - disable_hackshot_left_ramp
+      - disable_hackshot_kickback
+      - disable_hackshot_right_ramp
+      - disable_hackshot_right_orbit
+
+scoring:
+  mode_overlordmultiball_started:
+    temp_multiplier:
+      action: set
+      score: 1
+  timer_overlord_timer_tick:
+    temp_multiplier: 1
+  hackshots_hit:
+    score: 100 * current_player.temp_multiplier
+  jackpotshot_hit:
+    score: 1000 * device.counters.hackshots_hit_counter.value
+
+shot_profiles:
+  overlord_target_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: overlord_shot_show
+        speed: 4
+  overlord_jackpot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: overlord_shot_show
+        speed: 12
+
+shot_groups:
+  hackshots:
+    shots: hackshot_left_orbit, hackshot_left_ramp, hackshot_right_orbit, hackshot_right_orbit, hackshot_kickback
+
+shots:
+  jackpotshot:
+    switches: s_hitbank_top, s_hitbank_bottom
+    enable_events: enable_jackpotshot
+    disable_events: disable_jackpotshot, jackpotshot_hit
+    profile: overlord_jackpot_profile
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+  hackshot_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: enable_hackshot_left_orbit
+    disable_events: disable_hackshot_left_orbit, hackshot_left_orbit_hit
+    profile: overlord_target_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+  hackshot_right_orbit:
+    hit_events: sh_right_orbit_hit
+    enable_events: enable_hackshot_right_orbit
+    disable_events: disable_hackshot_right_orbit, hackshot_right_orbit_hit
+    profile: overlord_target_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  hackshot_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: enable_hackshot_left_ramp
+    disable_events: disable_hackshot_left_ramp, hackshot_left_ramp_hit
+    profile: overlord_target_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+  hackshot_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: enable_hackshot_right_ramp
+    disable_events: disable_hackshot_right_ramp, hackshot_right_ramp_hit
+    profile: overlord_target_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  hackshot_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: enable_hackshot_kickback
+    disable_events: disable_hackshot_kickback, hackshot_kickback_hit
+    profile: overlord_target_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+
+show_player:
+  hackshots_hit:
+    overlord_hit_show:
+      speed: 8
+      loops: 8
+      priority: 1
+
+shows:
+  overlord_shot_show:
+    - time: 0
+      lights:
+        (leds): 4BEB9B
+    - time: '+1'
+      lights:
+        (leds): black
+  overlord_hit_show:
+    - time: 0
+      lights:
+        shot_shields: 4BEB9B
+    - time: '+1'
+      lights:
+        shot_shields: black
 
 slide_player:
   mode_overlordmultiball_started:

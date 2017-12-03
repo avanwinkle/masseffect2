@@ -54,8 +54,8 @@ modes:
   - recruitthane
   - missionselect
   - n7_assignments
-  # - overlordlight
-  # - overlordmultiball
+  - overlordlight
+  - overlordmultiball
   - planets
   - shadowbroker
   - shopping

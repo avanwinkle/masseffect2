@@ -35,15 +35,15 @@ event_player:
     - reenable_nonrecruit_modes
   disable_nonrecruit_modes:
     - stop_mode_arrival
-    - stop_mode_overlord
+    - stop_mode_overlordlight
     - stop_mode_shadowbroker
     - stop_mode_shopping
   reenable_nonrecruit_modes:
     - start_mode_shadowbroker
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
-  # reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
-  #   - start_mode_overlordlight
+  reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
+    - start_mode_overlordlight
   # reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
   #   - start_mode_arrival
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
@@ -141,6 +141,13 @@ shots:
     switch: s_hitbank_top
   sh_hitbank_bottom:
     switch: s_hitbank_bottom
+  # Dropbanks are here, but not necessary yet
+  # sh_dropbank_top:
+  #   switch: s_dropbank_top
+  # sh_dropbank_middle:
+  #   switch: s_dropbank_middle
+  # sh_dropbank_bottom:
+  #   switch: s_dropbank_bottom
   # Other commonly-used or commonly-behaving shots
   fullorbit_enter:
     switches: s_left_orbit, s_right_orbit
@@ -209,30 +216,7 @@ slide_player:
       expire: 5s
 
 slides:
-  base_slide:
-    widgets:
-      - type: text
-        text: (score)
-        number_grouping: true
-        min_digits: 2
-        font_size: 10
-        font_name: Quadrit
-        anchor_y: top
-        y: top-6
-      - type: text
-        text: LVL (player|level)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: left+2
-        y: 2
-      - type: text
-        text: BALL (ball)
-        style: dmd_small
-        x: right-2
-        y: 2
-        anchor_x: right
-        anchor_y: bottom
+  base_slide: []
   levelup_slide:
     widgets:
       - type: text
@@ -257,11 +241,43 @@ sounds:
     fade_out: 1s
 
 widget_player:
+  mode_base_started:
+    base_score_widget:
+      slide: base_slide
+    base_level_widget:
+      slide: base_slide
+    base_ball_widget:
+      slide: base_slide
   levelup:
     levelup_mission:
       slide: levelup_slide
 
 widgets:
+  base_score_widget:
+    - type: text
+      text: (score)
+      number_grouping: true
+      min_digits: 2
+      font_size: 10
+      font_name: Quadrit
+      anchor_y: top
+      y: top-6
+  base_level_widget:
+      - type: text
+        text: LVL (player|level)
+        style: dmd_small
+        anchor_x: left
+        anchor_y: bottom
+        x: left+2
+        y: 2
+  base_ball_widget:
+      - type: text
+        text: BALL (ball)
+        style: dmd_small
+        x: right-2
+        y: 2
+        anchor_x: right
+        anchor_y: bottom
   levelup_mission:
     - type: text
       text: (last_mission)

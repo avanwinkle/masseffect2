@@ -71,49 +71,49 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_anomalous_weather
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_ramp_shield_rgb
   n7_eclipse_smuggling_depot_shot:
     hit_events: sh_left_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_eclipse_smuggling_depot
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_ramp_shield_rgb
   n7_hahne_kedar_facility_shot:
     hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_hahne_kedar_facility
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_orbit_shield_rgb
   n7_imminent_ship_crash_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_imminent_ship_crash
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_javelin_missiles_launched_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_javelin_missiles_launched
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_orbit_shield_rgb
   n7_lost_operative_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: n7_shot_profile
     enable_events: start_n7_lost_operative
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_hitbank_shield_rgb
   n7_msv_strontium_mule_shot:
     hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_msv_strontium_mule
-    disable_events: n7_assignment_ended
+    disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_ramp_shield_rgb
 

@@ -5,11 +5,6 @@ mode:
   priority: 500
 
 event_player:
-  player_temp_build_value:
-    set_recruitscore:
-      build: (player|temp_build_value)
-      hurry: (player|temp_hurryup_value)
-      score: (value)
   spinner_hit: enable_cure
   cure_shot_hit: enable_fans
   fan_shots_hit_complete:

@@ -48,7 +48,7 @@ shots:
     hit_events: logicblock_sbvasir_counter_hit
     profile: advance_sbdrops_profile
   start_vasirchase_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp
     enable_events: logicblock_sbvasir_counter_complete
     disable_events: start_mode_vasirchase
     profile: start_sbvasirchase_profile

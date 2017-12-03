@@ -14,13 +14,20 @@ config:
 event_player:
   mode_recruitbase_started:
     - start_mode_recruitfield
+    # - start_mode_overlordmultiball
   start_mode_missionselect:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
   start_mode_n7_assignments:
     - stop_mode_recruitfield
     - disable_nonrecruit_modes
-  mode_n7_assignments_stopping:
+  start_mode_overlordmultiball:
+    - stop_mode_recruitfield
+    - disable_nonrecruit_modes
+  mode_overlord_multiball_will_stop:
+    - start_mode_recruitfield
+    - reenable_nonrecruit_modes
+  n7_assignment_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
   missionselect_pass_selected:

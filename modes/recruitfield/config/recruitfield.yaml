@@ -361,11 +361,11 @@ slides:
         y: 3
 
 sound_player:
-  mode_recruitfield_started:
-    music_normandy_walkin_intro:
-      action: play
-      loops: -1
-      mode_end_action: stop
+  # mode_recruitfield_started:
+  #   music_normandy_walkin_intro:
+  #     action: play
+  #     loops: -1
+  #     mode_end_action: stop
   recruit_advance_garrus:
     shot_hit_garrus:
       action: play

@@ -97,3 +97,13 @@ slides:
     - type: text
       text: (score)
       style: bonus_score_style
+
+sound_player:
+  mode_bonus_started: music_death
+
+sounds:
+  music_death:
+    file: mus_death.ogg
+    track: music
+    loops: 0
+    mode_end_action: stop
