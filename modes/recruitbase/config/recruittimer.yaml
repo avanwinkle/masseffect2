@@ -16,15 +16,18 @@ timers:
     tick_interval: 1s
     direction: down
     control_events:
-      - event: recruittimer_set_twelve
-        action: jump
-        value: 12
       - event: recruittimer_add_ten
         action: add
         value: 10
       - event: recruittimer_add_twelve
         action: add
         value: 12
+      - event: recruittimer_set_twelve
+        action: jump
+        value: 12
+      - event: recruittimer_set_twenty
+        action: jump
+        value: 20
       - event: recruittimer_start
         action: restart
       - event: recruit_mission_ended

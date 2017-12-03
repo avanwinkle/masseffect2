@@ -246,6 +246,7 @@ sound_player:
   levelup:
     music_mission_success:
       action: play
+      priority: 100
 
 sounds:
   music_mission_success:

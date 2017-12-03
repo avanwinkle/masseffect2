@@ -5,7 +5,7 @@ mode:
   priority: 500
 
 event_player:
-  recruittimer_start: recruittimer_set_twelve
+  recruittimer_start: recruittimer_set_twenty
   logicblock_grunt_shots_counter_hit: recruittimer_add_twelve
   grunt_shots_complete: recruit_grunt_complete
   recruit_grunt_complete:
@@ -25,6 +25,32 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
+
+scoring:
+  mode_recruitgrunt_started:
+    temp_hurryup_value:
+      action: set
+      score: 8000
+    temp_multiplier:
+      action: set
+      score: 1
+    temp_build_value:
+      action: set
+      score: 0
+  timer_recruittimer_tick{current_player.temp_multiplier>0}:
+    temp_hurryup_value: -390
+  logicblock_grunt_shots_counter_hit:
+    # Capture the net hurryup value, but display the cumulative captured + hurryup
+    score: current_player.temp_hurryup_value- current_player.temp_build_value
+    # temp_build value is how much has already been captured, while temp_hurryup is that plus new hurryup value
+    temp_build_value:
+      action: set
+      score: current_player.temp_hurryup_value - current_player.temp_build_value
+    # Each consecutive hit increases the hurryup starting value by 50%
+    temp_hurryup_value:
+      action: add
+      score: 8000 * (1 + (current_player.temp_multiplier * 0.5))
+
 
 shot_groups:
   grunt_shots:
