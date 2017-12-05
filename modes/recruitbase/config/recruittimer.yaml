@@ -1,7 +1,16 @@
 #config_version=5
+
+#####
+# RECRUIT TIMER CONFIG
+# 
+# It's a lot less work to have just one timer for recruitment missions and let
+# each mission configure as it needs to. This way all of the events and widgets
+# can be programmed once and shared across all missions, hurray!
+#####
+
 event_player:
   recruit_mission_starting:
-    - recruittimer_start|3s
+    - recruittimer_start|3s     # It's nice to give a little delay
   timer_recruittimer_complete:
     - stop_recruitmission
     - recruit_mission_ended
@@ -15,6 +24,7 @@ timers:
     end_value: 0
     tick_interval: 1s
     direction: down
+    # Some missions use different timing, so a few handlers to adjust the clock
     control_events:
       - event: recruittimer_add_ten
         action: add

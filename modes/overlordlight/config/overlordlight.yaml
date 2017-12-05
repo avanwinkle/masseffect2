@@ -1,4 +1,16 @@
 #config_version=5
+
+#####
+# OVERLORD LIGHT MODE
+#
+# This mode handles the ball lock advancement for the Overlord multiball, using
+# shots and events to light lock, enable devices, and illuminate indicators.
+# 
+# This is a separate mode to help debug the complex multiball_lock/ball_hold
+# combo logic, but eventually this mode may be integrated with another base
+# or ball-lock common mode.
+#####
+
 mode:
   start_events: start_mode_overlordlight
   stop_events: stop_mode_overlordlight

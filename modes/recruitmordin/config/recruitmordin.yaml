@@ -1,4 +1,19 @@
 #config_version=5
+
+#####
+# MORDIN RECRUITMENT MISSION
+#
+# This mode begins with the spinner lit to build value. The first hit to the
+# spinner lights the right orbit, hitting the orbit lights both ramps to 
+# activate the two ventilation fans. Additional spinner hits will continue to
+# build value, each additional hit to the orbit increases the built value 
+# multiplier 1x.  Once both ramps are hit the mission is completed and the score
+# is collected (built spinner value * number of orbit hits). The mode ends if
+# the timer expires.
+#
+# Progress is not saved and this mode must be restarted if failed.
+#####
+
 mode:
   start_events: start_mode_recruitmordin
   stop_events: stop_mode_recruitmordin, stop_recruitmission
@@ -17,6 +32,13 @@ counters:
   fans_counter:
     count_events: fan_left_lit_hit, fan_right_lit_hit
 
+#####
+# MORDIN SCORING:
+#    Each hit to the spinner adds 200 to the "base" value
+#    Each hit to the cure shot adds 1x to the multiplier
+#    Hit both fans to collect (base * multiplier) and complete the mission
+#    Progress is not saved
+#####
 scoring:
   # temp_build_value is the accumulated spinner value, temp_multiplier is the cure hits
   mode_recruitmordin_started:

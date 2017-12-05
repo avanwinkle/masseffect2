@@ -1,4 +1,13 @@
 #config_version=5
+
+#####
+# RESEARCH UPGRADES MODE
+#
+# This is a mostly passive mode that enables a bonus shot every time a mission
+# is completed. Hitting the shot awards big points! That's about all there is
+# to it.
+#####
+
 mode:
   start_events: start_mode_upgrades
   stop_events: stop_mode_upgrades

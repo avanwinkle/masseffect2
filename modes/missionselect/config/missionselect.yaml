@@ -1,5 +1,18 @@
 #config_version=5
 
+#####
+# MISSION SELECT MODE
+#
+# This is a game logic mode to present a selection carousel to the player when
+# missions are available for them to play. Usually this means any of the 
+# recruitment missions they've unlocked, but also Collecter Ship and the Suicide
+# Mission will be present here.
+#
+# Due to the arbitrary nature of which missions are available, this mode uses
+# a custom Python class (missionselect.py) to assess the state of each squadmate
+# and dynamically populate the carousel items when the mode starts.
+#####
+
 mode:
   start_events: start_mode_missionselect
   stop_events: stop_mode_missionselect, missionselect_item_selected

@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# N7 ASSIGNMENTS MODE
+#
+# This mode is a superjets-style countdown from the pop bumpers. Once the 
+# countdown hits zero, all other modes are temporarily disabled and a random
+# N7 Assignment shot is lit. The player has a fixed amount of time to hit this
+# shot and collect a hurryup value. Once collected or when the timer runs out,
+# the mode ends and regular gameplay resumes.
+#
+# TODO: Some sort of bonus mode after x number of N7 assignments are completed
+#####
+
 mode:
   start_events: start_mode_n7_assignments
   stop_events: stop_mode_n7_assignments, ball_will_end

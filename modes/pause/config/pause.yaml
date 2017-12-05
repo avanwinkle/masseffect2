@@ -1,4 +1,13 @@
 #config_version=5
+
+#####
+# PAUSE MODE
+#
+# This is just a cheap and easy way to take a break from the game in order to
+# take notes on bugs and behavior changes, without draining and costing a ball.
+# It really just creates a quick ball save that doesn't auto-launch. No big.
+#####
+
 mode:
   start_events: start_mode_pause
   stop_events: stop_mode_pause

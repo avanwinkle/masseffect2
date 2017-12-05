@@ -1,4 +1,18 @@
 #config_version=5
+
+#####
+# GARRUS RECRUIT MISSION
+#
+# This mode begins with three security doors to close, on a timer, indicated by 
+# three lit shots. The doors are on a hurry-up and hitting one adds some time. 
+# Failing the timer ends the mode; hitting all three shots will light the right 
+# ramp to collect the combined hurry-up value and complete the mission. The 
+# standup targets are worth points as eclipse, blood pack, and blue suns 
+# mercenaries.
+#
+# Progress is not saved and this mode must be restarted if failed.
+#####
+
 mode:
   start_events: start_mode_recruitgarrus
   stop_events: stop_mode_recruitgarrus, stop_recruitmission
@@ -25,6 +39,17 @@ counters:
     reset_events: mode_recruitgarrus_started
     reset_on_complete: false
 
+#####
+# GARRUS SCORING:
+#   The hurryup starts at 12,000 and ticks down 180/s
+#   Closing a door adds the time value of the hurryup (not the built value)
+#   Close all 3 doors to light the upstairs shot
+#   Hit the upstairs shot to award the hurryup value and complete the mission
+#   Progress is not saved
+#
+# An alternative approach would be to have a point-per-second value and ,on
+# door close, add timer_remaining_ticks * per_second_value to the hurryup.
+#####
 scoring:
   mode_recruitgarrus_started:
     temp_hurryup_value:

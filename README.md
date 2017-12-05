@@ -12,7 +12,7 @@ This project requires the Mission Pinball Framework 0.50 and can be simulated us
 
 ## Main Gameplay
 
-**Spoiler Warning: **
+**Spoiler Warning:**
 *In recreating the full experience of Mass Effect 2, the Pinball Game includes significant characters and story events from the original game.*
 
 ### Recruitment Missions

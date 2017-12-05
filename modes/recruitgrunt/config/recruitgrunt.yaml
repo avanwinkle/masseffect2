@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# GRUNT RECRUITMENT MISSION
+#
+# All shots are lit on this mode with a brief timer; hitting a shot un-lights it
+# and adds to the timer. Values are collected immediately based on the timer
+# amount remaining with a multiple of the number of consecutive shots hit (i.e.
+# restarting the mode reduces maximum value). The mode is completed when all
+# shots have been hit, and ends if the timer expires.
+#
+# Progress is saved after every shot hit.
+#####
+
 mode:
   start_events: start_mode_recruitgrunt
   stop_events: stop_mode_recruitgrunt, stop_recruitmission
@@ -26,6 +39,15 @@ counters:
     reset_on_complete: false
     persist_state: true
 
+#####
+# GRUNT SCORING:
+#    Hurryup starts at 8,000
+#    Hit any lit shot to collect the hurryup
+#    New hurryup is 8,000 plus 50% bonus for each hit shot *since mode start*
+#    Hurryup depletion is fixed (always 390 points-per-second)
+#    Hit all 5 shots to complete the mission
+#    Progress is saved after each shot (but the bonus multiplier resets)
+#####
 scoring:
   mode_recruitgrunt_started:
     temp_hurryup_value:

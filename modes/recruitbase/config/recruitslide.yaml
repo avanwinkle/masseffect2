@@ -1,4 +1,8 @@
 #config_version=5
+
+#####
+# Use a single slide/widget for all the missions, just update the text
+#####
 event_player:
   mode_recruitgarrus_started:
     set_recruitwidget:
@@ -37,6 +41,9 @@ slide_player:
     recruitslide:
       action: remove
 
+#####
+# At some point maybe the squadmate picture, but for now it looks bad
+#####
 slides:
   recruitslide: []
     # - type: image
@@ -47,7 +54,6 @@ slides:
     #   anchor_y: bottom
     #   x: 0
     #   y: 0
-
 
 widget_player:
   set_recruitwidget:

@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# THANE RECRUITMENT MISSION
+#
+# This mode begins with the right ramp lit to enter the Dantius towers, and each
+# subsequent hit to either ramp advances the player up a floor and builds value.
+# After 3 floors (1 if restarted) the orbits are lit to capture the value and
+# complete the mode, and the ramps remain available to continue building value.
+# The mode will end if the timer expires.
+#
+# Progress is not saved and this mode must be restarted if failed.
+#####
+
 mode:
   start_events: start_mode_recruitthane
   stop_events: stop_mode_recruitthane, stop_recruitmission
@@ -19,6 +32,17 @@ counters:
     count_events: tower_ascent_shot_hit
     reset_events: mode_recruitthane_started
 
+#####
+# THANE SCORING:
+#    Build value starts at 0
+#    Hit either tower ascent shot to add (10,000 points * ascent_shots_hit)
+#    Exponential growth! Maybe this should be mitigated or depleted over time?
+#    After 3 ascent shots, hit either orbit to collect built value and complete
+#      the mission (only 1 ascent shot required if mission was restarted)
+#    Player can continue to try for ascent shots for maximum score buildup
+#      before the timer runs out.. no maximum score for this mission?
+#    Progress is not saved
+#####
 scoring:
   mode_recruitthane_started:
     temp_build_value:

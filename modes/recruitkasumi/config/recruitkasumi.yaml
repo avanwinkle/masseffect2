@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# KASUMI RECRUITMENT MISSION
+#
+# This mode has a hurry-up with one shot lit as “alarmed” and the remaining
+# unlit shots as “safe”; hitting any of the safe shot collects the hurry-up and
+# advances to the next round (voiceprint, DNA sample, password). With each round
+# the just-hit shot becomes alarmed, reducing the number of safe shots. Hitting
+# any alarmed shot fails the mode. Hitting safe four shots completes the mode.
+#
+# Progress is saved after each shot.
+#####
+
 mode:
   start_events: start_mode_recruitkasumi
   stop_events: stop_mode_recruitkasumi, stop_recruitmission
@@ -38,6 +51,15 @@ event_player:
   right_ramp_alarmed_hit: kasumi_failed
   kickback_alarmed_hit: kasumi_failed
 
+#####
+# KASUMI SCORING:
+#    Hurryup starts at 8,000
+#    Hit any unalarmed shot to collect the hurryup value
+#    New hurryup is 8,000 plus the just-collected value
+#    Hurryup depletion scales (bigger hurryup => faster depletion)
+#    4 unalarmed shots completes the mission
+#    Progress is saved after each shot
+#####
 scoring:
   mode_recruitkasumi_started:
     temp_hurryup_value:
@@ -128,6 +150,7 @@ show_player:
       speed: 10
 
 shows:
+  # Dim the general illumination to make it feel more heist-y
   kasumi_gi_show:
     - time: 0
       lights:
@@ -143,11 +166,12 @@ shows:
         l_gi_lower_playfield:
           color: 888888
           fade: 1s
-
+  # Tricky! The shots to hit are the ones that AREN'T lit
   unalarmed_show:
     - time: 0
       lights:
         (led): black
+  # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
     - duration: 300ms
       lights:

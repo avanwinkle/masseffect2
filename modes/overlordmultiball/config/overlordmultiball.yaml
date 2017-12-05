@@ -1,4 +1,28 @@
 #config_version=5
+
+#####
+# OVERLORD MULTIBALL MODE
+#
+# The Overlord multiball is available during regular play prior to the Collector
+# Ship mission. Hitting either of the Geth/Batarian hitbank targets will light
+# lock up to three balls (for Prometheus, Vulcan, and Atlas stations). On the
+# third ball lock, a three-ball multiball begins with a few random shots lit as
+# hack targets, which are on timers and un-light after the timeout. As they
+# start to timeout, other shots are randomly lit. Hitting any lit shot lights
+# the hitbank for a big jackpot, also on a timer. 
+#
+# If the player successfully collects three jackpots, the mode has been
+# “completed” and a levelup is earned. From this point the multiball continues
+# so long as multiple balls are in play, with time for building value and up
+# to 1-3 hack targets appearing on intervals. Recruitment shots do not advance
+# and no other ball locks take effect. When two of the balls have drained, the
+# built value is collected and normal play resumes.
+#
+# TODO: After completing the Overlord multiball, it can be restarted the same
+# way as before, except that both hitbank targets must be hit to light lock.
+# Only the first completion will grant a levelup.
+#####
+
 mode:
   start_events: start_mode_overlordmultiball
   stop_events: stop_mode_overlordmultiball, multiball_overloard_multiball_ended

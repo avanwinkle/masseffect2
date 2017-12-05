@@ -1,4 +1,18 @@
 #config_version=5
+
+#####
+# JACK RECRUITMENT MISSION
+#
+# This round-based mode begins with three ramp/orbit shots lit for hurry-up, and
+# a timer. Hitting any of the shots stops the hurry-up value depletion (but
+# doesn’t stop the timer) and lights the hitbank; hitting the hitbank captures
+# the hurry-up value and starts the next round. The second round and third
+# rounds have only two hurry-up shots lit. Collecting all three rounds completes
+# the mode; the mode ends if the timer expires.
+#
+# Progress is saved after each round (ramp/orbit shot + hitbank shot).
+#####
+
 mode:
   start_events: start_mode_recruitjack
   stop_events: stop_mode_recruitjack, stop_recruitmission
@@ -21,6 +35,15 @@ counters:
     persist_state: true
     debug: true
 
+#####
+# JACK SCORING:
+#    Hurryup starts at 10,000
+#    Hit the round shot to stop the hurryup value depletion
+#    Hit the hitbank shot to collect the hurryup value and start another round
+#    New hurryup is double the collected one [THIS SHOULD CHANGE]
+#    3 rounds completes the mission
+#    Progress is saved after each round
+#####
 scoring:
   mode_recruitjack_started:
     temp_hurryup_value:

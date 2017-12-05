@@ -1,4 +1,15 @@
 #config_version=5
+
+#####
+# SHOPPING MODE
+#
+# This mode allows the player to "spend" the money they've earned on upgrades
+# like point multipliers, ball saves, and gameplay items that will aid them
+# on the Suicide Mission.
+#
+# [AVW] It's just stubbed out a bit here, doesn't actually do much yet.
+#####
+
 mode:
   start_events:
     start_mode_shopping

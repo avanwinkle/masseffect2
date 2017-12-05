@@ -2,27 +2,50 @@ from mpf.core.mode import Mode
 
 class LockHandler(Mode):
 
-  """Mode which handles ball entry for missionselect and multiball lock """
+  """
+    Mode which handles ball entry for missionselect hold and multiball lock.
+
+    This is pretty good at handling the basic conditions of the lock behavior:
+      * Is lock lit?
+      * How many balls are physically locked in the device?
+      * How many balls are virtually locked for multiball?
+      * Are there missions available?
+
+    Based on those conditions, one of the following may occur:
+      * If the final multiball ball is locked, multiball mode starts
+      * Else if mission select is enabled, the device holds the ball
+      * Else no lock/hold happens and the/a ball is returned immediately to play
+
+    And finally, play will resume
+      * If multiball mode, the device and trough will fill up the multiball ball count
+      * Else if the ball was locked, a new ball is added to the playfield from the trough
+      * Else if the device has physically locked balls, one is ejected (and replaced by the incoming)
+      * Else the device post is held open and the incoming ball flies right through without stopping
+
+    TODO: All of this logic is still being prototyped and debugged, so many of the values are 
+          hard-coded to correspond to the Overlord multiball lock. When it's stable, these params 
+          should be abstracted and/or use events to set the desired mode behavior.
+  """
 
   def __init__(self, machine, config, name, path):
     super().__init__(machine, config, name, path)
     self.debug_log = self.machine.log.info
-
+    # We want to track whether to lock this ball, so when handling external events we can act accordingly
     self._will_lock_ball = False
 
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)
     self.debug_log("LockHandler Mode is starting")
+
+    # We need a pointer to the physical ball device to count physically locked balls
     for device in self.machine.ball_devices:
       if device.name == 'bd_lock':
         self._bd_physical_lock = device
-
+    # We need a pointer to the multiball lock device to count virtually locked balls
     for device in self.mode_devices:
-      if device.name == 'physicallock':
-        self._physicallock = device
-      elif device.name == 'overlordlock':
+      if device.name == 'overlordlock':
         self._overlordlock = device
-
+    # We need a shot that defines whether lock is lit
     try:
       lockshot = self.machine.shots.overlord_lock_ball_shot
       self.debug_log("LockHandler is looking for overlord lock shot. " +
@@ -40,20 +63,26 @@ class LockHandler(Mode):
     super().mode_stop(**kwargs)
 
   def _bypass_lock(self):
-    # If a ball is in the lock, fire it quickly to trick the ball lock
+    # If a ball is in the lock, fire it quickly out of the ball device. When the incoming ball is registered,
+    # the ball device will do a physical check and assess that its count has not changed. Tricky!
     if self._bd_physical_lock.balls > 0:
       self._post_event('bypass_lock_release_pulse_short')
-    # If the lock is empty, call the bypass
+    # If the lock is empty, call the bypass on the ball device's eject coil, holding it open so that the
+    # incoming ball will fly through. After the entrance_switch delay, the ball device will do a physical check
+    # and assess that its count (zero balls) has not changed.
     else:
       self._post_event('bypass_lock_release_pulse_long')
 
   def _eject_one_ball(self):
+    """ Method to request (via event) that the physical ball lock eject one locked ball """
     self._post_event('lock_eject_one_ball')
 
   def _post_event(self, event, **kwargs):
+    """ Helper method for posting events """
     self.machine.events.post(event, **kwargs)
 
   def _handle_ball_enter(self, **kwargs):
+    """ Logic for assessing desired behavior when a ball enters the physical ball lock device """
     missions_available = self.machine.modes.recruitfield.active and self.player.available_missions > 0
     physical_balls_locked = self._bd_physical_lock.balls
     virtual_balls_locked = self._overlordlock.locked_balls
@@ -75,32 +104,48 @@ class LockHandler(Mode):
       self._return_ball_to_playfield()
 
   def _handle_bypasscheck(self, **kwargs):
-    # Always allow a lock if enabled but not enough to start multiball
+    """ Logic for assessing whether to hold/lock the ball or bypass the lock """
+
+    # LOCK: 
+    # If the lock shot is enabled and the virtual lock count is not enough to start multiball
+    # [AVW] Why no start multiball? Because I'm still trying to figure out why the balls_active count gets
+    #       messed up and the multiball releases one less than it should. Ugh.
     if self._overlordlock.enabled and self._overlordlock.locked_balls < 2:
       self.debug_log(" - Lock is lit, not going to bypass lock post")
       return
-    # Except for the above locking condition, bypass when on a mission
-    # Allow mission select if they are available (or Garrus is about to be)
+
+    # HOLD:
+    # If no mission currently running (i.e. recruitfield is active) and a mission is available
+    # (or if Garrus' mission is about to be, since the ball lock shot is also his mission light shot)
     elif self.machine.modes.recruitfield.active and self.player.available_missions > 0 or self.player.status_garrus == 2:
       self.debug_log(" - Recruitfield is active and missions are available, not going to bypass lock post")
       return
 
+    # BYPASS:
+    # If neither of the above locking conditions, bypass the lock/hold
     self.debug_log(" - Lock not enabled and no missions available, bypassing lock post")
     self._bypass_lock()
 
   def _handle_missionselect_stop(self, **kwargs):
+    """ Handler for when mode_missionselect_stop is called. Namely, get a ball active! """
     del kwargs
     self._return_ball_to_playfield()
 
   def _handle_multiball_start(self, **kwargs):
+    """ Handler for when logic determines a multiball mode should begin """
     self._post_event('start_mode_overlordmultiball')
 
   def _return_ball_to_playfield(self):
-     # If there are more physical than virtual, eject
+    """ Logic for deciding whether a ball should become active out of the ball device or the trough """
+    
+    # If we previously determined that we want to keep this ball, summon one from the playfield add_ball method
+    # [AVW] This is calling a method on the multiball_lock device object, but using an event would be preferrable
+    #       because it would allow similar behavior through yaml configs instead of exclusively via python
     if self._will_lock_ball:
       self.debug_log('LockHandler is keeping a physical ball locked, adding one via playfield')
       self._overlordlock.source_playfield.add_ball(balls=1)
       self._will_lock_ball = False
+     # If there are more physically-locked balls than the virtual lock desires, eject
     else:
       self.debug_log('LockHandler does not want to hold this ball, ejecting it')
       self._eject_one_ball()

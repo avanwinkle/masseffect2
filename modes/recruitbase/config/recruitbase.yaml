@@ -1,4 +1,25 @@
 #config_version=5
+
+#####
+# RECRUIT BASE MODE
+#
+# This game logic mode underlies the various recruitment collection and mission
+# modes. It is primarily responsible for handling the transition in and out of
+# recruitment missions and holding logic that is shared among them (events, 
+# slides, timers, and scoring).
+#
+# One particularly important role of Recruit Base is handling other modes so
+# that every recruitment mission doesn't have to worry about enabling/disabling.
+# Persistent side-modes like N7 Assignments, Shadow Broker, and multiballs are  
+# called "nonrecruit modes" and it's up to Recruit Base to en/disable them when 
+# recruitment missions start. Much easier than copying the same code between
+# all the different recruitment missions!
+#
+# Recruit Base is mostly event-driven and idempotent, so it may never need to be
+# stopped (although stopping it would free up a lot of event listeners). Right 
+# now it's a standalone mode to keep the logic in digestable chunks.
+#####
+
 mode:
   start_events:
     start_mode_recruitbase
@@ -6,10 +27,13 @@ mode:
     stop_mode_recruitbase
   priority: 300
 
+#####
+# There is a lot of logic in recruitbase, so let's break it up into files
+#####
 config:
-  - recruitscoring.yaml
-  - recruitslide.yaml
-  - recruittimer.yaml
+  - recruitscoring.yaml  # Everything in the scoring: section
+  - recruitslide.yaml    # Slides, widgets, and event_player for showing them
+  - recruittimer.yaml    # A shared hurryup timer for recruit missions
 
 event_player:
   mode_recruitbase_started:
@@ -72,6 +96,9 @@ event_player:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
 
+#####
+# This is just while I'm developing and debugging missions, a little cheat ;)
+#####
 ball_saves:
   debug_recruitmission_ballsave:
     active_time: 60s
@@ -146,6 +173,10 @@ slides:
         anchor_x: left
         x: 10
 
+#####
+# Play the 'mission complete' sounds in recruitbase, because the actual mission
+# that's been completed will have its mode stopped before the sound finishes
+#####
 sound_player:
   recruit_garrus_complete: missioncomplete_voice_garrus
   recruit_grunt_complete: missioncomplete_voice_grunt

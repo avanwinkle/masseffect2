@@ -1,9 +1,22 @@
 #config_version=5
+
+#####
+# TALI RECRUITMENT MISSION
+#
+# This mode lights the left ramp to target the Geth Colossus and is on a timer;
+# hitting the ramp builds value based on how much time is left on the timer. The
+# player must hit the left ramp six times before the timer runs out: solid blue 
+# (full shields), pulsing blue/yellow (partial shields), flashing blue/yellow 
+# (depleted shields), solid yellow (full armor), pulsing yellew (partial armor),
+# flashing yellow (depleted armor). The mission fails if the timer expires.
+#
+# Progress is not saved and this mission must be restarted if failed.
+#####
+
 mode:
   start_events: start_mode_recruittali
   stop_events: stop_mode_recruittali, stop_recruitmission
   priority: 500
-
 
 event_player:
   geth_colossus_shot_geth_colossus_profile_depleted_armor_hit: recruit_tali_complete
@@ -16,6 +29,13 @@ event_player:
     colossus_state:
       state: current_player.colossus_state
 
+#####
+# TALI SCORING:
+#    Hurryup starts at 6,000
+#    Hit the colossus shot to add (100 * timer_ticks_remaining) to the hurryup
+#    Hit the colossus shot 6x to collect the hurryup and complete the mission
+#    Progress is not saved
+#####
 scoring:
   mode_recruittali_started:
     temp_hurryup_value:

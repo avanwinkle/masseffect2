@@ -1,4 +1,18 @@
 #config_version=5
+
+#####
+# SHADOW BROKER MODE
+#
+# This mode is the base mode for handling progress through the Shadow Broker 
+# side missions. It primarily handles tracking the dropbank completions and
+# lighting their progress, then enabling shots to start the various modes that
+# progress through the Shadow Broker story.
+#
+# [AVW] This pretty much just lights the dropbanks now. As more modes are made
+#       it will get more advanced. This mode should maybe be renamed as
+#       "shadowbroker_base" to be consistent with other base modes.
+#####
+
 mode:
   start_events: start_mode_shadowbroker
   stop_events: stop_mode_shadowbroker

@@ -1,4 +1,21 @@
 #config_version=5
+
+#####
+# LOCKHANDLER MODE
+#
+# This is a game logic mode to handle the complex logic of balls entering the
+# ball device (bd_lock) via the left ramp. 
+#
+# Most of the logic is handled in a custom Python class (lockhandler.py). This
+# yaml file instantiates that class, sets up an event listener to trigger the
+# class handler.
+
+# Also this yaml file has got some multiball_lock logic because the class
+# interacts with multiball devices directly and it kinda makes it easier to have
+# all that contained here. Once the logic/behavior is stable, it may make more
+# sense to move the multiball locks to their respective modes.
+#####
+
 mode:
   start_events: start_mode_lockhandler
   stop_events: stop_mode_lockhandler

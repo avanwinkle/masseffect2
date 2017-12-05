@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# RECRUIT FIELD MODE
+#
+# This mode is the "generic" gameplay experience, i.e. what's happening when no
+# other mode is active. It's got logic for lighting all the recruitment mission
+# shots and tracking the hit counts for each of them.
+#
+# For now, it also has responsibility for the N7 Assignments counter and mode
+# start logic, because we will only want to start N7 Assignments when we're
+# in Recruit Field mode (i.e. never during any other mode)
+#####
+
 mode:
   start_events: start_mode_recruitfield
   stop_events: stop_mode_recruitfield, ball_will_end
