@@ -1,0 +1,122 @@
+#config_version=5
+
+#####
+# ZAEED RECRUITMENT MISSION
+#
+# This mode begins with both orbit shots lit, and the objective varies depending
+# on which shot the player hits. Once an orbit is hit, either orbit can be hit
+# repeatedly to build value; after 3 hits, the kickback lane is lit to collect
+# the value and complete the mode. The mode ends if the timer runs out.
+#
+# If the player chooses the left orbit (paragon, lit blue), the timer starts
+# higher and more time is added to the timer with each orbit hit. If the player
+# chooses the right orbit (renegade, lit red), the timer starts lower and a
+# bonus multiplier increases the captured value when the mode is completed.
+#
+# Progress is not saved and this mode must be restarted if failed.
+#
+# TODO: This mode has only been mocked out, not thoroughly tested
+#####
+
+mode:
+  start_events: start_mode_recruitzaeed
+  stop_events: stop_mode_recruitzaeed
+  priority: 500
+
+counters:
+  zaeed_orbits_counter:
+    starting_count: 0
+    count_complete_value: 2
+    direction: up
+    disable_on_complete: false
+    count_events: zaeed_orbitshots_hit
+
+event_player:
+  zaeed_kickshot_hit: recruit_zaeed_complete
+  recruit_zaeed_complete:
+    recruit_mission_succes:
+      squadmate: zaeed
+
+#####
+# ZAEED SCORING
+#    Hurryup starts at 10,000
+#    Hurryup depletes at a constant rate of 130/s
+#    Each orbit hit builds the hurryup at that time
+#    Subsequent orbit hits increase the multiplier of the built value
+#    Hit the kickback to complete the mode and collect the built value
+#    Progress is not saved
+#####
+scoring:
+  mode_recruitzaeed_started:
+    # Build value tracks the "base" hurryup depletion
+    temp_build_value:
+      action: set
+      score: 10000
+    temp_hurryup_value: 
+      action: set
+      score: 10000
+    temp_multiplier:
+      action: set
+      score: 1
+  timer_recruittimer_tick:
+    temp_hurryup_value: -130
+    temp_build_value:   -130
+  zaeed_orbitshots_hit:
+    temp_hurryup_value: current_player.temp_build_value * current_player.temp_multiplier
+    temp_multiplier: 0.5
+  zaeed_kickshot_hit:
+    score: current_player.temp_hurryup_value
+
+
+shot_profiles:
+  zaeed_kickshot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: zaeed_show
+  zaeed_orbit_profile:
+    states:
+      - name: reputation
+        show: flash_color_show
+      - name: lit
+        show: zaeed_show
+
+shot_groups:
+  zaeed_orbitshots:
+    shots: left_orbit
+
+shots:
+  zaeed_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: zaeed_orbit_profile
+    advance_events: zaeed_right_orbit_zaeed_orbit_profile_reputation_hit
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+      color: blue
+  zaeed_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: zaeed_orbit_profile
+    advance_events: zaeed_left_orbit_zaeed_orbit_profile_reputation_hit
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+      color: red
+  zaeed_kickshot:
+    hit_events: sh_kickback
+    enable_events: logicblock_zaeed_orbits_counter_complete
+    disable_events: mode_recruitzaeed_started
+    profile: zaeed_kickshot_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+      color: red
+
+shows:
+  zaeed_show:
+    - time: 0
+      lights:
+        (leds): FF0000 # color_zaeed
+        l_null: (color)
+    - time: '+1'
+      lights:
+        (leds): 000000
+        l_null: (color)
+

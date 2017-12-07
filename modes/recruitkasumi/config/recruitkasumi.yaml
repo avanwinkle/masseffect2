@@ -113,9 +113,6 @@ shots:
     profile: alarmed_shot_profile
     tags: alarmshot
     advance_events: set_alarm_right_orbit
-    disable_events: s_plunger_lane_inactive
-    enable_events:
-      sw_playfield_active: 500ms
     show_tokens:
       led: l_right_orbit_arrow_red
   right_ramp:
