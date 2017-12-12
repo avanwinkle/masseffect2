@@ -36,7 +36,7 @@ event_player:
 # Could maybe be replaced with better shot profile implementation?
 counters:
   n7_hits_counter:
-    starting_count: 20
+    starting_count: 40
     count_complete_value: 0
     direction: down
     count_events: n7_advance_shot_hit
@@ -262,11 +262,11 @@ shots:
     profile: recruit_profile
     advance_events: recruit_samara_lit
     enable_events:
-      enable_recruit_shots{current_player.status_garrus<=0}: 0
+      enable_recruit_shots{current_player.status_garrus<=4}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_samara
-      color: 8C00BB #color_samara
+      color: 0037FF #color_samara
     tags: recruit_shot
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
@@ -284,7 +284,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_thane_lit
     enable_events:
-      enable_recruit_shots{current_player.status_kasumi<=0}: 0
+      enable_recruit_shots{current_player.status_kasumi<=4}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_thane
@@ -296,7 +296,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_zaeed_lit
     enable_events:
-      enable_recruit_shots{current_player.status_grunt<=0}: 0
+      enable_recruit_shots{current_player.status_grunt<=4}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_zaeed
@@ -417,6 +417,10 @@ sound_pools:
     type: random_force_all
     sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
     track: voice
+  shot_hit_samara:
+    type: random_force_all
+    sounds: samara_shot_sound_1, samara_shot_sound_2, samara_shot_sound_3, samara_shot_sound_4, samara_shot_sound_5
+    track: voice
   shot_hit_tali:
     type: random_force_all
     sounds: tali_shot_sound_1, tali_shot_sound_2, tali_shot_sound_3, tali_shot_sound_4
@@ -476,6 +480,21 @@ sounds:
     track: voice
   mordin_shot_sound_5:
     file: en_us_hench_professor_ss_global_hench_professor_00331211_m.ogg
+    track: voice
+  samara_shot_sound_1:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00316732_m.ogg
+    track: voice
+  samara_shot_sound_2:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331131_m.ogg
+    track: voice
+  samara_shot_sound_3:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331153_m.ogg
+    track: voice
+  samara_shot_sound_4:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331158_m.ogg
+    track: voice
+  samara_shot_sound_5:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331164_m.ogg
     track: voice
   tali_shot_sound_1:
     file: en_us_hench_tali_ss_global_hench_tali_00285102_m.ogg

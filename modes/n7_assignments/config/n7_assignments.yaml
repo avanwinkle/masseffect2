@@ -3,7 +3,7 @@
 #####
 # N7 ASSIGNMENTS MODE
 #
-# This mode is a superjets-style countdown from the pop bumpers. Once the 
+# This mode is a superjets-style countdown from the pop bumpers. Once the
 # countdown hits zero, all other modes are temporarily disabled and a random
 # N7 Assignment shot is lit. The player has a fixed amount of time to hit this
 # shot and collect a hurryup value. Once collected or when the timer runs out,
@@ -167,6 +167,8 @@ slide_player:
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
+    base_slide:
+      action: play
 
 slides:
   n7_intro_slide:

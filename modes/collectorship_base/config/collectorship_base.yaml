@@ -8,13 +8,31 @@ event_player:
   mode_collectorship_base_started:
     - start_mode_collectorship_ambush
   mode_collectorship_ambush_complete:
+    - stop_mode_collectorship_ambush
     - start_mode_collectorship_husk
   mode_collectorship_husk_complete:
+    - stop_mode_collectorship_husk
     - start_mode_collectorship_praetorian
   mode_collectorship_praetorian_complete:
+    - stop_mode_collectorship_praetorian
     - start_mode_collectorship_ambush
   mode_collectorship_praetorian_failed:
+    - stop_mode_collectorship_praetorian
     - start_mode_collectorship_husk
+  multiball_collectorship_multiball_ended:
+    - stop_mode_collectorship_base
+    - stop_mode_collectorship_ambush
+    - stop_mode_collectorship_husk
+    - stop_mode_collectorship_praetorian
+
+multiballs:
+  collectorship_multiball:
+    ball_count: 2 # Start with 2, add up to 2 more
+    ball_count_type: total
+    start_events: mode_collectorship_base_started
+    add_a_ball_events: collectorship_add_ball
+    shoot_again: 10s
+
 
 slide_player:
   mode_collectorship_base_started:

@@ -10,12 +10,13 @@ event_player:
 
 scoring:
   mode_collectorship_ambush_started:
-    ambush_buildvalue:
-      score: 0
+    temp_hurryup_value:
+      action: set
+      score: 1000
   ship_shots_ship_shot_profile_lit_hit:
-   ambush_buildvalue: 1000 * current_player.collectorship_ambush_shipshottimer_tick
-  ship_shots_complete:
-    score: current_player.ambush_buildvalue
+   temp_hurryup_value: 1000 * current_player.collectorship_ambush_shipshottimer_tick
+  mode_collectorship_ambush_will_stop:
+    score: current_player.temp_hurryup_value
 
 shot_groups:
   ship_shots:
@@ -31,27 +32,27 @@ shot_profiles:
 
 shots:
   ship_left_ramp:
-    switch: s_left_ramp_exit
+    hit_events: sh_left_ramp_hit
     profile: ship_shot_profile
     show_tokens:
       led: l_left_ramp_shield_r
   ship_left_orbit:
-    switch: s_left_orbit
+    hit_events: sh_left_orbit_hit
     profile: ship_shot_profile
     show_tokens:
       led: l_left_orbit_shield_r
   ship_right_ramp:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: ship_shot_profile
     show_tokens:
       led: l_right_ramp_shield_r
   ship_right_orbit:
-    switch: s_right_orbit
+    hit_events: sh_right_orbit_hit
     profile: ship_shot_profile
     show_tokens:
       led: l_right_orbit_shield_r
   ship_kickback:
-    switch: s_kickback
+    hit_events: sh_kickback_hit
     profile: ship_shot_profile
     show_tokens:
       led: l_kickback_shield_r

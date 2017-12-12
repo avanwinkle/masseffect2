@@ -3,13 +3,15 @@
 #####
 # THANE RECRUITMENT MISSION
 #
-# This mode begins with the right ramp lit to enter the Dantius towers, and each
+# This mode begins with the ramps lit to enter the Dantius towers, and each
 # subsequent hit to either ramp advances the player up a floor and builds value.
 # After 3 floors (1 if restarted) the orbits are lit to capture the value and
 # complete the mode, and the ramps remain available to continue building value.
 # The mode will end if the timer expires.
 #
 # Progress is not saved and this mode must be restarted if failed.
+#
+# TODO: This mode has only been mocked out, not tested or debugged
 #####
 
 mode:
@@ -64,7 +66,7 @@ shots:
     hit_events: sh_right_ramp_hit
   tower_complete_shot:
     hit_events: sh_left_orbit_hit, s_right_orbit_hit
-    enable_events: counter_thane_ascent_counter_complete
+    enable_events: logicblock_thane_ascent_counter_complete
     disable_events: mode_recruitthane_started
 
 show_player:

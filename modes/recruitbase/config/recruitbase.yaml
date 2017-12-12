@@ -5,18 +5,18 @@
 #
 # This game logic mode underlies the various recruitment collection and mission
 # modes. It is primarily responsible for handling the transition in and out of
-# recruitment missions and holding logic that is shared among them (events, 
+# recruitment missions and holding logic that is shared among them (events,
 # slides, timers, and scoring).
 #
 # One particularly important role of Recruit Base is handling other modes so
 # that every recruitment mission doesn't have to worry about enabling/disabling.
-# Persistent side-modes like N7 Assignments, Shadow Broker, and multiballs are  
-# called "nonrecruit modes" and it's up to Recruit Base to en/disable them when 
+# Persistent side-modes like N7 Assignments, Shadow Broker, and multiballs are
+# called "nonrecruit modes" and it's up to Recruit Base to en/disable them when
 # recruitment missions start. Much easier than copying the same code between
 # all the different recruitment missions!
 #
 # Recruit Base is mostly event-driven and idempotent, so it may never need to be
-# stopped (although stopping it would free up a lot of event listeners). Right 
+# stopped (although stopping it would free up a lot of event listeners). Right
 # now it's a standalone mode to keep the logic in digestable chunks.
 #####
 
@@ -182,6 +182,7 @@ sound_player:
   recruit_grunt_complete: missioncomplete_voice_grunt
   recruit_jack_complete: missioncomplete_voice_jack
   recruit_mordin_complete: missioncomplete_voice_mordin
+  recruit_samara_complete: missioncomplete_voice_samara
   recruit_tali_complete: missioncomplete_voice_tali
 
 sound_pools:
@@ -205,6 +206,10 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_mordin_1, missioncomplete_voice_mordin_2
     max_queue_time: 1s
+  missioncomplete_voice_samara:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_samara_1, missioncomplete_voice_samara_2, missioncomplete_voice_samara_3
 
 sounds:
   missioncomplete_voice_garrus_1:
@@ -249,6 +254,18 @@ sounds:
     max_queue_time: 1s
   missioncomplete_voice_mordin_2:
     file: en_us_hench_professor_omgpra_mordin_d_00210653_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_samara_1:
+    file: en_us_hench_mystic_twrmwa_mw02_d_00197868_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_samara_2:
+    file: en_us_hench_mystic_twrmwa_mw02_d_00197872_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_samara_3:
+    file: en_us_hench_mystic_twrmwa_mw02_d_00216220_m.ogg
     track: voice
     max_queue_time: 1s
   missioncomplete_voice_tali:

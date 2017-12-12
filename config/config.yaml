@@ -50,8 +50,10 @@ modes:
   - recruitjack
   - recruitkasumi
   - recruitmordin
+  - recruitsamara
   - recruittali
   - recruitthane
+  - recruitzaeed
   - missionselect
   - n7_assignments
   - overlordlight
@@ -118,6 +120,9 @@ player_vars:
     initial_value: 0
   squadmates_count:
     initial_value: 2
+  temp_multiplier:
+    initial_value: 0.0
+    value_type: float
   upgrades_researched:
     initial_value: 0
   status_garrus:
