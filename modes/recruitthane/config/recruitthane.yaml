@@ -66,7 +66,7 @@ shots:
     hit_events: sh_right_ramp_hit
   tower_complete_shot:
     hit_events: sh_left_orbit_hit, s_right_orbit_hit
-    enable_events: counter_thane_ascent_counter_complete
+    enable_events: logicblock_thane_ascent_counter_complete
     disable_events: mode_recruitthane_started
 
 show_player:

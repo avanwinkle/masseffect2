@@ -4,7 +4,7 @@
 # LOCKHANDLER MODE
 #
 # This is a game logic mode to handle the complex logic of balls entering the
-# ball device (bd_lock) via the left ramp. 
+# ball device (bd_lock) via the left ramp.
 #
 # Most of the logic is handled in a custom Python class (lockhandler.py). This
 # yaml file instantiates that class, sets up an event listener to trigger the

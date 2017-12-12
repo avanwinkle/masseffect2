@@ -27,11 +27,9 @@ event_player:
     # - enable_collectorship
   mode_overlordmultiball_started:
     - stop_mode_recruitbase
-    - stop_mode_lockhandler
     - disable_nonrecruit_modes
   mode_overlordmultiball_stopped:
     - start_mode_recruitbase
-    - start_mode_lockhandler
     - reenable_nonrecruit_modes
   disable_nonrecruit_modes:
     - stop_mode_arrival
@@ -44,8 +42,8 @@ event_player:
   # Prior to collector attack: overlord; after: arrival
   reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
     - start_mode_overlordlight
-  # reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
-  #   - start_mode_arrival
+  reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
+    - start_mode_arrival
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
@@ -216,6 +214,11 @@ shows:
       lights:
         (leds): black
         l_null: (color)
+  color_off:
+    - time: 0
+      lights:
+        (leds): black
+        l_null: (color)
 
 slide_player:
   mode_base_started: base_slide
@@ -266,10 +269,12 @@ widgets:
       text: (score)
       number_grouping: true
       min_digits: 2
-      font_size: 10
+      font_size: 12
       font_name: Quadrit
+      anchor_x: left
       anchor_y: top
-      y: top-6
+      x: 2
+      y: top-4
   base_level_widget:
       - type: text
         text: LVL (player|level)

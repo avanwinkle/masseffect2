@@ -3,7 +3,7 @@
 #####
 # SAMARA RECRUITMENT MISSION
 #
-# This mode begins with all standup targets lit on a hurryup, hitting a lit 
+# This mode begins with all standup targets lit on a hurryup, hitting a lit
 # standup collects “intel” and builds value. After each lit standup hit, two
 # shots are lit to pursue Morinth; each subsequent lit standup target hit lights
 # (up to) two more shots. Unlit standups continue to build value but don’t light
@@ -22,7 +22,7 @@
 
 mode:
   start_events: start_mode_recruitsamara
-  stop_events: stop_mode_recruitsamara
+  stop_events: stop_mode_recruitsamara, stop_recruitmission
   priority: 500
 
 counters:
@@ -38,24 +38,24 @@ event_player:
     # Enable one each of the long lane shots and the kickback/bank shots
     - enable_random_shotshot
     - enable_random_bankshot
-  samara_targets_samara_target_profile_hit_complete:
+  samara_targets_hit_complete:
     - reset_targets
-  samara_shots_counter_complete: recruit_samara_complete
+  logicblock_samara_shots_counter_complete: recruit_samara_complete
   recruit_samara_complete:
     recruit_mission_success:
       squadmate: samara
 
 random_event_player:
   enable_random_shotshot:
-    force: all
+    force_different: true
     events:
       - enable_left_orbit_shot
       - enable_left_ramp_shot
       - enable_right_ramp_shot
       - enable_right_orbit_shot
   enable_random_bankshot:
-    force: all
-    events: 
+    force_different: true
+    events:
       - enable_dropbank_shot
       - enable_hitbank_shot
       - enable_kickback_shot
@@ -73,23 +73,25 @@ random_event_player:
 #####
 scoring:
   mode_recruitsamara_started:
-    temp_build_value: 
+    temp_build_value:
       action: set
       score: 0
-    temp_hurryup_value: 
+    temp_hurryup_value:
       action: set
       score: 6000
     temp_multiplier:
       action: set
-      score: 0.75
+      float: 0.75
   samara_targets_samara_target_profile_lit_hit:
-    temp_multiplier: 0.25
+    temp_multiplier:
+      action: add
+      float: 0.25
   timer_recruittimer_tick:
     temp_hurryup_value: -100
   samara_shots_hit:
     # The temp_build_value is the hurryup value at the time the last shot was hit,
     # which means the amount that will actually be collected
-    temp_build_value: 
+    temp_build_value:
       action: set
       score: (current_player.temp_hurryup_value * current_player.temp_multiplier)
     temp_hurryup_value: current_player.temp_hurryup_value * current_player.temp_multiplier
@@ -103,9 +105,7 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: lit
-        show: flash
-      - name: hit
-        show: off
+        show: flash_color_show
   samara_target_profile:
     show_when_disabled: false
     states:
@@ -116,73 +116,93 @@ shot_profiles:
 
 shot_groups:
   samara_targets:
-    shots: target1, target2, target3, target4, target5
+    shots: samara_target1, samara_target2, samara_target3, samara_target4, samara_target5
   samara_shots:
-    shots: left_orbit, left_ramp, right_orbit, right_ramp, kickback
+    shots: samara_left_orbit, samara_left_ramp, samara_right_orbit, samara_right_ramp, samara_kickback
 
 shots:
-  left_orbit:
+  samara_left_orbit:
     hit_events: sh_left_orbit_hit
     enable_events: enable_left_orbit_shot
-    reset_events: left_orbit_enabled
+    disable_events: samara_left_orbit_hit
     profile: samara_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-  left_ramp:
+      color: 0037FF # color_samara
+  samara_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: enable_left_ramp_shot
-    reset_events: left_ramp_enabled
+    disable_events: samara_left_ramp_hit
     profile: samara_shot_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-  right_orbit:
+      color: 0037FF # color_samara
+  samara_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: enable_right_orbit_shot
-    reset_events: right_orbit_enabled
+    disable_events: samara_right_orbit_hit
     profile: samara_shot_profile
-    disable_events: s_plunger_lane_inactive
-  right_ramp:
-    hit_events: sh_right_ramp_hit
-    enable_events: enable_right_ramp_shot
-    reset_events: right_ramp_enabled
-    profile: samara_shot_profile
-    reset_events: counter_kasumi_shots_counter_complete
     show_tokens:
       leds: l_right_ramp_shield_rgb
-  kickback:
+      color: 0037FF # color_samara
+  samara_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: enable_right_ramp_shot
+    disable_events: samara_right_ramp_hit
+    profile: samara_shot_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+      color: 0037FF # color_samara
+  samara_kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_kickback_shot
-    reset_events: kickback_enabled
+    disable_events: samara_kickback_hit
     profile: samara_shot_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-  target1:
+      color: 0037FF # color_samara
+  samara_target1:
     switch: s_target1
     profile: samara_target_profile
     reset_events: reset_targets
     show_tokens:
       leds: l_standup_1
-  target2:
+  samara_target2:
     switch: s_target2
     profile: samara_target_profile
     reset_events: reset_targets
     show_tokens:
       leds: l_standup_2
-  target3:
+  samara_target3:
     switch: s_target3
     profile: samara_target_profile
     reset_events: reset_targets
     show_tokens:
       leds: l_standup_3
-  target4:
+  samara_target4:
     switch: s_target4
     profile: samara_target_profile
     reset_events: reset_targets
     show_tokens:
       leds: l_standup_4
-  target5:
+  samara_target5:
     switch: s_target5
     profile: samara_target_profile
     reset_events: reset_targets
     show_tokens:
       leds: l_standup_5
+
+sound_player:
+  mode_recruitsamara_started:
+    music_recruit_samara:
+      action: play
+  recruit_samara_complete:
+    music_recruit_samara:
+      action: stop
+
+sounds:
+  music_recruit_samara:
+    file: mus_samara_acq_bossbattle_2.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s

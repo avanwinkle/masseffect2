@@ -20,13 +20,13 @@
 
 mode:
   start_events: start_mode_recruitzaeed
-  stop_events: stop_mode_recruitzaeed
+  stop_events: stop_mode_recruitzaeed, stop_recruitmission
   priority: 500
 
 counters:
   zaeed_orbits_counter:
     starting_count: 0
-    count_complete_value: 2
+    count_complete_value: 3
     direction: up
     disable_on_complete: false
     count_events: zaeed_orbitshots_hit
@@ -34,13 +34,13 @@ counters:
 event_player:
   zaeed_kickshot_hit: recruit_zaeed_complete
   recruit_zaeed_complete:
-    recruit_mission_succes:
+    recruit_mission_success:
       squadmate: zaeed
 
 #####
 # ZAEED SCORING
-#    Hurryup starts at 10,000
-#    Hurryup depletes at a constant rate of 130/s
+#    Hurryup starts at 8,000
+#    Hurryup depletes at a constant rate of 90/s
 #    Each orbit hit builds the hurryup at that time
 #    Subsequent orbit hits increase the multiplier of the built value
 #    Hit the kickback to complete the mode and collect the built value
@@ -51,19 +51,21 @@ scoring:
     # Build value tracks the "base" hurryup depletion
     temp_build_value:
       action: set
-      score: 10000
-    temp_hurryup_value: 
+      score: 8000
+    temp_hurryup_value:
       action: set
-      score: 10000
+      score: 8000
     temp_multiplier:
       action: set
-      score: 1
+      float: 1
   timer_recruittimer_tick:
-    temp_hurryup_value: -130
-    temp_build_value:   -130
+    temp_hurryup_value: -90
+    temp_build_value:   -90
   zaeed_orbitshots_hit:
     temp_hurryup_value: current_player.temp_build_value * current_player.temp_multiplier
-    temp_multiplier: 0.5
+    temp_multiplier:
+      action: add
+      float: 0.25
   zaeed_kickshot_hit:
     score: current_player.temp_hurryup_value
 
@@ -75,6 +77,7 @@ shot_profiles:
       - name: lit
         show: zaeed_show
   zaeed_orbit_profile:
+    show_when_disabled: false
     states:
       - name: reputation
         show: flash_color_show
@@ -83,7 +86,7 @@ shot_profiles:
 
 shot_groups:
   zaeed_orbitshots:
-    shots: left_orbit
+    shots: zaeed_left_orbit, zaeed_right_orbit
 
 shots:
   zaeed_left_orbit:
@@ -101,7 +104,7 @@ shots:
       leds: l_right_orbit_shield_rgb
       color: red
   zaeed_kickshot:
-    hit_events: sh_kickback
+    hit_events: sh_kickback_hit
     enable_events: logicblock_zaeed_orbits_counter_complete
     disable_events: mode_recruitzaeed_started
     profile: zaeed_kickshot_profile
@@ -120,3 +123,17 @@ shows:
         (leds): 000000
         l_null: (color)
 
+sound_player:
+  mode_recruitzaeed_started:
+    music_recruit_zaeed:
+      action: play
+  recruit_zaeed_complete:
+    music_recruit_zaeed:
+      action: stop
+
+sounds:
+  music_recruit_zaeed:
+    file: mus_jacob_loy_combat_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
