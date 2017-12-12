@@ -66,7 +66,13 @@ is a series of unlockable modes leading to a big boss finish
 * **Project Overlord** is a multiball mode
   * [Light for Multiball](overlordlight/config/overlordlight.yaml)
   * [Multiball Mode](overlordmultiball/config/overlordmultiball.yaml)
-* **[Research Upgrades](upgradse/config/upgrades.yaml)** provide additional shot bonuses after missions are completed
+
+### Supplemental Modes
+These modes can be triggered throughout the game and offer bonuses, multipliers, extra points, and 
+other goodies. They have to be enabled/unlocked and activated, but do not supercede any existing
+gameplay modes.
+* **[Harbinger](harbinger/config/harbinger.yaml)** provides a stackable playfield multiplier
+* **[Research Upgrades](upgrades/config/upgrades.yaml)** provide additional shot bonuses after missions are completed
 * **[Shopping](shopping/config/shopping.yaml)** provides purchasable items to help win missions
 
 ### Game Logic Modes

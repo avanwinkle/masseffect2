@@ -1,0 +1,156 @@
+#config_version=5
+
+#####
+# HARBINGER MODE
+#
+# This mode layers atop other game modes, specifically story missions featuring 
+# the Collectors (i.e. Collector Ship, Derelict Reaper(?), and Suicide Mission).
+#
+# Once enabled, this mode alternates a timed shot (available for 15s, disabled
+# for 15s) at the battering ram. Hitting the ram twice during the 15s window 
+# increases the playfield multiplier 1x for 60 seconds. These multipliers can
+# stack, but all are reset when the mode ends.
+#
+# Raising the multiplier disables the shot immediately, otherwise the shot is
+# disabled after the timer runs out. Regardless, the shot will re-enable after
+# 15s.
+#####
+
+mode:
+  start_events: start_mode_harbinger
+  stop_events: stop_mode_harbinger
+  priority: 600
+
+event_player:
+  harbinger_shot_hot_hit: harbinger_shot_runout|60s
+
+timers:
+  # This timer runs while Harbinger is ENABLED and the shot is LIT
+  # When it completes or is hit, the shot will be disabled
+  harbinger_enabled_timer:
+    start_value: 15
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: false
+    control_events:
+      - event: harbinger_disabled_timer_complete
+        action: restart
+      - event: harbinger_shot_hot_hit
+        action: stop
+  # This timer runs while Harbinger is DISABLED and the shot is OFF
+  # When it completes, the shot will be enabled again
+  harbinger_disabled_timer:
+    start_value: 15
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: true
+    control_events:
+      - event: harbinger_enabled_timer_complete
+        action: restart
+      - event: harbinger_shot_hot_hit
+        action: restart
+
+scoring:
+  harbinger_shot_hot_hit:
+    harbinger_multiplier: 1
+  harbinger_shot_runout:
+    harbinger_multiplier: -1
+  mode_harbinger_will_stop:
+    harbinger_multiplier:
+      action: set
+      score: 0
+
+shot_profiles:
+  harbinger_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: flash
+        speed: 2
+      - name: hot
+        show: flash
+        speed: 8
+      - name: enabled
+        show: on
+
+shots:
+  harbinger_shot:
+    switch: s_battering_ram
+    enable_events: 
+      - harbinger_disabled_timer_complete
+    disable_events: 
+      - harbinger_enabled_timer_complete
+      - harbinger_shot_hot_hit
+    reset_events: harbinger_disabled_timer_complete
+    show_tokens:
+      leds: l_battering_ram_bot
+
+sound_player:
+  harbinger_shot_enabled: harbinger_enabledsound  # "Assuming direct control..."
+  harbinger_shot_lit_hit: harbinger_hitsound      # "This hurts you..."
+  harbinger_shot_hot_hit: harbinger_killedsound   # "This form means nothing..."
+
+sound_pools:
+  harbinger_enabledsound: 
+    type: random_force_all
+    track: voice
+    max_queue_time: 3s
+    sounds: harbinger_enabledsound_1, harbinger_enabledsound_2, harbinger_enabledsound_3, harbinger_enabledsound_4, harbinger_enabledsound_5, harbinger_enabledsound_6, harbinger_enabledsound_7, harbinger_enabledsound_8, harbinger_enabledsound_9
+  harbinger_hitsound: 
+    type: random_force_all
+    track: voice
+    max_queue_time: 3s
+    sounds: harbinger_hitsound_1, harbinger_hitsound_2, harbinger_hitsound_3, harbinger_hitsound_4, harbinger_hitsound_5, harbinger_hitsound_6, harbinger_hitsound_7, harbinger_hitsound_8
+  harbinger_killedsound: 
+    type: random_force_all
+    track: voice
+    max_queue_time: 3s
+    sounds: harbinger_killedsound_1, harbinger_killedsound_2, harbinger_killedsound_3, harbinger_killedsound_4, harbinger_killedsound_5
+
+sounds:
+  harbinger_enabledsound_1: 
+    file: en_us_global_collector_general_ss_collector_general_00346726_m.ogg # "We are Harbinger"
+  harbinger_enabledsound_2:
+    file: en_us_global_collector_general_ss_collector_general_00346727_m.ogg # "Assuming direct control"
+  harbinger_enabledsound_3:
+    file: en_us_global_collector_general_ss_collector_general_00346725_m.ogg # "We are assuming control"
+  harbinger_enabledsound_4:
+    file: en_us_global_collector_general_ss_collector_general_00346724_m.ogg # "Assuming control of this form"
+  harbinger_enabledsound_5:
+    file: en_us_global_collector_general_ss_collector_general_00332646_m.ogg # "Face your annihilation"
+  harbinger_enabledsound_6:
+    file: en_us_global_collector_general_ss_collector_general_00332610_m.ogg # "I am unstoppable"
+  harbinger_enabledsound_7:
+    file: en_us_global_collector_general_ss_collector_general_00332562_m.ogg # "I will direct this personally"
+  harbinger_enabledsound_8:
+    file: en_us_global_collector_general_ss_collector_general_00332558_m.ogg # "Assuming control"
+  harbinger_enabledsound_9:
+    file: en_us_global_collector_general_ss_collector_general_00332557_m.ogg # "Direct intervention is necessary"
+  harbinger_hitsound_1:
+    file: en_us_global_collector_general_ss_collector_general_00346818_m.ogg # "We are the harbinger of your ascendance"
+  harbinger_hitsound_2:
+    file: en_us_global_collector_general_ss_collector_general_00346733_m.ogg # "You cannot stop us"
+  harbinger_hitsound_3:
+    file: en_us_global_collector_general_ss_collector_general_00346734_m.ogg # "We are the harbinger of your destiny"
+  harbinger_hitsound_4:
+    file: en_us_global_collector_general_ss_collector_general_00346736_m.ogg # "This form is irrelevant"
+  harbinger_hitsound_5:
+    file: en_us_global_collector_general_ss_collector_general_00346738_m.ogg # "You cannot stop us, Shepard"
+  harbinger_hitsound_6:
+    file: en_us_global_collector_general_ss_collector_general_00346804_m.ogg # "I sense your weakness"
+  harbinger_hitsound_7:
+    file: en_us_global_collector_general_ss_collector_general_00332635_m.ogg # "I know you feel this"
+  harbinger_hitsound_8:
+    file: en_us_global_collector_general_ss_collector_general_00332611_m.ogg # "You only damage the vessel"
+  harbinger_killedsound_1:
+    file: en_us_global_collector_general_ss_collector_general_00346728_m.ogg # "Releasing this form"
+  harbinger_killedsound_2:
+    file: en_us_global_collector_general_ss_collector_general_00346729_m.ogg # "This form is redundant"
+  harbinger_killedsound_3:
+    file: en_us_global_collector_general_ss_collector_general_00346732_m.ogg # "Releasing control of this form"
+  harbinger_killedsound_4:
+    file: en_us_global_collector_general_ss_collector_general_00332641_m.ogg # "You will know pain, Shepard"
+  harbinger_killedsound_5:
+    file: en_us_global_collector_general_ss_collector_general_00332603_m.ogg # "This changes nothing, Shepard"
