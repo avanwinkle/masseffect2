@@ -3,14 +3,16 @@ import re
 import os, sys
 import shutil
 
+verbose = False
+
 def match_configs(gamePath, doCopy=False):
-  allconfigs = parse_all_configs()
+  allconfigs = RequiredSounds()
   gamesounds = GameSounds(gamePath)
 
   soundCheck = {}
   counts = { 'found': [], 'missing': [], 'available': [], 'unavailable': [] }
 
-  for mode, modesounds in allconfigs.items():
+  for mode, modesounds in allconfigs.getAllConfigs().items():
     for track, sounds in modesounds.byTrack().items():
       for sound in sounds:
         modepath = "modes/{}/sounds/{}/".format(mode, track)
@@ -51,19 +53,68 @@ def match_configs(gamePath, doCopy=False):
     for filename in counts['unavailable']:
       print("    : {} ({})".format(filename, soundCheck[filename]['mode']))
 
-def parse_all_configs():
-  allconfigs = {}
-  for path, dirs, files in os.walk('modes'):
-    for file in files:
-      if file.endswith('.yaml'):
-        filename = file[:-5]
-        conf = ConfigProcessor.load_config_file('{}/{}'.format(path,file), "mode")
-        sounds = ModeSounds(filename)
-        sounds.parseConfig(conf)
-        if len(sounds) > 0:
-          allconfigs[filename] = sounds
-  return allconfigs
- 
+def prune_files(doDelete=False):
+  allconfigs = RequiredSounds()
+  existingsounds = GameSounds('./')
+
+  orphanedfiles = []
+  matchedfilescount = 0
+
+  for file in existingsounds.getFiles():
+    mode = allconfigs.findRequiringMode(file)
+    if not mode:
+      orphanedfiles.append(existingsounds.getFilePath(file))
+    else:
+      if verbose:
+        print("{} -> {}".format(file, mode.name))
+      matchedfilescount += 1
+
+  print("Found {} required files and {} orphaned files.\n".format(matchedfilescount, len(orphanedfiles)))
+  if (len(orphanedfiles) > 0):
+    print("REMOVING ORPHANED FILES:" if doDelete else "ORPHANED FILES TO REMOVE:")
+    for orphan in orphanedfiles:
+      print(orphan)
+      if doDelete:
+        os.remove(orphan)
+
+class RequiredSounds(object):
+  def __init__(self):
+    self._allconfigs = {} # Key: mode/config name, Value: ModeSounds object
+    self._sounds_by_filename = {} # Key: array of filenames, Value: ModeSounds object
+    self._allsoundfiles = []
+    for path, dirs, files in os.walk('modes'):
+      for file in files:
+        if file.endswith('.yaml'):
+          configfilename = file[:-5]
+          conf = ConfigProcessor.load_config_file('{}/{}'.format(path,file), "mode")
+          sounds = ModeSounds(configfilename)
+          sounds.parseConfig(conf)
+          if len(sounds) > 0:
+            self._allconfigs[configfilename] = sounds
+
+  def getAllConfigs(self):
+    return self._allconfigs
+
+  def findRequiringMode(self, filename):
+    # So we only have to do this once, make all of the sound files in a Mode into an array key
+    if not self._sounds_by_filename:
+      for sounds in self._allconfigs.values():
+        for filename in sounds.all():
+          self._sounds_by_filename[filename] = sounds
+          self._allsoundfiles.append(filename)
+
+    # Easiest check: is this file required _anywhere_ ?
+    if filename not in self._allsoundfiles:
+      return None
+
+    # Next check: find which mode requires it
+    for filelist in self._sounds_by_filename:
+      if filename in filelist:
+        return self._sounds_by_filename[filelist]
+
+  def __len__(self):
+    return len(self._allconfigs)
+
 class GameSounds(object):
   def __init__(self, root):
     # Most efficient way: two arrays in parallel?
@@ -77,6 +128,9 @@ class GameSounds(object):
   def getFilePath(self, filename):
     idx = self._soundfiles.index(filename)
     return "{}/{}".format(self._soundpaths[idx], self._soundfiles[idx])
+
+  def getFiles(self):
+    return self._soundfiles
 
 class ModeSounds(object):
   def __init__(self, modeName=None):
@@ -108,6 +162,9 @@ class ModeSounds(object):
     self._files.append(fileName)
     self._dict[trackName].append(fileName)
 
+  def checkSound(self, filename):
+    return filename in self._files
+
   def _addTrack(self, trackName):
     if not trackName in self._tracks:
       self._tracks.append(trackName)
@@ -130,15 +187,24 @@ class ModeSounds(object):
 
 def main():
   args = sys.argv[1:]
+  writeMode = False
+
+  if "-v" in args:
+    verbose = True
+  if "-w" in args:
+    writeMode = True
 
   if args[0] == "prune":
-    prune_files()
+    prune_files(doDelete=writeMode)
 
-  elif args[0] == "test" or args[0] == "copy":
+  elif args[0] == "copy":
     # The second arg needs to be a path
     try:
       os.stat(args[1])
-      match_configs(args[1], args[0] == "copy")
+      match_configs(args[1], doCopy=writeMode)
+    except(IndexError):
+      print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
+      print("Usage: python mesound.py [prune|copy] <path_to_masseffect_sounds> [-v|-w]")
     except(FileNotFoundError):
       print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
       print("Path not found: '{}'".format(args[0]))
@@ -154,14 +220,17 @@ Mass Effect 2 Extractor containing source audio folders and ogg files
 
 Options:
   copy  - Copy all required audio files into the ME2 mode folders
-  test  - Simulate the audio file copy, but don't copy anything
   prune - Remove all mode audio files not referenced in config files (will not affect dump folder)
 
 Params:
   path_to_masseffect_sounds - Path to the data dump folder created by Mass Effect 2 Extractor
 
+Flags:
+  -v    - Verbose mode
+  -w    - Write mode (actually copy/prune files)
+
 Usage: 
->> python mesound.py [prune|test|copy] <path_to_masseffect_sounds>
+>> python mesound.py [prune|test|copy] <path_to_masseffect_sounds> [-v|-w]
 """)
 
 if __name__ == "__main__":
