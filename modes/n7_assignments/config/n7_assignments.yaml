@@ -217,14 +217,37 @@ sound_player:
     music_n7:
       action: stop
 
-sounds:
-  music_n7:
-    file: StationAlert.ogg
-    track: music
+sound_pools:
+  musc_n7:
+    sounds: music_n7_stationalert, music_n7_combat_12, music_n7_combat_72, music_n7_combat_81
     mode_end_action: stop
-    start_at: 35s
+    type: random_force_all
+    track: music
     fade_in: 1s
     fade_out: 1s
+
+sounds:
+  music_n7_stationalert:
+    file: StationAlert.ogg
+    start_at: 35s
+  music_n7_combat_12:
+    file: mus_n7_1_combat_2.ogg
+  music_n7_combat_72:
+    file: mus_n7_7_combat_2.ogg
+  music_n7_combat_81:
+    file: mus_n7_8_combat_1.ogg
+  intro_imminent_ship_crash:
+    file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.ogg # "Warning: collision imminent"
+    track: voice
+  intro_javelin_missiles:
+    file: en_us_hench_ai_n7mmnt7_warning_00344483_m.ogg
+    track: voice
+  intro_anomalous_weather:
+    file: en_us_hench_ai_n7bldinv1_fog_00344671_m.ogg
+    track: voice
+  intro_hahne_kedar_facility:
+    file: en_us_hench_ai_n7bldinv2_generator_00344670_m.ogg
+    track: voice
 
 timers:
   n7timer:

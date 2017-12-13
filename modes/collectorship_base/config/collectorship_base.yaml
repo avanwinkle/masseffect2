@@ -7,6 +7,7 @@ mode:
 event_player:
   mode_collectorship_base_started:
     - start_mode_collectorship_ambush
+    - start_mode_harbinger
   mode_collectorship_ambush_complete:
     - stop_mode_collectorship_ambush
     - start_mode_collectorship_husk
@@ -24,6 +25,7 @@ event_player:
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
     - stop_mode_collectorship_praetorian
+    - stop_mode_harbinger
 
 multiballs:
   collectorship_multiball:
@@ -32,7 +34,6 @@ multiballs:
     start_events: mode_collectorship_base_started
     add_a_ball_events: collectorship_add_ball
     shoot_again: 10s
-
 
 slide_player:
   mode_collectorship_base_started:
@@ -45,3 +46,45 @@ slides:
       - type: text
         text: Collector Ship
         style: dmd_small
+
+sound_player:
+  mode_collectorship_ambush_started:
+    music_ambush:
+      action: play
+    music_praetorian:
+      action: stop
+  mode_collectorship_husk_started:
+    music_husk:
+      action: play
+    music_ambush:
+      action: stop
+    music_praetorian:
+      action: stop
+  mode_collectorship_praetorian_started:
+    music_husk:
+      action: stop
+    music_praetorian:
+      action: play
+  collectorship_multiball_ball_drain:
+    music_stinger:
+      action: play
+
+sounds:
+  music_ambush:
+    file: mus_critpath2_action.ogg
+    track: music
+    fade_in: 1s
+    fade_out: 1.5s
+  music_husks:
+    file: mus_critpath2_combat_2.ogg
+    track: music
+    fade_in: 1s
+    fade_out: 1.5s
+  music_praetorian:
+    file: mus_critpath1_boss.ogg
+    track: music
+    fade_in: 1s
+    fade_out: 1.5s
+  music_stinger:
+    file: mus_generic_stinger_053.ogg
+    track: sfx
