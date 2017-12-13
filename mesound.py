@@ -6,6 +6,7 @@ import shutil
 verbose = False
 
 def match_configs(gamePath, doCopy=False):
+  global verbose
   allconfigs = RequiredSounds()
   gamesounds = GameSounds(gamePath)
 
@@ -19,7 +20,7 @@ def match_configs(gamePath, doCopy=False):
         gamepath = None
         exists = False
         try:
-          exists = os.stat(modepath)
+          exists = os.stat("{}{}".format(modepath, sound))
           counts['found'].append(sound)
         except(FileNotFoundError):
           counts['missing'].append(sound)
@@ -48,34 +49,53 @@ def match_configs(gamePath, doCopy=False):
   print("Found {} sounds across {} config files.".format(len(soundCheck), len(allconfigs)))
   print(" - {} files accounted for".format(len(counts['found'])))
   print(" - {} missing files available {}".format(available, "and copied" if doCopy else "for copy"))
+  if verbose:
+    for filename in counts['available']:
+      print("    : {} -> {}".format(("/").join(soundCheck[filename]['gamepath'].split("/")[-2:]), soundCheck[filename]['modepath']))
   if (len(counts['unavailable']) > 0):
     print(" - {} files missing and unavailable:".format(len(counts['unavailable'])))
     for filename in counts['unavailable']:
       print("    : {} ({})".format(filename, soundCheck[filename]['mode']))
 
 def prune_files(doDelete=False):
+  global verbose
   allconfigs = RequiredSounds()
   existingsounds = GameSounds('./')
 
   orphanedfiles = []
   matchedfilescount = 0
+  misplacedfiles = []
 
   for file in existingsounds.getFiles():
+    filepath = existingsounds.getFilePath(file)
     mode = allconfigs.findRequiringMode(file)
+    # If this file is not required by any configs
     if not mode:
-      orphanedfiles.append(existingsounds.getFilePath(file))
+      orphanedfiles.append(filepath)
     else:
-      if verbose:
-        print("{} -> {}".format(file, mode.name))
-      matchedfilescount += 1
+      expectedpath = "./modes/{}/sounds/{}/{}".format(mode.name, mode.findTrackForSound(file), file)
+      if filepath != expectedpath:
+        print("{} is in the wrong place. Expected {}".format(filepath, expectedpath))
+        misplacedfiles.append((filepath, expectedpath))
+      else:
+        matchedfilescount += 1
+        # print("{} is of track {}".format(filepath, trackname))
+        if verbose:
+          print("{} -> {}".format(file, mode.name))
 
-  print("Found {} required files and {} orphaned files.\n".format(matchedfilescount, len(orphanedfiles)))
+  print("Found {} required files, {} misplaced files, and {} orphaned files.\n".format(matchedfilescount, len(misplacedfiles), len(orphanedfiles)))
   if (len(orphanedfiles) > 0):
     print("REMOVING ORPHANED FILES:" if doDelete else "ORPHANED FILES TO REMOVE:")
     for orphan in orphanedfiles:
       print(orphan)
       if doDelete:
         os.remove(orphan)
+  if (len(misplacedfiles) > 0):
+    print("MOVING MISPLACED FILES:" if doDelete else "MISPLACED FILES TO MOVE:")
+    for filepath, expectedpath in misplacedfiles:
+      print("{} -> {}".format(filepath, expectedpath))
+      if doDelete:
+        os.rename(filepath, expectedpath)
 
 class RequiredSounds(object):
   def __init__(self):
@@ -99,9 +119,9 @@ class RequiredSounds(object):
     # So we only have to do this once, make all of the sound files in a Mode into an array key
     if not self._sounds_by_filename:
       for sounds in self._allconfigs.values():
-        for filename in sounds.all():
-          self._sounds_by_filename[filename] = sounds
-          self._allsoundfiles.append(filename)
+        for soundname in sounds.all():
+          self._sounds_by_filename[soundname] = sounds
+          self._allsoundfiles.append(soundname)
 
     # Easiest check: is this file required _anywhere_ ?
     if filename not in self._allsoundfiles:
@@ -165,6 +185,18 @@ class ModeSounds(object):
   def checkSound(self, filename):
     return filename in self._files
 
+  def getSoundsForTrack(self, trackname):
+    try:
+      return self._dict[trackname]
+    except(KeyError):
+      print("ERROR: Mode {} has no track '{}'".format(self.name, trackname))
+      return None
+
+  def findTrackForSound(self, filename):
+    for trackname, sounds in self._dict.items():
+      if filename in sounds:
+        return trackname
+
   def _addTrack(self, trackName):
     if not trackName in self._tracks:
       self._tracks.append(trackName)
@@ -176,9 +208,6 @@ class ModeSounds(object):
   def byTrack(self):
     return self._dict
 
-  def __str__(self):
-    return self._dict.__str__()
-
   def __repr__(self):
     return "<ModeSounds '{}': {} files>".format(self.name, len(self))
 
@@ -186,13 +215,12 @@ class ModeSounds(object):
     return len(self._files)
 
 def main():
+  global verbose
   args = sys.argv[1:]
   writeMode = False
 
-  if "-v" in args:
-    verbose = True
-  if "-w" in args:
-    writeMode = True
+  verbose = "-v" in args
+  writeMode = "-w" in args
 
   if args[0] == "prune":
     prune_files(doDelete=writeMode)
@@ -214,8 +242,8 @@ def main():
 ---Mass Effect Pinball Sound Script---
 
 Use this script to copy audio files from your Mass Effect 2 game into the
-corresponding ME2 Pinball mode folders. Requires a data dump folder created by 
-Mass Effect 2 Extractor containing source audio folders and ogg files 
+corresponding ME2 Pinball mode folders. Requires a data dump folder created by
+Mass Effect 2 Extractor containing source audio folders and ogg files
 (e.g. 'endgm2_longwalk_a_s_int', 'en_us_player_f_endgm2_escape_c_00287372_f.ogg')
 
 Options:
@@ -229,7 +257,7 @@ Flags:
   -v    - Verbose mode
   -w    - Write mode (actually copy/prune files)
 
-Usage: 
+Usage:
 >> python mesound.py [prune|test|copy] <path_to_masseffect_sounds> [-v|-w]
 """)
 
