@@ -68,6 +68,12 @@ sound_player:
   collectorship_multiball_ball_drain:
     music_stinger:
       action: play
+  ship_shots_hit: collector_hit
+
+sound_pools:
+  collector_hit:
+    sounds: collector_noise_1, collector_noise_2, collector_noise_3, collector_noise_4, collector_noise_5, collector_noise_6
+    track: sfx
 
 sounds:
   music_ambush:
@@ -76,7 +82,7 @@ sounds:
     fade_in: 1s
     fade_out: 1.5s
   music_husks:
-    file: mus_critpath2_combat_2.ogg
+    file: mus_critpath2_combat_2_low.ogg
     track: music
     fade_in: 1s
     fade_out: 1.5s
@@ -88,3 +94,22 @@ sounds:
   music_stinger:
     file: mus_generic_stinger_053.ogg
     track: sfx
+  collector_noise_1:
+    file: sfx_ss_collector_ss_collector_00349721_m.ogg
+    track: sfx
+  collector_noise_2:
+    file: sfx_ss_collector_ss_collector_00349722_m.ogg
+    track: sfx
+  collector_noise_3:
+    file: sfx_ss_collector_ss_collector_00349723_m.ogg
+    track: sfx
+  collector_noise_4:
+    file: sfx_ss_collector_ss_collector_00349724_m.ogg
+    track: sfx
+  collector_noise_5:
+    file: sfx_ss_collector_ss_collector_00349725_m.ogg
+    track: sfx
+  collector_noise_6:
+    file: sfx_ss_collector_ss_collector_00349736_m.ogg
+    track: sfx
+

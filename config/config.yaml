@@ -37,12 +37,15 @@ event_player:
     - cancel_lock_release_pulse|700ms
 
 modes:
+  # Core Logic Modes:
   - base
   - bonus
   - lockhandler
-# - collectorship_ambush
-# - collectorship_base
+  - collectorship_base
+  - collectorship_ambush
+  - missionselect
   - pause
+  # Recruit Modes:
   - recruitbase
   - recruitfield
   - recruitgarrus
@@ -54,7 +57,8 @@ modes:
   - recruittali
   - recruitthane
   - recruitzaeed
-  - missionselect
+  # Side Mission Modes:
+  - harbinger
   - n7_assignments
   - overlordlight
   - overlordmultiball

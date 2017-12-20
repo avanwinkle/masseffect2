@@ -47,6 +47,13 @@ event_player:
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
+  missionselect_collectorship_selected:
+    - stop_mode_recruitbase
+    - disable_nonrecruit_modes
+    - start_mode_collectorship_base
+  start_mode_collectorship_base_stopped:
+    - start_mode_recruitbase
+    - reenable_nonrecruit_modes
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

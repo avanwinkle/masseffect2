@@ -35,27 +35,27 @@ shots:
     hit_events: sh_left_ramp_hit
     profile: ship_shot_profile
     show_tokens:
-      led: l_left_ramp_shield_r
+      led: l_left_ramp_shield_rgb
   ship_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: ship_shot_profile
     show_tokens:
-      led: l_left_orbit_shield_r
+      led: l_left_orbit_shield_rgb
   ship_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: ship_shot_profile
     show_tokens:
-      led: l_right_ramp_shield_r
+      led: l_right_ramp_shield_rgb
   ship_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: ship_shot_profile
     show_tokens:
-      led: l_right_orbit_shield_r
+      led: l_right_orbit_shield_rgb
   ship_kickback:
     hit_events: sh_kickback_hit
     profile: ship_shot_profile
     show_tokens:
-      led: l_kickback_shield_r
+      led: l_kickback_shield_rgb
 
 shows:
   ship_lit_show:

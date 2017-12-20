@@ -4,7 +4,7 @@
 # MISSION SELECT MODE
 #
 # This is a game logic mode to present a selection carousel to the player when
-# missions are available for them to play. Usually this means any of the 
+# missions are available for them to play. Usually this means any of the
 # recruitment missions they've unlocked, but also Collecter Ship and the Suicide
 # Mission will be present here.
 #
@@ -43,7 +43,9 @@ event_player:
 slide_player:
   missionselect_pass_highlighted{current_player.missionselect_init==0}: missionselect_intro_slide
   missionselect_pass_highlighted{current_player.missionselect_init!=0}: missionselect_pass_slide
+  missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
+  # Recruitment Missions:
   missionselect_garrus_highlighted: missionselect_recruit_slide
   missionselect_grunt_highlighted: missionselect_recruit_slide
   missionselect_jack_highlighted: missionselect_recruit_slide
@@ -82,6 +84,11 @@ slides:
         style: dmd_small
         anchor_y: bottom
         y: 3
+  missionselect_collectorship_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: Disabled Collector Vessel
   missionselect_suicide_slide:
     priority: 1
     widgets:

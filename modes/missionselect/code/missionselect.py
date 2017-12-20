@@ -1,6 +1,9 @@
 import copy
 from mpf.modes.carousel.code.carousel import Carousel
 
+DEBUG_COLLECTORSHIP = True
+DEBUG_SUICIDEMISSION = False
+
 class MissionSelect(Carousel):
 
   """ Mode which allows the player to select a mission."""
@@ -23,12 +26,12 @@ class MissionSelect(Carousel):
     self.debug_log("MissionSelect player: {}".format(player.vars.__str__()))
 
     # Collector ship only
-    if player.achievements['collectorship'] == "enabled":
+    if player.achievements['collectorship'] == "enabled" or DEBUG_COLLECTORSHIP:
       return ['collectorship']
 
     # If not collector ship, passing is always an option
     items = ['pass']
-    if player.achievements['suicidemission'] == "enabled":
+    if player.achievements['suicidemission'] == "enabled" or DEBUG_SUICIDEMISSION:
       items.append('suicide')
 
     for item in self._all_items:

@@ -3,11 +3,11 @@
 #####
 # HARBINGER MODE
 #
-# This mode layers atop other game modes, specifically story missions featuring 
+# This mode layers atop other game modes, specifically story missions featuring
 # the Collectors (i.e. Collector Ship, Derelict Reaper(?), and Suicide Mission).
 #
 # Once enabled, this mode alternates a timed shot (available for 15s, disabled
-# for 15s) at the battering ram. Hitting the ram twice during the 15s window 
+# for 15s) at the battering ram. Hitting the ram twice during the 15s window
 # increases the playfield multiplier 1x for 60 seconds. These multipliers can
 # stack, but all are reset when the mode ends.
 #
@@ -34,7 +34,7 @@ timers:
     direction: down
     start_running: false
     control_events:
-      - event: harbinger_disabled_timer_complete
+      - event: timer_harbinger_disabled_timer_complete
         action: restart
       - event: harbinger_shot_hot_hit
         action: stop
@@ -47,7 +47,7 @@ timers:
     direction: down
     start_running: true
     control_events:
-      - event: harbinger_enabled_timer_complete
+      - event: timer_harbinger_enabled_timer_complete
         action: restart
       - event: harbinger_shot_hot_hit
         action: restart
@@ -78,14 +78,22 @@ shot_profiles:
 shots:
   harbinger_shot:
     switch: s_battering_ram
-    enable_events: 
-      - harbinger_disabled_timer_complete
-    disable_events: 
-      - harbinger_enabled_timer_complete
+    enable_events:
+      - timer_harbinger_disabled_timer_complete
+    disable_events:
+      - timer_harbinger_enabled_timer_complete
       - harbinger_shot_hot_hit
     reset_events: harbinger_disabled_timer_complete
     show_tokens:
       leds: l_battering_ram_bot
+
+light_player:
+  harbinger_shot_enabled:
+    l_battering_ram_arrow:
+      color: on
+  harbinger_shot_disabled:
+    l_battering_ram_arrow:
+      color: off
 
 sound_player:
   harbinger_shot_enabled: harbinger_enabledsound  # "Assuming direct control..."
@@ -93,24 +101,24 @@ sound_player:
   harbinger_shot_hot_hit: harbinger_killedsound   # "This form means nothing..."
 
 sound_pools:
-  harbinger_enabledsound: 
+  harbinger_enabledsound:
     type: random_force_all
     track: voice
     max_queue_time: 3s
     sounds: harbinger_enabledsound_1, harbinger_enabledsound_2, harbinger_enabledsound_3, harbinger_enabledsound_4, harbinger_enabledsound_5, harbinger_enabledsound_6, harbinger_enabledsound_7, harbinger_enabledsound_8, harbinger_enabledsound_9
-  harbinger_hitsound: 
+  harbinger_hitsound:
     type: random_force_all
     track: voice
     max_queue_time: 3s
     sounds: harbinger_hitsound_1, harbinger_hitsound_2, harbinger_hitsound_3, harbinger_hitsound_4, harbinger_hitsound_5, harbinger_hitsound_6, harbinger_hitsound_7, harbinger_hitsound_8
-  harbinger_killedsound: 
+  harbinger_killedsound:
     type: random_force_all
     track: voice
     max_queue_time: 3s
     sounds: harbinger_killedsound_1, harbinger_killedsound_2, harbinger_killedsound_3, harbinger_killedsound_4, harbinger_killedsound_5
 
 sounds:
-  harbinger_enabledsound_1: 
+  harbinger_enabledsound_1:
     file: en_us_global_collector_general_ss_collector_general_00346726_m.ogg # "We are Harbinger"
   harbinger_enabledsound_2:
     file: en_us_global_collector_general_ss_collector_general_00346727_m.ogg # "Assuming direct control"
