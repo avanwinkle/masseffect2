@@ -51,7 +51,7 @@ event_player:
     - stop_mode_recruitbase
     - disable_nonrecruit_modes
     - start_mode_collectorship_base
-  start_mode_collectorship_base_stopped:
+  mode_collectorship_base_stopped:
     - start_mode_recruitbase
     - reenable_nonrecruit_modes
   fullorbit_enter_hit:

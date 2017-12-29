@@ -33,7 +33,7 @@ multiballs:
     ball_count_type: total
     start_events: mode_collectorship_base_started
     add_a_ball_events: collectorship_add_ball
-    shoot_again: 10s
+    shoot_again: 50s
 
 slide_player:
   mode_collectorship_base_started:
@@ -69,6 +69,13 @@ sound_player:
     music_stinger:
       action: play
   ship_shots_hit: collector_hit
+  multiball_collectorship_multiball_ended:
+    music_ambush:
+      action: stop
+    music_husk:
+      action: stop
+    music_praetorian:
+      action: stop
 
 sound_pools:
   collector_hit:

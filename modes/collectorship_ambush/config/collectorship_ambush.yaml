@@ -61,7 +61,7 @@ shows:
   ship_lit_show:
     - time: 0
       lights:
-        (led): brown
+        (led): 992600
     - time: 0.5s
       lights:
         (led): black
