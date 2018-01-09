@@ -13,6 +13,7 @@ event_player:
     - flippers_on
     - enable_praet_main_shot
     - enable_praet_side_shot
+  praet_attack_timer_complete: disable_flipper
   praetorian_hits_counter_complete: mode_collectorship_praetorian_complete
 
 random_event_player:
@@ -43,13 +44,25 @@ counters:
     starting_count: 0
     count_complete_value: 4
     count_events:
-      - preatorian_shot_hit
+      - praetorian_shot_hit
     direction: up
     reset_events: mode_praetorian_started
+
+# For scoring, the temp_hurryup_value carried over from husks is our base
+scoring:
+  # Add a little for each shot hit
+  praetorian_shot_hit: current_player.temp_hurryup_value * 0.25
+  # Add a bunch for defeating the praetorian
+  praetorian_hits_counter_complete: current_player.temp_hurryup_value * 10
 
 shot_groups:
   praetorian_shot:
     shots: praet_left_ramp, praet_left_orbit, praet_right_ramp, praet_right_orbit, praet_kickback, praet_dropbank, praet_hitbank
+
+shot_profiles:
+  praet_shot_profile:
+    show_when_disabled: false
+    show: praet_shot_show
 
 shots:
   praet_build_shot:
@@ -105,3 +118,25 @@ shots:
     show_tokens:
       led: l_hitbank_shield_rgb
 
+shows:
+  praet_shot_show:
+    - time: 0
+      lights:
+        (led): purple
+    - time: '+1'
+      lights:
+        (led): off
+
+timers:
+  praet_attack_timer:
+    start_value: 25
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: yes
+    restart_on_complete: true
+    control_events:
+      - event: stop_mode_collectorship_praetorian
+        action: stop
+      - event: praetorian_shot_hit
+        action: restart

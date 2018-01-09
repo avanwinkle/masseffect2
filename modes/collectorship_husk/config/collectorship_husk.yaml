@@ -8,7 +8,7 @@ event_player:
   timer_husk_timer_complete: mode_collectorship_husk_complete
 
 random_event_player:
-  husk_build_shot_hit{player.temp_multiplier==0}:
+  husk_build_shot_hit{player.temp_multiplier==0}: # the multiplier increments so we know not to keep enabling shots
     force_different: true
     force_all: false
     events:
@@ -20,17 +20,23 @@ random_event_player:
 
 scoring:
   mode_collectorship_husk_started:
+    temp_hurryup_value: # track the total accumulated value for the praetorian phase
+      action: set
+      score: 0
     temp_build_value:
       action: set
       score: 0
     temp_multiplier: # track whether a shot has been enabled
       action: set
       score: 0
+  mode_collectorship_husk_will_stop:
+    temp_hurryup_value: current_player.temp_build_value # cash out any uncollected value too!
   husk_build_shot_hit:
     temp_build_value: 300 + (current_player.temp_multiplier * 100)
     temp_multiplier: 1
   husk_collect_shot_hit:
     score: current_player.temp_build_value
+    temp_hurryup_value: current_player.temp_build_value
     temp_build_value:
       action: set
       score: 0
@@ -41,6 +47,11 @@ scoring:
 shot_groups:
   husk_collect_shot:
     shots: husk_left_ramp, husk_right_ramp, husk_left_orbit, husk_right_orbit, husk_kickback
+
+shot_profiles:
+  husk_shot_profile:
+    show_when_disabled: false
+    show: husk_shot_show
 
 shots:
   husk_build_shot:
@@ -89,7 +100,7 @@ show_player:
       loops: 6
       priority: 1
       speed: 5
-  mode_collectorship_will_stop:
+  mode_collectorship_husk_will_stop:
     husk_standup_show:
       action: stop
 
@@ -105,6 +116,13 @@ shows:
     - time: '+1':
       lights:
         target_lights: on
+  husk_shot_show:
+    - time: 0
+      lights:
+        (led): blue
+    - time: '+1'
+      lights:
+        (led): off
 
 timers:
   husk_timer:
