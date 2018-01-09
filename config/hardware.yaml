@@ -80,26 +80,26 @@ flippers:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
     enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, flippers_off
+    disable_events: ball_ending, flippers_off, right_flipper_off
     debug: true
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
     enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, flippers_off
+    disable_events: ball_ending, flippers_off, left_flipper_off
     debug: true
 
 drop_targets:
-  drop_target_bottom:
+  bottom:
     switch: s_dropbank_bottom
-  drop_target_middle:
+  middle:
     switch: s_dropbank_middle
-  drop_target_top:
+  top:
     switch: s_dropbank_top
 
 drop_target_banks:
   dropbank:
-    drop_targets: drop_target_bottom, drop_target_middle, drop_target_top
+    drop_targets: bottom, middle, top
     reset_coils: c_dropbank_reset
     reset_on_complete: 1s
 

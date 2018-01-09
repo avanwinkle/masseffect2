@@ -9,6 +9,9 @@ config:
 achievements:
   collectorship:
     enable_events: enable_collectorship
+    complete_events: 
+      - mode_collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
+      - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
   derelictreaper:
     enable_events: enable_derelictreaper
   collectorattack:

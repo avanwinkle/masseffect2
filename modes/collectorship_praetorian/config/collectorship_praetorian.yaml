@@ -1,0 +1,107 @@
+#config_version=5
+mode:
+  start_events: start_mode_praetorian
+  stop_events: stop_mode_praetorian
+  priority: 500
+
+event_player:
+  mode_collectorship_praetorian_started:
+    - enable_praet_main_shot
+    - enable_praet_side_shot
+  mode_collectorship_praetorian_will_stop: flippers_on
+  praetorian_shot_hit:
+    - flippers_on
+    - enable_praet_main_shot
+    - enable_praet_side_shot
+  praetorian_hits_counter_complete: mode_collectorship_praetorian_complete
+
+random_event_player:
+  enable_praet_main_shot:
+    force_different: true
+    force_all: true
+    events:
+      - enable_praet_left_ramp
+      - enable_praet_left_orbit
+      - enable_praet_right_ramp
+      - enable_praet_right_orbit
+  enable_praet_side_shot:
+    force_different: true
+    force_all: false
+    events:
+      - enable_praet_kickback
+      - enable_praet_dropbank
+      - enable_praet_hitbank
+  disable_flipper:
+    force_different: false
+    force_all: false
+    events:
+      - left_flipper_off
+      - right_flipper_off
+
+counters:
+  praetorian_hits_counter:
+    starting_count: 0
+    count_complete_value: 4
+    count_events:
+      - preatorian_shot_hit
+    direction: up
+    reset_events: mode_praetorian_started
+
+shot_groups:
+  praetorian_shot:
+    shots: praet_left_ramp, praet_left_orbit, praet_right_ramp, praet_right_orbit, praet_kickback, praet_dropbank, praet_hitbank
+
+shots:
+  praet_build_shot:
+    hit_events: standuptarget_hit
+  praet_left_ramp:
+    hit_events: sh_left_ramp_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_left_ramp
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+  praet_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_left_orbit
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  praet_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_right_ramp
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+  praet_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_right_orbit
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+  praet_kickback:
+    hit_events: sh_kickback_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_kickback
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_kickback_shield_rgb
+  # These are trying to use the "dropbank" device object, but dunno if it'll work?
+  praet_dropbank:
+    hit_events: drop_target_top_down, drop_target_middle_down, drop_target_bottom_down
+    profile: praet_shot_profile
+    enable_events: enable_praet_dropbank
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_dropbank_shield_rgb
+  praet_hitbank:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    profile: praet_shot_profile
+    enable_events: enable_praet_hitbank
+    disable_events: praetorian_shot_hit
+    show_tokens:
+      led: l_hitbank_shield_rgb
+

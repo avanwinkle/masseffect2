@@ -1,0 +1,118 @@
+#config_version=5
+mode:
+  start_events: start_mode_collectorship_husk
+  stop_events: stop_mode_collectorship_husk
+  priority: 500
+
+event_player:
+  timer_husk_timer_complete: mode_collectorship_husk_complete
+
+random_event_player:
+  husk_build_shot_hit{player.temp_multiplier==0}:
+    force_different: true
+    force_all: false
+    events:
+      - enable_husk_left_ramp
+      - enable_husk_left_orbit
+      - enable_husk_right_ramp
+      - enable_husk_right_orbit
+      - enable_husk_kickback
+
+scoring:
+  mode_collectorship_husk_started:
+    temp_build_value:
+      action: set
+      score: 0
+    temp_multiplier: # track whether a shot has been enabled
+      action: set
+      score: 0
+  husk_build_shot_hit:
+    temp_build_value: 300 + (current_player.temp_multiplier * 100)
+    temp_multiplier: 1
+  husk_collect_shot_hit:
+    score: current_player.temp_build_value
+    temp_build_value:
+      action: set
+      score: 0
+    temp_multiplier:
+      action: set
+      score: 0
+
+shot_groups:
+  husk_collect_shot:
+    shots: husk_left_ramp, husk_right_ramp, husk_left_orbit, husk_right_orbit, husk_kickback
+
+shots:
+  husk_build_shot:
+    hit_events: standuptarget_hit
+  husk_left_ramp:
+    hit_events: sh_left_ramp_hit
+    profile: husk_shot_profile
+    enable_events: enable_husk_left_ramp
+    disable_events: husk_collect_shot_hit
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+  husk_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: husk_shot_profile
+    enable_events: enable_husk_left_orbit
+    disable_events: husk_collect_shot_hit
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  husk_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: husk_shot_profile
+    enable_events: enable_husk_right_ramp
+    disable_events: husk_collect_shot_hit
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+  husk_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: husk_shot_profile
+    enable_events: enable_husk_right_orbit
+    disable_events: husk_collect_shot_hit
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+  husk_kickback:
+    hit_events: sh_kickback_hit
+    profile: husk_shot_profile
+    enable_events: enable_husk_kickback
+    disable_events: husk_collect_shot_hit
+    show_tokens:
+      led: l_kickback_shield_rgb
+
+show_player:
+  mode_collectorship_husk_started: husk_standup_show
+  husk_build_shot_hit: 
+    husk_standup_flash_show:
+      action: play
+      loops: 6
+      priority: 1
+      speed: 5
+  mode_collectorship_will_stop:
+    husk_standup_show:
+      action: stop
+
+shows:
+  husk_standup_show:
+    - time: 0
+      lights:
+        target_lights: on
+  husk_standup_flash_show:
+    - time: 0
+      lights:
+        target_lights: off
+    - time: '+1':
+      lights:
+        target_lights: on
+
+timers:
+  husk_timer:
+    start_value: 30
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: yes
+    control_events:
+      - event: stop_mode_collectorship_husk
+        action: stop

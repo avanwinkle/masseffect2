@@ -17,6 +17,8 @@ event_player:
   mode_collectorship_praetorian_complete:
     - stop_mode_collectorship_praetorian
     - start_mode_collectorship_ambush
+  mode_collectorship_praetorian_complete{device.achievemements.collectorship.state!="complete"}:
+    - levelup
   mode_collectorship_praetorian_failed:
     - stop_mode_collectorship_praetorian
     - start_mode_collectorship_husk
@@ -29,7 +31,7 @@ event_player:
 
 multiballs:
   collectorship_multiball:
-    ball_count: 2 # Start with 2, add up to 2 more
+    ball_count: 2 # Start with 2, add up to 2 more in ambush phase
     ball_count_type: total
     start_events: mode_collectorship_base_started
     add_a_ball_events: collectorship_add_ball

@@ -6,7 +6,8 @@ mode:
 
 event_player:
   ship_shots_complete: mode_collectorship_ambush_complete
-  mode_collectorship_ambush_complete: stop_mode_collectorship_ambush
+  # The below event has not been vetted and probably doesn't work yet
+  ship_shots_hit{device.multiballs.collectorship_multiball.ball_count<4}: collectorship_add_ball
 
 scoring:
   mode_collectorship_ambush_started:
