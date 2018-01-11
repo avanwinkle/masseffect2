@@ -16,8 +16,14 @@ achievements:
     enable_events: enable_derelictreaper
   collectorattack:
     enable_events: enable_collectorattack
+  shadowbroker:
+    enable_events: counter_sbhagalaz_counter_complete
+    complete_events: shadowbroker_boss_complete
   suicidemission:
     enable_events: enable_suicidemission
+  vasir:
+    enable_events: counter_sbvasir_counter_complete
+    complete_events: shadowbroker_vasir_complete
 
 event_player:
   mode_base_started:
@@ -37,10 +43,10 @@ event_player:
   disable_nonrecruit_modes:
     - stop_mode_arrival
     - stop_mode_overlordlight
-    - stop_mode_shadowbroker
+    - stop_mode_shadowbroker_base
     - stop_mode_shopping
   reenable_nonrecruit_modes:
-    - start_mode_shadowbroker
+    - start_mode_shadowbroker_base
     - start_mode_shopping
   # Prior to collector attack: overlord; after: arrival
   reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:

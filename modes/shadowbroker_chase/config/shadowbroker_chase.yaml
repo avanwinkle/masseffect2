@@ -1,0 +1,62 @@
+#config_version=5
+mode:
+  start_events: start_mode_shadowbroker_chase
+  stop_events: stop_mode_shadowbroker_chase
+  priority: 800
+
+event_player:
+  sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
+  shadowbroker_chase_complete: stop_mode_shadowbroker_chase
+
+shot_profiles:
+  chaseprofile:
+    advance_on_hit: false
+    states:
+      - name: off
+        show: off
+      - name: lit
+        show: flash
+
+shots:
+  sbchase_left_ramp:
+    advance_events: sbchase_left_orbit_chaseprofile_lit_hit
+    hit_events: sh_left_ramp_hit
+    reset_events: sbchase_left_ramp_chaseprofile_lit_hit
+    profile: sbchase_shot_profile
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+  sbchase_left_orbit:
+    advance_events: mode_shadowbroker_chase_started
+    reset_events: sbchase_left_orbit_chaseprofile_lit_hit
+    hit_events: sh_left_orbit_hit
+    profile: sbchase_shot_profile
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  sbchase_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: sbchase_shot_profile
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+  sbchase_right_orbit:
+    advance_events: sbchase_left_ramp_chaseprofile_lit_hit
+    hit_events: sh_right_orbit_hit
+    reset_events: sbchase_right_orbit_chaseprofile_lit_hit
+    profile: sbchase_shot_profile
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+  sbchase_kickback:
+    advance_events: sbchase_right_ramp_chaseprofile_lit_hit
+    hit_events: sh_kickback_hit
+    profile: sbchase_shot_profile
+    show_tokens:
+      led: l_kickback_shield_rgb
+
+timers:
+  sbchase_timer:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - event: shadowbroker_chase_complete
+        action: stop

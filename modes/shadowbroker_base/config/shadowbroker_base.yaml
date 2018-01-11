@@ -8,31 +8,42 @@
 # lighting their progress, then enabling shots to start the various modes that
 # progress through the Shadow Broker story.
 #
-# [AVW] This pretty much just lights the dropbanks now. As more modes are made
-#       it will get more advanced. This mode should maybe be renamed as
-#       "shadowbroker_base" to be consistent with other base modes.
 #####
 
 mode:
-  start_events: start_mode_shadowbroker
-  stop_events: stop_mode_shadowbroker
+  start_events: start_mode_shadowbroker_base
+  stop_events: stop_mode_shadowbroker_base
   priority: 500
 
 event_player:
-  start_vasirchase_shot_lit_hit: start_mode_vasirchase
+  # Complete the dropbank after vasir is enabled to begin the chase
+  drop_target_bank_dropbank_down{device.achievements.vasir.state=="enabled"}: start_mode_shadowbroker_chase
+  # Complete the chase to begin Vasir Combat
+  shadowbroker_chase_complete: start_mode_shadowbroker_vasir
+  # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
+  drop_target_bank_dropbank_down{device.achievements.shadowbroker.state=="enabled"}: start_mode_shadowbroker_hagalaz
+  # Complete hagalaz to begin Boss Combat
+  shadowbroker_hagalaz_complete: start_mode_shadowbroker_boss
+  # Complete the dropbank after boss is defeated for extra prizes!
+  drop_target_bank_dropbank_down{device.achievements.shadowbroker.state=="complete"}: award_shadowbroker_prize
 
 counters:
   sbvasir_counter:
-    count_events: sbdroptarget_group_complete
-    multiple_hit_window: 500ms # Not sure why sbdroptarget_group_complete{state:down} fires twice
+    count_events: drop_target_bank_dropbank_down
     starting_count: 0
     count_complete_value: 3
     persist_state: true
     disable_on_complete: true
-    reset_on_complete: false
+  sbhagalaz_counter:
+    enable_events: achievement_vasir_state_completed
+    count_events: drop_target_bank_dropbank_down
+    starting_count: 0
+    count_complete_value: 3
+    persist_state: true
+    disable_on_complete: true
 
 scoring:
-  sbdroptarget_group_complete:
+  drop_target_bank_dropbank_down:
     intel: 1
 
 shot_groups:
@@ -51,38 +62,20 @@ shot_profiles:
         show: sbdrops_two_show
       - name: three_lit
         show: sbdrops_three_show
-  start_sbvasirchase_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: light_sbvasirchase_show
 
 shots:
   enabled_sbvasirchase_shot:
-    hit_events: logicblock_sbvasir_counter_hit
+    advance_events: logicblock_sbvasir_counter_hit
+    reset_events: achievement_vasir_state_completed, achievement_shadowbroker_state_completed
     profile: advance_sbdrops_profile
-  start_vasirchase_shot:
-    hit_events: sh_right_ramp
-    enable_events: logicblock_sbvasir_counter_complete
-    disable_events: start_mode_vasirchase
-    profile: start_sbvasirchase_profile
-  sbdroptarget_bottom_shot:
-    switch: s_dropbank_bottom
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
-  sbdroptarget_middle_shot:
-    switch: s_dropbank_middle
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
-  sbdroptarget_top_shot:
-    switch: s_dropbank_top
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
 
 show_player:
-  sbdroptarget_group_hit:
+  drop_target_bank_dropbank_mixed:
     sbdrops_flash:
       priority: 100
       loops: 6
       speed: 10
-  sbdroptarget_group_complete:
+  drop_target_bank_dropbank_down:
     sbdrops_flash:
       priority: 100
       loops: 12
@@ -120,13 +113,3 @@ shows:
         l_dropbank_bottom: white
         l_dropbank_middle: white
         l_dropbank_top: white
-  light_sbvasirchase_show:
-    - time: 0
-      lights:
-        l_dropbank_bottom: white
-        l_dropbank_middle: white
-        l_dropbank_top: white
-        l_right_ramp_arrow_yellow: white
-    - time: '+1'
-      lights:
-        l_right_ramp_arrow_yellow: black

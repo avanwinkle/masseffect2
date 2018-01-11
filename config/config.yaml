@@ -68,7 +68,9 @@ modes:
   - overlordlight
   - overlordmultiball
   - planets
-  - shadowbroker
+  - shadowbroker_base
+  - shadowbroker_chase
+  - shadowbroker_vasir
   - shopping
 
 window:
