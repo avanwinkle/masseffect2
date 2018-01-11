@@ -1,4 +1,17 @@
 #config_version=5
+
+#####
+# COLLECTOR SHIP: AMBUSH PHASE
+#
+# This phase lights all shots on a hurryup and is completed when all shots have
+# been hit once. This is the first phase of the Collector Ship multiball, and
+# each shot hit will add a ball (up to the multiball maximum).
+#
+# Scoring is based on the hurryup value, which resets every time a shot is hit.
+#
+# This mode will end if the multiball ends.
+#####
+
 mode:
   start_events: start_mode_collectorship_ambush
   stop_events: stop_mode_collectorship_ambush
@@ -69,8 +82,8 @@ shows:
 
 timers:
   shipshottimer:
-    start_value: 24
-    end_value: 0
+    start_value: 25
+    end_value: 1
     tick_interval: 0.5s
     direction: down
     start_running: yes

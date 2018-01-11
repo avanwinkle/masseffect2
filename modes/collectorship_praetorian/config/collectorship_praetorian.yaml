@@ -1,4 +1,22 @@
 #config_version=5
+
+#####
+# COLLECTOR SHIP: PRAETORIAN PHASE
+#
+# This is the final phase of the Collector Ship multiball and lights two random
+# shots (one long lane, one close shot). Each hit randomizes two new shots; the
+# player must hit four shots total to complete the mode. Completing the mode
+# awards a levelup and returns to the Ambush phase for more add-a-balls.
+#
+# This mode features a countdown timer that restarts every time a lit shot is
+# hit. If the timer runs out once, a random flipper is disabled until the player
+# hits another lit shot. If the timer runs out a second time before a lit shot
+# is hit, the mode fails and the multiball returns to the Husk phase.
+#
+# Scoring for this mode is based on the total built value from the preceeding 
+# Husk phase.
+#####
+
 mode:
   start_events: start_mode_praetorian
   stop_events: stop_mode_praetorian

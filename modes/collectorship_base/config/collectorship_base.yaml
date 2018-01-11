@@ -1,8 +1,28 @@
 #config_version=5
+
+#####
+# COLLECTOR SHIP: BASE MODE
+#
+# This mode controls the rotating phases of the Collector Ship multiball, and 
+# handles shared elements like music, effects, slides, and the multiball count.
+# The phases go in the sequence of Ambush > Husk > Praetorian; defeating the
+# Praetorian cycles back to the Ambush phase for an unlimited number of cycles,
+# while failing to defeat the Praetorian regresses back to the Husk phase to
+# try again.
+#
+# The Collector Ship mode is playable only once, and when it becomes available
+# it can only be (and must be) selected from the Mission Selector. Regardless
+# of whether the player "completes" the mission by defeating the Praetorian, 
+# once the multiballs drain down to one this mode ends and cannot be restarted.
+#####
+
 mode:
   start_events: start_mode_collectorship_base
   stop_events: stop_mode_collectorship_base
   priority: 300
+
+config:
+  - collectorship_slides.yaml
 
 event_player:
   mode_collectorship_base_started:

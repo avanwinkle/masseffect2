@@ -1,4 +1,15 @@
 #config_version=5
+
+#####
+# COLLECTOR SHIP: HUSK PHASE
+#
+# This phase lights targets to build value and shots to collect the built value.
+# It runs on a fixed 60s timer and automatically advances to the Praetorian
+# phase when the timer completes.
+#
+# This mode will also end if the multiball ends.
+#####
+
 mode:
   start_events: start_mode_collectorship_husk
   stop_events: stop_mode_collectorship_husk

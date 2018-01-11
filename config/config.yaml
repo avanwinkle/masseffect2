@@ -41,12 +41,13 @@ modes:
   - base
   - bonus
   - lockhandler
+  - missionselect
+  - pause
+  # Collector Ship Modes:
   - collectorship_ambush
   - collectorship_base
   - collectorship_husk
   - collectorship_praetorian
-  - missionselect
-  - pause
   # Recruit Modes:
   - recruitbase
   - recruitfield
