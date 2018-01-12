@@ -11,7 +11,8 @@
 #
 # TODO: Scoring? The battering ram is a lightning conduit?
 #
-# Progress is not saved for this mode.
+# Progress is not saved for this mode, but it must only be completed one time.
+# Once Boss Combat has been reached, that mode can be restarted directly.
 #####
 
 mode:
@@ -35,8 +36,10 @@ event_player:
   hagalaz_target5_hagalaz_profile_lit_hit:
     - enable_shunt_right_ramp
     - enable_shunt_right_orbit
+  sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz
   shunt_counter_complete: enable_final_shunt
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
+  shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
 
 counters:
   shunt_counter:
@@ -147,3 +150,15 @@ shots:
     show_tokens: 
       leds: l_standup_5
   
+timers:
+  sbhagalaz_timer:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - event: shadowbroker_hagalaz_complete
+        action: stop
+      - event: shunt_shot_hit
+        action: add
+        value: 12

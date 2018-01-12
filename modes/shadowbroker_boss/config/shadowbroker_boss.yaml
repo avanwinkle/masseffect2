@@ -3,6 +3,15 @@
 #####
 # LAIR OF THE SHADOW BROKER: BOSS COMBAT
 #
+# This mode begins with a random shot lit as the Shadow Broker. The shot is blue
+# for full shields, one hit turns it yellow for armor. A second hit moves the 
+# shot to the left ramp and red for health; hitting this shot completes a "round"
+# and plays a cinematic.
+#
+# After a round, a new random shot is lit (with full shields again) and another
+# round must be completed. Completing three rounds will finish the mode.
+#
+# TODO: Scoring
 #####
 
 mode:
@@ -14,7 +23,10 @@ event_player:
   mode_shadowbroker_boss_started: shadowbroker_round_start|5s # Simulate delay for opening cineanim
   sbboss_shot_sbboss_shot_profile_armor_hit: enable_sbboss_finalshot
   sbboss_left_ramp_hit: shadowbroker_round_start
-  sbboss_round_counter_complete: shadowbroker_boss_complete
+  sbboss_round_counter_complete: 
+    - shadowbroker_boss_complete
+    - levelup
+  shadowbroker_boss_complete: stop_mode_shadowbroker_boss
 
 random_event_player:
   enable_random_sbboss_shot:
@@ -42,14 +54,17 @@ shot_profiles:
     reset_events: shadowbroker_round_start
     steps:
       - name: shields
+        show: flash_color_show
         show_tokens:
           color: blue
       - name: armor
+        show: flash_color_show
         show_tokens:
           color: yellow
   sbboss_health_profile:
     steps:
       - name: health
+        show: flash_color_show
         show_tokens:
           color: red
 

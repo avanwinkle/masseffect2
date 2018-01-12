@@ -1,7 +1,7 @@
 #config_version=5
 
 #####
-# SHADOW BROKER MODE
+# LAIR OF THE SHADOW BROKER: BASE MODE
 #
 # This mode is the base mode for handling progress through the Shadow Broker 
 # side missions. It primarily handles tracking the dropbank completions and

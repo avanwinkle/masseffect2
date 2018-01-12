@@ -1,4 +1,18 @@
 #config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: VASIR CHASE
+#
+# This mode is triggered by dropping the dropbank and involves a series of shots
+# that must be hit within a time limit (LO > LR > RO > KB). Completing the series
+# begins the Vasir Combat mode.
+#
+# TODO: Scoring
+#
+# Progress is not saved for this mode, not even completing it. Failing this mode
+# or Vasir Combat requires the player to restart from the beginning of the chase.
+#####
+
 mode:
   start_events: start_mode_shadowbroker_chase
   stop_events: stop_mode_shadowbroker_chase
@@ -7,6 +21,11 @@ mode:
 event_player:
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete: stop_mode_shadowbroker_chase
+  sbchase_timer_complete: stop_mode_shadowbroker_chase
+
+shot_groups:
+  sbchase_shots:
+    sbchase_left_ramp, sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_kickback
 
 shot_profiles:
   chaseprofile:
@@ -60,3 +79,6 @@ timers:
     control_events:
       - event: shadowbroker_chase_complete
         action: stop
+      - event: sbchase_shots_hit
+        action: add
+        value: 12

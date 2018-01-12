@@ -1,4 +1,23 @@
 #config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: VASIR COMBAT
+# 
+# This mode begins immediately upon completion of the Chase mode and involves
+# a fast-moving target that must be hit three times. The target is lit for Vasir's
+# barriers (purple), then armor (yellow), then health (red), and rotates to a
+# new shot every 12 seconds. Hitting the target three times defeats Vasir and
+# completes the mode.
+#
+# This mode has a hurryup timer and the mode fails if the timer expires.
+#
+# TODO: Scoring
+#
+# Progress is saved upon completion of this mode, enabling the player to advance
+# to the Hagalaz/Boss modes. If this mode is failed, it may only be restarted
+# by completing the Chase mode again.
+#####
+
 mode:
   start_events: start_mode_shadowbroker_vasir
   stop_events: stop_mode_shadowbroker_vasir
