@@ -16,8 +16,11 @@ achievements:
     enable_events: enable_derelictreaper
   collectorattack:
     enable_events: enable_collectorattack
-  shadowbroker:
+  hagalaz:
     enable_events: counter_sbhagalaz_counter_complete
+    complete_events: shadowbroker_hagalaz_complete
+  shadowbroker:
+    enable_events: shadowbroker_hagalaz_complete
     complete_events: shadowbroker_boss_complete
   suicidemission:
     enable_events: enable_suicidemission

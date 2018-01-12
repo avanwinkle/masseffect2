@@ -71,6 +71,11 @@ ball_devices:
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
     debug: True
+  bd_hold:
+    ball_capacity: 1
+    entrance_switch: s_kickback
+    hold_coil: c_up_post
+    hold_coil_release_time: 1s
 
 flippers:
   right_flipper:

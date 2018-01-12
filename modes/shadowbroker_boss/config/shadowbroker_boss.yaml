@@ -1,0 +1,88 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: BOSS COMBAT
+#
+#####
+
+mode:
+  start_events: start_mode_shadowbroker_boss
+  stop_events: stop_mode_shadowbroker_boss
+  priority: 800
+
+event_player:
+  mode_shadowbroker_boss_started: shadowbroker_round_start|5s # Simulate delay for opening cineanim
+  sbboss_shot_sbboss_shot_profile_armor_hit: enable_sbboss_finalshot
+  sbboss_left_ramp_hit: shadowbroker_round_start
+  sbboss_round_counter_complete: shadowbroker_boss_complete
+
+random_event_player:
+  enable_random_sbboss_shot:
+    force_all: true
+    events:
+      - enable_sbboss_left_orbit
+      - enable_sbboss_right_orbit
+      - enable_sbboss_right_ramp
+
+counters:
+  sbboss_round_counter:
+    starting_value: 0
+    complete_value: 3
+    direction: up
+    count_events: sbboss_left_ramp_hit
+
+multiballs:
+  shadowbroker_multiball:
+    ball_count: 2
+    ball_locks: bd_hold
+    start_or_add_a_ball_events: shadowbroker_round_start
+
+shot_profiles:
+  sbboss_shot_profile:
+    reset_events: shadowbroker_round_start
+    steps:
+      - name: shields
+        show_tokens:
+          color: blue
+      - name: armor
+        show_tokens:
+          color: yellow
+  sbboss_health_profile:
+    steps:
+      - name: health
+        show_tokens:
+          color: red
+
+shot_groups:
+  sbboss_shot:
+    shots: sbboss_left_orbit, sbboss_right_orbit, sbboss_right_ramp
+
+shots:
+  sbboss_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: enable_sbboss_finalshot
+    disable_events: sbboss_left_ramp_hit
+    profile: sbboss_health_profile
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+  sbboss_left_orbit:
+    enable_events: enable_sbboss_left_orbit
+    disable_events: enable_sbboss_finalshot
+    hit_events: sh_left_orbit_hit
+    profile: sbboss_shot_profile
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  sbboss_right_ramp:
+    enable_events: enable_sbboss_right_ramp
+    disable_events: enable_sbboss_finalshot
+    hit_events: sh_right_ramp_hit
+    profile: sbboss_shot_profile
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+  sbboss_right_orbit:
+    enable_events: enable_sbboss_right_orbit
+    disable_events: enable_sbboss_finalshot
+    hit_events: sh_right_orbit_hit
+    profile: sbboss_shot_profile
+    show_tokens:
+      led: l_right_orbit_shield_rgb
