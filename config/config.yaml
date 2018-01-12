@@ -84,8 +84,8 @@ displays:
     width: 128
     height: 32
     default: true
-    round_anchor_x: left
-    round_anchor_y: bottom
+    round_anchor_x: right
+    round_anchor_y: top
 
 light_player:
   gi_on:
@@ -195,7 +195,7 @@ sounds:
 
 widget_styles:
   text_default:
-    font_name: Quadrit
+    font_name: Quadrit-10
     font_size: 10
     adjust_top: 2
     adjust_bottom: 3
@@ -212,7 +212,7 @@ widget_styles:
     adjust_top: 2
     adjust_bottom: 3
   medium:
-    font_name: pixelmix
+    font_name: pixelmix-8
     font_size: 8
     adjust_top: 1
     adjust_bottom: 1
@@ -229,14 +229,14 @@ widget_styles:
     anchor_x: top
     anchor_y: left
   bonus_title_style:
-    font_name: Quadrit
+    font_name: Quadrit-10
     font_size: 10
     adjust_bottom: 3
     adjust_top: 2
     anchor_y: bottom
     y: middle
   bonus_score_style:
-    font_name: pixelmix
+    font_name: pixelmix-8
     font_size: 8
     anchor_y: top
     adjust_top: 1
@@ -244,7 +244,7 @@ widget_styles:
     y: middle-4
     number_grouping: true
   quadrit_big:
-    font_name: quadrit
+    font_name: Quadrit-10
     font_size: 10
     adjust_bottom: 3
     adjust_top: 2

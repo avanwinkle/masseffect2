@@ -337,7 +337,7 @@ slides:
     widgets:
       - type: text
         text: Recruit (last_recruit)
-        font_name: Quadrit
+        font_name: Quadrit-10
         font_size: 10
         anchor_y: bottom
         y: bottom+45%
@@ -350,7 +350,7 @@ slides:
     widgets:
       - type: text
         text: Recruit (last_recruit)
-        font_name: Quadrit
+        font_name: Quadrit-10
         font_size: 10
         anchor_y: bottom
         y: bottom+45%
@@ -363,7 +363,7 @@ slides:
     widgets:
       - type: text
         text: (last_recruit) Ready!
-        font_name: Quadrit
+        font_name: Quadrit-10
         font_size: 10
         anchor_y: bottom
         y: bottom+45%
@@ -519,12 +519,20 @@ widget_player:
 widgets:
   n7_progress_widget:
     - type: text
-      text: "N7 assignment in (count)"
+      text: "N7 assignment in"
       style: dmd_small
       anchor_y: bottom
       anchor_x: left
       y: 2
       x: 2
+      z: 2
+    - type: text
+      text: "(count)"
+      style: dmd_small
+      anchor_y: bottom
+      anchor_x: left
+      x: 48
+      y: 2
       z: 2
     - type: rectangle
       width: 128

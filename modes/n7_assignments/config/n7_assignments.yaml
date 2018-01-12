@@ -188,7 +188,7 @@ slides:
         x: 2
         y: top-2
         font_size: 8
-        font_name: pixelmix
+        font_name: pixelmix-8
   n7_hurryupslide:
     widgets:
       - type: image
@@ -206,7 +206,7 @@ slides:
         x: 2
         y: top-2
         font_size: 8
-        font_name: pixelmix
+        font_name: pixelmix-8
 
 sound_player:
   mode_n7_assignments_started:

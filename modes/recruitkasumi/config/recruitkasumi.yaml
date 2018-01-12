@@ -227,14 +227,14 @@ slides:
     widgets:
       - type: text
         text: Infiltrate Hock's Vault
-        font_name: pixelmix
+        font_name: pixelmix-8
         font_size: 8
         anchor_y: bottom
         y: middle+2
         z: 1
       - type: text
         text: Avoid the Alarms
-        font_name: pixelmix
+        font_name: pixelmix-8
         font_size: 8
         anchor_y: top
         y: middle-2

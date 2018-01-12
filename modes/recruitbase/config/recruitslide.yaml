@@ -85,7 +85,7 @@ widgets:
   recruitwidget_mission:
     - type: text
       text: (missionname)
-      font_name: pixelmix
+      font_name: pixelmix-8
       font_size: 8
       anchor_x: left
       anchor_y: top
@@ -96,7 +96,7 @@ widgets:
       text: (player|temp_hurryup_value)
       number_grouping: true
       font_size: 10
-      font_name: Quadrit
+      font_name: Quadrit-10
       anchor_x: left
       anchor_y: bottom
       x: 2
@@ -104,7 +104,7 @@ widgets:
   time_remaining_widget:
     - type: text
       text: "(ticks_remaining)"
-      font_name: pixelmix
+      font_name: pixelmix-8
       font_size: 8
       anchor_x: right
       anchor_y: bottom
