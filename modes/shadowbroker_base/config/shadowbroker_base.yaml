@@ -3,7 +3,7 @@
 #####
 # LAIR OF THE SHADOW BROKER: BASE MODE
 #
-# This mode is the base mode for handling progress through the Shadow Broker 
+# This mode is the base mode for handling progress through the Shadow Broker
 # side missions. It primarily handles tracking the dropbank completions and
 # lighting their progress, then enabling shots to start the various modes that
 # progress through the Shadow Broker story.
@@ -17,19 +17,27 @@ mode:
 
 event_player:
   # Complete the dropbank after vasir is enabled to begin the chase
-  drop_target_bank_dropbank_down{device.achievements.vasir.state=="enabled"}: start_mode_shadowbroker_chase
+  sbdroptarget_group_complete{device.achievements.vasir.state=="enabled"}:
+    - start_mode_shadowbroker_chase
+    - enter_shadowbroker_modes
   # Complete the chase to begin Vasir Combat
-  shadowbroker_chase_complete: start_mode_shadowbroker_vasir
+  shadowbroker_chase_complete:
+    - start_mode_shadowbroker_vasir
+    - enter_shadowbroker_modes
   # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
-  drop_target_bank_dropbank_down{device.achievements.hagalaz.state=="enabled"}: start_mode_shadowbroker_hagalaz
+  sbdroptarget_group_complete{device.achievements.hagalaz.state=="enabled"}:
+    - start_mode_shadowbroker_hagalaz
+    - enter_shadowbroker_modes
   # Get to the end of hagalaz to enable the hold for Boss Combat
   enable_final_shunt: enable_shadowbroker_hold
   # If the mode is restarted and boss combat is enabled, re-enable the hold
   mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}: enable_shadowbroker_hold
   # Get a ball in the ball hold to begin Boss Combat
-  ball_hold_shadowbroker_hold_held_ball: start_mode_shadowbroker_boss
+  ball_hold_shadowbroker_hold_held_ball:
+    - start_mode_shadowbroker_boss
+    - enter_shadowbroker_modes
   # Complete the dropbank after boss is defeated for extra prizes!
-  drop_target_bank_dropbank_down{device.achievements.shadowbroker.state=="complete"}: award_shadowbroker_prize
+  sbdroptarget_group_complete{device.achievements.shadowbroker.state=="complete"}: award_shadowbroker_prize
 
 ball_holds:
   shadowbroker_hold:
@@ -41,25 +49,28 @@ ball_holds:
 
 counters:
   sbvasir_counter:
-    count_events: drop_target_bank_dropbank_down
+    count_events: sbdroptarget_group_complete
     starting_count: 0
     count_complete_value: 3
     persist_state: true
     disable_on_complete: true
   sbhagalaz_counter:
     enable_events: achievement_vasir_state_completed
-    count_events: drop_target_bank_dropbank_down
+    count_events: sbdroptarget_group_complete
     starting_count: 0
     count_complete_value: 3
     persist_state: true
     disable_on_complete: true
 
 scoring:
-  drop_target_bank_dropbank_down:
+  sbdroptarget_group_complete:
     intel: 1
 
 shot_groups:
   sbdroptarget_group:
+    enable_events: start_mode_shadowbroker_base, exit_shadowbroker_modes
+    disable_events: enter_shadowbroker_modes
+    reset_events: sbdroptarget_group_complete
     shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot
 
 shot_profiles:
@@ -76,18 +87,27 @@ shot_profiles:
         show: sbdrops_three_show
 
 shots:
-  enabled_sbvasirchase_shot:
-    advance_events: logicblock_sbvasir_counter_hit
-    reset_events: achievement_vasir_state_completed, achievement_shadowbroker_state_completed
+  sbdroptarget_bottom_shot:
+    switch: s_dropbank_bottom
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdroptarget_middle_shot:
+    switch: s_dropbank_middle
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdroptarget_top_shot:
+    switch: s_dropbank_top
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdrop_showshot:
+    advance_events: sbdroptarget_group_complete
+    reset_events: achievement_vasir_state_completed
     profile: advance_sbdrops_profile
 
 show_player:
-  drop_target_bank_dropbank_mixed:
+  sbdroptarget_group_hit:
     sbdrops_flash:
       priority: 100
       loops: 6
       speed: 10
-  drop_target_bank_dropbank_down:
+  sbdroptarget_group_complete:
     sbdrops_flash:
       priority: 100
       loops: 12

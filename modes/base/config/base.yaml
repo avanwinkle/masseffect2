@@ -17,7 +17,7 @@ achievements:
   collectorattack:
     enable_events: enable_collectorattack
   hagalaz:
-    enable_events: counter_sbhagalaz_counter_complete
+    enable_events: logicblock_sbhagalaz_counter_complete
     complete_events: shadowbroker_hagalaz_complete
   shadowbroker:
     enable_events: shadowbroker_hagalaz_complete
@@ -25,7 +25,7 @@ achievements:
   suicidemission:
     enable_events: enable_suicidemission
   vasir:
-    enable_events: counter_sbvasir_counter_complete
+    enable_events: logicblock_sbvasir_counter_complete
     complete_events: shadowbroker_vasir_complete
 
 event_player:
@@ -43,11 +43,19 @@ event_player:
   mode_overlordmultiball_stopped:
     - start_mode_recruitbase
     - reenable_nonrecruit_modes
+  disable_recruit_modes:
+    - stop_mode_recruitbase
+    - stop_mode_recruitfield
+    - stop_mode_planets
   disable_nonrecruit_modes:
     - stop_mode_arrival
     - stop_mode_overlordlight
     - stop_mode_shadowbroker_base
     - stop_mode_shopping
+  reenable_recruit_modes:
+    - start_mode_recruitbase
+    - start_mode_recruitfield
+    - start_mode_planets
   reenable_nonrecruit_modes:
     - start_mode_shadowbroker_base
     - start_mode_shopping
@@ -60,14 +68,23 @@ event_player:
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
   missionselect_collectorship_selected:
-    - stop_mode_recruitbase
+    - disable_recruit_modes
     - disable_nonrecruit_modes
-    - stop_mode_planets
     - start_mode_collectorship_base
   mode_collectorship_base_stopped:
-    - start_mode_recruitbase
+    - reenable_recruit_modes
     - reenable_nonrecruit_modes
     - start_mode_planets
+  enter_shadowbroker_modes:
+    - disable_recruit_modes
+    - stop_mode_arrival
+    - stop_mode_overlordlight
+    - stop_mode_shopping
+  exit_shadowbroker_modes:
+    - reenable_recruit_modes
+    - start_mode_arrival
+    - start_mode_overlordlight
+    - start_mode_shopping
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches
@@ -160,13 +177,12 @@ shots:
     switch: s_hitbank_top
   sh_hitbank_bottom:
     switch: s_hitbank_bottom
-  # Dropbanks are here, but not necessary yet
-  # sh_dropbank_top:
-  #   switch: s_dropbank_top
-  # sh_dropbank_middle:
-  #   switch: s_dropbank_middle
-  # sh_dropbank_bottom:
-  #   switch: s_dropbank_bottom
+  sh_dropbank_top:
+    switch: s_dropbank_top
+  sh_dropbank_middle:
+    switch: s_dropbank_middle
+  sh_dropbank_bottom:
+    switch: s_dropbank_bottom
   # Other commonly-used or commonly-behaving shots
   fullorbit_enter:
     switches: s_left_orbit, s_right_orbit

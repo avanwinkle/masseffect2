@@ -73,9 +73,10 @@ ball_devices:
     debug: True
   bd_hold:
     ball_capacity: 1
-    entrance_switch: s_kickback
     hold_coil: c_up_post
     hold_coil_release_time: 1s
+    # hold_switches: s_kickback
+    entrance_switch: s_kickback
 
 flippers:
   right_flipper:
@@ -89,19 +90,26 @@ flippers:
     enable_events: ball_starting, flippers_on
     disable_events: ball_ending, flippers_off, left_flipper_off
 
-drop_targets:
-  bottom:
-    switch: s_dropbank_bottom
-  middle:
-    switch: s_dropbank_middle
-  top:
-    switch: s_dropbank_top
+# drop_targets:
+#   bottom:
+#     switch: s_dropbank_bottom
+#     ignore_switch_inactive: true
+#     debug: true
+#   middle:
+#     switch: s_dropbank_middle
+#     ignore_switch_inactive: true
+#     debug: true
+#   top:
+#     switch: s_dropbank_top
+#     ignore_switch_inactive: true
+#     debug: true
 
-drop_target_banks:
-  dropbank:
-    drop_targets: bottom, middle, top
-    reset_coils: c_dropbank_reset
-    reset_on_complete: 1s
+# drop_target_banks:
+#   dropbank:
+#     drop_targets: bottom, middle, top
+#     reset_coils: c_dropbank_reset
+#     reset_on_complete: 1s
+#     debug: true
 
 kickbacks:
   dragon_kickback:
@@ -253,7 +261,7 @@ switches:
   s_kickback:
     number: 10-14
     ignore_window_ms: 300
-    tags: playfield_active
+    # tags: playfield_active
   s_lock_1:
     number: 9-0
   s_lock_2:

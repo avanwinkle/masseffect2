@@ -4,7 +4,7 @@
 # LAIR OF THE SHADOW BROKER: BOSS COMBAT
 #
 # This mode begins with a random shot lit as the Shadow Broker. The shot is blue
-# for full shields, one hit turns it yellow for armor. A second hit moves the 
+# for full shields, one hit turns it yellow for armor. A second hit moves the
 # shot to the left ramp and red for health; hitting this shot completes a "round"
 # and plays a cinematic.
 #
@@ -23,10 +23,10 @@ event_player:
   mode_shadowbroker_boss_started: shadowbroker_round_start|5s # Simulate delay for opening cineanim
   sbboss_shot_sbboss_shot_profile_armor_hit: enable_sbboss_finalshot
   sbboss_left_ramp_hit: shadowbroker_round_start
-  sbboss_round_counter_complete: 
+  sbboss_round_counter_complete:
     - shadowbroker_boss_complete
     - levelup
-  shadowbroker_boss_complete: stop_mode_shadowbroker_boss
+  shadowbroker_boss_complete: stop_mode_shadowbroker_boss, exit_shadowbroker_modes
 
 random_event_player:
   enable_random_sbboss_shot:
@@ -38,8 +38,8 @@ random_event_player:
 
 counters:
   sbboss_round_counter:
-    starting_value: 0
-    complete_value: 3
+    starting_count: 0
+    count_complete_value: 3
     direction: up
     count_events: sbboss_left_ramp_hit
 
@@ -51,8 +51,7 @@ multiballs:
 
 shot_profiles:
   sbboss_shot_profile:
-    reset_events: shadowbroker_round_start
-    steps:
+    states:
       - name: shields
         show: flash_color_show
         show_tokens:
@@ -62,7 +61,7 @@ shot_profiles:
         show_tokens:
           color: yellow
   sbboss_health_profile:
-    steps:
+    states:
       - name: health
         show: flash_color_show
         show_tokens:
@@ -77,12 +76,14 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: enable_sbboss_finalshot
     disable_events: sbboss_left_ramp_hit
+    reset_events: shadowbroker_round_start
     profile: sbboss_health_profile
     show_tokens:
       led: l_left_ramp_shield_rgb
   sbboss_left_orbit:
     enable_events: enable_sbboss_left_orbit
     disable_events: enable_sbboss_finalshot
+    reset_events: shadowbroker_round_start
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -90,6 +91,7 @@ shots:
   sbboss_right_ramp:
     enable_events: enable_sbboss_right_ramp
     disable_events: enable_sbboss_finalshot
+    reset_events: shadowbroker_round_start
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -97,6 +99,7 @@ shots:
   sbboss_right_orbit:
     enable_events: enable_sbboss_right_orbit
     disable_events: enable_sbboss_finalshot
+    reset_events: shadowbroker_round_start
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:

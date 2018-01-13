@@ -36,10 +36,10 @@ event_player:
   hagalaz_target5_hagalaz_profile_lit_hit:
     - enable_shunt_right_ramp
     - enable_shunt_right_orbit
-  sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz
   shunt_counter_complete: enable_final_shunt
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
   shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
+  sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
 
 counters:
   shunt_counter:
@@ -51,25 +51,25 @@ counters:
 
 shot_groups:
   shunt_shot:
-    shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
+    shots: shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
 
 shot_profiles:
   shunt_profile:
     show_when_disabled: false
-    steps:
+    states:
       - name: lit
         show: flash_color_show
         show_tokens:
           color: orange
   shunt_final_profile:
     show_when_disabled: false
-    steps: 
+    states:
       - name: lit
         show: flash_color_show
         show_tokens:
           color: green
   hagalaz_profile:
-    steps:
+    states:
       - name: lit
         show: flash
       - name: off
@@ -117,39 +117,32 @@ shots:
     profile: shunt_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-  shunt_left_ramp:
-    hit_events: sh_left_ramp_hit
-    enable_events: enable_shunt_left_ramp
-    disable_events: shunt_left_ramp_hit, enable_final_shunt
-    profile: shunt_profile
-    show_tokens:
-      leds: l_left_ramp_shield_rgb
   hagalaz_target1:
     switch: s_target1
     profile: hagalaz_profile
-    show_tokens: 
+    show_tokens:
       leds: l_standup_1
   hagalaz_target2:
     switch: s_target2
     profile: hagalaz_profile
-    show_tokens: 
+    show_tokens:
       leds: l_standup_2
   hagalaz_target3:
     switch: s_target3
     profile: hagalaz_profile
-    show_tokens: 
+    show_tokens:
       leds: l_standup_3
   hagalaz_target4:
     switch: s_target4
     profile: hagalaz_profile
-    show_tokens: 
+    show_tokens:
       leds: l_standup_4
   hagalaz_target5:
     switch: s_target5
     profile: hagalaz_profile
-    show_tokens: 
+    show_tokens:
       leds: l_standup_5
-  
+
 timers:
   sbhagalaz_timer:
     start_value: 60
