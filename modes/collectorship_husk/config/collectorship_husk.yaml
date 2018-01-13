@@ -69,7 +69,7 @@ shot_profiles:
 
 shots:
   husk_build_shot:
-    hit_events: sw_standuptarget_active
+    hit_events: sw_standuptarget_active, sw_bumper_active
   husk_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: husk_shot_profile
@@ -137,6 +137,10 @@ shows:
     - time: '+1'
       lights:
         (leds): off
+
+sound_player:
+  husk_build_shot_hit: husk_sound_short
+  husk_collect_shot_hit: husk_sound_long
 
 timers:
   husktimer:

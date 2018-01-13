@@ -99,6 +99,14 @@ sound_pools:
   collector_hit:
     sounds: collector_noise_1, collector_noise_2, collector_noise_3, collector_noise_4, collector_noise_5, collector_noise_6
     track: sfx
+  husk_sound_short:
+    type: random_force_all
+    simultaneous_limit: 3
+    sounds: husk_short_1, husk_short_2, husk_short_3, husk_short_4, husk_short_5, husk_short_6, husk_short_7
+  husk_sound_long:
+    type: random_force_all
+    simultaneous_limit: 3
+    sounds: husk_long_1, husk_long_2, husk_long_3, husk_long_4, husk_long_5, husk_long_6
 
 sounds:
   music_ambush:
@@ -117,7 +125,7 @@ sounds:
     fade_in: 1s
     fade_out: 1.5s
   music_stinger:
-    file: mus_generic_stinger_053.ogg
+    file: mus_generic_stinger_111.ogg
     track: sfx
   collector_noise_1:
     file: sfx_ss_collector_ss_collector_00349721_m.ogg
@@ -137,4 +145,57 @@ sounds:
   collector_noise_6:
     file: sfx_ss_collector_ss_collector_00349736_m.ogg
     track: sfx
+  husk_short_1:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288225_m.ogg
+  husk_short_2:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288226_m.ogg
+  husk_short_3:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288227_m.ogg
+  husk_short_4:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288231_m.ogg
+  husk_short_5:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288237_m.ogg
+  husk_short_6:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288238_m.ogg
+  husk_short_7:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288239_m.ogg
+  husk_long_1:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288233_m.ogg
+  husk_long_2:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288234_m.ogg
+  husk_long_3:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00288235_m.ogg
+  husk_long_4:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00300983_m.ogg
+  husk_long_5:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00300984_m.ogg
+  husk_long_6:
+    max_queue_time: 1s
+    track: sfx
+    file: sfx_ss_husk_ss_husk_00300986_m.ogg
+
 

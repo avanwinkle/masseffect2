@@ -16,6 +16,9 @@ def match_configs(gamePath, doCopy=False):
   for mode, modesounds in allconfigs.getAllConfigs().items():
     for track, sounds in modesounds.byTrack().items():
       for sound in sounds:
+        if sound in soundCheck:
+          print("ERROR: Sound file '{}'' in mode {} also exists in mode {}".format(sound, mode, soundCheck[sound]['mode']))
+          return
         modepath = "modes/{}/sounds/{}/".format(mode, track)
         gamepath = None
         exists = False

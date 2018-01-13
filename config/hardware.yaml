@@ -165,13 +165,13 @@ switches:
     # type: NC
   s_bumper_left:
     number: 10-1
-    tags: playfield_active
+    tags: playfield_active, bumper
   s_bumper_right:
     number: 10-2
-    tags: playfield_active
+    tags: playfield_active, bumper
   s_bumper_bottom:
     number: 10-3
-    tags: playfield_active
+    tags: playfield_active, bumper
   s_return_lane_left:
     number: 9-5
     tags: playfield_active
