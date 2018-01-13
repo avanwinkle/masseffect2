@@ -531,7 +531,7 @@ widgets:
       style: dmd_small
       anchor_y: bottom
       anchor_x: left
-      x: 48
+      x: 84
       y: 2
       z: 2
     - type: rectangle

@@ -16,10 +16,11 @@ mode:
   priority: 500
 
 event_player:
-  timer_husk_timer_complete: mode_collectorship_husk_complete
+  timer_husktimer_complete: collectorship_husk_complete
+  collectorship_husk_complete: stop_mode_collectorship_husk
 
 random_event_player:
-  husk_build_shot_hit{player.temp_multiplier==0}: # the multiplier increments so we know not to keep enabling shots
+  husk_build_shot_hit{current_player.temp_multiplier==0}: # the multiplier increments so we know not to keep enabling shots
     force_different: true
     force_all: false
     events:
@@ -31,24 +32,24 @@ random_event_player:
 
 scoring:
   mode_collectorship_husk_started:
-    temp_hurryup_value: # track the total accumulated value for the praetorian phase
+    temp_build_value: # track the total accumulated value for the praetorian phase
       action: set
       score: 0
-    temp_build_value:
+    temp_hurryup_value:
       action: set
       score: 0
     temp_multiplier: # track whether a shot has been enabled
       action: set
       score: 0
   mode_collectorship_husk_will_stop:
-    temp_hurryup_value: current_player.temp_build_value # cash out any uncollected value too!
+    temp_build_value: current_player.temp_hurryup_value # cash out any uncollected value too!
   husk_build_shot_hit:
-    temp_build_value: 300 + (current_player.temp_multiplier * 100)
+    temp_hurryup_value: 300 + (current_player.temp_multiplier * 100)
     temp_multiplier: 1
   husk_collect_shot_hit:
-    score: current_player.temp_build_value
-    temp_hurryup_value: current_player.temp_build_value
-    temp_build_value:
+    score: current_player.temp_hurryup_value
+    temp_build_value: current_player.temp_hurryup_value
+    temp_hurryup_value:
       action: set
       score: 0
     temp_multiplier:
@@ -63,49 +64,51 @@ shot_profiles:
   husk_shot_profile:
     show_when_disabled: false
     show: husk_shot_show
+    states:
+      - name: on
 
 shots:
   husk_build_shot:
-    hit_events: standuptarget_hit
+    hit_events: sw_standuptarget_active
   husk_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: husk_shot_profile
     enable_events: enable_husk_left_ramp
     disable_events: husk_collect_shot_hit
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
   husk_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: husk_shot_profile
     enable_events: enable_husk_left_orbit
     disable_events: husk_collect_shot_hit
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
   husk_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: husk_shot_profile
     enable_events: enable_husk_right_ramp
     disable_events: husk_collect_shot_hit
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
   husk_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: husk_shot_profile
     enable_events: enable_husk_right_orbit
     disable_events: husk_collect_shot_hit
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
   husk_kickback:
     hit_events: sh_kickback_hit
     profile: husk_shot_profile
     enable_events: enable_husk_kickback
     disable_events: husk_collect_shot_hit
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
 
 show_player:
   mode_collectorship_husk_started: husk_standup_show
-  husk_build_shot_hit: 
+  husk_build_shot_hit:
     husk_standup_flash_show:
       action: play
       loops: 6
@@ -124,19 +127,19 @@ shows:
     - time: 0
       lights:
         target_lights: off
-    - time: '+1':
+    - time: '+1'
       lights:
         target_lights: on
   husk_shot_show:
     - time: 0
       lights:
-        (led): blue
+        (leds): blue
     - time: '+1'
       lights:
-        (led): off
+        (leds): off
 
 timers:
-  husk_timer:
+  husktimer:
     start_value: 30
     end_value: 0
     tick_interval: 1s
@@ -145,3 +148,4 @@ timers:
     control_events:
       - event: stop_mode_collectorship_husk
         action: stop
+

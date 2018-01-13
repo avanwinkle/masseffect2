@@ -1,7 +1,7 @@
 import copy
 from mpf.modes.carousel.code.carousel import Carousel
 
-DEBUG_COLLECTORSHIP = False
+DEBUG_COLLECTORSHIP = True
 DEBUG_SUICIDEMISSION = False
 
 class MissionSelect(Carousel):

@@ -18,19 +18,24 @@ mode:
   priority: 500
 
 event_player:
-  ship_shots_complete: mode_collectorship_ambush_complete
+  ship_shots_complete: collectorship_ambush_complete
   # The below event has not been vetted and probably doesn't work yet
   ship_shots_hit{game.balls_in_play<4}: collectorship_add_ball
+  collectorship_ambush_complete: stop_mode_collectorship_ambush
 
 scoring:
   mode_collectorship_ambush_started:
     temp_hurryup_value:
       action: set
-      score: 1000
+      score: 12000
   ship_shots_ship_shot_profile_lit_hit:
-   temp_hurryup_value: 1000 * current_player.collectorship_ambush_shipshottimer_tick
-  mode_collectorship_ambush_will_stop:
     score: current_player.temp_hurryup_value
+    temp_hurryup_value:
+     action: set
+     score: 12000
+  timer_ambushtimer_tick:
+    temp_hurryup_value: -500
+
 
 shot_groups:
   ship_shots:
@@ -47,26 +52,31 @@ shot_profiles:
 shots:
   ship_left_ramp:
     hit_events: sh_left_ramp_hit
+    reset_events: mode_collectorship_ambush_started
     profile: ship_shot_profile
     show_tokens:
       led: l_left_ramp_shield_rgb
   ship_left_orbit:
     hit_events: sh_left_orbit_hit
+    reset_events: mode_collectorship_ambush_started
     profile: ship_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
   ship_right_ramp:
     hit_events: sh_right_ramp_hit
+    reset_events: mode_collectorship_ambush_started
     profile: ship_shot_profile
     show_tokens:
       led: l_right_ramp_shield_rgb
   ship_right_orbit:
     hit_events: sh_right_orbit_hit
+    reset_events: mode_collectorship_ambush_started
     profile: ship_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
   ship_kickback:
     hit_events: sh_kickback_hit
+    reset_events: mode_collectorship_ambush_started
     profile: ship_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
@@ -81,7 +91,7 @@ shows:
         (led): black
 
 timers:
-  shipshottimer:
+  ambushtimer:
     start_value: 25
     end_value: 1
     tick_interval: 0.5s
@@ -98,16 +108,16 @@ widget_player:
   mode_collectorship_ambush_started:
     collectorship_debug:
       target: window
-  shipshottimer_start: shipshottimer_remaining_widget
-  shipshottimer_tick:
-    shipshottimer_remaining_widget:
+  ambushtimer_start: ambushtimer_remaining_widget
+  ambushtimer_tick:
+    ambushtimer_remaining_widget:
       action: update
   stop_mode_collectorship_ambush:
     collectorship_debug:
       action: remove
 
 widgets:
-  shipshottimer_remaining_widget:
+  ambushtimer_remaining_widget:
     - type: text
       text: (ticks_remaining)
       anchor_x: left
@@ -123,7 +133,7 @@ widgets:
       x: 10
       y: 10
     - type: text
-      text: "Timer: (player|collectorship_ambush_shipshottimer_tick)"
+      text: "Timer: (player|collectorship_ambush_ambushtimer_tick)"
       anchor_x: left
       anchor_y: bottom
       x: 460

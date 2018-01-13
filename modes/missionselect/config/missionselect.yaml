@@ -88,7 +88,13 @@ slides:
     priority: 1
     widgets:
       - type: text
-        text: Disabled Collector Vessel
+        text: Disabled
+        anchor_y: bottom
+        y: 50%
+      - type: text
+        text: Collector Vessel
+        anchor_y: top
+        y: 50%
   missionselect_suicide_slide:
     priority: 1
     widgets:

@@ -15,41 +15,66 @@ scoring:
 
 slide_player:
   mode_collectorship_base_started: collectorship_baseslide
-  mode_collectorship_base_will_stop:
+  stop_mode_collectorship_base:
     collectorship_baseslide:
       action: remove
 
 slides:
   collectorship_baseslide:
     widgets:
-      - collectorship_phase_widget
-      - collectorship_score_widget
-      - collectorship_hurryup_widget
-      - collectorship_harbinger_widget
+      - type: text
+        text: (last_mission)
+        style: medium
+      - type: text
+        text: (score)
+        style: dmd_small
+        anchor_x: left
+        anchor_y: top
+        x: 2
+        y: top-2
+      - type: text
+        text: (temp_hurryup_value)
+        style: dmd_small
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 2
+
+
+
+widget_player:
+  mode_harbinger_started: harbinger_widget
+  stop_mode_harbinger:
+    harbinger_widget:
+      action: remove
+  timer_ambushtimer_started: timer_widget
+  timer_ambushtimer_tick:
+    timer_widget:
+      action: update
+  timer_husktimer_tick:
+    timer_widget:
+      action: update
+  timer_praetoriantimer_tick:
+    timer_widget:
+      action: update
+  stop_mode_collectorship_base:
+    timer_widget:
+      action: remove
 
 widgets:
-  collectorship_phase_widget:
+  timer_widget:
     - type: text
-      text: (last_mission)
-      style: medium
-  collectorship_score_widget:
-    - type: text
-      text: (score)
-      anchor_x: left
+      text: (ticks_remaining)
+      style: dmd_small
+      anchor_x: right
       anchor_y: top
-      x: 2
-      y: 100%-2
-  collectorship_hurryup_widget:
-    - type: text
-      text: (temp_hurryup_value)
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 2
-  collectorship_harbinger_widget:
+      x: right-2
+      y: top-2
+  harbinger_widget:
     - type: text
       text: (harbinger_multiplier)X
+      style: dmd_small
       anchor_x: right
       anchor_y: bottom
-      x: 100%-2
+      x: right-2
       y: 2

@@ -19,7 +19,7 @@ virtual_platform_start_active_switches:
   s_trough6
 
 mpf-mc:
-  fps: 60
+  fps: 24
 
 game:
   balls_per_game: 5
@@ -102,7 +102,7 @@ player_vars:
   assignments_completed:
     initial_value: 0
   available_missions:
-    initial_value: 0
+    initial_value: 1
   credits:
     initial_value: 0
   last_recruit:
@@ -111,6 +111,8 @@ player_vars:
   last_mission:
     initial_value: "Mission Complete"
     value_type: str
+  harbinger_multiplier:
+    initial_value: 1
   intel:
     initial_value: 0
   level:

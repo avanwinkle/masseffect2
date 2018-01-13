@@ -9,7 +9,7 @@ config:
 achievements:
   collectorship:
     enable_events: enable_collectorship
-    complete_events: 
+    complete_events:
       - mode_collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
       - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
   derelictreaper:
@@ -53,10 +53,12 @@ event_player:
   missionselect_collectorship_selected:
     - stop_mode_recruitbase
     - disable_nonrecruit_modes
+    - stop_mode_planets
     - start_mode_collectorship_base
   mode_collectorship_base_stopped:
     - start_mode_recruitbase
     - reenable_nonrecruit_modes
+    - start_mode_planets
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

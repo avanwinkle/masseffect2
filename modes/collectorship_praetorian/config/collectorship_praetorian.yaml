@@ -13,26 +13,29 @@
 # hits another lit shot. If the timer runs out a second time before a lit shot
 # is hit, the mode fails and the multiball returns to the Husk phase.
 #
-# Scoring for this mode is based on the total built value from the preceeding 
+# Scoring for this mode is based on the total built value from the preceeding
 # Husk phase.
 #####
 
 mode:
-  start_events: start_mode_praetorian
-  stop_events: stop_mode_praetorian
+  start_events: start_mode_collectorship_praetorian
+  stop_events: stop_mode_collectorship_praetorian
   priority: 500
 
 event_player:
   mode_collectorship_praetorian_started:
     - enable_praet_main_shot
     - enable_praet_side_shot
-  mode_collectorship_praetorian_will_stop: flippers_on
   praetorian_shot_hit:
     - flippers_on
     - enable_praet_main_shot
     - enable_praet_side_shot
-  praet_attack_timer_complete: disable_flipper
-  praetorian_hits_counter_complete: mode_collectorship_praetorian_complete
+  timer_praetoriantimer_complete{current_player.temp_multiplier==0}: disable_flipper
+  timer_praetoriantimer_complete{current_player.temp_multilpier>0}: collectorship_praetorian_failed
+  logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
+  collectorship_praetorian_complete: stop_mode_collectorship_praetorian
+  collectorship_praetorian_failed: stop_mode_collectorship_praetorian
+  mode_collectorship_praetorian_will_stop: flippers_on
 
 random_event_player:
   enable_praet_main_shot:
@@ -64,14 +67,28 @@ counters:
     count_events:
       - praetorian_shot_hit
     direction: up
-    reset_events: mode_praetorian_started
+    reset_events: mode_collectorship_praetorian_started
 
 # For scoring, the temp_hurryup_value carried over from husks is our base
 scoring:
   # Add a little for each shot hit
-  praetorian_shot_hit: current_player.temp_hurryup_value * 0.25
+  praetorian_shot_hit:
+    score: 1000 + (current_player.temp_build_value * 0.25)
+    temp_multiplier:
+      action: set
+      score: 0
   # Add a bunch for defeating the praetorian
-  praetorian_hits_counter_complete: current_player.temp_hurryup_value * 10
+  praetorian_hits_counter_complete:
+    score: 4000 + (current_player.temp_build_value * 10)
+  # Use the multiplier to track hits
+  mode_collectorship_praetorian_started:
+    temp_multiplier:
+      action: set
+      score: 0
+  timer_praetoriantimer_complete:
+    temp_multiplier:
+      action: add
+      score: 1
 
 shot_groups:
   praetorian_shot:
@@ -81,6 +98,9 @@ shot_profiles:
   praet_shot_profile:
     show_when_disabled: false
     show: praet_shot_show
+    states:
+      - name: on
+        speed: 1
 
 shots:
   praet_build_shot:
@@ -146,8 +166,8 @@ shows:
         (led): off
 
 timers:
-  praet_attack_timer:
-    start_value: 25
+  praetoriantimer:
+    start_value: 16
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -158,3 +178,37 @@ timers:
         action: stop
       - event: praetorian_shot_hit
         action: restart
+
+widget_player:
+  mode_collectorship_praetorian_started:
+    praetorian_startwidget:
+      action: add
+  counter_praetorian_hits_counter_hit{count==1}:
+    praetorian_startwidget:
+      action: remove
+    praetorian_widget:
+      action: add
+  counter_praetorian_hits_counter_hit{count>1}:
+    praetorian_widget:
+      action: update
+  stop_mode_collectorship_praetorian:
+    praetorian_widget:
+      action: remove
+
+widgets:
+  praetorian_startwidget:
+    - type: text
+      text: "Shots: 4"
+      style: dmd_small
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
+      y: 2
+  praetorian_widget:
+    - type: text
+      text: "Shots: (remaining)"
+      style: dmd_small
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
+      y: 2

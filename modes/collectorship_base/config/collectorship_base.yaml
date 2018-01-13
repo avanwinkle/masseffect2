@@ -3,7 +3,7 @@
 #####
 # COLLECTOR SHIP: BASE MODE
 #
-# This mode controls the rotating phases of the Collector Ship multiball, and 
+# This mode controls the rotating phases of the Collector Ship multiball, and
 # handles shared elements like music, effects, slides, and the multiball count.
 # The phases go in the sequence of Ambush > Husk > Praetorian; defeating the
 # Praetorian cycles back to the Ambush phase for an unlimited number of cycles,
@@ -12,7 +12,7 @@
 #
 # The Collector Ship mode is playable only once, and when it becomes available
 # it can only be (and must be) selected from the Mission Selector. Regardless
-# of whether the player "completes" the mission by defeating the Praetorian, 
+# of whether the player "completes" the mission by defeating the Praetorian,
 # once the multiballs drain down to one this mode ends and cannot be restarted.
 #####
 
@@ -27,20 +27,16 @@ config:
 event_player:
   mode_collectorship_base_started:
     - start_mode_collectorship_ambush
-    - start_mode_harbinger
-  mode_collectorship_ambush_complete:
-    - stop_mode_collectorship_ambush
+    # - start_mode_harbinger
+  stop_mode_collectorship_ambush:
     - start_mode_collectorship_husk
-  mode_collectorship_husk_complete:
-    - stop_mode_collectorship_husk
+  stop_mode_collectorship_husk:
     - start_mode_collectorship_praetorian
-  mode_collectorship_praetorian_complete:
-    - stop_mode_collectorship_praetorian
+  collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
-  mode_collectorship_praetorian_complete{device.achievemements.collectorship.state!="complete"}:
+  collectorship_praetorian_complete{device.achievements.collectorship.state!="complete"}:
     - levelup
-  mode_collectorship_praetorian_failed:
-    - stop_mode_collectorship_praetorian
+  collectorship_praetorian_failed:
     - start_mode_collectorship_husk
   multiball_collectorship_multiball_ended:
     - stop_mode_collectorship_base
@@ -55,7 +51,7 @@ multiballs:
     ball_count_type: total
     start_events: mode_collectorship_base_started
     add_a_ball_events: collectorship_add_ball
-    shoot_again: 50s
+    shoot_again: 10s
 
 slide_player:
   mode_collectorship_base_started:
@@ -110,7 +106,7 @@ sounds:
     track: music
     fade_in: 1s
     fade_out: 1.5s
-  music_husks:
+  music_husk:
     file: mus_critpath2_combat_2_low.ogg
     track: music
     fade_in: 1s
