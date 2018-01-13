@@ -70,10 +70,30 @@ shots:
     show_tokens:
       led: l_kickback_shield_rgb
 
+slide_player:
+  mode_shadowbroker_chase_started: sbchase_slide
+
+slides:
+  sbchase_slide:
+    widgets:
+      - type: text
+        text: CHASE VASIR
+        style: quadrit_big
+        animations:
+          show_slide:                # animation trigger event
+            - property: opacity      # name of the widget property we're animating
+              value: 1               # target value of that property for this step
+              duration: .5s          # duration for this step (how long it takes to get there)
+            - property: opacity      # second step in the animation (starts with a hyphen)
+              value: 0.5
+              duration: .5s
+              repeat: true
+
 timers:
   sbchase_timer:
     start_value: 60
     end_value: 0
+    start_running: true
     tick_interval: 1s
     direction: down
     control_events:
@@ -82,3 +102,22 @@ timers:
       - event: sbchase_shots_hit
         action: add
         value: 12
+
+widget_player:
+  timer_sbchase_timer_started: timer_widget
+  timer_sbchase_timer_tick:
+    timer_widget:
+      action: update
+  stop_mode_shadowbroker_chase:
+    timer_widget:
+      action: remove
+
+widgets:
+  timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: dmd_small
+      anchor_x: right
+      anchor_y: top
+      x: right-2
+      y: top-2

@@ -131,6 +131,25 @@ shows:
       lights:
         (leds): black
 
+slide_player:
+  mode_shadowbroker_vasir_started: sbvasir_slide
+
+slides:
+  sbvasir_slide:
+    widgets:
+      - type: text
+        text: DEFEAT VASIR
+        style: quadrit_big
+        animations:
+          show_slide:                # animation trigger event
+            - property: opacity      # name of the widget property we're animating
+              value: 1               # target value of that property for this step
+              duration: .25s          # duration for this step (how long it takes to get there)
+            - property: opacity      # second step in the animation (starts with a hyphen)
+              value: 0.5
+              duration: .25s
+              repeat: true
+
 timers:
   vasir_timer:  # Timer for the shot rotation
     start_value: 12
@@ -152,3 +171,22 @@ timers:
       - event: shadowbroker_vasir_complete
         action: stop
 
+
+widget_player:
+  timer_vasir_timeout_started: timer_widget
+  timer_vasir_timeout_tick:
+    timer_widget:
+      action: update
+  stop_mode_shadowbroker_chase:
+    timer_widget:
+      action: remove
+
+widgets:
+  timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: dmd_small
+      anchor_x: right
+      anchor_y: top
+      x: right-2
+      y: top-2
