@@ -21,6 +21,8 @@ virtual_platform_start_active_switches:
 mpf-mc:
   fps: 24
 
+scriptlets: mpf_arduino.MPFArduino
+
 game:
   balls_per_game: 5
   max_players: 4
