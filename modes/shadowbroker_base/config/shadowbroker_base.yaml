@@ -16,6 +16,7 @@ mode:
   priority: 500
 
 event_player:
+  sbdroptarget_group_complete: reset_dropbank
   # Complete the dropbank after vasir is enabled to begin the chase
   sbdroptarget_group_complete{device.achievements.vasir.state=="enabled"}:
     - start_mode_shadowbroker_chase
@@ -145,69 +146,3 @@ shows:
         l_dropbank_bottom: white
         l_dropbank_middle: white
         l_dropbank_top: white
-
-sound_groups:
-  husk_sound_short:
-    type: random_force_all
-    simultaneous_limit: 3
-    sounds: husk_short_1, husk_short_2, husk_short_3, husk_short_4, husk_short_5, husk_short_6, husk_short_7
-  husk_sound_long:
-    type: random_force_all
-    simultaneous_limit: 3
-    sounds: husk_long_1, husk_long_2, husk_long_3, husk_long_4, husk_long_5, husk_long_6
-
-sounds:
-  husk_short_1:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288225_m.ogg
-  husk_short_2:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288226_m.ogg
-  husk_short_3:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288227_m.ogg
-  husk_short_4:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288231_m.ogg
-  husk_short_5:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288237_m.ogg
-  husk_short_6:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288238_m.ogg
-  husk_short_7:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288239_m.ogg
-  husk_long_1:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288233_m.ogg
-  husk_long_2:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288234_m.ogg
-  husk_long_3:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00288235_m.ogg
-  husk_long_4:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00300983_m.ogg
-  husk_long_5:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00300984_m.ogg
-  husk_long_6:
-    max_queue_time: 1s
-    track: sfx
-    file: sfx_ss_husk_ss_husk_00300986_m.ogg
-
-
