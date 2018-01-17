@@ -142,6 +142,24 @@ sound_player:
   husk_build_shot_hit: husk_sound_short
   husk_collect_shot_hit: husk_sound_long
 
+sounds:
+  husk_grunt_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295838_m.ogg
+    track: voice
+  husk_grunt_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.ogg
+    track: voice
+  husk_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310134_m.ogg
+    track: voice
+  husk_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310135_m.ogg
+    track: voice
+  husk_miranda_3:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.ogg
+    track: voice
+
+
 timers:
   husktimer:
     start_value: 30

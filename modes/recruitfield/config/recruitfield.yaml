@@ -195,7 +195,6 @@ shots:
       lit: color_shield_blue
       color: 0E1B4F #color_garrus
     tags: recruit_shot
-    debug: true
   recruit_grunt_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_profile
@@ -208,7 +207,6 @@ shots:
       lit: color_shield_orange
       color: ED3A00 #color_grunt
     tags: recruit_shot
-    debug: true
   recruit_jack_shot:
     hit_events: sh_kickback_hit
     profile: recruit_profile

@@ -174,8 +174,8 @@ sound_player:
 sound_pools:
   praet_hit:
     type: random_force_all
-    simultaneous_limit: 2
     sounds: praet_hit_1, praet_hit_2, praet_hit_3, praet_hit_4, praet_hit_5
+    track: sfx
 
 sounds:
   praet_hit_1:

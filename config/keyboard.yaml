@@ -46,6 +46,10 @@ keyboard:
     switch: s_hitbank_top
   0:
     switch: s_hitbank_bottom
+  enter:
+    switch: s_start_button
+  e:
+    event: sbdroptarget_group_complete
 
 
 event_player:

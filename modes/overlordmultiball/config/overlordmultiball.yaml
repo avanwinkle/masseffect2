@@ -9,7 +9,7 @@
 # third ball lock, a three-ball multiball begins with a few random shots lit as
 # hack targets, which are on timers and un-light after the timeout. As they
 # start to timeout, other shots are randomly lit. Hitting any lit shot lights
-# the hitbank for a big jackpot, also on a timer. 
+# the hitbank for a big jackpot, also on a timer.
 #
 # If the player successfully collects three jackpots, the mode has been
 # “completed” and a levelup is earned. From this point the multiball continues
@@ -41,11 +41,9 @@ counters:
   hackshots_hit_counter:
     starting_count: 1
     count_events: hackshots_hit
-    debug: true
   jackpots_hit_counter:
     starting_count: 0
     count_events: jackpotshot_hit
-    debug: true
 
 timers:
   overlord_timer:

@@ -28,16 +28,16 @@ event_player:
   mode_collectorship_base_started:
     - start_mode_collectorship_ambush
     # - start_mode_harbinger
-  stop_mode_collectorship_ambush:
+  collectorship_ambush_complete:
     - start_mode_collectorship_husk
-  stop_mode_collectorship_husk:
+  collectorship_husk_complete:
     - start_mode_collectorship_praetorian
+  collectorship_praetorian_failed:
+    - start_mode_collectorship_husk
   collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
   collectorship_praetorian_complete{device.achievements.collectorship.state!="complete"}:
     - levelup
-  collectorship_praetorian_failed:
-    - start_mode_collectorship_husk
   multiball_collectorship_multiball_ended:
     - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush
@@ -101,12 +101,12 @@ sound_pools:
     track: sfx
   husk_sound_short:
     type: random_force_all
-    simultaneous_limit: 3
     sounds: husk_short_1, husk_short_2, husk_short_3, husk_short_4, husk_short_5, husk_short_6, husk_short_7
+    track: sfx
   husk_sound_long:
     type: random_force_all
-    simultaneous_limit: 3
     sounds: husk_long_1, husk_long_2, husk_long_3, husk_long_4, husk_long_5, husk_long_6
+    track: sfx
 
 sounds:
   music_ambush:

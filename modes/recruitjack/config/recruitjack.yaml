@@ -33,7 +33,6 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
-    debug: true
 
 #####
 # JACK SCORING:
