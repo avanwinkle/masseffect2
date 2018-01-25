@@ -31,7 +31,7 @@ event_player:
     - enable_praet_main_shot
     - enable_praet_side_shot
   timer_praetoriantimer_complete{current_player.temp_multiplier==0}: disable_flipper
-  timer_praetoriantimer_complete{current_player.temp_multilpier>0}: collectorship_praetorian_failed
+  timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
   collectorship_praetorian_complete: stop_mode_collectorship_praetorian
   collectorship_praetorian_failed: stop_mode_collectorship_praetorian

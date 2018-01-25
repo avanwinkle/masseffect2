@@ -7,9 +7,10 @@
 # unlit shots as “safe”; hitting any of the safe shot collects the hurry-up and
 # advances to the next round (voiceprint, DNA sample, password). With each round
 # the just-hit shot becomes alarmed, reducing the number of safe shots. Hitting
-# any alarmed shot fails the mode. Hitting safe four shots completes the mode.
+# three alarmed shots fails the mode. Hitting four safe shots completes the mode.
 #
-# Progress is saved after each shot.
+# Progress is saved after each safe shot hit, and the three-alarm-failure count 
+# resets each time the mode is started.
 #####
 
 mode:
@@ -18,6 +19,7 @@ mode:
   priority: 500
 
 counters:
+  # This counter tracks how many unalarmed shots must be hit to succeed
   kasumi_shots_counter:
     starting_count: 0
     count_complete_value: 4
@@ -31,6 +33,20 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     direction: up
+  # This counter tracks how many alarmed shots are hit before failure
+  kasumi_alarms_counter:
+    starting_count: 3
+    count_complete_value: 0
+    count_events:
+      - left_orbit_alarmed_hit
+      - left_ramp_alarmed_hit
+      - right_orbit_alarmed_hit
+      - right_ramp_alarmed_hit
+      - kickback_alarmed_hit
+    reset_events: mode_recruitkasumi_started
+    events_when_complete: kasumi_failed
+    persist_state: false
+    direction: down
 
 event_player:
   mode_recruitkasumi_started:
@@ -44,21 +60,15 @@ event_player:
   recruit_kasumi_complete:
     recruit_mission_success:
       squadmate: kasumi
-  # I hate having to explicitly call out each shot, but without shot_group profiles...
-  left_orbit_alarmed_hit: kasumi_failed
-  left_ramp_alarmed_hit: kasumi_failed
-  right_orbit_alarmed_hit: kasumi_failed
-  right_ramp_alarmed_hit: kasumi_failed
-  kickback_alarmed_hit: kasumi_failed
 
 #####
 # KASUMI SCORING:
 #    Hurryup starts at 8,000
 #    Hit any unalarmed shot to collect the hurryup value
-#    New hurryup is 8,000 plus the just-collected value
+#    New hurryup is 8,000 plus previously-collected value (resets on restart)
 #    Hurryup depletion scales (bigger hurryup => faster depletion)
 #    4 unalarmed shots completes the mission
-#    Progress is saved after each shot
+#    Score is collected after each shot
 #####
 scoring:
   mode_recruitkasumi_started:
@@ -212,14 +222,17 @@ slide_player:
   kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
-  counter_kasumi_shots_counter_hit{count==1}:
+  logicblock_kasumi_shots_counter_hit{value==1}:
     kasumi_slide_1:
       expire: 3s
-  counter_kasumi_shots_counter_hit{count==2}:
+  logicblock_kasumi_shots_counter_hit{value==2}:
     kasumi_slide_2:
       expire: 3s
-  counter_kasumi_shots_counter_hit{count==3}:
+  logicblock_kasumi_shots_counter_hit{value==3}:
     kasumi_slide_3:
+      expire: 3s
+  logicblock_kasumi_alarms_counter_hit:
+    kasumi_alarm_slide:
       expire: 3s
 
 slides:
@@ -251,6 +264,16 @@ slides:
     widgets:
       - type: text
         text: "Password: Perrugia"
+  kasumi_alarm_slide:
+    widgets:
+      - type: text
+        text: "Alarm Tripped!"
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: "(value) until failure"
+        anchor_y: top
+        y: middle-2
   kasumi_failed_slide:
     widgets:
       - type: text
