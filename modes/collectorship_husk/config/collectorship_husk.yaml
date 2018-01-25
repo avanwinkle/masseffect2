@@ -140,7 +140,22 @@ shows:
 
 sound_player:
   husk_build_shot_hit: husk_sound_short
-  husk_collect_shot_hit: husk_sound_long
+  husk_collect_shot_hit:
+    husk_sound_long:
+      action: play
+    husk_squadmate:
+      action: play
+
+sound_pools:
+  husk_squadmate:
+    track: voice
+    type: random
+    sounds:
+      - husk_grunt_1{current_player.status_grunt==0}
+      - husk_grunt_2{current_player.status_grunt==0}
+      - husk_miranda_1
+      - husk_miranda_2
+      - husk_miranda_3
 
 sounds:
   husk_grunt_1:

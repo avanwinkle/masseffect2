@@ -57,39 +57,18 @@ event_player:
   missionselect_pass_selected:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
-  missionselect_garrus_selected:
-    - recruit_mission_starting
-    - start_mode_recruitgarrus
-  missionselect_grunt_selected:
-    - recruit_mission_starting
-    - start_mode_recruitgrunt
-  missionselect_jack_selected:
-    - recruit_mission_starting
-    - start_mode_recruitjack
-  missionselect_kasumi_selected:
-    - recruit_mission_starting
-    - start_mode_recruitkasumi
-  missionselect_legion_selected:
-    - recruit_mission_starting
-    - start_mode_recruitlegion
-  missionselect_mordin_selected:
-    - recruit_mission_starting
-    - start_mode_recruitmordin
-  missionselect_samara_selected:
-    - recruit_mission_starting
-    - start_mode_recruitsamara
-  missionselect_tali_selected:
-    - recruit_mission_starting
-    - start_mode_recruittali
-  missionselect_thane_selected:
-    - recruit_mission_starting
-    - start_mode_recruitthane
-  missionselect_zaeed_selected:
-    - recruit_mission_starting
-    - start_mode_recruitzaeed
-  recruit_mission_starting:
+  missionselect_recruitmission_selected:
     - disable_nonrecruit_modes
-    - stop_mode_missionselect
+    - start_mode_recruitgarrus{squadmate=="garrus"}
+    - start_mode_recruitgrunt{squadmate=="grunt"}
+    - start_mode_recruitjack{squadmate=="jack"}
+    - start_mode_recruitkasumi{squadmate=="kasumi"}
+    - start_mode_recruitlegion{squadmate=="legion"}
+    - start_mode_recruitmordin{squadmate=="mordin"}
+    - start_mode_recruitsamara{squadmate=="samara"}
+    - start_mode_recruittali{squadmate=="tali"}
+    - start_mode_recruitthane{squadmate=="thane"}
+    - start_mode_recruitzaeed{squadmate=="zaeed"}
   recruit_mission_success:
     - levelup
   recruit_mission_ended:
@@ -102,7 +81,7 @@ event_player:
 ball_saves:
   debug_recruitmission_ballsave:
     active_time: 60s
-    enable_events: recruit_mission_starting
+    enable_events: missionselect_recruitmission_selected
     disable_events: recruit_mission_ended
     hurry_up_time: 10s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

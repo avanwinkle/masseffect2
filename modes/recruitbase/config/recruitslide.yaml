@@ -36,24 +36,13 @@ event_player:
       missionname: "Storm the Refinery"
 
 slide_player:
-  recruit_mission_starting: recruitslide
+  missionselect_recruitmission_selected: recruitslide
   recruit_mission_ended:
     recruitslide:
       action: remove
 
-#####
-# At some point maybe the squadmate picture, but for now it looks bad
-#####
 slides:
   recruitslide: []
-    # - type: image
-    #   image: miranda
-    #   width: 34
-    #   height: 32
-    #   anchor_x: left
-    #   anchor_y: bottom
-    #   x: 0
-    #   y: 0
 
 widget_player:
   set_recruitwidget:

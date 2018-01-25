@@ -4,9 +4,9 @@
 # MORDIN RECRUITMENT MISSION
 #
 # This mode begins with the spinner lit to build value. The first hit to the
-# spinner lights the right orbit, hitting the orbit lights both ramps to 
+# spinner lights the right orbit, hitting the orbit lights both ramps to
 # activate the two ventilation fans. Additional spinner hits will continue to
-# build value, each additional hit to the orbit increases the built value 
+# build value, each additional hit to the orbit increases the built value
 # multiplier 1x.  Once both ramps are hit the mission is completed and the score
 # is collected (built spinner value * number of orbit hits). The mode ends if
 # the timer expires.
@@ -145,42 +145,40 @@ sound_player:
     music_recruit_mordin:
       action: play
       loops: -1
-  cure_shot_lit_complete{current_player.status_garrus==0}: step1_voice_garrus
-  cure_shot_lit_complete{current_player.status_kasumi==0}: step1_voice_kasumi
-  cure_shot_lit_complete{current_player.status_grunt==0}: step1_voice_grunt
-  cure_shot_lit_complete{current_player.status_zaeed==0}: step1_voice_zaeed
-  cure_shot_lit_complete{current_player.status_tali==0}: step1_voice_tali
-  cure_shot_lit_complete{current_player.status_jack==0}: step1_voice_jack
-  cure_shot_lit_complete{current_player.squadmates_count==2}: step1_voice_default
-  counter_fans_counter_hit{count==1 and current_player.status_grunt==0}: step2_voice_grunt
-  counter_fans_counter_hit{count==1 and current_player.status_garrus==0}: step2_voice_garrus
-  counter_fans_counter_hit{count==1 and current_player.status_jack==0}: step2_voice_jack
-  counter_fans_counter_hit{count==1 and current_player.status_tali==0}: step2_voice_tali
-  counter_fans_counter_hit{count==1 and current_player.status_zaeed==0}: step2_voice_zaeed
-  counter_fans_counter_hit{count==1 and current_player.status_kasumi==0}: step2_voice_kasumi
-  counter_fans_counter_hit{count==1 and current_player.squadmates_count==2}: step2_voice_default
-  # logicblock_fans_counter_complete{current_player.status_tali==0}: step3_voice_tali
-  # logicblock_fans_counter_complete{current_player.status_jack==0}: step3_voice_jack
-  # logicblock_fans_counter_complete{current_player.status_kasumi==0}: step3_voice_kasumi
-  # logicblock_fans_counter_complete{current_player.status_grunt==0}: step3_voice_grunt
-  # logicblock_fans_counter_complete{current_player.status_zaeed==0}: step3_voice_zaeed
-  # logicblock_fans_counter_complete{current_player.status_garrus==0}: step3_voice_garrus
+  cure_shot_lit_complete: step1_voice
+  counter_fans_counter_hit{count==1}: step2_voice
   recruit_mordin_complete:
     music_recruit_mordin:
       action: stop
 
 sound_pools:
-  step1_voice_default:
+  step1_voice:
     type: random
     track: voice
-    sounds: step1_voice_miranda, step1_voice_jacob
+    sounds:
+      - step1_voice_miranda
+      - step1_voice_jacob
+      - step1_voice_garrus{current_player.status_garrus==0}|2
+      - step1_voice_kasumi{current_player.status_kasumi==0}|2
+      - step1_voice_grunt{current_player.status_grunt==0}|2
+      - step1_voice_zaeed{current_player.status_zaeed==0}|2
+      - step1_voice_tali{current_player.status_tali==0}|2
+      - step1_voice_jack{current_player.status_jack==0}|2
     max_queue_time: 1s
-  step2_voice_default:
+  step2_voice:
     type: random
     track: voice
-    sounds: step2_voice_miranda, step2_voice_jacob
+    sounds:
+      - step2_voice_miranda
+      - step2_voice_jacob
+      - step2_voice_garrus{current_player.status_garrus==0}|2
+      - step2_voice_kasumi{current_player.status_kasumi==0}|2
+      - step2_voice_grunt{current_player.status_grunt==0}|2
+      - step2_voice_zaeed{current_player.status_zaeed==0}|2
+      - step2_voice_tali{current_player.status_tali==0}|2
+      - step2_voice_jack{current_player.status_jack==0}|2
     max_queue_time: 1s
-  step3_voice_default:
+  step3_voice:
     type: random
     track: voice
     sounds: step3_voice_miranda, step3_voice_jacob

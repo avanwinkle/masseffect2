@@ -21,7 +21,8 @@ mode:
   use_wait_queue: true
 
 mode_settings:
-  selectable_items: pass, suicide, garrus, grunt, jack, kasumi, legion, mordin, samara, tali, thane, zaeed,
+  # All squadmates are included via missionselect.py, no need to list them here
+  selectable_items: pass, suicide
   select_item_events: s_action_button_active
   next_item_events: s_flipper_right_active, missionselect_skip_forwards, mode_missionselect_started
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards

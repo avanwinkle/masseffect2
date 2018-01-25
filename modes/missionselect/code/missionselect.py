@@ -3,6 +3,7 @@ from mpf.modes.carousel.code.carousel import Carousel
 
 DEBUG_COLLECTORSHIP = True
 DEBUG_SUICIDEMISSION = False
+SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
 
 class MissionSelect(Carousel):
 
@@ -26,22 +27,29 @@ class MissionSelect(Carousel):
     self.debug_log("MissionSelect player: {}".format(player.vars.__str__()))
 
     # Collector ship only
-    if player.achievements['collectorship'] == "enabled" or DEBUG_COLLECTORSHIP:
+    if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
 
     # If not collector ship, passing is always an option
     items = ['pass']
     if player.achievements['suicidemission'] == "enabled" or DEBUG_SUICIDEMISSION:
       items.append('suicide')
+    # For debugging, allow the collector ship to be available but not required
+    if DEBUG_COLLECTORSHIP and player.achievements['collectorship'] != "complete":
+      items.append('collectorship')
 
-    for item in self._all_items:
-      # self.debug_log(" (missionselect) '{}'".format(item))
-      if hasattr(player, "status_{}".format(item)):
-        status = getattr(player, "status_{}".format(item))
-        # self.machine.debug_log("   - Found missionselect status: {}".format(status))
-        if (status == 1):
-          items.append(item)
+    for mate in SQUADMATES:
+      status = getattr(player, "status_{}".format(mate), -1)
+      # self.machine.debug_log("   - Found missionselect status: {}".format(status))
+      if (status == 1):
+        items.append(mate)
     return items
 
   def _get_available_items(self):
     return self._items
+
+  def _select_item(self, **kwargs):
+    super()._select_item()
+    selection = self._get_highlighted_item()
+    if selection in SQUADMATES:
+      self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
