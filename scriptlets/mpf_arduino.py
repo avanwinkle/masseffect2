@@ -18,8 +18,8 @@ class MPFArduino(Scriptlet):
 
     # The order of commands must exactly match the Arduino sketch file mpf_arduino.ino
     commands = [
-      ["draw_text", "s"],
-      ["error","s"]
+      ["clear_display", ""],
+      ["show_number", "i"],
     ]
 
     # Open a serial connection via PyCmdMessenger
@@ -27,7 +27,15 @@ class MPFArduino(Scriptlet):
 
     # Bind event handlers to send commands to Arduino
     # TODO: Get this into a config file
-    self.machine.events.add_handler('player_last_recruit', self._set_squadmate)
+    # self.machine.events.add_handler('player_last_recruit', self._set_squadmate)
+    self.machine.events.add_handler('timer_recruittimer_tick', self._set_timer)
+    self.machine.events.add_handler('timer_recruittimer_stopped', self._clear_timer)
 
   def _set_squadmate(self, **kwargs):
     self._c.send("draw_text", "{}\n".format(kwargs['value']))
+
+  def _set_timer(self, **kwargs):
+    self._c.send("show_number", kwargs['ticks'])
+
+  def _clear_timer(self, **kwargs):
+    self._c.send("clear_display")
