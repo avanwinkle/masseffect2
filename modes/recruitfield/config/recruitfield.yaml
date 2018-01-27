@@ -236,7 +236,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_legion_lit
     enable_events:
-      enable_recruit_shots{current_player.status_jack<=0}: 0
+      enable_recruit_shots{current_player.status_jack<=1}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_legion
@@ -260,7 +260,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_samara_lit
     enable_events:
-      enable_recruit_shots{current_player.status_garrus<=4}: 0
+      enable_recruit_shots{current_player.status_garrus<=1}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_samara
@@ -271,7 +271,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_tali_lit
     enable_events:
-      enable_recruit_shots{current_player.status_mordin<=0}: 0
+      enable_recruit_shots{current_player.status_mordin<=1}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_tali
@@ -282,7 +282,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_thane_lit
     enable_events:
-      enable_recruit_shots{current_player.status_kasumi<=4}: 0
+      enable_recruit_shots{current_player.status_kasumi<=1}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_thane
@@ -294,7 +294,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_zaeed_lit
     enable_events:
-      enable_recruit_shots{current_player.status_grunt<=4}: 0
+      enable_recruit_shots{current_player.status_grunt<=1}: 0
     disable_events: disable_recruit_shots
     show_tokens:
       led: shot_shield_zaeed
@@ -389,12 +389,32 @@ sound_player:
     shot_hit_jack:
       action: play
       max_queue_time: 1s
+  recruit_advance_kasumi:
+    shot_hit_kasumi:
+      action: play
+      max_queue_time: 1s
+  recruit_advance_legion:
+    shot_hit_legion:
+      action: play
+      max_queue_time: 1s
   recruit_advance_mordin:
     shot_hit_mordin:
       action: play
       max_queue_time: 1s
+  recruit_advance_samara:
+    shot_hit_samara:
+      action: play
+      max_queue_time: 1s
   recruit_advance_tali:
     shot_hit_tali:
+      action: play
+      max_queue_time: 1s
+  recruit_advance_thane:
+    shot_hit_thane:
+      action: play
+      max_queue_time: 1s
+  recruit_advance_zaeed:
+    shot_hit_zaeed:
       action: play
       max_queue_time: 1s
 
@@ -411,6 +431,14 @@ sound_pools:
     type: random_force_all
     sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
     track: voice
+  shot_hit_kasumi:
+    type: random_force_all
+    sounds: kasumi_shot_sound_1, kasumi_shot_sound_2, kasumi_shot_sound_3, kasumi_shot_sound_4, kasumi_shot_sound_5, kasumi_shot_sound_6
+    track: voice
+  shot_hit_legion:
+    type: random_force_all
+    sounds: legion_shot_sound_1, legion_shot_sound_2, legion_shot_sound_3, legion_shot_sound_4, legion_shot_sound_5
+    track: voice
   shot_hit_mordin:
     type: random_force_all
     sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
@@ -423,6 +451,15 @@ sound_pools:
     type: random_force_all
     sounds: tali_shot_sound_1, tali_shot_sound_2, tali_shot_sound_3, tali_shot_sound_4
     track: voice
+  shot_hit_thane:
+    type: random_force_all
+    sounds: thane_shot_sound_1, thane_shot_sound_2, thane_shot_sound_3, thane_shot_sound_4, thane_shot_sound_5
+    track: voice
+  shot_hit_zaeed:
+    type: random_force_all
+    sounds: zaeed_shot_sound_1, zaeed_shot_sound_2, zaeed_shot_sound_3, zaeed_shot_sound_4, zaeed_shot_sound_5, zaeed_shot_sound_6
+    track: voice
+
 
 sounds:
   garrus_shot_sound_1:
@@ -463,6 +500,39 @@ sounds:
     track: voice
   jack_shot_sound_5:
     file: en_us_hench_convict_ss_global_hench_convict_00286853_m.ogg
+    track: voice
+  kasumi_shot_sound_1:
+    file: DLC_HEN_MT_Int.096.ogg
+    track: voice
+  kasumi_shot_sound_2:
+    file: DLC_HEN_MT_Int.117.ogg
+    track: voice
+  kasumi_shot_sound_3:
+    file: DLC_HEN_MT_Int.146.ogg
+    track: voice
+  kasumi_shot_sound_4:
+    file: DLC_HEN_MT_Int.155.ogg
+    track: voice
+  kasumi_shot_sound_5:
+    file: DLC_HEN_MT_Int.159.ogg
+    track: voice
+  kasumi_shot_sound_6:
+    file: DLC_HEN_MT_Int.221.ogg
+    track: voice
+  legion_shot_sound_1:
+    file: en_us_hench_geth_ss_global_hench_geth_00240681_m.ogg
+    track: voice
+  legion_shot_sound_2:
+    file: en_us_hench_geth_ss_global_hench_geth_00240710_m.ogg
+    track: voice
+  legion_shot_sound_3:
+    file: en_us_hench_geth_ss_global_hench_geth_00242502_m.ogg
+    track: voice
+  legion_shot_sound_4:
+    file: en_us_hench_geth_ss_global_hench_geth_00315331_m.ogg
+    track: voice
+  legion_shot_sound_5:
+    file: en_us_hench_geth_ss_global_hench_geth_00315345_m.ogg
     track: voice
   mordin_shot_sound_1:
     file: en_us_hench_professor_ss_global_hench_professor_00316910_m.ogg
@@ -506,6 +576,40 @@ sounds:
   tali_shot_sound_4:
     file: en_us_hench_tali_ss_global_hench_tali_00289285_m.ogg
     track: voice
+  thane_shot_sound_1:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286433_m.ogg
+    track: voice
+  thane_shot_sound_2:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00297586_m.ogg
+    track: voice
+  thane_shot_sound_3:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.ogg
+    track: voice
+  thane_shot_sound_4:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00330846_m.ogg
+    track: voice
+  thane_shot_sound_5:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286432_m.ogg
+    track: voice
+  zaeed_shot_sound_1:
+    file: DLC_HEN_VT_Int.002.ogg
+    track: voice
+  zaeed_shot_sound_2:
+    file: DLC_HEN_VT_Int.007.ogg
+    track: voice
+  zaeed_shot_sound_3:
+    file: DLC_HEN_VT_Int.020.ogg
+    track: voice
+  zaeed_shot_sound_4:
+    file: DLC_HEN_VT_Int.030.ogg
+    track: voice
+  zaeed_shot_sound_5:
+    file: DLC_HEN_VT_Int.060.ogg
+    track: voice
+  zaeed_shot_sound_6:
+    file: DLC_HEN_VT_Int.116.ogg
+    track: voice
+
 
 widget_player:
   logicblock_n7_hits_counter_hit:
