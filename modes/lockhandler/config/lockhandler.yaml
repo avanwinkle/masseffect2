@@ -17,23 +17,30 @@
 #####
 
 mode:
-  start_events: start_mode_lockhandler
-  stop_events: stop_mode_lockhandler
+  start_events: start_mode_lockhandler # Never stopped
   code: lockhandler.LockHandler
   priority: 1000
 
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
   overlord_light_shot_hit{not device.multiball_locks.overlordlock.enabled}: enable_overlord_lock
-  multiball_lock_physicallock_locked_ball: lockhandler_ball_enter
   multiball_lock_overlordlock_full: start_mode_overlordmultiball
+
+queue_relay_player:
+  balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active}:
+    post: blocking_balldevice_bd_lock_ball_eject_attempt
+    wait_for: mode_missionselect_will_stop
+  balldevice_bd_trough_ball_eject_attempt{mode.missionselect.active}:
+    post: blocking_balldevice_bd_lock_ball_eject_attempt
+    wait_for: mode_missionselect_will_stop
 
 multiball_locks:
   overlordlock:
     balls_to_lock: 3
     lock_devices: bd_lock
-    autoreplace_locked_balls: False
+    # autoreplace_locked_balls: False
     reset_count_for_current_player_events: multiball_overlord_multiball_ended
     enable_events: enable_overlord_lock
     disable_events: multiball_lock_overlordlock_locked_ball
     debug: true
+    replace_ball_on_full: false
