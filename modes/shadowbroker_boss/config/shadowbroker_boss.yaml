@@ -104,3 +104,89 @@ shots:
     profile: sbboss_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
+
+sounds:
+  shadowbroker_chase_music:
+    file: "07 Final Combat.ogg"
+    track: music
+  broker_you_travel_with_fascinating_companions:
+    file: DLC_EXP_Part01_Int.1056.ogg
+    track: voice
+  broker_enough_talk:
+    file: DLC_EXP_Part01_Int.1059.ogg
+    track: voice
+  broker_its_pointless_to_challenge_me:
+    file: DLC_EXP_Part01_Int.1065.ogg
+    track: voice
+  broker_reckless_even_for_you_commander:
+    file: DLC_EXP_Part01_Int.1089.ogg
+    track: voice
+  broker_attack_1:
+    file: DLC_EXP_Part01_Int.1022.ogg
+    track: voice
+  broker_attack_2:
+    file: DLC_EXP_Part01_Int.1023.ogg
+    track: voice
+  broker_attack_3:
+    file: DLC_EXP_Part01_Int.1024.ogg
+    track: voice
+  broker_attack_4:
+    file: DLC_EXP_Part01_Int.1025.ogg
+    track: voice
+  broker_attack_5:
+    file: DLC_EXP_Part01_Int.1026.ogg
+    track: voice
+  broker_attack_6:
+    file: DLC_EXP_Part01_Int.1027.ogg
+    track: voice
+  broker_hit_1:
+    file: DLC_EXP_Part01_Int.1030.ogg
+    track: voice
+  broker_hit_2:
+    file: DLC_EXP_Part01_Int.1031.ogg
+    track: voice
+  broker_hit_3:
+    file: DLC_EXP_Part01_Int.1040.ogg
+    track: voice
+  broker_hit_4:
+    file: DLC_EXP_Part01_Int.1041.ogg
+    track: voice
+  broker_hit_5:
+    file: DLC_EXP_Part01_Int.1042.ogg
+    track: voice
+  broker_hit_6:
+    file: DLC_EXP_Part01_Int.1044.ogg
+    track: voice
+  broker_hit_7:
+    file: DLC_EXP_Part01_Int.1045.ogg
+    track: voice
+  broker_hit_8:
+    file: DLC_EXP_Part01_Int.1036.ogg
+    track: voice
+  liara_his_shields_deactivated:
+    file: DLC_EXP_Part01_Int.1008.ogg
+    track: voice
+  liara_were_through_his_shields:
+    file: DLC_EXP_Part01_Int.1013.ogg
+    track: voice
+  liara_his_shields_are_down:
+    file: DLC_EXP_Part01_Int.1015.ogg
+    track: voice
+  liara_hit_him_now:
+    file: DLC_EXP_Part01_Int.1014.ogg
+    track: voice
+  liara_quick_while_hes_vulnerable:
+    file: DLC_EXP_Part01_Int.1012.ogg
+    track: voice
+  liara_energy_projectiles_bouncing_off:
+    file: DLC_EXP_Part01_Int.1052.ogg
+    track: voice
+  liara_if_you_can_get_him_to:
+    file: DLC_EXP_Part01_Int.1051.ogg
+    track: voice
+  shepard_then_we_do_this_the_hard_way:
+    file: DLC_EXP_Part01_Int.1054.ogg
+    track: voice
+  shepard_liara_now:
+    file: DLC_EXP_Part01_Int.1050.ogg
+    track: voice

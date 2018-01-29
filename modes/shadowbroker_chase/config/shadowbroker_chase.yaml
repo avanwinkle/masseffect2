@@ -89,6 +89,103 @@ slides:
               duration: .5s
               repeat: true
 
+sounds:
+  liara_shes_getting_away_1:
+    file: DLC_EXP_Part01_Int.313.ogg
+    track: voice
+  liara_shes_getting_away_2:
+    file: DLC_EXP_Part01_Int.640.ogg
+    track: voice
+  liara_shes_getting_away_3:
+    file: DLC_EXP_Part01_Int.698.ogg
+    track: voice
+  liara_youre_enjoying_this:
+    file: DLC_EXP_Part01_Int.650.ogg
+    track: voice
+  liara_truck_1:
+    file: DLC_EXP_Part01_Int.665.ogg
+    track: voice
+  liara_truck_2:
+    file: DLC_EXP_Part01_Int.680.ogg
+    track: voice
+  liara_truck_3:
+    file: DLC_EXP_Part01_Int.688.ogg
+    track: voice
+  liara_right_no_left:
+    file: DLC_EXP_Part01_Int.690.ogg
+    track: voice
+  liara_left:
+    file: DLC_EXP_Part01_Int.691.ogg
+    track: voice
+  liara_not_letting_her_escape:
+    file: DLC_EXP_Part01_Int.681.ogg
+    track: voice
+  liara_dont_lose_her:
+    file: DLC_EXP_Part01_Int.684.ogg
+    track: voice
+  liara_shes_almost_out_of_range:
+    file: DLC_EXP_Part01_Int.693.ogg
+    track: voice
+  liara_were_losing_her:
+    file: DLC_EXP_Part01_Int.694.ogg
+    track: voice
+  liara_we_lost_her:
+    file: DLC_EXP_Part01_Int.695.ogg
+    track: voice
+  liara_need_to_go_faster:
+    file: DLC_EXP_Part01_Int.685.ogg
+    track: voice
+  liara_head_on_collision:
+    file: DLC_EXP_Part01_Int.666.ogg
+    track: voice
+  liara_its_a_taxi:
+    file: DLC_EXP_Part01_Int.667.ogg
+    track: voice
+  liara_go_go_go:
+    file: DLC_EXP_Part01_Int.671.ogg
+    track: voice
+  liara_oncoming_traffic:
+    file: DLC_EXP_Part01_Int.672.ogg
+    track: voice
+  liara_going_the_wrong_way:
+    file: DLC_EXP_Part01_Int.673.ogg
+    track: voice
+  shepard_there_we_go:
+    file: DLC_EXP_Part01_Int.649.ogg
+    track: voice
+  shepard_again:
+    file: DLC_EXP_Part01_Int.652.ogg
+    track: voice
+  shepard_what_kind_of_guns:
+    file: DLC_EXP_Part01_Int.656.ogg
+    track: voice
+  shepard_im_going:
+    file: DLC_EXP_Part01_Int.660.ogg
+    track: voice
+  shepard_well_be_fine:
+    file: DLC_EXP_Part01_Int.662.ogg
+    track: voice
+  shepard_im_on_her:
+    file: DLC_EXP_Part01_Int.664.ogg
+    track: voice
+  shepard_i_know_1:
+    file: DLC_EXP_Part01_Int.677.ogg
+    track: voice
+  shepard_i_know_3:
+    file: DLC_EXP_Part01_Int.675.ogg
+    track: voice
+  shepard_i_noticed:
+    file: DLC_EXP_Part01_Int.679.ogg
+    track: voice
+  shepard_im_working_on_it:
+    file: DLC_EXP_Part01_Int.647.ogg
+    track: voice
+  
+  
+    
+    
+
+
 timers:
   sbchase_timer:
     start_value: 60

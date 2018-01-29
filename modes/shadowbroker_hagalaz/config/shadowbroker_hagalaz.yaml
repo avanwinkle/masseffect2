@@ -143,6 +143,74 @@ shots:
     show_tokens:
       leds: l_standup_5
 
+sounds:
+  liara_now_therell_be_fewer_inside:
+    file: DLC_EXP_Part01_Int.902.ogg
+    track: voice
+  liara_no_time_to_talk:
+    file: DLC_EXP_Part01_Int.912.ogg
+    track: voice
+  liara_next_wave_looks_big:
+    file: DLC_EXP_Part01_Int.913.ogg
+    track: voice
+  liara_more_on_the_way:
+    file: DLC_EXP_Part01_Int.922.ogg
+    track: voice
+  liara_here_come_more:
+    file: DLC_EXP_Part01_Int.925.ogg
+    track: voice
+  liara_their_attacks_are_disorganized:
+    file: DLC_EXP_Part01_Int.942.ogg
+    track: voice
+  liara_that_security_upgrade:
+    file: DLC_EXP_Part01_Int.923.ogg
+    track: voice
+  liara_it_wont_be_much_longer:
+    file: DLC_EXP_Part01_Int.924.ogg
+    track: voice
+  liara_it_didnt_come_with_a_warranty:
+    file: DLC_EXP_Part01_Int.926.ogg
+    track: voice
+  liara_hatch_is_open:
+    file: DLC_EXP_Part01_Int.935.ogg
+    track: voice
+  liara_careful_capacitors:
+    file: DLC_EXP_Part01_Int.939.ogg
+    track: voice
+  liara_try_firing_at_capacitors:
+    file: DLC_EXP_Part01_Int.938.ogg
+    track: voice
+  liara_ive_never_broken_into_sb_before:
+    file: DLC_EXP_Part01_Int.953.ogg
+    track: voice
+  liara_its_locked_ive_got_a_shunt_program:
+    file: DLC_EXP_Part01_Int.954.ogg
+    track: voice
+  shepard_you_had_to_give_them_tactical_advice:
+    file: DLC_EXP_Part01_Int.895.ogg
+    track: voice
+  shepard_please_dont_give_the_mercs_ideas:
+    file: DLC_EXP_Part01_Int.899.ogg
+    track: voice
+  shepard_so_much_for_covert_infiltration:
+    file: DLC_EXP_Part01_Int.901.ogg
+    track: voice
+  shepard_tell_me_you_tested_it:
+    file: DLC_EXP_Part01_Int.911.ogg
+    track: voice
+  shepard_you_tested_it_right:
+    file: DLC_EXP_Part01_Int.919.ogg
+    track: voice
+  shepard_you_sure_shunt_is_working:
+    file: DLC_EXP_Part01_Int.921.ogg
+    track: voice
+  shepard_slap_omnigel:
+    file: DLC_EXP_Part01_Int.915.ogg
+    track: voice
+  shepard_how_long_will_it_take:
+    file: DLC_EXP_Part01_Int.951.ogg
+    track: voice
+
 timers:
   sbhagalaz_timer:
     start_value: 60
