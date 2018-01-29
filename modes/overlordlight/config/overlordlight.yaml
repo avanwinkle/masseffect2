@@ -132,14 +132,95 @@ sound_player:
     geth_hit_sfx:
       action: play
       max_queue_time: 1s
+  # TODO: Get the right conditions here
+  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==0}:
+    archer_need_to_go_to_both:
+      action: play
+      delay: 1.5s
+      max_queue_time: 3s
+  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==1}:
+    archer_still_need_to_go_to_prometheus:
+      action: play
+      delay: 1.5s
+      max_queue_time: 3s
+  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==2}:
+    archer_lockdown_cancelled_short:
+      action: play
+      delay: 1.5s
+      max_queue_time: 3s
+  multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:
+    vulcan_success:
+      action: play
+      max_queue_time: 3s
+  multiball_lock_overlordlock_locked_ball{total_balls_locked==2}:
+    archer_lockdown_cancelled:
+      action: play
+      max_queue_time: 3s
 
 sound_pools:
   geth_hit_sfx:
     sounds: geth_hit_1, geth_hit_2, geth_hit_3, geth_hit_4
     type: random_force_all
     track: sfx
+  vulcan_success:
+    sounds: archer_vulcan_success, shepard_hit_override_vulcan
+    type: random
+    track: voice
+  archer_still_need_to_go_to_prometheus:
+    sounds: archer_still_need_to_go_to_prometheus_1, archer_still_need_to_go_to_prometheus_2
+    type: random
+    track: voice
+  archer_lockdown_cancelled:
+    sounds: archer_lockdown_cancelled_1, archer_lockdown_cancelled_2, archer_lockdown_cancelled_3
+    type: random
+    track: voice
 
 sounds:
+  archer_lockdown_cancelled_1:
+    file: DLC_UNC_Pack01_Int.097.ogg
+    track: voice
+  archer_lockdown_cancelled_2:
+    file: DLC_UNC_Pack01_Int.099.ogg
+    track: voice
+  archer_lockdown_cancelled_3:
+    file: DLC_UNC_Pack01_Int.491.ogg
+    track: voice
+  archer_lockdown_cancelled_short:
+    file: DLC_UNC_Pack01_Int.098.ogg
+    track: voice
+  archer_still_need_to_go_to_vulcan_1:
+    file: DLC_UNC_Pack01_Int.100.ogg
+    track: voice
+  archer_still_need_to_go_to_vulcan_2:
+    file: DLC_UNC_Pack01_Int.485.ogg
+    track: voice
+  archer_still_need_to_go_to_prometheus_1:
+    file: DLC_UNC_Pack01_Int.102.ogg
+    track: voice
+  archer_still_need_to_go_to_prometheus_2:
+    file: DLC_UNC_Pack01_Int.487.ogg
+    track: voice
+  archer_still_need_to_go_to_both:
+    file: DLC_UNC_Pack01_Int.104.ogg
+    track: voice
+  archer_need_to_go_to_both:
+    file: DLC_UNC_Pack01_Int.484.ogg
+    track: voice
+  archer_prometheus_success:
+    file: DLC_UNC_Pack01_Int.486.ogg
+    track: voice
+  archer_vulcan_success:
+    file: DLC_UNC_Pack01_Int.488.ogg
+    track: voice
+  shepard_hit_override_vulcan:
+    file: DLC_UNC_Pack01_Int.219.ogg
+    track: voice
+  vi_override_accepted_atlas_1:
+    file: DLC_UNC_Pack01_Int.221.ogg
+    track: voice
+  vi_override_accepted_atlas_2:
+    file: DLC_UNC_Pack01_Int.289.ogg
+    track: voice
   geth_hit_1:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307868_m.ogg
     track: sfx
