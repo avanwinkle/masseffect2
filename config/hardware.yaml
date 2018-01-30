@@ -53,8 +53,6 @@ ball_devices:
     mechanical_eject: true
     confirm_eject_type: target # default
     eject_timeouts: 3s
-    tags: ball_add_live
-    # debug: true
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
@@ -62,7 +60,6 @@ ball_devices:
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
     auto_fire_on_unexpected_ball: False
-    # debug: true
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
@@ -81,13 +78,11 @@ flippers:
     activation_switch: s_flipper_right
     enable_events: ball_starting, flippers_on
     disable_events: ball_ending, flippers_off, right_flipper_off
-    debug: true
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
     enable_events: ball_starting, flippers_on
     disable_events: ball_ending, flippers_off, left_flipper_off
-    debug: true
 
 drop_targets:
   bottom:
@@ -256,16 +251,10 @@ switches:
     tags: playfield_active
   s_lock_1:
     number: 9-0
-    # ignore_window_ms: 1000
-    tags: lock
   s_lock_2:
     number: 9-2
-    # ignore_window_ms: 1000
-    tags: lock
   s_lock_3:
     number: 9-3
-    # ignore_window_ms: 1000
-    tags: lock
 
 lights:
   l_null:
