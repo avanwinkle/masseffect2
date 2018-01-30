@@ -5,7 +5,7 @@
 #
 # This mode handles the ball lock advancement for the Overlord multiball, using
 # shots and events to light lock, enable devices, and illuminate indicators.
-# 
+#
 # This is a separate mode to help debug the complex multiball_lock/ball_hold
 # combo logic, but eventually this mode may be integrated with another base
 # or ball-lock common mode.
@@ -19,7 +19,12 @@ mode:
 event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
-  overlord_light_shot_hit{mode.recruitfield.active}: play_overlord_hit_sound
+  overlord_light_shot_hit{mode.recruitfield.active}:
+    - play_overlord_hit_sound
+  enable_overlord_lock:
+    - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
+    - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
+    - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
 
 shot_groups:
   overlord_light_shot:
@@ -132,28 +137,24 @@ sound_player:
     geth_hit_sfx:
       action: play
       max_queue_time: 1s
-  # TODO: Get the right conditions here
-  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==0}:
+  play_overlord_station_sound_1:
     archer_need_to_go_to_both:
       action: play
-      delay: 1.5s
       max_queue_time: 3s
-  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==1}:
+  play_overlord_station_sound_2:
     archer_still_need_to_go_to_prometheus:
       action: play
-      delay: 1.5s
       max_queue_time: 3s
-  play_overlord_hit_sound{machine.shots.overlord_lock_ball_shot.enabled!=true and devices.bd_lock.balls_locked.count==2}:
-    archer_lockdown_cancelled_short:
+  play_overlord_station_sound_3:
+    archer_lockdown_cancelled:
       action: play
-      delay: 1.5s
       max_queue_time: 3s
   multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:
     vulcan_success:
       action: play
       max_queue_time: 3s
   multiball_lock_overlordlock_locked_ball{total_balls_locked==2}:
-    archer_lockdown_cancelled:
+    archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 3s
 

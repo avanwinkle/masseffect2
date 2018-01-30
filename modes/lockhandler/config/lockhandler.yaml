@@ -24,7 +24,7 @@ mode:
 
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
-  overlord_light_shot_hit: enable_overlord_lock
+  overlord_light_shot_hit{not device.multiball_locks.overlordlock.enabled}: enable_overlord_lock
   multiball_lock_physicallock_locked_ball: lockhandler_ball_enter
   multiball_lock_overlordlock_full: start_mode_overlordmultiball
 

@@ -166,9 +166,8 @@ sound_player:
   recruit_samara_complete: missioncomplete_voice_samara
   recruit_tali_complete: missioncomplete_voice_tali
   recruit_thane_complete: missioncomplete_voice_thane
-  recruit_zaeed_complete: 
-    - missioncomplete_voice_zaeed_renegade{current_player.zaeed_path_renegade==1}
-    - missioncomplete_voice_zaeed_paragon{current_player.zaeed_path_renegade==0}
+  recruit_zaeed_complete{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
+  recruit_zaeed_complete{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
 
 sound_pools:
   missioncomplete_voice_garrus:
@@ -290,7 +289,7 @@ sounds:
   missioncomplete_voice_legion_3:
     file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
     track: voice
-    max_queue_time: 1s 
+    max_queue_time: 1s
   missioncomplete_voice_mordin_1:
     file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
     track: voice
