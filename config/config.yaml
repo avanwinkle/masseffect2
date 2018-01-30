@@ -162,7 +162,8 @@ player_vars:
     initial_value: 4
   status_zaeed:
     initial_value: 4
-
+  zaeed_path_renegade:
+    initial_value: 0
 
 sound_system:
   master_volume: 0.75

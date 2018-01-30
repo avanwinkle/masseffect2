@@ -228,7 +228,7 @@ sound_pools:
 
 sounds:
   music_n7_stationalert:
-    file: StationAlert.ogg
+    file: "03 Station Alert.ogg"
     start_at: 35s
   music_n7_combat_12:
     file: mus_n7_1_combat_2.ogg

@@ -281,13 +281,114 @@ slides:
 
 sound_player:
   mode_recruitkasumi_started:
-    recruit_music_kasumi:
+    recruit_music_kasumi_1:
       action: play
       loops: -1
+  # First alarm hit, increase the music tension
+  logicblock_kasumi_alarms_counter_hit{value==1}:
+    recruit_music_kasumi_1:
+      action: stop
+    recruit_music_kasumi_2:
+      action: play
+  # Second alarm hit, more tension
+  logicblock_kasumi_alarms_counter_hit{value==2}:
+    recruit_music_kasumi_2:
+      action: stop
+    recruit_music_kasumi_3:
+      action: play
 
 sounds:
-  recruit_music_kasumi:
-    file: Infiltration.ogg
+  recruit_music_kasumi_1:
+    file: "03 Infiltration.ogg"
     track: music
     mode_end_action: stop
     fade_out: 1s
+  recruit_music_kasumi_2:
+    file: "02 Making Our Escape.ogg"
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+  recruit_music_kasumi_3:
+    file: "01 Death from Above.ogg"
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+    fade_in: 1s
+    start_at: 15s
+  kasumi_list_of_items:
+    file: DLC_HEN_MT_Int.468.ogg
+    track: voice
+  kasumi_barrier_is_down:
+    file: DLC_HEN_MT_Int.446.ogg
+    track: voice
+  kasumi_got_voice:
+    file: DLC_HEN_MT_Int.555.ogg
+    track: voice
+  kasumi_lets_crack_voice:
+    file: DLC_HEN_MT_Int.592.ogg
+    track: voice
+  kasumi_need_dna:
+    file: DLC_HEN_MT_Int.453.ogg
+    track: voice
+  kasumi_look_for_dna:
+    file: DLC_HEN_MT_Int.665.ogg
+    track: voice
+  kasumi_not_great_saliva_sample:
+    file: DLC_HEN_MT_Int.678.ogg
+    track: voice
+  kasumi_that_should_do_it: # Done with DNA but not explicit
+    file: DLC_HEN_MT_Int.657.ogg
+    track: voice
+  kasumi_need_password_and_voice:
+    file: DLC_HEN_MT_Int.415.ogg
+    track: voice
+  kasumi_weve_got_the_password_need_voice:
+    file: DLC_HEN_MT_Int.417.ogg
+    track: voice
+  kasumi_still_need_password_and_voice:
+    file: DLC_HEN_MT_Int.420.ogg
+    track: voice
+  kasumi_still_need_voice_1:
+    file: DLC_HEN_MT_Int.422.ogg
+    track: voice
+  kasumi_still_need_voice_2:
+    file: DLC_HEN_MT_Int.437.ogg
+    track: voice
+  kasumi_this_is_where_your_special_skills:
+    file: DLC_HEN_MT_Int.779.ogg
+    track: voice
+  kasumi_damn_you_hock:
+    file: DLC_HEN_MT_Int.794.ogg
+    track: voice
+  kasumi_damn_it_we_have_to_find_another_way:
+    file: DLC_HEN_MT_Int.817.ogg
+    track: voice
+  kasumi_careful_barrier_up:
+    file: DLC_HEN_MT_Int.440.ogg
+    track: voice
+  kasumi_dont_touch_that_without_dna_set_off_alarm:
+    file: DLC_HEN_MT_Int.451.ogg
+    track: voice
+  kasumi_hey_no_touching:
+    file: DLC_HEN_MT_Int.452.ogg
+    track: voice
+  guard_room_off_limits:
+    file: DLC_HEN_MT_Int.681.ogg
+    track: voice
+  guard_i_told_you_room_off_limits:
+    file: DLC_HEN_MT_Int.683.ogg
+    track: voice
+  guard_turn_around_now:
+    file: DLC_HEN_MT_Int.691.ogg
+    track: voice
+  guard_you_stop:
+    file: DLC_HEN_MT_Int.717.ogg
+    track: voice
+  shepard_password_is_perrugia:
+    file: DLC_HEN_MT_Int.442.ogg
+    track: voice
+  shepard_damn:
+    file: DLC_HEN_MT_Int.669.ogg
+    track: voice
+
+

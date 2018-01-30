@@ -58,6 +58,14 @@ scoring:
     temp_multiplier:
       action: set
       float: 1
+    # Default to paragon path with value == 0
+    zaeed_path_renegade:
+      action: set
+      score: 0
+  # If the right orbit is the first orbit hit, set path to renegade
+  zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
+    zaeed_path_renegade:
+      score: 1  
   timer_recruittimer_tick:
     temp_hurryup_value: -90
     temp_build_value:   -90

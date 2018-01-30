@@ -160,9 +160,15 @@ sound_player:
   recruit_garrus_complete: missioncomplete_voice_garrus
   recruit_grunt_complete: missioncomplete_voice_grunt
   recruit_jack_complete: missioncomplete_voice_jack
+  recruit_kasumi_complete: missioncomplete_voice_kasumi
+  recruit_legion_complete: missioncomplete_voice_legion
   recruit_mordin_complete: missioncomplete_voice_mordin
   recruit_samara_complete: missioncomplete_voice_samara
   recruit_tali_complete: missioncomplete_voice_tali
+  recruit_thane_complete: missioncomplete_voice_thane
+  recruit_zaeed_complete: 
+    - missioncomplete_voice_zaeed_renegade{current_player.zaeed_path_renegade==1}
+    - missioncomplete_voice_zaeed_paragon{current_player.zaeed_path_renegade==0}
 
 sound_pools:
   missioncomplete_voice_garrus:
@@ -180,6 +186,15 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_jack_1, missioncomplete_voice_jack_2
     max_queue_time: 1s
+  missioncomplete_voice_kasumi:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_kasumi_1, missioncomplete_voice_kasumi_2, missioncomplete_voice_kasumi_3, missioncomplete_voice_kasumi_4, missioncomplete_voice_kasumi_5, missioncomplete_voice_kasumi_6
+  missioncomplete_voice_legion:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_legion_1, missioncomplete_voice_legion_2, missioncomplete_voice_legion_3
+    max_queue_time: 1s
   missioncomplete_voice_mordin:
     type: random
     track: voice
@@ -189,6 +204,19 @@ sound_pools:
     type: random
     track: voice
     sounds: missioncomplete_voice_samara_1, missioncomplete_voice_samara_2, missioncomplete_voice_samara_3
+  missioncomplete_voice_thane:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_thane_1, missioncomplete_voice_thane_2
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_renegade:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_zaeed_renegade_1, missioncomplete_voice_zaeed_renegade_2, missioncomplete_voice_zaeed_renegade_3
+  missioncomplete_voice_zaeed_paragon:
+    type: random
+    track: voice
+    sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
 
 sounds:
   missioncomplete_voice_garrus_1:
@@ -227,6 +255,42 @@ sounds:
     file: en_us_hench_convict_prscva_cv_join_d_00200320_m.ogg
     track: voice
     max_queue_time: 1s
+  missioncomplete_voice_kasumi_1:
+    file: DLC_HEN_MT_Int.773.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_kasumi_2:
+    file: DLC_HEN_MT_Int.022.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_kasumi_3:
+    file: DLC_HEN_MT_Int.061.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_kasumi_4:
+    file: DLC_HEN_MT_Int.067.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_kasumi_5:
+    file: DLC_HEN_MT_Int.081.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_kasumi_6:
+    file: DLC_HEN_MT_Int.086.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_legion_1:
+    file: en_us_hench_geth_norgt_relationship00_h_00275284_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_legion_2:
+    file: en_us_hench_geth_norgt_relationship00_h_00275287_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_legion_3:
+    file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
+    track: voice
+    max_queue_time: 1s 
   missioncomplete_voice_mordin_1:
     file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
     track: voice
@@ -249,5 +313,37 @@ sounds:
     max_queue_time: 1s
   missioncomplete_voice_tali:
     file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_thane_1:
+    file: en_us_hench_assassin_norasa_debrief_d_00223267_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_thane_2:
+    file: en_us_hench_assassin_norasa_debrief_d_00223275_m.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_renegade_1:
+    file: DLC_HEN_VT_Int.213.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_renegade_2:
+    file: DLC_HEN_VT_Int.505.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_renegade_3:
+    file: DLC_HEN_VT_Int.506.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_paragon_1:
+    file: DLC_HEN_VT_Int.216.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_paragon_2:
+    file: DLC_HEN_VT_Int.476.ogg
+    track: voice
+    max_queue_time: 1s
+  missioncomplete_voice_zaeed_paragon_3:
+    file: DLC_HEN_VT_Int.485.ogg
     track: voice
     max_queue_time: 1s

@@ -25,14 +25,14 @@
 
 mode:
   start_events: start_mode_overlordmultiball
-  stop_events: stop_mode_overlordmultiball, multiball_overloard_multiball_ended
+  stop_events: stop_mode_overlordmultiball, multiball_overlord_multiball_ended
   priority: 500
 
 multiballs:
   overlord_multiball:
     ball_count: 3
     # Should be total, but can't figure out why the active ball count is messed up
-    ball_count_type: add
+    ball_count_type: total
     ball_locks: bd_lock
     shoot_again: 10s
     start_events: mode_overlordmultiball_started
@@ -69,9 +69,9 @@ event_player:
   hackshots_hit:
     - enable_jackpotshot
     - disable_jackpotshot|15s
+    - enable_random_hackshot|15s
   mode_overlordmultiball_will_stop{device.counters.jackpots_hit_counter.value==3}:
     - levelup
-
 
 random_event_player:
   enable_random_hackshot:
@@ -216,7 +216,7 @@ sound_player:
 
 sounds:
   overlord_music:
-    file: Combat_Troops.ogg
+    file: "04 Combat Troops.ogg"
     track: music
     mode_end_action: stop
     fade_out: 1s
