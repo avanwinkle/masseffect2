@@ -126,5 +126,5 @@ scoring:
     missionselect_init:
       action: set
       score: 0
-  slide_missionselect_recruit_slide_active:
+  slide_missionselect_intro_slide_removed:
     missionselect_init: 1

@@ -1,7 +1,7 @@
 import copy
 from mpf.modes.carousel.code.carousel import Carousel
 
-DEBUG_COLLECTORSHIP = True
+DEBUG_COLLECTORSHIP = False
 DEBUG_SUICIDEMISSION = False
 SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
 

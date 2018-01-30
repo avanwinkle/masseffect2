@@ -6,15 +6,20 @@ class MPFArduino(Scriptlet):
 
   def on_load(self):
     # TODO: Get this into a config file
-    PORT = "/dev/cu.usbmodem1421"
-
+    PORTS = ["/dev/cu.usbmodem1421", "/dev/cu.usbmodem1411"]
+    ser = None
     # Look for a device on the given port, if not found then abort this Scriptlet
-    try:
-      ser = serial.Serial(PORT)
-    except serial.serialutil.SerialException:
+    for port in PORTS:
+      try:
+        ser = serial.Serial(port)
+        break
+      except serial.serialutil.SerialException:
+        continue
+    # If no port found, abandon
+    if not ser:
       return
 
-    arduino = PyCmdMessenger.ArduinoBoard(PORT, baud_rate=115200)
+    arduino = PyCmdMessenger.ArduinoBoard(port, baud_rate=115200)
 
     # The order of commands must exactly match the Arduino sketch file mpf_arduino.ino
     commands = [

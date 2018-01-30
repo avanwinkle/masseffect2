@@ -19,7 +19,7 @@ virtual_platform_start_active_switches:
   s_trough6
 
 mpf-mc:
-  fps: 24
+  fps: 30
 
 scriptlets: mpf_arduino.MPFArduino
 
@@ -104,7 +104,7 @@ player_vars:
   assignments_completed:
     initial_value: 0
   available_missions:
-    initial_value: 1
+    initial_value: 0
   credits:
     initial_value: 0
   last_recruit:

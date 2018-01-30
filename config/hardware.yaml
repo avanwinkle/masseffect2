@@ -17,7 +17,7 @@ machine:
 
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
-    fps: 24
+    fps: 30
     gamma: 1.5
     only_send_changes: true
     source_display: dmd
