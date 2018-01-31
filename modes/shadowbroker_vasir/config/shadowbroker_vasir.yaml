@@ -1,0 +1,331 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: VASIR COMBAT
+#
+# This mode begins immediately upon completion of the Chase mode and involves
+# a fast-moving target that must be hit three times. The target is lit for Vasir's
+# barriers (purple), then armor (yellow), then health (red), and rotates to a
+# new shot every 12 seconds. Hitting the target three times defeats Vasir and
+# completes the mode.
+#
+# This mode has a hurryup timer and the mode fails if the timer expires.
+#
+# TODO: Scoring
+#
+# Progress is saved upon completion of this mode, enabling the player to advance
+# to the Hagalaz/Boss modes. If this mode is failed, it may only be restarted
+# by completing the Chase mode again.
+#####
+
+mode:
+  start_events: start_mode_shadowbroker_vasir
+  stop_events: stop_mode_shadowbroker_vasir
+  priority: 850
+
+event_player:
+  timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
+  shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
+  stop_mode_shadowbroker_vasir: exit_shadowbroker_modes
+  vasir_shot_health_hit:
+    - shadowbroker_vasir_complete
+    - levelup
+  # Relay some sounds to delay
+  vasir_shot_barrier_hit: play_vasir_start_sound|2s
+  vasir_shot_armor_hit: play_vasir_start_sound|2s
+
+scoring:
+  mode_shadowbroker_vasir_started:
+    last_mission:
+      action: set
+      string: "Broker Intel Recovered"
+
+shot_groups:
+  vasir_shot:
+    rotate_right_events:
+      - timer_vasir_timer_complete
+      - vasir_shot_barrier_hit
+      - vasir_shot_armor_hit
+    shots:
+      - sbvasir_hitbank
+      - sbvasir_left_orbit
+      - sbvasir_right_ramp
+      - sbvasir_dropbank
+      - sbvasir_left_ramp
+      - sbvasir_right_orbit
+
+shot_profiles:
+  sbvasir_shot_profile:
+    advance_on_hit: false
+    states:
+      - name: off
+        show: off
+        priority: 100
+      - name: barrier
+        show: vasir_barrier_show
+        speed: 4
+        priority: 10
+        show_tokens:
+          color: purple
+      - name: armor
+        show: vasir_armor_show
+        speed: 8
+        priority: 10
+        show_tokens:
+          color: yellow
+      - name: health
+        show: vasir_health_show
+        speed: 12
+        priority: 10
+        show_tokens:
+          color: red
+
+shots:
+  sbvasir_left_ramp:
+    advance_events:
+      - sbvasir_left_ramp_barrier_hit
+      - sbvasir_left_ramp_armor_hit
+    hit_events: sh_left_ramp_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+  sbvasir_left_orbit:
+    advance_events:
+      - mode_shadowbroker_vasir_started # Start with this shot enabled
+      - sbvasir_left_orbit_barrier_hit
+      - sbvasir_left_orbit_armor_hit
+    hit_events: sh_left_orbit_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+  sbvasir_right_ramp:
+    advance_events:
+      - sbvasir_right_ramp_barrier_hit
+      - sbvasir_right_ramp_armor_hit
+    hit_events: sh_right_ramp_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  sbvasir_right_orbit:
+    advance_events:
+      - sbvasir_right_orbit_barrier_hit
+      - sbvasir_right_orbit_armor_hit
+    hit_events: sh_right_orbit_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  sbvasir_kickback:
+    advance_events:
+      - sbvasir_kickback_barrier_hit
+      - sbvasir_kickback_armor_hit
+    hit_events: sh_kickback_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+  sbvasir_dropbank:
+    advance_events:
+      - sbvasir_dropbank_barrier_hit
+      - sbvasir_dropbank_armor_hit
+    hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_dropbank_shield_rgb
+  sbvasir_hitbank:
+    advance_events:
+      - sbvasir_hitbank_barrier_hit
+      - sbvasir_hitbank_armor_hit
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    profile: sbvasir_shot_profile
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+
+shows:
+  vasir_barrier_show:
+    - time: 0
+      lights:
+        (leds): purple
+    - time: '+1'
+      lights:
+        (leds): black
+  vasir_armor_show:
+    - time: 0
+      lights:
+        (leds): yellow
+    - time: '+1'
+      lights:
+        (leds): black
+  vasir_health_show:
+    - time: 0
+      lights:
+        (leds): red
+    - time: '+1'
+      lights:
+        (leds): black
+
+slide_player:
+  mode_shadowbroker_vasir_started: sbvasir_slide
+
+slides:
+  sbvasir_slide:
+    widgets:
+      - type: text
+        text: DEFEAT VASIR
+        style: quadrit_big
+        animations:
+          show_slide:                # animation trigger event
+            - property: opacity      # name of the widget property we're animating
+              value: 1               # target value of that property for this step
+              duration: .25s          # duration for this step (how long it takes to get there)
+            - property: opacity      # second step in the animation (starts with a hyphen)
+              value: 0.5
+              duration: .25s
+              repeat: true
+
+sound_player:
+  mode_shadowbroker_vasir_started:
+    shadowbroker_vasir_music:
+      action: play
+      start_at: 102s
+      fade_out: 2s
+      # fade_in: 2s
+      mode_end_action: stop
+    vasir_start_sound:
+      action: play
+  timer_vasir_timer_complete: vasir_move_sound
+  vasir_shot_barrier_hit: vasir_hit_sound
+  vasir_shot_armor_hit: vasir_hit_sound
+  # Relays
+  play_vasir_start_sound: vasir_start_sound
+
+sound_pools:
+  vasir_start_sound:
+    sounds: vasir_this_will_be_fun, vasir_ill_finish_you_myself, vasir_youre_dead_shepard, vasir_you_cant_take_me
+    track: voice
+  vasir_hit_sound:
+    sounds: vasir_hit_1, vasir_hit_2, vasir_hit_3, vasir_hit_4, vasir_hit_5
+    type: random_force_next
+    track: voice
+    max_queue_time: 1s
+  vasir_move_sound:
+    sounds:
+      - vasir_heads_up
+      - vasir_faster_than_you
+      - vasir_ready_or_not
+      - vasir_here_i_come
+      - vasir_try_to_keep_up
+      - vasir_having_trouble
+      - vasir_can_you_keep_up
+      - vasir_come_and_get_me
+      - vasir_catch_me_if_you_can
+    type: random_force_all
+    track: voice
+
+sounds:
+  vasir_this_will_be_fun:
+    vasir_:
+    file: DLC_EXP_Part01_Int.282.ogg
+    track: voice
+  vasir_ill_finish_you_myself:
+    file: DLC_EXP_Part01_Int.723.ogg
+    track: voice
+  vasir_you_cant_take_me:
+    file: DLC_EXP_Part01_Int.240.ogg
+    track: voice
+  vasir_youre_dead_shepard:
+    file: DLC_EXP_Part01_Int.242.ogg
+    track: voice
+  vasir_faster_than_you:
+    file: DLC_EXP_Part01_Int.245.ogg
+    track: voice
+  vasir_heads_up:
+    file: DLC_EXP_Part01_Int.246.ogg
+    track: voice
+  vasir_ready_or_not:
+    file: DLC_EXP_Part01_Int.247.ogg
+    track: voice
+  vasir_here_i_come:
+    file: DLC_EXP_Part01_Int.248.ogg
+    track: voice
+  vasir_try_to_keep_up:
+    file: DLC_EXP_Part01_Int.259.ogg
+    track: voice
+  vasir_see_ya:
+    file: DLC_EXP_Part01_Int.260.ogg
+    track: voice
+  vasir_having_trouble:
+    file: DLC_EXP_Part01_Int.261.ogg
+    track: voice
+  vasir_can_you_keep_up:
+    file: DLC_EXP_Part01_Int.262.ogg
+    track: voice
+  vasir_come_and_get_me:
+    file: DLC_EXP_Part01_Int.266.ogg
+    track: voice
+  vasir_catch_me_if_you_can:
+    file: DLC_EXP_Part01_Int.267.ogg
+    track: voice
+  vasir_hit_1:
+    file: DLC_EXP_Part01_Int.273.ogg
+    track: voice
+  vasir_hit_2:
+    file: DLC_EXP_Part01_Int.277.ogg
+    track: voice
+  vasir_hit_3:
+    file: DLC_EXP_Part01_Int.278.ogg
+    track: voice
+  vasir_hit_4:
+    file: DLC_EXP_Part01_Int.279.ogg
+    track: voice
+  vasir_hit_5:
+    file: DLC_EXP_Part01_Int.280.ogg
+    track: voice
+  vasir_hit_damn_it:
+    file: DLC_EXP_Part01_Int.809.ogg
+    track: voice
+  vasir_damn_it:
+    file: DLC_EXP_Part01_Int.756.ogg
+    track: voice
+
+timers:
+  vasir_timer:  # Timer for the shot rotation
+    start_value: 12
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    restart_on_complete: true
+    start_running: true
+    control_events:
+      - event: mode_shadowbroker_vasir_will_stop
+        action: stop
+      - event: vasir_shot_barrier_hit
+        action: restart
+      - event: vasir_shot_armor_hit
+        action: restart
+  vasir_timeout: # Timer for the mode to fail
+    start_value: 120
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: true
+    control_events:
+      - event: shadowbroker_vasir_complete
+        action: stop
+
+widget_player:
+  timer_vasir_timeout_started: timer_widget
+  timer_vasir_timeout_tick:
+    timer_widget:
+      action: update
+  stop_mode_shadowbroker_chase:
+    timer_widget:
+      action: remove
+
+widgets:
+  timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: dmd_small
+      anchor_x: right
+      anchor_y: top
+      x: right-2
+      y: top-2

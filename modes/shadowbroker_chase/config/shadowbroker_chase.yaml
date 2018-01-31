@@ -1,0 +1,287 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: VASIR CHASE
+#
+# This mode is triggered by dropping the dropbank and involves a series of shots
+# that must be hit within a time limit (LO > LR > RO > KB). Completing the series
+# begins the Vasir Combat mode.
+#
+# TODO: Scoring
+#
+# Progress is not saved for this mode, not even completing it. Failing this mode
+# or Vasir Combat requires the player to restart from the beginning of the chase.
+#####
+
+mode:
+  start_events: start_mode_shadowbroker_chase
+  stop_events: stop_mode_shadowbroker_chase
+  priority: 800
+
+event_player:
+  sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
+  shadowbroker_chase_complete: stop_mode_shadowbroker_chase
+  sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
+
+counters:
+  sbchase_counter:
+    starting_count: 0
+    count_complete_value: 5
+    direction: up
+    reset_events: mode_shadowbroker_chase_started
+    events_when_complete: shadowbroker_chase_complete
+    count_events:
+      - sbchase_left_ramp_chaseprofile_lit_hit
+      - sbchase_left_orbit_chaseprofile_lit_hit
+      - sbchase_right_ramp_chaseprofile_lit_hit
+      - sbchase_right_orbit_chaseprofile_lit_hit
+      - sbchase_kickback_chaseprofile_lit_hit
+
+shot_groups:
+  sbchase_shots:
+    shots: sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_left_ramp, sbchase_kickback
+    rotate_right_events: logicblock_sbchase_counter_hit
+
+shot_profiles:
+  chaseprofile:
+    advance_on_hit: false
+    states:
+      - name: off
+        show: off
+      - name: lit
+        show: flash
+
+shots:
+  sbchase_left_ramp:
+    hit_events: sh_left_ramp_hit
+    profile: chaseprofile
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+  sbchase_left_orbit:
+    advance_events: mode_shadowbroker_chase_started
+    hit_events: sh_left_orbit_hit
+    profile: chaseprofile
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+  sbchase_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: chaseprofile
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+  sbchase_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: chaseprofile
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+  sbchase_kickback:
+    hit_events: sh_kickback_hit
+    profile: chaseprofile
+    show_tokens:
+      led: l_kickback_shield_rgb
+
+slide_player:
+  mode_shadowbroker_chase_started: sbchase_slide
+
+slides:
+  sbchase_slide:
+    widgets:
+      - type: text
+        text: CHASE VASIR
+        style: quadrit_big
+        animations:
+          show_slide:                # animation trigger event
+            - property: opacity      # name of the widget property we're animating
+              value: 1               # target value of that property for this step
+              duration: .5s          # duration for this step (how long it takes to get there)
+            - property: opacity      # second step in the animation (starts with a hyphen)
+              value: 0.5
+              duration: .5s
+              repeat: true
+
+sound_player:
+  mode_shadowbroker_chase_started:
+    shadowbroker_vasir_music:
+      action: play
+      fade_out: 2s
+    liara_come_on_shes_getting_away:
+      action: play
+  sbchase_timer_complete:
+    shadowbroker_vasir_music:
+      action: stop
+  logicblock_sbchase_counter_hit: chase_shot_hit_sound
+  sbchase_shots_off_hit: liara_sound_hurry
+  sw_hitbank_active: liara_sound_truck
+  # Call-and-response
+  play_liara_its_a_taxi: liara_its_a_taxi
+  play_shepard_im_going: shepard_im_going
+  play_shepard_well_be_fine: shepard_well_be_fine
+  play_shepard_sound_truck: shepard_sound_truck
+  play_shepard_reply: shepard_sound_reply
+  play_shepard_i_hear_those_can_be_bad: shepard_i_hear_those_can_be_bad
+  play_liara_youre_enjoying_this: liara_youre_enjoying_this
+
+sound_pools:
+  chase_shot_hit_sound:
+    sounds: liara_head_on_collision, shepard_there_we_go, shepard_what_kind_of_guns, liara_go_go_go
+    track: voice
+  liara_sound_truck:
+    sounds: liara_truck_1, liara_truck_2, liara_truck_3
+    track: voice
+  liara_sound_hurry:
+    sounds:
+      - liara_oncoming_traffic
+      - liara_need_to_go_faster
+      - liara_shes_getting_away_3
+      - liara_dont_lose_her
+      - liara_shes_almost_out_of_range
+      - liara_going_the_wrong_way
+      - liara_were_losing_her
+    track: voice
+    type: random_force_all
+  shepard_sound_reply:
+    sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_1, shepard_i_know_2, shepard_i_noticed
+    track: voice
+    type: random_force_all
+  shepard_sound_truck:
+    sounds: shepard_i_know_1, shepard_i_know_2, shepard_again
+    track: voice
+
+sounds:
+  liara_come_on_shes_getting_away:
+    file: DLC_EXP_Part01_Int.640.ogg
+    track: voice
+  liara_shes_getting_away_1:
+    file: DLC_EXP_Part01_Int.313.ogg
+    track: voice
+    events_when_stopped: play_shepard_reply
+  liara_shes_getting_away_3:
+    file: DLC_EXP_Part01_Int.698.ogg
+    track: voice
+  liara_youre_enjoying_this:
+    file: DLC_EXP_Part01_Int.650.ogg
+    track: voice
+  liara_truck_1:
+    file: DLC_EXP_Part01_Int.665.ogg
+    events_when_stopped: play_shepard_sound_truck
+    track: voice
+  liara_truck_2:
+    file: DLC_EXP_Part01_Int.680.ogg
+    events_when_stopped: play_shepard_sound_truck
+    track: voice
+  liara_truck_3:
+    file: DLC_EXP_Part01_Int.688.ogg
+    events_when_stopped: play_shepard_sound_truck
+    track: voice
+  liara_right_no_left:
+    file: DLC_EXP_Part01_Int.690.ogg
+    track: voice
+  liara_left:
+    file: DLC_EXP_Part01_Int.691.ogg
+    track: voice
+  liara_not_letting_her_escape:
+    file: DLC_EXP_Part01_Int.681.ogg
+    track: voice
+  liara_dont_lose_her:
+    file: DLC_EXP_Part01_Int.684.ogg
+    track: voice
+  liara_shes_almost_out_of_range:
+    file: DLC_EXP_Part01_Int.693.ogg
+    track: voice
+    events_when_stopped: play_shepard_reply
+  liara_were_losing_her:
+    file: DLC_EXP_Part01_Int.694.ogg
+    track: voice
+    events_when_stopped: play_shepard_reply
+  liara_we_lost_her:
+    file: DLC_EXP_Part01_Int.695.ogg
+    track: voice
+  liara_need_to_go_faster:
+    file: DLC_EXP_Part01_Int.685.ogg
+    track: voice
+    events_when_stopped: play_shepard_im_going
+  liara_head_on_collision:
+    file: DLC_EXP_Part01_Int.666.ogg
+    events_when_stopped: play_shepard_i_hear_those_can_be_bad
+    track: voice
+  liara_its_a_taxi:
+    file: DLC_EXP_Part01_Int.667.ogg
+    track: voice
+  liara_go_go_go:
+    file: DLC_EXP_Part01_Int.671.ogg
+    track: voice
+    events_when_stopped: play_shepard_im_going
+  liara_oncoming_traffic:
+    file: DLC_EXP_Part01_Int.672.ogg
+    track: voice
+    events_when_stopped: play_shepard_well_be_fine
+  liara_going_the_wrong_way:
+    file: DLC_EXP_Part01_Int.673.ogg
+    track: voice
+  shepard_there_we_go:
+    file: DLC_EXP_Part01_Int.649.ogg
+    track: voice
+    events_when_stopped: play_liara_youre_enjoying_this
+  shepard_again:
+    file: DLC_EXP_Part01_Int.652.ogg
+    track: voice
+  shepard_what_kind_of_guns:
+    file: DLC_EXP_Part01_Int.656.ogg
+    events_when_stopped: play_liara_its_a_taxi
+    track: voice
+  shepard_im_going:
+    file: DLC_EXP_Part01_Int.660.ogg
+    track: voice
+  shepard_well_be_fine:
+    file: DLC_EXP_Part01_Int.662.ogg
+    track: voice
+  shepard_im_on_her:
+    file: DLC_EXP_Part01_Int.664.ogg
+    track: voice
+  shepard_i_know_1:
+    file: DLC_EXP_Part01_Int.677.ogg
+    track: voice
+  shepard_i_know_2:
+    file: DLC_EXP_Part01_Int.675.ogg
+    track: voice
+  shepard_i_noticed:
+    file: DLC_EXP_Part01_Int.679.ogg
+    track: voice
+  shepard_im_working_on_it:
+    file: DLC_EXP_Part01_Int.647.ogg
+    track: voice
+  shepard_i_hear_those_can_be_bad:
+    file: DLC_EXP_Part01_Int.654.ogg
+    track: voice
+
+timers:
+  sbchase_timer:
+    start_value: 60
+    end_value: 0
+    start_running: true
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - event: shadowbroker_chase_complete
+        action: stop
+      - event: sbchase_shots_hit
+        action: add
+        value: 12
+
+widget_player:
+  timer_sbchase_timer_started: timer_widget
+  timer_sbchase_timer_tick:
+    timer_widget:
+      action: update
+  stop_mode_shadowbroker_chase:
+    timer_widget:
+      action: remove
+
+widgets:
+  timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: dmd_small
+      anchor_x: right
+      anchor_y: top
+      x: right-2
+      y: top-2

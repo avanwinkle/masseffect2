@@ -62,13 +62,18 @@ modes:
   - recruittali
   - recruitthane
   - recruitzaeed
+  # Lair of the Shadow Broker
+  - shadowbroker_base
+  - shadowbroker_boss
+  - shadowbroker_chase
+  - shadowbroker_hagalaz
+  - shadowbroker_vasir
   # Side Mission Modes:
   - harbinger
   - n7_assignments
   - overlordlight
   - overlordmultiball
   - planets
-  - shadowbroker
   - shopping
 
 window:
@@ -170,13 +175,16 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 1
-      volume: 0.8
+      volume: 0.7
     voice:
       simultaneous_sounds: 1
-      volume: 0.7
+      volume: 0.8
     sfx:
       simultaneous_sounds: 8
       volume: 0.4
+    levelup:
+      simultaneous_sounds: 1
+      volume: 0.5
 
 assets:
   sounds:

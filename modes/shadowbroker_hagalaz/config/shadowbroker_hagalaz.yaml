@@ -1,0 +1,225 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: HAGALAZ SHIP EXTERIOR
+#
+# This mode begins with all standup targets lit and a "shunt" program running on
+# the kickback lane. Hitting a standup target lights the shots on either side,
+# and hitting a lit shot progresses the shunt program's door-hack counter. When
+# the counter is complete the door unlocks at the kickback lane; hitting the
+# lane holds the ball and begins the Boss Combat mode.
+#
+# TODO: Scoring? The battering ram is a lightning conduit?
+#
+# Progress is not saved for this mode, but it must only be completed one time.
+# Once Boss Combat has been reached, that mode can be restarted directly.
+#####
+
+mode:
+  start_events: start_mode_shadowbroker_hagalaz
+  stop_events: stop_mode_shadowbroker_hagalaz
+  priority: 800
+
+event_player:
+  hagalaz_target1_hagalaz_profile_lit_hit:
+    - enable_shunt_left_orbit
+    - enable_shunt_kickback
+  hagalaz_target2_hagalaz_profile_lit_hit:
+    - enable_shunt_kickback
+    - enable_shunt_left_ramp
+  hagalaz_target3_hagalaz_profile_lit_hit:
+    - enable_shunt_left_ramp
+    - enable_shunt_right_ramp
+  hagalaz_target4_hagalaz_profile_lit_hit:
+    - enable_shunt_left_ramp
+    - enable_shunt_right_ramp
+  hagalaz_target5_hagalaz_profile_lit_hit:
+    - enable_shunt_right_ramp
+    - enable_shunt_right_orbit
+  shunt_counter_complete: enable_final_shunt
+  ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
+  shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
+  sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+
+counters:
+  shunt_counter:
+    starting_count: 0
+    count_complete_value: 3
+    direction: up
+    persist_state: false
+    count_events: shunt_shot_shunt_profile_lit_hit
+
+shot_groups:
+  shunt_shot:
+    shots: shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
+
+shot_profiles:
+  shunt_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: flash_color_show
+        show_tokens:
+          color: orange
+  shunt_final_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: flash_color_show
+        show_tokens:
+          color: green
+  hagalaz_profile:
+    states:
+      - name: lit
+        show: flash
+      - name: off
+        show: off
+
+shots:
+  shunt_final_shot:
+    hit_events: sh_kickback_hit
+    enable_events: enable_final_shunt
+    profile: shunt_final_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+  shunt_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: enable_shunt_left_orbit
+    disable_events: shunt_left_orbit_hit, enable_final_shunt
+    profile: shunt_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+  shunt_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: enable_shunt_left_ramp
+    disable_events: shunt_left_ramp_hit, enable_final_shunt
+    profile: shunt_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+  shunt_right_orbit:
+    hit_events: sh_right_orbit_hit
+    enable_events: enable_shunt_right_orbit
+    disable_events: shunt_right_orbit_hit, enable_final_shunt
+    profile: shunt_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  shunt_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: enable_shunt_right_ramp
+    disable_events: shunt_right_ramp_hit, enable_final_shunt
+    profile: shunt_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  shunt_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: enable_shunt_kickback
+    disable_events: shunt_kickback_hit, enable_final_shunt
+    profile: shunt_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+  hagalaz_target1:
+    switch: s_target1
+    profile: hagalaz_profile
+    show_tokens:
+      leds: l_standup_1
+  hagalaz_target2:
+    switch: s_target2
+    profile: hagalaz_profile
+    show_tokens:
+      leds: l_standup_2
+  hagalaz_target3:
+    switch: s_target3
+    profile: hagalaz_profile
+    show_tokens:
+      leds: l_standup_3
+  hagalaz_target4:
+    switch: s_target4
+    profile: hagalaz_profile
+    show_tokens:
+      leds: l_standup_4
+  hagalaz_target5:
+    switch: s_target5
+    profile: hagalaz_profile
+    show_tokens:
+      leds: l_standup_5
+
+sounds:
+  liara_now_therell_be_fewer_inside:
+    file: DLC_EXP_Part01_Int.902.ogg
+    track: voice
+  liara_no_time_to_talk:
+    file: DLC_EXP_Part01_Int.912.ogg
+    track: voice
+  liara_next_wave_looks_big:
+    file: DLC_EXP_Part01_Int.913.ogg
+    track: voice
+  liara_more_on_the_way:
+    file: DLC_EXP_Part01_Int.922.ogg
+    track: voice
+  liara_here_come_more:
+    file: DLC_EXP_Part01_Int.925.ogg
+    track: voice
+  liara_their_attacks_are_disorganized:
+    file: DLC_EXP_Part01_Int.942.ogg
+    track: voice
+  liara_that_security_upgrade:
+    file: DLC_EXP_Part01_Int.923.ogg
+    track: voice
+  liara_it_wont_be_much_longer:
+    file: DLC_EXP_Part01_Int.924.ogg
+    track: voice
+  liara_it_didnt_come_with_a_warranty:
+    file: DLC_EXP_Part01_Int.926.ogg
+    track: voice
+  liara_hatch_is_open:
+    file: DLC_EXP_Part01_Int.935.ogg
+    track: voice
+  liara_careful_capacitors:
+    file: DLC_EXP_Part01_Int.939.ogg
+    track: voice
+  liara_try_firing_at_capacitors:
+    file: DLC_EXP_Part01_Int.938.ogg
+    track: voice
+  liara_ive_never_broken_into_sb_before:
+    file: DLC_EXP_Part01_Int.953.ogg
+    track: voice
+  liara_its_locked_ive_got_a_shunt_program:
+    file: DLC_EXP_Part01_Int.954.ogg
+    track: voice
+  shepard_you_had_to_give_them_tactical_advice:
+    file: DLC_EXP_Part01_Int.895.ogg
+    track: voice
+  shepard_please_dont_give_the_mercs_ideas:
+    file: DLC_EXP_Part01_Int.899.ogg
+    track: voice
+  shepard_so_much_for_covert_infiltration:
+    file: DLC_EXP_Part01_Int.901.ogg
+    track: voice
+  shepard_tell_me_you_tested_it:
+    file: DLC_EXP_Part01_Int.911.ogg
+    track: voice
+  shepard_you_tested_it_right:
+    file: DLC_EXP_Part01_Int.919.ogg
+    track: voice
+  shepard_you_sure_shunt_is_working:
+    file: DLC_EXP_Part01_Int.921.ogg
+    track: voice
+  shepard_slap_omnigel:
+    file: DLC_EXP_Part01_Int.915.ogg
+    track: voice
+  shepard_how_long_will_it_take:
+    file: DLC_EXP_Part01_Int.951.ogg
+    track: voice
+
+timers:
+  sbhagalaz_timer:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      - event: shadowbroker_hagalaz_complete
+        action: stop
+      - event: shunt_shot_hit
+        action: add
+        value: 12

@@ -51,7 +51,6 @@ keyboard:
   e:
     event: sbdroptarget_group_complete
 
-
 event_player:
   skip_recruit_mission_garrus: recruit_mission_success, skip_mission_scoring, recruit_garrus_complete
   skip_recruit_mission_grunt: recruit_mission_success, skip_mission_scoring, recruit_grunt_complete

@@ -38,7 +38,6 @@ multiball_locks:
   overlordlock:
     balls_to_lock: 3
     lock_devices: bd_lock
-    # autoreplace_locked_balls: False
     reset_count_for_current_player_events: multiball_overlord_multiball_ended
     enable_events: enable_overlord_lock
     disable_events: multiball_lock_overlordlock_locked_ball

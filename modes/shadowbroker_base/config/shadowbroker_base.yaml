@@ -1,0 +1,216 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: BASE MODE
+#
+# This mode is the base mode for handling progress through the Shadow Broker
+# side missions. It primarily handles tracking the dropbank completions and
+# lighting their progress, then enabling shots to start the various modes that
+# progress through the Shadow Broker story.
+#
+#####
+
+mode:
+  start_events: start_mode_shadowbroker_base
+  stop_events: stop_mode_shadowbroker_base
+  priority: 500
+
+event_player:
+  sbdroptarget_group_complete:
+    - reset_dropbank
+    # Complete the dropbank after vasir is enabled to begin the chase
+    - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
+    # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
+    - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
+    # Complete the dropbank after boss is defeated for extra prizes!
+    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}
+  start_mode_shadowbroker_chase:
+    - enter_shadowbroker_modes
+  start_mode_shadowbroker_hagalaz:
+    - enter_shadowbroker_modes
+  # Complete the chase to begin Vasir Combat
+  shadowbroker_chase_complete:
+    - start_mode_shadowbroker_vasir
+  # Get to the end of hagalaz to enable the hold for Boss Combat
+  enable_final_shunt: enable_shadowbroker_hold
+  # If the mode is restarted and boss combat is enabled, re-enable the hold
+  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}: enable_shadowbroker_hold
+  # Get a ball in the ball hold to begin Boss Combat
+  ball_hold_shadowbroker_hold_held_ball:
+    - start_mode_shadowbroker_boss
+    - enter_shadowbroker_modes
+
+ball_holds:
+  shadowbroker_hold:
+    balls_to_hold: 1
+    hold_devices: bd_hold
+    enable_events: enable_shadowbroker_hold
+    release_one_events: release_shadowbroker_hold
+    disable_events: ball_hold_shadowbroker_hold_balls_released
+
+counters:
+  sbvasir_counter:
+    count_events: sbdroptarget_group_complete
+    starting_count: 0
+    count_complete_value: 3
+    persist_state: true
+  sbhagalaz_counter:
+    enable_events: achievement_vasir_state_completed
+    count_events: sbdroptarget_group_complete
+    starting_count: 0
+    count_complete_value: 3
+    persist_state: true
+    disable_on_complete: false
+
+scoring:
+  sbdroptarget_group_complete:
+    intel: 1
+
+shot_groups:
+  sbdroptarget_group:
+    enable_events: start_mode_shadowbroker_base, exit_shadowbroker_modes
+    disable_events: enter_shadowbroker_modes
+    reset_events: sbdroptarget_group_complete
+    shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot
+
+shot_profiles:
+  advance_sbdrops_profile:
+    show_when_disabled: false
+    states:
+      - name: unlit
+        show: sbdrops_off
+      - name: one_lit
+        show: sbdrops_one_show
+      - name: two_lit
+        show: sbdrops_two_show
+      - name: three_lit
+        show: sbdrops_three_show
+
+shots:
+  sbdroptarget_bottom_shot:
+    switch: s_dropbank_bottom
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdroptarget_middle_shot:
+    switch: s_dropbank_middle
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdroptarget_top_shot:
+    switch: s_dropbank_top
+    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+  sbdrop_showshot:
+    # Delay enabling to avoid initial droptarget_complete event
+    enable_events: mode_shadowbroker_base_started
+    advance_events: sbdroptarget_group_complete
+    reset_events: achievement_vasir_state_completed
+    profile: advance_sbdrops_profile
+
+show_player:
+  sbdroptarget_group_hit:
+    sbdrops_flash:
+      priority: 100
+      loops: 6
+      speed: 10
+  sbdroptarget_group_complete:
+    sbdrops_flash:
+      priority: 100
+      loops: 12
+      speed: 10
+
+shows:
+  sbdrops_flash:
+    - time: 0
+      lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: white
+        l_dropbank_top: white
+    - time: '+1'
+      lights:
+        l_dropbank_bottom: black
+        l_dropbank_middle: black
+        l_dropbank_top: black
+  sbdrops_off:
+    - lights:
+        l_dropbank_bottom: black
+        l_dropbank_middle: black
+        l_dropbank_top: black
+  sbdrops_one_show:
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: black
+        l_dropbank_top: black
+  sbdrops_two_show:
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: white
+        l_dropbank_top: black
+  sbdrops_three_show:
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: white
+        l_dropbank_top: white
+
+sound_player:
+  logicblock_sbvasir_counter_hit{count==1}: shepard_sounds_like_liara_found_something_big
+  logicblock_sbvasir_counter_hit{count==2}: vasir_i_know_where_the_trade_center_is
+  logicblock_sbvasir_counter_hit{count==3}: vasir_they_took_out_three_floors
+  achievement_vasir_state_completed: liara_shepard_im_glad_youre_here
+  logicblock_sbhagalaz_counter_hit{count==1}: liara_sukets_datapad_this_has_what_we_need
+  logicblock_sbhagalaz_counter_hit{count==2}: liara_we_can_be_at_base_in_a_few_hours
+  logicblock_sbhagalaz_counter_hit{count==3}: liara_land_outside_and_hunt_for_a_hatch
+  # Relays
+  play_shepard_ill_start_down_here: shepard_ill_start_down_here
+
+sounds:
+  shadowbroker_agent_music:
+    file: "03 Agent Combat.ogg"
+    track: music
+  shadowbroker_vasir_music:
+    file: "05 Vasir Combat.ogg"
+    track: music
+  # Dropbanks for Vasir
+  shepard_sounds_like_liara_found_something_big:
+    file: DLC_EXP_Part01_Int.143.ogg
+    track: voice
+  shepard_ive_got_something_here:
+    file: DLC_EXP_Part01_Int.146.ogg
+    track: voice
+  shepard_liara_knew_i_was_coming:
+    file: DLC_EXP_Part01_Int.179.ogg
+    track: voice
+  shepard_liaras_in_there:
+    file: DLC_EXP_Part01_Int.636.ogg
+    track: voice
+  shepard_ill_start_down_here:
+    file: DLC_EXP_Part01_Int.628.ogg
+    track: voice
+  vasir_i_know_where_the_trade_center_is:
+    file: DLC_EXP_Part01_Int.169.ogg
+    track: voice
+  vasir_they_took_out_three_floors:
+    file: DLC_EXP_Part01_Int.634.ogg
+    events_when_stopped: play_shepard_ill_start_down_here
+    track: voice
+  # After Vasir
+  liara_shepard_im_glad_youre_here:
+    file: DLC_EXP_Part01_Int.871.ogg
+    track: voice
+    volume: 0.7
+  # Dropbanks for Hagalaz
+  liara_sukets_datapad_this_has_what_we_need:
+    file: DLC_EXP_Part01_Int.797.ogg
+    track: voice
+  liara_sb_agents_still_shooting_illium:
+    file: DLC_EXP_Part01_Int.878.ogg
+    track: voice
+  liara_well_need_normandy_stealth_system:
+    file: DLC_EXP_Part01_Int.879.ogg
+    track: voice
+  liara_i_can_get_us_there:
+    file: DLC_EXP_Part01_Int.885.ogg
+    track: voice
+  liara_we_can_be_at_base_in_a_few_hours:
+    file: DLC_EXP_Part01_Int.884.ogg
+    track: voice
+  liara_land_outside_and_hunt_for_a_hatch:
+    file: DLC_EXP_Part01_Int.944.ogg
+    track: voice
+
