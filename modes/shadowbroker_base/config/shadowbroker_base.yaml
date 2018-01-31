@@ -22,6 +22,8 @@ event_player:
     - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
     # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
     - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
+    # Complete the dropbank after hagalaz to re-enable boss combat
+    - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
     # Complete the dropbank after boss is defeated for extra prizes!
     - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}
   start_mode_shadowbroker_chase:
@@ -31,10 +33,9 @@ event_player:
   # Complete the chase to begin Vasir Combat
   shadowbroker_chase_complete:
     - start_mode_shadowbroker_vasir
-  # Get to the end of hagalaz to enable the hold for Boss Combat
-  enable_final_shunt: enable_shadowbroker_hold
   # If the mode is restarted and boss combat is enabled, re-enable the hold
-  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}: enable_shadowbroker_hold
+  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}: 
+    - enable_shadowbroker_hold
   # Get a ball in the ball hold to begin Boss Combat
   ball_hold_shadowbroker_hold_held_ball:
     - start_mode_shadowbroker_boss
@@ -44,7 +45,7 @@ ball_holds:
   shadowbroker_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
-    enable_events: enable_shadowbroker_hold
+    enable_events: enable_shadowbroker_hold, enable_hatch
     release_one_events: release_shadowbroker_hold
     disable_events: ball_hold_shadowbroker_hold_balls_released
 
@@ -54,6 +55,7 @@ counters:
     starting_count: 0
     count_complete_value: 3
     persist_state: true
+    disable_on_complete: true
   sbhagalaz_counter:
     enable_events: achievement_vasir_state_completed
     count_events: sbdroptarget_group_complete
@@ -89,13 +91,13 @@ shot_profiles:
 shots:
   sbdroptarget_bottom_shot:
     switch: s_dropbank_bottom
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
   sbdroptarget_middle_shot:
     switch: s_dropbank_middle
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
   sbdroptarget_top_shot:
     switch: s_dropbank_top
-    reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
   sbdrop_showshot:
     # Delay enabling to avoid initial droptarget_complete event
     enable_events: mode_shadowbroker_base_started
