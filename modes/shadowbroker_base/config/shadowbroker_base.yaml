@@ -54,14 +54,13 @@ counters:
     starting_count: 0
     count_complete_value: 3
     persist_state: true
-    disable_on_complete: true
   sbhagalaz_counter:
     enable_events: achievement_vasir_state_completed
     count_events: sbdroptarget_group_complete
     starting_count: 0
     count_complete_value: 3
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
 
 scoring:
   sbdroptarget_group_complete:
@@ -147,9 +146,20 @@ shows:
         l_dropbank_middle: white
         l_dropbank_top: white
 
+sound_player:
+  logicblock_sbvasir_counter_updated{value==1}: shepard_sounds_like_liara_found_something_big
+  logicblock_sbvasir_counter_updated{value==2}: vasir_i_know_where_the_trade_center_is
+  logicblock_sbvasir_counter_updated{value==3}: vasir_they_took_out_three_floors, shepard_ill_start_down_here|2s
+  logicblock_sbhagalaz_counter_updated{value==1}: liara_sukets_datapad_this_has_what_we_need
+  logicblock_sbhagalaz_counter_updated{value==2}: liara_we_can_be_at_base_in_a_few_hours
+  logicblock_sbhagalaz_counter_updated{value==3}: liara_land_outside_and_hunt_for_a_hatch
+
 sounds:
   shadowbroker_agent_music:
     file: "03 Agent Combat.ogg"
+    track: music
+  shadowbroker_vasir_music:
+    file: "05 Vasir Combat.ogg"
     track: music
   # Dropbanks for Vasir
   shepard_sounds_like_liara_found_something_big:

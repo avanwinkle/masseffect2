@@ -150,11 +150,38 @@ slides:
               duration: .25s
               repeat: true
 
+sound_player:
+  mode_shadowbroker_vasir_started:
+    shadowbroker_vasir_music:
+      action: play
+      start_at: 102s
+      fade_in: 2s
+      mode_end_action: stop
+  timer_vasir_timer_complete: vasir_move_sound
+  # TODO: Figure out how to best handle profile state based on shot group
+  vasir_shot_barrier_hit: vasir_hit_sound
+
+sound_pools:
+  vasir_start_sound:
+    sounds: vasir_this_will_be_fun, vasir_ill_finish_you_myself, vasir_youre_dead_shepard, vasir_you_cant_take_me
+  vasir_hit_sound:
+    sounds: vasir_hit_1, vasir_hit_2, vasir_hit_3, vasir_hit_4, vasir_hit_5
+    type: random_force_next
+    max_queue_time: 1s
+  vasir_move_sound:
+    sounds: 
+      - vasir_heads_up
+      - vasir_faster_than_you
+      - vasir_ready_or_not
+      - vasir_here_i_come
+      - vasir_try_to_keep_up
+      - vasir_having_trouble
+      - vasir_can_you_keep_up
+      - vasir_come_and_get_me
+      - vasir_catch_me_if_you_can
+    type: random_force_all
+
 sounds:
-  shadowbroker_vasir_music:
-    file: "05 Vasir Combat.ogg"
-    track: music
-    start_at: 60s
   vasir_this_will_be_fun:
     vasir_:
     file: DLC_EXP_Part01_Int.282.ogg
@@ -220,19 +247,6 @@ sounds:
     file: DLC_EXP_Part01_Int.756.ogg
     track: voice
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 timers:
   vasir_timer:  # Timer for the shot rotation
     start_value: 12
@@ -253,7 +267,6 @@ timers:
     control_events:
       - event: shadowbroker_vasir_complete
         action: stop
-
 
 widget_player:
   timer_vasir_timeout_started: timer_widget

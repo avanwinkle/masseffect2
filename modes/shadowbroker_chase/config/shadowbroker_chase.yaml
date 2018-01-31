@@ -23,9 +23,24 @@ event_player:
   shadowbroker_chase_complete: stop_mode_shadowbroker_chase
   sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
 
+counters:
+  sbchase_counter:
+    starting_count: 0
+    count_complete_value: 5
+    direction: up
+    reset_events: mode_shadowbroker_chase_started
+    events_when_complete: shadowbroker_chase_complete
+    count_events:
+      - sbchase_left_ramp_chaseprofile_lit_hit
+      - sbchase_left_orbit_chaseprofile_lit_hit
+      - sbchase_right_ramp_chaseprofile_lit_hit
+      - sbchase_right_orbit_chaseprofile_lit_hit
+      - sbchase_kickback_chaseprofile_lit_hit
+
 shot_groups:
   sbchase_shots:
-    shots: sbchase_left_ramp, sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_kickback
+    shots: sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_left_ramp, sbchase_kickback
+    rotate_right_events: logicblock_sbchase_counter_updated
 
 shot_profiles:
   chaseprofile:
@@ -38,7 +53,6 @@ shot_profiles:
 
 shots:
   sbchase_left_ramp:
-    advance_events: sbchase_left_orbit_chaseprofile_lit_hit
     hit_events: sh_left_ramp_hit
     reset_events: sbchase_left_ramp_chaseprofile_lit_hit
     profile: chaseprofile
@@ -46,7 +60,6 @@ shots:
       led: l_left_ramp_shield_rgb
   sbchase_left_orbit:
     advance_events: mode_shadowbroker_chase_started
-    reset_events: sbchase_left_orbit_chaseprofile_lit_hit
     hit_events: sh_left_orbit_hit
     profile: chaseprofile
     show_tokens:
@@ -57,14 +70,11 @@ shots:
     show_tokens:
       led: l_right_ramp_shield_rgb
   sbchase_right_orbit:
-    advance_events: sbchase_left_ramp_chaseprofile_lit_hit
     hit_events: sh_right_orbit_hit
-    reset_events: sbchase_right_orbit_chaseprofile_lit_hit
     profile: chaseprofile
     show_tokens:
       led: l_right_orbit_shield_rgb
   sbchase_kickback:
-    advance_events: sbchase_right_orbit_chaseprofile_lit_hit
     hit_events: sh_kickback_hit
     profile: chaseprofile
     show_tokens:
@@ -89,6 +99,41 @@ slides:
               duration: .5s
               repeat: true
 
+sound_player:
+  mode_shadowbroker_chase_started: 
+    shadowbroker_vasir_music:
+      action: play
+      mode_end_action: stop
+      fade_out: 2s
+  logicblock_sbchase_counter_updated: chase_shot_hit_sound
+  # Call-and-response
+  play_liara_its_a_taxi: liara_its_a_taxi
+  play_shepard_im_going: shepard_im_going
+  play_shepard_well_be_fine: shepard_well_be_fine
+  play_shepard_sound_truck: shepard_sound_truck
+  play_liara_youre_enjoying_this: liara_youre_enjoying_this
+
+sound_pools:
+  chase_shot_hit_sound:
+    sounds: liara_oncoming_traffic, liara_head_on_collision, shepard_there_we_go, liara_go_go_go, liara_right_no_left
+  liara_sound_truck:
+    sounds: liara_truck_1, liara_truck_2, liara_truck_3
+    type: sequence
+  liara_sound_hurry:
+    sounds: liara_need_to_go_faster, liara_shes_getting_away_1, liara_shes_getting_away_2, liara_shes_getting_away_3
+    track: voice
+    type: random_force_all
+  liara_sound_wrong_way:
+    sounds: liara_dont_lose_her, liara_shes_almost_out_of_range, liara_going_the_wrong_way, liara_were_losing_her
+    track: voice
+    type: random_force_all
+  shepard_sound_reply:
+    sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_1, shepard_i_know_2, shepard_i_noticed
+    track: voice
+    type: random_force_all
+  shepard_sound_truck:
+    sounds: shepard_i_know_1, shepard_i_know_2, shepard_again
+
 sounds:
   liara_shes_getting_away_1:
     file: DLC_EXP_Part01_Int.313.ogg
@@ -104,12 +149,15 @@ sounds:
     track: voice
   liara_truck_1:
     file: DLC_EXP_Part01_Int.665.ogg
+    events_when_stopped: play_shepard_sound_truck
     track: voice
   liara_truck_2:
     file: DLC_EXP_Part01_Int.680.ogg
+    events_when_stopped: play_shepard_sound_truck
     track: voice
   liara_truck_3:
     file: DLC_EXP_Part01_Int.688.ogg
+    events_when_stopped: play_shepard_sound_truck
     track: voice
   liara_right_no_left:
     file: DLC_EXP_Part01_Int.690.ogg
@@ -137,6 +185,7 @@ sounds:
     track: voice
   liara_head_on_collision:
     file: DLC_EXP_Part01_Int.666.ogg
+    events_when_stopped: play_shepard_well_be_fine
     track: voice
   liara_its_a_taxi:
     file: DLC_EXP_Part01_Int.667.ogg
@@ -144,6 +193,7 @@ sounds:
   liara_go_go_go:
     file: DLC_EXP_Part01_Int.671.ogg
     track: voice
+    events_when_stopped: play_shepard_im_going
   liara_oncoming_traffic:
     file: DLC_EXP_Part01_Int.672.ogg
     track: voice
@@ -153,11 +203,13 @@ sounds:
   shepard_there_we_go:
     file: DLC_EXP_Part01_Int.649.ogg
     track: voice
+    events_when_stopped: play_liara_youre_enjoying_this
   shepard_again:
     file: DLC_EXP_Part01_Int.652.ogg
     track: voice
   shepard_what_kind_of_guns:
     file: DLC_EXP_Part01_Int.656.ogg
+    events_when_stopped: play_liara_its_a_taxi
     track: voice
   shepard_im_going:
     file: DLC_EXP_Part01_Int.660.ogg
@@ -171,7 +223,7 @@ sounds:
   shepard_i_know_1:
     file: DLC_EXP_Part01_Int.677.ogg
     track: voice
-  shepard_i_know_3:
+  shepard_i_know_2:
     file: DLC_EXP_Part01_Int.675.ogg
     track: voice
   shepard_i_noticed:
@@ -180,11 +232,6 @@ sounds:
   shepard_im_working_on_it:
     file: DLC_EXP_Part01_Int.647.ogg
     track: voice
-  
-  
-    
-    
-
 
 timers:
   sbchase_timer:
