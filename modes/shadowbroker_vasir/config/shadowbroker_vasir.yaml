@@ -27,18 +27,25 @@ event_player:
   timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
   stop_mode_shadowbroker_vasir: exit_shadowbroker_modes
-  # Need a better way than each shot at the health profile
-  sbvasir_left_ramp_health_hit: shadowbroker_vasir_complete
-  sbvasir_left_orbit_health_hit: shadowbroker_vasir_complete
-  sbvasir_right_ramp_health_hit: shadowbroker_vasir_complete
-  sbvasir_right_orbit_health_hit: shadowbroker_vasir_complete
-  sbvasir_kickback_health_hit: shadowbroker_vasir_complete
-  sbvasir_dropbank_health_hit: shadowbroker_vasir_complete
-  sbvasir_hitbank_health_hit: shadowbroker_vasir_complete
+  vasir_shot_health_hit:
+    - shadowbroker_vasir_complete
+    - levelup
+  # Relay some sounds to delay
+  vasir_shot_barrier_hit: play_vasir_start_sound|2s
+  vasir_shot_armor_hit: play_vasir_start_sound|2s
+
+scoring:
+  mode_shadowbroker_vasir_started:
+    last_mission:
+      action: set
+      string: "Broker Intel Recovered"
 
 shot_groups:
   vasir_shot:
-    rotate_right_events: timer_vasir_timer_complete
+    rotate_right_events:
+      - timer_vasir_timer_complete
+      - vasir_shot_barrier_hit
+      - vasir_shot_armor_hit
     shots:
       - sbvasir_hitbank
       - sbvasir_left_orbit
@@ -49,60 +56,84 @@ shot_groups:
 
 shot_profiles:
   sbvasir_shot_profile:
-    loop: true
+    advance_on_hit: false
     states:
       - name: off
         show: off
-        manual_advance: true
+        priority: 100
       - name: barrier
         show: vasir_barrier_show
         speed: 4
+        priority: 10
         show_tokens:
           color: purple
       - name: armor
         show: vasir_armor_show
         speed: 8
+        priority: 10
         show_tokens:
           color: yellow
       - name: health
         show: vasir_health_show
         speed: 12
+        priority: 10
         show_tokens:
           color: red
 
 shots:
   sbvasir_left_ramp:
+    advance_events:
+      - sbvasir_left_ramp_barrier_hit
+      - sbvasir_left_ramp_armor_hit
     hit_events: sh_left_ramp_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
+    advance_events:
+      - mode_shadowbroker_vasir_started # Start with this shot enabled
+      - sbvasir_left_orbit_barrier_hit
+      - sbvasir_left_orbit_armor_hit
     hit_events: sh_left_orbit_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
   sbvasir_right_ramp:
+    advance_events:
+      - sbvasir_right_ramp_barrier_hit
+      - sbvasir_right_ramp_armor_hit
     hit_events: sh_right_ramp_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
   sbvasir_right_orbit:
+    advance_events:
+      - sbvasir_right_orbit_barrier_hit
+      - sbvasir_right_orbit_armor_hit
     hit_events: sh_right_orbit_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
   sbvasir_kickback:
+    advance_events:
+      - sbvasir_kickback_barrier_hit
+      - sbvasir_kickback_armor_hit
     hit_events: sh_kickback_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_kickback_shield_rgb
   sbvasir_dropbank:
+    advance_events:
+      - sbvasir_dropbank_barrier_hit
+      - sbvasir_dropbank_armor_hit
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     profile: sbvasir_shot_profile
     show_tokens:
       leds: l_dropbank_shield_rgb
   sbvasir_hitbank:
-    advance_events: mode_shadowbroker_vasir_started # Start with hitbank enabled
+    advance_events:
+      - sbvasir_hitbank_barrier_hit
+      - sbvasir_hitbank_armor_hit
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: sbvasir_shot_profile
     show_tokens:
@@ -155,21 +186,28 @@ sound_player:
     shadowbroker_vasir_music:
       action: play
       start_at: 102s
-      fade_in: 2s
+      fade_out: 2s
+      # fade_in: 2s
       mode_end_action: stop
+    vasir_start_sound:
+      action: play
   timer_vasir_timer_complete: vasir_move_sound
-  # TODO: Figure out how to best handle profile state based on shot group
   vasir_shot_barrier_hit: vasir_hit_sound
+  vasir_shot_armor_hit: vasir_hit_sound
+  # Relays
+  play_vasir_start_sound: vasir_start_sound
 
 sound_pools:
   vasir_start_sound:
     sounds: vasir_this_will_be_fun, vasir_ill_finish_you_myself, vasir_youre_dead_shepard, vasir_you_cant_take_me
+    track: voice
   vasir_hit_sound:
     sounds: vasir_hit_1, vasir_hit_2, vasir_hit_3, vasir_hit_4, vasir_hit_5
     type: random_force_next
+    track: voice
     max_queue_time: 1s
   vasir_move_sound:
-    sounds: 
+    sounds:
       - vasir_heads_up
       - vasir_faster_than_you
       - vasir_ready_or_not
@@ -180,6 +218,7 @@ sound_pools:
       - vasir_come_and_get_me
       - vasir_catch_me_if_you_can
     type: random_force_all
+    track: voice
 
 sounds:
   vasir_this_will_be_fun:
@@ -258,6 +297,10 @@ timers:
     control_events:
       - event: mode_shadowbroker_vasir_will_stop
         action: stop
+      - event: vasir_shot_barrier_hit
+        action: restart
+      - event: vasir_shot_armor_hit
+        action: restart
   vasir_timeout: # Timer for the mode to fail
     start_value: 120
     end_value: 0

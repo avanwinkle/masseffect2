@@ -175,13 +175,16 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 1
-      volume: 0.8
+      volume: 0.7
     voice:
       simultaneous_sounds: 1
-      volume: 0.7
+      volume: 0.8
     sfx:
       simultaneous_sounds: 8
       volume: 0.4
+    levelup:
+      simultaneous_sounds: 1
+      volume: 0.5
 
 assets:
   sounds:

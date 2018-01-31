@@ -16,19 +16,21 @@ mode:
   priority: 500
 
 event_player:
-  sbdroptarget_group_complete: reset_dropbank
-  # Complete the dropbank after vasir is enabled to begin the chase
-  sbdroptarget_group_complete{device.achievements.vasir.state=="enabled"}:
-    - start_mode_shadowbroker_chase
+  sbdroptarget_group_complete:
+    - reset_dropbank
+    # Complete the dropbank after vasir is enabled to begin the chase
+    - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
+    # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
+    - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
+    # Complete the dropbank after boss is defeated for extra prizes!
+    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}
+  start_mode_shadowbroker_chase:
+    - enter_shadowbroker_modes
+  start_mode_shadowbroker_hagalaz:
     - enter_shadowbroker_modes
   # Complete the chase to begin Vasir Combat
   shadowbroker_chase_complete:
     - start_mode_shadowbroker_vasir
-    - enter_shadowbroker_modes
-  # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
-  sbdroptarget_group_complete{device.achievements.hagalaz.state=="enabled"}:
-    - start_mode_shadowbroker_hagalaz
-    - enter_shadowbroker_modes
   # Get to the end of hagalaz to enable the hold for Boss Combat
   enable_final_shunt: enable_shadowbroker_hold
   # If the mode is restarted and boss combat is enabled, re-enable the hold
@@ -37,8 +39,6 @@ event_player:
   ball_hold_shadowbroker_hold_held_ball:
     - start_mode_shadowbroker_boss
     - enter_shadowbroker_modes
-  # Complete the dropbank after boss is defeated for extra prizes!
-  sbdroptarget_group_complete{device.achievements.shadowbroker.state=="complete"}: award_shadowbroker_prize
 
 ball_holds:
   shadowbroker_hold:
@@ -97,6 +97,8 @@ shots:
     switch: s_dropbank_top
     reset_events: mode_shadowbroker_will_stop, sbdroptarget_group_complete
   sbdrop_showshot:
+    # Delay enabling to avoid initial droptarget_complete event
+    enable_events: mode_shadowbroker_base_started
     advance_events: sbdroptarget_group_complete
     reset_events: achievement_vasir_state_completed
     profile: advance_sbdrops_profile
@@ -147,12 +149,15 @@ shows:
         l_dropbank_top: white
 
 sound_player:
-  logicblock_sbvasir_counter_updated{value==1}: shepard_sounds_like_liara_found_something_big
-  logicblock_sbvasir_counter_updated{value==2}: vasir_i_know_where_the_trade_center_is
-  logicblock_sbvasir_counter_updated{value==3}: vasir_they_took_out_three_floors, shepard_ill_start_down_here|2s
-  logicblock_sbhagalaz_counter_updated{value==1}: liara_sukets_datapad_this_has_what_we_need
-  logicblock_sbhagalaz_counter_updated{value==2}: liara_we_can_be_at_base_in_a_few_hours
-  logicblock_sbhagalaz_counter_updated{value==3}: liara_land_outside_and_hunt_for_a_hatch
+  logicblock_sbvasir_counter_hit{count==1}: shepard_sounds_like_liara_found_something_big
+  logicblock_sbvasir_counter_hit{count==2}: vasir_i_know_where_the_trade_center_is
+  logicblock_sbvasir_counter_hit{count==3}: vasir_they_took_out_three_floors
+  achievement_vasir_state_completed: liara_shepard_im_glad_youre_here
+  logicblock_sbhagalaz_counter_hit{count==1}: liara_sukets_datapad_this_has_what_we_need
+  logicblock_sbhagalaz_counter_hit{count==2}: liara_we_can_be_at_base_in_a_few_hours
+  logicblock_sbhagalaz_counter_hit{count==3}: liara_land_outside_and_hunt_for_a_hatch
+  # Relays
+  play_shepard_ill_start_down_here: shepard_ill_start_down_here
 
 sounds:
   shadowbroker_agent_music:
@@ -182,7 +187,13 @@ sounds:
     track: voice
   vasir_they_took_out_three_floors:
     file: DLC_EXP_Part01_Int.634.ogg
+    events_when_stopped: play_shepard_ill_start_down_here
     track: voice
+  # After Vasir
+  liara_shepard_im_glad_youre_here:
+    file: DLC_EXP_Part01_Int.871.ogg
+    track: voice
+    volume: 0.7
   # Dropbanks for Hagalaz
   liara_sukets_datapad_this_has_what_we_need:
     file: DLC_EXP_Part01_Int.797.ogg
@@ -202,4 +213,4 @@ sounds:
   liara_land_outside_and_hunt_for_a_hatch:
     file: DLC_EXP_Part01_Int.944.ogg
     track: voice
-  
+

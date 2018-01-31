@@ -9,23 +9,36 @@ config:
 achievements:
   collectorship:
     enable_events: enable_collectorship
+    start_events: mode_collectorship_base_started
     complete_events:
       - mode_collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
       - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
   derelictreaper:
     enable_events: enable_derelictreaper
+    start_events: start_mode_derelictreaper
   collectorattack:
     enable_events: enable_collectorattack
+    start_events: mode_collectorattack_started
+    complete_events: mode_collectorattack_stopped # Only happens once, completed after playing
   hagalaz:
     enable_events: logicblock_sbhagalaz_counter_complete
+    start_events: mode_shadowbroker_hagalaz_started
+    stop_events: mode_shadowbroker_hagalaz_stopped
     complete_events: shadowbroker_hagalaz_complete
   shadowbroker:
     enable_events: shadowbroker_hagalaz_complete
+    start_events: mode_shadowbroker_boss_started
+    stop_events: mode_shadowbroker_boss_stopped
     complete_events: shadowbroker_boss_complete
   suicidemission:
     enable_events: enable_suicidemission
+    start_events: mode_suicidemission_base_started
+    stop_events: mode_suicidemission_base_stopped
+    complete_events: suicidemission_complete
   vasir:
     enable_events: logicblock_sbvasir_counter_complete
+    start_events: mode_shadowbroker_vasir_started
+    stop_events: mode_shadowbroker_vasir_stopped
     complete_events: shadowbroker_vasir_complete
 
 event_player:
@@ -142,9 +155,12 @@ counters:
 scoring:
   levelup:
     level: 1
+  recruit_mission_success:
     available_missions: -1
   enable_collectorship:
     available_missions: 1
+  mode_collectorship_base_stopped:
+    available_missions: -1
   skip_mission_scoring: # Mock values so we can skip missions and keep accurate counts
     recruits_lit_count: 1
     available_missions: 1
@@ -283,9 +299,9 @@ sound_player:
 sounds:
   music_mission_success:
     file: mus_gui_mission_completion.ogg
-    track: music
+    track: levelup # Use a special track to avoid music fadeout conflicts
     loop: 0
-    fade_in: 1s
+    fade_in: 500ms
     fade_out: 1s
 
 widget_player:
