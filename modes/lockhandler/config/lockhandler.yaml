@@ -42,4 +42,3 @@ multiball_locks:
     enable_events: enable_overlord_lock
     disable_events: multiball_lock_overlordlock_locked_ball
     debug: true
-    replace_ball_on_full: false

@@ -55,7 +55,7 @@ shot_groups:
       - sbvasir_right_orbit
 
 shot_profiles:
-  sbvasir_shot_profile:
+  vasirprofile:
     advance_on_hit: false
     states:
       - name: off
@@ -86,7 +86,7 @@ shots:
       - sbvasir_left_ramp_barrier_hit
       - sbvasir_left_ramp_armor_hit
     hit_events: sh_left_ramp_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
@@ -95,7 +95,7 @@ shots:
       - sbvasir_left_orbit_barrier_hit
       - sbvasir_left_orbit_armor_hit
     hit_events: sh_left_orbit_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_left_orbit_shield_rgb
   sbvasir_right_ramp:
@@ -103,7 +103,7 @@ shots:
       - sbvasir_right_ramp_barrier_hit
       - sbvasir_right_ramp_armor_hit
     hit_events: sh_right_ramp_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_right_ramp_shield_rgb
   sbvasir_right_orbit:
@@ -111,7 +111,7 @@ shots:
       - sbvasir_right_orbit_barrier_hit
       - sbvasir_right_orbit_armor_hit
     hit_events: sh_right_orbit_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_right_orbit_shield_rgb
   sbvasir_kickback:
@@ -119,7 +119,7 @@ shots:
       - sbvasir_kickback_barrier_hit
       - sbvasir_kickback_armor_hit
     hit_events: sh_kickback_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_kickback_shield_rgb
   sbvasir_dropbank:
@@ -127,7 +127,7 @@ shots:
       - sbvasir_dropbank_barrier_hit
       - sbvasir_dropbank_armor_hit
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_dropbank_shield_rgb
   sbvasir_hitbank:
@@ -135,7 +135,7 @@ shots:
       - sbvasir_hitbank_barrier_hit
       - sbvasir_hitbank_armor_hit
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    profile: sbvasir_shot_profile
+    profile: vasirprofile
     show_tokens:
       leds: l_hitbank_shield_rgb
 
