@@ -9,7 +9,8 @@
 # and plays a cinematic.
 #
 # After a round, a new random shot is lit (with full shields again) and another
-# round must be completed. Completing three rounds will finish the mode.
+# round must be completed. Completing three rounds will finish the mode. 
+# Currently, progress is saved after each round?
 #
 # TODO: Scoring
 #####
@@ -20,13 +21,20 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started: shadowbroker_round_start|5s # Simulate delay for opening cineanim
-  sbboss_shot_sbboss_shot_profile_armor_hit: enable_sbboss_finalshot
-  sbboss_left_ramp_hit: shadowbroker_round_start
-  sbboss_round_counter_complete:
-    - shadowbroker_boss_complete
+  mode_shadowbroker_boss_started: start_sbboss_intro_show # Simulate delay for opening cineanim
+  sbboss_shot_hit: enable_sbboss_finalshot
+  logicblock_sbboss_round_counter_hit: 
+    - start_sbboss_round_show_1{count==1}
+    - start_sbboss_round_show_2{count==2}
+    - start_sbboss_round_show_3{count==3}
+  sbboss_round_show_complete: shadowbroker_round_start
+  shadowbroker_boss_complete: 
     - levelup
-  shadowbroker_boss_complete: stop_mode_shadowbroker_boss, exit_shadowbroker_modes
+    - stop_mode_shadowbroker_boss
+    - exit_shadowbroker_modes
+  # Disable the flippers during the inter-round show, reenable after
+  start_sbboss_round_show: flippers_off
+  sbboss_round_show_complete: flippers_on
 
 random_event_player:
   enable_random_sbboss_shot:
@@ -36,18 +44,27 @@ random_event_player:
       - enable_sbboss_right_orbit
       - enable_sbboss_right_ramp
 
+ball_holds:
+  sbboss_hold:
+    # Will this work to allow either device to hold?
+    hold_devices: bd_hold, bd_lock
+    balls_to_hold: 1
+    enable_events: enable_sbboss_finalshot
+    release_one_events: sbboss_round_show_complete
+    disable_events: sbboss_round_show_complete
+
 counters:
   sbboss_round_counter:
     starting_count: 0
     count_complete_value: 3
     direction: up
-    count_events: sbboss_left_ramp_hit
+    count_events: sbboss_left_ramp_hit, sbboss_kickback_hit
 
 multiballs:
   shadowbroker_multiball:
     ball_count: 2
-    ball_locks: bd_hold
-    start_or_add_a_ball_events: shadowbroker_round_start
+    stop_events: start_sbboss_round_show
+    start_events: shadowbroker_round_start
 
 shot_profiles:
   sbboss_shot_profile:
@@ -70,20 +87,28 @@ shot_profiles:
 shot_groups:
   sbboss_shot:
     shots: sbboss_left_orbit, sbboss_right_orbit, sbboss_right_ramp
+    reset_events: shadowbroker_round_start
 
 shots:
   sbboss_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: enable_sbboss_finalshot
-    disable_events: sbboss_left_ramp_hit
+    disable_events: logicblock_sbboss_round_counter_hit
     reset_events: shadowbroker_round_start
     profile: sbboss_health_profile
     show_tokens:
       led: l_left_ramp_shield_rgb
+  sbboss_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: enable_sbboss_finalshot
+    disable_events: logicblock_sbboss_round_counter_hit
+    reset_events: shadowbroker_round_start
+    profile: sbboss_health_profile
+    show_tokens:
+      led: l_kickback_shield_rgb
   sbboss_left_orbit:
     enable_events: enable_sbboss_left_orbit
     disable_events: enable_sbboss_finalshot
-    reset_events: shadowbroker_round_start
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -91,7 +116,6 @@ shots:
   sbboss_right_ramp:
     enable_events: enable_sbboss_right_ramp
     disable_events: enable_sbboss_finalshot
-    reset_events: shadowbroker_round_start
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -99,14 +123,54 @@ shots:
   sbboss_right_orbit:
     enable_events: enable_sbboss_right_orbit
     disable_events: enable_sbboss_finalshot
-    reset_events: shadowbroker_round_start
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
 
+shows:
+  sbboss_intro_show:
+    - time: 0
+      sounds:
+        broker_you_travel_with_fascinating_companions:
+          action: play
+    - time: 5s
+      events: 
+        - sbboss_round_show_complete
+        - enable_random_sbboss_shot
+  sbboss_round_show_1:
+    - time: 0
+      sounds:
+        liara_energy_projectiles_bouncing_off:
+          action: play
+    - time: 3s
+      sounds:
+        shepard_then_we_do_this_the_hard_way:
+          action: play
+    - time: 5s
+      events: 
+        - sbboss_round_show_complete
+        - enable_random_sbboss_shot
+  sbboss_round_show_2:
+    - time: 0
+      sounds:
+        liara_if_you_can_get_him_to:
+          action: play
+    - time: 3s
+      events: 
+        - sbboss_round_show_complete
+        - enable_random_sbboss_shot
+  sbboss_round_show_3:
+    - time: 0
+      sounds:
+        shepard_liara_now: 
+          action: play
+    - time: 1500ms
+      events: shadowbroker_boss_complete
+
+
 sounds:
-  shadowbroker_chase_music:
+  shadowbroker_boss_music:
     file: "07 Final Combat.ogg"
     track: music
   broker_you_travel_with_fascinating_companions:
