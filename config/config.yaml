@@ -174,7 +174,7 @@ sound_system:
   master_volume: 0.75
   tracks:
     music:
-      simultaneous_sounds: 1
+      simultaneous_sounds: 2
       volume: 0.7
     voice:
       simultaneous_sounds: 1

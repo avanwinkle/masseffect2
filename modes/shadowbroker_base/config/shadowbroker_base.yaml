@@ -16,6 +16,12 @@ mode:
   priority: 500
 
 event_player:
+  ### DEBUG
+  # mode_shadowbroker_base_started:
+  #   - logicblock_sbvasir_counter_complete
+  #   - mode_shadowbroker_vasir_started|1s
+  #   - shadowbroker_vasir_complete|2s
+  #   - logicblock_sbhagalaz_counter_complete|3s
   sbdroptarget_group_complete:
     - reset_dropbank
     # Complete the dropbank after vasir is enabled to begin the chase
@@ -34,12 +40,19 @@ event_player:
   shadowbroker_chase_complete:
     - start_mode_shadowbroker_vasir
   # If the mode is restarted and boss combat is enabled, re-enable the hold
-  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}: 
+  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}:
     - enable_shadowbroker_hold
   # Get a ball in the ball hold to begin Boss Combat
   ball_hold_shadowbroker_hold_held_ball:
     - start_mode_shadowbroker_boss
     - enter_shadowbroker_modes
+
+ball_saves:
+  debug_shadowbroker_ballsave:
+    active_time: 60s
+    enable_events: enter_shadowbroker_modes
+    disable_events: exit_shadowbroker_modes
+    balls_to_save: -1
 
 ball_holds:
   shadowbroker_hold:
@@ -165,9 +178,11 @@ sounds:
   shadowbroker_agent_music:
     file: "03 Agent Combat.ogg"
     track: music
+    loops: -1
   shadowbroker_vasir_music:
     file: "05 Vasir Combat.ogg"
     track: music
+    loops: -1
   # Dropbanks for Vasir
   shepard_sounds_like_liara_found_something_big:
     file: DLC_EXP_Part01_Int.143.ogg

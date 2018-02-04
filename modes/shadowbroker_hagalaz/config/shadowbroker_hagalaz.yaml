@@ -29,9 +29,13 @@ mode:
 
 event_player:
   mode_shadowbroker_hagalaz_started:
+    - enable_random_shuntshot
     - capacitors_charged_ready|10s
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
+  # TBD: Automatically light a new shot when one is hit?
+  # shunt_shot_lit_hit:
+  #   - enable_random_shuntshot
   hagalaz_target1_hagalaz_profile_lit_hit:
     - enable_shunt_left_orbit
     - enable_shunt_kickback
@@ -195,18 +199,20 @@ shows:
         (leds): 000000
     - duration: 10s
       lights:
-        (leds): 
+        (leds):
           color: FFFFFF
           fade: 10s
   capacitor_charged_show:
     - duration: 250ms
       lights:
-        (leds): FFFFFF
-        fade: 250ms
+        (leds):
+          color: FFFFFF
+          fade: 250ms
     - duration: 250ms
       lights:
-        (leds): BBBBBB
-        fade: 250ms
+        (leds):
+          color: BBBBBB
+          fade: 250ms
 
 sound_player:
   mode_shadowbroker_hagalaz_started:
@@ -215,10 +221,9 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-  logicblock_shunt_counter_updated{value<10}:
-    - shunt_progress_sound{value % 2 != 0} # Odd nums, play progress
-    - attack_comment_sound{value % 2 == 0} # Even nums, play comment
-  enable_hatch: 
+  logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 != 0}: shunt_progress_sound
+  logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
+  enable_hatch:
     liara_hatch_is_open:
       action: play
     shadowbroker_agent_music:
@@ -235,18 +240,23 @@ sound_player:
 
 sound_pools:
   shunt_progress_sound:
-    sounds: 
+    type: sequence
+    track: voice
+    sounds:
       - shepard_how_long_will_it_take
+      - shepard_slap_omnigel
       - shepard_you_sure_shunt_is_working
+      - liara_their_attacks_are_disorganized
       - shepard_you_tested_it_right
       - shepard_tell_me_you_tested_it
-      - shepard_slap_omnigel
+      - liara_next_wave_looks_big
+      - shepard_so_much_for_covert_infiltration
+      - liara_here_come_more
   attack_comment_sound:
+    type: sequence
+    track: voice
     sounds:
       - liara_try_firing_at_capacitors
-      - shepard_so_much_for_covert_infiltration
-      - liara_their_attacks_are_disorganized
-      - liara_next_wave_looks_big
 
 sounds:
   liara_now_therell_be_fewer_inside:
@@ -351,11 +361,10 @@ timers:
     start_value: 64
     end_value: 0
     tick_interval: 1s
+    start_running: true
     direction: down
     control_events:
-      - event: shadowbroker_hagalaz_complete
-        action: stop
-      - event: enable_random_shuntshot
+      - event: enable_hatch
         action: stop
       - event: shunt_shot_hit
         action: add

@@ -9,7 +9,7 @@
 # and plays a cinematic.
 #
 # After a round, a new random shot is lit (with full shields again) and another
-# round must be completed. Completing three rounds will finish the mode. 
+# round must be completed. Completing three rounds will finish the mode.
 # Currently, progress is saved after each round?
 #
 # TODO: Scoring
@@ -23,12 +23,12 @@ mode:
 event_player:
   mode_shadowbroker_boss_started: start_sbboss_intro_show # Simulate delay for opening cineanim
   sbboss_shot_hit: enable_sbboss_finalshot
-  logicblock_sbboss_round_counter_hit: 
+  logicblock_sbboss_round_counter_hit:
     - start_sbboss_round_show_1{count==1}
     - start_sbboss_round_show_2{count==2}
     - start_sbboss_round_show_3{count==3}
   sbboss_round_show_complete: shadowbroker_round_start
-  shadowbroker_boss_complete: 
+  shadowbroker_boss_complete:
     - levelup
     - stop_mode_shadowbroker_boss
     - exit_shadowbroker_modes
@@ -135,7 +135,7 @@ shows:
         broker_you_travel_with_fascinating_companions:
           action: play
     - time: 5s
-      events: 
+      events:
         - sbboss_round_show_complete
         - enable_random_sbboss_shot
   sbboss_round_show_1:
@@ -148,7 +148,7 @@ shows:
         shepard_then_we_do_this_the_hard_way:
           action: play
     - time: 5s
-      events: 
+      events:
         - sbboss_round_show_complete
         - enable_random_sbboss_shot
   sbboss_round_show_2:
@@ -157,13 +157,13 @@ shows:
         liara_if_you_can_get_him_to:
           action: play
     - time: 3s
-      events: 
+      events:
         - sbboss_round_show_complete
         - enable_random_sbboss_shot
   sbboss_round_show_3:
     - time: 0
       sounds:
-        shepard_liara_now: 
+        shepard_liara_now:
           action: play
     - time: 1500ms
       events: shadowbroker_boss_complete
@@ -173,6 +173,7 @@ sounds:
   shadowbroker_boss_music:
     file: "07 Final Combat.ogg"
     track: music
+    loops: -1
   broker_you_travel_with_fascinating_companions:
     file: DLC_EXP_Part01_Int.1056.ogg
     track: voice
