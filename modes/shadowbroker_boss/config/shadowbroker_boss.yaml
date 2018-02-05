@@ -21,20 +21,21 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started: start_sbboss_intro_show # Simulate delay for opening cineanim
-  sbboss_shot_hit: enable_sbboss_finalshot
+  mode_shadowbroker_boss_started: play_sbboss_intro_show # Simulate delay for opening cineanim
+  sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
-    - start_sbboss_round_show_1{count==1}
-    - start_sbboss_round_show_2{count==2}
-    - start_sbboss_round_show_3{count==3}
-  sbboss_round_show_complete: shadowbroker_round_start
+    - play_sbboss_round_show_1{count==1}
+    - play_sbboss_round_show_2{count==2}
+    - play_sbboss_round_show_3{count==3}
+  sbboss_round_show_complete:
+    - shadowbroker_round_start
+    - flippers_on
   shadowbroker_boss_complete:
     - levelup
     - stop_mode_shadowbroker_boss
     - exit_shadowbroker_modes
   # Disable the flippers during the inter-round show, reenable after
-  start_sbboss_round_show: flippers_off
-  sbboss_round_show_complete: flippers_on
+  play_sbboss_round_show: flippers_off
 
 random_event_player:
   enable_random_sbboss_shot:
@@ -63,26 +64,20 @@ counters:
 multiballs:
   shadowbroker_multiball:
     ball_count: 2
-    stop_events: start_sbboss_round_show
+    stop_events: play_sbboss_round_show
     start_events: shadowbroker_round_start
 
 shot_profiles:
   sbboss_shot_profile:
     states:
       - name: shields
-        show: flash_color_show
-        show_tokens:
-          color: blue
+        show: sbboss_shields_show
       - name: armor
-        show: flash_color_show
-        show_tokens:
-          color: yellow
+        show: sbboss_armor_show
   sbboss_health_profile:
     states:
       - name: health
-        show: flash_color_show
-        show_tokens:
-          color: red
+        show: sbboss_health_show
 
 shot_groups:
   sbboss_shot:
@@ -97,7 +92,7 @@ shots:
     reset_events: shadowbroker_round_start
     profile: sbboss_health_profile
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
   sbboss_kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_sbboss_finalshot
@@ -105,28 +100,46 @@ shots:
     reset_events: shadowbroker_round_start
     profile: sbboss_health_profile
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
   sbboss_left_orbit:
     enable_events: enable_sbboss_left_orbit
     disable_events: enable_sbboss_finalshot
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
   sbboss_right_ramp:
     enable_events: enable_sbboss_right_ramp
     disable_events: enable_sbboss_finalshot
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
   sbboss_right_orbit:
     enable_events: enable_sbboss_right_orbit
     disable_events: enable_sbboss_finalshot
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
+
+show_player:
+  play_sbboss_intro_show:
+    sbboss_intro_show:
+      action: play
+      loops: 0
+  play_sbboss_round_show_1:
+    sbboss_round_show_1:
+      action: play
+      loops: 0
+  play_sbboss_round_show_2:
+    sbboss_round_show_2:
+      action: play
+      loops: 0
+  play_sbboss_round_show_3:
+    sbboss_round_show_3:
+      action: play
+      loops: 0
 
 shows:
   sbboss_intro_show:
@@ -134,6 +147,8 @@ shows:
       sounds:
         broker_you_travel_with_fascinating_companions:
           action: play
+          track: voice
+      slides: shadowbroker_intro_slide
     - time: 5s
       events:
         - sbboss_round_show_complete
@@ -143,10 +158,13 @@ shows:
       sounds:
         liara_energy_projectiles_bouncing_off:
           action: play
+          track: voice
+      slides: shadowbroker_round_1_slide
     - time: 3s
       sounds:
         shepard_then_we_do_this_the_hard_way:
           action: play
+          track: voice
     - time: 5s
       events:
         - sbboss_round_show_complete
@@ -156,6 +174,8 @@ shows:
       sounds:
         liara_if_you_can_get_him_to:
           action: play
+          track: voice
+      slides: shadowbroker_round_2_slide
     - time: 3s
       events:
         - sbboss_round_show_complete
@@ -165,9 +185,51 @@ shows:
       sounds:
         shepard_liara_now:
           action: play
+          track: voice
+      slides: shadowbroker_round_3_slide
     - time: 1500ms
       events: shadowbroker_boss_complete
+  sbboss_shields_show:
+    - time: 0
+      lights:
+        (leds): blue
+    - time: '+1'
+      lights:
+        (leds): black
+  sbboss_armor_show:
+    - time: 0
+      lights:
+        (leds): yellow
+    - time: '+1'
+      lights:
+        (leds): black
+  sbboss_health_show:
+    - time: 0
+      lights:
+        (leds): red
+    - time: '+1'
+      lights:
+        (leds): black
 
+slides:
+  shadowbroker_intro_slide:
+    - type: text
+      text: SB Boss Intro
+  shadowbroker_round_1_slide:
+    - type: text
+      text: SB Boss Round 1
+  shadowbroker_round_2_slide:
+    - type: text
+      text: SB Boss Round 2
+  shadowbroker_round_3_slide:
+    - type: text
+      text: SB Boss Round 3
+
+
+sound_player:
+  mode_shadowbroker_boss_started:
+    shadowbroker_boss_music:
+      action: play
 
 sounds:
   shadowbroker_boss_music:

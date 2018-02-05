@@ -16,12 +16,16 @@ mode:
   priority: 500
 
 event_player:
-  ### DEBUG
-  # mode_shadowbroker_base_started:
-  #   - logicblock_sbvasir_counter_complete
-  #   - mode_shadowbroker_vasir_started|1s
-  #   - shadowbroker_vasir_complete|2s
-  #   - logicblock_sbhagalaz_counter_complete|3s
+  ## DEBUG
+  mode_shadowbroker_base_started:
+    - logicblock_sbvasir_counter_complete
+    - mode_shadowbroker_vasir_started|1s
+    - shadowbroker_vasir_complete|2s
+    - logicblock_sbhagalaz_counter_complete|3s
+  # DEBUG
+  shadowbroker_hagalaz_complete:
+    - enter_shadowbroker_modes
+    - start_mode_shadowbroker_boss
   sbdroptarget_group_complete:
     - reset_dropbank
     # Complete the dropbank after vasir is enabled to begin the chase
@@ -54,13 +58,13 @@ ball_saves:
     disable_events: exit_shadowbroker_modes
     balls_to_save: -1
 
-ball_holds:
-  shadowbroker_hold:
-    balls_to_hold: 1
-    hold_devices: bd_hold
-    enable_events: enable_shadowbroker_hold, enable_hatch
-    release_one_events: release_shadowbroker_hold
-    disable_events: ball_hold_shadowbroker_hold_balls_released
+# ball_holds:
+#   shadowbroker_hold:
+#     balls_to_hold: 1
+#     hold_devices: bd_hold
+#     enable_events: enable_shadowbroker_hold, enable_hatch
+#     release_one_events: release_shadowbroker_hold
+#     disable_events: ball_hold_shadowbroker_hold_balls_released
 
 counters:
   sbvasir_counter:

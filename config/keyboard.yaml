@@ -50,6 +50,8 @@ keyboard:
     switch: s_start_button
   e:
     event: sbdroptarget_group_complete
+  x:
+    event: sbboss_round_show_complete
 
 event_player:
   skip_recruit_mission_garrus: recruit_mission_success, skip_mission_scoring, recruit_garrus_complete

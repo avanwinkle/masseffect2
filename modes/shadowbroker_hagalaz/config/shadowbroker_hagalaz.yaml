@@ -33,9 +33,6 @@ event_player:
     - capacitors_charged_ready|10s
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
-  # TBD: Automatically light a new shot when one is hit?
-  # shunt_shot_lit_hit:
-  #   - enable_random_shuntshot
   hagalaz_target1_hagalaz_profile_lit_hit:
     - enable_shunt_left_orbit
     - enable_shunt_kickback
@@ -52,6 +49,8 @@ event_player:
     - enable_shunt_right_ramp
     - enable_shunt_right_orbit
   logicblock_shunt_counter_complete: enable_hatch
+  # DEBUG
+  hatch_shot_hit: shadowbroker_hagalaz_complete
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
   shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
   timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
@@ -70,7 +69,7 @@ random_event_player:
 counters:
   shunt_counter:
     starting_count: 0
-    count_complete_value: 10
+    count_complete_value: 3 # DEBUG, should be 10
     direction: up
     persist_state: false
     count_events: shunt_shot_lit_hit
@@ -221,8 +220,8 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-  logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 != 0}: shunt_progress_sound
-  logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
+  logicblock_shunt_counter_updated{value>0 and value<10}: shunt_progress_sound
+  # logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
   enable_hatch:
     liara_hatch_is_open:
       action: play
@@ -244,11 +243,11 @@ sound_pools:
     track: voice
     sounds:
       - shepard_how_long_will_it_take
-      - shepard_slap_omnigel
       - shepard_you_sure_shunt_is_working
-      - liara_their_attacks_are_disorganized
       - shepard_you_tested_it_right
       - shepard_tell_me_you_tested_it
+      - liara_their_attacks_are_disorganized
+      - shepard_slap_omnigel
       - liara_next_wave_looks_big
       - shepard_so_much_for_covert_infiltration
       - liara_here_come_more
