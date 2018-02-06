@@ -19,20 +19,31 @@ mode:
 
 event_player:
   mode_shopping_started: enable_storetargets
-  lock_ball_for_store_hit: ball_hold_enable
-  store_complete: reset_storetargets, ball_hold_disable
-  slide_store_enabled_slide_removed: post_store_complete
-  all_storetargets_hit_complete: enable_store_shot
+  all_storetargets_hit_complete: enable_store
+  start_store: 
+    - flippers_off
+    # DEBUG: Mock out the store happening by waiting 5s and posting "complete"
+    - post_store_complete|5s
+  store_complete: flippers_on
 
+# When showing the store, block the queue until the store is complete
 queue_relay_player:
   show_store:
     post: start_store
     wait_for: post_store_complete
 
+# Create a queue event when a ball is held and wait for the queue
 queue_event_player:
-  lock_ball_for_store_storeshot_profile_lit_hit:
+  ball_hold_shopping_hold_held_ball:
     queue_event: show_store
-    events_when_finished: store_complete|5s
+    events_when_finished: store_complete
+
+ball_holds:
+  shopping_hold:
+    hold_devices: bd_hold
+    release_one_events: store_complete
+    enable_events: enable_store
+    disable_events: ball_hold_shopping_hold_balls_released
 
 shot_groups:
   all_storetargets:
@@ -51,8 +62,6 @@ shot_profiles:
     advance_on_hit: false
     show_when_disabled: false
     states:
-      - name: unlit
-        show: storeunlit_show
       - name: lit
         show: storelit_show
 
@@ -60,10 +69,8 @@ shots:
   lock_ball_for_store:
     switch: s_kickback
     profile: storeshot_profile
-    advance_events: enable_store_shot
-    reset_events: store_complete
-    enable_events: enable_storetargets
-    disable_events: disable_storetargets
+    enable_events: enable_store
+    disable_events: store_complete
   storetarget1:
     switch: s_target1
     tags: storetarget
@@ -141,29 +148,29 @@ slides:
         anchor_y: top
         y: middle-2
 
-# sound_player:
-#   start_store:
-#     shep_fave_store:
-#       action: play
+sound_player:
+  start_store:
+    shep_fave_store:
+      action: play
 
-# sound_pools:
-#   shep_fave_store:
-#     type: random_force_all
-#     sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
+sound_pools:
+  shep_fave_store:
+    type: random_force_all
+    sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
 
-# sounds:
-#   shep_fave_store_1:
-#     file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
-#     track: voice
-#   shep_fave_store_2:
-#     file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
-#     track: voice
-#   shep_fave_store_3:
-#     file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
-#     track: voice
-#   shep_fave_store_4:
-#     file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
-#     track: voice
+sounds:
+  shep_fave_store_1:
+    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
+    track: voice
+  shep_fave_store_2:
+    file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
+    track: voice
+  shep_fave_store_3:
+    file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
+    track: voice
+  shep_fave_store_4:
+    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
+    track: voice
 
 scoring:
   all_storetargets_hit:
