@@ -1,4 +1,7 @@
 #config_version=5
+event_player:
+  sw_flipper_active: start_mode_mainmenu
+
 show_player:
   mode_attract_started:
     attract_dmd_loop:

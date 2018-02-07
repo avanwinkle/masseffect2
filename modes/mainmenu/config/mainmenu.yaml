@@ -1,0 +1,64 @@
+#config_version=5
+
+mode:
+  start_events: start_mode_mainmenu
+  stop_events: stop_mode_mainmenu, career_loaded
+  priority: 100
+  code: mainmenu.MainMenu
+
+mode_settings:
+  selectable_items: new_game
+  select_item_events: s_action_button_active
+  next_item_events: s_flipper_right_active, mode_mainmenu_started
+  previous_item_events: s_flipper_left_active
+
+queue_relay_player:
+  game_starting:
+    post: load_career
+    wait_for: career_loaded
+
+slide_player:
+  mainmenu_new_game_highlighted: new_game_slide
+  mainmenu_resume_game_highlighted: resume_game_slide
+  mainmenu_change_career_highlighted: change_career_slide
+  mainmenu_casual_highlighted: casual_slide
+
+slides:
+  change_career_slide:
+    widgets:
+      - type: text
+        text: Switch Career
+        style: savegame_title
+  resume_game_slide:
+    widgets: 
+      - type: text
+        text: Resume Game
+        style: savegame_title
+  new_game_slide:
+    widgets: 
+      - type: text
+        text: New Game
+        style: savegame_title
+  casual_slide:
+    widgets:
+      - type: text 
+        text: Casual Play
+        style: savegame_title
+
+widgets:
+  player_name_widget:
+    - type: text
+      text: (current_player.career_name)
+      style: small
+      anchor_y: top
+      anchor_x: left
+      y: 100%-2
+      x: 2
+  player_lvl_widget:
+    - type: text
+      text: (current_player.level)
+      style: small
+      anchor_y: top
+      anchor_x: right
+      y: 100%-2
+      x: 100%-2

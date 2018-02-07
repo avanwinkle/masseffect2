@@ -21,7 +21,9 @@ virtual_platform_start_active_switches:
 mpf-mc:
   fps: 30
 
-# scriptlets: mpf_arduino.MPFArduino
+scriptlets:
+  - save_career.SaveCareer
+  - mpf_arduino.MPFArduino
 
 game:
   balls_per_game: 5
@@ -42,6 +44,7 @@ modes:
   - base
   - bonus
   - lockhandler
+  - mainmenu
   - missionselect
   - pause
   # Collector Ship Modes:
@@ -105,6 +108,9 @@ light_player:
       color: black
 
 player_vars:
+  career_name:
+    initial_value: "_default"
+    value_type: str
   assignments_completed:
     initial_value: 0
   available_missions:
@@ -223,5 +229,13 @@ widget_styles:
     font_size: 10
     adjust_bottom: 3
     adjust_top: 2
+  savegame_title:
+    font_name: Quadrit-10
+    font_size: 10
+    anchor_y: middle
+    anchor_x: left
+    y: 50%
+    x: 2
+
 
 
