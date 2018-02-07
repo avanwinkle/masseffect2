@@ -195,20 +195,6 @@ assets:
     music:
       track: music
 
-sounds:
-  music_normandy_walkin_intro:
-    file: mus_nor_normandy_walkin_intro.ogg
-    track: music
-  music_recruit_mordin:
-    file: mus_mordin_acq_combat_1.ogg
-    track: music
-  music_long_walk_low:
-    file: mus_endgm2_tension_2.ogg
-    track: music
-  music_long_walk:
-    file: mus_endgm2_combat_2_low.ogg
-    track: music
-
 widget_styles:
   text_default:
     font_name: Quadrit-10

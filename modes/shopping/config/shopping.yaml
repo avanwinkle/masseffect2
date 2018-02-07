@@ -157,6 +157,7 @@ sound_pools:
   shep_fave_store:
     type: random_force_all
     sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
+    track: voice
 
 sounds:
   shep_fave_store_1:
