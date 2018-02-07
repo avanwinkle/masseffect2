@@ -141,6 +141,27 @@ player_vars:
     initial_value: 0
   squadmates_count:
     initial_value: 2
+  status_garrus:
+    initial_value: 0
+  status_grunt:
+    initial_value: 0
+  status_jack:
+    initial_value: 0
+  status_kasume:
+    initial_value: 0
+  status_legion:
+    initial_value: 0
+  status_mordin:
+    initial_value: 0
+  status_samara:
+    initial_value: 0
+  status_tali:
+    initial_value: 0
+  status_thane:
+    initial_value: 0
+  status_zaeed:
+    initial_value: 0
+
   temp_multiplier:
     initial_value: 0.0
     value_type: float

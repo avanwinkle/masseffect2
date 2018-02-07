@@ -41,7 +41,7 @@ class MissionSelect(Carousel):
     for mate in SQUADMATES:
       status = getattr(player, "status_{}".format(mate), -1)
       # self.machine.debug_log("   - Found missionselect status: {}".format(status))
-      if (status == 1):
+      if (status == 3):
         items.append(mate)
     return items
 

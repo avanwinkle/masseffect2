@@ -87,6 +87,120 @@ ball_saves:
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: -1
 
+counters:
+  status_garrus_counter:
+    count_events: recruit_garrus_shot_unlit_hit, recruit_garrus_complete
+    multiple_hit_window: 500ms
+    starting_count: current_player.status_garrus
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_garrus
+    events_when_complete: recruit_lit, recruit_garrus_lit
+  status_grunt_counter:
+    count_events: recruit_grunt_shot_unlit_hit, recruit_grunt_complete
+    multiple_hit_window: 1000ms
+    starting_count: current_player.status_grunt
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_grunt
+    events_when_complete: recruit_lit, recruit_grunt_lit
+  status_jack_counter:
+    count_events: recruit_jack_shot_unlit_hit, recruit_jack_complete
+    multiple_hit_window: 300ms
+    starting_count: current_player.status_jack
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_hit: recruit_advance, recruit_advance_jack
+    events_when_complete: recruit_lit, recruit_jack_lit
+  status_kasumi_counter:
+    count_events: recruit_kasumi_shot_unlit_hit, recruit_kasumi_complete
+    multiple_hit_window: 500ms
+    events_when_hit: recruit_advance, recruit_advance_kasumi
+    starting_count: current_player.status_kasumi
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_kasumi_lit
+  status_legion_counter:
+    count_events: recruit_legion_shot_unlit_hit, recruit_legion_complete
+    events_when_hit: recruit_advance, recruit_advance_legion
+    multiple_hit_window: 500ms
+    starting_count: current_player.status_legion
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_legion_lit
+  status_mordin_counter:
+    count_events: recruit_mordin_shot_unlit_hit, recruit_mordin_complete
+    multiple_hit_window: 800ms
+    events_when_hit: recruit_advance, recruit_advance_mordin
+    starting_count: current_player.status_mordin
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_mordin_lit
+    debug: true
+  status_samara_counter:
+    count_events: recruit_samara_shot_unlit_hit, recruit_samara_complete
+    multiple_hit_window: 500ms
+    events_when_hit: recruit_advance, recruit_advance_samara
+    starting_count: current_player.status_samara
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_samara_lit
+  status_tali_counter:
+    count_events: recruit_tali_shot_unlit_hit, recruit_tali_complete
+    multiple_hit_window: 500ms
+    events_when_hit: recruit_advance, recruit_advance_tali
+    starting_count: current_player.status_tali
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_tali_lit
+  status_thane_counter:
+    count_events: recruit_thane_shot_unlit_hit, recruit_thane_complete
+    multiple_hit_window: 500ms
+    events_when_hit: recruit_advance, recruit_advance_thane
+    starting_count: current_player.status_thane
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_thane_lit
+  status_zaeed_counter:
+    count_events: recruit_zaeed_shot_unlit_hit, recruit_zaeed_complete
+    multiple_hit_window: 1000ms
+    events_when_hit: recruit_advance, recruit_advance_zaeed
+    starting_count: current_player.status_zaeed
+    count_complete_value: 3
+    direction: up
+    persist_state: true
+    disable_on_complete: false
+    reset_on_complete: false
+    events_when_complete: recruit_lit, recruit_zaeed_lit
+
+
 shot_profiles:
   recruit_profile:
     show_when_disabled: false

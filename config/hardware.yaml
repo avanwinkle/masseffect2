@@ -45,7 +45,6 @@ slide_player:
     window_slide_1:
       target: window
 
-
 ball_devices:
   bd_plunger:
     ball_switches: s_plunger_lane
@@ -70,7 +69,6 @@ ball_devices:
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
-    debug: True
   bd_hold:
     ball_capacity: 1
     hold_coil: c_up_post
@@ -144,10 +142,10 @@ switches:
     number: 1-2
   s_flipper_left:
     number: 8-2
-    tags: flipper_left
+    tags: flipper_left, flipper
   s_flipper_right:
     number: 8-3
-    tags: flipper_right
+    tags: flipper_right, flipper
   s_plunger_lane:
     number: 9-1
   s_trough1:
@@ -567,7 +565,6 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
-    debug: true
 
 sound_system:
   tracks:

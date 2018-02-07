@@ -1,21 +1,25 @@
 #config_version=5
-
+#config_version=5
 mode:
   start_events: start_mode_mainmenu
-  stop_events: stop_mode_mainmenu, career_loaded
+  stop_events: stop_mode_mainmenu
   priority: 100
+  game_mode: false
   code: mainmenu.MainMenu
 
 mode_settings:
   selectable_items: new_game
   select_item_events: s_action_button_active
-  next_item_events: s_flipper_right_active, mode_mainmenu_started
+  next_item_events: s_flipper_right_active
   previous_item_events: s_flipper_left_active
 
+event_player:
+  career_loaded: stop_mode_mainmenu
+
 queue_relay_player:
-  game_starting:
-    post: load_career
-    wait_for: career_loaded
+  player_turn_starting:
+    post: show_mainmenu
+    wait_for: mode_mainmenu_stopping
 
 slide_player:
   mainmenu_new_game_highlighted: new_game_slide
@@ -30,35 +34,60 @@ slides:
         text: Switch Career
         style: savegame_title
   resume_game_slide:
-    widgets: 
+    widgets:
       - type: text
         text: Resume Game
         style: savegame_title
   new_game_slide:
-    widgets: 
+    widgets:
       - type: text
         text: New Game
         style: savegame_title
   casual_slide:
     widgets:
-      - type: text 
+      - type: text
         text: Casual Play
         style: savegame_title
+
+widget_player:
+  mainmenu_new_game_highlighted: player_name_widget
+  mainmenu_resume_game_highlighted: player_name_widget
+  mainmenu_change_career_highlighted: player_name_widget
+  mainmenu_casual_highlighted:
+    player_name_widget:
+      action: remove
+
 
 widgets:
   player_name_widget:
     - type: text
-      text: (current_player.career_name)
+      text: (player|career_name)
       style: small
       anchor_y: top
       anchor_x: left
-      y: 100%-2
+      y: top-2
       x: 2
-  player_lvl_widget:
     - type: text
-      text: (current_player.level)
+      text: (player|level)
       style: small
       anchor_y: top
       anchor_x: right
-      y: 100%-2
-      x: 100%-2
+      y: top-2
+      x: right-2
+
+show_player:
+  mode_attract_started:
+    attract_dmd_loop:
+      loops: -1
+      speed: 1
+  attract_change_career_highlighted:
+    attract_dmd_loop:
+      action: stop
+    # middle_circle_sweep:
+    #   loops: -1
+    #   speed: 6
+  mode_attract_will_stop:
+    attract_dmd_loop:
+      action: stop
+    # middle_circle_sweep:
+    #   action: stop

@@ -8,42 +8,26 @@ scoring:
   recruit_mission_success:
     score: 10000
     squadmates_count: 1
-  recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
-    status_garrus:
-      score: 0
-      action: set
-  recruit_grunt_complete: #recruit_mission_success{squadmate=="grunt"}:
-    status_grunt:
-      score: 0
-      action: set
-  recruit_jack_complete: #recruit_mission_success{squadmate=="jack"}:
-    status_jack:
-      score: 0
-      action: set
-  recruit_legion_complete: #recruit_mission_success{squadmate=="legion"}:
-    status_legion:
-      score: 0
-      action: set
-  recruit_mordin_complete: #recruit_mission_success{squadmate=="mordin"}:
-    status_mordin:
-      score: 0
-      action: set
-  recruit_samara_complete: #recruit_mission_success{squadmate=="samara"}:
-    status_samara:
-      score: 0
-      action: set
-  recruit_tali_complete: #recruit_mission_success{squadmate=="tali"}:
-    status_tali:
-      score: 0
-      action: set
-  recruit_thane_complete: #recruit_mission_success{squadmate=="thane"}:
-    status_thane:
-      score: 0
-      action: set
-  recruit_zaeed_complete: #recruit_mission_success{squadmate=="zaeed"}:
-    status_zaeed:
-      score: 0
-      action: set
+
+  recruit_advance_garrus: #recruit_mission_success{squadmate=="garrus"}:
+    status_garrus: 1
+  recruit_advance_grunt: #recruit_mission_success{squadmate=="grunt"}:
+    status_grunt: 1
+  recruit_advance_jack: #recruit_mission_success{squadmate=="jack"}:
+    status_jack: 1
+  recruit_advance_legion: #recruit_mission_success{squadmate=="legion"}:
+    status_legion: 1
+  recruit_advance_mordin: #recruit_mission_success{squadmate=="mordin"}:
+    status_mordin: 1
+  recruit_advance_samara: #recruit_mission_success{squadmate=="samara"}:
+    status_samara: 1
+  recruit_advance_tali: #recruit_mission_success{squadmate=="tali"}:
+    status_tali: 1
+  recruit_advance_thane: #recruit_mission_success{squadmate=="thane"}:
+    status_thane: 1
+  recruit_advance_zaeed: #recruit_mission_success{squadmate=="zaeed"}:
+    status_zaeed: 1
+
   set_last_recruit_garrus:
     last_recruit:
       string: "Garrus"

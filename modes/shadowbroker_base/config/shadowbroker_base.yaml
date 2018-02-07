@@ -63,8 +63,14 @@ counters:
     count_complete_value: 3
     persist_state: true
     disable_on_complete: true
+    enable_events:
+      - mode_shadowbroker_base_started{device.achievements.vasir.state!="completed"}
+    disable_events:
+      - achievement_vasir_state_completed
   sbhagalaz_counter:
-    enable_events: achievement_vasir_state_completed
+    enable_events:
+      - achievement_vasir_state_completed
+      - mode_shadowbroker_base_started{device.achievements.vasir.state=="completed"}
     count_events: sbdroptarget_group_complete
     starting_count: 0
     count_complete_value: 3
