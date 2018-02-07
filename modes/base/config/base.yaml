@@ -161,9 +161,6 @@ scoring:
     available_missions: 1
   mode_collectorship_base_stopped:
     available_missions: -1
-  skip_mission_scoring: # Mock values so we can skip missions and keep accurate counts
-    recruits_lit_count: 1
-    available_missions: 1
 
 shots:
 # These "core" shots for the main shots

@@ -158,12 +158,12 @@ sound_pools:
     sounds:
       - step1_voice_miranda
       - step1_voice_jacob
-      - step1_voice_garrus{current_player.status_garrus==0}|2
-      - step1_voice_kasumi{current_player.status_kasumi==0}|2
-      - step1_voice_grunt{current_player.status_grunt==0}|2
-      - step1_voice_zaeed{current_player.status_zaeed==0}|2
-      - step1_voice_tali{current_player.status_tali==0}|2
-      - step1_voice_jack{current_player.status_jack==0}|2
+      - step1_voice_garrus{current_player.status_garrus.state==0}|2
+      - step1_voice_kasumi{current_player.status_kasumi.state==0}|2
+      - step1_voice_grunt{current_player.status_grunt.state==0}|2
+      - step1_voice_zaeed{current_player.status_zaeed.state==0}|2
+      - step1_voice_tali{current_player.status_tali.state==0}|2
+      - step1_voice_jack{current_player.status_jack.state==0}|2
     max_queue_time: 1s
   step2_voice:
     type: random
@@ -171,12 +171,12 @@ sound_pools:
     sounds:
       - step2_voice_miranda
       - step2_voice_jacob
-      - step2_voice_garrus{current_player.status_garrus==0}|2
-      - step2_voice_kasumi{current_player.status_kasumi==0}|2
-      - step2_voice_grunt{current_player.status_grunt==0}|2
-      - step2_voice_zaeed{current_player.status_zaeed==0}|2
-      - step2_voice_tali{current_player.status_tali==0}|2
-      - step2_voice_jack{current_player.status_jack==0}|2
+      - step2_voice_garrus{current_player.status_garrus.state==0}|2
+      - step2_voice_kasumi{current_player.status_kasumi.state==0}|2
+      - step2_voice_grunt{current_player.status_grunt.state==0}|2
+      - step2_voice_zaeed{current_player.status_zaeed.state==0}|2
+      - step2_voice_tali{current_player.status_tali.state==0}|2
+      - step2_voice_jack{current_player.status_jack.state==0}|2
     max_queue_time: 1s
   step3_voice:
     type: random

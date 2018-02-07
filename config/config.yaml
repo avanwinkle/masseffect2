@@ -131,8 +131,6 @@ player_vars:
     initial_value: 0
   mineral_platinum:
     initial_value: 0
-  recruits_lit_count:
-    initial_value: 0
   reputation:
     initial_value: 0
   squadmates_count:
@@ -142,30 +140,6 @@ player_vars:
     value_type: float
   upgrades_researched:
     initial_value: 0
-  status_garrus:
-    initial_value: 4
-  status_grunt:
-    initial_value: 4
-  status_jack:
-    initial_value: 4
-  status_jacob:
-    initial_value: 0
-  status_kasumi:
-    initial_value: 4
-  status_legion:
-    initial_value: 4
-  status_miranda:
-    initial_value: 0
-  status_mordin:
-    initial_value: 4
-  status_samara:
-    initial_value: 4
-  status_tali:
-    initial_value: 4
-  status_thane:
-    initial_value: 4
-  status_zaeed:
-    initial_value: 4
   zaeed_path_renegade:
     initial_value: 0
 

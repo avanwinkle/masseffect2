@@ -104,7 +104,7 @@ show_player:
     ball_save_show:
       action: play
       speed: 3
-  ball_save_debug_recruitmission_ballsave_huryr_up:
+  ball_save_debug_recruitmission_ballsave_hurry_up:
     ball_save_show:
       action: play
       speed: 9

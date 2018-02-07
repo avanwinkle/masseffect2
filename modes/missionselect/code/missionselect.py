@@ -3,7 +3,7 @@ from mpf.modes.carousel.code.carousel import Carousel
 
 DEBUG_COLLECTORSHIP = False
 DEBUG_SUICIDEMISSION = False
-SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
+SQUADMATES = ("garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed")
 
 class MissionSelect(Carousel):
 
@@ -13,7 +13,7 @@ class MissionSelect(Carousel):
     super().mode_init()
     self.debug_log("MissionSelect is ready to go!!!")
     self.debug_log(" - items:", self._items)
-    self._all_items = copy.deepcopy(self._items)
+    self._all_items = copy.copy(self._items)
 
   def mode_start(self, **kwargs):
 

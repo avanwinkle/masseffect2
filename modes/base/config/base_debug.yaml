@@ -100,11 +100,6 @@ widgets:
       style: squad_debug_style
       x: 160
       y: top-124
-    - type: text
-      text: "Recruits Lit: (player|recruits_lit_count)"
-      style: squad_debug_style
-      x: 160
-      y: top-144
 
     # Column Two
     - type: text

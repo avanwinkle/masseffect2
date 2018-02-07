@@ -43,263 +43,239 @@ counters:
     disable_on_complete: false
     reset_on_complete: true
     persist_state: true
-  recruit_garrus_counter:
-    count_events: recruit_garrus_shot_hit
+  status_garrus:
+    count_events: recruit_garrus_shot_unlit_hit, recruit_garrus_complete
     multiple_hit_window: 500ms
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_hit: recruit_advance, recruit_advance_garrus
     events_when_complete: recruit_lit, recruit_garrus_lit
-  recruit_grunt_counter:
-    count_events: recruit_grunt_shot_hit
+  status_grunt:
+    count_events: recruit_grunt_shot_unlit_hit, recruit_grunt_complete
     multiple_hit_window: 1000ms
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_hit: recruit_advance, recruit_advance_grunt
     events_when_complete: recruit_lit, recruit_grunt_lit
-  recruit_jack_counter:
-    count_events: recruit_jack_shot_hit
+  status_jack:
+    count_events: recruit_jack_shot_unlit_hit, recruit_jack_complete
     multiple_hit_window: 300ms
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_hit: recruit_advance, recruit_advance_jack
     events_when_complete: recruit_lit, recruit_jack_lit
-  recruit_kasumi_counter:
-    count_events: recruit_kasumi_shot_hit
+  status_kasumi:
+    count_events: recruit_kasumi_shot_unlit_hit, recruit_kasumi_complete
     multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_kasumi
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_kasumi_lit
-  recruit_legion_counter:
-    count_events: recruit_legion_shot_hit
+  status_legion:
+    count_events: recruit_legion_shot_unlit_hit, recruit_legion_complete
     events_when_hit: recruit_advance, recruit_advance_legion
     multiple_hit_window: 500ms
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_legion_lit
-  recruit_mordin_counter:
-    count_events: recruit_mordin_shot_hit
+  status_mordin:
+    count_events: recruit_mordin_shot_unlit_hit, recruit_mordin_complete
     multiple_hit_window: 800ms
     events_when_hit: recruit_advance, recruit_advance_mordin
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
-  recruit_samara_counter:
-    count_events: recruit_samara_shot_hit
+  status_samara:
+    count_events: recruit_samara_shot_unlit_hit, recruit_samara_complete
     multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_samara
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_samara_lit
-  recruit_tali_counter:
-    count_events: recruit_tali_shot_hit
+  status_tali:
+    count_events: recruit_tali_shot_unlit_hit, recruit_tali_complete
     multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_tali
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_tali_lit
-  recruit_thane_counter:
-    count_events: recruit_thane_shot_hit
+  status_thane:
+    count_events: recruit_thane_shot_unlit_hit, recruit_thane_complete
     multiple_hit_window: 500ms
     events_when_hit: recruit_advance, recruit_advance_thane
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_thane_lit
-  recruit_zaeed_counter:
-    count_events: recruit_zaeed_shot_hit
+  status_zaeed:
+    count_events: recruit_zaeed_shot_unlit_hit, recruit_zaeed_complete
     multiple_hit_window: 1000ms
     events_when_hit: recruit_advance, recruit_advance_zaeed
     starting_count: 4
     count_complete_value: 1
     direction: down
     persist_state: true
-    disable_on_complete: true
+    disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_zaeed_lit
-
-scoring:
-  recruit_advance_garrus:
-    status_garrus: -1
-  recruit_advance_grunt:
-    status_grunt: -1
-  recruit_advance_jack:
-    status_jack: -1
-  recruit_advance_kasumi:
-    status_kasumi: -1
-  recruit_advance_legion:
-    status_legion: -1
-  recruit_advance_mordin:
-    status_mordin: -1
-  recruit_advance_samara:
-    status_samara: -1
-  recruit_advance_tali:
-    status_tali: -1
-  recruit_advance_thane:
-    status_thane: -1
-  recruit_advance_zaeed:
-    status_zaeed: -1
 
 shots:
   n7_advance_shot:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
     enable_events: enable_recruit_shots
     disable_events: disable_recruit_shots
-  # These shots need to exist in base so mission events will advance them
-  # even when the field mode is not running
   recruit_garrus_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_profile
-    advance_events: recruit_garrus_lit
+    advance_events: recruit_garrus_lit, recruit_garrus_complete
     enable_events:
-      enable_recruit_shots{current_player.status_garrus>0}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_garrus
       lit: color_shield_blue
       color: 0E1B4F #color_garrus
-    tags: recruit_shot
   recruit_grunt_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_profile
-    advance_events: recruit_grunt_lit
+    advance_events: recruit_grunt_lit, recruit_grunt_complete
     enable_events:
-      enable_recruit_shots{current_player.status_grunt>0}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_grunt
       lit: color_shield_orange
       color: ED3A00 #color_grunt
-    tags: recruit_shot
   recruit_jack_shot:
     hit_events: sh_kickback_hit
     profile: recruit_profile
-    advance_events: recruit_jack_lit
+    advance_events: recruit_jack_lit, recruit_jack_complete
     enable_events:
-      enable_recruit_shots{current_player.status_jack>0}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_jack
       lit: color_shield_purple
       color: 6F00FF #color_jack
-    tags: recruit_shot
   recruit_kasumi_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_profile
-    advance_events: recruit_kasumi_lit
+    advance_events: recruit_kasumi_lit, recruit_kasumi_complete
     enable_events:
-      enable_recruit_shots{current_player.status_kasumi>0}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_kasumi
       lit: color_shield_yellow
       color: F7F315 #color_kasumi
-    tags: recruit_shot
   recruit_legion_shot:
     hit_events: sh_kickback_hit
     profile: recruit_profile
-    advance_events: recruit_legion_lit
+    advance_events: recruit_legion_lit, recruit_legion_complete
     enable_events:
-      enable_recruit_shots{current_player.status_jack<=1}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots{current_player.status_jack.state<=1}
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_legion
       lit: color_shield_white
       color: FFFFFF #color_legion
-    tags: recruit_shot
   recruit_mordin_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_profile
-    advance_events: recruit_mordin_lit
+    advance_events: recruit_mordin_lit, recruit_mordin_complete
     enable_events:
-      enable_recruit_shots{current_player.status_mordin>0}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_mordin
       lit: color_shield_red
       color: BD000A #color_mordin
-    tags: recruit_shot
   recruit_samara_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_profile
-    advance_events: recruit_samara_lit
+    advance_events: recruit_samara_lit, recruit_samara_complete
     enable_events:
-      enable_recruit_shots{current_player.status_garrus<=1}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots{current_player.status_garrus.state<=1}
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_samara
       color: 0037FF #color_samara
-    tags: recruit_shot
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_profile
-    advance_events: recruit_tali_lit
+    advance_events: recruit_tali_lit, recruit_tali_complete
     enable_events:
-      enable_recruit_shots{current_player.status_mordin<=1}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots{current_player.status_mordin.state<=1}
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_tali
       color: D323FF #color_tali
-    tags: recruit_shot
   recruit_thane_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_profile
-    advance_events: recruit_thane_lit
+    advance_events: recruit_thane_lit, recruit_thane_complete
     enable_events:
-      enable_recruit_shots{current_player.status_kasumi<=1}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots{current_player.status_kasumi.state<=1}
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_thane
       lit: color_shield_green
       color: 00FF00 #color_thane
-    tags: recruit_shot
   recruit_zaeed_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_profile
-    advance_events: recruit_zaeed_lit
+    advance_events: recruit_zaeed_lit, recruit_zaeed_complete
     enable_events:
-      enable_recruit_shots{current_player.status_grunt<=1}: 0
-    disable_events: disable_recruit_shots
+      - enable_recruit_shots{current_player.status_grunt.state<=1}
+    disable_events: 
+      - disable_recruit_shots
     show_tokens:
       led: shot_shield_zaeed
       color: FF0000 #color_zaeed
-    tags: recruit_shot
 
 
 show_player:
