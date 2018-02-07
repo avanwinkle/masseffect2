@@ -19,7 +19,7 @@ achievements:
   collectorattack:
     enable_events: enable_collectorattack
     start_events: mode_collectorattack_started
-    complete_events: mode_collectorattack_stopped # Only happens once, completed after playing
+    complete_events: mode_collectorattack_stopped # Only played once, completed after playing
   hagalaz:
     enable_events: logicblock_sbhagalaz_counter_complete
     start_events: mode_shadowbroker_hagalaz_started
@@ -47,6 +47,7 @@ event_player:
     - start_mode_recruitbase
     - start_mode_lockhandler
     - start_mode_planets
+    - start_mode_upgrades
     - enable_orbitswitches
     - reenable_nonrecruit_modes
     # - enable_collectorship
@@ -65,6 +66,7 @@ event_player:
     - stop_mode_overlordlight
     - stop_mode_shadowbroker_base
     - stop_mode_shopping
+    - stop_mode_upgrades
   reenable_recruit_modes:
     - start_mode_recruitbase
     - start_mode_recruitfield
@@ -72,11 +74,10 @@ event_player:
   reenable_nonrecruit_modes:
     - start_mode_shadowbroker_base
     - start_mode_shopping
-  # Prior to collector attack: overlord; after: arrival
-  reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
-    - start_mode_overlordlight
-  reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
-    - start_mode_arrival
+    - start_mode_upgrades
+    # Prior to collector attack: overlord; after: arrival
+    - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
+    - start_mode_arrival{device.achievements.collectorship.state=="complete"}
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship

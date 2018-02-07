@@ -39,6 +39,12 @@ event_player:
     - bypass_lock_release_pulse|0
     - cancel_lock_release_pulse|700ms
 
+machine_vars:
+  last_career: 
+    initial_value: "__casual__"
+    value_type: str
+    persist: true
+
 modes:
   # Core Logic Modes:
   - base
@@ -253,10 +259,20 @@ widget_styles:
   savegame_title:
     font_name: Quadrit-10
     font_size: 10
-    anchor_y: middle
+    anchor_y: bottom
     anchor_x: left
-    y: 50%
-    x: 2
+    y: 4
+    x: 4
+  savegame_playername:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: top
+    anchor_x: left
+    y: top-2
+    x: 4
+    z: 1
 
 
 

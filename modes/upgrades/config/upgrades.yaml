@@ -45,7 +45,6 @@ event_player:
     enable_upgrade:
       upgrade_name: "Heavy Weapon Ammo"
 
-
 scoring:
   collect_upgrade_shot_hit:
     upgrades_researched: 1
@@ -60,7 +59,7 @@ shot_profiles:
 
 shots:
   collect_upgrade_shot:
-    switch: s_right_ramp_exit
+    hit_events: sh_right_ramp_hit
     profile: upgrade_shot_profile
     enable_events: enable_upgrade
     disable_events: collect_upgrade_shot_hit

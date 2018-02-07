@@ -30,6 +30,7 @@ counters:
     direction: up
     disable_on_complete: false
     count_events: zaeed_orbitshots_hit
+    reset_events: mode_recruitzaeed_started # Is this necessary without persist_state?
 
 event_player:
   zaeed_kickshot_hit: recruit_zaeed_complete
@@ -77,13 +78,10 @@ scoring:
   zaeed_kickshot_hit:
     score: current_player.temp_hurryup_value
 
-
 shot_profiles:
   zaeed_kickshot_profile:
     show_when_disabled: false
-    states:
-      - name: lit
-        show: zaeed_show
+    show: zaeed_show
   zaeed_orbit_profile:
     show_when_disabled: false
     states:
