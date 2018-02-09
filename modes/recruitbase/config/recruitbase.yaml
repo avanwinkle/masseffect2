@@ -154,7 +154,6 @@ counters:
     disable_on_complete: false
     reset_on_complete: false
     events_when_complete: recruit_lit, recruit_mordin_lit
-    debug: true
   status_samara_counter:
     count_events: recruit_samara_shot_unlit_hit, recruit_samara_complete
     multiple_hit_window: 500ms
@@ -210,6 +209,8 @@ shot_profiles:
         show: recruitshow_on
       - name: lit
         show: recruitshow_flash
+        speed: 2
+        sync_ms: 600
       - name: recruited
         show: recruitshow_complete
 

@@ -3,7 +3,7 @@ from mpf.modes.carousel.code.carousel import Carousel
 
 DEBUG_COLLECTORSHIP = False
 DEBUG_SUICIDEMISSION = False
-SQUADMATES = ("garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed")
+SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
 
 class MissionSelect(Carousel):
 
@@ -12,7 +12,7 @@ class MissionSelect(Carousel):
   def mode_init(self):
     super().mode_init()
     self.debug_log("MissionSelect is ready to go!!!")
-    self.debug_log(" - items:", self._items)
+    self.debug_log(" - items: {}".format(self._items))
     self._all_items = copy.copy(self._items)
 
   def mode_start(self, **kwargs):
@@ -24,7 +24,7 @@ class MissionSelect(Carousel):
 
   def _build_items_list(self):
     player = self.machine.game.player
-    self.debug_log("MissionSelect player: {}".format(player.vars.__str__()))
+    self.debug_log("MissionSelect player: {}".format(player.vars))
 
     # Collector ship only
     if player.achievements['collectorship'] == "enabled":
@@ -38,10 +38,11 @@ class MissionSelect(Carousel):
     if DEBUG_COLLECTORSHIP and player.achievements['collectorship'] != "complete":
       items.append('collectorship')
 
+    self.debug_log(self.machine.device_manager.collections)
     for mate in SQUADMATES:
-      status = getattr(player, "status_{}".format(mate), -1)
-      # self.machine.debug_log("   - Found missionselect status: {}".format(status))
-      if (status == 3):
+      status = self.machine.device_manager.collections["counters"].get("status_{}_counter".format(mate), -1)
+      self.debug_log("   - Found {} missionselect status in device.counters: {}".format(mate, status.value))
+      if (status.value == 3):
         items.append(mate)
     return items
 

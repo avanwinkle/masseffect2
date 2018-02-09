@@ -20,7 +20,7 @@ mode:
 event_player:
   mode_recruitfield_started: enable_recruit_shots, disable_fullorbit
   mode_recruitfield_will_stop: disable_recruit_shots, enable_fullorbit
-  logicblock_n7_hits_counter_complete: start_mode_n7_assignments
+  logicblock_n7_hits_countercomplete: start_mode_n7_assignments
   recruit_garrus_shot_hit: set_last_recruit_garrus
   recruit_grunt_shot_hit: set_last_recruit_grunt
   recruit_jack_shot_hit: set_last_recruit_jack
@@ -102,7 +102,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_legion_lit, recruit_legion_complete
     enable_events:
-      - enable_recruit_shots{current_player.status_jack>=3}
+      - enable_recruit_shots{device.counters.status_jack_counter.value>=3}
       - recruit_jack_lit
     disable_events:
       - disable_recruit_shots
@@ -127,7 +127,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_samara_lit, recruit_samara_complete
     enable_events:
-      - enable_recruit_shots{current_player.status_garrus>=3}
+      - enable_recruit_shots{device.counters.status_garrus_counter.value>=3}
       - recruit_garrus_lit
     disable_events:
       - disable_recruit_shots
@@ -139,7 +139,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_tali_lit, recruit_tali_complete
     enable_events:
-      - enable_recruit_shots{current_player.status_mordin>=3}
+      - enable_recruit_shots{device.counters.status_mordin_counter.value>=3}
       - recruit_mordin_lit
     disable_events:
       - disable_recruit_shots
@@ -151,7 +151,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_thane_lit, recruit_thane_complete
     enable_events:
-      - enable_recruit_shots{current_player.status_kasumi>=3}
+      - enable_recruit_shots{device.counters.status_kasumi_counter.value>=3}
       - recruit_kasumi_lit
     disable_events:
       - disable_recruit_shots
@@ -164,7 +164,7 @@ shots:
     profile: recruit_profile
     advance_events: recruit_zaeed_lit, recruit_zaeed_complete
     enable_events:
-      - enable_recruit_shots{current_player.status_grunt>=3}
+      - enable_recruit_shots{device.counters.status_grunt_counter.value>=3}
       - recruit_grunt_lit
     disable_events:
       - disable_recruit_shots
@@ -483,7 +483,7 @@ sounds:
 
 
 widget_player:
-  logicblock_n7_hits_counter_hit:
+  logicblock_n7_hits_counterhit:
     n7_progress_widget:
       action: update
       widget_settings:

@@ -21,10 +21,6 @@ virtual_platform_start_active_switches:
 mpf-mc:
   fps: 30
 
-scriptlets:
-  - save_career.SaveCareer
-  - mpf_arduino.MPFArduino
-
 game:
   balls_per_game: 5
   max_players: 4
@@ -40,10 +36,26 @@ event_player:
     - cancel_lock_release_pulse|700ms
 
 machine_vars:
-  last_career: 
-    initial_value: "__casual__"
+  last_career_player_1:
+    initial_value: " "
     value_type: str
     persist: true
+  last_career_player_2:
+    initial_value: " "
+    value_type: str
+    persist: true
+  last_career_player_3:
+    initial_value: " "
+    value_type: str
+    persist: true
+  last_career_player_4:
+    initial_value: " "
+    value_type: str
+    persist: true
+
+scriptlets:
+  - save_career.SaveCareer
+  # - mpf_arduino.MPFArduino
 
 modes:
   # Core Logic Modes:
@@ -52,7 +64,7 @@ modes:
   - lockhandler
   - mainmenu
   - missionselect
-  - pause
+  # - pause
   # Collector Ship Modes:
   - collectorship_ambush
   - collectorship_base
@@ -71,11 +83,11 @@ modes:
   - recruitthane
   - recruitzaeed
   # Lair of the Shadow Broker
-  - shadowbroker_base
-  - shadowbroker_boss
-  - shadowbroker_chase
-  - shadowbroker_hagalaz
-  - shadowbroker_vasir
+  # - shadowbroker_base
+  # - shadowbroker_boss
+  # - shadowbroker_chase
+  # - shadowbroker_hagalaz
+  # - shadowbroker_vasir
   # Side Mission Modes:
   - harbinger
   - n7_assignments
@@ -153,7 +165,7 @@ player_vars:
     initial_value: 0
   status_jack:
     initial_value: 0
-  status_kasume:
+  status_kasumi:
     initial_value: 0
   status_legion:
     initial_value: 0
@@ -167,7 +179,6 @@ player_vars:
     initial_value: 0
   status_zaeed:
     initial_value: 0
-
   temp_multiplier:
     initial_value: 0.0
     value_type: float
@@ -207,18 +218,6 @@ widget_styles:
     font_size: 10
     adjust_top: 2
     adjust_bottom: 3
-  space title huge:
-    font_name: DEADJIM
-    font_size: 29
-    antialias: true
-    adjust_top: 3
-    adjust_bottom: 3
-  space title:
-    font_name: DEADJIM
-    font_size: 21
-    antialias: true
-    adjust_top: 2
-    adjust_bottom: 3
   medium:
     font_name: pixelmix-8
     font_size: 8
@@ -229,9 +228,24 @@ widget_styles:
     font_size: 9
     adjust_top: 2
     adjust_bottom: 3
-  tall title:
-    font_name: big_noodle_titling
-    font_size: 20
+  score_style_singleplayer:
+    number_grouping: true
+    min_digits: 2
+    font_size: 12
+    font_name: Quadrit-10
+    anchor_x: left
+    anchor_y: top
+    x: 2
+    y: top-4
+  score_style_multiplayer:
+    number_grouping: true
+    min_digits: 2
+    font_size: 10
+    font_name: Quadrit-10
+    anchor_x: left
+    anchor_y: middle
+    x: 2
+    y: middle-2
   squad_debug_style:
     font_size: 18
     anchor_x: top
@@ -263,6 +277,42 @@ widget_styles:
     anchor_x: left
     y: 4
     x: 4
+  mp_player_1:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: top
+    y: top-2
+    x: 2
+  mp_player_2:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: right
+    anchor_y: top
+    y: top-2
+    x: right-2
+  mp_player_3:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    y: 2
+    x: 2
+  mp_player_4:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: right
+    anchor_y: bottom
+    y: 2
+    x: right-2
   savegame_playername:
     font_name: smallest_pixel-7
     font_size: 9

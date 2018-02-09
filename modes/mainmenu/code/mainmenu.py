@@ -12,7 +12,7 @@ class MainMenu(Carousel):
     super().mode_init()
     # Set initial values
     self.mainmenu = []
-    self.careers = [] 
+    self.careers = []
     self._selected_career = None
 
   def mode_start(self, **kwargs):
@@ -29,7 +29,7 @@ class MainMenu(Carousel):
       self.stop()
       return
 
-    self.debug_log("Showing main menu!")
+    self.debug_log("Showing career menu for player {}".format(self.machine.game.player.number))
     self._shown_menu = self.mainmenu
     super().mode_start()
     self._highlighted_item_index = 0 if self._selected_career else self.mainmenu.index("casual")
@@ -54,15 +54,17 @@ class MainMenu(Carousel):
       self.debug_log("Searching savegame files: {}".format(files))
       for file in files:
         if file.endswith(".json"):
-          career = json.load(open("{}/{}".format(path,file)))
-          # Rudimentary validation, at least what we need to get started
-          if career["career_name"] and career["last_played"]:
-            career["_strftime"] = datetime.fromtimestamp(career["last_played"]).strftime("%x")
-            self.careers.append(career)
+          with open("{}/{}".format(path,file)) as f:
+            career = json.load(f)
+            # Rudimentary validation, at least what we need to get started
+            if career["career_name"] and career["last_played"]:
+              career["_strftime"] = datetime.fromtimestamp(career["last_played"]).strftime("%x")
+              self.careers.append(career)
 
-            # Set a default/initial selection if  it's the most recently played
-            if career["career_name"] == self.machine.get_machine_var("last_career"):
-              self._selected_career = career
+              # Set a default/initial selection if it's the most recently played for player 1
+              if career["career_name"] == self.machine.get_machine_var("last_career_player_1"):
+                self._selected_career = career
+          f.close()
 
     # Sort by the date last played (newest first)
     self.careers.sort(key=itemgetter("last_played"), reverse=True)
@@ -90,13 +92,13 @@ class MainMenu(Carousel):
       self._shown_menu = self.mainmenu
       self._highlighted_item_index = 0
       self._update_highlighted_item(None)
-      self.machine.events.post("mainmenu_career_selected")
+      self._post_career_event("mainmenu_career_selected")
       # Don't post selection via carousel, keep the carousel open
       return
     # If the career menu was selected, change the menu items and highlight the first one
     elif selection == "change_career":
       self.machine.events.post("mainmenu_change_career_selected")
-      
+
       if not self._selected_career:
         self._set_selected_career(self.careers[0])
       else:
@@ -111,13 +113,13 @@ class MainMenu(Carousel):
       self._set_selected_career(None)
     # If resume was chosen, load the career
     elif selection == "resume_game":
-      self.machine.events.post("load_career")
+      self._post_career_event("load_career")
     # If new game was chosen, mock the loading events
     elif selection == "new_game":
-      self.machine.events.post("career_loaded")
+      self._post_career_event("career_loaded")
     else:
       self.error_log("Unknown selection '{}' from main menu!".format(selection))
-
+    self.info_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
     super()._select_item()
 
   def _update_highlighted_item(self, direction):
@@ -126,19 +128,22 @@ class MainMenu(Carousel):
       self._set_selected_career(self.careers[self._highlighted_item_index])
       self._post_career_event("highlight_career".format(self.name))
     else:
-      super()._update_highlighted_item(direction)
+      self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
+                                 direction=direction)
 
   def _set_selected_career(self, career=None):
     self._selected_career = career
     career_data = self._selected_career or {}
     self.debug_log("Setting career to {}".format(career))
-    self.machine.set_machine_var("last_career", career_data.get("career_name", " "))
+    self.machine.set_machine_var("last_career_player_{}".format(self.machine.game.player.number),
+                                 career_data.get("career_name", " "))
     self._post_career_event("set_career");
 
-  def _post_career_event(self, evt_name):
+  def _post_career_event(self, evt_name, **kwargs):
     career_data = self._selected_career or {}
     self.machine.events.post(evt_name,
                              career_name=career_data.get("career_name"),
                              last_played=career_data.get("_strftime"),
-                             level=career_data.get("level")
+                             level=career_data.get("level"),
+                             **kwargs
                              )

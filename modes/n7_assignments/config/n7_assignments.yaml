@@ -167,8 +167,6 @@ slide_player:
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
-    base_slide:
-      action: play
 
 slides:
   n7_intro_slide:

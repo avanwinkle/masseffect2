@@ -9,24 +9,24 @@ scoring:
     score: 10000
     squadmates_count: 1
 
-  recruit_advance_garrus: #recruit_mission_success{squadmate=="garrus"}:
-    status_garrus: 1
-  recruit_advance_grunt: #recruit_mission_success{squadmate=="grunt"}:
-    status_grunt: 1
-  recruit_advance_jack: #recruit_mission_success{squadmate=="jack"}:
-    status_jack: 1
-  recruit_advance_legion: #recruit_mission_success{squadmate=="legion"}:
-    status_legion: 1
-  recruit_advance_mordin: #recruit_mission_success{squadmate=="mordin"}:
-    status_mordin: 1
-  recruit_advance_samara: #recruit_mission_success{squadmate=="samara"}:
-    status_samara: 1
-  recruit_advance_tali: #recruit_mission_success{squadmate=="tali"}:
-    status_tali: 1
-  recruit_advance_thane: #recruit_mission_success{squadmate=="thane"}:
-    status_thane: 1
-  recruit_advance_zaeed: #recruit_mission_success{squadmate=="zaeed"}:
-    status_zaeed: 1
+  # recruit_advance_garrus: #recruit_mission_success{squadmate=="garrus"}:
+  #   status_garrus: 1
+  # recruit_advance_grunt: #recruit_mission_success{squadmate=="grunt"}:
+  #   status_grunt: 1
+  # recruit_advance_jack: #recruit_mission_success{squadmate=="jack"}:
+  #   status_jack: 1
+  # recruit_advance_legion: #recruit_mission_success{squadmate=="legion"}:
+  #   status_legion: 1
+  # recruit_advance_mordin: #recruit_mission_success{squadmate=="mordin"}:
+  #   status_mordin: 1
+  # recruit_advance_samara: #recruit_mission_success{squadmate=="samara"}:
+  #   status_samara: 1
+  # recruit_advance_tali: #recruit_mission_success{squadmate=="tali"}:
+  #   status_tali: 1
+  # recruit_advance_thane: #recruit_mission_success{squadmate=="thane"}:
+  #   status_thane: 1
+  # recruit_advance_zaeed: #recruit_mission_success{squadmate=="zaeed"}:
+  #   status_zaeed: 1
 
   set_last_recruit_garrus:
     last_recruit:

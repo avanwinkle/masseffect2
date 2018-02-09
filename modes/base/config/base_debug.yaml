@@ -14,62 +14,62 @@ widgets:
       x: 10
       y: top-24
     - type: text
-      text: "Garrus: (player|status_garrus)"
+      text: "Garrus: (player|status_garrus_counter)"
       style: squad_debug_style
       x: 160
       y: top-24
     - type: text
-      text: "Grunt: (player|status_grunt)"
+      text: "Grunt: (player|status_grunt_counter)"
       style: squad_debug_style
       x: 260
       y: top-24
     - type: text
-      text: "Jack: (player|status_jack)"
+      text: "Jack: (player|status_jack_counter)"
       style: squad_debug_style
       y: top-24
       x: 360
     - type: text
-      text: "Jacob: (player|status_jacob)"
+      text: "Jacob: (player|status_jacob_counter)"
       style: squad_debug_style
       x: 460
       y: top-24
     - type: text
-      text: "Kasumi: (player|status_kasumi)"
+      text: "Kasumi: (player|status_kasumi_counter)"
       style: squad_debug_style
       x: 560
       y: top-24
     - type: text
-      text: "Legion: (player|status_legion)"
+      text: "Legion: (player|status_legion_counter_state)"
       style: squad_debug_style
       y: top-24
       x: 660
     - type: text
-      text: "Miranda: (player|status_miranda)"
+      text: "Miranda: (player|status_miranda_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 160
     - type: text
-      text: "Mordin: (player|status_mordin)"
+      text: "Mordin: (player|status_mordin_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 260
     - type: text
-      text: "Samara: (player|status_samara)"
+      text: "Samara: (player|status_samara_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 360
     - type: text
-      text: "Tali: (player|status_tali)"
+      text: "Tali: (player|status_tali_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 460
     - type: text
-      text: "Thane: (player|status_thane)"
+      text: "Thane: (player|status_thane_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 560
     - type: text
-      text: "Zaeed: (player|status_zaeed)"
+      text: "Zaeed: (player|status_zaeed_counter_state)"
       style: squad_debug_style
       y: top-44
       x: 660

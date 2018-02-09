@@ -273,12 +273,19 @@ shows:
 
 slide_player:
   mode_base_started: base_slide
+  multiplayer_game:
+    base_slide:
+      action: remove
+    multiplayer_slide:
+      action: play
   levelup:
     levelup_slide:
       expire: 5s
 
 slides:
   base_slide: []
+  # TODO: Move multiplayer slide behavior into a show
+  multiplayer_slide: []
   levelup_slide:
     widgets:
       - type: text
@@ -310,6 +317,73 @@ widget_player:
       slide: base_slide
     base_ball_widget:
       slide: base_slide
+  # Player 2 has entered the game
+  multiplayer_game:
+    mp_score_widget:
+      slide: multiplayer_slide
+    base_level_widget:
+      slide: multiplayer_slide
+    base_ball_widget:
+      slide: multiplayer_slide
+    # Start with player1 name, player2 score
+    mp_name_widget_player_1:
+      slide: multiplayer_slide
+    mp_score_widget_player_2:
+      slide: multiplayer_slide
+  # Player 3 has entered the game
+  player_added{num==3}:
+    base_level_widget:
+      action: remove
+    mp_score_widget_player_3:
+      slide: multiplayer_slide
+  # Player 4 has entered the game
+  player_added{num==4}:
+    base_ball_widget:
+      action: remove
+      slide: multiplayer_slide
+    mp_score_widget_player_4:
+      slide: multiplayer_slide
+  # Player Turns: Swap scores -> names when turn starts, revert when turn ends
+  player_turn_started{number==1}:
+    mp_score_widget_player_1:
+      action: remove
+    mp_name_widget_player_1:
+      slide: multiplayer_slide
+  player_turn_ended{number==1}:
+    mp_score_widget_player_1:
+      slide: multiplayer_slide
+    mp_name_widget_player_1:
+      action: remove
+  player_turn_started{number==2}:
+    mp_score_widget_player_2:
+      action: remove
+    mp_name_widget_player_2:
+      slide: multiplayer_slide
+  player_turn_ended{number==2}:
+    mp_score_widget_player_2:
+      slide: multiplayer_slide
+    mp_name_widget_player_2:
+      action: remove
+  player_turn_started{number==3}:
+    mp_score_widget_player_3:
+      action: remove
+    mp_name_widget_player_3:
+      slide: multiplayer_slide
+  player_turn_ended{number==3}:
+    mp_score_widget_player_3:
+      slide: multiplayer_slide
+    mp_name_widget_player_3:
+      action: remove
+  player_turn_started{number==4}:
+    mp_score_widget_player_4:
+      action: remove
+    mp_name_widget_player_4:
+      slide: multiplayer_slide
+  player_turn_ended{number==4}:
+    mp_score_widget_player_4:
+      slide: multiplayer_slide
+    mp_name_widget_player_4:
+      action: remove
   levelup:
     levelup_mission:
       slide: levelup_slide
@@ -318,30 +392,51 @@ widgets:
   base_score_widget:
     - type: text
       text: (score)
-      number_grouping: true
-      min_digits: 2
-      font_size: 12
-      font_name: Quadrit-10
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-4
+      style: score_style_singleplayer
+  mp_score_widget:
+    - type: text
+      text: (score)
+      style: score_style_multiplayer
   base_level_widget:
-      - type: text
-        text: LVL (player|level)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: left+2
-        y: 2
+    - type: text
+      text: LVL (player|level)
+      style: mp_player_3
   base_ball_widget:
-      - type: text
-        text: BALL (ball)
-        style: dmd_small
-        x: right-2
-        y: 2
-        anchor_x: right
-        anchor_y: bottom
+    - type: text
+      text: BALL (ball)
+      style: mp_player_4
+  mp_score_widget_player_1:
+    - type: text
+      text: (player1|score)
+      style: mp_player_1
+  mp_score_widget_player_2:
+    - type: text
+      text: (player2|score)
+      style: mp_player_2
+  mp_score_widget_player_3:
+    - type: text
+      text: (player3|score)
+      style: mp_player_3
+  mp_score_widget_player_4:
+    - type: text
+      text: (player4|score)
+      style: mp_player_4
+  mp_name_widget_player_1:
+    - type: text
+      text: (machine|last_career_player_1)
+      style: mp_player_1
+  mp_name_widget_player_2:
+    - type: text
+      text: (machine|last_career_player_2)
+      style: mp_player_2
+  mp_name_widget_player_3:
+    - type: text
+      text: (machine|last_career_player_3)
+      style: mp_player_3
+  mp_name_widget_player_4:
+    - type: text
+      text: (machine|last_career_player_4)
+      style: mp_player_4
   levelup_mission:
     - type: text
       text: (last_mission)

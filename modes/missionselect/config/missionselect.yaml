@@ -18,6 +18,7 @@ mode:
   stop_events: stop_mode_missionselect, missionselect_item_selected
   priority: 1000
   code: missionselect.MissionSelect
+  file_log: full
   ##### Look into this:
   # Possible queue events:
   #   outgoing_balls_handler: balldevice_(name)_ball_eject_attempt

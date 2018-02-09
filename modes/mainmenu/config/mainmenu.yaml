@@ -1,5 +1,4 @@
 #config_version=5
-#config_version=5
 mode:
   start_events: start_mode_mainmenu, ball_ended
   stop_events: stop_mode_mainmenu, ball_started, mainmenu_item_selected
@@ -17,7 +16,7 @@ event_player:
   career_loaded: stop_mode_mainmenu
 
 queue_relay_player:
-  player_turn_starting:
+  player_turn_starting{player.ball==0}:
     post: show_mainmenu
     wait_for: mode_mainmenu_stopping
 
@@ -31,7 +30,6 @@ slide_player:
   mainmenu_change_career_selected: career_select_slide
   mainmenu_career_selected: resume_game_slide
 
-
 slides:
   change_career_slide:
     widgets:
@@ -39,7 +37,7 @@ slides:
         text: Switch Career
         style: savegame_title
       - type: text
-        text: (machine|last_career)
+        text: (career_name)
         style: savegame_playername
   resume_game_slide:
     widgets:
@@ -47,7 +45,7 @@ slides:
         text: Resume Game
         style: savegame_title
       - type: text
-        text: (machine|last_career)
+        text: (career_name)
         style: savegame_playername
   new_game_slide:
     widgets:
@@ -55,7 +53,7 @@ slides:
         text: Restart Career
         style: savegame_title
       - type: text  
-        text: (machine|last_career)
+        text: (career_name)
         style: savegame_playername
   career_select_slide:
     widgets:
