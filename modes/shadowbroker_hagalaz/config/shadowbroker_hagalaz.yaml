@@ -3,11 +3,18 @@
 #####
 # LAIR OF THE SHADOW BROKER: HAGALAZ SHIP EXTERIOR
 #
-# This mode begins with all standup targets lit and a "shunt" program running on
-# the kickback lane. Hitting a standup target lights the shots on either side,
-# and hitting a lit shot progresses the shunt program's door-hack counter. When
-# the counter is complete the door unlocks at the kickback lane; hitting the
-# lane holds the ball and begins the Boss Combat mode.
+# This timed mode lights a random "shunt" shot every 8 seconds.
+# Hitting a lit shot advances the shunt counter; ten hits completes the shunt
+# and opens the hatch (enables kickback lane + ball hold). Hitting a lit shot
+# also adds time to the timer.
+#
+# After the hatch has been opened, shunt shots are disabled and the timer stops.
+# The player has unlimited time to enter the hatch and advance to the Boss
+# phase. Draining the ball will fail the mode, however.
+#
+# Lightning capacitors (standup targets) charge up after 10s, hitting a
+# capacitor triggers a hit for any lit shunt shots on either side. Hitting any
+# capacitor drains them all and restarts the charge-up.
 #
 # TODO: Scoring? The battering ram is a lightning conduit?
 #
@@ -21,6 +28,11 @@ mode:
   priority: 800
 
 event_player:
+  mode_shadowbroker_hagalaz_started:
+    - enable_random_shuntshot
+    - capacitors_charged_ready|10s
+  capacitor_shot_charged_hit:
+    - capacitors_charged_ready|10s
   hagalaz_target1_hagalaz_profile_lit_hit:
     - enable_shunt_left_orbit
     - enable_shunt_kickback
@@ -36,189 +48,322 @@ event_player:
   hagalaz_target5_hagalaz_profile_lit_hit:
     - enable_shunt_right_ramp
     - enable_shunt_right_orbit
-  shunt_counter_complete: enable_final_shunt
+  logicblock_shunt_counter_complete: enable_hatch
+  # DEBUG
+  hatch_shot_hit: shadowbroker_hagalaz_complete
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
   shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
-  sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+  timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
+  timer_sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+
+random_event_player:
+  enable_random_shuntshot:
+    force_all: true
+    events:
+      - enable_shunt_left_orbit
+      - enable_shunt_kickback
+      - enable_shunt_left_ramp
+      - enable_shunt_right_ramp
+      - enable_shunt_right_orbit
 
 counters:
   shunt_counter:
     starting_count: 0
-    count_complete_value: 3
+    count_complete_value: 3 # DEBUG, should be 10
     direction: up
     persist_state: false
-    count_events: shunt_shot_shunt_profile_lit_hit
+    count_events: shunt_shot_lit_hit
+    reset_events: mode_shadowbroker_hagalaz_started
 
 shot_groups:
   shunt_shot:
     shots: shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
+    disable_events: enable_hatch
+  capacitor_shot:
+    shots: hagalaz_target1, hagalaz_target2, hagalaz_target3, hagalaz_target4, hagalaz_target5
+    reset_events: capacitor_shot_charged_hit
+    disable_events: enable_hatch
 
 shot_profiles:
   shunt_profile:
     show_when_disabled: false
     states:
       - name: lit
-        show: flash_color_show
-        show_tokens:
-          color: orange
-  shunt_final_profile:
+        show: shunt_show
+  hatch_profile:
     show_when_disabled: false
     states:
       - name: lit
-        show: flash_color_show
-        show_tokens:
-          color: green
-  hagalaz_profile:
+        show: hatch_show
+  capacitor_profile:
+    advance_on_hit: false
+    show_when_disabled: false
     states:
-      - name: lit
-        show: flash
-      - name: off
-        show: off
+      - name: charging
+        show: capacitor_charging_show
+      - name: charged
+        show: capacitor_charged_show
 
 shots:
-  shunt_final_shot:
+  hatch_shot:
     hit_events: sh_kickback_hit
-    enable_events: enable_final_shunt
-    profile: shunt_final_profile
+    enable_events: enable_hatch
+    profile: hatch_profile
     show_tokens:
       leds: l_kickback_shield_rgb
   shunt_left_orbit:
-    hit_events: sh_left_orbit_hit
+    hit_events: sh_left_orbit_hit, hagalaz_target1_charged_hit
     enable_events: enable_shunt_left_orbit
-    disable_events: shunt_left_orbit_hit, enable_final_shunt
+    disable_events: shunt_left_orbit_hit, enable_hatch
     profile: shunt_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-  shunt_left_ramp:
-    hit_events: sh_left_ramp_hit
-    enable_events: enable_shunt_left_ramp
-    disable_events: shunt_left_ramp_hit, enable_final_shunt
-    profile: shunt_profile
-    show_tokens:
-      leds: l_left_ramp_shield_rgb
-  shunt_right_orbit:
-    hit_events: sh_right_orbit_hit
-    enable_events: enable_shunt_right_orbit
-    disable_events: shunt_right_orbit_hit, enable_final_shunt
-    profile: shunt_profile
-    show_tokens:
-      leds: l_right_orbit_shield_rgb
-  shunt_right_ramp:
-    hit_events: sh_right_ramp_hit
-    enable_events: enable_shunt_right_ramp
-    disable_events: shunt_right_ramp_hit, enable_final_shunt
-    profile: shunt_profile
-    show_tokens:
-      leds: l_right_ramp_shield_rgb
   shunt_kickback:
-    hit_events: sh_kickback_hit
+    hit_events: sh_kickback_hit, hagalaz_target1_charged_hit, hagalaz_target2_charged_hit
     enable_events: enable_shunt_kickback
-    disable_events: shunt_kickback_hit, enable_final_shunt
+    disable_events: shunt_kickback_hit, enable_hatch
     profile: shunt_profile
     show_tokens:
       leds: l_kickback_shield_rgb
+  shunt_left_ramp:
+    hit_events: sh_left_ramp_hit, hagalaz_target2_charged_hit, hagalaz_target3_charged_hit
+    enable_events: enable_shunt_left_ramp
+    disable_events: shunt_left_ramp_hit, enable_hatch
+    profile: shunt_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+  shunt_right_ramp:
+    hit_events: sh_right_ramp_hit, hagalaz_target4_charged_hit, hagalaz_target5_charged_hit
+    enable_events: enable_shunt_right_ramp
+    disable_events: shunt_right_ramp_hit, enable_hatch
+    profile: shunt_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  shunt_right_orbit:
+    hit_events: sh_right_orbit_hit, hagalaz_target5_charged_hit
+    enable_events: enable_shunt_right_orbit
+    disable_events: shunt_right_orbit_hit, enable_hatch
+    profile: shunt_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
   hagalaz_target1:
     switch: s_target1
-    profile: hagalaz_profile
+    advance_events: capacitors_charged_ready
+    profile: capacitor_profile
     show_tokens:
       leds: l_standup_1
   hagalaz_target2:
     switch: s_target2
-    profile: hagalaz_profile
+    advance_events: capacitors_charged_ready
+    profile: capacitor_profile
     show_tokens:
       leds: l_standup_2
   hagalaz_target3:
     switch: s_target3
-    profile: hagalaz_profile
+    advance_events: capacitors_charged_ready
+    profile: capacitor_profile
     show_tokens:
       leds: l_standup_3
   hagalaz_target4:
     switch: s_target4
-    profile: hagalaz_profile
+    advance_events: capacitors_charged_ready
+    profile: capacitor_profile
     show_tokens:
       leds: l_standup_4
   hagalaz_target5:
     switch: s_target5
-    profile: hagalaz_profile
+    advance_events: capacitors_charged_ready
+    profile: capacitor_profile
     show_tokens:
       leds: l_standup_5
+
+shows:
+  shunt_show:
+    - time: 0
+      lights:
+        (leds): blue
+    - time: '+1'
+      lights:
+        (leds): 000000
+  hatch_show:
+    - time: 0
+      lights:
+        (leds): green
+    - time: '+1'
+      lights:
+        (leds): blue
+  capacitor_charging_show:
+    - time: 0
+      lights:
+        (leds): 000000
+    - duration: 10s
+      lights:
+        (leds):
+          color: FFFFFF
+          fade: 10s
+  capacitor_charged_show:
+    - duration: 250ms
+      lights:
+        (leds):
+          color: FFFFFF
+          fade: 250ms
+    - duration: 250ms
+      lights:
+        (leds):
+          color: BBBBBB
+          fade: 250ms
+
+sound_player:
+  mode_shadowbroker_hagalaz_started:
+    shadowbroker_agent_music:
+      action: play
+      mode_end_action: stop
+    liara_its_locked_ive_got_a_shunt_program:
+      action: play
+  logicblock_shunt_counter_updated{value>0 and value<10}: shunt_progress_sound
+  # logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
+  enable_hatch:
+    liara_hatch_is_open:
+      action: play
+    shadowbroker_agent_music:
+      action: stop
+      fade_out: 3s
+  # Relays
+  play_liara_that_security_upgrade: liara_that_security_upgrade
+  play_liara_ive_never_broken_into_sb_before: liara_ive_never_broken_into_sb_before
+  play_liara_no_time_to_talk: liara_no_time_to_talk
+  play_liara_now_therell_be_fewer_inside: liara_now_therell_be_fewer_inside
+  play_liara_it_didnt_come_with_a_warranty: liara_it_didnt_come_with_a_warranty
+  play_shepard_please_dont_give_the_mercs_ideas: shepard_please_dont_give_the_mercs_ideas
+  play_shepard_you_had_to_give_them_tactical_advice: shepard_you_had_to_give_them_tactical_advice
+
+sound_pools:
+  shunt_progress_sound:
+    type: sequence
+    track: voice
+    sounds:
+      - shepard_how_long_will_it_take
+      - shepard_you_sure_shunt_is_working
+      - shepard_you_tested_it_right
+      - shepard_tell_me_you_tested_it
+      - liara_their_attacks_are_disorganized
+      - shepard_slap_omnigel
+      - liara_next_wave_looks_big
+      - shepard_so_much_for_covert_infiltration
+      - liara_here_come_more
+  attack_comment_sound:
+    type: sequence
+    track: voice
+    sounds:
+      - liara_try_firing_at_capacitors
 
 sounds:
   liara_now_therell_be_fewer_inside:
     file: DLC_EXP_Part01_Int.902.ogg
     track: voice
+    max_queue_time: 1s
   liara_no_time_to_talk:
     file: DLC_EXP_Part01_Int.912.ogg
     track: voice
+    max_queue_time: 1s
   liara_next_wave_looks_big:
     file: DLC_EXP_Part01_Int.913.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_shepard_you_had_to_give_them_tactical_advice
   liara_more_on_the_way:
     file: DLC_EXP_Part01_Int.922.ogg
     track: voice
+    max_queue_time: 1s
   liara_here_come_more:
     file: DLC_EXP_Part01_Int.925.ogg
     track: voice
+    max_queue_time: 1s
   liara_their_attacks_are_disorganized:
     file: DLC_EXP_Part01_Int.942.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_shepard_please_dont_give_the_mercs_ideas
   liara_that_security_upgrade:
     file: DLC_EXP_Part01_Int.923.ogg
     track: voice
+    max_queue_time: 1s
   liara_it_wont_be_much_longer:
     file: DLC_EXP_Part01_Int.924.ogg
     track: voice
+    max_queue_time: 1s
   liara_it_didnt_come_with_a_warranty:
     file: DLC_EXP_Part01_Int.926.ogg
     track: voice
+    max_queue_time: 1s
   liara_hatch_is_open:
     file: DLC_EXP_Part01_Int.935.ogg
     track: voice
+    max_queue_time: 1s
   liara_careful_capacitors:
     file: DLC_EXP_Part01_Int.939.ogg
     track: voice
+    max_queue_time: 1s
   liara_try_firing_at_capacitors:
     file: DLC_EXP_Part01_Int.938.ogg
     track: voice
+    max_queue_time: 1s
   liara_ive_never_broken_into_sb_before:
     file: DLC_EXP_Part01_Int.953.ogg
     track: voice
+    max_queue_time: 1s
   liara_its_locked_ive_got_a_shunt_program:
     file: DLC_EXP_Part01_Int.954.ogg
     track: voice
+    max_queue_time: 1s
   shepard_you_had_to_give_them_tactical_advice:
     file: DLC_EXP_Part01_Int.895.ogg
     track: voice
+    max_queue_time: 1s
   shepard_please_dont_give_the_mercs_ideas:
     file: DLC_EXP_Part01_Int.899.ogg
     track: voice
+    max_queue_time: 1s
   shepard_so_much_for_covert_infiltration:
     file: DLC_EXP_Part01_Int.901.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_now_therell_be_fewer_inside
   shepard_tell_me_you_tested_it:
     file: DLC_EXP_Part01_Int.911.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_no_time_to_talk
   shepard_you_tested_it_right:
     file: DLC_EXP_Part01_Int.919.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_no_time_to_talk
   shepard_you_sure_shunt_is_working:
     file: DLC_EXP_Part01_Int.921.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_it_didnt_come_with_a_warranty
   shepard_slap_omnigel:
     file: DLC_EXP_Part01_Int.915.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_that_security_upgrade
   shepard_how_long_will_it_take:
     file: DLC_EXP_Part01_Int.951.ogg
     track: voice
+    max_queue_time: 1s
+    events_when_stopped: play_liara_ive_never_broken_into_sb_before
 
 timers:
   sbhagalaz_timer:
-    start_value: 60
+    start_value: 64
     end_value: 0
     tick_interval: 1s
+    start_running: true
     direction: down
     control_events:
-      - event: shadowbroker_hagalaz_complete
+      - event: enable_hatch
         action: stop
       - event: shunt_shot_hit
         action: add
