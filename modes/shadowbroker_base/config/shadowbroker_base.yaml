@@ -16,16 +16,6 @@ mode:
   priority: 500
 
 event_player:
-  ## DEBUG
-  mode_shadowbroker_base_started:
-    - logicblock_sbvasir_counter_complete
-    - mode_shadowbroker_vasir_started|1s
-    - shadowbroker_vasir_complete|2s
-    - logicblock_sbhagalaz_counter_complete|3s
-  # DEBUG
-  shadowbroker_hagalaz_complete:
-    - enter_shadowbroker_modes
-    - start_mode_shadowbroker_boss
   sbdroptarget_group_complete:
     - reset_dropbank
     # Complete the dropbank after vasir is enabled to begin the chase
