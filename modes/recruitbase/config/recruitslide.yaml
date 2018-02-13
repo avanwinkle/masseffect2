@@ -36,6 +36,15 @@ event_player:
       missionname: "Storm the Refinery"
 
 slide_player:
+  recruit_advance{status==1}:
+    recruiting_advance_slide_2:
+      expire: 1s
+  recruit_advance{status==2}:
+    recruiting_advance_slide_1:
+      expire: 1s
+  recruit_advance{status==3}:
+    recruiting_advance_slide_lit:
+      expire: 2s
   missionselect_recruitmission_selected: recruitslide
   recruit_mission_ended:
     recruitslide:
@@ -43,6 +52,48 @@ slide_player:
 
 slides:
   recruitslide: []
+  recruiting_advance_slide_2:
+    widgets:
+      - type: text
+        text: Recruit (squadmate)
+        font_name: Quadrit-10
+        font_size: 10
+        anchor_y: bottom
+        y: bottom+45%
+        casing: title
+      - type: text
+        text: 2 shots to light
+        anchor_y: bottom
+        style: dmd_small
+        y: 3
+  recruiting_advance_slide_1:
+    widgets:
+      - type: text
+        text: Recruit (squadmate)
+        font_name: Quadrit-10
+        font_size: 10
+        anchor_y: bottom
+        y: bottom+45%
+        casing: title
+      - type: text
+        text: 1 shot to light
+        style: dmd_small
+        anchor_y: bottom
+        y: 3
+  recruiting_advance_slide_lit:
+    widgets:
+      - type: text
+        text: (squadmate) Ready!
+        font_name: Quadrit-10
+        font_size: 10
+        anchor_y: bottom
+        y: bottom+45%
+        casing: title
+      - type: text
+        text: Left Ramp to Start Mission
+        style: dmd_small
+        anchor_y: bottom
+        y: 3
 
 widget_player:
   set_recruitwidget:

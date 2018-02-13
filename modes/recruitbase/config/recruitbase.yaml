@@ -34,6 +34,7 @@ config:
   - recruitscoring.yaml  # Everything in the scoring: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
+  - recruitshows.yaml
 
 event_player:
   mode_recruitbase_started:
@@ -58,7 +59,6 @@ event_player:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
   missionselect_recruitmission_selected:
-    - disable_nonrecruit_modes
     - start_mode_recruitgarrus{squadmate=="garrus"}
     - start_mode_recruitgrunt{squadmate=="grunt"}
     - start_mode_recruitjack{squadmate=="jack"}
@@ -69,8 +69,6 @@ event_player:
     - start_mode_recruittali{squadmate=="tali"}
     - start_mode_recruitthane{squadmate=="thane"}
     - start_mode_recruitzaeed{squadmate=="zaeed"}
-  recruit_mission_success:
-    - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
@@ -87,133 +85,6 @@ ball_saves:
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: -1
 
-counters:
-  status_garrus_counter:
-    count_events: recruit_garrus_shot_unlit_hit, recruit_garrus_complete
-    multiple_hit_window: 500ms
-    starting_count: current_player.status_garrus
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_hit: recruit_advance, recruit_advance_garrus
-    events_when_complete: recruit_lit, recruit_garrus_lit
-  status_grunt_counter:
-    count_events: recruit_grunt_shot_unlit_hit, recruit_grunt_complete
-    multiple_hit_window: 1000ms
-    starting_count: current_player.status_grunt
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_hit: recruit_advance, recruit_advance_grunt
-    events_when_complete: recruit_lit, recruit_grunt_lit
-  status_jack_counter:
-    count_events: recruit_jack_shot_unlit_hit, recruit_jack_complete
-    multiple_hit_window: 300ms
-    starting_count: current_player.status_jack
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_hit: recruit_advance, recruit_advance_jack
-    events_when_complete: recruit_lit, recruit_jack_lit
-  status_kasumi_counter:
-    count_events: recruit_kasumi_shot_unlit_hit, recruit_kasumi_complete
-    multiple_hit_window: 500ms
-    events_when_hit: recruit_advance, recruit_advance_kasumi
-    starting_count: current_player.status_kasumi
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_kasumi_lit
-  status_legion_counter:
-    count_events: recruit_legion_shot_unlit_hit, recruit_legion_complete
-    events_when_hit: recruit_advance, recruit_advance_legion
-    multiple_hit_window: 500ms
-    starting_count: current_player.status_legion
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_legion_lit
-  status_mordin_counter:
-    count_events: recruit_mordin_shot_unlit_hit, recruit_mordin_complete
-    multiple_hit_window: 800ms
-    events_when_hit: recruit_advance, recruit_advance_mordin
-    starting_count: current_player.status_mordin
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_mordin_lit
-  status_samara_counter:
-    count_events: recruit_samara_shot_unlit_hit, recruit_samara_complete
-    multiple_hit_window: 500ms
-    events_when_hit: recruit_advance, recruit_advance_samara
-    starting_count: current_player.status_samara
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_samara_lit
-  status_tali_counter:
-    count_events: recruit_tali_shot_unlit_hit, recruit_tali_complete
-    multiple_hit_window: 500ms
-    events_when_hit: recruit_advance, recruit_advance_tali
-    starting_count: current_player.status_tali
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_tali_lit
-  status_thane_counter:
-    count_events: recruit_thane_shot_unlit_hit, recruit_thane_complete
-    multiple_hit_window: 500ms
-    events_when_hit: recruit_advance, recruit_advance_thane
-    starting_count: current_player.status_thane
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_thane_lit
-  status_zaeed_counter:
-    count_events: recruit_zaeed_shot_unlit_hit, recruit_zaeed_complete
-    multiple_hit_window: 1000ms
-    events_when_hit: recruit_advance, recruit_advance_zaeed
-    starting_count: current_player.status_zaeed
-    count_complete_value: 3
-    direction: up
-    persist_state: true
-    disable_on_complete: false
-    reset_on_complete: false
-    events_when_complete: recruit_lit, recruit_zaeed_lit
-
-
-shot_profiles:
-  recruit_profile:
-    show_when_disabled: false
-    advance_on_hit: false
-    states:
-      - name: unlit
-        show: recruitshow_on
-      - name: lit
-        show: recruitshow_flash
-        speed: 2
-        sync_ms: 600
-      - name: recruited
-        show: recruitshow_complete
-
 show_player:
   ball_save_debug_recruitmission_ballsave_timer_start:
     ball_save_show:
@@ -226,32 +97,6 @@ show_player:
   ball_save_debug_recruitmission_ballsave_disabled:
     ball_save_show:
       action: stop
-
-shows:
-  recruitshow_off:
-    - lights:
-        (led): black
-        l_null: (color)
-        (lit): black
-  recruitshow_flash:
-    - time: 0
-      lights:
-        (led): black
-        l_null: (color)
-        (lit): white
-    - time: +1
-      lights:
-        (led): black
-        l_null: (color)
-        (lit): black
-  recruitshow_on:
-    - lights:
-        (led): (color)
-        (lit): black
-  recruitshow_complete:
-    - lights:
-        (led): (color)
-        (lit): white
 
 slide_player:
   mode_recruitbase_started:
@@ -272,17 +117,17 @@ slides:
 # that's been completed will have its mode stopped before the sound finishes
 #####
 sound_player:
-  recruit_garrus_complete: missioncomplete_voice_garrus
-  recruit_grunt_complete: missioncomplete_voice_grunt
-  recruit_jack_complete: missioncomplete_voice_jack
-  recruit_kasumi_complete: missioncomplete_voice_kasumi
-  recruit_legion_complete: missioncomplete_voice_legion
-  recruit_mordin_complete: missioncomplete_voice_mordin
-  recruit_samara_complete: missioncomplete_voice_samara
-  recruit_tali_complete: missioncomplete_voice_tali
-  recruit_thane_complete: missioncomplete_voice_thane
-  recruit_zaeed_complete{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
-  recruit_zaeed_complete{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
+  recruit_success_garrus: missioncomplete_voice_garrus
+  recruit_success_grunt: missioncomplete_voice_grunt
+  recruit_success_jack: missioncomplete_voice_jack
+  recruit_success_kasumi: missioncomplete_voice_kasumi
+  recruit_success_legion: missioncomplete_voice_legion
+  recruit_success_mordin: missioncomplete_voice_mordin
+  recruit_success_samara: missioncomplete_voice_samara
+  recruit_success_tali: missioncomplete_voice_tali
+  recruit_success_thane: missioncomplete_voice_thane
+  recruit_success_zaeed:{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
+  recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
 
 sound_pools:
   missioncomplete_voice_garrus:

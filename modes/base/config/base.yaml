@@ -265,9 +265,11 @@ shows:
       lights:
         (leds): black
         l_null: (color)
+  color_on:
+    - lights:
+        (leds): (color)
   color_off:
-    - time: 0
-      lights:
+    - lights:
         (leds): black
         l_null: (color)
 
@@ -439,7 +441,7 @@ widgets:
       style: mp_player_4
   levelup_mission:
     - type: text
-      text: (last_mission)
+      text: (mission_name)
       style: dmd_small
       anchor_y: bottom
       y: 3

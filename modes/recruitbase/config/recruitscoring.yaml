@@ -3,78 +3,58 @@ scoring:
   sw_standuptarget_active:
     score: 200
   recruit_lit:
-    available_missions: 1
     score: 5000
+    available_missions: 1
   recruit_mission_success:
     score: 10000
     squadmates_count: 1
-
-  # recruit_advance_garrus: #recruit_mission_success{squadmate=="garrus"}:
-  #   status_garrus: 1
-  # recruit_advance_grunt: #recruit_mission_success{squadmate=="grunt"}:
-  #   status_grunt: 1
-  # recruit_advance_jack: #recruit_mission_success{squadmate=="jack"}:
-  #   status_jack: 1
-  # recruit_advance_legion: #recruit_mission_success{squadmate=="legion"}:
-  #   status_legion: 1
-  # recruit_advance_mordin: #recruit_mission_success{squadmate=="mordin"}:
-  #   status_mordin: 1
-  # recruit_advance_samara: #recruit_mission_success{squadmate=="samara"}:
-  #   status_samara: 1
-  # recruit_advance_tali: #recruit_mission_success{squadmate=="tali"}:
-  #   status_tali: 1
-  # recruit_advance_thane: #recruit_mission_success{squadmate=="thane"}:
-  #   status_thane: 1
-  # recruit_advance_zaeed: #recruit_mission_success{squadmate=="zaeed"}:
-  #   status_zaeed: 1
-
-  set_last_recruit_garrus:
-    last_recruit:
-      string: "Garrus"
-    last_mission:
-      string: "Garrus Recruited"
-  set_last_recruit_grunt:
-    last_recruit:
-      string: "Grunt"
-    last_mission:
-      string: "Grunt Recruited"
-  set_last_recruit_jack:
-    last_recruit:
-      string: "Jack"
-    last_mission:
-      string: "Jack Recruited"
-  set_last_recruit_kasumi:
-    last_recruit:
-      string: "Kasumi"
-    last_mission:
-      string: "Kasumi Recruited"
-  set_last_recruit_legion:
-    last_recruit:
-      string: "Legion"
-    last_mission:
-      string: "Legion Recruited"
-  set_last_recruit_mordin:
-    last_recruit:
-      string: "Mordin"
-    last_mission:
-      string: "Mordin Recruited"
-  set_last_recruit_samara:
-    last_recruit:
-      string: "Samara"
-    last_mission:
-      string: "Samara Recruited"
-  set_last_recruit_tali:
-    last_recruit:
-      string: "Tali"
-    last_mission:
-      string: "Tali Recruited"
-  set_last_recruit_thane:
-    last_recruit:
-      string: "Thane"
-    last_mission:
-      string: "Thane Recruited"
-  set_last_recruit_zaeed:
-    last_recruit:
-      string: "Zaeed"
-    last_mission:
-      string: "Zaeed Recruited"
+  recruit_advance_garrus:
+    status_garrus: 1
+  recruit_advance_grunt:
+    status_grunt: 1
+  recruit_advance_jack:
+    status_jack: 1
+  recruit_advance_kasumi:
+    status_kasumi: 1
+  recruit_advance_legion:
+    status_legion: 1
+  recruit_advance_mordin:
+    status_mordin: 1
+  recruit_advance_samara:
+    status_samara: 1
+  recruit_advance_tali:
+    status_tali: 1
+  recruit_advance_thane:
+    status_thane: 1
+  recruit_advance_zaeed:
+    status_zaeed: 1
+  recruit_garrus_complete:
+    status_garrus:
+      score: 4
+  recruit_grunt_complete:
+    status_grunt:
+      score: 4
+  recruit_jack_complete:
+    status_jack:
+      score: 4
+  recruit_kasumi_complete:
+    status_kasumi:
+      score: 4
+  recruit_legion_complete:
+    status_legion:
+      score: 4
+  recruit_mordin_complete:
+    status_mordin:
+      score: 4
+  recruit_samara_complete:
+    status_samara:
+      score: 4
+  recruit_tali_complete:
+    status_tali:
+      score: 4
+  recruit_thane_complete:
+    status_thane:
+      score: 4
+  recruit_zaeed_complete:
+    status_zaeed:
+      score: 4

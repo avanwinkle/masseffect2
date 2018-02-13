@@ -1,0 +1,111 @@
+#config_version=5
+show_player:
+  mode_recruitfield_started:
+    missions_available_show{current_player.available_missions>0}:
+      action: play
+  player_available_missions{value>0}:
+    missions_available_show:
+      action: play
+  mode_recruitfield_will_stop:
+    missions_available_show:
+      action: stop
+  # All of the following are to flash/light the colored shields for avaliable/completed recruit missions
+  # TODO: These override each other, the only option is one show PER squadmate
+  enable_recruit_shots:
+    recruits_lit_show{current_player.status_garrus==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_blue
+    recruits_lit_show{current_player.status_grunt==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_orange
+    recruits_lit_show{current_player.status_jack==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_purple
+    recruits_lit_show{current_player.status_kasumi==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_yellow
+    recruits_lit_show{current_player.status_mordin==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_red
+    recruits_lit_show{current_player.status_samara==3}:
+      action: play
+      show_tokens:
+        leds: l_iron_throne
+    recruits_lit_show{current_player.status_tali==3}:
+      action: play
+      show_tokens:
+        leds: l_right_outlane
+    recruits_lit_show{current_player.status_thane==3}:
+      action: play
+      show_tokens:
+        leds: color_shield_green
+    recruits_lit_show{current_player.status_zaeed==3}:
+      action: play
+      show_tokens:
+        leds: l_hand_of_the_king
+    recruits_complete_show{current_player.status_garrus==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_blue
+    recruits_complete_show{current_player.status_grunt==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_orange
+    recruits_complete_show{current_player.status_jack==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_purple
+    recruits_complete_show{current_player.status_kasumi==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_yellow
+    recruits_complete_show{current_player.status_mordin==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_red
+    recruits_complete_show{current_player.status_samara==4}:
+      action: play
+      show_tokens:
+        leds: l_iron_throne
+    recruits_complete_show{current_player.status_tali==4}:
+      action: play
+      show_tokens:
+        leds: l_right_outlane
+    recruits_complete_show{current_player.status_thane==4}:
+      action: play
+      show_tokens:
+        leds: color_shield_green
+    recruits_complete_show{current_player.status_zaeed==4}:
+      action: play
+      show_tokens:
+        leds: l_hand_of_the_king
+  disable_recruit_shots:
+    recruits_lit_show:
+      action: stop
+    recruits_complete_show:
+      action: stop
+
+shows:
+  missions_available_show:
+    - time: 0
+      lights:
+        l_left_ramp_arrow_clear: white
+    - time: '+1'
+      lights:
+        l_left_ramp_arrow_clear: black
+  recruits_lit_show:
+    - time: 0
+      lights:
+        (leds): on
+    - time: '+1'
+      lights:
+        (leds): off
+  recruits_complete_show:
+    - time: 0
+      lights:
+        (leds): on

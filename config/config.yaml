@@ -54,6 +54,7 @@ machine_vars:
     persist: true
 
 scriptlets:
+  - me_squadmates.MESquadmates
   - save_career.SaveCareer
   # - mpf_arduino.MPFArduino
 
@@ -83,11 +84,11 @@ modes:
   - recruitthane
   - recruitzaeed
   # Lair of the Shadow Broker
-  # - shadowbroker_base
-  # - shadowbroker_boss
-  # - shadowbroker_chase
-  # - shadowbroker_hagalaz
-  # - shadowbroker_vasir
+  - shadowbroker_base
+  - shadowbroker_boss
+  - shadowbroker_chase
+  - shadowbroker_hagalaz
+  - shadowbroker_vasir
   # Side Mission Modes:
   - harbinger
   - n7_assignments
@@ -127,7 +128,7 @@ light_player:
 
 player_vars:
   career_name:
-    initial_value: "_default"
+    initial_value: " "
     value_type: str
   assignments_completed:
     initial_value: 0
@@ -135,12 +136,6 @@ player_vars:
     initial_value: 0
   credits:
     initial_value: 0
-  last_recruit:
-    initial_value: "Somebody"
-    value_type: str
-  last_mission:
-    initial_value: "Mission Complete"
-    value_type: str
   harbinger_multiplier:
     initial_value: 1
   intel:
@@ -155,7 +150,20 @@ player_vars:
     initial_value: 0
   mineral_platinum:
     initial_value: 0
+  recruits_color:
+    initial_value: "FFFFFF"
+    value_type: str
+  recruits_lit:
+    initial_value: "l_null"
+    value_type: str
+  recruits_complete:
+    initial_value: "l_null"
+    value_type: str
   reputation:
+    initial_value: 0
+  sbcounter_vasir_saved:
+    initial_value: 0
+  sbcounter_hagalaz_saved:
     initial_value: 0
   squadmates_count:
     initial_value: 2

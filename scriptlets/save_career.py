@@ -3,7 +3,9 @@ import logging
 from datetime import datetime
 from mpf.core.scriptlet import Scriptlet
 
-PLAYER_VARS = ("assigments_completed", "available_missions", "career_name", "level", "recruits_lit_count", "squadmates_count")
+PLAYER_VARS = (
+  "assigments_completed", "available_missions", "career_name", "level",
+  "recruits_lit_count", "sbcounter_hagalaz_saved", "sbcounter_vasir_saved", "squadmates_count")
 
 class SaveCareer(Scriptlet):
 
@@ -17,10 +19,11 @@ class SaveCareer(Scriptlet):
 
   def _set_career(self, **kwargs):
     if self.machine.game and self.machine.game.player:
+      career_name = kwargs.get("career_name", None)
       # Store the career for this player's number
-      self._current_careers[self.machine.game.player.number] = kwargs or None
+      self._current_careers[self.machine.game.player.number] = kwargs if career_name else None
       # Attach the career name to the current player
-      self.machine.game.player["career_name"] = kwargs.get("career_name", None)
+      self.machine.game.player["career_name"] = career_name
 
     self.log.info("Set career to '{}', Args={}".format(self.machine.game.player.career_name, kwargs))
 
@@ -39,10 +42,8 @@ class SaveCareer(Scriptlet):
     newcareer = {"last_played": datetime.now().timestamp()}
 
     for key, value in player.vars.items():
-      if key in PLAYER_VARS or key == "achievements":
+      if key in PLAYER_VARS or key == "achievements" or key.startswith("status_"):
         newcareer[key] = value
-      elif key.startswith("status_") and key.endswith("_counter_state"):
-        newcareer[key[:-14]] = value.value
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))
     json.dump(newcareer, open(self._get_filename(player.career_name), mode="w"))

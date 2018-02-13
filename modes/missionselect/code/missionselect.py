@@ -24,7 +24,6 @@ class MissionSelect(Carousel):
 
   def _build_items_list(self):
     player = self.machine.game.player
-    self.debug_log("MissionSelect player: {}".format(player.vars))
 
     # Collector ship only
     if player.achievements['collectorship'] == "enabled":
@@ -40,9 +39,8 @@ class MissionSelect(Carousel):
 
     self.debug_log(self.machine.device_manager.collections)
     for mate in SQUADMATES:
-      status = self.machine.device_manager.collections["counters"].get("status_{}_counter".format(mate), -1)
-      self.debug_log("   - Found {} missionselect status in device.counters: {}".format(mate, status.value))
-      if (status.value == 3):
+      status = player.vars.get("status_{}".format(mate))
+      if (status == 3):
         items.append(mate)
     return items
 
@@ -54,3 +52,9 @@ class MissionSelect(Carousel):
     selection = self._get_highlighted_item()
     if selection in SQUADMATES:
       self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
+
+  def _update_highlighted_item(self, direction):
+    h = self._get_highlighted_item()
+    self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction)
+    if h in SQUADMATES:
+      self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)

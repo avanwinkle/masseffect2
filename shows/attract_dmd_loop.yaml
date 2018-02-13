@@ -3,8 +3,12 @@
   slides:
     attract_dmd_loop_slide_2:
       widgets:
-      - type: image
-        image: me2_logo_x128
-        width: 128
-        height: 32
+        - type: text
+          text: some case
+          casing: title
+      # widgets:
+      # - type: image
+      #   image: me2_logo_x128
+      #   width: 128
+      #   height: 32
 

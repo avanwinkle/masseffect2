@@ -59,7 +59,7 @@ ball_saves:
 counters:
   sbvasir_counter:
     count_events: sbdroptarget_group_complete
-    starting_count: 0
+    starting_count: current_player.sbcounter_vasir_saved
     count_complete_value: 3
     persist_state: true
     disable_on_complete: true
@@ -72,7 +72,7 @@ counters:
       - achievement_vasir_state_completed
       - mode_shadowbroker_base_started{device.achievements.vasir.state=="completed"}
     count_events: sbdroptarget_group_complete
-    starting_count: 0
+    starting_count: current_player.sbcounter_hagalaz_saved
     count_complete_value: 3
     persist_state: true
     disable_on_complete: false
@@ -129,6 +129,7 @@ show_player:
       priority: 100
       loops: 12
       speed: 10
+  # TODO: Convert the lights to a show so they will play on persist
 
 shows:
   sbdrops_flash:
