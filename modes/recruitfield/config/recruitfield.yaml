@@ -20,7 +20,7 @@ mode:
 event_player:
   mode_recruitfield_started: enable_recruit_shots, disable_fullorbit
   mode_recruitfield_will_stop: disable_recruit_shots, enable_fullorbit
-  logicblock_n7_hits_countercomplete: start_mode_n7_assignments
+  logicblock_n7_hits_counter_complete: start_mode_n7_assignments
   # When a squadmate moves from "shot" to "lit", re-evaluate the shots
   recruit_lit: enable_recruit_shots
 
@@ -159,11 +159,17 @@ shots:
       color: FF0000 #color_zaeed
 
 sound_player:
-  # mode_recruitfield_started:
-  #   music_normandy_walkin_intro:
-  #     action: play
-  #     loops: -1
-  #     mode_end_action: stop
+  mode_recruitfield_started:
+    music_normandy_walkin_intro:
+      action: play
+      loops: 0
+      mode_end_action: stop
+      events_when_stopped: play_galaxy_map
+  play_galaxy_map:
+    music_galaxy_map:
+      action: play
+      loops: -1 # TODO: integrate with scanning loop
+      mode_end_action: stop
   recruit_advance_garrus:
     shot_hit_sounds_garrus:
       action: play
@@ -248,6 +254,12 @@ sound_pools:
     track: voice
 
 sounds:
+  music_normandy_walkin_intro:
+    file: mus_nor_normandy_walkin_intro.ogg
+    track: music
+  music_galaxy_map:
+    file: mus_galaxy_map_loop.ogg
+    track: music
   garrus_shot_sound_1:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
     track: voice
@@ -397,7 +409,7 @@ sounds:
     track: voice
 
 widget_player:
-  logicblock_n7_hits_counterhit:
+  logicblock_n7_hits_counter_hit:
     n7_progress_widget:
       action: update
       widget_settings:

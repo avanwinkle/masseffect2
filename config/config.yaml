@@ -161,9 +161,7 @@ player_vars:
     value_type: str
   reputation:
     initial_value: 0
-  sbcounter_vasir_saved:
-    initial_value: 0
-  sbcounter_hagalaz_saved:
+  counter_sbdrops_counter:
     initial_value: 0
   squadmates_count:
     initial_value: 2

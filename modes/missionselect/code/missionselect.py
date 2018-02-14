@@ -37,7 +37,6 @@ class MissionSelect(Carousel):
     if DEBUG_COLLECTORSHIP and player.achievements['collectorship'] != "complete":
       items.append('collectorship')
 
-    self.debug_log(self.machine.device_manager.collections)
     for mate in SQUADMATES:
       status = player.vars.get("status_{}".format(mate))
       if (status == 3):

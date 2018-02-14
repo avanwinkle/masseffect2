@@ -34,7 +34,7 @@ config:
   - recruitscoring.yaml  # Everything in the scoring: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
-  - recruitshows.yaml
+  - recruitshows.yaml    # Shows to light recruit shields, missions available
 
 event_player:
   mode_recruitbase_started:

@@ -5,7 +5,7 @@ from mpf.core.scriptlet import Scriptlet
 
 PLAYER_VARS = (
   "assigments_completed", "available_missions", "career_name", "level",
-  "recruits_lit_count", "sbcounter_hagalaz_saved", "sbcounter_vasir_saved", "squadmates_count")
+  "recruits_lit_count", "counter_sbdrops_counter", "squadmates_count")
 
 class SaveCareer(Scriptlet):
 

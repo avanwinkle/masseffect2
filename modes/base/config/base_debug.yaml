@@ -100,6 +100,11 @@ widgets:
       style: squad_debug_style
       x: 160
       y: top-124
+    - type: text
+      text: "Shadow Broker: (player|counter_sbdrops_counter)"
+      style: squad_debug_style
+      x: 160
+      y: top-144
 
     # Column Two
     - type: text
@@ -144,15 +149,3 @@ widgets:
       style: squad_debug_style
       x: 560
       y: top-144
-
-    # Below
-    - type: text
-      text: "Recruits Lit: (player|recruits_lit)"
-      style: squad_debug_style
-      y: 144
-      x: 10
-    - type: text
-      text: "Recruits Complete: (player|recruits_complete)"
-      style: squad_debug_style
-      x: 10
-      y: 124

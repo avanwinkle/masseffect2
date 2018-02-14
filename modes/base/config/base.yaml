@@ -21,7 +21,7 @@ achievements:
     start_events: mode_collectorattack_started
     complete_events: mode_collectorattack_stopped # Only played once, completed after playing
   hagalaz:
-    enable_events: logicblock_sbhagalaz_counter_complete
+    enable_events: logicblock_sbdrops_counter_complete
     start_events: mode_shadowbroker_hagalaz_started
     stop_events: mode_shadowbroker_hagalaz_stopped
     complete_events: shadowbroker_hagalaz_complete
@@ -36,7 +36,7 @@ achievements:
     stop_events: mode_suicidemission_base_stopped
     complete_events: suicidemission_complete
   vasir:
-    enable_events: logicblock_sbvasir_counter_complete
+    enable_events: logicblock_sbdrops_counter_hit{count==4}
     start_events: mode_shadowbroker_vasir_started
     stop_events: mode_shadowbroker_vasir_stopped
     complete_events: shadowbroker_vasir_complete
@@ -104,14 +104,20 @@ event_player:
     - disable_orbitswitches
     - disable_gates|900ms
     - enable_orbitswitches|900ms
+  # From an auto-plunger launch, open the gates and disable the switches
+  # TODO: don't open the gates during multiball, to keep left orbit open for shots
   fullorbit_fromplunger_hit:
     - enable_gates
     - disable_orbitswitches
     - disable_gates|1500ms
     - enable_orbitswitches|2000ms
+  # From a plunger launch, disable orbit switches to avoid cheat-easy hits
   s_plunger_lane_inactive:
     - disable_orbitswitches
-    - enable_orbitswitches|1000ms
+    - enable_orbitswitches|2000ms
+  # From a plunger orbit launch, re-enable orbit switches immediately once left orbit is hit
+  fullorbit_complete_hit:
+    - enable_orbitswitches
 
 accruals:
   recruitment_missions:
@@ -140,19 +146,6 @@ ball_saves:
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
-counters:
-  recruited_count:
-    starting_count: 2
-    count_events: recruit_success
-    count_complete_value: 12
-    disable_on_complete: true
-    reset_on_complete: false
-    persist_state: true
-  mission_count:
-    starting_count: 0
-    count_events: recruit_success # TODO: Add other events that are missions enabling
-    persist_state: true
-
 scoring:
   levelup:
     level: 1
@@ -173,13 +166,13 @@ shots:
     switch: s_left_ramp_exit
   sh_left_orbit:
     switch: s_left_orbit
-    enable_events: enable_orbitswitches
+    enable_events: enable_orbitswitches, enable_leftorbit
     disable_events: disable_orbitswitches
   sh_right_ramp:
     switch: s_right_ramp_exit
   sh_right_orbit:
     switch: s_right_orbit
-    enable_events: enable_orbitswitches
+    enable_events: enable_orbitswitches, enable_rightorbit
     disable_events: disable_orbitswitches
   sh_spinner:
     switch: s_spinner_left
@@ -205,6 +198,13 @@ shots:
   fullorbit_fromplunger:
     hit_events: balldevice_bd_plunger_ejecting_ball
     enable_events: enable_fullorbit
+    disable_events: disable_fullorbit
+  # Re-enable orbit switches IMMEDIATELY if the ball moves from plunger to
+  # left orbit, i.e. completes an orbit. It could be hit up to right orbit very
+  # quickly, faster than the normal orbit timeout
+  fullorbit_complete:
+    switch: s_left_orbit
+    enable_events: fullorbit_fromplunger_hit
     disable_events: disable_fullorbit
 
 show_player:
