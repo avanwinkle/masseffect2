@@ -19,6 +19,13 @@ class MPFArduino(Scriptlet):
     if not ser:
       return
 
+    # Bind event handlers to send commands to Arduino
+    # TODO: Get this into a config file
+    if hasattr(self, "machine"):
+      self.machine.events.add_handler('recruit_advance', self._set_squadmate)
+      self.machine.events.add_handler('timer_recruittimer_tick', self._set_timer)
+      self.machine.events.add_handler('timer_recruittimer_stopped', self._clear_timer)
+
     arduino = PyCmdMessenger.ArduinoBoard(port, baud_rate=115200)
 
     # The order of commands must exactly match the Arduino sketch file mpf_arduino.ino
@@ -30,16 +37,12 @@ class MPFArduino(Scriptlet):
 
     # Open a serial connection via PyCmdMessenger
     self._c = PyCmdMessenger.CmdMessenger(arduino, commands)
+    self._last_bmp = None
 
-    # Bind event handlers to send commands to Arduino
-    # TODO: Get this into a config file
-    # self.machine.events.add_handler('player_last_recruit', self._set_squadmate)
-    if getattr(self, "machine", None):
-      self.machine.events.add_handler('timer_recruittimer_tick', self._set_timer)
-      self.machine.events.add_handler('timer_recruittimer_stopped', self._clear_timer)
-
-  def _set_squadmate(self, squadmate, **kwargs):
-    self._c.send("draw_bmp", "r{}.bmp".format(squadmate))
+  def _set_squadmate(self, **kwargs):
+    if kwargs.get("squadmate", self._last_bmp) != self._last_bmp:
+      self._last_bmp = kwargs.get("squadmate")
+      self._c.send("draw_bmp", "r{}.bmp".format(self._last_bmp))
 
   def _set_timer(self, **kwargs):
     self._c.send("show_number", kwargs['ticks'])
