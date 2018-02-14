@@ -56,10 +56,3 @@ keyboard:
     switch: s_flipper_left
   v:
     switch: s_flipper_right
-
-event_player:
-  skip_recruit_mission_garrus: recruit_mission_success, skip_mission_scoring, recruit_garrus_complete
-  skip_recruit_mission_grunt: recruit_mission_success, skip_mission_scoring, recruit_grunt_complete
-  skip_recruit_mission_jack: recruit_mission_success, skip_mission_scoring, recruit_jack_complete
-  skip_recruit_mission_kasumi: recruit_mission_success, skip_mission_scoring, recruit_kasumi_complete
-  skip_recruit_mission_mordin: recruit_mission_success, skip_mission_scoring, recruit_mordin_complete

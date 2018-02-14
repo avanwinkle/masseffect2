@@ -41,9 +41,6 @@ event_player:
   samara_targets_hit_complete:
     - reset_targets
   logicblock_samara_shots_counter_complete: recruit_samara_complete
-  recruit_samara_complete:
-    recruit_mission_success:
-      squadmate: samara
 
 random_event_player:
   enable_random_shotshot:

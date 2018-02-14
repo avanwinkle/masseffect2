@@ -14,34 +14,34 @@ mode:
   priority: 400
 
 event_player:
-  recruit_garrus_completed:
+  recruit_success_garrus:
     enable_upgrade:
       upgrade_name: "Omni-Tool Damage"
-  recruit_grunt_completed:
+  recruit_success_grunt:
     enable_upgrade:
       upgrade_name: "Shotgun Damage"
-  recruit_jack_completed:
+  recruit_success_jack:
     enable_upgrade:
       upgrade_name: "Bio-Amp Interface"
-  recruit_kasumi_completed:
+  recruit_success_kasumi:
     enable_upgrade:
       upgrade_name: "M22 Locust SMG"
-  recruit_legion_completed:
+  recruit_success_legion:
     enable_upgrade:
       upgrade_name: "M80 Widow Rifle"
-  recruit_mordin_completed:
+  recruit_success_mordin:
     enable_upgrade:
       upgrade_name: "M16 Carnifax Pistol"
-  recruit_samara_completed:
+  recruit_success_samara:
     enable_upgrade:
       upgrade_name: "Assault Rifle Damage"
-  recruit_tali_completed:
+  recruit_success_tali:
     enable_upgrade:
       upgrade_name: "Geth Plasma Shotgun"
-  recruit_thane_complete:
+  recruit_success_thane:
     enable_upgrade:
       upgrade_name: "M17 Viper Rifle"
-  recruit_zaeed_completed:
+  recruit_success_zaeed:
     enable_upgrade:
       upgrade_name: "Heavy Weapon Ammo"
 

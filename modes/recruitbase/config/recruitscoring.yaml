@@ -5,7 +5,7 @@ scoring:
   recruit_lit:
     score: 5000
     available_missions: 1
-  recruit_mission_success:
+  recruit_success:
     score: 10000
     squadmates_count: 1
   recruit_advance_garrus:
@@ -28,33 +28,33 @@ scoring:
     status_thane: 1
   recruit_advance_zaeed:
     status_zaeed: 1
-  recruit_garrus_complete:
+  recruit_success_garrus:
     status_garrus:
       score: 4
-  recruit_grunt_complete:
+  recruit_success_grunt:
     status_grunt:
       score: 4
-  recruit_jack_complete:
+  recruit_success_jack:
     status_jack:
       score: 4
-  recruit_kasumi_complete:
+  recruit_success_kasumi:
     status_kasumi:
       score: 4
-  recruit_legion_complete:
+  recruit_success_legion:
     status_legion:
       score: 4
-  recruit_mordin_complete:
+  recruit_success_mordin:
     status_mordin:
       score: 4
-  recruit_samara_complete:
+  recruit_success_samara:
     status_samara:
       score: 4
-  recruit_tali_complete:
+  recruit_success_tali:
     status_tali:
       score: 4
-  recruit_thane_complete:
+  recruit_success_thane:
     status_thane:
       score: 4
-  recruit_zaeed_complete:
+  recruit_success_zaeed:
     status_zaeed:
       score: 4

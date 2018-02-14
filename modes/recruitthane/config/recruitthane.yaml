@@ -21,9 +21,6 @@ mode:
 
 event_player:
   tower_complete_shot_hit: recruit_thane_complete
-  recruit_thane_complete:
-    recruit_mission_success:
-      squadmate: thane
 
 counters:
   thane_ascent_counter:

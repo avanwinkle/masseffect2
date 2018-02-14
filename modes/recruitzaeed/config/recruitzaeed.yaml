@@ -34,9 +34,6 @@ counters:
 
 event_player:
   zaeed_kickshot_hit: recruit_zaeed_complete
-  recruit_zaeed_complete:
-    recruit_mission_success:
-      squadmate: zaeed
 
 #####
 # ZAEED SCORING
@@ -66,7 +63,7 @@ scoring:
   # If the right orbit is the first orbit hit, set path to renegade
   zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
     zaeed_path_renegade:
-      score: 1  
+      score: 1
   timer_recruittimer_tick:
     temp_hurryup_value: -90
     temp_build_value:   -90

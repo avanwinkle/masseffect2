@@ -5,8 +5,8 @@
 #
 # This mode lights the left ramp to target the Geth Colossus and is on a timer;
 # hitting the ramp builds value based on how much time is left on the timer. The
-# player must hit the left ramp six times before the timer runs out: solid blue 
-# (full shields), pulsing blue/yellow (partial shields), flashing blue/yellow 
+# player must hit the left ramp six times before the timer runs out: solid blue
+# (full shields), pulsing blue/yellow (partial shields), flashing blue/yellow
 # (depleted shields), solid yellow (full armor), pulsing yellew (partial armor),
 # flashing yellow (depleted armor). The mission fails if the timer expires.
 #
@@ -20,9 +20,6 @@ mode:
 
 event_player:
   geth_colossus_shot_geth_colossus_profile_depleted_armor_hit: recruit_tali_complete
-  recruit_tali_complete:
-    recruit_mission_success:
-      squadmate: tali
   drop_target_bank_dropbank_complete: recruittimer_add_time
   drop_target_bank_hitbank_complete: recruittimer_add_time
   geth_colossus_shot_hit:

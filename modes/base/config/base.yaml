@@ -118,16 +118,16 @@ accruals:
     persist_state: true
     reset_on_complete: false
     events:
-      - recruit_garrus_complete
-      - recruit_grunt_complete
-      - recruit_jack_complete
-      - recruit_kasumi_complete
-      - recruit_legion_complete
-      - recruit_mordin_complete
-      - recruit_samara_complete
-      - recruit_tali_complete
-      - recruit_thane_complete
-      - recruit_zaeed_complete
+      - recruit_success_garrus
+      - recruit_success_grunt
+      - recruit_success_jack
+      - recruit_success_kasumi
+      - recruit_success_legion
+      - recruit_success_mordin
+      - recruit_success_samara
+      - recruit_success_tali
+      - recruit_success_thane
+      - recruit_success_zaeed
 
 ball_saves:
   default:
@@ -143,20 +143,20 @@ ball_saves:
 counters:
   recruited_count:
     starting_count: 2
-    count_events: recruit_mission_success
+    count_events: recruit_success
     count_complete_value: 12
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
   mission_count:
     starting_count: 0
-    count_events: recruit_mission_success
+    count_events: recruit_success # TODO: Add other events that are missions enabling
     persist_state: true
 
 scoring:
   levelup:
     level: 1
-  recruit_mission_success:
+  recruit_success:
     available_missions: -1
   enable_collectorship:
     available_missions: 1

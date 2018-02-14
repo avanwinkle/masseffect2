@@ -35,10 +35,10 @@ class MESquadmates(Scriptlet):
     self.log = logging.getLogger("MESquadmates")
     self.log.setLevel('DEBUG')
 
-    self.machine.events.add_handler("enable_recruit_shots", self._on_enable_shots)
-    # self.machine.events.add_handler("recruit_mission_success", self._on_success)
+    # self.machine.events.add_handler("enable_recruit_shots", self._on_enable_shots)
     for mate in SQUADMATES:
       self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+      self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
 
   def _on_enable_shots(self, **kwargs):
     # Build a list of lit and completed recruit shots by led
@@ -69,7 +69,8 @@ class MESquadmates(Scriptlet):
       self.machine.game.player["recruits_color"] = COLORS[mate]
       self.machine.events.post("flash_all_shields")
 
-  def _on_success(self, **kwargs):
-    self.log.debug("Received SUCCESS event with kwargs: {}".format(kwargs))
+  def _on_complete(self, **kwargs):
+    self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
     self.machine.events.post("levelup", mission_name="{} Recruited".format(kwargs["squadmate"]))
-    # self.machine.events.post("recruit_{}_complete".format(kwargs["squadmate"]))
+    self.machine.events.post("recruit_success", squadmate=kwargs["squadmate"])
+    self.machine.events.post("recruit_success_{}".format(kwargs["squadmate"]))

@@ -22,11 +22,7 @@ mode:
 event_player:
   spinner_hit: enable_cure
   cure_shot_hit: enable_fans
-  fan_shots_hit_complete:
-    recruit_mordin_complete
-  recruit_mordin_complete:
-    recruit_mission_success:
-      squadmate: mordin
+  fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
   fans_counter:
