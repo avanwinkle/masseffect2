@@ -121,7 +121,7 @@ displays:
 light_player:
   gi_on:
     gi:
-      color: white
+      color: DDDDDD
   gi_off:
     gi:
       color: black
@@ -290,6 +290,8 @@ widget_styles:
     adjust_top: 2
     anchor_x: left
     anchor_y: top
+    number_grouping: true
+    min_digits: 2
     y: top-2
     x: 2
   mp_player_2:
@@ -299,6 +301,8 @@ widget_styles:
     adjust_top: 2
     anchor_x: right
     anchor_y: top
+    number_grouping: true
+    min_digits: 2
     y: top-2
     x: right-2
   mp_player_3:
@@ -308,6 +312,8 @@ widget_styles:
     adjust_top: 2
     anchor_x: left
     anchor_y: bottom
+    number_grouping: true
+    min_digits: 2
     y: 2
     x: 2
   mp_player_4:
@@ -317,6 +323,8 @@ widget_styles:
     adjust_top: 2
     anchor_x: right
     anchor_y: bottom
+    number_grouping: true
+    min_digits: 2
     y: 2
     x: right-2
   savegame_playername:

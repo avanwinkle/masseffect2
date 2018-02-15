@@ -110,12 +110,12 @@ kickbacks:
     disable_events: kickback_disable
 
 autofire_coils:
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
@@ -497,11 +497,11 @@ lights:
 coils:
   c_flipper_left_main:
     number: 8-0
-    default_pulse_ms: 26
+    default_pulse_ms: 30
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 8-5
-    default_pulse_ms: 26
+    default_pulse_ms: 30
     default_hold_power: 0.1
   c_plunger:
     number: 9-1
@@ -522,11 +522,11 @@ coils:
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12
-    default_recycle: true
+    # default_recycle: true
   c_slingshot_right:
     number: 8-4
     default_pulse_ms: 12
-    default_recycle: true
+    # default_recycle: true
   c_dropbank_reset:
     number: 8-2
     default_pulse_ms: 1

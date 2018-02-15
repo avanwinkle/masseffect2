@@ -155,13 +155,13 @@ shows:
     - duration: 1000ms
       lights:
         (leds):
-          color: 000000
-          fade: 100ms
-    - duration: 1000ms
+          color: off
+          fade: 250ms
+    - duration: 500ms
       lights:
         (leds):
-          color: FFFFFF
-          fade: 100ms
+          color: EEEEEE
+          fade: 250ms
   recruits_complete_show:
     - time: 0
       lights:

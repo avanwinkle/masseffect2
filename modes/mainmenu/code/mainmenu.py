@@ -16,13 +16,13 @@ class MainMenu(Carousel):
     self._selected_career = None
 
   def mode_start(self, **kwargs):
-    # Load career data
-    self._load_careers()
-    self._load_mainmenu()
     """ When the mode starts, create a handler to trigger the Carousel start. """
     self.add_mode_event_handler("show_mainmenu", self.show_menu)
 
   def show_menu(self, **kwargs):
+    # Load career data
+    self._load_careers()
+    self._load_mainmenu()
     # If no careers to choose from, skip the menu completely
     if not self.careers:
       self.info_log("No careers to show, skipping menu")
@@ -49,6 +49,14 @@ class MainMenu(Carousel):
   def _load_careers(self):
     gamepath = self.machine.machine_path + "/savegames/"
     self.careers = []
+    self._selected_career = None
+
+    # On first load there is no game, but we know it'll be player one
+    player_num = self.machine.game.player.number if self.machine.game else 1
+
+    # Don't include careers chosen by previous players
+    already_chosen = [self.machine.get_machine_var("last_career_player_{}".format(x)) for x in range(1, player_num)]
+    self.debug_log("Already chosen careers: {}".format(already_chosen))
 
     for path, dirs, files in os.walk(gamepath):
       self.debug_log("Searching savegame files: {}".format(files))
@@ -58,17 +66,20 @@ class MainMenu(Carousel):
             career = json.load(f)
             # Rudimentary validation, at least what we need to get started
             if career["career_name"] and career["last_played"]:
+              if career["career_name"] in already_chosen:
+                continue
+
               career["_strftime"] = datetime.fromtimestamp(career["last_played"]).strftime("%x")
               self.careers.append(career)
 
               # Set a default/initial selection if it's the most recently played for player 1
-              if career["career_name"] == self.machine.get_machine_var("last_career_player_1"):
+              if career["career_name"] == self.machine.get_machine_var("last_career_player_{}".format(player_num)):
                 self._selected_career = career
           f.close()
 
     # Sort by the date last played (newest first)
     self.careers.sort(key=itemgetter("last_played"), reverse=True)
-    self.debug_log("Created career menu with {}; initial selection is {}".format(
+    self.debug_log("Created player {} career menu with {}; initial selection is {}".format(player_num,
                     ", ".join([c["career_name"] for c in self.careers]), self._selected_career))
 
   def _get_available_items(self):
