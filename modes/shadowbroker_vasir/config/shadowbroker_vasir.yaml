@@ -28,17 +28,12 @@ event_player:
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
   stop_mode_shadowbroker_vasir: exit_shadowbroker_modes
   vasir_shot_health_hit:
-    - shadowbroker_vasir_complete
-    - levelup
+    shadowbroker_vasir_complete: {}
+    levelup:
+      mission_name: "Broker Intel Recovered"
   # Relay some sounds to delay
   vasir_shot_barrier_hit: play_vasir_start_sound|2s
   vasir_shot_armor_hit: play_vasir_start_sound|2s
-
-scoring:
-  mode_shadowbroker_vasir_started:
-    last_mission:
-      action: set
-      string: "Broker Intel Recovered"
 
 shot_groups:
   vasir_shot:

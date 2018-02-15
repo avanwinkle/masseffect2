@@ -16,7 +16,9 @@ mode:
   priority: 500
 
 event_player:
-  sbdroptarget_group_complete:
+  mode_shadowbroker_base_started:
+    exit_shadowbroker_modes
+  sbdroptarget_group_down_complete:
     - reset_dropbank
     # Complete the dropbank after vasir is enabled to begin the chase
     - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
@@ -57,72 +59,90 @@ ball_saves:
 #     disable_events: ball_hold_shadowbroker_hold_balls_released
 
 counters:
-  sbvasir_counter:
-    count_events: sbdroptarget_group_complete
-    starting_count: 0
-    count_complete_value: 3
-    persist_state: true
-    disable_on_complete: true
-  sbhagalaz_counter:
-    enable_events: achievement_vasir_state_completed
-    count_events: sbdroptarget_group_complete
-    starting_count: 0
-    count_complete_value: 3
+  # COMBINE sbvasir_counter and sbhagalaz_counter
+  sbdrops_counter:
+    count_events: sbdroptarget_group_down_complete
+    starting_count: current_player.counter_sbdrops_counter
+    count_complete_value: 8
     persist_state: true
     disable_on_complete: false
+    enable_events:
+      # This is enabled if vasir, hagalaz, and boss are not
+      - exit_shadowbroker_modes{device.achievements.vasir.state!="enabled" and device.achievements.hagalaz.state!="enabled" and device.achievements.shadowbroker.state!="enabled"}
+    disable_events:
+      - enter_shadowbroker_modes
+      - achievement_vasir_state_enabled
+      - achievement_hagalaz_state_enabled
+      - achievement_shadowbroker_state_enabled
 
 scoring:
-  sbdroptarget_group_complete:
+  sbdroptarget_group_down_complete:
     intel: 1
+  # Track the value of this counter as a player variable (for saved careers)
+  logicblock_sbdrops_counter_hit:
+    counter_sbdrops_counter:
+      action: set
+      score: device.counters.sbdrops_counter.value
 
 shot_groups:
   sbdroptarget_group:
-    enable_events: start_mode_shadowbroker_base, exit_shadowbroker_modes
+    enable_events: exit_shadowbroker_modes
     disable_events: enter_shadowbroker_modes
-    reset_events: sbdroptarget_group_complete
+    reset_events: sbdroptarget_group_down_complete
     shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot
 
 shot_profiles:
+  sbdrops_profile:
+    states:
+      - name: up
+      - name: down
   advance_sbdrops_profile:
     show_when_disabled: false
+    show: sbdrops_show
     states:
       - name: unlit
-        show: sbdrops_off
       - name: one_lit
-        show: sbdrops_one_show
       - name: two_lit
-        show: sbdrops_two_show
       - name: three_lit
-        show: sbdrops_three_show
 
 shots:
   sbdroptarget_bottom_shot:
-    switch: s_dropbank_bottom
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
+    hit_events: s_dropbank_bottom_active
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    profile: sbdrops_profile
   sbdroptarget_middle_shot:
-    switch: s_dropbank_middle
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
+    hit_events: s_dropbank_middle_active
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    profile: sbdrops_profile
   sbdroptarget_top_shot:
-    switch: s_dropbank_top
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_complete
-  sbdrop_showshot:
-    # Delay enabling to avoid initial droptarget_complete event
-    enable_events: mode_shadowbroker_base_started
-    advance_events: sbdroptarget_group_complete
-    reset_events: achievement_vasir_state_completed
-    profile: advance_sbdrops_profile
+    hit_events: s_dropbank_top_active
+    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    profile: sbdrops_profile
 
 show_player:
-  sbdroptarget_group_hit:
+  sbdroptarget_group_up_hit:
     sbdrops_flash:
       priority: 100
       loops: 6
       speed: 10
-  sbdroptarget_group_complete:
+  sbdroptarget_group_down_complete:
     sbdrops_flash:
       priority: 100
       loops: 12
       speed: 10
+  exit_shadowbroker_modes:
+    sbdrops_show:
+      manual_advance: true
+      start_step: device.counters.sbdrops_counter.value % 4 + 1 # Show steps start at 1
+  logicblock_sbdrops_counter_hit:
+    sbdrops_show:
+      action: advance
+  mode_shadowbroker_base_stopping:
+    sbdrops_show:
+      action: stop
+  enter_shadowbroker_modes:
+    sbdrops_show:
+      action: stop
 
 shows:
   sbdrops_flash:
@@ -136,35 +156,32 @@ shows:
         l_dropbank_bottom: black
         l_dropbank_middle: black
         l_dropbank_top: black
-  sbdrops_off:
+  sbdrops_show:
     - lights:
         l_dropbank_bottom: black
         l_dropbank_middle: black
         l_dropbank_top: black
-  sbdrops_one_show:
     - lights:
         l_dropbank_bottom: white
         l_dropbank_middle: black
         l_dropbank_top: black
-  sbdrops_two_show:
     - lights:
         l_dropbank_bottom: white
         l_dropbank_middle: white
         l_dropbank_top: black
-  sbdrops_three_show:
     - lights:
         l_dropbank_bottom: white
         l_dropbank_middle: white
         l_dropbank_top: white
 
 sound_player:
-  logicblock_sbvasir_counter_hit{count==1}: shepard_sounds_like_liara_found_something_big
-  logicblock_sbvasir_counter_hit{count==2}: vasir_i_know_where_the_trade_center_is
-  logicblock_sbvasir_counter_hit{count==3}: vasir_they_took_out_three_floors
+  logicblock_sbdrops_counter_hit{count==1}: shepard_sounds_like_liara_found_something_big
+  logicblock_sbdrops_counter_hit{count==2}: vasir_i_know_where_the_trade_center_is
+  logicblock_sbdrops_counter_hit{count==3}: vasir_they_took_out_three_floors
   achievement_vasir_state_completed: liara_shepard_im_glad_youre_here
-  logicblock_sbhagalaz_counter_hit{count==1}: liara_sukets_datapad_this_has_what_we_need
-  logicblock_sbhagalaz_counter_hit{count==2}: liara_we_can_be_at_base_in_a_few_hours
-  logicblock_sbhagalaz_counter_hit{count==3}: liara_land_outside_and_hunt_for_a_hatch
+  logicblock_sbdrops_counter_hit{count==5}: liara_sukets_datapad_this_has_what_we_need
+  logicblock_sbdrops_counter_hit{count==6}: liara_we_can_be_at_base_in_a_few_hours
+  logicblock_sbdrops_counter_hit{count==7}: liara_land_outside_and_hunt_for_a_hatch
   # Relays
   play_shepard_ill_start_down_here: shepard_ill_start_down_here
 

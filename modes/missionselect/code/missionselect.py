@@ -12,8 +12,8 @@ class MissionSelect(Carousel):
   def mode_init(self):
     super().mode_init()
     self.debug_log("MissionSelect is ready to go!!!")
-    self.debug_log(" - items:", self._items)
-    self._all_items = copy.deepcopy(self._items)
+    self.debug_log(" - items: {}".format(self._items))
+    self._all_items = copy.copy(self._items)
 
   def mode_start(self, **kwargs):
 
@@ -24,7 +24,6 @@ class MissionSelect(Carousel):
 
   def _build_items_list(self):
     player = self.machine.game.player
-    self.debug_log("MissionSelect player: {}".format(player.vars.__str__()))
 
     # Collector ship only
     if player.achievements['collectorship'] == "enabled":
@@ -39,9 +38,8 @@ class MissionSelect(Carousel):
       items.append('collectorship')
 
     for mate in SQUADMATES:
-      status = getattr(player, "status_{}".format(mate), -1)
-      # self.machine.debug_log("   - Found missionselect status: {}".format(status))
-      if (status == 1):
+      status = player.vars.get("status_{}".format(mate))
+      if (status == 3):
         items.append(mate)
     return items
 
@@ -53,3 +51,9 @@ class MissionSelect(Carousel):
     selection = self._get_highlighted_item()
     if selection in SQUADMATES:
       self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
+
+  def _update_highlighted_item(self, direction):
+    h = self._get_highlighted_item()
+    self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction)
+    if h in SQUADMATES:
+      self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)

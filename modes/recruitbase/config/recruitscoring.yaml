@@ -2,98 +2,59 @@
 scoring:
   sw_standuptarget_active:
     score: 200
-  recruit_advance{count==1}:
-    recruits_lit_count: 1
-    available_missions: 1
   recruit_lit:
     score: 5000
-  recruit_mission_success:
+    available_missions: 1
+  recruit_success:
     score: 10000
-    recruits_lit_count: -1
     squadmates_count: 1
-  recruit_garrus_complete: #recruit_mission_success{squadmate=="garrus"}:
+  recruit_advance_garrus:
+    status_garrus: 1
+  recruit_advance_grunt:
+    status_grunt: 1
+  recruit_advance_jack:
+    status_jack: 1
+  recruit_advance_kasumi:
+    status_kasumi: 1
+  recruit_advance_legion:
+    status_legion: 1
+  recruit_advance_mordin:
+    status_mordin: 1
+  recruit_advance_samara:
+    status_samara: 1
+  recruit_advance_tali:
+    status_tali: 1
+  recruit_advance_thane:
+    status_thane: 1
+  recruit_advance_zaeed:
+    status_zaeed: 1
+  recruit_success_garrus:
     status_garrus:
-      score: 0
-      action: set
-  recruit_grunt_complete: #recruit_mission_success{squadmate=="grunt"}:
+      score: 4
+  recruit_success_grunt:
     status_grunt:
-      score: 0
-      action: set
-  recruit_jack_complete: #recruit_mission_success{squadmate=="jack"}:
+      score: 4
+  recruit_success_jack:
     status_jack:
-      score: 0
-      action: set
-  recruit_legion_complete: #recruit_mission_success{squadmate=="legion"}:
+      score: 4
+  recruit_success_kasumi:
+    status_kasumi:
+      score: 4
+  recruit_success_legion:
     status_legion:
-      score: 0
-      action: set
-  recruit_mordin_complete: #recruit_mission_success{squadmate=="mordin"}:
+      score: 4
+  recruit_success_mordin:
     status_mordin:
-      score: 0
-      action: set
-  recruit_samara_complete: #recruit_mission_success{squadmate=="samara"}:
+      score: 4
+  recruit_success_samara:
     status_samara:
-      score: 0
-      action: set
-  recruit_tali_complete: #recruit_mission_success{squadmate=="tali"}:
+      score: 4
+  recruit_success_tali:
     status_tali:
-      score: 0
-      action: set
-  recruit_thane_complete: #recruit_mission_success{squadmate=="thane"}:
+      score: 4
+  recruit_success_thane:
     status_thane:
-      score: 0
-      action: set
-  recruit_zaeed_complete: #recruit_mission_success{squadmate=="zaeed"}:
+      score: 4
+  recruit_success_zaeed:
     status_zaeed:
-      score: 0
-      action: set
-  set_last_recruit_garrus:
-    last_recruit:
-      string: "Garrus"
-    last_mission:
-      string: "Garrus Recruited"
-  set_last_recruit_grunt:
-    last_recruit:
-      string: "Grunt"
-    last_mission:
-      string: "Grunt Recruited"
-  set_last_recruit_jack:
-    last_recruit:
-      string: "Jack"
-    last_mission:
-      string: "Jack Recruited"
-  set_last_recruit_kasumi:
-    last_recruit:
-      string: "Kasumi"
-    last_mission:
-      string: "Kasumi Recruited"
-  set_last_recruit_legion:
-    last_recruit:
-      string: "Legion"
-    last_mission:
-      string: "Legion Recruited"
-  set_last_recruit_mordin:
-    last_recruit:
-      string: "Mordin"
-    last_mission:
-      string: "Mordin Recruited"
-  set_last_recruit_samara:
-    last_recruit:
-      string: "Samara"
-    last_mission:
-      string: "Samara Recruited"
-  set_last_recruit_tali:
-    last_recruit:
-      string: "Tali"
-    last_mission:
-      string: "Tali Recruited"
-  set_last_recruit_thane:
-    last_recruit:
-      string: "Thane"
-    last_mission:
-      string: "Thane Recruited"
-  set_last_recruit_zaeed:
-    last_recruit:
-      string: "Zaeed"
-    last_mission:
-      string: "Zaeed Recruited"
+      score: 4

@@ -34,6 +34,7 @@ config:
   - recruitscoring.yaml  # Everything in the scoring: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
+  - recruitshows.yaml    # Shows to light recruit shields, missions available
 
 event_player:
   mode_recruitbase_started:
@@ -58,7 +59,6 @@ event_player:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
   missionselect_recruitmission_selected:
-    - disable_nonrecruit_modes
     - start_mode_recruitgarrus{squadmate=="garrus"}
     - start_mode_recruitgrunt{squadmate=="grunt"}
     - start_mode_recruitjack{squadmate=="jack"}
@@ -69,8 +69,6 @@ event_player:
     - start_mode_recruittali{squadmate=="tali"}
     - start_mode_recruitthane{squadmate=="thane"}
     - start_mode_recruitzaeed{squadmate=="zaeed"}
-  recruit_mission_success:
-    - levelup
   recruit_mission_ended:
     - start_mode_recruitfield
     - reenable_nonrecruit_modes
@@ -87,56 +85,18 @@ ball_saves:
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: -1
 
-shot_profiles:
-  recruit_profile:
-    show_when_disabled: false
-    advance_on_hit: false
-    states:
-      - name: unlit
-        show: recruitshow_on
-      - name: lit
-        show: recruitshow_flash
-      - name: recruited
-        show: recruitshow_complete
-
 show_player:
   ball_save_debug_recruitmission_ballsave_timer_start:
     ball_save_show:
       action: play
       speed: 3
-  ball_save_debug_recruitmission_ballsave_huryr_up:
+  ball_save_debug_recruitmission_ballsave_hurry_up:
     ball_save_show:
       action: play
       speed: 9
   ball_save_debug_recruitmission_ballsave_disabled:
     ball_save_show:
       action: stop
-
-shows:
-  recruitshow_off:
-    - lights:
-        (led): black
-        l_null: (color)
-        (lit): black
-  recruitshow_flash:
-    - time: 0
-      lights:
-        (led): black
-        l_null: (color)
-        (lit): white
-    - time: +1
-      lights:
-        (led): black
-        l_null: (color)
-        (lit): black
-  recruitshow_on:
-    - lights:
-        (led): (color)
-        (lit): black
-  recruitshow_complete:
-    - lights:
-        (led): (color)
-        (lit): white
 
 slide_player:
   mode_recruitbase_started:
@@ -157,17 +117,17 @@ slides:
 # that's been completed will have its mode stopped before the sound finishes
 #####
 sound_player:
-  recruit_garrus_complete: missioncomplete_voice_garrus
-  recruit_grunt_complete: missioncomplete_voice_grunt
-  recruit_jack_complete: missioncomplete_voice_jack
-  recruit_kasumi_complete: missioncomplete_voice_kasumi
-  recruit_legion_complete: missioncomplete_voice_legion
-  recruit_mordin_complete: missioncomplete_voice_mordin
-  recruit_samara_complete: missioncomplete_voice_samara
-  recruit_tali_complete: missioncomplete_voice_tali
-  recruit_thane_complete: missioncomplete_voice_thane
-  recruit_zaeed_complete{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
-  recruit_zaeed_complete{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
+  recruit_success_garrus: missioncomplete_voice_garrus
+  recruit_success_grunt: missioncomplete_voice_grunt
+  recruit_success_jack: missioncomplete_voice_jack
+  recruit_success_kasumi: missioncomplete_voice_kasumi
+  recruit_success_legion: missioncomplete_voice_legion
+  recruit_success_mordin: missioncomplete_voice_mordin
+  recruit_success_samara: missioncomplete_voice_samara
+  recruit_success_tali: missioncomplete_voice_tali
+  recruit_success_thane: missioncomplete_voice_thane
+  recruit_success_zaeed:{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
+  recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
 
 sound_pools:
   missioncomplete_voice_garrus:

@@ -6,7 +6,7 @@ hardware:
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
-  baud: 230400 #115200
+  baud: 115200 #115200
   runtime_baud: 2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
@@ -45,7 +45,6 @@ slide_player:
     window_slide_1:
       target: window
 
-
 ball_devices:
   bd_plunger:
     ball_switches: s_plunger_lane
@@ -70,7 +69,6 @@ ball_devices:
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
-    debug: True
   bd_hold:
     ball_capacity: 1
     hold_coil: c_up_post
@@ -90,26 +88,19 @@ flippers:
     enable_events: ball_starting, flippers_on
     disable_events: ball_ending, flippers_off, left_flipper_off
 
-# drop_targets:
-#   bottom:
-#     switch: s_dropbank_bottom
-#     ignore_switch_inactive: true
-#     debug: true
-#   middle:
-#     switch: s_dropbank_middle
-#     ignore_switch_inactive: true
-#     debug: true
-#   top:
-#     switch: s_dropbank_top
-#     ignore_switch_inactive: true
-#     debug: true
+drop_targets:
+  bottom:
+    switch: s_dropbank_bottom
+  middle:
+    switch: s_dropbank_middle
+  top:
+    switch: s_dropbank_top
 
-# drop_target_banks:
-#   dropbank:
-#     drop_targets: bottom, middle, top
-#     reset_coils: c_dropbank_reset
-#     reset_on_complete: 1s
-#     debug: true
+drop_target_banks:
+  dropbank:
+    drop_targets: bottom, middle, top
+    reset_coils: c_dropbank_reset
+    reset_on_complete: 1s
 
 kickbacks:
   dragon_kickback:
@@ -119,12 +110,12 @@ kickbacks:
     disable_events: kickback_disable
 
 autofire_coils:
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
@@ -144,10 +135,10 @@ switches:
     number: 1-2
   s_flipper_left:
     number: 8-2
-    tags: flipper_left
+    tags: flipper_left, flipper
   s_flipper_right:
     number: 8-3
-    tags: flipper_right
+    tags: flipper_right, flipper
   s_plunger_lane:
     number: 9-1
   s_trough1:
@@ -260,7 +251,7 @@ switches:
     tags: playfield_active
   s_kickback:
     number: 10-14
-    ignore_window_ms: 300
+    ignore_window_ms: 400
     # tags: playfield_active
   s_lock_1:
     number: 9-0
@@ -506,11 +497,11 @@ lights:
 coils:
   c_flipper_left_main:
     number: 8-0
-    default_pulse_ms: 26
+    default_pulse_ms: 30
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 8-5
-    default_pulse_ms: 26
+    default_pulse_ms: 30
     default_hold_power: 0.1
   c_plunger:
     number: 9-1
@@ -531,11 +522,11 @@ coils:
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12
-    default_recycle: true
+    # default_recycle: true
   c_slingshot_right:
     number: 8-4
     default_pulse_ms: 12
-    default_recycle: true
+    # default_recycle: true
   c_dropbank_reset:
     number: 8-2
     default_pulse_ms: 1
@@ -567,7 +558,6 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
-    debug: true
 
 sound_system:
   tracks:
@@ -582,7 +572,7 @@ sound_system:
       preload: true
       simultaneous_sounds: 7
     music:
-      volume: 0.5
+      volume: 0.8
       simultaneous_sounds: 1
   buffer: 2048  # previous value was 512
   frequency: 44100

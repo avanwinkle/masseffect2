@@ -21,16 +21,15 @@ mode:
 
 event_player:
   tower_complete_shot_hit: recruit_thane_complete
-  recruit_thane_complete:
-    recruit_mission_success:
-      squadmate: thane
 
 counters:
   thane_ascent_counter:
     # The first time it takes three shots to light, otherwise just one
-    starting_count: 0 if player.counter_thane_ascent_counter_count < 2 else 2
+    # TODO: Verify the initial state of a persisted player variable, it may not be undefined!
+    starting_count: 2 if player.counter_thane_ascent_counter_count > 0 else 0
     count_complete_value: 3
     disable_on_complete: false
+    persist_state: true
     count_events: tower_ascent_shot_hit
     reset_events: mode_recruitthane_started
 

@@ -31,9 +31,10 @@ event_player:
     - shadowbroker_round_start
     - flippers_on
   shadowbroker_boss_complete:
-    - levelup
-    - stop_mode_shadowbroker_boss
-    - exit_shadowbroker_modes
+    stop_mode_shadowbroker_boss: {}
+    exit_shadowbroker_modes: {}
+    levelup:
+      mission_name: "Greetings, Shadow Broker"
   # Disable the flippers during the inter-round show, reenable after
   play_sbboss_round_show: flippers_off
 

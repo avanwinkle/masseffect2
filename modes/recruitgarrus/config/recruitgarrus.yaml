@@ -3,11 +3,11 @@
 #####
 # GARRUS RECRUIT MISSION
 #
-# This mode begins with three security doors to close, on a timer, indicated by 
-# three lit shots. The doors are on a hurry-up and hitting one adds some time. 
-# Failing the timer ends the mode; hitting all three shots will light the right 
-# ramp to collect the combined hurry-up value and complete the mission. The 
-# standup targets are worth points as eclipse, blood pack, and blue suns 
+# This mode begins with three security doors to close, on a timer, indicated by
+# three lit shots. The doors are on a hurry-up and hitting one adds some time.
+# Failing the timer ends the mode; hitting all three shots will light the right
+# ramp to collect the combined hurry-up value and complete the mission. The
+# standup targets are worth points as eclipse, blood pack, and blue suns
 # mercenaries.
 #
 # Progress is not saved and this mode must be restarted if failed.
@@ -21,9 +21,6 @@ mode:
 event_player:
   door_closed: recruittimer_add_time
   clear_upstairs_hit_complete: recruit_garrus_complete
-  recruit_garrus_complete:
-    recruit_mission_success:
-      squadmate: garrus
 
 counters:
   doors_closed_counter:

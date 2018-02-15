@@ -21,9 +21,6 @@ event_player:
   recruittimer_start: recruittimer_set_twenty
   logicblock_grunt_shots_counter_hit: recruittimer_add_twelve
   grunt_shots_complete: recruit_grunt_complete
-  recruit_grunt_complete:
-    recruit_mission_success:
-      squadmate: grunt
 
 counters:
   grunt_shots_counter:

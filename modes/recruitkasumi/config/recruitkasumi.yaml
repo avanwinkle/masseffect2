@@ -9,7 +9,7 @@
 # the just-hit shot becomes alarmed, reducing the number of safe shots. Hitting
 # three alarmed shots fails the mode. Hitting four safe shots completes the mode.
 #
-# Progress is saved after each safe shot hit, and the three-alarm-failure count 
+# Progress is saved after each safe shot hit, and the three-alarm-failure count
 # resets each time the mode is started.
 #####
 
@@ -57,9 +57,6 @@ event_player:
     - recruit_mission_ended
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
-  recruit_kasumi_complete:
-    recruit_mission_success:
-      squadmate: kasumi
 
 #####
 # KASUMI SCORING:

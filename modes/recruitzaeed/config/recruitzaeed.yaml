@@ -30,12 +30,10 @@ counters:
     direction: up
     disable_on_complete: false
     count_events: zaeed_orbitshots_hit
+    reset_events: mode_recruitzaeed_started # Is this necessary without persist_state?
 
 event_player:
   zaeed_kickshot_hit: recruit_zaeed_complete
-  recruit_zaeed_complete:
-    recruit_mission_success:
-      squadmate: zaeed
 
 #####
 # ZAEED SCORING
@@ -65,7 +63,7 @@ scoring:
   # If the right orbit is the first orbit hit, set path to renegade
   zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
     zaeed_path_renegade:
-      score: 1  
+      score: 1
   timer_recruittimer_tick:
     temp_hurryup_value: -90
     temp_build_value:   -90
@@ -77,13 +75,10 @@ scoring:
   zaeed_kickshot_hit:
     score: current_player.temp_hurryup_value
 
-
 shot_profiles:
   zaeed_kickshot_profile:
     show_when_disabled: false
-    states:
-      - name: lit
-        show: zaeed_show
+    show: zaeed_show
   zaeed_orbit_profile:
     show_when_disabled: false
     states:

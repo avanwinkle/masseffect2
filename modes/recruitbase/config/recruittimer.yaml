@@ -14,7 +14,7 @@ event_player:
   timer_recruittimer_complete:
     - stop_recruitmission
     - recruit_mission_ended
-  recruit_mission_success:
+  recruit_success:
     - stop_recruitmission
     - recruit_mission_ended
 

@@ -37,7 +37,8 @@ event_player:
   collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
   collectorship_praetorian_complete{device.achievements.collectorship.state!="complete"}:
-    - levelup
+    levelup:
+      mission_name: IFF Retrieved
   multiball_collectorship_multiball_ended:
     - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush

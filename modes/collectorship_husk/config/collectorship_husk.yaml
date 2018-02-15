@@ -151,8 +151,8 @@ sound_pools:
     track: voice
     type: random
     sounds:
-      - husk_grunt_1{current_player.status_grunt==0}
-      - husk_grunt_2{current_player.status_grunt==0}
+      - husk_grunt_1{current_player.status_grunt.state==0}
+      - husk_grunt_2{current_player.status_grunt.state==0}
       - husk_miranda_1
       - husk_miranda_2
       - husk_miranda_3

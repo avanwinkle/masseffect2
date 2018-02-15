@@ -19,9 +19,9 @@ achievements:
   collectorattack:
     enable_events: enable_collectorattack
     start_events: mode_collectorattack_started
-    complete_events: mode_collectorattack_stopped # Only happens once, completed after playing
+    complete_events: mode_collectorattack_stopped # Only played once, completed after playing
   hagalaz:
-    enable_events: logicblock_sbhagalaz_counter_complete
+    enable_events: logicblock_sbdrops_counter_complete
     start_events: mode_shadowbroker_hagalaz_started
     stop_events: mode_shadowbroker_hagalaz_stopped
     complete_events: shadowbroker_hagalaz_complete
@@ -36,7 +36,7 @@ achievements:
     stop_events: mode_suicidemission_base_stopped
     complete_events: suicidemission_complete
   vasir:
-    enable_events: logicblock_sbvasir_counter_complete
+    enable_events: logicblock_sbdrops_counter_hit{count==4}
     start_events: mode_shadowbroker_vasir_started
     stop_events: mode_shadowbroker_vasir_stopped
     complete_events: shadowbroker_vasir_complete
@@ -47,6 +47,7 @@ event_player:
     - start_mode_recruitbase
     - start_mode_lockhandler
     - start_mode_planets
+    - start_mode_upgrades
     - enable_orbitswitches
     - reenable_nonrecruit_modes
     # - enable_collectorship
@@ -65,18 +66,17 @@ event_player:
     - stop_mode_overlordlight
     - stop_mode_shadowbroker_base
     - stop_mode_shopping
+    - stop_mode_upgrades
   reenable_recruit_modes:
     - start_mode_recruitbase
-    - start_mode_recruitfield
     - start_mode_planets
   reenable_nonrecruit_modes:
     - start_mode_shadowbroker_base
     - start_mode_shopping
-  # Prior to collector attack: overlord; after: arrival
-  reenable_nonrecruit_modes{device.achievements.collectorship.state!="complete"}:
-    - start_mode_overlordlight
-  reenable_nonrecruit_modes{device.achievements.collectorship.state=="complete"}:
-    - start_mode_arrival
+    - start_mode_upgrades
+    # Prior to collector attack: overlord; after: arrival
+    - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
+    - start_mode_arrival{device.achievements.collectorship.state=="complete"}
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
@@ -103,67 +103,57 @@ event_player:
     - disable_orbitswitches
     - disable_gates|900ms
     - enable_orbitswitches|900ms
+  # From an auto-plunger launch, open the gates and disable the switches
+  # TODO: don't open the gates during multiball, to keep left orbit open for shots
   fullorbit_fromplunger_hit:
     - enable_gates
     - disable_orbitswitches
     - disable_gates|1500ms
     - enable_orbitswitches|2000ms
+  # From a plunger launch, disable orbit switches to avoid cheat-easy hits
   s_plunger_lane_inactive:
     - disable_orbitswitches
-    - enable_orbitswitches|1000ms
+    - enable_orbitswitches|2000ms
+  # From a plunger orbit launch, re-enable orbit switches immediately once left orbit is hit
+  fullorbit_complete_hit:
+    - enable_orbitswitches
 
 accruals:
   recruitment_missions:
     persist_state: true
     reset_on_complete: false
     events:
-      - recruit_garrus_complete
-      - recruit_grunt_complete
-      - recruit_jack_complete
-      - recruit_kasumi_complete
-      - recruit_legion_complete
-      - recruit_mordin_complete
-      - recruit_samara_complete
-      - recruit_tali_complete
-      - recruit_thane_complete
-      - recruit_zaeed_complete
+      - recruit_success_garrus
+      - recruit_success_grunt
+      - recruit_success_jack
+      - recruit_success_kasumi
+      - recruit_success_legion
+      - recruit_success_mordin
+      - recruit_success_samara
+      - recruit_success_tali
+      - recruit_success_thane
+      - recruit_success_zaeed
 
-ball_saves:
-  default:
-    active_time: 20s
-    grace_period: 2s
-    hurry_up_time: 5s
-    enable_events: mode_base_started
-    timer_start_events: playfield_active
-    auto_launch: true
-    balls_to_save: 1
-    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
-
-counters:
-  recruited_count:
-    starting_count: 2
-    count_events: recruit_mission_success
-    count_complete_value: 12
-    disable_on_complete: true
-    reset_on_complete: false
-    persist_state: true
-  mission_count:
-    starting_count: 0
-    count_events: recruit_mission_success
-    persist_state: true
+# ball_saves:
+#   default:
+#     active_time: 20s
+#     grace_period: 2s
+#     hurry_up_time: 5s
+#     enable_events: mode_base_started
+#     timer_start_events: playfield_active
+#     auto_launch: true
+#     balls_to_save: 1
+#     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
 scoring:
   levelup:
     level: 1
-  recruit_mission_success:
+  recruit_success:
     available_missions: -1
   enable_collectorship:
     available_missions: 1
   mode_collectorship_base_stopped:
     available_missions: -1
-  skip_mission_scoring: # Mock values so we can skip missions and keep accurate counts
-    recruits_lit_count: 1
-    available_missions: 1
 
 shots:
 # These "core" shots for the main shots
@@ -175,13 +165,13 @@ shots:
     switch: s_left_ramp_exit
   sh_left_orbit:
     switch: s_left_orbit
-    enable_events: enable_orbitswitches
+    enable_events: enable_orbitswitches, enable_leftorbit
     disable_events: disable_orbitswitches
   sh_right_ramp:
     switch: s_right_ramp_exit
   sh_right_orbit:
     switch: s_right_orbit
-    enable_events: enable_orbitswitches
+    enable_events: enable_orbitswitches, enable_rightorbit
     disable_events: disable_orbitswitches
   sh_spinner:
     switch: s_spinner_left
@@ -207,6 +197,13 @@ shots:
   fullorbit_fromplunger:
     hit_events: balldevice_bd_plunger_ejecting_ball
     enable_events: enable_fullorbit
+    disable_events: disable_fullorbit
+  # Re-enable orbit switches IMMEDIATELY if the ball moves from plunger to
+  # left orbit, i.e. completes an orbit. It could be hit up to right orbit very
+  # quickly, faster than the normal orbit timeout
+  fullorbit_complete:
+    switch: s_left_orbit
+    enable_events: fullorbit_fromplunger_hit
     disable_events: disable_fullorbit
 
 show_player:
@@ -267,20 +264,20 @@ shows:
       lights:
         (leds): black
         l_null: (color)
+  color_on:
+    - lights:
+        (leds): (color)
   color_off:
-    - time: 0
-      lights:
+    - lights:
         (leds): black
         l_null: (color)
 
 slide_player:
-  mode_base_started: base_slide
   levelup:
     levelup_slide:
       expire: 5s
 
 slides:
-  base_slide: []
   levelup_slide:
     widgets:
       - type: text
@@ -305,48 +302,14 @@ sounds:
     fade_out: 1s
 
 widget_player:
-  mode_base_started:
-    base_score_widget:
-      slide: base_slide
-    base_level_widget:
-      slide: base_slide
-    base_ball_widget:
-      slide: base_slide
   levelup:
     levelup_mission:
       slide: levelup_slide
 
 widgets:
-  base_score_widget:
-    - type: text
-      text: (score)
-      number_grouping: true
-      min_digits: 2
-      font_size: 12
-      font_name: Quadrit-10
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-4
-  base_level_widget:
-      - type: text
-        text: LVL (player|level)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: left+2
-        y: 2
-  base_ball_widget:
-      - type: text
-        text: BALL (ball)
-        style: dmd_small
-        x: right-2
-        y: 2
-        anchor_x: right
-        anchor_y: bottom
   levelup_mission:
     - type: text
-      text: (last_mission)
+      text: (mission_name)
       style: dmd_small
       anchor_y: bottom
       y: 3

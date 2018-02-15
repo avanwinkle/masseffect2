@@ -18,6 +18,7 @@ mode:
   stop_events: stop_mode_missionselect, missionselect_item_selected
   priority: 1000
   code: missionselect.MissionSelect
+  file_log: full
   ##### Look into this:
   # Possible queue events:
   #   outgoing_balls_handler: balldevice_(name)_ball_eject_attempt
@@ -35,16 +36,6 @@ mode_settings:
 event_player:
   mode_missionselect_started: flippers_off, stop_mode_pause
   mode_missionselect_will_stop: flippers_on, start_mode_pause
-  missionselect_garrus_highlighted: set_last_recruit_garrus
-  missionselect_grunt_highlighted: set_last_recruit_grunt
-  missionselect_jack_highlighted: set_last_recruit_jack
-  missionselect_kasumi_highlighted: set_last_recruit_kasumi
-  missionselect_legion_highlighted: set_last_recruit_legion
-  missionselect_mordin_highlighted: set_last_recruit_mordin
-  missionselect_samara_highlighted: set_last_recruit_samara
-  missionselect_tali_highlighted: set_last_recruit_tali
-  missionselect_thane_highlighted: set_last_recruit_thane
-  missionselect_zaeed_highlighted: set_last_recruit_zaeed
 
 slide_player:
   missionselect_pass_highlighted{current_player.missionselect_init==0}: missionselect_intro_slide
@@ -52,16 +43,27 @@ slide_player:
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
   # Recruitment Missions:
-  missionselect_garrus_highlighted: missionselect_recruit_slide
-  missionselect_grunt_highlighted: missionselect_recruit_slide
-  missionselect_jack_highlighted: missionselect_recruit_slide
-  missionselect_kasumi_highlighted: missionselect_recruit_slide
-  missionselect_legion_highlighted: missionselect_recruit_slide
-  missionselect_mordin_highlighted: missionselect_recruit_slide
-  missionselect_samara_highlighted: missionselect_recruit_slide
-  missionselect_tali_highlighted: missionselect_recruit_slide
-  missionselect_thane_highlighted: missionselect_recruit_slide
-  missionselect_zaeed_highlighted: missionselect_recruit_slide
+  missionselect_recruit_highlighted:
+    missionselect_recruit_slide{squadmate=="garrus"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="grunt"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="jack"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="kasumi"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="legion"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="mordin"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="samara"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="tali"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="thane"}:
+      action: play
+    missionselect_recruit_slide{squadmate=="zaeed"}:
+      action: play
 
 slides:
   missionselect_intro_slide:
@@ -81,10 +83,11 @@ slides:
     priority: 1
     widgets:
       - type: text
-        text: (last_recruit)
+        text: (squadmate)
         style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
+        casing: title
       - type: text
         text: Start Recruitment Mission
         style: dmd_small

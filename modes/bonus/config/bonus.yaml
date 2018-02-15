@@ -25,6 +25,7 @@ mode_settings:
 
 
 slide_player:
+  mode_bonus_started: end_slide
   bonus_level: bonus_level_slide
   bonus_squadmates: bonus_squadmates_slide
   bonus_credits: bonus_credits_slide
@@ -34,6 +35,10 @@ slide_player:
   bonus_upgrades: bonus_upgrades_slide
 
 slides:
+  end_slide:
+    widgets:
+      - type: text
+        text: Critical Mission Failure
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"

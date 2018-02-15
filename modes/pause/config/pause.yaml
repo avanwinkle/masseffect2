@@ -19,7 +19,7 @@ event_player:
 
 ball_saves:
   pause_ballsave:
-    active_time: 5s
+    active_time: 10s
     auto_launch: false
     enable_events: pause_enabled
 
@@ -52,6 +52,10 @@ widgets:
         height: 32
         color: 000000
         z: 0
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
 
 show_player:
   pause_enabled:

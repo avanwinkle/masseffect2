@@ -40,8 +40,6 @@ slides:
         x: 2
         y: 2
 
-
-
 widget_player:
   mode_harbinger_started: harbinger_widget
   stop_mode_harbinger:
