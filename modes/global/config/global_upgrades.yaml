@@ -8,42 +8,50 @@
 # to it.
 #####
 
-event_player:
-  recruit_success_garrus:
-    enable_upgrade:
-      upgrade_name: "Omni-Tool Damage"
-  recruit_success_grunt:
-    enable_upgrade:
-      upgrade_name: "Shotgun Damage"
-  recruit_success_jack:
-    enable_upgrade:
-      upgrade_name: "Bio-Amp Interface"
-  recruit_success_kasumi:
-    enable_upgrade:
-      upgrade_name: "M22 Locust SMG"
-  recruit_success_legion:
-    enable_upgrade:
-      upgrade_name: "M80 Widow Rifle"
-  recruit_success_mordin:
-    enable_upgrade:
-      upgrade_name: "M16 Carnifax Pistol"
-  recruit_success_samara:
-    enable_upgrade:
-      upgrade_name: "Assault Rifle Damage"
-  recruit_success_tali:
-    enable_upgrade:
-      upgrade_name: "Geth Plasma Shotgun"
-  recruit_success_thane:
-    enable_upgrade:
-      upgrade_name: "M17 Viper Rifle"
-  recruit_success_zaeed:
-    enable_upgrade:
-      upgrade_name: "Heavy Weapon Ammo"
-
 scoring:
   collect_upgrade_shot_hit:
     upgrades_researched: 1
     score: 4000 * (1 + 0.25 * current_player.upgrades_researched)
+  recruit_success_garrus:
+    available_upgrade:
+      action: set
+      string: "Omni-Tool Damage"
+  recruit_success_grunt:
+    available_upgrade:
+      action: set
+      string: "Shotgun Damage"
+  recruit_success_jack:
+    available_upgrade:
+      action: set
+      string: "Bio-Amp Interface"
+  recruit_success_kasumi:
+    available_upgrade:
+      action: set
+      string: "M22 Locust SMG"
+  recruit_success_legion:
+    available_upgrade:
+      action: set
+      string: "M80 Widow Rifle"
+  recruit_success_mordin:
+    available_upgrade:
+      action: set
+      string: "M16 Carnifax Pistol"
+  recruit_success_samara:
+    available_upgrade:
+      action: set
+      string: "Assault Rifle Damage"
+  recruit_success_tali:
+    available_upgrade:
+      action: set
+      string: "Geth Plasma Shotgun"
+  recruit_success_thane:
+    available_upgrade:
+      action: set
+      string: "M17 Viper Rifle"
+  recruit_success_zaeed:
+    available_upgrade:
+      action: set
+      string: "Heavy Weapon Ammo"
 
 shot_profiles:
   upgrade_shot_profile:
@@ -76,7 +84,7 @@ slides:
       x: 25%
       y: top-2
     - type: text
-      text: (upgrade_name)
+      text: (player|available_upgrade)
       style: dmd_med
       anchor_x: left
       anchor_y: top

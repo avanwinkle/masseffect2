@@ -130,7 +130,6 @@ shots:
       - recruit_lit{squadmate=="kasumi"}
     show_tokens:
       leds: shot_shield_thane
-      lit: color_shield_green
       color: 00FF00 #color_thane
   recruit_zaeed_shot:
     hit_events: sh_left_orbit_hit

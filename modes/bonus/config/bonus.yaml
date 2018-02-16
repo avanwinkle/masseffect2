@@ -7,7 +7,7 @@ mode_settings:
       score: 1000
       player_score_entry: level
     - event: bonus_squadmates
-      score: (200 * current_player.squadmates_count if current_player.squadmates_count > 2 else 0)
+      score: (1200 * current_player.squadmates_count if current_player.squadmates_count > 2 else 0)
       player_score_entry:
     - event: bonus_credits
       score: (current_player.credits * 0.25)

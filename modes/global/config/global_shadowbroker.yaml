@@ -9,9 +9,11 @@
 # progress through the Shadow Broker story.
 #
 #####
-event_player:
-  sbdroptarget_group_down_complete:
-    - reset_dropbank
+
+# Do i need to manually reset or will that happen automatically?
+# event_player:
+#   drop_target_bank_dropbank_down:
+#     - reset_dropbank
 
 ball_saves:
   debug_shadowbroker_ballsave:
@@ -23,7 +25,7 @@ ball_saves:
 counters:
   # COMBINE sbvasir_counter and sbhagalaz_counter
   sbdrops_counter:
-    count_events: sbdroptarget_group_down_complete
+    count_events: drop_target_bank_dropbank_down #drop_target_bank_dropbank_down
     starting_count: current_player.counter_sbdrops_counter
     count_complete_value: 8
     persist_state: true
@@ -37,7 +39,7 @@ counters:
       - achievement_shadowbroker_state_enabled
 
 scoring:
-  sbdroptarget_group_down_complete:
+  drop_target_bank_dropbank_down:
     intel: 1
   # Track the value of this counter as a player variable (for saved careers)
   logicblock_sbdrops_counter_hit:
@@ -45,10 +47,10 @@ scoring:
       action: set
       score: device.counters.sbdrops_counter.value
 
-shot_groups:
-  sbdroptarget_group:
-    reset_events: sbdroptarget_group_down_complete
-    shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot
+# shot_groups:
+#   sbdroptarget_group:
+#     reset_events: drop_target_bank_dropbank_down
+#     shots: sbdroptarget_bottom_shot, sbdroptarget_middle_shot, sbdroptarget_top_shot
 
 shot_profiles:
   sbdrops_profile:
@@ -66,29 +68,29 @@ shot_profiles:
 
 shots:
   sbdroptarget_bottom_shot:
-    hit_events: s_dropbank_bottom_active
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    hit_events: drop_target_bottom_down
+    reset_events: drop_target_bank_dropbank_down
     profile: sbdrops_profile
   sbdroptarget_middle_shot:
-    hit_events: s_dropbank_middle_active
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    hit_events: drop_target_middle_down
+    reset_events: mode_shadowbroker_base_started, drop_target_bank_dropbank_down
     profile: sbdrops_profile
   sbdroptarget_top_shot:
-    hit_events: s_dropbank_top_active
-    reset_events: mode_shadowbroker_base_started, sbdroptarget_group_down_complete
+    hit_events: drop_target_top_down
+    reset_events: mode_shadowbroker_base_started, drop_target_bank_dropbank_down
     profile: sbdrops_profile
 
 show_player:
-  sbdroptarget_group_up_hit:
+  drop_target_bank_dropbank_mixed:
     sbdrops_flash:
       priority: 100
-      loops: 6
-      speed: 10
-  sbdroptarget_group_down_complete:
+      loops: 3
+      speed: 12
+  drop_target_bank_dropbank_down:
     sbdrops_flash:
       priority: 100
       loops: 12
-      speed: 10
+      speed: 12
   mode_global_started:
     sbdrops_show:
       manual_advance: true

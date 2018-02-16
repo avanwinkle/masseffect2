@@ -45,7 +45,10 @@ slide_player:
   recruit_advance{status==3}:
     recruiting_advance_slide_lit:
       expire: 2s
-  missionselect_recruitmission_selected: recruitslide
+  missionselect_recruitmission_selected:
+    recruitslide:
+      action: play
+      priority: 100
   recruit_mission_ended:
     recruitslide:
       action: remove

@@ -103,16 +103,16 @@ accruals:
       - recruit_success_thane
       - recruit_success_zaeed
 
-# ball_saves:
-#   default:
-#     active_time: 20s
-#     grace_period: 2s
-#     hurry_up_time: 5s
-#     enable_events: mode_base_started
-#     timer_start_events: playfield_active
-#     auto_launch: true
-#     balls_to_save: 1
-#     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+ball_saves:
+  default:
+    active_time: 20s
+    grace_period: 2s
+    hurry_up_time: 5s
+    enable_events: mode_base_started
+    timer_start_events: playfield_active
+    auto_launch: true
+    balls_to_save: 1
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
 scoring:
   levelup:

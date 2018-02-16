@@ -30,31 +30,41 @@ scoring:
     status_zaeed: 1
   recruit_success_garrus:
     status_garrus:
+      action: set
       score: 4
   recruit_success_grunt:
     status_grunt:
+      action: set
       score: 4
   recruit_success_jack:
     status_jack:
+      action: set
       score: 4
   recruit_success_kasumi:
     status_kasumi:
+      action: set
       score: 4
   recruit_success_legion:
     status_legion:
+      action: set
       score: 4
   recruit_success_mordin:
     status_mordin:
+      action: set
       score: 4
   recruit_success_samara:
     status_samara:
+      action: set
       score: 4
   recruit_success_tali:
     status_tali:
+      action: set
       score: 4
   recruit_success_thane:
     status_thane:
+      action: set
       score: 4
   recruit_success_zaeed:
     status_zaeed:
+      action: set
       score: 4

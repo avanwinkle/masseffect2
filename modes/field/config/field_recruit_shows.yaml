@@ -14,46 +14,55 @@ show_player:
     recruits_lit_show{current_player.status_garrus==3}:
       action: play
       key: recruits_lit_show_garrus
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_blue
     recruits_lit_show{current_player.status_grunt==3}:
       action: play
       key: recruits_lit_show_grunt
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_orange
     recruits_lit_show{current_player.status_jack==3}:
       action: play
       key: recruits_lit_show_jack
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_purple
     recruits_lit_show{current_player.status_kasumi==3}:
       action: play
       key: recruits_lit_show_kasumi
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_yellow
     recruits_lit_show{current_player.status_mordin==3}:
       action: play
       key: recruits_lit_show_mordin
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_red
     recruits_lit_show{current_player.status_samara==3}:
       action: play
       key: recruits_lit_show_samara
+      sync_ms: 1000
       show_tokens:
         leds: l_iron_throne
     recruits_lit_show{current_player.status_tali==3}:
       action: play
       key: recruits_lit_show_tali
+      sync_ms: 1000
       show_tokens:
         leds: l_right_outlane
     recruits_lit_show{current_player.status_thane==3}:
       action: play
       key: recruits_lit_show_thane
+      sync_ms: 1000
       show_tokens:
         leds: color_shield_green
     recruits_lit_show{current_player.status_zaeed==3}:
       action: play
       key: recruits_lit_show_zaeed
+      sync_ms: 1000
       show_tokens:
         leds: l_hand_of_the_king
     recruits_complete_show{current_player.status_garrus==4}:

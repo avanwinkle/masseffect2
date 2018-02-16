@@ -78,7 +78,7 @@ slide_player:
   multiball_lock_overlordlock_locked_ball:
     overlord_ball_locked_slide:
       expire: 1.5s
-      priority: 100
+      priority: 600 # Enough to beat recruit timer?
   multiball_overlord_multiball_started:
     overlord_ball_locked_slide_full:
       expire: 4s
@@ -117,23 +117,23 @@ sound_player:
   play_overlord_station_sound_1:
     archer_need_to_go_to_both:
       action: play
-      max_queue_time: 3s
+      max_queue_time: 2s
   play_overlord_station_sound_2:
     archer_still_need_to_go_to_prometheus:
       action: play
-      max_queue_time: 3s
+      max_queue_time: 2s
   play_overlord_station_sound_3:
     archer_lockdown_cancelled:
       action: play
-      max_queue_time: 3s
+      max_queue_time: 2s
   multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:
     vulcan_success:
       action: play
-      max_queue_time: 3s
+      max_queue_time: 2s
   multiball_lock_overlordlock_locked_ball{total_balls_locked==2}:
     archer_lockdown_cancelled_short:
       action: play
-      max_queue_time: 3s
+      max_queue_time: 2s
 
 sound_pools:
   geth_hit_sfx:

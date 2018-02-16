@@ -52,11 +52,13 @@ counters:
 
 event_player:
   mode_recruitkasumi_started:
-    # - sweep_alarms
+    - sweep_alarms
     - set_alarm_left_ramp
   kasumi_failed:
     - stop_recruitmission
     - recruit_mission_ended
+  logicblock_kasumi_shots_counter_hit:
+    - sweep_alarms
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
 
@@ -144,8 +146,8 @@ show_player:
   mode_recruitkasumi_started:
     kasumi_gi_show:
       action: play
-      loops: 0
-  mode_recruitkasumi_stopping:
+      loops: -1
+  mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
   sweep_alarms:
@@ -153,25 +155,27 @@ show_player:
       action: play
       priority: 100
       loops: 1
-      speed: 10
+      speed: 30
 
 shows:
   # Dim the general illumination to make it feel more heist-y
   kasumi_gi_show:
-    - time: 0
+    - duration: 1s
       lights:
-        gi: FFFFFF
-    - time: 1s
+        gi:
+          color: 000000
+          fade: 500ms
+    - duration: 1s
       lights:
         l_gi_upper:
           color: 000000
-          fade: 1s
+          fade: 500ms
         l_gi_left_playfield:
           color: 444444
-          fade: 1s
+          fade: 500ms
         l_gi_lower_playfield:
-          color: 888888
-          fade: 1s
+          color: BBBBBB
+          fade: 500ms
   # Tricky! The shots to hit are the ones that AREN'T lit
   unalarmed_show:
     - time: 0
@@ -179,40 +183,46 @@ shows:
         (led): black
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
-    - duration: 300ms
+    - duration: 600ms
       lights:
         (led):
           color: FFFFFF
-          fade: 150ms
-    - duration: 300ms
+          fade: 120ms
+    - duration: 1200ms
       lights:
         (led):
-          color: 888888
-          fade: 150ms
+          color: 000000
+          fade: 120ms
   alarm_sweep_show:
     - time: 0
       lights:
-        l_left_ramp_arrow_red: white
-        l_left_orbit_arrow_red: black
-        l_right_orbit_arrow_red: black
-        l_right_ramp_arrow_red: black
+        l_left_orbit_arrow_red: white
         l_kickback_arrow_red: black
-    - time: '+1'
-      lights:
         l_left_ramp_arrow_red: black
+        l_right_ramp_arrow_red: black
         l_right_orbit_arrow_red: white
-    - time: '+2'
+    - time: '+1'
       lights:
         l_left_orbit_arrow_red: black
         l_kickback_arrow_red: white
-    - time: '+3'
-      lights:
+        l_left_ramp_arrow_red: black
         l_right_ramp_arrow_red: white
-        l_kickback_arrow_red: black
-    - time: '+4'
+        l_right_orbit_arrow_red: black
+    - time: '+2'
       lights:
         l_left_orbit_arrow_red: white
+        l_kickback_arrow_red: black
+        l_left_ramp_arrow_red: black
         l_right_ramp_arrow_red: black
+        l_right_orbit_arrow_red: white
+    - time: '+3'
+      lights:
+        l_left_orbit_arrow_red: black
+        l_kickback_arrow_red: white
+        l_left_ramp_arrow_red: black
+        l_right_ramp_arrow_red: white
+        l_right_orbit_arrow_red: black
+    - time: '+4'
 
 slide_player:
   mode_recruitkasumi_started:
@@ -224,15 +234,19 @@ slide_player:
   logicblock_kasumi_shots_counter_hit{value==1}:
     kasumi_slide_1:
       expire: 3s
+      priority: 1000 # Enough to beat the recruit timer?
   logicblock_kasumi_shots_counter_hit{value==2}:
     kasumi_slide_2:
       expire: 3s
+      priority: 1000 # Enough to beat the recruit timer?
   logicblock_kasumi_shots_counter_hit{value==3}:
     kasumi_slide_3:
       expire: 3s
+      priority: 1000 # Enough to beat the recruit timer?
   logicblock_kasumi_alarms_counter_hit:
     kasumi_alarm_slide:
       expire: 3s
+      priority: 1000 # Enough to beat the recruit timer?
 
 slides:
   kasumi_instructions_slide:
@@ -270,7 +284,7 @@ slides:
         anchor_y: bottom
         y: middle+2
       - type: text
-        text: "(value) until failure"
+        text: "(count) until failure"
         anchor_y: top
         y: middle-2
   kasumi_failed_slide:

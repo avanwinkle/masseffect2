@@ -129,6 +129,9 @@ player_vars:
     initial_value: 0
   available_missions:
     initial_value: 0
+  available_upgrade:
+    initial_value: " "
+    value_type: str
   credits:
     initial_value: 0
   harbinger_multiplier:
