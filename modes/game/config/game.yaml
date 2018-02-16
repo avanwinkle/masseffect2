@@ -104,10 +104,6 @@ widgets:
     - type: text
       text: (score)
       style: score_style_singleplayer
-  mp_score_widget:
-    - type: text
-      text: (score)
-      style: score_style_multiplayer
   base_level_widget:
     - type: text
       text: LVL (player|level)
@@ -116,6 +112,10 @@ widgets:
     - type: text
       text: BALL (ball)
       style: mp_player_4
+  mp_score_widget:
+    - type: text
+      text: (score)
+      style: score_style_multiplayer
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)

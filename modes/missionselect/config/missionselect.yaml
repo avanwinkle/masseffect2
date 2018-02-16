@@ -47,25 +47,7 @@ slide_player:
   missionselect_suicide_highlighted: missionselect_suicide_slide
   # Recruitment Missions:
   missionselect_recruit_highlighted:
-    missionselect_recruit_slide{squadmate=="garrus"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="grunt"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="jack"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="kasumi"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="legion"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="mordin"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="samara"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="tali"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="thane"}:
-      action: play
-    missionselect_recruit_slide{squadmate=="zaeed"}:
+    missionselect_recruit_slide:
       action: play
 
 slides:
