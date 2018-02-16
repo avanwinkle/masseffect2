@@ -48,7 +48,9 @@ scoring:
 shot_profiles:
   upgrade_shot_profile:
     show_when_disabled: False
-    show: flash
+    states:
+      - name: lit
+        show: flash
 
 shots:
   collect_upgrade_shot:

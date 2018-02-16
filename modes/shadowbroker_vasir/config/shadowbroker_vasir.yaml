@@ -19,14 +19,15 @@
 #####
 
 mode:
-  start_events: start_mode_shadowbroker_vasir
+  start_events: shadowbroker_chase_complete
   stop_events: stop_mode_shadowbroker_vasir
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
   priority: 850
 
 event_player:
   timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
-  stop_mode_shadowbroker_vasir: exit_shadowbroker_modes
   vasir_shot_health_hit:
     shadowbroker_vasir_complete: {}
     levelup:

@@ -18,6 +18,8 @@
 mode:
   start_events: start_mode_shadowbroker_boss
   stop_events: stop_mode_shadowbroker_boss
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
   priority: 800
 
 event_player:

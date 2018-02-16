@@ -14,19 +14,8 @@
 event_player:
   mode_field_started: enable_recruit_shots, disable_fullorbit
   mode_field_will_stop: disable_recruit_shots, enable_fullorbit
-  logicblock_n7_hits_counter_complete: start_mode_n7_assignments
   # When a squadmate moves from "shot" to "lit", re-evaluate the shots
   recruit_lit: enable_recruit_shots
-
-counters:
-  n7_hits_counter:
-    starting_count: 40
-    count_complete_value: 0
-    direction: down
-    count_events: n7_advance_shot_hit
-    disable_on_complete: false
-    reset_on_complete: true
-    persist_state: true
 
 shot_profiles:
   recruit_shot_profile:
@@ -36,10 +25,6 @@ shot_profiles:
       - name: active
 
 shots:
-  n7_advance_shot:
-    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: enable_recruit_shots
-    disable_events: disable_recruit_shots
   recruit_garrus_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_shot_profile
@@ -153,17 +138,6 @@ shots:
       color: FF0000 #color_zaeed
 
 sound_player:
-  mode_recruitfield_started:
-    music_normandy_walkin_intro:
-      action: play
-      loops: 0
-      mode_end_action: stop
-      events_when_stopped: play_galaxy_map
-  play_galaxy_map:
-    music_galaxy_map:
-      action: play
-      loops: -1 # TODO: integrate with scanning loop
-      mode_end_action: stop
   recruit_advance_garrus:
     shot_hit_sounds_garrus:
       action: play
@@ -248,12 +222,6 @@ sound_pools:
     track: voice
 
 sounds:
-  music_normandy_walkin_intro:
-    file: mus_nor_normandy_walkin_intro.ogg
-    track: music
-  music_galaxy_map:
-    file: mus_galaxy_map_loop.ogg
-    track: music
   garrus_shot_sound_1:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
     track: voice
@@ -401,30 +369,3 @@ sounds:
   zaeed_shot_sound_6:
     file: DLC_HEN_VT_Int.116.ogg
     track: voice
-
-widget_player:
-  logicblock_n7_hits_counter_hit:
-    n7_progress_widget:
-      action: update
-      widget_settings:
-        expire: 2s
-
-widgets:
-  n7_progress_widget:
-    - type: text
-      text: "N7 assignment in (count)"
-      style: dmd_small
-      anchor_y: bottom
-      anchor_x: left
-      y: 2
-      x: 2
-      z: 2
-    - type: rectangle
-      width: 128
-      height: 8
-      color: 000000
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 0
-      z: 1

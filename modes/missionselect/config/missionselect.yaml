@@ -34,12 +34,15 @@ mode_settings:
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards
 
 event_player:
-  mode_missionselect_started: flippers_off, stop_mode_pause
-  mode_missionselect_will_stop: flippers_on, start_mode_pause
+  mode_missionselect_started: flippers_off
+  missionselect_item_selected: flippers_on
 
 slide_player:
-  missionselect_pass_highlighted{current_player.missionselect_init==0}: missionselect_intro_slide
-  missionselect_pass_highlighted{current_player.missionselect_init!=0}: missionselect_pass_slide
+  missionselect_pass_highlighted:
+    missionselect_intro_slide{current_player.missionselect_init==0}:
+      action: play
+    missionselect_pass_slide{current_player.missionselect_init!=0}:
+      action: play
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
   # Recruitment Missions:
@@ -127,7 +130,6 @@ slides:
         style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
-
 
 scoring:
   mode_missionselect_started:

@@ -7,6 +7,23 @@ config:
   - base_debug.yaml
 
 achievements:
+  # SHADOW BROKER
+  vasir:
+    enable_events: logicblock_sbdrops_counter_hit{count==4}
+    start_events: mode_shadowbroker_vasir_started
+    stop_events: stop_mode_shadowbroker_vasir
+    complete_events: shadowbroker_vasir_complete
+  hagalaz:
+    enable_events: logicblock_sbdrops_counter_complete
+    start_events: mode_shadowbroker_hagalaz_started
+    stop_events: stop_mode_shadowbroker_hagalaz
+    complete_events: shadowbroker_hagalaz_complete
+  shadowbroker:
+    enable_events: shadowbroker_hagalaz_complete
+    start_events: mode_shadowbroker_boss_started
+    stop_events: stop_mode_shadowbroker_boss
+    complete_events: shadowbroker_boss_complete
+  # COLLECTOR MISSIONS
   collectorship:
     enable_events: enable_collectorship
     start_events: mode_collectorship_base_started
@@ -20,26 +37,12 @@ achievements:
     enable_events: enable_collectorattack
     start_events: mode_collectorattack_started
     complete_events: mode_collectorattack_stopped # Only played once, completed after playing
-  hagalaz:
-    enable_events: logicblock_sbdrops_counter_complete
-    start_events: mode_shadowbroker_hagalaz_started
-    stop_events: mode_shadowbroker_hagalaz_stopped
-    complete_events: shadowbroker_hagalaz_complete
-  shadowbroker:
-    enable_events: shadowbroker_hagalaz_complete
-    start_events: mode_shadowbroker_boss_started
-    stop_events: mode_shadowbroker_boss_stopped
-    complete_events: shadowbroker_boss_complete
+  # SUICIDE MISSION
   suicidemission:
     enable_events: enable_suicidemission
     start_events: mode_suicidemission_base_started
     stop_events: mode_suicidemission_base_stopped
     complete_events: suicidemission_complete
-  vasir:
-    enable_events: logicblock_sbdrops_counter_hit{count==4}
-    start_events: mode_shadowbroker_vasir_started
-    stop_events: mode_shadowbroker_vasir_stopped
-    complete_events: shadowbroker_vasir_complete
 
 event_player:
   mode_base_started:
@@ -48,7 +51,6 @@ event_player:
     - start_mode_field
     - start_mode_lockhandler
     - enable_orbitswitches
-    - reenable_nonrecruit_modes
   # REFACTOR MODES
   mode_type_wizard_started:
     - stop_mode_global
@@ -64,23 +66,7 @@ event_player:
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
   missionselect_collectorship_selected:
-    - disable_recruit_modes
-    - disable_nonrecruit_modes
     - start_mode_collectorship_base
-  mode_collectorship_base_stopped:
-    - reenable_recruit_modes
-    - reenable_nonrecruit_modes
-    - start_mode_planets
-  enter_shadowbroker_modes:
-    - disable_recruit_modes
-    - stop_mode_arrival
-    - stop_mode_overlordlight
-    - stop_mode_shopping
-  exit_shadowbroker_modes:
-    - reenable_recruit_modes
-    - start_mode_arrival
-    - start_mode_overlordlight
-    - start_mode_shopping
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

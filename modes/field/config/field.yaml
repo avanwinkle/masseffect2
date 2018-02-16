@@ -17,3 +17,25 @@ config:
   - field_recruit.yaml
   - field_shadowbroker.yaml
   - field_shopping.yaml
+  - field_n7assignments.yaml
+
+sound_player:
+  mode_field_started:
+    music_normandy_walkin_intro:
+      action: play
+      loops: 0
+      mode_end_action: stop
+      events_when_stopped: play_galaxy_map
+  play_galaxy_map:
+    music_galaxy_map:
+      action: play
+      loops: -1 # TODO: integrate with scanning loop
+      mode_end_action: stop
+
+sounds:
+  music_normandy_walkin_intro:
+    file: mus_nor_normandy_walkin_intro.ogg
+    track: music
+  music_galaxy_map:
+    file: mus_galaxy_map_loop.ogg
+    track: music

@@ -49,6 +49,7 @@ multiballs:
     ball_count_type: total
     ball_locks: bd_lock
     shoot_again: 10s
+    enable_events: multiball_lock_overlordlock_locked_ball{total_balls_locked==3}
     start_events: multiball_lock_overlordlock_full #mode_overlordmultiball_started
 
 shots:

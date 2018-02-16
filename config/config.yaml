@@ -61,13 +61,12 @@ scriptlets:
 modes:
   # Core Logic Modes:
   - base
-  - bonus
+  - global
+  - field
   - lockhandler
   - mainmenu
   - missionselect
-  - global
-  - field
-  # - pause
+  - bonus
   # Collector Ship Modes:
   - collectorship_ambush
   - collectorship_base
