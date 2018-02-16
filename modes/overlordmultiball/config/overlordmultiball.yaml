@@ -24,18 +24,11 @@
 #####
 
 mode:
-  start_events: start_mode_overlordmultiball
+  start_events: start_mode_overlordmultiball, multiball_overlord_multiball_started
   stop_events: stop_mode_overlordmultiball, multiball_overlord_multiball_ended
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
   priority: 500
-
-multiballs:
-  overlord_multiball:
-    ball_count: 3
-    # Should be total, but can't figure out why the active ball count is messed up
-    ball_count_type: total
-    ball_locks: bd_lock
-    shoot_again: 10s
-    start_events: mode_overlordmultiball_started
 
 counters:
   hackshots_hit_counter:

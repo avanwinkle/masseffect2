@@ -1,0 +1,20 @@
+#config_version=5
+
+#####
+# LAIR OF THE SHADOW BROKER: FIELD MODE
+#
+# This mode contains the show elements related to Shadow Broker progression that
+# display during Field mode.
+#####
+
+event_player:
+  # Shadow Broker modes are only triggered from Field
+  sbdroptarget_group_down_complete:
+    # Complete the dropbank after vasir is enabled to begin the chase
+    - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
+    # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
+    - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
+    # Complete the dropbank after hagalaz to re-enable boss combat
+    - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
+    # Complete the dropbank after boss is defeated for extra prizes!
+    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}

@@ -41,3 +41,35 @@ multiball_locks:
     reset_count_for_current_player_events: multiball_overlord_multiball_ended
     enable_events: enable_overlord_lock
     disable_events: multiball_lock_overlordlock_locked_ball
+
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    # Should be total, but can't figure out why the active ball count is messed up
+    ball_count_type: total
+    ball_locks: bd_lock
+    shoot_again: 10s
+    start_events: multiball_lock_overlordlock_full #mode_overlordmultiball_started
+
+shots:
+  overlord_lock_ball_shot:
+    switch: s_left_ramp_exit
+    profile: overlord_lock_profile
+    enable_events: overlord_light_shot_hit
+    disable_events: multiball_lock_overlordlock_locked_ball
+
+shot_profiles:
+  overlord_lock_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: overlord_lock_lit
+
+shows:
+  overlord_lock_lit:
+    - time: 0
+      lights:
+        l_lock_lit: white
+    - time: '+1'
+      lights:
+        l_lock_lit: black

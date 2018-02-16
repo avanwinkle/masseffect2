@@ -11,17 +11,12 @@
 # or ball-lock common mode.
 #####
 
-mode:
-  start_events: start_mode_overlordlight
-  stop_events: stop_mode_overlordlight
-  priority: 1200
-
 event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
-  overlord_light_shot_hit{mode.recruitfield.active}:
+  overlord_light_shot_hit:
     - play_overlord_hit_sound
-  player_shot_overlord_lock_ball_shot_enabled:
+  player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
     - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
@@ -41,18 +36,8 @@ shot_profiles:
         show: off
       - name: lit
         show: on
-  overlord_lock_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: overlord_lock_lit
 
 shots:
-  overlord_lock_ball_shot:
-    switch: s_left_ramp_exit
-    profile: overlord_lock_profile
-    enable_events: overlord_light_shot_hit
-    disable_events: multiball_lock_overlordlock_locked_ball
   light_lock_overlord_top:
     switch: s_hitbank_top
     profile: overlord_light_profile
@@ -88,14 +73,6 @@ shows:
       lights:
         l_hitbank_bot: black
         l_hitbank_top: black
-  overlord_lock_lit:
-    - time: 0
-      lights:
-        l_lock_lit: white
-    - time: '+1'
-      lights:
-        l_lock_lit: black
-
 
 slide_player:
   multiball_lock_overlordlock_locked_ball:

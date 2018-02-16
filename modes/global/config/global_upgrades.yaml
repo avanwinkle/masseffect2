@@ -8,11 +8,6 @@
 # to it.
 #####
 
-mode:
-  start_events: start_mode_upgrades
-  stop_events: stop_mode_upgrades
-  priority: 400
-
 event_player:
   recruit_success_garrus:
     enable_upgrade:
@@ -54,8 +49,6 @@ shot_profiles:
   upgrade_shot_profile:
     show_when_disabled: False
     show: flash
-    show_tokens:
-      leds: l_right_ramp_arrow_yellow
 
 shots:
   collect_upgrade_shot:
@@ -63,6 +56,8 @@ shots:
     profile: upgrade_shot_profile
     enable_events: enable_upgrade
     disable_events: collect_upgrade_shot_hit
+    show_tokens:
+      leds: l_right_ramp_arrow_yellow
 
 slide_player:
   collect_upgrade_shot_hit:
@@ -71,15 +66,6 @@ slide_player:
 
 slides:
   upgrade_slide:
-    widgets: upgrade_base_widget, upgrade_title_widget
-
-widget_player:
-  enable_upgrade:
-    upgrade_title_widget:
-      action: update
-
-widgets:
-  upgrade_base_widget:
     - type: text
       text: "Upgrade Researched"
       style: dmd_small
@@ -87,7 +73,6 @@ widgets:
       anchor_y: top
       x: 25%
       y: top-2
-  upgrade_title_widget:
     - type: text
       text: (upgrade_name)
       style: dmd_med

@@ -65,6 +65,8 @@ modes:
   - lockhandler
   - mainmenu
   - missionselect
+  - global
+  - field
   # - pause
   # Collector Ship Modes:
   - collectorship_ambush
@@ -72,8 +74,6 @@ modes:
   - collectorship_husk
   - collectorship_praetorian
   # Recruit Modes:
-  - recruitbase
-  - recruitfield
   - recruitgarrus
   - recruitgrunt
   - recruitjack
@@ -84,7 +84,6 @@ modes:
   - recruitthane
   - recruitzaeed
   # Lair of the Shadow Broker
-  - shadowbroker_base
   - shadowbroker_boss
   - shadowbroker_chase
   - shadowbroker_hagalaz
@@ -92,10 +91,7 @@ modes:
   # Side Mission Modes:
   - harbinger
   - n7_assignments
-  - overlordlight
   - overlordmultiball
-  - planets
-  - shopping
 
 window:
   width: 800

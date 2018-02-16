@@ -9,25 +9,13 @@
 # progress through the Shadow Broker story.
 #
 #####
-
-mode:
-  start_events: start_mode_shadowbroker_base
-  stop_events: stop_mode_shadowbroker_base
-  priority: 500
-
 event_player:
   mode_shadowbroker_base_started:
-    exit_shadowbroker_modes
+    - exit_shadowbroker_modes
+    # If the mode is restarted and boss combat is enabled, re-enable the hold
+    - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
   sbdroptarget_group_down_complete:
     - reset_dropbank
-    # Complete the dropbank after vasir is enabled to begin the chase
-    - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
-    # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
-    - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
-    # Complete the dropbank after hagalaz to re-enable boss combat
-    - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
-    # Complete the dropbank after boss is defeated for extra prizes!
-    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}
   start_mode_shadowbroker_chase:
     - enter_shadowbroker_modes
   start_mode_shadowbroker_hagalaz:
@@ -35,9 +23,6 @@ event_player:
   # Complete the chase to begin Vasir Combat
   shadowbroker_chase_complete:
     - start_mode_shadowbroker_vasir
-  # If the mode is restarted and boss combat is enabled, re-enable the hold
-  mode_shadowbroker_base_started{device.achievements.shadowbroker.state=="enabled"}:
-    - enable_shadowbroker_hold
   # Get a ball in the ball hold to begin Boss Combat
   ball_hold_shadowbroker_hold_held_ball:
     - start_mode_shadowbroker_boss

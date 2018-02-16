@@ -1,0 +1,33 @@
+#config_version=5
+
+#####
+# MASS EFFECT 2: GLOBAL MODE
+#
+# This is the general mode that underlies non-Wizard-mode gameplay, and handles
+# progression tracking for global values like N7 missions, shadowbroker drops,
+# and multiball lights.
+#
+# This mode does NOT include lights, sounds, and shows for these progressions,
+# since active mission modes may overrule them. Instead, those elements are part
+# of the Field mode.
+#####
+
+mode:
+  start_events: start_mode_global
+  stop_events: stop_mode_global
+  priority: 300
+
+##
+# These are the various modes that run as part of Global
+config:
+  - global_planets.yaml
+  - global_recruit.yaml
+  - global_shadowbroker.yaml
+  - global_upgrades.yaml
+  - global_overlord.yaml
+
+event_player:
+  mode_global_started:
+    - WAWA_global_stuff
+    - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
+    - start_mode_arrival{device.achievements.collectorship.state=="complete"}

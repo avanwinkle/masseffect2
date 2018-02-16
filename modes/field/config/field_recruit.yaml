@@ -11,15 +11,9 @@
 # start logic, because we will only want to start N7 Assignments when we're
 # in Recruit Field mode (i.e. never during any other mode)
 #####
-
-mode:
-  start_events: start_mode_recruitfield
-  stop_events: stop_mode_recruitfield, ball_will_end
-  priority: 400
-
 event_player:
-  mode_recruitfield_started: enable_recruit_shots, disable_fullorbit
-  mode_recruitfield_will_stop: disable_recruit_shots, enable_fullorbit
+  mode_field_started: enable_recruit_shots, disable_fullorbit
+  mode_field_will_stop: disable_recruit_shots, enable_fullorbit
   logicblock_n7_hits_counter_complete: start_mode_n7_assignments
   # When a squadmate moves from "shot" to "lit", re-evaluate the shots
   recruit_lit: enable_recruit_shots

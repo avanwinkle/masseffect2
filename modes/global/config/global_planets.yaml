@@ -2,20 +2,15 @@
 
 #####
 # PLANETS MODE
-# 
+#
 # This is a fairly simple and passive mode that runs in the background and makes
-# bonus points for the player. In addition to behavior from other modes, 
+# bonus points for the player. In addition to behavior from other modes,
 # completing both top lanes increases the "planets discovered" multiplier and
 # the pop bumpers collect various "minerals". The minerals have virtually no
 # difference but their collection rate is multiplied by the number of planets.
 #
 # After each ball, a bonus is awarded for the total minerals collected.
 #####
-
-mode:
-  start_events: start_mode_planets
-  stop_events: stop_mode_planets
-  priority: 400
 
 scoring:
   planet_shots_hit_complete:

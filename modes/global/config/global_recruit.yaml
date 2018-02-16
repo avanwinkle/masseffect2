@@ -20,13 +20,6 @@
 # now it's a standalone mode to keep the logic in digestable chunks.
 #####
 
-mode:
-  start_events:
-    start_mode_recruitbase
-  stop_events:
-    stop_mode_recruitbase
-  priority: 300
-
 #####
 # There is a lot of logic in recruitbase, so let's break it up into files
 #####

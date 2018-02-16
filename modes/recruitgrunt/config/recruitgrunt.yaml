@@ -15,6 +15,8 @@
 mode:
   start_events: start_mode_recruitgrunt
   stop_events: stop_mode_recruitgrunt, stop_recruitmission
+  events_when_started: mode_type_mission_started
+  events_when_stopped: mode_type_mission_stopped
   priority: 500
 
 event_player:

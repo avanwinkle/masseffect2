@@ -10,17 +10,9 @@
 # [AVW] It's just stubbed out a bit here, doesn't actually do much yet.
 #####
 
-mode:
-  start_events:
-    start_mode_shopping
-  stop_events:
-    stop_mode_shopping
-  priority: 400
-
 event_player:
-  mode_shopping_started: enable_storetargets
   all_storetargets_hit_complete: enable_store
-  start_store: 
+  start_store:
     - flippers_off
     # DEBUG: Mock out the store happening by waiting 5s and posting "complete"
     - post_store_complete|5s
@@ -38,12 +30,12 @@ queue_event_player:
     queue_event: show_store
     events_when_finished: store_complete
 
-ball_holds:
-  shopping_hold:
-    hold_devices: bd_hold
-    release_one_events: store_complete
-    enable_events: enable_store
-    disable_events: ball_hold_shopping_hold_balls_released
+# ball_holds:
+#   shopping_hold:
+#     hold_devices: bd_hold
+#     release_one_events: store_complete
+#     enable_events: enable_store
+#     disable_events: ball_hold_shopping_hold_balls_released
 
 shot_groups:
   all_storetargets:
