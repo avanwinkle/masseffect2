@@ -27,7 +27,6 @@ config:
   - recruitscoring.yaml  # Everything in the scoring: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
-  - recruitshows.yaml    # Shows to light recruit shields, missions available
 
 event_player:
   mode_recruitbase_started:
@@ -69,14 +68,14 @@ event_player:
 #####
 # This is just while I'm developing and debugging missions, a little cheat ;)
 #####
-ball_saves:
-  debug_recruitmission_ballsave:
-    active_time: 60s
-    enable_events: missionselect_recruitmission_selected
-    disable_events: recruit_mission_ended
-    hurry_up_time: 10s
-    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
-    balls_to_save: -1
+# ball_saves:
+#   debug_recruitmission_ballsave:
+#     active_time: 60s
+#     enable_events: missionselect_recruitmission_selected
+#     disable_events: recruit_mission_ended
+#     hurry_up_time: 10s
+#     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+#     balls_to_save: -1
 
 show_player:
   ball_save_debug_recruitmission_ballsave_timer_start:

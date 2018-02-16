@@ -42,3 +42,6 @@ timers:
         action: restart
       - event: recruit_mission_ended
         action: stop
+      # TODO: Refactor mission ending events with mode type
+      - event: mode_type_mission_stopped
+        action: stop

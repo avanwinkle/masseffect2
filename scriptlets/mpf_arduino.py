@@ -6,7 +6,7 @@ class MPFArduino(Scriptlet):
 
   def on_load(self):
     # TODO: Get this into a config file
-    PORTS = ["/dev/cu.usbmodem1421", "/dev/cu.usbmodem1411"]
+    PORTS = ["/dev/cu.usbmodem1421", "/dev/cu.usbmodem1411", "/dev/cu.usbmodemFA131"]
     ser = None
     # Look for a device on the given port, if not found then abort this Scriptlet
     for port in PORTS:

@@ -497,12 +497,12 @@ lights:
 coils:
   c_flipper_left_main:
     number: 8-0
-    default_pulse_ms: 30
-    default_hold_power: 0.1
+    default_pulse_ms: 35
+    default_hold_power: 0.2
   c_flipper_right_main:
     number: 8-5
-    default_pulse_ms: 30
-    default_hold_power: 0.1
+    default_pulse_ms: 35
+    default_hold_power: 0.2
   c_plunger:
     number: 9-1
     default_pulse_ms: 20

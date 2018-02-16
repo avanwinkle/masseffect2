@@ -27,6 +27,8 @@ config:
   - global_overlord.yaml
 
 event_player:
-  mode_global_started:ga
+  mode_global_started:
     - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
     - start_mode_arrival{device.achievements.collectorship.state=="complete"}
+  ball_will_end:
+    - recruit_mission_ended # Stop the timer if a recruit mission is going

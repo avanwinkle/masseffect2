@@ -11,7 +11,7 @@
 mode:
   start_events: start_mode_field
   stop_events: stop_mode_field
-  priority: 500
+  priority: 310
 
 config:
   - field_recruit.yaml

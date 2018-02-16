@@ -270,6 +270,12 @@ sounds:
     fade_in: 500ms
     fade_out: 1s
 
+track_player:
+  ball_will_end:
+    __all__:
+      action: stop_all_sounds
+      fade: 500ms
+
 widget_player:
   levelup:
     levelup_mission:
