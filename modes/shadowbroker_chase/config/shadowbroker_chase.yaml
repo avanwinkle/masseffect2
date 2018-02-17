@@ -1,4 +1,4 @@
-#config_version=5
+ #config_version=5
 
 #####
 # LAIR OF THE SHADOW BROKER: VASIR CHASE
@@ -102,6 +102,8 @@ sound_player:
       action: play
     liara_come_on_shes_getting_away:
       action: play
+    car_takeoff:
+      action: play
   timer_sbchase_timer_complete:
     shadowbroker_vasir_music:
       action: stop
@@ -109,6 +111,7 @@ sound_player:
     liara_we_lost_her:
       action: play
   logicblock_sbchase_counter_hit{remaining>0}: chase_shot_hit_sound
+  shadowbroker_chase_complete: car_crash
   sbchase_shots_off_hit: liara_sound_hurry
   sw_hitbank_active: liara_sound_truck
   # Call-and-response
@@ -121,6 +124,9 @@ sound_player:
   play_liara_youre_enjoying_this: liara_youre_enjoying_this
 
 sound_pools:
+  car_takeoff:
+    sounds: car_takeoff_1, car_takeoff_2
+    track: sfx
   chase_shot_hit_sound:
     sounds: liara_head_on_collision, shepard_there_we_go, shepard_what_kind_of_guns, liara_go_go_go
     track: voice
@@ -147,6 +153,15 @@ sound_pools:
     track: voice
 
 sounds:
+  car_takeoff_1:
+    file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_car_takeoff_01.ogg
+    track: sfx
+  car_takeoff_2:
+    file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_car_takeoff_02.ogg
+    track: sfx
+  car_crash:
+    file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
+    track: sfx
   liara_come_on_shes_getting_away:
     file: DLC_EXP_Part01_Int.640.ogg
     track: voice

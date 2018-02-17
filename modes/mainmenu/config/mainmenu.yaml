@@ -114,3 +114,28 @@ show_player:
       action: stop
     middle_circle_sweep:
       action: stop
+
+sound_player:
+  show_mainmenu: mus_gui_char_create
+  mainmenu_change_career_selected: galaxy_zoom_in
+  mainmenu_career_selected: galaxy_zoom_out
+  mainmenu_item_selected: gui_splashstart
+
+sounds:
+  mus_gui_char_create:
+    file: mus_gui_char_create.wav
+    track: music
+    fade: 500ms
+    mode_end_action: stop
+  galaxy_zoom_in:
+    file: SFXGame.586.ogg
+    track: sfx
+  galaxy_zoom_out:
+    file: SFXGame.587.ogg 
+    track: sfx
+  gui_splashstart:
+    file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
+    track: sfx
+
+
+

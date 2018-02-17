@@ -1,0 +1,255 @@
+#config_version=5
+
+#####
+# Global Sounds
+#
+# These are the general playfield effects that run all the times.
+#####
+
+sound_player:
+  s_plunger_inactive: galaxy_woosh 
+  s_left_ramp_enter_active: bioticcharge_up
+  global_left_ramp_hit: bioticcharge_boom
+  s_right_ramp_enter_active: pull_up
+  global_right_ramp_hit: pull_boom
+  global_left_orbit_hit: singularity_up
+  global_right_orbit_hit: warp_up
+  global_kickback_hit: shockwave_up
+  s_outlane_left_hit: powerdown
+  s_outlane_right_hit: powerdown
+
+sound_pools:
+  bioticcharge_up:
+    sounds: bioticcharge_up_1, bioticcharge_up_2
+  bioticcharge_boom:
+    sounds: bioticcharge_boom_1, bioticcharge_boom_2
+  throw_up:
+    sounds: throw_up_1, throw_up_2, throw_up_3, throw_up_4
+  throw_hit:
+    sounds: throw_hit_1, throw_hit_2
+  throw_boom:
+    sounds: throw_boom_1, throw_boom_2
+  powerdown:
+    sounds: powerdown_hard, powerdown_empty
+  pull_up:
+    sounds: pull_up_1, pull_up_2
+  pull_hit:
+    sounds: pull_hit_1, pull_hit_2
+  shockwave_up:
+    sounds: shockwave_up_1, shockwave_up_2
+  shockwave_hit:
+    sounds: shockwave_hit_1, shockwave_hit_2
+  singularity_up:
+    sounds: singularity_up_1, singularity_up_2
+  singularity_hit:
+    sounds: singularity_hit_1, singularity_hit_2
+  warp_up:
+    sounds: warp_up_1, warp_up_2
+
+sounds:
+  powerdown_hard:
+    file: SFXGame.562.ogg
+    track: sfx
+  powerdown_empty:
+    file: SFXGame.564.ogg
+    track: sfx
+  incinerate_up_1:
+    file: SFXPower_Incinerate.02.ogg
+    track: sfx
+  incinerate_hit_1:
+    file: SFXPower_Incinerate.03.ogg
+    track: sfx
+  incinerate_hit_2:
+    file: SFXPower_Incinerate.04.ogg
+    track: sfx 
+  throw_up_1:
+    file: SFXPower_Throw.01.ogg
+    track: sfx
+  throw_up_2:
+    file: SFXPower_Throw.02.ogg
+    track: sfx
+  throw_up_3:
+    file: SFXPower_Throw.03.ogg
+    track: sfx
+  throw_up_4:
+    file: SFXPower_Throw.04.ogg
+    track: sfx
+  throw_hit_1:
+    file: SFXPower_Throw.05.ogg
+    track: sfx
+  throw_hit_2:
+    file: SFXPower_Throw.06.ogg
+    track: sfx
+  throw_boom_1:
+    file: SFXPower_Throw.09.ogg
+    track: sfx
+  throw_boom_2:
+    file: SFXPower_Throw.10.ogg
+    track: sfx
+  pull_up_1:
+    file: SFXPower_Pull.01.ogg
+    track: sfx
+  pull_up_2:
+    file: SFXPower_Pull.02.ogg
+    track: sfx
+  pull_hit_1:
+    file: SFXPower_Pull.03.ogg
+    track: sfx
+  pull_hit_2:
+    file: SFXPower_Pull.04.ogg
+    track: sfx
+  shockwave_up_1:
+    file: SFXPower_Shockwave.01.ogg
+    track: sfx
+  shockwave_up_2:
+    file: SFXPower_Shockwave.02.ogg
+    track: sfx
+  shockwave_hit_1:
+    file: SFXPower_Shockwave.13.ogg
+    track: sfx
+  shockwave_hit_2:
+    file: SFXPower_Shockwave.14.ogg
+    track: sfx
+  singularity_up_1:
+    file: SFXPower_Singularity.01.ogg
+    track: sfx
+  singularity_up_2:
+    file: SFXPower_Singularity.02.ogg
+    track: sfx
+  singularity_hit_1:
+    file: SFXPower_Singularity.03.ogg
+    track: sfx
+  singularity_hit_2:
+    file: SFXPower_Singularity.04.ogg
+    track: sfx
+  warp_up_1:
+    file: SFXPower_Warp.01.ogg
+  warp_up_2:
+    file: SFXPower_Warp.02.ogg
+  warp_hit:
+    file: SFXPower_Warp.03.ogg
+  singularity_active_1:
+    file: SFXPower_Singularity.09.ogg
+  bioticcharge_up_1:
+    file: SFXPower_BioticCharge.01.ogg
+    track: sfx
+  bioticcharge_up_2:
+    file: SFXPower_BioticCharge.02.ogg
+    track: sfx
+  bioticcharge_boom_1:
+    file: SFXPower_BioticCharge.03.ogg
+    track: sfx
+  bioticcharge_boom_2:
+    file: SFXPower_BioticCharge.04.ogg
+    track: sfx
+  bioticcharge_down:
+    file: SFXPower_BioticCharge.11.ogg
+    track: sfx
+  galaxy_whoosh:
+    file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
+    track: sfx
+
+# These are global shot listeners for making noise, only disabled for recruit shots
+# Logic: enable if first recruit == 3 or second recruit >= 3
+#    inversely, disable if first recruit != 3 and second recruit < 3
+shots:
+  global_left_orbit: # Grunt and Zaeed
+    switch: s_left_orbit
+    enable_events: mode_global_started, disable_recruit_shots
+    disable_events: enable_recruit_shots{current_player.status_grunt != 3 and current_player.status_zaeed < 3 }
+  global_right_orbit: # Mordin and Tali
+    switch: s_right_orbit
+    enable_events: mode_global_started, disable_recruit_shots
+    disable_events: enable_recruit_shots{current_player.status_mordin != 3 and current_player.status_tali < 3 }
+  global_left_ramp: # Garrus and Samara
+    switch: s_left_ramp_exit
+    enable_events: mode_global_started, disable_recruit_shots
+    disable_events: enable_recruit_shots{current_player.status_garrus != 3 and current_player.status_samara < 3 }
+  global_right_ramp: # Kasumi and Thane
+    switch: s_right_ramp_exit
+    enable_events: mode_global_started, disable_recruit_shots
+    disable_events: enable_recruit_shots{current_player.status_kasumi != 3 and current_player.status_thane < 3 }
+  global_kickback: # Jack and Legion
+    switch: s_kickback
+    enable_events: mode_global_started, disable_recruit_shots
+    disable_events: enable_recruit_shots{current_player.status_jack != 3 and current_player.status_legion < 3 }
+
+####
+# NOTES on misc SFXGame sounds
+# 032-036, 075-080, 128-131 : ricochets
+# 100-101 : bullet thuds
+# 160-167 : bullet casing clatters
+# 178-186 : bullet whizz by
+# 190-196 : biotic effects absorbing
+# 213-216 : quick explosions
+# 226-235 : misc battlefield sounds
+# 251-254 : kung fu whiffs
+# 320-330 : warble wobble
+# 336-353 : loading weapons
+# 370-375, 393-397 : powering up electronics
+# 538 : reaper whazaaam
+# 543 : engine powerdown
+# 558-559 : shuttly flybys
+# 562 : powerdown hard stop 
+# 566-567, 581-584 : radar
+# 569-571, 580, 621   : scanner
+# 576 : chime?
+# 585 : ship escape (galaxy map)
+# 586-588 : menu selections
+# 622-631, 638-641 : general GUI interactions (menu, selection)
+# 635-637 : stingers
+# 642 : door opening
+# 643, 761-764  : door bypass
+# 644-696 : beeps and boops, mostly UI
+# 715-722 : squad upgrade ui
+# 735-747 : drone/turret setup
+# 749-752 : stingers for awards/assets
+# 824-826 : big clunks
+# 833 : power collapse
+# 834-839 : misc power/tech noises
+# 844-846 : combo explosions
+# 876 : shield/weapon overheat
+# 879-893 : cocking/loading weapons
+# 918-919 : power whiffs
+# 921-923 : creepy booms
+# 947-956 : machine power ups and downs
+# 964 : stinger for ... Infiltration?
+#####
+# SQUADMATES
+# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg    "Shepard!" (also 00310106, 107)
+# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg    "Shepard's down"
+# en_us_hench_vixen_ss_global_hench_vixen_00310048_m.ogg    "Need Assistance", "Little help?", "I'm Exposed"
+# en_us_hench_vixen_ss_global_hench_vixen_00310066_m.ogg    "Watch out!"
+# en_us_hench_vixen_ss_global_hench_vixen_00310074_m.ogg    "Only one left
+# en_us_hench_vixen_ss_global_hench_vixen_00310083_m.ogg    "Damn it!", "That didn't work", "Shit!"
+# en_us_hench_vixen_ss_global_hench_vixen_00310088_m.ogg    "That was ineffective"
+# en_us_hench_vixen_ss_global_hench_vixen_00310095_m.ogg    "Friendly down"
+# en_us_hench_vixen_ss_global_hench_vixen_00310124_m.ogg    "Nice shot" (through 129)
+# en_us_hench_vixen_ss_global_hench_vixen_00310188_m.ogg    "Perfect!" (lots of good nearby)
+# en_us_hench_vixen_ss_global_hench_vixen_00332051_m.ogg    "Careful, Shepard" (also 52)
+#
+# SHEPARD
+# en_us_player_f_ss_global_player_female_00288377_f.ogg     "I'm hit"
+# en_us_player_f_ss_global_player_female_00288378_f.ogg     "Damn it"
+# en_us_player_f_ss_global_player_female_00314495_f.ogg     "Deploying medigel" (also 96) 
+# en_us_player_f_ss_global_player_female_00314497_f.ogg     "Wake up! That's an order" also 98)
+# en_us_player_f_ss_global_player_female_00314499_f.ogg     "On your feet, soldier" (also 500)
+# en_us_player_f_ss_global_player_female_00314501_f.ogg     "First aid deployed" (also 502)
+# en_us_player_f_ss_global_player_female_00333977_f.ogg     "This should come in handy", "I'll take it", "We can use this" (through 999)
+# en_us_player_f_ss_global_player_female_00334010_f.ogg     "Can't do it yet", "Need a second", "Not ready yet"
+# en_us_player_f_ss_global_player_female_00334232_f.ogg     "Running on empty"
+# en_us_player_f_ss_global_player_female_00337524_f.ogg     "Out of clips" (also 527)
+#
+# EDI
+# en_us_hench_ai_nor_ai_edi_hint_h_00333682_m.ogg "Something on our sensors" (also 683)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333684_m.ogg "I have found something" (also 685)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333686_m.ogg "Scans have found something" (also 687)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333689_m.ogg "Probe launched", "Launching Probe", "Probe away" (through 694)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333696_m.ogg "Anomaly detected" (through 699)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.ogg "I am receiving a distress signal" (through 704) 
+# en_us_hench_ai_nor_ai_edi_hint_h_00345722_m.ogg "Research projects: Iridium"
+# en_us_hench_ai_nor_ai_edi_hint_h_00345723_m.ogg "Research projects: Platinum"
+# en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.ogg "Research projects: Palladium"
+#####
+
+

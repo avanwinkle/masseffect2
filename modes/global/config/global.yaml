@@ -25,6 +25,7 @@ config:
   - global_shadowbroker.yaml
   - global_upgrades.yaml
   - global_overlord.yaml
+  - global_sounds.yaml
 
 event_player:
   mode_global_started:
