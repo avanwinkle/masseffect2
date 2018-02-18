@@ -3,6 +3,7 @@ show_player:
   mode_field_started:
     missions_available_show{current_player.available_missions>0}:
       action: play
+      sync_ms: 600
   player_available_missions{value>0}:
     missions_available_show:
       action: play
@@ -154,10 +155,10 @@ show_player:
 
 shows:
   missions_available_show:
-    - time: 0
+    - duration: 500ms
       lights:
         l_left_ramp_arrow_clear: white
-    - time: '+1'
+    - duration: 500ms
       lights:
         l_left_ramp_arrow_clear: black
   recruits_lit_show:

@@ -42,7 +42,7 @@ slides:
   resume_game_slide:
     widgets:
       - type: text
-        text: Resume Game
+        text: Continue Game
         style: savegame_title
       - type: text
         text: (career_name)
@@ -50,9 +50,9 @@ slides:
   new_game_slide:
     widgets:
       - type: text
-        text: Restart Career
+        text: Restart Game
         style: savegame_title
-      - type: text  
+      - type: text
         text: (career_name)
         style: savegame_playername
   career_select_slide:
@@ -123,15 +123,17 @@ sound_player:
 
 sounds:
   mus_gui_char_create:
-    file: mus_gui_char_create.wav
+    file: mus_reconstruction_a.ogg
     track: music
+    volume: 0.5
+    start_at: 3s
     fade: 500ms
     mode_end_action: stop
   galaxy_zoom_in:
     file: SFXGame.586.ogg
     track: sfx
   galaxy_zoom_out:
-    file: SFXGame.587.ogg 
+    file: SFXGame.587.ogg
     track: sfx
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg

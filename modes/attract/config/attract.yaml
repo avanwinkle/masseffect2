@@ -15,3 +15,15 @@ show_player:
       action: stop
     middle_circle_sweep:
       action: stop
+
+sound_player:
+  mode_attract_started:
+    mus_main_menu:
+      action: play
+      mode_end_action: stop
+
+sounds:
+  mus_main_menu:
+    file: mus_main_menu.ogg
+    track: music
+    fade_out: 1s

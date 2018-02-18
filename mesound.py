@@ -105,15 +105,27 @@ class RequiredSounds(object):
     self._allconfigs = {} # Key: mode/config name, Value: ModeSounds object
     self._sounds_by_filename = {} # Key: array of filenames, Value: ModeSounds object
     self._allsoundfiles = []
+
+    # Track modes that are imported into parent modes, so we don't scan them twice
+    imported_configs = []
+
     for path, dirs, files in os.walk('modes'):
-      for file in files:
-        if file.endswith('.yaml'):
-          configfilename = file[:-5]
-          conf = ConfigProcessor.load_config_file('{}/{}'.format(path,file), "mode")
+      for filename in files:
+        if filename.endswith('.yaml'):
+          configfilename = filename[:-5]
+          conf = ConfigProcessor.load_config_file('{}/{}'.format(path,filename), "mode")
           sounds = ModeSounds(configfilename)
           sounds.parseConfig(conf)
           if len(sounds) > 0:
             self._allconfigs[configfilename] = sounds
+
+          for importedconfigname in conf.get('config', []):
+            imported_configs.append(importedconfigname[:-5])
+
+    # Wait until all configs have been imported, because load order is unpredictable
+    for configfilename in imported_configs:
+      if configfilename in self._allconfigs:
+        del self._allconfigs[configfilename]
 
   def getAllConfigs(self):
     return self._allconfigs
@@ -163,7 +175,7 @@ class ModeSounds(object):
     self.name = modeName
 
   def parseConfig(self, modeConfig):
-    if not 'sounds' in modeConfig or not modeConfig['sounds']:
+    if not modeConfig.get('sounds'):
       return self
 
     for sound in modeConfig['sounds'].values():

@@ -1,10 +1,12 @@
 # config_version=5
 mode:
   start_events: ball_starting
+  stop_events: ball_will_end
   priority: 100
 
 config:
   - base_debug.yaml
+  - base_medigel.yaml
 
 achievements:
   # SHADOW BROKER
@@ -48,9 +50,10 @@ event_player:
   mode_base_started:
     - start_mode_pause
     - start_mode_global
-    - start_mode_field
     - start_mode_lockhandler
     - enable_orbitswitches
+  mode_global_started: # Wait for global to start before field
+    - start_mode_field
   # REFACTOR MODES
   mode_type_wizard_started:
     - stop_mode_global
@@ -108,8 +111,13 @@ ball_saves:
     active_time: 20s
     grace_period: 2s
     hurry_up_time: 5s
-    enable_events: mode_base_started
-    timer_start_events: playfield_active
+    enable_events:
+      - mode_base_started
+    timer_start_events:
+      - balldevice_bd_plunger_ball_eject_success #mode_base_started
+    disable_events:
+      - ball_will_end
+      - ball_save_recruitsave_enabled # Only allow one active save at a time
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -177,18 +185,20 @@ shots:
 
 show_player:
   ball_save_default_enabled:
-    ball_save_show:
+    ball_save_preshow:
       action: play
-      loops: 0
   ball_save_default_timer_start:
+    ball_save_preshow:
+      action: stop
     ball_save_show:
       action: play
       speed: 3
+      priority: 10
   ball_save_default_hurry_up:
     ball_save_show:
       action: play
       speed: 9
-  ball_save_default_timer_grace_period:
+  ball_save_default_grace_period:
     ball_save_show:
       action: stop
   ball_save_default_disabled:
@@ -196,6 +206,9 @@ show_player:
       action: stop
 
 shows:
+  ball_save_preshow:
+    - lights:
+        l_ball_save: on
   ball_save_show:
     - time: 0
       lights:

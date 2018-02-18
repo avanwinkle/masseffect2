@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_recruitkasumi
-  stop_events: stop_mode_recruitkasumi, stop_recruitmission
+  stop_events: stop_mode_recruitkasumi, stop_recruitmission, stop_missions
   events_when_started: mode_type_mission_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
@@ -312,17 +312,17 @@ sound_player:
 
 sounds:
   recruit_music_kasumi_1:
-    file: "03 Infiltration.ogg"
+    file: KAS.03.Infiltration.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:
-    file: "02 Making Our Escape.ogg"
+    file: KAS.02.Making_Our_Escape.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_3:
-    file: "01 Death from Above.ogg"
+    file: KAS.01.Death_from_Above.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s

@@ -1,0 +1,65 @@
+#config_version=5
+
+# Can we throw a ball out to avoid ball save events?
+
+shots:
+  medigel_shot:
+    switch: s_outlane_left, s_outlane_right
+    profile: medigel_profile
+    enable_events: levelup
+    disable_events: medigel_save_shot_hit, ball_will_end
+  medigel_save_shot:
+    hit_events: medigel_shot_hit{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
+    enable_events: player_shot_medigel_shot_enabled
+    disable_events: medigel_save_shot_hit
+
+shot_profiles:
+  medigel_profile:
+    show: medigel_show
+    show_when_disabled: false
+    states:
+      - name: lit
+
+shows:
+  medigel_show:
+    - lights:
+        l_left_outlane: on
+        l_right_outlane: on
+
+sound_player:
+  medigel_shot_hit: medigel_sound
+  ball_save_default_saving_ball: medigel_sound
+
+sound_pools:
+  medigel_sound:
+    sounds: deploying_medigel_1, deploying_medigel_2, on_your_feet_1, on_your_feet_2, first_aid_1, first_aid_2
+    type: random_force_all
+    track: voice
+    volume: 1
+
+sounds:
+  deploying_medigel_1:
+    file: en_us_player_f_ss_global_player_female_00314495_f.ogg
+    track: voice
+    max_queue_time: 3s
+  deploying_medigel_2:
+    file: en_us_player_f_ss_global_player_female_00314496_f.ogg
+    track: voice
+    max_queue_time: 3s
+  on_your_feet_1:
+    file: en_us_player_f_ss_global_player_female_00314499_f.ogg
+    track: voice
+    max_queue_time: 3s
+  on_your_feet_2:
+    file: en_us_player_f_ss_global_player_female_00314500_f.ogg
+    track: voice
+    max_queue_time: 3s
+  first_aid_1:
+    file: en_us_player_f_ss_global_player_female_00314501_f.ogg
+    track: voice
+    max_queue_time: 3s
+  first_aid_2:
+    file: en_us_player_f_ss_global_player_female_00314502_f.ogg
+    track: voice
+    max_queue_time: 3s
+

@@ -7,7 +7,7 @@
 #####
 
 sound_player:
-  s_plunger_inactive: galaxy_woosh 
+  s_plunger_inactive: galaxy_woosh
   s_left_ramp_enter_active: bioticcharge_up
   global_left_ramp_hit: bioticcharge_boom
   s_right_ramp_enter_active: pull_up
@@ -15,36 +15,55 @@ sound_player:
   global_left_orbit_hit: singularity_up
   global_right_orbit_hit: warp_up
   global_kickback_hit: shockwave_up
-  s_outlane_left_hit: powerdown
-  s_outlane_right_hit: powerdown
+  s_outlane_left_active: powerdown
+  s_outlane_right_active: powerdown
+  s_return_lane_left_active: shuttle_flyby
+  s_return_lane_right_active: shuttle_flyby
 
 sound_pools:
   bioticcharge_up:
     sounds: bioticcharge_up_1, bioticcharge_up_2
+    track: sfx
   bioticcharge_boom:
     sounds: bioticcharge_boom_1, bioticcharge_boom_2
+    track: sfx
   throw_up:
     sounds: throw_up_1, throw_up_2, throw_up_3, throw_up_4
+    track: sfx
   throw_hit:
     sounds: throw_hit_1, throw_hit_2
+    track: sfx
   throw_boom:
     sounds: throw_boom_1, throw_boom_2
+    track: sfx
   powerdown:
     sounds: powerdown_hard, powerdown_empty
+    track: sfx
   pull_up:
     sounds: pull_up_1, pull_up_2
+    track: sfx
   pull_hit:
     sounds: pull_hit_1, pull_hit_2
+    track: sfx
   shockwave_up:
     sounds: shockwave_up_1, shockwave_up_2
+    track: sfx
   shockwave_hit:
     sounds: shockwave_hit_1, shockwave_hit_2
+    track: sfx
   singularity_up:
     sounds: singularity_up_1, singularity_up_2
+    track: sfx
   singularity_hit:
     sounds: singularity_hit_1, singularity_hit_2
+    track: sfx
   warp_up:
     sounds: warp_up_1, warp_up_2
+    track: sfx
+  shuttle_flyby:
+    sounds: shuttle_flyby_1, shuttle_flyby_2
+    track: sfx
+    volume: 0.5
 
 sounds:
   powerdown_hard:
@@ -61,7 +80,7 @@ sounds:
     track: sfx
   incinerate_hit_2:
     file: SFXPower_Incinerate.04.ogg
-    track: sfx 
+    track: sfx
   throw_up_1:
     file: SFXPower_Throw.01.ogg
     track: sfx
@@ -87,16 +106,16 @@ sounds:
     file: SFXPower_Throw.10.ogg
     track: sfx
   pull_up_1:
-    file: SFXPower_Pull.01.ogg
+    file: SFXPower_Pull.1.ogg
     track: sfx
   pull_up_2:
-    file: SFXPower_Pull.02.ogg
+    file: SFXPower_Pull.2.ogg
     track: sfx
   pull_hit_1:
-    file: SFXPower_Pull.03.ogg
+    file: SFXPower_Pull.3.ogg
     track: sfx
   pull_hit_2:
-    file: SFXPower_Pull.04.ogg
+    file: SFXPower_Pull.4.ogg
     track: sfx
   shockwave_up_1:
     file: SFXPower_Shockwave.01.ogg
@@ -148,6 +167,13 @@ sounds:
   galaxy_whoosh:
     file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
     track: sfx
+  shuttle_flyby_1:
+    file: SFXGame.558.ogg
+    track: sfx
+  shuttle_flyby_2:
+    file: SFXGame.559.ogg
+    track: sfx
+
 
 # These are global shot listeners for making noise, only disabled for recruit shots
 # Logic: enable if first recruit == 3 or second recruit >= 3
@@ -156,23 +182,23 @@ shots:
   global_left_orbit: # Grunt and Zaeed
     switch: s_left_orbit
     enable_events: mode_global_started, disable_recruit_shots
-    disable_events: enable_recruit_shots{current_player.status_grunt != 3 and current_player.status_zaeed < 3 }
+    disable_events: enable_recruit_shots{current_player.status_grunt!=3} # and current_player.status_zaeed<3}
   global_right_orbit: # Mordin and Tali
     switch: s_right_orbit
     enable_events: mode_global_started, disable_recruit_shots
-    disable_events: enable_recruit_shots{current_player.status_mordin != 3 and current_player.status_tali < 3 }
+    disable_events: enable_recruit_shots{current_player.status_mordin!=3} # and current_player.status_tali<3}
   global_left_ramp: # Garrus and Samara
     switch: s_left_ramp_exit
     enable_events: mode_global_started, disable_recruit_shots
-    disable_events: enable_recruit_shots{current_player.status_garrus != 3 and current_player.status_samara < 3 }
+    disable_events: enable_recruit_shots{current_player.status_garrus!=3} # and current_player.status_samara<3}
   global_right_ramp: # Kasumi and Thane
     switch: s_right_ramp_exit
     enable_events: mode_global_started, disable_recruit_shots
-    disable_events: enable_recruit_shots{current_player.status_kasumi != 3 and current_player.status_thane < 3 }
+    disable_events: enable_recruit_shots{current_player.status_kasumi!=3} # and current_player.status_thane<3}
   global_kickback: # Jack and Legion
     switch: s_kickback
     enable_events: mode_global_started, disable_recruit_shots
-    disable_events: enable_recruit_shots{current_player.status_jack != 3 and current_player.status_legion < 3 }
+    disable_events: enable_recruit_shots{current_player.status_jack!=3} # and current_player.status_legion<3}
 
 ####
 # NOTES on misc SFXGame sounds
@@ -190,7 +216,7 @@ shots:
 # 538 : reaper whazaaam
 # 543 : engine powerdown
 # 558-559 : shuttly flybys
-# 562 : powerdown hard stop 
+# 562 : powerdown hard stop
 # 566-567, 581-584 : radar
 # 569-571, 580, 621   : scanner
 # 576 : chime?
@@ -231,7 +257,7 @@ shots:
 # SHEPARD
 # en_us_player_f_ss_global_player_female_00288377_f.ogg     "I'm hit"
 # en_us_player_f_ss_global_player_female_00288378_f.ogg     "Damn it"
-# en_us_player_f_ss_global_player_female_00314495_f.ogg     "Deploying medigel" (also 96) 
+# en_us_player_f_ss_global_player_female_00314495_f.ogg     "Deploying medigel" (also 96)
 # en_us_player_f_ss_global_player_female_00314497_f.ogg     "Wake up! That's an order" also 98)
 # en_us_player_f_ss_global_player_female_00314499_f.ogg     "On your feet, soldier" (also 500)
 # en_us_player_f_ss_global_player_female_00314501_f.ogg     "First aid deployed" (also 502)
@@ -246,7 +272,7 @@ shots:
 # en_us_hench_ai_nor_ai_edi_hint_h_00333686_m.ogg "Scans have found something" (also 687)
 # en_us_hench_ai_nor_ai_edi_hint_h_00333689_m.ogg "Probe launched", "Launching Probe", "Probe away" (through 694)
 # en_us_hench_ai_nor_ai_edi_hint_h_00333696_m.ogg "Anomaly detected" (through 699)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.ogg "I am receiving a distress signal" (through 704) 
+# en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.ogg "I am receiving a distress signal" (through 704)
 # en_us_hench_ai_nor_ai_edi_hint_h_00345722_m.ogg "Research projects: Iridium"
 # en_us_hench_ai_nor_ai_edi_hint_h_00345723_m.ogg "Research projects: Platinum"
 # en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.ogg "Research projects: Palladium"

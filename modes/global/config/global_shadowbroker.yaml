@@ -94,7 +94,7 @@ show_player:
   mode_global_started:
     sbdrops_show:
       manual_advance: true
-      start_step: device.counters.sbdrops_counter.value % 4 + 1 # Show steps start at 1
+      start_step: device.counters.sbdrops_counter.value % 4 + 1
   logicblock_sbdrops_counter_hit:
     sbdrops_show:
       action: advance

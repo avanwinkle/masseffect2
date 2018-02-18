@@ -113,7 +113,7 @@ class LockHandler(Mode):
     # HOLD:
     # If no mission currently running (i.e. field mode is active) and a mission is available
     # (or if Garrus' mission is about to be, since the ball lock shot is also his mission light shot)
-    elif self.machine.modes.field.active and self.player.available_missions > 0 or self.player.status_garrus == 2:
+    elif self.machine.modes.field.active and (self.player.available_missions > 0 or self.player.status_garrus == 2):
       self.log.debug(" - Field mode is active and missions are available, not going to bypass lock post")
       return
 

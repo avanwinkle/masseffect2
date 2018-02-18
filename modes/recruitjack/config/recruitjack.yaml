@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_recruitjack
-  stop_events: stop_mode_recruitjack, stop_recruitmission
+  stop_events: stop_mode_recruitjack, stop_recruitmission, stop_missions
   events_when_started: mode_type_mission_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500

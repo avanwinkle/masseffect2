@@ -144,12 +144,27 @@ sound_player:
   start_store:
     shep_fave_store:
       action: play
+  sw_standuptarget_active:
+    biotic_hit:
+      action: play
+      volume: 0.5
+  all_storetargets_hit_complete|500ms:
+    biotic_explosion:
+      action: play
 
 sound_pools:
   shep_fave_store:
     type: random_force_all
     sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
     track: voice
+  biotic_hit:
+    sounds: biotic_hit_1, biotic_hit_2, biotic_hit_3, biotic_hit_4, biotic_hit_5, biotic_hit_6
+    type: random_force_all
+    track: sfx
+  biotic_explosion:
+    sounds: biotic_explosion_1, biotic_explosion_2, biotic_explosion_3
+    type: random_force_all
+    track: sfx
 
 sounds:
   shep_fave_store_1:
@@ -164,6 +179,33 @@ sounds:
   shep_fave_store_4:
     file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
     track: voice
+  biotic_hit_1:
+    file: SFXGame.190.ogg
+    track: sfx
+  biotic_hit_2:
+    file: SFXGame.191.ogg
+    track: sfx
+  biotic_hit_3:
+    file: SFXGame.192.ogg
+    track: sfx
+  biotic_hit_4:
+    file: SFXGame.193.ogg
+    track: sfx
+  biotic_hit_5:
+    file: SFXGame.194.ogg
+    track: sfx
+  biotic_hit_6:
+    file: SFXGame.195.ogg
+    track: sfx
+  biotic_explosion_1:
+    file: SFXGame.844.ogg
+    track: sfx
+  biotic_explosion_2:
+    file: SFXGame.845.ogg
+    track: sfx
+  biotic_explosion_3:
+    file: SFXGame.846.ogg
+    track: sfx
 
 scoring:
   all_storetargets_hit:

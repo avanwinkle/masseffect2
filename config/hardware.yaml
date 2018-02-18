@@ -50,8 +50,10 @@ ball_devices:
     ball_switches: s_plunger_lane
     eject_coil: c_plunger
     mechanical_eject: true
-    confirm_eject_type: target # default
+    ball_missing_timeouts: 4s
     eject_timeouts: 3s
+    confirm_eject_type: target # default
+    tags: ball_add_live
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
@@ -59,6 +61,7 @@ ball_devices:
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
     auto_fire_on_unexpected_ball: False
+    confirm_eject_switch: s_plunger_lane
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
@@ -553,6 +556,8 @@ coils:
     number: 8-6
   c_kickback:
     number: 8-3
+    default_pulse_ms: 10
+    pulse_events: pulse_kickback
 
 playfields:
   playfield:

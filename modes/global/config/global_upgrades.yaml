@@ -91,3 +91,42 @@ slides:
       x: 25%
       y: top-12
 
+sound_player:
+  collect_upgrade_shot_hit: upgrade_collected_sound
+
+sound_pools:
+  upgrade_collected_sound:
+    sounds: this_should_come_in_handy, we_can_use_this, this_might_be_useful, ill_take_it, this_is_valuable, this_looks_interesting, oh_whats_this
+    type: random_force_all
+    track: voice
+
+sounds:
+  this_should_come_in_handy:
+    file: en_us_player_f_ss_global_player_female_00333977_f.ogg
+    track: voice
+    max_queue_time: 2s
+  we_can_use_this:
+    file: en_us_player_f_ss_global_player_female_00333980_f.ogg
+    track: voice
+    max_queue_time: 2s
+  this_might_be_useful:
+    file: en_us_player_f_ss_global_player_female_00333981_f.ogg
+    track: voice
+    max_queue_time: 2s
+  ill_take_it:
+    file: en_us_player_f_ss_global_player_female_00333984_f.ogg
+    track: voice
+    max_queue_time: 2s
+  this_is_valuable:
+    file: en_us_player_f_ss_global_player_female_00333989_f.ogg
+    track: voice
+    max_queue_time: 2s
+  this_looks_interesting:
+    file: en_us_player_f_ss_global_player_female_00333997_f.ogg
+    track: voice
+    max_queue_time: 2s
+  oh_whats_this:
+    file: en_us_player_f_ss_global_player_female_00333999_f.ogg
+    track: voice
+    max_queue_time: 2s
+
