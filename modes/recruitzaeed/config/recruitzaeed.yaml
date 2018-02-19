@@ -121,7 +121,7 @@ shows:
   zaeed_show:
     - time: 0
       lights:
-        (leds): FF0000 # color_zaeed
+        (leds): FF4400 #color_zaeed
         l_null: (color)
     - time: '+1'
       lights:

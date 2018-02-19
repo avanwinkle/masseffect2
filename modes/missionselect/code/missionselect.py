@@ -30,7 +30,7 @@ class MissionSelect(Carousel):
       return ['collectorship']
 
     # If not collector ship, passing is always an option
-    items = ['pass']
+    items = []
     if player.achievements['suicidemission'] == "enabled" or DEBUG_SUICIDEMISSION:
       items.append('suicide')
     # For debugging, allow the collector ship to be available but not required
@@ -41,6 +41,8 @@ class MissionSelect(Carousel):
       status = player.vars.get("status_{}".format(mate))
       if (status == 3):
         items.append(mate)
+    # Pass is last
+    items.append('pass')
     return items
 
   def _get_available_items(self):

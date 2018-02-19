@@ -99,21 +99,23 @@ widgets:
       x: right-4
 
 show_player:
-  mode_attract_started:
-    attract_dmd_loop:
-      loops: -1
-      speed: 1
-    middle_circle_sweep:
-      loops: -1
-      speed: 6
-  attract_change_career_highlighted:
-    attract_dmd_loop:
+  show_mainmenu: mainmenu_show
+  mainmenu_item_selected:
+    mainmenu_show:
       action: stop
-  mode_attract_will_stop:
-    attract_dmd_loop:
-      action: stop
-    middle_circle_sweep:
-      action: stop
+
+shows:
+  mainmenu_show:
+    - duration: 1s
+      lights:
+        l_lockdown_rgb:
+          color: red
+          fade: 100ms
+    - duration: 1s
+      lights:
+        l_lockdown_rgb:
+          color: blue
+          fade: 100ms
 
 sound_player:
   show_mainmenu: mus_gui_char_create
@@ -127,7 +129,8 @@ sounds:
     track: music
     volume: 0.5
     start_at: 3s
-    fade: 500ms
+    fade_in: 500ms
+    fade_out: 1s
     mode_end_action: stop
   galaxy_zoom_in:
     file: SFXGame.586.ogg

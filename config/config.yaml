@@ -71,6 +71,7 @@ modes:
   - bonus
   # Environments
   - environment
+  - env_cars
   - env_field
   - env_krogan
   # Collector Ship Modes:

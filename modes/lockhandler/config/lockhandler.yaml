@@ -18,6 +18,7 @@
 
 mode:
   start_events: start_mode_lockhandler # Never stopped
+  stop_events: ball_will_end
   code: lockhandler.LockHandler
   priority: 1000
 
@@ -51,7 +52,7 @@ multiballs:
     shoot_again: 10s
     # enable_events: multiball_lock_overlordlock_full #multiball_lock_overlordlock_locked_ball{total_balls_locked==3}
     # start_events: start_mode_overlordmultiball #mode_overlordmultiball_started
-    reset_events: multiball_overlord_multiball_ended
+    reset_events: multiball_overlord_multiball_ended, ${color_garrus}
     debug: true
 
 shots:
@@ -67,7 +68,7 @@ shot_profiles:
     states:
       - name: lit
         show: overlord_lock_lit
-        sync_ms: 600
+        sync_ms: 1000
 
 show_player:
   mode_type_wizard_started:

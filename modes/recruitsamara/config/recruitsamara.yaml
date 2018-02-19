@@ -128,7 +128,7 @@ shots:
     profile: samara_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: 0037FF # color_samara
+      color: 00FFAA #color_samara
   samara_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: enable_left_ramp_shot
@@ -136,7 +136,7 @@ shots:
     profile: samara_shot_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: 0037FF # color_samara
+      color: 00FFAA #color_samara
   samara_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: enable_right_orbit_shot
@@ -144,7 +144,7 @@ shots:
     profile: samara_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: 0037FF # color_samara
+      color: 00FFAA #color_samara
   samara_right_ramp:
     hit_events: sh_right_ramp_hit
     enable_events: enable_right_ramp_shot
@@ -152,7 +152,7 @@ shots:
     profile: samara_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: 0037FF # color_samara
+      color: 00FFAA #color_samara
   samara_kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_kickback_shot
@@ -160,7 +160,7 @@ shots:
     profile: samara_shot_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: 0037FF # color_samara
+      color: 00FFAA #color_samara
   samara_target1:
     switch: s_target1
     profile: samara_target_profile

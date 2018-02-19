@@ -42,7 +42,7 @@ shots:
       - recruit_lit{squadmate=="garrus"}
     show_tokens:
       leds: shot_shield_garrus
-      color: 0E1B4F #color_garrus
+      color: 0055FF #color_garrus
     tags: envshot_left_ramp
   recruit_grunt_shot:
     hit_events: sh_left_orbit_hit
@@ -54,7 +54,7 @@ shots:
       - recruit_lit{squadmate=="grunt"}
     show_tokens:
       leds: shot_shield_grunt
-      color: ED3A00 #color_grunt
+      color: BB1100 #color_grunt
     tags: envshot_left_orbit
   recruit_jack_shot:
     hit_events: sh_kickback_hit
@@ -66,7 +66,7 @@ shots:
       - recruit_lit{squadmate=="jack"}
     show_tokens:
       leds: shot_shield_jack
-      color: 6F00FF #color_jack
+      color: 4D00CC #color_jack
     tags: envshot_kickback
   recruit_kasumi_shot:
     hit_events: sh_right_ramp_hit
@@ -78,7 +78,7 @@ shots:
       - recruit_lit{squadmate=="kasumi"}
     show_tokens:
       leds: shot_shield_kasumi
-      color: F7F315 #color_kasumi
+      color: EEFF00 #color_kasumi
     tags: envshot_right_ramp
   recruit_legion_shot:
     hit_events: sh_kickback_hit
@@ -102,7 +102,7 @@ shots:
       - recruit_lit{squadmate=="mordin"}
     show_tokens:
       leds: shot_shield_mordin
-      color: BD000A #color_mordin
+      color: 440000 #color_mordin
     tags: envshot_right_orbit
   recruit_samara_shot:
     hit_events: sh_left_ramp_hit
@@ -114,7 +114,7 @@ shots:
       - recruit_lit{squadmate=="garrus"}
     show_tokens:
       leds: shot_shield_samara
-      color: 0037FF #color_samara
+      color: 00FFAA #color_samara
     tags: envshot_left_ramp
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
@@ -126,7 +126,7 @@ shots:
       - recruit_lit{squadmate=="mordin"}
     show_tokens:
       leds: shot_shield_tali
-      color: D323FF #color_tali
+      color: FF11DD #color_tali
     tags: envshot_right_orbit
   recruit_thane_shot:
     hit_events: sh_right_ramp_hit
@@ -138,7 +138,7 @@ shots:
       - recruit_lit{squadmate=="kasumi"}
     show_tokens:
       leds: shot_shield_thane
-      color: 00FF00 #color_thane
+      color: 00FF11 #color_thane
     tags: envshot_right_ramp
   recruit_zaeed_shot:
     hit_events: sh_left_orbit_hit
@@ -150,5 +150,5 @@ shots:
       - recruit_lit{squadmate=="grunt"}
     show_tokens:
       leds: shot_shield_zaeed
-      color: FF0000 #color_zaeed
+      color: FF4400 #color_zaeed
     tags: envshot_left_orbit

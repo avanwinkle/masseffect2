@@ -25,7 +25,6 @@ mode:
   #   mode: mode_(name)_starting, mode_(name)_stopping
   use_wait_queue: true
 
-
 mode_settings:
   # All squadmates are included via missionselect.py, no need to list them here
   selectable_items: pass, suicide
@@ -34,26 +33,96 @@ mode_settings:
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards
 
 event_player:
-  mode_missionselect_started: flippers_off
-  missionselect_item_selected: flippers_on
+  mode_missionselect_started:
+    - disable_recruit_shots
+    - flippers_off
+  missionselect_item_selected:
+    - enable_recruit_shots
+    - flippers_on
 
 show_player:
   mode_missionselect_started: missionselect_show
   mode_missionselect_will_stop:
     missionselect_show:
       action: stop
+    missionselect_highlight_show:
+      action: stop
+  missionselect_pass_highlighted:
+    missionselect_highlight_show:
+      show_tokens:
+        leds: shot_shields
+        color: black
+  missionselect_collectorship_highlighted:
+    missionselect_highlight_show:
+      show_tokens:
+        leds: shot_shields
+        color: FF2200
+  missionselect_recruit_highlighted:
+    missionselect_highlight_show{squadmate=="garrus"}:
+      show_tokens:
+        leds: shot_shield_garrus
+        color: 0055FF
+    missionselect_highlight_show{squadmate=="grunt"}:
+      show_tokens:
+        leds: shot_shield_grunt
+        color: BB1100
+    missionselect_highlight_show{squadmate=="jack"}:
+      show_tokens:
+        leds: shot_shield_jack
+        color: 4D00CC #color_jack
+    missionselect_highlight_show{squadmate=="kasumi"}:
+      show_tokens:
+        leds: shot_shield_kasumi
+        color: EEFF00 #color_kasumi
+    missionselect_highlight_show{squadmate=="legion"}:
+      show_tokens:
+        leds: shot_shield_legion
+        color: FFFFFF #color_legion
+    missionselect_highlight_show{squadmate=="mordin"}:
+      show_tokens:
+        leds: shot_shield_mordin
+        color: 440000 #color_mordin
+    missionselect_highlight_show{squadmate=="samara"}:
+      show_tokens:
+        leds: shot_shield_samara
+        color: 00FFAA #color_samara
+    missionselect_highlight_show{squadmate=="tali"}:
+      show_tokens:
+        leds: shot_shield_tali
+        color: FF11DD #color_tali
+    missionselect_highlight_show{squadmate=="thane"}:
+      show_tokens:
+        leds: shot_shield_thane
+        color: 00FF11 #color_thane
+    missionselect_highlight_show{squadmate=="zaeed"}:
+      show_tokens:
+        leds: shot_shield_zaeed
+        color: FF4400 #color_zaeed
 
 shows:
   missionselect_show:
     - lights:
         gi: off
+        l_left_ramp_arrow_clear: off
+        shot_shields: off
+  missionselect_highlight_show:
+    - duration: 500ms
+      lights:
+        (leds): (color)
+    - duration: 500ms
+      lights:
+        (leds): black
+        (l_null): (color)
 
 slide_player:
-  missionselect_pass_highlighted:
-    missionselect_intro_slide{current_player.missionselect_init==0}:
+  mode_missionselect_started:
+    missionselect_intro_slide:
       action: play
-    missionselect_pass_slide{current_player.missionselect_init!=0}:
-      action: play
+      expire: 3s
+  sw_flipper_active:
+    missionselect_intro_slide:
+      action: remove
+  missionselect_pass_highlighted: missionselect_pass_slide
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
   # Recruitment Missions:

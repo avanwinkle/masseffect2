@@ -119,12 +119,16 @@ shots:
 
 shows:
   door_shot_show:
-    - time: 0
+    - duration: 500ms
       lights:
-        (led): green
-    - time: +1
+        (led):
+          color: 55FF00 #color_door_green
+          fade: 200ms
+    - duration: 500ms
       lights:
-        (led): black
+        (led):
+          color: black
+          fade: 200ms
 
 slide_player:
   close_doors_hit_complete:

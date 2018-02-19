@@ -26,6 +26,9 @@ mode:
   priority: 850
 
 event_player:
+  mode_shadowbroker_chase_started:
+    set_environment:
+      env: field
   timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
   vasir_shot_health_hit:
@@ -187,6 +190,9 @@ sound_player:
       mode_end_action: stop
     vasir_start_sound:
       action: play
+    shuttle_land:
+      action: play
+      volume: 0.2
   timer_vasir_timer_complete: vasir_move_sound
   vasir_shot_barrier_hit: vasir_hit_sound
   vasir_shot_armor_hit: vasir_hit_sound
@@ -217,6 +223,9 @@ sound_pools:
     track: voice
 
 sounds:
+  shuttle_land:
+    file: biod_krogar_100landing.Wwise_KroGar_Streaming.env_krogar_shuttle_land.ogg
+    track: sfx
   vasir_this_will_be_fun:
     vasir_:
     file: DLC_EXP_Part01_Int.282.ogg

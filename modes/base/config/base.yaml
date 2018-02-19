@@ -2,6 +2,7 @@
 mode:
   start_events: ball_starting
   stop_events: ball_will_end
+  # code: base.Base
   priority: 100
 
 config:
@@ -57,10 +58,9 @@ event_player:
     - stop_mode_lockhandler
     - stop_mode_environment
     - stop_wizards
-  # REFACTOR MODES
   mode_type_wizard_started:
     - stop_mode_global
-  mode_type_wizard_stopped:
+  mode_type_wizard_stopped{not mode.base.stopping}:
     - start_mode_global
 
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
@@ -236,6 +236,7 @@ shows:
         l_dropbank_shield_rgb: black
         l_hitbank_shield_rgb: black
         l_null: (color)
+    - time: '+1'
   flash_color_show:
     - time: 0
       lights:
@@ -256,6 +257,10 @@ slide_player:
   levelup:
     levelup_slide:
       expire: 5s
+  n7_assignment_shot_hit:
+    n7_complete_slide:
+      priority: 600
+      expire: 5s
 
 slides:
   levelup_slide:
@@ -266,6 +271,10 @@ slides:
         style: dmd_big
         anchor_y: bottom
         y: 10
+  n7_complete_slide:
+    widgets:
+      - type: text
+        text: Assignment Complete!
 
 sound_player:
   levelup:
@@ -285,8 +294,8 @@ sounds:
       delay: 2s
       attack: 2s
       attenuation: 0
-      release_point: 3s
-      release: 2s
+      release_point: 5s
+      release: 3s
 
 track_player:
   ball_will_end:

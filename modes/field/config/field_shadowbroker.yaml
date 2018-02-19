@@ -39,12 +39,15 @@ show_player:
     shadowbroker_lit_show:
       action: play
       priority: 10
-      sync_ms: 600
-  achievememnt_vasir_enabled:
+      sync_ms: 1000
+  achievement_vasir_state_enabled:
     shadowbroker_lit_show:
       action: play
       priority: 10
-      sync_ms: 600
+      sync_ms: 1000
+  mode_field_will_stop:
+    shadowbroker_lit_show:
+      action: stop
 
 shows:
   shadowbroker_lit_show:

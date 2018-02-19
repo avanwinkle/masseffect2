@@ -5,15 +5,21 @@ event_player:
 show_player:
   mode_attract_started:
     attract_dmd_loop:
-      loops: -1
-      speed: 1
+      action: play
     middle_circle_sweep:
       loops: -1
       speed: 6
+    flash:
+      action: play
+      speed: 6
+      show_tokens:
+        leds: l_start_button
   mode_attract_will_stop:
     attract_dmd_loop:
       action: stop
     middle_circle_sweep:
+      action: stop
+    flash:
       action: stop
 
 sound_player:

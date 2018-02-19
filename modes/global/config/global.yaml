@@ -36,7 +36,7 @@ event_player:
     - stop_missions
   mode_type_mission_started:
     - stop_mode_field
-  mode_type_mission_stopped:
+  mode_type_mission_stopped{not mode["global"].stopping}:
     - start_mode_field
   kickback_override_hit: pulse_kickback
 

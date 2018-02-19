@@ -1,0 +1,40 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_cars
+  stop_events: stop_mode_env_cars
+  priority: 1000
+
+sound_player:
+  envshot_left_ramp_hit: shuttle_sound
+  envshot_right_ramp_hit: shuttle_sound
+  envshot_left_orbit_hit: shuttle_sound
+  envshot_right_orbit_hit: shuttle_sound
+  envshot_kickback_hit: shuttle_sound
+
+sound_pools:
+  shuttle_sound:
+    sounds: shuttle_in_1, shuttle_in_2, shuttle_in_3, shuttle_out_1, shuttle_out_2
+    track: sfx
+    type: random_force_all
+
+sounds:
+  shuttle_in_1:
+    file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_shuttle_in_01.ogg
+    track: sfx
+    volume: 0.1
+  shuttle_in_2:
+    file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_shuttle_in_02.ogg
+    track: sfx
+    volume: 0.1
+  shuttle_out_1:
+    file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_shuttle_out_01.ogg
+    track: sfx
+    volume: 0.1
+  shuttle_in_3:
+    file: biod_mptowr.Wwise_MPTowr_NonStreaming.env_mptowr_shuttle_in.ogg
+    track: sfx
+    volume: 0.1
+  shuttle_out_2:
+    file: biod_mptowr.Wwise_MPTowr_NonStreaming.env_mptowr_shuttle_out.ogg
+    track: sfx
+    volume: 0.1

@@ -10,7 +10,7 @@ spike:
   runtime_baud: 1152000 #2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
-  use_send_key: true
+  # use_send_key: true
 
 machine:
   balls_installed: 6
@@ -18,7 +18,7 @@ machine:
 
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
-    fps: 30
+    fps: 15
     gamma: 1
     only_send_changes: true
     source_display: dmd
@@ -381,25 +381,25 @@ lights:
     number: 8-3
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 9-5
-    tags: color_shield_yellow
+    tags: color_shields, color_shield_yellow
   l_shield_greyjoy: # Sigil Greyjoy [#25]
     number: 9-7
-    tags: color_shield_purple
+    tags: color_shields, color_shield_purple
   l_shield_lannister: # Sigil Lannister [#24]
     number: 9-6
-    tags: color_shield_red
+    tags: color_shields, color_shield_red
   l_shield_martell: # Sigil Martell [#27]
     number: 9-9
-    tags: color_shield_orange
+    tags: color_shields, color_shield_orange
   l_shield_stark: # Sigil Stark [#22]
     number: 9-4
-    tags: color_shield_white
+    tags: color_shields, color_shield_white
   l_shield_targaryen: # Sigil Targaryen [#20]
     number: 9-2
-    tags: color_shield_blue
+    tags: color_shields, color_shield_blue
   l_shield_tyrell: # Sigil Tyrell [#26]
     number: 9-8
-    tags: color_shield_green
+    tags: color_shields, color_shield_green
   l_standup_1: # Standup 1 [#44]
     number: 9-37
     tags: target_lights
@@ -428,6 +428,7 @@ lights:
         number: 9-30
       blue:
         number: 9-31
+    tags: shot_shields
   l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
     type: rgb
     channels:
@@ -487,6 +488,7 @@ lights:
         number: 9-43
       blue:
         number: 9-44
+    tags: shot_shields
   l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
     type: rgb
     channels:
@@ -579,7 +581,7 @@ sound_system:
       simultaneous_sounds: 7
     music:
       volume: 0.8
-      simultaneous_sounds: 1
+      simultaneous_sounds: 2
   buffer: 2048  # previous value was 512
   frequency: 44100
   channels: 1

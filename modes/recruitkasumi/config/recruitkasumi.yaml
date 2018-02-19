@@ -265,28 +265,58 @@ slides:
         anchor_y: top
         y: middle-2
         z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_slide_1:
     widgets:
       - type: text
         text: Voiceprint Recorded
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_slide_2:
     widgets:
       - type: text
         text: DNA Sample Obtained
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_slide_3:
     widgets:
       - type: text
         text: "Password: Perrugia"
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_alarm_slide:
     widgets:
       - type: text
         text: "Alarm Tripped!"
         anchor_y: bottom
         y: middle+2
+        z: 1
       - type: text
         text: "(count) until failure"
         anchor_y: top
         y: middle-2
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_failed_slide:
     widgets:
       - type: text
@@ -297,18 +327,23 @@ sound_player:
     recruit_music_kasumi_1:
       action: play
       loops: -1
+      fade_in: 1s
   # First alarm hit, increase the music tension
   logicblock_kasumi_alarms_counter_hit{value==1}:
     recruit_music_kasumi_1:
       action: stop
+      fade_out: 2s
     recruit_music_kasumi_2:
       action: play
+      fade_in: 1s
   # Second alarm hit, more tension
   logicblock_kasumi_alarms_counter_hit{value==2}:
     recruit_music_kasumi_2:
       action: stop
+      fade_out: 2s
     recruit_music_kasumi_3:
       action: play
+      fade_in: 1s
 
 sounds:
   recruit_music_kasumi_1:

@@ -21,9 +21,21 @@ mode:
   priority: 800
 
 event_player:
+  mode_shadowbroker_chase_started:
+    set_environment:
+      env: cars
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete: stop_mode_shadowbroker_chase
   timer_sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
+  # If the ball is saved, the mode is ended
+  ball_save_sbchase_save_saving_ball: stop_mode_shadowbroker_chase
+
+ball_saves:
+  sbchase_save:
+    enable_events: mode_shadowbroker_chase_started
+    disable_events: shadowbroker_chase_complete
+    balls_to_save: 1
+    auto_launch: true
 
 counters:
   sbchase_counter:
@@ -55,27 +67,32 @@ shots:
     profile: chaseprofile
     show_tokens:
       led: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
   sbchase_left_orbit:
     advance_events: mode_shadowbroker_chase_started
     hit_events: sh_left_orbit_hit
     profile: chaseprofile
     show_tokens:
       led: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   sbchase_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: chaseprofile
     show_tokens:
       led: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
   sbchase_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: chaseprofile
     show_tokens:
       led: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
   sbchase_kickback:
     hit_events: sh_kickback_hit
     profile: chaseprofile
     show_tokens:
       led: l_kickback_shield_rgb
+    tags: envshot_kickback
 
 slide_player:
   mode_shadowbroker_chase_started: sbchase_slide
@@ -101,21 +118,33 @@ sound_player:
     shadowbroker_vasir_music:
       action: play
       volume: 0.3
+      fade_in: 0
+      fade_out: 2s
+      mode_end_action: stop
     liara_come_on_shes_getting_away:
       action: play
+      volume: 1
     car_takeoff:
       action: play
       volume: 0.1
   timer_sbchase_timer_complete:
-    shadowbroker_vasir_music:
-      action: stop
-      fade_out: 2s
     liara_we_lost_her:
       action: play
+      volume: 1
+  ball_save_sbchase_save_saving_ball:
+    liara_we_lost_her:
+      action: play
+      volume: 1
   logicblock_sbchase_counter_hit{remaining>0}: chase_shot_hit_sound
   shadowbroker_chase_complete: car_crash
-  sbchase_shots_off_hit: liara_sound_hurry
-  sw_hitbank_active: liara_sound_truck
+  sbchase_shots_off_hit:
+    liara_sound_hurry:
+      action: play
+      max_queue_time: 0
+  sw_hitbank_active:
+    liara_sound_truck:
+      action: play
+      max_queue_time: 0
   # Call-and-response
   play_liara_its_a_taxi: liara_its_a_taxi
   play_shepard_im_going: shepard_im_going
@@ -146,16 +175,29 @@ sound_pools:
       - liara_were_losing_her
     track: voice
     type: random_force_all
-    volume: 0.8
+    volume: 1
+    ducking:
+      target: music
+      delay: 0
+      attack: 200ms
+      attenuation: 0.5
+      release: 200ms
+
   shepard_sound_reply:
     sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_1, shepard_i_know_2, shepard_i_noticed
     track: voice
     type: random_force_all
-    volume: 0.8
+    volume: 1
+    ducking:
+      target: music
+      delay: 0
+      attack: 200ms
+      attenuation: 0.5
+      release: 200ms
   shepard_sound_truck:
     sounds: shepard_i_know_1, shepard_i_know_2, shepard_again
     track: voice
-    volume: 0.8
+    volume: 1
 
 sounds:
   car_takeoff_1:
@@ -170,7 +212,7 @@ sounds:
   liara_come_on_shes_getting_away:
     file: DLC_EXP_Part01_Int.640.ogg
     track: voice
-    volume: 0.7
+    volume: 1
     max_queue_time: 1s
   liara_shes_getting_away_1:
     file: DLC_EXP_Part01_Int.313.ogg
@@ -185,6 +227,7 @@ sounds:
     file: DLC_EXP_Part01_Int.650.ogg
     track: voice
     max_queue_time: 1s
+    volume: 1
   liara_truck_1:
     file: DLC_EXP_Part01_Int.665.ogg
     events_when_stopped: play_shepard_sound_truck
@@ -240,6 +283,7 @@ sounds:
     events_when_stopped: play_shepard_i_hear_those_can_be_bad
     track: voice
     max_queue_time: 3s
+    volume: 1
   liara_its_a_taxi:
     file: DLC_EXP_Part01_Int.667.ogg
     track: voice
@@ -280,6 +324,7 @@ sounds:
     file: DLC_EXP_Part01_Int.662.ogg
     track: voice
     max_queue_time: 1s
+    volume: 1
   shepard_im_on_her:
     file: DLC_EXP_Part01_Int.664.ogg
     track: voice
@@ -304,6 +349,7 @@ sounds:
     file: DLC_EXP_Part01_Int.654.ogg
     track: voice
     max_queue_time: 1s
+    volume: 1
 
 timers:
   sbchase_timer:

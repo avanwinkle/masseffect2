@@ -101,7 +101,7 @@ slides:
       - type: rectangle
         width: 128
         height: 32
-        color: 222222
+        color: black
         z: 1
   overlord_ball_locked_slide_full:
     widgets:

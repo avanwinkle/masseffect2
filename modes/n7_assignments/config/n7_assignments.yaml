@@ -78,8 +78,7 @@ scoring:
 shot_groups:
   n7_assignment_shot:
     shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_hahne_kedar_facility_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
-    rotate_right_events: s_bumper_right_active
-    rotate_left_events: s_bumber_left_active
+    rotate_right_events: sw_bumper_active # Bumper hits determine randomness
 
 shots:
   n7_anomalous_weather_shot:
@@ -171,13 +170,11 @@ slide_player:
     n7_intro_slide:
       action: play
       expire: 5s
+      priority: 5
   set_n7_mission:
     n7_hurryupslide:
       action: play
-  n7_assignment_shot_hit:
-    n7_complete_slide:
-      action: play
-      expire: 3s
+      priority: 1
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
@@ -201,10 +198,6 @@ slides:
         y: top-2
         font_size: 8
         font_name: pixelmix-8
-  n7_complete_slide:
-    widgets:
-      type: text
-      text: Assignment Complete!
   n7_hurryupslide:
     widgets:
       - type: image
@@ -230,11 +223,8 @@ sound_player:
       action: play
       loops: -1
       fade_in: 1s
-      mode_end_action: stop
-  mode_n7_assignments_will_stop:
-    music_n7:
-      action: stop
       fade_out: 1s
+      mode_end_action: stop
   n7_assignment_shot_hit: assignment_complete
 
 sound_pools:

@@ -129,16 +129,17 @@ show_player:
   logicblock_grunt_shots_counter_hit:
     flash_all_shields_show:
       loops: 6
-      speed: 6
+      speed: 12
+      priority: 100
       show_tokens:
-        color: ED3A00 #color_grunt
+        color: BB1100 #color_grunt
 
 shows:
   grunt_lit_show:
-    - time: 0
+    - duration: 500ms
       lights:
-        (led): ED3A00 #color_grunt
-    - time: +1
+        (led): BB1100 #color_grunt
+    - duration: 500ms
       lights:
         (led): black
 
@@ -146,7 +147,7 @@ sound_player:
   mode_recruitgrunt_started:
     music_recruit_grunt:
       action: play
-      loops: -1
+      mode_end_action: stop
   logicblock_grunt_shots_counter_hit{count<3}: grunt_dialogue
   logicblock_grunt_shots_counter_hit{count==3}: grunt_dialogue_4
   logicblock_grunt_shots_counter_hit{count==4}: grunt_bossdialogue
