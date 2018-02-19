@@ -1,0 +1,60 @@
+#config_version=5
+mode:
+  start_events: mode_attract_started
+  stop_events: mode_attract_stopped
+  priority: 1000
+  game_mode: false
+  code: colorpicker.ColorPicker
+
+mode_settings:
+  rgb_lights:
+    - l_hitbank_shield_rgb
+    - l_right_ramp_shield_rgb
+    - l_lockdown_rgb
+    - l_left_ramp_shield_rgb
+    - l_left_orbit_shield_rgb
+    - l_kickback_shield_rgb
+    - l_dropbank_shield_rgb
+    - l_right_orbit_shield_rgb
+  white_lights:
+    - l_dropbank_bottom
+    - l_dropbank_middle
+    - l_dropbank_top
+    - l_battering_ram_arrow
+    - l_left_ramp_arrow_green
+
+slide_player:
+  mode_colorpicker_started:
+    colorpicker_slide
+
+slides:
+  colorpicker_slide: []
+
+widget_player:
+  mode_colorpicker_started:
+    colorpicker_widget:
+      slide: colorpicker_slide
+    colorpicker_white_widget:
+      slide: colorpicker_slide
+  colorpicker_color_updated:
+    colorpicker_widget:
+      action: update
+  colorpicker_white_updated:
+    colorpicker_white_widget:
+      action: update
+
+widgets:
+  colorpicker_widget:
+    - type: text
+      text: (color)
+      font_size: 24
+      casing: upper
+  colorpicker_white_widget:
+    - type: text
+      text: (brightness)
+      font_size: 8
+      casing: upper
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
+      y: 2

@@ -1,0 +1,112 @@
+#config_version=5
+keyboard:
+  "'":
+    event: colorpicker
+    params:
+      channel: red
+      direction: up
+  a:
+    event: colorpicker
+    params:
+      channel: red
+      direction: down
+  ",":
+    event: colorpicker
+    params:
+      channel: green
+      direction: up
+  o:
+    event: colorpicker
+    params:
+      channel: green
+      direction: down
+  ".":
+    event: colorpicker
+    params:
+      channel: blue
+      direction: up
+  e:
+    event: colorpicker
+    params:
+      channel: blue
+      direction: down
+  "shift+'":
+    event: colorpicker
+    params:
+      channel: red
+      direction: up
+      scale: micro
+  shift+a:
+    event: colorpicker
+    params:
+      channel: red
+      direction: down
+      scale: micro
+  "shift+,":
+    event: colorpicker
+    params:
+      channel: green
+      direction: up
+      scale: micro
+  shift+o:
+    event: colorpicker
+    params:
+      channel: green
+      direction: down
+      scale: micro
+  "shift+.":
+    event: colorpicker
+    params:
+      channel: blue
+      direction: up
+      scale: micro
+  shift+e:
+    event: colorpicker
+    params:
+      channel: blue
+      direction: down
+      scale: micro
+  p:
+    event: colorpicker
+    params:
+      channel: all
+      direction: up
+  u:
+    event: colorpicker
+    params:
+      channel: all
+      direction: down
+  shift+p:
+    event: colorpicker
+    params:
+      channel: all
+      direction: up
+      scale: micro
+  shift+u:
+    event: colorpicker
+    params:
+      channel: all
+      direction: down
+      scale: micro
+  y:
+    event: colorpicker
+    params:
+      channel: white
+      direction: up
+  i:
+    event: colorpicker
+    params:
+      channel: white
+      direction: down
+  shift+y:
+    event: colorpicker
+    params:
+      channel: white
+      direction: up
+      scale: micro
+  shift+i:
+    event: colorpicker
+    params:
+      channel: white
+      direction: down
+      scale: micro
