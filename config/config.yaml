@@ -1,8 +1,8 @@
 # config_version=5
 config:
 - hardware.yaml
-# - keyboard.yaml
-- keyboard_colorpicker.yaml
+- keyboard.yaml
+# - keyboard_colorpicker.yaml
 
 smart_virtual:
   console_log: basic
@@ -60,7 +60,7 @@ scriptlets:
   # - mpf_arduino.MPFArduino
 
 modes:
-  - colorpicker
+  # - colorpicker
   # Core Logic Modes:
   - base
   - global

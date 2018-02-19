@@ -290,7 +290,7 @@ lights:
   #   number: 1-0
   l_dragon_fire: # Dragon Fire [#51]
     number: 10-29
-  l_dropbank_bottom: # Left 3-Bank (Bot) [#13]
+  l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 9-34
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 9-35

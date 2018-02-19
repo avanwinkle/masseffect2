@@ -54,7 +54,7 @@ shows:
         l_dropbank_top: white
         l_dropbank_middle: white
         l_dropbank_shield_rgb:
-          color: 993d00 #b34700
+          color: FF1F00
           fade: 20ms
     - duration: 500ms
       lights:

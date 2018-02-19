@@ -36,12 +36,7 @@ class ColorPicker(Mode):
   def set_color(self):
     for light in self.machine.device_manager.collections["lights"].items_tagged("colorpicker-rgb-light"):
       self.log.debug("Setting color {} for light {}".format(self.color.hex, light.name))
-      # TODO: This is messy but it may just be MPF-Monitor wierdness. Debug on Spike
-      key = "colorpicker-{}".format(light.name)
-      light.remove_from_stack_by_key(key)
-      # light.off()
-      light.color(self.color, priority=10000, key=key, fade_ms=10)
-      # light.on()
+      light.color(self.color, priority=10000, fade_ms=10)
     self.machine.events.post("colorpicker_color_updated",
       color=self.color.hex)
 
