@@ -22,7 +22,7 @@ mpf-mc:
   fps: 30
 
 game:
-  balls_per_game: 5
+  balls_per_game: 3
   max_players: 4
 
 event_player:
@@ -67,6 +67,10 @@ modes:
   - mainmenu
   - missionselect
   - bonus
+  # Environments
+  - environment
+  - env_field
+  - env_krogan
   # Collector Ship Modes:
   - collectorship_ambush
   - collectorship_base

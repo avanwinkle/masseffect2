@@ -91,11 +91,18 @@ slides:
         style: dmd_small
         anchor_y: top
         y: top-2
+        z: 2
       - type: text
         text: Ball (total_balls_locked) Locked!
         style: dmd_small
         anchor_y: bottom
         y: 2
+        z: 2
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 222222
+        z: 1
   overlord_ball_locked_slide_full:
     widgets:
       - type: text
@@ -240,11 +247,14 @@ widgets:
     - type: text
       text: Vulcan Station
       style: dmd_big
+      z: 2
   station_widget_2:
     - type: text
       text: Prometheus Station
       style: dmd_big
+      z: 2
   station_widget_3:
     - type: text
       text: Atlas Station
       style: dmd_big
+      z: 2

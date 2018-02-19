@@ -21,6 +21,9 @@ mode:
   priority: 500
 
 event_player:
+  mode_recruitgarrus_started:
+    set_environment:
+      env: bloodpack
   door_closed: recruittimer_add_time
   clear_upstairs_hit_complete: recruit_garrus_complete
 

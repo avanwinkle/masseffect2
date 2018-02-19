@@ -11,7 +11,7 @@ config:
 achievements:
   # SHADOW BROKER
   vasir:
-    enable_events: logicblock_sbdrops_counter_hit{count==4}
+    enable_events: logicblock_sbdrops_counter_hit{count==3}
     start_events: mode_shadowbroker_vasir_started
     stop_events: stop_mode_shadowbroker_vasir
     complete_events: shadowbroker_vasir_complete
@@ -48,23 +48,21 @@ achievements:
 
 event_player:
   mode_base_started:
-    - start_mode_pause
     - start_mode_global
     - start_mode_lockhandler
+    - start_mode_environment
     - enable_orbitswitches
-  mode_global_started: # Wait for global to start before field
-    - start_mode_field
+  mode_base_will_stop:
+    - stop_mode_global
+    - stop_mode_lockhandler
+    - stop_mode_environment
+    - stop_wizards
   # REFACTOR MODES
   mode_type_wizard_started:
     - stop_mode_global
-    - stop_mode_field
   mode_type_wizard_stopped:
     - start_mode_global
-    - start_mode_field
-  mode_type_mission_started:
-    - stop_mode_field
-  mode_type_mission_stopped:
-    - start_mode_field
+
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{current_player.squadmates_count == 6}:
     - enable_collectorship
@@ -282,6 +280,13 @@ sounds:
     loop: 0
     fade_in: 500ms
     fade_out: 1s
+    ducking:
+      target: music
+      delay: 2s
+      attack: 2s
+      attenuation: 0
+      release_point: 3s
+      release: 2s
 
 track_player:
   ball_will_end:

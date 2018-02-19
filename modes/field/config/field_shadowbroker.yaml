@@ -39,6 +39,12 @@ show_player:
     shadowbroker_lit_show:
       action: play
       priority: 10
+      sync_ms: 600
+  achievememnt_vasir_enabled:
+    shadowbroker_lit_show:
+      action: play
+      priority: 10
+      sync_ms: 600
 
 shows:
   shadowbroker_lit_show:
@@ -48,7 +54,7 @@ shows:
         l_dropbank_top: white
         l_dropbank_middle: white
         l_dropbank_shield_rgb:
-          color: b34700
+          color: 993d00 #b34700
           fade: 20ms
     - duration: 500ms
       lights:

@@ -102,11 +102,17 @@ class LockHandler(Mode):
   def _handle_bypasscheck(self, **kwargs):
     """ Logic for assessing whether to hold/lock the ball or bypass the lock """
 
+    # WIZARD:
+    # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)
+    if not self.machine.modes.get("global").active: # global is a reserved word
+      self.log.debug(" - A wizard mode is active, bypassing lock post")
+      pass
+
     # LOCK:
     # If the lock shot is enabled and the virtual lock count is not enough to start multiball
     # [AVW] Why no start multiball? Because I'm still trying to figure out why the balls_active count gets
     #       messed up and the multiball releases one less than it should. Ugh.
-    if self._overlordlock.enabled and self._overlordlock.locked_balls < 2:
+    elif self._overlordlock.enabled and self._overlordlock.locked_balls < 2:
       self.log.debug(" - Lock is lit, not going to bypass lock post")
       return
 
@@ -119,7 +125,9 @@ class LockHandler(Mode):
 
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold
-    self.log.debug(" - Lock not enabled and no missions available, bypassing lock post")
+    else:
+      self.log.debug(" - Lock not enabled and no missions available, bypassing lock post")
+
     self._bypass_lock()
 
   def _handle_missionselect_stop(self, **kwargs):

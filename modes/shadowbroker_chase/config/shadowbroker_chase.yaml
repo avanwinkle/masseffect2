@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_shadowbroker_chase
-  stop_events: stop_mode_shadowbroker_chase
+  stop_events: stop_mode_shadowbroker_chase, stop_wizards
   events_when_started: mode_type_wizard_started
   events_when_stopped: mode_type_wizard_stopped
   priority: 800
@@ -100,11 +100,12 @@ sound_player:
   mode_shadowbroker_chase_started:
     shadowbroker_vasir_music:
       action: play
+      volume: 0.3
     liara_come_on_shes_getting_away:
       action: play
     car_takeoff:
       action: play
-      volume: 0.3
+      volume: 0.1
   timer_sbchase_timer_complete:
     shadowbroker_vasir_music:
       action: stop
@@ -145,13 +146,16 @@ sound_pools:
       - liara_were_losing_her
     track: voice
     type: random_force_all
+    volume: 0.8
   shepard_sound_reply:
     sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_1, shepard_i_know_2, shepard_i_noticed
     track: voice
     type: random_force_all
+    volume: 0.8
   shepard_sound_truck:
     sounds: shepard_i_know_1, shepard_i_know_2, shepard_again
     track: voice
+    volume: 0.8
 
 sounds:
   car_takeoff_1:

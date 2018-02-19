@@ -49,8 +49,10 @@ multiballs:
     ball_count_type: total
     ball_locks: bd_lock
     shoot_again: 10s
-    enable_events: start_mode_overlordmultiball #multiball_lock_overlordlock_locked_ball{total_balls_locked==3}
-    start_events: multiball_lock_overlordlock_full #mode_overlordmultiball_started
+    # enable_events: multiball_lock_overlordlock_full #multiball_lock_overlordlock_locked_ball{total_balls_locked==3}
+    # start_events: start_mode_overlordmultiball #mode_overlordmultiball_started
+    reset_events: multiball_overlord_multiball_ended
+    debug: true
 
 shots:
   overlord_lock_ball_shot:
@@ -67,7 +69,18 @@ shot_profiles:
         show: overlord_lock_lit
         sync_ms: 600
 
+show_player:
+  mode_type_wizard_started:
+    overlord_disabled_show:
+      priority: 100
+  mode_type_wizard_stopped:
+    overlord_disabled_show:
+      action: stop
+
 shows:
+  overlord_disabled_show:
+    - lights:
+        l_lock_lit: black
   overlord_lock_lit:
     - duration: 500ms
       lights:

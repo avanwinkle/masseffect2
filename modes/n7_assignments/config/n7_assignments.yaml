@@ -140,13 +140,21 @@ shot_profiles:
         show: n7_show
         speed: 12
 
+show_player:
+  mode_n7_assignments_started: n7_lightsdown
+  mode_n7_assignments_will_stop:
+    n7_lightsdown:
+      action: stop
+
 shows:
-  n7_show:
-    - time: 0
-      lights:
+  n7_lightsdown:
+    - lights:
         gi:
           color: 444444
           fade: 1s
+  n7_show:
+    - time: 0
+      lights:
         (leds): red
     - time: '+3'
       lights:
@@ -162,10 +170,14 @@ slide_player:
   mode_n7_assignments_started:
     n7_intro_slide:
       action: play
-      expire: 3s
+      expire: 5s
   set_n7_mission:
     n7_hurryupslide:
       action: play
+  n7_assignment_shot_hit:
+    n7_complete_slide:
+      action: play
+      expire: 3s
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
@@ -189,6 +201,10 @@ slides:
         y: top-2
         font_size: 8
         font_name: pixelmix-8
+  n7_complete_slide:
+    widgets:
+      type: text
+      text: Assignment Complete!
   n7_hurryupslide:
     widgets:
       - type: image
@@ -213,16 +229,23 @@ sound_player:
     music_n7:
       action: play
       loops: -1
+      fade_in: 1s
       mode_end_action: stop
   mode_n7_assignments_will_stop:
     music_n7:
       action: stop
+      fade_out: 1s
+  n7_assignment_shot_hit: assignment_complete
 
 sound_pools:
   music_n7:
     sounds: music_n7_stationalert, music_n7_breakingout, music_n7_combat_12, music_n7_combat_72, music_n7_combat_81
     type: random_force_all
     track: music
+  assignment_complete:
+    sounds: asscompl_1, asscompl_2, asscompl_3
+    track: sfx
+    type: random_force_all
 
 sounds:
   music_n7_stationalert:
@@ -255,6 +278,16 @@ sounds:
   intro_hahne_kedar_facility:
     file: en_us_hench_ai_n7bldinv2_generator_00344670_m.ogg
     track: voice
+  asscompl_1:
+    file: SFXGame.749.ogg
+    track: sfx
+  asscompl_2:
+    file: SFXGame.750.ogg
+    track: sfx
+  asscompl_3:
+    file: SFXGame.751.ogg
+    track: sfx
+
 
 timers:
   n7timer:

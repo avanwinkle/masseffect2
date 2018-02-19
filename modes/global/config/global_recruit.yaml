@@ -91,6 +91,9 @@ show_player:
   ball_save_recruitsave_grace_period:
     ball_save_show:
       action: stop
+  ball_save_recruitsave_disabled:
+    ball_save_show:
+      action: stop
 
 slide_player:
   mode_recruitbase_started:

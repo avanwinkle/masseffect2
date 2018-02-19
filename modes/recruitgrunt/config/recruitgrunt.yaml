@@ -20,6 +20,9 @@ mode:
   priority: 500
 
 event_player:
+  mode_recruitgrunt_started:
+    set_environment:
+      env: krogan
   recruittimer_start: recruittimer_set_twenty
   logicblock_grunt_shots_counter_hit: recruittimer_add_twelve
   grunt_shots_complete: recruit_grunt_complete
@@ -88,29 +91,39 @@ shot_profiles:
 shots:
   grunt_left_ramp:
     hit_events: sh_left_ramp_hit
+    disable_events: grunt_left_ramp_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
   grunt_left_orbit:
     hit_events: sh_left_orbit_hit
+    disable_events: grunt_left_orbit_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   grunt_right_ramp:
     hit_events: sh_right_ramp_hit
+    disable_events: grunt_right_ramp_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
   grunt_right_orbit:
     hit_events: sh_right_orbit_hit
+    disable_events: grunt_right_orbit_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
   grunt_kickback:
     hit_events: sh_kickback_hit
+    disable_events: grunt_kickback_hit
     profile: grunt_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
+    tags: envshot_kickback
 
 show_player:
   logicblock_grunt_shots_counter_hit:

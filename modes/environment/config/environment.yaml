@@ -1,0 +1,27 @@
+#config_version=5
+
+mode:
+  start_events: start_mode_environment
+  stop_events: stop_mode_environment
+  code: environment.Environment
+  priority: 400
+
+shots:
+  envshot_left_orbit:
+    switch: s_left_orbit
+  envshot_kickback:
+    switch: s_kickback
+  # Assume ramp shots are exit by default
+  envshot_left_ramp:
+    switch: s_left_ramp_exit
+  envshot_right_ramp:
+    switch: s_right_ramp_exit
+  # Ramp shot entrances can be explicitly defined
+  envshot_right_ramp_entrance:
+    switch: s_right_ramp_entrance
+  envshot_left_ramp_entrance:
+    switch: s_left_ramp_entrance
+  envshot_right_orbit:
+    switch: s_right_orbit
+  envshot_standuptarget:
+    hit_events: sw_standuptarget_hit

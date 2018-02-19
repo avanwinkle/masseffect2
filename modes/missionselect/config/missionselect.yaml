@@ -37,6 +37,17 @@ event_player:
   mode_missionselect_started: flippers_off
   missionselect_item_selected: flippers_on
 
+show_player:
+  mode_missionselect_started: missionselect_show
+  mode_missionselect_will_stop:
+    missionselect_show:
+      action: stop
+
+shows:
+  missionselect_show:
+    - lights:
+        gi: off
+
 slide_player:
   missionselect_pass_highlighted:
     missionselect_intro_slide{current_player.missionselect_init==0}:

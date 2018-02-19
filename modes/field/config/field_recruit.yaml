@@ -43,6 +43,7 @@ shots:
     show_tokens:
       leds: shot_shield_garrus
       color: 0E1B4F #color_garrus
+    tags: envshot_left_ramp
   recruit_grunt_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
@@ -54,6 +55,7 @@ shots:
     show_tokens:
       leds: shot_shield_grunt
       color: ED3A00 #color_grunt
+    tags: envshot_left_orbit
   recruit_jack_shot:
     hit_events: sh_kickback_hit
     profile: recruit_shot_profile
@@ -65,6 +67,7 @@ shots:
     show_tokens:
       leds: shot_shield_jack
       color: 6F00FF #color_jack
+    tags: envshot_kickback
   recruit_kasumi_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
@@ -76,6 +79,7 @@ shots:
     show_tokens:
       leds: shot_shield_kasumi
       color: F7F315 #color_kasumi
+    tags: envshot_right_ramp
   recruit_legion_shot:
     hit_events: sh_kickback_hit
     profile: recruit_shot_profile
@@ -87,6 +91,7 @@ shots:
     show_tokens:
       leds: shot_shield_legion
       color: FFFFFF #color_legion
+    tags: envshot_kickback
   recruit_mordin_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_shot_profile
@@ -98,6 +103,7 @@ shots:
     show_tokens:
       leds: shot_shield_mordin
       color: BD000A #color_mordin
+    tags: envshot_right_orbit
   recruit_samara_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_shot_profile
@@ -109,6 +115,7 @@ shots:
     show_tokens:
       leds: shot_shield_samara
       color: 0037FF #color_samara
+    tags: envshot_left_ramp
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_shot_profile
@@ -120,6 +127,7 @@ shots:
     show_tokens:
       leds: shot_shield_tali
       color: D323FF #color_tali
+    tags: envshot_right_orbit
   recruit_thane_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
@@ -131,6 +139,7 @@ shots:
     show_tokens:
       leds: shot_shield_thane
       color: 00FF00 #color_thane
+    tags: envshot_right_ramp
   recruit_zaeed_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
@@ -142,3 +151,4 @@ shots:
     show_tokens:
       leds: shot_shield_zaeed
       color: FF0000 #color_zaeed
+    tags: envshot_left_orbit

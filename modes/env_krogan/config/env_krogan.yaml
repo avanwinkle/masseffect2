@@ -1,0 +1,34 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_krogan
+  stop_events: stop_mode_env_krogan
+  priority: 400
+
+sound_player:
+  envshot_left_ramp_entrance_hit: krogan_hit
+  envshot_left_ramp_hit: krogan_hit
+  envshot_right_ramp_entrance_hit: krogan_hit
+  envshot_right_ramp_hit: krogan_hit
+  envshot_left_orbit_hit: krogan_hit
+  envshot_right_orbit_hit: krogan_hit
+  envshot_kickback_hit: krogan_hit
+
+sound_pools:
+  krogan_hit:
+    sounds: krogan_hit_short_1, krogan_hit_short_2, krogan_hit_med_1, krogan_hit_long_1
+    type: random_force_all
+    track: sfx
+
+sounds:
+  krogan_hit_short_1:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303497_m.ogg
+    track: sfx
+  krogan_hit_short_2:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303521_m.ogg
+    track: sfx
+  krogan_hit_med_1:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303502_m.ogg
+    track: sfx
+  krogan_hit_long_1:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303498_m.ogg
+    track: sfx

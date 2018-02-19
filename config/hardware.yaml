@@ -7,9 +7,10 @@ spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
   baud: 115200 #115200
-  runtime_baud: 2000000
+  runtime_baud: 1152000 #2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
+  use_send_key: true
 
 machine:
   balls_installed: 6
@@ -18,7 +19,7 @@ machine:
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
     fps: 30
-    gamma: 1.5
+    gamma: 1
     only_send_changes: true
     source_display: dmd
     platform: spike
@@ -116,9 +117,6 @@ autofire_coils:
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
@@ -128,6 +126,9 @@ autofire_coils:
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
 
 
 switches:
@@ -556,7 +557,7 @@ coils:
     number: 8-6
   c_kickback:
     number: 8-3
-    default_pulse_ms: 10
+    default_pulse_ms: 20
     pulse_events: pulse_kickback
 
 playfields:
