@@ -11,9 +11,14 @@ show_player:
       speed: 6
     flash:
       action: play
-      speed: 6
+      speed: 4
       show_tokens:
         leds: l_start_button
+    flasher_show_triple:
+      action: play
+      speed: 5
+      show_tokens:
+        flashers: l_flash_dragon_right, l_flash_dragon_left
   mode_attract_will_stop:
     attract_dmd_loop:
       action: stop
@@ -21,6 +26,7 @@ show_player:
       action: stop
     flash:
       action: stop
+
 
 sound_player:
   mode_attract_started:

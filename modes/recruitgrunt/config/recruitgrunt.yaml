@@ -173,11 +173,13 @@ sounds:
   music_recruit_grunt_1:
     file: mus_grunt_acq_combat_1.ogg
     track: music
+    streaming: true
     mode_end_action: stop
     fade_out: 1s
   music_recruit_grunt_2:
     file: mus_grunt_acq_combat_2b.ogg
     track: music
+    streaming: true
     mode_end_action: stop
     fade_out: 1s
   grunt_bossdialogue_1:

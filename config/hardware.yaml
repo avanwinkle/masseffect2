@@ -304,7 +304,7 @@ lights:
     number: 10-6
   l_flash_kickback_lane: # Kickback Lane [#99]
     number: 10-26
-  l_flash_left_loop: # Left Loop [#102]
+  l_flash_left_orbit: # Left Loop [#102]
     number: 10-13
   l_flash_left_ramp: # Left Ramp [#98]
     number: 10-27
@@ -318,6 +318,10 @@ lights:
     number: 9-14
   l_flash_throne: # Throne [#105]
     number: 10-30
+  l_flash_dragon_right: # Dragon Right (Purple) [#106]
+    number: 10-31
+  l_flash_dragon_left: # Dragon Left (2x Red & White) [#107]
+    number: 9-15
   l_gi_coin_door: # Coin Door GI [#85]
     number: 1-1
   l_gi_left_playfield: # Left Playfield GI [#87]

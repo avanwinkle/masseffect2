@@ -166,11 +166,6 @@ shows:
         (leds): white
 
 slide_player:
-  mode_n7_assignments_started:
-    n7_intro_slide:
-      action: play
-      expire: 5s
-      priority: 5
   set_n7_mission:
     n7_hurryupslide:
       action: play
@@ -180,24 +175,6 @@ slide_player:
       action: remove
 
 slides:
-  n7_intro_slide:
-    widgets:
-      - type: image
-        image: n7_logo_33x11
-        width: 33
-        height: 11
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 3
-      - type: text
-        text: Hit the N7 Shot
-        anchor_x: left
-        anchor_y: top
-        x: 2
-        y: top-2
-        font_size: 8
-        font_name: pixelmix-8
   n7_hurryupslide:
     widgets:
       - type: image

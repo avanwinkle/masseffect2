@@ -20,7 +20,7 @@ mode:
 event_player:
   ship_shots_complete: collectorship_ambush_complete
   # The below event has not been vetted and probably doesn't work yet
-  ship_shots_hit{game.balls_in_play<4}: collectorship_add_ball
+  ship_shots_lit_hit{game.balls_in_play<4}: collectorship_add_ball
   collectorship_ambush_complete: stop_mode_collectorship_ambush
 
 scoring:
@@ -36,6 +36,12 @@ scoring:
   timer_ambushtimer_tick:
     temp_hurryup_value: -500
 
+counters:
+  collector_shots_counter:
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
+    count_events: ship_shots_lit_hit
 
 shot_groups:
   ship_shots:
@@ -81,14 +87,107 @@ shots:
     show_tokens:
       led: l_kickback_shield_rgb
 
+
+show_player:
+  mode_collectorship_ambush_started:
+    flasher_show_double:
+      key: ambush_flasher_battering
+      speed: 0.9
+      show_tokens:
+        flashers: l_flash_battering_ram
+    flasher_show_triple:
+      key: ambush_flasher_dragon
+      speed: 1.35
+      show_tokens:
+        flashers: l_flash_dragon_left
+    flasher_show_single:
+      key: ambush_flasher_backpanel
+      speed: 1.7
+      show_tokens:
+        flashers: l_flash_back_panel_left
+    ambush_show:
+      action: play
+  stop_mode_collectorship_ambush:
+    ambush_flasher_backpanel:
+      action: stop
+    ambush_flasher_dragon:
+      action: stop
+    ambush_flasher_battering:
+      action: stop
+    ambush_show:
+      action: stop
+
 shows:
-  ship_lit_show:
-    - time: 0
+  ambush_show:
+    - duration: 2s
       lights:
-        (led): 992600
-    - time: 0.5s
+        l_dragon_fire:
+          color: FFFFFF
+          fade: 50ms
+    - duration: 2ms
+      lights:
+        l_dragon_fire:
+          color: 444444
+          fade: 300ms
+  ship_lit_show:
+    - duration: 250ms
+      lights:
+        (led): 551100
+    - duration: 500ms
       lights:
         (led): black
+
+sound_player:
+  logicblock_collector_shots_counter_hit{count==1}:
+    squadmate_just_one_left:
+      action: play
+      volume: 1
+
+sound_pools:
+  squadmate_just_one_left:
+    track: voice
+    type: random
+    ducking:
+      target: music
+      delay: 0
+      attenuation: 0.5
+      attack: 100ms
+      release: 100ms
+    sounds:
+      - jol_garrus_1{current_player.status_garrus==4}
+      - jol_garrus_2{current_player.status_garrus==4}
+      - jol_garrus_3{current_player.status_garrus==4}
+      - jol_kasumi_1{current_player.status_kasumi==4}
+      - jol_kasumi_2{current_player.status_kasumi==4}
+      - jol_miranda_1
+      - jol_miranda_2
+      - jol_miranda_3
+
+sounds:
+  jol_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303076_m.ogg
+    track: voice
+  jol_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303077_m.ogg
+    track: voice
+  jol_garrus_3:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303078_m.ogg
+    track: voice
+  jol_kasumi_1:
+    file: DLC_HEN_MT_Int.193.ogg
+    track: voice
+  jol_kasumi_2:
+    file: DLC_HEN_MT_Int.195.ogg
+    track: voice
+  jol_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257402_m.ogg
+    track: voice
+  jol_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257403_m.ogg
+    track: voice
+  jol_miranda_3:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257404_m.ogg
+    track: voice
 
 timers:
   ambushtimer:
@@ -98,7 +197,7 @@ timers:
     direction: down
     start_running: yes
     control_events:
-      - event: ship_shots_ship_shot_profile_lit_hit
+      - event: logicblock_collector_shots_counter_hit
         action: add
         value: 24
       - event: stop_mode_collectorship_ambush

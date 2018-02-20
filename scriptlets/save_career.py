@@ -5,7 +5,7 @@ from mpf.core.scriptlet import Scriptlet
 
 PLAYER_VARS = (
   "assigments_completed", "available_missions", "career_name", "level",
-  "recruits_lit_count", "counter_sbdrops_counter", "squadmates_count")
+  "recruits_lit_count", "counter_sbdrops_counter", "squadmates_count", "readonly")
 
 class SaveCareer(Scriptlet):
 
@@ -33,7 +33,7 @@ class SaveCareer(Scriptlet):
       self.log.debug("Player {} is casual, not saving career".format(
         player.number))
       return
-    elif self._current_careers[player.number].get("readonly"):
+    elif player.vars.get("readonly", 0) == 1:
       self.log.debug("Career '{}' is readonly, aborting save".format(
         player.career_name))
       return

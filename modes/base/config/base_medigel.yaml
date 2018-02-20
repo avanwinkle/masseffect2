@@ -44,6 +44,9 @@ sound_pools:
     type: random_force_all
     track: voice
     volume: 1
+    ducking:
+      track: music
+      attack: 0.5
 
 sounds:
   deploying_medigel_1:

@@ -1,8 +1,6 @@
 import copy
 from mpf.modes.carousel.code.carousel import Carousel
 
-DEBUG_COLLECTORSHIP = False
-DEBUG_SUICIDEMISSION = False
 SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
 
 class MissionSelect(Carousel):
@@ -26,16 +24,13 @@ class MissionSelect(Carousel):
     player = self.machine.game.player
 
     # Collector ship only
-    if player.achievements['collectorship'] == "enabled":
+    if player.achievements['collectorship'] in ("enabled", "stopped"):
       return ['collectorship']
 
     # If not collector ship, passing is always an option
     items = []
-    if player.achievements['suicidemission'] == "enabled" or DEBUG_SUICIDEMISSION:
+    if player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
-    # For debugging, allow the collector ship to be available but not required
-    if DEBUG_COLLECTORSHIP and player.achievements['collectorship'] != "complete":
-      items.append('collectorship')
 
     for mate in SQUADMATES:
       status = player.vars.get("status_{}".format(mate))

@@ -87,7 +87,7 @@ shots:
       - enable_recruit_shots{current_player.status_jack>3 and current_player.status_legion<3}
     disable_events:
       - disable_recruit_shots
-      - recruit_lit{squadmate=="jack"}
+      - recruit_lit{squadmate=="legion"}
     show_tokens:
       leds: shot_shield_legion
       color: FFFFFF #color_legion
@@ -111,10 +111,10 @@ shots:
       - enable_recruit_shots{current_player.status_garrus>3 and current_player.status_samara<3}
     disable_events:
       - disable_recruit_shots
-      - recruit_lit{squadmate=="garrus"}
+      - recruit_lit{squadmate=="samara"}
     show_tokens:
       leds: shot_shield_samara
-      color: 00FFAA #color_samara
+      color: 008899 #color_samara
     tags: envshot_left_ramp
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
@@ -123,7 +123,7 @@ shots:
       - enable_recruit_shots{current_player.status_mordin>3 and current_player.status_tali<3}
     disable_events:
       - disable_recruit_shots
-      - recruit_lit{squadmate=="mordin"}
+      - recruit_lit{squadmate=="tali"}
     show_tokens:
       leds: shot_shield_tali
       color: FF11DD #color_tali
@@ -135,7 +135,7 @@ shots:
       - enable_recruit_shots{current_player.status_kasumi>3 and current_player.status_thane<3}
     disable_events:
       - disable_recruit_shots
-      - recruit_lit{squadmate=="kasumi"}
+      - recruit_lit{squadmate=="thane"}
     show_tokens:
       leds: shot_shield_thane
       color: 00FF11 #color_thane
@@ -147,8 +147,8 @@ shots:
       - enable_recruit_shots{current_player.status_grunt>3 and current_player.status_zaeed<3}
     disable_events:
       - disable_recruit_shots
-      - recruit_lit{squadmate=="grunt"}
+      - recruit_lit{squadmate=="zaeed"}
     show_tokens:
       leds: shot_shield_zaeed
-      color: FF4400 #color_zaeed
+      color: FF3300 #color_zaeed
     tags: envshot_left_orbit

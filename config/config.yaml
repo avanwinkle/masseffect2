@@ -132,6 +132,8 @@ player_vars:
   career_name:
     initial_value: " "
     value_type: str
+  readonly:
+    initial_value: 0
   assignments_completed:
     initial_value: 0
   available_missions:

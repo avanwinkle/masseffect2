@@ -10,7 +10,7 @@ event_player:
 
 counters:
   n7_hits_counter:
-    starting_count: 10
+    starting_count: 30
     count_complete_value: 0
     direction: down
     count_events: n7_advance_shot_hit

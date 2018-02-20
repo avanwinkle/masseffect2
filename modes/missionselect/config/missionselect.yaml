@@ -104,6 +104,9 @@ shows:
     - lights:
         gi: off
         l_left_ramp_arrow_clear: off
+        l_dropbank_bottom: off
+        l_dropbank_middle: off
+        l_dropbank_top: off
         shot_shields: off
   missionselect_highlight_show:
     - duration: 500ms

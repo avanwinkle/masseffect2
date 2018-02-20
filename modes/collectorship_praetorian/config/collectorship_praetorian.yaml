@@ -156,11 +156,34 @@ shots:
     show_tokens:
       led: l_hitbank_shield_rgb
 
+show_player:
+  mode_collectorship_praetorian_started:
+    flasher_show_double:
+      key: praet_flasher_dragon
+      speed: 3.1
+      show_tokens:
+        flashers: l_flash_dragon_right
+    flasher_show_triple:
+      key: praet_flasher_main
+      speed: 0.7
+      show_tokens:
+        flashers: l_flash_kickback_lane, l_flash_slingshots
+  stop_mode_collectorship_praetorian:
+    praet_flasher_dragon:
+      action: stop
+    praet_flasher_main:
+      action: stop
+  praetorian_shot_hit:
+    flash_show_triple:
+      loops: 0
+      show_tokens:
+        flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_pop_bumpers, l_flash_dragon_left
+
 shows:
   praet_shot_show:
     - time: 0
       lights:
-        (led): purple
+        (led): 2200AA
     - time: '+1'
       lights:
         (led): off

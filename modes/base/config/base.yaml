@@ -30,9 +30,10 @@ achievements:
   collectorship:
     enable_events: enable_collectorship
     start_events: mode_collectorship_base_started
+    stop_events: mode_collectorship_base_stopped
     complete_events:
-      - mode_collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
-      - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
+      - collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
+      # - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
   derelictreaper:
     enable_events: enable_derelictreaper
     start_events: start_mode_derelictreaper
@@ -48,6 +49,10 @@ achievements:
     complete_events: suicidemission_complete
 
 event_player:
+  # DEBUG for Spike Desync
+  s_action_button_active:
+    - flippers_off
+    - flippers_on|100ms
   mode_base_started:
     - start_mode_global
     - start_mode_lockhandler
@@ -245,6 +250,54 @@ shows:
       lights:
         (leds): black
         l_null: (color)
+  flasher_show_single:
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): on
+    - duration: 10s
+      lights:
+        (flashers): off
+  flasher_show_double:
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): off
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): off
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): on
+    - duration: 10s
+      lights:
+        (flashers): off
+  flasher_show_triple:
+    - duration: 50ms
+      fixed_duration: true
+      lights:
+        (flashers): on
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): off
+    - duration: 50ms
+      fixed_duration: true
+      lights:
+        (flashers): on
+    - duration: 100ms
+      fixed_duration: true
+      lights:
+        (flashers): off
+    - duration: 50ms
+      fixed_duration: true
+      lights:
+        (flashers): on
+    - duration: 10s
+      lights:
+        (flashers): off
   color_on:
     - lights:
         (leds): (color)

@@ -20,7 +20,7 @@ event_player:
   collectorship_husk_complete: stop_mode_collectorship_husk
 
 random_event_player:
-  husk_build_shot_hit{current_player.temp_multiplier==0}: # the multiplier increments so we know not to keep enabling shots
+  husk_build_shot_hit{current_player.temp_multiplier<=2}: # the multiplier increments so we know not to keep enabling shots
     force_different: true
     force_all: false
     events:
@@ -107,13 +107,24 @@ shots:
       leds: l_kickback_shield_rgb
 
 show_player:
-  mode_collectorship_husk_started: husk_standup_show
+  mode_collectorship_husk_started:
+    husk_standup_show:
+      action: play
   husk_build_shot_hit:
     husk_standup_flash_show:
       action: play
       loops: 6
       priority: 1
       speed: 5
+    flasher_show_double:
+      loops: 0
+      show_tokens:
+        flashers: l_flash_slingshots, l_flash_throne, l_flash_battering_ram
+  husk_collect_shot_hit:
+    flasher_show_triple:
+      loops: 0
+      show_tokens:
+        flashers: l_flash_left_ramp, l_flash_sword_lock, l_flash_throne, l_flash_pop_bumpers
   mode_collectorship_husk_will_stop:
     husk_standup_show:
       action: stop
@@ -123,6 +134,8 @@ shows:
     - time: 0
       lights:
         target_lights: on
+        l_flash_slingshots:
+          color: AAAAAA
   husk_standup_flash_show:
     - time: 0
       lights:
@@ -133,17 +146,20 @@ shows:
   husk_shot_show:
     - time: 0
       lights:
-        (leds): blue
+        (leds): 00101E
     - time: '+1'
       lights:
         (leds): off
 
 sound_player:
-  husk_build_shot_hit: husk_sound_short
+  husk_build_shot_hit:
+    husk_sound_short:
+      action: play
+    husk_squadmate|1s:
+      action: play
+      volume: 1
   husk_collect_shot_hit:
     husk_sound_long:
-      action: play
-    husk_squadmate:
       action: play
 
 sound_pools:
@@ -151,18 +167,46 @@ sound_pools:
     track: voice
     type: random
     sounds:
-      - husk_grunt_1{current_player.status_grunt.state==0}
-      - husk_grunt_2{current_player.status_grunt.state==0}
+      - husk_garrus_1{current_player.status_garrus==4}
+      - husk_garrus_2{current_player.status_garrus==4}
+      - husk_grunt_1{current_player.status_grunt==4}
+      - husk_grunt_2{current_player.status_grunt==4}
+      - husk_jack_1{current_player.status_jack==4}
+      - husk_jack_2{current_player.status_jack==4}
+      - husk_kasumi_1{current_player.status_kasumi==4}
+      - husk_jacob_1
+      - husk_jacob_2
       - husk_miranda_1
       - husk_miranda_2
       - husk_miranda_3
 
 sounds:
+  husk_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303132_m.ogg
+    track: voice
+  husk_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303133_m.ogg
+    track: voice
   husk_grunt_1:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295838_m.ogg
     track: voice
   husk_grunt_2:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.ogg
+    track: voice
+  husk_jack_1:
+    file: en_us_hench_convict_ss_global_hench_convict_00296157_m.ogg
+    track: voice
+  husk_jack_2:
+    file: en_us_hench_convict_ss_global_hench_convict_00296158_m.ogg
+    track: voice
+  husk_jacob_1:
+    file: en_us_hench_leading_ss_global_hench_leading_00299273_m.ogg
+    track: voice
+  husk_jacob_2:
+    file: en_us_hench_leading_ss_global_hench_leading_00299274_m.ogg
+    track: voice
+  husk_kasumi_1:
+    file: DLC_HEN_MT_Int.101.ogg
     track: voice
   husk_miranda_1:
     file: en_us_hench_vixen_ss_global_hench_vixen_00310134_m.ogg
@@ -177,7 +221,7 @@ sounds:
 
 timers:
   husktimer:
-    start_value: 30
+    start_value: 20
     end_value: 0
     tick_interval: 1s
     direction: down

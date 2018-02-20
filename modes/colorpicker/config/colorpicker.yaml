@@ -1,7 +1,6 @@
 #config_version=5
 mode:
   start_events: mode_attract_started
-  stop_events: mode_attract_stopped
   priority: 1000
   game_mode: false
   code: colorpicker.ColorPicker

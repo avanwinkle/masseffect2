@@ -349,16 +349,19 @@ sounds:
   recruit_music_kasumi_1:
     file: KAS.03.Infiltration.ogg
     track: music
+    streaming: true
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:
     file: KAS.02.Making_Our_Escape.ogg
     track: music
+    streaming: true
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_3:
     file: KAS.01.Death_from_Above.ogg
     track: music
+    streaming: true
     mode_end_action: stop
     fade_out: 1s
     fade_in: 1s

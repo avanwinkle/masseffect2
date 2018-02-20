@@ -19,7 +19,7 @@
 mode:
   start_events: start_mode_collectorship_base
   stop_events: stop_mode_collectorship_base, stop_wizards
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started, start_mode_collectorship_ambush
   events_when_stopped: mode_type_wizard_stopped
   priority: 300
 
@@ -28,7 +28,8 @@ config:
 
 event_player:
   mode_collectorship_base_started:
-    - start_mode_collectorship_ambush
+    set_environment:
+      env: collectors
     # - start_mode_harbinger
   collectorship_ambush_complete:
     - start_mode_collectorship_husk
@@ -41,7 +42,15 @@ event_player:
   collectorship_praetorian_complete{device.achievements.collectorship.state!="complete"}:
     levelup:
       mission_name: IFF Retrieved
-  multiball_collectorship_multiball_ended:
+  # If the player drains to one ball AFTER defeating the praetorian, stop the mode
+  multiball_collectorship_multiball_ended{device.achievements.collectorship.state=="complete"}:
+    - stop_mode_collectorship_base
+    - stop_mode_collectorship_ambush
+    - stop_mode_collectorship_husk
+    - stop_mode_collectorship_praetorian
+    - stop_mode_harbinger
+  # If the player hasn't defeated the praetorian, the mode continues until end of ball
+  ball_will_end:
     - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
@@ -53,8 +62,8 @@ multiballs:
     ball_count: 2 # Start with 2, add up to 2 more in ambush phase
     ball_count_type: total
     start_events: mode_collectorship_base_started
-    add_a_ball_events: collectorship_add_ball
-    shoot_again: 10s
+    start_or_add_a_ball_events: collectorship_add_ball
+    # shoot_again: 30s
 
 slide_player:
   mode_collectorship_base_started:
@@ -68,15 +77,63 @@ slides:
         text: Collector Ship
         style: dmd_small
 
+show_player:
+  mode_collectorship_base_started:
+    flasher_show_triple:
+      speed: 6
+      show_tokens:
+        flashers: gi
+    flasher_show_double:
+      speed: 2
+      show_tokens:
+        flashers: l_gi_upper
+    # collectorship_flash_show:
+    #   action: play
+    #   sync_ms: 1000
+
+shows:
+  collectorship_flash_show:
+    - duration: 3s
+    - duration: 200ms
+      lights:
+        l_flash_slingshots: on
+    - lights:
+        l_flash_slingshots: off
+    - duration: 4.5s
+    - duration: 200ms
+      lights:
+        l_flash_throne: on
+    - lights:
+        l_flash_throne: off
+    - duration: 5s
+    - duration: 200ms
+      lights:
+        l_flash_dragon_left: on
+    - lights:
+        l_flash_dragon_left: off
+
+
+light_player:
+  mode_collectorship_ambush_started:
+    gi: off
+
 sound_player:
   mode_collectorship_ambush_started:
     music_ambush:
       action: play
+      fade_in: 1s
+      fade_out: 1s
+      volume: 0.8
+      mode_end_action: stop
     music_praetorian:
       action: stop
   mode_collectorship_husk_started:
     music_husk:
       action: play
+      fade_in: 1s
+      fade_out: 1s
+      volume: 0.8
+      mode_end_action: stop
     music_ambush:
       action: stop
     music_praetorian:
@@ -86,17 +143,14 @@ sound_player:
       action: stop
     music_praetorian:
       action: play
+      fade_in: 1s
+      volume: 0.8
+      fade_out: 1s
+      mode_end_action: stop
   collectorship_multiball_ball_drain:
     music_stinger:
       action: play
   ship_shots_hit: collector_hit
-  multiball_collectorship_multiball_ended:
-    music_ambush:
-      action: stop
-    music_husk:
-      action: stop
-    music_praetorian:
-      action: stop
 
 sound_pools:
   collector_hit:
@@ -115,20 +169,15 @@ sounds:
   music_ambush:
     file: mus_critpath2_action.ogg
     track: music
-    fade_in: 1s
-    fade_out: 1.5s
   music_husk:
     file: mus_critpath2_combat_2_low.ogg
     track: music
-    fade_in: 1s
-    fade_out: 1.5s
   music_praetorian:
     file: mus_critpath1_boss.ogg
     track: music
-    fade_in: 1s
-    fade_out: 1.5s
   music_stinger:
     file: mus_generic_stinger_111.ogg
+    volume: 1
     track: sfx
   collector_noise_1:
     file: sfx_ss_collector_ss_collector_00349721_m.ogg
