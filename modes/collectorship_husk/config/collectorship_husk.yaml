@@ -135,7 +135,7 @@ shows:
       lights:
         target_lights: on
         l_flash_slingshots:
-          color: AAAAAA
+          color: 999999
   husk_standup_flash_show:
     - time: 0
       lights:

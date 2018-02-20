@@ -90,12 +90,12 @@ shots:
 
 show_player:
   mode_collectorship_ambush_started:
-    flasher_show_double:
+    flasher_show_double|3s:
       key: ambush_flasher_battering
       speed: 0.9
       show_tokens:
         flashers: l_flash_battering_ram
-    flasher_show_triple:
+    flasher_show_triple|4s:
       key: ambush_flasher_dragon
       speed: 1.35
       show_tokens:

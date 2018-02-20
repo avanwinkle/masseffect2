@@ -189,7 +189,13 @@ shows:
         (led): off
 
 sound_player:
-  mode_collectorship_praetorian_started: praet_intro, praet_alarm
+  mode_collectorship_praetorian_started:
+    praet_intro:
+      action: play
+      volume: 1
+    praet_alarm|2s:
+      action: play
+      volume: 1
   collectorship_praetorian_complete: praet_death
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
