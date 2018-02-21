@@ -241,22 +241,24 @@ slide_player:
   kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
-  logicblock_kasumi_shots_counter_hit{value==1}:
+  logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_slide_1:
       expire: 3s
-      priority: 1000 # Enough to beat the recruit timer?
-  logicblock_kasumi_shots_counter_hit{value==2}:
+  logicblock_kasumi_shots_counter_hit{count==2}:
     kasumi_slide_2:
       expire: 3s
-      priority: 1000 # Enough to beat the recruit timer?
-  logicblock_kasumi_shots_counter_hit{value==3}:
+  logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_slide_3:
       expire: 3s
-      priority: 1000 # Enough to beat the recruit timer?
-  logicblock_kasumi_alarms_counter_hit:
+  logicblock_kasumi_shots_counter_hit{count==4}:
+    kasumi_slide_4:
+      expire: 3s
+  logicblock_kasumi_alarms_counter_hit{count>0}:
     kasumi_alarm_slide:
       expire: 3s
-      priority: 1000 # Enough to beat the recruit timer?
+  logicblock_kasumi_alarms_counter_hit{count==0}:
+    kasumi_failed_slide:
+      expire: 3s
 
 slides:
   kasumi_instructions_slide:
@@ -310,6 +312,16 @@ slides:
         height: 32
         color: black
         z: 0
+  kasumi_slide_4:
+    widgets:
+      - type: text
+        text: "Barrier Deactivated"
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
   kasumi_alarm_slide:
     widgets:
       - type: text
@@ -338,22 +350,80 @@ sound_player:
       action: play
       loops: -1
       fade_in: 1s
+    kasumi_list_of_items:
+      action: play
+      ducking:
+        target: music
+        attenuation: 0.5
   # First alarm hit, increase the music tension
-  logicblock_kasumi_alarms_counter_hit{value==1}:
+  logicblock_kasumi_alarms_counter_hit{count==1}:
     recruit_music_kasumi_1:
       action: stop
       fade_out: 2s
     recruit_music_kasumi_2:
       action: play
       fade_in: 1s
+    kasumi_careful: play
   # Second alarm hit, more tension
-  logicblock_kasumi_alarms_counter_hit{value==2}:
+  logicblock_kasumi_alarms_counter_hit{count==2}:
     recruit_music_kasumi_2:
       action: stop
       fade_out: 2s
     recruit_music_kasumi_3:
       action: play
       fade_in: 1s
+    guard_warning: play
+  logicblock_kasumi_alarms_counter_hit{count==3}:
+    kasumi_failed: play
+  # First shot hit, got the password
+  logicblock_kasumi_shots_counter_hit{count==1}:
+    kasumi_password_complete
+  # Second shot hit, got the voice print
+  logicblock_kasumi_shots_counter_hit{count==2}:
+    kasumi_voice_complete
+  # Third shot hit, got the DNA sample
+  logicblock_kasumi_shots_counter_hit{count==3}:
+    kasumi_not_great_saliva_sample
+  # Fourth shot hit, get the barrier down
+  logicblock_kasumi_shots_counter_hit{count==4}:
+    kasumi_barrier_is_down
+
+sound_pools:
+  kasumi_careful:
+    type: random
+    sounds: 
+      - kasumi_careful_barrier_up
+      - kasumi_hey_no_touching
+      - kasumi_dont_touch_that_without_dna_set_off_alarm
+      - kasumi_try_again
+      - shepard_damn
+    track: voice
+  guard_warning:
+    type: random
+    sounds:
+      - guard_room_off_limits
+      - guard_i_told_you_room_off_limits
+      - guard_turn_around_now
+      - guard_you_stop
+    track: voice
+  kasumi_failed:
+    type: random
+    sounds:
+      - kasumi_damn_it
+      - kasumi_look_out
+      - kasumi_damn_it_we_have_to_find_another_way
+
+  kasumi_password_complete:
+    type: random
+    sounds: 
+      - kasumi_weve_got_the_password_need_voice
+      - kasumi_still_need_password_and_voice
+      - shepard_password_is_perrugia
+    track: voice
+  kasumi_voice_complete:
+    type: random
+    sounds: kasumi_got_voice, kasumi_lets_crack_voice
+    track: voice
 
 sounds:
   recruit_music_kasumi_1:
@@ -429,6 +499,18 @@ sounds:
     track: voice
   kasumi_hey_no_touching:
     file: DLC_HEN_MT_Int.452.ogg
+    track: voice
+  kasumi_look_out:
+    file: DLC_HEN_MT_Int.110.ogg
+    track: voice
+  kasumi_damn_it:
+    file: DLC_HEN_MT_Int.173.ogg
+    track: voice
+  kasumi_damn:
+    file: DLC_HEN_MT_Int.176.ogg
+    track: voice
+  kasumi_try_again:
+    file: DLC_HEN_MT_Int.174.ogg
     track: voice
   guard_room_off_limits:
     file: DLC_HEN_MT_Int.681.ogg
