@@ -28,7 +28,9 @@ event_player:
   shadowbroker_chase_complete: stop_mode_shadowbroker_chase
   timer_sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
   # If the ball is saved, the mode is ended
-  ball_save_sbchase_save_saving_ball: stop_mode_shadowbroker_chase
+  ball_save_sbchase_save_saving_ball:
+    - stop_mode_shadowbroker_chase
+    - reset_dropbank
 
 ball_saves:
   sbchase_save:

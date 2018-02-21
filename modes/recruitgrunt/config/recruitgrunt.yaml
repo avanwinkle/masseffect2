@@ -132,13 +132,13 @@ show_player:
       speed: 12
       priority: 100
       show_tokens:
-        color: BB1100 #color_grunt
+        color: ff7d49 #color_grunt
 
 shows:
   grunt_lit_show:
     - duration: 500ms
       lights:
-        (led): BB1100 #color_grunt
+        (led): ff7d49 #color_grunt
     - duration: 500ms
       lights:
         (led): black
@@ -173,13 +173,11 @@ sounds:
   music_recruit_grunt_1:
     file: mus_grunt_acq_combat_1.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
   music_recruit_grunt_2:
     file: mus_grunt_acq_combat_2b.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
   grunt_bossdialogue_1:

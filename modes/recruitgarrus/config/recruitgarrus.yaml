@@ -174,7 +174,6 @@ sounds:
   music_recruit_garrus:
     file: mus_garrus_acq_combat_1.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
   garrus_mission_start:

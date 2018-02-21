@@ -174,7 +174,7 @@ show_player:
     praet_flasher_main:
       action: stop
   praetorian_shot_hit:
-    flash_show_triple:
+    flasher_show_triple:
       loops: 0
       show_tokens:
         flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_pop_bumpers, l_flash_dragon_left

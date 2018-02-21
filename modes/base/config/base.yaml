@@ -89,9 +89,9 @@ event_player:
   s_plunger_lane_inactive:
     - disable_orbitswitches
     - enable_orbitswitches|2000ms
-  # From a plunger orbit launch, re-enable orbit switches immediately once left orbit is hit
+  # From a plunger orbit launch, re-enable orbit switches once left orbit is hit
   fullorbit_complete_hit:
-    - enable_orbitswitches
+    - enable_orbitswitches|200ms
 
 accruals:
   recruitment_missions:

@@ -105,6 +105,7 @@ drop_target_banks:
     drop_targets: bottom, middle, top
     reset_coils: c_dropbank_reset
     reset_on_complete: 1s
+    reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
 
 kickbacks:
   dragon_kickback:
@@ -196,17 +197,21 @@ switches:
   s_left_orbit:
     number: 10-10
     tags: playfield_active
+    ignore_window_ms: 500
   s_right_orbit:
     number: 10-11
     tags: playfield_active
+    ignore_window_ms: 500
   s_left_ramp_entrance:
     number: 10-5
     tags: playfield_active
+    ignore_window_ms: 1000
   s_left_ramp_exit:
     number: 10-6
   s_right_ramp_entrance:
     number: 9-7
     tags: playfield_active
+    ignore_window_ms: 1000
   s_right_ramp_exit:
     number: 10-15
   s_top_lane_left:
@@ -365,10 +370,13 @@ lights:
     number: 10-14
   l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
     number: 10-3
+    tags: l_pop_bumpers
   l_pop_bumper_left: # Pop Bumper Left [#77]
     number: 10-1
+    tags: l_pop_bumpers
   l_pop_bumper_right: # Pop Bumper Right [#78]
     number: 10-2
+    tags: l_pop_bumpers
   l_right_orbit_arrow_red: # Right Loop Arrow [#74]
     number: 9-20
   l_right_outlane: # Right Outlane [#34]

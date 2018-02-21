@@ -147,9 +147,19 @@ show_player:
     kasumi_gi_show:
       action: play
       loops: -1
+    flasher_show_single:
+      action: play
+      show_tokens:
+        flashers: l_flash_back_panel_left
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
+  logicblock_kasumi_alarms_counter_hit:
+    flasher_show_triple:
+      action: play
+      loops: 0
+      show_tokens:
+        flashers: l_flash_battering_ram
   sweep_alarms:
     alarm_sweep_show:
       action: play
@@ -349,19 +359,16 @@ sounds:
   recruit_music_kasumi_1:
     file: KAS.03.Infiltration.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:
     file: KAS.02.Making_Our_Escape.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_3:
     file: KAS.01.Death_from_Above.ogg
     track: music
-    streaming: true
     mode_end_action: stop
     fade_out: 1s
     fade_in: 1s

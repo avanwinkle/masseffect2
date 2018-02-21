@@ -108,6 +108,10 @@ shows:
         l_dropbank_middle: off
         l_dropbank_top: off
         shot_shields: off
+        l_pop_bumpers: off
+        l_left_top_lane: off
+        l_right_top_lane: off
+
   missionselect_highlight_show:
     - duration: 500ms
       lights:

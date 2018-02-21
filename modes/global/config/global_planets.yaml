@@ -78,8 +78,11 @@ shots:
       leds: l_pop_bumper_left
 
 show_player:
-  # This is a tag-based event, will it work?
-  mineral_shot_hit: bumper_flash_show
+  sw_bumper_active:
+    flasher_show_single:
+      loops: 0
+      show_tokens:
+        flashers: l_flash_pop_bumpers
   planet_shots_hit_complete:
     planet_complete_show:
       loops: 6
@@ -87,10 +90,6 @@ show_player:
       priority: 100
 
 shows:
-  bumper_flash_show:
-    - duration: 50ms
-      lights:
-        l_flash_pop_bumpers: white
   planet_complete_show:
     - time: 0
       lights:
