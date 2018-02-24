@@ -346,6 +346,19 @@ widget_styles:
     y: top-2
     x: 4
     z: 1
-
-
+  mineral_name_style:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_x: middle
+    anchor_y: bottom
+    z: 3
+  mineral_highlight_style:
+    width: 42
+    height: 24
+    anchor_x: left
+    anchor_y: bottom
+    color: 333333
+    y: 9
 

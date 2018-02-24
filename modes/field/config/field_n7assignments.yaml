@@ -23,30 +23,3 @@ shots:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
     enable_events: enable_recruit_shots
     disable_events: disable_recruit_shots
-
-widget_player:
-  logicblock_n7_hits_counter_hit:
-    n7_progress_widget:
-      action: update
-      widget_settings:
-        expire: 2s
-
-widgets:
-  n7_progress_widget:
-    - type: text
-      text: "N7 assignment in (count)"
-      style: dmd_small
-      anchor_y: bottom
-      anchor_x: left
-      y: 2
-      x: 2
-      z: 2
-    - type: rectangle
-      width: 128
-      height: 8
-      color: 000000
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 0
-      z: 1

@@ -35,6 +35,29 @@ shows:
         l_left_outlane: on
         l_right_outlane: on
 
+slide_player:
+  ball_save_default_saving_ball:
+    medigel_slide:
+      action: play
+      expire: 3s
+  medigel_shot_hit:
+    medigel_slide:
+      action: play
+      expire: 3s
+
+slides:
+  medigel_slide:
+    - type: image
+      image: medigel.bmp
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
+    - type: text
+      text: Medigel Deployed
+      anchor_x: left
+      x: 36
+
 sound_player:
   medigel_shot_hit: medigel_sound|500ms
   ball_save_default_saving_ball: medigel_sound|500ms

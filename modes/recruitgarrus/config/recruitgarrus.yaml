@@ -164,6 +164,12 @@ sound_player:
       action: stop
 
 sound_pools:
+  garrus_mission_start:
+    type: random
+    track: voice
+    sounds: garrus_give_these_bastards_everything, garrus_get_those_doors_closed, garrus_you_deal_with_shutters
+    max_queue_time: 1s
+
   garrus_last_shutter:
     type: random
     track: voice
@@ -176,8 +182,14 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
-  garrus_mission_start:
+  garrus_give_these_bastards_everything:
     file: en_us_hench_garrus_omggra_garrus_intro_d_00206435_m.ogg
+    track: voice
+  garrus_get_those_doors_closed:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00227793_m.ogg
+    track: voice
+  garrus_you_deal_with_shutters:
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00228351_m.ogg
     track: voice
   garrus_two_more_shutters:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00205199_m.ogg

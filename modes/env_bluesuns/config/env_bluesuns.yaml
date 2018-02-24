@@ -1,0 +1,20 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_bluesuns
+  stop_events: stop_mode_env_bluesons
+  priority: 400
+
+sounds:
+  turian_hit_short_1:
+    file: en_us_ss_bluesun_elite_male_ss_bluesun_elite_tur_male_x_00298090_m.ogg
+    track: sfx
+  turian_hit_short_2:
+    file: en_us_ss_bluesun_elite_male_ss_bluesun_elite_tur_male_x_00298088_m.ogg
+    track: sfx
+  batarian_hit_short_1:
+    file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_bat_male_x_00305728_m.ogg
+    track: sfx
+  batarian_hit_short_2:
+    file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_bat_male_x_00305712_m.ogg
+    track: sfx
+
