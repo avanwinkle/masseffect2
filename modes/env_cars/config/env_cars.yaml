@@ -5,8 +5,8 @@ mode:
   priority: 1000
 
 sound_player:
-  envshot_left_ramp_hit: shuttle_sound
-  envshot_right_ramp_hit: shuttle_sound
+  envshot_left_ramp_entrance_hit: shuttle_sound
+  envshot_right_ramp_entrance_hit: shuttle_sound
   envshot_left_orbit_hit: shuttle_sound
   envshot_right_orbit_hit: shuttle_sound
   envshot_kickback_hit: shuttle_sound

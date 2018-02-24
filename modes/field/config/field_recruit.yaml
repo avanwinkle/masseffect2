@@ -54,7 +54,7 @@ shots:
       - recruit_lit{squadmate=="grunt"}
     show_tokens:
       leds: shot_shield_grunt
-      color: BB1100 #color_grunt
+      color: FF6611 #color_grunt
     tags: envshot_left_orbit
   recruit_jack_shot:
     hit_events: sh_kickback_hit
@@ -150,5 +150,5 @@ shots:
       - recruit_lit{squadmate=="zaeed"}
     show_tokens:
       leds: shot_shield_zaeed
-      color: FF3300 #color_zaeed
+      color: FF7700 #color_zaeed
     tags: envshot_left_orbit

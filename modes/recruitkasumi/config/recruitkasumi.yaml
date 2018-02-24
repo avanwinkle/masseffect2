@@ -26,12 +26,7 @@ counters:
     starting_count: 0
     count_complete_value: 4
     persist_state: true
-    count_events:
-      - left_orbit_unalarmed_hit
-      - left_ramp_unalarmed_hit
-      - right_orbit_unalarmed_hit
-      - right_ramp_unalarmed_hit
-      - kickback_unalarmed_hit
+    count_events: kasumi_shots_unalarmed_hit
     disable_on_complete: true
     reset_on_complete: false
     direction: up
@@ -39,12 +34,7 @@ counters:
   kasumi_alarms_counter:
     starting_count: 3
     count_complete_value: 0
-    count_events:
-      - left_orbit_alarmed_hit
-      - left_ramp_alarmed_hit
-      - right_orbit_alarmed_hit
-      - right_ramp_alarmed_hit
-      - kickback_alarmed_hit
+    count_events: kasumi_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
     events_when_complete: kasumi_failed
     persist_state: false
@@ -52,8 +42,8 @@ counters:
 
 event_player:
   mode_recruitkasumi_started:
-    - sweep_alarms
-    - set_alarm_left_ramp
+    set_environment:
+      env: kasumi
   kasumi_failed:
     - stop_recruitmission
     - recruit_mission_ended
@@ -92,7 +82,7 @@ scoring:
 
 shot_groups:
   kasumi_shots:
-    shots: left_orbit, left_ramp, right_orbit, right_ramp, kickback
+    shots: kasumi_left_orbit, kasumi_left_ramp, kasumi_right_orbit, kasumi_right_ramp, kasumi_kickback
 
 shot_profiles:
   alarmed_shot_profile:
@@ -105,42 +95,41 @@ shot_profiles:
         sync_ms: 700
 
 shots:
-  left_orbit:
+  kasumi_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: alarmed_shot_profile
-    tags: alarmshot
     advance_events: set_alarm_left_orbit
     show_tokens:
       led: l_left_orbit_arrow_red
-  left_ramp:
+    tags: alarmshot, envshot_left_orbit
+  kasumi_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: alarmed_shot_profile
-    tags: alarmshot
-    advance_events: set_alarm_left_ramp
+    advance_events: set_alarm_left_ramp, mode_recruitkasumi_started # Starting shot
     show_tokens:
       led: l_left_ramp_arrow_red
-  right_orbit:
+    tags: alarmshot, envshot_left_ramp
+  kasumi_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: alarmed_shot_profile
-    tags: alarmshot
     advance_events: set_alarm_right_orbit
     show_tokens:
       led: l_right_orbit_arrow_red
-  right_ramp:
+    tags: alarmshot, envshot_right_orbit
+  kasumi_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: alarmed_shot_profile
-    tags: alarmshot
     advance_events: set_alarm_right_ramp
-    reset_events: counter_kasumi_shots_counter_complete
     show_tokens:
       led: l_right_ramp_arrow_red
-  kickback:
+    tags: alarmshot, envshot_right_ramp
+  kasumi_kickback:
     hit_events: sh_kickback_hit
     profile: alarmed_shot_profile
-    tags: alarmshot
     advance_events: set_alarm_kickback
     show_tokens:
       led: l_kickback_arrow_red
+    tags: alarmshot, envshot_kickback
 
 show_player:
   mode_recruitkasumi_started:
@@ -151,6 +140,10 @@ show_player:
       action: play
       show_tokens:
         flashers: l_flash_back_panel_left
+    alarm_sweep_show:
+      action: play
+      loops: 2
+      speed: 30
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -164,7 +157,7 @@ show_player:
     alarm_sweep_show:
       action: play
       priority: 100
-      loops: 1
+      loops: 0
       speed: 30
 
 shows:
@@ -350,48 +343,40 @@ sound_player:
       action: play
       loops: -1
       fade_in: 1s
-    kasumi_list_of_items:
+    kasumi_need_password_and_voice:
       action: play
-      ducking:
-        target: music
-        attenuation: 0.5
-  # First alarm hit, increase the music tension
+  # First alarm hit
   logicblock_kasumi_alarms_counter_hit{count==1}:
-    recruit_music_kasumi_1:
-      action: stop
-      fade_out: 2s
-    recruit_music_kasumi_2:
+    kasumi_careful:
       action: play
-      fade_in: 1s
-    kasumi_careful: play
-  # Second alarm hit, more tension
+  # Second alarm hit
   logicblock_kasumi_alarms_counter_hit{count==2}:
-    recruit_music_kasumi_2:
-      action: stop
-      fade_out: 2s
-    recruit_music_kasumi_3:
+    guard_warning:
       action: play
-      fade_in: 1s
-    guard_warning: play
   logicblock_kasumi_alarms_counter_hit{count==3}:
-    kasumi_failed: play
+    kasumi_failed:
+      action: play
   # First shot hit, got the password
   logicblock_kasumi_shots_counter_hit{count==1}:
-    kasumi_password_complete
+    kasumi_password_complete:
+      action: play
   # Second shot hit, got the voice print
   logicblock_kasumi_shots_counter_hit{count==2}:
-    kasumi_voice_complete
+    kasumi_voice_complete:
+      action: play
   # Third shot hit, got the DNA sample
   logicblock_kasumi_shots_counter_hit{count==3}:
-    kasumi_not_great_saliva_sample
+    kasumi_not_great_saliva_sample:
+      action: play
   # Fourth shot hit, get the barrier down
   logicblock_kasumi_shots_counter_hit{count==4}:
-    kasumi_barrier_is_down
+    kasumi_barrier_is_down:
+      action: play
 
 sound_pools:
   kasumi_careful:
     type: random
-    sounds: 
+    sounds:
       - kasumi_careful_barrier_up
       - kasumi_hey_no_touching
       - kasumi_dont_touch_that_without_dna_set_off_alarm
@@ -408,14 +393,14 @@ sound_pools:
     track: voice
   kasumi_failed:
     type: random
+    track: voice
     sounds:
       - kasumi_damn_it
       - kasumi_look_out
       - kasumi_damn_it_we_have_to_find_another_way
-
   kasumi_password_complete:
     type: random
-    sounds: 
+    sounds:
       - kasumi_weve_got_the_password_need_voice
       - kasumi_still_need_password_and_voice
       - shepard_password_is_perrugia
@@ -429,6 +414,7 @@ sounds:
   recruit_music_kasumi_1:
     file: KAS.03.Infiltration.ogg
     track: music
+    volume: 0.6
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:
@@ -446,12 +432,24 @@ sounds:
   kasumi_list_of_items:
     file: DLC_HEN_MT_Int.468.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 200ms
+      release_point: 200ms
+      release: 500ms
   kasumi_barrier_is_down:
     file: DLC_HEN_MT_Int.446.ogg
     track: voice
   kasumi_got_voice:
     file: DLC_HEN_MT_Int.555.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 200ms
+      release_point: 200ms
+      release: 500ms
   kasumi_lets_crack_voice:
     file: DLC_HEN_MT_Int.592.ogg
     track: voice
@@ -464,6 +462,12 @@ sounds:
   kasumi_not_great_saliva_sample:
     file: DLC_HEN_MT_Int.678.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 200ms
+      release_point: 200ms
+      release: 500ms
   kasumi_that_should_do_it: # Done with DNA but not explicit
     file: DLC_HEN_MT_Int.657.ogg
     track: voice

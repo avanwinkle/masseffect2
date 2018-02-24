@@ -4,8 +4,6 @@ event_player:
 
 show_player:
   mode_attract_started:
-    attract_dmd_loop:
-      action: play
     middle_circle_sweep:
       loops: -1
       speed: 6
@@ -20,13 +18,21 @@ show_player:
       show_tokens:
         flashers: l_flash_dragon_right, l_flash_dragon_left
   mode_attract_will_stop:
-    attract_dmd_loop:
-      action: stop
     middle_circle_sweep:
       action: stop
     flash:
       action: stop
 
+slide_player:
+  mode_attract_started: me_logo_slide
+
+slides:
+  me_logo_slide:
+    widgets:
+      - type: image
+        image: me2_logo_x128
+        width: 128
+        height: 32
 
 sound_player:
   mode_attract_started:

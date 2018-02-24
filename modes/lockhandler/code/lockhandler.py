@@ -95,6 +95,8 @@ class LockHandler(Mode):
 
     if self._overlordlock.is_virtually_full:
       self.log.debug(" - Lock is going to fill the multiball, skip lock handling")
+    elif self.player.bypass_missionselect:
+      self.log.debug(" - Player has passed on mission selection, skipping mode start")
     elif missions_available:
       self.log.debug(" - Lock is not enabled but missions are available")
       self._post_event('start_mode_missionselect')
@@ -109,17 +111,17 @@ class LockHandler(Mode):
       pass
 
     # LOCK:
-    # If the lock shot is enabled and the virtual lock count is not enough to start multiball
-    # [AVW] Why no start multiball? Because I'm still trying to figure out why the balls_active count gets
-    #       messed up and the multiball releases one less than it should. Ugh.
-    elif self._overlordlock.enabled and self._overlordlock.locked_balls < 2:
+    # If the lock shot is enabled, hold onto the ball
+    elif self._overlordlock.enabled:
       self.log.debug(" - Lock is lit, not going to bypass lock post")
       return
 
     # HOLD:
     # If no mission currently running (i.e. field mode is active) and a mission is available
-    # (or if Garrus' mission is about to be, since the ball lock shot is also his mission light shot)
-    elif self.machine.modes.field.active and (self.player.available_missions > 0 or self.player.status_garrus == 2):
+    # unless the player has opted to bypass the missions (valid until a new mission is available),
+    # or if Garrus/Samara is about to be (since the ball lock shot is also their mission light shot)
+    elif self.machine.modes.field.active and ((self.player.status_garrus == 2 or self.player.status_samara == 2) or
+                                              (self.player.available_missions > 0 and self.player.bypass_missionselect == 0)):
       self.log.debug(" - Field mode is active and missions are available, not going to bypass lock post")
       return
 

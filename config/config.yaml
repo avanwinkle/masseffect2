@@ -23,7 +23,7 @@ mpf-mc:
   fps: 30
 
 game:
-  balls_per_game: 3
+  balls_per_game: 5
   max_players: 4
 
 event_player:
@@ -133,6 +133,8 @@ player_vars:
     initial_value: " "
     value_type: str
   readonly:
+    initial_value: 0
+  bypass_missionselect:
     initial_value: 0
   assignments_completed:
     initial_value: 0

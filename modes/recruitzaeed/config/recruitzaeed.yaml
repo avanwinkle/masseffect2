@@ -100,14 +100,14 @@ shots:
     advance_events: zaeed_right_orbit_zaeed_orbit_profile_reputation_hit
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: blue
+      color: 1166ff #color_paragon
   zaeed_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: zaeed_orbit_profile
     advance_events: zaeed_left_orbit_zaeed_orbit_profile_reputation_hit
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: red
+      color: 660000 #color_renegade
   zaeed_kickshot:
     hit_events: sh_kickback_hit
     enable_events: logicblock_zaeed_orbits_counter_complete
@@ -115,13 +115,13 @@ shots:
     profile: zaeed_kickshot_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: red
+      color: FF7700 #color_zaeed
 
 shows:
   zaeed_show:
     - time: 0
       lights:
-        (leds): FF4400 #color_zaeed
+        (leds): FF7700 #color_zaeed
         l_null: (color)
     - time: '+1'
       lights:

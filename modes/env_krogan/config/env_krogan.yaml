@@ -6,9 +6,9 @@ mode:
 
 sound_player:
   envshot_left_ramp_entrance_hit: krogan_hit
-  envshot_left_ramp_hit: krogan_hit
+  # envshot_left_ramp_hit: krogan_hit
   envshot_right_ramp_entrance_hit: krogan_hit
-  envshot_right_ramp_hit: krogan_hit
+  # envshot_right_ramp_hit: krogan_hit
   envshot_left_orbit_hit: krogan_hit
   envshot_right_orbit_hit: krogan_hit
   envshot_kickback_hit: krogan_hit

@@ -132,13 +132,13 @@ show_player:
       speed: 12
       priority: 100
       show_tokens:
-        color: ff7d49 #color_grunt
+        color: FF6611 #color_grunt
 
 shows:
   grunt_lit_show:
     - duration: 500ms
       lights:
-        (led): ff7d49 #color_grunt
+        (led): FF6611 #color_grunt
     - duration: 500ms
       lights:
         (led): black

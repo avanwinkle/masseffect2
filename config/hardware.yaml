@@ -10,6 +10,8 @@ spike:
   runtime_baud: 1152000 #2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
+  wait_times:
+    65: 24
   # use_send_key: true
 
 machine:
@@ -73,6 +75,7 @@ ball_devices:
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
+    ball_missing_timeouts: 5s
   bd_hold:
     ball_capacity: 1
     hold_coil: c_up_post
@@ -111,13 +114,16 @@ kickbacks:
   dragon_kickback:
     coil: c_kickback
     switch: s_kickback
-    enable_events: kickback_enable
-    disable_events: kickback_disable
+    enable_events: enable_kickback
+    disable_events: disable_kickback, ball_hold_enable
 
 autofire_coils:
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
@@ -127,9 +133,6 @@ autofire_coils:
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
 
 
 switches:
@@ -191,7 +194,7 @@ switches:
   s_battering_ram:
     number: 10-4
     tags: playfield_active
-  s_spinner_left:
+  s_spinner:
     number: 10-7
     tags: playfield_active
   s_left_orbit:
@@ -309,7 +312,7 @@ lights:
     number: 10-6
   l_flash_kickback_lane: # Kickback Lane [#99]
     number: 10-26
-  l_flash_left_orbit: # Left Loop [#102]
+  l_flash_left_orbit: # Left Loop (Spinner) [#102]
     number: 10-13
   l_flash_left_ramp: # Left Ramp [#98]
     number: 10-27
@@ -523,7 +526,7 @@ coils:
     default_hold_power: 0.2
   c_plunger:
     number: 9-1
-    default_pulse_ms: 20
+    default_pulse_ms: 18
   c_trough_eject:
     number: 9-2
     default_pulse_ms: 24
@@ -551,11 +554,11 @@ coils:
   c_up_post:
     number: 8-7
     default_hold_power: 0.3
-    # enable_events: ball_hold_enable
-    # disable_events: ball_hold_disable
+    enable_events: hold_post_enable
+    disable_events: hold_post_disable
   c_lock_release_post:
     number: 9-3
-    default_pulse_ms: 23
+    default_pulse_ms: 28
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
@@ -572,7 +575,7 @@ coils:
   c_kickback:
     number: 8-3
     default_pulse_ms: 20
-    pulse_events: pulse_kickback
+    # pulse_events: pulse_kickback
 
 playfields:
   playfield:

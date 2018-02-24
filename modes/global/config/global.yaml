@@ -31,6 +31,7 @@ event_player:
     - start_mode_field # Wait for global to start before field
     - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
     - start_mode_arrival{device.achievements.collectorship.state=="complete"}
+    # - enable_kickback # Can't write rules for different nodes?
   mode_global_will_stop:
     - stop_mode_field
     - stop_missions
@@ -42,8 +43,12 @@ event_player:
     - stop_mode_field
   missionselect_pass_selected:
     - start_mode_field
-  kickback_override_hit: pulse_kickback
+#   kickback_override_hit: pulse_kickback
 
-shots:
-  kickback_override:
-    switch: s_kickback
+flasher_player:
+  s_spinner_active:
+    l_flash_left_orbit: 50ms
+
+# shots:
+#   kickback_override:
+#     switch: s_kickback

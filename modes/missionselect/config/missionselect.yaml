@@ -60,43 +60,43 @@ show_player:
   missionselect_recruit_highlighted:
     missionselect_highlight_show{squadmate=="garrus"}:
       show_tokens:
-        leds: shot_shield_garrus
+        leds: shot_shield_garrus, l_action_button
         color: 0055FF
     missionselect_highlight_show{squadmate=="grunt"}:
       show_tokens:
-        leds: shot_shield_grunt
+        leds: shot_shield_grunt, l_action_button
         color: BB1100
     missionselect_highlight_show{squadmate=="jack"}:
       show_tokens:
-        leds: shot_shield_jack
+        leds: shot_shield_jack, l_action_button
         color: 4D00CC #color_jack
     missionselect_highlight_show{squadmate=="kasumi"}:
       show_tokens:
-        leds: shot_shield_kasumi
+        leds: shot_shield_kasumi, l_action_button
         color: EEFF00 #color_kasumi
     missionselect_highlight_show{squadmate=="legion"}:
       show_tokens:
-        leds: shot_shield_legion
+        leds: shot_shield_legion, l_action_button
         color: FFFFFF #color_legion
     missionselect_highlight_show{squadmate=="mordin"}:
       show_tokens:
-        leds: shot_shield_mordin
+        leds: shot_shield_mordin, l_action_button
         color: 440000 #color_mordin
     missionselect_highlight_show{squadmate=="samara"}:
       show_tokens:
-        leds: shot_shield_samara
+        leds: shot_shield_samara, l_action_button
         color: 00FFAA #color_samara
     missionselect_highlight_show{squadmate=="tali"}:
       show_tokens:
-        leds: shot_shield_tali
+        leds: shot_shield_tali, l_action_button
         color: FF11DD #color_tali
     missionselect_highlight_show{squadmate=="thane"}:
       show_tokens:
-        leds: shot_shield_thane
+        leds: shot_shield_thane, l_action_button
         color: 00FF11 #color_thane
     missionselect_highlight_show{squadmate=="zaeed"}:
       show_tokens:
-        leds: shot_shield_zaeed
+        leds: shot_shield_zaeed, l_action_button
         color: FF4400 #color_zaeed
 
 shows:

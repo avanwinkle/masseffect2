@@ -24,8 +24,8 @@
 #####
 
 mode:
-  start_events: start_mode_overlordmultiball, multiball_overlord_multiball_started
-  stop_events: stop_mode_overlordmultiball, multiball_overlord_multiball_ended
+  start_events: start_mode_overlordmultiball
+  stop_events: stop_mode_overlordmultiball, stop_wizards
   events_when_started: mode_type_wizard_started
   events_when_stopped: mode_type_wizard_stopped
   priority: 500
@@ -203,9 +203,8 @@ sound_player:
     overlord_music:
       action: play
       loops: -1
-  multiball_overlord_multiball_ended:
-    overlord_music:
-      action: stop
+      fade_out: 1s
+      mode_end_action: stop
 
 sounds:
   overlord_music:

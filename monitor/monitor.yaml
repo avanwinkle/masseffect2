@@ -233,7 +233,7 @@ switch:
   s_right_ramp_exit:
     x: 0.13879896577843792
     y: 0.15702479338842976
-  s_spinner_left:
+  s_spinner:
     x: 0.23684797878346267
     y: 0.42751267245913616
   s_start_button:

@@ -16,7 +16,7 @@ event_player:
   # doesn't have access to machine modes
   overlord_light_shot_hit:
     - play_overlord_hit_sound
-  player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
+  enable_overlord_lock{mode.field.active}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
     - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s

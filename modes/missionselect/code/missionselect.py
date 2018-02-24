@@ -48,6 +48,9 @@ class MissionSelect(Carousel):
     selection = self._get_highlighted_item()
     if selection in SQUADMATES:
       self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
+    elif selection == "pass":
+      # Store the current menu options so we can bypass
+      self.machine.game.player['bypass_missionselect'] = 1
 
   def _update_highlighted_item(self, direction):
     h = self._get_highlighted_item()

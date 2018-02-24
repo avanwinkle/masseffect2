@@ -26,6 +26,7 @@ event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
   overlord_light_shot_hit{not device.multiball_locks.overlordlock.enabled}: enable_overlord_lock
   multiball_lock_overlordlock_full: start_mode_overlordmultiball
+  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
 
 queue_relay_player:
   balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active}:
@@ -38,22 +39,24 @@ queue_relay_player:
 multiball_locks:
   overlordlock:
     balls_to_lock: 3
+    balls_to_replace: 2
     lock_devices: bd_lock
     reset_count_for_current_player_events: multiball_overlord_multiball_ended
     enable_events: enable_overlord_lock
     disable_events: multiball_lock_overlordlock_locked_ball
+    debug: true
 
-# multiballs:
-#   overlord_multiball:
-#     ball_count: 3
-#     # Should be total, but can't figure out why the active ball count is messed up
-#     ball_count_type: total
-#     ball_locks: bd_lock
-#     shoot_again: 10s
-#     # enable_events: multiball_lock_overlordlock_full #multiball_lock_overlordlock_locked_ball{total_balls_locked==3}
-#     # start_events: start_mode_overlordmultiball #mode_overlordmultiball_started
-#     reset_events: multiball_overlord_multiball_ended, ${color_garrus}
-#     debug: true
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+    enable_events: multiball_lock_overlordlock_full
+    start_events: mode_overlordmultiball_started
+    reset_events: multiball_overlord_multiball_ended
+    debug: true
 
 shots:
   overlord_lock_ball_shot:

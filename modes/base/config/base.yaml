@@ -58,11 +58,13 @@ event_player:
     - start_mode_lockhandler
     - start_mode_environment
     - enable_orbitswitches
+    - flippers_on
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
     - stop_mode_environment
     - stop_wizards
+    - flippers_off
   mode_type_wizard_started:
     - stop_mode_global
   mode_type_wizard_stopped{not mode.base.stopping}:
@@ -134,6 +136,11 @@ scoring:
     available_missions: 1
   mode_collectorship_base_stopped:
     available_missions: -1
+  # If a new mission becomes available, disable the bypass
+  player_available_missions{value>0}:
+    bypass_missionselect:
+      action: set
+      score: 0
 
 shots:
 # These "core" shots for the main shots
@@ -154,7 +161,7 @@ shots:
     enable_events: enable_orbitswitches, enable_rightorbit
     disable_events: disable_orbitswitches
   sh_spinner:
-    switch: s_spinner_left
+    switch: s_spinner
     enable_events: enable_orbitswitches
     disable_events: disable_orbitswitches
   sh_kickback:
@@ -252,7 +259,7 @@ shows:
         l_null: (color)
   flasher_show_single:
     - duration: 100ms
-      fixed_duration: true
+      # fixed_duration: true
       lights:
         (flashers): on
     - duration: 10s

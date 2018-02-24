@@ -11,27 +11,16 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
-  shift+1:
-    event: skip_recruit_mission_grunt
-  shift+2:
-    event: skip_recruit_mission_jack
-  shift+3:
-    event: skip_recruit_mission_garrus
-  shift+4:
-    event: skip_recruit_mission_kasumi
-  shift+5:
-    event: skip_recruit_mission_mordin
-
   l:
     event: bypass_lock_release_pulse
   n:
     event: cancel_lock_release_pulse
   r:
-    event: ball_hold_enable
+    event: hold_post_enable
   t:
-    event: ball_hold_disable
+    event: hold_post_disable
   m:
-    event: mainlock_release
+    event: enable_medigel
   a:
     event: enable_gates
   o:
