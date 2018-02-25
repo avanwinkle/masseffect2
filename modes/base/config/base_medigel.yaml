@@ -9,6 +9,7 @@ shots:
     profile: medigel_profile
     enable_events: levelup, enable_medigel
     disable_events: medigel_save_shot_hit, ball_will_end
+    tags: envshot_outlane
   # This shot is hit when medigel light shot is hit and no other saves are enabled
   medigel_save_shot:
     hit_events: medigel_shot_hit #{device.ball_saves["default"].enabled!=True and device.ball_saves["recruitsave"].enabled!=True}
@@ -48,15 +49,26 @@ slide_player:
 slides:
   medigel_slide:
     - type: image
-      image: medigel.bmp
+      image: medigel
       anchor_x: left
       anchor_y: bottom
       x: 0
       y: 0
     - type: text
-      text: Medigel Deployed
+      text: Medigel
+      style: medium
       anchor_x: left
-      x: 36
+      anchor_y: bottom
+      y: middle+2
+      x: 38
+    - type: text
+      text: Deployed
+      style: medium
+      anchor_x: left
+      anchor_y: top
+      y: middle-2
+      x: 38
+
 
 sound_player:
   medigel_shot_hit: medigel_sound|500ms

@@ -337,12 +337,16 @@ slides:
         text: Assignment Complete!
 
 sound_player:
+  s_plunger_lane_inactive: galaxy_whoosh
   levelup:
     music_mission_success:
       action: play
       priority: 100
 
 sounds:
+  galaxy_whoosh:
+    file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
+    track: sfx
   music_mission_success:
     file: mus_gui_mission_completion.ogg
     track: levelup # Use a special track to avoid music fadeout conflicts

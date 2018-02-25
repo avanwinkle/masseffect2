@@ -2,7 +2,7 @@
 
 mode:
   start_events: start_mode_env_field
-  stop_events: stop_mode_env_field
+  stop_events: stop_mode_env_field, stop_mode_environment
   priority: 1000
 
 sound_player:
@@ -13,8 +13,18 @@ sound_player:
   envshot_left_orbit_hit: singularity_up
   envshot_right_orbit_hit: warp_up
   envshot_kickback_hit: shockwave_up
+  envshot_return_lane_hit: shuttle_flyby
+  envshot_outlane_hit: powerdown
 
 sound_pools:
+  powerdown:
+    sounds: powerdown_hard #, powerdown_empty
+    track: sfx
+    volume: 0.4
+  shuttle_flyby:
+    sounds: shuttle_flyby_1, shuttle_flyby_2
+    track: sfx
+    volume: 0.3
   bioticcharge_up:
     sounds: bioticcharge_up_1, bioticcharge_up_2
     track: sfx
@@ -53,6 +63,18 @@ sound_pools:
     track: sfx
 
 sounds:
+  powerdown_hard:
+    file: SFXGame.562.ogg
+    track: sfx
+  powerdown_empty:
+    file: SFXGame.564.ogg
+    track: sfx
+  shuttle_flyby_1:
+    file: SFXGame.558.ogg
+    track: sfx
+  shuttle_flyby_2:
+    file: SFXGame.559.ogg
+    track: sfx
   incinerate_up_1:
     file: SFXPower_Incinerate.02.ogg
     track: sfx

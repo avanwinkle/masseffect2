@@ -1,0 +1,193 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_gunfight
+  stop_events: stop_mode_env_gunfight, stop_mode_environment
+  priority: 400
+
+event_player:
+  envshot_standuptarget_hit: env_random_gunfight
+  envshot_outlane_hit: env_random_shepdead
+
+random_event_player:
+  env_random_gunfight:
+    - env_gunfight_ricochet|2
+    - env_gunfight_bullet_thud
+    - env_gunfight_bullet_whiz|2
+    - env_gunfight_quick_expl
+  env_random_shepdead:
+    - shepdead_garrus{current_player.status_garrus>=3}|2
+    - shepdead_grunt
+    - shepdead_jack
+    - shepdead_jacob
+    - shepdead_miranda
+
+sound_player:
+  env_gunfight_ricochet: ricochet
+  env_gunfight_bullet_thud: bullet_thud
+  env_gunfight_bullet_whiz: bullet_whiz
+  env_gunfight_quick_expl: quick_expl
+  envshot_return_lane_hit: loading_weapon
+  shepdead_garrus:
+    shepdead_garrus:
+      action: play
+      max_queue_time: 0
+  shepdead_grunt:
+    shepdead_grunt:
+      action: play
+      max_queue_time: 0
+  shepdead_jack:
+    shepdead_jack:
+      action: play
+      max_queue_time: 0
+  shepdead_jacob:
+    shepdead_jacob:
+      action: play
+      max_queue_time: 0
+  shepdead_miranda:
+    shepdead_miranda:
+      action: play
+      max_queue_time: 0
+
+sound_pools:
+  shepdead_garrus:
+    sounds: shepdead_garrus_1, shepdead_garrus_2
+    track: voice
+    type: random
+  shepdead_jacob:
+    sounds: shepdead_jacob_1, shepdead_jacob_2, shepdead_jacob_3
+    track: voice
+    type: random
+  shepdead_miranda:
+    sounds: shepdead_miranda_1, shepdead_miranda_2, shepdead_miranda_3, shepdead_miranda_4
+    track: voice
+    type: random
+  ricochet:
+    sounds: ricochet_1, ricochet_2, ricochet_3, ricochet_4, ricochet_5, ricochet_6, ricochet_7, ricochet_8
+    track: sfx
+    type: random_force_all
+  bullet_thud:
+    sounds: bullet_thud_1, bullet_thud_2
+    track: sfx
+    type: random_force_all
+  bullet_whizz:
+    sounds: bullet_whizz_1, bullet_whizz_2, bullet_whizz_3, bullet_whizz_4
+    track: sfx
+    type: random_force_all
+  quick_expl:
+    sounds: quick_expl_1, quick_expl_2, quick_expl_3, quick_expl_4
+    track: sfx
+    type: random_force_all
+  loading_weapon:
+    sounds: loading_weapon_1, loading_weapon_2, loading_weapon_3, loading_weapon_4, loading_weapon_5, loading_weapon_6
+    track: sfx
+    type: random_force_all
+
+sounds:
+  ricochet_1:
+    file: SFXGame.128.ogg
+    track: sfx
+  ricochet_2:
+    file: SFXGame.129.ogg
+    track: sfx
+  ricochet_3:
+    file: SFXGame.130.ogg
+    track: sfx
+  ricochet_4:
+    file: SFXGame.131.ogg
+    track: sfx
+  ricochet_5:
+    file: SFXGame.032.ogg
+    track: sfx
+  ricochet_6:
+    file: SFXGame.033.ogg
+    track: sfx
+  ricochet_7:
+    file: SFXGame.034.ogg
+    track: sfx
+  ricochet_8:
+    file: SFXGame.035.ogg
+    track: sfx
+  bullet_thud_1:
+    file: SFXGame.100.ogg
+    track: sfx
+  bullet_thud_2:
+    file: SFXGame.101.ogg
+    track: sfx
+  bullet_whizz_1:
+    file: SFXGame.178.ogg
+    track: sfx
+  bullet_whizz_2:
+    file: SFXGame.179.ogg
+    track: sfx
+  bullet_whizz_3:
+    file: SFXGame.180.ogg
+    track: sfx
+  bullet_whizz_4:
+    file: SFXGame.181.ogg
+    track: sfx
+  quick_expl_1:
+    file: SFXGame.213.ogg
+    track: sfx
+  quick_expl_2:
+    file: SFXGame.214.ogg
+    track: sfx
+  quick_expl_3:
+    file: SFXGame.215.ogg
+    track: sfx
+  quick_expl_4:
+    file: SFXGame.216.ogg
+    track: sfx
+  loading_weapon_1:
+    file: SFXGame.879.ogg
+    track: sfx
+  loading_weapon_2:
+    file: SFXGame.880.ogg
+    track: sfx
+  loading_weapon_3:
+    file: SFXGame.881.ogg
+    track: sfx
+  loading_weapon_4:
+    file: SFXGame.882.ogg
+    track: sfx
+  loading_weapon_5:
+    file: SFXGame.883.ogg
+    track: sfx
+  loading_weapon_6:
+    file: SFXGame.884.ogg
+    track: sfx
+  shepdead_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303119_m.ogg
+    track: voice
+  shepdead_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303120_m.ogg
+    track: voice
+  shepdead_grunt:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295819_m.ogg
+    track: voice
+  shepdead_jack:
+    file: en_us_hench_convict_ss_global_hench_convict_00286938_m.ogg
+    track: voice
+  shepdead_jacob_1:
+    file: en_us_hench_leading_ss_global_hench_leading_00299244_m.ogg
+    track: voice
+  shepdead_jacob_2:
+    file: en_us_hench_leading_ss_global_hench_leading_00299253_m.ogg
+    track: voice
+  shepdead_jacob_3:
+    file: en_us_hench_leading_ss_global_hench_leading_00299254_m.ogg
+    track: voice
+  shepdead_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg
+    track: voice
+  shepdead_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257459_m.ogg
+    track: voice
+  shepdead_miranda_3:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310106_m.ogg
+    track: voice
+  shepdead_miranda_4:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310107_m.ogg
+    track: voice
+
+
+

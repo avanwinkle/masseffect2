@@ -1,7 +1,9 @@
 #config_version=5
 mode:
   start_events: start_mode_env_bluesuns
-  stop_events: stop_mode_env_bluesons
+  stop_events: stop_mode_env_bluesuns, stop_mode_environment
+  events_when_started: start_mode_env_gunfight
+  events_when_stopped: stop_mode_env_gunfight
   priority: 400
 
 sounds:

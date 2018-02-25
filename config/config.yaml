@@ -73,6 +73,7 @@ modes:
   - environment
   - env_cars
   - env_field
+  - env_gunfight
   - env_krogan
   # Collector Ship Modes:
   - collectorship_ambush

@@ -20,6 +20,11 @@ mode:
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
+event_player:
+  mode_recruitjack_started:
+    set_environment:
+      env: bluesuns
+
 counters:
   jack_rounds_counter:
     starting_count: 0

@@ -6,39 +6,6 @@
 # These are the general playfield effects that run all the times.
 #####
 
-sound_player:
-  s_plunger_lane_inactive: galaxy_whoosh
-  s_outlane_left_active: powerdown
-  s_outlane_right_active: powerdown
-  s_return_lane_left_active: shuttle_flyby
-  s_return_lane_right_active: shuttle_flyby
-
-sound_pools:
-  powerdown:
-    sounds: powerdown_hard #, powerdown_empty
-    track: sfx
-    volume: 0.4
-  shuttle_flyby:
-    sounds: shuttle_flyby_1, shuttle_flyby_2
-    track: sfx
-    volume: 0.3
-
-sounds:
-  powerdown_hard:
-    file: SFXGame.562.ogg
-    track: sfx
-  powerdown_empty:
-    file: SFXGame.564.ogg
-    track: sfx
-  galaxy_whoosh:
-    file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
-    track: sfx
-  shuttle_flyby_1:
-    file: SFXGame.558.ogg
-    track: sfx
-  shuttle_flyby_2:
-    file: SFXGame.559.ogg
-    track: sfx
 
 
 ####

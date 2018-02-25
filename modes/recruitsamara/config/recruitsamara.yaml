@@ -201,3 +201,6 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  aria_her_last_victim:
+    file: en_us_omghub_asari_ruler_omghub_asari_ruler_d_00224031_m.ogg
+    track: voice

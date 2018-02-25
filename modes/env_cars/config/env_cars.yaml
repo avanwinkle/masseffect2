@@ -1,7 +1,7 @@
 #config_version=5
 mode:
   start_events: start_mode_env_cars
-  stop_events: stop_mode_env_cars
+  stop_events: stop_mode_env_cars, stop_mode_environment
   priority: 1000
 
 sound_player:

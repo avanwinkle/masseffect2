@@ -100,22 +100,29 @@ shots:
     profile: door_shot_profile
     show_tokens:
       led: l_kickback_shield_rgb
+    tags: envshot_kickback
   left_door:
     hit_events: sh_left_orbit_hit
     profile: door_shot_profile
     show_tokens:
       led: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   right_door:
     hit_events: sh_right_orbit_hit
     profile: door_shot_profile
     show_tokens:
       led: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
   stairs:
     hit_events: sh_right_ramp_hit
     profile: upstairs_shot_profile
     enable_events: close_doors_hit_complete
     show_tokens:
       led: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
+  drain_shot:
+    switch: s_outlane_left, s_outlane_right
+    tags: envshot_outlane
 
 shows:
   door_shot_show:
@@ -162,6 +169,7 @@ sound_player:
   clear_upstairs_hit_complete:
     music_recruit_garrus:
       action: stop
+  drain_shot_hit: boss_sound
 
 sound_pools:
   garrus_mission_start:
@@ -169,12 +177,15 @@ sound_pools:
     track: voice
     sounds: garrus_give_these_bastards_everything, garrus_get_those_doors_closed, garrus_you_deal_with_shutters
     max_queue_time: 1s
-
   garrus_last_shutter:
     type: random
     track: voice
     sounds: garrus_final_1, garrus_final_2, garrus_final_3
     max_queue_time: 1s
+  boss_sound:
+    sounds: boss_finish_her, boss_now_youre_mine_archangel, boss_i_told_you_id_finish_you
+    track: voice
+    max_queue_time: 500ms
 
 sounds:
   music_recruit_garrus:
@@ -205,4 +216,13 @@ sounds:
     track: voice
   garrus_final_3:
     file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.ogg
+    track: voice
+  boss_finish_her:
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243130_m.ogg
+    track: voice
+  boss_now_youre_mine_archangel:
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243152_m.ogg
+    track: voice
+  boss_i_told_you_id_finish_you:
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243158_m.ogg
     track: voice

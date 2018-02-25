@@ -1,14 +1,14 @@
 #config_version=5
 mode:
   start_events: start_mode_env_krogan
-  stop_events: stop_mode_env_krogan
+  stop_events: stop_mode_env_krogan, stop_mode_environment
+  events_when_started: start_mode_env_gunfight
+  events_when_stopped: stop_mode_env_gunfight
   priority: 400
 
 sound_player:
   envshot_left_ramp_entrance_hit: krogan_hit
-  # envshot_left_ramp_hit: krogan_hit
   envshot_right_ramp_entrance_hit: krogan_hit
-  # envshot_right_ramp_hit: krogan_hit
   envshot_left_orbit_hit: krogan_hit
   envshot_right_orbit_hit: krogan_hit
   envshot_kickback_hit: krogan_hit

@@ -88,6 +88,7 @@ slide_player:
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
+      priority: 600 # Recruit missions run at 500
   timer_planet_slide_timer_complete:
     minerals_slide:
       action: remove
@@ -96,12 +97,12 @@ slides:
   planet_scanned_slide:
     - type: text
       text: (player|planets) Planets Scanned
-      z: 2
+      z: 10
     - type: rectangle
       width: 128
       height: 32
       color: black
-      z: 1
+      z: 9
   minerals_slide:
     - type: line
       points: 0, 31, 127, 31
@@ -231,7 +232,7 @@ widgets:
       anchor_x: left
       y: 2
       x: 2
-      z: 20
+      z: 3
     # - type: rectangle
     #   width: 128
     #   height: 8

@@ -52,7 +52,7 @@ sound_pools:
     track: voice
   shot_hit_sounds_jack:
     type: random_force_all
-    sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5
+    sounds: jack_shot_sound_1, jack_shot_sound_2, jack_shot_sound_3, jack_shot_sound_4, jack_shot_sound_5, jack_shot_sound_6
     track: voice
   shot_hit_sounds_kasumi:
     type: random_force_all
@@ -122,6 +122,9 @@ sounds:
     track: voice
   jack_shot_sound_5:
     file: en_us_hench_convict_ss_global_hench_convict_00286853_m.ogg
+    track: voice
+  jack_shot_sound_6:
+    file: en_us_hench_convict_ss_global_hench_convict_00286921_m.ogg
     track: voice
   kasumi_shot_sound_1:
     file: DLC_HEN_MT_Int.096.ogg
