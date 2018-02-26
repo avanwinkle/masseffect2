@@ -187,6 +187,31 @@ shots:
     show_tokens:
       leds: l_standup_5
 
+slide_player:
+  mode_recruitsamara_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: HIT TARGETS TO GATHER INTEL
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: HIT SHOTS TO PURSUE MORINTH
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
+
 sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:

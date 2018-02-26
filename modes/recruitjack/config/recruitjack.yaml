@@ -30,6 +30,7 @@ counters:
     starting_count: 0
     count_complete_value: 3
     count_events: jack_hitbank_shot_hit
+    multiple_hit_window: 500ms # In case both hitbanks are hit together
     events_when_complete: recruit_jack_complete
     direction: up
     disable_on_complete: true
@@ -206,6 +207,32 @@ shows:
             color: black
             fade: 20ms
     - time: '+1'
+
+
+slide_player:
+  mode_recruitjack_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: HIT SHOTS TO LIGHT BANK
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: 3X BANK HITS TO DEFEAT WARDEN
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
 
 sound_player:
   jack_shots_one_hit:

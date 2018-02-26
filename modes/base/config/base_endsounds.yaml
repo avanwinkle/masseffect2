@@ -12,6 +12,7 @@ sound_player:
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
   shadowbroker_chase_complete: car_crash
+  mode_overlordmultiball_stopped: david_ending
 
 sound_pools:
   # N7 Assignments
@@ -19,7 +20,10 @@ sound_pools:
     sounds: asscompl_1, asscompl_2, asscompl_3
     track: sfx
     type: random_force_all
-
+  david_ending:
+    sounds: david_sqrt_seemed_harmless, david_please_make_it_stop_1, david_please_make_it_stop_2
+    track: voice
+    type: random_force_all
 
 sounds:
   asscompl_1:
@@ -34,6 +38,15 @@ sounds:
   car_crash:
     file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
     track: sfx
+  david_sqrt_seemed_harmless:
+    file: DLC_UNC_Pack01_Int.438.ogg
+    track: voice
+  david_please_make_it_stop_1:
+    file: DLC_UNC_Pack01_Int.440.ogg
+    track: voice
+  david_please_make_it_stop_2:
+    file: DLC_UNC_Pack01_Int.462.ogg
+    track: voice     
   liara_we_lost_her:
     file: DLC_EXP_Part01_Int.695.ogg
     track: voice

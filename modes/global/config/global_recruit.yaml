@@ -389,6 +389,15 @@ sounds:
       attack: 10ms
       release: 100ms
       release_point: 50ms
+  missioncomplete_voice_thane_3:
+    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.ogg
+    track: voice
+    ducking:
+      target: levelup
+      attenuation: 1
+      attack: 10ms
+      release: 100ms
+      release_point: 50ms
   missioncomplete_voice_zaeed_renegade_1:
     file: DLC_HEN_VT_Int.213.ogg
     track: voice

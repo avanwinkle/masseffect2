@@ -69,7 +69,7 @@ shot_groups:
 
 shot_profiles:
   spinnerprofile:
-    show_when_disabled: false
+    show_when_disabled: true
     states:
       - name: flashing
         show: spinner_flash_show
@@ -149,8 +149,8 @@ sound_player:
     music_recruit_mordin:
       action: play
       loops: -1
-  cure_shot_lit_complete: step1_voice
-  counter_fans_counter_hit{count==1}: step2_voice
+  cure_shot_lit_complete{device.counters.fans_counter.value==0}: step1_voice
+  logicblock_fans_counter_hit{value==1}: step2_voice
   recruit_mordin_complete:
     music_recruit_mordin:
       action: stop
@@ -304,12 +304,18 @@ slides:
   instructions_slide:
     widgets:
       - type: text
-        text: SPINNER BUILDS VALUE
+        text: ORBITS BUILD VALUE
         style: dmd_small
         anchor_y: bottom
         y: middle+4
+        z: 1
       - type: text
-        text: HIT RAMPS TO ENABLE FANS
+        text: HIT RAMPS TO TURN ON FANS
         style: dmd_small
         anchor_y: top
         y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000

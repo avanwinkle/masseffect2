@@ -22,6 +22,9 @@ mode:
   priority: 500
 
 event_player:
+  mode_recruitthane_started:
+    set_environment:
+      env: eclipse
   tower_complete_shot_hit: recruit_thane_complete
 
 counters:
@@ -113,3 +116,87 @@ shows:
       lights:
         l_left_orbit_shield_rgb: black
         l_right_orbit_shield_rgb: black
+
+slide_player:
+  mode_recruitthane_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: HIT RAMPS TO ASCEND TOWER
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: HIT ORBIT TO STORM THE BRIDGE
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
+
+sound_player:
+  mode_recruitthane_started:
+    music_thane:
+      action: play
+      fade_out: 2s
+      mode_end_action: stop
+  logicblock_thane_ascent_counter_hit{value!=3}: nas_misc_sounds
+  logicblock_thane_ascent_counter_hit{value==3}: nas_no_one_gets_across_bridge
+  drain_shot_hit: failure_sound
+
+sound_pools:
+  nas_misc_sounds:
+    sounds: nas_damn_it, nas_where_is_everyone, nas_give_me_a_report, nas_answer_me_dammit, nas_find_out_whats_going_on, nas_just_kill_them, nas_finish_them_off, nas_sending_reinforcements
+    track: voice
+  failure_sound:
+    sounds: nas_good_work, nas_thats_more_like_it
+    track: voice
+
+sounds:
+  music_thane:
+    file: mus_thane_acq_combat_3b.ogg
+    track: music
+  nas_damn_it:
+    file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00178710_m.ogg
+    track: voice
+  nas_where_is_everyone:
+    file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189124_m.ogg
+    track: voice
+  nas_give_me_a_report:
+    file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189125_m.ogg
+    track: voice
+  nas_answer_me_dammit:
+    file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189126_m.ogg
+    track: voice
+  nas_find_out_whats_going_on:
+    file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189127_m.ogg
+    track: voice
+  nas_no_one_gets_across_bridge:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199419_m.ogg
+    track: voice
+  nas_just_kill_them:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199421_m.ogg
+    track: voice
+  nas_finish_them_off:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199422_m.ogg
+    track: voice
+  nas_sending_reinforcements:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199425_m.ogg
+    track: voice
+  nas_thats_more_like_it:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199423_m.ogg
+    track: voice
+  nas_good_work:
+    file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199750_m.ogg
+    track: voice
+
+
+

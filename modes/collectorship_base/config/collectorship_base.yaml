@@ -13,7 +13,7 @@
 # The Collector Ship mode is playable only once, and when it becomes available
 # it can only be (and must be) selected from the Mission Selector. Regardless
 # of whether the player "completes" the mission by defeating the Praetorian,
-# once the multiballs drain down to one this mode ends and cannot be restarted.
+# once the multiballs drain this mode ends and cannot be restarted.
 #####
 
 mode:
@@ -41,7 +41,7 @@ event_player:
     - start_mode_collectorship_ambush
   collectorship_praetorian_complete{device.achievements.collectorship.state!="completed"}:
     levelup:
-      mission_name: IFF Retrieved
+      mission_name: Collector Ship Escaped
   # If the player drains to one ball AFTER defeating the praetorian, stop the mode
   multiball_collectorship_multiball_ended{device.achievements.collectorship.state=="completed"}:
     - stop_mode_collectorship_base
@@ -63,7 +63,7 @@ multiballs:
     ball_count_type: total
     start_events: mode_collectorship_base_started
     start_or_add_a_ball_events: collectorship_add_ball
-    shoot_again: 40s
+    shoot_again: 20s
 
 slide_player:
   mode_collectorship_base_started:
@@ -111,7 +111,6 @@ shows:
         l_flash_dragon_left: on
     - lights:
         l_flash_dragon_left: off
-
 
 light_player:
   mode_collectorship_ambush_started:

@@ -146,6 +146,8 @@ player_vars:
     value_type: str
   credits:
     initial_value: 0
+  geth_colossus_state:
+    initial_value: 6
   harbinger_multiplier:
     initial_value: 1
   intel:

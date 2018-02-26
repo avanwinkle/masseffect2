@@ -461,7 +461,7 @@ lights:
         number: 9-24
       blue:
         number: 9-25
-    tags: shot_shields, shot_shield_kasumi, shot_shield_thane
+    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
   l_action_button_rgb: # Lockdown R [#4]
     type: rgb
     channels:
@@ -481,7 +481,7 @@ lights:
         number: 10-24
       blue:
         number: 10-25
-    tags: shot_shields, shot_shield_garrus, shot_shield_samara
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: rgb
     channels:
@@ -491,7 +491,7 @@ lights:
         number: 10-10
       blue:
         number: 10-11
-    tags: shot_shields, shot_shield_grunt, shot_shield_zaeed
+    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: rgb
     channels:
@@ -501,7 +501,7 @@ lights:
         number: 9-46
       blue:
         number: 9-47
-    tags: shot_shields, shot_shield_jack, shot_shield_legion
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
   l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
     type: rgb
     channels:
@@ -521,7 +521,7 @@ lights:
         number: 9-27
       blue:
         number: 9-28
-    tags: shot_shields, shot_shield_mordin, shot_shield_tali
+    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
 
 coils:
   c_flipper_left_main:

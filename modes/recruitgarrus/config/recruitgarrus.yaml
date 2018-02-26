@@ -120,9 +120,6 @@ shots:
     show_tokens:
       led: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
-  drain_shot:
-    switch: s_outlane_left, s_outlane_right
-    tags: envshot_outlane
 
 shows:
   door_shot_show:
@@ -137,12 +134,34 @@ shows:
           color: black
           fade: 200ms
 
+
 slide_player:
+  mode_recruitgarrus_started:
+    instructions_slide:
+      expire: 3s
   close_doors_hit_complete:
     doors_closed_slide:
       expire: 2s
 
 slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: CLOSE 3 SHUTTERS
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: AND SAVE ARCHANGEL
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
   doors_closed_slide:
     widgets:
       - type: text
@@ -150,11 +169,17 @@ slides:
         style: dmd_med
         anchor_y: bottom
         y: middle+2
+        z: 1
       - type: text
         text: Get Back Upstairs!
         style: dmd_med
         anchor_y: top
         y: middle-2
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
 
 sound_player:
   mode_recruitgarrus_started:

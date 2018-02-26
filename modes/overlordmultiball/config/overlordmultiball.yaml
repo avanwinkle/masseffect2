@@ -6,15 +6,18 @@
 # The Overlord multiball is available during regular play prior to the Collector
 # Ship mission. Hitting either of the Geth/Batarian hitbank targets will light
 # lock up to three balls (for Prometheus, Vulcan, and Atlas stations). On the
-# third ball lock, a three-ball multiball begins with a few random shots lit as
-# hack targets, which are on timers and un-light after the timeout. As they
-# start to timeout, other shots are randomly lit. Hitting any lit shot lights
-# the hitbank for a big jackpot, also on a timer.
+# third ball lock, a three-ball multiball begins.
+#
+# All lane shots are lit on a 30 second timer, hitting a lit shot "freezes" it
+# and adds 10 seconds. Once any shot is hit, the jackpot shot (hitbank) lights
+# and a hurry-up value is added to a buildup. Hitting the jackpot awards the
+# build value times a multiplier for how many lane shots have been hit, then
+# the lane shots reset. If the timer runs out, all lit lane shots freeze and the
+# jackpot shot must be hit to re-enable them.
 #
 # If the player successfully collects three jackpots, the mode has been
 # “completed” and a levelup is earned. From this point the multiball continues
-# so long as multiple balls are in play, with time for building value and up
-# to 1-3 hack targets appearing on intervals. Recruitment shots do not advance
+# so long as multiple balls are in play. Recruitment shots do not advance
 # and no other ball locks take effect. When two of the balls have drained, the
 # built value is collected and normal play resumes.
 #
@@ -32,67 +35,48 @@ mode:
 
 counters:
   hackshots_hit_counter:
-    starting_count: 1
-    count_events: hackshots_hit
+    starting_count: 0
+    count_events: hackshots_lit_hit
+    reset_events: reset_hackshots
   jackpots_hit_counter:
     starting_count: 0
     count_events: jackpotshot_hit
 
 timers:
   overlord_timer:
-    start_value: 1
-    direction: up
-    tick_interval: 5s
+    start_value: 30
+    end_value: 0
+    direction: down
+    tick_interval: 1s
+    control_events:
+      - event: reset_hackshots
+        action: restart
+      - event: hackshots_lit_hit
+        action: add
+        value: 10
 
 event_player:
-  # We want to use the bumpers for our own purposes
-  mode_overlordmultiball_started:
-    - stop_mode_planets
-    - enable_hackshot_right_orbit
-    - enable_hackshot_left_ramp
-    - enable_hackshot_left_orbit
-    - change_random_hackshot|15s
-    - change_random_hackshot|30s
-    - change_random_hackshot|45s
-  change_random_hackshot:
-    - disable_random_hackshot
-    - enable_random_hackshot|100ms
-  jackpotshot_hit: enable_random_hackshot
-  mode_overlordmultiball_stopping: start_mode_planets
-  hackshots_hit:
-    - enable_jackpotshot
-    - disable_jackpotshot|15s
-    - enable_random_hackshot|15s
+  mode_overlordmultiball_started.1:
+    - reset_hackshots
+    - play_music_1
+  mode_overlordmultiball_started.2:
+    set_environment:
+      env: geth
+  hackshots_lit_hit: enable_jackpotshot
+  jackpotshot_hit: reset_hackshots
+  timer_overlord_timer_complete: disable_hackshots
   mode_overlordmultiball_will_stop{device.counters.jackpots_hit_counter.value==3}:
     - levelup
 
-random_event_player:
-  enable_random_hackshot:
-    events:
-      - enable_hackshot_left_orbit
-      - enable_hackshot_left_ramp
-      - enable_hackshot_kickback
-      - enable_hackshot_right_ramp
-      - enable_hackshot_right_orbit
-  disable_random_hackshot:
-    events:
-      - disable_hackshot_left_orbit
-      - disable_hackshot_left_ramp
-      - disable_hackshot_kickback
-      - disable_hackshot_right_ramp
-      - disable_hackshot_right_orbit
-
 scoring:
-  mode_overlordmultiball_started:
-    temp_multiplier:
+  reset_hackshots:
+    temp_build_value:
       action: set
-      score: 1
-  timer_overlord_timer_tick:
-    temp_multiplier: 1
+      score: 0
   hackshots_hit:
-    score: 100 * current_player.temp_multiplier
+    temp_build_value: 100 * device.timers.overlord_timer.ticks_remaining
   jackpotshot_hit:
-    score: 1000 * device.counters.hackshots_hit_counter.value
+    score: current_player.temp_build_value * device.counters.hackshots_hit_counter.value
 
 shot_profiles:
   overlord_target_profile:
@@ -100,13 +84,16 @@ shot_profiles:
     states:
       - name: lit
         show: overlord_shot_show
+        priority: 10 # Higher priority than underlying frozen show
         speed: 4
+      - name: frozen
+        show: overlord_frozen_show
   overlord_jackpot_profile:
     show_when_disabled: false
     states:
       - name: lit
-        show: overlord_shot_show
-        speed: 12
+        show: overlord_jackpot_show
+        speed: 4
 
 shot_groups:
   hackshots:
@@ -120,64 +107,95 @@ shots:
     profile: overlord_jackpot_profile
     show_tokens:
       leds: l_hitbank_shield_rgb
+    tags: envshot_hitbank
   hackshot_left_orbit:
     hit_events: sh_left_orbit_hit
-    enable_events: enable_hackshot_left_orbit
-    disable_events: disable_hackshot_left_orbit, hackshot_left_orbit_hit
+    enable_events: reset_hackshots
+    disable_events: disable_hackshots, hackshot_left_orbit_hit
+    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   hackshot_right_orbit:
     hit_events: sh_right_orbit_hit
-    enable_events: enable_hackshot_right_orbit
-    disable_events: disable_hackshot_right_orbit, hackshot_right_orbit_hit
+    enable_events: reset_hackshots
+    disable_events: disable_hackshots, hackshot_right_orbit_hit
+    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
   hackshot_left_ramp:
     hit_events: sh_left_ramp_hit
-    enable_events: enable_hackshot_left_ramp
-    disable_events: disable_hackshot_left_ramp, hackshot_left_ramp_hit
+    enable_events: reset_hackshots
+    disable_events: disable_hackshots, hackshot_left_ramp_hit
+    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
   hackshot_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: enable_hackshot_right_ramp
-    disable_events: disable_hackshot_right_ramp, hackshot_right_ramp_hit
+    enable_events: reset_hackshots
+    disable_events: disable_hackshots, hackshot_right_ramp_hit
+    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
   hackshot_kickback:
     hit_events: sh_kickback_hit
-    enable_events: enable_hackshot_kickback
-    disable_events: disable_hackshot_kickback, hackshot_kickback_hit
+    enable_events: reset_hackshots
+    disable_events: disable_hackshots, hackshot_kickback_hit
+    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_kickback_shield_rgb
+    tags: envshot_kickback
 
 show_player:
+  mode_overlordmultiball_started:
+    overlord_frozen_show:
+      action: play
+      priority: 1
+      show_tokens: 
+        leds: lane_shields
+  mode_overlordmultiball_will_stop:
+    overlord_frozen_show:
+      action: stop
   hackshots_hit:
-    overlord_hit_show:
+    flash_all_shields_show:
       speed: 8
       loops: 8
       priority: 1
+      show_tokens:
+        color: 4BEB9B #color_overlord_green
 
 shows:
-  overlord_shot_show:
+  overlord_lit_show:
     - time: 0
       lights:
-        (leds): 4BEB9B
+        (leds): 4BEB9B #color_overlord_green
     - time: '+1'
       lights:
         (leds): black
-  overlord_hit_show:
+  overlord_jackpot_show:
     - time: 0
       lights:
-        shot_shields: 4BEB9B
+        l_hitbank_shield_rgb: FFFF00  #color_overlord_orange
     - time: '+1'
       lights:
-        shot_shields: black
+        l_hitbank_shield_rgb: 000000
+    - time: '+1'
+      lights:
+        l_hitbank_shield_rgb: 4BEB9B #color_overlord_green
+    - time: '+1'
+      lights:
+        l_hitbank_shield_rgb: 000000
+  overlord_frozen_show:
+    - lights:
+        (leds): FFFF00 #color_overlord_orange
 
 slide_player:
   mode_overlordmultiball_started:
@@ -199,16 +217,113 @@ slides:
         y: middle-2
 
 sound_player:
-  mode_overlordmultiball_started:
-    overlord_music:
+  play_music_1:
+    overlord_music_1:
       action: play
-      loops: -1
       fade_out: 1s
       mode_end_action: stop
+  play_music_2:
+    overlord_music_2:
+      action: play
+      fade_out: 1s
+      mode_end_action: stop
+  mode_overlordmultiball_started: archer_start
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==0}: vi_yell
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==1}: vi_scream
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value>=2}: vi_quietplease
+  enable_jackpotshot: upload_sound
+  jackpotshot_hit: upload_lost
+
+sound_pools:
+  archer_start:
+    sounds: archer_get_to_server_room, archer_you_have_to_hurry
+    type: random_force_all
+    track: voice
+  upload_sound:
+    sounds: upload_1, upload_2, upload_3, upload_4
+    type: random_force_all
+    track: voice
+  vi_quietplease:
+    sounds: vi_quietplease_1, vi_quietplease_2, vi_quietplease_3, vi_quietplease_4
+    type: random
+    track: sfx
+  vi_scream:
+    sounds: vi_scream_1, vi_scream_2, vi_scream_3
+    type: random
+    track: sfx
+  vi_yell:
+    sounds: vi_yell_1, vi_yell_2, vi_yell_3
+    type: random
+    track: sfx
 
 sounds:
-  overlord_music:
-    file: "04 Combat Troops.ogg"
+  overlord_music_1:
+    file: OVR.04.Combat_Troops.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 90s
+        events: play_music_2
+  overlord_music_2:
+    file: OVR.02.Boss_Combat.ogg
+    track: music
+    fade_out: 1s
+    mode_end_action: stop
+    markers: 
+      - time: 96s
+        events: play_music_1
+  archer_get_to_server_room:
+    file: DLC_UNC_Pack01_Int.291.ogg
+    track: voice
+  archer_you_have_to_hurry:
+    file: DLC_UNC_Pack01_Int.012.ogg
+    track: voice
+  upload_1:
+    file: DLC_UNC_Pack01_Int.475.ogg
+    track: voice
+  upload_2:
+    file: DLC_UNC_Pack01_Int.477.ogg
+    track: voice
+  upload_3:
+    file: DLC_UNC_Pack01_Int.479.ogg
+    track: voice
+  upload_4:
+    file: DLC_UNC_Pack01_Int.480.ogg
+    track: voice
+  upload_lost:
+    file: DLC_UNC_Pack01_Int.478.ogg
+    track: voice
+  vi_quietplease_1:
+    file: DLC_UNC_Pack01_Int.124.ogg
+    track: sfx
+  vi_quietplease_2:
+    file: DLC_UNC_Pack01_Int.125.ogg
+    track: sfx
+  vi_quietplease_3:
+    file: DLC_UNC_Pack01_Int.126.ogg
+    track: sfx
+  vi_quietplease_4:
+    file: DLC_UNC_Pack01_Int.127.ogg
+    track: sfx
+  vi_scream_1:
+    file: DLC_UNC_Pack01_Int.162.ogg
+    track: sfx
+  vi_scream_2:
+    file: DLC_UNC_Pack01_Int.163.ogg
+    track: sfx
+  vi_scream_3:
+    file: DLC_UNC_Pack01_Int.164.ogg
+    track: sfx
+  vi_yell_1:
+    file: DLC_UNC_Pack01_Int.168.ogg
+    track: sfx
+  vi_yell_2:
+    file: DLC_UNC_Pack01_Int.196.ogg
+    track: sfx
+  vi_yell_3:
+    file: DLC_UNC_Pack01_Int.197.ogg
+    track: sfx
+
+  
+

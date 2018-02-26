@@ -138,11 +138,81 @@ shows:
         (leds): 000000
         l_null: (color)
 
+slide_player:
+  mode_recruitzaeed_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: CHOOSE PARAGON OR RENEGADE
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: HIT 3X ORBITS TO CATCH VIDO
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
+
 sound_player:
   mode_recruitzaeed_started:
     music_recruit_zaeed:
       action: play
       mode_end_action: stop
+  logicblock_zaeed_orbits_counter_hit{value==1}:
+    explosionchoice_1_paragon{current_player.zaeed_path_renegade==0}:
+      action: play
+    explosionchoice_1_renegade{current_player.zaeed_path_renegade==1}:
+      action: play
+  logicblock_zaeed_orbits_counter_hit{value==2}:
+    explosionchoice_2_paragon{current_player.zaeed_path_renegade==0}:
+      action: play
+    explosionchoice_2_renegade{current_player.zaeed_path_renegade==1}:
+      action: play
+  logicblock_zaeed_orbits_counter_hit{value==3}:
+    explosionchoice_3_paragon{current_player.zaeed_path_renegade==0}:
+      action: play
+    explosionchoice_3_renegade{current_player.zaeed_path_renegade==1}:
+      action: play
+
+sound_pools:
+  zaeed_missionstart:
+    sounds: vido_all_squads_sweep_jungle, zaeed_here_we_go, zaeed_bring_it_on
+    track: voice
+    type: random_force_all
+  explosionchoice_1_paragon:
+    sounds: zaeed_you_wanna_waste_time, zaeed_let_these_people_burn
+    track: voice
+    type: random_force_all
+  explosionchoce_1_renegade:
+    sounds: shep_you_want_him_dead_then_he_dies, shep_lets_get_moving_before_vido_gets_away
+    track: voice
+    type: random_force_all
+  explosionchoice_2_paragon:
+    sounds: shep_we_dont_sacrifice_lives, shep_the_mission_is_to_save_these_workers
+    track: voice
+    type: random_force_all
+  explosionchoice_2_renegade:
+    sounds: zaeed_if_we_keep_up_the_pressure, zaeed_glad_you_see_it_my_way
+    track: voice
+    type: random_force_all
+  explosionchoice3_paragon:
+    sounds: zaeed_vido_come_fight_me, vido_see_you_in_twenty
+    track: voice
+    type: random_force_all
+  explosionchoice3_renegade:
+    sounds: zaeed_burn_you_son_of_a, zaeed_fry_you_son_of_a
+    track: voice
+    type: random_force_all
 
 sounds:
   music_recruit_zaeed:
@@ -150,3 +220,66 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  zaeed_here_we_go:
+    file: DLC_HEN_VT_Int.334.ogg
+    track: voice
+  zaeed_bring_it_on:
+    file: DLC_HEN_VT_Int.345.ogg
+    track: voice
+  shep_we_dont_sacrifice_lives:
+    file: DLC_HEN_VT_Int.377.ogg
+    track: voice
+  shep_this_isnt_the_time:
+    file: DLC_HEN_VT_Int.385.ogg
+    track: voice
+  shep_the_mission_is_to_save_these_workers:
+    file: DLC_HEN_VT_Int.389.ogg
+    track: voice
+  shep_you_want_him_dead_then_he_dies:
+    file: DLC_HEN_VT_Int.405.ogg
+    track: voice
+  shep_lets_get_moving_before_vido_gets_away:
+    file: DLC_HEN_VT_Int.418.ogg
+    track: voice
+  shep_were_here_to_free_these_people:
+    file: DLC_HEN_VT_Int.420.ogg
+    track: voice 
+  shep_ill_save_you_on_one_condition:
+    file: DLC_HEN_VT_Int.495.ogg
+    track: voice
+  zaeed_you_wanna_waste_time:
+    file: DLC_HEN_VT_Int.393.ogg
+    track: voice
+  zaeed_let_these_people_burn:
+    file: DLC_HEN_VT_Int.395.ogg
+    track: voice
+  zaeed_if_we_keep_up_the_pressure:
+    file: DLC_HEN_VT_Int.400.ogg
+    track: voice
+  zaeed_glad_you_see_it_my_way:
+    file: DLC_HEN_VT_Int.424.ogg
+    track: voice
+  zaeed_burn_you_son_of_a:
+    file: DLC_HEN_VT_Int.430.ogg
+    track: voice
+  zaeed_fry_you_son_of_a:
+    file: DLC_HEN_VT_Int.520.ogg
+    track: voice 
+  zaeed_vido_come_fight_me:
+    file: DLC_HEN_VT_Int.473.ogg
+    track: voice
+  vido_all_squads_sweep_jungle:
+    file: DLC_HEN_VT_Int.336.ogg
+    track: voice
+  vido_you_finally_tracked_me_down:
+    file: DLC_HEN_VT_Int.438.ogg
+    track: voice
+  vido_see_you_in_twenty:
+    file: DLC_HEN_VT_Int.518.ogg
+    track: voice
+
+
+
+
+
+

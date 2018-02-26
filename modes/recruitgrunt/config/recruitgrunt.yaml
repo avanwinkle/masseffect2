@@ -143,6 +143,31 @@ shows:
       lights:
         (led): black
 
+slide_player:
+  mode_recruitgrunt_started:
+    instructions_slide:
+      expire: 3s
+
+slides:
+  instructions_slide:
+    widgets:
+      - type: text
+        text: COMPLETE ALL SHOTS
+        style: dmd_small
+        anchor_y: bottom
+        y: middle+4
+        z: 1
+      - type: text
+        text: TO DEFEAT KROGAN
+        style: dmd_small
+        anchor_y: top
+        y: middle-4
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: 000000
+
 sound_player:
   mode_recruitgrunt_started:
     music_recruit_grunt:
