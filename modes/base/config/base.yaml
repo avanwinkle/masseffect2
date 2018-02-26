@@ -7,6 +7,7 @@ mode:
 
 config:
   - base_debug.yaml
+  - base_endsounds.yaml
   - base_medigel.yaml
 
 achievements:

@@ -80,6 +80,19 @@ show_player:
   mode_type_wizard_stopped:
     overlord_disabled_show:
       action: stop
+  # We don't start the multiball during a mission, so hide the show...
+  # ... if a mission starts and 2 balls are locked
+  mode_type_mission_started{device.multiball_locks.overlordlock.locked_balls==2}:
+    overlord_disabled_show:
+      priority: 100
+  # ... if ball 2 is locked during a mission
+  multiball_lock_overlordlock_locked_ball{total_balls_locked==2 and not mode.field.active}:
+    overlord_disabled_show:
+      priority: 100
+  mode_type_mission_stopped:
+    overlord_disabled_show:
+      action: stop
+
 
 shows:
   overlord_disabled_show:

@@ -110,6 +110,11 @@ class LockHandler(Mode):
       self.log.debug(" - A wizard mode is active, bypassing lock post")
       pass
 
+    # MULTIBALL AND FIELD
+    # If a field mode is active, lock a ball only if it won't fill the multiball
+    elif not self.machine.modes.field.active and self._overlordlock.locked_balls == 2:
+      pass
+
     # LOCK:
     # If the lock shot is enabled, hold onto the ball
     elif self._overlordlock.enabled:

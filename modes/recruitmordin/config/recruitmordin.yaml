@@ -87,6 +87,9 @@ shots:
   spinner:
     hit_events: sh_spinner_hit
     profile: spinnerprofile
+    enable_events: mode_recruitmordin_started, enable_orbitswitches
+    # Don't let a ball save plunge count as a hit to the spinner
+    disable_events: fullorbit_fromplunger_hit
     show_tokens:
       led: l_left_orbit_shield_rgb
   cure:

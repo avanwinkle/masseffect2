@@ -22,14 +22,20 @@ class MissionSelect(Carousel):
 
   def _build_items_list(self):
     player = self.machine.game.player
-
-    # Collector ship only
-    if player.achievements['collectorship'] in ("enabled", "stopped"):
-      return ['collectorship']
-
-    # If not collector ship, passing is always an option
     items = []
-    if player.achievements['suicidemission'] == "enabled":
+
+    # Collector ship only (first time)
+    if player.achievements['collectorship'] == "enabled":
+      return ['collectorship']
+    # Derelict Reaper only (first time)
+    if player.achievements['derelictreaper'] == "enabled":
+      return ['derelictreaper']
+
+    # If collectorship has been played but failed, it _can_ be replayed (pre-derelictreaper)
+    if player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
+      items.append('collectorship')
+    # If suicide mission is available, it goes first
+    elif player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
 
     for mate in SQUADMATES:

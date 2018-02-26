@@ -1,0 +1,41 @@
+#config_version=5
+
+#####
+# Modes can't play sounds when they end because the mode stops before the sound
+# player gets the instruction. This base mode extension contains all sounds that
+# should be played when other modes end.
+#####
+
+sound_player:
+  n7_assignment_shot_hit: assignment_complete
+  # Shadowbroker Chase
+  timer_sbchase_timer_complete: liara_we_lost_her
+  ball_save_sbchase_save_saving_ball: liara_we_lost_her
+  shadowbroker_chase_complete: car_crash
+
+sound_pools:
+  # N7 Assignments
+  assignment_complete:
+    sounds: asscompl_1, asscompl_2, asscompl_3
+    track: sfx
+    type: random_force_all
+
+
+sounds:
+  asscompl_1:
+    file: SFXGame.749.ogg
+    track: sfx
+  asscompl_2:
+    file: SFXGame.750.ogg
+    track: sfx
+  asscompl_3:
+    file: SFXGame.751.ogg
+    track: sfx
+  car_crash:
+    file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
+    track: sfx
+  liara_we_lost_her:
+    file: DLC_EXP_Part01_Int.695.ogg
+    track: voice
+    max_queue_time: 1s
+    volume: 1

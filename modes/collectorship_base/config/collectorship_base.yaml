@@ -39,11 +39,11 @@ event_player:
     - start_mode_collectorship_husk
   collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
-  collectorship_praetorian_complete{device.achievements.collectorship.state!="complete"}:
+  collectorship_praetorian_complete{device.achievements.collectorship.state!="completed"}:
     levelup:
       mission_name: IFF Retrieved
   # If the player drains to one ball AFTER defeating the praetorian, stop the mode
-  multiball_collectorship_multiball_ended{device.achievements.collectorship.state=="complete"}:
+  multiball_collectorship_multiball_ended{device.achievements.collectorship.state=="completed"}:
     - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk

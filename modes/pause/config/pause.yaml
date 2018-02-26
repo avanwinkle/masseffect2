@@ -71,12 +71,12 @@ shows:
     - time: 0
       lights:
         gi: black
-        l_lockdown_rgb:
+        l_action_button_rgb:
           color: orange
           fade: 1s
     - time: '+1'
       lights:
-        l_lockdown_rgb:
+        l_action_button_rgb:
           color: black
           fade: 1s
 

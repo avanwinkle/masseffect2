@@ -4,7 +4,8 @@ from datetime import datetime
 from mpf.core.scriptlet import Scriptlet
 
 PLAYER_VARS = (
-  "assigments_completed", "available_missions", "career_name", "level",
+  # "assigments_completed",
+  "available_missions", "career_name", "level",
   "recruits_lit_count", "counter_sbdrops_counter", "squadmates_count", "readonly")
 
 class SaveCareer(Scriptlet):

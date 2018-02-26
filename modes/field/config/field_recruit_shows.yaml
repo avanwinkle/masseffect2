@@ -37,6 +37,12 @@ show_player:
       sync_ms: 1000
       show_tokens:
         leds: color_shield_yellow
+    recruits_lit_show{current_player.status_legion==3}:
+      action: play
+      key: recruits_lit_show_legion
+      sync_ms: 1000
+      show_tokens:
+        leds: color_shield_white
     recruits_lit_show{current_player.status_mordin==3}:
       action: play
       key: recruits_lit_show_mordin
@@ -54,7 +60,7 @@ show_player:
       key: recruits_lit_show_tali
       sync_ms: 1000
       show_tokens:
-        leds: l_right_outlane
+        leds: l_return_lane
     recruits_lit_show{current_player.status_thane==3}:
       action: play
       key: recruits_lit_show_thane
@@ -87,6 +93,11 @@ show_player:
       key: recruits_complete_show_kasumi
       show_tokens:
         leds: color_shield_yellow
+    recruits_complete_show{current_player.status_legion==4}:
+      action: play
+      key: recruits_complete_show_legion
+      show_tokens:
+        leds: color_shield_white
     recruits_complete_show{current_player.status_mordin==4}:
       action: play
       key: recruits_complete_show_mordin
@@ -101,7 +112,7 @@ show_player:
       action: play
       key: recruits_complete_show_tali
       show_tokens:
-        leds: l_right_outlane
+        leds: l_return_lane
     recruits_complete_show{current_player.status_thane==4}:
       action: play
       key: recruits_complete_show_thane

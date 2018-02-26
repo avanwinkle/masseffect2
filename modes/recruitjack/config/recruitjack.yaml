@@ -127,6 +127,8 @@ shots:
       - logicblock_jack_rounds_counter_updated{value==2}
     disable_events: jack_shots_three_hit, mode_recruitjack_started
     tags: envshot_left_orbit, envshot_right_orbit
+  # TODO: Find a way to prevent a double-tap of both hitbanks advancing this
+  #       shot (and round counter) twice
   jack_hitbank_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: jack_hitbank_profile

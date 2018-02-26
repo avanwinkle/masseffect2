@@ -53,16 +53,18 @@ ball_devices:
     ball_switches: s_plunger_lane
     eject_coil: c_plunger
     mechanical_eject: true
-    ball_missing_timeouts: 4s
+    ball_missing_timeouts: 10s
     eject_timeouts: 3s
     confirm_eject_type: target # default
     tags: ball_add_live
+    entrance_count_delay: 0
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject
     tags: trough, home, drain
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
+    eject_timeouts: 1500ms
     auto_fire_on_unexpected_ball: False
     confirm_eject_switch: s_plunger_lane
   bd_lock:
@@ -121,9 +123,11 @@ autofire_coils:
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+    debug: true
   left_slingshot:
     switch: s_left_slingshot
     coil: c_slingshot_left
+    debug: true
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
@@ -360,6 +364,7 @@ lights:
     number: 10-12
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
+    tags: l_outlane
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
@@ -369,6 +374,7 @@ lights:
     number: 10-18
   l_left_return_lane: # Left Return Lane [#12]
     number: 9-33
+    tags: l_return_lane
   l_left_top_lane: # Left Top Lane [#75]
     number: 10-14
   l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
@@ -384,12 +390,14 @@ lights:
     number: 9-20
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
+    tags: l_outlane
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
   l_right_return_lane: # Right Return Lane [#33]
     number: 8-0
+    tags: l_return_lane
   l_right_top_lane: # Right Top Lane [#76]
     number: 10-15
   l_ball_save: # Shoot Again [#32]
@@ -454,13 +462,13 @@ lights:
       blue:
         number: 9-25
     tags: shot_shields, shot_shield_kasumi, shot_shield_thane
-  l_lockdown_rgb: # Lockdown R [#4]
+  l_action_button_rgb: # Lockdown R [#4]
     type: rgb
     channels:
       red:
         number: 1-5
       green:
-        number: 1-6
+        number: 1-4
       blue:
         number: 1-7
     tags: l_action_button
@@ -542,11 +550,11 @@ coils:
     default_pulse_ms: 20
   c_slingshot_left:
     number: 8-1
-    default_pulse_ms: 12
+    default_pulse_ms: 10
     # default_recycle: true
   c_slingshot_right:
     number: 8-4
-    default_pulse_ms: 12
+    default_pulse_ms: 10
     # default_recycle: true
   c_dropbank_reset:
     number: 8-2

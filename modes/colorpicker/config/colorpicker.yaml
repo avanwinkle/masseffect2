@@ -9,12 +9,12 @@ mode_settings:
   rgb_lights:
     - l_hitbank_shield_rgb
     - l_right_ramp_shield_rgb
-    - l_lockdown_rgb
     - l_left_ramp_shield_rgb
     - l_left_orbit_shield_rgb
     - l_kickback_shield_rgb
     - l_dropbank_shield_rgb
     - l_right_orbit_shield_rgb
+    - l_action_button_rgb
   white_lights:
     - l_dropbank_bottom
     - l_dropbank_middle

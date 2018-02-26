@@ -40,11 +40,18 @@ slide_player:
   ball_save_default_saving_ball:
     medigel_slide:
       action: play
-      expire: 3s
+      expire: 2s
+      priority: 2000
+  ball_save_recruitsave_saving_ball:
+    medigel_slide:
+      action: play
+      expire: 2s
+      priority: 2000
   medigel_shot_hit:
     medigel_slide:
       action: play
-      expire: 3s
+      expire: 2s
+      priority: 2000
 
 slides:
   medigel_slide:
@@ -54,6 +61,7 @@ slides:
       anchor_y: bottom
       x: 0
       y: 0
+      z: 2
     - type: text
       text: Medigel
       style: medium
@@ -61,6 +69,7 @@ slides:
       anchor_y: bottom
       y: middle+2
       x: 38
+      casing: upper
     - type: text
       text: Deployed
       style: medium
@@ -68,11 +77,18 @@ slides:
       anchor_y: top
       y: middle-2
       x: 38
+      casing: upper
+    - type: rectangle
+      width: 128
+      height: 32
+      color: black
+      z: 0
 
 
 sound_player:
-  medigel_shot_hit: medigel_sound|500ms
-  ball_save_default_saving_ball: medigel_sound|500ms
+  medigel_shot_hit: medigel_sound
+  ball_save_default_saving_ball: medigel_sound
+  ball_save_recruitsave_saving_ball: medigel_sound
 
 sound_pools:
   medigel_sound:
@@ -89,24 +105,66 @@ sounds:
     file: en_us_player_f_ss_global_player_female_00314495_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   deploying_medigel_2:
     file: en_us_player_f_ss_global_player_female_00314496_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   on_your_feet_1:
     file: en_us_player_f_ss_global_player_female_00314499_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   on_your_feet_2:
     file: en_us_player_f_ss_global_player_female_00314500_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   first_aid_1:
     file: en_us_player_f_ss_global_player_female_00314501_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   first_aid_2:
     file: en_us_player_f_ss_global_player_female_00314502_f.ogg
     track: voice
     max_queue_time: 3s
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 1
+      attack: 10ms
+      release: 10ms
+      release_point: 0
 

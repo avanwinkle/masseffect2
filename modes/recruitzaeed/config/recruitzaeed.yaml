@@ -81,6 +81,8 @@ shot_profiles:
   zaeed_kickshot_profile:
     show_when_disabled: false
     show: zaeed_show
+    states:
+      - name: lit
   zaeed_orbit_profile:
     show_when_disabled: false
     states:
@@ -117,6 +119,14 @@ shots:
       leds: l_kickback_shield_rgb
       color: FF7700 #color_zaeed
 
+show_player:
+  zaeed_orbitshots_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      show_tokens:
+        color: FF7700
+
 shows:
   zaeed_show:
     - time: 0
@@ -132,9 +142,7 @@ sound_player:
   mode_recruitzaeed_started:
     music_recruit_zaeed:
       action: play
-  recruit_zaeed_complete:
-    music_recruit_zaeed:
-      action: stop
+      mode_end_action: stop
 
 sounds:
   music_recruit_zaeed:

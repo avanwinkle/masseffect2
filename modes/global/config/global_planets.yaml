@@ -15,6 +15,9 @@
 scoring:
   planet_shots_hit_complete:
     planets: 1
+    score: 200
+  mineral_shots_hit:
+    score: 10
   mineral_shot_palladium_hit:
     mineral_palladium: 100 * (1 + current_player.planets * 0.25)
   mineral_shot_platinum_hit:
@@ -27,6 +30,10 @@ scoring:
     mineral_total: (change)
   player_mineral_iridium:
     mineral_total: (change)
+
+flasher_player:
+  sw_bumper_active:
+    l_flash_pop_bumpers: 50ms
 
 shot_groups:
   planet_shots:
@@ -104,81 +111,79 @@ slides:
       color: black
       z: 9
   minerals_slide:
-    - type: line
-      points: 0, 31, 127, 31
-      color: FFFFFF
-      thickness: 5
-      z: 4
-    # N7 assignments is 8px tall
-    - type: line
-      points: 0, 9, 127, 9
-      color: FFFFFF
-      thickness: 2
-      z: 4
-    # Vertical lines:
-    - type: line
-      points: 0, 9, 0, 31
-      color: FFFFFF
-      thickness: 2
-      z: 4
-    - type: line
-      points: 42, 9, 42, 31
-      color: FFFFFF
-      thickness: 2
-      z: 4
-    - type: line
-      points: 85, 9, 85, 31
-      color: FFFFFF
-      thickness: 2
-      z: 4
-    - type: line
-      points: 127, 9, 127, 31
-      color: FFFFFF
-      thickness: 2
-      z: 4
-    # Minerals
-    - type: text
-      text: (player|mineral_iridium)
-      min_digits: 1
-      number_grouping: true
-      style: mineral_name_style
-      x: 21
-      y: 24
-      z: 4
-    - type: text
-      text: irid.
-      style: mineral_name_style
-      x: 21
-      y: 12
-      z: 4
-    - type: text
-      text: (player|mineral_palladium)
-      min_digits: 1
-      number_grouping: true
-      style: mineral_name_style
-      x: 50%
-      y: 24
-      z: 4
-    - type: text
-      text: pallad.
-      style: mineral_name_style
-      x: 50%
-      y: 12
-      z: 4
-    - type: text
-      text: (player|mineral_platinum)
-      min_digits: 1
-      number_grouping: true
-      style: mineral_name_style
-      x: 106
-      y: 24
-      z: 4
-    - type: text
-      text: plat.
-      style: mineral_name_style
-      x: 106
-      y: 12
-      z: 4
+    widgets:
+      # Leftmost box
+      - type: line
+        key: leftbox
+        points: 0, 9, 42, 9, 42, 31, 0, 31
+        close: true
+        color: FFFFFF
+        thickness: 5
+        z: 1
+      # Middle box
+      - type: line
+        points: 43, 9, 85, 9, 85, 31, 43, 31
+        key: middlebox
+        close: true
+        color: pink
+        thickness: 10
+        z: 1
+      # Rightmost box
+      - type: line
+        points: 86, 9, 127, 9, 127, 31, 86, 31
+        key: rightbox
+        close: true
+        color: yellow
+        thickness: 20
+        z: 1
+      # Minerals
+      - type: text
+        text: (player|mineral_iridium)
+        min_digits: 1
+        number_grouping: true
+        style: mineral_name_style
+        x: 21
+        y: 24
+        z: 4
+      - type: text
+        text: irid.
+        style: mineral_name_style
+        x: 21
+        y: 12
+        z: 4
+      - type: text
+        text: (player|mineral_palladium)
+        min_digits: 1
+        number_grouping: true
+        style: mineral_name_style
+        x: 50%
+        y: 24
+        z: 4
+      - type: text
+        text: pallad.
+        style: mineral_name_style
+        x: 50%
+        y: 12
+        z: 4
+      - type: text
+        text: (player|mineral_platinum)
+        min_digits: 1
+        number_grouping: true
+        style: mineral_name_style
+        x: 106
+        y: 24
+        z: 4
+      - type: text
+        text: plat.
+        style: mineral_name_style
+        x: 106
+        y: 12
+        z: 4
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
 
 timers:
   planet_slide_timer:
@@ -230,7 +235,7 @@ widgets:
       style: dmd_small
       anchor_y: bottom
       anchor_x: left
-      y: 2
+      y: 1
       x: 2
       z: 3
     # - type: rectangle
@@ -243,14 +248,7 @@ widgets:
     #   y: 0
     #   z: 19
 
-
-
 show_player:
-  sw_bumper_active:
-    flasher_show_single:
-      loops: 0
-      show_tokens:
-        flashers: l_flash_pop_bumpers
   planet_shots_hit_complete:
     planet_complete_show:
       loops: 6
@@ -271,7 +269,6 @@ shows:
 sound_player:
   planet_shots_hit_complete: scan_complete_sound
 
-
 sound_pools:
   scan_complete_sound:
     sounds: something_sensors_1, something_sensors_2, found_something_1, found_something_2, scans_found_something_1, scans_found_something_2
@@ -280,9 +277,9 @@ sound_pools:
     volume: 1
     ducking:
       target: music
-      attenuation: 0.7
-      attack: 200ms
-      release: 200ms
+      attenuation: 1
+      attack: 20ms
+      release: 100ms
 
 sounds:
   something_sensors_1:

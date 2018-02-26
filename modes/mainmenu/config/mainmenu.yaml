@@ -108,12 +108,12 @@ shows:
   mainmenu_show:
     - duration: 1s
       lights:
-        l_lockdown_rgb:
+        l_action_button_rgb:
           color: red
           fade: 100ms
     - duration: 1s
       lights:
-        l_lockdown_rgb:
+        l_action_button_rgb:
           color: blue
           fade: 100ms
 

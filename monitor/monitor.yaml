@@ -78,7 +78,7 @@ light:
   l_left_top_lane:
     x: 0.6639217196401948
     y: 0.09681227863046045
-  l_lockdown_rgb:
+  l_action_button_rgb:
     x: 0.5066162250912983
     y: 0.9409681227863046
   l_right_orbit_arrow_red:

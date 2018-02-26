@@ -129,16 +129,7 @@ sound_player:
     car_takeoff:
       action: play
       volume: 0.1
-  timer_sbchase_timer_complete:
-    liara_we_lost_her:
-      action: play
-      volume: 1
-  ball_save_sbchase_save_saving_ball:
-    liara_we_lost_her:
-      action: play
-      volume: 1
   logicblock_sbchase_counter_hit{remaining>0}: chase_shot_hit_sound
-  shadowbroker_chase_complete: car_crash
   sbchase_shots_off_hit:
     liara_sound_hurry:
       action: play
@@ -184,7 +175,6 @@ sound_pools:
       attack: 200ms
       attenuation: 0.5
       release: 200ms
-
   shepard_sound_reply:
     sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_1, shepard_i_know_2, shepard_i_noticed
     track: voice
@@ -207,9 +197,6 @@ sounds:
     track: sfx
   car_takeoff_2:
     file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_car_takeoff_02.ogg
-    track: sfx
-  car_crash:
-    file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
     track: sfx
   liara_come_on_shes_getting_away:
     file: DLC_EXP_Part01_Int.640.ogg
@@ -271,10 +258,6 @@ sounds:
     track: voice
     max_queue_time: 1s
     events_when_stopped: play_shepard_reply
-  liara_we_lost_her:
-    file: DLC_EXP_Part01_Int.695.ogg
-    track: voice
-    max_queue_time: 1s
   liara_need_to_go_faster:
     file: DLC_EXP_Part01_Int.685.ogg
     track: voice
