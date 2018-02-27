@@ -1,4 +1,4 @@
-# config_version=5
+#config_version=5
 config:
 - hardware.yaml
 - keyboard.yaml
@@ -203,7 +203,7 @@ player_vars:
   upgrades_researched:
     initial_value: 0
   zaeed_path_renegade:
-    initial_value: 0
+    initial_value: -1
 
 sound_system:
   master_volume: 0.75

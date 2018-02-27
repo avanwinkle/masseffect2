@@ -106,6 +106,10 @@ widget_player:
     recruitwidget_score:
       action: add
       slide: recruitslide
+  update_recruitmission:
+    recruitwidget_mission:
+      action: update
+      slide: recruitslide
   player_temp_hurryup_value:
     recruitwidget_score:
       action: update

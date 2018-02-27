@@ -31,9 +31,11 @@ counters:
   thane_ascent_counter:
     # The first time it takes three shots to light, otherwise just one
     # TODO: Verify the initial state of a persisted player variable, it may not be undefined!
-    starting_count: 2 if player.counter_thane_ascent_counter_count > 0 else 0
+    starting_count: 2 if device.counters.thane_ascent_counter.value > 0 else 0
     count_complete_value: 3
+    direction: up
     disable_on_complete: false
+    reset_on_complete: false
     persist_state: true
     count_events: tower_ascent_shot_hit
     reset_events: mode_recruitthane_started
@@ -57,21 +59,17 @@ scoring:
   recruit_thane_complete:
     score: current_player.temp_build_value
   tower_ascent_shot_hit:
-    temp_build_value: current_player.thane_ascent_counter_count * 10000
-
-shot_groups:
-  tower_ascent_shot:
-    shots: tower_shot_left, tower_shot_right
+    temp_build_value: device.counters.thane_ascent_counter.value * 10000
 
 shots:
-  tower_shot_left:
-    hit_events: sh_left_ramp_hit
-  tower_shot_right:
-    hit_events: sh_right_ramp_hit
+  tower_ascent_shot:
+    hit_events: sh_left_ramp_hit, sh_right_ramp_hit
+    tags: envshot_left_ramp, envshot_right_ramp
   tower_complete_shot:
-    hit_events: sh_left_orbit_hit, s_right_orbit_hit
+    hit_events: sh_left_orbit_hit, sh_right_orbit_hit
     enable_events: logicblock_thane_ascent_counter_complete
     disable_events: mode_recruitthane_started
+    tags: envshot_left_orbit, envshot_right_orbit
 
 show_player:
   mode_recruitthane_started:
@@ -82,11 +80,16 @@ show_player:
       speed: 10
       loops: 6
       priority: 100
-  counter_thane_ascent_counter_complete:
+  logicblock_thane_ascent_counter_complete:
     tower_shots_show:
       action: stop
     tower_complete_show:
       speed: 2
+  stop_mode_recruitthane:
+    tower_shots_show:
+      action: stop
+    tower_complete_show:
+      action: stop
 
 shows:
   tower_shots_show:
@@ -119,11 +122,11 @@ shows:
 
 slide_player:
   mode_recruitthane_started:
-    instructions_slide:
+    thane_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  thane_instructions_slide:
     widgets:
       - type: text
         text: HIT RAMPS TO ASCEND TOWER
@@ -148,8 +151,8 @@ sound_player:
       action: play
       fade_out: 2s
       mode_end_action: stop
-  logicblock_thane_ascent_counter_hit{value!=3}: nas_misc_sounds
-  logicblock_thane_ascent_counter_hit{value==3}: nas_no_one_gets_across_bridge
+  logicblock_thane_ascent_counter_hit{count!=3}: nas_misc_sounds
+  logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
   drain_shot_hit: failure_sound
 
 sound_pools:

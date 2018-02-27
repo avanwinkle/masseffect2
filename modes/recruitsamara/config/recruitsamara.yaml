@@ -189,11 +189,11 @@ shots:
 
 slide_player:
   mode_recruitsamara_started:
-    instructions_slide:
+    samara_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  samara_instructions_slide:
     widgets:
       - type: text
         text: HIT TARGETS TO GATHER INTEL

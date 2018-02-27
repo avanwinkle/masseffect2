@@ -31,11 +31,19 @@ counters:
     count_complete_value: 3
     direction: up
     disable_on_complete: false
+    reset_on_complete: false
     count_events: zaeed_orbitshots_hit
-    reset_events: mode_recruitzaeed_started # Is this necessary without persist_state?
+    # reset_events: mode_recruitzaeed_started # Is this necessary without persist_state?
 
 event_player:
+  logicblock_zaeed_orbits_counter_hit: recruittimer_add_ten
   zaeed_kickshot_hit: recruit_zaeed_complete
+  player_zaeed_path_renegade{value==0}:
+    update_recruitmission:
+      missionname: "Save the Workers"
+  player_zaeed_path_renegade{value==1}:
+    update_recruitmission:
+      missionname: "Stop Vido's Escape"
 
 #####
 # ZAEED SCORING
@@ -61,11 +69,16 @@ scoring:
     # Default to paragon path with value == 0
     zaeed_path_renegade:
       action: set
-      score: 0
+      score: -1
   # If the right orbit is the first orbit hit, set path to renegade
   zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
     zaeed_path_renegade:
+      action: set
       score: 1
+  zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
+    zaeed_path_renegade:
+      action: set
+      score: 0
   timer_recruittimer_tick:
     temp_hurryup_value: -90
     temp_build_value:   -90
@@ -103,6 +116,7 @@ shots:
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: 1166ff #color_paragon
+    tags: envshot_left_orbit
   zaeed_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: zaeed_orbit_profile
@@ -110,6 +124,7 @@ shots:
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: 660000 #color_renegade
+    tags: envshot_right_orbit
   zaeed_kickshot:
     hit_events: sh_kickback_hit
     enable_events: logicblock_zaeed_orbits_counter_complete
@@ -118,6 +133,7 @@ shots:
     show_tokens:
       leds: l_kickback_shield_rgb
       color: FF7700 #color_zaeed
+    tags: envshot_kickback
 
 show_player:
   zaeed_orbitshots_hit:
@@ -140,11 +156,11 @@ shows:
 
 slide_player:
   mode_recruitzaeed_started:
-    instructions_slide:
+    zaeed_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  zaeed_instructions_slide:
     widgets:
       - type: text
         text: CHOOSE PARAGON OR RENEGADE
@@ -168,21 +184,14 @@ sound_player:
     music_recruit_zaeed:
       action: play
       mode_end_action: stop
-  logicblock_zaeed_orbits_counter_hit{value==1}:
-    explosionchoice_1_paragon{current_player.zaeed_path_renegade==0}:
+    zaeed_missionstart:
       action: play
-    explosionchoice_1_renegade{current_player.zaeed_path_renegade==1}:
-      action: play
-  logicblock_zaeed_orbits_counter_hit{value==2}:
-    explosionchoice_2_paragon{current_player.zaeed_path_renegade==0}:
-      action: play
-    explosionchoice_2_renegade{current_player.zaeed_path_renegade==1}:
-      action: play
-  logicblock_zaeed_orbits_counter_hit{value==3}:
-    explosionchoice_3_paragon{current_player.zaeed_path_renegade==0}:
-      action: play
-    explosionchoice_3_renegade{current_player.zaeed_path_renegade==1}:
-      action: play
+  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==0}: explosionchoice_1_paragon
+  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==1}: explosionchoice_1_renegade
+  logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==0}: explosionchoice_2_paragon
+  logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==1}: explosionchoice_2_renegade
+  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==0}: explosionchoice_3_paragon
+  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==1}: explosionchoice_3_renegade
 
 sound_pools:
   zaeed_missionstart:
@@ -193,7 +202,7 @@ sound_pools:
     sounds: zaeed_you_wanna_waste_time, zaeed_let_these_people_burn
     track: voice
     type: random_force_all
-  explosionchoce_1_renegade:
+  explosionchoice_1_renegade:
     sounds: shep_you_want_him_dead_then_he_dies, shep_lets_get_moving_before_vido_gets_away
     track: voice
     type: random_force_all
@@ -205,11 +214,11 @@ sound_pools:
     sounds: zaeed_if_we_keep_up_the_pressure, zaeed_glad_you_see_it_my_way
     track: voice
     type: random_force_all
-  explosionchoice3_paragon:
+  explosionchoice_3_paragon:
     sounds: zaeed_vido_come_fight_me, vido_see_you_in_twenty
     track: voice
     type: random_force_all
-  explosionchoice3_renegade:
+  explosionchoice_3_renegade:
     sounds: zaeed_burn_you_son_of_a, zaeed_fry_you_son_of_a
     track: voice
     type: random_force_all
@@ -223,27 +232,63 @@ sounds:
   zaeed_here_we_go:
     file: DLC_HEN_VT_Int.334.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   zaeed_bring_it_on:
     file: DLC_HEN_VT_Int.345.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   shep_we_dont_sacrifice_lives:
     file: DLC_HEN_VT_Int.377.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   shep_this_isnt_the_time:
     file: DLC_HEN_VT_Int.385.ogg
     track: voice
   shep_the_mission_is_to_save_these_workers:
     file: DLC_HEN_VT_Int.389.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   shep_you_want_him_dead_then_he_dies:
     file: DLC_HEN_VT_Int.405.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   shep_lets_get_moving_before_vido_gets_away:
     file: DLC_HEN_VT_Int.418.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 20ms
+      release: 20ms
+      release_point: 10ms
   shep_were_here_to_free_these_people:
     file: DLC_HEN_VT_Int.420.ogg
-    track: voice 
+    track: voice
   shep_ill_save_you_on_one_condition:
     file: DLC_HEN_VT_Int.495.ogg
     track: voice
@@ -264,7 +309,7 @@ sounds:
     track: voice
   zaeed_fry_you_son_of_a:
     file: DLC_HEN_VT_Int.520.ogg
-    track: voice 
+    track: voice
   zaeed_vido_come_fight_me:
     file: DLC_HEN_VT_Int.473.ogg
     track: voice

@@ -27,11 +27,15 @@ event_player:
   logicblock_geth_colossus_counter_complete: recruit_tali_complete
   drop_target_bank_dropbank_complete: recruittimer_add_time
   drop_target_bank_hitbank_complete: recruittimer_add_time
+  timer_recruittimer_tick{ticks<60 and ticks%15==0 and device.counters.geth_colossus_counter.value>3}: play_tali_shield
+  timer_recruittimer_tick{ticks<60 and ticks%15==0 and device.counters.geth_colossus_counter.value<=3}: play_tali_armor
+  timer_recruittimer_complete: recruit_tali_failed
 
 counters:
   geth_colossus_counter:
     count_events: geth_colossus_shot_hit
-    starting_count: min(current_player.geth_colossus_state, 6)
+    starting_count: current_player.geth_colossus_state
+    direction: down
     count_complete_value: 0
     persist_state: true
 
@@ -68,6 +72,7 @@ shots:
   geth_colossus_shot:
     hit_events: sh_left_ramp_hit
     reset_events: mode_recruittali_started
+    tags: envshot_left_ramp
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
 
@@ -80,98 +85,56 @@ show_player:
     geth_colossus_show:
       action: stop
   logicblock_geth_colossus_counter_updated:
-    geth_colossus_show_full_shields{count==6}:
+    geth_colossus_show{value>=6}:
       action: play
       key: geth_colossus_show
       speed: 1
-    geth_colossus_show_partial_shields{count==5}:
+      show_tokens:
+        color: 0066FF #color_shield
+    geth_colossus_show{value==5}:
       action: play
       key: geth_colossus_show
       speed: 2
-    geth_colossus_show_depleted_shields{count==4}:
+      show_tokens:
+        color: 0066FF #color_shield
+    geth_colossus_show{value==4}:
       action: play
       key: geth_colossus_show
       speed: 3
-    geth_colossus_show_full_armor{count==3}:
+      show_tokens:
+        color: 0066FF #color_shield
+    geth_colossus_show{value==3}:
       action: play
       key: geth_colossus_show
       speed: 1
-    geth_colossus_show_partial_armor{count==2}:
+      show_tokens:
+        color: FFCC00 #color_armor
+    geth_colossus_show{value==2}:
       action: play
       key: geth_colossus_show
       speed: 2
-    geth_colossus_show_depleted_armor{count==1}:
+      show_tokens:
+        color: FFCC00 #color_armor
+    geth_colossus_show{value==1}:
       action: play
       key: geth_colossus_show
       speed: 3
+      show_tokens:
+        color: FFCC00 #color_armor
 
 shows:
-  geth_colossus_show_full_shields:
-    - duration: 1000ms
+  geth_colossus_show:
+    - duration: 1200ms
       lights:
         l_left_ramp_shield_rgb:
-          color: 0089E7 #color_shield_full
-          fade: 500ms
-    - duration: 1000ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 004574 #color_shield_50
-          fade: 500ms
-  geth_colossus_show_partial_shields:
-    - duration: 500ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 0089E7 #color_shield_full
-          fade: 250ms
-    - duration: 500ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 004574 #color_shield_50
-          fade: 250ms
-  geth_colossus_show_depleted_shields:
-    - duration: 250ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 0089E7 #color_shield_full
-          fade: 0
-    - duration: 250ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: F2B118 #color_armor_full
-          fade: 0
-  geth_colossus_show_full_armor:
-    - duration: 1000ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: F2B118 #color_armor_full
-          fade: 500ms
-    - duration: 1000ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 79590C #color_armor_50
-          fade: 500ms
-  geth_colossus_show_partial_armor:
-    - duration: 500ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: F2B118 #color_armor_full
-          fade: 250ms
-    - duration: 500ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: 79590C #color_armor_50
-          fade: 250ms
-  geth_colossus_show_depleted_armor:
-    - duration: 250ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: F2B118 #color_armor_full
-          fade: 0
-    - duration: 250ms
+          color: (color)
+          fade: 20ms
+    - duration: 400ms
+      fixed_duration: true
       lights:
         l_left_ramp_shield_rgb:
           color: black
-          fade: 0
+          fade: 20ms
   geth_target_show:
     - time: 0
       lights:
@@ -182,14 +145,14 @@ shows:
 
 slide_player:
   mode_recruittali_started:
-    instructions_slide:
+    tali_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  tali_instructions_slide:
     widgets:
       - type: text
-        text: HIT THE GETH COLOSSUS 
+        text: HIT THE GETH COLOSSUS
         style: dmd_small
         anchor_y: bottom
         y: middle+4
@@ -210,16 +173,16 @@ sound_player:
     music_recruit_tali:
       action: play
       loops: -1
-    # reegar_missionstart|1s:
-    #   action: play
+    reegar_missionstart|1s:
+      action: play
   geth_colossus_shot_hit:
     colossus_hit_sound:
       action: play
-      volume: 0.25
-  timer_recruittimer_tick{ticks < 60 and ticks%10 == 0 and current_player.shot_geth_colossus_shot < 3}:
+      volume: 0.5
+  play_tali_shield:
     tali_attack_shield:
       action: play
-  timer_recruittimer_tick{ticks < 60 and ticks%10 == 0 and current_player.shot_geth_colossus_shot >= 3}:
+  play_tali_armor:
     tali_attack_armor:
       action: play
   recruit_tali_complete:
@@ -248,39 +211,6 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
-  colossus_repair_thane:
-    file: en_us_hench_assassin_suntla_colossusretwarn_h_00203092_m.ogg
-    track: voice
-  colossus_repair_jack:
-    file: en_us_hench_convict_suntla_colossusretwarn_h_00203093_m.ogg
-    track: voice
-  colossus_repair_garrus:
-    file: en_us_hench_garrus_suntla_colossusretwarn_h_00203088_m.ogg
-    track: voice
-  colossus_repair_legion:
-    file: en_us_hench_geth_suntla_colossusretwarn_h_00203087_m.ogg
-    track: voice
-  colossus_repair_grunt:
-    file: en_us_hench_grunt_suntla_colossusretwarn_h_00203091_m.ogg
-    track: voice
-  colossus_repair_kasumi:
-    file: en_us_hench_thief_suntla_colossusretwarn_h_00203094_m.ogg
-    track: voice
-  colossus_repair_jacob:
-    file: en_us_hench_leading_suntla_colossusretwarn_h_00203085_m.ogg
-    track: voice
-  colossus_repair_zaeed:
-    file: en_us_hench_veteran_suntla_colossusretwarn_h_00203086_m.ogg
-    track: voice
-  colossus_repair_samara:
-    file: en_us_hench_mystic_suntla_colossusretwarn_h_00203089_m.ogg
-    track: voice
-  colossus_repair_miranda:
-    file: en_us_hench_vixen_suntla_colossusretwarn_h_00203090_m.ogg
-    track: voice
-  colossus_repair_mordin:
-    file: en_us_hench_professor_suntla_colossusretwarn_h_00278339_m.ogg
-    track: voice
   tali_attack_shields_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289271_m.ogg
     track: voice
@@ -335,15 +265,6 @@ sounds:
   colossus_sound_9:
     file: sfx_ss_geth_colossus_ss_geth_colossus_00313122_m.ogg
     track: sfx
-
-# en_us_hench_tali_ss_global_hench_tali_00289304_m.ogg
-# en_us_hench_tali_ss_global_hench_tali_00289302_m.ogg
-# en_us_hench_tali_ss_global_hench_tali_00289303_m.ogg
-# en_us_suntla_quarianleader_suntla_turret_a_00178237_m.ogg
-# en_us_suntla_quarianleader_suntla_turret_a_00261803_m.ogg
-# en_us_suntla_quarianleader_suntla_turret_a_00261804_m.ogg
-# en_us_suntla_quarianleader_suntla_turret_a_00261805_m.ogg
-# en_us_suntla_quarianleader_suntla_turret_a_00261809_m.ogg
 
 widget_player:
   mode_recruittali_started:

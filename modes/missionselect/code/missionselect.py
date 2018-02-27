@@ -1,7 +1,18 @@
 import copy
 from mpf.modes.carousel.code.carousel import Carousel
 
-SQUADMATES = ["garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed"]
+SQUADMATES = [
+  "grunt",
+  "zaeed",
+  "jack",
+  "legion",
+  "garrus",
+  "samara",
+  "kasumi",
+  "thane",
+  "mordin",
+  "tali",
+]
 
 class MissionSelect(Carousel):
 

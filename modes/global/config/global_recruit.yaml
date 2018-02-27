@@ -160,295 +160,295 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_garrus_2:
     file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_grunt_1:
     file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_grunt_2:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274203_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_grunt_3:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274197_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_grunt_4:
     file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_grunt_5:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274200_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_jack_1:
     file: en_us_hench_convict_prscva_cv_join_d_00198389_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_jack_2:
     file: en_us_hench_convict_prscva_cv_join_d_00200320_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_1:
     file: DLC_HEN_MT_Int.773.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_2:
     file: DLC_HEN_MT_Int.022.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_3:
     file: DLC_HEN_MT_Int.061.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_4:
     file: DLC_HEN_MT_Int.067.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_5:
     file: DLC_HEN_MT_Int.081.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_kasumi_6:
     file: DLC_HEN_MT_Int.086.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_legion_1:
     file: en_us_hench_geth_norgt_relationship00_h_00275284_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_legion_2:
     file: en_us_hench_geth_norgt_relationship00_h_00275287_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_legion_3:
     file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_mordin_1:
     file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_mordin_2:
     file: en_us_hench_professor_omgpra_mordin_d_00210653_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_samara_1:
     file: en_us_hench_mystic_twrmwa_mw02_d_00197868_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_samara_2:
     file: en_us_hench_mystic_twrmwa_mw02_d_00197872_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_samara_3:
     file: en_us_hench_mystic_twrmwa_mw02_d_00216220_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_tali:
     file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_thane_1:
     file: en_us_hench_assassin_norasa_debrief_d_00223267_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_thane_2:
     file: en_us_hench_assassin_norasa_debrief_d_00223275_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_thane_3:
     file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_renegade_1:
     file: DLC_HEN_VT_Int.213.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_renegade_2:
     file: DLC_HEN_VT_Int.505.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_renegade_3:
     file: DLC_HEN_VT_Int.506.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_paragon_1:
     file: DLC_HEN_VT_Int.216.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_paragon_2:
     file: DLC_HEN_VT_Int.476.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
   missioncomplete_voice_zaeed_paragon_3:
     file: DLC_HEN_VT_Int.485.ogg
     track: voice
     ducking:
       target: levelup
-      attenuation: 1
-      attack: 10ms
-      release: 100ms
-      release_point: 50ms
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms

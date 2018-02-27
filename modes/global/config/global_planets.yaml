@@ -91,7 +91,7 @@ slide_player:
     planet_scanned_slide:
       action: play
       expire: 2s
-      priority: 10
+      priority: 610
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
@@ -200,21 +200,21 @@ widget_player:
       action: update
       slide: minerals_slide
       widget_settings:
-        expire: 150ms
+        expire: 200ms
         x: 0
   mineral_shot_palladium_hit:
     mineral_highlight:
       action: update
       slide: minerals_slide
       widget_settings:
-        expire: 150ms
+        expire: 200ms
         x: 43
   mineral_shot_platinum_hit:
     mineral_highlight:
       action: update
       slide: minerals_slide
       widget_settings:
-        expire: 150ms
+        expire: 200ms
         x: 86
   logicblock_n7_hits_counter_hit:
     n7_progress_widget:
@@ -229,6 +229,7 @@ widgets:
       style: mineral_highlight_style
       width: 42
       height: 24
+      z: 2
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"

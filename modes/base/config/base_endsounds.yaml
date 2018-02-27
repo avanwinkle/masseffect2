@@ -13,6 +13,7 @@ sound_player:
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
   shadowbroker_chase_complete: car_crash
   mode_overlordmultiball_stopped: david_ending
+  recruit_tali_failed: colossusrepair
 
 sound_pools:
   # N7 Assignments
@@ -20,6 +21,21 @@ sound_pools:
     sounds: asscompl_1, asscompl_2, asscompl_3
     track: sfx
     type: random_force_all
+  colossusrepair:
+    sounds:
+      - colossus_repair_garrus{current_player.status_garrus>=3}
+      - colossus_repair_grunt{current_player.status_grunt>=3}
+      - colossus_repair_jack{current_player.status_jack>=3}
+      - colossus_repair_jacob
+      - colossus_repair_kasumi{current_player.status_kasumi>=3}
+      - colossus_repair_legion{current_player.status_legion>=3}
+      - colossus_repair_miranda
+      - colossus_repair_mordin{current_player.status_mordin>=3}
+      - colossus_repair_samara{current_player.status_samara>=3}
+      - colossus_repair_thane{current_player.status_thane>=3}
+      - colossus_repair_zaeed{current_player.status_zaeed>=3}
+    track: voice
+    type: random
   david_ending:
     sounds: david_sqrt_seemed_harmless, david_please_make_it_stop_1, david_please_make_it_stop_2
     track: voice
@@ -38,6 +54,39 @@ sounds:
   car_crash:
     file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
     track: sfx
+  colossus_repair_thane:
+    file: en_us_hench_assassin_suntla_colossusretwarn_h_00203092_m.ogg
+    track: voice
+  colossus_repair_jack:
+    file: en_us_hench_convict_suntla_colossusretwarn_h_00203093_m.ogg
+    track: voice
+  colossus_repair_garrus:
+    file: en_us_hench_garrus_suntla_colossusretwarn_h_00203088_m.ogg
+    track: voice
+  colossus_repair_legion:
+    file: en_us_hench_geth_suntla_colossusretwarn_h_00203087_m.ogg
+    track: voice
+  colossus_repair_grunt:
+    file: en_us_hench_grunt_suntla_colossusretwarn_h_00203091_m.ogg
+    track: voice
+  colossus_repair_kasumi:
+    file: en_us_hench_thief_suntla_colossusretwarn_h_00203094_m.ogg
+    track: voice
+  colossus_repair_jacob:
+    file: en_us_hench_leading_suntla_colossusretwarn_h_00203085_m.ogg
+    track: voice
+  colossus_repair_zaeed:
+    file: en_us_hench_veteran_suntla_colossusretwarn_h_00203086_m.ogg
+    track: voice
+  colossus_repair_samara:
+    file: en_us_hench_mystic_suntla_colossusretwarn_h_00203089_m.ogg
+    track: voice
+  colossus_repair_miranda:
+    file: en_us_hench_vixen_suntla_colossusretwarn_h_00203090_m.ogg
+    track: voice
+  colossus_repair_mordin:
+    file: en_us_hench_professor_suntla_colossusretwarn_h_00278339_m.ogg
+    track: voice
   david_sqrt_seemed_harmless:
     file: DLC_UNC_Pack01_Int.438.ogg
     track: voice
@@ -46,7 +95,7 @@ sounds:
     track: voice
   david_please_make_it_stop_2:
     file: DLC_UNC_Pack01_Int.462.ogg
-    track: voice     
+    track: voice
   liara_we_lost_her:
     file: DLC_EXP_Part01_Int.695.ogg
     track: voice

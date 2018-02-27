@@ -52,7 +52,7 @@ multiballs:
     ball_count_type: total
     replace_balls_in_play: true
     ball_locks: bd_lock
-    shoot_again: 10s
+    shoot_again: 30s
     enable_events: multiball_lock_overlordlock_full
     start_events: mode_overlordmultiball_started
     reset_events: multiball_overlord_multiball_ended
