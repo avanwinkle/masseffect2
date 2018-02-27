@@ -262,7 +262,7 @@ shows:
         l_null: (color)
   flasher_show_single:
     - duration: 100ms
-      # fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): on
     - duration: 10s
@@ -270,15 +270,15 @@ shows:
         (flashers): off
   flasher_show_double:
     - duration: 100ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): off
     - duration: 100ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): off
     - duration: 100ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): on
     - duration: 10s
@@ -286,23 +286,23 @@ shows:
         (flashers): off
   flasher_show_triple:
     - duration: 50ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): on
     - duration: 100ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): off
     - duration: 50ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): on
     - duration: 100ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): off
     - duration: 50ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         (flashers): on
     - duration: 10s
