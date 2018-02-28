@@ -34,6 +34,8 @@ shots:
   # Dropbank will count as a hit if it's mixed
   envshot_dropbank:
     hit_events: drop_target_bank_dropbank_mixed
+  envshot_hitbank:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
 
 flasher_player:
   envshot_kickback_hit:

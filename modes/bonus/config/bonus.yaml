@@ -22,6 +22,11 @@ mode_settings:
       score: 750
       player_score_entry: upgrades_researched
 
+light_player:
+  mode_bonus_started:
+    gi:
+      color: 000000
+      fade: 500ms
 
 slide_player:
   mode_bonus_started: end_slide

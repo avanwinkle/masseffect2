@@ -39,7 +39,7 @@ event_player:
   mode_recruitzaeed_started:
     set_environment:
       env: bluesuns
-  logicblock_zaeed_orbits_counter_hit: recruittimer_add_ten
+  logicblock_zaeed_orbits_counter_hit{count==2}: recruittimer_add_ten
   zaeed_kickshot_hit: recruit_zaeed_complete
   player_zaeed_path_renegade{value==0}:
     update_recruitmission:
@@ -110,6 +110,7 @@ shot_profiles:
 shot_groups:
   zaeed_orbitshots:
     shots: zaeed_left_orbit, zaeed_right_orbit
+    reset_events: mode_recruitzaeed_started
 
 shots:
   zaeed_left_orbit:
@@ -260,6 +261,7 @@ sounds:
   shep_we_dont_sacrifice_lives:
     file: DLC_HEN_VT_Int.377.ogg
     track: voice
+    volume: 0.7
     ducking:
       target: music
       attenuation: 0.5
@@ -281,6 +283,7 @@ sounds:
   shep_you_want_him_dead_then_he_dies:
     file: DLC_HEN_VT_Int.405.ogg
     track: voice
+    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5
@@ -290,6 +293,7 @@ sounds:
   shep_lets_get_moving_before_vido_gets_away:
     file: DLC_HEN_VT_Int.418.ogg
     track: voice
+    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5
@@ -299,39 +303,111 @@ sounds:
   shep_were_here_to_free_these_people:
     file: DLC_HEN_VT_Int.420.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   shep_ill_save_you_on_one_condition:
     file: DLC_HEN_VT_Int.495.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_you_wanna_waste_time:
     file: DLC_HEN_VT_Int.393.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_let_these_people_burn:
     file: DLC_HEN_VT_Int.395.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_if_we_keep_up_the_pressure:
     file: DLC_HEN_VT_Int.400.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_glad_you_see_it_my_way:
     file: DLC_HEN_VT_Int.424.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_burn_you_son_of_a:
     file: DLC_HEN_VT_Int.430.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_fry_you_son_of_a:
     file: DLC_HEN_VT_Int.520.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   zaeed_vido_come_fight_me:
     file: DLC_HEN_VT_Int.473.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   vido_all_squads_sweep_jungle:
     file: DLC_HEN_VT_Int.336.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   vido_you_finally_tracked_me_down:
     file: DLC_HEN_VT_Int.438.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   vido_see_you_in_twenty:
     file: DLC_HEN_VT_Int.518.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
 
 
 

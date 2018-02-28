@@ -278,8 +278,8 @@ sound_pools:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
-      attack: 20ms
+      attenuation: 0.5
+      attack: 50ms
       release: 100ms
 
 sounds:

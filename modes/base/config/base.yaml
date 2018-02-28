@@ -192,7 +192,7 @@ shots:
   fullorbit_complete:
     switch: s_left_orbit
     enable_events: fullorbit_fromplunger_hit
-    disable_events: disable_fullorbit
+    disable_events: enable_orbitswitches
 
 show_player:
   ball_save_default_enabled:
@@ -318,6 +318,7 @@ slide_player:
   levelup:
     levelup_slide:
       expire: 5s
+      priority: 10000
   n7_assignment_shot_hit:
     n7_complete_slide:
       priority: 600

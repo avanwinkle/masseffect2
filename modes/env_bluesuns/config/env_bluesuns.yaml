@@ -18,14 +18,17 @@ sound_pools:
     sounds: turian_hit_short_1, turian_hit_short_2
     type: random_force_all
     track: sfx
+    max_queue_time: 500ms
   batarian_hit:
     sounds: batarian_hit_short_1, batarian_hit_short_2
     type: random_force_all
     track: sfx
+    max_queue_time: 500ms
   bluesuns_talking:
     sounds: human_blue_suns_protocol, human_keep_it_up_blue_suns, turian_suppressive_fire, turian_show_what_blue_suns, turian_rockets_away
     track: voice
     type: random_force_all
+    max_queue_time: 500ms
 
 sounds:
   human_keep_it_up_blue_suns:

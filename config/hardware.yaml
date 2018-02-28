@@ -7,7 +7,7 @@ spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
   baud: 115200 #115200
-  runtime_baud: 1152000 #2000000
+  runtime_baud: 2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
@@ -185,9 +185,11 @@ switches:
   s_return_lane_left:
     number: 9-5
     tags: playfield_active
+    ignore_window_ms: 1000
   s_return_lane_right:
     number: 8-6
     tags: playfield_active
+    ignore_window_ms: 1000
   s_outlane_left:
     number: 9-4
     tags: playfield_active
@@ -211,13 +213,13 @@ switches:
   s_left_ramp_entrance:
     number: 10-5
     tags: playfield_active
-    ignore_window_ms: 1000
+    ignore_window_ms: 1500
   s_left_ramp_exit:
     number: 10-6
   s_right_ramp_entrance:
     number: 9-7
     tags: playfield_active
-    ignore_window_ms: 1000
+    ignore_window_ms: 1500
   s_right_ramp_exit:
     number: 10-15
   s_top_lane_left:
@@ -537,6 +539,7 @@ coils:
   c_trough_eject:
     number: 9-2
     default_pulse_ms: 24
+    debug: true
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
@@ -569,6 +572,7 @@ coils:
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
+    debug: true
   c_orbit_gates:
     number: 10-0
     default_pulse_ms: 55

@@ -19,15 +19,11 @@ mode:
   priority: 1000
   code: missionselect.MissionSelect
   file_log: full
-  ##### Look into this:
-  # Possible queue events:
-  #   outgoing_balls_handler: balldevice_(name)_ball_eject_attempt
-  #   mode: mode_(name)_starting, mode_(name)_stopping
   use_wait_queue: true
 
 mode_settings:
   # All squadmates are included via missionselect.py, no need to list them here
-  selectable_items: pass, suicide
+  selectable_items: intro, pass
   select_item_events: s_action_button_active
   next_item_events: s_flipper_right_active, missionselect_skip_forwards, mode_missionselect_started
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards
@@ -35,7 +31,6 @@ mode_settings:
 event_player:
   mode_missionselect_started:
     - disable_recruit_shots
-    - flippers_off
   missionselect_item_selected:
     - enable_recruit_shots
     - flippers_on
@@ -102,7 +97,9 @@ show_player:
 shows:
   missionselect_show:
     - lights:
-        gi: off
+        gi:
+          color: off
+          fade: 2s
         l_left_ramp_arrow_clear: off
         l_dropbank_bottom: off
         l_dropbank_middle: off
@@ -122,24 +119,14 @@ shows:
         (l_null): (color)
 
 slide_player:
-  mode_missionselect_started:
-    missionselect_intro_slide:
-      action: play
-      expire: 3s
-  sw_flipper_active:
-    missionselect_intro_slide:
-      action: remove
+  missionselect_intro_highlighted: missionselect_intro_slide
   missionselect_pass_highlighted: missionselect_pass_slide
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
-  # Recruitment Missions:
-  missionselect_recruit_highlighted:
-    missionselect_recruit_slide:
-      action: play
+  missionselect_recruit_highlighted: missionselect_recruit_slide
 
 slides:
   missionselect_intro_slide:
-    priority: 100
     widgets:
       - type: text
         text: Select a Mission

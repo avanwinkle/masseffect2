@@ -100,7 +100,6 @@ class LockHandler(Mode):
       self.log.debug(" - Player has passed on mission selection, skipping mode start")
     elif missions_available:
       self.log.debug(" - Lock is not enabled but missions are available")
-      self._post_event('start_mode_missionselect')
 
   def _handle_bypasscheck(self, **kwargs):
     """ Logic for assessing whether to hold/lock the ball or bypass the lock """
@@ -109,36 +108,59 @@ class LockHandler(Mode):
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)
     if not self.machine.modes.get("global").active: # global is a reserved word
       self.log.debug(" - A wizard mode is active, bypassing lock post")
-      pass
+      self._bypass_lock()
+      return
 
-    # MULTIBALL AND FIELD
-    # If a field mode is active, lock a ball only if it won't fill the multiball
+    # MULTIBALL AND MISSION
+    # If a mission mode is active, bypass the lock if we have 2 balls locked already
+    # (i.e. do not allow a ball to lock for a multiball to start)
     elif not self.machine.modes.field.active and self._overlordlock.locked_balls == 2:
-      pass
+      self.log.debug(" - Two balls are locked and field mode isn't active, bypassing lock post")
+      self._bypass_lock()
+      return
+
+    do_bypass = True
 
     # LOCK:
     # If the lock shot is enabled, hold onto the ball
-    elif self._overlordlock.enabled:
+    if self._overlordlock.enabled:
       self.log.debug(" - Lock is lit, not going to bypass lock post")
-      # Show the slide already, while we wait for the balls to settle into the device
-      self.machine.events.post("show_overlord_locked_slide", total_balls_locked=self._overlordlock.locked_balls)
-      return
+      do_bypass = False
+      # Show the slide for the upcoming ball while we wait for it to settle into the device
+      self.machine.events.post("show_overlord_locked_slide",
+                               total_balls_locked=self._overlordlock.locked_balls+1)
+
+      # If we're about to start a multiball, don't offer missionselect
+      if self._overlordlock.locked_balls == 2:
+        return
 
     # HOLD:
     # If no mission currently running (i.e. field mode is active) and a mission is available
     # unless the player has opted to bypass the missions (valid until a new mission is available),
     # or if Garrus/Samara is about to be (since the ball lock shot is also their mission light shot)
-    elif self.machine.modes.field.active and ((self.player.status_garrus == 2 or self.player.status_samara == 2) or
+    if self.machine.modes.field.active and ((self.player.status_garrus == 2 or self.player.status_samara == 2) or
                                               (self.player.available_missions > 0 and self.player.bypass_missionselect == 0)):
       self.log.debug(" - Field mode is active and missions are available, not going to bypass lock post")
+      do_bypass = False
+
+      # If we aren't locking the ball, start missionselect in a second
+      if not self._overlordlock.enabled:
+        mission_delay = 1000
+        # self._post_event('start_mode_missionselect')
+      # If we are locking a ball, wait 2.5s for the slide/dialog
+      else:
+        mission_delay = 2500
+
+      self.machine.events.post("flippers_off")
+      self.delay.add(callback=self._post_event, ms=mission_delay,
+                     event='start_mode_missionselect')
       return
 
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold
-    else:
+    if do_bypass:
       self.log.debug(" - Lock not enabled and no missions available, bypassing lock post")
-
-    self._bypass_lock()
+      self._bypass_lock()
 
   def _handle_missionselect_stop(self, **kwargs):
     """ Handler for when mode_missionselect_stop is called. Namely, get a ball active! """
@@ -149,14 +171,14 @@ class LockHandler(Mode):
     self._post_event('start_mode_overlordmultiball')
 
   def _register_handlers(self):
-    self.machine.events.add_handler('balldevice_bd_lock_ball_entered',
-                                    self._handle_ball_enter)
-    self.machine.events.add_handler('multiball_lock_overlordlock_full',
-                                    self._handle_multiball_start)
-    self.machine.events.add_handler('lockhandler_check_bypass',
-                                    self._handle_bypasscheck)
-    self.machine.events.add_handler('mode_missionselect_will_stop',
-                                    self._handle_missionselect_stop)
+    self.add_mode_event_handler('balldevice_bd_lock_ball_entered',
+                                self._handle_ball_enter)
+    self.add_mode_event_handler('multiball_lock_overlordlock_full',
+                                self._handle_multiball_start)
+    self.add_mode_event_handler('lockhandler_check_bypass',
+                                self._handle_bypasscheck)
+    self.add_mode_event_handler('mode_missionselect_will_stop',
+                                self._handle_missionselect_stop)
 
   def _unregister_handlers(self):
     self.machine.events.remove_handler(self._handle_ball_enter)

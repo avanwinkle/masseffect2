@@ -24,11 +24,11 @@ event_player:
 shot_groups:
   overlord_light_shot:
     shots: light_lock_overlord_top, light_lock_overlord_bottom
-    enable_events: 
+    enable_events:
       - enable_lock_lightshot{device.achievements.collectorship.state!="complete"}
       - multiball_overlord_multiball_ended
-    disable_events: 
-      - disable_lock_lightshot 
+    disable_events:
+      - disable_lock_lightshot
       - multiball_overlord_multiball_started
     reset_events: multiball_lock_overlordlock_locked_ball
 
@@ -81,7 +81,7 @@ shows:
 slide_player:
   show_overlord_locked_slide:
     overlord_ball_locked_slide:
-      expire: 2s
+      expire: 3s
       priority: 600 # Enough to beat recruit timer?
   multiball_overlord_multiball_started:
     overlord_ball_locked_slide_full:

@@ -33,7 +33,7 @@ queue_relay_player:
     post: blocking_balldevice_bd_lock_ball_eject_attempt
     wait_for: mode_missionselect_will_stop
   balldevice_bd_trough_ball_eject_attempt{mode.missionselect.active}:
-    post: blocking_balldevice_bd_lock_ball_eject_attempt
+    post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
 
 multiball_locks:

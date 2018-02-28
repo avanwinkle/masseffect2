@@ -31,9 +31,11 @@ class MissionSelect(Carousel):
     self.debug_log("Final list of missionselect options: {}".format(self._items.__str__()))
     super().mode_start(**kwargs)
 
+    # Disable the intro slide after a time
+    self.delay.add(callback=self._remove_intro, ms=3000)
+
   def _build_items_list(self):
     player = self.machine.game.player
-    items = []
 
     # Collector ship only (first time)
     if player.achievements['collectorship'] == "enabled":
@@ -42,6 +44,7 @@ class MissionSelect(Carousel):
     if player.achievements['derelictreaper'] == "enabled":
       return ['derelictreaper']
 
+    items = ["intro"]
     # If collectorship has been played but failed, it _can_ be replayed (pre-derelictreaper)
     if player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
       items.append('collectorship')
@@ -61,12 +64,17 @@ class MissionSelect(Carousel):
     return self._items
 
   def _select_item(self, **kwargs):
+    # If select was hit while the intro still showed, pick the next one
+    if self._get_highlighted_item() == "intro":
+      self.debug_log("Intro was picked as mission, advancing to next item")
+      self._highlighted_item_index += 1
+
     super()._select_item()
     selection = self._get_highlighted_item()
     if selection in SQUADMATES:
       self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
     elif selection == "pass":
-      # Store the current menu options so we can bypass
+      # Store the choice to pass so we can skip missionselect until a new mission is available
       self.machine.game.player['bypass_missionselect'] = 1
 
   def _update_highlighted_item(self, direction):
@@ -74,3 +82,12 @@ class MissionSelect(Carousel):
     self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction)
     if h in SQUADMATES:
       self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)
+    # If we moved away from the intro, remove it
+    if h != "intro" and "intro" in self._items:
+      self._items = self._items[1:]
+      self._highlighted_item_index -= 1
+
+  def _remove_intro(self):
+    self.debug_log("Removing intro slide, highlighted is {} and items are: {}".format(self._highlighted_item_index, self._items))
+    if self._items[0] == "intro" and self._highlighted_item_index == 0:
+      self._next_item()

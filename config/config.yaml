@@ -75,6 +75,7 @@ modes:
   - env_bluesuns
   - env_cars
   - env_field
+  - env_geth
   - env_gunfight
   - env_krogan
   # Collector Ship Modes:

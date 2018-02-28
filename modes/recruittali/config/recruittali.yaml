@@ -130,7 +130,7 @@ shows:
           color: (color)
           fade: 20ms
     - duration: 400ms
-      fixed_duration: true
+      duration_function: duration
       lights:
         l_left_ramp_shield_rgb:
           color: black
