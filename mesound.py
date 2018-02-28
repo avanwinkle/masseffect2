@@ -186,6 +186,7 @@ class ModeSounds(object):
     # If a track is explicitly defined, use it
     if 'track' in soundDict and soundDict['track']:
       trackName = soundDict['track']
+    # Mass Effect 2 Pinball defaults: 
     elif fileName.startswith('en_us_'):
       trackName = 'voice'
     elif fileName.startswith('mus_'):
@@ -237,43 +238,52 @@ def main():
   verbose = "-v" in args
   writeMode = "-w" in args
 
-  if args[0] == "prune":
-    prune_files(doDelete=writeMode)
+  if args:
+    if args[0] == "prune":
+      prune_files(doDelete=writeMode)
+      return
+    elif args[0] == "copy":
+      # The second arg needs to be a path
+      try:
+        os.stat(args[1])
+        match_configs(args[1], doCopy=writeMode)
+      except(IndexError):
+        print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
+        print("Usage: python mesound.py [prune|copy] <path_to_masseffect_sounds> [-v|-w]")
+      except(FileNotFoundError):
+        print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
+        print("Path not found: '{}'".format(args[0]))
+      return
 
-  elif args[0] == "copy":
-    # The second arg needs to be a path
-    try:
-      os.stat(args[1])
-      match_configs(args[1], doCopy=writeMode)
-    except(IndexError):
-      print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
-      print("Usage: python mesound.py [prune|copy] <path_to_masseffect_sounds> [-v|-w]")
-    except(FileNotFoundError):
-      print("MeSound requires a path to your Mass Effect 2 audio dump folder.")
-      print("Path not found: '{}'".format(args[0]))
+  print("""
+---Mission Pinball Audio File Script---
 
-  else:
-    print("""
----Mass Effect Pinball Sound Script---
+Use this script to copy audio files from your source media folder into the
+corresponding MPF Pinball mode folders. 
 
-Use this script to copy audio files from your Mass Effect 2 game into the
-corresponding ME2 Pinball mode folders. Requires a data dump folder created by
+For Mass Effect 2 Pinball, requires a data dump folder created by
 Mass Effect 2 Extractor containing source audio folders and ogg files
 (e.g. 'endgm2_longwalk_a_s_int', 'en_us_player_f_endgm2_escape_c_00287372_f.ogg')
 
+For other projects, your mileage may vary. Contact mpf@anthonyvanwinkle.com 
+with any questions or feedback.
+
 Options:
-  copy  - Copy all required audio files into the ME2 mode folders
-  prune - Remove all mode audio files not referenced in config files (will not affect dump folder)
+  copy  - Copy all audio files referenced in configs from the source folder
+          to the appropriate modes/(name)/sounds/(track) folders
+
+  prune - Remove all audio files from mode folders not referenced in config files
+          and move any misplaced audio files to the correct mode folder
 
 Params:
-  path_to_masseffect_sounds - Path to the data dump folder created by Mass Effect 2 Extractor
+  path_to_sounds - Path to the folder containing all the source audio files
 
 Flags:
   -v    - Verbose mode
   -w    - Write mode (actually copy/prune files)
 
 Usage:
->> python mesound.py [prune|test|copy] <path_to_masseffect_sounds> [-v|-w]
+>> python mesound.py [prune|test|copy] <path_to_sounds> [-v|-w]
 """)
 
 if __name__ == "__main__":

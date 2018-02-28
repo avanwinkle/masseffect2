@@ -13,6 +13,7 @@ class Environment(Mode):
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)
     self.shots = [EnvShot(self.machine, self, shot, self.log) for shot in SHOTS]
+    self.shots.append(OutlaneShot(self.machine, self, "outlane", self.log))
     self._register_handlers()
 
   def _set_environment(self, **kwargs):
@@ -38,6 +39,9 @@ class Environment(Mode):
     self.machine.events.remove_handler(self._set_environment)
 
 class EnvShot(object):
+
+  target_statechange_events = ["player_shot_{}_enabled"]
+
   def __init__(self, machine, mode, tag, log):
     self.machine = machine
     self.mode = mode
@@ -48,8 +52,8 @@ class EnvShot(object):
     try:
       self._shot = self.machine.device_manager.collections["shots"]["envshot_{}".format(self.name)]
       self._shot.disable() # Disable by default, for safety
-      self.mode.add_mode_event_handler('s_{}{}_inactive'.format(
-        self.name, "_exit" if self.name.endswith("_ramp") else ""), self.check_shot)
+      # self.mode.add_mode_event_handler('s_{}{}_inactive'.format(
+      #   self.name, "_exit" if self.name.endswith("_ramp") else ""), self.check_shot)
     except KeyError as e:
       self.log.error("Missing environment shot for {}".format(e))
       raise
@@ -61,12 +65,13 @@ class EnvShot(object):
       self.machine.events.remove_handler_by_key(handler)
     self._event_handlers = []
 
-    for shot in self.get_mode_shots():
-      # Attach a handler for if this shot changes state
-      self._event_handlers.append(
-        self.mode.add_mode_event_handler("player_shot_{}_enabled".format(shot.name), self.check_shot))
+    for target in self.get_targets():
+      # Attach handlers for if this target changes state
+      for evt in self.target_statechange_events:
+        self._event_handlers.append(
+          self.mode.add_mode_event_handler(evt.format(target.name), self.check_shot))
       # If it's already enabled? This envshot is disabled
-      if shot.enabled:
+      if target.enabled:
         do_enable = False
 
     if do_enable:
@@ -75,12 +80,12 @@ class EnvShot(object):
       self._disable()
 
   def check_shot(self, **kwargs):
-    # If any shots are enabled, disable this envshot
+    """Check if any shots tagged 'envshot_(name)' are enabled; disable this envshot if true, enable if false"""
     if bool(self.enabled_count):
         self._disable()
     else:
       self._enable()
-    self.log.debug("Just checked {}, {} shots are enabled so this is now {}".format(
+    self.log.debug("Just checked {}, {} targets are enabled so this is now {}".format(
       self.name, self.enabled_count, self._shot.enabled))
 
   def _enable(self):
@@ -98,12 +103,21 @@ class EnvShot(object):
     self._shot.disable()
 
   def get_enabled_shots(self):
-    return list(filter(lambda x: x.enabled, self.get_mode_shots()))
+    return list(filter(lambda x: x.enabled, self.get_targets()))
 
-  def get_mode_shots(self):
+  def get_targets(self):
     self.machine.log.info("Getting shots for EnvShot '{}'".format(self.name))
     return self.machine.device_manager.collections["shots"].items_tagged("envshot_{}".format(self.name))
 
   @property
   def enabled_count(self):
     return len(self.get_enabled_shots())
+
+class OutlaneShot(EnvShot):
+
+  target_statechange_events = ["ball_save_{}_enabled", "ball_save_{}_disabled"]
+
+  def get_targets(self):
+    """We actually get ball saves, not mode shots, but same diff"""
+    self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
+    return self.machine.device_manager.collections["ball_saves"].values()
