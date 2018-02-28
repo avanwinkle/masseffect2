@@ -1,0 +1,24 @@
+#show_version=5
+- time: 0
+  flashers:
+    l_flash_slingshots: 150ms
+- time: 973ms
+  flashers:
+    l_flash_pop_bumpers: 150ms
+    l_flash_dragon_right: 150ms
+- time: 1764ms
+  flashers:
+    l_flash_right_ramp: 150ms
+    l_flash_left_ramp: 150ms
+- time: 2210ms
+  flashers:
+    l_flash_kickback_lane: 150ms
+- time: 2967ms
+  flashers:
+    l_flash_dragon_left: 150ms
+    l_flash_sword_lock: 150ms
+- time: 3532ms
+  flashers:
+    l_flash_left_orbit: 150ms
+    l_flash_battering_ram: 150ms
+- time: 4542ms

@@ -1,22 +1,40 @@
 #config_version=5
 event_player:
-  mode_attract_started: start_mode_mainmenu
-
-show_player:
   mode_attract_started:
-    middle_circle_sweep:
+    - start_mode_mainmenu
+    - start_suicide_track|300ms
+    - start_suicide_beat|300ms
+
+    - start_suicide_flash|29045ms # 28945ms + 300ms
+show_player:
+  start_suicide_track:
+    suicide_track:
       loops: -1
-      speed: 6
-    flash:
+      speed: 1
       action: play
-      speed: 4
-      show_tokens:
-        leds: l_start_button
-    flasher_show_triple:
+  start_suicide_beat:
+    suicide_beat:
+      loop: -1
+      speed: 1
       action: play
-      speed: 5
-      show_tokens:
-        flashers: l_flash_dragon_right, l_flash_dragon_left
+  start_suicide_flash:
+    suicide_flash:
+      loops: -1
+      speed: 1
+      action: play
+    # middle_circle_sweep:
+    #   loops: -1
+    #   speed: 6
+    # flash:
+    #   action: play
+    #   speed: 4
+    #   show_tokens:
+    #     leds: l_start_button
+    # flasher_show_triple:
+    #   action: play
+    #   speed: 5
+    #   show_tokens:
+    #     flashers: l_flash_dragon_right, l_flash_dragon_left
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop

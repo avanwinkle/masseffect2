@@ -1,0 +1,44 @@
+#show_version=5
+- time: 0
+  lights:
+    l_iron_throne: off
+    l_standup_1: on
+- time: 973ms
+  lights:
+    l_standup_1: off
+    l_standup_2: on
+- time: 1764ms
+  lights:
+    l_standup_2: off
+    l_standup_3: on
+- time: 2210ms
+  lights:
+    l_standup_3: off
+    l_standup_4: on
+- time: 2967ms
+  lights:
+    l_standup_4: off
+    l_standup_5: on
+- time: 3532ms
+  lights:
+    l_standup_5: off
+    l_ball_save: on
+- time: 4542ms
+  lights:
+    l_ball_save: off
+    l_dragon_fire: on
+- time: 5294ms
+  lights:
+    l_dragon_fire: off
+    l_hitbank_bot: on
+    l_hitbank_top: on
+- time: 5821ms
+  lights:
+    l_hitbank_top: off
+    l_hitbank_bot: off
+    l_hand_of_the_king: on
+- time: 6638ms
+  lights:
+    l_hand_of_the_king: off
+    l_iron_throne: on
+- time: 7112ms
