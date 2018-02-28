@@ -5,8 +5,323 @@
 #
 # These are the general playfield effects that run all the times.
 #####
+sound_player:
+  squad_target_left: 
+    squad_target_left:
+      action: play
+      max_queue_time: 0
+  squad_target_center: 
+    squad_target_center:
+      action: play
+      max_queue_time: 0
+  squad_target_right: 
+    squad_target_right:
+      action: play
+      max_queue_time: 0  
 
-
+sound_pools:
+  squad_target_left:
+    type: random_force_next
+    track: voice
+    sounds:
+      - target_left_garrus_1{current_player.status_garrus>=3}
+      - target_left_garrus_2{current_player.status_garrus>=3}
+      - target_left_grunt_1{current_player.status_grunt>=3}
+      - target_left_grunt_2{current_player.status_grunt>=3}
+      - target_left_jack_1{current_player.status_jack>=3}
+      - target_left_jack_2{current_player.status_jack>=3}
+      - target_left_jacob_1
+      - target_left_jacob_2
+      - target_left_kasumi_1{current_player.status_kasumi>=3}
+      - target_left_kasumi_2{current_player.status_kasumi>=3}
+      - target_left_legion_1{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_left_legion_2{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_left_miranda_1
+      - target_left_miranda_2
+      - target_left_mordin_1{current_player.status_mordin>=3}
+      - target_left_mordin_2{current_player.status_mordin>=3}
+      - target_left_samara_1{current_player.status_samara>=3}
+      - target_left_samara_2{current_player.status_samara>=3}
+      - target_left_tali_1{current_player.status_tali>=3}
+      - target_left_tali_2{current_player.status_tali>=3}
+      - target_left_thane_1{current_player.status_thane>=3}
+      - target_left_thane_2{current_player.status_thane>=3}
+      - target_left_zaeed_1{current_player.status_zaeed>=3}
+      - target_left_zaeed_2{current_player.status_zaeed>=3}
+  squad_target_center:
+    type: random_force_next
+    track: voice
+    sounds:
+      - target_center_garrus_1{current_player.status_garrus>=3}
+      - target_center_garrus_2{current_player.status_garrus>=3}
+      - target_center_grunt_1{current_player.status_grunt>=3}
+      - target_center_grunt_2{current_player.status_grunt>=3}
+      - target_center_jack_1{current_player.status_jack>=3}
+      - target_center_jack_2{current_player.status_jack>=3}
+      - target_center_jacob_1
+      - target_center_jacob_2
+      - target_center_kasumi_1{current_player.status_kasumi>=3}
+      - target_center_kasumi_2{current_player.status_kasumi>=3}
+      - target_center_legion_1{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_center_legion_2{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_center_miranda_1
+      - target_center_miranda_2
+      - target_center_mordin_1{current_player.status_mordin>=3}
+      - target_center_mordin_2{current_player.status_mordin>=3}
+      - target_center_samara_1{current_player.status_samara>=3}
+      - target_center_samara_2{current_player.status_samara>=3}
+      - target_center_tali_1{current_player.status_tali>=3}
+      - target_center_tali_2{current_player.status_tali>=3}
+      - target_center_thane_1{current_player.status_thane>=3}
+      - target_center_thane_2{current_player.status_thane>=3}
+      - target_center_zaeed_1{current_player.status_zaeed>=3}
+      - target_center_zaeed_2{current_player.status_zaeed>=3}
+  squad_target_right:
+    type: random_force_next
+    track: voice
+    sounds:
+      - target_right_garrus_1{current_player.status_garrus>=3}
+      - target_right_garrus_2{current_player.status_garrus>=3}
+      - target_right_grunt_1{current_player.status_grunt>=3}
+      - target_right_grunt_2{current_player.status_grunt>=3}
+      - target_right_jack_1{current_player.status_jack>=3}
+      - target_right_jack_2{current_player.status_jack>=3}
+      - target_right_jacob_1
+      - target_right_jacob_2
+      - target_right_kasumi_1{current_player.status_kasumi>=3}
+      - target_right_kasumi_2{current_player.status_kasumi>=3}
+      - target_right_legion_1{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_right_legion_2{current_player.status_legion>=3 or mode.recruitlegion.active}
+      - target_right_miranda_1
+      - target_right_miranda_2
+      - target_right_mordin_1{current_player.status_mordin>=3}
+      - target_right_mordin_2{current_player.status_mordin>=3}
+      - target_right_samara_1{current_player.status_samara>=3}
+      - target_right_samara_2{current_player.status_samara>=3}
+      - target_right_tali_1{current_player.status_tali>=3}
+      - target_right_tali_2{current_player.status_tali>=3}
+      - target_right_thane_1{current_player.status_thane>=3}
+      - target_right_thane_2{current_player.status_thane>=3}
+      - target_right_zaeed_1{current_player.status_zaeed>=3}
+      - target_right_zaeed_2{current_player.status_zaeed>=3}
+  
+sounds:
+  target_center_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303068_m.ogg
+    track: voice
+  target_center_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303069_m.ogg
+    track: voice
+  target_left_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303070_m.ogg
+    track: voice
+  target_left_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303071_m.ogg
+    track: voice
+  target_right_garrus_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303072_m.ogg
+    track: voice
+  target_right_garrus_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303073_m.ogg
+    track: voice
+  target_center_grunt_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295746_m.ogg
+    track: voice
+  target_center_grunt_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295747_m.ogg
+    track: voice
+  target_left_grunt_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295748_m.ogg
+    track: voice
+  target_left_grunt_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295749_m.ogg
+    track: voice
+  target_right_grunt_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295750_m.ogg
+    track: voice
+  target_right_grunt_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295751_m.ogg
+    track: voice
+  target_center_jack_1:
+    file: en_us_hench_convict_ss_global_hench_convict_00286862_m.ogg
+    track: voice
+  target_center_jack_2:
+    file: en_us_hench_convict_ss_global_hench_convict_00286863_m.ogg
+    track: voice
+  target_left_jack_1:
+    file: en_us_hench_convict_ss_global_hench_convict_00286864_m.ogg
+    track: voice
+  target_left_jack_2:
+    file: en_us_hench_convict_ss_global_hench_convict_00286865_m.ogg
+    track: voice
+  target_right_jack_1:
+    file: en_us_hench_convict_ss_global_hench_convict_00286866_m.ogg
+    track: voice
+  target_right_jack_2:
+    file: en_us_hench_convict_ss_global_hench_convict_00286867_m.ogg
+    track: voice
+  target_center_jacob_1:
+    file: en_us_hench_leading_ss_global_hench_leading_00299179_m.ogg
+    track: voice
+  target_center_jacob_2:
+    file: en_us_hench_leading_ss_global_hench_leading_00299180_m.ogg
+    track: voice
+  target_left_jacob_1:
+    file: en_us_hench_leading_ss_global_hench_leading_00299181_m.ogg
+    track: voice
+  target_left_jacob_2:
+    file: en_us_hench_leading_ss_global_hench_leading_00299182_m.ogg
+    track: voice
+  target_right_jacob_1:
+    file: en_us_hench_leading_ss_global_hench_leading_00299183_m.ogg
+    track: voice
+  target_right_jacob_2:
+    file: en_us_hench_leading_ss_global_hench_leading_00299184_m.ogg
+    track: voice
+  target_center_kasumi_1:
+    file: DLC_HEN_MT_Int.246.ogg 
+    track: voice
+  target_center_kasumi_2:
+    file: DLC_HEN_MT_Int.248.ogg 
+    track: voice
+  target_left_kasumi_1:
+    file: DLC_HEN_MT_Int.244.ogg 
+    track: voice
+  target_left_kasumi_2:
+    file: DLC_HEN_MT_Int.245.ogg 
+    track: voice
+  target_right_kasumi_1:
+    file: DLC_HEN_MT_Int.241.ogg 
+    track: voice
+  target_right_kasumi_2:
+    file: DLC_HEN_MT_Int.240.ogg
+    track: voice
+  target_center_legion_1:
+    file: en_us_hench_geth_ss_global_hench_geth_00240743_m.ogg
+    track: voice
+  target_center_legion_2:
+    file: en_us_hench_geth_ss_global_hench_geth_00240744_m.ogg
+    track: voice
+  target_left_legion_1:
+    file: en_us_hench_geth_ss_global_hench_geth_00240745_m.ogg
+    track: voice
+  target_left_legion_2:
+    file: en_us_hench_geth_ss_global_hench_geth_00240746_m.ogg
+    track: voice
+  target_right_legion_1:
+    file: en_us_hench_geth_ss_global_hench_geth_00240747_m.ogg
+    track: voice
+  target_right_legion_2:
+    file: en_us_hench_geth_ss_global_hench_geth_00240748_m.ogg
+    track: voice
+  target_center_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257393_m.ogg
+    track: voice
+  target_center_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257394_m.ogg 
+    track: voice
+  target_left_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257395_m.ogg 
+    track: voice
+  target_left_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257396_m.ogg 
+    track: voice
+  target_right_miranda_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257397_m.ogg 
+    track: voice
+  target_right_miranda_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257398_m.ogg 
+    track: voice
+  target_center_mordin_1:
+    file: en_us_hench_professor_ss_global_hench_professor_00241383_m.ogg
+    track: voice
+  target_center_mordin_2:
+    file: en_us_hench_professor_ss_global_hench_professor_00241384_m.ogg
+    track: voice
+  target_left_mordin_1:
+    file: en_us_hench_professor_ss_global_hench_professor_00241385_m.ogg
+    track: voice
+  target_left_mordin_2:
+    file: en_us_hench_professor_ss_global_hench_professor_00241386_m.ogg
+    track: voice
+  target_right_mordin_1:
+    file: en_us_hench_professor_ss_global_hench_professor_00241387_m.ogg
+    track: voice
+  target_right_mordin_2:
+    file: en_us_hench_professor_ss_global_hench_professor_00241388_m.ogg
+    track: voice
+  target_center_samara_1:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241063_m.ogg
+    track: voice
+  target_center_samara_2:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241064_m.ogg
+    track: voice
+  target_left_samara_1:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241065_m.ogg
+    track: voice
+  target_left_samara_2:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241066_m.ogg
+    track: voice
+  target_right_samara_1:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241067_m.ogg
+    track: voice
+  target_right_samara_2:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241068_m.ogg
+    track: voice
+  target_center_tali_1:
+    file: en_us_hench_tali_ss_global_hench_tali_00285175_m.ogg
+    track: voice
+  target_center_tali_2:
+    file: en_us_hench_tali_ss_global_hench_tali_00285176_m.ogg
+    track: voice
+  target_left_tali_1:
+    file: en_us_hench_tali_ss_global_hench_tali_00285177_m.ogg
+    track: voice
+  target_left_tali_2:
+    file: en_us_hench_tali_ss_global_hench_tali_00285178_m.ogg
+    track: voice
+  target_right_tali_1:
+    file: en_us_hench_tali_ss_global_hench_tali_00285179_m.ogg
+    track: voice
+  target_right_tali_2:
+    file: en_us_hench_tali_ss_global_hench_tali_00285180_m.ogg
+    track: voice
+  target_center_thane_1:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286505_m.ogg
+    track: voice
+  target_center_thane_2:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286506_m.ogg
+    track: voice
+  target_left_thane_1:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286507_m.ogg
+    track: voice
+  target_left_thane_2:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286508_m.ogg
+    track: voice
+  target_right_thane_1:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286509_m.ogg
+    track: voice
+  target_right_thane_2:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286510_m.ogg
+    track: voice
+  target_center_zaeed_1:
+    file: DLC_HEN_VT_Int.069.ogg
+    track: voice
+  target_center_zaeed_2:
+    file: DLC_HEN_VT_Int.070.ogg
+    track: voice
+  target_left_zaeed_1:
+    file: DLC_HEN_VT_Int.072.ogg
+    track: voice
+  target_left_zaeed_2:
+    file: DLC_HEN_VT_Int.073.ogg
+    track: voice
+  target_right_zaeed_1:
+    file: DLC_HEN_VT_Int.074.ogg
+    track: voice
+  target_right_zaeed_2:
+    file: DLC_HEN_VT_Int.075.ogg
+    track: voice
 
 ####
 # NOTES on misc SFXGame sounds

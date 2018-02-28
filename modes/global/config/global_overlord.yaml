@@ -24,8 +24,12 @@ event_player:
 shot_groups:
   overlord_light_shot:
     shots: light_lock_overlord_top, light_lock_overlord_bottom
-    enable_events: mode_overlordlight_started, multiball_overlord_multiball_ended
-    disable_events: mode_overlordlight_stopping, multiball_overlord_multiball_started
+    enable_events: 
+      - enable_lock_lightshot{device.achievements.collectorship.state!="complete"}
+      - multiball_overlord_multiball_ended
+    disable_events: 
+      - disable_lock_lightshot 
+      - multiball_overlord_multiball_started
     reset_events: multiball_lock_overlordlock_locked_ball
 
 shot_profiles:
@@ -75,9 +79,9 @@ shows:
         l_hitbank_top: black
 
 slide_player:
-  multiball_lock_overlordlock_locked_ball:
+  show_overlord_locked_slide:
     overlord_ball_locked_slide:
-      expire: 1.5s
+      expire: 2s
       priority: 600 # Enough to beat recruit timer?
   multiball_overlord_multiball_started:
     overlord_ball_locked_slide_full:
@@ -102,7 +106,7 @@ slides:
         width: 128
         height: 32
         color: black
-        z: 1
+        z: 0
   overlord_ball_locked_slide_full:
     widgets:
       - type: text
@@ -133,14 +137,14 @@ sound_player:
     archer_lockdown_cancelled:
       action: play
       max_queue_time: 1s
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:
+  show_overlord_locked_slide{total_balls_locked==1}:
     vulcan_success:
       action: play
-      max_queue_time: 1s
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==2}:
+      max_queue_time: 2s
+  show_overlord_locked_slide{total_balls_locked==2}:
     archer_lockdown_cancelled_short:
       action: play
-      max_queue_time: 1s
+      max_queue_time: 2s
 
 sound_pools:
   geth_hit_sfx:
@@ -151,14 +155,17 @@ sound_pools:
     sounds: archer_vulcan_success, shepard_hit_override_vulcan
     type: random
     track: voice
+    max_queue_time: 1s
   archer_still_need_to_go_to_prometheus:
     sounds: archer_still_need_to_go_to_prometheus_1, archer_still_need_to_go_to_prometheus_2
     type: random
     track: voice
+    max_queue_time: 1s
   archer_lockdown_cancelled:
     sounds: archer_lockdown_cancelled_1, archer_lockdown_cancelled_2, archer_lockdown_cancelled_3
     type: random
     track: voice
+    max_queue_time: 1s
 
 sounds:
   archer_lockdown_cancelled_1:
@@ -220,21 +227,21 @@ sounds:
     track: sfx
 
 widget_player:
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==1}:
+  show_overlord_locked_slide{total_balls_locked==1}:
     station_widget_1:
       slide: overlord_ball_locked_slide
     station_widget_2:
       action: remove
     station_widget_3:
       action: remove
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==2}:
+  show_overlord_locked_slide{total_balls_locked==2}:
     station_widget_1:
       action: remove
     station_widget_2:
       slide: overlord_ball_locked_slide
     station_widget_3:
       action: remove
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==3}:
+  show_overlord_locked_slide{total_balls_locked==3}:
     station_widget_1:
       action: remove
     station_widget_2:

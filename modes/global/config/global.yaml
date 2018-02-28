@@ -29,8 +29,8 @@ config:
 event_player:
   mode_global_started:
     - start_mode_field # Wait for global to start before field
-    - start_mode_overlordlight{device.achievements.collectorship.state!="complete"}
-    - start_mode_arrival{device.achievements.collectorship.state=="complete"}
+    - enable_sbdrops_counter
+    - enable_lock_lightshot
     # - enable_kickback # Can't write rules for different nodes?
   mode_global_will_stop:
     - stop_mode_field

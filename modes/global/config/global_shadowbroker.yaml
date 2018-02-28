@@ -32,8 +32,9 @@ counters:
     disable_on_complete: false
     enable_events:
       # This is enabled if vasir and hagalaz are not enabled, and boss is disabled
-      - mode_global_started{device.achievements.vasir.state!="enabled" and device.achievements.hagalaz.state!="enabled" and device.achievements.shadowbroker.state=="disabled"}
+      - enable_sbdrops_counter{device.achievements.vasir.state!="enabled" and device.achievements.hagalaz.state!="enabled" and device.achievements.shadowbroker.state=="disabled"}
     disable_events:
+      - disable_sbdrops_counter
       - achievement_vasir_state_enabled
       - achievement_hagalaz_state_enabled
       - achievement_shadowbroker_state_enabled

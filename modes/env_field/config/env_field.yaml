@@ -14,7 +14,7 @@ sound_player:
   envshot_right_orbit_hit: warp_up
   envshot_kickback_hit: shockwave_up
   envshot_return_lane_hit: shuttle_flyby
-  drain_shot_hit: powerdown
+  envshot_outlane_hit: powerdown
 
 sound_pools:
   powerdown:

@@ -68,6 +68,7 @@ class LockHandler(Mode):
     # If a ball is in the lock, fire it quickly out of the ball device. When the incoming ball is registered,
     # the ball device will do a physical check and assess that its count has not changed. Tricky!
     if self._bd_physical_lock.balls > 0:
+      # TODO: create a more precise list of pulse times depending on how many balls are locked?
       self._post_event('bypass_lock_release_pulse_short')
     # If the lock is empty, call the bypass on the ball device's eject coil, holding it open so that the
     # incoming ball will fly through. After the entrance_switch delay, the ball device will do a physical check
@@ -119,6 +120,8 @@ class LockHandler(Mode):
     # If the lock shot is enabled, hold onto the ball
     elif self._overlordlock.enabled:
       self.log.debug(" - Lock is lit, not going to bypass lock post")
+      # Show the slide already, while we wait for the balls to settle into the device
+      self.machine.events.post("show_overlord_locked_slide", total_balls_locked=self._overlordlock.locked_balls)
       return
 
     # HOLD:

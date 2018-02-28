@@ -194,7 +194,7 @@ sound_player:
   clear_upstairs_hit_complete:
     music_recruit_garrus:
       action: stop
-  drain_shot_hit: boss_sound
+  envshot_outlane_hit: boss_sound
 
 sound_pools:
   garrus_mission_start:

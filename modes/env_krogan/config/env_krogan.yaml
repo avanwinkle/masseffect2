@@ -11,24 +11,32 @@ sound_player:
   envshot_right_ramp_entrance_hit: krogan_hit
   envshot_left_orbit_hit: krogan_hit
   envshot_right_orbit_hit: krogan_hit
-  envshot_kickback_hit: krogan_hit
+  envshot_kickback_hit: krogan_talking
 
 sound_pools:
   krogan_hit:
-    sounds: krogan_hit_short_1, krogan_hit_short_2, krogan_hit_med_1, krogan_hit_long_1
+    sounds: krogan_hit_short_1, krogan_hit_short_2, krogan_hit_short_3, krogan_hit_med_1, krogan_hit_long_1
     type: random_force_all
     track: sfx
+  krogan_talking:
+    sounds: krogan_youll_pay_for_that, krogan_i_will_crush_you, krogan_youll_need_more_than_that
+    type: random_force_all
+    track: voice
 
 sounds:
   krogan_hit_short_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303497_m.ogg
-    track: sfx
   krogan_hit_short_2:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303521_m.ogg
-    track: sfx
+  krogan_hit_short_3:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303569_m.ogg
   krogan_hit_med_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303502_m.ogg
-    track: sfx
   krogan_hit_long_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303498_m.ogg
-    track: sfx
+  krogan_youll_pay_for_that:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303621_m.ogg
+  krogan_i_will_crush_you:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00303623_m.ogg
+  krogan_youll_need_more_than_that:
+    file: en_us_ss_elite_krogan_ss_elite_krogan_00307750_m.ogg

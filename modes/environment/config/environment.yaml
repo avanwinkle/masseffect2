@@ -27,8 +27,13 @@ shots:
     hit_events: sw_standuptarget_hit
   envshot_return_lane:
     switch: s_return_lane_left, s_return_lane_right
+  # Outlane is a special shot that's enabled if no shots tagged 'envshot_outlane'
+  # are enabled AND there are no ball saves enabled
   envshot_outlane:
     switch: s_outlane_left, s_outlane_right
+  # Dropbank will count as a hit if it's mixed
+  envshot_dropbank:
+    hit_events: drop_target_bank_dropbank_mixed
 
 flasher_player:
   envshot_kickback_hit:

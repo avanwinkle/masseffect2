@@ -177,8 +177,6 @@ shots:
     switch: s_dropbank_middle
   sh_dropbank_bottom:
     switch: s_dropbank_bottom
-  drain_shot:
-    switch: s_outlane_left, s_outlane_right
   # Other commonly-used or commonly-behaving shots
   fullorbit_enter:
     switches: s_left_orbit, s_right_orbit

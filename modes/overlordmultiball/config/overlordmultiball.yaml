@@ -85,6 +85,7 @@ scoring:
       action: set
       score: ticks
   hackshots_hit:
+    score: 500
     temp_build_value: 100 * current_player.temp_multiplier
   jackpotshot_hit:
     score: current_player.temp_build_value * device.counters.hackshots_hit_counter.value * (1 + 0.25 * device.counters.jackpots_hit_counter.value)

@@ -71,6 +71,8 @@ modes:
   - bonus
   # Environments
   - environment
+  - env_bloodpack
+  - env_bluesuns
   - env_cars
   - env_field
   - env_gunfight
@@ -85,6 +87,7 @@ modes:
   - recruitgrunt
   - recruitjack
   - recruitkasumi
+  - recruitlegion
   - recruitmordin
   - recruitsamara
   - recruittali
@@ -200,6 +203,10 @@ player_vars:
   temp_multiplier:
     initial_value: 0.0
     value_type: float
+  temp_build_value:
+    initial_value: 0
+  temp_hurryup_value:
+    initial_value: 0
   upgrades_researched:
     initial_value: 0
   zaeed_path_renegade:

@@ -1,0 +1,48 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_geth
+  stop_events: stop_mode_env_geth, stop_mode_environment
+  events_when_started: start_mode_env_gunfight
+  events_when_stopped: stop_mode_env_gunfight
+  priority: 400
+
+sound_player:
+  envshot_right_orbit_hit: 
+    geth_killed_short:
+      max_queue_time: 500ms
+  envshot_left_orbit_hit: 
+    geth_killed_short:
+      max_queue_time: 500ms
+  envshot_right_ramp_hit: 
+    geth_killed_short:
+      max_queue_time: 500ms
+  envshot_left_ramp_hit: 
+    geth_killed_short:
+      max_queue_time: 500ms
+
+sound_pools:
+  geth_killed_short:
+    sounds: geth_killed_short_1, geth_killed_short_2, geth_killed_short_3, geth_killed_short_4
+    track: sfx
+    type: random_force_next
+  geth_killed_long:
+    sounds: geth_killed_long_1, geth_killed_long_2, geth_killed_long_3
+    track: sfx
+    type: random_force_next
+
+sounds:
+  geth_killed_short_1:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307874_m.ogg
+  geth_killed_short_2:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307875_m.ogg
+  geth_killed_short_3:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307878_m.ogg
+  geth_killed_short_4:
+    file: sfx_ss_geth_sniper_ss_geth_sniper_00309331_m.ogg
+  geth_killed_long_1:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307876_m.ogg
+  geth_killed_long_2:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307877_m.ogg
+  geth_killed_long_3:
+    file: sfx_ss_geth_sniper_ss_geth_sniper_00309330_m.ogg
+

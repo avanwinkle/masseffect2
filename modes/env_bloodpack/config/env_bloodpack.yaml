@@ -1,0 +1,62 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_bloodpack
+  stop_events: stop_mode_env_bloodpack, stop_mode_environment
+  events_when_started: start_mode_env_gunfight
+  events_when_stopped: stop_mode_env_gunfight
+  priority: 400
+
+sound_player:
+  envshot_right_orbit_hit: krogan_hit   # sound defined in env_krogan
+  envshot_right_ramp_hit: krogan_hit
+  envshot_left_ramp_hit: vorcha_hit
+  envshot_left_orbit_hit: vorcha_hit
+  envshot_kickback_hit: vorcha_talking
+  envshot_dropbank_hit: varren_hit
+
+sound_pools:
+  vorcha_hit: 
+    sounds: vorcha_hit_short_1, vorcha_hit_short_2, vorcha_hit_short_3, vorcha_hit_med_1, vorcha_hit_med_2, vorcha_hit_long_1
+    track: sfx
+    type: random
+  vorcha_talking:
+    sounds: vorcha_ill_kill_you, vorcha_youre_gonna_die, vorcha_run_away, vorcha_fire_fire, vorcha_shoot_everything
+    track: voice
+    type: random_force_all
+  varren_hit:
+    sounds: varren_hit_1, varren_hit_2, varren_hit_3, varren_hit_4
+    track: sfx
+    type: random_force_next
+
+sounds:
+  varren_hit_1:
+    file: sfx_ss_varren_ss_new_varrens_00295077_m.ogg
+  varren_hit_2:
+    file: sfx_ss_varren_ss_new_varrens_00295078_m.ogg
+  varren_hit_3:
+    file: sfx_ss_varren_ss_new_varrens_00295079_m.ogg
+  varren_hit_4:
+    file: sfx_ss_varren_ss_new_varrens_00295080_m.ogg
+  vorcha_hit_short_1: 
+    file: en_us_ss_vorcha_ss_vorcha_00243613_m.ogg
+  vorcha_hit_short_2: 
+    file: en_us_ss_vorcha_ss_vorcha_00243631_m.ogg
+  vorcha_hit_short_3: 
+    file: en_us_ss_vorcha_ss_vorcha_00243632_m.ogg
+  vorcha_hit_med_1:
+    file: en_us_ss_vorcha_ss_vorcha_00243633_m.ogg
+  vorcha_hit_med_2: 
+    file: en_us_ss_vorcha_ss_vorcha_00243634_m.ogg
+  vorcha_hit_long_1: 
+    file: en_us_ss_vorcha_ss_vorcha_00243614_m.ogg
+  vorcha_ill_kill_you:
+    file: en_us_ss_vorcha_ss_vorcha_00243681_m.ogg
+  vorcha_youre_gonna_die:
+    file: en_us_ss_vorcha_ss_vorcha_00243684_m.ogg
+  vorcha_run_away:
+    file: en_us_ss_vorcha_ss_vorcha_00312956_m.ogg
+  vorcha_fire_fire: 
+    file: en_us_ss_vorcha_ss_vorcha_00312964_m.ogg
+  vorcha_shoot_everything:
+    file: en_us_ss_vorcha_ss_vorcha_00312977_m.ogg
+

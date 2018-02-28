@@ -59,7 +59,7 @@ scoring:
   recruit_thane_complete:
     score: current_player.temp_build_value
   tower_ascent_shot_hit:
-    temp_build_value: device.counters.thane_ascent_counter.value * 10000
+    temp_build_value: device.counters.thane_ascent_counter.value * 1000
 
 shots:
   tower_ascent_shot:
@@ -153,7 +153,7 @@ sound_player:
       mode_end_action: stop
   logicblock_thane_ascent_counter_hit{count!=3}: nas_misc_sounds
   logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
-  drain_shot_hit: failure_sound
+  envshot_outlane_hit: failure_sound
 
 sound_pools:
   nas_misc_sounds:
