@@ -10,39 +10,58 @@
 event_player:
   # Shadow Broker modes are only triggered from Field
   drop_target_bank_dropbank_down:
-    # Complete the dropbank after vasir is enabled to begin the chase
-    - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
-    # TBD: Allow starting directly back at vasir?
-    - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="stopped"}
-    # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
+    # Complete the dropbank after chase+vasir is enabled to begin the chase
+    - start_mode_shadowbroker_chase{device.achievements.sbchase.state=="enabled"}
+    # Complete the dropbank after hagalaz is enabled to begin hagalaz
     - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
+    # Complete the dropbank after chase to re-enable vasir combat
     # Complete the dropbank after hagalaz to re-enable boss combat
-    - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
+    - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.shadowbroker.state=="enabled"}
     # Complete the dropbank after boss is defeated for extra prizes!
-    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="complete"}
+    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="completed"}
   # If the mode is restarted and boss combat is enabled, re-enable the hold
   mode_global_started:
     - enable_shadowbroker_hold{device.achievements.shadowbroker.state=="enabled"}
+  # Get a ball in the ball hold to begin Vasir
+  ball_hold_shadowbroker_hold_held_ball{device.achievements.vasir.state!="completed"}:
+    - start_mode_shadowbroker_vasir
+    - enter_shadowbroker_modes
   # Get a ball in the ball hold to begin Boss Combat
-  ball_hold_shadowbroker_hold_held_ball:
+  ball_hold_shadowbroker_hold_held_ball{device.achievements.shadowbroker.state=="enabled"}:
     - start_mode_shadowbroker_boss
     - enter_shadowbroker_modes
 
-# ball_holds:
-#   shadowbroker_hold:
-#     balls_to_hold: 1
-#     hold_devices: bd_hold
-#     enable_events: enable_shadowbroker_hold, enable_hatch
-#     release_one_events: release_shadowbroker_hold
-#     disable_events: ball_hold_shadowbroker_hold_balls_released
+ball_holds:
+  shadowbroker_hold:
+    balls_to_hold: 1
+    hold_devices: bd_hold
+    enable_events: enable_shadowbroker_hold, player_shot_sbchase_kickback_enabled, enable_hatch
+    release_one_events: release_shadowbroker_hold
+    disable_events: ball_hold_shadowbroker_hold_balls_released
 
 show_player:
-  mode_field_started{device.achievements.vasir.state=="enabled"}:
+  mode_field_started{device.achievements.chase.state=="enabled" or device.achievements.hagalaz.state=="enabled"}:
     shadowbroker_lit_show:
       action: play
       priority: 10
       sync_ms: 1000
-  achievement_vasir_state_enabled:
+  achievement_chase_state_enabled:
+    shadowbroker_lit_show:
+      action: play
+      priority: 10
+      sync_ms: 1000
+  ball_hold_shadowbroker_hold_enabled:
+    shadowbroker_hold_enabled_show:
+      action: play
+      sync_ms: 1000
+  ball_hold_shadowbroker_hold_held_ball:
+    vasir_intro_cineanim{device.achievements.vasir.state=="enabled"}:
+      action: play
+    boss_intro_cineanim{device.achievments.shadowbroker.state=="enabled"}:
+      action: play
+    shadowbroker_hold_enabled_show:
+      action: stop
+  achievement_hagalaz_state_enabled:
     shadowbroker_lit_show:
       action: play
       priority: 10
@@ -66,3 +85,56 @@ shows:
         l_dropbank_shield_rgb:
           color: black
           fade: 20ms
+  shadowbroker_hold_enabled_show:
+    - duration: 500ms
+      lights:
+        l_kickback_arrow_clear: 
+          color: on
+          fade: 20ms
+    - duration: 500ms
+      lights:
+        l_kickback_arrow_clear: 
+          color: off
+          fade: 20ms
+  vasir_intro_cineanim:
+    - sounds: 
+        liara_vasir_its_over:
+          action: play
+          events_when_stopped: release_shadowbroker_hold, start_mode_shadowbroker_vasir
+      lights:
+        gi: off
+        l_flash_throne: on
+  boss_intro_cineanim:
+    - sounds:
+        boss_intro_cineanim_diag:
+          action: play
+          events_when_stopped: release_shadowbroker_hold, start_mode_shadowbroker_boss
+      lights:
+        gi: off
+        l_flash_dragon_left: on
+
+sound_pools:
+  boss_intro_cineanim_diag:
+    sounds: boss_your_interference, boss_enough_talk, boss_its_pointless_to_challenge_me, boss_reckless_even_for_you_commander
+    type: random_force_all
+    track: voice
+
+sounds:
+  boss_your_interference:
+    file: DLC_EXP_Part01_Int.1058.ogg
+    track: voice
+  boss_enough_talk:
+    file: DLC_EXP_Part01_Int.1059.ogg
+    track: voice
+  boss_its_pointless_to_challenge_me:
+    file: DLC_EXP_Part01_Int.1065.ogg
+    track: voice
+  boss_you_travel_with_fascinating_companions:
+    file: DLC_EXP_Part01_Int.1056.ogg
+    track: voice
+  boss_reckless_even_for_you_commander:
+    file: DLC_EXP_Part01_Int.1089.ogg
+    track: voice
+  liara_vasir_its_over:
+    file: DLC_EXP_Part01_Int.790.ogg
+    track: voice

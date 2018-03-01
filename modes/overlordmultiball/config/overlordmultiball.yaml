@@ -96,10 +96,11 @@ shot_profiles:
     states:
       - name: lit
         show: overlord_lit_show
-        priority: 10 # Higher priority than underlying frozen show
+        priority: 5 # Higher priority than all-off show, lower priority than all-solid show
         speed: 4
       - name: frozen
         show: overlord_frozen_show
+        priority: 15 # Higher priority than all-solid show, lower than all-frozen show
   overlord_jackpot_profile:
     show_when_disabled: false
     states:
@@ -165,47 +166,74 @@ shots:
     tags: envshot_kickback
 
 show_player:
-  mode_overlordmultiball_started:
-    overlord_frozen_show:
+  reset_hackshots:
+    overlord_hackshots_off_show:
+      key: overlord_hackshots_show
       action: play
-      priority: 1
+      priority: 1 # Lowest priority so individual shots will supercede
       show_tokens:
         leds: lane_shields
-  mode_overlordmultiball_will_stop:
-    overlord_frozen_show:
-      action: stop
+  enable_jackpotshot:
+    overlord_hackshots_solid_show:
+      key: overlord_hackshots_show
+      action: play
+      priority: 10  # Higher than lit hackshots, lower than frozen hackshots
+  disable_hackshots:
+    overlord_hackshots_frozen_show:
+      key: overlord_hackshots_show
+      action: play
+      priority: 20 # Higher than all other hackshot shows
   hackshots_hit:
     flash_all_shields_show:
       speed: 8
       loops: 8
-      priority: 1
+      priority: 50
       show_tokens:
         color: 11FF22 #color_overlord_green
+  mode_overlordmultiball_will_stop:
+    overlord_hackshots_show:
+      action: stop
 
 shows:
-  overlord_lit_show:
+  # Shows for ALL of the lane shots
+  overlord_hackshots_off_show:
+    - lights:
+        lane_shields: off
+  overlord_hackshots_solid_show:
+    - lights:
+        lane_shields: 11FF22 #color_overlord_green
+  overlord_hackshots_frozen_show:
+    - lights:
+        lane_shields: FF4400 #color_overlord_orange
+  # Shows for an INDIVIDUAL lane shot
+  overlord_hackshot_lit_show:
     - time: 0
       lights:
         (leds): 11FF22 #color_overlord_green
     - time: '+1'
       lights:
         (leds): black
-  overlord_jackpot_show:
-    - time: 0
-      lights:
-        l_hitbank_shield_rgb: FF4400  #color_overlord_orange
-    - time: '+1'
-      lights:
-        l_hitbank_shield_rgb: black
-    - time: '+1'
-      lights:
-        l_hitbank_shield_rgb: 11FF22 #color_overlord_green
-    - time: '+1'
-      lights:
-        l_hitbank_shield_rgb: black
-  overlord_frozen_show:
+  overlord_hackshot_frozen_show:
     - lights:
         (leds): FF4400 #color_overlord_orange
+  # Show for the JACKPOT shot
+  overlord_jackpot_show:
+    - duration: 1s
+      lights:
+        l_hitbank_shield_rgb: FF4400  #color_overlord_orange
+        l_hitbank_top: on
+    - duration: 500ms
+      lights:
+        l_hitbank_shield_rgb: black
+        l_hitbank_top: off
+    - duration: 1s
+      lights:
+        l_hitbank_shield_rgb: 11FF22 #color_overlord_green
+        l_hitbank_bot: on
+    - duration: 500ms
+      lights:
+        l_hitbank_shield_rgb: black
+        l_hitbank_bot: off
 
 slide_player:
   mode_overlordmultiball_started:

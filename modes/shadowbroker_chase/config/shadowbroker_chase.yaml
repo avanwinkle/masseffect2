@@ -11,6 +11,7 @@
 #
 # Progress is not saved for this mode, not even completing it. Failing this mode
 # or Vasir Combat requires the player to restart from the beginning of the chase.
+# ...maybe. That's annoying. For now, completion of this mode is saved ;)
 #####
 
 mode:

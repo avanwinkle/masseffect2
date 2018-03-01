@@ -36,7 +36,7 @@ counters:
     count_complete_value: 0
     count_events: kasumi_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
-    events_when_complete: kasumi_failed
+    events_when_complete: recruit_kasumi_failed
     persist_state: false
     direction: down
 
@@ -44,7 +44,7 @@ event_player:
   mode_recruitkasumi_started:
     set_environment:
       env: kasumi
-  kasumi_failed:
+  recruit_kasumi_failed:
     - stop_recruitmission
     - recruit_mission_ended
   logicblock_kasumi_shots_counter_hit:
@@ -231,7 +231,7 @@ slide_player:
   mode_recruitkasumi_started:
     kasumi_instructions_slide:
       expire: 3s
-  kasumi_failed:
+  recruit_kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
   logicblock_kasumi_shots_counter_hit{count==1}:
@@ -278,7 +278,7 @@ slides:
   kasumi_slide_1:
     widgets:
       - type: text
-        text: Voiceprint Recorded
+        text: Password Obtained
         z: 1
       - type: rectangle
         width: 128
@@ -288,7 +288,7 @@ slides:
   kasumi_slide_2:
     widgets:
       - type: text
-        text: DNA Sample Obtained
+        text: Voiceprint Recorded
         z: 1
       - type: rectangle
         width: 128
@@ -298,7 +298,7 @@ slides:
   kasumi_slide_3:
     widgets:
       - type: text
-        text: "Password: Perrugia"
+        text: DNA Sample Obtained
         z: 1
       - type: rectangle
         width: 128
@@ -308,7 +308,7 @@ slides:
   kasumi_slide_4:
     widgets:
       - type: text
-        text: "Barrier Deactivated"
+        text: Barrier Deactivated
         z: 1
       - type: rectangle
         width: 128
@@ -345,16 +345,9 @@ sound_player:
       fade_in: 1s
     kasumi_need_password_and_voice:
       action: play
-  # First alarm hit
-  logicblock_kasumi_alarms_counter_hit{count==1}:
+  # Alarm hit
+  logicblock_kasumi_alarms_counter_hit:
     kasumi_careful:
-      action: play
-  # Second alarm hit
-  logicblock_kasumi_alarms_counter_hit{count==2}:
-    guard_warning:
-      action: play
-  logicblock_kasumi_alarms_counter_hit{count==3}:
-    kasumi_failed:
       action: play
   # First shot hit, got the password
   logicblock_kasumi_shots_counter_hit{count==1}:
@@ -383,21 +376,6 @@ sound_pools:
       - kasumi_try_again
       - shepard_damn
     track: voice
-  guard_warning:
-    type: random
-    sounds:
-      - guard_room_off_limits
-      - guard_i_told_you_room_off_limits
-      - guard_turn_around_now
-      - guard_you_stop
-    track: voice
-  kasumi_failed:
-    type: random
-    track: voice
-    sounds:
-      - kasumi_damn_it
-      - kasumi_look_out
-      - kasumi_damn_it_we_have_to_find_another_way
   kasumi_password_complete:
     type: random
     sounds:
@@ -492,9 +470,6 @@ sounds:
   kasumi_damn_you_hock:
     file: DLC_HEN_MT_Int.794.ogg
     track: voice
-  kasumi_damn_it_we_have_to_find_another_way:
-    file: DLC_HEN_MT_Int.817.ogg
-    track: voice
   kasumi_careful_barrier_up:
     file: DLC_HEN_MT_Int.440.ogg
     track: voice
@@ -504,30 +479,24 @@ sounds:
   kasumi_hey_no_touching:
     file: DLC_HEN_MT_Int.452.ogg
     track: voice
-  kasumi_look_out:
-    file: DLC_HEN_MT_Int.110.ogg
-    track: voice
-  kasumi_damn_it:
-    file: DLC_HEN_MT_Int.173.ogg
-    track: voice
   kasumi_damn:
     file: DLC_HEN_MT_Int.176.ogg
     track: voice
   kasumi_try_again:
     file: DLC_HEN_MT_Int.174.ogg
     track: voice
-  guard_room_off_limits:
-    file: DLC_HEN_MT_Int.681.ogg
-    track: voice
-  guard_i_told_you_room_off_limits:
-    file: DLC_HEN_MT_Int.683.ogg
-    track: voice
-  guard_turn_around_now:
-    file: DLC_HEN_MT_Int.691.ogg
-    track: voice
-  guard_you_stop:
-    file: DLC_HEN_MT_Int.717.ogg
-    track: voice
+  # guard_room_off_limits:
+  #   file: DLC_HEN_MT_Int.681.ogg
+  #   track: voice
+  # guard_i_told_you_room_off_limits:
+  #   file: DLC_HEN_MT_Int.683.ogg
+  #   track: voice
+  # guard_turn_around_now:
+  #   file: DLC_HEN_MT_Int.691.ogg
+  #   track: voice
+  # guard_you_stop:
+  #   file: DLC_HEN_MT_Int.717.ogg
+  #   track: voice
   shepard_password_is_perrugia:
     file: DLC_HEN_MT_Int.442.ogg
     track: voice

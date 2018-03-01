@@ -179,6 +179,25 @@ shots:
     show_tokens:
       leds: l_standup_5
 
+show_player:
+  mode_shadowbroker_hagalaz_started:
+    # Make some lightning!
+    flasher_show_double:
+      key: throne_lightning
+      speed: 1.2
+      show_tokens:
+        flashers: l_flash_throne
+    flasher_show_triple:
+      key: upper_lightning
+      speed: 0.87
+      show_tokens:
+        flashers: l_flash_kickback_lane, l_flash_right_ramp
+    flasher_show_single:
+      key: dragon_lightning
+      speed: 1.37
+      show_tokens:
+        flashers: l_flash_dragon_right, l_flash_slingshots
+
 shows:
   shunt_show:
     - time: 0

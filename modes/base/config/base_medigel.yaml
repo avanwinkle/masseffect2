@@ -108,7 +108,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0
@@ -119,7 +119,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0
@@ -130,7 +130,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0
@@ -141,7 +141,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0
@@ -152,7 +152,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0
@@ -163,7 +163,7 @@ sounds:
     volume: 1
     ducking:
       target: music
-      attenuation: 1
+      attenuation: 0.8
       attack: 10ms
       release: 10ms
       release_point: 0

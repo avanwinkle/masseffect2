@@ -23,7 +23,9 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started: play_sbboss_intro_show # Simulate delay for opening cineanim
+  mode_shadowbroker_boss_started: 
+    - sbboss_round_show_complete # Mock a complete event to reset the round
+    - enable_random_sbboss_shot
   sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
     - play_sbboss_round_show_1{count==1}
@@ -50,7 +52,7 @@ random_event_player:
 
 ball_holds:
   sbboss_hold:
-    # Will this work to allow either device to hold?
+    # Will this work to allow either hold OR lock device to hold?
     hold_devices: bd_hold, bd_lock
     balls_to_hold: 1
     enable_events: enable_sbboss_finalshot
@@ -127,10 +129,6 @@ shots:
       leds: l_right_orbit_shield_rgb
 
 show_player:
-  play_sbboss_intro_show:
-    sbboss_intro_show:
-      action: play
-      loops: 0
   play_sbboss_round_show_1:
     sbboss_round_show_1:
       action: play
@@ -145,17 +143,6 @@ show_player:
       loops: 0
 
 shows:
-  sbboss_intro_show:
-    - time: 0
-      sounds:
-        broker_you_travel_with_fascinating_companions:
-          action: play
-          track: voice
-      slides: shadowbroker_intro_slide
-    - time: 5s
-      events:
-        - sbboss_round_show_complete
-        - enable_random_sbboss_shot
   sbboss_round_show_1:
     - time: 0
       sounds:
@@ -236,21 +223,9 @@ sound_player:
 
 sounds:
   shadowbroker_boss_music:
-    file: "07 Final Combat.ogg"
+    file: SBK.07.Final_Combat.ogg
     track: music
     loops: -1
-  broker_you_travel_with_fascinating_companions:
-    file: DLC_EXP_Part01_Int.1056.ogg
-    track: voice
-  broker_enough_talk:
-    file: DLC_EXP_Part01_Int.1059.ogg
-    track: voice
-  broker_its_pointless_to_challenge_me:
-    file: DLC_EXP_Part01_Int.1065.ogg
-    track: voice
-  broker_reckless_even_for_you_commander:
-    file: DLC_EXP_Part01_Int.1089.ogg
-    track: voice
   broker_attack_1:
     file: DLC_EXP_Part01_Int.1022.ogg
     track: voice

@@ -30,7 +30,7 @@ event_player:
     - flippers_on
     - enable_praet_main_shot
     - enable_praet_side_shot
-  timer_praetoriantimer_complete{current_player.temp_multiplier==0}: disable_flipper
+  timer_praetoriantimer_complete{current_player.temp_multiplier==0}: praetorian_attack
   timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
   collectorship_praetorian_complete: stop_mode_collectorship_praetorian
@@ -53,7 +53,7 @@ random_event_player:
       - enable_praet_kickback
       - enable_praet_dropbank
       - enable_praet_hitbank
-  disable_flipper:
+  praetorian_attack:
     force_different: false
     force_all: false
     events:
@@ -178,6 +178,16 @@ show_player:
       loops: 0
       show_tokens:
         flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_pop_bumpers, l_flash_dragon_left
+  praetorian_attack:
+    praet_shot_show:
+      action: play
+      loops: 5
+    flasher_show_triple|500ms:
+      action: play
+      show_tokens:
+        flashers: l_flash_dragon_right
+      speed: 10
+      loops: 40
 
 shows:
   praet_shot_show:
@@ -187,26 +197,53 @@ shows:
     - time: '+1'
       lights:
         (led): off
+  praet_attack_show_pre:
+    - time: 0
+      lights: 
+        gi: off
+        l_dragon_fire: on
+    - time: '+1'  # This is just so there's duration and we can "loop" to stop the show
 
 sound_player:
   mode_collectorship_praetorian_started:
     praet_intro:
       action: play
       volume: 1
-    praet_alarm|2s:
+    praet_alarm:
       action: play
       volume: 1
   collectorship_praetorian_complete: praet_death
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
+  praetorian_attack.1: praet_attack
+  praetorian_attack.2: praet_beam|500ms
+  praetorian_attack.3: shep_hit|1000ms
 
 sound_pools:
+  shep_hit:
+    type: random_force_all
+    sounds: shep_hit_1, shep_hit_2, shep_hit_3
+    track: voice
+    volume: 1
   praet_hit:
     type: random_force_all
     sounds: praet_hit_1, praet_hit_2, praet_hit_3, praet_hit_4, praet_hit_5
     track: sfx
+  praet_attack:
+    type: random_force_all
+    sounds: praet_attack_1, praet_attack_2, praet_attack_3
+    track: sfx
 
 sounds:
+  shep_hit_1:
+    file: en_us_player_f_ss_global_player_female_00288336_f.ogg
+    track: voice
+  shep_hit_2:
+    file: en_us_player_f_ss_global_player_female_00288339_f.ogg
+    track: voice
+  shep_hit_3:
+    file: en_us_player_f_ss_global_player_female_00288340_f.ogg
+    track: voice
   praet_hit_1:
     max_queue_time: 1s
     track: sfx
@@ -227,6 +264,18 @@ sounds:
     max_queue_time: 1s
     track: sfx
     file: sfx_ss_praetorian_ss_praetorian_00306918_m.ogg
+  praet_attack_1:
+    track: sfx
+    file: sfx_ss_praetorian_ss_praetorian_00306954_m.ogg
+  praet_attack_2:
+    track: sfx
+    file: sfx_ss_praetorian_ss_praetorian_00306955_m.ogg
+  praet_attack_3:
+    track: sfx
+    file: sfx_ss_praetorian_ss_praetorian_00306956_m.ogg
+  praet_beam:
+    track: sfx
+    file: SFXGame.538.ogg
   praet_intro:
     max_queue_time: 1s
     track: sfx

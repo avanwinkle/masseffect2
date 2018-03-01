@@ -69,7 +69,6 @@ scoring:
   recruit_garrus_complete:
     score: current_player.temp_hurryup_value
 
-
 shot_groups:
   close_doors:
     shots: center_door, left_door, right_door
@@ -133,7 +132,6 @@ shows:
         (led):
           color: black
           fade: 200ms
-
 
 slide_player:
   mode_recruitgarrus_started:
