@@ -73,7 +73,7 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_enable_time: 210ms, 200ms, 190ms
+    eject_coil_enable_time: 220ms, 210ms, 190ms
     eject_timeouts: 3s
     exit_count_delay: 2s
     auto_fire_on_unexpected_ball: False
@@ -552,11 +552,11 @@ coils:
     default_pulse_ms: 20
   c_slingshot_left:
     number: 8-1
-    default_pulse_ms: 11
+    default_pulse_ms: 12
     # default_recycle: true
   c_slingshot_right:
     number: 8-4
-    default_pulse_ms: 11
+    default_pulse_ms: 12
     # default_recycle: true
   c_dropbank_reset:
     number: 8-2

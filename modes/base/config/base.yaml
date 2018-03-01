@@ -194,6 +194,12 @@ shots:
     enable_events: fullorbit_fromplunger_hit
     disable_events: enable_orbitswitches
 
+sequence_shots:
+  left_to_right_orbit:
+    switch_sequence: s_spinner, s_left_orbit, s_right_orbit
+    sequence_timeout: 800ms # How long to finish the orbit?
+                            # How fast to fall down left orbit and get shot up?
+
 show_player:
   ball_save_default_enabled:
     ball_save_preshow:
@@ -333,6 +339,11 @@ slides:
         style: dmd_big
         anchor_y: bottom
         y: 10
+        z: 1
+      - type: rectangle
+        height: 32
+        width: 128
+        color: black
   n7_complete_slide:
     widgets:
       - type: text

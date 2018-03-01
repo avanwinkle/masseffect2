@@ -183,6 +183,7 @@ slides:
 sound_player:
   mode_shadowbroker_vasir_started:
     shadowbroker_vasir_music:
+      key: shadowbroker_vasir_music
       action: play
       start_at: 102s
       fade_out: 2s

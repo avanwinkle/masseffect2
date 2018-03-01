@@ -188,9 +188,15 @@ sound_player:
       loops: -1
     garrus_mission_start:
       action: play
-  door_closed{count==1}: garrus_two_more_shutters
-  door_closed{count==2}: garrus_one_more_shutter
-  door_closed{count==3}: garrus_last_shutter
+  door_closed{count==1}:
+    garrus_two_more_shutters:
+      max_queue_time: 1s
+  door_closed{count==2}:
+    garrus_one_more_shutter:
+      max_queue_time: 1s
+  door_closed{count==3}:
+    garrus_last_shutter:
+      max_queue_time: 2s
   clear_upstairs_hit_complete:
     music_recruit_garrus:
       action: stop

@@ -81,26 +81,26 @@ shot_profiles:
     states:
       - name: lit
         show: jack_shots_one_show
-        speed: 6
+        speed: 2
   jack_shots_two_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: jack_shots_two_show
-        speed: 9
+        speed: 3
         loops: -1
   jack_shots_three_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: jack_shots_three_show
-        speed: 12
+        speed: 4
   jack_hitbank_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: jack_hitbank_show
-        speed: 12
+        speed: 4
 
 shot_groups:
   jack_hurryup_shots:
@@ -280,6 +280,7 @@ sounds:
   music_recruit_jack:
     file: mus_jack_acq_combat_1.ogg
     track: music
+    volume: 0.8
     mode_end_action: stop
     fade_out: 1s
   warden_start:

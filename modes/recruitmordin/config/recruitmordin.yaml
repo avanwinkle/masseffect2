@@ -76,6 +76,7 @@ shot_profiles:
     states:
       - name: flashing
         show: spinner_flash_show
+        speed: 2
       - name: lit
         show: spinner_lit_show
   fanprofile:
@@ -83,6 +84,7 @@ shot_profiles:
     states:
       - name: lit
         show: fan_lit_show
+        speed: 2
       - name: hit
         show: fan_hit_show
 
@@ -96,7 +98,7 @@ shots:
     show_tokens:
       led: l_left_orbit_shield_rgb
   cure:
-    hit_events: sh_right_orbit_hit
+    hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
     profile: spinnerprofile
     reset_events: mode_recruitmordin_started
     enable_events: spinner_hit
@@ -127,17 +129,17 @@ shows:
   spinner_flash_show:
     - time: 0
       lights:
-        (led): red
+        (led): 440000 #color_mordin
     - time: +1
       lights:
         (led): black
   spinner_lit_show:
     - lights:
-        (led): red
+        (led): 440000 #color_mordin
   fan_lit_show:
     - time: 0
       lights:
-        (led): green
+        (led): 55FF00 #color_door_green
     - time: +1
       lights:
         (led): black
@@ -152,8 +154,8 @@ sound_player:
     music_recruit_mordin:
       action: play
       loops: -1
-  cure_shot_lit_complete{device.counters.fans_counter.value==0}: step1_voice
-  logicblock_fans_counter_hit{value==1}: step2_voice
+  cure_shot_lit_complete: step1_voice # Can't {device.counters.fans_counter.value==0} because MPF-MC != device.counters
+  logicblock_fans_counter_hit{count==1}: step2_voice
   recruit_mordin_complete:
     music_recruit_mordin:
       action: stop
@@ -260,7 +262,7 @@ sounds:
   krogan_strong_survive:
     file: en_us_ss_sub_krogan_ss_sub_krogan_00304056_m.ogg
   krogan_fear_the_battlemaster:
-    file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.ogg  
+    file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.ogg
 
 slide_player:
   mode_recruitmordin_started:

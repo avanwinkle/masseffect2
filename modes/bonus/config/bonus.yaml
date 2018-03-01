@@ -4,10 +4,10 @@ mode_settings:
   hurry_up_delay_ms: 0
   bonus_entries:
     - event: bonus_level
-      score: 1000
+      score: 400
       player_score_entry: level
     - event: bonus_squadmates
-      score: (1200 * current_player.squadmates_count if current_player.squadmates_count > 2 else 0)
+      score: 1200 * (current_player.squadmates_count - 2)
     - event: bonus_credits
       score: (current_player.credits * 0.25)
     - event: bonus_minerals

@@ -12,6 +12,8 @@ event_player:
   drop_target_bank_dropbank_down:
     # Complete the dropbank after vasir is enabled to begin the chase
     - start_mode_shadowbroker_chase{device.achievements.vasir.state=="enabled"}
+    # TBD: Allow starting directly back at vasir?
+    - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="stopped"}
     # Complete the dropbank after vasir is complete & broker is enabled to begin hagalaz
     - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled"}
     # Complete the dropbank after hagalaz to re-enable boss combat
