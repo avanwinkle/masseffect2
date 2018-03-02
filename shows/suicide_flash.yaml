@@ -1,40 +1,69 @@
 #show_version=5
-- time: 0
+- duration: 510ms
   flashers:
-    l_flash_slingshots: 150ms
-- time: 973ms
+    l_flash_slingshots: 80ms
+- duration: 510ms
   flashers:
-    l_flash_pop_bumpers: 150ms
-    l_flash_dragon_right: 150ms
-- time: 1764ms
+    l_flash_pop_bumpers: 80ms
+    l_flash_dragon_right: 80ms
+- duration: 258ms
   flashers:
-    l_flash_right_ramp: 150ms
-    l_flash_left_ramp: 150ms
-- time: 2210ms
+    l_flash_right_ramp: 80ms
+    l_flash_left_ramp: 80ms
+- duration: 258ms
   flashers:
-    l_flash_kickback_lane: 150ms
-- time: 2967ms
+    l_flash_dragon_left: 80ms
+    l_flash_sword_lock: 80ms
+- duration: 258ms
   flashers:
-    l_flash_dragon_left: 150ms
-    l_flash_sword_lock: 150ms
-- time: 3532ms
+    l_flash_left_orbit: 80ms
+    l_flash_battering_ram: 80ms
+- duration: 510ms
   flashers:
-    l_flash_left_orbit: 150ms
-    l_flash_battering_ram: 150ms
-- time: 4542ms
+    l_flash_pop_bumpers: 80ms
+    l_flash_dragon_left: 80ms
+- duration: 510ms
   flashers:
-    l_flash_pop_bumpers: 150ms
-    l_flash_dragon_left: 150ms
-- time: 5294ms
+    l_flash_kickback_lane: 80ms
+    l_flash_throne: 80ms
+- duration: 258ms
   flashers:
-    l_flash_kickback_lane: 150ms
-    l_flash_throne: 150ms
-- time: 5821ms
+    l_flash_back_panel_left: 80ms
+    l_flash_dragon_right: 80ms
+- duration: 258ms
   flashers:
-    l_flash_back_panel_left: 150ms
-    l_flash_dragon_right: 150ms
-- time: 6638ms
+    l_flash_kickback_lane: 80ms
+    l_flash_back_panel_right: 80ms
+- duration: 258ms
   flashers:
-    l_flash_kickback_lane: 150ms
-    l_flash_back_panel_right: 150ms
-- time: 7112ms
+    l_flash_kickback_lane: 80ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+#show_version=5
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+  flashers:
+    l_flash_dragon_right: 80ms
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+  flashers:
+    l_flash_pop_bumpers: 80ms
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+  flashers:
+    l_flash_dragon_left: 80ms
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+  flashers:
+    l_flash_slingshots: 80ms
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+  flashers:
+    l_flash_dragon_right: 80ms
+- duration: 510ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: on
+    l_start_button: on
+  flashers:
+    l_flash_left_ramp: 80ms
+    l_flash_right_ramp: 80ms
+- duration: 258ms
+  lights:
+    l_flash_back_panel_left: off
+    l_start_button: off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

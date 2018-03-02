@@ -111,7 +111,7 @@ drop_target_banks:
     drop_targets: bottom, middle, top
     reset_coils: c_dropbank_reset
     reset_on_complete: 1s
-    reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
+    reset_events: poo # machine_reset_phase_3, ball_starting, reset_dropbank
 
 kickbacks:
   dragon_kickback:
@@ -284,30 +284,41 @@ lights:
     tags: backbox
   l_2x_multiplier: # 2x Multiplier [#28]
     number: 9-10
+    tags: l_multipliers
   l_3x_multiplier: # 3x Multiplier [#29]
     number: 9-11
+    tags: l_multipliers
   l_4x_multiplier: # 4x Multiplier [#30]
     number: 9-12
+    tags: l_multipliers
   l_5x_multiplier: # 5x Multiplier [#31]
     number: 9-13
+    tags: l_multipliers
   l_battering_ram_arrow: # Battering Ram Arrow [#63]
     number: 10-22
+    tags: lane_arrows
   l_battering_ram_bot: # Battering Ram 3 (Bot) [#60]
     number: 10-19
+    tags: batram_multipliers
   l_battering_ram_mid: # Battering Ram 2 (Mid) [#61]
     number: 10-20
+    tags: batram_multipliers
   l_battering_ram_top: # Battering Ram 1 (Top) [#62]
     number: 10-21
+    tags: batram_multipliers
   # l_coin_enable: # Coin Enable [#1]
   #   number: 1-0
   l_dragon_fire: # Dragon Fire [#51]
     number: 10-29
   l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 9-34
+    tags: l_dropbanks, outer_circles
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 9-35
+    tags: l_dropbanks, outer_circles
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 9-36
+    tags: l_dropbanks, outer_circles
   l_flash_back_panel_left: # Back Panel Left [#100]
     number: 10-7
   l_flash_back_panel_right: # Back Panel Right [#101]
@@ -316,18 +327,22 @@ lights:
     number: 10-6
   l_flash_kickback_lane: # Kickback Lane [#99]
     number: 10-26
+    tags: upfield_flashers
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
     number: 10-13
   l_flash_left_ramp: # Left Ramp [#98]
     number: 10-27
+    tags: upfield_flashers
   l_flash_pop_bumpers: # Pop Bumpers [#97]
     number: 10-5
   l_flash_right_ramp: # Right Ramp [#96]
     number: 10-4
+    tags: upfield_flashers
   l_flash_slingshots: # Left/Right Sling [#104]
     number: 8-2
   l_flash_sword_lock: # Sword Lock [#95]
     number: 9-14
+    tags: upfield_flashers
   l_flash_throne: # Throne [#105]
     number: 10-30
   l_flash_dragon_right: # Dragon Right (Purple) [#106]
@@ -347,31 +362,40 @@ lights:
     tags: gi
   l_hand_of_the_king: # Hand of the King [#19]
     number: 9-1
+    tags: outer_circles
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
     number: 9-22
+    tags: l_hitbanks, outer_circles
   l_hitbank_top: # Right 2-Bank (Top) [#38]
     number: 9-21
+    tags: l_hitbanks, outer_circles
   l_iron_throne: # Iron Throne [#21]
     number: 9-3
+    tags: outer_circles
   l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
     number: 9-40
+    tags: lane_wedges
   l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
     number: 9-39
-    tags: l_store
+    tags: l_store, lane_wedges
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 9-41
+    tags: lane_arrows
   l_left_orbit_arrow_red: # Left Loop Arrow [#43]
     number: 10-12
+    tags: lane_arrows
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
     tags: l_outlane
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
+    tags: lane_wedges
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
     number: 10-17
-    tags: l_lock_lit
+    tags: l_lock_lit, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
+    tags: lane_arrows
   l_left_return_lane: # Left Return Lane [#12]
     number: 9-33
     tags: l_return_lane
@@ -388,20 +412,24 @@ lights:
     tags: l_pop_bumpers
   l_right_orbit_arrow_red: # Right Loop Arrow [#74]
     number: 9-20
+    tags: lane_arrows
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
-    tags: l_outlane
+    tags: l_outlane, outer_circles
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
+    tags: lane_arrows
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
+    tags: lane_wedges
   l_right_return_lane: # Right Return Lane [#33]
     number: 8-0
-    tags: l_return_lane
+    tags: l_return_lane, outer_circles
   l_right_top_lane: # Right Top Lane [#76]
     number: 10-15
   l_ball_save: # Shoot Again [#32]
     number: 8-3
+    tags: outer_circles
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 9-5
     tags: color_shields, color_shield_yellow

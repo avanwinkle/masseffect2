@@ -2,23 +2,24 @@
 event_player:
   mode_attract_started:
     - start_mode_mainmenu
-    - start_suicide_track|300ms
-    - start_suicide_beat|300ms
-
-    - start_suicide_flash|29045ms # 28945ms + 300ms
+    - start_suicide_intro|320ms
+    - start_suicide_main|29245ms
 
 show_player:
-  start_suicide_track:
+  start_suicide_intro:
     suicide_track:
+      loops: -1
+      speed: 0.278
+      action: play
+    suicide_flash_soft:
       loops: -1
       speed: 1
       action: play
-  start_suicide_beat:
+  start_suicide_main:
     suicide_beat:
       loop: -1
       speed: 1
       action: play
-  start_suicide_flash:
     suicide_flash:
       loops: -1
       speed: 1
@@ -31,12 +32,12 @@ show_player:
     #   speed: 5
     #   show_tokens:
     #     flashers: l_flash_dragon_right, l_flash_dragon_left
-  mode_attract_started:
-    flash:
-      action: play
-      speed: 4
-      show_tokens:
-        leds: l_start_button
+  # mode_attract_started:
+  #   flash:
+  #     action: play
+  #     speed: 4
+  #     show_tokens:
+  #       leds: l_start_button
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop

@@ -2,44 +2,44 @@
 - time: 0
   lights:
     shot_shields:
-      color: FFFFFF
-- time: 3649ms
+      color: FF1F00 #color_shadowbroker
+- time: '+1'
   lights:
     shot_shields:
-      color: FF1F00
-- time: 7220ms
+      color: FF7700 #color_zaeed
+- time: '+1'
   lights:
     shot_shields:
-      color: FF7700
-- time: 10788ms
+      color: EEFF00 #color_kasumi
+- time: '+1'
   lights:
     shot_shields:
-      color: 008899
-- time: 13683ms
+      color: 0055FF #color_garrus
+- time: '+1'
   lights:
     shot_shields:
-      color: FF11DD
+      color: 008899 #color_samara
   flashers:
     l_flash_dragon_right: 100ms
-- time: 14480ms
+- time: '+1'
   lights:
     shot_shields:
-      color: 00FF11
+      color: 00FF11 #color_thane
   flashers:
     l_flash_throne: 100ms
-- time: 17963ms
+- time: '+1'
   lights:
     shot_shields:
-      color: EEFF00
+      color: FF11DD #color_tali
   flashers:
     l_flash_dragon_left: 100ms
-- time: 21592ms
+- time: '+1'
   lights:
     shot_shields:
-      color: 5500FF
-- time: 25138ms
+      color: 5500FF #color_barrier
+- time: '+1'
   lights:
     shot_shields:
-      color: 0055FF
-- time: 28844ms
+      color: 990000 #color_health
+- time: '+1'
 
