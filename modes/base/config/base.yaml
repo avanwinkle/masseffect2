@@ -119,20 +119,20 @@ accruals:
       - recruit_success_thane
       - recruit_success_zaeed
 
-ball_holds:
-  # This must exist in field AND wizard modes, so... put it in base?
-  shadowbroker_hold:
-    balls_to_hold: 1
-    hold_devices: bd_hold
-    enable_events:
-      - enable_shadowbroker_hold
-      - logicblock_sbchase_counter_updated{value==4}
-      - enable_hatch
-    release_one_events: release_shadowbroker_hold
-    disable_events:
-      - ball_hold_shadowbroker_hold_balls_released
-      - disable_shadowbroker_hold
-    debug: true
+# ball_holds:
+#   # This must exist in field AND wizard modes, so... put it in base?
+#   shadowbroker_hold:
+#     balls_to_hold: 1
+#     hold_devices: bd_hold
+#     enable_events:
+#       - enable_shadowbroker_hold
+#       - logicblock_sbchase_counter_updated{value==4}
+#       - enable_hatch
+#     release_one_events: release_shadowbroker_hold
+#     disable_events:
+#       - ball_hold_shadowbroker_hold_balls_released
+#       - disable_shadowbroker_hold
+#     debug: true
 
 ball_saves:
   default:

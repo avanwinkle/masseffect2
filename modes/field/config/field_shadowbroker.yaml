@@ -22,7 +22,9 @@ event_player:
   # If the mode is restarted and vasir or boss is enabled, re-enable the hold
   mode_field_started:
     - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
-  ball_hold_shadowbroker_hold_held_ball:
+  # ERROR: Hold doesn't work, so use the hold event to fake it holding a ball
+  #ball_hold_shadowbroker_hold_held_ball:
+  enable_shadowbroker_hold:
     - enter_shadowbroker_modes
     # Get a ball in the ball hold to begin Vasir
     - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="enabled"}

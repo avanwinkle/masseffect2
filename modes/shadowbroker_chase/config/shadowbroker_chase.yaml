@@ -26,21 +26,18 @@ event_player:
     set_environment:
       env: cars
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
-  ball_hold_shadowbroker_hold_held_ball: stop_mode_shadowbroker_chase
-  timer_sbchase_timer_complete:
-    - stop_mode_shadowbroker_chase
-    - exit_shadowbroker_modes
-    - disable_shadowbroker_hold
+  shadowbroker_chase_complete: stop_mode_shadowbroker_chase
+  timer_sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
   # If the ball is saved, the mode is ended
   ball_save_sbchase_save_saving_ball:
-  #   - stop_mode_shadowbroker_chase # TEMP FOR WORK
+    - stop_mode_shadowbroker_chase
     - reset_dropbank
 
 ball_saves:
   sbchase_save:
     enable_events: mode_shadowbroker_chase_started
-    disable_events: mode_shadowbroker_chase_will_stop
-    balls_to_save: -1 # TEMP FOR WORK
+    disable_events: shadowbroker_chase_complete
+    balls_to_save: 1
     auto_launch: true
 
 counters:
