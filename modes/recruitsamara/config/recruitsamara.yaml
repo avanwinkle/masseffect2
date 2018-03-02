@@ -143,7 +143,7 @@ shots:
     disable_events: samara_right_orbit_hit
     profile: samara_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_orbit_shield_rgb
       color: 008899 #color_samara
   samara_right_ramp:
     hit_events: sh_right_ramp_hit

@@ -194,11 +194,19 @@ sound_player:
     shuttle_land:
       action: play
       volume: 0.2
-  timer_vasir_timer_complete: vasir_move_sound
-  vasir_shot_barrier_hit: vasir_hit_sound
-  vasir_shot_armor_hit: vasir_hit_sound
+  timer_vasir_timer_complete:
+    vasir_move_sound:
+      action: play
+  vasir_shot_barrier_hit:
+    vasir_hit_sound:
+      action: play
+  vasir_shot_armor_hit:
+    vasir_hit_sound:
+      action: play
   # Relays
-  play_vasir_start_sound: vasir_start_sound
+  play_vasir_start_sound:
+    vasir_start_sound:
+      action: play
 
 sound_pools:
   vasir_start_sound:

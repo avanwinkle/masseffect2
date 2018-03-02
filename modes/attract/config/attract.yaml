@@ -6,6 +6,7 @@ event_player:
     - start_suicide_beat|300ms
 
     - start_suicide_flash|29045ms # 28945ms + 300ms
+
 show_player:
   start_suicide_track:
     suicide_track:
@@ -25,16 +26,17 @@ show_player:
     # middle_circle_sweep:
     #   loops: -1
     #   speed: 6
-    # flash:
-    #   action: play
-    #   speed: 4
-    #   show_tokens:
-    #     leds: l_start_button
     # flasher_show_triple:
     #   action: play
     #   speed: 5
     #   show_tokens:
     #     flashers: l_flash_dragon_right, l_flash_dragon_left
+  mode_attract_started:
+    flash:
+      action: play
+      speed: 4
+      show_tokens:
+        leds: l_start_button
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop

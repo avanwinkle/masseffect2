@@ -101,6 +101,7 @@ shot_profiles:
       - name: lit
         show: flash
         speed: 2
+        sync_ms: 1000
 
 shots:
   heretic_kickback_shot:

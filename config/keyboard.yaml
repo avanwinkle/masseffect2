@@ -36,7 +36,7 @@ keyboard:
   shift+enter:
     switch: s_action_button
   e:
-    event: sbdroptarget_group_complete
+    event: drop_target_bank_dropbank_down
   w:
     switch: s_flipper_left
   v:

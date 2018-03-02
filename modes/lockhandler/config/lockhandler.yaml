@@ -62,7 +62,11 @@ shots:
   overlord_lock_ball_shot:
     switch: s_left_ramp_exit
     profile: overlord_lock_profile
-    enable_events: overlord_light_shot_hit
+    enable_events:
+      # Before the multiball has been played, any shot to the hitbank will light
+      - overlord_light_shot_hit{device.achievements.overlord.state=="disabled"}
+      # After it's been played, both hitbanks shots must complete to light
+      - overlord_light_shot_lit_complete
     disable_events: multiball_lock_overlordlock_locked_ball
 
 shot_profiles:

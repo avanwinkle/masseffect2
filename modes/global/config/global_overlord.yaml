@@ -25,7 +25,7 @@ shot_groups:
   overlord_light_shot:
     shots: light_lock_overlord_top, light_lock_overlord_bottom
     enable_events:
-      - enable_lock_lightshot{device.achievements.collectorship.state!="complete"}
+      - enable_lock_lightshot{device.achievements.collectorship.state!="completed"}
       - multiball_overlord_multiball_ended
     disable_events:
       - disable_lock_lightshot

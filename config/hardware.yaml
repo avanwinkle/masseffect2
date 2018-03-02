@@ -21,7 +21,7 @@ machine:
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
     fps: 15
-    gamma: 1
+    gamma: 0.8
     only_send_changes: true
     source_display: dmd
     platform: spike
@@ -83,7 +83,7 @@ ball_devices:
     ball_capacity: 1
     hold_coil: c_up_post
     hold_coil_release_time: 1s
-    # hold_switches: s_kickback
+    hold_switches: s_kickback
     entrance_switch: s_kickback
 
 flippers:
@@ -136,7 +136,6 @@ autofire_coils:
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
-
 
 switches:
   s_start_button:
@@ -269,7 +268,7 @@ switches:
   s_kickback:
     number: 10-14
     ignore_window_ms: 400
-    # tags: playfield_active
+    # tags: playfield_active # Cannot be playfield active if it's a ball hold switch
   s_lock_1:
     number: 9-0
   s_lock_2:
@@ -563,9 +562,11 @@ coils:
     default_pulse_ms: 1
   c_up_post:
     number: 8-7
+    default_pulse_ms: 14
     default_hold_power: 0.3
     enable_events: hold_post_enable
     disable_events: hold_post_disable
+    debug: true
   c_lock_release_post:
     number: 9-3
     default_pulse_ms: 28

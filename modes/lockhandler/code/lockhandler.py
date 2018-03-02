@@ -117,6 +117,11 @@ class LockHandler(Mode):
     elif not self.machine.modes.field.active and self._overlordlock.locked_balls == 2:
       self.log.debug(" - Two balls are locked and field mode isn't active, bypassing lock post")
       self._bypass_lock()
+      # Temporarily disable the lock, just in case the bypass post doesn't let a ball out
+      if self._overlordlock.enabled:
+        self._overlordlock.disable()
+        self.delay.add(callback=self._overlordlock.enable, ms=1000,
+                     event='start_mode_missionselect')
       return
 
     do_bypass = True

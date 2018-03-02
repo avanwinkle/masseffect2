@@ -22,11 +22,16 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruitmordin_started:
+  mode_recruitmordin_started.1:
     set_environment:
       env: bloodpack
+  mode_recruitmordin_started.2:
+    - play_intro_sound{device.counters.fans_counter.value==0}
+    - play_cure_sound{device.counters.fans_counter.value>0}
   spinner_hit: enable_cure
-  cure_shot_hit: enable_fans
+  cure_shot_flashing_hit:
+    - enable_fans
+    - play_cure_sound
   fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
@@ -149,12 +154,11 @@ shows:
 
 sound_player:
   mode_recruitmordin_started:
-    mission_intro:
-      action: play
     music_recruit_mordin:
       action: play
       loops: -1
-  cure_shot_lit_complete: step1_voice # Can't {device.counters.fans_counter.value==0} because MPF-MC != device.counters
+  play_intro_sound: mission_intro
+  play_cure_sound: step1_voice
   logicblock_fans_counter_hit{count==1}: step2_voice
   recruit_mordin_complete:
     music_recruit_mordin:

@@ -24,18 +24,27 @@ mode:
 
 event_player:
   mode_collectorship_praetorian_started:
+    - start_base_praetorian_show
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
   praetorian_shot_hit:
     - flippers_on
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
-  timer_praetoriantimer_complete{current_player.temp_multiplier==0}: praetorian_attack
+  timer_praetoriantimer_complete{current_player.temp_multiplier==0}:
+    - stop_base_praetorian_show
+    - praetorian_attack_one
+    - praetorian_attack_two|800ms
+    - praetorian_attack_three|1600ms
+    - start_base_praetorian_show|2400ms
   timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
   collectorship_praetorian_complete: stop_mode_collectorship_praetorian
   collectorship_praetorian_failed: stop_mode_collectorship_praetorian
-  mode_collectorship_praetorian_will_stop: flippers_on
+  # Re-enable the flippers, unless the game is over and we're stopping
+  mode_collectorship_praetorian_will_stop{mode.base.stopping!=True}:
+    - flippers_on
+    - stop_base_praetorian_show
   # Make sure the dropbank is UP when it's enabled!
   enable_praet_drop: reset_dropbank
 
@@ -55,7 +64,7 @@ random_event_player:
       - enable_praet_kickback
       - enable_praet_dropbank
       - enable_praet_hitbank
-  praetorian_attack:
+  praetorian_attack_three:
     force_different: false
     force_all: false
     events:
@@ -113,35 +122,35 @@ shots:
     enable_events: enable_praet_left_ramp
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
   praet_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: praet_shot_profile
     enable_events: enable_praet_left_orbit
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
   praet_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: praet_shot_profile
     enable_events: enable_praet_right_ramp
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
   praet_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: praet_shot_profile
     enable_events: enable_praet_right_orbit
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
   praet_kickback:
     hit_events: sh_kickback_hit
     profile: praet_shot_profile
     enable_events: enable_praet_kickback
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
   # These are trying to use the "dropbank" device object, but dunno if it'll work?
   praet_dropbank:
     hit_events: drop_target_top_down, drop_target_middle_down, drop_target_bottom_down
@@ -149,17 +158,17 @@ shots:
     enable_events: enable_praet_dropbank
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_dropbank_shield_rgb
+      leds: l_dropbank_shield_rgb
   praet_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: praet_shot_profile
     enable_events: enable_praet_hitbank
     disable_events: praetorian_shot_hit
     show_tokens:
-      led: l_hitbank_shield_rgb
+      leds: l_hitbank_shield_rgb
 
 show_player:
-  mode_collectorship_praetorian_started:
+  start_base_praetorian_show:
     flasher_show_double:
       key: praet_flasher_dragon
       speed: 3.1
@@ -170,7 +179,7 @@ show_player:
       speed: 0.7
       show_tokens:
         flashers: l_flash_kickback_lane, l_flash_slingshots
-  stop_mode_collectorship_praetorian:
+  stop_base_praetorian_show:
     praet_flasher_dragon:
       action: stop
     praet_flasher_main:
@@ -180,32 +189,56 @@ show_player:
       loops: 0
       show_tokens:
         flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_pop_bumpers, l_flash_dragon_left
-  praetorian_attack:
-    praet_shot_show:
+  praetorian_attack_one:
+    praet_attack_show_pre:
       action: play
       loops: 5
-    flasher_show_triple|500ms:
+      speed: 1
+  praetorian_attack_two:
+    praet_shot_show:
       action: play
-      show_tokens:
-        flashers: l_flash_dragon_right
+      loops: 3
       speed: 10
-      loops: 40
+      priority: 100
+      show_tokens:
+        leds: shot_shields
+    flash:
+      action: play
+      speed: 50
+      loops: 10
+      priority: 100
+      show_tokens:
+        leds: l_flash_dragon_right, l_flash_battering_ram, l_flash_left_orbit
+    flasher_show_triple:
+      action: play
+      loops: 3
+      speed: 7
+      show_tokens:
+        flashers: l_flash_kickback_lane, l_flash_pop_bumpers, l_flash_dragon_left
+  praetorian_attack_three:
+    flash:
+      action: play
+      speed: 20
+      loops: 10
+      priority: 100
+      show_tokens:
+        leds: l_flash_slingshots
 
 shows:
   praet_shot_show:
     - time: 0
       lights:
-        (led): 
+        (leds):
           color: 2200AA #color_praetorian
           fade: 100ms
     - time: '+1'
       lights:
-        (led): 
+        (leds):
           color: 000000
           fade: 100ms
   praet_attack_show_pre:
     - time: 0
-      lights: 
+      lights:
         gi: off
         l_dragon_fire: on
     - time: '+1'  # This is just so there's duration and we can "loop" to stop the show
@@ -221,16 +254,16 @@ sound_player:
   collectorship_praetorian_complete: praet_death
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
-  praetorian_attack.1: praet_attack
-  praetorian_attack.2: praet_beam|500ms
-  praetorian_attack.3: shep_hit|1000ms
+  praetorian_attack_one: praet_attack
+  praetorian_attack_two: praet_beam
+  praetorian_attack_three: shep_hit
 
 sound_pools:
   shep_hit:
     type: random_force_all
     sounds: shep_hit_1, shep_hit_2, shep_hit_3
     track: voice
-    volume: 1
+    volume: 2
   praet_hit:
     type: random_force_all
     sounds: praet_hit_1, praet_hit_2, praet_hit_3, praet_hit_4, praet_hit_5
@@ -239,6 +272,7 @@ sound_pools:
     type: random_force_all
     sounds: praet_attack_1, praet_attack_2, praet_attack_3
     track: sfx
+    volume: 1.5
 
 sounds:
   shep_hit_1:
@@ -282,6 +316,7 @@ sounds:
   praet_beam:
     track: sfx
     file: SFXGame.538.ogg
+    volume: 1
   praet_intro:
     max_queue_time: 1s
     track: sfx

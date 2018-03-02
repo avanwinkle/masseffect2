@@ -39,7 +39,7 @@ class SaveCareer(Scriptlet):
         player.career_name))
       return
 
-    self.log.info("Saving career for player {}: {}".format(player.number, player.vars))
+    self.log.info("Saving career for player {}".format(player.number))
     newcareer = {"last_played": datetime.now().timestamp()}
 
     for key, value in player.vars.items():

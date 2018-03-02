@@ -86,20 +86,20 @@ shot_profiles:
     states:
       - name: lit
         show: jack_shots_two_show
-        speed: 3
+        speed: 2
         loops: -1
   jack_shots_three_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: jack_shots_three_show
-        speed: 4
+        speed: 3
   jack_hitbank_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: jack_hitbank_show
-        speed: 4
+        speed: 3
 
 shot_groups:
   jack_hurryup_shots:
@@ -200,12 +200,12 @@ shows:
         l_hitbank_shield_rgb:
           color: 4D00CC #color_jack
           fade: 20ms
-    - time: '+1'
+    - time: '+2'
       lights:
         l_hitbank_shield_rgb:
             color: black
             fade: 20ms
-    - time: '+1'
+    - time: '+2'
 
 
 slide_player:
