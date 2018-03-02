@@ -1,4 +1,5 @@
 from mpf.core.config_processor import ConfigProcessor
+from mpf.core.utility_functions import Util
 import re
 import os, sys
 import shutil
@@ -172,20 +173,31 @@ class ModeSounds(object):
     self._dict = {}
     self._tracks = []
     self._files = []
+    self._pool_tracks = {}
     self.name = modeName
 
   def parseConfig(self, modeConfig):
     if not modeConfig.get('sounds'):
       return self
 
-    for sound in modeConfig['sounds'].values():
-      self.addSound(sound)
+    for sound_pool in modeConfig.get('sound_pools', {}).values():
+      for soundname in Util.string_to_list(sound_pool['sounds']):
+        if soundname in self._pool_tracks and self._pool_tracks[soundname] != sound_pool['track']:
+          print("ERROR: Sound {} exists in multiple pools/tracks in config {}".format(soundname, self.name))
+          return
+        self._pool_tracks[soundname] = sound_pool['track']
 
-  def addSound(self, soundDict):
+    for soundname, sound in modeConfig['sounds'].items():
+      self.addSound(sound, poolTrack=self._pool_tracks.get(soundname))
+
+  def addSound(self, soundDict, poolTrack=None):
     fileName = soundDict['file']
     # If a track is explicitly defined, use it
     if 'track' in soundDict and soundDict['track']:
       trackName = soundDict['track']
+    # If this sound is in a sound pool with a track, use that
+    elif poolTrack:
+      trackName = poolTrack
     # Mass Effect 2 Pinball defaults: 
     elif fileName.startswith('en_us_'):
       trackName = 'voice'

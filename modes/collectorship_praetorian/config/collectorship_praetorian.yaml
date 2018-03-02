@@ -24,18 +24,20 @@ mode:
 
 event_player:
   mode_collectorship_praetorian_started:
-    - enable_praet_main_shot
-    - enable_praet_side_shot
+    - enable_praet_main_shot|500ms
+    - enable_praet_side_shot|500ms
   praetorian_shot_hit:
     - flippers_on
-    - enable_praet_main_shot
-    - enable_praet_side_shot
+    - enable_praet_main_shot|500ms
+    - enable_praet_side_shot|500ms
   timer_praetoriantimer_complete{current_player.temp_multiplier==0}: praetorian_attack
   timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
   collectorship_praetorian_complete: stop_mode_collectorship_praetorian
   collectorship_praetorian_failed: stop_mode_collectorship_praetorian
   mode_collectorship_praetorian_will_stop: flippers_on
+  # Make sure the dropbank is UP when it's enabled!
+  enable_praet_drop: reset_dropbank
 
 random_event_player:
   enable_praet_main_shot:
@@ -97,9 +99,9 @@ shot_groups:
 shot_profiles:
   praet_shot_profile:
     show_when_disabled: false
-    show: praet_shot_show
     states:
-      - name: on
+      - name: lit
+        show: praet_shot_show
         speed: 1
 
 shots:
@@ -193,10 +195,14 @@ shows:
   praet_shot_show:
     - time: 0
       lights:
-        (led): 2200AA
+        (led): 
+          color: 2200AA #color_praetorian
+          fade: 100ms
     - time: '+1'
       lights:
-        (led): off
+        (led): 
+          color: 000000
+          fade: 100ms
   praet_attack_show_pre:
     - time: 0
       lights: 

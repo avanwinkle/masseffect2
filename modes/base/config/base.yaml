@@ -55,10 +55,6 @@ achievements:
     complete_events: suicidemission_complete
 
 event_player:
-  # DEBUG for Spike Desync
-  s_action_button_active:
-    - flippers_off
-    - flippers_on|100ms
   mode_base_started:
     - start_mode_global
     - start_mode_lockhandler
