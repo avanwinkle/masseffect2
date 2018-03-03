@@ -32,7 +32,14 @@ class MainMenu(Carousel):
     self.debug_log("Showing career menu for player {}".format(self.machine.game.player.number))
     self._shown_menu = self.mainmenu
     super().mode_start()
-    self._highlighted_item_index = 0 if self._selected_career else self.mainmenu.index("casual")
+    if self._selected_career:
+      if "achievements" in self._selected_career:
+        starting_item = "resume_game"
+      else:
+        starting_item = "new_game"
+    else:
+      starting_item = "casual"
+    self._highlighted_item_index = self.mainmenu.index(starting_item)
     self._update_highlighted_item(None)
     # We've already set the selected career, but want the event to be posted
     self._set_selected_career(self._selected_career)
@@ -42,8 +49,11 @@ class MainMenu(Carousel):
     if self.careers:
       menu = ["change_career"] + menu
     if self._selected_career:
-      menu = ["resume_game", "new_game"] + menu
+      menu = ["new_game"] + menu
+      if "achievements" in self._selected_career:
+        menu = ["resume_game"] + menu
     self.mainmenu = menu
+    self._highlighted_item_index = 0
     self.debug_log("Created main menu with {}".format(", ".join(self.mainmenu)))
 
   def _load_careers(self):
@@ -101,7 +111,6 @@ class MainMenu(Carousel):
       self._load_mainmenu()
       # Return to the main menu
       self._shown_menu = self.mainmenu
-      self._highlighted_item_index = 0
       self._update_highlighted_item(None)
       self._post_career_event("mainmenu_career_selected")
       # Don't post selection via carousel, keep the carousel open
@@ -148,7 +157,7 @@ class MainMenu(Carousel):
     self.debug_log("Setting career to {}".format(career))
     self.machine.set_machine_var("last_career_player_{}".format(self.machine.game.player.number),
                                  career_data.get("career_name", " "))
-    self._post_career_event("set_career");
+    self._post_career_event("set_career")
 
   def _post_career_event(self, evt_name, **kwargs):
     career_data = self._selected_career or {}

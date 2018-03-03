@@ -28,7 +28,7 @@ slide_player:
   mainmenu_casual_highlighted: casual_slide
   # Selecting and moving between menus
   mainmenu_change_career_selected: career_select_slide
-  mainmenu_career_selected: resume_game_slide
+  # mainmenu_career_selected: resume_game_slide
 
 slides:
   change_career_slide:
@@ -50,7 +50,7 @@ slides:
   new_game_slide:
     widgets:
       - type: text
-        text: Restart Game
+        text: Start New Game
         style: savegame_title
       - type: text
         text: (career_name)
@@ -119,9 +119,13 @@ shows:
 
 sound_player:
   show_mainmenu: mus_gui_char_create
+  player_added:
+    gui_splashstart:
+      action: play
+      volume: 0.2
   mainmenu_change_career_selected: galaxy_zoom_in
   mainmenu_career_selected: galaxy_zoom_out
-  mainmenu_item_selected: 
+  mainmenu_item_selected:
     gui_splashstart:
       action: play
       events_when_stopped: stop_mode_mainmenu
@@ -144,6 +148,7 @@ sounds:
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx
+    volume: 0.5
 
 
 
