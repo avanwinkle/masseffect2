@@ -2,24 +2,30 @@
 #include <Adafruit_SSD1351.h>
 #include <SD.h>
 #include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_LEDBackpack.h>
 
 #include <CmdMessenger.h>  // CmdMessenger
 
 // If we are using the hardware SPI interface, these are the pins (for future ref)
-#define sclk 52
-#define mosi 51
-#define miso 50
-#define SD_CS 53
-#define cs   5
-#define rst  6
-#define dc   3
+#define sclk 52  // ORG -> CL (2)
+#define mosi 51  // PRP -> SI (1)
+#define miso 50  // GRY -> SO (7)
+#define SD_CS 53 // WHT -> SC (6)
+#define cs   5   // GRN -> OC (5)
+#define rst  6   // BRN -> R  (4)
+#define dc   3   // BLU -> DC (3)
 
 // Color definitions
 #define BLACK           0x0000
-#define BLUE            0x001F\
+#define BLUE            0x001F
 
 enum {
   draw_bmp,
+  clear_ledsegment,
+  show_ledsegment_letters,
+  show_ledsegment_number,
 };
 
 // Attach a new CmdMessenger object to the default Serial port
@@ -28,12 +34,21 @@ CmdMessenger cmdMessenger = CmdMessenger(Serial);
 // the file itself
 File bmpFile;
 
+// to draw images from the SD card, we will share the hardware SPI interface
+Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, rst);
+
+// Store a connection to our alphanumeric LED segment display
+Adafruit_AlphaNum4 alpha4 = Adafruit_AlphaNum4();
+
 // information we extract about the bitmap file
 int bmpWidth, bmpHeight;
 uint8_t bmpDepth, bmpImageoffset;
 
 void attachCallbacks(void) {
   cmdMessenger.attach(draw_bmp, on_draw_bmp);
+  cmdMessenger.attach(clear_ledsegment, on_clear_ledsegment);
+  cmdMessenger.attach(show_ledsegment_letters, on_show_ledsegment_letters);
+  cmdMessenger.attach(show_ledsegment_number, on_show_ledsegment_number);
 }
 
 void on_draw_bmp(void) {
@@ -42,22 +57,69 @@ void on_draw_bmp(void) {
   bmpDraw(filename, 0, 0);
 }
 
-// to draw images from the SD card, we will share the hardware SPI interface
-Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, rst);
+void on_clear_ledsegment(void) {
+  alpha4.clear();
+  alpha4.writeDisplay();
+}
+
+void on_show_ledsegment_letters() {
+  // char n = cmdMessenger.readBinArg<char>();
+  char * letters = cmdMessenger.readStringArg();
+  showLetters(letters);
+}
+
+void showLetters(char *letters) {
+  int lettersLen = strlen(letters);
+  for (int i=0; i<lettersLen; i++) {
+    alpha4.writeDigitAscii(i, letters[i]);
+  }
+  alpha4.writeDisplay();
+}
+
+void on_show_ledsegment_number() {
+  int i = cmdMessenger.readBinArg<int>();
+  showNumber(i);
+}
+
+// Parse an integer and assign the digits to correct LED segment blocks
+void showNumber(int i) {
+  alpha4.clear();
+  int dig = i % 10;
+  int ten = (i - dig) / 10 % 10;
+  int hun = (i - dig - (10 * ten)) / 100 % 10;
+  int tho = (i - dig - (10 * ten) - (100 * hun)) / 1000 % 10;
+  alpha4.writeDigitAscii(3, dig+48);
+  alpha4.writeDigitAscii(2, ten+48);
+  if (hun > 0 || tho > 0) {
+    alpha4.writeDigitAscii(1, hun+48);
+  }
+  if (tho > 0) {
+    alpha4.writeDigitAscii(0, tho+48);
+  }
+  alpha4.writeDisplay();
+}
+
 
 void setup(void) {
   Serial.begin(115200);
-   
+
+  Serial.println("init");
+  setup_tft();
+  setup_ledsegment();
+
+  attachCallbacks();
+}
+
+void setup_tft() {
   pinMode(cs, OUTPUT);
   digitalWrite(cs, HIGH);
   pinMode(      10          , OUTPUT);
   digitalWrite( 10          , HIGH  );
-     
+
   // initialize the OLED
   tft.begin();
 
-  Serial.println("init");
-  
+
   tft.fillScreen(BLUE);
   delay(500);
   Serial.print("Initializing SD card...");
@@ -68,8 +130,19 @@ void setup(void) {
     Serial.println("SD OK!");
   }
 
-  attachCallbacks();
   bmpDraw("n7.bmp", 0, 0);
+}
+
+void setup_ledsegment() {
+  // initialize the segment
+    alpha4.begin(0x70);
+
+    Serial.println("init ledsegment");
+    showLetters("SR2");
+    // alpha4.writeDigitAscii(0, 'S');
+    // alpha4.writeDigitAscii(1, 'R');
+    // alpha4.writeDigitAscii(2, '2');
+    // alpha4.writeDisplay();
 }
 
 void loop() {

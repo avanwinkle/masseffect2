@@ -1,23 +1,15 @@
-import serial
-import PyCmdMessenger
+import asyncio
+import websockets
+import logging
+
 from mpf.core.scriptlet import Scriptlet
+from mpf.core.utility_functions import Util
 
 class MPFArduino(Scriptlet):
 
   def on_load(self):
-    # TODO: Get this into a config file
-    PORTS = ["/dev/cu.usbmodem1421", "/dev/cu.usbmodem1411", "/dev/cu.usbmodemFA131"]
-    ser = None
-    # Look for a device on the given port, if not found then abort this Scriptlet
-    for port in PORTS:
-      try:
-        ser = serial.Serial(port)
-        break
-      except serial.serialutil.SerialException:
-        continue
-    # If no port found, abandon
-    if not ser:
-      return
+    self.log = logging.getLogger("MPFArduino")
+    self.log.setLevel("INFO")
 
     # Bind event handlers to send commands to Arduino
     # TODO: Get this into a config file
@@ -26,26 +18,31 @@ class MPFArduino(Scriptlet):
       self.machine.events.add_handler('timer_recruittimer_tick', self._set_timer)
       self.machine.events.add_handler('timer_recruittimer_stopped', self._clear_timer)
 
-    arduino = PyCmdMessenger.ArduinoBoard(port, baud_rate=115200)
+    self.log.info("Arduino Client Initialized!")
 
-    # The order of commands must exactly match the Arduino sketch file mpf_arduino.ino
-    commands = [
-      # ["clear_display", ""],
-      # ["show_number", "i"],
-      ["draw_bmp", "s"],
-    ]
+  async def send_to_socket(self, data):
+    """Open a client connection to the socket server and send a single command."""
+    async with websockets.connect('ws://localhost:5052') as websocket:
+      await websocket.send(data)
+      # response = await websocket.recv()
+      # self.log.info("{} > {}".format(data, response))
 
-    # Open a serial connection via PyCmdMessenger
-    self._c = PyCmdMessenger.CmdMessenger(arduino, commands)
-    self._last_bmp = None
 
   def _set_squadmate(self, **kwargs):
-    if kwargs.get("squadmate", self._last_bmp) != self._last_bmp:
-      self._last_bmp = kwargs.get("squadmate")
-      self._c.send("draw_bmp", "r{}.bmp".format(self._last_bmp))
+    self.machine.log.info("Arduino trying to set squadmate from {}".format(kwargs))
+    if kwargs.get("squadmate"):
+      self.machine.clock.loop.create_task(
+        self.send_to_socket("set_squadmate:{squadmate}".format(**kwargs))
+      )
 
   def _set_timer(self, **kwargs):
-    self._c.send("show_number", kwargs['ticks'])
+    self.machine.log.info("Arduino trying to set timer from {}".format(kwargs))
+    self.machine.clock.loop.create_task(
+      self.send_to_socket("show_ledsegment_number:{ticks}".format(**kwargs))
+    )
 
   def _clear_timer(self, **kwargs):
-    self._c.send("clear_display")
+    del kwargs
+    self.machine.clock.loop.create_task(
+      self.send_to_socket("clear_ledsegment")
+    )

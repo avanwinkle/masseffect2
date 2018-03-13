@@ -1,0 +1,11 @@
+#config_version=5
+fadecandy:
+  gamma: 1
+
+light_stripes:
+  led_stripe_8:
+    number_start: 0
+    count: 8
+    light_template:
+      platform: fadecandy
+      type: grb

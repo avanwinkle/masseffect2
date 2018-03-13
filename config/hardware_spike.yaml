@@ -1,7 +1,7 @@
 #config_version=5
 #STERN Game of Thrones [Pro Edition]
 hardware:
-  platform: spike
+  platform: spike, fadecandy
 
 spike:
   port: /dev/tty.usbserial-FTA6MU05
@@ -25,28 +25,6 @@ dmds:
     only_send_changes: true
     source_display: dmd
     platform: spike
-
-slides:
-  window_slide_1:
-  - type: display
-    width: 768
-    height: 192
-    effects:
-      - type: color_dmd
-        gain: 1.2
-        dot_filter: true
-  - type: rectangle
-    width: 772
-    height: 196
-    color: 444444
-  waiting_for_connection:
-  - type: text
-    text: WAITING FOR MPF CONNECTION
-
-slide_player:
-  mc_ready:
-    window_slide_1:
-      target: window
 
 ball_devices:
   bd_plunger:
@@ -83,7 +61,7 @@ ball_devices:
     ball_capacity: 1
     hold_coil: c_up_post
     hold_coil_release_time: 1s
-    hold_switches: s_kickback
+    # hold_switches: s_kickback
     entrance_switch: s_kickback
 
 flippers:
@@ -111,7 +89,7 @@ drop_target_banks:
     drop_targets: bottom, middle, top
     reset_coils: c_dropbank_reset
     reset_on_complete: 1s
-    reset_events: poo # machine_reset_phase_3, ball_starting, reset_dropbank
+    reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
 
 kickbacks:
   dragon_kickback:
@@ -622,34 +600,3 @@ playfields:
     default_source_device: bd_plunger
     tags: default
 
-sound_system:
-  tracks:
-    voice:
-      volume: 1
-      priority: 2
-      simultaneous_sounds: 1
-      preload: true
-    sfx:
-      volume: 1
-      priority: 1
-      preload: true
-      simultaneous_sounds: 7
-    music:
-      volume: 0.8
-      simultaneous_sounds: 2
-  buffer: 2048  # previous value was 512
-  frequency: 44100
-  channels: 1
-  master_volume: 1
-  enabled: true
-
-assets:
-  sounds:
-    default:
-      track: sfx
-    music:
-      track: music
-    sfx:
-      track: sfx
-    voice:
-      track: voice
