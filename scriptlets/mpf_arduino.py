@@ -32,7 +32,7 @@ class MPFArduino(Scriptlet):
     self.machine.log.info("Arduino trying to set squadmate from {}".format(kwargs))
     if kwargs.get("squadmate"):
       self.machine.clock.loop.create_task(
-        self.send_to_socket("set_squadmate:{squadmate}".format(**kwargs))
+        self.send_to_socket("set_squadmate:{squadmate}:{tftnum}".format(**kwargs))
       )
 
   def _set_timer(self, **kwargs):

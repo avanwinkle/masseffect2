@@ -5,7 +5,6 @@ import PyCmdMessenger
 
 class ArduinoServer():
 
-
   def __init__(self):
     self._last_bmp = None
     self._server = websockets.serve(self._serve, 'localhost', 5052)
@@ -63,10 +62,14 @@ class ArduinoServer():
     self._c.send("clear_ledsegment")
 
   def set_squadmate(self, squadmate):
-    print("Setting squadmate '{}'".format(squadmate))
+    if ":" in squadmate:
+      squadmate, screenNum = squadmate.split(":")
+    else:
+      screenNum = 0
+    print("Setting squadmate '{}' on screen {}".format(squadmate, screenNum))
     if squadmate != self._last_bmp:
       self._last_bmp = squadmate
-      self._c.send("draw_bmp", "r{}.bmp".format(self._last_bmp))
+      self._c.send("draw_bmp", "{}:r{}.bmp".format(screenNum, self._last_bmp))
 
   def show_ledsegment_letters(self, letters):
     print("Setting segment letters to '{}'".format(letters))
@@ -81,7 +84,7 @@ class ArduinoServer():
     print("< {}".format(request))
 
     if ":" in request:
-      command, param = request.split(":")
+      command, param = request.split(":", 1)
     else:
       command = request
       param = None

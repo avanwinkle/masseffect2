@@ -9,13 +9,20 @@
 #include <CmdMessenger.h>  // CmdMessenger
 
 // If we are using the hardware SPI interface, these are the pins (for future ref)
-#define sclk 52  // ORG -> CL (2)
-#define mosi 51  // PRP -> SI (1)
-#define miso 50  // GRY -> SO (7)
-#define SD_CS 53 // WHT -> SC (6)
-#define cs   5   // GRN -> OC (5)
-#define rst  6   // BRN -> R  (4)
-#define dc   3   // BLU -> DC (3)
+#define sclk  52  // ORG -> CL (2)
+#define mosi  51  // PRP -> SI (1)
+#define miso  50  // GRY -> SO (7)
+#define SD_CS 53  // WHT -> SC (6)
+
+#define cs_1   2  // GRN -> OC (5)
+#define rst_1  3  // BRN -> R  (4)
+#define dc_1   4  // BLU -> DC (3)
+
+#define cs_2   5
+#define rst_2  6
+#define dc_2   7
+
+#define tft_count 2
 
 // Color definitions
 #define BLACK           0x0000
@@ -34,8 +41,20 @@ CmdMessenger cmdMessenger = CmdMessenger(Serial);
 // the file itself
 File bmpFile;
 
-// to draw images from the SD card, we will share the hardware SPI interface
-Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, rst);
+int tft_pins[tft_count][3] = {
+  { 2, 3, 4 }, // CS, RST, DC
+  { 5, 6, 7 }
+};
+
+
+//Adafruit_SSD1351 tft1 = Adafruit_SSD1351(tft_pins[0][0], tft_pins[0][2], tft_pins[0][1]);
+//Adafruit_SSD1351 tft2 = Adafruit_SSD1351(tft_pins[1][0], tft_pins[1][2], tft_pins[1][1]);
+
+Adafruit_SSD1351 tfts[2] = { 
+  Adafruit_SSD1351(tft_pins[0][0], tft_pins[0][2], tft_pins[0][1]),
+  Adafruit_SSD1351(tft_pins[1][0], tft_pins[1][2], tft_pins[1][1])
+ };
+
 
 // Store a connection to our alphanumeric LED segment display
 Adafruit_AlphaNum4 alpha4 = Adafruit_AlphaNum4();
@@ -52,9 +71,13 @@ void attachCallbacks(void) {
 }
 
 void on_draw_bmp(void) {
-  Serial.println("Drawing bmp!");
-  char * filename = cmdMessenger.readStringArg();
-  bmpDraw(filename, 0, 0);
+
+  char * bmpRequest = cmdMessenger.readStringArg(); // e.g. "1.rgarrus.bmp"
+  // Split the request into an OLED number and a filename, e.g
+  int tft_num = bmpRequest[0] - '0'; // This will work up to screen #9
+  char * filename =  bmpRequest + 2;
+  Serial.print("Drawing bmp '"); Serial.print(filename); Serial.print("` on screen "); Serial.println(tft_num);
+  bmpDraw(tft_num, filename, 0, 0);
 }
 
 void on_clear_ledsegment(void) {
@@ -104,33 +127,37 @@ void setup(void) {
   Serial.begin(115200);
 
   Serial.println("init");
-  setup_tft();
+  for (int t=0; t<tft_count; t++) {
+    setup_tft(t);
+  }
+
   setup_ledsegment();
 
   attachCallbacks();
 }
 
-void setup_tft() {
-  pinMode(cs, OUTPUT);
-  digitalWrite(cs, HIGH);
-  pinMode(      10          , OUTPUT);
-  digitalWrite( 10          , HIGH  );
+void setup_tft(int t) {
+  Adafruit_SSD1351 tft = tfts[t];
 
   // initialize the OLED
   tft.begin();
 
-
   tft.fillScreen(BLUE);
   delay(500);
-  Serial.print("Initializing SD card...");
 
-  if (!SD.begin(SD_CS)) {
-    Serial.println("failed!");
+  if (t==0) {
+    Serial.print("Initializing SD card...");
+  
+    if (!SD.begin(SD_CS)) {
+      Serial.println("failed!");
+    } else {
+      Serial.println("SD OK!");
+    }
   } else {
-    Serial.println("SD OK!");
+    Serial.print(" - Not looking for SD card on iteration:"); Serial.println(t, DEC);
   }
 
-  bmpDraw("n7.bmp", 0, 0);
+  bmpDraw(t, "n7.bmp", 0, 0);
 }
 
 void setup_ledsegment() {
@@ -159,8 +186,8 @@ void loop() {
 
 #define BUFFPIXEL 64
 
-void bmpDraw(char *filename, uint8_t x, uint8_t y) {
-
+void bmpDraw(int t, char *filename, uint8_t x, uint8_t y) {
+  Adafruit_SSD1351 tft = tfts[t];
   File     bmpFile;
   int      bmpWidth, bmpHeight;   // W+H in pixels
   uint8_t  bmpDepth;              // Bit depth (currently must be 24)
