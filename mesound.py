@@ -12,31 +12,32 @@ class SoundManager():
     self.machine_assets = None
     self.source_media = None
     self.source_path = None
-
-    self._orphanedfiles = []
-    self._misplacedfiles = []
-    self._duplicatefiles = []
+    self._analysis = None
 
     self.log = logging.getLogger()
     self.log.addHandler(logging.StreamHandler(sys.stdout))
     self.log.setLevel("DEBUG" if verbose else "INFO")
     self._get_source_path()
 
-  def _load_configs_for_source(self):
-    if not self.machine_configs:
-      self.log.info("Loading config files...")
+  def _load_machine_configs(self, refresh=False):
+    if refresh or not self.machine_configs:
+      self.log.info("  Loading config files...")
       self.machine_configs = RequiredSounds()
-    if not self.source_media:
-      self.log.info("Loading media files from source folder...")
+  
+  def _load_source_media(self, refresh=False):
+    if refresh or not self.source_media:
+      self.log.info("  Loading media files from source folder...")
       self.source_media = GameSounds(self.source_path)
   
-  def _load_configs_for_machine(self):
-    if not self.machine_configs:
-      self.log.info("Loading config files...")
-      self.machine_configs = RequiredSounds()
-    if not self.machine_assets:
-      self.log.info("Loading assets from machine folder...")
+  def _load_machine_assets(self, refresh=False):
+    if refresh or not self.machine_assets:
+      self.log.info("  Loading assets from machine folder...")
       self.machine_assets = GameSounds("./")
+
+  def refresh(self):
+    self._load_machine_configs(refresh=True)
+    self._load_source_media(refresh=True)
+    self._load_machine_assets(refresh=True)
 
   def set_source_path(self):
     print("Set path to your media source folder:")
@@ -69,109 +70,130 @@ class SoundManager():
     self.source_path = sourcepath
 
   def parse_machine_assets(self, writeMode=False):
-    self._load_configs_for_machine()
+    self.log.info("\nParsing machine configs, assets, and source media:")
+    self._load_machine_configs()
+    self._load_machine_assets()
+    self._load_source_media()
     matchedfilescount = 0
 
+    self._analysis = { 
+      'found': [], 
+      'missing': [], 
+      'available': {}, 
+      'unavailable': [], 
+      'misplaced': {}, # Key: expected file path; Value: current/wrong file path
+      'orphaned': [],
+      'duplicated': [],
+      'sounds': {} # Key: sound file name; Value: sound object
+    }
+    
     dupes = self.machine_assets.getDuplicates()
-
+    # First, look through all the files that exist in the mode folders to find orphaned, misplaced, and duplicate
     for idx, filename in enumerate(self.machine_assets.getFiles()):
       filepath = self.machine_assets.getFilePath(filename)
       mode = self.machine_configs.findRequiringMode(filename)
       # If this file is not required by any configs
       if not mode:
-        self._orphanedfiles.append(filepath)
+        self._analysis['orphaned'].append(filepath)
       else:
         expectedpath = "./modes/{}/sounds/{}/{}".format(mode.name, mode.findTrackForSound(filename), filename)
         if filepath != expectedpath:
           self.log.info("{} is in the wrong place. Expected {}".format(filepath, expectedpath))
-          self._misplacedfiles.append((filepath, expectedpath))
+          self._analysis['misplaced'][expectedpath] = filepath
         elif filename in dupes:
           # The expected path is for the ONE mode that legit requires this file
           for dupepath in dupes[filename]:
             if expectedpath != dupepath and not dupepath in self._duplicatefiles:
-              self._duplicatefiles.append(dupepath)
+              self._analysis['duplicated'].append(dupepath)
         else:
           matchedfilescount += 1
           self.log.debug("Matched {} in node {}".format(filename, mode.name))
-    self.log.info("Found {} required files, {} duplicate files, {} misplaced files, and {} orphaned files.\n".format(
-          matchedfilescount, len(self._duplicatefiles), len(self._misplacedfiles), len(self._orphanedfiles)))
-    self.cleanup_machine_assets(writeMode)
 
-  def cleanup_machine_assets(self, writeMode=False):
-    if (len(self._orphanedfiles) > 0):
-      self.log.info("REMOVING ORPHANED FILES:" if writeMode else "ORPHANED FILES TO REMOVE:")
-      for orphan in self._orphanedfiles:
-        self.log.info("- {}".format(orphan))
-        if writeMode:
-          os.remove(orphan)
-    if (len(self._duplicatefiles) > 0):
-      self.log.info("REMOVING DUPLICATE FILES:" if writeMode else "DUPLICATE FILES TO REMOVE:")
-      for orphan in self._duplicatefiles:
-        self.log.info("- {}".format(orphan))
-        if writeMode:
-          os.remove(orphan)
-    if (len(self._misplacedfiles) > 0):
-      self.log.info("MOVING MISPLACED FILES:" if writeMode else "MISPLACED FILES TO MOVE:")
-      for filepath, expectedpath in self._misplacedfiles:
-        self.log.info(" {} -> {}".format(filepath, expectedpath))
-        if writeMode:
-          os.rename(filepath, expectedpath)
-
-  def match_configs_to_source(self, writeMode=False):
-    self._load_configs_for_source()
-    soundCheck = {}
     allconfigs = self.machine_configs.getAllConfigs()
-    counts = { 'found': [], 'missing': [], 'available': [], 'unavailable': [] }
     
     for mode, modesounds in allconfigs.items():
       for track, sounds in modesounds.byTrack().items():
         for sound in sounds:
-          if sound in soundCheck:
+          if sound in self._analysis['sounds']:
             print("ERROR: Sound file '{}'' in mode {} also exists in mode {}".format(
-                  sound, mode, soundCheck[sound]['mode']))
+                  sound, mode, self._analysis['sounds'][sound]['mode']))
             return
-          modepath = "modes/{}/sounds/{}/".format(self.machine_configs.getModeParent(mode), track)
-          gamepath = None
+          modepath = "./modes/{}/sounds/{}/".format(self.machine_configs.getModeParent(mode), track)
+          sourcepath = None
           exists = False
+          expectedpath = "{}{}".format(modepath, sound)
           try:
-            exists = os.stat("{}{}".format(modepath, sound))
-            counts['found'].append(sound)
+            exists = os.stat(expectedpath)
+            self._analysis['found'].append(sound)
           except(FileNotFoundError):
-            counts['missing'].append(sound)
-            try:
-              gamepath = self.source_media.getFilePath(sound)
-              counts['available'].append(sound)
-            except(ValueError):
-              counts['unavailable'].append(sound)
+            # Is this file misplaced? Are we planning on moving it?
+            if expectedpath in self._analysis['misplaced']:
+              pass
+            else:
+              self._analysis['missing'].append(sound)
+              try:
+                sourcepath = self.source_media.getFilePath(sound)
+                self._analysis['available'][expectedpath] = sourcepath
+              except(ValueError):
+                self._analysis['unavailable'].append(sound)
 
-          soundCheck[sound] = { "mode": mode, "modepath": modepath, "gamepath": gamepath, "exists": exists}
-          if mode != self.machine_configs.getModeParent(mode):
-            print(soundCheck[sound])
-    available = len(counts['available'])
+          self._analysis['sounds'][sound] = { "mode": mode, "modepath": modepath, "sourcepath": sourcepath, "exists": exists}
 
-    if writeMode:
-      print("\n{} {} files into modes:".format("Copying" if writeMode else "Simulating copy of", available))
-      print("--------------------------------------------")
+    self.log.info("\nFound {} assets defined across {} config files.".format(len(self._analysis['sounds']), len(allconfigs)))
+    self.log.info(" - {} files accounted for".format(len(self._analysis['found'])))
+    if self._analysis['misplaced']:
+      self.log.info(" - {} misplaced files{}".format(len(self._analysis['misplaced']), " will be moved" if writeMode else ""))
+    if self._analysis['duplicated']:
+      self.log.info(" - {} duplicate files{}".format(len(self._analysis['duplicated']), " will be removed" if writeMode else ""))
+    if self._analysis['orphaned']:
+      self.log.info(" - {} orphaned files{}".format(len(self._analysis['orphaned']), " will be removed" if writeMode else ""))
+    if self._analysis['available']:
+      self.log.info(" - {} missing files available {}".format(len(self._analysis['available']), "and copied" if writeMode else "for copy"))
+      self.log.debug("    : {} -> {}".format(sourcepath, filename) for filename, sourcepath in self._analysis['available'].items())
+    if self._analysis['unavailable']:
+      self.log.info(" - {} files missing and unavailable:".format(len(self._analysis['unavailable'])))
+      for filename in self._analysis['unavailable']:
+        self.log.info("    : {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
+    self.log.info("\n")
+
+  def cleanup_machine_assets(self, writeMode=False):
+    if not self._analysis:
+      self.parse_machine_assets(writeMode=writeMode)
+
+    if self._analysis['orphaned']:
+      self.log.info("REMOVING ORPHANED FILES:" if writeMode else "ORPHANED FILES TO REMOVE:")
+      for orphan in self._analysis['orphaned']:
+        self.log.info("- {}".format(orphan))
+        if writeMode:
+          os.remove(orphan)
+    if self._analysis['duplicated']:
+      self.log.info("REMOVING DUPLICATE FILES:" if writeMode else "DUPLICATE FILES TO REMOVE:")
+      for orphan in self._analysis['duplicated']:
+        self.log.info("- {}".format(orphan))
+        if writeMode:
+          os.remove(orphan)
+    if self._analysis['misplaced']:
+      self.log.info("MOVING MISPLACED FILES:" if writeMode else "MISPLACED FILES TO MOVE:")
+      for expectedpath, filepath in self._analysis['misplaced'].items():
+        self.log.info(" {} -> {}".format(filepath, expectedpath))
+        if writeMode:
+          os.rename(filepath, expectedpath)
+    if self._analysis['available']:
+      self.log.info("COPYING AVAILABLE FILES:" if writeMode else "AVAILABLE FILES TO COPY:")
       original_umask = os.umask(0)
-      for idx, filename in enumerate(counts['available']):
-        src = soundCheck[filename]['gamepath']
-        dst = soundCheck[filename]['modepath']
-        print(" {}/{}: {} -> {}".format(idx+1, available, src, dst))
-        os.makedirs(dst, mode=0o774, exist_ok=True)
-        shutil.copy2(src, dst)
+      for idx, availitem in enumerate(self._analysis['available'].items()):
+        dst = availitem[0]
+        src = availitem[1]
+        self.log.info(" {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
+        # Ensure the target directory exists
+        if writeMode:
+          os.makedirs(dst.rsplit("/", 1)[0], mode=0o664, exist_ok=True)
+          shutil.copy2(src, dst)
       os.umask(original_umask)
 
-    self.log.info("Found {} assets defined across {} config files.".format(len(soundCheck), len(allconfigs)))
-    self.log.info(" - {} files accounted for".format(len(counts['found'])))
-    self.log.info(" - {} missing files available {}".format(available, "and copied" if writeMode else "for copy"))
-    self.log.debug("    : {} -> {}".format(
-                   ("/").join(soundCheck[filename]['gamepath'].split("/")[-2:]), soundCheck[filename]['modepath'])
-                   for filename in counts['available'])
-    if (len(counts['unavailable']) > 0):
-      self.log.info(" - {} files missing and unavailable:".format(len(counts['unavailable'])))
-      for filename in counts['unavailable']:
-        self.log.info("    : {} ({})".format(filename, soundCheck[filename]['mode']))
-
+    # Any previous analysis is no longer valid
+    self._analysis = None
+    self.log.info("\n Machine cleanup {} complete!\n".format("changes" if writeMode else "simulation"))
 
 class RequiredSounds(object):
   def __init__(self):
@@ -244,7 +266,7 @@ class GameSounds(object):
   def getFilePath(self, filename):
     """Return the path of the first occurance of a filename"""
     idx = self._soundfiles.index(filename)
-    return "{}/{}".format(self._soundpaths[idx], self._soundfiles[idx])
+    return "{}/{}".format(self._soundpaths[idx], filename)
 
   def getDuplicates(self):
     dupes = {}
@@ -345,18 +367,23 @@ MPF Sound Asset Manager
 ===============================
 
   1. Analyze machine and audio
+  
   2. Copy & prune assets
+  
   3. Set media source folder
-  0. Exit this program
+  
+  4. Refresh configs and files
 
+  0. Exit this program
 """.format(os.getcwd(), soundManager.source_path))
     selection = input(">> ")
     if selection == "1" or selection == "2":
       writeMode = selection == "2"
-      soundManager.parse_machine_assets(writeMode=writeMode)
-      soundManager.match_configs_to_source(writeMode=writeMode)
+      soundManager.cleanup_machine_assets(writeMode=writeMode)
     elif selection == "3":
       soundManager.set_source_path()
+    elif selection == "4":
+      soundManager.refresh()
     elif selection == "0" or not selection:
       running = False
 
@@ -382,7 +409,7 @@ def main():
       soundManager.parse_machine_assets(writeMode=writeMode)
       return
     elif args[0] == "copy":
-      soundManager.match_configs_to_source(writeMode=writeMode)
+      soundManager.cleanup_machine_assets(writeMode=writeMode)
       return
 
 
