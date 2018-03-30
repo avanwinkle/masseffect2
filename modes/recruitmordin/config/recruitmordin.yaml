@@ -270,11 +270,11 @@ sounds:
 
 slide_player:
   mode_recruitmordin_started:
-    instructions_slide:
+    mordin_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  mordin_instructions_slide:
     widgets:
       - type: text
         text: ORBITS BUILD VALUE
@@ -283,7 +283,7 @@ slides:
         y: middle+4
         z: 1
       - type: text
-        text: HIT RAMPS TO TURN ON FANS
+        text: RAMPS TURN ON FANS
         style: dmd_small
         anchor_y: top
         y: middle-4

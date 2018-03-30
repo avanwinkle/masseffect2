@@ -135,14 +135,14 @@ shows:
 
 slide_player:
   mode_recruitgarrus_started:
-    instructions_slide:
+    garrus_instructions_slide:
       expire: 3s
   close_doors_hit_complete:
     doors_closed_slide:
       expire: 2s
 
 slides:
-  instructions_slide:
+  garrus_instructions_slide:
     widgets:
       - type: text
         text: CLOSE 3 SHUTTERS

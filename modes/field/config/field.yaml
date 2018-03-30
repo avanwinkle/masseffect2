@@ -33,12 +33,14 @@ sound_player:
       fade_out: 1s
       mode_end_action: stop
       events_when_stopped: play_galaxy_map
+      priority: 1
   play_galaxy_map:
     music_galaxy_map:
       action: play
       loops: -1 # TODO: integrate with scanning loop
       fade_out: 1s
       mode_end_action: stop
+      priority: 1
 
 sounds:
   music_normandy_walkin_intro:

@@ -145,11 +145,11 @@ shows:
 
 slide_player:
   mode_recruitgrunt_started:
-    instructions_slide:
+    grunt_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  grunt_instructions_slide:
     widgets:
       - type: text
         text: COMPLETE ALL SHOTS

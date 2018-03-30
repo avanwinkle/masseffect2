@@ -1,7 +1,7 @@
 #config_version=5
 #STERN Game of Thrones [Pro Edition]
 hardware:
-  platform: spike, fadecandy
+  platform: spike #, fadecandy
 
 spike:
   port: /dev/tty.usbserial-FTA6MU05
@@ -50,11 +50,10 @@ ball_devices:
     ball_switches: s_lock_1, s_lock_2, s_lock_3
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
-    eject_all_events: game_ended
-    eject_coil_enable_time: 220ms, 210ms, 190ms
+    eject_all_events: game_ended         #200ms is too long! 190 can be too short!
+    eject_coil_enable_time: 220ms, 210ms, 194ms
     eject_timeouts: 3s
     exit_count_delay: 2s
-    auto_fire_on_unexpected_ball: False
     ball_missing_timeouts: 5s
     debug: true
   bd_hold:

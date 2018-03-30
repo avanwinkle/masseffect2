@@ -17,6 +17,7 @@ counters:
     disable_on_complete: false
     reset_on_complete: true
     persist_state: true
+    # TODO: Validate that this counter state persists on a per-player basis
 
 shots:
   n7_advance_shot:

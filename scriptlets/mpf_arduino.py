@@ -5,6 +5,29 @@ import logging
 from mpf.core.scriptlet import Scriptlet
 from mpf.core.utility_functions import Util
 
+TFT_NUMS = {
+  "dropbank": 0,
+  "left_orbit": 0,
+  "kickback": 0,
+  "left_ramp": 0,
+  "right_ramp": 0,
+  "right_orbit": 0,
+  "hitbank": 0
+}
+
+SQUADMATE_TFTS = {
+  "garrus": "left_ramp",
+  "grunt": "left_orbit",
+  "jack": "kickback",
+  "kasumi": "right_ramp",
+  "legion": "kickback",
+  "mordin": "right_orbit",
+  "tali": "right_orbit",
+  "thane": "right_ramp",
+  "samara": "left_ramp",
+  "zaeed": "left_orbit",
+}
+
 class MPFArduino(Scriptlet):
 
   def on_load(self):
@@ -30,9 +53,11 @@ class MPFArduino(Scriptlet):
 
   def _set_squadmate(self, **kwargs):
     self.machine.log.info("Arduino trying to set squadmate from {}".format(kwargs))
-    if kwargs.get("squadmate"):
+    if "squadmate" in kwargs:
+      squadmate = kwargs.get("squadmate")
+      tft_num = TFT_NUMS[SQUADMATE_TFTS[kwargs["squadmate"]]]
       self.machine.clock.loop.create_task(
-        self.send_to_socket("set_squadmate:{squadmate}:{tftnum}".format(**kwargs))
+        self.send_to_socket("set_squadmate:{}:{}".format(squadmate, tft_num))
       )
 
   def _set_timer(self, **kwargs):

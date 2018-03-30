@@ -28,6 +28,7 @@ counters:
   jack_rounds_counter:
     starting_count: 0
     count_complete_value: 3
+    enable_events: mode_recruitjack_started
     count_events: jack_hitbank_shot_hit
     multiple_hit_window: 500ms # In case both hitbanks are hit together
     events_when_complete: recruit_jack_complete
@@ -127,8 +128,6 @@ shots:
       - logicblock_jack_rounds_counter_updated{value==2}
     disable_events: jack_shots_three_hit, mode_recruitjack_started
     tags: envshot_left_orbit, envshot_right_orbit
-  # TODO: Find a way to prevent a double-tap of both hitbanks advancing this
-  #       shot (and round counter) twice
   jack_hitbank_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: jack_hitbank_profile
@@ -210,11 +209,11 @@ shows:
 
 slide_player:
   mode_recruitjack_started:
-    instructions_slide:
+    jack_instructions_slide:
       expire: 3s
 
 slides:
-  instructions_slide:
+  jack_instructions_slide:
     widgets:
       - type: text
         text: HIT SHOTS TO LIGHT BANK
@@ -223,7 +222,7 @@ slides:
         y: middle+4
         z: 1
       - type: text
-        text: 3X BANK HITS TO DEFEAT WARDEN
+        text: 3 BANKS TO DEFEAT WARDEN
         style: dmd_small
         anchor_y: top
         y: middle-4
@@ -260,14 +259,14 @@ sound_player:
       max_queue_time: 1s
       priority: 100
   mode_recruitjack_started:
-    music_recruit_jack:
+    music_recruit_jack_1:
       action: play
       loops: -1
     warden_start:
       action: play
-  recruit_jack_complete:
-    music_recruit_jack:
-      action: stop
+  play_music_recruit_jack_2:
+    music_recruit_jack_2:
+      action: play
 
 sound_pools:
   jack_shot_hit_sound:
@@ -276,12 +275,20 @@ sound_pools:
     track: voice
 
 sounds:
-  music_recruit_jack:
+  music_recruit_jack_1:
     file: mus_jack_acq_combat_1.ogg
     track: music
     volume: 0.8
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 43s
+        events: play_music_recruit_jack_2
+  music_recruit_jack_2:
+    file: mus_jack_acq_combat_2.ogg
+    track: music
+    volume: 0.8
+    mode_end_action: stop
   warden_start:
     file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.ogg
     track: voice

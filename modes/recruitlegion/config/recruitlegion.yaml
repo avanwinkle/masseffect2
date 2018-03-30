@@ -29,6 +29,7 @@ event_player:
     - disable_lock_lightshot
     - enable_random_heretic
     - play_opening_heretic_dialogue{device.counters.heretic_counter.value<3}
+    - reset_dropbank
   logicblock_heretic_counter_hit:
     - enable_random_heretic
   timer_recruittimer_tick{ticks<60 and ticks%20==0}:
@@ -38,6 +39,8 @@ event_player:
     - enable_lock_lightshot
   heretic_kickback_shot_hit:
     - recruit_legion_complete
+  heretic_shot_left_hit:
+    - reset_dropbank
 
 random_event_player:
   enable_random_heretic:

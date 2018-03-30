@@ -1,7 +1,7 @@
 #config_version=5
 config:
 - hardware_spike.yaml
-- hardware_fadecandy.yaml
+# - hardware_fadecandy.yaml
 - keyboard.yaml
 # - keyboard_colorpicker.yaml
 
@@ -58,7 +58,7 @@ machine_vars:
 scriptlets:
   - me_squadmates.MESquadmates
   - save_career.SaveCareer
-  - mpf_arduino.MPFArduino
+  # - mpf_arduino.MPFArduino
 
 modes:
   # - colorpicker

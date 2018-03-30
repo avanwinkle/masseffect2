@@ -98,15 +98,19 @@ shot_profiles:
         show: overlord_hackshot_lit_show
         priority: 5 # Higher priority than all-off show, lower priority than all-solid show
         speed: 4
+        sync_ms: 1000
       - name: frozen
         show: overlord_hackshot_frozen_show
         priority: 15 # Higher priority than all-solid show, lower than all-frozen show
+        sync_ms: 1000
   overlord_jackpot_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: overlord_jackpot_show
+        priority: 60 # Higher than all-frozen show
         speed: 4
+        sync_ms: 1000
 
 shot_groups:
   hackshots:
@@ -180,7 +184,7 @@ show_player:
     overlord_hackshots_frozen_show:
       key: overlord_hackshots_show
       action: play
-      priority: 20 # Higher than all other hackshot shows
+      priority: 20 # Higher than all other hackshot shows, lower than jackpot show
   hackshots_hit:
     flasher_show_triple:
       priority: 50

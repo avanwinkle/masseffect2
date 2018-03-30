@@ -377,7 +377,7 @@ sound_player:
   levelup:
     music_mission_success:
       action: play
-      priority: 100
+      priority: 2 # Field music is 1, so this trumps only that
 
 sounds:
   galaxy_whoosh:

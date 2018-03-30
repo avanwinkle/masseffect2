@@ -105,11 +105,15 @@ shot_profiles:
     states:
       - name: lit
         show: flash_color_show
+        sync_ms: 1000
+        speed: 4
   samara_target_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: flash
+        sync_ms: 1000
+        speed: 2
       - name: hit
         show: off
 

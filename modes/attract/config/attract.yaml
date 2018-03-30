@@ -17,7 +17,7 @@ show_player:
       action: play
   start_suicide_main:
     suicide_beat:
-      loop: -1
+      loops: -1
       speed: 1
       action: play
     suicide_flash:
