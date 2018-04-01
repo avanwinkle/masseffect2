@@ -1,15 +1,11 @@
 #config_version=5
 slide_player:
-  single_player_ball_started: base_slide
+  single_player_ball_started: singleplayer_slide
   multi_player_ball_started: multiplayer_slide
-  # If a second player joins during player1's turn, swap base_slide for multiplayer_slide
-  multiplayer_game:
-    base_slide:
-      action: remove
-    multiplayer_slide:
-      action: play
+  # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
+  multiplayer_game: multiplayer_slide
   ball_will_end:
-    base_slide:
+    singleplayer_slide:
       action: remove
     multiplayer_slide:
       action: remove
@@ -17,16 +13,14 @@ slide_player:
 widget_player:
   # First event, before additional players have a chance to enter
   game_started:
-    base_score_widget:
-      slide: base_slide
     base_level_widget:
-      slide: base_slide
+      action: add
+      slide: singleplayer_slide
     base_ball_widget:
-      slide: base_slide
+      action: add
+      slide: singleplayer_slide
   # Player 2 has entered the game, add widgets for player1 and player2
   player_added{num==2}:
-    mp_score_widget:
-      slide: multiplayer_slide
     base_level_widget:
       slide: multiplayer_slide
     base_ball_widget:
@@ -43,7 +37,6 @@ widget_player:
     # Remove the "Level" widget and place the player3 score
     base_level_widget:
       action: remove
-      slide: multiplayer_slide
   # Player 4 has entered the game
   player_added{num==4}:
     mp_score_widget_player_4:
@@ -51,7 +44,6 @@ widget_player:
     # Remove the "Ball" widget and place the player4 score
     base_ball_widget:
       action: remove
-      slide: multiplayer_slide
   # Player Turns: Swap scores -> names when turn starts, revert when turn ends
   player_turn_started{number==1}:
     mp_score_widget_player_1:
@@ -67,43 +59,49 @@ widget_player:
     mp_score_widget_player_2:
       action: remove
     mp_name_widget_player_2:
-      slide: multiplayer_slide
+      action: add
   player_turn_ended{number==2}:
     mp_score_widget_player_2:
-      slide: multiplayer_slide
+      action: add
     mp_name_widget_player_2:
       action: remove
   player_turn_started{number==3}:
     mp_score_widget_player_3:
       action: remove
     mp_name_widget_player_3:
-      slide: multiplayer_slide
+      action: add
   player_turn_ended{number==3}:
     mp_score_widget_player_3:
-      slide: multiplayer_slide
+      action: add
     mp_name_widget_player_3:
       action: remove
   player_turn_started{number==4}:
     mp_score_widget_player_4:
       action: remove
     mp_name_widget_player_4:
-      slide: multiplayer_slide
+      action: add
   player_turn_ended{number==4}:
     mp_score_widget_player_4:
-      slide: multiplayer_slide
+      action: add
     mp_name_widget_player_4:
       action: remove
 
 slides:
-  base_slide: []
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: score_style_singleplayer
+        key: base_score_singleplayer
   # TODO: Move multiplayer slide behavior into a show
-  multiplayer_slide: []
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: score_style_multiplayer
+        key: base_score_multiplayer
 
 widgets:
-  base_score_widget:
-    - type: text
-      text: (score)
-      style: score_style_singleplayer
   base_level_widget:
     - type: text
       text: LVL (player|level)
@@ -112,10 +110,6 @@ widgets:
     - type: text
       text: BALL (ball)
       style: mp_player_4
-  mp_score_widget:
-    - type: text
-      text: (score)
-      style: score_style_multiplayer
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)

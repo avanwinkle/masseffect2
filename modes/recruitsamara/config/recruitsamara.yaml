@@ -36,7 +36,7 @@ counters:
     count_events: samara_shots_hit
 
 event_player:
-  samara_targets_hit:
+  samara_targets_lit_hit:
     # Enable one each of the long lane shots and the kickback/bank shots
     - enable_random_shotshot
     - enable_random_bankshot
@@ -106,14 +106,14 @@ shot_profiles:
       - name: lit
         show: flash_color_show
         sync_ms: 1000
-        speed: 4
+        speed: 8
   samara_target_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: flash
         sync_ms: 1000
-        speed: 2
+        speed: 4
       - name: hit
         show: off
 

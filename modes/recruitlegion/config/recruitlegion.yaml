@@ -59,7 +59,7 @@ counters:
   heretic_counter:
     starting_count: 0
     count_complete_value: 3
-    persist_state: true
+    persist_state: false
     reset_on_complete: false
     disable_on_complete: false
     count_events: heretic_shots_lit_hit

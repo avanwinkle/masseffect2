@@ -24,6 +24,10 @@ event_player:
   # When a squadmate moves from "shot" to "lit", re-evaluate the shots
   recruit_lit: enable_recruit_shots
 
+scoring:
+  recruit_advance:
+    score: 500
+
 shot_profiles:
   recruit_shot_profile:
     show_when_disabled: false

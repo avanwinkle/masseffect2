@@ -198,6 +198,7 @@ widget_player:
   mineral_shot_iridium_hit:
     mineral_highlight:
       action: update
+      key: mineral_highlight_iridium
       slide: minerals_slide
       widget_settings:
         expire: 200ms
@@ -205,6 +206,7 @@ widget_player:
   mineral_shot_palladium_hit:
     mineral_highlight:
       action: update
+      key: mineral_highlight_palladium
       slide: minerals_slide
       widget_settings:
         expire: 200ms
@@ -212,6 +214,7 @@ widget_player:
   mineral_shot_platinum_hit:
     mineral_highlight:
       action: update
+      key: mineral_highlight_platinum
       slide: minerals_slide
       widget_settings:
         expire: 200ms

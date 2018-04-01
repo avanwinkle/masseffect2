@@ -110,7 +110,10 @@ widget_player:
     recruitwidget_mission:
       action: update
       slide: recruitslide
-  player_temp_hurryup_value:
+  # Adding players triggers their variables to be set, which can show an extra "0"
+  # on the base slide. Check player number to prevent this.
+  # TODO: Move all recruitslide logic out of global and into recruit missions?
+  player_temp_hurryup_value{player_num==current_player.number}:
     recruitwidget_score:
       action: update
       slide: recruitslide
