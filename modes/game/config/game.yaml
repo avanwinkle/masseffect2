@@ -60,9 +60,11 @@ widget_player:
       action: remove
     mp_name_widget_player_2:
       action: add
+      slide: multiplayer_slide
   player_turn_ended{number==2}:
     mp_score_widget_player_2:
       action: add
+      slide: multiplayer_slide
     mp_name_widget_player_2:
       action: remove
   player_turn_started{number==3}:
@@ -70,9 +72,11 @@ widget_player:
       action: remove
     mp_name_widget_player_3:
       action: add
+      slide: multiplayer_slide
   player_turn_ended{number==3}:
     mp_score_widget_player_3:
       action: add
+      slide: multiplayer_slide
     mp_name_widget_player_3:
       action: remove
   player_turn_started{number==4}:
@@ -80,9 +84,11 @@ widget_player:
       action: remove
     mp_name_widget_player_4:
       action: add
+      slide: multiplayer_slide
   player_turn_ended{number==4}:
     mp_score_widget_player_4:
       action: add
+      slide: multiplayer_slide
     mp_name_widget_player_4:
       action: remove
 
