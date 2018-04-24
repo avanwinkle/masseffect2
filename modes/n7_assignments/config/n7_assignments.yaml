@@ -60,17 +60,17 @@ random_event_player:
       - start_n7_lost_operative
       - start_n7_msv_strontium_mule
 
-scoring:
+variable_player:
   mode_n7_assignments_started:
     temp_build_value:
       action: set
       # Max value is 12000 plus 25% per mission completed
-      score: 12000 * (1 + (0.25 * current_player.assignments_completed))
+      int: 12000 * (1 + (0.25 * current_player.assignments_completed))
   timer_n7timer_tick:
     temp_build_value:
       action: add
       # Each tick is 1/2s, so burn 1/60th (200 + 25%) each time
-      score: (1 + (0.25 * current_player.assignments_completed)) * -200
+      int: (1 + (0.25 * current_player.assignments_completed)) * -200
   n7_assignment_shot_hit:
     score: current_player.temp_build_value
     assignments_completed: 1

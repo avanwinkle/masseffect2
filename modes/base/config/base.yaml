@@ -150,7 +150,7 @@ ball_saves:
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
-scoring:
+variable_player:
   levelup:
     level: 1
   recruit_success:
@@ -163,7 +163,7 @@ scoring:
   player_available_missions{value>0}:
     bypass_missionselect:
       action: set
-      score: 0
+      int: 0
 
 shots:
 # These "core" shots for the main shots

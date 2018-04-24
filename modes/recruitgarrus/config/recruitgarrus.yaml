@@ -42,7 +42,7 @@ counters:
     reset_on_complete: false
 
 #####
-# GARRUS SCORING:
+# GARRUS variable_player:
 #   The hurryup starts at 12,000 and ticks down 180/s
 #   Closing a door adds the time value of the hurryup (not the built value)
 #   Close all 3 doors to light the upstairs shot
@@ -52,15 +52,15 @@ counters:
 # An alternative approach would be to have a point-per-second value and ,on
 # door close, add timer_remaining_ticks * per_second_value to the hurryup.
 #####
-scoring:
+variable_player:
   mode_recruitgarrus_started:
     temp_hurryup_value:
       action: set
-      score: 12000
+      int: 12000
     # Multiplier is the _original_ hurryup value
     temp_multiplier:
       action: set
-      score: 12000
+      int: 12000
   timer_recruittimer_tick:
     temp_hurryup_value: -180
     temp_multiplier: -180

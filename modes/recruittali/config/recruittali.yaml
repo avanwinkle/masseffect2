@@ -40,17 +40,17 @@ counters:
     persist_state: true
 
 #####
-# TALI SCORING:
+# TALI variable_player:
 #    Hurryup starts at 6,000
 #    Hit the colossus shot to add (100 * timer_ticks_remaining) to the hurryup
 #    Hit the colossus shot 6x to collect the hurryup and complete the mission
 #    Progress is not saved
 #####
-scoring:
+variable_player:
   mode_recruittali_started:
     temp_hurryup_value:
       action: set
-      score: 6000
+      int: 6000
   mode_recruittali_will_stop:
     geth_colossus_state: 1  # Increment the state by 1 for "reparing itself"
   timer_recruittimer_tick:
@@ -59,10 +59,10 @@ scoring:
     temp_hurryup_value: current_player.recruitbase_recruittimer_tick * 100
     temp_multiplier:
       action: set
-      score: current_player.recruitbase_recruittimer_tick
+      int: current_player.recruitbase_recruittimer_tick
     geth_colossus_state:
       action: set
-      score: value
+      int: value
   geth_target_shot_hit:
     score: 150
   recruit_tali_complete:

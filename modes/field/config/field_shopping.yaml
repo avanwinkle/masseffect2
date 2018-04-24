@@ -207,6 +207,6 @@ sounds:
     file: SFXGame.846.ogg
     track: sfx
 
-scoring:
+variable_player:
   all_storetargets_hit:
     credits: 1000

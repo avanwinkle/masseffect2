@@ -8,7 +8,7 @@
 # to it.
 #####
 
-scoring:
+variable_player:
   collect_upgrade_shot_hit:
     upgrades_researched: 1
     score: 4000 * (1 + 0.25 * current_player.upgrades_researched)

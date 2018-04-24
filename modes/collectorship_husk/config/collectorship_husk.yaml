@@ -30,17 +30,17 @@ random_event_player:
       - enable_husk_right_orbit
       - enable_husk_kickback
 
-scoring:
+variable_player:
   mode_collectorship_husk_started:
     temp_build_value: # track the total accumulated value for the praetorian phase
       action: set
-      score: 0
+      int: 0
     temp_hurryup_value:
       action: set
-      score: 0
+      int: 0
     temp_multiplier: # track whether a shot has been enabled
       action: set
-      score: 0
+      int: 0
   mode_collectorship_husk_will_stop:
     temp_build_value: current_player.temp_hurryup_value # cash out any uncollected value too!
   husk_build_shot_hit:
@@ -51,10 +51,10 @@ scoring:
     temp_build_value: current_player.temp_hurryup_value
     temp_hurryup_value:
       action: set
-      score: 0
+      int: 0
     temp_multiplier:
       action: set
-      score: 0
+      int: 0
 
 shot_groups:
   husk_collect_shot:

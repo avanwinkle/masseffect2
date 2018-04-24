@@ -81,13 +81,13 @@ counters:
     reset_events: mode_collectorship_praetorian_started
 
 # For scoring, the temp_hurryup_value carried over from husks is our base
-scoring:
+variable_player:
   # Add a little for each shot hit
   praetorian_shot_hit:
     score: 1000 + (current_player.temp_build_value * 0.25)
     temp_multiplier:
       action: set
-      score: 0
+      int: 0
   # Add a bunch for defeating the praetorian
   praetorian_hits_counter_complete:
     score: 4000 + (current_player.temp_build_value * 10)
@@ -95,11 +95,11 @@ scoring:
   mode_collectorship_praetorian_started:
     temp_multiplier:
       action: set
-      score: 0
+      int: 0
   timer_praetoriantimer_complete:
     temp_multiplier:
       action: add
-      score: 1
+      int: 1
 
 shot_groups:
   praetorian_shot:

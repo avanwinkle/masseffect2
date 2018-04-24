@@ -34,14 +34,14 @@ counters:
       - achievement_hagalaz_state_enabled
       - achievement_shadowbroker_state_enabled
 
-scoring:
+variable_player:
   drop_target_bank_dropbank_down:
     intel: 1
   # Track the value of this counter as a player variable (for saved careers)
   logicblock_sbdrops_counter_hit:
     counter_sbdrops_counter:
       action: set
-      score: device.counters.sbdrops_counter.value
+      int: device.counters.sbdrops_counter.value
 
 # shot_groups:
 #   sbdroptarget_group:

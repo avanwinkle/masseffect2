@@ -12,7 +12,7 @@
 # After each ball, a bonus is awarded for the total minerals collected.
 #####
 
-scoring:
+variable_player:
   planet_shots_hit_complete:
     planets: 1
     score: 200

@@ -24,7 +24,7 @@
 # There is a lot of logic in recruitbase, so let's break it up into files
 #####
 config:
-  - recruitscoring.yaml  # Everything in the scoring: section
+  - recruitscoring.yaml  # Everything in the variable_player: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
 

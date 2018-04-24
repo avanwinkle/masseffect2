@@ -38,7 +38,7 @@ counters:
     persist_state: true
 
 #####
-# JACK SCORING:
+# JACK variable_player:
 #    Hurryup starts at 10,000
 #    Hit the round shot to stop the hurryup value depletion
 #    Hit the hitbank shot to collect the hurryup value and start another round
@@ -46,34 +46,34 @@ counters:
 #    3 rounds completes the mission
 #    Progress is saved after each round
 #####
-scoring:
+variable_player:
   mode_recruitjack_started:
     temp_hurryup_value:
       action: set
-      score: 10000
+      int: 10000
     # Store the multiplier as the "base" hurryup value to tick off 1/60th of it
     temp_multiplier:
       action: set
-      score: 10000
+      int: 10000
   timer_recruittimer_tick{current_player.temp_multiplier>0}:
     temp_hurryup_value: -1 * current_player.temp_multiplier / 600 * 10
   # Store the build value as the value of the hurry-up at the time it's hit
   jack_hurryup_shots_hit:
     temp_build_value:
       action: set
-      score: current_player.temp_hurryup_value
+      int: current_player.temp_hurryup_value
     temp_multiplier:
       action: set
-      score: 0
+      int: 0
   # Capture the build value and add it to the new hurryup
   jack_hitbank_shot_hit:
     score: current_player.temp_build_value
     temp_hurryup_value:
       action: set
-      score: current_player.temp_build_value * 2
+      int: current_player.temp_build_value * 2
     temp_multiplier:
       action: set
-      score: current_player.temp_build_value * 2
+      int: current_player.temp_build_value * 2
 
 shot_profiles:
   jack_shots_one_profile:

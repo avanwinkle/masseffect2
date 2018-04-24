@@ -34,7 +34,6 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 3s
     confirm_eject_type: target # default
-    tags: ball_add_live
     entrance_count_delay: 0
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam

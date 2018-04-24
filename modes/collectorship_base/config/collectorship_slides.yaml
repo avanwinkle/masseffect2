@@ -1,5 +1,5 @@
 #config_version=5
-scoring:
+variable_player:
   mode_collectorship_ambush_will_start:
     last_mission:
       action: set

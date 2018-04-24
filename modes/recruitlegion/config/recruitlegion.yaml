@@ -73,17 +73,17 @@ counters:
 #   adds a build value of hurryup times 10x num. of shots hit
 #   Completing the mode awards the built value
 #####
-scoring:
+variable_player:
   mode_recruitlegion_started:
     temp_multiplier:
       action: set
-      score: 1
+      int: 1
     temp_build_value:
       action: set
-      score: 1000
+      int: 1000
     temp_hurryup_value:
       action: set
-      score: 600
+      int: 600
   logicblock_heretic_counter_hit:
     temp_multiplier: 1
   timer_recruittimer_tick:

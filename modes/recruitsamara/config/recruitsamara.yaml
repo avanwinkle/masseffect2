@@ -60,7 +60,7 @@ random_event_player:
       - enable_kickback_shot
 
 #####
-# SAMARA SCORING:
+# SAMARA variable_player:
 #    Hurryup starts at 6,000 with a 1x multiplier
 #    Hit a standup target to add 200
 #    Hit a lit standup target to increase multiplier by 0.25x
@@ -70,14 +70,14 @@ random_event_player:
 #
 # TODO: This mode has only been mocked out, not thoroughly tested
 #####
-scoring:
+variable_player:
   mode_recruitsamara_started:
     temp_build_value:
       action: set
-      score: 0
+      int: 0
     temp_hurryup_value:
       action: set
-      score: 6000
+      int: 6000
     temp_multiplier:
       action: set
       float: 0.75
@@ -92,7 +92,7 @@ scoring:
     # which means the amount that will actually be collected
     temp_build_value:
       action: set
-      score: (current_player.temp_hurryup_value * current_player.temp_multiplier)
+      int: (current_player.temp_hurryup_value * current_player.temp_multiplier)
     temp_hurryup_value: current_player.temp_hurryup_value * current_player.temp_multiplier
   standuptarget_active:
     temp_hurryup_value: 200

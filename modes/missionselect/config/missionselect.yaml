@@ -187,10 +187,10 @@ slides:
         anchor_y: bottom
         y: bottom+45%
 
-scoring:
+variable_player:
   mode_missionselect_started:
     missionselect_init:
       action: set
-      score: 0
+      int: 0
   slide_missionselect_intro_slide_active:
     missionselect_init: 1

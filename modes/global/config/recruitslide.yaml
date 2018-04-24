@@ -103,7 +103,7 @@ widget_player:
     recruitwidget_mission:
       action: add
       slide: recruitslide
-    recruitwidget_score:
+    recruitwidget_int:
       action: add
       slide: recruitslide
   update_recruitmission:
@@ -114,7 +114,7 @@ widget_player:
   # on the base slide. Check player number to prevent this.
   # TODO: Move all recruitslide logic out of global and into recruit missions?
   player_temp_hurryup_value{player_num==current_player.number}:
-    recruitwidget_score:
+    recruitwidget_int:
       action: update
       slide: recruitslide
   timer_recruittimer_started:
@@ -128,7 +128,7 @@ widget_player:
   recruit_mission_ended:
     recruitwidget_mission:
       action: remove
-    recruitwidget_score:
+    recruitwidget_int:
       action: remove
 
 widgets:
@@ -141,7 +141,7 @@ widgets:
       anchor_y: top
       x: 2
       y: top-4
-  recruitwidget_score:
+  recruitwidget_int:
     - type: text
       text: (player|temp_hurryup_value)
       number_grouping: true

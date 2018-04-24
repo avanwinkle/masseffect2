@@ -72,18 +72,18 @@ event_player:
   logicblock_jackpots_hit_counter_hit{count==3}:
     - levelup
 
-scoring:
+variable_player:
   reset_hackshots:
     temp_build_value:
       action: set
-      score: 0
+      int: 0
     temp_multiplier:
       action: set
-      score: 30
+      int: 30
   timer_overlord_timer_tick:
     temp_multiplier:
       action: set
-      score: ticks
+      int: ticks
   hackshots_lit_hit:
     score: 500
     temp_build_value: 100 * current_player.temp_multiplier

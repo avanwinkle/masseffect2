@@ -39,21 +39,21 @@ counters:
     count_events: fan_left_lit_hit, fan_right_lit_hit
 
 #####
-# MORDIN SCORING:
+# MORDIN variable_player:
 #    Each hit to the spinner adds 200 to the "base" value
 #    Each hit to the cure shot adds 1x to the multiplier
 #    Hit both fans to collect (base * multiplier) and complete the mission
 #    Progress is not saved
 #####
-scoring:
+variable_player:
   # temp_build_value is the accumulated spinner value, temp_multiplier is the cure hits
   mode_recruitmordin_started:
     temp_multiplier:
       action: set
-      score: 1
+      int: 1
     temp_build_value:
       action: set
-      score: 200
+      int: 200
   spinner_hit:
     temp_build_value: 200
   cure_shot_hit:
@@ -61,11 +61,11 @@ scoring:
   player_temp_build_value:
     temp_hurryup_value:
       action: set
-      score: value * current_player.temp_multiplier
+      int: value * current_player.temp_multiplier
   player_temp_multiplier:
     temp_hurryup_value:
       action: set
-      score: current_player.temp_build_value * value
+      int: current_player.temp_build_value * value
   recruit_mordin_complete:
     score: current_player.temp_hurryup_value
 

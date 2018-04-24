@@ -52,11 +52,11 @@ timers:
       - event: harbinger_shot_hot_hit
         action: restart
 
-scoring:
+variable_player:
   mode_harbinger_started:
     harbinger_multiplier:
       action: set
-      score: 1
+      int: 1
   harbinger_shot_hot_hit:
     harbinger_multiplier: 1
   harbinger_shot_runout:
@@ -64,7 +64,7 @@ scoring:
   mode_harbinger_will_stop:
     harbinger_multiplier:
       action: set
-      score: 1
+      int: 1
 
 shot_profiles:
   harbinger_profile:

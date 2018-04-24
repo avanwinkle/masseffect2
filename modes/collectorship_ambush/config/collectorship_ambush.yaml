@@ -23,16 +23,16 @@ event_player:
   ship_shots_lit_hit{game.balls_in_play<4}: collectorship_add_ball
   collectorship_ambush_complete: stop_mode_collectorship_ambush
 
-scoring:
+variable_player:
   mode_collectorship_ambush_started:
     temp_hurryup_value:
       action: set
-      score: 12000
+      int: 12000
   ship_shots_ship_shot_profile_lit_hit:
     score: current_player.temp_hurryup_value
     temp_hurryup_value:
      action: set
-     score: 12000
+     int: 12000
   timer_ambushtimer_tick:
     temp_hurryup_value: -500
 

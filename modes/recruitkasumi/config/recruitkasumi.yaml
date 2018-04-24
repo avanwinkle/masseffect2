@@ -53,7 +53,7 @@ event_player:
     - recruit_kasumi_complete
 
 #####
-# KASUMI SCORING:
+# KASUMI variable_player:
 #    Hurryup starts at 8,000
 #    Hit any unalarmed shot to collect the hurryup value
 #    New hurryup is 8,000 plus previously-collected value (resets on restart)
@@ -61,24 +61,24 @@ event_player:
 #    4 unalarmed shots completes the mission
 #    Score is collected after each shot
 #####
-scoring:
+variable_player:
   mode_recruitkasumi_started:
     temp_hurryup_value:
       action: set
-      score: 8000
+      int: 8000
     temp_multiplier:
       action: set
-      score: 8000 / 59
+      int: 8000 / 59
   timer_recruittimer_tick{current_player.temp_multiplier>0}:
     temp_hurryup_value: -1 * current_player.temp_multiplier
   logicblock_kasumi_shots_counter_hit:
     score: current_player.temp_hurryup_value
     temp_hurryup_value:
       action: set
-      score: current_player.temp_hurryup_value + 8000
+      int: current_player.temp_hurryup_value + 8000
     temp_multiplier:
       action: set
-      score: (current_player.temp_hurryup_value + 8000) / 59
+      int: (current_player.temp_hurryup_value + 8000) / 59
 
 shot_groups:
   kasumi_shots:

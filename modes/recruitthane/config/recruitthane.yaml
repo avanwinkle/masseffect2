@@ -41,7 +41,7 @@ counters:
     reset_events: mode_recruitthane_started
 
 #####
-# THANE SCORING:
+# THANE variable_player:
 #    Build value starts at 0
 #    Hit either tower ascent shot to add (10,000 points * ascent_shots_hit)
 #    Exponential growth! Maybe this should be mitigated or depleted over time?
@@ -51,11 +51,11 @@ counters:
 #      before the timer runs out.. no maximum score for this mission?
 #    Progress is not saved
 #####
-scoring:
+variable_player:
   mode_recruitthane_started:
     temp_build_value:
       action: set
-      score: 0
+      int: 0
   recruit_thane_complete:
     score: current_player.temp_build_value
   tower_ascent_shot_hit:
