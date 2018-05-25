@@ -559,7 +559,7 @@ coils:
     # default_recycle: true
   c_slingshot_right:
     number: 8-4
-    default_pulse_ms: 12
+    default_pulse_ms: 15
     # default_recycle: true
   c_dropbank_reset:
     number: 8-2

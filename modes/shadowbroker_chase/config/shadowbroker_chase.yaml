@@ -45,7 +45,7 @@ counters:
     starting_count: 0
     count_complete_value: 5
     direction: up
-    reset_events: mode_shadowbroker_chase_started
+    # reset_events: mode_shadowbroker_chase_started
     events_when_complete: shadowbroker_chase_complete
     count_events: sbchase_shots_lit_hit
 
@@ -54,11 +54,17 @@ light_player:
     gi:
       color: 444444
 
+variable_player:
+  mode_shadowbroker_chase_will_stop:
+    sbchase_counter: 1
+  sbchase_shots_lit_hit:
+    sbchase_counter: -1
+
 shot_groups:
   sbchase_shots:
     shots: sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_left_ramp, sbchase_kickback
-    rotate_right_events: logicblock_sbchase_counter_hit
-    reset_events: mode_shadowbroker_chase_will_stop
+    rotate_right_events: sbchase_shots_lit_hit
+    rotate_left_events: mode_shadowbroker_chase_will_stop
 
 shot_profiles:
   chaseprofile:
@@ -80,7 +86,7 @@ shots:
       flasher: l_flash_left_ramp
     tags: envshot_left_ramp
   sbchase_left_orbit:
-    advance_events: mode_shadowbroker_chase_started
+    advance_events: mode_shadowbroker_chase_started{current_player.sbchase_counter==5}
     hit_events: sh_left_orbit_hit
     profile: chaseprofile
     show_tokens:
@@ -150,11 +156,18 @@ slides:
           show_slide:                # animation trigger event
             - property: opacity      # name of the widget property we're animating
               value: 1               # target value of that property for this step
-              duration: .75s          # duration for this step (how long it takes to get there)
+              duration: 1.5s          # duration for this step (how long it takes to get there)
             - property: opacity      # second step in the animation (starts with a hyphen)
               value: 0.2
-              duration: .75s
+              duration: 1.5s
               repeat: true
+      - type: text
+        text: (player|sbchase_counter)
+        style: dmd_small
+        anchor_x: right
+        anchor_y: bottom
+        x: right-2
+        y: 2
 
 sound_player:
   mode_shadowbroker_chase_started:
@@ -171,7 +184,7 @@ sound_player:
     car_takeoff:
       action: play
       volume: 0.1
-  logicblock_sbchase_counter_hit{remaining>0}: chase_shot_hit_sound
+  player_sbchase_counter{value>0}: chase_shot_hit_sound
   sbchase_shots_off_hit:
     liara_sound_hurry:
       action: play
@@ -378,7 +391,7 @@ sounds:
 
 timers:
   sbchase_timer:
-    start_value: 60
+    start_value: 40
     end_value: 0
     start_running: true
     tick_interval: 1s

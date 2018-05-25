@@ -16,22 +16,32 @@ event_player:
     - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}
     # Complete the dropbank after chase to re-enable vasir combat
     # Complete the dropbank after hagalaz to re-enable boss combat
-    - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.shadowbroker.state=="enabled"}
+    - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
     # Complete the dropbank after boss is defeated for extra prizes!
     - award_shadowbroker_prize{device.achievements.shadowbroker.state=="completed"}
-  # If the mode is restarted and vasir or boss is enabled, re-enable the hold
-  mode_field_started:
+  # If the mode is restarted and the hold was enabled before, re-enable the hold
+  mode_field_started{current_player.sbhold_enabled==1}:
     - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
   # ERROR: Hold doesn't work, so use the hold event to fake it holding a ball
   #ball_hold_shadowbroker_hold_held_ball:
-  enable_shadowbroker_hold:
+  sh_kickback_hit{current_player.sbhold_enabled==1}:
     - enter_shadowbroker_modes
     # Get a ball in the ball hold to begin Vasir
-    - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="enabled"}
+    - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped"}
     # Get a ball in the ball hold to begin Boss Combat
-    - start_mode_shadowbroker_boss{device.achievements.shadowbroker.state=="enabled"}
-    - release_shadowbroker_hold|1000ms
-  release_shadowbroker_hold: disable_shadowbroker_hold
+    - start_mode_shadowbroker_boss{device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
+    - disable_shadowbroker_hold
+
+# Use a player variable to mock the hold state of the ball hold
+variable_player:
+  enable_shadowbroker_hold:
+    sbhold_enabled:
+      action: set
+      int: 1
+  disable_shadowbroker_hold:
+    sbhold_enabled:
+      action: set
+      int: 0
 
 show_player:
   mode_field_started{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}:
@@ -48,7 +58,7 @@ show_player:
     shadowbroker_hold_enabled_show:
       action: play
       sync_ms: 1000
-  ball_hold_shadowbroker_hold_held_ball:
+  enter_shadowbroker_modes:
     vasir_intro_cineanim{device.achievements.vasir.state=="enabled"}:
       action: play
     boss_intro_cineanim{device.achievements.shadowbroker.state=="enabled"}:
@@ -62,6 +72,8 @@ show_player:
       sync_ms: 1000
   mode_field_will_stop:
     shadowbroker_lit_show:
+      action: stop
+    shadowbroker_hold_enabled_show:
       action: stop
 
 shows:

@@ -16,7 +16,7 @@ class SaveCareer(Scriptlet):
     self._achievement_handlers = {}
     self.machine.events.add_handler("load_career", self._load_career)
     self.machine.events.add_handler("set_career", self._set_career)
-    self.machine.events.add_handler("ball_will_end", self._save_career)
+    self.machine.events.add_handler("player_turn_will_end", self._save_career)
 
   def _set_career(self, **kwargs):
     if self.machine.game and self.machine.game.player:
@@ -29,7 +29,8 @@ class SaveCareer(Scriptlet):
     self.log.info("Set career to '{}', Args={}".format(self.machine.game.player.career_name, kwargs))
 
   def _save_career(self, **kwargs):
-    player = self.machine.game.player
+    # This is asynchronous so fetch the player from the event, not necessarily the "current" player
+    player = self.machine.game.player_list[kwargs.get("number") - 1]
     if not self._current_careers.get(player.number):
       self.log.debug("Player {} is casual, not saving career".format(
         player.number))

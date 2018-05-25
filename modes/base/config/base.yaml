@@ -15,22 +15,22 @@ achievements:
   chase:
     enable_events: logicblock_sbdrops_counter_hit{count==3}
     start_events: mode_shadowbroker_chase_started
-    stop_events: stop_mode_shadowbroker_chase
+    stop_events: mode_shadowbroker_chase_will_stop
     complete_events: shadowbroker_chase_complete
   vasir:
     enable_events: shadowbroker_chase_complete
     start_events: mode_shadowbroker_vasir_started
-    stop_events: stop_mode_shadowbroker_vasir
+    stop_events: mode_shadowbroker_vasir_will_stop
     complete_events: shadowbroker_vasir_complete
   hagalaz:
     enable_events: logicblock_sbdrops_counter_complete
     start_events: mode_shadowbroker_hagalaz_started
-    stop_events: stop_mode_shadowbroker_hagalaz
+    stop_events: mode_shadowbroker_hagalaz_will_stop
     complete_events: shadowbroker_hagalaz_complete
   shadowbroker:
     enable_events: shadowbroker_hagalaz_complete
     start_events: mode_shadowbroker_boss_started
-    stop_events: stop_mode_shadowbroker_boss
+    stop_events: mode_shadowbroker_boss_will_stop
     complete_events: shadowbroker_boss_complete
   # MULTIBALLS
   overlord:

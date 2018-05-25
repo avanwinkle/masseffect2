@@ -7,7 +7,7 @@ config:
 
 smart_virtual:
   console_log: basic
-  file_log: full
+  file_log: basic
 
 mpf:
   default_pulse_ms: 10
@@ -181,6 +181,10 @@ player_vars:
   reputation:
     initial_value: 0
   counter_sbdrops_counter:
+    initial_value: 0
+  sbchase_counter:
+    initial_value: 5
+  sbhold_enabled:
     initial_value: 0
   squadmates_count:
     initial_value: 2

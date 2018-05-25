@@ -4,8 +4,7 @@ mode_settings:
   hurry_up_delay_ms: 0
   bonus_entries:
     - event: bonus_level
-      score: 400
-      player_score_entry: level
+      score: 600 * (current_player.level - 1)
     - event: bonus_squadmates
       score: 1200 * (current_player.squadmates_count - 2)
     - event: bonus_credits
@@ -19,7 +18,7 @@ mode_settings:
       score: 800
       player_score_entry: intel
     - event: bonus_upgrades
-      score: 750
+      score: 1500
       player_score_entry: upgrades_researched
 
 light_player:
