@@ -82,7 +82,7 @@ show_player:
     flasher_show_triple|6s:
       speed: 6
       show_tokens:
-        flashers: gi
+        flashers: l_gi_lower_playfield
     flasher_show_double|1s:
       speed: 2
       show_tokens:

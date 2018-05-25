@@ -31,9 +31,9 @@ variable_player:
   ship_shots_ship_shot_profile_lit_hit:
     score: current_player.temp_hurryup_value
     temp_hurryup_value:
-     action: set
+     action: add
      int: 12000
-  timer_ambushtimer_tick:
+  timer_ambushtimer_tick{player.temp_hurryup_value > 0}:
     temp_hurryup_value: -500
 
 counters:
@@ -218,7 +218,7 @@ widget_player:
 widgets:
   ambushtimer_remaining_widget:
     - type: text
-      text: (ticks_remaining)
+      text: (player|temp_hurryup_value)
       anchor_x: left
       anchor_y: top
       x: left+2
@@ -226,13 +226,7 @@ widgets:
       font_size: 8
   collectorship_debug:
     - type: text
-      text: "Build Value: (player|ambush_buildvalue)"
-      anchor_x: left
-      anchor_y: bottom
-      x: 10
-      y: 10
-    - type: text
-      text: "Timer: (player|collectorship_ambush_ambushtimer_tick)"
+      text: "Ambush: (player|temp_hurryup_value)"
       anchor_x: left
       anchor_y: bottom
       x: 460

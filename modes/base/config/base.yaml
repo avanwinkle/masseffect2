@@ -288,52 +288,28 @@ shows:
         l_null: (color)
   flasher_show_single:
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): on
+      flashers:
+        (flashers): 120ms
     - duration: 10s
-      lights:
-        (flashers): off
   flasher_show_double:
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): off
+      flashers:
+        (flashers): 120ms
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): off
-    - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): on
+      flashers:
+        (flashers): 120ms
     - duration: 10s
-      lights:
-        (flashers): off
   flasher_show_triple:
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): on
+      flashers:
+        (flashers): 120ms
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): off
+      flashers:
+        (flashers): 120ms
     - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): on
-    - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): off
-    - duration: 200ms
-      duration_function: duration
-      lights:
-        (flashers): on
+      flashers:
+        (flashers): 120ms
     - duration: 10s
-      lights:
-        (flashers): off
   color_on:
     - lights:
         (leds): (color)

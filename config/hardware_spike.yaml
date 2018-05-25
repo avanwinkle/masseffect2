@@ -563,7 +563,7 @@ coils:
     # default_recycle: true
   c_dropbank_reset:
     number: 8-2
-    default_pulse_ms: 1
+    default_pulse_ms: 30
   c_up_post:
     number: 8-7
     default_pulse_ms: 14
