@@ -41,21 +41,38 @@ event_player:
   # Reset the dropbank whenever it is lit, to ensure a fair shot
   player_shot_sbvasir_dropbank{value>0}: reset_dropbank
 
+#####
+# VASIR COMBAT SCORING:
+#   Hurryup starts at 20,000
+#   Barrier (first) shot awards 1x hurryup
+#   Armor (second) shot awards 1.25x hurryup
+#   Health (third) shot awards 1.5x hurryup
+#####
 variable_player:
   mode_shadowbroker_vasir_started:
-    # Use the temp multiplier to track when a shot rotation should advance
-    temp_multiplier:
+    temp_hurryup_value:
+      action: set
+      int: 15000
+    temp_build_value:
       action: set
       int: 0
-  vasir_shot_armor_hit:
-    temp_multiplier: 1
+    temp_multiplier:
+      action: set
+      float: 1.0
   vasir_shot_barrier_hit:
-    temp_multiplier: 1
-  # Before the timer triggers a rotation, zero the multiplier to prevent advancement
-  timer_vasir_timer_complete:
+    temp_build_value: current_player.temp_hurryup_value
+    temp_hurryup_value: current_player.temp_hurryup_value * (temp_multiplier + 0.25)
     temp_multiplier:
-      action: set
-      int: 0
+      float: 0.25
+  # Award the hurryup * multiple but _not_ what was already awarded
+  vasir_shot_armor_hit:
+    temp_hurryup_value: (current_player.temp_hurryup_value - current_player.temp_build_value) * (temp_multiplier + 0.25)
+    temp_multiplier:
+      float: 0.25
+  vasir_shot_health_hit:
+    score: current_player.temp_hurryup_value
+  timer_vasir_timeout_tick:
+    temp_hurryup_value: -250 * current_player.temp_multiplier
 
 counters:
   vasir_hits_counter:
@@ -196,6 +213,13 @@ slides:
               value: 0.5
               duration: .25s
               repeat: true
+      - type: text
+        text: (player|temp_hurryup_value)
+        style: dmd_small
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 2
 
 sound_player:
   mode_shadowbroker_vasir_started:
@@ -325,7 +349,7 @@ timers:
       - event: vasir_shot_armor_hit
         action: restart
   vasir_timeout: # Timer for the mode to fail
-    start_value: 120
+    start_value: 60
     end_value: 0
     tick_interval: 1s
     direction: down

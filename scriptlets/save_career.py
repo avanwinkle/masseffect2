@@ -44,6 +44,12 @@ class SaveCareer(Scriptlet):
     newcareer = {"last_played": datetime.now().timestamp()}
 
     for key, value in player.vars.items():
+      # For achievements, prevent "started" values (in case of hard exit)
+      if key == "achievements":
+        for ach, state in value:
+          if state == "started":
+            self.log.warn(" - Achievement {} in state '{}', changing to 'stopped'".format(ach, state))
+            newcareer[key][ach] = "stopped"
       if key in PLAYER_VARS or key == "achievements" or key.startswith("status_"):
         newcareer[key] = value
 

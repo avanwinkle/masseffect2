@@ -182,7 +182,7 @@ player_vars:
     initial_value: 0
   counter_sbdrops_counter:
     initial_value: 0
-  sbchase_counter:
+  sbchase_hits_remaining:
     initial_value: 5
   sbhold_enabled:
     initial_value: 0
