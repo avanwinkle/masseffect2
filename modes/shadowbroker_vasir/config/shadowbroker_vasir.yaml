@@ -113,6 +113,7 @@ shots:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
     advance_events:
+      - mode_shadowbroker_vasir_started # Start with this shot enabled
       - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_orbit_hit
     profile: vasirprofile
@@ -148,7 +149,6 @@ shots:
       leds: l_dropbank_shield_rgb
   sbvasir_hitbank:
     advance_events:
-      - mode_shadowbroker_vasir_started # Start with this shot enabled (to rotate immediately)
       - player_shot_sbvasir_hitbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: vasirprofile
@@ -311,7 +311,7 @@ sounds:
 
 timers:
   vasir_timer:  # Timer for the shot rotation
-    start_value: 12
+    start_value: 10
     end_value: 0
     tick_interval: 1s
     direction: down

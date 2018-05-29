@@ -42,7 +42,7 @@ achievements:
   collectorship:
     enable_events: enable_collectorship
     start_events: mode_collectorship_base_started
-    stop_events: mode_collectorship_base_stopped
+    stop_events: mode_collectorship_base_will_stop
     complete_events:
       - collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
       # - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
@@ -52,12 +52,12 @@ achievements:
   collectorattack:
     enable_events: enable_collectorattack
     start_events: mode_collectorattack_started
-    complete_events: mode_collectorattack_stopped # Only played once, completed after playing
+    complete_events: mode_collectorattack_will_stop # Only played once, completed after playing
   # SUICIDE MISSION
   suicidemission:
     enable_events: enable_suicidemission
     start_events: mode_suicidemission_base_started
-    stop_events: mode_suicidemission_base_stopped
+    stop_events: mode_suicidemission_base_will_stop
     complete_events: suicidemission_complete
 
 event_player:

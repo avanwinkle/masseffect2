@@ -36,6 +36,7 @@ event_player:
     - praetorian_attack_one
     - praetorian_attack_two|800ms
     - praetorian_attack_three|1600ms
+    - flippers_off|1600ms
     - start_base_praetorian_show|2400ms
   timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
@@ -46,7 +47,7 @@ event_player:
     - flippers_on
     - stop_base_praetorian_show
   # Make sure the dropbank is UP when it's enabled!
-  enable_praet_drop: reset_dropbank
+  enable_praet_dropbank: reset_dropbank
 
 random_event_player:
   enable_praet_main_shot:

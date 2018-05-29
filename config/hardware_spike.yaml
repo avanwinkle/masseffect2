@@ -50,7 +50,7 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended         #200ms is too long! 190 can be too short!
-    eject_coil_enable_time: 220ms, 210ms, 194ms
+    eject_coil_enable_time: 230ms, 210ms, 196ms
     eject_timeouts: 3s
     exit_count_delay: 2s
     ball_missing_timeouts: 5s

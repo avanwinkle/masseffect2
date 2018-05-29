@@ -28,13 +28,13 @@ variable_player:
     temp_hurryup_value:
       action: set
       int: 12000
-  ship_shots_ship_shot_profile_lit_hit:
+  ship_shots_lit_hit:
     score: current_player.temp_hurryup_value
     temp_hurryup_value:
      action: add
      int: 12000
-  timer_ambushtimer_tick{player.temp_hurryup_value > 0}:
-    temp_hurryup_value: -500
+  timer_ambushtimer_tick{current_player.temp_hurryup_value > 0}:
+    temp_hurryup_value: -250
 
 counters:
   collector_shots_counter:
@@ -189,45 +189,30 @@ sounds:
     file: en_us_hench_vixen_ss_global_hench_vixen_00257404_m.ogg
     track: voice
 
+widget_player:
+  logicblock_collector_shots_counter_updated:
+    collector_shots_widget:
+      action: update
+
+widgets:
+  collector_shots_widget:
+    - type: text
+      text: "Shots: (value)"
+      style: small
+      anchor_y: bottom
+      anchor_x: right
+      y: 2
+      x: right-2
+
 timers:
   ambushtimer:
-    start_value: 25
-    end_value: 1
+    start_value: 96
+    end_value: 0
     tick_interval: 0.5s
     direction: down
     start_running: yes
     control_events:
       - event: logicblock_collector_shots_counter_hit
-        action: add
-        value: 24
+        action: restart
       - event: stop_mode_collectorship_ambush
         action: stop
-
-widget_player:
-  mode_collectorship_ambush_started:
-    collectorship_debug:
-      target: window
-  ambushtimer_start: ambushtimer_remaining_widget
-  ambushtimer_tick:
-    ambushtimer_remaining_widget:
-      action: update
-  stop_mode_collectorship_ambush:
-    collectorship_debug:
-      action: remove
-
-widgets:
-  ambushtimer_remaining_widget:
-    - type: text
-      text: (player|temp_hurryup_value)
-      anchor_x: left
-      anchor_y: top
-      x: left+2
-      y: top-2
-      font_size: 8
-  collectorship_debug:
-    - type: text
-      text: "Ambush: (player|temp_hurryup_value)"
-      anchor_x: left
-      anchor_y: bottom
-      x: 460
-      y: 10

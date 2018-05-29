@@ -189,7 +189,7 @@ show_player:
     flasher_show_triple:
       priority: 50
       show_tokens:
-        flashers: l_flash_slingshots
+        flashers: l_flash_slingshots, l_flash_pop_bumpers, l_flash_throne
   mode_overlordmultiball_will_stop:
     overlord_hackshots_show:
       action: stop

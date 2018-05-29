@@ -27,43 +27,48 @@ slides:
         style: medium
       - type: text
         text: (score)
-        style: dmd_small
+        style: small
         anchor_x: left
         anchor_y: top
         x: 2
         y: top-2
-      - type: text
-        text: (temp_hurryup_value)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
+
 
 widget_player:
   mode_harbinger_started: harbinger_widget
   stop_mode_harbinger:
     harbinger_widget:
       action: remove
-  timer_ambushtimer_started: timer_widget
-  timer_ambushtimer_tick:
-    timer_widget:
+  player_temp_hurryup_value:
+    cs_hurryup_widget:
       action: update
+  timer_husktimer_started: cs_timer_widget
   timer_husktimer_tick:
-    timer_widget:
+    cs_timer_widget:
       action: update
   timer_praetoriantimer_tick:
-    timer_widget:
+    cs_timer_widget:
       action: update
+  mode_collectorship_ambush_will_start:
+    cs_timer_widget:
+      action: remove
   stop_mode_collectorship_base:
-    timer_widget:
+    cs_timer_widget:
       action: remove
 
 widgets:
-  timer_widget:
+  cs_hurryup_widget:
+    - type: text
+      text: (temp_hurryup_value)
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 2
+  cs_timer_widget:
     - type: text
       text: (ticks_remaining)
-      style: dmd_small
+      style: small
       anchor_x: right
       anchor_y: top
       x: right-2
@@ -71,7 +76,7 @@ widgets:
   harbinger_widget:
     - type: text
       text: (harbinger_multiplier)X
-      style: dmd_small
+      style: small
       anchor_x: right
       anchor_y: bottom
       x: right-2
