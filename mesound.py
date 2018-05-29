@@ -23,12 +23,12 @@ class SoundManager():
     if refresh or not self.machine_configs:
       self.log.info("  Loading config files...")
       self.machine_configs = RequiredSounds()
-  
+
   def _load_source_media(self, refresh=False):
     if refresh or not self.source_media:
       self.log.info("  Loading media files from source folder...")
       self.source_media = GameSounds(self.source_path)
-  
+
   def _load_machine_assets(self, refresh=False):
     if refresh or not self.machine_assets:
       self.log.info("  Loading assets from machine folder...")
@@ -60,7 +60,7 @@ class SoundManager():
           raise FileNotFoundError
       except(FileNotFoundError):
         print("Unable to read media source path.")
-        sourcepath = set_media_path()
+        sourcepath = self.set_source_path()
     try:
       os.stat(sourcepath)
     except(FileNotFoundError):
@@ -76,17 +76,17 @@ class SoundManager():
     self._load_source_media()
     matchedfilescount = 0
 
-    self._analysis = { 
-      'found': [], 
-      'missing': [], 
-      'available': {}, 
-      'unavailable': [], 
+    self._analysis = {
+      'found': [],
+      'missing': [],
+      'available': {},
+      'unavailable': [],
       'misplaced': {}, # Key: expected file path; Value: current/wrong file path
       'orphaned': [],
       'duplicated': [],
       'sounds': {} # Key: sound file name; Value: sound object
     }
-    
+
     dupes = self.machine_assets.getDuplicates()
     # First, look through all the files that exist in the mode folders to find orphaned, misplaced, and duplicate
     for idx, filename in enumerate(self.machine_assets.getFiles()):
@@ -103,14 +103,14 @@ class SoundManager():
         elif filename in dupes:
           # The expected path is for the ONE mode that legit requires this file
           for dupepath in dupes[filename]:
-            if expectedpath != dupepath and not dupepath in self._duplicatefiles:
+            if expectedpath != dupepath and not dupepath in self._analysis['duplicated']:
               self._analysis['duplicated'].append(dupepath)
         else:
           matchedfilescount += 1
           self.log.debug("Matched {} in node {}".format(filename, mode.name))
 
     allconfigs = self.machine_configs.getAllConfigs()
-    
+
     for mode, modesounds in allconfigs.items():
       for track, sounds in modesounds.byTrack().items():
         for sound in sounds:
@@ -311,7 +311,7 @@ class ModeSounds(object):
     # If this sound is in a sound pool with a track, use that
     elif poolTrack:
       trackName = poolTrack
-    # Mass Effect 2 Pinball defaults: 
+    # Mass Effect 2 Pinball defaults:
     elif fileName.startswith('en_us_'):
       trackName = 'voice'
     elif fileName.startswith('mus_'):
@@ -367,11 +367,11 @@ MPF Sound Asset Manager
 ===============================
 
   1. Analyze machine and audio
-  
+
   2. Copy & prune assets
-  
+
   3. Set media source folder
-  
+
   4. Refresh configs and files
 
   0. Exit this program
@@ -393,7 +393,7 @@ def main():
   args = sys.argv[1:]
   verbose = "-v" in args
   writeMode = "-w" in args
-  
+
   soundManager = SoundManager(verbose=verbose)
 
   if not soundManager.source_path:
@@ -417,13 +417,13 @@ def main():
 ---Mission Pinball Audio File Script---
 
 Use this script to copy audio files from your source media folder into the
-corresponding MPF Pinball mode folders. 
+corresponding MPF Pinball mode folders.
 
 For Mass Effect 2 Pinball, requires a data dump folder created by
 Mass Effect 2 Extractor containing source audio folders and ogg files
 (e.g. 'endgm2_longwalk_a_s_int', 'en_us_player_f_endgm2_escape_c_00287372_f.ogg')
 
-For other projects, your mileage may vary. Contact mpf@anthonyvanwinkle.com 
+For other projects, your mileage may vary. Contact mpf@anthonyvanwinkle.com
 with any questions or feedback.
 
 Options:

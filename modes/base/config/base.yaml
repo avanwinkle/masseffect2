@@ -336,7 +336,7 @@ slides:
         font_size: 14
         style: dmd_big
         anchor_y: bottom
-        y: 10
+        y: 12
         z: 100
       - type: rectangle
         height: 32
@@ -391,3 +391,4 @@ widgets:
       style: dmd_small
       anchor_y: bottom
       y: 3
+      z: 12

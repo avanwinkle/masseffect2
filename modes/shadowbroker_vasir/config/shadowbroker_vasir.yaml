@@ -26,7 +26,7 @@ mode:
   priority: 850
 
 event_player:
-  mode_shadowbroker_chase_started:
+  mode_shadowbroker_vasir_started:
     set_environment:
       env: field
   timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
@@ -38,6 +38,30 @@ event_player:
   # Relay some sounds to delay
   vasir_shot_barrier_hit: play_vasir_start_sound|2s
   vasir_shot_armor_hit: play_vasir_start_sound|2s
+  # Reset the dropbank whenever it is lit, to ensure a fair shot
+  player_shot_sbvasir_dropbank{value>0}: reset_dropbank
+
+variable_player:
+  mode_shadowbroker_vasir_started:
+    # Use the temp multiplier to track when a shot rotation should advance
+    temp_multiplier:
+      action: set
+      int: 0
+  vasir_shot_armor_hit:
+    temp_multiplier: 1
+  vasir_shot_barrier_hit:
+    temp_multiplier: 1
+  # Before the timer triggers a rotation, zero the multiplier to prevent advancement
+  timer_vasir_timer_complete:
+    temp_multiplier:
+      action: set
+      int: 0
+
+counters:
+  vasir_hits_counter:
+    starting_count: 1
+    count_events: vasir_shot_barrier_hit, vasir_shot_armor_hit
+    reset_events: mode_shadowbroker_vasir_started
 
 shot_groups:
   vasir_shot:
@@ -62,19 +86,19 @@ shot_profiles:
         priority: 100
       - name: barrier
         show: vasir_barrier_show
-        speed: 4
+        speed: 2
         priority: 10
         show_tokens:
           color: purple
       - name: armor
         show: vasir_armor_show
-        speed: 8
+        speed: 4
         priority: 10
         show_tokens:
           color: yellow
       - name: health
         show: vasir_health_show
-        speed: 12
+        speed: 8
         priority: 10
         show_tokens:
           color: red
@@ -82,57 +106,50 @@ shot_profiles:
 shots:
   sbvasir_left_ramp:
     advance_events:
-      - sbvasir_left_ramp_barrier_hit
-      - sbvasir_left_ramp_armor_hit
+      - player_shot_sbvasir_left_ramp{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_ramp_hit
     profile: vasirprofile
     show_tokens:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
     advance_events:
-      - mode_shadowbroker_vasir_started # Start with this shot enabled
-      - sbvasir_left_orbit_barrier_hit
-      - sbvasir_left_orbit_armor_hit
+      - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_orbit_hit
     profile: vasirprofile
     show_tokens:
       leds: l_left_orbit_shield_rgb
   sbvasir_right_ramp:
     advance_events:
-      - sbvasir_right_ramp_barrier_hit
-      - sbvasir_right_ramp_armor_hit
+      - player_shot_sbvasir_right_ramp{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_right_ramp_hit
     profile: vasirprofile
     show_tokens:
       leds: l_right_ramp_shield_rgb
   sbvasir_right_orbit:
     advance_events:
-      - sbvasir_right_orbit_barrier_hit
-      - sbvasir_right_orbit_armor_hit
+      - player_shot_sbvasir_right_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_right_orbit_hit
     profile: vasirprofile
     show_tokens:
       leds: l_right_orbit_shield_rgb
   sbvasir_kickback:
     advance_events:
-      - sbvasir_kickback_barrier_hit
-      - sbvasir_kickback_armor_hit
+      - player_shot_sbvasir_kickback{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_kickback_hit
     profile: vasirprofile
     show_tokens:
       leds: l_kickback_shield_rgb
   sbvasir_dropbank:
     advance_events:
-      - sbvasir_dropbank_barrier_hit
-      - sbvasir_dropbank_armor_hit
+      - player_shot_sbvasir_dropbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     profile: vasirprofile
     show_tokens:
       leds: l_dropbank_shield_rgb
   sbvasir_hitbank:
     advance_events:
-      - sbvasir_hitbank_barrier_hit
-      - sbvasir_hitbank_armor_hit
+      - mode_shadowbroker_vasir_started # Start with this shot enabled (to rotate immediately)
+      - player_shot_sbvasir_hitbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: vasirprofile
     show_tokens:
@@ -140,24 +157,24 @@ shots:
 
 shows:
   vasir_barrier_show:
-    - time: 0
+    - duration: 2
       lights:
         (leds): purple
-    - time: '+1'
+    - duration: 1
       lights:
         (leds): black
   vasir_armor_show:
-    - time: 0
+    - duration: 2
       lights:
         (leds): yellow
-    - time: '+1'
+    - duration: 1
       lights:
         (leds): black
   vasir_health_show:
-    - time: 0
+    - duration: 2
       lights:
         (leds): red
-    - time: '+1'
+    - duration: 1
       lights:
         (leds): black
 
@@ -187,13 +204,13 @@ sound_player:
       action: play
       start_at: 102s
       fade_out: 2s
-      # fade_in: 2s
+      fade_in: 500ms
       mode_end_action: stop
     vasir_start_sound:
       action: play
     shuttle_land:
       action: play
-      volume: 0.2
+      volume: 0.5
   timer_vasir_timer_complete: vasir_move_sound
   vasir_shot_barrier_hit: vasir_hit_sound
   vasir_shot_armor_hit: vasir_hit_sound
@@ -289,7 +306,7 @@ sounds:
     file: DLC_EXP_Part01_Int.809.ogg
     track: voice
   vasir_damn_it:
-    file: DLC_EXP_Part01_Int.756.ogg
+    file: DLC_EXP_Part01_Int.755.ogg
     track: voice
 
 timers:
