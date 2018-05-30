@@ -11,7 +11,6 @@
 mode:
   start_events: start_mode_field
   stop_events: stop_mode_field
-  events_when_stopped: disable_recruit_shots # Turn off the shows
   priority: 310
 
 event_player:

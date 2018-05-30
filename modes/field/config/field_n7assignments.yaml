@@ -24,7 +24,5 @@ counters:
 shots:
   n7_advance_shot:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: enable_recruit_shots{device.achievements.derelictreaper.state!="enabled"}
-    disable_events: 
-      - disable_recruit_shots
-      - achievement_derelictreaper_state_enabled
+    enable_events: mode_field_started{device.achievements.derelictreaper.state!="enabled"}
+    disable_events: achievement_derelictreaper_state_enabled

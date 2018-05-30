@@ -157,15 +157,14 @@ class LockHandler(Mode):
       self.log.debug(" - Field mode is active and missions are available, not going to bypass lock post")
       do_bypass = False
 
-      # If we aren't locking the ball, start missionselect in a second
-      if not self._logicallockdevice.enabled:
-        mission_delay = 1000
-        # self._post_event('start_mode_missionselect')
       # If we are locking a ball, wait 2.5s for the slide/dialog
-      else:
+      if self._logicallockdevice.enabled:
         mission_delay = 2500
+      # If we aren't locking the ball, start missionselect in a second
+      else:
+        mission_delay = 1000
 
-      self.machine.events.post("flippers_off")
+      # self.machine.events.post("flippers_off") # Moved to missionselect
       self.delay.add(callback=self._post_event, ms=mission_delay,
                      event='start_mode_missionselect')
       return

@@ -30,29 +30,23 @@ COLORS = {
 }
 
 class MESquadmates(Scriptlet):
+  """ 
+  This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
+  a convenient way to automate the event postings over all squadmates without a bunch of copy+paste in the yaml
+  files. 
 
+  Possible extensions of this scriptlet:
+   - Incrementing the status_squadmate player variable
+   - Creating, enabling, disabling recruit lane shots
+   - Creating, playing, stopping recruit lit/complete shows
+   """
   def on_load(self):
     self.log = logging.getLogger("MESquadmates")
     self.log.setLevel('DEBUG')
 
-    # self.machine.events.add_handler("enable_recruit_shots", self._on_enable_shots)
     for mate in SQUADMATES:
       self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
       self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
-
-  def _on_enable_shots(self, **kwargs):
-    # Build a list of lit and completed recruit shots by led
-    recruits_lit = []
-    recruits_complete = []
-    for mate in SQUADMATES:
-      status = self.machine.game.player["status_{}".format(mate)]
-      if status == 3:
-        recruits_lit.append(LEDS[mate])
-      elif status == 4:
-        recruits_complete.append(LEDS[mate])
-
-    self.machine.game.player["recruits_lit"] = ", ".join(recruits_lit) if recruits_lit else "l_null"
-    self.machine.game.player["recruits_complete"] = ", ".join(recruits_complete) if recruits_complete else "l_null"
 
   def _on_hit(self, **kwargs):
     self.log.debug("Received HIT event with kwargs: {}".format(kwargs))
