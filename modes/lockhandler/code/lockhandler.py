@@ -24,7 +24,7 @@ class LockHandler(Mode):
       * Else the device post is held open and the incoming ball flies right through without stopping
 
     TODO: All of this logic is still being prototyped and debugged, so many of the values are
-          hard-coded to correspond to the Overlord multiball lock. When it's stable, these params
+          hard-coded to correspond to the Overlord/Arrival locks. When it's stable, these params
           should be abstracted and/or use events to set the desired mode behavior.
   """
 
@@ -45,18 +45,18 @@ class LockHandler(Mode):
         self._bd_physical_lock = device
     # We need a pointer to the multiball lock device to count virtually locked balls
     for device in self.mode_devices:
-      if device.name == 'overlordlock':
-        self._overlordlock = device
+      if device.name == 'overrivallock':
+        self._overrivallock = device
     # We need a shot that defines whether lock is lit
     try:
-      lockshot = self.machine.shots.overlord_lock_ball_shot
-      self.log.debug("LockHandler is looking for overlord lock shot. " +
+      lockshot = self.machine.shots.overrival_lock_ball_shot
+      self.log.debug("LockHandler is looking for overrival lock shot. " +
         "state: {}, state_name: {}, enabled: {}".format(lockshot.state, lockshot.state_name, lockshot.enabled)
         )
-      if self.machine.shots.overlord_lock_ball_shot.enabled:
-        self._post_event('enable_overlord_lock')
+      if self.machine.shots.overrival_lock_ball_shot.enabled:
+        self._post_event('enable_overrival_lock')
     except KeyError:
-      self.log.debug("LockHandler has no overlord lock shot, locking will be disabled")
+      self.log.debug("LockHandler has no overrival lock shot, locking will be disabled")
 
     self._register_handlers()
 
@@ -84,8 +84,8 @@ class LockHandler(Mode):
     """ Logic for assessing desired behavior when a ball enters the physical ball lock device """
     missions_available = self.machine.modes.field.active and self.player.available_missions > 0
     physical_balls_locked = self._bd_physical_lock.balls
-    virtual_balls_locked = self._overlordlock.locked_balls
-    self._will_lock_ball = self._overlordlock.enabled
+    virtual_balls_locked = self._overrivallock.locked_balls
+    self._will_lock_ball = self._overrivallock.enabled
 
     self._post_event('lockhandler_ball_entered',
                       will_lock_ball=self._will_lock_ball,
@@ -94,7 +94,7 @@ class LockHandler(Mode):
                       virtual_balls_locked=virtual_balls_locked
                       )
 
-    if self._overlordlock.is_virtually_full:
+    if self._overrivallock.is_virtually_full:
       self.log.debug(" - Lock is going to fill the multiball, skip lock handling")
     elif self.player.bypass_missionselect:
       self.log.debug(" - Player has passed on mission selection, skipping mode start")
@@ -114,13 +114,13 @@ class LockHandler(Mode):
     # MULTIBALL AND MISSION
     # If a mission mode is active, bypass the lock if we have 2 balls locked already
     # (i.e. do not allow a ball to lock for a multiball to start)
-    elif not self.machine.modes.field.active and self._overlordlock.locked_balls == 2:
+    elif not self.machine.modes.field.active and self._overrivallock.locked_balls == 2:
       self.log.debug(" - Two balls are locked and field mode isn't active, bypassing lock post")
       self._bypass_lock()
       # Temporarily disable the lock, just in case the bypass post doesn't let a ball out
-      if self._overlordlock.enabled:
-        self._overlordlock.disable()
-        self.delay.add(callback=self._overlordlock.enable, ms=1000,
+      if self._overrivallock.enabled:
+        self._overrivallock.disable()
+        self.delay.add(callback=self._overrivallock.enable, ms=1000,
                      event='start_mode_missionselect')
       return
 
@@ -128,15 +128,17 @@ class LockHandler(Mode):
 
     # LOCK:
     # If the lock shot is enabled, hold onto the ball
-    if self._overlordlock.enabled:
+    if self._overrivallock.enabled:
       self.log.debug(" - Lock is lit, not going to bypass lock post")
       do_bypass = False
+
+      # Pick an event to show a slide, either overlord or arrival
+      slide_evt = "show_arrival_locked_slide" if self.player.achievements.collectorship.state == "completed" else "show_overlord_locked_slide"
       # Show the slide for the upcoming ball while we wait for it to settle into the device
-      self.machine.events.post("show_overlord_locked_slide",
-                               total_balls_locked=self._overlordlock.locked_balls+1)
+      self.machine.events.post(slide_evt, total_balls_locked=self._overrivallock.locked_balls+1)
 
       # If we're about to start a multiball, don't offer missionselect
-      if self._overlordlock.locked_balls == 2:
+      if self._overrivallock.locked_balls == 2:
         return
 
     # HOLD:
@@ -149,7 +151,7 @@ class LockHandler(Mode):
       do_bypass = False
 
       # If we aren't locking the ball, start missionselect in a second
-      if not self._overlordlock.enabled:
+      if not self._overrivallock.enabled:
         mission_delay = 1000
         # self._post_event('start_mode_missionselect')
       # If we are locking a ball, wait 2.5s for the slide/dialog
@@ -173,12 +175,12 @@ class LockHandler(Mode):
 
   def _handle_multiball_start(self, **kwargs):
     """ Handler for when logic determines a multiball mode should begin """
-    self._post_event('start_mode_overlordmultiball')
+    self._post_event('start_mode_overrivalmultiball')
 
   def _register_handlers(self):
     self.add_mode_event_handler('balldevice_bd_lock_ball_entered',
                                 self._handle_ball_enter)
-    self.add_mode_event_handler('multiball_lock_overlordlock_full',
+    self.add_mode_event_handler('multiball_lock_overrivallock_full',
                                 self._handle_multiball_start)
     self.add_mode_event_handler('lockhandler_check_bypass',
                                 self._handle_bypasscheck)

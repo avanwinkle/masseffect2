@@ -24,9 +24,12 @@ mode:
 
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
-  overlord_light_shot_hit{not device.multiball_locks.overlordlock.enabled}: enable_overlord_lock
-  multiball_lock_overlordlock_full: start_mode_overlordmultiball
-  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
+  overrival_light_shot_hit{not device.multiball_locks.overrivallock.enabled}: enable_overrival_lock
+  multiball_lock_overrival_full:
+    - start_mode_overlordmultiball{device.achievements.collectorship.state!="completed"}
+    - start_mode_arrivalmultiball{device.achievements.collectorship.state=="completed"}
+  multiball_overrival_multiball_ended: stop_mode_overlordmultiball
+  multiball_arrival_multiball_ended: stop_mode_arrivalmultiball
 
 queue_relay_player:
   balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active}:
@@ -37,13 +40,15 @@ queue_relay_player:
     wait_for: mode_missionselect_will_stop
 
 multiball_locks:
-  overlordlock:
+  overrivallock:
     balls_to_lock: 3
     balls_to_replace: 2
     lock_devices: bd_lock
-    reset_count_for_current_player_events: multiball_overlord_multiball_ended
-    enable_events: enable_overlord_lock
-    disable_events: multiball_lock_overlordlock_locked_ball
+    reset_count_for_current_player_events:
+      - multiball_overlord_multiball_ended
+      - multiball_arrival_multiball_ended
+    enable_events: enable_overrival_lock
+    disable_events: multiball_lock_overrival_locked_ball
     debug: true
 
 multiballs:
@@ -53,56 +58,65 @@ multiballs:
     replace_balls_in_play: true
     ball_locks: bd_lock
     shoot_again: 10s
-    enable_events: multiball_lock_overlordlock_full
+    enable_events: multiball_lock_overrival_full{device.achievements.collectorship.state!="completed"}
     start_events: mode_overlordmultiball_started
     reset_events: multiball_overlord_multiball_ended
     debug: true
-
+  arrivalmultiball:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+    enable_events: multiball_lock_overrival_full{device.achievements.collectorship.state=="completed"}
+    start_events: mode_overlordmultiball_started
+    reset_events: multiball_arrivalmultiball_ended
+    debug: true
 shots:
-  overlord_lock_ball_shot:
+  overrival_lock_ball_shot:
     switch: s_left_ramp_exit
-    profile: overlord_lock_profile
+    profile: overrival_lock_profile
     enable_events:
       # Before the multiball has been played, any shot to the hitbank will light
-      - overlord_light_shot_hit{device.achievements.overlord.state=="disabled"}
+      - overrival_light_shot_hit{device.achievements.overlord.state=="disabled"}
       # After it's been played, both hitbanks shots must complete to light
-      - overlord_light_shot_lit_complete
-    disable_events: multiball_lock_overlordlock_locked_ball
+      - overrival_light_shot_lit_complete
+    disable_events: multiball_lock_overrival_locked_ball
 
 shot_profiles:
-  overlord_lock_profile:
+  overrival_lock_profile:
     show_when_disabled: false
     states:
       - name: lit
-        show: overlord_lock_lit
+        show: overrival_lock_lit
         sync_ms: 1000
 
 show_player:
   mode_type_wizard_started:
-    overlord_disabled_show:
+    overrival_disabled_show:
       priority: 100
   mode_type_wizard_stopped:
-    overlord_disabled_show:
+    overrival_disabled_show:
       action: stop
   # We don't start the multiball during a mission, so hide the show...
   # ... if a mission starts and 2 balls are locked
-  mode_type_mission_started{device.multiball_locks.overlordlock.locked_balls==2}:
-    overlord_disabled_show:
+  mode_type_mission_started{device.multiball_locks.overrival.locked_balls==2}:
+    overrival_disabled_show:
       priority: 100
   # ... if ball 2 is locked during a mission
-  multiball_lock_overlordlock_locked_ball{total_balls_locked==2 and not mode.field.active}:
-    overlord_disabled_show:
+  multiball_lock_overrival_locked_ball{total_balls_locked==2 and not mode.field.active}:
+    overrival_disabled_show:
       priority: 100
   mode_type_mission_stopped:
-    overlord_disabled_show:
+    overrival_disabled_show:
       action: stop
 
 
 shows:
-  overlord_disabled_show:
+  overrival_disabled_show:
     - lights:
         l_lock_lit: black
-  overlord_lock_lit:
+  overrival_lock_lit:
     - duration: 500ms
       lights:
         l_lock_lit: white

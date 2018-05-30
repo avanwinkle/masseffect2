@@ -1,10 +1,11 @@
 #config_version=5
 
 #####
-# OVERLORD LIGHT MODE
+# OVERLORD & ARRIVAL LIGHT MODE
 #
-# This mode handles the ball lock advancement for the Overlord multiball, using
-# shots and events to light lock, enable devices, and illuminate indicators.
+# This mode handles the ball lock advancement for the Overlord and Arrival
+# multiballs, using shots and events to light lock, enable devices, and
+# illuminate indicators.
 #
 # This is a separate mode to help debug the complex multiball_lock/ball_hold
 # combo logic, but eventually this mode may be integrated with another base
@@ -14,26 +15,33 @@
 event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
-  overlord_light_shot_hit:
-    - play_overlord_hit_sound
-  enable_overlord_lock{mode.field.active}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
+  overrival_lightshot_hit:
+    - play_overlord_hit_sound{device.achivements.collectorship.state!="completed"}
+    - play_arrival_hit_sound{device.achivements.collectorship.state=="completed"}
+  enable_overrival_lock{mode.field.active and device.achivements.collectorship.state!="completed"}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
     - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
+  enable_overrival_lock{mode.field.active and device.achivements.collectorship.state=="completed"}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
+    - play_arrival_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
+    - play_arrival_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
+    - play_arrival_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
 
 shot_groups:
-  overlord_light_shot:
-    shots: light_lock_overlord_top, light_lock_overlord_bottom
+  overrival_lightshot:
+    shots: light_lock_overrival_top, light_lock_overrival_bottom
     enable_events:
-      - enable_lock_lightshot{device.achievements.collectorship.state!="completed"}
+      - enable_lock_lightshot
       - multiball_overlord_multiball_ended
+      - multiball_arrival_multiball_ended
     disable_events:
       - disable_lock_lightshot
       - multiball_overlord_multiball_started
-    reset_events: multiball_lock_overlordlock_locked_ball
+      - multiball_arrival_multiball_ended
+    reset_events: multiball_lock_overrival_locked_ball
 
 shot_profiles:
-  overlord_light_profile:
+  overrival_light_profile:
     show_when_disabled: false
     states:
       - name: unlit
@@ -42,20 +50,20 @@ shot_profiles:
         show: on
 
 shots:
-  light_lock_overlord_top:
+  light_lock_overrival_top:
     switch: s_hitbank_top
-    profile: overlord_light_profile
+    profile: overrival_light_profile
     show_tokens:
       led: l_hitbank_top
-  light_lock_overlord_bottom:
+  light_lock_overrival_bottom:
     switch: s_hitbank_bottom
-    profile: overlord_light_profile
+    profile: overrival_light_profile
     show_tokens:
       led: l_hitbank_bot
 
 show_player:
-  overlord_light_shot_hit:
-    overlord_lock_flash:
+  overrival_light_shot_hit:
+    overrival_lock_flash:
       priority: 100
       loops: 6
       speed: 10
@@ -68,7 +76,7 @@ show_player:
       action: stop
 
 shows:
-  overlord_lock_flash:
+  overrival_lock_flash:
     - time: 0
       lights:
         l_hitbank_bot: white
@@ -79,12 +87,20 @@ shows:
         l_hitbank_top: black
 
 slide_player:
+  # This show event comes from lockhandler.py
   show_overlord_locked_slide:
     overlord_ball_locked_slide:
       expire: 3s
       priority: 600 # Enough to beat recruit timer?
+  show_arrival_locked_slide:
+    arrival_ball_locked_slide:
+      expire: 3s
+      priority: 600
   multiball_overlord_multiball_started:
     overlord_ball_locked_slide_full:
+      expire: 4s
+  multiball_arrival_multiball_started:
+    arrival_ball_locked_slide_full:
       expire: 4s
 
 slides:
@@ -111,6 +127,37 @@ slides:
     widgets:
       - type: text
         text: OVERLORD
+        style: dmd_big
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: MULTIBALL
+        style: dmd_big
+        anchor_y: top
+        y: middle-2
+  arrival_ball_locked_slide:
+    widgets:
+      - type: text
+        text: ARRIVAL
+        style: dmd_small
+        anchor_y: top
+        y: top-2
+        z: 2
+      - type: text
+        text: Ball (total_balls_locked) Locked!
+        style: dmd_small
+        anchor_y: bottom
+        y: 2
+        z: 2
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
+  arrival_ball_locked_slide_full:
+    widgets:
+      - type: text
+        text: ARRIVAL
         style: dmd_big
         anchor_y: bottom
         y: middle+2
@@ -228,40 +275,76 @@ sounds:
 
 widget_player:
   show_overlord_locked_slide{total_balls_locked==1}:
-    station_widget_1:
+    overlord_widget_ball1:
       slide: overlord_ball_locked_slide
-    station_widget_2:
+    overlord_widget_ball2:
       action: remove
-    station_widget_3:
+    overlord_widget_ball3:
       action: remove
   show_overlord_locked_slide{total_balls_locked==2}:
-    station_widget_1:
+    overlord_widget_ball1:
       action: remove
-    station_widget_2:
+    overlord_widget_ball2:
       slide: overlord_ball_locked_slide
-    station_widget_3:
+    overlord_widget_ball3:
       action: remove
   show_overlord_locked_slide{total_balls_locked==3}:
-    station_widget_1:
+    overlord_widget_ball1:
       action: remove
-    station_widget_2:
+    overlord_widget_ball2:
       action: remove
-    station_widget_3:
+    overlord_widget_ball3:
       slide: overlord_ball_locked_slide
+  show_arrival_locked_slide{total_balls_locked==1}:
+    arrival_widget_ball1:
+      slide: arrival_ball_locked_slide
+    arrival_widget_ball2:
+      action: remove
+    arrival_widget_ball3:
+      action: remove
+  show_arrival_locked_slide{total_balls_locked==2}:
+    arrival_widget_ball1:
+      action: remove
+    arrival_widget_ball2:
+      slide: arrival_ball_locked_slide
+    arrival_widget_ball3:
+      action: remove
+  show_arrival_locked_slide{total_balls_locked==3}:
+    arrival_widget_ball1:
+      action: remove
+    arrival_widget_ball2:
+      action: remove
+    arrival_widget_ball3:
+      slide: arrival_ball_locked_slide
 
 widgets:
-  station_widget_1:
+  overlord_widget_ball1:
     - type: text
       text: Vulcan Station
       style: dmd_big
       z: 2
-  station_widget_2:
+  overlord_widget_ball2:
     - type: text
       text: Prometheus Station
       style: dmd_big
       z: 2
-  station_widget_3:
+  overlord_widget_ball3:
     - type: text
       text: Atlas Station
+      style: dmd_big
+      z: 2
+  arrival_widget_ball1:
+    - type: text
+      text: Cooling Rods Activated
+      style: dmd_big
+      z: 2
+  arrival_widget_ball2:
+    - type: text
+      text: Engines Powering On
+      style: dmd_big
+      z: 2
+  arrival_widget_ball3:
+    - type: text
+      text: Escape Project Base
       style: dmd_big
       z: 2
