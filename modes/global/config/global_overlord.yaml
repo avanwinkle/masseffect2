@@ -15,21 +15,58 @@
 event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
-  overrival_lightshot_hit:
-    - play_overlord_hit_sound{device.achivements.collectorship.state!="completed"}
-    - play_arrival_hit_sound{device.achivements.collectorship.state=="completed"}
-  enable_overrival_lock{mode.field.active and device.achivements.collectorship.state!="completed"}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
+  fmball_lightshot_hit.1:
+    - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
+    - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}
+  # If the current multiball has not been played, a single hit will light
+    - enable_fmball_lock{(device.achievements.overlord.state=="enabled" or device.achievements.arrival.state=="enabled") and not device.multiball_locks.fmball_lock.enabled}
+  # If the current multiball HAS been played, the both shots needed to light
+  fmball_lightshot_complete{not device.multiball_locks.fmball_lock.enabled}:
+    - enable_fmball_lock
+  # Only play the "lock is lit" sound if mode.field is active
+  enable_fmball_lock{mode.field.active}:
+    - play_overlord_lock_sound{device.achievements.arrival.state=="disabled"}
+    - play_arrival_lock_sound{device.achievements.arrival.state!="disabled"}
+  play_overlord_lock_sound:
     - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
-  enable_overrival_lock{mode.field.active and device.achivements.collectorship.state=="completed"}: # player_shot_overlord_lock_ball_shot_enabled{mode.field.active}:
+  play_arrival_lock_sound:
     - play_arrival_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_arrival_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_arrival_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
+  multiball_lock_fmball_full:
+    - start_mode_overlordmultiball{device.achievements.arrival.state=="disabled"}
+    - start_mode_arrivalmultiball{device.achievements.arrival.state!="disabled"}
+  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
+  multiball_arrival_multiball_ended: stop_mode_arrivalmultiball
+
+# TODO: Move these multiballs into their respective modes?
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+    enable_events: multiball_lock_fmball_full{device.achievements.arrival.state=="disabled"}
+    start_events: mode_overlordmultiball_started
+    reset_events: multiball_overlord_multiball_ended
+    debug: true
+  arrivalmultiball:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+    enable_events: multiball_lock_fmball_full{device.achievements.arrival.state!="disabled"}
+    start_events: mode_arrivalmultiball_started
+    reset_events: multiball_arrivalmultiball_ended
+    debug: true
 
 shot_groups:
-  overrival_lightshot:
-    shots: light_lock_overrival_top, light_lock_overrival_bottom
+  fmball_lightshot:
+    shots: light_lock_fmball_top, light_lock_fmball_bottom
     enable_events:
       - enable_lock_lightshot
       - multiball_overlord_multiball_ended
@@ -38,32 +75,47 @@ shot_groups:
       - disable_lock_lightshot
       - multiball_overlord_multiball_started
       - multiball_arrival_multiball_ended
-    reset_events: multiball_lock_overrival_locked_ball
+    reset_events: multiball_lock_fmball_locked_ball
 
 shot_profiles:
-  overrival_light_profile:
+  fmball_light_profile:
     show_when_disabled: false
     states:
       - name: unlit
         show: off
       - name: lit
         show: on
+  fmball_lock_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: fmball_lock_lit
+        sync_ms: 1000
 
 shots:
-  light_lock_overrival_top:
+  fmball_lock_shot:
+    switch: s_left_ramp_exit
+    profile: fmball_lock_profile
+    enable_events:
+      # Before the multiball has been played, any shot to the hitbank will light
+      - fmball_light_shot_hit{device.achievements.overlord.state=="disabled"}
+      # After it's been played, both hitbanks shots must complete to light
+      - fmball_light_shot_lit_complete
+    disable_events: multiball_lock_fmball_locked_ball
+  light_lock_fmball_top:
     switch: s_hitbank_top
-    profile: overrival_light_profile
+    profile: fmball_light_profile
     show_tokens:
       led: l_hitbank_top
-  light_lock_overrival_bottom:
+  light_lock_fmball_bottom:
     switch: s_hitbank_bottom
-    profile: overrival_light_profile
+    profile: fmball_light_profile
     show_tokens:
       led: l_hitbank_bot
 
 show_player:
-  overrival_light_shot_hit:
-    overrival_lock_flash:
+  fmball_light_shot_hit:
+    fmball_lock_flash:
       priority: 100
       loops: 6
       speed: 10
@@ -74,9 +126,28 @@ show_player:
   multiball_overlord_multiball_shoot_again_ended:
     ball_save_show:
       action: stop
+  # When in wizard mode, hide the lock light show because we can't lock
+  mode_type_wizard_started:
+    fmball_disabled_show:
+      priority: 100
+  mode_type_wizard_stopped:
+    fmball_disabled_show:
+      action: stop
+  # We don't start the multiball during a mission, so hide the show...
+  # ... if a mission starts and 2 balls are locked
+  mode_type_mission_started{device.multiball_locks.fmball_lock.locked_balls==2}:
+    fmball_disabled_show:
+      priority: 100
+  # ... if ball 2 is locked during a mission
+  multiball_lock_fmball_locked_ball{total_balls_locked==2 and not mode.field.active}:
+    fmball_disabled_show:
+      priority: 100
+  mode_type_mission_stopped:
+    fmball_disabled_show:
+      action: stop
 
 shows:
-  overrival_lock_flash:
+  fmball_lock_flash:
     - time: 0
       lights:
         l_hitbank_bot: white
@@ -85,14 +156,24 @@ shows:
       lights:
         l_hitbank_bot: black
         l_hitbank_top: black
+  fmball_disabled_show:
+    - lights:
+        l_lock_lit: black
+  fmball_lock_lit:
+    - duration: 500ms
+      lights:
+        l_lock_lit: white
+    - duration: 500ms
+      lights:
+        l_lock_lit: black
 
 slide_player:
-  # This show event comes from lockhandler.py
-  show_overlord_locked_slide:
+  # This event comes from lockhandler.py
+  lockhandler_ball_locked{device.achievements.arrival.state=="disabled"}:
     overlord_ball_locked_slide:
       expire: 3s
       priority: 600 # Enough to beat recruit timer?
-  show_arrival_locked_slide:
+  lockhandler_ball_locked{device.achievements.arrival.state!="disabled"}:
     arrival_ball_locked_slide:
       expire: 3s
       priority: 600
@@ -135,6 +216,11 @@ slides:
         style: dmd_big
         anchor_y: top
         y: middle-2
+      - type: text
+        text: via global_overlord.yaml
+        style: small
+        anchor_y: bottom
+        y: 0
   arrival_ball_locked_slide:
     widgets:
       - type: text

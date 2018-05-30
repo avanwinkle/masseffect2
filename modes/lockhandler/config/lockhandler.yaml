@@ -9,11 +9,6 @@
 # Most of the logic is handled in a custom Python class (lockhandler.py). This
 # yaml file instantiates that class, sets up an event listener to trigger the
 # class handler.
-
-# Also this yaml file has got some multiball_lock logic because the class
-# interacts with multiball devices directly and it kinda makes it easier to have
-# all that contained here. Once the logic/behavior is stable, it may make more
-# sense to move the multiball locks to their respective modes.
 #####
 
 mode:
@@ -22,14 +17,12 @@ mode:
   code: lockhandler.LockHandler
   priority: 1000
 
+mode_settings:
+  ball_device: bd_lock
+  lock_device: fmball_lock
+
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
-  overrival_light_shot_hit{not device.multiball_locks.overrivallock.enabled}: enable_overrival_lock
-  multiball_lock_overrival_full:
-    - start_mode_overlordmultiball{device.achievements.collectorship.state!="completed"}
-    - start_mode_arrivalmultiball{device.achievements.collectorship.state=="completed"}
-  multiball_overrival_multiball_ended: stop_mode_overlordmultiball
-  multiball_arrival_multiball_ended: stop_mode_arrivalmultiball
 
 queue_relay_player:
   balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active}:
@@ -39,87 +32,13 @@ queue_relay_player:
     post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
 
+# This lock needs to be here in order to be found in self.mode_devices
 multiball_locks:
-  overrivallock:
+  fmball_lock:
     balls_to_lock: 3
     balls_to_replace: 2
     lock_devices: bd_lock
-    reset_count_for_current_player_events:
-      - multiball_overlord_multiball_ended
-      - multiball_arrival_multiball_ended
-    enable_events: enable_overrival_lock
-    disable_events: multiball_lock_overrival_locked_ball
+    reset_count_for_current_player_events: fmball_stopped
+    enable_events: enable_fmball_lock
+    disable_events: multiball_lock_fmball_locked_ball
     debug: true
-
-multiballs:
-  overlord_multiball:
-    ball_count: 3
-    ball_count_type: total
-    replace_balls_in_play: true
-    ball_locks: bd_lock
-    shoot_again: 10s
-    enable_events: multiball_lock_overrival_full{device.achievements.collectorship.state!="completed"}
-    start_events: mode_overlordmultiball_started
-    reset_events: multiball_overlord_multiball_ended
-    debug: true
-  arrivalmultiball:
-    ball_count: 3
-    ball_count_type: total
-    replace_balls_in_play: true
-    ball_locks: bd_lock
-    shoot_again: 10s
-    enable_events: multiball_lock_overrival_full{device.achievements.collectorship.state=="completed"}
-    start_events: mode_overlordmultiball_started
-    reset_events: multiball_arrivalmultiball_ended
-    debug: true
-shots:
-  overrival_lock_ball_shot:
-    switch: s_left_ramp_exit
-    profile: overrival_lock_profile
-    enable_events:
-      # Before the multiball has been played, any shot to the hitbank will light
-      - overrival_light_shot_hit{device.achievements.overlord.state=="disabled"}
-      # After it's been played, both hitbanks shots must complete to light
-      - overrival_light_shot_lit_complete
-    disable_events: multiball_lock_overrival_locked_ball
-
-shot_profiles:
-  overrival_lock_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: overrival_lock_lit
-        sync_ms: 1000
-
-show_player:
-  mode_type_wizard_started:
-    overrival_disabled_show:
-      priority: 100
-  mode_type_wizard_stopped:
-    overrival_disabled_show:
-      action: stop
-  # We don't start the multiball during a mission, so hide the show...
-  # ... if a mission starts and 2 balls are locked
-  mode_type_mission_started{device.multiball_locks.overrival.locked_balls==2}:
-    overrival_disabled_show:
-      priority: 100
-  # ... if ball 2 is locked during a mission
-  multiball_lock_overrival_locked_ball{total_balls_locked==2 and not mode.field.active}:
-    overrival_disabled_show:
-      priority: 100
-  mode_type_mission_stopped:
-    overrival_disabled_show:
-      action: stop
-
-
-shows:
-  overrival_disabled_show:
-    - lights:
-        l_lock_lit: black
-  overrival_lock_lit:
-    - duration: 500ms
-      lights:
-        l_lock_lit: white
-    - duration: 500ms
-      lights:
-        l_lock_lit: black

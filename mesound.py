@@ -1,10 +1,13 @@
 from mpf.core.config_processor import ConfigProcessor
+from mpf.core.config_validator import ConfigValidator
 from mpf.core.utility_functions import Util
 import re
 import os, sys
 import shutil
 import logging
 from datetime import datetime
+
+configProcessor = ConfigProcessor(ConfigValidator(None))
 
 class SoundManager():
   def __init__(self, verbose=False):
@@ -208,7 +211,7 @@ class RequiredSounds(object):
       for filename in files:
         if filename.endswith('.yaml'):
           configfilename = filename[:-5]
-          conf = ConfigProcessor.load_config_file('{}/{}'.format(path,filename), "mode")
+          conf = configProcessor.load_config_file('{}/{}'.format(path,filename), "mode")
           sounds = ModeSounds(configfilename)
           sounds.parseConfig(conf)
           if len(sounds) > 0:

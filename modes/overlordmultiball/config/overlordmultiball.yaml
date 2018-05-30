@@ -29,8 +29,8 @@
 mode:
   start_events: start_mode_overlordmultiball
   stop_events: stop_mode_overlordmultiball, stop_wizards
-  events_when_started: mode_type_wizard_started
-  events_when_stopped: mode_type_wizard_stopped
+  events_when_started: mode_type_wizard_started, fmball_started
+  events_when_stopped: mode_type_wizard_stopped, fmball_stopped
   priority: 500
 
 counters:
@@ -253,6 +253,11 @@ slides:
         style: dmd_big
         anchor_y: top
         y: middle-2
+      - type: text
+        text: via overlordmultiball.yaml
+        style: small
+        anchor_y: bottom
+        y: 0
 
 sound_player:
   play_music_1:

@@ -34,10 +34,16 @@ achievements:
     complete_events: shadowbroker_boss_complete
   # MULTIBALLS
   overlord:
-    enable_events: multiball_lock_overlordlock_full
+    # enable_events commented out, will start enabled?
+    disable_events: achievement_collectorship_state_completed
     start_events: mode_overlordmultiball_started
     stop_events: mode_overlordmultiball_stopped
     complete_events: logicblock_jackpots_hit_counter_hit{count==3}
+  arrival:
+    enable_events: achievement_collectorship_state_completed
+    start_events: mode_arrivalmultiball_started
+    stop_events: mode_arrivalmultiball_stopped
+    complete_events: arrival_escapeshot_hit
   # COLLECTOR MISSIONS
   collectorship:
     enable_events: enable_collectorship
