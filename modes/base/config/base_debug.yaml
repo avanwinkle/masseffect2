@@ -5,6 +5,8 @@ widget_player:
       target: window
     vars_debug:
       target: window
+    score_debug:
+      target: window
 
 widgets:
   squad_debug:
@@ -73,6 +75,22 @@ widgets:
       style: squad_debug_style
       y: top-44
       x: 660
+  score_debug:
+    - type: text
+      text: "Temp Hurryup: (temp_hurryup_value)"
+      style: squad_debug_style
+      x: 10
+      y: 24
+    - type: text
+      text: "Temp Build: (temp_build_value)"
+      style: squad_debug_style
+      x: 10
+      y: 44
+    - type: text
+      text: "Temp Multiplier: (temp_multiplier)"
+      style: squad_debug_style
+      x: 10
+      y: 64
   vars_debug:
     - type: text
       text: "PLAYER VARS:"
