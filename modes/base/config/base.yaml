@@ -34,13 +34,12 @@ achievements:
     complete_events: shadowbroker_boss_complete
   # MULTIBALLS
   overlord:
-    # enable_events commented out, will start enabled?
-    disable_events: achievement_collectorship_state_completed
+    disable_events: mode_collectorship_base_started
     start_events: mode_overlordmultiball_started
     stop_events: mode_overlordmultiball_stopped
-    complete_events: logicblock_jackpots_hit_counter_hit{count==3}
+    complete_events: overlord_complete
   arrival:
-    enable_events: achievement_collectorship_state_completed
+    enable_events: mode_collectorship_base_started
     start_events: mode_arrivalmultiball_started
     stop_events: mode_arrivalmultiball_stopped
     complete_events: arrival_escapeshot_hit
@@ -49,12 +48,11 @@ achievements:
     enable_events: enable_collectorship
     start_events: mode_collectorship_base_started
     stop_events: mode_collectorship_base_will_stop
-    complete_events:
-      - collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
-      # - mode_collectorship_base_stopped # Once the mode has been played, the achievement is complete
+    complete_events: collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
   derelictreaper:
     enable_events: enable_derelictreaper
     start_events: start_mode_derelictreaper
+    complete_events: mode_collectorattack_started
   collectorattack:
     enable_events: enable_collectorattack
     start_events: mode_collectorattack_started
@@ -83,12 +81,15 @@ event_player:
     - stop_mode_global
   mode_type_wizard_stopped{not mode.base.stopping}:
     - start_mode_global
-
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
-  player_squadmates_count{current_player.squadmates_count == 6}:
+  player_squadmates_count{value==6}:
     - enable_collectorship
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
+  # When we have reached level 8, go to derelict reaper. This can be from 
+  # completing 7 recruits, or fewer recruits plus other mission levelups
+  player_level{value==8}:
+    - enable_derelictreaper
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

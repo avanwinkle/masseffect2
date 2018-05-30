@@ -225,6 +225,12 @@ widget_player:
       slide: minerals_slide
       widget_settings:
         expire: 2s
+  logicblock_derelictreaper_iff_counter_hit:
+    reaperiff_progress_widget:
+      action: update
+      slide: minerals_slide
+      widget_settings:
+        expire: 2s
 
 widgets:
   mineral_highlight:
@@ -236,6 +242,15 @@ widgets:
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"
+      style: dmd_small
+      anchor_y: bottom
+      anchor_x: left
+      y: 1
+      x: 2
+      z: 3
+  reaperiff_progress_widget:
+    - type: text
+      text: "Reaper IFF in (count)"
       style: dmd_small
       anchor_y: bottom
       anchor_x: left

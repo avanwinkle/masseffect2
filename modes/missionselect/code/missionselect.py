@@ -14,6 +14,8 @@ SQUADMATES = [
   "tali",
 ]
 
+ALLOW_COLLECTORSHIP_REPLAY = True
+
 class MissionSelect(Carousel):
 
   """ Mode which allows the player to select a mission."""
@@ -40,23 +42,22 @@ class MissionSelect(Carousel):
     # Collector ship only (first time)
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
-    # Derelict Reaper only (first time)
-    if player.achievements['derelictreaper'] == "enabled":
-      return ['derelictreaper']
 
     items = ["intro"]
-    # If collectorship has been played but failed, it _can_ be replayed (pre-derelictreaper)
-    if player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
-      items.append('collectorship')
     # If suicide mission is available, it goes first
-    elif player.achievements['suicidemission'] == "enabled":
+    if player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
 
     for mate in SQUADMATES:
       status = player.vars.get("status_{}".format(mate))
       if (status == 3):
         items.append(mate)
-    # Pass is last
+    
+    # If collectorship has been played but the praetorian wasn't defeated, it can be replayed (pre-derelictreaper)
+    if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
+      items.append('collectorship')
+    
+    # Pass is the last item in the menu
     items.append('pass')
     return items
 

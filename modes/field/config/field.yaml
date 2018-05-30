@@ -20,10 +20,11 @@ event_player:
       env: field
 
 config:
+  - field_derelictreaper_iff.yaml
+  - field_n7assignments.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
   - field_shopping.yaml
-  - field_n7assignments.yaml
 
 sound_player:
   mode_field_started:

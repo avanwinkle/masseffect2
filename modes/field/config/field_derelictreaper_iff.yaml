@@ -1,0 +1,28 @@
+#config_version=5
+
+#####
+# DERELICT REAPER: Field
+#
+# This field mode tracks bumper hits to trigger the Derelict Reaper mini-Wizard
+# mode. It's behavior is identical to field_n7assignments, and this behavior
+# replaces that one when the derelictreaper achievement is enabled.
+#####
+
+event_player:
+  logicblock_derelictreaper_iff_counter_complete: start_mode_derelictreaper
+
+counters:
+  derelictreaper_iff_counter:
+    starting_count: 15
+    count_complete_value: 0
+    count_events: derelictreaper_shot_hit
+    direction: down
+    persist_state: true
+
+shots:
+  derelictreaper_shot:
+    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
+    enable_events: 
+      - enable_recruit_shots{device.achievements.derelictreaper.state=="enabled"}
+      - achievement_derelictreaper_state_enabled
+    disable_events: disable_recruit_shots

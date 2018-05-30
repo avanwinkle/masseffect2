@@ -33,6 +33,34 @@ mode:
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped
   priority: 500
 
+event_player:
+  mode_overlordmultiball_started.1:
+    - reset_hackshots
+    - play_music_1
+  mode_overlordmultiball_started.2:
+    set_environment:
+      env: geth
+  # To light the jackpot, you have to hit n hackshots where n = jackpots already hit
+  logicblock_hackshots_hit_counter_hit{count>device.counters.jackpots_hit_counter.value}:
+    - enable_jackpotshot
+  jackpotshot_hit: reset_hackshots
+  timer_overlord_timer_complete: disable_hackshots
+  # If the player collects three jackpots, this achievement is "complete"!
+  logicblock_jackpots_hit_counter_hit{count==3}: overlord_complete
+  # Grant a levelup for completing the achievement
+  achievement_overlord_state_completed: levelup
+  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
+
+multiballs:
+  overlord_multiball:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+    start_events: mode_overlordmultiball_started
+    debug: true
+
 counters:
   hackshots_hit_counter:
     starting_count: 0
@@ -56,21 +84,6 @@ timers:
       - event: hackshots_lit_hit
         action: add
         value: 10
-
-event_player:
-  mode_overlordmultiball_started.1:
-    - reset_hackshots
-    - play_music_1
-  mode_overlordmultiball_started.2:
-    set_environment:
-      env: geth
-  # To light the jackpot, you have to hit n hackshots where n = jackpots already hit
-  logicblock_hackshots_hit_counter_hit{count>device.counters.jackpots_hit_counter.value}:
-    - enable_jackpotshot
-  jackpotshot_hit: reset_hackshots
-  timer_overlord_timer_complete: disable_hackshots
-  logicblock_jackpots_hit_counter_hit{count==3}:
-    - levelup
 
 variable_player:
   reset_hackshots:

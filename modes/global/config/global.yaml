@@ -19,12 +19,12 @@ mode:
 ##
 # These are the various modes that run as part of Global
 config:
+  - global_multiball.yaml
   - global_planets.yaml
   - global_recruit.yaml
   - global_shadowbroker.yaml
-  - global_upgrades.yaml
-  - global_overlord.yaml
   - global_sounds.yaml
+  - global_upgrades.yaml
 
 event_player:
   mode_global_started:

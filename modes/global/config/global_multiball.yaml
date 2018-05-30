@@ -15,12 +15,13 @@
 event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
-  fmball_lightshot_hit.1:
+  fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}
-  # If the current multiball has not been played, a single hit will light
+  # If the current multiball has not been played, a single hit will light.
+  # We know a mode has been played if it is "stopped" rather than "enabled"
     - enable_fmball_lock{(device.achievements.overlord.state=="enabled" or device.achievements.arrival.state=="enabled") and not device.multiball_locks.fmball_lock.enabled}
-  # If the current multiball HAS been played, the both shots needed to light
+  # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
   # Only play the "lock is lit" sound if mode.field is active
@@ -38,32 +39,7 @@ event_player:
   multiball_lock_fmball_full:
     - start_mode_overlordmultiball{device.achievements.arrival.state=="disabled"}
     - start_mode_arrivalmultiball{device.achievements.arrival.state!="disabled"}
-  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
-  multiball_arrival_multiball_ended: stop_mode_arrivalmultiball
-
-# TODO: Move these multiballs into their respective modes?
-multiballs:
-  overlord_multiball:
-    ball_count: 3
-    ball_count_type: total
-    replace_balls_in_play: true
-    ball_locks: bd_lock
-    shoot_again: 10s
-    enable_events: multiball_lock_fmball_full{device.achievements.arrival.state=="disabled"}
-    start_events: mode_overlordmultiball_started
-    reset_events: multiball_overlord_multiball_ended
-    debug: true
-  arrivalmultiball:
-    ball_count: 3
-    ball_count_type: total
-    replace_balls_in_play: true
-    ball_locks: bd_lock
-    shoot_again: 10s
-    enable_events: multiball_lock_fmball_full{device.achievements.arrival.state!="disabled"}
-    start_events: mode_arrivalmultiball_started
-    reset_events: multiball_arrivalmultiball_ended
-    debug: true
-
+  
 shot_groups:
   fmball_lightshot:
     shots: light_lock_fmball_top, light_lock_fmball_bottom
