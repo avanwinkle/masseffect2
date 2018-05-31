@@ -31,7 +31,7 @@ mode:
   stop_events: stop_mode_overlordmultiball, stop_wizards
   events_when_started: mode_type_wizard_started, fmball_started
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped
-  priority: 500
+  priority: 1000
 
 event_player:
   mode_overlordmultiball_started.1:
@@ -50,6 +50,11 @@ event_player:
   # Grant a levelup for completing the achievement
   achievement_overlord_state_completed: levelup
   multiball_overlord_multiball_ended: stop_mode_overlordmultiball
+  # Sound_player doesn't know device states, so make events here
+  hackshots_frozen_hit:
+    - play_frozen_hackshot_1{device.counters.jackpots_hit_counter.value==1}
+    - play_frozen_hackshot_2{device.counters.jackpots_hit_counter.value==2}
+    - play_frozen_hackshot_3{device.counters.jackpots_hit_counter.value==3}
 
 multiballs:
   overlord_multiball:
@@ -250,32 +255,10 @@ shows:
 
 slide_player:
   mode_overlordmultiball_started:
-    overlord_ball_locked_slide_full:
-      expire: 4s
-      priority: 100
     overlord_slide:
       action: play
 
 slides:
-  overlord_ball_locked_slide_full:
-    widgets:
-      - type: text
-        text: OVERLORD
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 2
-      - type: text
-        text: MULTIBALL
-        style: dmd_big
-        anchor_y: top
-        y: middle-2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
   overlord_slide:
     widgets:
       - type: text
@@ -283,6 +266,12 @@ slides:
         style: dmd_big
         anchor_y: bottom
         y: middle+2
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
 
 sound_player:
   play_music_1:
@@ -295,9 +284,9 @@ sound_player:
       action: play
       fade_out: 1s
       mode_end_action: stop
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==1}: vi_yell
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==2}: vi_scream
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value>=3}: vi_quietplease
+  play_frozen_hackshot_1: vi_yell
+  play_frozen_hackshot_2: vi_scream
+  play_frozen_hackshot_3: vi_quietplease
   enable_jackpotshot: upload_sound
   jackpotshot_hit: upload_lost
 
@@ -408,6 +397,7 @@ widgets:
       anchor_y: bottom
       y: 2
       x: 2
+      z: 4
   jackpots_needed_widget:
     - type: text
       text: " / (value)"
@@ -416,6 +406,7 @@ widgets:
       anchor_y: bottom
       y: 2
       x: 48
+      z: 4
   jackpot_widget:
     - type: text
       text: "JACKPOT LIT"
@@ -424,6 +415,7 @@ widgets:
       anchor_y: bottom
       y: 2
       x: right-2
+      z: 4
       animations:
         add_to_slide:                # animation trigger event
           - property: opacity      # name of the widget property we're animating
@@ -433,22 +425,3 @@ widgets:
             value: 0
             duration: 1s
             repeat: true
-  jackpot_superwidget:
-    - type: text
-      text: JACKPOT
-      style: dmd_big
-      z: 20
-      animations:
-        add_to_slide:                # animation trigger event
-          - property: opacity      # name of the widget property we're animating
-            value: 1               # target value of that property for this step
-            duration: 600ms          # duration for this step (how long it takes to get there)
-          - property: opacity      # second step in the animation (starts with a hyphen)
-            value: 0.2
-            duration: 600ms
-            repeat: true
-    - type: rectangle
-      width: 128
-      height: 32
-      color: black
-      z: 19

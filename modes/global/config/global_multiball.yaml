@@ -143,13 +143,14 @@ slide_player:
     overlord_lock_is_lit_slide:
       expire: 2s
       priority: 1200 # Minerals run at priority ~900
-  lockhandler_overlord_ball_will_lock{total_balls_locked<3}:
+  lockhandler_overlord_ball_will_lock:
     overlord_ball_locked_slide:
       expire: 3s
-      priority: 600 # Enough to beat recruit timer?:
+      priority: 1600 # Enough to beat recruit timer?:
   lockhandler_overlord_ball_will_lock{total_balls_locked==3}:
-    overlord_ball_locked_slide:
-      priority: 600 # Enough to beat recruit timer?:
+    overlord_full_slide:
+      expire: 6s
+      priority: 1599 # Just below the "ball 3 locked" slide but 3s longer
   lockhandler_arrival_ball_will_lock:
     arrival_ball_locked_slide:
       expire: 3s
@@ -188,6 +189,25 @@ slides:
         anchor_y: bottom
         y: 2
         z: 2
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
+  overlord_full_slide:
+    widgets:
+      - type: text
+        text: OVERLORD
+        style: dmd_big
+        anchor_y: bottom
+        y: middle+2
+        z: 2
+      - type: text
+        text: MULTIBALL
+        style: dmd_big
+        anchor_y: top
+        y: middle-2
+        z: 1
       - type: rectangle
         width: 128
         height: 32
@@ -242,8 +262,9 @@ sound_player:
   lockhandler_overlord_ball_will_lock{total_balls_locked==3}:
     archer_start:
       action: play
-      max_queue_time: 3s
-      events_when_stopped: start_mode_overlordmultiball
+      # No max queue time since we _have_ to play this track to start the multiball
+      about_to_finish_time: 500ms
+      events_when_about_to_finish: start_mode_overlordmultiball
 
 sound_pools:
   geth_hit_sfx:
