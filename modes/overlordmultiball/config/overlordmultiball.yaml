@@ -41,12 +41,12 @@ event_player:
     set_environment:
       env: geth
   # To light the jackpot, you have to hit n hackshots where n = jackpots already hit
-  logicblock_hackshots_hit_counter_hit{count>device.counters.jackpots_hit_counter.value}:
+  logicblock_hackshots_hit_counter_hit{count>=device.counters.jackpots_hit_counter.value}:
     - enable_jackpotshot
   jackpotshot_hit: reset_hackshots
   timer_overlord_timer_complete: disable_hackshots
   # If the player collects three jackpots, this achievement is "complete"!
-  logicblock_jackpots_hit_counter_hit{count==3}: overlord_complete
+  logicblock_jackpots_hit_counter_hit{count==4}: overlord_complete
   # Grant a levelup for completing the achievement
   achievement_overlord_state_completed: levelup
   multiball_overlord_multiball_ended: stop_mode_overlordmultiball
@@ -67,8 +67,8 @@ counters:
     count_events: hackshots_lit_hit
     reset_events: reset_hackshots
   jackpots_hit_counter:
-    starting_count: 0
-    count_complete_value: 4
+    starting_count: 1
+    count_complete_value: 5
     disable_on_complete: true
     count_events: jackpotshot_hit
 
@@ -101,7 +101,7 @@ variable_player:
     score: 500
     temp_build_value: 100 * current_player.temp_multiplier
   jackpotshot_hit:
-    score: current_player.temp_build_value * device.counters.hackshots_hit_counter.value * (1 + 0.25 * device.counters.jackpots_hit_counter.value)
+    score: current_player.temp_build_value * device.counters.hackshots_hit_counter.value * (1 + 0.25 * (device.counters.jackpots_hit_counter.value - 1))
 
 shot_profiles:
   overlord_target_profile:
@@ -252,6 +252,9 @@ slide_player:
   mode_overlordmultiball_started:
     overlord_ball_locked_slide_full:
       expire: 4s
+      priority: 100
+    overlord_slide:
+      action: play
 
 slides:
   overlord_ball_locked_slide_full:
@@ -261,16 +264,25 @@ slides:
         style: dmd_big
         anchor_y: bottom
         y: middle+2
+        z: 2
       - type: text
         text: MULTIBALL
         style: dmd_big
         anchor_y: top
         y: middle-2
+        z: 1
+      - type: rectangle
+        width: 128
+        height: 32
+        color: black
+        z: 0
+  overlord_slide:
+    widgets:
       - type: text
-        text: via overlordmultiball.yaml
-        style: small
+        text: OVERLORD
+        style: dmd_big
         anchor_y: bottom
-        y: 0
+        y: middle+2
 
 sound_player:
   play_music_1:
@@ -283,18 +295,13 @@ sound_player:
       action: play
       fade_out: 1s
       mode_end_action: stop
-  mode_overlordmultiball_started: archer_start
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==0}: vi_yell
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==1}: vi_scream
-  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value>=2}: vi_quietplease
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==1}: vi_yell
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value==2}: vi_scream
+  hackshots_frozen_hit{device.counters.jackpots_hit_counter.value>=3}: vi_quietplease
   enable_jackpotshot: upload_sound
   jackpotshot_hit: upload_lost
 
 sound_pools:
-  archer_start:
-    sounds: archer_get_to_server_room, archer_you_have_to_hurry
-    type: random_force_all
-    track: voice
   upload_sound:
     sounds: upload_1, upload_2, upload_3, upload_4
     type: random_force_all
@@ -329,12 +336,6 @@ sounds:
     markers:
       - time: 96s
         events: play_music_1
-  archer_get_to_server_room:
-    file: DLC_UNC_Pack01_Int.291.ogg
-    track: voice
-  archer_you_have_to_hurry:
-    file: DLC_UNC_Pack01_Int.012.ogg
-    track: voice
   upload_1:
     file: DLC_UNC_Pack01_Int.475.ogg
     track: voice
@@ -381,5 +382,73 @@ sounds:
     file: DLC_UNC_Pack01_Int.197.ogg
     track: sfx
 
+widget_player:
+  logicblock_jackpots_hit_counter_updated:
+    jackpots_needed_widget:
+      slide: overlord_slide
+      action: update
+  logicblock_hackshots_hit_counter_updated:
+    hackshots_widget:
+      slide: overlord_slide
+      action: update
+  enable_jackpotshot:
+    jackpot_widget:
+      slide: overlord_slide
+      action: add
+  jackpotshot_hit:
+    jackpot_widget:
+      action: remove
 
-
+widgets:
+  hackshots_widget:
+    - type: text
+      text: "Targets: (value)"
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      y: 2
+      x: 2
+  jackpots_needed_widget:
+    - type: text
+      text: " / (value)"
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      y: 2
+      x: 48
+  jackpot_widget:
+    - type: text
+      text: "JACKPOT LIT"
+      style: small
+      anchor_x: right
+      anchor_y: bottom
+      y: 2
+      x: right-2
+      animations:
+        add_to_slide:                # animation trigger event
+          - property: opacity      # name of the widget property we're animating
+            value: 1               # target value of that property for this step
+            duration: 1s          # duration for this step (how long it takes to get there)
+          - property: opacity      # second step in the animation (starts with a hyphen)
+            value: 0
+            duration: 1s
+            repeat: true
+  jackpot_superwidget:
+    - type: text
+      text: JACKPOT
+      style: dmd_big
+      z: 20
+      animations:
+        add_to_slide:                # animation trigger event
+          - property: opacity      # name of the widget property we're animating
+            value: 1               # target value of that property for this step
+            duration: 600ms          # duration for this step (how long it takes to get there)
+          - property: opacity      # second step in the animation (starts with a hyphen)
+            value: 0.2
+            duration: 600ms
+            repeat: true
+    - type: rectangle
+      width: 128
+      height: 32
+      color: black
+      z: 19

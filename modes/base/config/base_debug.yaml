@@ -162,8 +162,3 @@ widgets:
       style: squad_debug_style
       x: 560
       y: top-124
-    - type: text
-      text: "Minerals: (player|mineral_iridium)/(player|mineral_palladium)/(player|mineral_platinum)"
-      style: squad_debug_style
-      x: 560
-      y: top-144

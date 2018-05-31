@@ -39,7 +39,7 @@ class LockHandler(Mode):
 
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)
-    self.log.debug("LockHandler Mode is starting")
+    self.log.info("LockHandler Mode is starting")
 
     # We need a pointer to the physical ball device to count physically locked balls
     for device in self.machine.ball_devices:
@@ -56,7 +56,7 @@ class LockHandler(Mode):
     # We need a shot that defines whether lock is lit
     try:
       lockshot = self.machine.shots["{}_shot".format(self._logicallockdevice.name)]
-      self.log.debug("LockHandler is looking for multiball lock shot. " +
+      self.log.info("LockHandler is looking for multiball lock shot. " +
         "state: {}, state_name: {}, enabled: {}".format(lockshot.state, lockshot.state_name, lockshot.enabled)
         )
       # If that shot is enabled when this mode starts, make an event to enable the lock
@@ -64,7 +64,7 @@ class LockHandler(Mode):
       if lockshot.enabled:
         self._post_event('enable_{}'.format(self._logicallockdevice.name))
     except KeyError:
-      self.log.debug("LockHandler has no {} lock shot, locking will be disabled")
+      self.log.info("LockHandler has no {} lock shot, locking will be disabled")
 
     self._register_handlers()
 
@@ -103,11 +103,11 @@ class LockHandler(Mode):
                       )
 
     if self._logicallockdevice.is_virtually_full:
-      self.log.debug(" - Lock is going to fill the multiball, skip lock handling")
+      self.log.info(" - Lock is going to fill the multiball, skip lock handling")
     elif self.player.bypass_missionselect:
-      self.log.debug(" - Player has passed on mission selection, skipping mode start")
+      self.log.info(" - Player has passed on mission selection, skipping mode start")
     elif missions_available:
-      self.log.debug(" - Lock is not enabled but missions are available")
+      self.log.info(" - Lock is not enabled but missions are available")
 
   def _handle_bypasscheck(self, **kwargs):
     """ Logic for assessing whether to hold/lock the ball or bypass the lock """
@@ -115,7 +115,7 @@ class LockHandler(Mode):
     # WIZARD:
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)
     if not self.machine.modes.get("global").active: # global is a reserved word
-      self.log.debug(" - A wizard mode is active, bypassing lock post")
+      self.log.info(" - A wizard mode is active, bypassing lock post")
       self._bypass_lock()
       return
 
@@ -123,7 +123,7 @@ class LockHandler(Mode):
     # If a mission mode is active, bypass the lock if we have 2 balls locked already
     # (i.e. do not allow a ball to lock for a multiball to start)
     elif not self.machine.modes.field.active and self._logicallockdevice.locked_balls == 2:
-      self.log.debug(" - Two balls are locked and field mode isn't active, bypassing lock post")
+      self.log.info(" - Two balls are locked and field mode isn't active, bypassing lock post")
       self._bypass_lock()
       # Temporarily disable the lock, just in case the bypass post doesn't let a ball out
       if self._logicallockdevice.enabled:
@@ -137,12 +137,16 @@ class LockHandler(Mode):
     # LOCK:
     # If the lock shot is enabled, hold onto the ball
     if self._logicallockdevice.enabled:
-      self.log.debug(" - Lock is lit, not going to bypass lock post")
+      self.log.info(" - Lock is lit, not going to bypass lock post")
       do_bypass = False
 
+      # **Warning** This is a hard-coded conditional, which shouldn't be in a python file
+      self.log.debug("{}".format(self.player.achievements))
+      fmball = "overlord" if self.player.achievements["arrival"] == "disabled" else "arrival"
       # Show the slide for the upcoming ball while we wait for it to settle into the device
-      self.machine.events.post("lockhandler_ball_locked", 
-                               total_balls_locked=self._logicallockdevice.locked_balls+1)
+      self.machine.events.post("lockhandler_{}_ball_will_lock".format(fmball),
+                               total_balls_locked=self._logicallockdevice.locked_balls+1,
+                               fmball=fmball)
 
       # If we're about to start a multiball, don't offer missionselect
       if self._logicallockdevice.locked_balls == 2:
@@ -154,7 +158,7 @@ class LockHandler(Mode):
     # or if Garrus/Samara is about to be (since the ball lock shot is also their mission light shot)
     if self.machine.modes.field.active and ((self.player.status_garrus == 2 or self.player.status_samara == 2) or
                                               (self.player.available_missions > 0 and self.player.bypass_missionselect == 0)):
-      self.log.debug(" - Field mode is active and missions are available, not going to bypass lock post")
+      self.log.info(" - Field mode is active and missions are available, not going to bypass lock post")
       do_bypass = False
 
       # If we are locking a ball, wait 2.5s for the slide/dialog
@@ -172,7 +176,7 @@ class LockHandler(Mode):
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold
     if do_bypass:
-      self.log.debug(" - Lock not enabled and no missions available, bypassing lock post")
+      self.log.info(" - Lock not enabled and no missions available, bypassing lock post")
       self._bypass_lock()
 
   def _handle_missionselect_stop(self, **kwargs):

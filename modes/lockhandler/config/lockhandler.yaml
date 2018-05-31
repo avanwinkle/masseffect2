@@ -40,5 +40,5 @@ multiball_locks:
     lock_devices: bd_lock
     reset_count_for_current_player_events: fmball_stopped
     enable_events: enable_fmball_lock
-    disable_events: multiball_lock_fmball_locked_ball
+    disable_events: multiball_lock_fmball_lock_locked_ball
     debug: true

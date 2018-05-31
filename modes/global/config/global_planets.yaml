@@ -112,30 +112,6 @@ slides:
       z: 9
   minerals_slide:
     widgets:
-      # # Leftmost box
-      # - type: line
-      #   key: leftbox
-      #   points: 0, 9, 42, 9, 42, 31, 0, 31
-      #   close: true
-      #   color: FFFFFF
-      #   thickness: 5
-      #   z: 1
-      # # Middle box
-      # - type: line
-      #   points: 43, 9, 85, 9, 85, 31, 43, 31
-      #   key: middlebox
-      #   close: true
-      #   color: pink
-      #   thickness: 10
-      #   z: 1
-      # # Rightmost box
-      # - type: line
-      #   points: 86, 9, 127, 9, 127, 31, 86, 31
-      #   key: rightbox
-      #   close: true
-      #   color: yellow
-      #   thickness: 20
-      #   z: 1
       # Minerals
       - type: text
         text: (player|mineral_iridium)
