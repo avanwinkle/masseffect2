@@ -35,13 +35,13 @@ achievements:
   # MULTIBALLS
   overlord:
     disable_events: mode_collectorship_base_started
-    start_events: mode_overlordmultiball_started
-    stop_events: mode_overlordmultiball_stopped
+    start_events: mode_overlord_started
+    stop_events: mode_overlord_stopped
     complete_events: overlord_complete
   arrival:
     enable_events: mode_collectorship_base_started
-    start_events: mode_arrivalmultiball_started
-    stop_events: mode_arrivalmultiball_stopped
+    start_events: mode_arrival_started
+    stop_events: mode_arrival_stopped
     complete_events: arrival_escapeshot_hit
   # COLLECTOR MISSIONS
   collectorship:

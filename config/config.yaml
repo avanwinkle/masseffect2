@@ -103,7 +103,8 @@ modes:
   # Side Mission Modes:
   - harbinger
   - n7_assignments
-  - overlordmultiball
+  - overlord
+  - arrival
 
 window:
   width: 800

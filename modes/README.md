@@ -54,8 +54,6 @@ automatically.
 ### Side Missions
 Side missions provide additional gameplay during the course of collecting 
 recruitment missions, and are unlocked by hitting various targets/banks/bumpers.
-
-* **Arrival** is a multiball mode unlocked after the Collector Ship mission
 * **Lair of the Shadow Broker** ([base mode](shadowbroker/config/shadowbroker.yaml)) 
 is a series of unlockable modes leading to a big boss finish
   * Vasir Chase
@@ -63,9 +61,10 @@ is a series of unlockable modes leading to a big boss finish
   * Hagalaz Ship
   * Boss Combat
 * **[N7 Assignments](n7_assignments/config/n7_assignments.yaml)**
-* **Project Overlord** is a multiball mode
-  * [Light for Multiball](overlordlight/config/overlordlight.yaml)
-  * [Multiball Mode](overlordmultiball/config/overlordmultiball.yaml)
+* **Project Overlord** and **Arrival** are multiball modes
+  * [Overlord Multiball](overlord/config/overlord.yaml)
+  * [Arrival Multiball](arrival/config/arrival.yaml)
+  * [Global Multiball Manager](global/config/global_multiball.yaml)
 
 ### Supplemental Modes
 These modes can be triggered throughout the game and offer bonuses, multipliers, extra points, and 

@@ -41,9 +41,6 @@ event_player:
     - play_arrival_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
     - play_arrival_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
     - play_arrival_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
-  multiball_lock_fmball_lock_full:
-    # - start_mode_overlordmultiball{device.achievements.arrival.state=="disabled"}
-    - start_mode_arrivalmultiball{device.achievements.arrival.state!="disabled"}
 
 shot_groups:
   fmball_lightshot:
@@ -264,7 +261,34 @@ sound_player:
       action: play
       # No max queue time since we _have_ to play this track to start the multiball
       about_to_finish_time: 500ms
-      events_when_about_to_finish: start_mode_overlordmultiball
+      events_when_about_to_finish: start_mode_overlord
+  play_arrival_station_sound_1:
+    arr_ken_keep_shepard_contained:
+      action: play
+      max_queue_time: 1s
+  play_arrival_station_sound_2:
+    arr_annc_cooling_rod_a_inserted:
+      action: play
+      max_queue_time: 1s
+  play_arrival_station_sound_3:
+    arr_shep_i_wanna_activate_the_project:
+      action: play
+      max_queue_time: 1s
+# Sound player doesn't accept conditions in sound names, so conditional events only
+  lockhandler_arrival_ball_will_lock{total_balls_locked==1}:
+    arr_ken_shepards_escaped:
+      action: play
+      max_queue_time: 2s
+  lockhandler_arrival_ball_will_lock{total_balls_locked==2}:
+    arr_annc_cooling_rod_b_inserted:
+      action: play
+      max_queue_time: 2s
+  lockhandler_arrival_ball_will_lock{total_balls_locked==3}:
+    arr_annc_project_activated_collision_imminent:
+      action: play
+      # No max queue time since we _have_ to play this track to start the multiball
+      about_to_finish_time: 800ms
+      events_when_about_to_finish: start_mode_arrival
 
 sound_pools:
   geth_hit_sfx:
@@ -355,6 +379,30 @@ sounds:
   geth_hit_4:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307899_m.ogg
     track: sfx
+  arr_ken_keep_shepard_contained:
+    file: DLC_EXP_Part02_Int.644.ogg
+    track: voice
+  arr_ken_shepards_escaped:
+    file: DLC_EXP_Part02_Int.244.ogg
+    track: voice
+  arr_annc_cooling_rod_a_inserted:
+    file: DLC_EXP_Part02_Int.599.ogg
+    track: voice
+  arr_annc_cooling_rod_b_inserted:
+    file: DLC_EXP_Part02_Int.023.ogg
+    track: voice
+  arr_annc_warning_temperature_critical:
+    file: DLC_EXP_Part02_Int.004.ogg
+    track: voice
+  arr_annc_warning_temperature_rising:
+    file: DLC_EXP_Part02_Int.017.ogg
+    track: voice
+  arr_shep_i_wanna_activate_the_project:
+    file: DLC_EXP_Part02_Int.674.ogg
+    track: voice
+  arr_annc_project_activated_collision_imminent:
+    file: DLC_EXP_Part02_Int.676.ogg
+    track: voice
 
 widget_player:
   lockhandler_overlord_ball_will_lock{total_balls_locked==1}:
@@ -418,16 +466,16 @@ widgets:
       z: 2
   arrival_widget_ball1:
     - type: text
-      text: Cooling Rods Activated
+      text: Med Bay Escaped
       style: dmd_big
       z: 2
   arrival_widget_ball2:
     - type: text
-      text: Engines Powering On
+      text: Cooling Rods Restored
       style: dmd_big
       z: 2
   arrival_widget_ball3:
     - type: text
-      text: Escape Project Base
+      text: Project Activated
       style: dmd_big
       z: 2

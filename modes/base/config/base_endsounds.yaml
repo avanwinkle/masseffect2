@@ -12,7 +12,7 @@ sound_player:
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
   shadowbroker_chase_complete: car_crash
-  mode_overlordmultiball_stopped: david_ending
+  mode_overlord_stopped: david_ending
   recruit_tali_failed: colossusrepair
   recruit_kasumi_failed: kasumi_failed
 

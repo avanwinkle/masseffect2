@@ -21,23 +21,23 @@
 # and no other ball locks take effect. When two of the balls have drained, the
 # built value is collected and normal play resumes.
 #
-# TODO: After completing the Overlord multiball, it can be restarted the same
-# way as before, except that both hitbank targets must be hit to light lock.
+# After completing the Overlord multiball, it can be restarted the same way as
+# before, except that both hitbank targets must be hit to light lock.
 # Only the first completion will grant a levelup.
 #####
 
 mode:
-  start_events: start_mode_overlordmultiball
-  stop_events: stop_mode_overlordmultiball, stop_wizards
+  start_events: start_mode_overlord
+  stop_events: stop_mode_overlord, stop_wizards
   events_when_started: mode_type_wizard_started, fmball_started
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped
   priority: 1000
 
 event_player:
-  mode_overlordmultiball_started.1:
+  mode_overlord_started.1:
     - reset_hackshots
     - play_music_1
-  mode_overlordmultiball_started.2:
+  mode_overlord_started.2:
     set_environment:
       env: geth
   # To light the jackpot, you have to hit n hackshots where n = jackpots already hit
@@ -49,7 +49,7 @@ event_player:
   logicblock_jackpots_hit_counter_hit{count==4}: overlord_complete
   # Grant a levelup for completing the achievement
   achievement_overlord_state_completed: levelup
-  multiball_overlord_multiball_ended: stop_mode_overlordmultiball
+  multiball_overlord_multiball_ended: stop_mode_overlord
   # Sound_player doesn't know device states, so make events here
   hackshots_frozen_hit:
     - play_frozen_hackshot_1{device.counters.jackpots_hit_counter.value==1}
@@ -63,7 +63,7 @@ multiballs:
     replace_balls_in_play: true
     ball_locks: bd_lock
     shoot_again: 10s
-    start_events: mode_overlordmultiball_started
+    start_events: mode_overlord_started
     debug: true
 
 counters:
@@ -208,7 +208,7 @@ show_player:
       priority: 50
       show_tokens:
         flashers: l_flash_slingshots, l_flash_pop_bumpers, l_flash_throne
-  mode_overlordmultiball_will_stop:
+  mode_overlord_will_stop:
     overlord_hackshots_show:
       action: stop
 
@@ -254,7 +254,7 @@ shows:
         l_hitbank_bot: off
 
 slide_player:
-  mode_overlordmultiball_started:
+  mode_overlord_started:
     overlord_slide:
       action: play
 
