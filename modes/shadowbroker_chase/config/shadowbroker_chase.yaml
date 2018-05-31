@@ -47,7 +47,7 @@ light_player:
 
 #####
 # SHADOWBROKER CHASE SCORING:
-#   Hurryup starts at 2,000 * multiplier
+#   Hurryup starts at 1,200 * multiplier
 #   Multiplier starts at shots-to-hit (i.e. repeat attempts have lower multiple)
 #   Hitting one shot caches the hurryup as a build value
 #   Hitting a second shot awards the previous shot's score
@@ -56,10 +56,10 @@ variable_player:
   mode_shadowbroker_chase_started:
     temp_hurryup_value:
       action: set
-      int: 2000 * current_player.sbchase_hits_remaining
+      int: 1200
     temp_multiplier:
       action: set
-      int: current_player.sbchase_hits_remaining
+      float: current_player.sbchase_hits_remaining
     temp_build_value:
       action: set
       int: 0
@@ -68,12 +68,13 @@ variable_player:
     sbchase_hits_remaining: 1
   sbchase_shots_lit_hit:
     sbchase_hits_remaining: -1
-    temp_multiplier: 1
+    temp_multiplier:
+      float: 0.2
     temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier
   player_temp_build_value{value>0 and prev_value>0}:
     score: prev_value
   timer_sbchase_timer_tick:
-    temp_hurryup_value: -50 * current_player.temp_multiplier
+    temp_hurryup_value: -50
 
 shot_groups:
   sbchase_shots:
@@ -184,19 +185,21 @@ slides:
         x: right-2
         y: 2
       - type: text
-        text: (player|temp_hurryup_value)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
-      - type: text
         text: (player|temp_build_value)
         style: dmd_small
         anchor_x: left
         anchor_y: bottom
         x: 2
-        y: 12
+        y: 2
+        animations:
+          show_slide:                # animation trigger event
+            - property: opacity      # name of the widget property we're animating
+              value: 1               # target value of that property for this step
+              duration: 2.5s          # duration for this step (how long it takes to get there)
+            - property: opacity      # second step in the animation (starts with a hyphen)
+              value: 0.5
+              duration: 2.5s
+              repeat: true
 
 sound_player:
   mode_shadowbroker_chase_started:
