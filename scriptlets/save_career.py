@@ -46,7 +46,7 @@ class SaveCareer(Scriptlet):
     for key, value in player.vars.items():
       # For achievements, prevent "started" values (in case of hard exit)
       if key == "achievements":
-        for ach, state in value:
+        for ach, state in value.items():
           if state == "started":
             self.log.warn(" - Achievement {} in state '{}', changing to 'stopped'".format(ach, state))
             newcareer[key][ach] = "stopped"
