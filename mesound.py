@@ -73,7 +73,9 @@ class SoundManager():
     self.source_path = sourcepath
 
   def parse_machine_assets(self, writeMode=False):
-    self.log.info("\nParsing machine configs, assets, and source media:")
+    self.log.info("\nMPF Sound Asset Manager [{}]".format("WRITE MODE" if writeMode else "READ-ONLY"))
+    self.log.info("----------------------------------------------------")
+    self.log.info("Parsing machine configs, assets, and source media:")
     self._load_machine_configs()
     self._load_machine_assets()
     self._load_source_media()
@@ -190,7 +192,7 @@ class SoundManager():
         self.log.info(" {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
         # Ensure the target directory exists
         if writeMode:
-          os.makedirs(dst.rsplit("/", 1)[0], mode=0o664, exist_ok=True)
+          os.makedirs(dst.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           shutil.copy2(src, dst)
       os.umask(original_umask)
 
