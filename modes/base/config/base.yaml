@@ -52,9 +52,10 @@ achievements:
   derelictreaper:
     enable_events: enable_derelictreaper
     start_events: start_mode_derelictreaper
-    complete_events: mode_collectorattack_started
+    stop_events: mode_derelictreaper_will_stop
+    complete_events: derelictreaper_complete
   collectorattack:
-    enable_events: enable_collectorattack
+    enable_events: mode_derelictreaper_will_stop # Automatically enabled after derelict reaper
     start_events: mode_collectorattack_started
     complete_events: mode_collectorattack_will_stop # Only played once, completed after playing
   # SUICIDE MISSION

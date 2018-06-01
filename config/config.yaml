@@ -70,7 +70,7 @@ modes:
   - mainmenu
   - missionselect
   - bonus
-  # Environments
+  # Environments:
   - environment
   - env_bloodpack
   - env_bluesuns
@@ -79,12 +79,13 @@ modes:
   - env_geth
   - env_gunfight
   - env_krogan
-  # Collector Ship Modes:
+  # Main Story Missions:
   - collectorship_ambush
   - collectorship_base
   - collectorship_husk
   - collectorship_praetorian
-  # Recruit Modes:
+  - derelictreaper
+  # Recruit Missions:
   - recruitgarrus
   - recruitgrunt
   - recruitjack
@@ -95,14 +96,15 @@ modes:
   - recruittali
   - recruitthane
   - recruitzaeed
-  # Lair of the Shadow Broker
+  # Lair of the Shadow Broker:
   - shadowbroker_boss
   - shadowbroker_chase
   - shadowbroker_hagalaz
   - shadowbroker_vasir
-  # Side Mission Modes:
+  # Side Missions:
   - harbinger
   - n7_assignments
+  # Multiballs:
   - overlord
   - arrival
 

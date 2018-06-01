@@ -1,0 +1,235 @@
+#config_version=5
+
+#####
+# DERELICT REAPER
+#
+# This is a multiball mode on a timer. Each lane is lit to damage the Reaper's
+# core, each target is lit (as a husk) to increase the timer. Completing the 
+# lanes lights a super jackpot shot on a timer, after which the lanes reset.
+# If the husk timer runs out, a special shot must be hit to re-enable the lanes.
+#
+# This mode ends when the multiball drains to a single ball.
+#####
+
+mode:
+  start_events: start_mode_derelictreaper
+  stop_events: stop_mode_derelictreaper
+  events_when_started: mode_type_wizard_started, enable_reapercore
+  events_when_stopped: mode_type_wizard_stopped
+  priority: 500
+
+event_player:
+  timer_reapercore_timeout_complete: 
+    - disable_reapercore
+    - enable_corereset
+  corereset_hit: enable_reapercore
+  reaperjackpot_hit: derelictreaper_complete
+  achievement_derelictreaper_state_completed: levelup
+
+counters:
+  reapercore_counter:
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
+    count_events: reapercore_shots_lit_hit
+    reset_events: reaperjackpot_hit
+
+shot_groups:
+  reapercore_shots:
+    shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_ramp
+    enable_events: enable_reapercore
+    reset_events: enable_reapercore, reapercore_shots_hit_complete
+    disable_events: disable_reapercore
+
+shot_profiles:
+  corereset_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: corereset_show
+        speed: 4
+  reapercore_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: reapercore_lit_show
+        sync_ms: 1000
+      - name: hit
+        show: off
+  reaperjackpot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: reaperjackpot_show
+        speed: 4
+
+shots:
+  reaperjackpot:
+    hit_events: s_battering_ram_active
+    profile: reaperjackpot_profile
+    enable_events: reapercore_shots_hit_complete
+  reaperhusk:
+    hit_events: standuptarget_hit
+  corereset:
+    hit_events: sh_hitbank_hit
+    profile: corereset_profile
+    enable_events: enable_corereset
+    disable_events: corereset_hit
+  reapercore_left_ramp:
+    hit_events: sh_left_ramp_hit
+    disable_events: reapercore_left_ramp_hit
+    profile: reapercore_profile
+    show_tokens:
+      led: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
+  reapercore_left_orbit:
+    hit_events: sh_left_orbit_hit
+    disable_events: reapercore_left_orbit_hit
+    profile: reapercore_profile
+    show_tokens:
+      led: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
+  reapercore_right_ramp:
+    hit_events: sh_right_ramp_hit
+    disable_events: reapercore_right_ramp_hit
+    profile: reapercore_profile
+    show_tokens:
+      led: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
+  reapercore_right_orbit:
+    hit_events: sh_right_orbit_hit
+    disable_events: reapercore_right_orbit_hit
+    profile: reapercore_profile
+    show_tokens:
+      led: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
+  reapercore_kickback:
+    hit_events: sh_kickback_hit
+    disable_events: reapercore_kickback_hit
+    profile: reapercore_profile
+    show_tokens:
+      led: l_kickback_shield_rgb
+    tags: envshot_kickback
+
+show_player:
+  enable_reapercore: reaperhusk_show
+  reaperhusk_hit:
+    reaperhusk_hit_show:
+      priority: 2
+      loops: 4
+      speed: 6
+
+shows:
+  corereset_show:
+    - time: 0
+      lights: 
+        l_hitbanks: off
+        l_hitbank_shield_rgb: 00FF00
+    - time: '+1'
+      lights:
+        l_hitbanks: on
+        l_hitbank_shield_rgb: 000000
+  reaperhusk_show:
+    - time: 0
+      lights:
+        target_lights: on
+  reaperhusk_hit_show:
+    - time: 0
+      lights: 
+        target_lights: off
+    - time: 1
+      lights:
+        target_lights: on
+  reaperjackpot_show:
+    - time: 0
+      lights:
+        l_battering_ram_arrow: on
+    - time: '+1'
+      lights:
+        l_battering_ram_arrow: off
+
+slide_player:
+  mode_derelictreaper_started: derelictreaper_slide
+
+slides:
+  derelictreaper_slide:
+    widgets:
+      - type: text
+        text: DERELICT REAPER
+        style: dmd_big
+        anchor_y: bottom
+        y: middle+2
+        z: 1
+
+widget_player:
+  slide_derelictreaper_slide_created:
+    reapershots_widget:
+      slide: derelictreaper_slide
+    reapertimeout_widget:
+      slide: derelictreaper_slide
+  enable_corereset:
+    corereset_widget:
+      slide: derelictreaper_slide
+  timer_reapercore_timeout_tick:
+    reapercore_widget:
+      action: update
+  logicblock_reapercore_counter_updated:
+    reapertimeout_widget:
+      action: update
+
+widgets:
+  corereset_widget:
+    - type: text
+      text: Hit bank to expose core!
+      z: 5
+      animations:
+        show_slide:
+          - property: opacity
+            value: 1
+            duration: 500ms
+          - property: opacity
+            value: 1
+            duration: 500ms
+          - property: opacity
+            value: 0.2
+            duration: 500ms
+            repeat: true
+    # Use this rectangle to cover up the shots/timer widgets
+    - type: rectangle
+      width: 128
+      height: 10
+      color: black
+      anchor_y: bottom
+      y: 0
+      z: 4
+  reapershots_widget:
+    - type: text
+      text: "Shots: (value)"
+      style: small
+      anchor_y: bottom
+      anchor_x: left
+      x: 2
+      y: 2
+      z: 1
+  reapertimeout_widget:
+    - type: text
+      text: (ticks)
+      style: small
+      anchor_y: bottom
+      anchor_x: right
+      x: right-2
+      y: 2
+      z: 1
+
+timers:
+  reapercore_timeout:
+    start_value: 18
+    end_value: 0
+    start_running: yes
+    direction: down
+    control_events:
+      - event: reaperhusk_hit
+        action: add
+        value: 2
+      - event: corereset_hit
+        action: restart

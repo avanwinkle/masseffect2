@@ -201,7 +201,7 @@ widget_player:
       slide: minerals_slide
       widget_settings:
         expire: 2s
-  logicblock_derelictreaper_iff_counter_hit:
+  logicblock_iff_counter_hit:
     reaperiff_progress_widget:
       action: update
       slide: minerals_slide
@@ -226,7 +226,7 @@ widgets:
       z: 3
   reaperiff_progress_widget:
     - type: text
-      text: "Reaper IFF in (count)"
+      text: "IFF ready in (count)"
       style: dmd_small
       anchor_y: bottom
       anchor_x: left

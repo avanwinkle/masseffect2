@@ -3,12 +3,15 @@
 #####
 # N7 Assignments: Field
 #
-# This field mode tracks bumper hits to enable N7 assignments. It's present during
-# field except for when the derelict reaper achievement is enabled.
+# This field mode tracks bumper hits to enable N7 assignments during field mode,
+# except for when the collector attack achievement is enabled. During that time,
+# the bumper hits countdown to the IFF test and triggers the Collector Attack
+# mode when complete. After, the N7 assignments come back.
 #####
 
 event_player:
   logicblock_n7_hits_counter_complete: start_mode_n7_assignments
+  logicblock_iff_counter_complete: start_mode_collectorattack
 
 counters:
   n7_hits_counter:
@@ -16,13 +19,27 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: n7_advance_shot_hit
+    reset_events: logicblock_iff_counter_complete # Keep it clean, reset the counter after IFF
     disable_on_complete: false
     reset_on_complete: true
     persist_state: true
     # TODO: Validate that this counter state persists on a per-player basis
+  iff_counter:
+    starting_count: 30
+    count_complete_value: 0
+    direction: down
+    count_events: iff_advance_shot_hit
+    persist_state: true
 
 shots:
   n7_advance_shot:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: mode_field_started{device.achievements.derelictreaper.state!="enabled"}
-    disable_events: achievement_derelictreaper_state_enabled
+    enable_events: mode_field_started{device.achievements.collectorattack.state!="enabled"}
+    # Do we need to disable on field mode start, or will it not automatically enable on mode start?
+    disable_events: achievement_collectorattack_state_enabled
+  iff_advance_shot:
+    switches: s_bumper_bottom, s_bumper_right, s_bumper_left
+    enable_events: mode_field_started{device.achievements.collectorattack.state=="enabled"}
+    disable_events: logicblock_iff_counter_complete
+
+
