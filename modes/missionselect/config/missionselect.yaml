@@ -46,7 +46,12 @@ show_player:
     missionselect_highlight_show:
       show_tokens:
         leds: shot_shields
-        color: FF2200
+        color: FF2200 #color_collector
+  missionselect_derelictreaper_highlighted:
+    missionselect_highlight_show:
+      show_tokens:
+        leds: shot_shields
+        color: FF2200 #color_collector
   missionselect_recruit_highlighted:
     missionselect_highlight_show{squadmate=="garrus"}:
       show_tokens:
@@ -117,6 +122,7 @@ slide_player:
   missionselect_intro_highlighted: missionselect_intro_slide
   missionselect_pass_highlighted: missionselect_pass_slide
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
+  missionselect_derelictreaper_highlighted: missionselect_derelictreaper_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
   missionselect_recruit_highlighted: missionselect_recruit_slide
 
@@ -156,6 +162,17 @@ slides:
         y: 50%
       - type: text
         text: Collector Vessel
+        anchor_y: top
+        y: 50%
+  missionselect_derelictreaper_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: Derelict
+        anchor_y: bottom
+        y: 50%
+      - type: text
+        text: Reaper
         anchor_y: top
         y: 50%
   missionselect_suicide_slide:

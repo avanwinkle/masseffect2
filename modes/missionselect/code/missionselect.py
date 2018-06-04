@@ -39,25 +39,29 @@ class MissionSelect(Carousel):
   def _build_items_list(self):
     player = self.machine.game.player
 
-    # Collector ship only (first time)
+    # Collector Ship only (first time)
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
+    # Derelict Reaper only (first time)
+    if player.achievements['derelictreaper'] == "enabled":
+      return ['derelictreaper']
 
     items = ["intro"]
     # If suicide mission is available, it goes first
     if player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
 
+    # Then any squadmates who are available to recruit
     for mate in SQUADMATES:
       status = player.vars.get("status_{}".format(mate))
       if (status == 3):
         items.append(mate)
-    
+
     # If collectorship has been played but the praetorian wasn't defeated, it can be replayed (pre-derelictreaper)
     if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
       items.append('collectorship')
-    
-    # Pass is the last item in the menu
+
+    # "Pass" is the last item in the menu
     items.append('pass')
     return items
 
@@ -92,3 +96,12 @@ class MissionSelect(Carousel):
     self.debug_log("Removing intro slide, highlighted is {} and items are: {}".format(self._highlighted_item_index, self._items))
     if self._items[0] == "intro" and self._highlighted_item_index == 0:
       self._next_item()
+
+  # Don't select or trigger selection events if there is only one item
+  def _next_item(self, **kwargs):
+    if len(self._items) > 1:
+      super()._next_item(**kwargs)
+
+  def _previous_item(self, **kwargs):
+    if len(self._items) > 1:
+      super()._previous_item(**kwargs)

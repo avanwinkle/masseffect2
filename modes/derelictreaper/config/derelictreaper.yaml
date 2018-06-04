@@ -4,7 +4,7 @@
 # DERELICT REAPER
 #
 # This is a multiball mode on a timer. Each lane is lit to damage the Reaper's
-# core, each target is lit (as a husk) to increase the timer. Completing the 
+# core, each target is lit (as a husk) to increase the timer. Completing the
 # lanes lights a super jackpot shot on a timer, after which the lanes reset.
 # If the husk timer runs out, a special shot must be hit to re-enable the lanes.
 #
@@ -19,7 +19,7 @@ mode:
   priority: 500
 
 event_player:
-  timer_reapercore_timeout_complete: 
+  timer_reapercore_timeout_complete:
     - disable_reapercore
     - enable_corereset
   corereset_hit: enable_reapercore
@@ -28,17 +28,17 @@ event_player:
 
 counters:
   reapercore_counter:
-    starting_count: 5
+    starting_count: 6
     count_complete_value: 0
     direction: down
-    count_events: reapercore_shots_lit_hit
+    count_events: reapercore_shots_lit_hit, mode_derelictreaper_started
     reset_events: reaperjackpot_hit
 
 shot_groups:
   reapercore_shots:
     shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_ramp
     enable_events: enable_reapercore
-    reset_events: enable_reapercore, reapercore_shots_hit_complete
+    reset_events: corereset_hit, reapercore_shots_hit_complete
     disable_events: disable_reapercore
 
 shot_profiles:
@@ -71,48 +71,45 @@ shots:
   reaperhusk:
     hit_events: standuptarget_hit
   corereset:
-    hit_events: sh_hitbank_hit
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: corereset_profile
     enable_events: enable_corereset
     disable_events: corereset_hit
   reapercore_left_ramp:
     hit_events: sh_left_ramp_hit
-    disable_events: reapercore_left_ramp_hit
     profile: reapercore_profile
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
     tags: envshot_left_ramp
   reapercore_left_orbit:
     hit_events: sh_left_orbit_hit
-    disable_events: reapercore_left_orbit_hit
     profile: reapercore_profile
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
     tags: envshot_left_orbit
   reapercore_right_ramp:
     hit_events: sh_right_ramp_hit
-    disable_events: reapercore_right_ramp_hit
     profile: reapercore_profile
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
   reapercore_right_orbit:
     hit_events: sh_right_orbit_hit
-    disable_events: reapercore_right_orbit_hit
     profile: reapercore_profile
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
     tags: envshot_right_orbit
   reapercore_kickback:
     hit_events: sh_kickback_hit
-    disable_events: reapercore_kickback_hit
     profile: reapercore_profile
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
     tags: envshot_kickback
 
 show_player:
-  enable_reapercore: reaperhusk_show
+  enable_reapercore:
+    reaperhusk_show:
+      priority: 1
   reaperhusk_hit:
     reaperhusk_hit_show:
       priority: 2
@@ -122,7 +119,7 @@ show_player:
 shows:
   corereset_show:
     - time: 0
-      lights: 
+      lights:
         l_hitbanks: off
         l_hitbank_shield_rgb: 00FF00
     - time: '+1'
@@ -135,11 +132,18 @@ shows:
         target_lights: on
   reaperhusk_hit_show:
     - time: 0
-      lights: 
+      lights:
         target_lights: off
     - time: 1
       lights:
         target_lights: on
+  reapercore_lit_show:
+    - time: 0
+      lights:
+        (leds): FFFFFF
+    - time: '+2'
+      lights:
+        (leds): 00101E
   reaperjackpot_show:
     - time: 0
       lights:
@@ -161,6 +165,39 @@ slides:
         y: middle+2
         z: 1
 
+sound_player:
+  enable_reapercore:
+    derelictreaper_music:
+      action: play
+    derelictreaper_music_tension:
+      action: stop
+  disable_reapercore:
+    derelictreaper_close_stinger:
+      action: play
+    derelictreaper_music:
+      action: stop
+    derelictreaper_music_tension:
+      action: play
+
+sounds:
+  derelictreaper_music:
+    file: mus_legion_acq_bossbattle.ogg
+    track: music
+    mode_end_action: stop
+    start_at: 1s
+    fade_in: 1s
+    fade_out: 1.5s
+  derelictreaper_music_tension:
+    file: mus_legion_acq_bossbattle_low.ogg
+    track: music
+    start_at: 2s
+    fade_in: 1s
+    fade_out: 1.5s
+    mode_end_action: stop
+  derelictreaper_close_stinger:
+    file: mus_legion_acq_sting_2.ogg
+    track: sfx
+
 widget_player:
   slide_derelictreaper_slide_created:
     reapershots_widget:
@@ -171,16 +208,19 @@ widget_player:
     corereset_widget:
       slide: derelictreaper_slide
   timer_reapercore_timeout_tick:
-    reapercore_widget:
+    reapertimeout_widget:
       action: update
   logicblock_reapercore_counter_updated:
-    reapertimeout_widget:
+    reapershots_widget:
       action: update
 
 widgets:
   corereset_widget:
     - type: text
       text: Hit bank to expose core!
+      style: small
+      anchor_y: top
+      y: middle
       z: 5
       animations:
         show_slide:

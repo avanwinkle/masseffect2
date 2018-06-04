@@ -146,7 +146,7 @@ shows:
   husk_shot_show:
     - time: 0
       lights:
-        (leds): 00101E
+        (leds): 00101E #color_husk
     - time: '+1'
       lights:
         (leds): off

@@ -87,10 +87,12 @@ event_player:
     - enable_collectorship
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
-  # When we have reached level 8, go to derelict reaper. This can be from 
+  # When we have reached level 8, go to derelict reaper. This can be from
   # completing 7 recruits, or fewer recruits plus other mission levelups
   player_level{value==8}:
     - enable_derelictreaper
+  missionselect_derelictreaper_selected:
+    - start_mode_derelictreaper
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

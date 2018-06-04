@@ -19,7 +19,6 @@ event_player:
       env: field
 
 config:
-  - field_derelictreaper_iff.yaml
   - field_n7assignments.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
