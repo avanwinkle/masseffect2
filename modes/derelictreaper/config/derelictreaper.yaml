@@ -8,12 +8,24 @@
 # lanes lights a super jackpot shot on a timer, after which the lanes reset.
 # If the husk timer runs out, a special shot must be hit to re-enable the lanes.
 #
-# This mode ends when the multiball drains to a single ball.
+# This mode is like a recruitment mission in that it can be chosen from mission
+# select and can be replayed until completed--and this mission must be completed
+# in order to enable the IFF counter and progress to the Suicide Mission.
+#
+# This mode has some complex rules for ending the mode and completing the
+# "derelictreaper" achievement:
+# Once all five shots have been completed, hitting the super jackpot or draining
+# all balls will complete the achievement. If the jackpot is hit and multiple
+# balls are still active, the shots will reset and play will continue until
+# only one ball remains. If the jackpot is hit and only one ball is active, the
+# mode ends immediately.
+#
+# Shot progress on the reaper core lanes is saved.
 #####
 
 mode:
   start_events: start_mode_derelictreaper
-  stop_events: stop_mode_derelictreaper
+  stop_events: stop_mode_derelictreaper, stop_wizards
   events_when_started: mode_type_wizard_started, enable_reapercore
   events_when_stopped: mode_type_wizard_stopped
   priority: 500
@@ -23,16 +35,73 @@ event_player:
     - disable_reapercore
     - enable_corereset
   corereset_hit: enable_reapercore
-  reaperjackpot_hit: derelictreaper_complete
-  achievement_derelictreaper_state_completed: levelup
+  # Hitting the jackpot completes the achievement and awards a levelup
+  reaperjackpot_hit: 
+    - derelictreaper_complete
+    - levelup
+    # If we destroy the core and there's only one ball in play, end the mode
+    - stop_mode_derelictreaper{game.balls_in_play==1}
+  # If the multiball ends and we've already destroyed the core, end the mode
+  multiball_reapercoremb_ended{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
+  # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
+  ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
 
 counters:
   reapercore_counter:
-    starting_count: 6
+    starting_count: 5
     count_complete_value: 0
     direction: down
-    count_events: reapercore_shots_lit_hit, mode_derelictreaper_started
+    count_events: reapercore_shots_lit_hit
     reset_events: reaperjackpot_hit
+    disable_on_complete: true
+    persist_state: true
+
+multiballs:
+  reapercoremb:
+    ball_count: 2
+    ball_count_type: total
+    # Without ball save the multiball auto stops upon start, so just "start" it
+    # every time the reaper core opens and there is only one ball in play
+    start_events: enable_reapercore{game.balls_in_play<2}
+
+#####
+# DERELICT REAPER SCORING
+#
+# Each round begins with a hurryup value of 1,000 plus a 0.2x multiple for each
+# starting shot lit, saved in the temp_multiplier value. Hitting a shot stores
+# the hurryup value and re-adds the starting value to the hurryup, and the
+# hurryup drains at a constant rate (1,000 pts per 18 seconds) down to a minimum
+# value of 500. 
+#
+# Restarting the mode or re-enabling the core triggers a recalculation of the
+# multiplier based on the number of lit shots, so the more tries a player takes
+# the less value each completed shot awards.
+#
+# Hitting the jackpot shot multiplies the _entire_ built value by the shot-count
+# multiplier.
+#####
+variable_player:
+  mode_derelictreaper_started:
+    temp_build_value:
+      action: set
+      int: 0
+  enable_reapercore:
+    temp_multiplier:
+      action: set
+      float: 1 + (0.2 * device.counters.reapercore_counter.value)
+    temp_hurryup_value:
+      action: set
+      int: 1000 * current_player.temp_multiplier
+  reapercore_shots_lit_hit:
+    temp_hurryup_value: 1000 * current_player.temp_multiplier
+    temp_build_value: current_player.temp_hurryup_value
+  timer_reapercore_timeout_tick{current_player.temp_hurryup_value>500}:
+    temp_hurryup_value: -55
+  reaperjackpot_hit:
+    temp_build_value: current_player.temp_build_value * current_player.temp_multiplier
+  mode_derelictreaper_will_stop:
+    score: current_player.temp_build_value
+
 
 shot_groups:
   reapercore_shots:

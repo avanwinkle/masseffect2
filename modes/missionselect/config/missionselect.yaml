@@ -134,11 +134,6 @@ slides:
         style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
-      - type: text
-        text: < FLIPPERS >
-        anchor_y: bottom
-        style: dmd_small
-        y: 3
   missionselect_recruit_slide:
     priority: 1
     widgets:
@@ -199,10 +194,14 @@ slides:
         anchor_y: bottom
         y: bottom+45%
 
-variable_player:
-  mode_missionselect_started:
-    missionselect_init:
-      action: set
-      int: 0
-  slide_missionselect_intro_slide_active:
-    missionselect_init: 1
+widget_player:
+  # The intro slide appears whenever there are multiple options, so show arrows
+  missionselect_intro_highlighted: select_arrows_widget
+  
+widgets:
+  select_arrows_widget:
+    - type: text
+      text: < FLIPPERS TO SELECT >
+      anchor_y: bottom
+      style: small
+      y: 3

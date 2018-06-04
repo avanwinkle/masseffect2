@@ -67,12 +67,12 @@ flippers:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
     enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, flippers_off, right_flipper_off
+    disable_events: ball_ending, service_mode_entered, flippers_off, right_flipper_off
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
     enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, flippers_off, left_flipper_off
+    disable_events: ball_ending, service_mode_entered, flippers_off, left_flipper_off
 
 drop_targets:
   bottom:
@@ -100,18 +100,28 @@ autofire_coils:
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
+    enable_events: ball_started, slingshots_on
+    disable_events: ball_ending, service_mode_entered, slingshots_off
   left_slingshot:
     switch: s_left_slingshot
     coil: c_slingshot_left
+    enable_events: ball_started, slingshots_on
+    disable_events: ball_ending, service_mode_entered, slingshots_off
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
   right_bumper:
     switch: s_bumper_right
     coil: c_bumper_right
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
 
 switches:
   s_start_button:
@@ -539,6 +549,7 @@ coils:
   c_plunger:
     number: 9-1
     default_pulse_ms: 18
+    pulse_events: pulse_plunger
   c_trough_eject:
     number: 9-2
     default_pulse_ms: 24

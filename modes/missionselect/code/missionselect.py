@@ -39,16 +39,16 @@ class MissionSelect(Carousel):
   def _build_items_list(self):
     player = self.machine.game.player
 
-    # Collector Ship only (first time)
+    # If Collector Ship is available, it is the only option
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
-    # Derelict Reaper only (first time)
-    if player.achievements['derelictreaper'] == "enabled":
-      return ['derelictreaper']
 
     items = ["intro"]
-    # If suicide mission is available, it goes first
-    if player.achievements['suicidemission'] == "enabled":
+    # If Derelict Reaper is available and not completed, it goes first
+    if player.achievements['derelictreaper'] not in ("disabled", "completed"):
+      items.append('derelictreaper')
+    # If Suicide Mission is ready, it goes first
+    elif player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
 
     # Then any squadmates who are available to recruit

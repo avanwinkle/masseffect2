@@ -54,10 +54,10 @@ achievements:
     start_events: start_mode_derelictreaper
     stop_events: mode_derelictreaper_will_stop
     complete_events: derelictreaper_complete
-  collectorattack:
+  normandyattack:
     enable_events: mode_derelictreaper_will_stop # Automatically enabled after derelict reaper
-    start_events: mode_collectorattack_started
-    complete_events: mode_collectorattack_will_stop # Only played once, completed after playing
+    start_events: mode_normandyattack_started
+    complete_events: mode_normandyattack_will_stop # Only played once, completed after playing
   # SUICIDE MISSION
   suicidemission:
     enable_events: enable_suicidemission

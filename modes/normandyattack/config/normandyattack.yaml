@@ -1,0 +1,151 @@
+#config_version=5
+
+#####
+# NORMANDY ATTACKED
+#####
+
+mode:
+  start_events: start_mode_normandyattack
+  stop_events: stop_mode_normandyattack, stop_wizards
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
+  priority: 2000
+
+event_player:
+  mode_normandyattack_started:
+    - flippers_off
+    - bumpers_off
+    - slingshots_off
+  normandyattack_begin:
+    - flippers_on
+    - bumpers_on
+    - slingshots_on
+    # If it's time to begin and the ball is in the plunger lane, fire it out!
+    - pulse_plunger{device.switches.s_plunger_lane.state==1}
+
+ball_saves:
+  normandyattack_save:
+    delayed_eject_events: normandyattack_saveball
+    auto_launch: false
+
+show_player:
+  mode_normandyattack_started: normandyattack_shutdown_show
+
+shows:
+  normandyattack_shutdown_show:
+    - time: 0
+      slides:
+        blank_slide:
+          action: play
+      lights:
+        gi: off
+      tracks:
+        __all__:
+          action: stop_all_sounds
+          fade: 0
+    - time: 2s
+      sounds: edi_propulsion_disabled_virus_detected
+
+slides:
+  blank_slide: []
+
+sound_player:
+  play_normandy_tension: normandyattack_music
+  play_horizon_tension: horizon_tension_music
+  ball_drain: 
+    - edi_main_corridors_no_longer_safe
+    - normandyattack_music
+  balldevice_bd_trough_eject_success: edi_emergency_floor_lighting
+
+sounds:
+  normandyattack_music:
+    file: mus_critpath3_tension_1.ogg
+    track: music
+    fade_in: 1s
+    about_to_finish_time: 5s
+    events_when_about_to_finish: play_horizon_tension
+    mode_end_action: stop
+  horizon_tension_music:
+    file: mus_critpath1_tension_2.ogg
+    track: music
+    fade_in: 1s
+    about_to_finish_time: 3s
+    events_when_about_to_finish: play_horizon_tension
+    mode_end_action: stop
+  edi_propulsion_disabled_virus_detected:
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
+    track: voice
+  edi_main_corridors_no_longer_safe:
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
+    track: voice
+    events_when_stopped: normandyattack_saveball
+  edi_emergency_floor_lighting:
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
+    track: voice
+    events_when_stopped: normandyattack_begin
+  edi_i_have_control: 
+    file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg
+    track: voice
+  edi_instr_maint_shaft_far_end:
+    file: en_us_hench_ai_norcr3_ai_level1_a_00211038_m.ogg
+    track: voice
+  edi_instr_go_through_medical_to_reach_core:
+    file: en_us_hench_ai_norcr3_ai_level2_a_00225609_m.ogg
+    track: voice
+  edi_instr_connect_core:
+    file: en_us_hench_ai_norcr3_ai_core_d_00193456_m.ogg
+    track: voice
+  edi_instr_shaft_behind_to_engineering:
+    file: en_us_hench_ai_norcr3_ai_core_d_00193458_m.ogg
+    track: voice
+  edi_instr_engineering_is_clear:
+    file: en_us_hench_ai_norcr3_ai_level3_a_00193624_m.ogg
+    track: voice
+  edi_instr_activate_the_drive:
+    file: en_us_hench_ai_norcr3_ai_engines_d_00224561_m.ogg
+    track: voice
+  edi_hostiles_approaching:
+    file: en_us_hench_ai_norcr3_ai_level1_a_00211037_m.ogg
+    track: voice
+  edi_hostiles_closing_in:
+    file: en_us_hench_ai_norcr3_ai_level2_a_00314751_m.ogg
+    track: voice
+  edi_hostiles_returning:
+    file: en_us_hench_ai_norcr3_ai_level3_a_00314752_m.ogg
+    track: voice
+  edi_finished:
+    file: en_us_hench_ai_norcr3_escape_c_00193467_m.ogg
+    track: voice
+  joker_ah_shit:
+    file: en_us_hench_joker_norcr3_ai_cockpit_d_00331879_m.ogg
+    track: voice
+  joker_shit_1: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312046_m.ogg
+    track: voice
+  joker_shit_2: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312047_m.ogg
+    track: voice
+  joker_shit_3: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312048_m.ogg
+    track: voice
+  joker_shit_4: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312049_m.ogg
+    track: voice
+  joker_shit_5: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312050_m.ogg
+    track: voice
+  joker_shit_6: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312051_m.ogg
+    track: voice
+  joker_shit_7: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312052_m.ogg
+    track: voice
+  joker_shit_8: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312053_m.ogg
+    track: voice
+  joker_shit_9: 
+    file: en_us_hench_joker_norcr3_jokershit_a_00312054_m.ogg
+    track: voice
+  joker_death:
+    file: en_us_hench_joker_norcr3_mission_failure_c_00312044_m.ogg
+    track: voice

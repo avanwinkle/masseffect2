@@ -19,7 +19,7 @@ event_player:
       env: field
 
 config:
-  - field_n7assignments.yaml
+  - field_bumpers.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
   - field_shopping.yaml
