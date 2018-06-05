@@ -16,11 +16,15 @@ mode_settings:
     - l_right_orbit_shield_rgb
     - l_action_button_rgb
   white_lights:
-    - l_dropbank_bottom
-    - l_dropbank_middle
-    - l_dropbank_top
-    - l_battering_ram_arrow
-    - l_left_ramp_arrow_green
+    - l_right_ramp_arrow_red
+    - l_right_orbit_arrow_red
+    - l_left_ramp_arrow_red
+    # - l_dropbank_bottom
+    # - l_dropbank_middle
+    # - l_dropbank_top
+    # - l_battering_ram_arrow
+    # - l_left_ramp_arrow_green
+
 
 slide_player:
   mode_colorpicker_started:

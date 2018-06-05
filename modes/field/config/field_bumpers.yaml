@@ -43,8 +43,8 @@ shots:
     disable_events: logicblock_iff_counter_complete
 
 sound_player:
-  logicblock_iff_counter_hit{value==20}: joker_iff_ready_to_go
-  logicblock_iff_counter_hit{value==10}: edi_iff_almost_ready
+  logicblock_iff_counter_hit{count==25}: joker_iff_ready_to_go
+  logicblock_iff_counter_hit{count==15}: edi_iff_almost_ready
 
 sounds:
   edi_iff_almost_ready:

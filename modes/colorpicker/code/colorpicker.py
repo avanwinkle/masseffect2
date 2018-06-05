@@ -43,7 +43,7 @@ class ColorPicker(Mode):
   def set_white(self):
     for light in self.machine.device_manager.collections["lights"].items_tagged("colorpicker-white-light"):
       light.clear_stack()
-      light.on(brightness=self.white)
+      light.on(brightness=self.white, priority=10000)
     self.machine.events.post("colorpicker_white_updated",
       brightness="{:02x}".format(self.white))
 

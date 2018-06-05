@@ -16,24 +16,129 @@ event_player:
     - flippers_off
     - bumpers_off
     - slingshots_off
+    - play_edi|2s
+  play_edi:
+    set_environment:
+      env: collectors
   normandyattack_begin:
     - flippers_on
     - bumpers_on
     - slingshots_on
+  normandyattack_launchball:
     # If it's time to begin and the ball is in the plunger lane, fire it out!
-    - pulse_plunger{device.switches.s_plunger_lane.state==1}
+    - pulse_plunger
+  normandy_dropbank_lit_hit:
+    - levelup
+    - stop_mode_normandyattack
 
 ball_saves:
-  normandyattack_save:
+  normandyattack_openingsave:
     delayed_eject_events: normandyattack_saveball
     auto_launch: false
+  normandyattack_save:
+    delayed_eject_events: normandyattack_saveball
+    balls_to_save: 3
+    enable_events: normandyattack_begin
+
+counters:
+  # This counter is just a way to debounce multiple hits on drop/hitbanks
+  normandyattack_counter:
+    starting_count: 0
+    count_events: normandy_shots_lit_hit
+    multiple_hit_window: 500ms # In case both hitbanks are hit together
+    direction: up
+  normandyattack_shit:
+    starting_count: 0
+    count_events: normandy_shots_off_hit
+    multiple_hit_window: 1500ms # In case both hitbanks are hit together
+    direction: up
+
+shot_groups:
+  normandy_shots:
+    shots:
+      - normandy_left_ramp
+      - normandy_right_ramp
+      - normandy_hitbank
+      - normandy_kickback
+      - normandy_left_orbit
+      - normandy_right_orbit
+      - normandy_dropbank
+    rotate_right_events: logicblock_normandyattack_counter_hit
+
+shot_profiles:
+  normandy_profile:
+    advance_on_hit: false
+    states:
+      - name: off
+      - name: lit
+        show: normandy_escapelights
+  normandy_bank_profile:
+    advance_on_hit: false
+    states:
+      - name: off
+      - name: lit
+        show: normandy_escapebanks
+
+shots:
+  normandy_plunge:
+    hit_events: balldevice_bd_trough_ball_eject_success
+    disable_events: normandyattack_begin
+  normandy_left_ramp:
+    hit_events: sh_left_ramp_hit
+    advance_events: normandyattack_begin # This is the first shot to be lit
+    profile: normandy_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+      arrows: l_left_ramp_arrow_red
+    tags: envshot_left_ramp
+  normandy_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: normandy_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+      arrows: l_left_orbit_arrow_red
+    tags: envshot_left_orbit
+  normandy_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: normandy_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+      arrows: l_right_ramp_arrow_red
+    tags: envshot_right_ramp
+  normandy_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: normandy_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+      arrows: l_right_orbit_arrow_red
+    tags: envshot_right_orbit
+  normandy_kickback:
+    hit_events: sh_kickback_hit
+    profile: normandy_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+      arrows: l_kickback_arrow_red
+    tags: envshot_kickback
+  normandy_dropbank:
+    hit_events: sh_dropbank_top_hit, sh_dropbank_bottom_hit, sh_dropbank_middle_hit
+    profile: normandy_bank_profile
+    show_tokens:
+      leds: l_dropbank_shield_rgb
+      flashers: l_flash_slingshots
+  normandy_hitbank:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    profile: normandy_bank_profile
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+      flashers: l_flash_sword_lock
 
 show_player:
   mode_normandyattack_started: normandyattack_shutdown_show
+  normandyattack_begin: normandyattack_show
 
 shows:
   normandyattack_shutdown_show:
-    - time: 0
+    - duration: -1
       slides:
         blank_slide:
           action: play
@@ -43,8 +148,45 @@ shows:
         __all__:
           action: stop_all_sounds
           fade: 0
-    - time: 2s
-      sounds: edi_propulsion_disabled_virus_detected
+  normandyattack_show:
+    - time: 0
+      flashers:
+        l_flash_dragon_left: 80ms
+    - time: '+3'
+      flashers:
+        l_flash_back_panel_left: 80ms
+    - time: '+2'
+      flashers:
+        l_flash_sword_lock: 80ms
+    - time: '+4'
+  normandy_escapelights:
+    - time: 0
+      lights:
+        (leds): 220000
+        (arrows): 00
+    - time: '+1'
+      lights:
+        (leds): 000000
+        (arrows): 44
+    - time: '+1'
+      lights:
+        (leds): 000000
+        (arrows): 00
+  normandy_escapebanks:
+    - time: 0
+      lights:
+        (leds): 220000
+        (flashers): off
+    - time: '+1'
+      lights:
+        (leds): 000000
+      flashers:
+        (flashers): 120ms
+    - time: '+1'
+      lights:
+        (leds): 000000
+        (flashers): off
+
 
 slides:
   blank_slide: []
@@ -52,25 +194,53 @@ slides:
 sound_player:
   play_normandy_tension: normandyattack_music
   play_horizon_tension: horizon_tension_music
-  ball_drain: 
-    - edi_main_corridors_no_longer_safe
-    - normandyattack_music
-  balldevice_bd_trough_eject_success: edi_emergency_floor_lighting
+  play_edi: edi_propulsion_disabled_virus_detected
+  ball_save_normandyattack_openingsave_saving_ball: edi_ballsave
+  ball_save_normandyattack_save_saving_ball: edi_ballsave
+  # For the opening intro, play a sound between the trough eject and the plunge
+  normandy_plunge_hit: edi_emergency_floor_lighting
+  logicblock_normandyattack_counter_hit: normandy_advance
+  logicblock_normandyattack_shit_hit: joker_shit
+  normandy_dropbank_lit_hit: edi_finished
+
+sound_pools:
+  edi_ballsave:
+    track: voice
+    sounds:
+      - edi_main_corridors_no_longer_safe
+      - edi_hostiles_approaching
+      - edi_hostiles_returning
+      - edi_hostiles_closing_in
+  normandy_advance:
+    track: voice
+    sounds:
+      - edi_instr_maint_shaft_far_end
+      - edi_instr_go_through_medical_to_reach_core
+      - edi_instr_connect_core
+      - edi_instr_shaft_behind_to_engineering
+      - edi_instr_engineering_is_clear
+      - edi_instr_activate_the_drive
+      - edi_i_have_control
+  joker_shit:
+    sounds: joker_shit_1, joker_shit_2, joker_shit_3, joker_shit_4, joker_shit_5, joker_shit_6, joker_shit_7, joker_shit_8, joker_shit_9
+    type: random_force_all
+    track: voice
+    max_queue_time: 500ms
 
 sounds:
   normandyattack_music:
     file: mus_critpath3_tension_1.ogg
     track: music
     fade_in: 1s
-    about_to_finish_time: 5s
-    events_when_about_to_finish: play_horizon_tension
     mode_end_action: stop
+    markers:
+      - time: 11s
+        events: play_horizon_tension
   horizon_tension_music:
     file: mus_critpath1_tension_2.ogg
     track: music
     fade_in: 1s
-    about_to_finish_time: 3s
-    events_when_about_to_finish: play_horizon_tension
+    events_when_stopped: play_horizon_tension
     mode_end_action: stop
   edi_propulsion_disabled_virus_detected:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
@@ -78,12 +248,13 @@ sounds:
   edi_main_corridors_no_longer_safe:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
     track: voice
+    events_when_played: play_normandy_tension
     events_when_stopped: normandyattack_saveball
   edi_emergency_floor_lighting:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
     track: voice
-    events_when_stopped: normandyattack_begin
-  edi_i_have_control: 
+    events_when_stopped: normandyattack_begin, normandyattack_launchball
+  edi_i_have_control:
     file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg
     track: voice
   edi_instr_maint_shaft_far_end:
@@ -107,43 +278,46 @@ sounds:
   edi_hostiles_approaching:
     file: en_us_hench_ai_norcr3_ai_level1_a_00211037_m.ogg
     track: voice
+    events_when_stopped: normandyattack_saveball
   edi_hostiles_closing_in:
     file: en_us_hench_ai_norcr3_ai_level2_a_00314751_m.ogg
     track: voice
+    events_when_stopped: normandyattack_saveball
   edi_hostiles_returning:
     file: en_us_hench_ai_norcr3_ai_level3_a_00314752_m.ogg
     track: voice
+    events_when_stopped: normandyattack_saveball
   edi_finished:
     file: en_us_hench_ai_norcr3_escape_c_00193467_m.ogg
     track: voice
   joker_ah_shit:
     file: en_us_hench_joker_norcr3_ai_cockpit_d_00331879_m.ogg
     track: voice
-  joker_shit_1: 
+  joker_shit_1:
     file: en_us_hench_joker_norcr3_jokershit_a_00312046_m.ogg
     track: voice
-  joker_shit_2: 
+  joker_shit_2:
     file: en_us_hench_joker_norcr3_jokershit_a_00312047_m.ogg
     track: voice
-  joker_shit_3: 
+  joker_shit_3:
     file: en_us_hench_joker_norcr3_jokershit_a_00312048_m.ogg
     track: voice
-  joker_shit_4: 
+  joker_shit_4:
     file: en_us_hench_joker_norcr3_jokershit_a_00312049_m.ogg
     track: voice
-  joker_shit_5: 
+  joker_shit_5:
     file: en_us_hench_joker_norcr3_jokershit_a_00312050_m.ogg
     track: voice
-  joker_shit_6: 
+  joker_shit_6:
     file: en_us_hench_joker_norcr3_jokershit_a_00312051_m.ogg
     track: voice
-  joker_shit_7: 
+  joker_shit_7:
     file: en_us_hench_joker_norcr3_jokershit_a_00312052_m.ogg
     track: voice
-  joker_shit_8: 
+  joker_shit_8:
     file: en_us_hench_joker_norcr3_jokershit_a_00312053_m.ogg
     track: voice
-  joker_shit_9: 
+  joker_shit_9:
     file: en_us_hench_joker_norcr3_jokershit_a_00312054_m.ogg
     track: voice
   joker_death:

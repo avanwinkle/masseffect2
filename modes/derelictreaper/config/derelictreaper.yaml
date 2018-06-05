@@ -36,7 +36,7 @@ event_player:
     - enable_corereset
   corereset_hit: enable_reapercore
   # Hitting the jackpot completes the achievement and awards a levelup
-  reaperjackpot_hit: 
+  reaperjackpot_hit:
     - derelictreaper_complete
     - levelup
     # If we destroy the core and there's only one ball in play, end the mode
@@ -62,7 +62,7 @@ multiballs:
     ball_count_type: total
     # Without ball save the multiball auto stops upon start, so just "start" it
     # every time the reaper core opens and there is only one ball in play
-    start_events: enable_reapercore{game.balls_in_play<2}
+    start_events: mode_derelictreaper_started, enable_reapercore{game.balls_in_play<2}
 
 #####
 # DERELICT REAPER SCORING
@@ -71,7 +71,7 @@ multiballs:
 # starting shot lit, saved in the temp_multiplier value. Hitting a shot stores
 # the hurryup value and re-adds the starting value to the hurryup, and the
 # hurryup drains at a constant rate (1,000 pts per 18 seconds) down to a minimum
-# value of 500. 
+# value of 500.
 #
 # Restarting the mode or re-enabling the core triggers a recalculation of the
 # multiplier based on the number of lit shots, so the more tries a player takes
@@ -102,12 +102,11 @@ variable_player:
   mode_derelictreaper_will_stop:
     score: current_player.temp_build_value
 
-
 shot_groups:
   reapercore_shots:
-    shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_ramp
+    shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_orbit
     enable_events: enable_reapercore
-    reset_events: corereset_hit, reapercore_shots_hit_complete
+    reset_events: reapercore_shots_hit_complete
     disable_events: disable_reapercore
 
 shot_profiles:
@@ -130,20 +129,23 @@ shot_profiles:
     states:
       - name: lit
         show: reaperjackpot_show
-        speed: 4
+        speed: 6
 
 shots:
   reaperjackpot:
     hit_events: s_battering_ram_active
     profile: reaperjackpot_profile
     enable_events: reapercore_shots_hit_complete
+    disable_events: reaperjackpot_hit
   reaperhusk:
-    hit_events: standuptarget_hit
+    hit_events: sw_standuptarget_active
+    enable_events: enable_reapercore
+    disable_events: disable_reapercore, reapercore_shots_hit_complete
   corereset:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: corereset_profile
     enable_events: enable_corereset
-    disable_events: corereset_hit
+    disable_events: corereset_hit, enable_reapercore
   reapercore_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: reapercore_profile
@@ -209,17 +211,22 @@ shows:
   reapercore_lit_show:
     - time: 0
       lights:
-        (leds): FFFFFF
-    - time: '+2'
+        (leds): 333373
+    - time: '+1'
       lights:
         (leds): 00101E
+    - time: '+2'
+      lights:
+        (leds): 4444D9
   reaperjackpot_show:
     - time: 0
       lights:
         l_battering_ram_arrow: on
+        l_battering_ram_top: off
     - time: '+1'
       lights:
         l_battering_ram_arrow: off
+        l_battering_ram_top: on
 
 slide_player:
   mode_derelictreaper_started: derelictreaper_slide
@@ -268,14 +275,12 @@ sounds:
     track: sfx
 
 widget_player:
-  slide_derelictreaper_slide_created:
-    reapershots_widget:
-      slide: derelictreaper_slide
-    reapertimeout_widget:
-      slide: derelictreaper_slide
   enable_corereset:
     corereset_widget:
       slide: derelictreaper_slide
+  enable_reapercore:
+    corereset_widget:
+      action: remove
   timer_reapercore_timeout_tick:
     reapertimeout_widget:
       action: update
@@ -342,3 +347,5 @@ timers:
         value: 2
       - event: corereset_hit
         action: restart
+      - event: reapercore_shots_hit_complete
+        action: stop

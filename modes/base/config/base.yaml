@@ -156,6 +156,7 @@ ball_saves:
     disable_events:
       - ball_will_end
       - ball_save_recruitsave_enabled # Only allow one active save at a time
+      - start_mode_normandyattack # We want the ball to drain when this starts
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

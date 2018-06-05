@@ -262,7 +262,10 @@ shows:
         l_right_top_lane: black
 
 sound_player:
-  planet_shots_hit_complete: scan_complete_sound
+  planet_shots_hit_complete:
+    scan_complete_sound:
+      action: play
+      max_queue_time: 1s
 
 sound_pools:
   scan_complete_sound:
