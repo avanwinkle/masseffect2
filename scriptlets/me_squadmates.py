@@ -30,10 +30,10 @@ COLORS = {
 }
 
 class MESquadmates(Scriptlet):
-  """ 
+  """
   This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
   a convenient way to automate the event postings over all squadmates without a bunch of copy+paste in the yaml
-  files. 
+  files.
 
   Possible extensions of this scriptlet:
    - Incrementing the status_squadmate player variable
@@ -45,7 +45,9 @@ class MESquadmates(Scriptlet):
     self.log.setLevel('DEBUG')
 
     for mate in SQUADMATES:
+      # TODO: Add and remove these shot handlers as field mode is enabled/disabled?
       self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+      # TODO: Add and remove these shot handlers as individual recruit modes are enabled/disabled?
       self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
 
   def _on_hit(self, **kwargs):

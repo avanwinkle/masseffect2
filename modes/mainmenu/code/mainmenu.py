@@ -139,7 +139,7 @@ class MainMenu(Carousel):
       self._post_career_event("career_loaded")
     else:
       self.error_log("Unknown selection '{}' from main menu!".format(selection))
-    self.info_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
+    self.debug_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
     super()._select_item()
 
   def _update_highlighted_item(self, direction):

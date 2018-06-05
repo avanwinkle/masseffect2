@@ -26,21 +26,21 @@ class SaveCareer(Scriptlet):
       # Attach the career name to the current player
       self.machine.game.player["career_name"] = career_name
 
-    self.log.info("Set career to '{}', Args={}".format(self.machine.game.player.career_name, kwargs))
+    self.log.debug("Set career to '{}', Args={}".format(self.machine.game.player.career_name, kwargs))
 
   def _save_career(self, **kwargs):
     # This is asynchronous so fetch the player from the event, not necessarily the "current" player
     player = self.machine.game.player_list[kwargs.get("number") - 1]
     if not self._current_careers.get(player.number):
-      self.log.debug("Player {} is casual, not saving career".format(
+      self.log.info("Player {} is casual, not saving career".format(
         player.number))
       return
     elif player.vars.get("readonly", 0) == 1:
-      self.log.debug("Career '{}' is readonly, aborting save".format(
+      self.log.info("Career '{}' is readonly, aborting save".format(
         player.career_name))
       return
 
-    self.log.info("Saving career for player {}".format(player.number))
+    self.log.info("Saving career '{}' for player {}".format(player.career_name, player.number))
     newcareer = {"last_played": datetime.now().timestamp()}
 
     for key, value in player.vars.items():
@@ -65,8 +65,7 @@ class SaveCareer(Scriptlet):
         careerdata = json.load(f)
         self._achievement_handlers = {}
 
-        self.log.info("Loading career with careerdata {}".format(careerdata))
-        self.log.info("Player is {}".format(player))
+        self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
         for key,value in careerdata.items():
           if key in PLAYER_VARS or key.startswith("status_"):
             setattr(player, key, value) # e.g. player.available_missions = 2
@@ -79,21 +78,21 @@ class SaveCareer(Scriptlet):
                             achievement=achievement,
                             state=state)
                 self._achievement_handlers[achievement] = handler
-        self.log.info("Created achievement handlers: {}".format(self._achievement_handlers))
+        self.log.debug("Created achievement handlers: {}".format(self._achievement_handlers))
       f.close()
     # Allow the queue to continue
     self.machine.events.post("career_loaded", career_name=player.career_name)
 
   def _force_achievement(self, **kwargs):
-    self.machine.log.info("Forcing acchievement state with kwargs {}".format(kwargs))
+    self.log.info(" - Loading achievement '{achievement}' into state '{state}'".format(**kwargs))
     player_achievements = self.machine.game.player.achievements
     player_achievements[kwargs["achievement"]] = kwargs["state"]
 
     self.machine.events.remove_handler_by_key(self._achievement_handlers[kwargs["achievement"]])
     del self._achievement_handlers[kwargs["achievement"]]
 
-    self.log.info("Player achievements are now: {}".format(player_achievements))
-    self.log.info("Save handlers are now: {}".format(self._achievement_handlers))
+    self.log.debug("Player achievements are now: {}".format(player_achievements))
+    self.log.debug("Save handlers are now: {}".format(self._achievement_handlers))
 
   def _get_filename(self, career_name):
     return "{}/{}.json".format(self.machine.machine_path + "/savegames", career_name)

@@ -6,8 +6,10 @@ variable_player:
     score: 5000
     available_missions: 1
   recruit_success:
-    score: 10000
     squadmates_count: 1
+    score: 10000
+    available_missions: -1
+  # TODO: Move all these repetative handlers to MESquadmates py file?
   recruit_advance_garrus:
     status_garrus: 1
   recruit_advance_grunt:

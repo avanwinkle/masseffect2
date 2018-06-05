@@ -2,7 +2,6 @@
 mode:
   start_events: ball_starting
   stop_events: ball_will_end
-  # code: base.Base
   priority: 100
 
 config:
@@ -60,7 +59,7 @@ achievements:
     complete_events: mode_normandyattack_will_stop # Only played once, completed after playing
   # SUICIDE MISSION
   suicidemission:
-    enable_events: enable_suicidemission
+    enable_events: achievement_normandyattack_state_completed
     start_events: mode_suicidemission_base_started
     stop_events: mode_suicidemission_base_will_stop
     complete_events: suicidemission_complete
@@ -88,7 +87,11 @@ event_player:
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
   # When we have reached level 8, go to derelict reaper. This can be from
-  # completing 7 recruits, or fewer recruits plus other mission levelups
+  # completing 7 recruits, or fewer recruits plus other mission levelups. It's
+  # important to track how many levels are possible to avoid enabling derelict
+  # reaper _before_ collectorship. Since collectorship requires 4 recruits and
+  # derelict reaper requires 7 levelups, only three levelups should be allowed
+  # before collectorship: Overlord, Shadowbroker Vasir, and Shadowbroker Boss
   player_level{value==8}:
     - enable_derelictreaper
   missionselect_derelictreaper_selected:
@@ -152,11 +155,11 @@ ball_saves:
     enable_events:
       - mode_base_started
     timer_start_events:
-      - balldevice_bd_plunger_ball_eject_success #mode_base_started
+      - balldevice_bd_plunger_ball_eject_success
     disable_events:
       - ball_will_end
       - ball_save_recruitsave_enabled # Only allow one active save at a time
-      - start_mode_normandyattack # We want the ball to drain when this starts
+      - start_mode_normandyattack # We want the ball to drain when the attack starts
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -164,13 +167,23 @@ ball_saves:
 variable_player:
   levelup:
     level: 1
-  recruit_success:
-    available_missions: -1
-  enable_collectorship:
+  # Use achievements to track available missions
+  # TODO: Use a common wizard-type class to set availability
+  achievement_collectorship_state_enabled:
     available_missions: 1
-  mode_collectorship_base_stopped:
+  achievement_collectorship_state_completed:
     available_missions: -1
-  # If a new mission becomes available, disable the bypass
+  achievement_derelictreaper_state_enabled:
+    available_missions: 1
+  achievement_derelictreaper_state_completed:
+    available_missions: -1
+  achievement_normandyattack_state_enabled:
+    available_missions: 1
+  achievement_normandyattack_state_completed:
+    available_missions: -1
+  achievement_suicidemission_state_enabled:
+    available_missions: 1
+  # If a new mission becomes available, remove the player-selected bypass
   player_available_missions{value>0}:
     bypass_missionselect:
       action: set
