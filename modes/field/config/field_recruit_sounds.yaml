@@ -1,42 +1,42 @@
 #config_version=5
 sound_player:
-  recruit_advance_garrus:
+  recruit_garrus_shot_hit:
     shot_hit_sounds_garrus:
       action: play
       max_queue_time: 1s
-  recruit_advance_grunt:
+  recruit_grunt_shot_hit:
     shot_hit_sounds_grunt:
       action: play
       max_queue_time: 1s
-  recruit_advance_jack:
+  recruit_jack_shot_hit:
     shot_hit_sounds_jack:
       action: play
       max_queue_time: 1s
-  recruit_advance_kasumi:
+  recruit_kasumi_shot_hit:
     shot_hit_sounds_kasumi:
       action: play
       max_queue_time: 1s
-  recruit_advance_legion:
+  recruit_legion_shot_hit:
     shot_hit_sounds_legion:
       action: play
       max_queue_time: 1s
-  recruit_advance_mordin:
+  recruit_mordin_shot_hit:
     shot_hit_sounds_mordin:
       action: play
       max_queue_time: 1s
-  recruit_advance_samara:
+  recruit_samara_shot_hit:
     shot_hit_sounds_samara:
       action: play
       max_queue_time: 1s
-  recruit_advance_tali:
+  recruit_tali_shot_hit:
     shot_hit_sounds_tali:
       action: play
       max_queue_time: 1s
-  recruit_advance_thane:
+  recruit_thane_shot_hit:
     shot_hit_sounds_thane:
       action: play
       max_queue_time: 1s
-  recruit_advance_zaeed:
+  recruit_zaeed_shot_hit:
     shot_hit_sounds_zaeed:
       action: play
       max_queue_time: 1s

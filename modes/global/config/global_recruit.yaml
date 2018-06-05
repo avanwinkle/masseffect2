@@ -28,19 +28,6 @@ config:
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
 
-event_player:
-  missionselect_recruitmission_selected:
-    - start_mode_recruitgarrus{squadmate=="garrus"}
-    - start_mode_recruitgrunt{squadmate=="grunt"}
-    - start_mode_recruitjack{squadmate=="jack"}
-    - start_mode_recruitkasumi{squadmate=="kasumi"}
-    - start_mode_recruitlegion{squadmate=="legion"}
-    - start_mode_recruitmordin{squadmate=="mordin"}
-    - start_mode_recruitsamara{squadmate=="samara"}
-    - start_mode_recruittali{squadmate=="tali"}
-    - start_mode_recruitthane{squadmate=="thane"}
-    - start_mode_recruitzaeed{squadmate=="zaeed"}
-
 #####
 # This is just while I'm developing and debugging missions, a little cheat ;)
 #####

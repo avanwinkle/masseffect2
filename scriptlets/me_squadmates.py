@@ -43,12 +43,23 @@ class MESquadmates(Scriptlet):
   def on_load(self):
     self.log = logging.getLogger("MESquadmates")
     self.log.setLevel('DEBUG')
+    self._current_recruit = None
 
+    # Create a listener for a recruitmission to start
+    self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
+
+  def _enable_shothandlers(self):
+    self.machine.events.remove_handler(self._enable_shothandlers)
+    self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)
     for mate in SQUADMATES:
-      # TODO: Add and remove these shot handlers as field mode is enabled/disabled?
-      self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
-      # TODO: Add and remove these shot handlers as individual recruit modes are enabled/disabled?
-      self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
+      if self.machine.game.player["status_{}".format(mate)] < 4:
+        self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+    self.machine.log.info("Created a bunch of shothandlers!", self)
+  
+  def _disable_shothandlers(self):
+    self.machine.events.remove_handler(self._on_hit)
+    self.machine.events.remove_handler(self._disable_shothandlers)
+    self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
   def _on_hit(self, **kwargs):
     self.log.debug("Received HIT event with kwargs: {}".format(kwargs))
@@ -57,16 +68,33 @@ class MESquadmates(Scriptlet):
 
     if 0 < future_mate_status <= 3:
       self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
-      self.machine.events.post("recruit_advance_{}".format(mate))
 
       if future_mate_status == 3:
         self.machine.events.post("recruit_lit", squadmate=mate)
 
+
+      self.machine.game.player["status_{}".format(mate)] = future_mate_status
       self.machine.game.player["recruits_color"] = COLORS[mate]
       self.machine.events.post("flash_all_shields")
 
+  def _on_missionselect(self, **kwargs):
+    mate = kwargs["squadmate"]
+    self._current_mate = mate
+    self.machine.events.post("start_mode_recruit{}".format(mate))
+
+    self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
+    self.machine.events.add_handler("mode_recruit{}_stopped".format(mate), self._on_stop)
+
+  def _on_stop(self, **kwargs):
+    self.machine.events.remove_handler(self._on_stop)
+    self.machine.events.remove_handler(self._on_complete)
+
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
-    self.machine.events.post("levelup", mission_name="{} Recruited".format(kwargs["squadmate"]))
-    self.machine.events.post("recruit_success", squadmate=kwargs["squadmate"])
-    self.machine.events.post("recruit_success_{}".format(kwargs["squadmate"]))
+
+    mate = kwargs["squadmate"]
+    self.machine.events.post("levelup", mission_name="{} Recruited".format(mate))
+    self.machine.events.post("recruit_success", squadmate=mate)
+    self.machine.events.post("recruit_success_{}".format(mate))
+    self.machine.game.player["status_{}".format(mate)] = 4
+
