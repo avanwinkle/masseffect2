@@ -106,8 +106,8 @@ shot_groups:
   reapercore_shots:
     shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_orbit
     enable_events: enable_reapercore
-    reset_events: reapercore_shots_hit_complete
-    disable_events: disable_reapercore
+    reset_events: reaperjackpot_hit
+    disable_events: disable_reapercore, reapercore_shots_hit_complete
 
 shot_profiles:
   corereset_profile:
@@ -280,6 +280,9 @@ widget_player:
       slide: derelictreaper_slide
   enable_reapercore:
     corereset_widget:
+      action: remove
+  reapercore_shots_hit_complete:
+    reapertimeout_widget:
       action: remove
   timer_reapercore_timeout_tick:
     reapertimeout_widget:
