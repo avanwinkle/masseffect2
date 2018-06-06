@@ -40,7 +40,8 @@ class Environment(Mode):
 
 class EnvShot(object):
 
-  target_statechange_events = ["player_shot_{}_enabled"]
+  # Two events: a change in the enabled state and a change in the profile state
+  target_statechange_events = ["player_shot_{}_enabled", "player_shot_{}"]
 
   def __init__(self, machine, mode, tag, log):
     self.machine = machine
@@ -103,7 +104,8 @@ class EnvShot(object):
     self._shot.disable()
 
   def get_enabled_shots(self):
-    return list(filter(lambda x: x.enabled, self.get_targets()))
+    # Return a list of shots tagged with this env_shot name that are enabled and not "off" state
+    return list(filter(lambda x: x.enabled and x.state_name != "off", self.get_targets()))
 
   def get_targets(self):
     self.machine.log.info("Getting shots for EnvShot '{}'".format(self.name))
@@ -116,6 +118,10 @@ class EnvShot(object):
 class OutlaneShot(EnvShot):
 
   target_statechange_events = ["ball_save_{}_enabled", "ball_save_{}_disabled"]
+
+  def get_enabled_shots(self):
+    # Return a list of ball_saves that are enabled
+    return list(filter(lambda x: x.enabled, self.get_targets()))
 
   def get_targets(self):
     """We actually get ball saves, not mode shots, but same diff"""

@@ -49,19 +49,38 @@ counters:
     direction: up
   normandyattack_shit:
     starting_count: 0
-    count_events: normandy_shots_off_hit
-    multiple_hit_window: 1500ms # In case both hitbanks are hit together
+    count_events:
+      - left_orbit_fail_hit
+      - left_ramp_fail_hit
+      - right_ramp_fail_hit
+      - right_orbit_fail_hit
+      - normandy_outlane_hit
+    multiple_hit_window: 5s # In case both hitbanks are hit together
     direction: up
+
+sequence_shots:
+  left_ramp_fail:
+    switch_sequence: s_left_ramp_entrance, s_left_ramp_entrance
+    sequence_timeout: 3s
+  right_ramp_fail:
+    switch_sequence: s_right_ramp_entrance, s_right_ramp_entrance
+    sequence_timeout: 3s
+  left_orbit_fail:
+    switch_sequence: s_left_orbit, s_left_orbit
+    sequence_timeout: 3s
+  right_orbit_fail:
+    switch_sequence: s_right_orbit, s_right_orbit
+    sequence_timeout: 3s
 
 shot_groups:
   normandy_shots:
     shots:
       - normandy_left_ramp
       - normandy_right_ramp
+      - normandy_right_orbit
       - normandy_hitbank
       - normandy_kickback
       - normandy_left_orbit
-      - normandy_right_orbit
       - normandy_dropbank
     rotate_right_events: logicblock_normandyattack_counter_hit
 
@@ -125,12 +144,18 @@ shots:
     show_tokens:
       leds: l_dropbank_shield_rgb
       flashers: l_flash_slingshots
+    tags: envshot_dropbank
   normandy_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: normandy_bank_profile
     show_tokens:
       leds: l_hitbank_shield_rgb
       flashers: l_flash_sword_lock
+    tags: envshot_hitbank
+  normandy_outlane:
+    switch: s_outlane_left, s_outlane_right
+    disable_events: ball_save_normandyattack_save_disabled
+    tags: envshot_outlane
 
 show_player:
   mode_normandyattack_started: normandyattack_shutdown_show
@@ -187,7 +212,6 @@ shows:
         (leds): 000000
         (flashers): off
 
-
 slides:
   blank_slide: []
 
@@ -202,6 +226,7 @@ sound_player:
   logicblock_normandyattack_counter_hit: normandy_advance
   logicblock_normandyattack_shit_hit: joker_shit
   normandy_dropbank_lit_hit: edi_finished
+  envshot_outlane_hit: joker_death
 
 sound_pools:
   edi_ballsave:

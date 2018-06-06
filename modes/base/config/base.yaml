@@ -177,10 +177,6 @@ variable_player:
     available_missions: 1
   achievement_derelictreaper_state_completed:
     available_missions: -1
-  achievement_normandyattack_state_enabled:
-    available_missions: 1
-  achievement_normandyattack_state_completed:
-    available_missions: -1
   achievement_suicidemission_state_enabled:
     available_missions: 1
   # If a new mission becomes available, remove the player-selected bypass
