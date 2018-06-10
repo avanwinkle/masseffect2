@@ -38,9 +38,11 @@ event_player:
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
-    - levelup
     # If we destroy the core and there's only one ball in play, end the mode
     - stop_mode_derelictreaper{game.balls_in_play==1}
+  derelictreaper_complete:
+    levelup:
+      mission_name: Reaper IFF Acquired
   # If the multiball ends and we've already destroyed the core, end the mode
   multiball_reapercoremb_ended{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot

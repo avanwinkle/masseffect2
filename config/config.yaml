@@ -55,9 +55,9 @@ machine_vars:
     value_type: str
     persist: true
 
-scriptlets:
-  - me_squadmates.MESquadmates
-  - save_career.SaveCareer
+custom_code:
+  - scriptlets.me_squadmates.MESquadmates
+  - scriptlets.save_career.SaveCareer
   # - mpf_arduino.MPFArduino
 
 modes:

@@ -1,5 +1,5 @@
 import logging
-from mpf.core.scriptlet import Scriptlet
+from mpf.core.custom_code import CustomCode
 
 SQUADMATES = ("garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed")
 
@@ -29,7 +29,7 @@ COLORS = {
   "zaeed": "FF0000",
 }
 
-class MESquadmates(Scriptlet):
+class MESquadmates(CustomCode):
   """
   This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
   a convenient way to automate the event postings over all squadmates without a bunch of copy+paste in the yaml
@@ -47,22 +47,24 @@ class MESquadmates(Scriptlet):
 
     # Create a listener for a recruitmission to start
     self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
+    # Create a listener for the field mode to start
+    self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
-  def _enable_shothandlers(self):
+  def _enable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._enable_shothandlers)
     self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)
     for mate in SQUADMATES:
       if self.machine.game.player["status_{}".format(mate)] < 4:
         self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
     self.machine.log.info("Created a bunch of shothandlers!", self)
-  
-  def _disable_shothandlers(self):
+
+  def _disable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._on_hit)
     self.machine.events.remove_handler(self._disable_shothandlers)
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
   def _on_hit(self, **kwargs):
-    self.log.debug("Received HIT event with kwargs: {}".format(kwargs))
+    self.log.debug("Received recruit HIT event with kwargs: {}".format(kwargs))
     mate = kwargs["squadmate"]
     future_mate_status = self.machine.game.player["status_{}".format(mate)] + 1
 

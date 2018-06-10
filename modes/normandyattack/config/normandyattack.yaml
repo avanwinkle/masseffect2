@@ -28,8 +28,9 @@ event_player:
     # If it's time to begin and the ball is in the plunger lane, fire it out!
     - pulse_plunger
   normandy_dropbank_lit_hit:
-    - levelup
-    - stop_mode_normandyattack
+    levelup:
+      mission_name: Normandy Escaped
+      stop_mode_normandyattack: {}
 
 ball_saves:
   normandyattack_openingsave:

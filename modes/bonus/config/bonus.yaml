@@ -108,7 +108,9 @@ slides:
       style: bonus_score_style
 
 sound_player:
-  mode_bonus_started: music_death
+  mode_bonus_started:
+    music_death:
+      priority: 1000
 
 sounds:
   music_death:

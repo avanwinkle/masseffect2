@@ -1,14 +1,14 @@
 import json
 import logging
 from datetime import datetime
-from mpf.core.scriptlet import Scriptlet
+from mpf.core.custom_code import CustomCode
 
 PLAYER_VARS = (
   # "assigments_completed",
   "available_missions", "career_name", "level",
   "recruits_lit_count", "counter_sbdrops_counter", "squadmates_count", "readonly")
 
-class SaveCareer(Scriptlet):
+class SaveCareer(CustomCode):
 
   def on_load(self):
     self.log = logging.getLogger("SaveCareer")
