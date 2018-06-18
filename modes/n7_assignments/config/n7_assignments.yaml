@@ -179,8 +179,6 @@ slides:
     widgets:
       - type: image
         image: n7_logo_33x11
-        width: 33
-        height: 11
         anchor_x: left
         anchor_y: bottom
         x: 2

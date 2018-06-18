@@ -52,8 +52,6 @@ slides:
     widgets:
       - type: image
         image: me2_logo_x128
-        width: 128
-        height: 32
 
 sound_player:
   mode_attract_started:

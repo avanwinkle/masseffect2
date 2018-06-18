@@ -286,6 +286,8 @@ widget_player:
   reapercore_shots_hit_complete:
     reapertimeout_widget:
       action: remove
+    reapershots_widget:
+      action: remove
   timer_reapercore_timeout_tick:
     reapertimeout_widget:
       action: update

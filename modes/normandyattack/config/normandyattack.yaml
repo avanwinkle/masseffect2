@@ -30,16 +30,20 @@ event_player:
   normandy_dropbank_lit_hit:
     levelup:
       mission_name: Normandy Escaped
-      stop_mode_normandyattack: {}
+    stop_mode_normandyattack: {}
 
 ball_saves:
   normandyattack_openingsave:
     delayed_eject_events: normandyattack_saveball
     auto_launch: false
+  # When a shot is hit the normandy_outlane shot is enabled with a medigel-style save.
+  # It will save up to three balls but must be re-enabled after each use.
   normandyattack_save:
     delayed_eject_events: normandyattack_saveball
+    enable_events: normandy_outlane_hit
+    early_ball_save_events: ball_save_normandyattack_save_enabled
+    disable_events: ball_save_normandyattack_save_saving_ball
     balls_to_save: 3
-    enable_events: normandyattack_begin
 
 counters:
   # This counter is just a way to debounce multiple hits on drop/hitbanks
@@ -98,6 +102,10 @@ shot_profiles:
       - name: off
       - name: lit
         show: normandy_escapebanks
+  normandy_save_profile:
+    states:
+      - name: lit
+        show: normandy_save_show
 
 shots:
   normandy_plunge:
@@ -155,7 +163,9 @@ shots:
     tags: envshot_hitbank
   normandy_outlane:
     switch: s_outlane_left, s_outlane_right
-    disable_events: ball_save_normandyattack_save_disabled
+    enable_events: normandy_shots_lit_hit
+    disable_events: normandy_outlane_hit, ball_save_normandyattack_save_disabled
+    profile: normandy_save_profile
     tags: envshot_outlane
 
 show_player:
@@ -212,6 +222,9 @@ shows:
       lights:
         (leds): 000000
         (flashers): off
+  normandy_save_show:
+    - lights:
+        l_outlane: 99
 
 slides:
   blank_slide: []

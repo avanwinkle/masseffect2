@@ -164,7 +164,7 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: lit
-        show: on
+        show: flash
       - name: off
         show: off
   arrival_escape_profile:
