@@ -233,3 +233,73 @@ sounds:
   aria_her_last_victim:
     file: en_us_omghub_asari_ruler_omghub_asari_ruler_d_00224031_m.ogg
     track: voice
+  shep_ill_dance_next_to_you:
+    file: en_us_player_f_omgmwl_asari_dance_c_00234203_f.ogg
+    track: voice
+  shep_what_do_you_think_of_halix:
+    file: en_us_player_f_omgmwl_daughter01_d_00226744_f.ogg
+    track: voice
+  shep_do_you_know_vanya:
+    file: en_us_player_f_omgmwl_daughter01_d_00226763_f.ogg
+    track: voice
+  shep_do_you_know_forta:
+    file: en_us_player_f_omgmwl_daughter01_d_00226771_f.ogg
+    track: voice
+  shep_band_called_expel_ten:
+    file: en_us_player_f_omgmwl_daughter01_d_00226777_f.ogg
+    track: voice
+  shep_i_know_what_i_like:
+    file: en_us_player_f_omgmwl_daughter01_d_00235002_f.ogg
+    track: voice
+  shep_conversation_is_about_power:
+    file: en_us_player_f_omgmwl_daughter01_d_00236272_f.ogg
+    track: voice
+  shep_violence_is_means_to_an_end:
+    file: en_us_player_f_omgmwl_daughter01_d_00236284_f.ogg
+    track: voice
+  morinth_ive_been_watching_you:
+    file: en_us_hench_vampire_omgmwl_puzzle_win_c_00234177_m.ogg
+    track: voice
+  morinth_ive_got_a_booth:
+    file: en_us_hench_vampire_omgmwl_puzzle_win_c_00234178_m.ogg
+    track: voice
+  morinth_wanna_get_out_of_here:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00203353_m.ogg
+    track: voice
+  morinth_vanya_my_favorite:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00226725_m.ogg
+    track: voice
+  morinth_forta_i_didnt_think_anyone_knew_him:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00226730_m.ogg
+    track: voice
+  morinth_expel_ten_concert:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00226735_m.ogg
+    track: voice
+  morinth_halix_slithers_through_my_soul:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00226738_m.ogg
+    track: voice
+  morinth_expel_ten_dark_pulses:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00234251_m.ogg
+    track: voice
+  morinth_it_speaks_to_the_darkest_places_in_me: 
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00234990_m.ogg
+    track: voice
+  morinth_violence_purest_form_of_expression:
+    file: en_us_hench_vampire_omgmwl_daughter01_d_00236225_m.ogg
+    track: voice
+  morinth_chess:
+    file: en_us_hench_vampire_omgmwl_chess_set_a_00213723_m.ogg
+    track: voice
+  morinth_look_into_my_eyes: 
+    file: en_us_hench_vampire_omgmwl_daughter03_d_00226562_m.ogg
+    track: voice
+  dude_expel_ten_tickets:
+    file: en_us_omgmwl_loiterer_omgmwl_loiterer_d_00225529_m.ogg
+    track: voice
+  samara_dont_chase_her_off:
+    file: en_us_hench_mystic_omgmwl_daughter01_d_00333630_m.ogg
+    track: voice
+  samara_dont_bore_her:
+    file: en_us_hench_mystic_omgmwl_daughter01_d_00333631_m.ogg
+    track: voice
+
