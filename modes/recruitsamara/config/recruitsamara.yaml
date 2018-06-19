@@ -4,7 +4,7 @@
 # SAMARA RECRUITMENT MISSION
 #
 # This mode begins with all standup targets lit on a hurryup, hitting a lit
-# standup collects “intel” and builds value. After each lit standup hit, two
+# standup collects “intel” and builds value. After each lit standup hit, two random
 # shots are lit to pursue Morinth; each subsequent lit standup target hit lights
 # (up to) two more shots. Unlit standups continue to build value but don’t light
 # any more shots. Hitting a lit shot collects all standup target values built to
@@ -220,9 +220,34 @@ sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
+    morinth_intro_sound:
+      action: play
+  samara_targets_lit_hit: morinth_intel_call
+  # Don't play on the final counter increment, since that plays the mission complete sound
+  samara_shots_lit_hit{device.counters.samara_shots_counter.value<5}: morinth_intel_call
   recruit_samara_complete:
     music_recruit_samara:
       action: stop
+
+sound_pools:
+  morinth_intro_sound:
+    track: voice
+    type: random_force_all
+    sounds: aria_her_last_victim, samara_dont_bore_her, samara_dont_chase_her_off, morinth_ive_been_watching_you, morinth_ive_got_a_booth
+  morinth_intel_call:
+    track: voice
+    type: sequence
+    sounds: 
+      - shep_band_called_expel_ten
+      - morinth_expel_ten_dark_pulses
+      - shep_what_do_you_think_of_halix
+      - morinth_halix_slithers_through_my_soul
+      - shep_do_you_know_vanya
+      - morinth_vanya_my_favorite
+      - shep_do_you_know_forta
+      - morinth_forta_i_didnt_think_anyone_knew_him
+      - morinth_violence_purest_form_of_expression
+      - shep_violence_is_means_to_an_end
 
 sounds:
   music_recruit_samara:
