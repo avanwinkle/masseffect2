@@ -56,7 +56,7 @@ class MESquadmates(CustomCode):
     for mate in SQUADMATES:
       if self.machine.game.player["status_{}".format(mate)] < 4:
         self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
-    self.machine.log.info("Created a bunch of shothandlers!", self)
+    self.machine.log.info("Created a bunch of shothandlers! {}".format(self))
 
   def _disable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._on_hit)
