@@ -24,20 +24,6 @@ show_player:
       loops: -1
       speed: 1
       action: play
-    # middle_circle_sweep:
-    #   loops: -1
-    #   speed: 6
-    # flasher_show_triple:
-    #   action: play
-    #   speed: 5
-    #   show_tokens:
-    #     flashers: l_flash_dragon_right, l_flash_dragon_left
-  # mode_attract_started:
-  #   flash:
-  #     action: play
-  #     speed: 4
-  #     show_tokens:
-  #       leds: l_start_button
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop

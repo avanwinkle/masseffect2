@@ -222,7 +222,9 @@ sound_player:
       action: play
     morinth_intro_sound:
       action: play
-  samara_targets_lit_hit: morinth_intel_call
+  samara_targets_lit_hit:
+    morinth_intel_call:
+      max_queue_time: 1s
   # Don't play on the final counter increment, since that plays the mission complete sound
   samara_shots_lit_hit{device.counters.samara_shots_counter.value<5}: morinth_intel_call
   recruit_samara_complete:
@@ -237,7 +239,7 @@ sound_pools:
   morinth_intel_call:
     track: voice
     type: sequence
-    sounds: 
+    sounds:
       - shep_band_called_expel_ten
       - morinth_expel_ten_dark_pulses
       - shep_what_do_you_think_of_halix
@@ -306,7 +308,7 @@ sounds:
   morinth_expel_ten_dark_pulses:
     file: en_us_hench_vampire_omgmwl_daughter01_d_00234251_m.ogg
     track: voice
-  morinth_it_speaks_to_the_darkest_places_in_me: 
+  morinth_it_speaks_to_the_darkest_places_in_me:
     file: en_us_hench_vampire_omgmwl_daughter01_d_00234990_m.ogg
     track: voice
   morinth_violence_purest_form_of_expression:
@@ -315,7 +317,7 @@ sounds:
   morinth_chess:
     file: en_us_hench_vampire_omgmwl_chess_set_a_00213723_m.ogg
     track: voice
-  morinth_look_into_my_eyes: 
+  morinth_look_into_my_eyes:
     file: en_us_hench_vampire_omgmwl_daughter03_d_00226562_m.ogg
     track: voice
   dude_expel_ten_tickets:

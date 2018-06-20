@@ -27,10 +27,11 @@ event_player:
   normandyattack_launchball:
     # If it's time to begin and the ball is in the plunger lane, fire it out!
     - pulse_plunger
-  normandy_dropbank_lit_hit:
+  normandy_dropbank_lit_hit.1:
     levelup:
       mission_name: Normandy Escaped
-    stop_mode_normandyattack: {}
+  normandy_dropbank_lit_hit.2:
+    - stop_mode_normandyattack
 
 ball_saves:
   normandyattack_openingsave:
@@ -62,6 +63,14 @@ counters:
       - normandy_outlane_hit
     multiple_hit_window: 5s # In case both hitbanks are hit together
     direction: up
+
+light_player:
+  mode_normandyattack_started:
+    gi: off
+  normandy_dropbank_lit_hit:
+    gi:
+      color: on
+      fade: 1s
 
 sequence_shots:
   left_ramp_fail:
@@ -178,8 +187,6 @@ shows:
       slides:
         blank_slide:
           action: play
-      lights:
-        gi: off
       tracks:
         __all__:
           action: stop_all_sounds
