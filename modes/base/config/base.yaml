@@ -16,53 +16,63 @@ achievements:
     start_events: mode_shadowbroker_chase_started
     stop_events: mode_shadowbroker_chase_will_stop
     complete_events: shadowbroker_chase_complete
+    restart_on_next_ball_when_started: false
   vasir:
     enable_events: shadowbroker_chase_complete
     start_events: mode_shadowbroker_vasir_started
     stop_events: mode_shadowbroker_vasir_will_stop
     complete_events: shadowbroker_vasir_complete
+    restart_on_next_ball_when_started: false
   hagalaz:
     enable_events: logicblock_sbdrops_counter_complete
     start_events: mode_shadowbroker_hagalaz_started
     stop_events: mode_shadowbroker_hagalaz_will_stop
     complete_events: shadowbroker_hagalaz_complete
+    restart_on_next_ball_when_started: false
   shadowbroker:
     enable_events: shadowbroker_hagalaz_complete
     start_events: mode_shadowbroker_boss_started
     stop_events: mode_shadowbroker_boss_will_stop
     complete_events: shadowbroker_boss_complete
+    restart_on_next_ball_when_started: false
   # MULTIBALLS
   overlord:
     disable_events: mode_collectorship_base_started
     start_events: mode_overlord_started
     stop_events: mode_overlord_stopped
     complete_events: overlord_complete
+    restart_on_next_ball_when_started: false
   arrival:
     enable_events: mode_collectorship_base_started
     start_events: mode_arrival_started
     stop_events: mode_arrival_stopped
     complete_events: arrival_escapeshot_hit
+    restart_on_next_ball_when_started: false
   # COLLECTOR MISSIONS
   collectorship:
     enable_events: enable_collectorship
     start_events: mode_collectorship_base_started
     stop_events: mode_collectorship_base_will_stop
     complete_events: collectorship_praetorian_complete # Track the first praetorian completion to award a levelup
+    restart_on_next_ball_when_started: false
   derelictreaper:
     enable_events: enable_derelictreaper
     start_events: start_mode_derelictreaper
     stop_events: mode_derelictreaper_will_stop
     complete_events: derelictreaper_complete
+    restart_on_next_ball_when_started: false
   normandyattack:
     enable_events: mode_derelictreaper_will_stop # Automatically enabled after derelict reaper
     start_events: mode_normandyattack_started
     complete_events: mode_normandyattack_will_stop # Only played once, completed after playing
+    restart_on_next_ball_when_started: false
   # SUICIDE MISSION
   suicidemission:
     enable_events: achievement_normandyattack_state_completed
     start_events: mode_suicidemission_base_started
     stop_events: mode_suicidemission_base_will_stop
     complete_events: suicidemission_complete
+    restart_on_next_ball_when_started: false
 
 event_player:
   mode_base_started:
