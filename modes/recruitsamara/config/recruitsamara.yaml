@@ -36,28 +36,7 @@ counters:
     count_events: samara_shots_hit
 
 event_player:
-  samara_targets_lit_hit:
-    # Enable one each of the long lane shots and the kickback/bank shots
-    - enable_random_shotshot
-    - enable_random_bankshot
-  samara_targets_hit_complete:
-    - reset_targets
   logicblock_samara_shots_counter_complete: recruit_samara_complete
-
-random_event_player:
-  enable_random_shotshot:
-    force_different: true
-    events:
-      - enable_left_orbit_shot
-      - enable_left_ramp_shot
-      - enable_right_ramp_shot
-      - enable_right_orbit_shot
-  enable_random_bankshot:
-    force_different: true
-    events:
-      - enable_dropbank_shot
-      - enable_hitbank_shot
-      - enable_kickback_shot
 
 #####
 # SAMARA variable_player:
@@ -120,14 +99,13 @@ shot_profiles:
 shot_groups:
   samara_targets:
     shots: samara_target1, samara_target2, samara_target3, samara_target4, samara_target5
-    reset_events: reset_targets
   samara_shots:
     shots: samara_left_orbit, samara_left_ramp, samara_right_orbit, samara_right_ramp, samara_kickback
 
 shots:
   samara_left_orbit:
     hit_events: sh_left_orbit_hit
-    enable_events: enable_left_orbit_shot
+    enable_events: samara_target1_lit_hit
     disable_events: samara_left_orbit_hit
     profile: samara_shot_profile
     show_tokens:
@@ -135,7 +113,7 @@ shots:
       color: 008899 #color_samara
   samara_left_ramp:
     hit_events: sh_left_ramp_hit
-    enable_events: enable_left_ramp_shot
+    enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
     disable_events: samara_left_ramp_hit
     profile: samara_shot_profile
     show_tokens:
@@ -143,7 +121,7 @@ shots:
       color: 008899 #color_samara
   samara_right_orbit:
     hit_events: sh_right_orbit_hit
-    enable_events: enable_right_orbit_shot
+    enable_events: samara_target5_lit_hit
     disable_events: samara_right_orbit_hit
     profile: samara_shot_profile
     show_tokens:
@@ -151,7 +129,7 @@ shots:
       color: 008899 #color_samara
   samara_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: enable_right_ramp_shot
+    enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
     disable_events: samara_right_ramp_hit
     profile: samara_shot_profile
     show_tokens:
@@ -159,7 +137,7 @@ shots:
       color: 008899 #color_samara
   samara_kickback:
     hit_events: sh_kickback_hit
-    enable_events: enable_kickback_shot
+    enable_events: samara_target1_lit_hit, samara_target2_lit_hit
     disable_events: samara_kickback_hit
     profile: samara_shot_profile
     show_tokens:
@@ -220,7 +198,7 @@ sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
-    morinth_intro_sound:
+    gunship:
       action: play
   samara_targets_lit_hit:
     morinth_intel_call:
@@ -232,6 +210,18 @@ sound_player:
       action: stop
 
 sound_pools:
+  gunship_sound:
+    track: voice
+    type: random_force_all
+    sounds:
+      - gunship_miranda
+      - gunship_jacob
+      - gunship_garrus{current_player.status_garrus>=3}
+      - gunship_kasumi{current_player.status_kasumi>=3}
+      - gunship_grunt{current_player.status_grunt>=3}
+      - gunship_zaeed{current_player.status_zaeed>=3}
+      - gunship_tali{current_player.status_tali>=3}
+      - gunship_jack{current_player.status_jack>=3}
   morinth_intro_sound:
     track: voice
     type: random_force_all
@@ -257,76 +247,36 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
-  aria_her_last_victim:
-    file: en_us_omghub_asari_ruler_omghub_asari_ruler_d_00224031_m.ogg
+  gunship_thane:
+    file: en_us_hench_assassin_twrmwa_gun_ship_amb_h_00212350_m.ogg
     track: voice
-  shep_ill_dance_next_to_you:
-    file: en_us_player_f_omgmwl_asari_dance_c_00234203_f.ogg
+  gunship_jack:
+    file: en_us_hench_convict_twrmwa_gun_ship_amb_h_00212346_m.ogg
     track: voice
-  shep_what_do_you_think_of_halix:
-    file: en_us_player_f_omgmwl_daughter01_d_00226744_f.ogg
+  gunship_garrus:
+    file: en_us_hench_garrus_twrmwa_gun_ship_amb_h_00212343_m.ogg
     track: voice
-  shep_do_you_know_vanya:
-    file: en_us_player_f_omgmwl_daughter01_d_00226763_f.ogg
+  gunship_legion:
+    file: en_us_hench_geth_twrmwa_gun_ship_amb_h_00212345_m.ogg
     track: voice
-  shep_do_you_know_forta:
-    file: en_us_player_f_omgmwl_daughter01_d_00226771_f.ogg
+  gunship_grunt:
+    file: en_us_hench_grunt_twrmwa_gun_ship_amb_h_00212342_m.ogg
     track: voice
-  shep_band_called_expel_ten:
-    file: en_us_player_f_omgmwl_daughter01_d_00226777_f.ogg
+  gunship_jacob:
+    file: en_us_hench_leading_twrmwa_gun_ship_amb_h_00212341_m.ogg
     track: voice
-  shep_i_know_what_i_like:
-    file: en_us_player_f_omgmwl_daughter01_d_00235002_f.ogg
+  gunship_mordin:
+    file: en_us_hench_professor_twrmwa_gun_ship_amb_h_00212348_m.ogg
     track: voice
-  shep_conversation_is_about_power:
-    file: en_us_player_f_omgmwl_daughter01_d_00236272_f.ogg
+  gunship_tali:
+    file: en_us_hench_tali_twrmwa_gun_ship_amb_h_00212344_m.ogg
     track: voice
-  shep_violence_is_means_to_an_end:
-    file: en_us_player_f_omgmwl_daughter01_d_00236284_f.ogg
+  gunship_kasumi:
+    file: en_us_hench_thief_twrmwa_gun_ship_amb_h_00212349_m.ogg
     track: voice
-  morinth_ive_been_watching_you:
-    file: en_us_hench_vampire_omgmwl_puzzle_win_c_00234177_m.ogg
+  gunship_zaeed:
+    file: en_us_hench_veteran_twrmwa_gun_ship_amb_h_00212347_m.ogg
     track: voice
-  morinth_ive_got_a_booth:
-    file: en_us_hench_vampire_omgmwl_puzzle_win_c_00234178_m.ogg
+  gunship_miranda:
+    file: en_us_hench_vixen_twrmwa_gun_ship_amb_h_00212340_m.ogg
     track: voice
-  morinth_wanna_get_out_of_here:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00203353_m.ogg
-    track: voice
-  morinth_vanya_my_favorite:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00226725_m.ogg
-    track: voice
-  morinth_forta_i_didnt_think_anyone_knew_him:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00226730_m.ogg
-    track: voice
-  morinth_expel_ten_concert:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00226735_m.ogg
-    track: voice
-  morinth_halix_slithers_through_my_soul:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00226738_m.ogg
-    track: voice
-  morinth_expel_ten_dark_pulses:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00234251_m.ogg
-    track: voice
-  morinth_it_speaks_to_the_darkest_places_in_me:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00234990_m.ogg
-    track: voice
-  morinth_violence_purest_form_of_expression:
-    file: en_us_hench_vampire_omgmwl_daughter01_d_00236225_m.ogg
-    track: voice
-  morinth_chess:
-    file: en_us_hench_vampire_omgmwl_chess_set_a_00213723_m.ogg
-    track: voice
-  morinth_look_into_my_eyes:
-    file: en_us_hench_vampire_omgmwl_daughter03_d_00226562_m.ogg
-    track: voice
-  dude_expel_ten_tickets:
-    file: en_us_omgmwl_loiterer_omgmwl_loiterer_d_00225529_m.ogg
-    track: voice
-  samara_dont_chase_her_off:
-    file: en_us_hench_mystic_omgmwl_daughter01_d_00333630_m.ogg
-    track: voice
-  samara_dont_bore_her:
-    file: en_us_hench_mystic_omgmwl_daughter01_d_00333631_m.ogg
-    track: voice
-
