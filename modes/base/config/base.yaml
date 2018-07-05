@@ -57,6 +57,7 @@ achievements:
     restart_on_next_ball_when_started: false
   derelictreaper:
     enable_events: enable_derelictreaper
+    disable_events: achievement_suicidemission_state_started
     start_events: start_mode_derelictreaper
     stop_events: mode_derelictreaper_will_stop
     complete_events: derelictreaper_complete

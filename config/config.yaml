@@ -190,18 +190,25 @@ player_vars:
     initial_value: 5
   sbhold_enabled:
     initial_value: 0
+  specialist:
+    initial_value: "none"
+    value_type: str
   squadmates_count:
     initial_value: 2
   status_garrus:
     initial_value: 0
   status_grunt:
     initial_value: 0
+  status_jacob:
+    initial_value: 4
   status_jack:
     initial_value: 0
   status_kasumi:
     initial_value: 0
   status_legion:
     initial_value: 0
+  status_miranda:
+    initial_value: 4
   status_mordin:
     initial_value: 0
   status_samara:
@@ -346,6 +353,30 @@ widget_styles:
     anchor_x: left
     y: 4
     x: 4
+  spec_default:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.6
+  spec_dead:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.2
+  spec_highlight:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 1
   mp_player_1:
     font_name: smallest_pixel-7
     font_size: 9
