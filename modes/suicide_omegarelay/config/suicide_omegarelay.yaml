@@ -1,0 +1,6 @@
+#config_version=5
+mode:
+  start_events: achievement_omegarelay_state_started
+  stop_events: ball_will_end, omegarelay_complete
+  priority: 300
+

@@ -7,20 +7,20 @@ event_player:
 
 show_player:
   start_suicide_intro:
-    suicide_track:
+    attract_sm_track:
       loops: -1
       speed: 0.278
       action: play
-    suicide_flash_soft:
+    attract_sm_flash_soft:
       loops: -1
       speed: 1
       action: play
   start_suicide_main:
-    suicide_beat:
+    attract_sm_beat:
       loops: -1
       speed: 1
       action: play
-    suicide_flash:
+    attract_sm_flash:
       loops: -1
       speed: 1
       action: play
