@@ -1,12 +1,14 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_base
-  stop_events: ball_will_end, suicidemission_complete, suicidemission_failed
-  priority: 200
+  stop_events: stop_wizards, suicidemission_complete, suicidemission_failed
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
+  priority: 2000
 
 event_player:
   mode_suicide_base_started:
-    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="started"}
+    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="enabled" or device.achievements.omegarelay.state=="stopped"}
     - start_mode_missionselect{device.achievements.infiltration.state=="started" or device.achievements.longwalk.state=="started"}
     - start_mode_suicide_humanreaper{device.achievements.humanreaper.state=="started"}
     - start_mode_suicide_endrun{device.achievements.endrun.state=="started"}

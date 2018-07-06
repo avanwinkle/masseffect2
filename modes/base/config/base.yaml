@@ -70,11 +70,12 @@ achievements:
   # SUICIDE MISSION
   suicidemission:
     enable_events: achievement_normandyattack_state_completed
-    start_events: missionselect_suicidemission_selected
+    start_events: missionselect_suicide_selected
     complete_events: suicidemission_complete
     restart_on_next_ball_when_started: true
   omegarelay:
-    enable_events: missionselect_suicidemission_selected
+    enable_events: achievement_suicidemission_state_enabled
+    start_events: mode_suicide_omegarelay_started
     disable_events: suicidemission_failed
     complete_events: omegarelay_complete
   infiltration:
@@ -127,6 +128,8 @@ event_player:
     - enable_derelictreaper
   missionselect_derelictreaper_selected:
     - start_mode_derelictreaper
+  missionselect_suicide_selected:
+    - start_mode_suicide_base
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches

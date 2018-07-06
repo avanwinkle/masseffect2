@@ -2,7 +2,7 @@
 mode:
   start_events: start_mode_suicide_infiltration
   stop_events: ball_will_end, infiltration_complete, infiltration_failed
-  priority: 300
+  priority: 2300
 
 event_player:
   timer_infiltration_tick{ticks==40}: increase_infiltration_med

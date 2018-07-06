@@ -41,10 +41,23 @@ class SaveCareer(CustomCode):
       return
 
     self.log.info("Saving career '{}' for player {}".format(player.career_name, player.number))
-    newcareer = {"last_played": datetime.now().timestamp()}
+    newcareer = {"last_played": datetime.now().timestamp(), "achievements": {}}
 
     for key, value in player.vars.items():
-      if key in PLAYER_VARS or key == "achievements" or key.startswith("status_"):
+      # For achievements, prevent "started" values (in case of hard exit)
+      if key == "achievements":
+        for ach, state in value.items():
+          # Don't allow suicide mission states to save, always revert to disabled
+          if ach in ("omegarelay", "infiltration", "longwalk", "humanreaper", "endrun") and state != "disabled":
+            self.log.warn(" - Suicide Achievement {} in state '{}', changing to 'disabled'".format(ach, state))
+            newcareer[key][ach] = "disabled"
+          # Don't save the started-ness of the suicide mission, revert it to enabled
+          elif ach == "suicidemission" and state != "disabled":
+            newcareer[key][ach] = "enabled"
+          # Everything else? Save the existing state
+          else:
+            newcareer[key][ach] = state
+      elif key in PLAYER_VARS or key.startswith("status_"):
         newcareer[key] = value
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))

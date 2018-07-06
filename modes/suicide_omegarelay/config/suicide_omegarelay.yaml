@@ -2,7 +2,7 @@
 mode:
   start_events: achievement_omegarelay_state_started
   stop_events: ball_will_end, omegarelay_complete
-  priority: 300
+  priority: 2300
 
 event_player:
   omegarelay_shots_lit_complete: omegarelay_complete
