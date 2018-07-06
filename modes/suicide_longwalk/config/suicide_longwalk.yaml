@@ -1,6 +1,605 @@
 #config_version=5
 mode:
-  start_events: achievement_longwalk_state_started
-  stop_events: ball_will_end, longwalk_complete
-  priority: 300
+  start_events: start_mode_suicide_longwalk
+  stop_events: longwalk_complete, longwalk_failed, ball_will_end # Replace with killed specialist
+  events_when_started: mode_type_suicide_started, reset_tension
+  events_when_stopped: mode_type_suicide_stopped
+  code: suicide_longwalk.LongWalk
+  priority: 2300
 
+event_player:
+  mode_suicide_longwalk_started:
+    set_environment:
+      env: collectors
+  player_tension{change>0}: increase_tension
+  logicblock_swarmpaths_hit:
+    - reset_tension
+    - play_specialist_lw_advance{count>1}
+    - play_specialist_lw_close{count==1}
+  timer_longwalk_complete: kill_specialist, longwalk_failed
+
+counters:
+  swarmpaths:
+    starting_count: 7
+    count_complete_value: 0
+    direction: down
+    count_events: swarmpaths_hit
+    persist_state: true
+    reset_events: mode_suicide_longwalk_started
+
+timers:
+  longwalk:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: true
+    control_events:
+      - event: reset_tension
+        action: restart
+      - event: logicblock_swarmpaths_complete
+        action: stop
+      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>40}
+        action: jump
+        value: 40
+      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>20}
+        action: jump
+        value: 20
+      - event: player_tension{value==3 and current_player.suicide_longwalk_longwalk_tick>0}
+        action: jump
+        value: 0
+
+variable_player:
+  mode_suicide_longwalk_started:
+    tension:
+      action: set
+      int: 0
+  timer_longwalk_tick{ticks==40}:
+    tension: 1
+  timer_longwalk_tick{ticks==20}:
+    tension: 1
+  swarmfails_hit:
+    tension: 1
+  reset_tension:
+    tension:
+      action: set
+      int: 0
+  kill_specialist:
+    status_jack{current_player.specialist=="jack"}:
+      action: set
+      int: -1
+    status_jacob{current_player.specialist=="jacob"}:
+      action: set
+      int: -1
+    status_miranda{current_player.specialist=="miranda"}:
+      action: set
+      int: -1
+    status_samara{current_player.specialist=="samara"}:
+      action: set
+      int: -1
+    status_thane{current_player.specialist=="thane"}:
+      action: set
+      int: -1
+
+shot_groups:
+  swarmpaths:
+    shots: longwalk_dropbank, longwalk_left_orbit, longwalk_kickback, longwalk_left_ramp, longwalk_right_ramp, longwalk_right_orbit, longwalk_hitbank
+
+shots:
+  swarmfails:
+    hit_events: envshot_left_orbit_nofull_hit, envshot_kickback_hit, envshot_left_ramp_hit, envshot_right_ramp_hit, envshot_right_orbit_nofull_hit
+  longwalk_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: enable_longwalk_left_ramp
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
+  longwalk_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: enable_longwalk_left_orbit
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit_nofull
+  longwalk_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: enable_longwalk_right_ramp
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
+  longwalk_right_orbit:
+    hit_events: sh_right_orbit_hit
+    enable_events: enable_longwalk_right_orbit
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit_nofull
+  longwalk_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: enable_longwalk_kickback
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+    tags: envshot_kickback
+  longwalk_dropbank:
+    hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
+    enable_events: enable_longwalk_dropbank
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_dropbank_shield_rgb
+    tags: envshot_dropbank
+  longwalk_hitbank:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    enable_events: enable_longwalk_hitbank
+    disable_events: mode_suicide_longwalk_started, logicblock_swarmpaths_hit
+    advance_events: increase_tension
+    reset_events: reset_tension
+    profile: longwalk_profile
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+    tags: envshot_hitbank
+
+shot_profiles:
+  longwalk_profile:
+    states:
+      - name: low
+        show: swarmpath_show
+        speed: 1
+        show_tokens:
+          fadetime: 0
+      - name: med
+        show: swarmpath_show
+        speed: 2
+        show_tokens:
+          fadetime: 0
+      - name: high
+        show: swarmpath_show
+        speed: 3
+        show_tokens:
+          fadetime: 0
+
+show_player:
+  swarmfails_hit:
+    swarmpath_show:
+      action: play
+      loops: 1
+
+shows:
+  swarmpath_show:
+    - time: 0
+      lights:
+        (leds):
+          color: 0066ff #color_paragon
+          fade: (fadetime)
+    - time: '+1'
+      lights:
+        (leds):
+          color: off
+          fade: (fadetime)
+  swarmfail_show:
+    - time: 0
+      flashers:
+        l_flash_dragon_left: 150ms
+        l_flash_back_panel_left: 150ms
+
+light_player:
+  mode_suicide_longwalk_started:
+    gi:
+      color: off
+      fade: 1s
+
+sound_player:
+  mode_suicide_longwalk_started:
+    longwalk_low:
+      action: play
+  player_tension{value==1}:
+    longwalk_low:
+      action: stop
+    longwalk_med:
+      action: play
+      start_at: 18s
+    specialist_lw_warning_med:
+      action: play
+  player_tension{value==2}:
+    longwalk_med:
+      action: stop
+    longwalk_high:
+      action: play
+      start_at: 33s
+    specialist_lw_warning_high:
+      action: play
+  # If we were already low-tension, no need to restart the music
+  player_tension{value==0 and change<0}:
+    longwalk_low:
+      action: play
+      start_at: 10s
+    longwalk_med:
+      action: stop
+    longwalk_high:
+      action: stop
+    specialist_lw_warning_med:
+      action: stop
+    specialist_lw_warning_high:
+      action: stop
+  play_specialist_lw_advance: specialist_lw_advance
+  play_specialist_lw_close: specialist_lw_close
+  kill_specialist:
+    # specialist_death_lw:
+    #   action: play
+    #   events_when_played: specialist_killed
+    specialist_lw_advance:
+      action: stop
+    specialist_lw_warning_med:
+      action: stop
+    specialist_lw_warning_high:
+      action: stop
+    specialist_lw_close:
+      action: stop
+
+sound_pools:
+  specialist_lw_close:
+    track: voice
+    sounds:
+      - specialist_jack_i_can_see_the_entrance{current_player.specialist=="jack"}
+      - specialist_jacob_i_can_see_the_entrance{current_player.specialist=="jacob"}
+      - specialist_miranda_i_can_see_the_entrance{current_player.specialist=="miranda"}
+      - specialist_samara_i_can_see_the_entrance{current_player.specialist=="samara"}
+      - specialist_thane_i_can_see_the_entrance{current_player.specialist=="thane"}
+  specialist_lw_advance:
+    track: voice
+    type: random_force_all
+    sounds:
+      - specialist_jack_moving_out{current_player.specialist=="jack"}
+      - specialist_jack_moving_out_commander{current_player.specialist=="jack"}
+      - specialist_jack_moving_out_stay_close{current_player.specialist=="jack"}
+      - specialist_jack_all_clear{current_player.specialist=="jack"}
+      - specialist_jack_ready{current_player.specialist=="jack"}
+      - specialist_jack_lets_go{current_player.specialist=="jack"}
+      - specialist_jacob_moving_out{current_player.specialist=="jacob"}
+      - specialist_jacob_moving_out_commander{current_player.specialist=="jacob"}
+      - specialist_jacob_moving_out_stay_close{current_player.specialist=="jacob"}
+      - specialist_jacob_all_clear{current_player.specialist=="jacob"}
+      - specialist_jacob_ready{current_player.specialist=="jacob"}
+      - specialist_jacob_lets_go{current_player.specialist=="jacob"}
+      - specialist_miranda_moving_out{current_player.specialist=="miranda"}
+      - specialist_miranda_moving_out_commander{current_player.specialist=="miranda"}
+      - specialist_miranda_moving_out_stay_close{current_player.specialist=="miranda"}
+      - specialist_miranda_all_clear{current_player.specialist=="miranda"}
+      - specialist_miranda_ready{current_player.specialist=="miranda"}
+      - specialist_miranda_lets_go{current_player.specialist=="miranda"}
+      - specialist_samara_moving_out{current_player.specialist=="samara"}
+      - specialist_samara_moving_out_commander{current_player.specialist=="samara"}
+      - specialist_samara_moving_out_stay_close{current_player.specialist=="samara"}
+      - specialist_samara_all_clear{current_player.specialist=="samara"}
+      - specialist_samara_ready{current_player.specialist=="samara"}
+      - specialist_samara_lets_go{current_player.specialist=="samara"}
+      - specialist_thane_moving_out{current_player.specialist=="thane"}
+      - specialist_thane_moving_out_commander{current_player.specialist=="thane"}
+      - specialist_thane_moving_out_stay_close{current_player.specialist=="thane"}
+      - specialist_thane_all_clear{current_player.specialist=="thane"}
+      - specialist_thane_ready{current_player.specialist=="thane"}
+      - specialist_thane_lets_go{current_player.specialist=="thane"}
+  specialist_lw_warning_med:
+    track: voice
+    type: random_force_all
+    sounds:
+      - specialist_jack_ill_hold_this_position{current_player.specialist=="jack"}
+      - specialist_jack_moving_to_cover{current_player.specialist=="jack"}
+      - specialist_jack_taking_cover{current_player.specialist=="jack"}
+      - specialist_jack_incoming{current_player.specialist=="jack"}
+      - specialist_jack_hostiles{current_player.specialist=="jack"}
+      - specialist_jacob_ill_hold_this_position{current_player.specialist=="jacob"}
+      - specialist_jacob_moving_to_cover{current_player.specialist=="jacob"}
+      - specialist_jacob_taking_cover{current_player.specialist=="jacob"}
+      - specialist_jacob_incoming{current_player.specialist=="jacob"}
+      - specialist_jacob_hostiles{current_player.specialist=="jacob"}
+      - specialist_miranda_ill_hold_this_position{current_player.specialist=="miranda"}
+      - specialist_miranda_moving_to_cover{current_player.specialist=="miranda"}
+      - specialist_miranda_taking_cover{current_player.specialist=="miranda"}
+      - specialist_miranda_incoming{current_player.specialist=="miranda"}
+      - specialist_miranda_hostiles{current_player.specialist=="miranda"}
+      - specialist_samara_ill_hold_this_position{current_player.specialist=="samara"}
+      - specialist_samara_moving_to_cover{current_player.specialist=="samara"}
+      - specialist_samara_taking_cover{current_player.specialist=="samara"}
+      - specialist_samara_incoming{current_player.specialist=="samara"}
+      - specialist_samara_hostiles{current_player.specialist=="samara"}
+      - specialist_thane_ill_hold_this_position{current_player.specialist=="thane"}
+      - specialist_thane_moving_to_cover{current_player.specialist=="thane"}
+      - specialist_thane_taking_cover{current_player.specialist=="thane"}
+      - specialist_thane_incoming{current_player.specialist=="thane"}
+      - specialist_thane_hostiles{current_player.specialist=="thane"}
+  specialist_lw_warning_high:
+    track: voice
+    type: random_force_all
+    sounds:
+      - specialist_jack_strain_substantial{current_player.specialist=="jack"}
+      - specialist_jack_dont_know_how_much_more_i_can_take{current_player.specialist=="jack"}
+      - specialist_jacob_strain_substantial{current_player.specialist=="jacob"}
+      - specialist_jacob_dont_know_how_much_more_i_can_take{current_player.specialist=="jacob"}
+      - specialist_miranda_strain_substantial{current_player.specialist=="miranda"}
+      - specialist_miranda_dont_know_how_much_more_i_can_take{current_player.specialist=="miranda"}
+      - specialist_samara_strain_substantial{current_player.specialist=="samara"}
+      - specialist_samara_dont_know_how_much_more_i_can_take{current_player.specialist=="samara"}
+      - specialist_thane_strain_substantial{current_player.specialist=="thane"}
+      - specialist_thane_dont_know_how_much_more_i_can_take{current_player.specialist=="thane"}
+
+sounds:
+  longwalk_low:
+    file: mus_endgm2_tension_2.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 3s
+    fade_out: 2s
+    volume: 0.9
+  longwalk_med:
+    file: mus_endgm2_combat_2_low.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 1500ms
+    fade_out: 2s
+  longwalk_high:
+    file: mus_endgm2_combat_2.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 1500ms
+    fade_out: 2s
+  specialist_thane_leaving_the_barrier:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266720_m.ogg
+    track: voice
+  specialist_thane_strain_substantial:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266721_m.ogg
+    track: voice
+  specialist_thane_i_can_see_the_entrance:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266722_m.ogg
+    track: voice
+  specialist_thane_dont_know_how_much_more_i_can_take:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266723_m.ogg
+    track: voice
+  specialist_thane_moving_out_commander:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266724_m.ogg
+    track: voice
+  specialist_thane_ill_hold_this_position:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266725_m.ogg
+    track: voice
+  specialist_thane_moving_out:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266726_m.ogg
+    track: voice
+  specialist_thane_moving_to_cover:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266727_m.ogg
+    track: voice
+  specialist_thane_hostiles:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266728_m.ogg
+    track: voice
+  specialist_thane_ready:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266729_m.ogg
+    track: voice
+  specialist_thane_taking_cover:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266730_m.ogg
+    track: voice
+  specialist_thane_incoming:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266731_m.ogg
+    track: voice
+  specialist_thane_lets_go:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266732_m.ogg
+    track: voice
+  specialist_thane_what_are_they_making:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266733_m.ogg
+    track: voice
+  specialist_thane_moving_out_stay_close:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00266734_m.ogg
+    track: voice
+  specialist_thane_all_clear:
+    file: en_us_hench_assassin_endgm2_longwalk_a_00289180_m.ogg
+    track: voice
+  specialist_jack_ready:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266649_m.ogg
+    track: voice
+  specialist_jack_ill_hold_this_position:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266650_m.ogg
+    track: voice
+  specialist_jack_incoming:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266651_m.ogg
+    track: voice
+  specialist_jack_lets_go:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266652_m.ogg
+    track: voice
+  specialist_jack_what_are_they_making:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266653_m.ogg
+    track: voice
+  specialist_jack_moving_out_stay_close:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266654_m.ogg
+    track: voice
+  specialist_jack_leaving_the_barrier:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266736_m.ogg
+    track: voice
+  specialist_jack_strain_substantial:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266737_m.ogg
+    track: voice
+  specialist_jack_i_can_see_the_entrance:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266738_m.ogg
+    track: voice
+  specialist_jack_dont_know_how_much_more_i_can_take:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266739_m.ogg
+    track: voice
+  specialist_jack_moving_out_commander:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266740_m.ogg
+    track: voice
+  specialist_jack_taking_cover:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266741_m.ogg
+    track: voice
+  specialist_jack_moving_out:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266742_m.ogg
+    track: voice
+  specialist_jack_moving_to_cover:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266743_m.ogg
+    track: voice
+  specialist_jack_hostiles:
+    file: en_us_hench_convict_endgm2_longwalk_a_00266744_m.ogg
+    track: voice
+  specialist_jack_all_clear:
+    file: en_us_hench_convict_endgm2_longwalk_a_00289182_m.ogg
+    track: voice
+  specialist_jacob_leaving_the_barrier:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266688_m.ogg
+    track: voice
+  specialist_jacob_strain_substantial:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266689_m.ogg
+    track: voice
+  specialist_jacob_i_can_see_the_entrance:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266690_m.ogg
+    track: voice
+  specialist_jacob_dont_know_how_much_more_i_can_take:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266691_m.ogg
+    track: voice
+  specialist_jacob_moving_out_commander:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266692_m.ogg
+    track: voice
+  specialist_jacob_ill_hold_this_position:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266693_m.ogg
+    track: voice
+  specialist_jacob_moving_out:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266694_m.ogg
+    track: voice
+  specialist_jacob_moving_to_cover:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266695_m.ogg
+    track: voice
+  specialist_jacob_hostiles:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266696_m.ogg
+    track: voice
+  specialist_jacob_ready:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266697_m.ogg
+    track: voice
+  specialist_jacob_taking_cover:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266698_m.ogg
+    track: voice
+  specialist_jacob_incoming:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266699_m.ogg
+    track: voice
+  specialist_jacob_lets_go:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266700_m.ogg
+    track: voice
+  specialist_jacob_what_are_they_making:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266701_m.ogg
+    track: voice
+  specialist_jacob_moving_out_stay_close:
+    file: en_us_hench_leading_endgm2_longwalk_a_00266702_m.ogg
+    track: voice
+  specialist_jacob_all_clear:
+    file: en_us_hench_leading_endgm2_longwalk_a_00289178_m.ogg
+    track: voice
+  specialist_samara_leaving_the_barrier:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266656_m.ogg
+    track: voice
+  specialist_samara_strain_substantial:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266657_m.ogg
+    track: voice
+  specialist_samara_i_can_see_the_entrance:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266658_m.ogg
+    track: voice
+  specialist_samara_dont_know_how_much_more_i_can_take:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266659_m.ogg
+    track: voice
+  specialist_samara_moving_out_commander:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266660_m.ogg
+    track: voice
+  specialist_samara_ill_hold_this_position:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266661_m.ogg
+    track: voice
+  specialist_samara_moving_out:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266662_m.ogg
+    track: voice
+  specialist_samara_moving_to_cover:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266663_m.ogg
+    track: voice
+  specialist_samara_hostiles:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266664_m.ogg
+    track: voice
+  specialist_samara_ready:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266665_m.ogg
+    track: voice
+  specialist_samara_taking_cover:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266666_m.ogg
+    track: voice
+  specialist_samara_incoming:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266667_m.ogg
+    track: voice
+  specialist_samara_lets_go:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266668_m.ogg
+    track: voice
+  specialist_samara_what_are_they_making:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266669_m.ogg
+    track: voice
+  specialist_samara_moving_out_stay_close:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00266670_m.ogg
+    track: voice
+  specialist_samara_all_clear:
+    file: en_us_hench_mystic_endgm2_longwalk_a_00289176_m.ogg
+    track: voice
+  specialist_miranda_leaving_the_barrier:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266672_m.ogg
+    track: voice
+  specialist_miranda_strain_substantial:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266673_m.ogg
+    track: voice
+  specialist_miranda_i_can_see_the_entrance:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266674_m.ogg
+    track: voice
+  specialist_miranda_dont_know_how_much_more_i_can_take:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266675_m.ogg
+    track: voice
+  specialist_miranda_moving_out_commander:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266676_m.ogg
+    track: voice
+  specialist_miranda_ill_hold_this_position:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266677_m.ogg
+    track: voice
+  specialist_miranda_moving_out:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266678_m.ogg
+    track: voice
+  specialist_miranda_moving_to_cover:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266679_m.ogg
+    track: voice
+  specialist_miranda_hostiles:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266680_m.ogg
+    track: voice
+  specialist_miranda_ready:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266681_m.ogg
+    track: voice
+  specialist_miranda_taking_cover:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266682_m.ogg
+    track: voice
+  specialist_miranda_incoming:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266683_m.ogg
+    track: voice
+  specialist_miranda_lets_go:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266684_m.ogg
+    track: voice
+  specialist_miranda_what_are_they_making:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266685_m.ogg
+    track: voice
+  specialist_miranda_moving_out_stay_close:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00266686_m.ogg
+    track: voice
+  specialist_miranda_all_clear:
+    file: en_us_hench_vixen_endgm2_longwalk_a_00289177_m.ogg
+    track: voice

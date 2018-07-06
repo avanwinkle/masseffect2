@@ -8,16 +8,15 @@ mode:
 
 event_player:
   player_tension{value==1}:
-    - increase_infiltration_med
-    - play_specialist_warning_first{device.counters.valves.value==5}
-    - play_specialist_warning_med{device.counters.valves.value<5}
-  player_tension{value==2}: increase_infiltration_high
+    - increase_infiltration
+    - play_specialist_inf_warning_first{device.counters.valves.value==5}
+    - play_specialist_inf_warning_med{device.counters.valves.value<5}
+  player_tension{value==2}: increase_infiltration
   valveshots_hit: reset_infiltration
   timer_infiltration_complete: kill_specialist
-  valve_left_ramp_hit: infiltration_complete
   logicblock_valves_hit:
-    - play_specialist_advance{count>1}
-    - play_specialist_close{count==1}
+    - play_specialist_inf_advance{count>1}
+    - play_specialist_inf_close{count==1}
   specialist_killed: infiltration_failed
 
 queue_relay_player:
@@ -36,6 +35,7 @@ multiballs:
 counters:
   valves:
     starting_count: 5
+    count_complete_value: 0
     direction: down
     count_events: valveshots_hit
     persist_state: true
@@ -51,7 +51,7 @@ timers:
     control_events:
       - event: reset_infiltration
         action: restart
-      - event: infiltration_complete
+      - event: logicblock_valves_complete
         action: stop
 
 shot_groups:
@@ -79,7 +79,7 @@ shots:
     enable_events: mode_suicide_infiltration_started
     reset_events: mode_suicide_infiltration_started
     disable_events: valve_right_ramp_hit
-    advance_events: increase_infiltration_med, increase_infiltration_high
+    advance_events: increase_infiltration_med
     profile: valve_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
@@ -88,7 +88,7 @@ shots:
     hit_events: sh_left_orbit_hit
     enable_events: valve_right_ramp_hit
     disable_events: valve_left_orbit_hit, mode_suicide_infiltration_started
-    advance_events: increase_infiltration_med, increase_infiltration_high
+    advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -98,7 +98,7 @@ shots:
     hit_events: sh_kickback_hit
     enable_events: valve_left_orbit_hit
     disable_events: valve_kickback_hit, mode_suicide_infiltration_started
-    advance_events: increase_infiltration_med, increase_infiltration_high
+    advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -108,7 +108,7 @@ shots:
     hit_events: sh_right_orbit_hit
     enable_events: valve_kickback_hit
     disable_events: valve_right_orbit_hit, mode_suicide_infiltration_started
-    advance_events: increase_infiltration_med, increase_infiltration_high
+    advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -118,7 +118,7 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: valve_right_orbit_hit
     disable_events: valve_left_ramp_hit, mode_suicide_infiltration_started
-    advance_events: increase_infiltration_med, increase_infiltration_high
+    advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -197,6 +197,9 @@ sound_player:
   mode_suicide_infiltration_started:
     infiltration_low:
       action: play
+  logicblock_valves_complete:
+    specialist_inf_through:
+      events_when_stopped: infiltration_complete
   player_tension{value==1}:
     infiltration_low:
       action: stop
@@ -209,15 +212,15 @@ sound_player:
     infiltration_high:
       action: play
       start_at: 34s
-    specialist_warning_high:
+    specialist_inf_warning_high:
       action: play
-  play_specialist_warning_first: specialist_warning_first
-  play_specialist_warning_med: specialist_warning_med
-  play_specialist_advance:
-    specialist_advance:
+  play_specialist_inf_warning_first: specialist_inf_warning_first
+  play_specialist_inf_warning_med: specialist_inf_warning_med
+  play_specialist_inf_advance:
+    specialist_inf_advance:
       events_when_stopped: advance_complete
-  play_specialist_close:
-    specialist_close:
+  play_specialist_inf_close:
+    specialist_inf_close:
       events_when_stopped: advance_complete
   # If we were already low-tension, no need to restart the music
   player_tension{value==0 and change<0}:
@@ -228,31 +231,41 @@ sound_player:
       action: stop
     infiltration_high:
       action: stop
-    specialist_warning_first:
+    specialist_inf_warning_first:
       action: stop
       fade_out: 100ms
-    specialist_warning_med:
+    specialist_inf_warning_med:
       action: stop
       fade_out: 100ms
-    specialist_warning_high:
+    specialist_inf_warning_high:
       action: stop
       fade_out: 100ms
   kill_specialist:
     specialist_death_inf:
       action: play
       events_when_played: specialist_killed
-    specialist_warning_first:
+    specialist_inf_warning_first:
       action: stop
       fade_out: 100ms
-    specialist_warning_med:
+    specialist_inf_warning_med:
       action: stop
       fade_out: 100ms
-    specialist_warning_high:
+    specialist_inf_warning_high:
       action: stop
       fade_out: 100ms
 
 sound_pools:
-  specialist_death_inf:
+  specialist_inf_through:
+    track: voice
+    sounds:
+      - specialist_garrus_im_through_opening_doors_now{current_player.specialist=="garrus"}
+      - specialist_jacob_im_through_opening_doors_now{current_player.specialist=="jacob"}
+      - specialist_legion_im_through_opening_doors_now{current_player.specialist=="legion"}
+      - specialist_kasumi_im_through_opening_doors_now{current_player.specialist=="kasumi"}
+      - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
+      - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
+      - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
+  specialist_inf_death_inf:
     track: voice
     sounds:
       - specialist_garrus_death_inf{current_player.specialist=="garrus"}
@@ -262,7 +275,7 @@ sound_pools:
       - specialist_mordin_death_inf{current_player.specialist=="mordin"}
       - specialist_tali_death_inf{current_player.specialist=="tali"}
       - specialist_thane_death_inf{current_player.specialist=="thane"}
-  specialist_close:
+  specialist_inf_close:
     track: voice
     type: random_force_all
     sounds:
@@ -280,7 +293,7 @@ sound_pools:
       - specialist_tali_one_more_valve_to_go{current_player.specialist=="tali"}
       - specialist_thane_moving_on_near_the_end{current_player.specialist=="thane"}
       - specialist_thane_one_more_valve_to_go{current_player.specialist=="thane"}
-  specialist_warning_first:
+  specialist_inf_warning_first:
     track: voice
     sounds:
       - specialist_garrus_gate_blocking{current_player.specialist=="garrus"}
@@ -290,7 +303,7 @@ sound_pools:
       - specialist_mordin_gate_blocking{current_player.specialist=="mordin"}
       - specialist_tali_gate_blocking{current_player.specialist=="tali"}
       - specialist_thane_gate_blocking{current_player.specialist=="thane"}
-  specialist_warning_med:
+  specialist_inf_warning_med:
     type: random_force_all
     track: voice
     sounds:
@@ -329,7 +342,7 @@ sound_pools:
       - specialist_thane_waiting_on_you{current_player.specialist=="thane"}
       - specialist_thane_another_obstacle_in_the_way{current_player.specialist=="thane"}
       - specialist_thane_another_thing_in_the_way{current_player.specialist=="thane"}
-  specialist_warning_high:
+  specialist_inf_warning_high:
     type: random_force_all
     track: voice
     sounds:
@@ -368,7 +381,7 @@ sound_pools:
       - specialist_thane_burning_up{current_player.specialist=="thane"}
       - specialist_thane_im_on_fire{current_player.specialist=="thane"}
       - specialist_thane_hurry_shepard_its_heating_up{current_player.specialist=="thane"}
-  specialist_advance:
+  specialist_inf_advance:
     type: random_force_all
     track: voice
     sounds:
@@ -604,22 +617,22 @@ sounds:
   specialist_legion_nice_work:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00318127_m.ogg
     track: voice
-  specialist_jacob_blocked_again:
+  specialist_jacob_gate_is_open:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258862_m.ogg
     track: voice
-  specialist_jacob_gate_is_open:
+  specialist_jacob_gate_blocking:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258869_m.ogg
     track: voice
-  specialist_jacob_gate_blocking:
+  specialist_jacob_that_valve:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258877_m.ogg
     track: voice
-  specialist_jacob_that_valve:
+  specialist_jacob_hurry_shepard_its_heating_up:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258888_m.ogg
     track: voice
-  specialist_jacob_hurry_shepard_its_heating_up:
+  specialist_jacob_im_through_opening_doors_now:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
     track: voice
-  specialist_jacob_im_through_opening_doors_now:
+  specialist_jacob_blocked_again:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258902_m.ogg
     track: voice
   specialist_jacob_being_cooked_alive:

@@ -120,10 +120,13 @@ class LockHandler(Mode):
       if self.machine.modes.suicide_infiltration.active:
         if self.machine.game.player["valves_state"].value <= 1:
           self.log.info(" - Suicide wants a specialist, lockhandler is taking no action")
+          # We don't need to start missionselect here, suicide_base will take care of it:
+          # infiltration: valves > specialist_through > infiltration_complete
+          # suicide_base: infiltration_complete > start_mode_missionselect
         else:
           self._bypass_lock()
         return
-      # If a specialist has died and we need to select another
+      # If a specialist has died and we need to select another, queue up mission select
       elif self.machine.game.player["status_{}".format(self.machine.game.player["specialist"])] == -1:
         self.log.info(" - Suicide needs a specialist because {} is dead.".format(self.machine.game.player["specialist"]))
         do_bypass = False

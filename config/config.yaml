@@ -60,7 +60,7 @@ machine_vars:
     persist: true
 
 custom_code:
-  - scriptlets.me_squadmates.MESquadmates
+  - scriptlets.me_squadmates.SquadmateHandlers
   - scriptlets.save_career.SaveCareer
   # - mpf_arduino.MPFArduino
 

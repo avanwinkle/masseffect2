@@ -2,6 +2,8 @@ import logging
 from mpf.core.custom_code import CustomCode
 
 SQUADMATES = ("garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed")
+BIOTICMATES = ("jack", "jacob", "miranda", "samara", "thane")
+TECHMATES = ("garrus", "jacob", "kasumi", "legion", "mordin", "tali", "thane")
 
 LEDS = {
   "garrus": "color_shield_blue",
@@ -29,7 +31,32 @@ COLORS = {
   "zaeed": "FF0000",
 }
 
-class MESquadmates(CustomCode):
+class SquadmateStatusClass():
+  def __init__(self):
+    self.log = logging.getLogger("SquadmateStatus")
+    self.log.info("Squadmate Status ready!")
+
+  def _mate_status_is(self, player, squadmate, status):
+    return player["status_{}".format(squadmate)] == status
+
+  def _get_available_mates(self, player, mates=SQUADMATES):
+    return [mate for mate in mates if self._mate_status_is(player, mate, 4)]
+
+  def all_biotics(self):
+    return BIOTICMATES
+
+  def all_techs(self):
+    return TECHMATES
+
+  def available_biotics(self, player):
+    return self._get_available_mates(player, BIOTICMATES)
+
+  def available_techs(self, player):
+    return self._get_available_mates(player, TECHMATES)
+
+SquadmateStatus = SquadmateStatusClass()
+
+class SquadmateHandlers(CustomCode):
   """
   This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
   a convenient way to automate the event postings over all squadmates without a bunch of copy+paste in the yaml

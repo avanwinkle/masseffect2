@@ -1,36 +1,6 @@
 import copy
+from scriptlets.me_squadmates import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
-
-SQUADMATES = [
-  "grunt",
-  "zaeed",
-  "jack",
-  "legion",
-  "garrus",
-  "samara",
-  "kasumi",
-  "thane",
-  "mordin",
-  "tali",
-]
-
-BIOMATES = [
-  "jack",
-  "jacob",
-  "miranda",
-  "samara",
-  "thane",
-]
-
-TECHMATES = [
-  "garrus",
-  "jacob",
-  "kasumi",
-  "legion",
-  "mordin",
-  "tali",
-  "thane",
-]
 
 ALLOW_COLLECTORSHIP_REPLAY = True
 
@@ -50,7 +20,8 @@ class MissionSelect(Carousel):
     if self.machine.game.player.achievements['suicidemission'] == "started":
       self._items = self._build_specialist_list()
       # Wait for the mode to be ready before rendering the list of specialists
-      self.add_mode_event_handler('update_specialists', self._render_specialists)
+      # self.add_mode_event_handler('mode_missionselect_started', self._render_specialists)
+      self._render_specialists()
     else:
       self._items = self._build_items_list()
       # Disable the intro slide after a time
@@ -67,7 +38,7 @@ class MissionSelect(Carousel):
       return ['collectorship']
 
     self._intro = "intro"
-    self._mates = SQUADMATES
+    self._mates = SquadmateStatus.all_mates()
     items = [self._intro]
 
     # If Derelict Reaper is available and not completed, it goes first
@@ -94,28 +65,24 @@ class MissionSelect(Carousel):
   def _build_specialist_list(self):
     player = self.machine.game.player
     self._intro = "specialist"
-    items = [self._intro]
 
     # If we are suiciding, filter for the correct type of squadmate
     if player.achievements['infiltration'] != "completed":
-      self._mates = TECHMATES
+      self._mates = SquadmateStatus.all_techs()
+      items = SquadmateStatus.available_techs(player)
     elif player.achievements['longwalk'] != "completed":
-      self._mates = BIOMATES
+      self._mates = SquadmateStatus.all_biotics()
+      items = SquadmateStatus.available_biotics(player)
     else:
       raise KeyError("What specialist are we building for?", player.achievements)
 
-    for mate in self._mates:
-      status = player["status_{}".format(mate)]
-      if status == 4:
-        items.append(mate)
     self._specialist = self._mates[0]
-
     return items
 
   def _render_specialists(self, **kwargs):
     for mate in self._mates:
       status = self.machine.game.player["status_{}".format(mate)]
-      if mate == kwargs.get("squadmate"):
+      if mate == kwargs.get("squadmate", self._specialist):
         self.machine.events.post("{}_specialist_{}_highlighted".format(self.name, mate))
       # Set available specialists to be specialists
       elif status == 4:

@@ -158,17 +158,13 @@ ball_saves:
     hurry_up_time: 5s
     enable_events:
       - mode_base_started
-      # When starting a new ball in the middle of the suicide mission:
-      - mode_type_suicide_started{current_player.suicide_continuing==0}
     timer_start_events:
       - balldevice_bd_plunger_ball_eject_success
     disable_events:
       - ball_will_end
       - ball_save_recruitsave_enabled # Only allow one active save at a time
       - start_mode_normandyattack # We want the ball to drain when the attack starts
-      - start_mode_suicide_base # Suicide mission plays by its own rules
-      # Don't keep the save up if we have a multiball
-      - multiball_infiltration_started
+      - missionselect_suicide_selected # Suicide mission plays by its own rules
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -405,6 +401,12 @@ sounds:
       release: 3s
 
 track_player:
+  # Bring the music out asap to allow for the bonus music to fade in
+  ball_will_end:
+    music:
+      action: stop_all_sounds
+      fade: 500ms
+  # In case a mode has audio that wants to queue-block on ball_ending
   ball_ending:
     __all__:
       action: stop_all_sounds

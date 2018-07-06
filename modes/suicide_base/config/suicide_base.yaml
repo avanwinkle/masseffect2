@@ -2,6 +2,8 @@
 mode:
   start_events: start_mode_suicide_base
   stop_events: stop_wizards, suicidemission_complete, suicidemission_failed
+  events_when_started: mode_type_wizard_started, enable_fullorbit
+  events_when_stopped: mode_type_wizard_stopped
   priority: 2000
 
 event_player:
@@ -59,23 +61,15 @@ variable_player:
   kill_specialist:
     suicide_continuing:
       action: set
-      int: -1
+      int: 0
   omegarelay_complete:
-    suicide_continuing:
-      action: set
-      int: 1
+    suicide_continuing: 1
   infiltration_complete:
-    suicide_continuing:
-      action: set
-      int: 1
+    suicide_continuing: 1
   longwalk_complete:
-    suicide_continuing:
-      action: set
-      int: 1
+    suicide_continuing: 1
   humanreaper_complete:
-    suicide_continuing:
-      action: set
-      int: 1
+    suicide_continuing: 1
   suicidemission_failed:
     # Reset all dead squadmates to be re-recruitable (or recruited for Jacob/Miranda)
     status_garrus{current_player.status_garrus==-1}:
@@ -116,11 +110,14 @@ variable_player:
       int: 0
 
 slide_player:
-  mode_suicide_base_started: suicide_slide
-  mode_missionselect_started:
+  mode_type_suicide_started: suicide_slide
+  mode_type_suicide_stopped:
     suicide_slide:
       action: remove
-  mode_missionselect_will_stop: suicide_slide
+  kill_specialist: specialist_killed_slide
+  missionselect_specialist_selected:
+    specialist_killed_slide:
+      action: remove
 
 slides:
   suicide_slide:
@@ -131,6 +128,18 @@ slides:
         style: small
         anchor_y: top
         y: top-2
+  specialist_killed_slide:
+    widgets:
+      - type: text
+        text: (player|specialist) is dead
+        style: small
+        anchor_y: bottom
+        y: middle+4
+      - type: text
+        text: Shoot ramp to try again
+        style: small
+        anchor_y: top
+        y: middle-4
 
 widget_player:
   mode_suicide_omegarelay_started:
@@ -143,10 +152,28 @@ widget_player:
       action: remove
     infiltration_title:
       slide: suicide_slide
+  mode_suicide_longwalk_started:
+    infiltration_title:
+      action: remove
+    longwalk_title:
+      slide: suicide_slide
+  mode_suicide_humanreaper_started:
+    longwalk_title:
+      action: remove
+    humanreaper_title:
+      slide: suicide_slide
+  mode_suicide_endrun_started:
+    humanreaper_title:
+      action: remove
+    endrun_title:
+      slide: suicide_slide
   timer_omegarelay_tick:
     suicide_time:
       action: update
   timer_infiltration_tick:
+    suicide_time:
+      action: update
+  timer_longwalk_tick:
     suicide_time:
       action: update
 
@@ -158,6 +185,18 @@ widgets:
   infiltration_title:
     - type: text
       text: Infiltration
+      style: text_default
+  longwalk_title:
+    - type: text
+      text: the Long Walk
+      style: text_default
+  humanreaper_title:
+    - type: text
+      text: the Human Reaper
+      style: text_default
+  endrun_title:
+    - type: text
+      text: the End Run
       style: text_default
   suicide_time:
     - type: text

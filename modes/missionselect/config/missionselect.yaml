@@ -18,7 +18,7 @@ mode:
   stop_events: stop_mode_missionselect, missionselect_item_selected
   events_when_started: flippers_off
   events_when_stopped: flippers_on
-  priority: 1000
+  priority: 3000
   code: missionselect.MissionSelect
   file_log: full
   use_wait_queue: true
@@ -98,7 +98,7 @@ show_player:
       speed: 6
       show_tokens:
         color: FF0000
-        fadetime: 50ms
+        fadetime: 20ms
 
 shows:
   missionselect_show:
@@ -187,7 +187,7 @@ slide_player:
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_derelictreaper_highlighted: missionselect_derelictreaper_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
-  missionselect_specialist_highlighted: missionselect_specialist_slide
+  mode_missionselect_started: missionselect_specialist_slide
 
 slides:
   missionselect_intro_slide:

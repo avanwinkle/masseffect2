@@ -36,6 +36,11 @@ shots:
     hit_events: drop_target_bank_dropbank_mixed
   envshot_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+  # Orbit envshots that won't hit during fullorbits
+  envshot_left_orbit_nofull:
+    hit_events: sh_left_orbit_hit
+  envshot_right_orbit_nofull:
+    hit_events: sh_right_orbit_hit
 
 flasher_player:
   envshot_kickback_hit:
