@@ -158,6 +158,8 @@ ball_saves:
     hurry_up_time: 5s
     enable_events:
       - mode_base_started
+      # When starting a new ball in the middle of the suicide mission:
+      - mode_type_suicide_started{current_player.suicide_continuing==0}
     timer_start_events:
       - balldevice_bd_plunger_ball_eject_success
     disable_events:
@@ -165,6 +167,8 @@ ball_saves:
       - ball_save_recruitsave_enabled # Only allow one active save at a time
       - start_mode_normandyattack # We want the ball to drain when the attack starts
       - start_mode_suicide_base # Suicide mission plays by its own rules
+      # Don't keep the save up if we have a multiball
+      - multiball_infiltration_started
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

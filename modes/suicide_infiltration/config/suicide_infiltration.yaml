@@ -1,22 +1,24 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_infiltration
-  stop_events: infiltration_complete, infiltration_failed, specialist_killed
+  stop_events: infiltration_complete, infiltration_failed
+  events_when_started: mode_type_suicide_started
+  events_when_stopped: mode_type_suicide_stopped
   priority: 2300
 
 event_player:
-  timer_infiltration_tick{ticks==35}:
+  player_tension{value==1}:
     - increase_infiltration_med
     - play_specialist_warning_first{device.counters.valves.value==5}
     - play_specialist_warning_med{device.counters.valves.value<5}
-  timer_infiltration_tick{ticks==15}: increase_infiltration_high
+  player_tension{value==2}: increase_infiltration_high
   valveshots_hit: reset_infiltration
-  timer_infiltration_complete: infiltration_failed
+  timer_infiltration_complete: kill_specialist
   valve_left_ramp_hit: infiltration_complete
   logicblock_valves_hit:
     - play_specialist_advance{count>1}
     - play_specialist_close{count==1}
-  infiltration_failed: kill_specialist
+  specialist_killed: infiltration_failed
 
 queue_relay_player:
   ball_ending{device.counters.valves.value>0}:
@@ -38,6 +40,19 @@ counters:
     count_events: valveshots_hit
     persist_state: true
     reset_events: mode_suicide_infiltration_started
+
+timers:
+  infiltration:
+    start_value: 40
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: true
+    control_events:
+      - event: reset_infiltration
+        action: restart
+      - event: infiltration_complete
+        action: stop
 
 shot_groups:
   valveshots:
@@ -111,6 +126,18 @@ shots:
     tags: envshot_left_ramp
 
 variable_player:
+  mode_suicide_infiltration_started:
+    tension:
+      action: set
+      int: 0
+  timer_infiltration_tick{ticks==32}:
+    tension: 1
+  timer_infiltration_tick{ticks==16}:
+    tension: 1
+  reset_infiltration:
+    tension:
+      action: set
+      int: 0
   kill_specialist:
     status_garrus{current_player.specialist=="garrus"}:
       action: set
@@ -170,18 +197,18 @@ sound_player:
   mode_suicide_infiltration_started:
     infiltration_low:
       action: play
-  increase_infiltration_med:
+  player_tension{value==1}:
     infiltration_low:
       action: stop
     infiltration_med:
       action: play
-      start_at: 10s
-  increase_infiltration_high:
+      start_at: 36s
+  player_tension{value==2}:
     infiltration_med:
       action: stop
     infiltration_high:
       action: play
-      start_at: 10s
+      start_at: 34s
     specialist_warning_high:
       action: play
   play_specialist_warning_first: specialist_warning_first
@@ -192,18 +219,37 @@ sound_player:
   play_specialist_close:
     specialist_close:
       events_when_stopped: advance_complete
-  reset_infiltration:
+  # If we were already low-tension, no need to restart the music
+  player_tension{value==0 and change<0}:
     infiltration_low:
       action: play
-      start_at: 8s
+      start_at: 21s
     infiltration_med:
       action: stop
     infiltration_high:
       action: stop
+    specialist_warning_first:
+      action: stop
+      fade_out: 100ms
+    specialist_warning_med:
+      action: stop
+      fade_out: 100ms
+    specialist_warning_high:
+      action: stop
+      fade_out: 100ms
   kill_specialist:
     specialist_death_inf:
       action: play
       events_when_played: specialist_killed
+    specialist_warning_first:
+      action: stop
+      fade_out: 100ms
+    specialist_warning_med:
+      action: stop
+      fade_out: 100ms
+    specialist_warning_high:
+      action: stop
+      fade_out: 100ms
 
 sound_pools:
   specialist_death_inf:
@@ -218,6 +264,7 @@ sound_pools:
       - specialist_thane_death_inf{current_player.specialist=="thane"}
   specialist_close:
     track: voice
+    type: random_force_all
     sounds:
       - specialist_garrus_moving_on_near_the_end{current_player.specialist=="garrus"}
       - specialist_garrus_one_more_valve_to_go{current_player.specialist=="garrus"}
@@ -361,26 +408,26 @@ sound_pools:
       - specialist_thane_all_clear_moving_on{current_player.specialist=="thane"}
       - specialist_thane_nice_work{current_player.specialist=="thane"}
 
-
 sounds:
   infiltration_low:
     file: mus_endgm2_tension_1.ogg
     track: music
     mode_end_action: stop
-    fade_in: 2s
-    fade_out: 3s
+    fade_in: 1s
+    fade_out: 2s
+    volume: 0.9
   infiltration_med:
     file: mus_endgm2_combat_1_low.ogg
     track: music
     mode_end_action: stop
-    fade_in: 2s
-    fade_out: 3s
+    fade_in: 1500ms
+    fade_out: 2s
   infiltration_high:
     file: mus_endgm2_combat_1.ogg
     track: music
     mode_end_action: stop
-    fade_in: 2s
-    fade_out: 3s
+    fade_in: 1500ms
+    fade_out: 2s
   # Death
   specialist_thane_death_inf:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
@@ -761,17 +808,3 @@ sounds:
   specialist_kasumi_nice_work:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00318128_m.ogg
     track: voice
-
-
-timers:
-  infiltration:
-    start_value: 45
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: true
-    control_events:
-      - event: reset_infiltration
-        action: restart
-      - event: infiltration_complete
-        action: stop

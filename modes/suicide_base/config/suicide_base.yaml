@@ -2,8 +2,6 @@
 mode:
   start_events: start_mode_suicide_base
   stop_events: stop_wizards, suicidemission_complete, suicidemission_failed
-  events_when_started: mode_type_wizard_started
-  events_when_stopped: mode_type_wizard_stopped
   priority: 2000
 
 event_player:
@@ -37,13 +35,6 @@ ball_saves:
     delayed_eject_events: mode_suicide_infiltration_started
     auto_launch: true # Must be true because we have a multiball starting too
 
-ball_holds:
-  specialist_hold:
-    hold_devices: bd_lock
-    balls_to_hold: 1
-    enable_events: valve_left_ramp_enabled
-    release_all_events: mode_suicide_longwalk_started
-
 show_player:
   # Light the missions arrow to select a specialist after one died
   infiltration_failed:
@@ -68,15 +59,23 @@ variable_player:
   kill_specialist:
     suicide_continuing:
       action: set
-      int: 0
+      int: -1
   omegarelay_complete:
-    suicide_continuing: 1
+    suicide_continuing:
+      action: set
+      int: 1
   infiltration_complete:
-    suicide_continuing: 1
+    suicide_continuing:
+      action: set
+      int: 1
   longwalk_complete:
-    suicide_continuing: 1
+    suicide_continuing:
+      action: set
+      int: 1
   humanreaper_complete:
-    suicide_continuing: 1
+    suicide_continuing:
+      action: set
+      int: 1
   suicidemission_failed:
     # Reset all dead squadmates to be re-recruitable (or recruited for Jacob/Miranda)
     status_garrus{current_player.status_garrus==-1}:
