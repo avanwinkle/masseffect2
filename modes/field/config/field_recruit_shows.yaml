@@ -7,7 +7,7 @@ show_player:
   player_bypass_missionselect{value>0}:
     missions_available_show:
       action: stop
-  mode_field_started:
+  mode_field_started.1:
     missions_available_show{current_player.available_missions>0 and current_player.bypass_missionselect==0}:
       action: play
       sync_ms: 1000

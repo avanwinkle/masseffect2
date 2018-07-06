@@ -77,7 +77,16 @@ shot_groups:
 
 shot_profiles:
   spinnerprofile:
+    # Spinner disables temporarily during orbits, but keep the show alive
     show_when_disabled: true
+    states:
+      - name: flashing
+        show: spinner_flash_show
+        speed: 2
+      - name: lit
+        show: spinner_lit_show
+  cureprofile:
+    show_when_disabled: false
     states:
       - name: flashing
         show: spinner_flash_show
@@ -101,56 +110,52 @@ shots:
     # Don't let a ball save plunge count as a hit to the spinner
     disable_events: fullorbit_fromplunger_hit
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
   cure:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
-    profile: spinnerprofile
-    reset_events: mode_recruitmordin_started
+    profile: cureprofile
     enable_events: spinner_hit
-    # disable_events: mode_recruitmordin_started
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
     tags: envshot_right_orbit
   fan_left:
     hit_events: sh_left_ramp_hit
     profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
-    # disable_events: mode_recruitmordin_started
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
     tags: envshot_left_ramp
   fan_right:
     hit_events: sh_right_ramp_hit
     profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
-    # disable_events: mode_recruitmordin_started
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
 
 shows:
   spinner_flash_show:
     - time: 0
       lights:
-        (led): 440000 #color_mordin
+        (leds): 440000 #color_mordin
     - time: +1
       lights:
-        (led): black
+        (leds): black
   spinner_lit_show:
     - lights:
-        (led): 440000 #color_mordin
+        (leds): 440000 #color_mordin
   fan_lit_show:
     - time: 0
       lights:
-        (led): 55FF00 #color_door_green
+        (leds): 55FF00 #color_door_green
     - time: +1
       lights:
-        (led): black
+        (leds): black
   fan_hit_show:
     - lights:
-        (led): black
+        (leds): black
 
 sound_player:
   mode_recruitmordin_started:
@@ -172,12 +177,12 @@ sound_pools:
     sounds:
       - step1_voice_miranda
       - step1_voice_jacob
-      - step1_voice_garrus{current_player.status_garrus>=3}|2
-      - step1_voice_kasumi{current_player.status_kasumi>=3}|2
-      - step1_voice_grunt{current_player.status_grunt>=3}|2
-      - step1_voice_zaeed{current_player.status_zaeed>=3}|2
-      - step1_voice_tali{current_player.status_tali>=3}|2
-      - step1_voice_jack{current_player.status_jack>=3}|2
+      - step1_voice_garrus{current_player.status_garrus>=4}|2
+      - step1_voice_kasumi{current_player.status_kasumi>=4}|2
+      - step1_voice_grunt{current_player.status_grunt>=4}|2
+      - step1_voice_zaeed{current_player.status_zaeed>=4}|3
+      - step1_voice_tali{current_player.status_tali>=4}|3
+      - step1_voice_jack{current_player.status_jack>=4}|2
     max_queue_time: 1s
   step2_voice:
     type: random
@@ -185,12 +190,12 @@ sound_pools:
     sounds:
       - step2_voice_miranda
       - step2_voice_jacob
-      - step2_voice_garrus{current_player.status_garrus>=3}|2
-      - step2_voice_kasumi{current_player.status_kasumi>=3}|2
-      - step2_voice_grunt{current_player.status_grunt>=3}|2
-      - step2_voice_zaeed{current_player.status_zaeed>=3}|2
-      - step2_voice_tali{current_player.status_tali>=3}|2
-      - step2_voice_jack{current_player.status_jack>=3}|2
+      - step2_voice_garrus{current_player.status_garrus>=4}|2
+      - step2_voice_kasumi{current_player.status_kasumi>=4}|2
+      - step2_voice_grunt{current_player.status_grunt>=4}|2
+      - step2_voice_zaeed{current_player.status_zaeed>=4}|3
+      - step2_voice_tali{current_player.status_tali>=4}|3
+      - step2_voice_jack{current_player.status_jack>=4}|2
     max_queue_time: 1s
   step3_voice:
     type: random

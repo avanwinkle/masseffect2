@@ -14,7 +14,8 @@ shots:
     tags: envshot_outlane
   # This shot is hit when medigel light shot is hit and no other saves are enabled
   medigel_save_shot:
-    hit_events: medigel_shot_hit #{device.ball_saves["default"].enabled!=True and device.ball_saves["recruitsave"].enabled!=True}
+    # Don't save during default or recruit saves, or we'll get two balls!
+    hit_events: medigel_shot_hit{device.ball_saves["default"].enabled!=True and device.ball_saves["recruitsave"].enabled!=True}
     enable_events: player_shot_medigel_shot_enabled
     disable_events: medigel_save_shot_hit
 
@@ -49,7 +50,7 @@ slide_player:
       action: play
       expire: 2s
       priority: 2000
-  medigel_shot_hit:
+  medigel_save_shot_hit:
     medigel_slide:
       action: play
       expire: 2s
@@ -88,7 +89,7 @@ slides:
 
 
 sound_player:
-  medigel_shot_hit: medigel_sound
+  medigel_save_shot_hit: medigel_sound
   ball_save_default_saving_ball: medigel_sound
   ball_save_recruitsave_saving_ball: medigel_sound
 

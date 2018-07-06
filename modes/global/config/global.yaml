@@ -34,6 +34,8 @@ event_player:
     # - enable_kickback # Can't write rules for different nodes?
   mode_global_will_stop:
     - stop_mode_field
+    - disable_sbdrops_counter
+    - disable_lock_lightshot
     - stop_missions
   mode_type_mission_started:
     - stop_mode_field
