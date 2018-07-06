@@ -86,6 +86,13 @@ modes:
   - collectorship_praetorian
   - derelictreaper
   - normandyattack
+  # Suicide Mission:
+  - suicide_base
+  - suicide_omegarelay
+  - suicide_infiltration
+  - suicide_longwalk
+  - suicide_humanreaper
+  - suicide_endrun
   # Recruit Missions:
   - recruitgarrus
   - recruitgrunt
@@ -172,6 +179,8 @@ player_vars:
   mineral_palladium:
     initial_value: 0
   mineral_platinum:
+    initial_value: 0
+  presuicide_score:
     initial_value: 0
   recruits_color:
     initial_value: "FFFFFF"

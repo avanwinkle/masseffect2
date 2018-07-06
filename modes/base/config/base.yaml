@@ -71,27 +71,33 @@ achievements:
   suicidemission:
     enable_events: achievement_normandyattack_state_completed
     start_events: missionselect_suicidemission_selected
-    complete_events: endrun_complete
+    complete_events: suicidemission_complete
     restart_on_next_ball_when_started: true
   omegarelay:
     enable_events: missionselect_suicidemission_selected
+    disable_events: suicidemission_failed
     complete_events: omegarelay_complete
   infiltration:
     enable_events: omegarelay_complete
+    disable_events: suicidemission_failed
     complete_events: infiltration_complete
   longwalk:
     enable_events: infiltration_complete
+    disable_events: suicidemission_failed
     complete_events: longwalk_complete
   humanreaper:
     enable_events: longwalk_complete
+    disable_events: suicidemission_failed
     complete_events: humanreaper_complete
   endrun:
     enable_events: humanreaper_complete
+    disable_events: suicidemission_failed
     complete_events: endrun_complete
 
 event_player:
   mode_base_started:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
+    - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
     - start_mode_lockhandler
     - start_mode_environment
     - enable_orbitswitches

@@ -16,6 +16,7 @@ event_player:
   career_loaded: stop_mode_mainmenu
 
 queue_relay_player:
+  # For the first ball, allow the player to pick a profile
   player_turn_starting{player.ball==0}:
     post: show_mainmenu
     wait_for: mainmenu_item_selected

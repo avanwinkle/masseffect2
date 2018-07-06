@@ -1,6 +1,162 @@
 #config_version=5
 mode:
-  start_events: achievement_infiltration_state_started
-  stop_events: ball_will_end, infiltration_complete
+  start_events: start_mode_suicide_infiltration
+  stop_events: ball_will_end, infiltration_complete, infiltration_failed
   priority: 300
 
+event_player:
+  timer_infiltration_tick{ticks==40}: increase_infiltration_med
+  timer_infiltration_tick{ticks==20}: increase_infiltration_high
+  valveshots_low_hit: reset_infiltration
+  valveshots_med_hit: reset_infiltration
+  valveshots_high_hit: reset_infiltration
+  timer_infiltration_complete: infiltration_failed
+  valve_left_ramp_hit: infiltration_complete
+
+shot_groups:
+  valveshots:
+    shots: valve_left_orbit, valve_right_ramp, valve_kickback, valve_right_orbit, valve_left_ramp
+    rotate_right_events: reset_infiltration
+    reset_events: infiltration_failed
+
+shot_profiles:
+  valve_profile:
+    advance_on_hit: false
+    states:
+      - name: low
+        show: valve_show_low
+        speed: 2
+      - name: med
+        show: valve_show_med
+        speed: 4
+      - name: high
+        show: valve_show_high
+        speed: 8
+
+shots:
+  valve_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: mode_suicide_infiltration_started
+    disable_events: valve_left_orbit_hit
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    profile: valve_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
+  valve_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: valve_left_orbit_hit
+    disable_events: valve_right_ramp_hit
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    profile: valve_profile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
+  valve_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: valve_right_ramp_hit
+    disable_events: valve_kickback_hit
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    profile: valve_profile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+    tags: envshot_kickback
+  valve_right_orbit:
+    hit_events: sh_right_orbit_hit
+    enable_events: valve_kickback_hit
+    disable_events: valve_right_orbit_hit
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    profile: valve_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+    tags: envshot_right_orbit
+  valve_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: valve_right_orbit_hit
+    disable_events: valve_left_ramp_hit
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    profile: valve_profile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
+
+shows:
+  valve_show_low:
+    - time: 0
+      lights:
+        (leds): 55FF00
+    - time: '+2'
+      lights:
+        (leds): off
+  valve_show_med:
+    - time: 0
+      lights:
+        (leds): FF2200
+    - time: '+2'
+      lights:
+        (leds): off
+  valve_show_hight:
+    - time: 0
+      lights:
+        (leds): 660000
+    - time: '+2'
+      lights:
+        (leds): off
+
+sound_player:
+  mode_suicide_infiltration_started:
+    infiltration_low:
+      action: play
+  increase_infiltration_med:
+    infiltration_low:
+      action: stop
+    infiltration_med:
+      action: play
+      start_at: 10s
+  increase_infiltration_high:
+    infiltration_med:
+      action: stop
+    infiltration_high:
+      action: play
+      start_at: 10s
+  reset_infiltration:
+    infiltration_low:
+      action: play
+      start_at: 8s
+    infiltration_med:
+      action: stop
+    infiltration_high:
+      action: stop
+
+sounds:
+  infiltration_low:
+    file: mus_endgm2_tension_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 2s
+    fade_out: 3s
+  infiltration_med:
+    file: mus_endgm2_combat_1_low.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 2s
+    fade_out: 3s
+  infiltration_high:
+    file: mus_endgm2_combat_1.ogg
+    track: music
+    mode_end_action: stop
+    fade_in: 2s
+    fade_out: 3s
+
+timers:
+  infiltration:
+    start_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    start_running: true
+    control_events:
+      - event: reset_infiltration
+        action: restart
+      - event: infiltration_complete
+        action: stop

@@ -138,6 +138,7 @@ class MissionSelect(Carousel):
     if selection in self._mates:
       if self._intro == "specialist":
         self.machine.game.player["specialist"] = selection
+        self.machine.events.post("{}_specialist_selected".format(self.name), squadmate=selection)
       else:
         self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
     elif selection == "pass":

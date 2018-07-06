@@ -1,6 +1,69 @@
 #config_version=5
 mode:
-  start_events: achievement_suicidemission_state_started
-  stop_events: ball_will_end
+  start_events: start_mode_suicide_base
+  stop_events: ball_will_end, suicidemission_complete, suicidemission_failed
   priority: 200
 
+event_player:
+  mode_suicide_base_started:
+    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="started"}
+    - start_mode_missionselect{device.achievements.infiltration.state=="started" or device.achievements.longwalk.state=="started"}
+    - start_mode_suicide_humanreaper{device.achievements.humanreaper.state=="started"}
+    - start_mode_suicide_endrun{device.achievements.endrun.state=="started"}
+  # Wait for the mission selection of a specialist before starting infiltration or long walk
+  missionselect_specialist_selected:
+    - start_mode_suicide_infiltration{device.achievements.infiltration.state=="started"}
+    - start_mode_suicide_longwalk{device.achievements.longwalk.state=="started"}
+  achievement_endrun_state_completed:
+    - levelup
+    - suicidemission_complete
+  achievement_suicidemission_state_started{current_player.presuicide_score==0}:
+    # Remember the score before starting the mission, in case it fails
+    presuicide_score:
+      action: set
+      int: current_player.score
+
+queue_relay_player:
+  balldevice_bd_trough_ejecting_ball{device.achievements.infiltration.state=="started" and not mode.suicide_infiltration.active}:
+    post: start_mode_missionselect
+    wait_for: mode_missionselect_will_stop
+
+variable_player:
+  suicidemission_failed:
+    # Reset all dead squadmates to be re-recruitable (or recruited for Jacob/Miranda)
+    status_garrus{current_player.status_garrus==-1}:
+      action: set
+      int: 0
+    status_grunt{current_player.status_grunt==-1}:
+      action: set
+      int: 0
+    status_jacob{current_player.status_jacob==-1}:
+      action: set
+      int: 4
+    status_jack{current_player.status_jack==-1}:
+      action: set
+      int: 0
+    status_kasumi{current_player.status_kasumi==-1}:
+      action: set
+      int: 0
+    status_legion{current_player.status_legion==-1}:
+      action: set
+      int: 0
+    status_miranda{current_player.status_miranda==-1}:
+      action: set
+      int: 4
+    status_mordin{current_player.status_mordin==-1}:
+      action: set
+      int: 0
+    status_samara{current_player.status_samara==-1}:
+      action: set
+      int: 0
+    status_tali{current_player.status_tali==-1}:
+      action: set
+      int: 0
+    status_thane{current_player.status_thane==-1}:
+      action: set
+      int: 0
+    status_zaeed{current_player.status_zaeed==-1}:
+      action: set
+      int: 0

@@ -4,3 +4,101 @@ mode:
   stop_events: ball_will_end, omegarelay_complete
   priority: 300
 
+event_player:
+  omegarelay_shots_lit_complete: omegarelay_complete
+  timer_omegarelay_complete: omegarelay_complete
+
+variable_player:
+  mode_suicide_omegarelay_started:
+    temp_hurryup_value:
+      action: set
+      int: 6000
+    temp_multiplier:
+      action: set
+      float: 1.0
+  omegarelay_shots_lit_hit:
+    temp_hurryup_value:
+      action: set
+      int: 6000 * current_player.temp_multiplier
+    score: current_player.temp_hurryup_value
+    temp_multiplier:
+      action: add
+      float: 0.5
+  timer_omegarelay_tick:  # 6000 over 60s = 100 per second
+    temp_hurryup_value: -100 * current_player.temp_multiplier
+
+multiballs:
+  omegarelay:
+    ball_count: 3
+    ball_count_type: total
+    replace_balls_in_play: true
+    ball_locks: bd_lock
+    shoot_again: 10s
+
+shot_groups:
+  omegarelay_shots:
+    shots: omg_left_orbit, omg_kickback, omg_left_ramp, omg_right_ramp, omg_right_orbit, omg_dropbank, omg_hitbank
+
+shot_profiles:
+  omgprofile:
+    states:
+      - name: lit
+        show: on
+      - name: hit
+        show: off
+
+shots:
+  omg_left_ramp:
+    hit_events: sh_left_ramp_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_left_ramp_shield_rgb
+  omg_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+  omg_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_right_ramp_shield_rgb
+  omg_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+  omg_kickback:
+    hit_events: sh_kickback_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_kickback_shield_rgb
+  omg_dropbank:
+    hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_dropbank_shield_rgb
+  omg_hitbank:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    profile: omgprofile
+    show_tokens:
+      leds: l_hitbank_shield_rgb
+
+sound_player:
+  mode_suicide_omegarelay_started: omegarelay_gunsuccess
+
+sounds:
+  omegarelay_gunsuccess:
+    file: mus_endgm1_gunsuccess.ogg
+    track: music
+    mode_end_action: stop
+
+timers:
+  omegarelay:
+    start_value: 60
+    end_value: 0
+    direction: down
+    tick_interval: 1s
+    control_events:
+      - event: omegarelay_shots_lit_complete
+        action: stop
