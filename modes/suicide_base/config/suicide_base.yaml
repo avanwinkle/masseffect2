@@ -7,28 +7,40 @@ mode:
   priority: 2000
 
 event_player:
-  mode_suicide_base_started:
-    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="enabled" or device.achievements.omegarelay.state=="stopped"}
-    - start_mode_missionselect{device.achievements.infiltration.state=="started" or device.achievements.longwalk.state=="started"}
-    - start_mode_suicide_humanreaper{device.achievements.humanreaper.state=="started"}
-    - start_mode_suicide_endrun{device.achievements.endrun.state=="started"}
+  mode_suicide_base_started.1:
+    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
+    - start_mode_missionselect{device.achievements.omegarelay.state=="completed" and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}
+    - start_mode_suicide_humanreaper{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
+    - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   missionselect_specialist_selected:
-    - start_mode_suicide_infiltration{device.achievements.infiltration.state=="started"}
-    - start_mode_suicide_longwalk{device.achievements.longwalk.state=="started"}
-  achievement_endrun_state_completed:
+    - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
+    - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed"}
+  # Progression
+  omegarelay_complete: start_mode_missionselect
+  infiltration_complete: start_mode_missionselect
+  longwalk_complete: start_mode_suicide_humanreaper
+  humanreaper_complete: start_mode_suicide_endrun
+  endrun_complete:
     - levelup
     - suicidemission_complete
-  achievement_suicidemission_state_started{current_player.presuicide_score==0}:
-    # Remember the score before starting the mission, in case it fails
+  # Remember the score before starting the mission, in case it fails
+  mode_suicide_base_started.2{current_player.presuicide_score==0}:
     presuicide_score:
       action: set
       int: current_player.score
 
-queue_relay_player:
-  balldevice_bd_trough_ejecting_ball{device.achievements.infiltration.state=="started" and not mode.suicide_infiltration.active}:
-    post: start_mode_missionselect
-    wait_for: mode_missionselect_will_stop
+# queue_relay_player:
+#   balldevice_bd_trough_ejecting_ball{device.achievements.infiltration.state=="started" and not mode.suicide_infiltration.active}:
+#     post: start_mode_missionselect
+#     wait_for: mode_missionselect_will_stop
+
+ball_saves:
+  omegarelay_save:
+    enable_events: multiball_omegarelay_ended
+    only_last_ball: true
+    delayed_eject_events: mode_suicide_infiltration_started
+    auto_launch: true # Must be true because we have a multiball starting too
 
 variable_player:
   suicidemission_failed:
@@ -69,3 +81,52 @@ variable_player:
     status_zaeed{current_player.status_zaeed==-1}:
       action: set
       int: 0
+
+slide_player:
+  mode_suicide_base_started: suicide_slide
+
+slides:
+  suicide_slide:
+    widgets:
+      - type: text
+        text: the Suicide Mission
+        color: BBBBBB
+        style: small
+        anchor_y: top
+        y: top-2
+
+widget_player:
+  mode_suicide_omegarelay_started:
+    omegarelay_title:
+      slide: suicide_slide
+    suicide_time:
+      slide: suicide_slide
+  mode_suicide_infiltration_started:
+    omegarelay_title:
+      action: remove
+    infiltration_title:
+      slide: suicide_slide
+  timer_omegarelay_tick:
+    suicide_time:
+      action: update
+  timer_infiltration_tick:
+    suicide_time:
+      action: update
+
+widgets:
+  omegarelay_title:
+    - type: text
+      text: Omega 4 Relay
+      style: text_default
+  infiltration_title:
+    - type: text
+      text: Infiltration
+      style: text_default
+  suicide_time:
+    - type: text
+      text: (ticks)
+      style: medium
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 2

@@ -97,12 +97,12 @@ class MissionSelect(Carousel):
     items = [self._intro]
 
     # If we are suiciding, filter for the correct type of squadmate
-    if player.achievements['infiltration'] == "started":
+    if player.achievements['infiltration'] != "completed":
       self._mates = TECHMATES
-    elif player.achievements['longwalk'] == "started":
+    elif player.achievements['longwalk'] != "completed":
       self._mates = BIOMATES
     else:
-      raise KeyError("What specialist are we building for?")
+      raise KeyError("What specialist are we building for?", player.achievements)
 
     for mate in self._mates:
       status = player["status_{}".format(mate)]

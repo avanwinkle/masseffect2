@@ -12,6 +12,10 @@ smart_virtual:
 mpf:
   default_pulse_ms: 10
 
+logging:
+  file:
+    asset_manager: none
+
 virtual_platform_start_active_switches:
   s_trough1
   s_trough2
