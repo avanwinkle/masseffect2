@@ -117,7 +117,7 @@ shots:
   heretic_shot_left:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     enable_events: enable_heretic_shot_left
-    disable_events: heretic_shot_left_hit, mode_recruitlegion_started
+    disable_events: heretic_shot_left_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
     profile: heretic_profile
     show_tokens:
       leds: l_dropbank_shield_rgb
@@ -125,7 +125,7 @@ shots:
   heretic_shot_center:
     hit_events: sh_left_ramp_hit
     enable_events: enable_heretic_shot_center
-    disable_events: heretic_shot_center_hit, mode_recruitlegion_started
+    disable_events: heretic_shot_center_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
     profile: heretic_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
@@ -133,7 +133,7 @@ shots:
   heretic_shot_right:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     enable_events: enable_heretic_shot_right
-    disable_events: heretic_shot_right_hit, mode_recruitlegion_started
+    disable_events: heretic_shot_right_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
     profile: heretic_profile
     show_tokens:
       leds: l_hitbank_shield_rgb

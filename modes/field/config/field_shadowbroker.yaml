@@ -52,7 +52,7 @@ variable_player:
       int: 0
 
 show_player:
-  mode_field_started{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}.2:
+  mode_field_started.2{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}:
     shadowbroker_lit_show:
       action: play
       priority: 10

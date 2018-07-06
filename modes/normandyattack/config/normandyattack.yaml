@@ -34,11 +34,13 @@ event_player:
     - stop_mode_normandyattack
 
 ball_saves:
+  # This ball save recovers from the forced drain at power outage
   normandyattack_openingsave:
     delayed_eject_events: normandyattack_saveball
     auto_launch: false
   # When a shot is hit the normandy_outlane shot is enabled with a medigel-style save.
-  # It will save up to three balls but must be re-enabled after each use.
+  # It will save up to three balls but must be re-enabled after each use. There
+  # are no saves for the center drain.
   normandyattack_save:
     delayed_eject_events: normandyattack_saveball
     enable_events: normandy_outlane_hit
@@ -60,7 +62,7 @@ counters:
       - left_ramp_fail_hit
       - right_ramp_fail_hit
       - right_orbit_fail_hit
-      - normandy_outlane_hit
+      - normandy_outlane_hit{not device.ball_saves.normandyattack_save.enabled}
     multiple_hit_window: 5s # In case both hitbanks are hit together
     direction: up
 
