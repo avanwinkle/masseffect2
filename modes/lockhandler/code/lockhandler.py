@@ -111,10 +111,27 @@ class LockHandler(Mode):
 
   def _handle_bypasscheck(self, **kwargs):
     """ Logic for assessing whether to hold/lock the ball or bypass the lock """
+    do_bypass = True
+    mission_delay = -1
+
+    # SUICIDE:
+    if self.machine.modes.suicide_base.active:
+      # If the suicide mission wants to hold the ball for picking a specialist, allow it to handle
+      if self.machine.modes.suicide_infiltration.active:
+        if self.machine.game.player["valves_state"].value <= 1:
+          self.log.info(" - Suicide wants a specialist, lockhandler is taking no action")
+        else:
+          self._bypass_lock()
+        return
+      # If a specialist has died and we need to select another
+      elif self.machine.game.player["status_{}".format(self.machine.game.player["specialist"])] == -1:
+        self.log.info(" - Suicide needs a specialist because {} is dead.".format(self.machine.game.player["specialist"]))
+        do_bypass = False
+        mission_delay = 500
 
     # WIZARD:
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)
-    if not self.machine.modes.get("global").active: # global is a reserved word
+    elif not self.machine.modes.get("global").active: # global is a reserved word
       self.log.info(" - A wizard mode is active, bypassing lock post")
       self._bypass_lock()
       return
@@ -131,8 +148,6 @@ class LockHandler(Mode):
         self.delay.add(callback=self._logicallockdevice.enable, ms=1000,
                      event='start_mode_missionselect')
       return
-
-    do_bypass = True
 
     # LOCK:
     # If the lock shot is enabled, hold onto the ball
@@ -168,14 +183,15 @@ class LockHandler(Mode):
       else:
         mission_delay = 1000
 
-      # self.machine.events.post("flippers_off") # Moved to missionselect
+    # MISSION SELECT:
+    # If the above handler wants to start mission select, do so after the requested delay
+    if mission_delay > -1:
       self.delay.add(callback=self._post_event, ms=mission_delay,
                      event='start_mode_missionselect')
-      return
 
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold
-    if do_bypass:
+    elif do_bypass:
       self.log.info(" - Lock not enabled and no missions available, bypassing lock post")
       self._bypass_lock()
 

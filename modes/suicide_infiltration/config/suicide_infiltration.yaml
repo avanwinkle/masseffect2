@@ -1,31 +1,51 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_infiltration
-  stop_events: ball_will_end, infiltration_complete, infiltration_failed
+  stop_events: infiltration_complete, infiltration_failed, specialist_killed
   priority: 2300
 
 event_player:
-  timer_infiltration_tick{ticks==40}: increase_infiltration_med
-  timer_infiltration_tick{ticks==20}: increase_infiltration_high
-  valveshots_low_hit: reset_infiltration
-  valveshots_med_hit: reset_infiltration
-  valveshots_high_hit: reset_infiltration
+  timer_infiltration_tick{ticks==35}:
+    - increase_infiltration_med
+    - play_specialist_warning_first{device.counters.valves.value==5}
+    - play_specialist_warning_med{device.counters.valves.value<5}
+  timer_infiltration_tick{ticks==15}: increase_infiltration_high
+  valveshots_hit: reset_infiltration
   timer_infiltration_complete: infiltration_failed
   valve_left_ramp_hit: infiltration_complete
+  logicblock_valves_hit:
+    - play_specialist_advance{count>1}
+    - play_specialist_close{count==1}
+  infiltration_failed: kill_specialist
+
+queue_relay_player:
+  ball_ending{device.counters.valves.value>0}:
+    post: kill_specialist
+    wait_for: specialist_killed
 
 multiballs:
   infiltration:
     ball_count: 2
-    start_or_add_a_ball_events: mode_suicide_infiltration_started, valveshots_hit
+    shoot_again: 0
+    start_or_add_a_ball_events:
+      - mode_suicide_infiltration_started{current_player.suicide_continuing>0}
+      - advance_complete{game.balls_in_play==1} # Restore up to 2 balls (after the dialogue finishes)
+
+counters:
+  valves:
+    starting_count: 5
+    direction: down
+    count_events: valveshots_hit
+    persist_state: true
+    reset_events: mode_suicide_infiltration_started
 
 shot_groups:
   valveshots:
     shots: valve_left_orbit, valve_right_ramp, valve_kickback, valve_right_orbit, valve_left_ramp
-    rotate_right_events: reset_infiltration
-    reset_events: infiltration_failed
 
 shot_profiles:
   valve_profile:
+    show_when_disabled: false
     advance_on_hit: false
     states:
       - name: low
@@ -39,29 +59,32 @@ shot_profiles:
         speed: 8
 
 shots:
-  valve_left_orbit:
-    hit_events: sh_left_orbit_hit
-    enable_events: mode_suicide_infiltration_started
-    disable_events: valve_left_orbit_hit
-    advance_events: increase_infiltration_med, increase_infiltration_high
-    profile: valve_profile
-    show_tokens:
-      leds: l_left_orbit_shield_rgb
-    tags: envshot_left_orbit
   valve_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: valve_left_orbit_hit
+    enable_events: mode_suicide_infiltration_started
+    reset_events: mode_suicide_infiltration_started
     disable_events: valve_right_ramp_hit
     advance_events: increase_infiltration_med, increase_infiltration_high
     profile: valve_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
+  valve_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: valve_right_ramp_hit
+    disable_events: valve_left_orbit_hit, mode_suicide_infiltration_started
+    advance_events: increase_infiltration_med, increase_infiltration_high
+    reset_events: mode_suicide_infiltration_started
+    profile: valve_profile
+    show_tokens:
+      leds: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   valve_kickback:
     hit_events: sh_kickback_hit
-    enable_events: valve_right_ramp_hit
-    disable_events: valve_kickback_hit
+    enable_events: valve_left_orbit_hit
+    disable_events: valve_kickback_hit, mode_suicide_infiltration_started
     advance_events: increase_infiltration_med, increase_infiltration_high
+    reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
       leds: l_kickback_shield_rgb
@@ -69,8 +92,9 @@ shots:
   valve_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: valve_kickback_hit
-    disable_events: valve_right_orbit_hit
+    disable_events: valve_right_orbit_hit, mode_suicide_infiltration_started
     advance_events: increase_infiltration_med, increase_infiltration_high
+    reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
@@ -78,12 +102,46 @@ shots:
   valve_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: valve_right_orbit_hit
-    disable_events: valve_left_ramp_hit
+    disable_events: valve_left_ramp_hit, mode_suicide_infiltration_started
     advance_events: increase_infiltration_med, increase_infiltration_high
+    reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
     tags: envshot_left_ramp
+
+variable_player:
+  kill_specialist:
+    status_garrus{current_player.specialist=="garrus"}:
+      action: set
+      int: -1
+    status_jack{current_player.specialist=="jack"}:
+      action: set
+      int: -1
+    status_jacob{current_player.specialist=="jacob"}:
+      action: set
+      int: -1
+    status_legion{current_player.specialist=="legion"}:
+      action: set
+      int: -1
+    status_kasumi{current_player.specialist=="kasumi"}:
+      action: set
+      int: -1
+    status_miranda{current_player.specialist=="miranda"}:
+      action: set
+      int: -1
+    status_mordin{current_player.specialist=="mordin"}:
+      action: set
+      int: -1
+    status_samara{current_player.specialist=="samara"}:
+      action: set
+      int: -1
+    status_tali{current_player.specialist=="tali"}:
+      action: set
+      int: -1
+    status_thane{current_player.specialist=="thane"}:
+      action: set
+      int: -1
 
 shows:
   valve_show_low:
@@ -100,7 +158,7 @@ shows:
     - time: '+2'
       lights:
         (leds): off
-  valve_show_hight:
+  valve_show_high:
     - time: 0
       lights:
         (leds): 660000
@@ -118,8 +176,6 @@ sound_player:
     infiltration_med:
       action: play
       start_at: 10s
-    specialist_warning_med:
-      action: play
   increase_infiltration_high:
     infiltration_med:
       action: stop
@@ -128,6 +184,14 @@ sound_player:
       start_at: 10s
     specialist_warning_high:
       action: play
+  play_specialist_warning_first: specialist_warning_first
+  play_specialist_warning_med: specialist_warning_med
+  play_specialist_advance:
+    specialist_advance:
+      events_when_stopped: advance_complete
+  play_specialist_close:
+    specialist_close:
+      events_when_stopped: advance_complete
   reset_infiltration:
     infiltration_low:
       action: play
@@ -136,40 +200,88 @@ sound_player:
       action: stop
     infiltration_high:
       action: stop
+  kill_specialist:
+    specialist_death_inf:
+      action: play
+      events_when_played: specialist_killed
 
 sound_pools:
+  specialist_death_inf:
+    track: voice
+    sounds:
+      - specialist_garrus_death_inf{current_player.specialist=="garrus"}
+      - specialist_jacob_death_inf{current_player.specialist=="jacob"}
+      - specialist_legion_death_inf{current_player.specialist=="legion"}
+      - specialist_kasumi_death_inf{current_player.specialist=="kasumi"}
+      - specialist_mordin_death_inf{current_player.specialist=="mordin"}
+      - specialist_tali_death_inf{current_player.specialist=="tali"}
+      - specialist_thane_death_inf{current_player.specialist=="thane"}
+  specialist_close:
+    track: voice
+    sounds:
+      - specialist_garrus_moving_on_near_the_end{current_player.specialist=="garrus"}
+      - specialist_garrus_one_more_valve_to_go{current_player.specialist=="garrus"}
+      - specialist_jacob_moving_on_near_the_end{current_player.specialist=="jacob"}
+      - specialist_jacob_one_more_valve_to_go{current_player.specialist=="jacob"}
+      - specialist_kasumi_moving_on_near_the_end{current_player.specialist=="kasumi"}
+      - specialist_kasumi_one_more_valve_to_go{current_player.specialist=="kasumi"}
+      - specialist_legion_moving_on_near_the_end{current_player.specialist=="legion"}
+      - specialist_legion_one_more_valve_to_go{current_player.specialist=="legion"}
+      - specialist_mordin_moving_on_near_the_end{current_player.specialist=="mordin"}
+      - specialist_mordin_one_more_valve_to_go{current_player.specialist=="mordin"}
+      - specialist_tali_moving_on_near_the_end{current_player.specialist=="tali"}
+      - specialist_tali_one_more_valve_to_go{current_player.specialist=="tali"}
+      - specialist_thane_moving_on_near_the_end{current_player.specialist=="thane"}
+      - specialist_thane_one_more_valve_to_go{current_player.specialist=="thane"}
+  specialist_warning_first:
+    track: voice
+    sounds:
+      - specialist_garrus_gate_blocking{current_player.specialist=="garrus"}
+      - specialist_jacob_gate_blocking{current_player.specialist=="jacob"}
+      - specialist_kasumi_gate_blocking{current_player.specialist=="kasumi"}
+      - specialist_legion_gate_blocking{current_player.specialist=="legion"}
+      - specialist_mordin_gate_blocking{current_player.specialist=="mordin"}
+      - specialist_tali_gate_blocking{current_player.specialist=="tali"}
+      - specialist_thane_gate_blocking{current_player.specialist=="thane"}
   specialist_warning_med:
     type: random_force_all
     track: voice
     sounds:
       # garrus
       - specialist_garrus_blocked_again{current_player.specialist=="garrus"}
-      - specialist_garrus_gate_blocking{current_player.specialist=="garrus"}
-      - specialist_garrus_hurry_shepard_its_heating_up{current_player.specialist=="garrus"}
+      - specialist_garrus_waiting_on_you{current_player.specialist=="garrus"}
+      - specialist_garrus_another_obstacle_in_the_way{current_player.specialist=="garrus"}
+      - specialist_garrus_another_thing_in_the_way{current_player.specialist=="garrus"}
       # jacob
       - specialist_jacob_blocked_again{current_player.specialist=="jacob"}
-      - specialist_jacob_gate_blocking{current_player.specialist=="jacob"}
-      - specialist_jacob_hurry_shepard_its_heating_up{current_player.specialist=="jacob"}
+      - specialist_jacob_waiting_on_you{current_player.specialist=="jacob"}
+      - specialist_jacob_another_obstacle_in_the_way{current_player.specialist=="jacob"}
+      - specialist_jacob_another_thing_in_the_way{current_player.specialist=="jacob"}
       # kasumi
       - specialist_kasumi_blocked_again{current_player.specialist=="kasumi"}
-      - specialist_kasumi_gate_blocking{current_player.specialist=="kasumi"}
-      - specialist_kasumi_hurry_shepard_its_heating_up{current_player.specialist=="kasumi"}
+      - specialist_kasumi_waiting_on_you{current_player.specialist=="kasumi"}
+      - specialist_kasumi_another_obstacle_in_the_way{current_player.specialist=="kasumi"}
+      - specialist_kasumi_another_thing_in_the_way{current_player.specialist=="kasumi"}
       # legion
       - specialist_legion_blocked_again{current_player.specialist=="legion"}
-      - specialist_legion_gate_blocking{current_player.specialist=="legion"}
-      - specialist_legion_hurry_shepard_its_heating_up{current_player.specialist=="legion"}
+      - specialist_legion_waiting_on_you{current_player.specialist=="legion"}
+      - specialist_legion_another_obstacle_in_the_way{current_player.specialist=="legion"}
+      - specialist_legion_another_thing_in_the_way{current_player.specialist=="legion"}
       # mordin
       - specialist_mordin_blocked_again{current_player.specialist=="mordin"}
-      - specialist_mordin_gate_blocking{current_player.specialist=="mordin"}
-      - specialist_mordin_hurry_shepard_its_heating_up{current_player.specialist=="mordin"}
+      - specialist_mordin_waiting_on_you{current_player.specialist=="mordin"}
+      - specialist_mordin_another_obstacle_in_the_way{current_player.specialist=="mordin"}
+      - specialist_mordin_another_thing_in_the_way{current_player.specialist=="mordin"}
       # tali
       - specialist_tali_blocked_again{current_player.specialist=="tali"}
-      - specialist_tali_gate_blocking{current_player.specialist=="tali"}
-      - specialist_tali_hurry_shepard_its_heating_up{current_player.specialist=="tali"}
+      - specialist_tali_waiting_on_you{current_player.specialist=="tali"}
+      - specialist_tali_another_obstacle_in_the_way{current_player.specialist=="tali"}
+      - specialist_tali_another_thing_in_the_way{current_player.specialist=="tali"}
       # thane
       - specialist_thane_blocked_again{current_player.specialist=="thane"}
-      - specialist_thane_gate_blocking{current_player.specialist=="thane"}
-      - specialist_thane_hurry_shepard_its_heating_up{current_player.specialist=="thane"}
+      - specialist_thane_waiting_on_you{current_player.specialist=="thane"}
+      - specialist_thane_another_obstacle_in_the_way{current_player.specialist=="thane"}
+      - specialist_thane_another_thing_in_the_way{current_player.specialist=="thane"}
   specialist_warning_high:
     type: random_force_all
     track: voice
@@ -178,30 +290,77 @@ sound_pools:
       - specialist_garrus_being_cooked_alive{current_player.specialist=="garrus"}
       - specialist_garrus_burning_up{current_player.specialist=="garrus"}
       - specialist_garrus_im_on_fire{current_player.specialist=="garrus"}
+      - specialist_garrus_hurry_shepard_its_heating_up{current_player.specialist=="garrus"}
       # jacob
       - specialist_jacob_being_cooked_alive{current_player.specialist=="jacob"}
       - specialist_jacob_burning_up{current_player.specialist=="jacob"}
       - specialist_jacob_im_on_fire{current_player.specialist=="jacob"}
+      - specialist_jacob_hurry_shepard_its_heating_up{current_player.specialist=="jacob"}
       # kasumi
       - specialist_kasumi_being_cooked_alive{current_player.specialist=="kasumi"}
       - specialist_kasumi_burning_up{current_player.specialist=="kasumi"}
       - specialist_kasumi_im_on_fire{current_player.specialist=="kasumi"}
+      - specialist_kasumi_hurry_shepard_its_heating_up{current_player.specialist=="kasumi"}
       # legion
       - specialist_legion_being_cooked_alive{current_player.specialist=="legion"}
       - specialist_legion_burning_up{current_player.specialist=="legion"}
       - specialist_legion_im_on_fire{current_player.specialist=="legion"}
+      - specialist_legion_hurry_shepard_its_heating_up{current_player.specialist=="legion"}
       # mordin
       - specialist_mordin_being_cooked_alive{current_player.specialist=="mordin"}
       - specialist_mordin_burning_up{current_player.specialist=="mordin"}
       - specialist_mordin_im_on_fire{current_player.specialist=="mordin"}
+      - specialist_mordin_hurry_shepard_its_heating_up{current_player.specialist=="mordin"}
       # tali
       - specialist_tali_being_cooked_alive{current_player.specialist=="tali"}
       - specialist_tali_burning_up{current_player.specialist=="tali"}
       - specialist_tali_im_on_fire{current_player.specialist=="tali"}
+      - specialist_tali_hurry_shepard_its_heating_up{current_player.specialist=="tali"}
       # thane
       - specialist_thane_being_cooked_alive{current_player.specialist=="thane"}
       - specialist_thane_burning_up{current_player.specialist=="thane"}
       - specialist_thane_im_on_fire{current_player.specialist=="thane"}
+      - specialist_thane_hurry_shepard_its_heating_up{current_player.specialist=="thane"}
+  specialist_advance:
+    type: random_force_all
+    track: voice
+    sounds:
+      # garrus
+      - specialist_garrus_gate_is_open{current_player.specialist=="garrus"}
+      - specialist_garrus_i_knew_i_could_count_on_you{current_player.specialist=="garrus"}
+      - specialist_garrus_all_clear_moving_on{current_player.specialist=="garrus"}
+      - specialist_garrus_nice_work{current_player.specialist=="garrus"}
+      # jacob
+      - specialist_jacob_gate_is_open{current_player.specialist=="jacob"}
+      - specialist_jacob_i_knew_i_could_count_on_you{current_player.specialist=="jacob"}
+      - specialist_jacob_all_clear_moving_on{current_player.specialist=="jacob"}
+      - specialist_jacob_nice_work{current_player.specialist=="jacob"}
+      # kasumi
+      - specialist_kasumi_gate_is_open{current_player.specialist=="kasumi"}
+      - specialist_kasumi_i_knew_i_could_count_on_you{current_player.specialist=="kasumi"}
+      - specialist_kasumi_all_clear_moving_on{current_player.specialist=="kasumi"}
+      - specialist_kasumi_nice_work{current_player.specialist=="kasumi"}
+      # legion
+      - specialist_legion_gate_is_open{current_player.specialist=="legion"}
+      - specialist_legion_i_knew_i_could_count_on_you{current_player.specialist=="legion"}
+      - specialist_legion_all_clear_moving_on{current_player.specialist=="legion"}
+      - specialist_legion_nice_work{current_player.specialist=="legion"}
+      # mordin
+      - specialist_mordin_gate_is_open{current_player.specialist=="mordin"}
+      - specialist_mordin_i_knew_i_could_count_on_you{current_player.specialist=="mordin"}
+      - specialist_mordin_all_clear_moving_on{current_player.specialist=="mordin"}
+      - specialist_mordin_nice_work{current_player.specialist=="mordin"}
+      # tali
+      - specialist_tali_gate_is_open{current_player.specialist=="tali"}
+      - specialist_tali_i_knew_i_could_count_on_you{current_player.specialist=="tali"}
+      - specialist_tali_all_clear_moving_on{current_player.specialist=="tali"}
+      - specialist_tali_nice_work{current_player.specialist=="tali"}
+      # thane
+      - specialist_thane_gate_is_open{current_player.specialist=="thane"}
+      - specialist_thane_i_knew_i_could_count_on_you{current_player.specialist=="thane"}
+      - specialist_thane_all_clear_moving_on{current_player.specialist=="thane"}
+      - specialist_thane_nice_work{current_player.specialist=="thane"}
+
 
 sounds:
   infiltration_low:
@@ -222,10 +381,29 @@ sounds:
     mode_end_action: stop
     fade_in: 2s
     fade_out: 3s
-  # Specialists
-  specialist_thane_death:
+  # Death
+  specialist_thane_death_inf:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
     track: voice
+  specialist_garrus_death_inf:
+    file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
+    track: voice
+  specialist_legion_death_inf:
+    file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
+    track: voice
+  specialist_jacob_death_inf:
+    file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
+    track: voice
+  specialist_mordin_death_inf:
+    file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
+    track: voice
+  specialist_tali_death_inf:
+    file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
+    track: voice
+  specialist_kasumi_death_inf:
+    file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
+    track: voice
+  # Specialists
   specialist_thane_blocked_again:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00258859_m.ogg
     track: voice
@@ -276,9 +454,6 @@ sounds:
     track: voice
   specialist_thane_nice_work:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00318130_m.ogg
-    track: voice
-  specialist_garrus_death:
-    file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
     track: voice
   specialist_garrus_blocked_again:
     file: en_us_hench_garrus_endgm2_gutterrunner_a_00258858_m.ogg
@@ -331,9 +506,6 @@ sounds:
   specialist_garrus_nice_work:
     file: en_us_hench_garrus_endgm2_gutterrunner_a_00318129_m.ogg
     track: voice
-  specialist_legion_death:
-    file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
-    track: voice
   specialist_legion_blocked_again:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00258856_m.ogg
     track: voice
@@ -384,9 +556,6 @@ sounds:
     track: voice
   specialist_legion_nice_work:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00318127_m.ogg
-    track: voice
-  specialist_jacob_death:
-    file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
     track: voice
   specialist_jacob_blocked_again:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258862_m.ogg
@@ -439,9 +608,6 @@ sounds:
   specialist_jacob_nice_work:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00318126_m.ogg
     track: voice
-  specialist_mordin_death:
-    file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
-    track: voice
   specialist_mordin_blocked_again:
     file: en_us_hench_professor_endgm2_gutterrunner_a_00258861_m.ogg
     track: voice
@@ -493,9 +659,6 @@ sounds:
   specialist_mordin_nice_work:
     file: en_us_hench_professor_endgm2_gutterrunner_a_00318132_m.ogg
     track: voice
-  specialist_tali_death:
-    file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
-    track: voice
   specialist_tali_blocked_again:
     file: en_us_hench_tali_endgm2_gutterrunner_a_00258860_m.ogg
     track: voice
@@ -546,9 +709,6 @@ sounds:
     track: voice
   specialist_tali_nice_work:
     file: en_us_hench_tali_endgm2_gutterrunner_a_00318131_m.ogg
-    track: voice
-  specialist_kasumi_death:
-    file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
     track: voice
   specialist_kasumi_blocked_again:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00258857_m.ogg
@@ -605,7 +765,7 @@ sounds:
 
 timers:
   infiltration:
-    start_value: 60
+    start_value: 45
     end_value: 0
     tick_interval: 1s
     direction: down

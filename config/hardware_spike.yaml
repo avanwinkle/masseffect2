@@ -50,8 +50,8 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_enable_time: 230ms, 205ms, 198ms
-                          # 1 ball:  205ms can be too long
+    eject_coil_enable_time: 250ms, 205ms, 198ms
+                          # 1 ball:  230ms can be too short, increasing to 250
                           # 2 balls: 200ms can be too short, increasing to 205
                           # 3 balls: 200ms is too long! 190 can be too short! 196 still slightly too short
     eject_timeouts: 3s

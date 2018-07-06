@@ -30,11 +30,6 @@ event_player:
       action: set
       int: current_player.score
 
-# queue_relay_player:
-#   balldevice_bd_trough_ejecting_ball{device.achievements.infiltration.state=="started" and not mode.suicide_infiltration.active}:
-#     post: start_mode_missionselect
-#     wait_for: mode_missionselect_will_stop
-
 ball_saves:
   omegarelay_save:
     enable_events: multiball_omegarelay_ended
@@ -42,7 +37,46 @@ ball_saves:
     delayed_eject_events: mode_suicide_infiltration_started
     auto_launch: true # Must be true because we have a multiball starting too
 
+ball_holds:
+  specialist_hold:
+    hold_devices: bd_lock
+    balls_to_hold: 1
+    enable_events: valve_left_ramp_enabled
+    release_all_events: mode_suicide_longwalk_started
+
+show_player:
+  # Light the missions arrow to select a specialist after one died
+  infiltration_failed:
+    missions_available_show:
+      action: play
+  longwalk_failed:
+    missions_available_show:
+      action: play
+  mode_missionselect_started:
+    missions_available_show:
+      action: stop
+  mode_suicide_base_started:
+    missions_available_show:
+      action: stop
+
 variable_player:
+  # Track whether we are progressing into a mode or starting a new ball
+  mode_suicide_base_started:
+    suicide_continuing:
+      action: set
+      int: 0
+  kill_specialist:
+    suicide_continuing:
+      action: set
+      int: 0
+  omegarelay_complete:
+    suicide_continuing: 1
+  infiltration_complete:
+    suicide_continuing: 1
+  longwalk_complete:
+    suicide_continuing: 1
+  humanreaper_complete:
+    suicide_continuing: 1
   suicidemission_failed:
     # Reset all dead squadmates to be re-recruitable (or recruited for Jacob/Miranda)
     status_garrus{current_player.status_garrus==-1}:
@@ -84,6 +118,10 @@ variable_player:
 
 slide_player:
   mode_suicide_base_started: suicide_slide
+  mode_missionselect_started:
+    suicide_slide:
+      action: remove
+  mode_missionselect_will_stop: suicide_slide
 
 slides:
   suicide_slide:

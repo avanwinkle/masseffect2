@@ -95,9 +95,10 @@ show_player:
         color: FF4400 #color_zaeed
   missionselect_suicide_highlighted:
     missionselect_suicide_show:
-      speed: 4
+      speed: 6
       show_tokens:
-        color: 990000
+        color: FF0000
+        fadetime: 50ms
 
 shows:
   missionselect_show:
@@ -126,68 +127,67 @@ shows:
       lights:
         l_dropbank_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_right_orbit_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_left_orbit_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_hitbank_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_kickback_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_dropbank_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_left_ramp_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_left_orbit_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_right_ramp_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_kickback_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_right_orbit_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_left_ramp_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
     - time: '+1'
       lights:
         l_hitbank_shield_rgb:
           color: (color)
-          fade: 500ms
+          fade: (fadetime)
         l_right_ramp_shield_rgb:
           color: 0
-          fade: 500ms
+          fade: (fadetime)
 
 slide_player:
   missionselect_intro_highlighted: missionselect_intro_slide
+  missionselect_recruit_highlighted: missionselect_recruit_slide
   missionselect_pass_highlighted: missionselect_pass_slide
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_derelictreaper_highlighted: missionselect_derelictreaper_slide
-  missionselect_suicide_highlighted:
-    missionselect_suicide_slide:
-      priority: 2500  # Suicide runs at 2000
-  missionselect_recruit_highlighted: missionselect_recruit_slide
+  missionselect_suicide_highlighted: missionselect_suicide_slide
+  missionselect_specialist_highlighted: missionselect_specialist_slide
 
 slides:
   missionselect_intro_slide:
@@ -256,7 +256,14 @@ slides:
         style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
-  missionselect_specialist_slide: []
+  missionselect_specialist_slide:
+    priority: 2500 # Suicide runs at 2000
+    widgets:
+      - type: rectangle
+        color: black
+        width: 128
+        height: 32
+        z: 1
 
 widget_player:
   # The intro slide appears whenever there are multiple options, so show arrows
@@ -264,151 +271,181 @@ widget_player:
   missionselect_specialist_garrus_default:
     specialist_garrus_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_garrus_highlighted:
     specialist_garrus_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_garrus_dead:
     specialist_garrus_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_jack_default:
     specialist_jack_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_jack_highlighted:
     specialist_jack_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_jack_dead:
     specialist_jack_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_jacob_default:
     specialist_jacob_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_jacob_highlighted:
     specialist_jacob_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_jacob_dead:
     specialist_jacob_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_kasumi_default:
     specialist_kasumi_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_kasumi_highlighted:
     specialist_kasumi_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_kasumi_dead:
     specialist_kasumi_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_legion_default:
     specialist_legion_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_legion_highlighted:
     specialist_legion_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_legion_dead:
     specialist_legion_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_miranda_default:
     specialist_miranda_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_miranda_highlighted:
     specialist_miranda_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_miranda_dead:
     specialist_miranda_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_mordin_default:
     specialist_mordin_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_mordin_highlighted:
     specialist_mordin_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_mordin_dead:
     specialist_mordin_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_samara_default:
     specialist_samara_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_samara_highlighted:
     specialist_samara_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_samara_dead:
     specialist_samara_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_tali_default:
     specialist_tali_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_tali_highlighted:
     specialist_tali_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_tali_dead:
     specialist_tali_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
   missionselect_specialist_thane_default:
     specialist_thane_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_default
   missionselect_specialist_thane_highlighted:
     specialist_thane_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_highlight
   missionselect_specialist_thane_dead:
     specialist_thane_widget:
       action: update
+      slide: missionselect_specialist_slide
       widget_settings:
         style: spec_dead
 
@@ -425,57 +462,67 @@ widgets:
       style: spec_default
       y: 24
       x: 2
+      z: 2
   specialist_jack_widget:
     - type: text
       text: Jack
       style: spec_default
       y: 24
       x: 2
+      z: 2
   specialist_jacob_widget:
     - type: text
       text: Jacob
       style: spec_default
       y: 13
       x: 2
+      z: 2
   specialist_kasumi_widget:
     - type: text
       text: Kasumi
       style: spec_default
       y: 2
       x: 2
+      z: 2
   specialist_legion_widget:
     - type: text
       text: Legion
       style: spec_default
       y: 24
       x: 44
+      z: 2
   specialist_miranda_widget:
     - type: text
       text: Miranda
       style: spec_default
       y: 24
       x: 44
+      z: 2
   specialist_mordin_widget:
     - type: text
       text: Mordin
       style: spec_default
       y: 13
       x: 44
+      z: 2
   specialist_samara_widget:
     - type: text
       text: Samara
       style: spec_default
       y: 13
       x: 44
+      z: 2
   specialist_tali_widget:
     - type: text
       text: Tali
       style: spec_default
       y: 2
       x: 44
+      z: 2
   specialist_thane_widget:
     - type: text
       text: Thane
       style: spec_default
       y: 24
       x: 86
+      z: 2

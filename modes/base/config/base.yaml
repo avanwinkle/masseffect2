@@ -266,6 +266,8 @@ show_player:
     ball_save_show:
       action: stop
   ball_save_default_disabled:
+    ball_save_preshow:
+      action: stop
     ball_save_show:
       action: stop
 
@@ -399,7 +401,7 @@ sounds:
       release: 3s
 
 track_player:
-  ball_will_end:
+  ball_ending:
     __all__:
       action: stop_all_sounds
       fade: 500ms
