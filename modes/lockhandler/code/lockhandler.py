@@ -127,8 +127,9 @@ class LockHandler(Mode):
           self._bypass_lock()
         return
       # If a specialist has died and we need to select another, queue up mission select
-      elif self.machine.game.player["status_{}".format(self.machine.game.player["specialist"])] == -1:
-        self.log.info(" - Suicide needs a specialist because {} is dead.".format(self.machine.game.player["specialist"]))
+      #elif self.machine.game.player["status_{}".format(self.machine.game.player["specialist"])] == -1:
+      elif (self.player.achievements["infiltration"] == "started" and not self.machine.modes.suicide_infiltration.active) or (self.player.achievements["longwalk"] == "started" and not self.machine.modes.suicide_longwalk.active):
+        self.log.info(" - Suicide needs a specialist because infiltration/longwalk failed".format(self.machine.game.player["specialist"]))
         do_bypass = False
         mission_delay = 500
 

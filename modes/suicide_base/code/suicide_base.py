@@ -28,7 +28,9 @@ class SuicideBase(Mode):
     self.info_log("Found a {} mate to kill: {}".format(kwargs["squadmate"], mate))
     self._set_status(mate, -1)
     self.player["squadmates_count"] -= 1
-    self.machine.events.post("squadmate_killed", squadmate=mate)
+    # It's useful to know whether the ball is ending or not
+    ball_is_ending = self.machine.modes["base"].stopping or not self.machine.modes["base"].active
+    self.machine.events.post("squadmate_killed", squadmate=mate, ball_is_ending=ball_is_ending)
     # Until we have callbacks working, trigger the relay event too
     self.machine.events.post("squadmate_killed_complete", squadmate=mate)
 

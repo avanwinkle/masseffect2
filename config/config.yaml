@@ -375,7 +375,7 @@ widget_styles:
     adjust_top: 2
     anchor_x: left
     anchor_y: bottom
-    opacity: 0.5
+    opacity: 0.4
   spec_dead:
     font_name: smallest_pixel-7
     font_size: 9
@@ -383,7 +383,7 @@ widget_styles:
     adjust_top: 2
     anchor_x: left
     anchor_y: bottom
-    opacity: 0.1
+    opacity: 0.05
   spec_highlight:
     font_name: smallest_pixel-7
     font_size: 9
