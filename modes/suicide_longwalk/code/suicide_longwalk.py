@@ -20,8 +20,8 @@ class LongWalk(Mode):
     self.info_log("Longwalk mode starting, available biotics are: {}".format(
       SquadmateStatus.available_biotics(self.machine.game.player)))
 
-    # Create event handlers for the shot counter updating
-    self.add_mode_event_handler('reset_tension', self._enable_shots)
+    # Create event handlers for the shot counter updating. Must be the counter event to track shots hit
+    self.add_mode_event_handler('logicblock_swarmpaths_hit', self._enable_shots)
     # Enable one shot to start
     self._enable_shots()
 

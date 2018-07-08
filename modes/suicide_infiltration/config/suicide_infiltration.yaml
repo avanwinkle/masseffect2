@@ -13,16 +13,13 @@ event_player:
     - play_specialist_inf_warning_med{device.counters.valves.value<5}
   player_tension{value==2}: increase_infiltration
   valveshots_hit: reset_infiltration
-  timer_infiltration_complete: kill_specialist
+  timer_infiltration_complete:
+    kill_squadmate:
+      squadmate: specialist
   logicblock_valves_hit:
     - play_specialist_inf_advance{count>1}
     - play_specialist_inf_close{count==1}
-  specialist_killed: infiltration_failed
-
-queue_relay_player:
-  ball_ending{device.counters.valves.value>0}:
-    post: kill_specialist
-    wait_for: specialist_killed
+  squadmate_killed: infiltration_failed
 
 multiballs:
   infiltration:
@@ -138,37 +135,6 @@ variable_player:
     tension:
       action: set
       int: 0
-  kill_specialist:
-    status_garrus{current_player.specialist=="garrus"}:
-      action: set
-      int: -1
-    status_jack{current_player.specialist=="jack"}:
-      action: set
-      int: -1
-    status_jacob{current_player.specialist=="jacob"}:
-      action: set
-      int: -1
-    status_legion{current_player.specialist=="legion"}:
-      action: set
-      int: -1
-    status_kasumi{current_player.specialist=="kasumi"}:
-      action: set
-      int: -1
-    status_miranda{current_player.specialist=="miranda"}:
-      action: set
-      int: -1
-    status_mordin{current_player.specialist=="mordin"}:
-      action: set
-      int: -1
-    status_samara{current_player.specialist=="samara"}:
-      action: set
-      int: -1
-    status_tali{current_player.specialist=="tali"}:
-      action: set
-      int: -1
-    status_thane{current_player.specialist=="thane"}:
-      action: set
-      int: -1
 
 shows:
   valve_show_low:
@@ -240,10 +206,7 @@ sound_player:
     specialist_inf_warning_high:
       action: stop
       fade_out: 100ms
-  kill_specialist:
-    specialist_death_inf:
-      action: play
-      events_when_played: specialist_killed
+  kill_squadmate:
     specialist_inf_warning_first:
       action: stop
       fade_out: 100ms
@@ -265,16 +228,6 @@ sound_pools:
       - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
       - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
       - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
-  specialist_inf_death_inf:
-    track: voice
-    sounds:
-      - specialist_garrus_death_inf{current_player.specialist=="garrus"}
-      - specialist_jacob_death_inf{current_player.specialist=="jacob"}
-      - specialist_legion_death_inf{current_player.specialist=="legion"}
-      - specialist_kasumi_death_inf{current_player.specialist=="kasumi"}
-      - specialist_mordin_death_inf{current_player.specialist=="mordin"}
-      - specialist_tali_death_inf{current_player.specialist=="tali"}
-      - specialist_thane_death_inf{current_player.specialist=="thane"}
   specialist_inf_close:
     track: voice
     type: random_force_all
@@ -441,28 +394,7 @@ sounds:
     mode_end_action: stop
     fade_in: 1500ms
     fade_out: 2s
-  # Death
-  specialist_thane_death_inf:
-    file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
-    track: voice
-  specialist_garrus_death_inf:
-    file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
-    track: voice
-  specialist_legion_death_inf:
-    file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
-    track: voice
-  specialist_jacob_death_inf:
-    file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
-    track: voice
-  specialist_mordin_death_inf:
-    file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
-    track: voice
-  specialist_tali_death_inf:
-    file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
-    track: voice
-  specialist_kasumi_death_inf:
-    file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
-    track: voice
+
   # Specialists
   specialist_thane_blocked_again:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00258859_m.ogg

@@ -1,9 +1,10 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_base
-  stop_events: stop_wizards, suicidemission_complete, suicidemission_failed
+  stop_events: suicidemission_complete, suicidemission_failed
   events_when_started: mode_type_wizard_started, enable_fullorbit
   events_when_stopped: mode_type_wizard_stopped
+  code: suicide_base.SuicideBase
   priority: 2000
 
 event_player:
@@ -24,11 +25,21 @@ event_player:
   endrun_complete:
     - levelup
     - suicidemission_complete
-  # Remember the score before starting the mission, in case it fails
+  # Remember the score before starting the suicide mission, in case it fails
   mode_suicide_base_started.2{current_player.presuicide_score==0}:
     presuicide_score:
       action: set
       int: current_player.score
+  infiltration_failed{mode["base"].active and not mode["base"].stopping}: play_suicide_base
+  longwalk_failed{mode["base"].active and not mode["base"].stopping}: play_suicide_base
+
+queue_relay_player:
+  # If the ball drains during infiltration or longwalk, kill the specialist too
+  ball_ending{mode.suicide_infiltration.active or mode.suicide_longwalk.active}:
+    post: kill_squadmate
+    args:
+      squadmate: specialist
+    wait_for: squadmate_killed_complete # TODO: change this to a post-sound-effect event
 
 ball_saves:
   omegarelay_save:
@@ -37,12 +48,103 @@ ball_saves:
     delayed_eject_events: mode_suicide_infiltration_started
     auto_launch: true # Must be true because we have a multiball starting too
 
+sound_player:
+  # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
+  # play_squadmate_sound: squadmate_thane_killed_inf
+  play_suicide_base: suicide_music_base
+  mode_type_suicide_started:
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
+
+sounds:
+  suicide_music_base:
+    file: mus_endgm1_attackplan.ogg
+    track: music
+  # Death
+  squadmate_thane_killed_inf:
+    file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
+    track: voice
+  squadmate_garrus_killed_inf:
+    file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
+    track: voice
+  squadmate_legion_killed_inf:
+    file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
+    track: voice
+  squadmate_jacob_killed_inf:
+    file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
+    track: voice
+  squadmate_mordin_killed_inf:
+    file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
+    track: voice
+  squadmate_tali_killed_inf:
+    file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
+    track: voice
+  squadmate_kasumi_killed_inf:
+    file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
+    track: voice
+  # Killed Callback
+  squadmate_jacob_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282111_f.ogg
+    track: voice
+  squadmate_legion_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282112_f.ogg
+    track: voice
+  squadmate_kasumi_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282113_f.ogg
+    track: voice
+  squadmate_garrus_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282114_f.ogg
+    track: voice
+  squadmate_thane_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282115_f.ogg
+    track: voice
+  squadmate_tali_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282116_f.ogg
+    track: voice
+  squadmate_mordin_killed_callback_shepard_inf:
+    file: en_us_player_f_endgm2_tech_culmination_c_00282117_f.ogg
+    track: voice
+  squadmate_jacob_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266790_f.ogg
+    track: voice
+  squadmate_samara_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266791_f.ogg
+    track: voice
+  squadmate_grunt_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266792_f.ogg
+    track: voice
+  squadmate_garrus_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266793_f.ogg
+    track: voice
+  squadmate_tali_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266794_f.ogg
+    track: voice
+  squadmate_legion_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266795_f.ogg
+    track: voice
+  squadmate_jack_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266796_f.ogg
+    track: voice
+  squadmate_zaeed_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266797_f.ogg
+    track: voice
+  squadmate_mordin_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266798_f.ogg
+    track: voice
+  squadmate_kasumi_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266799_f.ogg
+    track: voice
+  squadmate_thane_killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266800_f.ogg
+    track: voice
+  squadmate__killed_callback_shepard_lw:
+    file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
+    track: voice
+
 show_player:
   # Light the missions arrow to select a specialist after one died
-  infiltration_failed:
-    missions_available_show:
-      action: play
-  longwalk_failed:
+  play_suicide_base:
     missions_available_show:
       action: play
   mode_missionselect_started:
@@ -70,44 +172,6 @@ variable_player:
     suicide_continuing: 1
   humanreaper_complete:
     suicide_continuing: 1
-  suicidemission_failed:
-    # Reset all dead squadmates to be re-recruitable (or recruited for Jacob/Miranda)
-    status_garrus{current_player.status_garrus==-1}:
-      action: set
-      int: 0
-    status_grunt{current_player.status_grunt==-1}:
-      action: set
-      int: 0
-    status_jacob{current_player.status_jacob==-1}:
-      action: set
-      int: 4
-    status_jack{current_player.status_jack==-1}:
-      action: set
-      int: 0
-    status_kasumi{current_player.status_kasumi==-1}:
-      action: set
-      int: 0
-    status_legion{current_player.status_legion==-1}:
-      action: set
-      int: 0
-    status_miranda{current_player.status_miranda==-1}:
-      action: set
-      int: 4
-    status_mordin{current_player.status_mordin==-1}:
-      action: set
-      int: 0
-    status_samara{current_player.status_samara==-1}:
-      action: set
-      int: 0
-    status_tali{current_player.status_tali==-1}:
-      action: set
-      int: 0
-    status_thane{current_player.status_thane==-1}:
-      action: set
-      int: 0
-    status_zaeed{current_player.status_zaeed==-1}:
-      action: set
-      int: 0
 
 slide_player:
   mode_type_suicide_started: suicide_slide
@@ -176,6 +240,12 @@ widget_player:
   timer_longwalk_tick:
     suicide_time:
       action: update
+  logicblock_swarmpaths_hit:
+    suicide_shots:
+      action: update
+  logicblock_valves_hit:
+    suicide_shots:
+      action: update
 
 widgets:
   omegarelay_title:
@@ -201,8 +271,16 @@ widgets:
   suicide_time:
     - type: text
       text: (ticks)
-      style: medium
+      style: small
       anchor_x: left
       anchor_y: bottom
       x: 2
+      y: 2
+  suicide_shots:
+    - type: text
+      text: "Shots: (count)"
+      style: small
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
       y: 2

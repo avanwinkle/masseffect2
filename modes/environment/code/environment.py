@@ -1,7 +1,7 @@
 import logging
 from mpf.core.mode import Mode
 
-SHOTS = ["left_orbit", "kickback", "left_ramp", "left_ramp_entrance", "right_ramp", "right_ramp_entrance", "right_orbit", "standuptarget", "return_lane", "dropbank", "hitbank"]
+SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_entrance", "right_ramp", "right_ramp_entrance", "right_orbit", "right_orbit_nofull", "standuptarget", "return_lane", "dropbank", "hitbank"]
 
 class Environment(Mode):
   def __init__(self, machine, config, name, path):

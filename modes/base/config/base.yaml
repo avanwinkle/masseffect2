@@ -135,7 +135,7 @@ event_player:
     - enable_gates
     - disable_orbitswitches
     - disable_gates|900ms
-    - enable_orbitswitches|900ms
+    - enable_orbitswitches|1100ms  # Tried 900 but got false positives on longwalk, increasing to 1100 (min +40)
   # From an auto-plunger launch, open the gates and disable the switches
   # TODO: don't open the gates during multiball, to keep left orbit open for shots
   fullorbit_fromplunger_hit:

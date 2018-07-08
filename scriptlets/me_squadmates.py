@@ -39,8 +39,12 @@ class SquadmateStatusClass():
   def _mate_status_is(self, player, squadmate, status):
     return player["status_{}".format(squadmate)] == status
 
-  def _get_available_mates(self, player, mates=SQUADMATES):
-    return [mate for mate in mates if self._mate_status_is(player, mate, 4)]
+  def _get_available_mates(self, player, mates, include_specialist=True):
+    specialist = None if include_specialist else player["specialist"]
+    return [mate for mate in mates if (self._mate_status_is(player, mate, 4) and mate != specialist)]
+
+  def all_mates(self):
+    return SQUADMATES
 
   def all_biotics(self):
     return BIOTICMATES
@@ -48,11 +52,17 @@ class SquadmateStatusClass():
   def all_techs(self):
     return TECHMATES
 
+  def available_mates(self, player, **kwargs):
+    return self._get_available_mates(player, SQUADMATES, **kwargs)
+
   def available_biotics(self, player):
     return self._get_available_mates(player, BIOTICMATES)
 
   def available_techs(self, player):
     return self._get_available_mates(player, TECHMATES)
+
+  def dead_mates(self, player):
+    return [mate for mate in mates if (self._mate_status_is(player, mate, -1))]
 
 SquadmateStatus = SquadmateStatusClass()
 
@@ -71,6 +81,9 @@ class SquadmateHandlers(CustomCode):
     self.log = logging.getLogger("MESquadmates")
     self.log.setLevel('DEBUG')
     self._current_recruit = None
+
+    self.machine.log.info("MPF BCP: {}".format(self.machine.bcp))
+    self.machine.log.info(" - BCP Transports: {}".format(self.machine.bcp.transport._transports))
 
     # Create a listener for a recruitmission to start
     self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)

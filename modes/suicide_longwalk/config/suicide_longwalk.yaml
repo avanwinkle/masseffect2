@@ -1,7 +1,7 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_longwalk
-  stop_events: longwalk_complete, longwalk_failed, ball_will_end # Replace with killed specialist
+  stop_events: longwalk_complete, longwalk_failed
   events_when_started: mode_type_suicide_started, reset_tension
   events_when_stopped: mode_type_suicide_stopped
   code: suicide_longwalk.LongWalk
@@ -12,11 +12,15 @@ event_player:
     set_environment:
       env: collectors
   player_tension{change>0}: increase_tension
+  enable_longwalk_dropbank: reset_dropbank
   logicblock_swarmpaths_hit:
     - reset_tension
     - play_specialist_lw_advance{count>1}
     - play_specialist_lw_close{count==1}
-  timer_longwalk_complete: kill_specialist, longwalk_failed
+  timer_longwalk_complete:
+    kill_squadmate:
+      squadmate: random
+  squadmate_killed: longwalk_failed
 
 counters:
   swarmpaths:
@@ -54,9 +58,7 @@ variable_player:
     tension:
       action: set
       int: 0
-  timer_longwalk_tick{ticks==40}:
-    tension: 1
-  timer_longwalk_tick{ticks==20}:
+  timer_longwalk_tick{ticks==40 or ticks==20}:
     tension: 1
   swarmfails_hit:
     tension: 1
@@ -64,22 +66,6 @@ variable_player:
     tension:
       action: set
       int: 0
-  kill_specialist:
-    status_jack{current_player.specialist=="jack"}:
-      action: set
-      int: -1
-    status_jacob{current_player.specialist=="jacob"}:
-      action: set
-      int: -1
-    status_miranda{current_player.specialist=="miranda"}:
-      action: set
-      int: -1
-    status_samara{current_player.specialist=="samara"}:
-      action: set
-      int: -1
-    status_thane{current_player.specialist=="thane"}:
-      action: set
-      int: -1
 
 shot_groups:
   swarmpaths:
@@ -243,18 +229,28 @@ sound_player:
       action: stop
   play_specialist_lw_advance: specialist_lw_advance
   play_specialist_lw_close: specialist_lw_close
-  kill_specialist:
-    # specialist_death_lw:
-    #   action: play
-    #   events_when_played: specialist_killed
-    specialist_lw_advance:
-      action: stop
+  squadmate_killed.1{squadmate==current_player.specialist}:
+    specialist_death_lw:
+      action: play
+      events_when_played: squadmate_killed_complete
+  squadmate_killed.2{squadmate!=current_player.specialist}:
+    random_death_lw:
+      action: play
+      priority: 100
+      events_when_stopped: squadmate_killed_callback
+    random_death_callback_lw:
+      action: play
+      priority: 1
+      events_when_played: squadmate_killed_complete
     specialist_lw_warning_med:
       action: stop
     specialist_lw_warning_high:
       action: stop
+    specialist_lw_advance:
+      action: stop
     specialist_lw_close:
       action: stop
+
 
 sound_pools:
   specialist_lw_close:
