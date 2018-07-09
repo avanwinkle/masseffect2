@@ -8,7 +8,7 @@ The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWar
 
 ## Requirements
 
-This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge.
+This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine (configuration coming soon) or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
 
 ## Main Gameplay
 
@@ -16,7 +16,7 @@ This project requires the Mission Pinball Framework 0.50 and can be simulated us
 *In recreating the full experience of Mass Effect 2, the Pinball Game includes significant characters and story events from the original game.*
 
 ### Recruitment Missions
-The core challenge of the ME2 Pinball Game is to recruit a squad to take with you on the Suicide Mission. When the game starts all five of the major shots are lit with a possible squadmate—hit a shot three times to light that character's recruitment mission. After a mission is lit, a second one will appear on that same shot for a total of ten possible recruitment missions. Once lit, a recruitment mission can be started from the left ramp.
+The core challenge of the ME2 Pinball Game is to recruit a squad to take with you on the Suicide Mission. When the game starts all five of the major shots are lit with a squadmate to recruit—hit a shot three times to light that squadmate's recruitment mission. After a squadmate is recruited, a second squadmate's recruitment light will appear on that same shot (for a total of ten possible recruitment missions). Once lit, a recruitment mission can be started from the left ramp.
 
 * **The Professor - Curing the Plague**
 
@@ -82,15 +82,15 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 
 * Infiltrating the Collector Base
 
-  Choose a specialist to enter the vent and follow the lit shots to activate the valves and get them through safely, fighting Collectors all the while in this two-ball battle. Don't let the timer run out!
+  Choose a tech specialist to enter the vent, then follow the lit shots to activate the valves and get them through safely—fighting Collectors all the while in this exciting two-ball battle. Don't let the timer run out!
 
 * The Long Walk
 
-  Choose a biotic specialist to protect the squad and follow the blue shots to make your way deeper into the base. Don't let your squadmates get too far behind!
+  Choose a biotic specialist to protect the squad and follow the blue shots to make your way deeper into the base, battling husks and Collectors along the way. Move quickly, don't stray from the biotic barrier, and don't let your squadmates get too far behind if you want to survive!
 
 * The Reaper
 
-  Finish the fight in this two-phase mode, alternating between taking down Collectors during a four-ball multiball and playing cat-and-mouse against a Reaper. Build up attack damage and hit the Reaper repeatedly to take it down, but watch out for its deadly beam cannon!
+  Finish the fight in this two-phase mode that alternates between taking down Collectors during a four-ball multiball and playing cat-and-mouse against a Reaper. Build up attack damage and hit the Reaper repeatedly to take it down, but watch out for its deadly beam cannon!
 
 * Escape
 
@@ -99,15 +99,15 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 ## Additional Gameplay
 
 ### Lair of the Shadow Broker
-Drop the bank of targets to gather intel on the Shadow Broker and start this mini-wizard mode. Complete three banks to unlock the Vasir car chase, then follow the shots and defeat Vasir in combat to get the data disk. Complete additional drop banks to unlock Hagalaz and Storm the Shadow Broker's ship, defeating his mercenaries to meet him face-to-face in a two-ball battle.
+Drop the bank of targets to gather intel on the Shadow Broker and start this mini-wizard mode. Complete three banks to unlock the Vasir car chase, then follow the shots and defeat Vasir in combat to get the data disk. Complete additional drop banks to unlock Hagalaz, then storm the Shadow Broker's ship and defeat his mercenaries to meet him face-to-face in a high-stakes two-ball battle.
 
 ### Overlord
-Hit the Geth target banks to clear a station on Aite and hit the left ramp to lock a ball and disable the lockdown. When all three stations are complete the Overlord three-ball multiball begins—hit the glowing shots to build value, and watch out for the blinking lights of data upload shots. When they appear, no more value can be built until the uploads are destroyed.
+Hit the Geth target banks to clear a station on Aite and hit the left ramp to lock a ball and disable the geth. When all three stations are complete the Overlord three-ball multiball begins—hit the glowing shots to build value, and watch out for the blinking lights of data upload shots. When they appear, no more value can be built until the uploads are destroyed.
 
 *This mission is only available prior to the Collector Ship mission*
 
 ### Arrival
-Hit the Batarian target banks to celar a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins—hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
+Hit the Batarian target banks to clear a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins—hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
 
 *This mission is only available after the Collector Ship mission*
 

@@ -35,21 +35,6 @@ event_player:
     - capacitors_charged_ready|10s
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
-  hagalaz_target1_hagalaz_profile_lit_hit:
-    - enable_shunt_left_orbit
-    - enable_shunt_kickback
-  hagalaz_target2_hagalaz_profile_lit_hit:
-    - enable_shunt_kickback
-    - enable_shunt_left_ramp
-  hagalaz_target3_hagalaz_profile_lit_hit:
-    - enable_shunt_left_ramp
-    - enable_shunt_right_ramp
-  hagalaz_target4_hagalaz_profile_lit_hit:
-    - enable_shunt_left_ramp
-    - enable_shunt_right_ramp
-  hagalaz_target5_hagalaz_profile_lit_hit:
-    - enable_shunt_right_ramp
-    - enable_shunt_right_orbit
   logicblock_shunt_counter_complete: enable_hatch
   # DEBUG
   hatch_shot_hit: shadowbroker_hagalaz_complete
