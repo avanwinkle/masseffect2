@@ -3,16 +3,16 @@
 The gameplay of ME2P is divided into a few broad categories:
 
 ### Recruitment Missions
-Recruitment missions compromise the bulk of the gameplay and are unlocked by 
-hitting their corresponding shots 3x. There are 10 recruitment missions, 
+Recruitment missions compromise the bulk of the gameplay and are unlocked by
+hitting their corresponding shots 3x. There are 10 recruitment missions,
 corresponding to the 10 recruitable squadmates.
 
 *Common Recruitment Modes:*
 
-* **[Recruit Base](recruitbase/config/recruitbase.yaml)** handles the 
+* **[Recruit Base](recruitbase/config/recruitbase.yaml)** handles the
 underlying/common logic for enabling/disabling/awarding recruitment missions
-* **[Recruit Field](recruitfield/config/recruitfield.yaml)** handles the basic 
-gameplay for unlocking recruitment/side missions and is the default mode when 
+* **[Recruit Field](recruitfield/config/recruitfield.yaml)** handles the basic
+gameplay for unlocking recruitment/side missions and is the default mode when
 no other gameplay mode is active
 
 *Individual Recruitment Missions:*
@@ -29,9 +29,9 @@ no other gameplay mode is active
 * **Zaeed** - Assault the Refinery
 
 ### Story Missions
-Story missions are the mini and full-sized wizard modes of the game and are 
-unlocked by completing recruitment missions. There are 4 story missions, some of 
-which are selectable from the Mission Select and some of which are triggered 
+Story missions are the mini and full-sized wizard modes of the game and are
+unlocked by completing recruitment missions. There are 4 story missions, some of
+which are selectable from the Mission Select and some of which are triggered
 automatically.
 
 * **Collector Ship** ([base mode](collectorship_base/config/collectorship_base.yaml))
@@ -46,15 +46,15 @@ automatically.
   * Omega 4 Relay
   * Infiltration
   * the Long Walk
-  * the Reaper
+  * the Human Reaper
     * Collector Phase
     * Reaper Phase
-  * Escape
+  * the End Run / Escape
 
 ### Side Missions
-Side missions provide additional gameplay during the course of collecting 
+Side missions provide additional gameplay during the course of collecting
 recruitment missions, and are unlocked by hitting various targets/banks/bumpers.
-* **Lair of the Shadow Broker** ([base mode](shadowbroker/config/shadowbroker.yaml)) 
+* **Lair of the Shadow Broker** ([base mode](shadowbroker/config/shadowbroker.yaml))
 is a series of unlockable modes leading to a big boss finish
   * Vasir Chase
   * Vasir Combat
@@ -67,7 +67,7 @@ is a series of unlockable modes leading to a big boss finish
   * [Global Multiball Manager](global/config/global_multiball.yaml)
 
 ### Supplemental Modes
-These modes can be triggered throughout the game and offer bonuses, multipliers, extra points, and 
+These modes can be triggered throughout the game and offer bonuses, multipliers, extra points, and
 other goodies. They have to be enabled/unlocked and activated, but do not supercede any existing
 gameplay modes.
 * **[Harbinger](harbinger/config/harbinger.yaml)** provides a stackable playfield multiplier

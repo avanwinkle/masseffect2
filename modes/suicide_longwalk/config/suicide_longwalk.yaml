@@ -1,4 +1,25 @@
 #config_version=5
+
+#####
+# SUICIDE MISSION Pt. III: THE LONG WALK
+#
+# This mode begins with the player selecting a biotic specialist from the
+# recruited squadmates (excluding any that died during the Infiltration mode).
+# The player must then hit a series of randomly-placed shots to make their way
+# through the central chamber, staying close to the biotic's protective barrier.
+#
+# This mode is on a timer, which resets every time a path shot is hit. An incorrect
+# shot (i.e. any lane that's not lit) drops the timer down to the nearest 1/3rd.
+# If the timer runs out a random squadmate is pulled from the protective
+# barrier and killed, and the player must re-start the mode by hitting the left-
+# lane lock.
+#
+# If the ball drains during this mode, the biotic specialist is killed
+# and the player must select a new one at the beginning of their next ball. If
+# all biotic specialists die, the Suicide Mission fails and the player is
+# returned to the recruitment mode to recruit more squadmates.
+######
+
 mode:
   start_events: start_mode_suicide_longwalk
   stop_events: longwalk_complete, longwalk_failed

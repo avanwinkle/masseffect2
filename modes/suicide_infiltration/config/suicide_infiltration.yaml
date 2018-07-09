@@ -1,4 +1,20 @@
 #config_version=5
+
+#####
+# SUICIDE MISSION Pt. II: INFILTRATION
+#
+# This mode begins with the player selecting a tech specialist from the recruited
+# squadmates. Then begins a two-ball multiball on a timer, and a series of shots
+# lit to open the venting valves to allow the specialist to proceed through the
+# heating duct. Completing all of the shots completes the mode.
+#
+# This mode runs on a timer, which resets every time a valve shot is hit. If the
+# timer runs out the specialist is killed and the mode ends. It can be restarted
+# via the left-lane ball lock, but a new specialist must be chosen. If all tech
+# specialist squadmates die, the Suicide Mission fails and the player is returned
+# to the recruitment mode to recruit more squadmates.
+#####
+
 mode:
   start_events: start_mode_suicide_infiltration
   stop_events: infiltration_complete, infiltration_failed

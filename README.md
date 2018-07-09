@@ -68,7 +68,7 @@ At various points in the game, special missions will become available which pres
 * The Derelict Reaper
 
   Speed is the name of the game in this high-stakes multiball as Commander Shepard must fight through waves of husks and scions to find the IFF and get out before the Reaper falls.
-  
+
 * The Collector Attack
 
   Follow the emergency lighting and avoid Collector forces as you make your way towards an escape in this dark survival mission.
@@ -80,7 +80,7 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 
   Bring your ship upgrades and make your stand against oculus sentries and the behemoth Collector ship in this chaotic timed multiball.
 
-* Infiltrating the Base
+* Infiltrating the Collector Base
 
   Choose a specialist to enter the vent and follow the lit shots to activate the valves and get them through safely, fighting Collectors all the while in this two-ball battle. Don't let the timer run out!
 
@@ -113,6 +113,6 @@ Hit the Batarian target banks to celar a path through Project Base and hit the l
 
 ## Credits
 
-Mass Effect 2 is an amazing piece of work by BioWare. 
+Mass Effect 2 is an amazing piece of work by BioWare.
 
 ME2 Pinball is a labor of love by Anthony van Winkle.

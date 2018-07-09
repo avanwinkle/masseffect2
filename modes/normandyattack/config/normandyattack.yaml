@@ -2,6 +2,16 @@
 
 #####
 # NORMANDY ATTACKED
+#
+# This mode shuts off all lights, sounds, and displays for the machine and forces
+# the player to navigate a series of red shots to restore power to the ship and
+# escape the Collector's attack. Hitting a lit shot enables an outlane ball save,
+# and completing the mode awards a levelup.
+#
+# This mode is triggered automatically via pop bumper countdown, after the
+# Derelict Reaper mission is completed. This mode is only played once regardless
+# of outcome, and afterwards the Suicide Mission becomes available from the
+# mission select screen.
 #####
 
 mode:

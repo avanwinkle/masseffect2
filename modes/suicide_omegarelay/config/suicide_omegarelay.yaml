@@ -1,4 +1,16 @@
 #config_version=5
+
+#####
+# SUICIDE MISSION Pt. I: THE OMEGA 4 RELAY
+#
+# This mode is the first sub-mode of the Suicide Mission and is a fixed-time
+# multiball with all shots lit.
+#
+# There are three conditions to end the mode: all lit shots are hit, the timer
+# runs out, or all the balls drain. In all cases, this mode moves directly into
+# Infiltration mode (i.e. it cannot be failed).
+#####
+
 mode:
   start_events: start_mode_suicide_omegarelay
   stop_events: ball_will_end, omegarelay_complete
