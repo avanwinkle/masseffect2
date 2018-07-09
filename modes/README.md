@@ -11,6 +11,10 @@ increasing the multiplier (e.g. restarting missions offers a lower possible
 multiplier) and shots banking the hurryup values. Details of each modes's scoring
 are noted in the mode config files, above the `variable_player` section.
 
+Mass Effect 2 pinball is the basis for the MPF documentation's [Mode Layering Guide](http://docs.missionpinball.org/en/dev/game_design/mode_layering.html) for how to
+structure and transition between playfield, mission, and wizard modes, so reviewing
+that guide may be helpful in understanding how the below modes behave.
+
 ### Recruitment Missions
 Recruitment missions compromise the bulk of the gameplay and are unlocked by
 hitting their corresponding shots 3x. There are 10 recruitment missions,
@@ -66,7 +70,9 @@ for completion on subsequent starts.
   * If the mode fails, step the shot profile back one state
 * **[Thane](recruitthane/config/recruitthane.yaml)** - Ascend Dantius Tower
   * Light two ramps and count their hits
-  * When the ramps counter reaches a certain value (3 shots on the first play, 1 shot on repeat plays), light the orbit shots
+  * When the ramps counter reaches a certain value, light the orbit shots
+    * Counter needs 3 hits the first time this mode is played
+    * Counter only needs 1 hit on subsequent play attempts
   * Continue hitting ramps to build value
   * Hit either orbit to complete the mode and collect the value
 * **[Zaeed](recruitzaeed/config/recruitzaeed.yaml)** - Assault the Refinery
@@ -77,54 +83,53 @@ for completion on subsequent starts.
   * Clear the chosen path and reset the counter when the mode restarts
 
 ### Story Missions
-Story missions are the mini and full-sized wizard modes of the game and are
-unlocked by completing recruitment missions. There are 4 story missions, some of
-which are selectable from the Mission Select and some of which are triggered
-automatically.
+Story missions are the mini-wizard and final wizard modes of the game, and are
+unlocked by completing missions. Most missions are selected from the Mission Select
+menu, but some start automatically when certain conditions are met.
 
-####Collector Ship
-The Collector Ship mission becomes available after four squadmates have been recruited, and
-is started from the mission select screen. No other recruitment missions can be played and
-the Collector Ship can not be bypassed.
+#### Collector Ship
+The Collector Ship mission is available after 4 squadmates are recruited, and
+is started from the mission select screen. Once enabled, no other missions can be 
+selected and the Collector Ship can not be bypassed.
 
-It consists of a "base" mode that runs underneath and manages the three "phase" modes,
-which cycle through as long as the player is able to maintain them. The mode (and
-corresponding achievement) are considered "complete" after the third phase is beat. Prior
-to completion the mode will play until the ball ends, but if the player beats the third
+The Collector Ship consists of a "base" mode that runs underneath and manages the three "phase" modes,
+which cycle through as long as the player is able to maintain them. The mode (and its
+corresponding achievement) are considered "complete" if the player finishes the third phase. Prior
+to completion the mode will play until the player's turn ends, but if the player beats the third
 phase then the mode will stop when only one ball remains.
 
-* **[Base mode](collectorship_base/config/collectorship_base.yaml))**
+* **[Base mode](collectorship_base/config/collectorship_base.yaml)**
   * Start the mini-wizard mode and manage the transition between phases
   * Handle common sound files shared between phases
   * Start a multiball and add balls on certain events
 * **[Ambush Phase](collectorship_ambush/config/collectorship_ambush.yaml)**
-  * Light all shots and count each one being hit
+  * Light all shots and count each one's hit
   * Add a ball (up to a maximum number) when a lit shot is hit
-  * Play a sound when only one shot remains
-  * Complete the phase when all shots are hit
+  * Play a sound when only one lit shot remains
+  * Complete the phase when all lit shots are hit
 * **[Husk Phase](collectorship_husk/config/collectorship_husk.yaml)**
   * Start a timer and light all standup targets
-  * Hit a lit standup to light a random lane shot and add value
-  * Hit a light lane to collect/reset the added values
-  * Store the total sum of all values added/collected
+  * Hit a standup to light a random lane shot and build value
+  * Hit a lane to collect and reset the built values
+  * Store the total sum of all values built/collected
   * Play sounds depending on which squadmates have been recruited
   * End the phase automatically when the timer runs out
 * **[Praetorian Phase](collectorship_praetorian/config/collectorship_praetorian.yaml)**
-  * Start a timer for the Praetorian's "attack"
+  * Start a countdown timer for the Praetorian's "attack"
   * Light one random lane and one random bank
-  * Hit either lit shot to increment a counter and light new random shots
+  * Hit any lit shot to reset the countdown and light new random shots
   * If the "attack" timer runs out, play a show and disable one flipper
   * Re-enable the flipper by hitting a lit shot
-  * Complete the shots counter to complete the mode and return to the Ambush phase
+  * Count the hit shots to complete the mode and return to the Ambush phase
   * If the "attack" timer runs out a second time, regress back to the Husk phase
 
 This mode can only be played once.
 
-####Derelict Reaper**
+#### Derelict Reaper
 This mode can be selected from the Misson Select when the player reaches level 8
 (by recruiting squadmates and/or completing other missions), but it does not have
-to be played immediately. The player can choose to continue recruiting and doing
-side missions until they choose to play the Derelict Reaper.
+to be played immediately. The player can continue recruiting and doing
+other missions before they choose to play the Derelict Reaper.
   * Two-ball multiball when the mode starts
   * Light all lane shots on a timer (with a hurryup)
   * When the timer runs out, the lane shots are disabled and the hitbank is lit
@@ -137,8 +142,10 @@ side missions until they choose to play the Derelict Reaper.
 This mode can only be played once.
 
 #### Normandy Attack
-This mode is driven from a pop bumper counter that starts after the Derelict Reaper is played.
-When the counter reaches zero, all other modes stop and the Normandy Attack begins immediately.
+This mode is driven from a pop bumper counter that starts counting down immediately
+after the Derelict Reaper mode is played (regardless of whether the achievement
+was completed). When the counter reaches zero, all other modes stop and the
+Normandy Attack begins immediately.
   * Override all light, sound, and slide plays to simulate machine shutdown
   * Shut off flippers and force a ball drain while a show plays
   * Enable a secret ball save to resume play without costing a player ball
@@ -148,6 +155,10 @@ When the counter reaches zero, all other modes stop and the Normandy Attack begi
   * Light an outlane ball save on each shot completion
 
 #### Suicide Mission
+This is the final wizard mode of the game, a sequence of five modes with variable
+behavior depending on which missions have been completed (and which squadmates
+recruited). It's under active development so the documentation is limited to
+the in-config comments.
   * Omega 4 Relay
   * Infiltration
   * the Long Walk
@@ -161,56 +172,65 @@ Side missions provide additional gameplay during the course of collecting
 recruitment missions, and are unlocked by hitting various targets/banks/bumpers.
 
 #### Lair of the Shadow Broker
-This is a series of unlockable modes governed by the [global shadowbroker mode](global/config/global_shadowbroker.yaml). The global mode handles the tracking/lighting of dropbank hits to enable the series of mini-wizard modes:
-* **[Vasir Chase](shadowbroker_chase/config/shadowbroker_chase.yaml)** is a typical timed follow-the-shots-sequence with a pre-determined set of shots.
-  * Light a shot and advance through a specific order of shots using *hit_events* and *enable_events*
+This is a series of unlockable modes governed by the [global shadowbroker mode](global/config/global_shadowbroker.yaml).
+The global mode handles the tracking/lighting of dropbank hits to enable the 
+series of mini-wizard modes:
+* **[Vasir Chase](shadowbroker_chase/config/shadowbroker_chase.yaml)** is a 
+typical, timed, follow-the-shots-sequence with a pre-determined set of shots.
+  * Light a shot and advance through a specific order of shots using `hit_events` and `enable_events`
   * Play a progression of success sounds as the lit shots are hit
   * Play a randomization of wrong-way sounds when the wrong shots are hit
   * Don't end the ball on drain, instead end the mode and return to the normal playfield
   * If the player fails, restart them one shot back from where they left off
-* **[Vasir Combat](shadowbroker_vasir/config/shadowbroker_vasir.yaml)** is a follow-the-shot mode where the player must hit a shot that "jumps" around the playfield
+* **[Vasir Combat](shadowbroker_vasir/config/shadowbroker_vasir.yaml)** is a 
+follow-the-shot mode where the player must repeatedly hit a shot that "jumps" 
+around the playfield
   * Define a sequence of shots in a shot_group with a rotation order
-  * Light a "target" shot with a profile state and start a timer
+  * Light a "target" shot with a profile state and start a shot rotation timer
   * If the timer runs out, rotate the target to a different shot
-  * If the target is hit: reset the timer, advance the profile state, rotate the target to a different shot *(this logic is way more complex than you'd think)*
-  * Complete the mode by hitting the target on its final profile state
+  * If the target is hit: reset the timer, advance the profile state, and rotate the
+  target to a different shot 
+    * *(this logic is way more complex than you'd think)*
+  * Complete the mode by hitting the target on its final profile state (3x hits total)
 * **[Hagalaz Ship](shadowbroker_hagalaz/config/shadowbroker_hagalaz.yaml)** 
   * Define a group of shots and randomly light one every 8 seconds
   * Hit a lit shot to advance a counter
-  * Use lights to indicate standup targets "charging up" over 10s
-  * Hit a "charged" standup to register a hit on the shots to either side of it
-  * Stop all timers and charging when the counter hits its target value
-  * Light a special ball hold shot to finish the mode
+  * Use playfield lighting to indicate standups "charging up" over 10s
+  * Hit a "charged" standup to count hits on the shots to either side (if they're lit)
+  * Stop all timers and charging when the lit-shot-counter completes
+  * Light a special *ball_hold* shot to finish the mode
 * **[Boss Combat](shadowbroker_boss/config/shadowbroker_boss.yaml)**
 
 #### Multiballs
-There are two multiball modes, both of which are lit and locked in the same way via the [global multiball handler](global/config/global_multiball.yaml). Prior to the Collector Ship mission
-it's Overlord that can be played; after it's Arrival.
-* **[Overlord Multiball](overlord/config/overlord.yaml)** is a typical multiball that will run as long as there are multiple balls in play.
-  * Light all lanes with a hurryup to build value
-  * Hit one lane to enable a "jackpot" shot and add time to the timer
+There are two multiball modes, both of which are lit and locked in the same way 
+via the [global multiball handler](global/config/global_multiball.yaml). Overlord
+is the multiball mode available prior to the Collector Ship mission, and Arrival
+is available after.
+* **[Project Overlord](overlord/config/overlord.yaml)** is a typical multiball that will run as long as there are multiple balls in play.
+  * Light all lanes and start a hurryup timer
+  * Hit any lane to enable a "jackpot" shot, build the hurryup value, and add time to the timer
   * Continue hitting lit lanes to build more value; hit the jackpot to collect
-  * After each jackpot collection, it takes one more lane shot to re-light (up to every lane)
+  * After each jackpot collection, it takes an additional lane shot to re-light
   * Collect 3 jackpots to complete the mode and the achievement
   * If the timer runs out, all lane shots "freeze" and must be reset
   * The mode ends when the balls drain down to one
-* **[Arrival Multiball](arrival/config/arrival.yaml)** is a timed multiball that runs in phases synchronized with music.
+* **[Arrival](arrival/config/arrival.yaml)** is a timed multiball that runs in phases, synchronized with music.
   * Start a music track and synchronize the start/stop of phases to markers in the music
-  * Maintain multiple multiballs with decreasing ball counts
+  * Maintain multiple multiballs with decreasing ball counts and save times
   * Phase 1 (save 3 balls): light all lanes with compound scoring to build value
   * Phase 2 (save 2 balls): light all targets for points to add value
   * Phase 3 (save 1 ball): light all lanes for increasing the multiplier
   * Phase 4 (no ball save): light the escape shot and start the hurryup
-  * If the escape shot is hit, award the complete built value X the multipliers
+  * If the escape shot is hit, award the complete built value, times the built multipliers
   * If the escape shot is not hit, award a portion of the built value
   * If the ball drains, award a smaller portion of the built value
 
 * **[N7 Assignments](n7_assignments/config/n7_assignments.yaml)** are single-shot modes that
 are started automatically each time the pop bumper count is completed.
-  * Light a random "mission" shot through random_event_player
-  * Display a dynamic value on a slide using event_player arguments
-  * Set a hurryup value on a timer and show it ticking down
-  * Award the hurryup value if the shot is hit
+  * Light a random "mission" shot through `random_event_player`
+  * Display a dynamic value on a slide using `event_player` arguments
+  * Set a hurryup value on a timer and make a text widget show it ticking down
+  * Award the hurryup value if the lit shot is hit
   * End the mode if the timer runs out
 
 ### Supplemental Modes
@@ -225,39 +245,42 @@ gameplay modes.
 Game logic modes handle underlying behavior and are not exposed to the player but do interesting things behind-the-scenes.
 
 #### Base
-* **[Base](base/config/base.yaml)** handles the fundamental gameplay and exists beneath all other modes. It handles the transitions between *global* and various wizard modes.
+* **[Base](base/config/base.yaml)** handles the fundamental gameplay and exists 
+beneath all other modes. It handles the transitions between *global* and various
+wizard modes, and is responsible for starting/stopping modes when balls start and
+end.
 * [Medigel](base/config/base_medigel.yaml) handles a special outlane ball save that can
 be enabled by events throughout the game and will save one outlane drain (if no other
 ball saves are active).
 
 #### Global
-* **[Global](global/config/global.yaml)** handles the transitions between *field* and various mission modes, as well as common gameplay behaviors that exists in non-wizard play.
-* [Multiball](global/config/global_multiball.yaml) handles the lighting and lock-enabling of multiballs, since both Overlord and Arrival multiball modes use the
+* **[Global Base](global/config/global.yaml)** handles the transitions between *field* and various mission modes, as well as common gameplay behaviors that exists in non-wizard play.
+* [Global Multiball](global/config/global_multiball.yaml) handles the lighting and lock-enabling of multiballs, since both Overlord and Arrival multiball modes use the
 same lighting/locking behavior.
   * Use achievement states to determine which multiball mode is being advanced
   * Enable a "light lock" shot on two hitbanks
-  * Hit either hitbank to disable the "light" shot and light the "lock" shot
+  * Hit either hitbank to disable the "light" shot and enable the "lock" shot
   * Hit the lock shot to lock a ball, play a sound and slide, and re-enable the light shot
   * Lock three balls to start the appropriate multiball mode
   * After a multiball has been played, it can be lit/locked again but *both* hitbanks must be hit to light the lock.
-* [Planets](global/config/global_planets.yaml) handles the pop bumper and top lane
+* [Global Planets](global/config/global_planets.yaml) handles the pop bumper and top lane
 behaviors, including multipliers and countdown awards.
-* [Recruit](global/config/global_recruit.yaml) handles the lighting and tracking of
+* [Global Recruit](global/config/global_recruit.yaml) handles the lighting and tracking of
 recruitment shots, allowing players to advance towards recruitment missions and playing
 sounds/slides when those missions are completed. It also handles a common ball save
 that runs when any recruit mission starts.
-* [Shadow Broker](global/config/global_shadowbroker.yaml) handles the dropbank hits
+* [Global Shadow Broker](global/config/global_shadowbroker.yaml) handles the dropbank hits
 that progress towards the various Shadow Broker modes.
   * Track dropbank completions and play a specific sound on each drop
-  * Light up to three lights to indicate the completion progress
-  * Complete one set of three to enable the chase
-  * While the chase is enabled, complete the dropbank to start the chase mode
-  * After the chase is completed, hit the ball hold to start the vasir mode
-  * After vasir is completed, track and light up another three dropbank completions
-  * On the third completion, enable the hagalaz mode
-  * While hagalaz is enabled, complete the drapbank to start the mode
-  * After hagalaz is completed, hit the ball hold to start the broker mode
-  * After the broker is completed, additional dropbanks award bonus points
+  * Light up to three playfield lights to indicate the dropbank progress
+  * Complete three dropbanks to enable the chase mode/achievement
+  * While the chase is enabled, completing the dropbank starts the chase mode
+  * After the chase is completed, the ball hold is enabled to start the vasir mode
+  * After vasir is completed, the dropbank completion counting starts again
+  * On the next third completion, the hagalaz mode/achievement is enabled
+  * While hagalaz is enabled, completing the drapbank starts the hagalaz mode
+  * After hagalaz is completed, the ball hold starts the boss mode
+  * After the boss is completed, additional dropbanks award bonus points
 
 #### Field
 * **[Field](field/config/field.yaml)** handles all playfield behavior when no mission or wizard mode is active. 
