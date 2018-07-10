@@ -442,19 +442,19 @@ lights:
     tags: color_shields, color_shield_green
   l_standup_1: # Standup 1 [#44]
     number: 9-37
-    tags: target_lights
+    tags: l_targets
   l_standup_2: # Standup 2 [#52]
     number: 9-38
-    tags: target_lights
+    tags: l_targets
   l_standup_3: # Standup 3 [#59]
     number: 10-28
-    tags: target_lights
+    tags: l_targets
   l_standup_4: # Standup 4 [#64]
     number: 9-16
-    tags: target_lights
+    tags: l_targets
   l_standup_5: # Standup 5 [#70]
     number: 9-19
-    tags: target_lights
+    tags: l_targets
   l_start_button: # Start Button [#2]
     number: 1-2
   # l_tournament_start: # Tournament Start [#3]

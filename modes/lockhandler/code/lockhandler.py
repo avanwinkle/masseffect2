@@ -118,6 +118,7 @@ class LockHandler(Mode):
     if self.machine.modes.suicide_base.active:
       # If the suicide mission wants to hold the ball for picking a specialist, allow it to handle
       if self.machine.modes.suicide_infiltration.active:
+        # counters = self.machine.device_manager.get_monitorable_devices().get("counters")
         if self.machine.game.player["valves_state"].value <= 1:
           self.log.info(" - Infiltration complete, need a specialist for long walk, lockhandler starting mission select")
           # We want to start missionselect here so that the ball device doesn't eject the ball
@@ -125,6 +126,7 @@ class LockHandler(Mode):
           do_bypass = False
           mission_delay = 1000
         else:
+          self.log.info(" - Infiltration in progress, player_vars is: {}".format(self.machine.game.player.vars))
           self._bypass_lock()
         return
       # If a specialist has died and we need to select another, queue up mission select

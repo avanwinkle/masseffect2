@@ -67,27 +67,27 @@ shots:
     switch: s_target1
     tags: storetarget
     show_tokens:
-      led: l_standup_1
+      leds: l_standup_1
   storetarget2:
     switch: s_target2
     tags: storetarget
     show_tokens:
-      led: l_standup_2
+      leds: l_standup_2
   storetarget3:
     switch: s_target3
     tags: storetarget
     show_tokens:
-      led: l_standup_3
+      leds: l_standup_3
   storetarget4:
     switch: s_target4
     tags: storetarget
     show_tokens:
-      led: l_standup_4
+      leds: l_standup_4
   storetarget5:
     switch: s_target5
     tags: storetarget
     show_tokens:
-      led: l_standup_5
+      leds: l_standup_5
 
 show_player:
   all_storetargets_hit:
@@ -99,17 +99,17 @@ show_player:
 shows:
   storetarget_unhit:
     - lights:
-        (led): black
+        (leds): black
   storetargets_flash:
     - time: 0
       lights:
-        target_lights: white
+        l_targets: white
     - time: '+1'
       lights:
-        target_lights: black
+        l_targets: black
   storetarget_hit:
     - lights:
-        (led): white
+        (leds): white
   storelit_show:
     - time: 0
       lights:

@@ -61,6 +61,34 @@ ball_saves:
     delayed_eject_events: mode_suicide_infiltration_started
     auto_launch: true # Must be true because we have a multiball starting too
 
+variable_player:
+  # Track whether we are progressing into a mode or starting a new ball
+  mode_suicide_base_started:
+    suicide_continuing:
+      action: set
+      int: 0
+    # Human Reaper hit points... 100,000?
+    reaper_hp:
+      action: set
+      int: 100000
+    reaper_rounds:
+      action: set
+      int: 6
+  kill_specialist:
+    suicide_continuing:
+      action: set
+      int: 0
+  omegarelay_complete:
+    suicide_continuing: 1
+  infiltration_complete:
+    suicide_continuing: 1
+  longwalk_complete:
+    suicide_continuing: 1
+  humanreaper_complete:
+    suicide_continuing: 1
+  mode_suicide_humanreaper_started{current_player.reaper_rounds>0}:
+    reaper_rounds: -1
+
 sound_player:
   # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
   # play_squadmate_sound: squadmate_thane_killed_inf
@@ -80,7 +108,7 @@ sound_player:
   start_mode_suicide_platforms:
     suicide_music_3a:
       start_at: 0s
-  # When it's reaper time, switch to reaper
+  # When it's reaper time, switch to reaper music
   start_mode_suicide_humanreaper:
     suicide_music_platforms:
       action: stop
@@ -201,7 +229,7 @@ sounds:
   squadmate_thane_killed_callback_shepard_lw:
     file: en_us_player_f_endgm2_biotic_fail_c_00266800_f.ogg
     track: voice
-  squadmate__killed_callback_shepard_lw:
+  squadmate_miranda_killed_callback_shepard_lw:
     file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
     track: voice
 
@@ -213,34 +241,9 @@ show_player:
   mode_missionselect_started:
     missions_available_show:
       action: stop
-  mode_suicide_base_started:
-    missions_available_show:
-      action: stop
   mode_suicide_base_will_stop:
     missions_available_show:
       action: stop
-
-variable_player:
-  # Track whether we are progressing into a mode or starting a new ball
-  mode_suicide_base_started:
-    suicide_continuing:
-      action: set
-      int: 0
-    reaper_hp:
-      action: set
-      int: 10000
-  kill_specialist:
-    suicide_continuing:
-      action: set
-      int: 0
-  omegarelay_complete:
-    suicide_continuing: 1
-  infiltration_complete:
-    suicide_continuing: 1
-  longwalk_complete:
-    suicide_continuing: 1
-  humanreaper_complete:
-    suicide_continuing: 1
 
 slide_player:
   mode_type_suicide_started: suicide_slide
@@ -288,8 +291,15 @@ widget_player:
       action: remove
     longwalk_title:
       slide: suicide_slide
-  mode_suicide_humanreaper_started:
+  mode_suicide_platforms_started:
     longwalk_title:
+      action: remove
+    humanreaper_title:
+      action: remove
+    platforms_title:
+      slide: suicide_slide
+  mode_suicide_humanreaper_started:
+    platforms_title:
       action: remove
     humanreaper_title:
       slide: suicide_slide
@@ -330,6 +340,10 @@ widgets:
   longwalk_title:
     - type: text
       text: the Long Walk
+      style: text_default
+  platforms_title:
+    - type: text
+      text: Final Battle
       style: text_default
   humanreaper_title:
     - type: text

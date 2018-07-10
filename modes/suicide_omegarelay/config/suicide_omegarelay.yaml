@@ -14,6 +14,8 @@
 mode:
   start_events: start_mode_suicide_omegarelay
   stop_events: ball_will_end, omegarelay_complete
+  events_when_started: mode_type_suicide_started
+  events_when_stopped: mode_type_suicide_stopped
   priority: 2300
 
 event_player:
@@ -52,6 +54,13 @@ variable_player:
   timer_omegarelay_tick:  # 6000 over 60s = 100 per second
     temp_hurryup_value: -100 * current_player.temp_multiplier
 
+counters:
+  omegarelay_extraball_counter:
+    starting_count: 0
+    count_complete_value: 6
+    direction: up
+    count_events: omegarelay_shots_lit_hit
+
 multiballs:
   omegarelay:
     ball_count: 3
@@ -68,7 +77,9 @@ shot_profiles:
   omgprofile:
     states:
       - name: lit
-        show: on
+        show: flash_color_show
+        show_tokens:
+          color: FF2200 # color_collectors
       - name: hit
         show: off
 

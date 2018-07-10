@@ -22,13 +22,13 @@ mode:
   priority: 600
 
 event_player:
-  harbinger_shot_hot_hit: harbinger_shot_runout|60s
+  harbinger_shot_hot_hit: harbinger_shot_runout|45s
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
   # When it completes or is hit, the shot will be disabled
   harbinger_enabled_timer:
-    start_value: 30
+    start_value: 20
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -41,7 +41,7 @@ timers:
   # This timer runs while Harbinger is DISABLED and the shot is OFF
   # When it completes, the shot will be enabled again
   harbinger_disabled_timer:
-    start_value: 10
+    start_value: 17
     end_value: 0
     tick_interval: 1s
     direction: down

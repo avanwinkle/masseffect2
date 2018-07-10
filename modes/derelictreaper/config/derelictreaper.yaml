@@ -202,14 +202,14 @@ shows:
   reaperhusk_show:
     - time: 0
       lights:
-        target_lights: on
+        l_targets: on
   reaperhusk_hit_show:
     - time: 0
       lights:
-        target_lights: off
+        l_targets: off
     - time: 1
       lights:
-        target_lights: on
+        l_targets: on
   reapercore_lit_show:
     - time: 0
       lights:

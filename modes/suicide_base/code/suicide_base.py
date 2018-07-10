@@ -20,7 +20,9 @@ class SuicideBase(Mode):
     if mate == "specialist":
       mate = self.player["specialist"]
     elif mate == "random":
-      mate = random.choice(SquadmateStatus.available_mates(self.player, include_specialist=False))
+      avail_mates = SquadmateStatus.available_mates(self.player, include_specialist=False)
+      # If the specialist is the only mate left, kill them even if include_specialist is false
+      mate = random.choice(avail_mates) if avail_mates else self.player["specialist"]
       self.add_mode_event_handler("squadmate_killed_callback",
         self._kill_squadmate_callback,
         squadmate=mate)
@@ -31,6 +33,18 @@ class SuicideBase(Mode):
     # It's useful to know whether the ball is ending or not
     ball_is_ending = self.machine.modes["base"].stopping or not self.machine.modes["base"].active
     self.machine.events.post("squadmate_killed", squadmate=mate, ball_is_ending=ball_is_ending)
+
+    # Are we out of squadmates?
+    if not self._squadmates_can_continue():
+      self.info_log("No squadmates available to be specialists. Suicide Mission has failed.")
+      # Base will already be done if the ball is ending, set the state manually
+      if ball_is_ending:
+        ach = self.machine.device_manager.get_monitorable_devices().get("achievements")
+        ach["suicidemission"].stop()
+        self.info_log(" - achievement suicidemisson has stopped: {}".format(ach))
+      else:
+        self.machine.events.post("suicidemission_failed")
+
     # Until we have callbacks working, trigger the relay event too
     self.machine.events.post("squadmate_killed_complete", squadmate=mate)
 
@@ -49,12 +63,22 @@ class SuicideBase(Mode):
       "events_when_played": "squadmate_killed_complete",
     })
 
+  def _squadmates_can_continue(self):
+    if self.player["squadmates_count"] == 0:
+      return False
+    elif self.player.achievements["infiltration"] == "started" and not SquadmateStatus.available_techs(self.player):
+      return False
+    elif self.player.achievements["longwalk"] == "started" and not SquadmateStatus.available_biotics(self.player):
+      return False
+    return True
+
   def _handle_failure(self, **kwargs):
     # Reset all dead squadmates to recruitable
     for mate in SquadmateStatus.dead_mates(self.player):
       # Jacob and Miranda are already recruited
       if mate in ("jacob", "miranda"):
         self._set_status(mate, 4)
+        self.player["squadmates_count"] += 1
       else:
         self._set_status(mate, 0)
 

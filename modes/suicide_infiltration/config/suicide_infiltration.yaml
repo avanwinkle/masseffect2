@@ -51,8 +51,9 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: valveshots_hit
-    persist_state: true
     reset_events: mode_suicide_infiltration_started
+    persist_state: true
+    player_variable: valves_state
 
 timers:
   infiltration:
@@ -90,7 +91,7 @@ shots:
   valve_right_ramp:
     hit_events: sh_right_ramp_hit
     enable_events: mode_suicide_infiltration_started
-    reset_events: mode_suicide_infiltration_started
+    reset_events: mode_suicide_infiltration_will_stop
     disable_events: valve_right_ramp_hit
     advance_events: increase_infiltration_med
     profile: valve_profile
@@ -100,7 +101,7 @@ shots:
   valve_left_orbit:
     hit_events: sh_left_orbit_hit
     enable_events: valve_right_ramp_hit
-    disable_events: valve_left_orbit_hit, mode_suicide_infiltration_started
+    disable_events: valve_left_orbit_hit, mode_suicide_infiltration_will_stop
     advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -110,7 +111,7 @@ shots:
   valve_kickback:
     hit_events: sh_kickback_hit
     enable_events: valve_left_orbit_hit
-    disable_events: valve_kickback_hit, mode_suicide_infiltration_started
+    disable_events: valve_kickback_hit, mode_suicide_infiltration_will_stop
     advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -120,7 +121,7 @@ shots:
   valve_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: valve_kickback_hit
-    disable_events: valve_right_orbit_hit, mode_suicide_infiltration_started
+    disable_events: valve_right_orbit_hit, mode_suicide_infiltration_will_stop
     advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -130,7 +131,7 @@ shots:
   valve_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: valve_right_orbit_hit
-    disable_events: valve_left_ramp_hit, mode_suicide_infiltration_started
+    disable_events: valve_left_ramp_hit, mode_suicide_infiltration_will_stop
     advance_events: increase_infiltration_med
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -187,7 +188,7 @@ sound_player:
       action: stop
     infiltration_med:
       action: play
-      start_at: 36s
+      start_at: 37s
   player_tension{value==2}:
     infiltration_med:
       action: stop
@@ -398,7 +399,7 @@ sounds:
     file: mus_endgm2_combat_1_low.ogg
     track: music
     mode_end_action: stop
-    fade_in: 1500ms
+    fade_in: 1s
     fade_out: 2s
   infiltration_high:
     file: mus_endgm2_combat_1.ogg
