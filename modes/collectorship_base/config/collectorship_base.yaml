@@ -19,8 +19,8 @@
 mode:
   start_events: start_mode_collectorship_base
   stop_events: stop_mode_collectorship_base, stop_wizards
-  events_when_started: mode_type_wizard_started, start_mode_collectorship_ambush
-  events_when_stopped: mode_type_wizard_stopped
+  events_when_started: mode_type_wizard_started, start_mode_collectorship_ambush, start_mode_harbinger
+  events_when_stopped: mode_type_wizard_stopped, stop_mode_harbinger
   priority: 300
 
 config:
@@ -30,7 +30,6 @@ event_player:
   mode_collectorship_base_started:
     set_environment:
       env: collectors
-    # - start_mode_harbinger
   collectorship_ambush_complete:
     - start_mode_collectorship_husk
   collectorship_husk_complete:
@@ -55,7 +54,6 @@ event_player:
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
     - stop_mode_collectorship_praetorian
-    - stop_mode_harbinger
 
 multiballs:
   collectorship_multiball:

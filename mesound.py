@@ -182,6 +182,7 @@ class SoundManager():
       for expectedpath, filepath in self._analysis['misplaced'].items():
         self.log.info(" {} -> {}".format(filepath, expectedpath))
         if writeMode:
+          os.makedirs(expectedpath.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           os.rename(filepath, expectedpath)
     if self._analysis['available']:
       self.log.info("COPYING AVAILABLE FILES:" if writeMode else "AVAILABLE FILES TO COPY:")

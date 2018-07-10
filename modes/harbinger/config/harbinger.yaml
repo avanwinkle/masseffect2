@@ -4,7 +4,7 @@
 # HARBINGER MODE
 #
 # This mode layers atop other game modes, specifically story missions featuring
-# the Collectors (i.e. Collector Ship, Derelict Reaper(?), and Suicide Mission).
+# the Collectors (i.e. Collector Ship and Suicide Mission).
 #
 # Once enabled, this mode alternates a timed shot (available for 15s, disabled
 # for 15s) at the battering ram. Hitting the ram twice during the 15s window
@@ -60,7 +60,9 @@ variable_player:
   harbinger_shot_hot_hit:
     harbinger_multiplier: 1
   harbinger_shot_runout:
-    harbinger_multiplier: -1
+    harbinger_multiplier:
+      action: set
+      int: 1
   mode_harbinger_will_stop:
     harbinger_multiplier:
       action: set
@@ -99,6 +101,18 @@ light_player:
   harbinger_shot_disabled:
     l_battering_ram_arrow:
       color: off
+  player_harbinger_multiplier{value>=2}:
+    l_2x_multiplier: on
+  player_harbinger_multiplier{value>=3}:
+    l_3x_multiplier: on
+  player_harbinger_multiplier{value>=4}:
+    l_4x_multiplier: on
+  player_harbinger_multiplier{value>=5}:
+    l_4x_multiplier: on
+  player_harbinger_multiplier{value==1}:
+    l_multipliers: off
+  mode_harbinger_will_stop:
+    l_multipliers: off
 
 sound_player:
   player_shot_harbinger_shot_enabled: harbinger_enabledsound  # "Assuming direct control..."

@@ -97,6 +97,7 @@ modes:
   - suicide_omegarelay
   - suicide_infiltration
   - suicide_longwalk
+  - suicide_platforms
   - suicide_humanreaper
   - suicide_endrun
   # Recruit Missions:

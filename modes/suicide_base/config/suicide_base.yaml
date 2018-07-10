@@ -20,7 +20,7 @@ event_player:
   mode_suicide_base_started.1:
     - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
     - start_mode_missionselect{device.achievements.omegarelay.state=="completed" and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}
-    - start_mode_suicide_humanreaper{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
+    - start_mode_suicide_platforms{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   missionselect_specialist_selected:
@@ -29,7 +29,10 @@ event_player:
   # Progression
   omegarelay_complete: start_mode_missionselect
   infiltration_complete: start_mode_missionselect
-  longwalk_complete: start_mode_suicide_humanreaper
+  longwalk_complete: start_mode_suicide_platforms
+  platforms_complete: start_mode_suicide_humanreaper
+  # reaper goes back to platforms when it "fails"
+  humanreaper_failed: start_mode_suicide_platforms
   humanreaper_complete: start_mode_suicide_endrun
   endrun_complete:
     - levelup
@@ -70,11 +73,57 @@ sound_player:
     suicide_music_base:
       action: stop
       fade_out: 2s
+  # Handle the transition between platform/reaper phases for seamlessness
+  # Start by playing the intro track when the long walk is completed
+  longwalk_complete: suicide_music_intro
+  # Seamlessly blend that one into the 3a
+  start_mode_suicide_platforms:
+    suicide_music_3a:
+      start_at: 0s
+  # When it's reaper time, switch to reaper
+  start_mode_suicide_humanreaper:
+    suicide_music_platforms:
+      action: stop
+    suicide_music_reaper:
+      action: play
+  # When we move from reaper back to platforms, skip the intro
+  humanreaper_failed:
+    suicide_music_reaper:
+      action: stop
+    suicide_music_platforms:
+      action: play
+
+sound_pools:
+  suicide_music_platforms:
+    type: sequence
+    track: music
+    sounds: suicide_music_3b, suicide_music_3a
+    fade_out: 2s
 
 sounds:
   suicide_music_base:
     file: mus_endgm1_attackplan.ogg
     track: music
+  suicide_music_intro:
+    file: mus_endgm2_speech_conv_b.ogg
+    track: music
+    markers:
+      - time: 37s
+        events: play_suicide_music_platforms
+  suicide_music_3a:
+    file: mus_endgm2_combat_3a.ogg
+    track: music
+    start_at: 3s
+    fade_in: 500ms
+  suicide_music_3b:
+    file: mus_endgm2_combat_3b.ogg
+    track: music
+    start_at: 7s
+    fade_in: 2s
+  suicide_music_reaper:
+    file: mus_endgm2_reaperdeath.ogg
+    track: music
+    fade_out: 1s
   # Death
   squadmate_thane_killed_inf:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
@@ -177,6 +226,9 @@ variable_player:
     suicide_continuing:
       action: set
       int: 0
+    reaper_hp:
+      action: set
+      int: 10000
   kill_specialist:
     suicide_continuing:
       action: set

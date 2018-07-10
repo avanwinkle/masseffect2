@@ -42,6 +42,7 @@ event_player:
     kill_squadmate:
       squadmate: random
   squadmate_killed: longwalk_failed
+  logicblock_swarmpaths_complete: longwalk_complete
 
 counters:
   swarmpaths:

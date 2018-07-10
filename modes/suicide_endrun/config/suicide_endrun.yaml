@@ -4,3 +4,14 @@ mode:
   stop_events: ball_will_end, endrun_complete
   priority: 300
 
+
+sounds:
+  endrun_music:
+    file: mus_endgm2_endrun_alive.ogg
+    track: music
+  endrun_success_music:
+    file: mus_endgm2_endrunsuccess.ogg
+    track: music
+  endrun_explosion_music:
+    file: mus_endgm2_endexplosion.ogg
+    track: music
