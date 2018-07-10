@@ -5,6 +5,7 @@ import re
 import os, sys
 import shutil
 import logging
+import tempfile, pickle
 from datetime import datetime
 
 configProcessor = ConfigProcessor(ConfigValidator(None))
@@ -16,11 +17,26 @@ class SoundManager():
     self.source_media = None
     self.source_path = None
     self._analysis = None
+    self.cache_file_name = "mesound_cache"
 
     self.log = logging.getLogger()
     self.log.addHandler(logging.StreamHandler(sys.stdout))
     self.log.setLevel("DEBUG" if verbose else "INFO")
     self._get_source_path()
+
+  def get_cache_path(self):
+    return os.path.join(tempfile.gettempdir(), self.cache_file_name)
+
+  def write_to_cache(self, data):
+    with open(self.get_cache_path(), 'wb') as f:
+      pickle.dump(data, f)
+
+  def clear_cache(self):
+    try:
+      os.remove(self.get_cache_path())
+      self.log.info("Cache file removed")
+    except Exception as e:
+      self.log.warning("Unable to remove cache file: {}".format(e))
 
   def _load_machine_configs(self, refresh=False):
     if refresh or not self.machine_configs:
@@ -28,9 +44,21 @@ class SoundManager():
       self.machine_configs = RequiredSounds()
 
   def _load_source_media(self, refresh=False):
+    self.log.info("  Looking for source media cache...")
+    try:
+      with open(self.get_cache_path(), 'rb') as f:
+        self.source_media = pickle.load(f)
+        stamp = os.path.getmtime(self.get_cache_path())
+        self.log.info("    - cache found! Last modified {}".format(datetime.fromtimestamp(stamp).strftime("%b %d %Y %H:%M:%S")))
+    except Exception as e:
+      self.log.warning("    - Could not load cache file: {}".format(e))
+
     if refresh or not self.source_media:
       self.log.info("  Loading media files from source folder...")
       self.source_media = GameSounds(self.source_path)
+
+      self.log.info("   - creating cache of source media...")
+      self.write_to_cache(self.source_media)
 
   def _load_machine_assets(self, refresh=False):
     if refresh or not self.machine_assets:
@@ -73,6 +101,7 @@ class SoundManager():
     self.source_path = sourcepath
 
   def parse_machine_assets(self, writeMode=False):
+    starttime = datetime.now()
     self.log.info("\nMPF Sound Asset Manager [{}]".format("WRITE MODE" if writeMode else "READ-ONLY"))
     self.log.info("----------------------------------------------------")
     self.log.info("Parsing machine configs, assets, and source media:")
@@ -159,7 +188,8 @@ class SoundManager():
       self.log.info(" - {} files missing and unavailable:".format(len(self._analysis['unavailable'])))
       for filename in self._analysis['unavailable']:
         self.log.info("    : {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
-    self.log.info("\n")
+    endtime = datetime.now()
+    self.log.info("\nOperation took {} seconds".format((endtime - starttime).total_seconds()))
 
   def cleanup_machine_assets(self, writeMode=False):
     if not self._analysis:
@@ -380,6 +410,8 @@ MPF Sound Asset Manager
 
   4. Refresh configs and files
 
+  5. Clear cached media source tree
+
   0. Exit this program
 """.format(os.getcwd(), soundManager.source_path))
     selection = input(">> ")
@@ -390,6 +422,8 @@ MPF Sound Asset Manager
       soundManager.set_source_path()
     elif selection == "4":
       soundManager.refresh()
+    elif selection == "5":
+      soundManager.clear_cache()
     elif selection == "0" or not selection:
       running = False
 
@@ -417,6 +451,9 @@ def main():
     elif args[0] == "copy":
       soundManager.cleanup_machine_assets(writeMode=writeMode)
       return
+    elif args[0] == "clear":
+      soundManager.clear_cache()
+      return
 
 
   print("""
@@ -438,6 +475,8 @@ Options:
 
   prune - Remove all audio files from mode folders not referenced in config files
           and move any misplaced audio files to the correct mode folder
+
+  clear - Clear cached directory trees (for use when source media files change)
 
 Params:
   path_to_sounds - Path to the folder containing all the source audio files
