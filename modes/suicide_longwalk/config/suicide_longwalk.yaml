@@ -211,8 +211,14 @@ shows:
 
 light_player:
   mode_suicide_longwalk_started:
-    gi:
+    l_gi_left_playfield:
       color: off
+      fade: 1s
+    l_gi_lower_playfield:
+      color: off
+      fade: 1s
+    l_gi_upper:
+      color: 333333
       fade: 1s
 
 sound_player:

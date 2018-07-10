@@ -33,11 +33,12 @@ class MissionSelect(Carousel):
 
   def _build_items_list(self):
     player = self.machine.game.player
+    self._intro = "intro"
+
     # If Collector Ship is available, it is the only option
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
 
-    self._intro = "intro"
     self._mates = SquadmateStatus.all_mates()
     items = [self._intro]
 

@@ -66,7 +66,7 @@ sound_player:
     suicide_music_base:
       action: stop
       fade_out: 2s
-  suicidemission_ended:
+  mode_suicide_base_will_stop:
     suicide_music_base:
       action: stop
       fade_out: 2s
@@ -167,7 +167,7 @@ show_player:
   mode_suicide_base_started:
     missions_available_show:
       action: stop
-  suicidemission_ended:
+  mode_suicide_base_will_stop:
     missions_available_show:
       action: stop
 

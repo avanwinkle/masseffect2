@@ -85,14 +85,17 @@ achievements:
     complete_events: infiltration_complete
   longwalk:
     enable_events: infiltration_complete
+    start_events: mode_suicide_longwalk_started
     disable_events: suicidemission_failed
     complete_events: longwalk_complete
   humanreaper:
     enable_events: longwalk_complete
+    start_events: mode_suicide_humanreaper_started
     disable_events: suicidemission_failed
     complete_events: humanreaper_complete
   endrun:
     enable_events: humanreaper_complete
+    start_events: mode_suicide_endrun_started
     disable_events: suicidemission_failed
     complete_events: endrun_complete
 
@@ -172,6 +175,9 @@ ball_saves:
 variable_player:
   levelup:
     level: 1
+  # Track the squadmates recruited _this game_, not ones imported from saves
+  player_squadmates_count{change==1}:
+    recruited_squadmates_count: 1
   # Use achievements to track available missions
   # TODO: Use a common wizard-type class to set availability
   achievement_collectorship_state_enabled:

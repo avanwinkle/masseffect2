@@ -196,14 +196,20 @@ sound_player:
       start_at: 34s
     specialist_inf_warning_high:
       action: play
-  play_specialist_inf_warning_first: specialist_inf_warning_first
-  play_specialist_inf_warning_med: specialist_inf_warning_med
+  play_specialist_inf_warning_first:
+    specialist_inf_warning_first:
+      mode_end_action: stop
+  play_specialist_inf_warning_med:
+    specialist_inf_warning_med:
+      mode_end_action: stop
   play_specialist_inf_advance:
     specialist_inf_advance:
       events_when_stopped: advance_complete
+      mode_end_action: stop
   play_specialist_inf_close:
     specialist_inf_close:
       events_when_stopped: advance_complete
+      mode_end_action: stop
   # If we were already low-tension, no need to restart the music
   player_tension{value==0 and change<0}:
     infiltration_low:
@@ -213,16 +219,6 @@ sound_player:
       action: stop
     infiltration_high:
       action: stop
-    specialist_inf_warning_first:
-      action: stop
-      fade_out: 100ms
-    specialist_inf_warning_med:
-      action: stop
-      fade_out: 100ms
-    specialist_inf_warning_high:
-      action: stop
-      fade_out: 100ms
-  kill_squadmate:
     specialist_inf_warning_first:
       action: stop
       fade_out: 100ms

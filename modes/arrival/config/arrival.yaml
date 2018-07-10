@@ -39,6 +39,7 @@ mode:
 counters:
   arrival_phase:
     starting_count: 1 # Start at phase one, even though it's zero
+    reset_events: mode_arrival_started
     count_events: start_arrival_phase2, start_arrival_phase3, start_arrival_phase4, start_arrival_phase5
 
 multiballs:
@@ -250,6 +251,7 @@ shots:
     enable_events: start_arrival_phase4
     advance_events: start_arrival_phase5
     disable_events: start_arrival_finale
+    reset_events: mode_arrival_started
     show_tokens:
       leds: l_left_ramp_shield_rgb
 

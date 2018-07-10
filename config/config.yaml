@@ -210,6 +210,9 @@ player_vars:
     value_type: str
   squadmates_count:
     initial_value: 2
+  # squadmates_count is saved, recruited_squadmates_count resets each game
+  recruited_squadmates_count:
+    initial_value: 0
   status_garrus:
     initial_value: 0
   status_grunt:

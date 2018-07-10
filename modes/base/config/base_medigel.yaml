@@ -15,7 +15,8 @@ shots:
   # This shot is hit when medigel light shot is hit and no other saves are enabled
   medigel_save_shot:
     # Don't save during default or recruit saves, or we'll get two balls!
-    hit_events: medigel_shot_hit{not device.ball_saves["default"].enabled and not device.ball_saves["recruitsave"].enabled}
+    # Why don't these events work?
+    hit_events: medigel_shot_hit{device.ball_saves["default"].enabled!=True and device.ball_saves["recruitsave"].enabled!=True}
     enable_events: player_shot_medigel_shot_enabled
     disable_events: medigel_save_shot_hit
 

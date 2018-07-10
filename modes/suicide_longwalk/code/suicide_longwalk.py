@@ -5,7 +5,7 @@ from scriptlets.me_squadmates import SquadmateStatus
 
 PATHSHOTS = ["dropbank", "left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "hitbank"]
 SHOTS_TO_COMPLETE = 7 # This value must match the swarmpaths counter starting_count value!
-RANDOMCHANCE = 0.9 # Percent chance that an available double shot will come up
+RANDOMCHANCE = 0.7 # Percent chance that an available double shot will come up
 
 class LongWalk(Mode):
 

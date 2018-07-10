@@ -6,7 +6,7 @@ mode_settings:
     - event: bonus_level
       score: 600 * (current_player.level - 1)
     - event: bonus_squadmates
-      score: 1200 * (current_player.squadmates_count - 2)
+      score: 1200 * (current_player.recruited_squadmates_count)
     - event: bonus_credits
       score: (current_player.credits * 0.25)
     - event: bonus_minerals
@@ -52,7 +52,7 @@ slides:
       style: bonus_score_style
   bonus_squadmates_slide:
     - type: text
-      text: "(player|squadmates_count) Squadmates"
+      text: "(player|recruited_squadmates_count) New Squadmates"
       style: bonus_title_style
     - type: text
       text: (score)
