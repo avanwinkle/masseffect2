@@ -264,6 +264,8 @@ switches:
     number: 9-2
   s_lock_3:
     number: 9-3
+  s_tenpoints:
+    number: 9-12
 
 lights:
   l_null:
