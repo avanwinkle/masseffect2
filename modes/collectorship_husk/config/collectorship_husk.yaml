@@ -13,6 +13,7 @@
 mode:
   start_events: start_mode_collectorship_husk
   stop_events: stop_mode_collectorship_husk
+  events_when_started: stop_harbinger
   priority: 500
 
 event_player:

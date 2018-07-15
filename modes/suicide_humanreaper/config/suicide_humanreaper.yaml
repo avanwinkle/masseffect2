@@ -2,7 +2,7 @@
 mode:
   start_events: achievement_humanreaper_state_started
   stop_events: ball_will_end, humanreaper_complete, humanreaper_failed
-  events_when_started: restart_reaper
+  events_when_started: restart_reaper, stop_harbinger
   priority: 300
 
 event_player:
@@ -109,7 +109,7 @@ shots:
       leds: l_kickback_shield_rgb
       arrow: l_kickback_arrow_red
     tags: envshot_kickback
-  
+
 shot_profiles:
   reaper_profile:
     show_when_disabled: false
@@ -163,7 +163,7 @@ shows:
         (arrow): on
     - time: 1s
       lights:
-        (leds): 
+        (leds):
           color: FF0000
           fade: 16s
         (arrow): on

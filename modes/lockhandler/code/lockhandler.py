@@ -118,6 +118,7 @@ class LockHandler(Mode):
     if self.machine.modes.suicide_base.active:
       # If the suicide mission wants to hold the ball for picking a specialist, allow it to handle
       if self.machine.modes.suicide_infiltration.active:
+        self.log.info("INFILTRATION: valves state is: {}".format(self.machine.game.player["valves_state"]))
         # counters = self.machine.device_manager.get_monitorable_devices().get("counters")
         if self.machine.game.player["valves_state"].value <= 1:
           self.log.info(" - Infiltration complete, need a specialist for long walk, lockhandler starting mission select")
