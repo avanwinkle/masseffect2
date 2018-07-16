@@ -78,24 +78,6 @@ variable_player:
   mode_recruitsamara_will_stop:
     score: current_player.temp_build_value
 
-shot_profiles:
-  samara_shot_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: flash_color_show
-        sync_ms: 1000
-        speed: 4
-  samara_target_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: flash
-        sync_ms: 1000
-        speed: 4
-      - name: hit
-        show: off
-
 shot_groups:
   samara_targets:
     shots: samara_target1, samara_target2, samara_target3, samara_target4, samara_target5
@@ -107,7 +89,7 @@ shots:
     hit_events: sh_left_orbit_hit
     enable_events: samara_target1_lit_hit
     disable_events: samara_left_orbit_hit
-    profile: samara_shot_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: 008899 #color_samara
@@ -115,7 +97,7 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
     disable_events: samara_left_ramp_hit
-    profile: samara_shot_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: 008899 #color_samara
@@ -123,7 +105,7 @@ shots:
     hit_events: sh_right_orbit_hit
     enable_events: samara_target5_lit_hit
     disable_events: samara_right_orbit_hit
-    profile: samara_shot_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: 008899 #color_samara
@@ -131,7 +113,7 @@ shots:
     hit_events: sh_right_ramp_hit
     enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
     disable_events: samara_right_ramp_hit
-    profile: samara_shot_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: 008899 #color_samara
@@ -139,35 +121,40 @@ shots:
     hit_events: sh_kickback_hit
     enable_events: samara_target1_lit_hit, samara_target2_lit_hit
     disable_events: samara_kickback_hit
-    profile: samara_shot_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_kickback_shield_rgb
       color: 008899 #color_samara
   samara_target1:
     switch: s_target1
-    profile: samara_target_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_standup_1
+      color: FFFFFF
   samara_target2:
     switch: s_target2
-    profile: samara_target_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_standup_2
+      color: FFFFFF
   samara_target3:
     switch: s_target3
-    profile: samara_target_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_standup_3
+      color: FFFFFF
   samara_target4:
     switch: s_target4
-    profile: samara_target_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_standup_4
+      color: FFFFFF
   samara_target5:
     switch: s_target5
-    profile: samara_target_profile
+    profile: color_flashing_profile
     show_tokens:
       leds: l_standup_5
+      color: FFFFFF
 
 slide_player:
   mode_recruitsamara_started:

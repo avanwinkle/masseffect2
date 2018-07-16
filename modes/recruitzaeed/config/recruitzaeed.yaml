@@ -96,16 +96,16 @@ variable_player:
 shot_profiles:
   zaeed_kickshot_profile:
     show_when_disabled: false
-    show: zaeed_show
+    show: color_flashing_fast
     states:
       - name: lit
   zaeed_orbit_profile:
     show_when_disabled: false
     states:
       - name: reputation
-        show: flash_color_show
+        show: color_alternating_default
       - name: lit
-        show: zaeed_show
+        show: color_flashing_default
 
 shot_groups:
   zaeed_orbitshots:
@@ -116,18 +116,20 @@ shots:
   zaeed_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: zaeed_orbit_profile
-    advance_events: zaeed_right_orbit_zaeed_orbit_profile_reputation_hit
+    advance_events: zaeed_right_orbit_reputation_hit
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: 1166ff #color_paragon
+      color1: FF7700 #color_zaeed
+      color2: 1166ff #color_paragon
     tags: envshot_left_orbit
   zaeed_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: zaeed_orbit_profile
-    advance_events: zaeed_left_orbit_zaeed_orbit_profile_reputation_hit
+    advance_events: zaeed_left_orbit_reputation_hit
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: 660000 #color_renegade
+      color1: FF7700 #color_zaeed
+      color2: 660000 #color_renegade
     tags: envshot_right_orbit
   zaeed_kickshot:
     hit_events: sh_kickback_hit

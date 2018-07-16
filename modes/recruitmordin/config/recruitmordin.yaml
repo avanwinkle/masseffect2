@@ -29,12 +29,13 @@ event_player:
     - play_intro_sound{device.counters.fans_counter.value==0}
     - play_cure_sound{device.counters.fans_counter.value>0}
   spinner_hit: enable_cure
-  cure_shot_flashing_hit:
+  cure_shot_lit_hit:
     - enable_fans
     - play_cure_sound
   fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
+  # The counter lets us play the correct sound for each fan hit
   fans_counter:
     count_events: fan_left_lit_hit, fan_right_lit_hit
 
@@ -80,82 +81,48 @@ shot_profiles:
     # Spinner disables temporarily during orbits, but keep the show alive
     show_when_disabled: true
     states:
-      - name: flashing
-        show: spinner_flash_show
-        speed: 2
       - name: lit
-        show: spinner_lit_show
-  cureprofile:
-    show_when_disabled: false
-    states:
-      - name: flashing
-        show: spinner_flash_show
-        speed: 2
-      - name: lit
-        show: spinner_lit_show
-  fanprofile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: fan_lit_show
-        speed: 2
+        show: color_flashing_default
+        sync_ms: 1000
       - name: hit
-        show: fan_hit_show
+        show: led_color
 
 shots:
   spinner:
     hit_events: sh_spinner_hit
-    profile: spinnerprofile
     enable_events: mode_recruitmordin_started, enable_orbitswitches
     # Don't let a ball save plunge count as a hit to the spinner
     disable_events: fullorbit_fromplunger_hit
+    profile: spinnerprofile
     show_tokens:
       leds: l_left_orbit_shield_rgb
+      color: 440000 #color_mordin
   cure:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
-    profile: cureprofile
     enable_events: spinner_hit
+    profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
+      color: 440000 #color_mordin
     tags: envshot_right_orbit
   fan_left:
     hit_events: sh_left_ramp_hit
-    profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
+    profile: color_flashing_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_left_ramp
   fan_right:
     hit_events: sh_right_ramp_hit
-    profile: fanprofile
     reset_events: mode_recruitmordin_started
     enable_events: enable_fans
+    profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_right_ramp
-
-shows:
-  spinner_flash_show:
-    - time: 0
-      lights:
-        (leds): 440000 #color_mordin
-    - time: +1
-      lights:
-        (leds): black
-  spinner_lit_show:
-    - lights:
-        (leds): 440000 #color_mordin
-  fan_lit_show:
-    - time: 0
-      lights:
-        (leds): 55FF00 #color_door_green
-    - time: +1
-      lights:
-        (leds): black
-  fan_hit_show:
-    - lights:
-        (leds): black
 
 sound_player:
   mode_recruitmordin_started:

@@ -278,24 +278,24 @@ show_player:
 
 shows:
   arrival_lane_show_one:
-    - duration: 1200ms
+    - duration: 600ms
       lights:
         (leds): FFFFFF
-    - duration: 1200ms
+    - duration: 600ms
       lights:
         (leds): 000000
   arrival_lane_show_two:
-    - duration: 600ms
+    - duration: 300ms
       lights:
-        (leds): BBBBFF
-    - duration: 600ms
+        (leds): 9999FF
+    - duration: 300ms
       lights:
         (leds): 000000
   arrival_lane_show_three:
-    - duration: 300ms
+    - duration: 150ms
       lights:
-        (leds): 8888FF
-    - duration: 300ms
+        (leds): 4444FF
+    - duration: 150ms
       lights:
         (leds): 000000
   arrival_escape_charging_show:

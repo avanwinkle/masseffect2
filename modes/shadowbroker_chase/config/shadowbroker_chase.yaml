@@ -103,6 +103,7 @@ shots:
     tags: envshot_left_ramp
   sbchase_left_orbit:
     advance_events: mode_shadowbroker_chase_started{current_player.sbchase_hits_remaining==5}
+    reset_events: mode_shadowbroker_chase_started{current_player.sbchase_hits_remaining<5}
     hit_events: sh_left_orbit_hit
     profile: chaseprofile
     show_tokens:
