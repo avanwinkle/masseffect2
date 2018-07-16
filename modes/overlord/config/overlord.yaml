@@ -139,6 +139,7 @@ shots:
     switches: s_hitbank_top, s_hitbank_bottom
     enable_events: enable_jackpotshot
     disable_events: disable_jackpotshot, jackpotshot_hit
+    reset_events: mode_overlord_started
     profile: overlord_jackpot_profile
     tags: envshot_hitbank
   hackshot_left_orbit:

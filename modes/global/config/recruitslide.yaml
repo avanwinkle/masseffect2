@@ -36,13 +36,13 @@ event_player:
       missionname: "Storm the Refinery"
 
 slide_player:
-  recruit_advance{status==1}:
+  recruit_advance.1{status==1}:
     recruiting_advance_slide_2:
       expire: 1s
-  recruit_advance{status==2}:
+  recruit_advance.2{status==2}:
     recruiting_advance_slide_1:
       expire: 1s
-  recruit_advance{status==3}:
+  recruit_advance.3{status==3}:
     recruiting_advance_slide_lit:
       expire: 2s
   missionselect_recruitmission_selected:

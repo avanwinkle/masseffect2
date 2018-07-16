@@ -137,10 +137,10 @@ shows:
   geth_target_show:
     - time: 0
       lights:
-        target_lights: white
+        l_targets: white
     - time: '+1'
       lights:
-        target_lights: black
+        l_targets: black
 
 slide_player:
   mode_recruittali_started:

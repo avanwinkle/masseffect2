@@ -264,8 +264,6 @@ switches:
     number: 9-2
   s_lock_3:
     number: 9-3
-  s_tenpoints:
-    number: 9-12
 
 lights:
   l_null:
@@ -444,19 +442,19 @@ lights:
     tags: color_shields, color_shield_green
   l_standup_1: # Standup 1 [#44]
     number: 9-37
-    tags: target_lights
+    tags: l_targets
   l_standup_2: # Standup 2 [#52]
     number: 9-38
-    tags: target_lights
+    tags: l_targets
   l_standup_3: # Standup 3 [#59]
     number: 10-28
-    tags: target_lights
+    tags: l_targets
   l_standup_4: # Standup 4 [#64]
     number: 9-16
-    tags: target_lights
+    tags: l_targets
   l_standup_5: # Standup 5 [#70]
     number: 9-19
-    tags: target_lights
+    tags: l_targets
   l_start_button: # Start Button [#2]
     number: 1-2
   # l_tournament_start: # Tournament Start [#3]
@@ -562,13 +560,13 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
-    default_pulse_ms: 20
+    default_pulse_ms: 17
   c_bumper_right:
     number: 10-2
-    default_pulse_ms: 20
+    default_pulse_ms: 17
   c_bumper_bottom:
     number: 10-3
-    default_pulse_ms: 20
+    default_pulse_ms: 17
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 12

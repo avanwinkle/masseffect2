@@ -41,7 +41,7 @@
       fade: 258ms
 - duration: 510ms
   lights:
-    target_lights: on
+    l_targets: on
     l_multipliers: on
     l_pop_bumpers:
       color: black
@@ -58,7 +58,7 @@
     l_flash_throne: 120ms
 - duration: 258ms
   lights:
-    target_lights:
+    l_targets:
       color: black
       fade: 258ms
     l_multipliers:

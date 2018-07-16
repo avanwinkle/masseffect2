@@ -125,13 +125,13 @@ shows:
         l_dropbank_top: white
 
 sound_player:
-  logicblock_sbdrops_counter_hit{count==1}: shepard_sounds_like_liara_found_something_big
-  logicblock_sbdrops_counter_hit{count==2}: vasir_i_know_where_the_trade_center_is
-  logicblock_sbdrops_counter_hit{count==3}: vasir_they_took_out_three_floors
+  logicblock_sbdrops_counter_hit.1{count==1}: shepard_sounds_like_liara_found_something_big
+  logicblock_sbdrops_counter_hit.2{count==2}: vasir_i_know_where_the_trade_center_is
+  logicblock_sbdrops_counter_hit.3{count==3}: vasir_they_took_out_three_floors
   achievement_vasir_state_completed: liara_shepard_im_glad_youre_here
-  logicblock_sbdrops_counter_hit{count==4}: liara_sukets_datapad_this_has_what_we_need
-  logicblock_sbdrops_counter_hit{count==5}: liara_we_can_be_at_base_in_a_few_hours
-  logicblock_sbdrops_counter_hit{count==6}: liara_land_outside_and_hunt_for_a_hatch
+  logicblock_sbdrops_counter_hit.4{count==4}: liara_sukets_datapad_this_has_what_we_need
+  logicblock_sbdrops_counter_hit.5{count==5}: liara_we_can_be_at_base_in_a_few_hours
+  logicblock_sbdrops_counter_hit.6{count==6}: liara_land_outside_and_hunt_for_a_hatch
   # Relays
   play_shepard_ill_start_down_here: shepard_ill_start_down_here
 

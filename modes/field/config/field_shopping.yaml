@@ -103,10 +103,10 @@ shows:
   storetargets_flash:
     - time: 0
       lights:
-        target_lights: white
+        l_targets: white
     - time: '+1'
       lights:
-        target_lights: black
+        l_targets: black
   storetarget_hit:
     - lights:
         (led): white

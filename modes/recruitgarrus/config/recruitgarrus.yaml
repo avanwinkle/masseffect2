@@ -32,9 +32,9 @@ counters:
     starting_count: 0
     count_complete_value: 3
     count_events:
-      - center_door_door_shot_profile_lit_hit
-      - left_door_door_shot_profile_lit_hit
-      - right_door_door_shot_profile_lit_hit
+      - center_door_lit_hit
+      - left_door_lit_hit
+      - right_door_lit_hit
     events_when_hit: door_closed
     direction: up
     disable_on_complete: true
@@ -78,60 +78,36 @@ shot_groups:
     shots: stairs
     reset_events: mode_recruitgarrus_started
 
-shot_profiles:
-  door_shot_profile:
-    states:
-      - name: lit
-        show: door_shot_show
-      - name: hit
-        show: off
-  upstairs_shot_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: door_shot_show
-      - name: hit
-        show: on
-
 shots:
   center_door:
     hit_events: sh_kickback_hit
-    profile: door_shot_profile
+    profile: color_flashing_profile
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_kickback
   left_door:
     hit_events: sh_left_orbit_hit
-    profile: door_shot_profile
+    profile: color_flashing_profile
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_left_orbit
   right_door:
     hit_events: sh_right_orbit_hit
-    profile: door_shot_profile
+    profile: color_flashing_profile
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_right_orbit
   stairs:
     hit_events: sh_right_ramp_hit
-    profile: upstairs_shot_profile
+    profile: color_flashing_profile
     enable_events: close_doors_hit_complete
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
+      color: 55FF00 #color_door_green
     tags: envshot_right_ramp
-
-shows:
-  door_shot_show:
-    - duration: 500ms
-      lights:
-        (led):
-          color: 55FF00 #color_door_green
-          fade: 200ms
-    - duration: 500ms
-      lights:
-        (led):
-          color: black
-          fade: 200ms
 
 slide_player:
   mode_recruitgarrus_started:

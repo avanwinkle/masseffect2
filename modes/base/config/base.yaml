@@ -8,6 +8,7 @@ config:
   - base_debug.yaml
   - base_endsounds.yaml
   - base_medigel.yaml
+  - base_shows.yaml
 
 achievements:
   # SHADOW BROKER
