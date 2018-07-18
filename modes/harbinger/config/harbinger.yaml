@@ -49,7 +49,7 @@ timers:
         action: restart
       - event: stop_harbinger
         action: stop
-      - event: play_harbinger
+      - event: start_harbinger
         action: restart
 
 variable_player:
@@ -74,7 +74,7 @@ variable_player:
     harbinger_running:
       action: set
       int: 0
-  play_harbinger:
+  start_harbinger:
     harbinger_running:
       action: set
       int: 1

@@ -106,7 +106,7 @@ shots:
       leds: l_hitbank_shield_rgb
   platform_targets:
     hit_events: sw_standuptarget_active
-    profile: default
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_targets
 

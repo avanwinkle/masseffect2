@@ -26,7 +26,7 @@ event_player:
     - enable_fmball_lock
   # We don't start the multiball during a mission, so hide the show...
   # ... if a mission starts and 2 balls are locked
-  mode_type_mission_started{device.multiball_locks.fmball_lock.locked_balls==2}.2: hide_fmball_lock_show
+  mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
   # ... or if ball 2 is locked during a mission
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
   # Only play the "lock is lit" sound if mode.field is active
@@ -128,11 +128,11 @@ slide_player:
     overlord_lock_is_lit_slide:
       expire: 2s
       priority: 1200 # Minerals run at priority ~900
-  lockhandler_overlord_ball_will_lock.1:
+  lockhandler_overlord_ball_will_lock:
     overlord_ball_locked_slide:
       expire: 3s
       priority: 1600 # Enough to beat recruit timer?:
-  lockhandler_overlord_ball_will_lock.2{total_balls_locked==3}:
+  lockhandler_overlord_ball_will_lock{total_balls_locked==3}:
     overlord_full_slide:
       expire: 6s
       priority: 1599 # Just below the "ball 3 locked" slide but 3s longer
@@ -141,11 +141,11 @@ slide_player:
     arrival_lock_is_lit_slide:
       expire: 2s
       priority: 1200 # Minerals run at priority ~900
-  lockhandler_arrival_ball_will_lock.1:
+  lockhandler_arrival_ball_will_lock:
     arrival_ball_locked_slide:
       expire: 4s
       priority: 1600
-  lockhandler_arrival_ball_will_lock.2{total_balls_locked==3}:
+  lockhandler_arrival_ball_will_lock{total_balls_locked==3}:
     arrival_full_slide:
       expire: 8s
       priority: 1599 # Just below the "ball 3 locked" slide but 3s longer

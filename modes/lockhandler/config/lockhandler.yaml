@@ -25,7 +25,7 @@ event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
 
 queue_relay_player:
-  balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active}:
+  balldevice_bd_lock_ball_eject_attempt{mode.missionselect.active or mode.suicide_infiltration.stopping}:
     post: blocking_balldevice_bd_lock_ball_eject_attempt
     wait_for: mode_missionselect_will_stop
   balldevice_bd_trough_ball_eject_attempt{mode.missionselect.active}:

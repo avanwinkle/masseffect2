@@ -28,7 +28,7 @@ event_player:
     - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed"}
   # Progression
   omegarelay_complete: start_mode_missionselect
-  infiltration_complete: start_mode_missionselect
+  achievement_infiltration_state_completed: start_mode_missionselect  # Use the achievement state because that's what mission select checks
   longwalk_complete: start_mode_suicide_platforms
   platforms_complete: start_mode_suicide_humanreaper
   # reaper goes back to platforms when it "fails"
@@ -101,6 +101,8 @@ sound_player:
     suicide_music_base:
       action: stop
       fade_out: 2s
+  # Play the final valve sound here so we can stop the infiltration mode immediately
+  infiltration_complete: specialist_inf_through
   # Handle the transition between platform/reaper phases for seamlessness
   # Start by playing the intro track when the long walk is completed
   longwalk_complete: suicide_music_intro
@@ -127,6 +129,17 @@ sound_pools:
     track: music
     sounds: suicide_music_3b, suicide_music_3a
     fade_out: 2s
+  specialist_inf_through:
+    track: voice
+    sounds:
+      - specialist_garrus_im_through_opening_doors_now{current_player.specialist=="garrus"}
+      - specialist_jacob_im_through_opening_doors_now{current_player.specialist=="jacob"}
+      - specialist_legion_im_through_opening_doors_now{current_player.specialist=="legion"}
+      - specialist_kasumi_im_through_opening_doors_now{current_player.specialist=="kasumi"}
+      - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
+      - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
+      - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
+
 
 sounds:
   suicide_music_base:
@@ -232,6 +245,29 @@ sounds:
   squadmate_miranda_killed_callback_shepard_lw:
     file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
     track: voice
+  # Infiltration specialist complete
+  specialist_thane_im_through_opening_doors_now:
+    file: en_us_hench_assassin_endgm2_gutterrunner_a_00258899_m.ogg
+    track: voice
+  specialist_garrus_im_through_opening_doors_now:
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.ogg
+      track: voice
+  specialist_legion_im_through_opening_doors_now:
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.ogg
+      track: voice
+  specialist_jacob_im_through_opening_doors_now:
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
+      track: voice
+  specialist_mordin_im_through_opening_doors_now:
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.ogg
+      track: voice
+  specialist_tali_im_through_opening_doors_now:
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.ogg
+      track: voice
+  specialist_kasumi_im_through_opening_doors_now:
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.ogg
+      track: voice
+
 
 show_player:
   # Light the missions arrow to select a specialist after one died

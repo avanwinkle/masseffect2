@@ -14,10 +14,8 @@ widget_player:
   # First event, before additional players have a chance to enter
   game_started:
     base_level_widget:
-      action: add
       slide: singleplayer_slide
     base_ball_widget:
-      action: add
       slide: singleplayer_slide
   # Player 2 has entered the game, add widgets for player1 and player2
   player_added.1{num==2}:

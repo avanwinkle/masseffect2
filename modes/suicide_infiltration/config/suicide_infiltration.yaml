@@ -35,6 +35,7 @@ event_player:
   logicblock_valves_hit:
     - play_specialist_inf_advance{count>1}
     - play_specialist_inf_close{count==1}
+  logicblock_valves_complete: infiltration_complete
   squadmate_killed: infiltration_failed
 
 multiballs:
@@ -179,9 +180,6 @@ sound_player:
   mode_suicide_infiltration_started:
     infiltration_low:
       action: play
-  logicblock_valves_complete:
-    specialist_inf_through:
-      events_when_stopped: infiltration_complete
   player_tension{value==1}:
     infiltration_low:
       action: stop
@@ -230,16 +228,6 @@ sound_player:
       fade_out: 100ms
 
 sound_pools:
-  specialist_inf_through:
-    track: voice
-    sounds:
-      - specialist_garrus_im_through_opening_doors_now{current_player.specialist=="garrus"}
-      - specialist_jacob_im_through_opening_doors_now{current_player.specialist=="jacob"}
-      - specialist_legion_im_through_opening_doors_now{current_player.specialist=="legion"}
-      - specialist_kasumi_im_through_opening_doors_now{current_player.specialist=="kasumi"}
-      - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
-      - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
-      - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
   specialist_inf_close:
     track: voice
     type: random_force_all
@@ -423,9 +411,6 @@ sounds:
   specialist_thane_hurry_shepard_its_heating_up:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00258892_m.ogg
     track: voice
-  specialist_thane_im_through_opening_doors_now:
-    file: en_us_hench_assassin_endgm2_gutterrunner_a_00258899_m.ogg
-    track: voice
   specialist_thane_being_cooked_alive:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00318060_m.ogg
     track: voice
@@ -473,9 +458,6 @@ sounds:
     track: voice
   specialist_garrus_hurry_shepard_its_heating_up:
     file: en_us_hench_garrus_endgm2_gutterrunner_a_00258891_m.ogg
-    track: voice
-  specialist_garrus_im_through_opening_doors_now:
-    file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.ogg
     track: voice
   specialist_garrus_being_cooked_alive:
     file: en_us_hench_garrus_endgm2_gutterrunner_a_00318059_m.ogg
@@ -525,9 +507,6 @@ sounds:
   specialist_legion_hurry_shepard_its_heating_up:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00258889_m.ogg
     track: voice
-  specialist_legion_im_through_opening_doors_now:
-    file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.ogg
-    track: voice
   specialist_legion_being_cooked_alive:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00318057_m.ogg
     track: voice
@@ -572,9 +551,6 @@ sounds:
     track: voice
   specialist_jacob_hurry_shepard_its_heating_up:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258888_m.ogg
-    track: voice
-  specialist_jacob_im_through_opening_doors_now:
-    file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
     track: voice
   specialist_jacob_blocked_again:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00258902_m.ogg
@@ -627,9 +603,6 @@ sounds:
   specialist_mordin_hurry_shepard_its_heating_up:
     file: en_us_hench_professor_endgm2_gutterrunner_a_00258894_m.ogg
     track: voice
-  specialist_mordin_im_through_opening_doors_now:
-    file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.ogg
-    track: voice
   specialist_mordin_being_cooked_alive:
     file: en_us_hench_professor_endgm2_gutterrunner_a_00318062_m.ogg
     track: voice
@@ -678,9 +651,6 @@ sounds:
   specialist_tali_hurry_shepard_its_heating_up:
     file: en_us_hench_tali_endgm2_gutterrunner_a_00258893_m.ogg
     track: voice
-  specialist_tali_im_through_opening_doors_now:
-    file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.ogg
-    track: voice
   specialist_tali_being_cooked_alive:
     file: en_us_hench_tali_endgm2_gutterrunner_a_00318061_m.ogg
     track: voice
@@ -728,9 +698,6 @@ sounds:
     track: voice
   specialist_kasumi_hurry_shepard_its_heating_up:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00258890_m.ogg
-    track: voice
-  specialist_kasumi_im_through_opening_doors_now:
-    file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.ogg
     track: voice
   specialist_kasumi_being_cooked_alive:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00318058_m.ogg

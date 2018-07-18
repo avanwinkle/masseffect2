@@ -62,5 +62,12 @@ shot_profiles:
     states:
       - name: unlit
         show: off
-      - name: unlit
+      - name: lit
         show: led_color
+  hit_to_off_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_color
+      - name: hit
+        show: off

@@ -124,12 +124,13 @@ class LockHandler(Mode):
           self.log.info(" - Infiltration complete, need a specialist for long walk, lockhandler starting mission select")
           # We want to start missionselect here so that the ball device doesn't eject the ball
           # before the "complete" events propagate down to suicide_base and back up again.
+          # ...except that starts mission select before the achievement change. Let's try waiting,
+          # and changing the lockhandler queue relay to check if suicide_infiltration is active
           do_bypass = False
-          mission_delay = 1000
         else:
           self.log.info(" - Infiltration in progress, player_vars is: {}".format(self.machine.game.player.vars))
           self._bypass_lock()
-        return
+          return
       # If a specialist has died and we need to select another, queue up mission select
       elif (self.player.achievements["infiltration"] == "started" and not self.machine.modes.suicide_infiltration.active) or (self.player.achievements["longwalk"] == "started" and not self.machine.modes.suicide_longwalk.active):
         self.log.info(" - Suicide needs a specialist because infiltration/longwalk failed".format(self.machine.game.player["specialist"]))

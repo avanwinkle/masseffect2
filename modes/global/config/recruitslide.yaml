@@ -101,10 +101,10 @@ slides:
 widget_player:
   set_recruitwidget:
     recruitwidget_mission:
-      action: add
+      action: update
       slide: recruitslide
     recruitwidget_int:
-      action: add
+      action: update
       slide: recruitslide
   update_recruitmission:
     recruitwidget_mission:
@@ -119,7 +119,7 @@ widget_player:
       slide: recruitslide
   timer_recruittimer_started:
     time_remaining_widget:
-      action: add
+      action: update
       slide: recruitslide
   timer_recruittimer_tick:
     time_remaining_widget:

@@ -20,7 +20,7 @@ ball_saves:
 counters:
   # COMBINE sbvasir_counter and sbhagalaz_counter
   sbdrops_counter:
-    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete
+    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
     starting_count: current_player.counter_sbdrops_counter
     count_complete_value: 7
     persist_state: true

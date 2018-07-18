@@ -102,7 +102,7 @@ shots:
   heretic_kickback_shot:
     hit_events: sh_kickback_hit
     enable_events: logicblock_heretic_counter_complete
-    profile: color_flashing_profile
+    profile: color_flashing_fast_profile
     show_tokens:
       leds: l_kickback_shield_rgb
       color: FFFFFF #color_legion
@@ -111,7 +111,7 @@ shots:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     enable_events: enable_heretic_shot_left
     disable_events: heretic_shot_left_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_dropbank_shield_rgb
       color: FFFFFF #color_legion
@@ -120,7 +120,7 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: enable_heretic_shot_center
     disable_events: heretic_shot_center_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: FFFFFF #color_legion
@@ -129,7 +129,7 @@ shots:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     enable_events: enable_heretic_shot_right
     disable_events: heretic_shot_right_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_hitbank_shield_rgb
       color: FFFFFF #color_legion
