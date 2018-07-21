@@ -15,8 +15,9 @@
 
 mode:
   start_events: start_mode_suicide_platforms
-  stop_events: stop_mode_suicide_platforms, platforms_complete
+  stop_events: ball_will_end, stop_mode_suicide_platforms, platforms_complete
   events_when_started: mode_type_suicide_started, start_harbinger, reset_platforms
+  events_when_stopped: stop_harbinger
   priority: 2300
 
 event_player:
@@ -50,7 +51,7 @@ variable_player:
 
 timers:
   platform:
-    start_value: 40
+    start_value: 5
     end_value: 0
     direction: down
     start_running: yes  # TODO: add free-shoot period for combat squadmates
@@ -59,10 +60,9 @@ timers:
         action: add
         value: 4
 
-
 shot_groups:
   platform_targets:
-    shots: platform_dropbank, platform_hitbank, platform_targets
+    shots: platform_dropbank, platform_hitbank, platform_target1, platform_target2, platform_target3, platform_target4, platform_target5
     reset_events: reset_platforms
   platform_shots:
     shots: platform_left_orbit, platform_kickback, platform_left_ramp, platform_right_ramp, platform_right_orbit
@@ -74,41 +74,73 @@ shots:
     profile: platform_shot_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
+      color: FF2200 #color_collectors
   platform_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
+      color: FF2200 #color_collectors
   platform_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
+      color: FF2200 #color_collectors
   platform_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
+      color: FF2200 #color_collectors
   platform_kickback:
     hit_events: sh_kickback_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_kickback_shield_rgb
+      color: FF2200 #color_collectors
   platform_dropbank:
     hit_events: sh_dropbank_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_dropbank_shield_rgb
+      color: FF2200 #color_collectors
   platform_hitbank:
     hit_events: sh_hitbank_hit
     profile: platform_shot_profile
     show_tokens:
       leds: l_hitbank_shield_rgb
-  platform_targets:
+      color: FF2200 #color_collectors
+  platform_target1:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
-      leds: l_targets
+      leds: l_standup_1
+      color: FFFFFF
+  platform_target2:
+    hit_events: sw_standuptarget_active
+    profile: hit_to_off_profile
+    show_tokens:
+      leds: l_standup_2
+      color: FFFFFF
+  platform_target3:
+    hit_events: sw_standuptarget_active
+    profile: hit_to_off_profile
+    show_tokens:
+      leds: l_standup_3
+      color: FFFFFF
+  platform_target4:
+    hit_events: sw_standuptarget_active
+    profile: hit_to_off_profile
+    show_tokens:
+      leds: l_standup_4
+      color: FFFFFF
+  platform_target5:
+    hit_events: sw_standuptarget_active
+    profile: hit_to_off_profile
+    show_tokens:
+      leds: l_standup_5
+      color: FFFFFF
 
 shot_profiles:
   platform_shot_profile:
@@ -117,8 +149,6 @@ shot_profiles:
       - name: lit
         show: flash_color_show
         speed: 2
-        show_tokens:
-          color: FF2200 # color_collectors
       - name: hit
         show: off
 
@@ -129,3 +159,62 @@ show_player:
       speed: 2
       show_tokens:
         leds: l_targets
+        color: FFFFFF
+
+sound_player:
+  mode_suicide_platforms_started: enemies_incoming
+
+sound_pools:
+  enemies_incoming:
+    track: voice
+    sounds:
+      - garrus_enemies_incoming{current_player.status_garrus==4}
+      - grunt_enemies_incoming{current_player.status_grunt==4}
+      - jacob_enemies_incoming{current_player.status_jacob==4}
+      - jack_enemies_incoming{current_player.status_jack==4}
+      - kasumi_enemies_incoming{current_player.status_kasumi==4}
+      - legion_enemies_incoming{current_player.status_legion==4}
+      - miranda_enemies_incoming{current_player.status_miranda==4}
+      - mordin_enemies_incoming{current_player.status_mordin==4}
+      - samara_enemies_incoming{current_player.status_samara==4}
+      - tali_enemies_incoming{current_player.status_tali==4}
+      - thane_enemies_incoming{current_player.status_thane==4}
+      - zaeed_enemies_incoming{current_player.status_zaeed==4}
+
+sounds:
+  garrus_enemies_incoming:
+    file: en_us_hench_garrus_endgm2_boss_fight_a_00286111_m.ogg
+    track: voice
+  grunt_enemies_incoming:
+    file: en_us_hench_grunt_endgm2_boss_fight_a_00286110_m.ogg
+    track: voice
+  jack_enemies_incoming:
+    file: en_us_hench_convict_endgm2_boss_fight_a_00286114_m.ogg
+    track: voice
+  jacob_enemies_incoming:
+    file: en_us_hench_leading_endgm2_boss_fight_a_00286108_m.ogg
+    track: voice
+  kasumi_enemies_incoming:
+    file: en_us_hench_thief_endgm2_boss_fight_a_00286118_m.ogg
+    track: voice
+  legion_enemies_incoming:
+    file: en_us_hench_geth_endgm2_boss_fight_a_00286113_m.ogg
+    track: voice
+  miranda_enemies_incoming:
+    file: en_us_hench_vixen_endgm2_boss_fight_a_00286107_m.ogg
+    track: voice
+  mordin_enemies_incoming:
+    file: en_us_hench_professor_endgm2_boss_fight_a_00286115_m.ogg
+    track: voice
+  samara_enemies_incoming:
+    file: en_us_hench_mystic_endgm2_boss_fight_a_00286109_m.ogg
+    track: voice
+  tali_enemies_incoming:
+    file: en_us_hench_tali_endgm2_boss_fight_a_00286112_m.ogg
+    track: voice
+  thane_enemies_incoming:
+    file: en_us_hench_assassin_endgm2_boss_fight_a_00286116_m.ogg
+    track: voice
+  zaeed_enemies_incoming:
+    file: en_us_hench_veteran_endgm2_boss_fight_a_00286119_m.ogg
+    track: voice

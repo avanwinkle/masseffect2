@@ -31,6 +31,12 @@ shot_profiles:
       - name: lit
         show: color_flashing_default
         sync_ms: 1000
+  color_flashing_fast_static:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: color_flashing_fast
+        sync_ms: 1000
   color_flashing_profile:
     show_when_disabled: false
     states:

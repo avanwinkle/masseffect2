@@ -29,7 +29,7 @@ event_player:
   # Progression
   omegarelay_complete: start_mode_missionselect
   achievement_infiltration_state_completed: start_mode_missionselect  # Use the achievement state because that's what mission select checks
-  longwalk_complete: start_mode_suicide_platforms
+  longwalk_complete: start_mode_suicide_platforms|4s # Delay for the dialog
   platforms_complete: start_mode_suicide_humanreaper
   # reaper goes back to platforms when it "fails"
   humanreaper_failed: start_mode_suicide_platforms
@@ -44,7 +44,7 @@ event_player:
       int: current_player.score
   # We don't end on ball_ending for the queue player, so trigger that here
   # TODO: move all the post-drain queue logic into the custom code and avoid the relay player?
-  ball_ending{not mode.suicide.infltration.active and not mode.suicide_longwalk.active}: suicidemission_ended
+  ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_ended
 
 queue_relay_player:
   # If the ball drains during infiltration or longwalk, kill the specialist too
@@ -67,13 +67,16 @@ variable_player:
     suicide_continuing:
       action: set
       int: 0
+  # Reset the reaper ROUNDS and HP on each ball? or each suicide mission?
+  mode_suicide_longwalk_started:
+    # Maximum rounds to kill the reaper... 4?
+    reaper_rounds:
+      action: set
+      int: 4
     # Human Reaper hit points... 100,000?
     reaper_hp:
       action: set
       int: 100000
-    reaper_rounds:
-      action: set
-      int: 6
   kill_specialist:
     suicide_continuing:
       action: set
@@ -105,21 +108,25 @@ sound_player:
   infiltration_complete: specialist_inf_through
   # Handle the transition between platform/reaper phases for seamlessness
   # Start by playing the intro track when the long walk is completed
-  longwalk_complete: suicide_music_intro
+  longwalk_complete:
+    suicide_music_intro:
+      action: play
+    shep_we_win_or_lose_it_all:
+      action: play
   # Seamlessly blend that one into the 3a
-  start_mode_suicide_platforms:
+  suicide_music_intro_transition:
     suicide_music_3a:
-      start_at: 0s
+      start_at: 2s
   # When it's reaper time, switch to reaper music
   start_mode_suicide_humanreaper:
+    suicide_music_3a:
+      action: stop
+      fade_out: 1s
     suicide_music_platforms:
       action: stop
-    suicide_music_reaper:
-      action: play
+      fade_out: 1s
   # When we move from reaper back to platforms, skip the intro
   humanreaper_failed:
-    suicide_music_reaper:
-      action: stop
     suicide_music_platforms:
       action: play
 
@@ -128,7 +135,7 @@ sound_pools:
     type: sequence
     track: music
     sounds: suicide_music_3b, suicide_music_3a
-    fade_out: 2s
+    fade_out: 1s
   specialist_inf_through:
     track: voice
     sounds:
@@ -140,31 +147,30 @@ sound_pools:
       - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
       - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
 
-
 sounds:
   suicide_music_base:
     file: mus_endgm1_attackplan.ogg
     track: music
+    mode_end_action: stop
   suicide_music_intro:
     file: mus_endgm2_speech_conv_b.ogg
     track: music
+    mode_end_action: stop
     markers:
       - time: 37s
-        events: play_suicide_music_platforms
+        events: suicide_music_intro_transition
   suicide_music_3a:
     file: mus_endgm2_combat_3a.ogg
     track: music
     start_at: 3s
     fade_in: 500ms
+    mode_end_action: stop
   suicide_music_3b:
     file: mus_endgm2_combat_3b.ogg
     track: music
     start_at: 7s
     fade_in: 2s
-  suicide_music_reaper:
-    file: mus_endgm2_reaperdeath.ogg
-    track: music
-    fade_out: 1s
+    mode_end_action: stop
   # Death
   squadmate_thane_killed_inf:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
@@ -250,23 +256,30 @@ sounds:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00258899_m.ogg
     track: voice
   specialist_garrus_im_through_opening_doors_now:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.ogg
-      track: voice
+    file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.ogg
+    track: voice
   specialist_legion_im_through_opening_doors_now:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.ogg
-      track: voice
+    file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.ogg
+    track: voice
   specialist_jacob_im_through_opening_doors_now:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
-      track: voice
+    file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
+    track: voice
   specialist_mordin_im_through_opening_doors_now:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.ogg
-      track: voice
+    file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.ogg
+    track: voice
   specialist_tali_im_through_opening_doors_now:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.ogg
-      track: voice
+    file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.ogg
+    track: voice
   specialist_kasumi_im_through_opening_doors_now:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.ogg
-      track: voice
+    file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.ogg
+    track: voice
+  # Final battle
+  shep_we_win_or_lose_it_all:
+    file: en_us_player_f_endgm2_huddle_03b_d_00266971_f.ogg
+    track: voice
+  shep_give_us_a_minute_edi:
+    file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
+    track: voice
 
 
 show_player:
@@ -293,6 +306,12 @@ slide_player:
   suicidemission_ended:
     specialist_killed_slide:
       action: remove
+  ball_will_end:
+    suicide_slide:
+      action: remove
+  player_reaper_hp{value>0 and change<0}:
+    reaper_hitdamage_slide:
+      expire: 4s
 
 slides:
   suicide_slide:
@@ -310,6 +329,23 @@ slides:
         style: small
         anchor_y: top
         y: middle-4
+  reaper_hitdamage_slide:
+    widgets:
+      - type: text
+        text: KAPOW!
+        style: text_default
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: (change) damage dealt!
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: (value) remaining
+        style: small
+        anchor_y: bottom
+        y: 2
 
 widget_player:
   mode_suicide_omegarelay_started:
@@ -353,6 +389,21 @@ widget_player:
   timer_longwalk_tick:
     suicide_time:
       action: update
+  timer_platform_tick:
+    suicide_time:
+      action: update
+  timer_reaper_charging_tick:
+    suicide_time:
+      action: update
+  timer_reaper_firing_tick:
+    suicide_time:
+      action: update
+  timer_reaper_charging_complete:
+    reaper_firing_widget:
+      slide: suicide_slide
+  timer_reaper_firing_complete:
+    reaper_firing_widget:
+      action: remove
   logicblock_swarmpaths_hit:
     suicide_shots:
       action: update
@@ -411,3 +462,19 @@ widgets:
       style: small
       anchor_y: bottom
       y: middle+4
+  reaper_firing_widget:
+    type: text
+    text: REAPER FIRING!
+    style: small
+    anchor_y: top
+    y: middle-8
+    expire: 5s
+    animations:
+      add_to_slide:
+        - property: opacity
+          value: 1
+          duration: .25s
+        - property: opacity
+          value: 0.5
+          duration: .25s
+          repeat: true
