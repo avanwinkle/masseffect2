@@ -52,16 +52,7 @@ slide_player:
       action: remove
 
 slides:
-  recruitslide:
-    widgets:
-      - type: text
-        text: (player|missionname)
-        font_name: pixelmix-8
-        font_size: 8
-        anchor_x: left
-        anchor_y: top
-        x: 2
-        y: top-4
+  recruitslide: []
   recruiting_advance_slide_2:
     widgets:
       - type: text
@@ -106,9 +97,9 @@ slides:
         y: 3
 
 widget_player:
-  set_recruitwidget:
-    recruitwidget_int:
-      action: update
+  missionselect_recruitmission_selected:
+    recruitwidget_name:
+      action: add
       slide: recruitslide
   # Adding players triggers their variables to be set, which can show an extra "0"
   # on the base slide. Check player number to prevent this.
@@ -127,6 +118,15 @@ widget_player:
       slide: recruitslide
 
 widgets:
+  recruitwidget_name:
+    - type: text
+      text: (missionname)
+      font_name: pixelmix-8
+      font_size: 8
+      anchor_x: left
+      anchor_y: top
+      x: 2
+      y: top-4
   recruitwidget_int:
     - type: text
       text: (player|temp_hurryup_value)

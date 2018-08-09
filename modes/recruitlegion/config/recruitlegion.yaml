@@ -3,14 +3,22 @@
 #####
 # LEGION RECRUIT MISSION
 #
-# This mode begins with a random lighting of either the dropbank, hitbank, or
-# left ramp. Hitting the lit shot lights another, and 15 seconds without hitting
-# a shot will also light another. Completing 3 shots lights the kickback lane,
-# and hitting the kickback lane collects the value and completes the mode. The
-# other lanes continue to be lit after the kickback lane lights, for additional
-# points.
+# This mode requires a sequence of shots to be hit: either orbit, either ramp,
+# and then either orbit. When one shot is hit a 10s timer begins for the next one,
+# and if the timer expires the shot is disabled and one of the hit/drop banks is
+# lit. The player must hit the lit dropbank to re-enable the sequence shot.
 #
-# Progress is saved
+# When the sequence is complete, the mission is "successful" and the player
+# recruits Legion immediately. The kickback shot will light for a multiplier,
+# a paragon/renegade bonus award, and a levelup. If the timer expires before the
+# shot is hit then no bonus/levelup is awarded, but Legion is recruited and the
+# mission is no longer available.
+#
+# Progress is saved for the sequence during an attempt, but the sequence resets
+# each time the mode begins.
+#
+# TOOD: If the timer is <10s when the sequence advances, it is bumped up to 10s
+# (except for the bonus shot).
 #####
 
 mode:
@@ -25,14 +33,11 @@ event_player:
     set_environment:
       env: geth
   mode_recruitlegion_started.2:
-    - disable_sbdrops_counter
+    - play_opening_heretic_dialogue
+    # We use the banks as a shot target, so disable the drops and lock hits
     - disable_lock_lightshot
-    - enable_random_heretic
-    - play_opening_heretic_dialogue{device.counters.heretic_counter.value<3}
-    - reset_dropbank
-  logicblock_heretic_counter_hit:
-    - enable_random_heretic
-  timer_recruittimer_tick{ticks<60 and ticks%20==0}:
+    - disable_sbdrops_counter
+  timer_heretic_timer_complete:
     - enable_random_heretic
   mode_recruitlegion_will_stop:
     - enable_sbdrops_counter
@@ -41,29 +46,37 @@ event_player:
     - recruit_legion_complete
   heretic_shot_left_hit:
     - reset_dropbank
+  heretic_shot_bonus:
+    - recruit_legion_complete
+  enable_heretic_shot_dropbank:
+    - squad_target_left
+  enable_heretic_shot_hitbank:
+    - squad_target_right
 
 random_event_player:
   enable_random_heretic:
-    force_different: true
     events:
-      - enable_heretic_shot_left
-      - enable_heretic_shot_center
-      - enable_heretic_shot_right
-  comment_random_direction:
-    events:
-      - squad_target_left{machine.shots.heretic_shot_left.enabled}
-      - squad_target_right{machine.shots.heretic_shot_right.enabled}
-      - squad_target_center{machine.shots.heretic_shot_center.enabled}
+      - enable_heretic_shot_dropbank
+      - enable_heretic_shot_hitbank
 
 counters:
   heretic_counter:
     starting_count: 0
     count_complete_value: 3
-    persist_state: false
-    reset_on_complete: false
-    disable_on_complete: false
-    count_events: heretic_shots_lit_hit
-    multiple_hit_window: 500ms # In case both drop/hitbanks are hit together
+    count_events: heretic_sequence_shots_lit_hit
+    reset_events: mode_recruitlegion_started
+
+timers:
+  heretic_timer:
+    start_value: 10
+    end_value: 0
+    direction: down
+    start_running: false
+    control_events:
+      - event: heretic_sequence_shots_lit_hit
+        action: restart
+      - event: logicblock_heretic_counter_complete
+        action: stop
 
 #####
 # LEGION SCORING
@@ -93,13 +106,24 @@ variable_player:
     score: current_player.temp_hurryup_value
   heretic_kickback_shot_hit:
     score: current_player.temp_build_value
+  # Manually set legion status to 4 because the levelup is not guaranteed!
+  logicblock_heretic_counter_complete:
+    status_legion:
+      action: set
+      int: 4
 
 shot_groups:
-  heretic_shots:
-    shots: heretic_shot_left, heretic_shot_right, heretic_shot_center
+  heretic_sequence_shots:
+    shots: heretic_shot_orbits, heretic_shot_ramps
+    rotate_events: heretic_sequence_shots_lit_hit
+    enable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
+    disable_events: enable_random_heretic
+  heretic_recovery_shots:
+    shots: heretic_shot_dropbank, heretic_shot_hitbank
+    disable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
 
 shots:
-  heretic_kickback_shot:
+  heretic_shot_bonus:
     hit_events: sh_kickback_hit
     enable_events: logicblock_heretic_counter_complete
     profile: color_flashing_fast_profile
@@ -107,33 +131,41 @@ shots:
       leds: l_kickback_shield_rgb
       color: FFFFFF #color_legion
     tags: envshot_kickback
-  heretic_shot_left:
+  heretic_shot_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
-    enable_events: enable_heretic_shot_left
-    disable_events: heretic_shot_left_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
+    enable_events: enable_heretic_shot_dropbank
+    disable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_dropbank_shield_rgb
       color: FFFFFF #color_legion
     tags: envshot_dropbank
-  heretic_shot_center:
-    hit_events: sh_left_ramp_hit
-    enable_events: enable_heretic_shot_center
-    disable_events: heretic_shot_center_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
-    profile: color_flashing_static
-    show_tokens:
-      leds: l_left_ramp_shield_rgb
-      color: FFFFFF #color_legion
-    tags: envshot_left_ramp
-  heretic_shot_right:
+  heretic_shot_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    enable_events: enable_heretic_shot_right
-    disable_events: heretic_shot_right_hit, mode_recruitlegion_started, logicblock_heretic_counter_complete
+    enable_events: enable_heretic_shot_hitbank
+    disable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_hitbank_shield_rgb
       color: FFFFFF #color_legion
     tags: envshot_hitbank
+  heretic_shot_orbits:
+    hit_events: sh_left_orbit_hit, sh_right_orbit_hit
+    reset_events: mode_recruitlegion_started
+    advance_events: heretic_sequence_shots_unlit_complete
+    profile: hit_to_flash_profile_noadvance
+    show_tokens:
+      leds: l_left_orbit_shield_rgb, l_right_orbit_shield_rgb
+      color: FFFFFF #color_legion
+    tags: envshot_left_orbit, envshot_right_orbit
+  heretic_shot_ramps:
+    hit_events: sh_left_ramp_hit, sh_right_ramp_hit
+    reset_events: mode_recruitlegion_started
+    profile: hit_to_flash_profile_noadvance
+    show_tokens:
+      leds: l_left_ramp_shield_rgb, l_right_ramp_shield_rgb
+      color: FFFFFF #color_legion
+    tags: envshot_left_ramp, envshot_right_ramp
 
 sound_player:
   mode_recruitlegion_started:
@@ -144,14 +176,23 @@ sound_player:
   play_opening_heretic_dialogue: shepard_start_your_upload
   logicblock_heretic_counter_hit{count==1}: legion_alert_mobile_platforms
   logicblock_heretic_counter_hit{count==2}: legion_alert_close_combat
-  logicblock_heretic_counter_updated{value==3}: legion_hack_complete
-  logicblock_heretic_counter_hit{count>3}: geth_killed_short
+  logicblock_heretic_counter_complete:
+    legion_hack_complete:
+      action: play
+    music_legion_low:
+      action: play
+      mode_end_action: stop
 
 sounds:
   music_legion:
     file: mus_legion_acq_combat_1.ogg
     track: music
     fade_in: 3s
+    fade_out: 1s
+  music_legion_low:
+    file: mus_legion_acq_tension_1.ogg
+    track: music
+    fade_in: 1s
     fade_out: 1s
   shepard_start_your_upload:
     file: en_us_player_f_gthgtl_core_h_00183211_f.ogg
@@ -188,6 +229,29 @@ sounds:
       release: 100ms
       release_point: 50ms
 
+widget_player:
+  timer_heretic_timer_tick:
+    heretic_timerwidget:
+      action: update
+      slide: recruitslide
+  mode_recruitlegion_will_stop:
+    heretic_timerwidget:
+      action: remove
+  timer_heretic_timer_complete:
+    heretic_timerwidget:
+      action: remove
+  timer_heretic_timer_stopped:
+    heretic_timerwidget:
+      action: remove
 
-
+widgets:
+  heretic_timerwidget:
+    - type: text
+      text: (ticks_remaining)
+      font_name: pixelmix-8
+      font_size: 8
+      anchor_x: right
+      anchor_y: bottom
+      x: right-4
+      y: 12
 
