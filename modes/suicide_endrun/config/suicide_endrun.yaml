@@ -4,6 +4,8 @@ mode:
   stop_events: ball_will_end, endrun_complete
   priority: 300
 
+sound_player:
+  mode_suicide_endrun_started: endrun_music
 
 sounds:
   endrun_music:

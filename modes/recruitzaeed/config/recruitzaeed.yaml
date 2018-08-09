@@ -119,6 +119,7 @@ shots:
     advance_events: zaeed_right_orbit_reputation_hit
     show_tokens:
       leds: l_left_orbit_shield_rgb
+      color: FF7700 #color_zaeed
       color1: FF7700 #color_zaeed
       color2: 1166ff #color_paragon
     tags: envshot_left_orbit
@@ -128,6 +129,7 @@ shots:
     advance_events: zaeed_left_orbit_reputation_hit
     show_tokens:
       leds: l_right_orbit_shield_rgb
+      color: FF7700 #color_zaeed
       color1: FF7700 #color_zaeed
       color2: 660000 #color_renegade
     tags: envshot_right_orbit

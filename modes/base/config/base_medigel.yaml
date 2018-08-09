@@ -1,6 +1,9 @@
 #config_version=5
 
-# Can we throw a ball out to avoid ball save events?
+event_player:
+  # I don't know why these conditions don't work as enable/hit for the shot or the save
+  medigel_shot_hit:
+    - do_medigel_save{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
 
 shots:
   # This shot lights when medigel is available
@@ -10,19 +13,12 @@ shots:
     enable_events: levelup, enable_medigel
     # Disable medigel during Normandy attack because it has many saves. Completing
     # the attack will levelup and restore medigel anyway.
-    disable_events: medigel_save_shot_hit, ball_will_end, mode_normandyattack_started
+    disable_events: ball_save_medigel_save_saving_ball, ball_will_end, mode_normandyattack_started
     tags: envshot_outlane
-  # This shot is hit when medigel light shot is hit and no other saves are enabled
-  medigel_save_shot:
-    # Don't save during default or recruit saves, or we'll get two balls!
-    # Why don't these events work?
-    hit_events: medigel_shot_hit{device.ball_saves["default"].enabled!=True and device.ball_saves["recruitsave"].enabled!=True}
-    enable_events: player_shot_medigel_shot_enabled
-    disable_events: medigel_save_shot_hit
 
 ball_saves:
   medigel_save:
-    enable_events: medigel_save_shot_hit
+    enable_events: do_medigel_save
     early_ball_save_events: ball_save_medigel_save_enabled
     auto_launch: true
     balls_to_save: 1
@@ -51,7 +47,7 @@ slide_player:
       action: play
       expire: 2s
       priority: 2000
-  medigel_save_shot_hit:
+  ball_save_medigel_save_saving_ball:
     medigel_slide:
       action: play
       expire: 2s
@@ -90,7 +86,7 @@ slides:
 
 
 sound_player:
-  medigel_save_shot_hit: medigel_sound
+  ball_save_medigel_save_saving_ball: medigel_sound
   ball_save_default_saving_ball: medigel_sound
   ball_save_recruitsave_saving_ball: medigel_sound
 

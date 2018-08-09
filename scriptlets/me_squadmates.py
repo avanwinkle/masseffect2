@@ -62,7 +62,7 @@ class SquadmateStatusClass():
     return self._get_available_mates(player, TECHMATES)
 
   def dead_mates(self, player):
-    return [mate for mate in mates if (self._mate_status_is(player, mate, -1))]
+    return [mate for mate in SQUADMATES if (self._mate_status_is(player, mate, -1))]
 
 SquadmateStatus = SquadmateStatusClass()
 

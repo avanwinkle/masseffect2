@@ -89,7 +89,7 @@ shots:
     hit_events: sh_left_orbit_hit
     enable_events: samara_target1_lit_hit
     disable_events: samara_left_orbit_hit
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: 008899 #color_samara
@@ -97,7 +97,7 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
     disable_events: samara_left_ramp_hit
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: 008899 #color_samara
@@ -105,7 +105,7 @@ shots:
     hit_events: sh_right_orbit_hit
     enable_events: samara_target5_lit_hit
     disable_events: samara_right_orbit_hit
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: 008899 #color_samara
@@ -113,7 +113,7 @@ shots:
     hit_events: sh_right_ramp_hit
     enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
     disable_events: samara_right_ramp_hit
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: 008899 #color_samara
@@ -121,37 +121,37 @@ shots:
     hit_events: sh_kickback_hit
     enable_events: samara_target1_lit_hit, samara_target2_lit_hit
     disable_events: samara_kickback_hit
-    profile: color_flashing_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_kickback_shield_rgb
       color: 008899 #color_samara
   samara_target1:
     switch: s_target1
-    profile: color_flashing_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_1
       color: FFFFFF
   samara_target2:
     switch: s_target2
-    profile: color_flashing_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_2
       color: FFFFFF
   samara_target3:
     switch: s_target3
-    profile: color_flashing_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_3
       color: FFFFFF
   samara_target4:
     switch: s_target4
-    profile: color_flashing_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_4
       color: FFFFFF
   samara_target5:
     switch: s_target5
-    profile: color_flashing_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_5
       color: FFFFFF

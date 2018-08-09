@@ -1,6 +1,263 @@
 #config_version=5
 mode:
-  start_events: achievement_humanreaper_state_started
-  stop_events: ball_will_end, humanreaper_complete
+  start_events: start_mode_suicide_humanreaper
+  stop_events: ball_will_end, humanreaper_complete, humanreaper_failed
+  events_when_started: mode_type_suicide_started, restart_reaper, stop_harbinger
   priority: 300
 
+event_player:
+  timer_reaper_charging_complete: fire_reapercannon
+  timer_reaper_firing_complete:
+    - flippers_off
+    - restart_reaper|4s
+  restart_reaper:
+    - flippers_on
+    - enable_random_reapershot
+  player_reaper_hp:
+    # If the reaper still has HP and there are more rounds to go, "fail" to return to platforms
+    - humanreaper_failed{value>0 and current_player.reaper_rounds>0}
+    # If the reaper has no HP and the minimum 3 rounds have passed, OR if the max rounds have passed, "complete"
+    - humanreaper_complete{(value<=0 and current_player.reaper_rounds<=3) or current_player.reaper_rounds<=0}
+
+random_event_player:
+  enable_random_reapershot:
+    events:
+      - enable_reapershot_left_orbit
+      - enable_reapershot_kickback
+      - enable_reapershot_left_ramp
+      - enable_reapershot_right_ramp
+      - enable_reapershot_right_orbit
+
+variable_player:
+  reaper_shot_hit:
+    reaper_hp:
+      action: add
+      # We need a minimum value to progress the mode, so... 1000+
+      int: (1000 + current_player.build_value) * (current_player.reaper_rounds / 2) * -1
+
+# We can take "cover" while the reaper is firing
+ball_holds:
+  coverhold:
+    enable_events: timer_reaper_charging_complete
+    disable_events: restart_reaper
+    release_all_events: restart_reaper
+    hold_devices: bd_lock, bd_hold
+
+timers:
+  # This is the "charging" phase of the reaper cannon
+  reaper_charging:
+    start_value: 20
+    end_value: 0
+    direction: down
+    tick_interval: 500ms
+    start_running: true
+    control_events:
+      - event: reaper_shot_hit
+        action: stop
+      - event: restart_reaper
+        action: restart
+  # This is the "firing" phase of the reaper cannon
+  reaper_firing:
+    start_value: 10
+    end_value: 0
+    direction: down
+    tick_interval: 500ms
+    control_events:
+      - event: fire_reapercannon
+        action: restart
+      - event: reaper_shot_hit
+        action: stop
+
+shot_groups:
+  reaper_shot:
+    shots: reapershot_left_orbit, reapershot_kickback, reapershot_left_ramp, reapershot_right_ramp, reapershot_right_orbit
+    disable_events: mode_suicide_humanreaper_will_stop, timer_reaper_firing_complete
+    reset_events: restart_reaper
+
+shots:
+  reapershot_left_ramp:
+    hit_events: sh_left_ramp_hit
+    enable_events: enable_reapershot_left_ramp
+    advance_events: fire_reapercannon
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: l_left_ramp_arrow_red
+      color: FFFFFF
+    tags: envshot_left_ramp
+  reapershot_left_orbit:
+    hit_events: sh_left_orbit_hit
+    enable_events: enable_reapershot_left_orbit
+    advance_events: fire_reapercannon
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: l_left_orbit_arrow_red
+      color: FFFFFF
+    tags: envshot_left_orbit
+  reapershot_right_ramp:
+    hit_events: sh_right_ramp_hit
+    enable_events: enable_reapershot_right_ramp
+    advance_events: fire_reapercannon
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: l_right_ramp_arrow_red
+      color: FFFFFF
+    tags: envshot_right_ramp
+  reapershot_right_orbit:
+    hit_events: sh_right_orbit_hit
+    enable_events: enable_reapershot_right_orbit
+    advance_events: fire_reapercannon
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: l_right_orbit_arrow_red
+      color: FFFFFF
+    tags: envshot_right_orbit
+  reapershot_kickback:
+    hit_events: sh_kickback_hit
+    enable_events: enable_reapershot_kickback
+    advance_events: fire_reapercannon
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: l_kickback_arrow_red
+      color: FFFFFF
+    tags: envshot_kickback
+
+slide_player:
+  timer_reaper_firing_complete: reaper_firing_slide
+  reset_reaper:
+    reaper_firing_slide:
+      action: remove
+
+slides:
+  reaper_firing_slide:
+    widgets:
+      - type: rectangle
+        width: 128
+        height: 32
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        z: 0
+        color: 000000
+      - type: rectangle
+        width: 128
+        height: 32
+        anchor_x: left
+        anchor_y: bottom
+        x: 0
+        y: 0
+        z: 1
+        color: FFFFFF
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: .25s
+            - property: opacity
+              value: 0
+              duration: .25s
+              repeat: true
+
+sound_player:
+  mode_suicide_humanreaper_started: suicide_music_reaper
+
+sounds:
+  suicide_music_reaper:
+    file: mus_endgm2_reaperdeath.ogg
+    track: music
+    fade_in: 500ms
+    fade_out: 1s
+    mode_end_action: stop
+
+show_player:
+  timer_reaper_firing_complete:
+    reaper_cannon_lanes_show:
+      action: play
+      loops: 16
+      speed: 4
+    reaper_cannon_flashers_show:
+      action: play
+      loops: 8
+      speed: 2
+  enable_reapershot_left_ramp:
+    reaper_charging_shield_show:
+      loops: 0
+      show_tokens:
+        leds: l_left_ramp_shield_rgb
+  enable_reapershot_left_orbit:
+    reaper_charging_shield_show:
+      loops: 0
+      show_tokens:
+        leds: l_left_orbit_shield_rgb
+  enable_reapershot_right_ramp:
+    reaper_charging_shield_show:
+      loops: 0
+      show_tokens:
+        leds: l_right_ramp_shield_rgb
+  enable_reapershot_right_orbit:
+    reaper_charging_shield_show:
+      loops: 0
+      show_tokens:
+        leds: l_right_orbit_shield_rgb
+  enable_reapershot_kickback:
+    reaper_charging_shield_show:
+      loops: 0
+      show_tokens:
+        leds: l_kickback_shield_rgb
+  fire_reapercannon:
+    reaper_charging_shield_show:
+      action: stop
+
+shows:
+  reaper_charging_shield_show:
+    - time: 0
+      lights:
+        (leds): 000000
+        (arrow): on
+    - time: 1s
+      lights:
+        (leds):
+          color: FF0000
+          fade: 10s
+        (arrow): on
+    - time: 12s
+  reaper_charging_arrow_show:
+    - time: 0
+      lights:
+        (arrow): 000000
+    - time: '+1'
+      lights:
+        (arrow): FFFFFF
+  reaper_firing_show:
+    - time: 0
+      lights:
+        lane_arrows: on
+        (leds): FF0000
+    - time: '+1'
+      lights:
+        lane_arrows: off
+  reaper_cannon_lanes_show:
+    - time: 0
+      lights:
+        color_shields: FF0000
+        lane_arrows: off
+    - time: '+1'
+      lights:
+        color_shields: 330000
+        lane_arrows: on
+  reaper_cannon_flashers_show:
+    - time: 0
+      flashers:
+        l_flash_dragon_right: 150ms
+    - time: 800ms
+      flashers:
+        l_flash_pop_bumpers: 100ms
+        l_flash_left_orbit: 100ms
+    - time: 1300ms
+      flashers:
+        l_flash_dragon_left: 200ms
+        l_flash_battering_ram: 100ms
+    - time: 3s
+      flashers:
+        l_flash_back_panel_right: 200ms
+        l_flash_slingshots: 100ms

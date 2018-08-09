@@ -20,7 +20,7 @@ ball_saves:
 counters:
   # COMBINE sbvasir_counter and sbhagalaz_counter
   sbdrops_counter:
-    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete
+    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
     starting_count: current_player.counter_sbdrops_counter
     count_complete_value: 7
     persist_state: true
@@ -125,15 +125,31 @@ shows:
         l_dropbank_top: white
 
 sound_player:
-  logicblock_sbdrops_counter_hit.1{count==1}: shepard_sounds_like_liara_found_something_big
-  logicblock_sbdrops_counter_hit.2{count==2}: vasir_i_know_where_the_trade_center_is
-  logicblock_sbdrops_counter_hit.3{count==3}: vasir_they_took_out_three_floors
-  achievement_vasir_state_completed: liara_shepard_im_glad_youre_here
-  logicblock_sbdrops_counter_hit.4{count==4}: liara_sukets_datapad_this_has_what_we_need
-  logicblock_sbdrops_counter_hit.5{count==5}: liara_we_can_be_at_base_in_a_few_hours
-  logicblock_sbdrops_counter_hit.6{count==6}: liara_land_outside_and_hunt_for_a_hatch
-  # Relays
-  play_shepard_ill_start_down_here: shepard_ill_start_down_here
+  logicblock_sbdrops_counter_hit.1{count==1}:
+    shepard_sounds_like_liara_found_something_big:
+      max_queue_time: 2s
+  logicblock_sbdrops_counter_hit.2{count==2}:
+    vasir_i_know_where_the_trade_center_is:
+      max_queue_time: 2s
+  logicblock_sbdrops_counter_hit.3{count==3}:
+    vasir_they_took_out_three_floors:
+      max_queue_time: 2s
+  achievement_vasir_state_completed:
+    liara_shepard_im_glad_youre_here:
+      max_queue_time: 2s
+  logicblock_sbdrops_counter_hit.4{count==4}:
+    liara_sukets_datapad_this_has_what_we_need:
+      max_queue_time: 2s
+  logicblock_sbdrops_counter_hit.5{count==5}:
+    liara_we_can_be_at_base_in_a_few_hours:
+      max_queue_time: 2s
+  logicblock_sbdrops_counter_hit.6{count==6}:
+    liara_land_outside_and_hunt_for_a_hatch:
+      max_queue_time: 2s
+  # Relays:
+  play_shepard_ill_start_down_here:
+    shepard_ill_start_down_here:
+      max_queue_time: 2s
 
 sounds:
   shadowbroker_agent_music:

@@ -108,7 +108,7 @@ slides:
 widget_player:
   set_recruitwidget:
     recruitwidget_int:
-      action: add
+      action: update
       slide: recruitslide
   # Adding players triggers their variables to be set, which can show an extra "0"
   # on the base slide. Check player number to prevent this.
@@ -119,7 +119,7 @@ widget_player:
       slide: recruitslide
   timer_recruittimer_started:
     time_remaining_widget:
-      action: add
+      action: update
       slide: recruitslide
   timer_recruittimer_tick:
     time_remaining_widget:

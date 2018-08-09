@@ -49,7 +49,7 @@ class SoundManager():
       with open(self.get_cache_path(), 'rb') as f:
         self.source_media = pickle.load(f)
         stamp = os.path.getmtime(self.get_cache_path())
-        self.log.info("    - cache found! Last modified {}".format(datetime.fromtimestamp(stamp).strftime("%b %d %Y %H:%M:%S")))
+        self.log.info("    - Cache found from {}".format(datetime.fromtimestamp(stamp).strftime("%b %d %Y %H:%M:%S")))
     except Exception as e:
       self.log.warning("    - Could not load cache file: {}".format(e))
 
@@ -121,6 +121,8 @@ class SoundManager():
       'sounds': {} # Key: sound file name; Value: sound object
     }
 
+    self.log.info("\nComparing current file tree to config assets:")
+
     dupes = self.machine_assets.getDuplicates()
     # First, look through all the files that exist in the mode folders to find orphaned, misplaced, and duplicate
     for idx, filename in enumerate(self.machine_assets.getFiles()):
@@ -173,27 +175,27 @@ class SoundManager():
 
           self._analysis['sounds'][sound] = { "mode": mode, "modepath": modepath, "sourcepath": sourcepath, "exists": exists}
 
-    self.log.info("\nFound {} assets defined across {} config files.".format(len(self._analysis['sounds']), len(allconfigs)))
-    self.log.info(" - {} files accounted for".format(len(self._analysis['found'])))
+    self.log.info("  Found {} assets defined across {} config files.".format(len(self._analysis['sounds']), len(allconfigs)))
+    self.log.info("   - {} files correctly accounted for".format(len(self._analysis['found'])))
     if self._analysis['misplaced']:
-      self.log.info(" - {} misplaced files{}".format(len(self._analysis['misplaced']), " will be moved" if writeMode else ""))
+      self.log.info("   - {} misplaced files{}".format(len(self._analysis['misplaced']), " will be moved" if writeMode else ""))
     if self._analysis['duplicated']:
-      self.log.info(" - {} duplicate files{}".format(len(self._analysis['duplicated']), " will be removed" if writeMode else ""))
+      self.log.info("   - {} duplicate files{}".format(len(self._analysis['duplicated']), " will be removed" if writeMode else ""))
     if self._analysis['orphaned']:
-      self.log.info(" - {} orphaned files{}".format(len(self._analysis['orphaned']), " will be removed" if writeMode else ""))
+      self.log.info("   - {} orphaned files{}".format(len(self._analysis['orphaned']), " will be removed" if writeMode else ""))
     if self._analysis['available']:
-      self.log.info(" - {} missing files available {}".format(len(self._analysis['available']), "and copied" if writeMode else "for copy"))
+      self.log.info("   - {} missing files available {}".format(len(self._analysis['available']), "and copied" if writeMode else "for copy"))
       self.log.debug("    : {} -> {}".format(sourcepath, filename) for filename, sourcepath in self._analysis['available'].items())
     if self._analysis['unavailable']:
-      self.log.info(" - {} files missing and unavailable:".format(len(self._analysis['unavailable'])))
+      self.log.info("   - {} files missing and unavailable:".format(len(self._analysis['unavailable'])))
       for filename in self._analysis['unavailable']:
-        self.log.info("    : {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
-    endtime = datetime.now()
-    self.log.info("\nOperation took {} seconds".format((endtime - starttime).total_seconds()))
-
+        self.log.warning("    : {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
+    
   def cleanup_machine_assets(self, writeMode=False):
     if not self._analysis:
       self.parse_machine_assets(writeMode=writeMode)
+
+    files_changed = 0
 
     if self._analysis['orphaned']:
       self.log.info("REMOVING ORPHANED FILES:" if writeMode else "ORPHANED FILES TO REMOVE:")
@@ -201,35 +203,42 @@ class SoundManager():
         self.log.info("- {}".format(orphan))
         if writeMode:
           os.remove(orphan)
+          files_changed += 1
     if self._analysis['duplicated']:
       self.log.info("REMOVING DUPLICATE FILES:" if writeMode else "DUPLICATE FILES TO REMOVE:")
       for orphan in self._analysis['duplicated']:
         self.log.info("- {}".format(orphan))
         if writeMode:
           os.remove(orphan)
+          files_changed += 1
     if self._analysis['misplaced']:
       self.log.info("MOVING MISPLACED FILES:" if writeMode else "MISPLACED FILES TO MOVE:")
       for expectedpath, filepath in self._analysis['misplaced'].items():
-        self.log.info(" {} -> {}".format(filepath, expectedpath))
+        self.log.debug(" {} -> {}".format(filepath, expectedpath))
         if writeMode:
           os.makedirs(expectedpath.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           os.rename(filepath, expectedpath)
+          files_changed += 1
     if self._analysis['available']:
       self.log.info("COPYING AVAILABLE FILES:" if writeMode else "AVAILABLE FILES TO COPY:")
       original_umask = os.umask(0)
       for idx, availitem in enumerate(self._analysis['available'].items()):
         dst = availitem[0]
         src = availitem[1]
-        self.log.info(" {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
+        self.log.debug(" {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
         # Ensure the target directory exists
         if writeMode:
           os.makedirs(dst.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           shutil.copy2(src, dst)
+          files_changed += 1
       os.umask(original_umask)
 
     # Any previous analysis is no longer valid
-    self._analysis = None
-    self.log.info("\n Machine cleanup {} complete!\n".format("changes" if writeMode else "simulation"))
+    if writeMode:
+      self._analysis = None
+      self.log.info("\nMachine copy and cleanup complete! {} file{} changed.".format(files_changed or "No", "" if files_changed == 1 else "s"))
+    else:
+      self.log.info("\nSimulation complete, no files changed.")
 
 class RequiredSounds(object):
   def __init__(self):
@@ -445,16 +454,17 @@ def main():
     return
 
   if args:
-    if args[0] == "prune":
+    starttime = datetime.now()
+    if args[0] == "parse":
       soundManager.parse_machine_assets(writeMode=writeMode)
-      return
     elif args[0] == "copy":
       soundManager.cleanup_machine_assets(writeMode=writeMode)
-      return
     elif args[0] == "clear":
       soundManager.clear_cache()
-      return
+    endtime = datetime.now()
+    soundManager.log.info("\nOperation complete in {:.2f} seconds".format((endtime - starttime).total_seconds()))
 
+    return
 
   print("""
 ---Mission Pinball Audio File Script---
@@ -471,10 +481,11 @@ with any questions or feedback.
 
 Options:
   copy  - Copy all audio files referenced in configs from the source folder
-          to the appropriate modes/(name)/sounds/(track) folders
+          to the appropriate modes/(name)/sounds/(track) folders, and remove
+          all audio files not referenced in config files
 
-  prune - Remove all audio files from mode folders not referenced in config files
-          and move any misplaced audio files to the correct mode folder
+  parse - Print analysis of config files and source folder with summary of
+          files to move/copy/remove
 
   clear - Clear cached directory trees (for use when source media files change)
 
@@ -483,10 +494,10 @@ Params:
 
 Flags:
   -v    - Verbose mode
-  -w    - Write mode (actually copy/prune files)
+  -w    - Write mode
 
 Usage:
->> python mesound.py [prune|test|copy] <path_to_sounds> [-v|-w]
+>> python mesound.py [copy|parse|clear] [<path_to_sounds>] [-v|-w]
 """)
 
 if __name__ == "__main__":

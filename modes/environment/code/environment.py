@@ -35,9 +35,6 @@ class Environment(Mode):
   def _register_handlers(self):
     self.add_mode_event_handler('set_environment', self._set_environment)
 
-  def _unregister_handlers(self):
-    self.machine.events.remove_handler(self._set_environment)
-
 class EnvShot(object):
 
   # Two events: a change in the enabled state and a change in the profile state

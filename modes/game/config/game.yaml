@@ -14,13 +14,11 @@ widget_player:
   # First event, before additional players have a chance to enter
   game_started:
     base_level_widget:
-      action: add
       slide: singleplayer_slide
     base_ball_widget:
-      action: add
       slide: singleplayer_slide
   # Player 2 has entered the game, add widgets for player1 and player2
-  player_added{num==2}:
+  player_added.1{num==2}:
     base_level_widget:
       slide: multiplayer_slide
     base_ball_widget:
@@ -31,61 +29,61 @@ widget_player:
     mp_score_widget_player_2:
       slide: multiplayer_slide
   # Player 3 has entered the game
-  player_added{num==3}:
+  player_added.2{num==3}:
     mp_score_widget_player_3:
       slide: multiplayer_slide
     # Remove the "Level" widget and place the player3 score
     base_level_widget:
       action: remove
   # Player 4 has entered the game
-  player_added{num==4}:
+  player_added.3{num==4}:
     mp_score_widget_player_4:
       slide: multiplayer_slide
     # Remove the "Ball" widget and place the player4 score
     base_ball_widget:
       action: remove
   # Player Turns: Swap scores -> names when turn starts, revert when turn ends
-  player_turn_started{number==1}:
+  player_turn_started.1{number==1}:
     mp_score_widget_player_1:
       action: remove
     mp_name_widget_player_1:
       slide: multiplayer_slide
-  player_turn_ended{number==1}:
+  player_turn_ended.1{number==1}:
     mp_score_widget_player_1:
       slide: multiplayer_slide
     mp_name_widget_player_1:
       action: remove
-  player_turn_started{number==2}:
+  player_turn_started.2{number==2}:
     mp_score_widget_player_2:
       action: remove
     mp_name_widget_player_2:
       action: add
       slide: multiplayer_slide
-  player_turn_ended{number==2}:
+  player_turn_ended.2{number==2}:
     mp_score_widget_player_2:
       action: add
       slide: multiplayer_slide
     mp_name_widget_player_2:
       action: remove
-  player_turn_started{number==3}:
+  player_turn_started.3{number==3}:
     mp_score_widget_player_3:
       action: remove
     mp_name_widget_player_3:
       action: add
       slide: multiplayer_slide
-  player_turn_ended{number==3}:
+  player_turn_ended.3{number==3}:
     mp_score_widget_player_3:
       action: add
       slide: multiplayer_slide
     mp_name_widget_player_3:
       action: remove
-  player_turn_started{number==4}:
+  player_turn_started.4{number==4}:
     mp_score_widget_player_4:
       action: remove
     mp_name_widget_player_4:
       action: add
       slide: multiplayer_slide
-  player_turn_ended{number==4}:
+  player_turn_ended.4{number==4}:
     mp_score_widget_player_4:
       action: add
       slide: multiplayer_slide

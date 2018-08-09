@@ -1,0 +1,20 @@
+<snippet>
+  <content><![CDATA[
+$SELECTION
+${SELECTION/hench_garrus/hench_grunt/g}
+${SELECTION/hench_garrus/hench_convict/g}
+${SELECTION/hench_garrus/hench_leading/g}
+${SELECTION/hench_garrus/hench_thief/g}
+${SELECTION/hench_garrus/hench_geth/g}
+${SELECTION/hench_garrus/hench_vixen/g}
+${SELECTION/hench_garrus/hench_professor/g}
+${SELECTION/hench_garrus/hench_mystic/g}
+${SELECTION/hench_garrus/hench_tali/g}
+${SELECTION/hench_garrus/hench_assassin/g}
+${SELECTION/hench_garrus/hench_zaeed/g}
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <!-- <tabTrigger>hello</tabTrigger> -->
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>
