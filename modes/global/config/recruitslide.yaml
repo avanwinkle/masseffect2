@@ -3,47 +3,45 @@
 #####
 # Use a single slide/widget for all the missions, just update the text
 #####
-event_player:
+variable_player:
   mode_recruitgarrus_started:
-    set_recruitwidget:
-      missionname: "Defend Archangel"
+    missionname:
+      string: "Defend Archangel"
   mode_recruitgrunt_started:
-    set_recruitwidget:
-      missionname: "Defeat the Tank-Bred"
+    missionname:
+      string: "Defeat the Tank-Bred"
   mode_recruitjack_started:
-    set_recruitwidget:
-      missionname: "Escape from Purgatory"
+    missionname:
+      string: "Escape from Purgatory"
   mode_recruitkasumi_started:
-    set_recruitwidget:
-      missionname: "Infiltrate the Vault"
+    missionname:
+      string: "Infiltrate the Vault"
   mode_recruitlegion_started:
-    set_recruitwidget:
-      missionname: "Stop the Heretics"
+    missionname:
+      string: "Stop the Heretics"
   mode_recruitmordin_started:
-    set_recruitwidget:
-      missionname: "Cure the Plague"
+    missionname:
+      string: "Cure the Plague"
   mode_recruitsamara_started:
-    set_recruitwidget:
-      missionname: "Find Morinth"
+    missionname:
+      string: "Find Morinth"
   mode_recruittali_started:
-    set_recruitwidget:
-      missionname: "Destroy the Colossus"
+    missionname:
+      string: "Destroy the Colossus"
   mode_recruitthane_started:
-    set_recruitwidget:
-      missionname: "Assault Dantius Towers"
+    missionname:
+      string: "Assault Dantius Towers"
   mode_recruitzaeed_started:
-    set_recruitwidget:
-      missionname: "Storm the Refinery"
+    missionname:
+      string: "Storm the Refinery"
 
 slide_player:
-  recruit_advance.1{status==1}:
-    recruiting_advance_slide_2:
+  recruit_advance:
+    recruiting_advance_slide_2{status==1}:
       expire: 1s
-  recruit_advance.2{status==2}:
-    recruiting_advance_slide_1:
+    recruiting_advance_slide_1{status==2}:
       expire: 1s
-  recruit_advance.3{status==3}:
-    recruiting_advance_slide_lit:
+    recruiting_advance_slide_lit{status==3}:
       expire: 2s
   missionselect_recruitmission_selected:
     recruitslide:
@@ -54,7 +52,16 @@ slide_player:
       action: remove
 
 slides:
-  recruitslide: []
+  recruitslide:
+    widgets:
+      - type: text
+        text: (player|missionname)
+        font_name: pixelmix-8
+        font_size: 8
+        anchor_x: left
+        anchor_y: top
+        x: 2
+        y: top-4
   recruiting_advance_slide_2:
     widgets:
       - type: text
@@ -100,15 +107,8 @@ slides:
 
 widget_player:
   set_recruitwidget:
-    recruitwidget_mission:
-      action: add
-      slide: recruitslide
     recruitwidget_int:
       action: add
-      slide: recruitslide
-  update_recruitmission:
-    recruitwidget_mission:
-      action: update
       slide: recruitslide
   # Adding players triggers their variables to be set, which can show an extra "0"
   # on the base slide. Check player number to prevent this.
@@ -125,22 +125,8 @@ widget_player:
     time_remaining_widget:
       action: update
       slide: recruitslide
-  recruit_mission_ended:
-    recruitwidget_mission:
-      action: remove
-    recruitwidget_int:
-      action: remove
 
 widgets:
-  recruitwidget_mission:
-    - type: text
-      text: (missionname)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-4
   recruitwidget_int:
     - type: text
       text: (player|temp_hurryup_value)

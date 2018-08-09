@@ -388,6 +388,10 @@ sound_player:
     music_mission_success:
       action: play
       priority: 2 # Field music is 1, so this trumps only that
+  # Whether starting a mission or game over, kill the "levelup" music if field stops
+  mode_field_will_stop:
+    music_mission_success:
+      action: stop
 
 sounds:
   galaxy_whoosh:
@@ -404,8 +408,8 @@ sounds:
       delay: 2s
       attack: 2s
       attenuation: 0
-      release_point: 5s
-      release: 3s
+      release_point: 12s
+      release: 6s
 
 track_player:
   # Bring the music out asap to allow for the bonus music to fade in
