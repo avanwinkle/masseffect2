@@ -1,0 +1,407 @@
+#show_version=5
+- time: 0
+  lights:
+    (ledring)_light_1:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_0: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_0: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_15: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_0: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_14: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_0: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_13: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_0:
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_12: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_0:
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_11: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_0:
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_10: 
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    (ledring)_light_10: 
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_11: 
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_12: 
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_13: 
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_14: 
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_15: 
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_0:
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_1:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_2:  
+      color: (color)%100
+      fade: (fade)
+    (ledring)_light_3:  
+      color: (color)%80
+      fade: (fade)
+    (ledring)_light_4:  
+      color: (color)%60
+      fade: (fade)
+    (ledring)_light_5:  
+      color: (color)%40
+      fade: (fade)
+    (ledring)_light_6:  
+      color: (color)%20
+      fade: (fade)
+    (ledring)_light_7:  
+      color: (color)%10
+      fade: (fade)
+    (ledring)_light_8:  
+      color: (color)%00
+      fade: (fade)
+    (ledring)_light_9:  
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+
+
+
+
+
