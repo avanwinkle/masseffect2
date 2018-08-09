@@ -170,8 +170,7 @@ player_vars:
     initial_value: " "
     value_type: str
   available_upgrade:
-    initial_value: " "
-    value_type: str
+    initial_value: 0
   credits:
     initial_value: 0
   geth_colossus_state:

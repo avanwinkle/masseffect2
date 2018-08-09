@@ -99,6 +99,26 @@ achievements:
     start_events: mode_suicide_endrun_started
     disable_events: suicidemission_failed
     complete_events: endrun_complete
+  # SHIP UPGRADES
+  upgrade_armor:
+    complete_events: capture_upgrade
+    events_when_started: upgrade_available
+    events_when_completed: upgrade_complete, upgraded_armor
+  upgrade_shields:
+    complete_events: capture_upgrade
+    events_when_started: upgrade_available
+    events_when_completed: upgrade_complete, upgraded_shields
+  upgrade_cannon:
+    complete_events: capture_upgrade
+    events_when_started: upgrade_available
+    events_when_completed: upgrade_complete, upgraded_cannon
+
+achievement_groups:
+  ship_upgrades_group:
+    achievements: upgrade_armor, upgrade_shields, upgrade_cannon
+    start_selected_events: player_level{value%3==0}
+    auto_select: true
+    events_when_all_completed: all_upgrades_complete
 
 event_player:
   mode_base_started:
@@ -199,6 +219,13 @@ variable_player:
   player_available_missions{value>0}:
     bypass_missionselect:
       action: set
+      int: 0
+  # Track whether an upgrade is available to be claimed
+  upgrade_available:
+    available_upgrades: 1
+  upgrade_complete:
+    available_upgrades:
+      action: set   # Set to 0, no way to collect upgrades that were missed
       int: 0
 
 shots:

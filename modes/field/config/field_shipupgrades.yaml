@@ -1,0 +1,51 @@
+#config_version=5
+event_player:
+  capture_shipupgrade_shot_hit: capture_upgrade
+  
+shots:
+  capture_shipupgrade_shot:
+    switch: s_tenpoints
+    enable_events: 
+      - mode_field_started{current_player.available_upgrades>0}
+      - upgrade_available
+    disable_events: upgrade_complete
+    profile: color_on
+    show_tokens:
+      leds: l_upgrade
+      color: FFFFFF
+
+slide_player:
+  upgrade_available:
+    upgrade_ready_slide:
+      expire: 1s
+  upgraded_armor:
+    upgrade_armor_complete_slide:
+      expire: 1s
+  upgraded_cannon:
+    upgrade_cannon_complete_slide:
+      expire: 1s
+  upgraded_shields:
+    upgrade_shields_complete_slide:
+      expire: 1s
+
+slides:
+  upgrade_ready_slide:
+    widgets:
+      - type: text
+        text: Upgrade Available!
+        font_size: 12
+  upgrade_armor_complete_slide:
+    widgets:
+      - type: text
+        text: Silaris Armor Upgraded!
+        font_size: 12
+  upgrade_cannon_complete_slide:
+    widgets:
+      - type: text
+        text: Thanix Cannon Upgraded!
+        font_size: 12
+  upgrade_shields_complete_slide:
+    widgets:
+      - type: text
+        text: Multicore Shielding Upgraded!
+        font_size: 12

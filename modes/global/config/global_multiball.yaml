@@ -18,9 +18,9 @@ event_player:
   fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
-  # If the current multiball has not been played, a single hit will light.
+  # If overlord has not been played, a single hit will light. (Arrival always takes both)
   # We know a mode has been played if it is "stopped" rather than "enabled"
-    - enable_fmball_lock{(device.achievements.overlord.state=="enabled" or device.achievements.arrival.state=="enabled") and not device.multiball_locks.fmball_lock.enabled}
+    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and not device.multiball_locks.fmball_lock.enabled}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
@@ -49,14 +49,9 @@ event_player:
 shot_groups:
   fmball_lightshot:
     shots: light_lock_fmball_top, light_lock_fmball_bottom
-    enable_events:
-      - enable_lock_lightshot
-      - multiball_overlord_multiball_ended
-      - multiball_arrival_multiball_ended
-    disable_events:
-      - disable_lock_lightshot
-      - multiball_overlord_multiball_started
-      - multiball_arrival_multiball_started
+    # Since multiballs are wizards, this mode will auto enable/disable the shot with multiballs
+    enable_events: enable_lock_lightshot
+    disable_events: disable_lock_lightshot
     reset_events: multiball_lock_fmball_lock_locked_ball
 
 shots:

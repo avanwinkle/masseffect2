@@ -25,6 +25,11 @@ shows:
         (leds): (color2)
 
 shot_profiles:
+  color_on:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_color
   color_flashing_static:
     show_when_disabled: false
     states:

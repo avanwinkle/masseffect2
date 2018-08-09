@@ -258,6 +258,8 @@ switches:
     number: 10-14
     ignore_window_ms: 400
     # tags: playfield_active # Cannot be playfield active if it's a ball hold switch
+  s_tenpoints:
+    number: 9-12
   s_lock_1:
     number: 9-0
   s_lock_2:
@@ -412,7 +414,7 @@ lights:
     tags: lane_arrows
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
-    tags: lane_wedges
+    tags: lane_wedges, l_upgrade
   l_right_return_lane: # Right Return Lane [#33]
     number: 8-0
     tags: l_return_lane, outer_circles
