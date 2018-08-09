@@ -36,12 +36,14 @@ event_player:
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
   logicblock_shunt_counter_complete: enable_hatch
-  # DEBUG
-  hatch_shot_hit: shadowbroker_hagalaz_complete
-  ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
   shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
   timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+  # If the only lit shot is hit, immediately light another one
+  player_temp_counter{value==0}: enable_random_shuntshot
+  # DEBUG until we have an actual hold
+  hatch_shot_hit: shadowbroker_hagalaz_complete
+  ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
 
 random_event_player:
   enable_random_shuntshot:
@@ -56,11 +58,22 @@ random_event_player:
 counters:
   shunt_counter:
     starting_count: 0
-    count_complete_value: 3 # DEBUG, should be 10
+    count_complete_value: 8
     direction: up
-    persist_state: false
     count_events: shunt_shot_lit_hit
     reset_events: mode_shadowbroker_hagalaz_started
+
+variable_player:
+  # Count how many shunt shots are lit so we can avoid having zero shots
+  mode_shadowbroker_hagalaz_started:
+    temp_counter:
+      action: set
+      int: 0
+  enable_random_shuntshot:
+    temp_counter: 1
+  shunt_shot_lit_hit:
+    temp_counter: -1
+
 
 shot_groups:
   shunt_shot:
@@ -72,11 +85,6 @@ shot_groups:
     disable_events: enable_hatch
 
 shot_profiles:
-  shunt_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: shunt_show
   hatch_profile:
     show_when_disabled: false
     states:
@@ -102,37 +110,42 @@ shots:
     hit_events: sh_left_orbit_hit, hagalaz_target1_charged_hit
     enable_events: enable_shunt_left_orbit
     disable_events: shunt_left_orbit_hit, enable_hatch
-    profile: shunt_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_left_orbit_shield_rgb
+      color: blue
   shunt_kickback:
     hit_events: sh_kickback_hit, hagalaz_target1_charged_hit, hagalaz_target2_charged_hit
     enable_events: enable_shunt_kickback
     disable_events: shunt_kickback_hit, enable_hatch
-    profile: shunt_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_kickback_shield_rgb
+      color: blue
   shunt_left_ramp:
     hit_events: sh_left_ramp_hit, hagalaz_target2_charged_hit, hagalaz_target3_charged_hit
     enable_events: enable_shunt_left_ramp
     disable_events: shunt_left_ramp_hit, enable_hatch
-    profile: shunt_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
+      color: blue
   shunt_right_ramp:
     hit_events: sh_right_ramp_hit, hagalaz_target4_charged_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_ramp
     disable_events: shunt_right_ramp_hit, enable_hatch
-    profile: shunt_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_right_ramp_shield_rgb
+      color: blue
   shunt_right_orbit:
     hit_events: sh_right_orbit_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_orbit
     disable_events: shunt_right_orbit_hit, enable_hatch
-    profile: shunt_profile
+    profile: color_flashing_static
     show_tokens:
       leds: l_right_orbit_shield_rgb
+      color: blue
   hagalaz_target1:
     switch: s_target1
     advance_events: capacitors_charged_ready
@@ -165,32 +178,15 @@ shots:
       leds: l_standup_5
 
 show_player:
-  mode_shadowbroker_hagalaz_started:
-    # Make some lightning!
-    flasher_show_double:
-      key: throne_lightning
-      speed: 1.2
-      show_tokens:
-        flashers: l_flash_throne
-    flasher_show_triple:
-      key: upper_lightning
-      speed: 0.87
-      show_tokens:
-        flashers: l_flash_kickback_lane, l_flash_right_ramp
-    flasher_show_single:
-      key: dragon_lightning
-      speed: 1.37
-      show_tokens:
-        flashers: l_flash_dragon_right, l_flash_slingshots
+  # Make some lightning!
+  mode_shadowbroker_hagalaz_started: 
+    lightning_show:
+      loops: 2
+  capacitors_charged_ready:
+    lightning_show:
+      loops: 0
 
 shows:
-  shunt_show:
-    - time: 0
-      lights:
-        (leds): blue
-    - time: '+1'
-      lights:
-        (leds): 000000
   hatch_show:
     - time: 0
       lights:
@@ -218,6 +214,19 @@ shows:
         (leds):
           color: BBBBBB
           fade: 250ms
+  lightning_show:
+    - time: 0
+      flashers:  
+        l_flash_throne: 120ms
+    - time: 400ms
+      flashers:
+        l_flash_kickback_lane: 200ms
+        l_flash_right_ramp: 200ms
+    - time: 700ms
+      flashers:
+        l_flash_dragon_right: 120ms
+        l_flash_slingshots: 200ms
+    - time: 2s
 
 sound_player:
   mode_shadowbroker_hagalaz_started:
@@ -226,7 +235,7 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-  logicblock_shunt_counter_updated{value>0 and value<10}: shunt_progress_sound
+  logicblock_shunt_counter_updated{value>0 and value<8}: shunt_progress_sound
   # logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
   enable_hatch:
     liara_hatch_is_open:
@@ -234,7 +243,7 @@ sound_player:
     shadowbroker_agent_music:
       action: stop
       fade_out: 3s
-  # Relays
+  # Relays to play a call/response sound
   play_liara_that_security_upgrade: liara_that_security_upgrade
   play_liara_ive_never_broken_into_sb_before: liara_ive_never_broken_into_sb_before
   play_liara_no_time_to_talk: liara_no_time_to_talk
@@ -363,7 +372,7 @@ sounds:
 
 timers:
   sbhagalaz_timer:
-    start_value: 64
+    start_value: 60
     end_value: 0
     tick_interval: 1s
     start_running: true
