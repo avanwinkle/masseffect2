@@ -68,7 +68,7 @@ ball_saves:
     enable_events:
       # An active ball save will save leftover multiballs, so only enable during phase3 with one ball in play
       - start_arrival_phase3{game.balls_in_play<=1}
-      - playfield_ball_count_change{balls==1 and device.counters.arrival_phase==3}
+      - playfield_ball_count_change{balls==1 and device.counters.arrival_phase.value==3}
     disable_events: start_arrival_phase4
 
 event_player:

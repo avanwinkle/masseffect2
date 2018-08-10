@@ -198,12 +198,12 @@ sound_pools:
     sounds:
       - gunship_miranda
       - gunship_jacob
-      - gunship_garrus{current_player.status_garrus>=3}
-      - gunship_kasumi{current_player.status_kasumi>=3}
-      - gunship_grunt{current_player.status_grunt>=3}
-      - gunship_zaeed{current_player.status_zaeed>=3}
-      - gunship_tali{current_player.status_tali>=3}
-      - gunship_jack{current_player.status_jack>=3}
+      - gunship_garrus{current_player.status_garrus>3}
+      - gunship_kasumi{current_player.status_kasumi>3}
+      - gunship_grunt{current_player.status_grunt>3}
+      - gunship_zaeed{current_player.status_zaeed>3}
+      - gunship_tali{current_player.status_tali>3}
+      - gunship_jack{current_player.status_jack>3}
 
 sounds:
   music_recruit_samara:

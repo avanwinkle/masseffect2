@@ -330,7 +330,7 @@ widget_styles:
   score_style_singleplayer:
     number_grouping: true
     min_digits: 2
-    font_size: 12
+    font_size: 10
     font_name: Quadrit-10
     anchor_x: left
     anchor_y: top
