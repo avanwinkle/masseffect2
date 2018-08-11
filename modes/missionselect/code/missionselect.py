@@ -2,7 +2,7 @@ import copy
 from scriptlets.me_squadmates import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
-ALLOW_COLLECTORSHIP_REPLAY = True
+ALLOW_COLLECTORSHIP_REPLAY = False
 
 class MissionSelect(Carousel):
 

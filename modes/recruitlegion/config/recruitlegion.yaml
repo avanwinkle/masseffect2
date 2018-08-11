@@ -24,8 +24,9 @@
 mode:
   start_events: start_mode_recruitlegion
   stop_events: stop_mode_recruitlegion, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
-  events_when_stopped: mode_type_mission_stopped
+  # We use the banks as a shot target, so disable the drops and lock hits
+  events_when_started: mode_type_mission_started, disable_sbdrops_counter, disable_lock_lightshot
+  events_when_stopped: mode_type_mission_stopped, enable_sbdrops_counter, enable_lock_lightshot
   priority: 500
 
 event_player:
@@ -34,14 +35,8 @@ event_player:
       env: geth
   mode_recruitlegion_started.2:
     - play_opening_heretic_dialogue
-    # We use the banks as a shot target, so disable the drops and lock hits
-    - disable_lock_lightshot
-    - disable_sbdrops_counter
   timer_heretic_timer_complete:
     - enable_random_heretic
-  mode_recruitlegion_will_stop:
-    - enable_sbdrops_counter
-    - enable_lock_lightshot
   heretic_kickback_shot_hit:
     - recruit_legion_complete
   heretic_shot_left_hit:
@@ -117,7 +112,7 @@ shot_groups:
     shots: heretic_shot_orbits, heretic_shot_ramps
     rotate_events: heretic_sequence_shots_lit_hit
     enable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
-    disable_events: enable_random_heretic
+    disable_events: enable_random_heretic, logicblock_heretic_counter_complete
   heretic_recovery_shots:
     shots: heretic_shot_dropbank, heretic_shot_hitbank
     disable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
@@ -152,7 +147,7 @@ shots:
   heretic_shot_orbits:
     hit_events: sh_left_orbit_hit, sh_right_orbit_hit
     reset_events: mode_recruitlegion_started
-    advance_events: heretic_sequence_shots_unlit_complete
+    advance_events: play_opening_heretic_dialogue
     profile: hit_to_flash_profile_noadvance
     show_tokens:
       leds: l_left_orbit_shield_rgb, l_right_orbit_shield_rgb

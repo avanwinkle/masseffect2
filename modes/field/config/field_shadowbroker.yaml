@@ -52,11 +52,18 @@ variable_player:
       int: 0
 
 show_player:
-  mode_field_started.2{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}:
+  mode_field_started:
+    sbdrops_show:
+      manual_advance: true
+      start_step: device.counters.sbdrops_counter.value % 4 + 1
+  mode_field_started{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}:
     shadowbroker_lit_show:
       action: play
       priority: 10
       sync_ms: 1000
+  logicblock_sbdrops_counter_hit:
+    sbdrops_show:
+      action: advance
   achievement_chase_state_enabled:
     shadowbroker_lit_show:
       action: play
@@ -83,8 +90,27 @@ show_player:
       action: stop
     shadowbroker_hold_enabled_show:
       action: stop
+    sbdrops_show:
+      action: stop
 
 shows:
+  sbdrops_show:
+    - lights:
+        l_dropbank_bottom: black
+        l_dropbank_middle: black
+        l_dropbank_top: black
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: black
+        l_dropbank_top: black
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: white
+        l_dropbank_top: black
+    - lights:
+        l_dropbank_bottom: white
+        l_dropbank_middle: white
+        l_dropbank_top: white
   shadowbroker_lit_show:
     - duration: 500ms
       lights:

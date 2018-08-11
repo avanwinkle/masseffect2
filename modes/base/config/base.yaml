@@ -38,9 +38,8 @@ achievements:
     restart_on_next_ball_when_started: false
   # MULTIBALLS
   overlord:
-    disable_events: mode_collectorship_base_started
     start_events: mode_overlord_started
-    stop_events: mode_overlord_stopped
+    stop_events: mode_overlord_stopped, mode_collectorship_base_started
     complete_events: overlord_complete
     restart_on_next_ball_when_started: false
   arrival:
@@ -441,6 +440,7 @@ sound_player:
   mode_field_will_stop:
     music_mission_success:
       action: stop
+      fade_out: 1s
 
 sounds:
   galaxy_whoosh:
@@ -451,13 +451,13 @@ sounds:
     track: levelup # Use a special track to avoid music fadeout conflicts
     loop: 0
     fade_in: 500ms
-    fade_out: 1s
+    fade_out: 10s
     ducking:
       target: music
       delay: 2s
       attack: 2s
       attenuation: 0
-      release_point: 12s
+      release_point: 15s
       release: 6s
 
 track_player:

@@ -9,16 +9,11 @@
 # progress through the Shadow Broker story.
 #
 #####
-
-ball_saves:
-  debug_shadowbroker_ballsave:
-    active_time: 60s
-    enable_events: enter_shadowbroker_modes
-    disable_events: exit_shadowbroker_modes
-    balls_to_save: -1
+mode:
+  events_when_started: enable_sbdrops_counter
+  events_when_stopped: disable_sbdrops_counter
 
 counters:
-  # COMBINE sbvasir_counter and sbhagalaz_counter
   sbdrops_counter:
     count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
     starting_count: current_player.counter_sbdrops_counter
@@ -83,16 +78,6 @@ show_player:
       priority: 100
       loops: 12
       speed: 12
-  mode_global_started:
-    sbdrops_show:
-      manual_advance: true
-      start_step: device.counters.sbdrops_counter.value % 4 + 1
-  logicblock_sbdrops_counter_hit:
-    sbdrops_show:
-      action: advance
-  mode_global_will_stop:
-    sbdrops_show:
-      action: stop
 
 shows:
   sbdrops_flash:
@@ -106,44 +91,28 @@ shows:
         l_dropbank_bottom: black
         l_dropbank_middle: black
         l_dropbank_top: black
-  sbdrops_show:
-    - lights:
-        l_dropbank_bottom: black
-        l_dropbank_middle: black
-        l_dropbank_top: black
-    - lights:
-        l_dropbank_bottom: white
-        l_dropbank_middle: black
-        l_dropbank_top: black
-    - lights:
-        l_dropbank_bottom: white
-        l_dropbank_middle: white
-        l_dropbank_top: black
-    - lights:
-        l_dropbank_bottom: white
-        l_dropbank_middle: white
-        l_dropbank_top: white
 
 sound_player:
-  logicblock_sbdrops_counter_hit.1{count==1}:
+  # Have to deal with duplicate events until MC handles event priority with conditions
+  logicblock_sbdrops_counter_hit{count==1}:
     shepard_sounds_like_liara_found_something_big:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit.2{count==2}:
+  logicblock_sbdrops_counter_hit{count==2}:
     vasir_i_know_where_the_trade_center_is:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit.3{count==3}:
+  logicblock_sbdrops_counter_hit{count==3}:
     vasir_they_took_out_three_floors:
       max_queue_time: 2s
   achievement_vasir_state_completed:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit.4{count==4}:
+  logicblock_sbdrops_counter_hit{count==4}:
     liara_sukets_datapad_this_has_what_we_need:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit.5{count==5}:
+  logicblock_sbdrops_counter_hit{count==5}:
     liara_we_can_be_at_base_in_a_few_hours:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit.6{count==6}:
+  logicblock_sbdrops_counter_hit{count==6}:
     liara_land_outside_and_hunt_for_a_hatch:
       max_queue_time: 2s
   # Relays:

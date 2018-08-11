@@ -234,22 +234,23 @@ slide_player:
   recruit_kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
-  logicblock_kasumi_shots_counter_hit.1{count==1}:
+  # Until MC supports priority and condition, deal with duplicate warnings
+  logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_slide_1:
       expire: 3s
-  logicblock_kasumi_shots_counter_hit.2{count==2}:
+  logicblock_kasumi_shots_counter_hit{count==2}:
     kasumi_slide_2:
       expire: 3s
-  logicblock_kasumi_shots_counter_hit.3{count==3}:
+  logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_slide_3:
       expire: 3s
-  logicblock_kasumi_shots_counter_hit.4{count==4}:
+  logicblock_kasumi_shots_counter_hit{count==4}:
     kasumi_slide_4:
       expire: 3s
-  logicblock_kasumi_alarms_counter_hit.1{count>0}:
+  logicblock_kasumi_alarms_counter_hit{count>0}:
     kasumi_alarm_slide:
       expire: 3s
-  logicblock_kasumi_alarms_counter_hit.2{count==0}:
+  logicblock_kasumi_alarms_counter_hit{count==0}:
     kasumi_failed_slide:
       expire: 3s
 
@@ -350,19 +351,19 @@ sound_player:
     kasumi_careful:
       action: play
   # First shot hit, got the password
-  logicblock_kasumi_shots_counter_hit.1{count==1}:
+  logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_password_complete:
       action: play
   # Second shot hit, got the voice print
-  logicblock_kasumi_shots_counter_hit.2{count==2}:
+  logicblock_kasumi_shots_counter_hit{count==2}:
     kasumi_voice_complete:
       action: play
   # Third shot hit, got the DNA sample
-  logicblock_kasumi_shots_counter_hit.3{count==3}:
+  logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_not_great_saliva_sample:
       action: play
   # Fourth shot hit, get the barrier down
-  logicblock_kasumi_shots_counter_hit.4{count==4}:
+  logicblock_kasumi_shots_counter_hit{count==4}:
     kasumi_barrier_is_down:
       action: play
 
