@@ -69,10 +69,9 @@ variable_player:
       int: 0
   # Reset the reaper ROUNDS and HP on each ball? or each suicide mission?
   mode_suicide_longwalk_started:
-    # Maximum rounds to kill the reaper... 4?
     reaper_rounds:
       action: set
-      int: 4
+      int: 1
     # Human Reaper hit points... 100,000?
     reaper_hp:
       action: set
@@ -89,12 +88,12 @@ variable_player:
     suicide_continuing: 1
   humanreaper_complete:
     suicide_continuing: 1
-  mode_suicide_humanreaper_started{current_player.reaper_rounds>0}:
-    reaper_rounds: -1
+  mode_suicide_humanreaper_started:
+    reaper_rounds: 1
 
 sound_player:
   # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
-  # play_squadmate_sound: squadmate_thane_killed_inf
+  play_squadmate_sound{hack==true}: squadmate_thane_killed_inf
   squadmate_killed{not ball_is_ending}: suicide_music_base
   mode_type_suicide_started:
     suicide_music_base:
@@ -171,6 +170,13 @@ sounds:
     start_at: 7s
     fade_in: 2s
     mode_end_action: stop
+  # Huddles
+  shepard_some_could_sneak_in_this_shaft:
+    file: en_us_player_f_endgm1_huddle_01a_d_00317445_f.ogg
+    track: voice
+  jacob_who_do_we_send_into_the_shaft:
+    file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.ogg
+    track: voice
   # Death
   squadmate_thane_killed_inf:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
@@ -351,8 +357,6 @@ widget_player:
   mode_suicide_omegarelay_started:
     omegarelay_title:
       slide: suicide_slide
-    suicide_time:
-      slide: suicide_slide
   mode_suicide_infiltration_started:
     omegarelay_title:
       action: remove
@@ -383,6 +387,9 @@ widget_player:
   timer_omegarelay_tick:
     suicide_time:
       action: update
+  timer_omegarelay_stopped:
+    suicide_time:
+      action: remove
   timer_infiltration_tick:
     suicide_time:
       action: update

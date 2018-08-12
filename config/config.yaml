@@ -311,6 +311,16 @@ assets:
       track: voice
       load: on_demand
 
+animations:
+  pulse_text:
+    - property: opacity      # name of the widget property we're animating
+      value: 1               # target value of that property for this step
+      duration: .25s          # duration for this step (how long it takes to get there)
+    - property: opacity      # second step in the animation (starts with a hyphen)
+      value: 0.5
+      duration: .25s
+      repeat: true
+
 widget_styles:
   text_default:
     font_name: Quadrit-10

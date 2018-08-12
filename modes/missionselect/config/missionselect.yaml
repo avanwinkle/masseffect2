@@ -189,7 +189,12 @@ slide_player:
   missionselect_collectorship_highlighted: missionselect_collectorship_slide
   missionselect_derelictreaper_highlighted: missionselect_derelictreaper_slide
   missionselect_suicide_highlighted: missionselect_suicide_slide
-  mode_missionselect_started: missionselect_specialist_slide
+  mode_missionselect_started{device.achievements.suicidemission.state=="started"}:
+    missionselect_specialist_intro_slide:
+      priority: 2501
+      expire: 2s
+    missionselect_specialist_slide:
+      priority: 2500 # Suicide runs at 2000
 
 slides:
   missionselect_intro_slide:
@@ -258,8 +263,14 @@ slides:
         style: quadrit_big
         anchor_y: bottom
         y: bottom+45%
+  missionselect_specialist_intro_slide:
+    widgets:
+      - type: text
+        text: Select a Specialist
+        style: quadrit_big
+        anchor_y: bottom
+        y: bottom+45%
   missionselect_specialist_slide:
-    priority: 2500 # Suicide runs at 2000
     widgets:
       - type: rectangle
         color: black
@@ -461,70 +472,70 @@ widgets:
   specialist_garrus_widget:
     - type: text
       text: Garrus
-      style: spec_default
+      style: spec_dead
       y: 24
       x: 2
       z: 2
   specialist_jack_widget:
     - type: text
       text: Jack
-      style: spec_default
+      style: spec_dead
       y: 24
       x: 2
       z: 2
   specialist_jacob_widget:
     - type: text
       text: Jacob
-      style: spec_default
+      style: spec_dead
       y: 13
       x: 2
       z: 2
   specialist_kasumi_widget:
     - type: text
       text: Kasumi
-      style: spec_default
+      style: spec_dead
       y: 2
       x: 2
       z: 2
   specialist_legion_widget:
     - type: text
       text: Legion
-      style: spec_default
+      style: spec_dead
       y: 24
       x: 44
       z: 2
   specialist_miranda_widget:
     - type: text
       text: Miranda
-      style: spec_default
+      style: spec_dead
       y: 24
       x: 44
       z: 2
   specialist_mordin_widget:
     - type: text
       text: Mordin
-      style: spec_default
+      style: spec_dead
       y: 13
       x: 44
       z: 2
   specialist_samara_widget:
     - type: text
       text: Samara
-      style: spec_default
+      style: spec_dead
       y: 13
       x: 44
       z: 2
   specialist_tali_widget:
     - type: text
       text: Tali
-      style: spec_default
+      style: spec_dead
       y: 2
       x: 44
       z: 2
   specialist_thane_widget:
     - type: text
       text: Thane
-      style: spec_default
+      style: spec_dead
       y: 24
       x: 86
       z: 2

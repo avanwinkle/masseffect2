@@ -162,7 +162,8 @@ show_player:
         color: FFFFFF
 
 sound_player:
-  mode_suicide_platforms_started: enemies_incoming
+  mode_suicide_platforms_started{current_player.reaper_rounds % 2 == 0}: enemies_incoming
+  mode_suicide_platforms_started{current_player.reaper_rounds % 2 == 1}: enemies_reinforcements
 
 sound_pools:
   enemies_incoming:
@@ -180,6 +181,21 @@ sound_pools:
       - tali_enemies_incoming{current_player.status_tali==4}
       - thane_enemies_incoming{current_player.status_thane==4}
       - zaeed_enemies_incoming{current_player.status_zaeed==4}
+  enemies_reinforcements:
+    track: voice
+    sounds:
+      - garrus_reinforcements{current_player.status_garrus==4}
+      - grunt_reinforcements{current_player.status_grunt==4}
+      - jacob_reinforcements{current_player.status_jacob==4}
+      - jack_reinforcements{current_player.status_jack==4}
+      - kasumi_reinforcements{current_player.status_kasumi==4}
+      - legion_reinforcements{current_player.status_legion==4}
+      - miranda_reinforcements{current_player.status_miranda==4}
+      - mordin_reinforcements{current_player.status_mordin==4}
+      - samara_reinforcements{current_player.status_samara==4}
+      - tali_reinforcements{current_player.status_tali==4}
+      - thane_reinforcements{current_player.status_thane==4}
+      - zaeed_reinforcements{current_player.status_zaeed==4}
 
 sounds:
   garrus_enemies_incoming:
@@ -217,4 +233,40 @@ sounds:
     track: voice
   zaeed_enemies_incoming:
     file: en_us_hench_veteran_endgm2_boss_fight_a_00286119_m.ogg
+    track: voice
+  thane_reinforcements:
+    file: en_us_hench_assassin_endgm2_warnings_a_00317951_m.ogg
+    track: voice
+  garrus_reinforcements:
+    file: en_us_hench_garrus_endgm2_warnings_a_00317956_m.ogg
+    track: voice
+  legion_reinforcements:
+    file: en_us_hench_geth_endgm2_warnings_a_00317954_m.ogg
+    track: voice
+  grunt_reinforcements:
+    file: en_us_hench_grunt_endgm2_warnings_a_00317957_m.ogg
+    track: voice
+  jacob_reinforcements:
+    file: en_us_hench_leading_endgm2_warnings_a_00317953_m.ogg
+    track: voice
+  samara_reinforcements:
+    file: en_us_hench_mystic_endgm2_warnings_a_00317950_m.ogg
+    track: voice
+  mordin_reinforcements:
+    file: en_us_hench_professor_endgm2_warnings_a_00317952_m.ogg
+    track: voice
+  tali_reinforcements:
+    file: en_us_hench_tali_endgm2_warnings_a_00317949_m.ogg
+    track: voice
+  kasumi_reinforcements:
+    file: en_us_hench_thief_endgm2_warnings_a_00317948_m.ogg
+    track: voice
+  zaeed_reinforcements:
+    file: en_us_hench_veteran_endgm2_warnings_a_00317958_m.ogg
+    track: voice
+  miranda_reinforcements:
+    file: en_us_hench_vixen_endgm2_warnings_a_00317955_m.ogg
+    track: voice
+  jack_reinforcements:
+    file: en_us_hench_convict_endgm2_warnings_a_00317935_m.ogg
     track: voice

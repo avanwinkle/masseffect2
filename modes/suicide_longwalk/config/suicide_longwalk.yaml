@@ -45,6 +45,10 @@ event_player:
   logicblock_swarmpaths_complete: longwalk_complete
 
 counters:
+  barrier_warning:
+    starting_count: 0
+    count_events: increase_tension
+    reset_events: mode_suicide_longwalk_started
   swarmpaths:
     starting_count: 7
     count_complete_value: 0
@@ -232,8 +236,9 @@ sound_player:
     longwalk_med:
       action: play
       start_at: 18s
-    specialist_lw_warning_med:
-      action: play
+  # We play the "leaving the barrier" sound for the first increase
+  logicblock_barrier_warning_hit{value==1}: specialist_lw_warning_barrier
+  logicblock_barrier_warning_hit{value>1}: specialist_lw_warning_med
   player_tension{value==2}:
     longwalk_med:
       action: stop
@@ -281,6 +286,14 @@ sound_player:
 
 
 sound_pools:
+  specialist_lw_warning_barrier:
+    track: voice
+    sounds:
+      - specialist_jack_leaving_the_barrier{current_player.specialist=="jack"}
+      - specialist_jacob_leaving_the_barrier{current_player.specialist=="jacob"}
+      - specialist_miranda_leaving_the_barrier{current_player.specialist=="miranda"}
+      - specialist_samara_leaving_the_barrier{current_player.specialist=="samara"}
+      - specialist_thane_leaving_the_barrier{current_player.specialist=="thane"}
   specialist_lw_close:
     track: voice
     sounds:

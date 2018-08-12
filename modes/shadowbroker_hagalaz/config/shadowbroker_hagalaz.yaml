@@ -179,7 +179,7 @@ shots:
 
 show_player:
   # Make some lightning!
-  mode_shadowbroker_hagalaz_started: 
+  mode_shadowbroker_hagalaz_started:
     lightning_show:
       loops: 2
   capacitors_charged_ready:
@@ -216,7 +216,7 @@ shows:
           fade: 250ms
   lightning_show:
     - time: 0
-      flashers:  
+      flashers:
         l_flash_throne: 120ms
     - time: 400ms
       flashers:
@@ -383,3 +383,56 @@ timers:
       - event: shunt_shot_hit
         action: add
         value: 12
+
+slide_player:
+  mode_shadowbroker_hagalaz_started: hagalaz_slide
+  logicblock_shunt_counter_complete: hagalaz_complete_slide
+
+slides:
+  hagalaz_slide:
+    widgets:
+      - type: text
+        text: Infiltrate the Ship
+        style: medium
+      - type: text
+        text: "Shots: (count)"
+        style: small
+        anchor_x: right
+        anchor_y: bottom
+        x: right-2
+        y: 2
+  hagalaz_complete_slide:
+    widgets:
+      - type: text
+        text: ENTER
+        style: quadrit_big
+        anchor_y: bottom
+        y: middle+2
+        animations:
+          show_slide: pulse_text
+      - type: text
+        text: THE SHIP
+        style: quadrit_big
+        anchor_y: top
+        y: middle-2
+        animations:
+          show_slide: pulse_text
+
+widget_player:
+  timer_sbhagalaz_timer_tick:
+    hagalaz_timer_widget:
+      action: update
+      slide: hagalaz_slide
+  timer_sbhagalaz_timer_stopped:
+    hagalaz_timer_widget:
+      action: remove
+
+widgets:
+  hagalaz_timer_widget:
+    - type: text
+      text: (ticks)
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 2

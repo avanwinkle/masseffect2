@@ -1,7 +1,5 @@
 #config_version=5
 keyboard:
-  8:
-    event: start_mode_arrival
   # Advance major shots
   1:
     switch: s_left_orbit
@@ -13,6 +11,8 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
+  8:
+    switch: s_dropbank_top
   l:
     event: bypass_lock_release_pulse
   n:

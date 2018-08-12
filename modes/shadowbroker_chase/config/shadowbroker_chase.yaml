@@ -170,14 +170,7 @@ slides:
         text: CHASE VASIR
         style: quadrit_big
         animations:
-          show_slide:                # animation trigger event
-            - property: opacity      # name of the widget property we're animating
-              value: 1               # target value of that property for this step
-              duration: 2.5s          # duration for this step (how long it takes to get there)
-            - property: opacity      # second step in the animation (starts with a hyphen)
-              value: 0.2
-              duration: 2.5s
-              repeat: true
+          show_slide: pulse text
       - type: text
         text: "Shots: (player|sbchase_hits_remaining)"
         style: dmd_small
@@ -192,15 +185,6 @@ slides:
         anchor_y: bottom
         x: 2
         y: 2
-        animations:
-          show_slide:                # animation trigger event
-            - property: opacity      # name of the widget property we're animating
-              value: 1               # target value of that property for this step
-              duration: 2.5s          # duration for this step (how long it takes to get there)
-            - property: opacity      # second step in the animation (starts with a hyphen)
-              value: 0.5
-              duration: 2.5s
-              repeat: true
 
 sound_player:
   mode_shadowbroker_chase_started:

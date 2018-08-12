@@ -17,7 +17,8 @@ event_player:
     # If the reaper still has HP and there are more rounds to go, "fail" to return to platforms
     - humanreaper_failed{value>0 and current_player.reaper_rounds>0}
     # If the reaper has no HP and the minimum 3 rounds have passed, OR if the max rounds have passed, "complete"
-    - humanreaper_complete{(value<=0 and current_player.reaper_rounds<=3) or current_player.reaper_rounds<=0}
+    # Maximum rounds to kill the reaper... 4?
+    - humanreaper_complete{(value<=0 and current_player.reaper_rounds<=3) or current_player.reaper_rounds>=4}
 
 random_event_player:
   enable_random_reapershot:
@@ -29,11 +30,17 @@ random_event_player:
       - enable_reapershot_right_orbit
 
 variable_player:
+  mode_suicide_humanreaper_started:
+    # Store the "damage" built from the last round
+    temp_hurryup_value:
+      action: set
+      # We need a minimum value to progress the mode, so... 1000+
+      # Also do 25% more damage each round, to help a player out :)
+      int: (1000 + current_player.temp_build_value) * (1 + 0.25 * current_player.reaper_rounds)
   reaper_shot_hit:
     reaper_hp:
       action: add
-      # We need a minimum value to progress the mode, so... 1000+
-      int: (1000 + current_player.build_value) * (current_player.reaper_rounds / 2) * -1
+      int: current_player.temp_hurryup_value * -1
 
 # We can take "cover" while the reaper is firing
 ball_holds:
@@ -122,12 +129,41 @@ shots:
     tags: envshot_kickback
 
 slide_player:
+  mode_suicide_humanreaper_started: reaper_slide
   timer_reaper_firing_complete: reaper_firing_slide
   reset_reaper:
     reaper_firing_slide:
       action: remove
 
 slides:
+  reaper_slide:
+    widgets:
+      - type: text
+        text: Destroy the Reaper
+        style: text_default
+      - type: text
+        text: (player|temp_hurryup_value) Dmg
+        number_grouping: true
+        style: small
+        anchor_x: left
+        anchor_y: bottom
+        x: 2
+        y: 2
+      - type: text
+        text: Round (player|reaper_rounds)
+        style: small
+        anchor_x: right
+        anchor_y: bottom
+        x: right-2
+        y: 14
+      - type: text
+        text: (player|reaper_hp) HP
+        style: small
+        number_grouping: true
+        anchor_x: right
+        anchor_y: bottom
+        x: right-2
+        y: 2
   reaper_firing_slide:
     widgets:
       - type: rectangle
@@ -157,6 +193,22 @@ slides:
               value: 0
               duration: .25s
               repeat: true
+
+widget_player:
+  timer_reaper_charging_tick:
+    reaper_charging_widget:
+      action: update
+      slide: reaper_slide
+
+widgets:
+  reaper_charging_widget:
+    - type: text
+      text: Firing in (player|reaper_rounds)s
+      style: small
+      anchor_x: left
+      anchor_y: bottom
+      x: 2
+      y: 14
 
 sound_player:
   mode_suicide_humanreaper_started: suicide_music_reaper

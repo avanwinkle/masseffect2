@@ -206,14 +206,7 @@ slides:
         text: DEFEAT VASIR
         style: quadrit_big
         animations:
-          show_slide:                # animation trigger event
-            - property: opacity      # name of the widget property we're animating
-              value: 1               # target value of that property for this step
-              duration: .25s          # duration for this step (how long it takes to get there)
-            - property: opacity      # second step in the animation (starts with a hyphen)
-              value: 0.5
-              duration: .25s
-              repeat: true
+          show_slide: pulse_text
 
 sound_player:
   mode_shadowbroker_vasir_started:
