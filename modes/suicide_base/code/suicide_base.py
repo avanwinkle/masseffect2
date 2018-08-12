@@ -52,6 +52,7 @@ class SuicideBase(Mode):
     self._play_sound({
       "sound": "killed",
       "squadmate": mate,
+      "mode": self._get_current_mode(),
     })
 
   def _kill_squadmate_callback(self, **kwargs):
@@ -85,3 +86,7 @@ class SuicideBase(Mode):
   def _play_sound(self, sound_event):
     self.machine.events.post("play_squadmate_sound", **sound_event)
 
+  def _get_current_mode(self):
+    for mode in ["omegarelay", "infiltration", "longwalk", "platforms", "humanreaper", "escape"]:
+      if self.machine.modes["suicide_{}".format(mode)].active:
+        return mode

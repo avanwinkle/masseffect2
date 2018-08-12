@@ -93,7 +93,7 @@ variable_player:
 
 sound_player:
   # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
-  play_squadmate_sound{hack==true}: squadmate_thane_killed_inf
+  play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
   squadmate_killed{not ball_is_ending}: suicide_music_base
   mode_type_suicide_started:
     suicide_music_base:
@@ -178,25 +178,25 @@ sounds:
     file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.ogg
     track: voice
   # Death
-  squadmate_thane_killed_inf:
+  squadmate_thane_killed_infiltration:
     file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
     track: voice
-  squadmate_garrus_killed_inf:
+  squadmate_garrus_killed_infiltration:
     file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
     track: voice
-  squadmate_legion_killed_inf:
+  squadmate_legion_killed_infiltration:
     file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
     track: voice
-  squadmate_jacob_killed_inf:
+  squadmate_jacob_killed_infiltration:
     file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
     track: voice
-  squadmate_mordin_killed_inf:
+  squadmate_mordin_killed_infiltration:
     file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
     track: voice
-  squadmate_tali_killed_inf:
+  squadmate_tali_killed_infiltration:
     file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
     track: voice
-  squadmate_kasumi_killed_inf:
+  squadmate_kasumi_killed_infiltration:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
     track: voice
   # Killed Callback

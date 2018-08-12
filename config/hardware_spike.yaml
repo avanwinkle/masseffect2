@@ -564,13 +564,13 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
-    default_pulse_ms: 18
+    default_pulse_ms: 16
   c_bumper_right:
     number: 10-2
     default_pulse_ms: 18
   c_bumper_bottom:
     number: 10-3
-    default_pulse_ms: 18
+    default_pulse_ms: 14
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 13

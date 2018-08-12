@@ -394,13 +394,6 @@ slides:
       - type: text
         text: Infiltrate the Ship
         style: medium
-      - type: text
-        text: "Shots: (count)"
-        style: small
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 2
   hagalaz_complete_slide:
     widgets:
       - type: text
@@ -426,6 +419,10 @@ widget_player:
   timer_sbhagalaz_timer_stopped:
     hagalaz_timer_widget:
       action: remove
+  logicblock_shunt_counter_updated:
+    hagalaz_shunt_widget:
+      action: update
+      slide: hagalaz_slide
 
 widgets:
   hagalaz_timer_widget:
@@ -435,4 +432,12 @@ widgets:
       anchor_x: left
       anchor_y: bottom
       x: 2
+      y: 2
+  hagalaz_shunt_widget:
+    - type: text
+      text: "Shots: (count)"
+      style: small
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
       y: 2

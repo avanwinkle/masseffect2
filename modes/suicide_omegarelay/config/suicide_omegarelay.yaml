@@ -118,7 +118,10 @@ shots:
       color: FF2200 # color_collectors
 
 sound_player:
-  mode_suicide_omegarelay_started: omegarelay_gunsuccess
+  mode_suicide_omegarelay_started:
+    omegarelay_gunsuccess:
+      start_at: 4s
+      fade_in: 1s
   # timer_omegarelay_tick{ticks==5}: joker_mass_effect_generators_offline
   force_omega_end: joker_everybody_hold_on
 
@@ -149,7 +152,7 @@ sounds:
 
 timers:
   omegarelay:
-    start_value: 60
+    start_value: 54
     end_value: 0
     direction: down
     tick_interval: 1s
