@@ -69,9 +69,11 @@ achievements:
     restart_on_next_ball_when_started: false
   # SUICIDE MISSION
   suicidemission:
-    enable_events: achievement_normandyattack_state_completed
+    enable_events:
+      - achievement_normandyattack_state_completed
+      - reenable_suicidemission # After at least one tech and biotic are in the squad
     start_events: missionselect_suicide_selected
-    stop_events: suicidemission_failed
+    disable_events: suicidemission_failed
     complete_events: suicidemission_complete
     restart_on_next_ball_when_started: true
   omegarelay:
@@ -196,6 +198,24 @@ extra_balls:
   omegarelay_extraball:
     award_events: omegarelay_shots_hit_complete
 
+counters:
+  # Vasir and Hagalaz are wizard modes, so global_shadowbroker misses their complete events
+  sbdrops_counter:
+    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
+    starting_count: current_player.counter_sbdrops_counter
+    count_complete_value: 7
+    persist_state: true
+    disable_on_complete: false
+    enable_events:
+      # Count is enabled if vasir and hagalaz are not enabled/stopped AND boss is disabled
+      - enable_sbdrops_counter{device.achievements.chase.state!="enabled" and device.achievements.chase.state!="stopped" and device.achievements.vasir.state!="enabled" and device.achievements.vasir.state!="stopped" and device.achievements.hagalaz.state!="enabled" and device.achievements.hagalaz.state!="stopped" and device.achievements.shadowbroker.state=="disabled"}
+    disable_events:
+      - disable_sbdrops_counter
+      - achievement_chase_state_enabled
+      - achievement_vasir_state_enabled
+      - achievement_hagalaz_state_enabled
+      - achievement_shadowbroker_state_enabled
+
 variable_player:
   levelup:
     level: 1
@@ -206,11 +226,11 @@ variable_player:
   # TODO: Use a common wizard-type class to set availability
   achievement_collectorship_state_enabled:
     available_missions: 1
-  achievement_collectorship_state_completed:
+  mode_collectorship_base_started:
     available_missions: -1
   achievement_derelictreaper_state_enabled:
     available_missions: 1
-  achievement_derelictreaper_state_completed:
+  mode_derelictreaper_started:
     available_missions: -1
   achievement_suicidemission_state_enabled:
     available_missions: 1

@@ -5,7 +5,12 @@ variable_player:
   recruit_lit:
     score: 5000
     available_missions: 1
-  recruit_success:
+  # Legion calls awards recruitment before the mode ends
+  recruit_success{squadmate!="legion"}:
+    squadmates_count: 1
+    score: 10000
+    available_missions: -1
+  recruit_legion_precomplete:
     squadmates_count: 1
     score: 10000
     available_missions: -1

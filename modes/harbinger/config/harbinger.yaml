@@ -18,7 +18,7 @@
 
 mode:
   start_events: start_mode_harbinger
-  stop_events: stop_mode_harbinger
+  stop_events: stop_mode_harbinger, ball_will_end
   priority: 600
 
 event_player:

@@ -140,3 +140,12 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.post("recruit_success_{}".format(mate))
     self.machine.game.player["status_{}".format(mate)] = 4
 
+    # See if we had previously failed the Suicide Mission, and if so, do we now
+    # have enough tech/biotic squadmates to try again?
+    achs = self.machine.game.player.achievements
+    if (achs["normandyattack"] == "completed" and achs["suicidemission"] == "disabled"):
+      self.log.debug("Recruitmend successful, should we re-enable the suicide mission? {} techs, {} biotics".format(
+        len(SquadmateStatus.available_techs), len(SquadmateStatus.available_biotics)))
+      if len(SquadmateStatus.available_techs) > 1 and len(SquadmateStatus.available_biotics) > 1:
+        achs["suicidemission"].enable()
+

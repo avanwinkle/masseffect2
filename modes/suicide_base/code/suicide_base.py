@@ -39,9 +39,9 @@ class SuicideBase(Mode):
       self.info_log("No squadmates available to be specialists. Suicide Mission has failed.")
       # Base will already be done if the ball is ending, set the state manually
       if ball_is_ending:
-        ach = self.machine.device_manager.get_monitorable_devices().get("achievements")
-        ach["suicidemission"].stop()
-        self.info_log(" - achievement suicidemisson has stopped: {}".format(ach))
+        self.player.achievements["suicidemission"] = "disabled"
+        self.info_log(" - achievement suicidemisson has been manually disabled")
+        self._handle_failure()
       else:
         self.machine.events.post("suicidemission_failed")
 

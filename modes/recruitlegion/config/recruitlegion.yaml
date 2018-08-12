@@ -41,12 +41,15 @@ event_player:
     - recruit_legion_complete
   heretic_shot_left_hit:
     - reset_dropbank
-  heretic_shot_bonus:
-    - recruit_legion_complete
   enable_heretic_shot_dropbank:
     - squad_target_left
   enable_heretic_shot_hitbank:
     - squad_target_right
+  # Set legion recruited but only "success" on kickback
+  logicblock_heretic_counter_complete: recruit_legion_precomplete
+  heretic_shot_bonus_hit: recruit_legion_complete
+
+
 
 random_event_player:
   enable_random_heretic:
@@ -101,11 +104,6 @@ variable_player:
     score: current_player.temp_hurryup_value
   heretic_kickback_shot_hit:
     score: current_player.temp_build_value
-  # Manually set legion status to 4 because the levelup is not guaranteed!
-  logicblock_heretic_counter_complete:
-    status_legion:
-      action: set
-      int: 4
 
 shot_groups:
   heretic_sequence_shots:

@@ -13,23 +13,6 @@ mode:
   events_when_started: enable_sbdrops_counter
   events_when_stopped: disable_sbdrops_counter
 
-counters:
-  sbdrops_counter:
-    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
-    starting_count: current_player.counter_sbdrops_counter
-    count_complete_value: 7
-    persist_state: true
-    disable_on_complete: false
-    enable_events:
-      # Count is enabled if vasir and hagalaz are not enabled/stopped AND boss is disabled
-      - enable_sbdrops_counter{device.achievements.chase.state!="enabled" and device.achievements.chase.state!="stopped" and device.achievements.vasir.state!="enabled" and device.achievements.vasir.state!="stopped" and device.achievements.hagalaz.state!="enabled" and device.achievements.hagalaz.state!="stopped" and device.achievements.shadowbroker.state=="disabled"}
-    disable_events:
-      - disable_sbdrops_counter
-      - achievement_chase_state_enabled
-      - achievement_vasir_state_enabled
-      - achievement_hagalaz_state_enabled
-      - achievement_shadowbroker_state_enabled
-
 variable_player:
   drop_target_bank_dropbank_down:
     intel: 1

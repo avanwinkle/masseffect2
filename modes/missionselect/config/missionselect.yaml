@@ -95,6 +95,8 @@ show_player:
         color: FF4400 #color_zaeed
   missionselect_suicide_highlighted:
     missionselect_suicide_show:
+      action: play
+      key: missionselect_highlight_show
       speed: 6
       show_tokens:
         color: FF0000

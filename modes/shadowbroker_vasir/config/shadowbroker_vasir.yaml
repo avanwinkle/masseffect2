@@ -132,6 +132,7 @@ shots:
     advance_events:
       - mode_shadowbroker_vasir_started # Start with this shot enabled
       - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
+    reset_events: mode_shadowbroker_vasir_will_stop # Reset at the end to re-advance at the start
     hit_events: sh_left_orbit_hit
     profile: vasirprofile
     show_tokens:

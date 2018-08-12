@@ -61,7 +61,11 @@ class SaveCareer(CustomCode):
         newcareer[key] = value
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))
-    json.dump(newcareer, open(self._get_filename(player.career_name), mode="w"))
+    json.dump(newcareer,
+              open(self._get_filename(player.career_name), mode="w"),
+              indent=2,
+              sort_keys=True
+    )
 
   def _load_career(self, **kwargs):
     player = self.machine.game.player
