@@ -17,19 +17,12 @@ class MissionSelect(Carousel):
     self._specialist = "jacob"
 
   def mode_start(self, **kwargs):
-    if self.machine.game.player.achievements['suicidemission'] == "started":
-      self._items = self._build_specialist_list()
-      # Wait for the mode to be ready before rendering the list of specialists
-      # self.add_mode_event_handler('mode_missionselect_started', self._render_specialists)
-      self._render_specialists()
-    else:
-      self._items = self._build_items_list()
-      # Disable the intro slide after a time
-      self.delay.add(callback=self._remove_intro, ms=3000)
+    self._items = self._build_items_list()
+    # Disable the intro slide after a time
+    self.delay.add(callback=self._remove_intro, ms=3000)
 
     self.debug_log("Final list of missionselect options: {}".format(self._items.__str__()))
     super().mode_start(**kwargs)
-
 
   def _build_items_list(self):
     player = self.machine.game.player
@@ -39,7 +32,6 @@ class MissionSelect(Carousel):
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
 
-    self._mates = SquadmateStatus.all_mates()
     items = [self._intro]
 
     # If Derelict Reaper is available and not completed, it goes first
@@ -50,10 +42,9 @@ class MissionSelect(Carousel):
       items.append('suicide')
 
     # Then any squadmates who are of the "available" status
+    self._mates = SquadmateStatus.recruitable_mates()
     for mate in self._mates:
-      status = player.vars.get("status_{}".format(mate))
-      if (status == 3):
-        items.append(mate)
+      items.append(mate)
 
     # If collectorship has been played but the praetorian wasn't defeated, it can be replayed (pre-derelictreaper)
     if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled":
@@ -62,35 +53,6 @@ class MissionSelect(Carousel):
     # "Pass" is the last item in the menu
     items.append('pass')
     return items
-
-  def _build_specialist_list(self):
-    player = self.machine.game.player
-    self._intro = "specialist"
-
-    # If we are suiciding, filter for the correct type of squadmate
-    if player.achievements['infiltration'] != "completed":
-      self._mates = SquadmateStatus.all_techs()
-      items = SquadmateStatus.available_techs(player)
-    elif player.achievements['longwalk'] != "completed":
-      self._mates = SquadmateStatus.all_biotics()
-      items = SquadmateStatus.available_biotics(player)
-    else:
-      raise KeyError("What specialist are we building for?", player.achievements)
-
-    self._specialist = self._mates[0]
-    return items
-
-  def _render_specialists(self, **kwargs):
-    for mate in self._mates:
-      status = self.machine.game.player["status_{}".format(mate)]
-      if mate == kwargs.get("squadmate", self._specialist):
-        self.machine.events.post("{}_specialist_{}_highlighted".format(self.name, mate))
-      # Set available specialists to be specialists
-      elif status == 4:
-        self.machine.events.post("{}_specialist_{}_default".format(self.name, mate))
-      # Set dead available specialists to be dead specialists
-      elif status == -1:
-        self.machine.events.post("{}_specialist_{}_dead".format(self.name, mate))
 
   def _get_available_items(self):
     return self._items
@@ -104,10 +66,6 @@ class MissionSelect(Carousel):
     super()._select_item()
     selection = self._get_highlighted_item()
     if selection in self._mates:
-      if self._intro == "specialist":
-        self.machine.game.player["specialist"] = selection
-        self.machine.events.post("{}_specialist_selected".format(self.name), squadmate=selection)
-      else:
         self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
     elif selection == "pass":
       # Store the choice to pass so we can skip missionselect until a new mission is available
@@ -117,10 +75,7 @@ class MissionSelect(Carousel):
     h = self._get_highlighted_item()
     self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction)
     if h in self._mates:
-      if self._intro == "specialist":
-        self._render_specialists(squadmate=h)
-      else:
-        self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)
+      self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)
     # If we moved away from the intro, remove it
     if h != self._intro and self._intro in self._items:
       self._items = self._items[1:]

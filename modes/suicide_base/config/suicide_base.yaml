@@ -19,16 +19,16 @@ mode:
 event_player:
   mode_suicide_base_started.1:
     - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
-    - start_mode_missionselect{device.achievements.omegarelay.state=="completed" and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}
+    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}
     - start_mode_suicide_platforms{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
   # Wait for the mission selection of a specialist before starting infiltration or long walk
-  missionselect_specialist_selected:
+  mode_suicide_huddle_will_stop:
     - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
     - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed"}
   # Progression
-  omegarelay_complete: start_mode_missionselect
-  achievement_infiltration_state_completed: start_mode_missionselect  # Use the achievement state because that's what mission select checks
+  omegarelay_complete: start_mode_suicide_huddle
+  achievement_infiltration_state_completed: start_mode_suicide_huddle  # Use the achievement state because that's what mission select checks
   longwalk_complete: start_mode_suicide_platforms|4s # Delay for the dialog
   platforms_complete: start_mode_suicide_humanreaper
   # reaper goes back to platforms when it "fails"
@@ -47,6 +47,10 @@ event_player:
   ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_ended
 
 queue_relay_player:
+  # If we're starting a new ball and need to huddle, delay the ball eject
+  balldevice_bd_trough_ball_eject_attempt{mode.suicide_huddle.active}:
+    post: huddle_waitforit
+    wait_for: mode_suicide_huddle_will_stop
   # If the ball drains during infiltration or longwalk, kill the specialist too
   ball_ending{mode.suicide_infiltration.active or mode.suicide_longwalk.active}:
     post: kill_squadmate
@@ -287,13 +291,12 @@ sounds:
     file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
     track: voice
 
-
 show_player:
   # Light the missions arrow to select a specialist after one died
   squadmate_killed{not ball_is_ending}:
     missions_available_show:
       action: play
-  mode_missionselect_started:
+  mode_suicide_huddle_started:
     missions_available_show:
       action: stop
   mode_suicide_base_will_stop:
@@ -301,12 +304,23 @@ show_player:
       action: stop
 
 slide_player:
+  mode_suicide_base_started:
+    singleplayer_slide:
+      action: remove
+    multiplayer_slide:
+      action: remove
+  slide_singleplayer_slide_created:
+    singleplayer_slide:
+      action: remove
+  slide_multiplayer_slide_created:
+    multiplayer_slide:
+      action: remove
   mode_type_suicide_started: suicide_slide
   mode_type_suicide_stopped:
     suicide_slide:
       action: remove
   squadmate_killed{not ball_is_ending}: specialist_killed_slide
-  missionselect_specialist_selected:
+  suicide_huddle_specialist_selected:
     specialist_killed_slide:
       action: remove
   suicidemission_ended:

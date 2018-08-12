@@ -39,9 +39,9 @@ class SquadmateStatusClass():
   def _mate_status_is(self, player, squadmate, status):
     return player["status_{}".format(squadmate)] == status
 
-  def _get_available_mates(self, player, mates, include_specialist=True):
+  def _get_available_mates(self, player, mates, status=4, include_specialist=True):
     specialist = None if include_specialist else player["specialist"]
-    return [mate for mate in mates if (self._mate_status_is(player, mate, 4) and mate != specialist)]
+    return [mate for mate in mates if (self._mate_status_is(player, mate, status) and mate != specialist)]
 
   def all_mates(self):
     return SQUADMATES
@@ -61,8 +61,11 @@ class SquadmateStatusClass():
   def available_techs(self, player):
     return self._get_available_mates(player, TECHMATES)
 
+  def recruitable_mates(self, player):
+    return self._get_available_mates(player, status=3)
+
   def dead_mates(self, player):
-    return [mate for mate in SQUADMATES if (self._mate_status_is(player, mate, -1))]
+    return self._get_avaliable_mates(player, status=-1)
 
 SquadmateStatus = SquadmateStatusClass()
 

@@ -15,6 +15,9 @@ mpf:
 logging:
   file:
     asset_manager: none
+    sound_player: full
+    sounds: full
+    sound: full
 
 virtual_platform_start_active_switches:
   s_trough1
@@ -94,6 +97,7 @@ modes:
   - normandyattack
   # Suicide Mission:
   - suicide_base
+  - suicide_huddle
   - suicide_omegarelay
   - suicide_infiltration
   - suicide_longwalk
