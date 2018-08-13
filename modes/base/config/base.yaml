@@ -90,8 +90,13 @@ achievements:
     start_events: mode_suicide_longwalk_started
     disable_events: suicidemission_failed
     complete_events: longwalk_complete
-  humanreaper:
+  tubes:
     enable_events: longwalk_complete
+    start_events: mode_suicide_tubes_started
+    disable_events: suicidemission_failed
+    complete_events: tubes_complete
+  humanreaper:
+    enable_events: tubes_complete
     start_events: mode_suicide_humanreaper_started
     disable_events: suicidemission_failed
     complete_events: humanreaper_complete

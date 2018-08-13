@@ -1,4 +1,29 @@
 #config_version=5
+
+#####
+# SUICIDE MISSION Pt. V (Phase 2): THE HUMAN REAPER
+#
+# This mode is the second phase of the Suicide Mission penultimate mode, which
+# has a countdown for the reaper's cannon and a random shot lit for the reaper.
+#
+# Hitting the reaper shot does X damage to the reaper, where x is the built value
+# carried over from the Platforms phase times a multiplier for the round. A bigger
+# multiple of the damage is counted for the player's score and the game returns
+# to the platform phase to build another value.
+#
+# When the reaper's cannon is charged, it begins a firing sequence. During this
+# sequence a shot to any ball hold/lock will hold the ball until after the firing.
+# At the end of the sequence, lights flash and the flippers will be temporarily
+# disabled.
+#
+# If all balls drain during the reaper battle, a squadmate can sacrifice themselves
+# to save Shepard (a maximum of two per ball). If all squadmates have died, this
+# is no longer an option.
+#
+# The reaper/platforms cycle will continue until
+#  A) the reaper takes enough damage and its hp is zero, or
+#  B) the reaper takes any damage after 5 rounds have been played
+#####
 mode:
   start_events: start_mode_suicide_humanreaper
   stop_events: ball_will_end, humanreaper_complete, humanreaper_failed
@@ -47,6 +72,10 @@ variable_player:
     reaper_hp:
       action: add
       int: current_player.temp_hurryup_value * -1
+    score:
+      action: add
+      # The score actually has a higher multiplier on earlier rounds!
+      int: current_player.temp_hurryup_value * (5 / current_player.reaper_rounds)
 
 # We can take "cover" while the reaper is firing
 ball_holds:
@@ -169,7 +198,7 @@ widget_player:
       slide: reaper_slide
 
 sound_player:
-  mode_suicide_humanreaper_started: suicide_music_reaper
+  mode_suicide_humanreaper_started: reaper_high
 
 show_player:
   timer_reaper_firing_complete:

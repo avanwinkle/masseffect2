@@ -24,14 +24,16 @@ config:
 event_player:
   mode_suicide_base_started.1:
     - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
-    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.longwalk.state!="completed"}
-    - play_platforms_intro{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
+    # Everything between omegarelay and endrun starts with the huddle
+    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
+          # - play_platforms_intro{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
     - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
     - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed" and device.achievements.longwalk.state!="completed"}
-    - start_mode_suicide_platforms{device.achievements.longwalk.state=="completed"}
+    - start_mode_suicide_tubes{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}
+    - start_mode_suicide_platforms{device.achievements.tubes.state=="completed" and device.achievements.humanreaper.state!="completed"}
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
   # achievement_infiltration_state_completed: start_mode_suicide_huddle  # Use the achievement state because that's what mission select checks
@@ -89,7 +91,7 @@ variable_player:
   mode_suicide_base_started:
     suicide_continuing:
       action: set
-      int: 0
+      int: 1 # 1 for testing intros, 0 for skipping them
     # For debugging, when we start directly into reaper mode
     reaper_hp{not current_player.reaper_hp}:
       action: set
@@ -121,143 +123,3 @@ variable_player:
     suicide_continuing: 1
   mode_suicide_humanreaper_started:
     reaper_rounds: 1
-
-show_player:
-  mode_suicide_base_will_stop:
-    missions_available_show:
-      action: stop
-  play_platforms_intro:
-    platforms_intro_show:
-      loops: 0
-
-shows:
-  platforms_intro_show:
-    - time: 0
-      sounds:
-        shep_we_win_or_lose_it_all:
-          action: load
-          track: voice
-    - time: 3s
-      sounds:
-        shep_we_win_or_lose_it_all:
-          action: play
-          track: voice
-          events_when_stopped: start_mode_suicide_platforms
-
-sound_player:
-  # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
-  play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
-  mode_type_suicide_started:
-    suicide_music_base:
-      action: stop
-      fade_out: 2s
-  mode_suicide_base_will_stop:
-    suicide_music_base:
-      action: stop
-      fade_out: 2s
-  # Play the final valve sound here so we can stop the infiltration mode immediately
-  infiltration_complete:
-    specialist_inf_through:
-      # Start this first to avoid a race condition with the huddle dialoge
-      events_when_played: start_mode_suicide_huddle
-  # Handle the transition between platform/reaper phases for seamlessness
-  play_platforms_intro:
-    suicide_music_intro:
-      action: play
-  play_enemies_incoming: enemies_incoming
-  play_enemies_reinforcements: enemies_reinforcements
-
-slide_player:
-  mode_suicide_base_started:
-    singleplayer_slide:
-      action: remove
-    multiplayer_slide:
-      action: remove
-    suicide_slide:
-      action: play
-  slide_singleplayer_slide_created:
-    singleplayer_slide:
-      action: remove
-  slide_multiplayer_slide_created:
-    multiplayer_slide:
-      action: remove
-  player_reaper_hp{value>0 and change<0}:
-    reaper_hitdamage_slide:
-      expire: 4s
-  restore_singleplayer_slide: singleplayer_slide
-  restore_multiplayer_slide: multiplayer_slide
-
-widget_player:
-  mode_suicide_huddle_started:
-    huddle_title:
-      slide: suicide_slide
-  slide_huddle_slide_active:
-    huddle_title:
-      action: remove
-      slide: suicide_slide
-  mode_suicide_omegarelay_started:
-    omegarelay_title:
-      slide: suicide_slide
-  mode_suicide_omegarelay_will_stop:
-    omegarelay_title:
-      action: remove
-  suicide_huddle_specialist_selected{mission=="infiltration"}:
-    infiltration_title:
-      slide: suicide_slide
-  mode_suicide_infiltration_will_stop:
-    infiltration_title:
-      action: remove
-  suicide_huddle_specialist_selected{mission=="longwalk"}:
-    longwalk_title:
-      slide: suicide_slide
-  mode_suicide_longwalk_will_stop:
-    longwalk_title:
-      action: remove
-  play_platforms_intro:
-    suicide_time:
-      action: remove
-    suicide_shots:
-      action: remove
-    platforms_title:
-      slide: suicide_slide
-  # mode_suicide_humanreaper_started:
-  #   platforms_title:
-  #     action: remove
-  #   humanreaper_title:
-  #     slide: suicide_slide
-  mode_suicide_endrun_started:
-    humanreaper_title:
-      action: remove
-    endrun_title:
-      slide: suicide_slide
-  timer_omegarelay_tick:
-    suicide_time:
-      action: update
-  timer_omegarelay_stopped:
-    suicide_time:
-      action: remove
-  timer_infiltration_tick:
-    suicide_time:
-      action: update
-  timer_longwalk_tick:
-    suicide_time:
-      action: update
-  logicblock_swarmpaths_hit:
-    suicide_shots:
-      action: update
-  logicblock_valves_hit:
-    suicide_shots:
-      action: update
-  set_initial_suicide_shots:
-    suicide_shots:
-      action: update
-      slide: suicide_slide
-  set_initial_suicide_ticks:
-    suicide_time:
-      action: update
-      slide: suicide_slide
-  mode_type_suicide_stopped:
-    suicide_shots:
-      action: remove
-    suicide_time:
-      action: remove

@@ -19,15 +19,14 @@ event_player:
   specialist_lw_callback_miranda:
     - play_specialist_lw_callback_miranda{current_player.status_miranda==4}|300ms
     - specialist_lw_callback_complete{current_player.status_miranda!=4}
-  specialist_intro_complete: show_huddle_slide
-  # If this is our first time coming to the mode, play a little ditty
-  mode_suicide_huddle_started{current_player.suicide_continuing>0}:
-    # With only infiltration and longwalk, we can use this easy condition. Adding more huddles will require more finesse
-    - play_specialist_preselection_inf{device.achievements.infiltration.state!="completed"}
-    - play_specialist_preselection_lw{device.achievements.infiltration.state=="completed"}
-  # If we are repeating the mode, skip the ditty and go straight to selection
-  mode_suicide_huddle_started{current_player.suicide_continuing==0}:
-    - show_huddle_slide|2s
+  specialist_intro_complete: show_huddle_slide # This is an end-of-sound event
+  mode_suicide_huddle_started:
+    # If this is our first time coming to the mode, play a little ditty
+    - play_huddle_intro_show{current_player.suicide_continuing>0}|2s
+    # If we are repeating a specialist-requiring mode, skip the ditty and go straight to the selection
+    - show_huddle_slide{current_player.suicide_continuing==0 and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}|2s
+    # If we are repeating a mode without specialist, skip the ditty and start it
+    - play_huddle_outro_show{current_player.suicide_continuing==0 and device.achievements.longwalk.state=="completed"}|2s
 
 slide_player:
   show_huddle_slide:
@@ -38,17 +37,41 @@ slide_player:
       action: remove
 
 show_player:
+  play_huddle_intro_show:
+    infiltration_intro_show{device.achievements.infiltration.state!="completed"}:
+      action: play
+      loops: 0
+    longwalk_intro_show{device.achievements.infiltration.state=="completed" and device.achievements.longwalk.state!="completed"}:
+      action: play
+      loops: 0
+    tubes_intro_show{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}:
+      action: play
+      loops: 0
+  play_huddle_outro_show:
+    # For the time being, tubes intro and outro are the same. When the intro is longer, outro will be the tail
+    tubes_intro_show{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}:
+      action: play
+      loops: 0
   suicide_huddle_specialist_selected{mission=="infiltration"}:
-    infiltration_starting_show:
+    infiltration_outro_show:
       action: play
       loops: 0
   suicide_huddle_specialist_selected{mission=="longwalk"}:
-    longwalk_starting_show:
+    longwalk_outro_show:
       action: play
       loops: 0
 
 shows:
-  infiltration_starting_show:
+  infiltration_intro_show:
+    - time: 0
+      events:
+        - gogo_huddleintro_show
+      sounds:
+        specialist_inf_intro:
+          action: play
+          track: voice
+          events_when_stopped: specialist_intro_complete
+  infiltration_outro_show:
     - time: 0
       sounds:
         infiltration_low:
@@ -56,11 +79,19 @@ shows:
           track: music
     - time: 2.5s
       sounds:
-        specialist_inf_intro:
+        specialist_inf_outro:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
-  longwalk_starting_show:
+  longwalk_intro_show:
+    - time: 0
+      sounds:
+        specialist_lw_intro:
+          action: play
+          track: voice
+          # Longwalk has variable end points, so the sounds themselves explicitly define
+          # where the specialist_intro_complete comes in
+  longwalk_outro_show:
     - time: 0
       sounds:
         longwalk_low:
@@ -68,10 +99,28 @@ shows:
           track: music
     - time: 1s
       sounds:
-        specialist_lw_intro:
+        specialist_lw_outro:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
+  tubes_intro_show:
+    - time: 0
+      sounds:
+        platforms_low:
+          action: play
+          track: music
+    - time: 2s
+      sounds:
+        shep_we_win_or_lose_it_all:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
+  platforms_intro_show:
+    - time: 0
+      sounds:
+        platforms_med_high:
+          action: play
+          track: voice
 
 sound_player:
   # Sounds in shows don't playback after loading, so pre-load them!
@@ -82,19 +131,43 @@ sound_player:
     specialist_inf_intro:
       action: load
       track: voice
+    specialist_inf_outro:
+      action: load
+      track: voice
     longwalk_low:
       action: load
       track: music
     specialist_lw_intro:
       action: load
       track: voice
-  play_specialist_preselection_inf: specialist_preselection_inf
-  play_specialist_preselection_lw: specialist_preselection_lw
+    specialist_lw_outro:
+      action: load
+      track: voice
+    platforms_low:
+      action: load
+      track: music
+    platforms_med_high:
+      action: load
+      track: music
+    shep_we_win_or_lose_it_all:
+      action: load
+      track: voice
+  play_specialist_inf_intro: specialist_inf_intro
+  play_specialist_lw_intro: specialist_lw_intro
   play_specialist_lw_no: specialist_lw_no
   play_specialist_lw_yes: specialist_lw_yes
   play_specialist_lw_callback_miranda: miranda_any_biotic_could
 
 widget_player:
+  ## Show the specialist selection title
+  mode_suicide_huddle_started{device.achievements.omegarelay.state=="completed" and device.achievements.tubes.state=="disabled"}:
+    huddle_title:
+      slide: suicide_slide
+  slide_huddle_slide_active:
+    huddle_title:
+      action: remove
+      slide: suicide_slide
+  ## Change styles on all the specialist widgets
   suicide_huddle_garrus_default:
     specialist_garrus_widget:
       action: update

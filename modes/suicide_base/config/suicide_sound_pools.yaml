@@ -4,7 +4,7 @@ sound_pools:
 ### INFILTRATION
   # Huddle
     # Huddle Intro
-    specialist_preselection_inf:
+    specialist_inf_intro:
       track: voice
       type: random
       sounds:
@@ -33,16 +33,16 @@ sound_pools:
         - selection_inf_confirm_tali{current_player.specialist=="tali"}
         - selection_inf_confirm_thane{current_player.specialist=="thane"}
     # Infiltration starting (huddle outro)
-    specialist_inf_intro:
+    specialist_inf_outro:
       track: voice
       sounds:
-        - specialist_inf_intro_garrus{current_player.specialist=="garrus"}
-        - specialist_inf_intro_jacob{current_player.specialist=="jacob"}
-        - specialist_inf_intro_kasumi{current_player.specialist=="kasumi"}
-        - specialist_inf_intro_legion{current_player.specialist=="legion"}
-        - specialist_inf_intro_mordin{current_player.specialist=="mordin"}
-        - specialist_inf_intro_tali{current_player.specialist=="tali"}
-        - specialist_inf_intro_thane{current_player.specialist=="thane"}
+        - specialist_inf_outro_garrus{current_player.specialist=="garrus"}
+        - specialist_inf_outro_jacob{current_player.specialist=="jacob"}
+        - specialist_inf_outro_kasumi{current_player.specialist=="kasumi"}
+        - specialist_inf_outro_legion{current_player.specialist=="legion"}
+        - specialist_inf_outro_mordin{current_player.specialist=="mordin"}
+        - specialist_inf_outro_tali{current_player.specialist=="tali"}
+        - specialist_inf_outro_thane{current_player.specialist=="thane"}
     # Infiltration complete
     specialist_inf_through:
       track: voice
@@ -206,7 +206,7 @@ sound_pools:
 ### LONG WALK
   # Huddle
     # Huddle intro pt 1
-    specialist_preselection_lw:
+    specialist_lw_intro:
       track: voice
       type: random
       sounds:
@@ -234,7 +234,7 @@ sound_pools:
         - specialist_biotic_field_no_miranda{current_player.status_miranda==4}
         - specialist_biotic_field_no_jack{current_player.status_jack==4}
     # Huddle outro
-    specialist_lw_intro:
+    specialist_lw_outro:
       track: voice
       sounds:
         - specialist_im_ready_samara{current_player.specialist=="samara"}
@@ -342,16 +342,34 @@ sound_pools:
         - specialist_thane_dont_know_how_much_more_i_can_take{current_player.specialist=="thane"}
         - specialist_thane_hurry_shepard{current_player.specialist=="thane"}
 
+### TUBES
+  # Squadmate hint
+    tubes_hint:
+      type: random_force_all
+      track: voice
+      sounds:
+        - tube_hint_garrus{current_player.status_garrus==4}
+        - tube_hint_grunt{current_player.status_grunt==4}
+        - tube_hint_jacob{current_player.status_jacob==4}
+        - tube_hint_jack{current_player.status_jack==4}
+        - tube_hint_kasumi{current_player.status_kasumi==4}
+        - tube_hint_legion{current_player.status_legion==4}
+        - tube_hint_miranda{current_player.status_miranda==4}
+        - tube_hint_mordin{current_player.status_mordin==4}
+        - tube_hint_samara{current_player.status_samara==4}
+        - tube_hint_tali{current_player.status_tali==4}
+        - tube_hint_thane{current_player.status_thane==4}
+        - tube_hint_zaeed{current_player.status_zaeed==4}
+
 ### FINAL BATTLE
   # Platforms music
-    suicide_music_platforms:
+    platforms_med_high:
       type: sequence
       track: music
-      sounds: suicide_music_3a, suicide_music_3b
+      # Start with high because we transition from low -> med and we want to hear something different
+      sounds: platforms_high, platforms_med
       fade_in: 1s
       fade_out: 1s
-
-
   # Returning to Platforms mode
     enemies_incoming:
       track: voice

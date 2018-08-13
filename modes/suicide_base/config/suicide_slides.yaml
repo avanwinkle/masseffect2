@@ -1,4 +1,105 @@
 #config_version=5
+
+slide_player:
+    mode_suicide_base_started:
+      singleplayer_slide:
+        action: remove
+      multiplayer_slide:
+        action: remove
+      suicide_slide:
+        action: play
+    slide_singleplayer_slide_created:
+      singleplayer_slide:
+        action: remove
+    slide_multiplayer_slide_created:
+      multiplayer_slide:
+        action: remove
+    player_reaper_hp{value>0 and change<0}:
+      reaper_hitdamage_slide:
+        expire: 4s
+    restore_singleplayer_slide: singleplayer_slide
+    restore_multiplayer_slide: multiplayer_slide
+
+widget_player:
+  # START/STOP Modes (Titles and add/remove)
+    mode_type_suicide_stopped:
+      suicide_shots:
+        action: remove
+      suicide_time:
+        action: remove
+    mode_suicide_omegarelay_started:
+      omegarelay_title:
+        slide: suicide_slide
+    mode_suicide_omegarelay_will_stop:
+      omegarelay_title:
+        action: remove
+    suicide_huddle_specialist_selected{mission=="infiltration"}:
+      infiltration_title:
+        slide: suicide_slide
+    mode_suicide_infiltration_will_stop:
+      infiltration_title:
+        action: remove
+    suicide_huddle_specialist_selected{mission=="longwalk"}:
+      longwalk_title:
+        slide: suicide_slide
+    mode_suicide_longwalk_will_stop:
+      longwalk_title:
+        action: remove
+    mode_suicide_tubes_started:
+      suicide_time:
+        action: remove
+      suicide_shots:
+        action: remove
+      suicide_tubes:
+        slide: suicide_slide
+      tubes_title:
+        slide: suicide_slide
+    mode_suicide_tubes_will_stop:
+      tubes_title:
+        action: remove
+      suicide_tubes:
+        action: remove
+    mode_suicide_platforms_started:
+      platforms_title:
+        slide: suicide_slide
+    mode_suicide_endrun_started:
+      humanreaper_title:
+        action: remove
+      endrun_title:
+        slide: suicide_slide
+  # TIMERS AND SHOTS Updating Widgets
+    timer_omegarelay_tick:
+      suicide_time:
+        action: update
+    timer_omegarelay_stopped:
+      suicide_time:
+        action: remove
+    timer_infiltration_tick:
+      suicide_time:
+        action: update
+    timer_longwalk_tick:
+      suicide_time:
+        action: update
+    logicblock_swarmpaths_hit:
+      suicide_shots:
+        action: update
+    logicblock_valves_hit:
+      suicide_shots:
+        action: update
+    logicblock_tubes_counter_updated:
+      suicide_tubes:
+        action: update
+        slide: suicide_slide
+  # SET INITIAL
+    set_initial_suicide_shots:
+      suicide_shots:
+        action: update
+        slide: suicide_slide
+    set_initial_suicide_ticks:
+      suicide_time:
+        action: update
+        slide: suicide_slide
+
 slides:
   # No longer used?
   huddle_slide:
@@ -134,6 +235,10 @@ widgets:
       - type: text
         text: the Long Walk
         style: text_default
+    tubes_title:
+      - type: text
+        text: Destroy the Tubes
+        style: text_default
     platforms_title:
       - type: text
         text: Final Battle
@@ -150,37 +255,25 @@ widgets:
     suicide_time:
       - type: text
         text: (ticks)
-        style: small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
+        style: small_bot_left
     suicide_shots:
       - type: text
         text: "Shots: (count)"
-        style: small
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 2
+        style: small_bot_right
+    suicide_tubes:
+      - type: text
+        text: "Tubes: (value)"
+        style: small_bot_right
     suicide_hurryup:
       - type: text
         text: (value)
         number_grouping: true
-        style: small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
+        style: small_bot_left
     suicide_damage:
       - type: text
         text: "(value)"
-        style: small
+        style: small_bot_right
         number_grouping: true
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 2
     reaper_charging_widget:
       - type: text
         text: Firing in (ticks)s

@@ -1,4 +1,30 @@
 #config_version=5
+sound_player:
+    # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
+    play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
+    mode_type_suicide_started:
+      suicide_music_base:
+        action: stop
+        fade_out: 2s
+    mode_suicide_base_will_stop:
+      suicide_music_base:
+        action: stop
+        fade_out: 2s
+    # Play the final valve sound here so we can stop the infiltration mode immediately
+    infiltration_complete:
+      specialist_inf_through:
+        # Start this first to avoid a race condition with the huddle dialoge
+        events_when_stopped: start_mode_suicide_huddle
+    longwalk_complete:
+      shep_everyone_through_the_doors:
+        events_when_stopped: start_mode_suicide_huddle
+    # # Handle the transition between platform/reaper phases for seamlessness
+    # play_platforms_intro:
+    #   platforms_low:
+    #     action: play
+    # play_enemies_incoming: enemies_incoming
+    # play_enemies_reinforcements: enemies_reinforcements
+
 sounds:
 
 ### MUSIC
@@ -8,9 +34,6 @@ sounds:
       track: music
       fade_in: 2s
       fade_out: 1s
-
-
-
   # Infiltration
     infiltration_low:
       file: mus_endgm2_tension_1.ogg
@@ -50,31 +73,30 @@ sounds:
       fade_in: 1s
       fade_out: 2s
   # Final Battle
-    suicide_music_intro:
+    platforms_low:
       file: mus_endgm2_speech_conv_b.ogg
       track: music
       start_at: 1s
       fade_in: 200ms
       fade_out: 1500ms
-      mode_end_action: stop
       markers:
         - time: 37s
-          events: suicide_music_intro_transition
-    suicide_music_3a:
+          events: platforms_low_med_transition_marker
+    platforms_med:
       file: mus_endgm2_combat_3a.ogg
       track: music
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
       mode_end_action: stop
-    suicide_music_3b:
+    platforms_high:
       file: mus_endgm2_combat_3b.ogg
       track: music
       start_at: 5s
       fade_in: 1.5s
       fade_out: 2s
       mode_end_action: stop
-    suicide_music_reaper:
+    reaper_high:
       file: mus_endgm2_reaperdeath.ogg
       track: music
       fade_in: 500ms
@@ -84,8 +106,6 @@ sounds:
         # If we get to the end of the song, go back to platforms
         - time: 36s
           events: humanreaper_failed, humanreaper_timeout
-
-
 
 ### SQUADMATE DEATHS AND CALLBACKS
   # Death Groan (Infiltration)
@@ -826,13 +846,55 @@ sounds:
     specialist_miranda_all_clear:
       file: en_us_hench_vixen_endgm2_longwalk_a_00289177_m.ogg
       track: voice
-
-
-### FINAL BATTLE - PLATFORMS
-  # Final battle intro
+  # Ending
+    shep_everyone_through_the_doors:
+      file: en_us_player_f_endgm2_biotic_fail_c_00282838_f.ogg
+      track: voice
+### TUBES
+  # Tubes intro
     shep_we_win_or_lose_it_all:
       file: en_us_player_f_endgm2_huddle_03b_d_00266971_f.ogg
       track: voice
+  # Squadmate tube hints
+    tube_hint_thane:
+      file: en_us_hench_assassin_endgm2_boss_fight_a_00286142_m.ogg
+      track: voice
+    tube_hint_jack:
+      file: en_us_hench_convict_endgm2_boss_fight_a_00286140_m.ogg
+      track: voice
+    tube_hint_garrus:
+      file: en_us_hench_garrus_endgm2_boss_fight_a_00286137_m.ogg
+      track: voice
+    tube_hint_legion:
+      file: en_us_hench_geth_endgm2_boss_fight_a_00286139_m.ogg
+      track: voice
+    tube_hint_grunt:
+      file: en_us_hench_grunt_endgm2_boss_fight_a_00286136_m.ogg
+      track: voice
+    tube_hint_jacob:
+      file: en_us_hench_leading_endgm2_boss_fight_a_00286134_m.ogg
+      track: voice
+    tube_hint_samara:
+      file: en_us_hench_mystic_endgm2_boss_fight_a_00286135_m.ogg
+      track: voice
+    tube_hint_mordin:
+      file: en_us_hench_professor_endgm2_boss_fight_a_00286141_m.ogg
+      track: voice
+    tube_hint_tali:
+      file: en_us_hench_tali_endgm2_boss_fight_a_00286138_m.ogg
+      track: voice
+    tube_hint_kasumi:
+      file: en_us_hench_thief_endgm2_boss_fight_a_00286104_m.ogg
+      track: voice
+    tube_hint_zaeed:
+      file: en_us_hench_veteran_endgm2_boss_fight_a_00286105_m.ogg
+      track: voice
+    tube_hint_miranda:
+      file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.ogg
+      track: voice
+
+### FINAL BATTLE - PLATFORMS
+  # Final battle intro
     shep_give_us_a_minute_edi:
       file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
       track: voice
@@ -927,31 +989,29 @@ sounds:
     shepard_some_could_sneak_in_this_shaft:
       file: en_us_player_f_endgm1_huddle_01a_d_00317445_f.ogg
       track: voice
-      events_when_stopped: specialist_intro_complete
     jacob_who_do_we_send_into_the_shaft:
       file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.ogg
       track: voice
-      events_when_stopped: specialist_intro_complete
   # Infiltration: Confirmation/Outro
-    specialist_inf_intro_thane:
+    specialist_inf_outro_thane:
       file: en_us_hench_assassin_endgm2_vent_update1_a_00258656_m.ogg
       track: voice
-    specialist_inf_intro_garrus:
+    specialist_inf_outro_garrus:
       file: en_us_hench_garrus_endgm2_vent_update1_a_00258654_m.ogg
       track: voice
-    specialist_inf_intro_legion:
+    specialist_inf_outro_legion:
       file: en_us_hench_geth_endgm2_vent_update1_a_00258657_m.ogg
       track: voice
-    specialist_inf_intro_jacob:
+    specialist_inf_outro_jacob:
       file: en_us_hench_leading_endgm2_vent_update1_a_00258653_m.ogg
       track: voice
-    specialist_inf_intro_mordin:
+    specialist_inf_outro_mordin:
       file: en_us_hench_professor_endgm2_vent_update1_a_00258655_m.ogg
       track: voice
-    specialist_inf_intro_tali:
+    specialist_inf_outro_tali:
       file: en_us_hench_tali_endgm2_vent_update1_a_00258658_m.ogg
       track: voice
-    specialist_inf_intro_kasumi:
+    specialist_inf_outro_kasumi:
       file: en_us_hench_thief_endgm2_vent_update1_a_00258659_m.ogg
       track: voice
     shep_selection_inf_jacob:

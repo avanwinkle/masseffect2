@@ -101,6 +101,7 @@ modes:
   - suicide_omegarelay
   - suicide_infiltration
   - suicide_longwalk
+  - suicide_tubes
   - suicide_platforms
   - suicide_humanreaper
   - suicide_endrun
@@ -342,6 +343,24 @@ widget_styles:
     font_size: 9
     adjust_top: 2
     adjust_bottom: 3
+  small_bot_left:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: bottom
+    anchor_x: left
+    y: 2
+    x: 2
+  small_bot_right:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: bottom
+    anchor_x: right
+    y: 2
+    x: right-2
   score_style_singleplayer:
     number_grouping: true
     min_digits: 2
