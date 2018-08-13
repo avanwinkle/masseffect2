@@ -18,7 +18,7 @@
 mode:
   start_events: start_mode_suicide_infiltration
   stop_events: infiltration_complete, infiltration_failed
-  events_when_started: mode_type_suicide_started, start_harbinger
+  events_when_started: mode_type_suicide_started, start_harbinger, reset_tension
   events_when_stopped: mode_type_suicide_stopped, stop_harbinger
   priority: 2300
 
@@ -28,7 +28,7 @@ event_player:
     - play_specialist_inf_warning_first{device.counters.valves.value==5}
     - play_specialist_inf_warning_med{device.counters.valves.value<5}
   player_tension{value==2}: increase_infiltration
-  valveshots_hit: reset_infiltration
+  valveshots_hit: reset_tension
   timer_infiltration_complete:
     kill_squadmate:
       squadmate: specialist
@@ -37,6 +37,12 @@ event_player:
     - play_specialist_inf_close{count==1}
   logicblock_valves_complete: infiltration_complete
   squadmate_killed: infiltration_failed
+  mode_suicide_infiltration_started:
+    set_initial_suicide_shots:
+      count: 5
+  reset_tension:
+    set_initial_suicide_ticks:
+      ticks: 40
 
 multiballs:
   infiltration:
@@ -61,9 +67,8 @@ timers:
     end_value: 0
     tick_interval: 1s
     direction: down
-    start_running: true
     control_events:
-      - event: reset_infiltration
+      - event: reset_tension
         action: restart
       - event: logicblock_valves_complete
         action: stop
@@ -140,18 +145,18 @@ shots:
     tags: envshot_left_ramp
 
 variable_player:
-  mode_suicide_infiltration_started:
-    tension:
-      action: set
-      int: 0
   timer_infiltration_tick{ticks==32}:
     tension: 1
   timer_infiltration_tick{ticks==16}:
     tension: 1
-  reset_infiltration:
+  reset_tension:
     tension:
       action: set
       int: 0
+  infiltration_failed:
+    tension:
+      action: set
+      int: -1
 
 shows:
   valve_show_low:

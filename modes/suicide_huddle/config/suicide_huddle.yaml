@@ -2,7 +2,7 @@
 
 mode:
   start_events: start_mode_suicide_huddle
-  stop_events: stop_mode_suicide_huddle
+  stop_events: stop_mode_suicide_huddle, suicide_huddle_complete
   events_when_started: flippers_off
   events_when_stopped: flippers_on
   priority: 3000
@@ -16,30 +16,28 @@ mode_settings:
   previous_item_events: s_flipper_left_active
 
 event_player:
-  slide_huddle_intro_slide_removed: show_huddle_slide
+  specialist_lw_callback_miranda:
+    - play_specialist_lw_callback_miranda{current_player.status_miranda==4}|300ms
+    - specialist_lw_callback_complete{current_player.status_miranda!=4}
+  specialist_intro_complete: show_huddle_slide
+  # If this is our first time coming to the mode, play a little ditty
+  mode_suicide_huddle_started{current_player.suicide_continuing>0}:
+    # With only infiltration and longwalk, we can use this easy condition. Adding more huddles will require more finesse
+    - play_specialist_preselection_inf{device.achievements.infiltration.state!="completed"}
+    - play_specialist_preselection_lw{device.achievements.infiltration.state=="completed"}
+  # If we are repeating the mode, skip the ditty and go straight to selection
+  mode_suicide_huddle_started{current_player.suicide_continuing==0}:
+    - show_huddle_slide|3s
 
 slide_player:
-  mode_suicide_huddle_started:
-    huddle_intro_slide:
-      priority: 2501
-      expire: 2s
   show_huddle_slide:
     huddle_slide:
-      priority: 2500 # Suicide runs at 2000
+      action: play
   suicide_huddle_specialist_selected:
     huddle_slide:
       action: remove
-    suicide_slide:
-      action: play
 
 slides:
-  huddle_intro_slide:
-    widgets:
-      - type: text
-        text: Select a Specialist
-        style: quadrit_big
-        anchor_y: bottom
-        y: bottom+45%
   huddle_slide:
     widgets:
       - type: rectangle
@@ -51,11 +49,12 @@ slides:
     widgets:
       - type: text
         text: "Specialist Selected:"
-        style: medium
+        style: small
         anchor_y: bottom
         y: middle+2
       - type: text
         text: (player|specialist)
+        style: medium
         anchor_y: top
         y: middle-2
         casing: title
@@ -63,6 +62,10 @@ slides:
 show_player:
   suicide_huddle_specialist_selected{mission=="infiltration"}:
     infiltration_starting_show:
+      action: play
+      loops: 0
+  suicide_huddle_specialist_selected{mission=="longwalk"}:
+    longwalk_starting_show:
       action: play
       loops: 0
 
@@ -73,16 +76,24 @@ shows:
         infiltration_low:
           action: play
           track: music
-      events: inf_show_step_1
-    - time: '+2'
-      events: inf_show_stop_2
+    - time: 2.5s
       sounds:
         specialist_inf_intro:
           action: play
           track: voice
-          events_when_stopped: stop_mode_suicide_huddle
-    - time: '+5'
-      events: inf_show_step_3
+          events_when_stopped: suicide_huddle_complete
+  longwalk_starting_show:
+    - time: 0
+      sounds:
+        longwalk_low:
+          action: play
+          track: music
+    - time: 1s
+      sounds:
+        specialist_lw_intro:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
 
 sound_player:
   # Sounds in shows don't playback after loading, so pre-load them!
@@ -93,8 +104,50 @@ sound_player:
     specialist_inf_intro:
       action: load
       track: voice
+    longwalk_low:
+      action: load
+      track: music
+    specialist_lw_intro:
+      action: load
+      track: voice
+  play_specialist_preselection_inf: specialist_preselection_inf
+  play_specialist_preselection_lw: specialist_preselection_lw
+  play_specialist_lw_no: specialist_lw_no
+  play_specialist_lw_yes: specialist_lw_yes
+  play_specialist_lw_callback_miranda: miranda_any_biotic_could
 
 sound_pools:
+  specialist_preselection_inf:
+    track: voice
+    type: random
+    sounds:
+      - shepard_some_could_sneak_in_this_shaft
+      - jacob_who_do_we_send_into_the_shaft{current_player.status_jacob==4}
+  specialist_preselection_lw:
+    track: voice
+    type: random
+    sounds:
+      - edi_chamber_overrun_with_seeker_swarms
+      - shepard_what_about_biotics
+      - shepard_conventional_weapons_useless
+  specialist_lw_yes:
+    track: voice
+    type: random
+    sounds:
+      - specialist_biotic_field_yes_thane{current_player.status_thane==4}
+      - specialist_biotic_field_yes_jacob{current_player.status_jacob==4}
+      - specialist_biotic_field_yes_samara{current_player.status_samara==4}
+      - specialist_biotic_field_yes_miranda{current_player.status_miranda==4}
+      - specialist_biotic_field_yes_jack{current_player.status_jack==4}
+  specialist_lw_no:
+    track: voice
+    type: random
+    sounds:
+      - specialist_biotic_field_no_thane{current_player.status_thane==4}
+      - specialist_biotic_field_no_jacob{current_player.status_jacob==4}
+      - specialist_biotic_field_no_samara{current_player.status_samara==4}
+      - specialist_biotic_field_no_miranda{current_player.status_miranda==4}
+      - specialist_biotic_field_no_jack{current_player.status_jack==4}
   specialist_inf_selection:
     track: voice
     sounds:
@@ -125,8 +178,98 @@ sound_pools:
       - specialist_inf_intro_mordin{current_player.specialist=="mordin"}
       - specialist_inf_intro_tali{current_player.specialist=="tali"}
       - specialist_inf_intro_thane{current_player.specialist=="thane"}
+  specialist_lw_intro:
+    track: voice
+    sounds:
+      - specialist_im_ready_samara{current_player.specialist=="samara"}
+      - specialist_im_ready_jack{current_player.specialist=="jack"}
+      - specialist_im_ready_jacob{current_player.specialist=="jacob"}
+      - specialist_im_ready_miranda{current_player.specialist=="miranda"}
+      - specialist_must_move_quickly_thane{current_player.specialist=="thane"}
 
 sounds:
+  # Huddles
+  shepard_some_could_sneak_in_this_shaft:
+    file: en_us_player_f_endgm1_huddle_01a_d_00317445_f.ogg
+    track: voice
+    events_when_stopped: specialist_intro_complete
+  jacob_who_do_we_send_into_the_shaft:
+    file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.ogg
+    track: voice
+    events_when_stopped: specialist_intro_complete
+  shepard_what_about_biotics:
+    file: en_us_player_f_endgm2_huddle_02a_d_00282594_f.ogg
+    track: voice
+    events_when_stopped: play_specialist_lw_yes
+  shepard_conventional_weapons_useless:
+    file: en_us_player_f_endgm2_huddle_02a_d_00282560_f.ogg
+    track: voice
+    events_when_stopped: play_specialist_lw_no
+  edi_chamber_overrun_with_seeker_swarms:
+    file: en_us_hench_ai_endgm2_huddle_02a_d_00282512_m.ogg
+    track: voice
+    start_at: 1500ms
+    events_when_stopped: play_specialist_lw_no
+  miranda_any_biotic_could:
+    file: en_us_hench_vixen_endgm2_huddle_02a_d_00282526_m.ogg
+    track: voice
+    events_when_stopped: specialist_intro_complete
+  specialist_biotic_field_yes_thane:
+    file: en_us_hench_assassin_endgm2_huddle_02a_d_00282695_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_no_thane:
+    file: en_us_hench_assassin_endgm2_huddle_02a_d_00282698_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_yes_jack:
+    file: en_us_hench_convict_endgm2_huddle_02a_d_00282515_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_no_jack:
+    file: en_us_hench_convict_endgm2_huddle_02a_d_00282522_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_yes_jacob:
+    file: en_us_hench_leading_endgm2_huddle_02a_d_00282516_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_no_jacob:
+    file: en_us_hench_leading_endgm2_huddle_02a_d_00282524_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_yes_samara:
+    file: en_us_hench_mystic_endgm2_huddle_02a_d_00282513_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_no_samara:
+    file: en_us_hench_mystic_endgm2_huddle_02a_d_00282518_m.ogg
+    track: voice
+    events_when_stopped: specialist_lw_callback_miranda
+  specialist_biotic_field_yes_miranda:
+    file: en_us_hench_vixen_endgm2_huddle_02a_d_00282517_m.ogg
+    track: voice
+    events_when_stopped: specialist_intro_complete
+  specialist_biotic_field_no_miranda:
+    file: en_us_hench_vixen_endgm2_huddle_02a_d_00282527_m.ogg
+    track: voice
+    events_when_stopped: specialist_intro_complete
+  # Confirmation for Long Walk
+  specialist_im_ready_samara:
+    file: en_us_hench_mystic_endgm2_huddle_03b_d_00267109_m.ogg
+    track: voice
+  specialist_im_ready_jack:
+    file: en_us_hench_convict_endgm2_huddle_03b_d_00267114_m.ogg
+    track: voice
+  specialist_im_ready_jacob:
+    file: en_us_hench_leading_endgm2_huddle_03b_d_00267107_m.ogg
+    track: voice
+  specialist_im_ready_miranda:
+    file: en_us_hench_vixen_endgm2_huddle_03b_d_00267106_m.ogg
+    track: voice
+  specialist_must_move_quickly_thane:
+    file: en_us_hench_assassin_endgm2_biotic_fail_c_00319752_m.ogg
+    track: voice
   # Selection/confirmation for Infiltration
   specialist_inf_intro_thane:
     file: en_us_hench_assassin_endgm2_vent_update1_a_00258656_m.ogg

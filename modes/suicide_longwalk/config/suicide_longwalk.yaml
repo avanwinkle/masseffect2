@@ -32,12 +32,20 @@ event_player:
   mode_suicide_longwalk_started:
     set_environment:
       env: collectors
+    set_initial_suicide_shots:
+      count: 7
   player_tension{change>0}: increase_tension
   enable_longwalk_dropbank: reset_dropbank
   logicblock_swarmpaths_hit:
     - reset_tension
     - play_specialist_lw_advance{count>1}
     - play_specialist_lw_close{count==1}
+  player_tension{value==1}:
+    - play_specialist_lw_warning_barrier{device.counters.barrier_warning.value==0}
+    - play_specialist_lw_warning_med{device.counters.barrier_warning.value>0}
+  reset_tension:
+    set_initial_suicide_ticks:
+      ticks: 60
   timer_longwalk_complete:
     kill_squadmate:
       squadmate: random
@@ -92,6 +100,11 @@ variable_player:
     tension:
       action: set
       int: 0
+  # Clear the tension value so we don't duplicate the music when the reset jumps it to zero
+  longwalk_failed:
+    tension:
+      action: set
+      int: -1
 
 shot_groups:
   swarmpaths:
@@ -227,24 +240,18 @@ light_player:
       fade: 1s
 
 sound_player:
-  mode_suicide_longwalk_started:
-    longwalk_low:
-      action: play
   player_tension{value==1}:
     longwalk_low:
       action: stop
     longwalk_med:
       action: play
       start_at: 18s
-  # We play the "leaving the barrier" sound for the first increase
-  logicblock_barrier_warning_hit{value==1}: specialist_lw_warning_barrier
-  logicblock_barrier_warning_hit{value>1}: specialist_lw_warning_med
   player_tension{value==2}:
     longwalk_med:
       action: stop
     longwalk_high:
       action: play
-      start_at: 33s
+      start_at: 34s
     specialist_lw_warning_high:
       action: play
   # If we were already low-tension, no need to restart the music
@@ -260,13 +267,16 @@ sound_player:
       action: stop
     specialist_lw_warning_high:
       action: stop
+  # We play the "leaving the barrier" sound for the first increase
+  play_specialist_lw_warning_barrier: specialist_lw_warning_barrier
+  play_specialist_lw_warning_med: specialist_lw_warning_med
   play_specialist_lw_advance: specialist_lw_advance
   play_specialist_lw_close: specialist_lw_close
-  squadmate_killed.1{squadmate==current_player.specialist}:
+  squadmate_killed{squadmate==current_player.specialist}:
     specialist_death_lw:
       action: play
       events_when_played: squadmate_killed_complete
-  squadmate_killed.2{squadmate!=current_player.specialist}:
+  squadmate_killed{squadmate!=current_player.specialist}:
     random_death_lw:
       action: play
       priority: 100
@@ -283,7 +293,10 @@ sound_player:
       action: stop
     specialist_lw_close:
       action: stop
-
+  # We start the music in huddle so make sure we end it on mode end
+  mode_suicide_longwalk_will_stop:
+    longwalk_low:
+      action: stop
 
 sound_pools:
   specialist_lw_warning_barrier:
@@ -384,7 +397,6 @@ sounds:
   longwalk_low:
     file: mus_endgm2_tension_2.ogg
     track: music
-    mode_end_action: stop
     fade_in: 3s
     fade_out: 2s
     volume: 0.9
@@ -392,13 +404,13 @@ sounds:
     file: mus_endgm2_combat_2_low.ogg
     track: music
     mode_end_action: stop
-    fade_in: 1500ms
+    fade_in: 1s
     fade_out: 2s
   longwalk_high:
     file: mus_endgm2_combat_2.ogg
     track: music
     mode_end_action: stop
-    fade_in: 1500ms
+    fade_in: 1s
     fade_out: 2s
   specialist_thane_leaving_the_barrier:
     file: en_us_hench_assassin_endgm2_longwalk_a_00266720_m.ogg

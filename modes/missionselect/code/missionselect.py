@@ -42,7 +42,7 @@ class MissionSelect(Carousel):
       items.append('suicide')
 
     # Then any squadmates who are of the "available" status
-    self._mates = SquadmateStatus.recruitable_mates()
+    self._mates = SquadmateStatus.recruitable_mates(player)
     for mate in self._mates:
       items.append(mate)
 

@@ -51,7 +51,7 @@ variable_player:
 
 timers:
   platform:
-    start_value: 5
+    start_value: 15
     end_value: 0
     direction: down
     start_running: yes  # TODO: add free-shoot period for combat squadmates

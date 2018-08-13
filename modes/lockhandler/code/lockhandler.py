@@ -113,9 +113,12 @@ class LockHandler(Mode):
     """ Logic for assessing whether to hold/lock the ball or bypass the lock """
     do_bypass = True
     mission_delay = -1
+    # By default we start missionselect, but during Suicide we start suicide_huddle
+    selection_mode = "missionselect"
 
     # SUICIDE:
     if self.machine.modes.suicide_base.active:
+      selection_mode = "suicide_huddle"
       # If the suicide mission wants to hold the ball for picking a specialist, allow it to handle
       if self.machine.modes.suicide_infiltration.active:
         self.log.info("INFILTRATION: valves state is: {}".format(self.machine.game.player["valves_state"]))
@@ -195,7 +198,7 @@ class LockHandler(Mode):
     # If the above handler wants to start mission select, do so after the requested delay
     if mission_delay > -1:
       self.delay.add(callback=self._post_event, ms=mission_delay,
-                     event='start_mode_missionselect')
+                     event='start_mode_{}'.format(selection_mode))
 
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold

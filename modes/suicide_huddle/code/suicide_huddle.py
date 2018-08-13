@@ -9,11 +9,11 @@ class SuicideHuddle(Carousel):
   def mode_init(self):
     super().mode_init()
     self._mates = []
-    self._specialist = "jacob"
+    self._specialist = "None"
 
   def mode_start(self, **kwargs):
+    self._items = ["intro"]
     super().mode_start(**kwargs)
-
     self.add_mode_event_handler("slide_huddle_slide_active", self._build_specialist_list)
 
   def _build_specialist_list(self, **kwargs):
@@ -22,16 +22,19 @@ class SuicideHuddle(Carousel):
     # If we are suiciding, filter for the correct type of squadmate
     if player.achievements['infiltration'] != "completed":
       self._mates = SquadmateStatus.all_techs()
-      items = SquadmateStatus.available_techs(player)
+      self._items = SquadmateStatus.available_techs(player)
     elif player.achievements['longwalk'] != "completed":
       self._mates = SquadmateStatus.all_biotics()
-      items = SquadmateStatus.available_biotics(player)
+      self._items = SquadmateStatus.available_biotics(player)
     else:
       raise KeyError("What specialist are we building for?", player.achievements)
 
+    # Select the first available mate
     self._specialist = self._mates[0]
+    while self._specialist not in self._items:
+      self._specialist = self._mates[self._mates.index(self._specialist) + 1]
+
     self.machine.log.info("Huddle specialist mates are: {}".format(self._mates))
-    self._items = items
     self._render_specialists()
 
   def _render_specialists(self, **kwargs):
