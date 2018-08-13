@@ -52,13 +52,19 @@ for completion on subsequent starts.
   * Fail the mode when a certain number of lit shots are hit
   * Play a specified sound/slide on each shot hit, depending on the counters
 * **[Legion](recruitlegion/config/recruitlegion.yaml)** - Stop the Heretics
+  * Hit any lit shot to start a countdown timer
+  * Hit a second shot before the timer runs out to advance and reset the timer
+  * Hit a third shot to complete the mode and light a bonus shot
+  * Hit the bonus shot to collect extra points
+  * If the between-shot timer expires, progress is paused and a bank shot must
+    be hit to re-enable the main shots
 * **[Mordin](recruitmordin/config/recruitmordin.yaml)** - Cure the Plague
   * Light the spinner to hit first, then light the right orbit to hit second
   * Once both are hit, light both ramps
   * Hit both ramps (in either order) to complete the mode
   * Play a semi-random sound on each hit (dependent on which squadmates are recruited)
 * **[Samara](recruitsamara/config/recruitsamara.yaml)** - Chase Morinth
-  * Light all standup targets
+  * All standup targets start lit, all lanes are off
   * Hit a standup target to light the lanes on either side
   * Hit a certain number of lit lanes to complete the mode
   * Preserve the state of targets/lane shots when restarting
@@ -89,7 +95,7 @@ menu, but some start automatically when certain conditions are met.
 
 #### Collector Ship
 The Collector Ship mission is available after 4 squadmates are recruited, and
-is started from the mission select screen. Once enabled, no other missions can be 
+is started from the mission select screen. Once enabled, no other missions can be
 selected and the Collector Ship can not be bypassed.
 
 The Collector Ship consists of a "base" mode that runs underneath and manages the three "phase" modes,
@@ -173,26 +179,26 @@ recruitment missions, and are unlocked by hitting various targets/banks/bumpers.
 
 #### Lair of the Shadow Broker
 This is a series of unlockable modes governed by the [global shadowbroker mode](global/config/global_shadowbroker.yaml).
-The global mode handles the tracking/lighting of dropbank hits to enable the 
+The global mode handles the tracking/lighting of dropbank hits to enable the
 series of mini-wizard modes:
-* **[Vasir Chase](shadowbroker_chase/config/shadowbroker_chase.yaml)** is a 
+* **[Vasir Chase](shadowbroker_chase/config/shadowbroker_chase.yaml)** is a
 typical, timed, follow-the-shots-sequence with a pre-determined set of shots.
   * Light a shot and advance through a specific order of shots using `hit_events` and `enable_events`
   * Play a progression of success sounds as the lit shots are hit
   * Play a randomization of wrong-way sounds when the wrong shots are hit
   * Don't end the ball on drain, instead end the mode and return to the normal playfield
   * If the player fails, restart them one shot back from where they left off
-* **[Vasir Combat](shadowbroker_vasir/config/shadowbroker_vasir.yaml)** is a 
-follow-the-shot mode where the player must repeatedly hit a shot that "jumps" 
+* **[Vasir Combat](shadowbroker_vasir/config/shadowbroker_vasir.yaml)** is a
+follow-the-shot mode where the player must repeatedly hit a shot that "jumps"
 around the playfield
   * Define a sequence of shots in a shot_group with a rotation order
   * Light a "target" shot with a profile state and start a shot rotation timer
   * If the timer runs out, rotate the target to a different shot
   * If the target is hit: reset the timer, advance the profile state, and rotate the
-  target to a different shot 
+  target to a different shot
     * *(this logic is way more complex than you'd think)*
   * Complete the mode by hitting the target on its final profile state (3x hits total)
-* **[Hagalaz Ship](shadowbroker_hagalaz/config/shadowbroker_hagalaz.yaml)** 
+* **[Hagalaz Ship](shadowbroker_hagalaz/config/shadowbroker_hagalaz.yaml)**
   * Define a group of shots and randomly light one every 8 seconds
   * Hit a lit shot to advance a counter
   * Use playfield lighting to indicate standups "charging up" over 10s
@@ -202,7 +208,7 @@ around the playfield
 * **[Boss Combat](shadowbroker_boss/config/shadowbroker_boss.yaml)**
 
 #### Multiballs
-There are two multiball modes, both of which are lit and locked in the same way 
+There are two multiball modes, both of which are lit and locked in the same way
 via the [global multiball handler](global/config/global_multiball.yaml). Overlord
 is the multiball mode available prior to the Collector Ship mission, and Arrival
 is available after.
@@ -245,7 +251,7 @@ gameplay modes.
 Game logic modes handle underlying behavior and are not exposed to the player but do interesting things behind-the-scenes.
 
 #### Base
-* **[Base](base/config/base.yaml)** handles the fundamental gameplay and exists 
+* **[Base](base/config/base.yaml)** handles the fundamental gameplay and exists
 beneath all other modes. It handles the transitions between *global* and various
 wizard modes, and is responsible for starting/stopping modes when balls start and
 end.
@@ -283,7 +289,7 @@ that progress towards the various Shadow Broker modes.
   * After the boss is completed, additional dropbanks award bonus points
 
 #### Field
-* **[Field](field/config/field.yaml)** handles all playfield behavior when no mission or wizard mode is active. 
+* **[Field](field/config/field.yaml)** handles all playfield behavior when no mission or wizard mode is active.
 
 #### Other
 * **[Bonus](bonus/config/bonus.yaml)** awards extra points after a ball has ended

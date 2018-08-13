@@ -15,20 +15,6 @@ slide_player:
     squadmate_killed_slide:
       action: remove
 
-slides:
-  squadmate_killed_slide:
-    widgets:
-      - type: text
-        text: Shoot ramp to try again
-        style: small
-        anchor_y: top
-        y: middle-4
-      - type: text
-        text: (player|killed_squadmate) is dead
-        style: small
-        anchor_y: bottom
-        y: middle+4
-
 show_player:
   mode_suicide_restart_started:
     missions_available_show:
@@ -39,11 +25,3 @@ show_player:
 
 sound_player:
   play_suicide_music_base: suicide_music_base
-
-sounds:
-  suicide_music_base:
-    file: mus_endgm1_attackplan.ogg
-    track: music
-    fade_in: 2s
-    fade_out: 1s
-

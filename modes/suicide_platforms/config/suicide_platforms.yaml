@@ -170,30 +170,6 @@ sound_player:
     suicide_music_platforms:
       action: play
 
-sound_pools:
-  suicide_music_platforms:
-    type: sequence
-    track: music
-    sounds: suicide_music_3a, suicide_music_3b
-    fade_in: 1s
-    fade_out: 1s
-
-sounds:
-  suicide_music_3a:
-    file: mus_endgm2_combat_3a.ogg
-    track: music
-    start_at: 2.5s
-    fade_in: 1s
-    fade_out: 2s
-    mode_end_action: stop
-  suicide_music_3b:
-    file: mus_endgm2_combat_3b.ogg
-    track: music
-    start_at: 5s
-    fade_in: 1.5s
-    fade_out: 2s
-    mode_end_action: stop
-
 widget_player:
   player_temp_hurryup_value:
     suicide_hurryup:

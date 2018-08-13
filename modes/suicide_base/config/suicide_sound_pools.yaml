@@ -1,0 +1,391 @@
+#config_version=5
+sound_pools:
+
+### INFILTRATION
+  # Huddle
+    # Huddle Intro
+    specialist_preselection_inf:
+      track: voice
+      type: random
+      sounds:
+        - shepard_some_could_sneak_in_this_shaft
+        - jacob_who_do_we_send_into_the_shaft{current_player.status_jacob==4}
+    # Shepard naming specialist (unused?)
+    specialist_inf_selection:
+      track: voice
+      sounds:
+        - shep_selection_inf_garrus{current_player.specialist=="garrus"}
+        - shep_selection_inf_jacob{current_player.specialist=="jacob"}
+        - shep_selection_inf_kasumi{current_player.specialist=="kasumi"}
+        - shep_selection_inf_legion{current_player.specialist=="legion"}
+        - shep_selection_inf_mordin{current_player.specialist=="mordin"}
+        - shep_selection_inf_tali{current_player.specialist=="tali"}
+        - shep_selection_inf_thane{current_player.specialist=="thane"}
+    # Specialist confirming selection (unused?)
+    specialist_inf_confirmation:
+      track: voice
+      sounds:
+        - selection_inf_confirm_garrus{current_player.specialist=="garrus"}
+        - selection_inf_confirm_jacob{current_player.specialist=="jacob"}
+        - selection_inf_confirm_kasumi{current_player.specialist=="kasumi"}
+        - selection_inf_confirm_legion{current_player.specialist=="legion"}
+        - selection_inf_confirm_mordin{current_player.specialist=="mordin"}
+        - selection_inf_confirm_tali{current_player.specialist=="tali"}
+        - selection_inf_confirm_thane{current_player.specialist=="thane"}
+    # Infiltration starting (huddle outro)
+    specialist_inf_intro:
+      track: voice
+      sounds:
+        - specialist_inf_intro_garrus{current_player.specialist=="garrus"}
+        - specialist_inf_intro_jacob{current_player.specialist=="jacob"}
+        - specialist_inf_intro_kasumi{current_player.specialist=="kasumi"}
+        - specialist_inf_intro_legion{current_player.specialist=="legion"}
+        - specialist_inf_intro_mordin{current_player.specialist=="mordin"}
+        - specialist_inf_intro_tali{current_player.specialist=="tali"}
+        - specialist_inf_intro_thane{current_player.specialist=="thane"}
+    # Infiltration complete
+    specialist_inf_through:
+      track: voice
+      sounds:
+        - specialist_garrus_im_through_opening_doors_now{current_player.specialist=="garrus"}
+        - specialist_jacob_im_through_opening_doors_now{current_player.specialist=="jacob"}
+        - specialist_legion_im_through_opening_doors_now{current_player.specialist=="legion"}
+        - specialist_kasumi_im_through_opening_doors_now{current_player.specialist=="kasumi"}
+        - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
+        - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
+        - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
+  # Specialist Callouts
+    # One shot remaining
+    specialist_inf_close:
+      track: voice
+      type: random_force_all
+      sounds:
+        - specialist_garrus_moving_on_near_the_end{current_player.specialist=="garrus"}
+        - specialist_garrus_one_more_valve_to_go{current_player.specialist=="garrus"}
+        - specialist_jacob_moving_on_near_the_end{current_player.specialist=="jacob"}
+        - specialist_jacob_one_more_valve_to_go{current_player.specialist=="jacob"}
+        - specialist_kasumi_moving_on_near_the_end{current_player.specialist=="kasumi"}
+        - specialist_kasumi_one_more_valve_to_go{current_player.specialist=="kasumi"}
+        - specialist_legion_moving_on_near_the_end{current_player.specialist=="legion"}
+        - specialist_legion_one_more_valve_to_go{current_player.specialist=="legion"}
+        - specialist_mordin_moving_on_near_the_end{current_player.specialist=="mordin"}
+        - specialist_mordin_one_more_valve_to_go{current_player.specialist=="mordin"}
+        - specialist_tali_moving_on_near_the_end{current_player.specialist=="tali"}
+        - specialist_tali_one_more_valve_to_go{current_player.specialist=="tali"}
+        - specialist_thane_moving_on_near_the_end{current_player.specialist=="thane"}
+        - specialist_thane_one_more_valve_to_go{current_player.specialist=="thane"}
+    specialist_inf_warning_first:
+      track: voice
+      sounds:
+        - specialist_garrus_gate_blocking{current_player.specialist=="garrus"}
+        - specialist_jacob_gate_blocking{current_player.specialist=="jacob"}
+        - specialist_kasumi_gate_blocking{current_player.specialist=="kasumi"}
+        - specialist_legion_gate_blocking{current_player.specialist=="legion"}
+        - specialist_mordin_gate_blocking{current_player.specialist=="mordin"}
+        - specialist_tali_gate_blocking{current_player.specialist=="tali"}
+        - specialist_thane_gate_blocking{current_player.specialist=="thane"}
+    specialist_inf_warning_med:
+      type: random_force_all
+      track: voice
+      sounds:
+        # garrus
+        - specialist_garrus_blocked_again{current_player.specialist=="garrus"}
+        - specialist_garrus_waiting_on_you{current_player.specialist=="garrus"}
+        - specialist_garrus_another_obstacle_in_the_way{current_player.specialist=="garrus"}
+        - specialist_garrus_another_thing_in_the_way{current_player.specialist=="garrus"}
+        # jacob
+        - specialist_jacob_blocked_again{current_player.specialist=="jacob"}
+        - specialist_jacob_waiting_on_you{current_player.specialist=="jacob"}
+        - specialist_jacob_another_obstacle_in_the_way{current_player.specialist=="jacob"}
+        - specialist_jacob_another_thing_in_the_way{current_player.specialist=="jacob"}
+        # kasumi
+        - specialist_kasumi_blocked_again{current_player.specialist=="kasumi"}
+        - specialist_kasumi_waiting_on_you{current_player.specialist=="kasumi"}
+        - specialist_kasumi_another_obstacle_in_the_way{current_player.specialist=="kasumi"}
+        - specialist_kasumi_another_thing_in_the_way{current_player.specialist=="kasumi"}
+        # legion
+        - specialist_legion_blocked_again{current_player.specialist=="legion"}
+        - specialist_legion_waiting_on_you{current_player.specialist=="legion"}
+        - specialist_legion_another_obstacle_in_the_way{current_player.specialist=="legion"}
+        - specialist_legion_another_thing_in_the_way{current_player.specialist=="legion"}
+        # mordin
+        - specialist_mordin_blocked_again{current_player.specialist=="mordin"}
+        - specialist_mordin_waiting_on_you{current_player.specialist=="mordin"}
+        - specialist_mordin_another_obstacle_in_the_way{current_player.specialist=="mordin"}
+        - specialist_mordin_another_thing_in_the_way{current_player.specialist=="mordin"}
+        # tali
+        - specialist_tali_blocked_again{current_player.specialist=="tali"}
+        - specialist_tali_waiting_on_you{current_player.specialist=="tali"}
+        - specialist_tali_another_obstacle_in_the_way{current_player.specialist=="tali"}
+        - specialist_tali_another_thing_in_the_way{current_player.specialist=="tali"}
+        # thane
+        - specialist_thane_blocked_again{current_player.specialist=="thane"}
+        - specialist_thane_waiting_on_you{current_player.specialist=="thane"}
+        - specialist_thane_another_obstacle_in_the_way{current_player.specialist=="thane"}
+        - specialist_thane_another_thing_in_the_way{current_player.specialist=="thane"}
+    specialist_inf_warning_high:
+      type: random_force_all
+      track: voice
+      sounds:
+        # garrus
+        - specialist_garrus_being_cooked_alive{current_player.specialist=="garrus"}
+        - specialist_garrus_burning_up{current_player.specialist=="garrus"}
+        - specialist_garrus_im_on_fire{current_player.specialist=="garrus"}
+        - specialist_garrus_hurry_shepard_its_heating_up{current_player.specialist=="garrus"}
+        # jacob
+        - specialist_jacob_being_cooked_alive{current_player.specialist=="jacob"}
+        - specialist_jacob_burning_up{current_player.specialist=="jacob"}
+        - specialist_jacob_im_on_fire{current_player.specialist=="jacob"}
+        - specialist_jacob_hurry_shepard_its_heating_up{current_player.specialist=="jacob"}
+        # kasumi
+        - specialist_kasumi_being_cooked_alive{current_player.specialist=="kasumi"}
+        - specialist_kasumi_burning_up{current_player.specialist=="kasumi"}
+        - specialist_kasumi_im_on_fire{current_player.specialist=="kasumi"}
+        - specialist_kasumi_hurry_shepard_its_heating_up{current_player.specialist=="kasumi"}
+        # legion
+        - specialist_legion_being_cooked_alive{current_player.specialist=="legion"}
+        - specialist_legion_burning_up{current_player.specialist=="legion"}
+        - specialist_legion_im_on_fire{current_player.specialist=="legion"}
+        - specialist_legion_hurry_shepard_its_heating_up{current_player.specialist=="legion"}
+        # mordin
+        - specialist_mordin_being_cooked_alive{current_player.specialist=="mordin"}
+        - specialist_mordin_burning_up{current_player.specialist=="mordin"}
+        - specialist_mordin_im_on_fire{current_player.specialist=="mordin"}
+        - specialist_mordin_hurry_shepard_its_heating_up{current_player.specialist=="mordin"}
+        # tali
+        - specialist_tali_being_cooked_alive{current_player.specialist=="tali"}
+        - specialist_tali_burning_up{current_player.specialist=="tali"}
+        - specialist_tali_im_on_fire{current_player.specialist=="tali"}
+        - specialist_tali_hurry_shepard_its_heating_up{current_player.specialist=="tali"}
+        # thane
+        - specialist_thane_being_cooked_alive{current_player.specialist=="thane"}
+        - specialist_thane_burning_up{current_player.specialist=="thane"}
+        - specialist_thane_im_on_fire{current_player.specialist=="thane"}
+        - specialist_thane_hurry_shepard_its_heating_up{current_player.specialist=="thane"}
+    # Shot hit successfully
+    specialist_inf_advance:
+      type: random_force_all
+      track: voice
+      sounds:
+        # garrus
+        - specialist_garrus_gate_is_open{current_player.specialist=="garrus"}
+        - specialist_garrus_i_knew_i_could_count_on_you{current_player.specialist=="garrus"}
+        - specialist_garrus_all_clear_moving_on{current_player.specialist=="garrus"}
+        - specialist_garrus_nice_work{current_player.specialist=="garrus"}
+        # jacob
+        - specialist_jacob_gate_is_open{current_player.specialist=="jacob"}
+        - specialist_jacob_i_knew_i_could_count_on_you{current_player.specialist=="jacob"}
+        - specialist_jacob_all_clear_moving_on{current_player.specialist=="jacob"}
+        - specialist_jacob_nice_work{current_player.specialist=="jacob"}
+        # kasumi
+        - specialist_kasumi_gate_is_open{current_player.specialist=="kasumi"}
+        - specialist_kasumi_i_knew_i_could_count_on_you{current_player.specialist=="kasumi"}
+        - specialist_kasumi_all_clear_moving_on{current_player.specialist=="kasumi"}
+        - specialist_kasumi_nice_work{current_player.specialist=="kasumi"}
+        # legion
+        - specialist_legion_gate_is_open{current_player.specialist=="legion"}
+        - specialist_legion_i_knew_i_could_count_on_you{current_player.specialist=="legion"}
+        - specialist_legion_all_clear_moving_on{current_player.specialist=="legion"}
+        - specialist_legion_nice_work{current_player.specialist=="legion"}
+        # mordin
+        - specialist_mordin_gate_is_open{current_player.specialist=="mordin"}
+        - specialist_mordin_i_knew_i_could_count_on_you{current_player.specialist=="mordin"}
+        - specialist_mordin_all_clear_moving_on{current_player.specialist=="mordin"}
+        - specialist_mordin_nice_work{current_player.specialist=="mordin"}
+        # tali
+        - specialist_tali_gate_is_open{current_player.specialist=="tali"}
+        - specialist_tali_i_knew_i_could_count_on_you{current_player.specialist=="tali"}
+        - specialist_tali_all_clear_moving_on{current_player.specialist=="tali"}
+        - specialist_tali_nice_work{current_player.specialist=="tali"}
+        # thane
+        - specialist_thane_gate_is_open{current_player.specialist=="thane"}
+        - specialist_thane_i_knew_i_could_count_on_you{current_player.specialist=="thane"}
+        - specialist_thane_all_clear_moving_on{current_player.specialist=="thane"}
+        - specialist_thane_nice_work{current_player.specialist=="thane"}
+
+### LONG WALK
+  # Huddle
+    # Huddle intro pt 1
+    specialist_preselection_lw:
+      track: voice
+      type: random
+      sounds:
+        - edi_chamber_overrun_with_seeker_swarms
+        - shepard_what_about_biotics
+        - shepard_conventional_weapons_useless
+    # Huddle intro pt 2-A
+    specialist_lw_yes:
+      track: voice
+      type: random
+      sounds:
+        - specialist_biotic_field_yes_thane{current_player.status_thane==4}
+        - specialist_biotic_field_yes_jacob{current_player.status_jacob==4}
+        - specialist_biotic_field_yes_samara{current_player.status_samara==4}
+        - specialist_biotic_field_yes_miranda{current_player.status_miranda==4}
+        - specialist_biotic_field_yes_jack{current_player.status_jack==4}
+    # Huddle intro pt 2-B
+    specialist_lw_no:
+      track: voice
+      type: random
+      sounds:
+        - specialist_biotic_field_no_thane{current_player.status_thane==4}
+        - specialist_biotic_field_no_jacob{current_player.status_jacob==4}
+        - specialist_biotic_field_no_samara{current_player.status_samara==4}
+        - specialist_biotic_field_no_miranda{current_player.status_miranda==4}
+        - specialist_biotic_field_no_jack{current_player.status_jack==4}
+    # Huddle outro
+    specialist_lw_intro:
+      track: voice
+      sounds:
+        - specialist_im_ready_samara{current_player.specialist=="samara"}
+        - specialist_im_ready_jack{current_player.specialist=="jack"}
+        - specialist_im_ready_jacob{current_player.specialist=="jacob"}
+        - specialist_im_ready_miranda{current_player.specialist=="miranda"}
+        - specialist_must_move_quickly_thane{current_player.specialist=="thane"}
+  # Specialist Callouts
+    specialist_lw_warning_barrier:
+      track: voice
+      sounds:
+        - specialist_jack_leaving_the_barrier{current_player.specialist=="jack"}
+        - specialist_jacob_leaving_the_barrier{current_player.specialist=="jacob"}
+        - specialist_miranda_leaving_the_barrier{current_player.specialist=="miranda"}
+        - specialist_samara_leaving_the_barrier{current_player.specialist=="samara"}
+        - specialist_thane_leaving_the_barrier{current_player.specialist=="thane"}
+    specialist_lw_close:
+      track: voice
+      sounds:
+        - specialist_jack_i_can_see_the_entrance{current_player.specialist=="jack"}
+        - specialist_jacob_i_can_see_the_entrance{current_player.specialist=="jacob"}
+        - specialist_miranda_i_can_see_the_entrance{current_player.specialist=="miranda"}
+        - specialist_samara_i_can_see_the_entrance{current_player.specialist=="samara"}
+        - specialist_thane_i_can_see_the_entrance{current_player.specialist=="thane"}
+    specialist_lw_advance:
+      track: voice
+      type: random_force_all
+      sounds:
+        - specialist_jack_moving_out{current_player.specialist=="jack"}
+        - specialist_jack_moving_out_commander{current_player.specialist=="jack"}
+        - specialist_jack_moving_out_stay_close{current_player.specialist=="jack"}
+        - specialist_jack_all_clear{current_player.specialist=="jack"}
+        - specialist_jack_ready{current_player.specialist=="jack"}
+        - specialist_jack_lets_go{current_player.specialist=="jack"}
+        - specialist_jacob_moving_out{current_player.specialist=="jacob"}
+        - specialist_jacob_moving_out_commander{current_player.specialist=="jacob"}
+        - specialist_jacob_moving_out_stay_close{current_player.specialist=="jacob"}
+        - specialist_jacob_all_clear{current_player.specialist=="jacob"}
+        - specialist_jacob_ready{current_player.specialist=="jacob"}
+        - specialist_jacob_lets_go{current_player.specialist=="jacob"}
+        - specialist_miranda_moving_out{current_player.specialist=="miranda"}
+        - specialist_miranda_moving_out_commander{current_player.specialist=="miranda"}
+        - specialist_miranda_moving_out_stay_close{current_player.specialist=="miranda"}
+        - specialist_miranda_all_clear{current_player.specialist=="miranda"}
+        - specialist_miranda_ready{current_player.specialist=="miranda"}
+        - specialist_miranda_lets_go{current_player.specialist=="miranda"}
+        - specialist_samara_moving_out{current_player.specialist=="samara"}
+        - specialist_samara_moving_out_commander{current_player.specialist=="samara"}
+        - specialist_samara_moving_out_stay_close{current_player.specialist=="samara"}
+        - specialist_samara_all_clear{current_player.specialist=="samara"}
+        - specialist_samara_ready{current_player.specialist=="samara"}
+        - specialist_samara_lets_go{current_player.specialist=="samara"}
+        - specialist_thane_moving_out{current_player.specialist=="thane"}
+        - specialist_thane_moving_out_commander{current_player.specialist=="thane"}
+        - specialist_thane_moving_out_stay_close{current_player.specialist=="thane"}
+        - specialist_thane_all_clear{current_player.specialist=="thane"}
+        - specialist_thane_ready{current_player.specialist=="thane"}
+        - specialist_thane_lets_go{current_player.specialist=="thane"}
+    specialist_lw_warning_med:
+      track: voice
+      type: random_force_all
+      sounds:
+        - specialist_jack_ill_hold_this_position{current_player.specialist=="jack"}
+        - specialist_jack_moving_to_cover{current_player.specialist=="jack"}
+        - specialist_jack_taking_cover{current_player.specialist=="jack"}
+        - specialist_jack_incoming{current_player.specialist=="jack"}
+        - specialist_jack_hostiles{current_player.specialist=="jack"}
+        - specialist_jacob_ill_hold_this_position{current_player.specialist=="jacob"}
+        - specialist_jacob_moving_to_cover{current_player.specialist=="jacob"}
+        - specialist_jacob_taking_cover{current_player.specialist=="jacob"}
+        - specialist_jacob_incoming{current_player.specialist=="jacob"}
+        - specialist_jacob_hostiles{current_player.specialist=="jacob"}
+        - specialist_miranda_ill_hold_this_position{current_player.specialist=="miranda"}
+        - specialist_miranda_moving_to_cover{current_player.specialist=="miranda"}
+        - specialist_miranda_taking_cover{current_player.specialist=="miranda"}
+        - specialist_miranda_incoming{current_player.specialist=="miranda"}
+        - specialist_miranda_hostiles{current_player.specialist=="miranda"}
+        - specialist_samara_ill_hold_this_position{current_player.specialist=="samara"}
+        - specialist_samara_moving_to_cover{current_player.specialist=="samara"}
+        - specialist_samara_taking_cover{current_player.specialist=="samara"}
+        - specialist_samara_incoming{current_player.specialist=="samara"}
+        - specialist_samara_hostiles{current_player.specialist=="samara"}
+        - specialist_thane_ill_hold_this_position{current_player.specialist=="thane"}
+        - specialist_thane_moving_to_cover{current_player.specialist=="thane"}
+        - specialist_thane_taking_cover{current_player.specialist=="thane"}
+        - specialist_thane_incoming{current_player.specialist=="thane"}
+        - specialist_thane_hostiles{current_player.specialist=="thane"}
+    specialist_lw_warning_high:
+      track: voice
+      type: random_force_all
+      sounds:
+        - specialist_jack_strain_substantial{current_player.specialist=="jack"}
+        - specialist_jack_dont_know_how_much_more_i_can_take{current_player.specialist=="jack"}
+        - specialist_jack_hurry_shepard{current_player.specialist=="jack"}
+        - specialist_jacob_strain_substantial{current_player.specialist=="jacob"}
+        - specialist_jacob_dont_know_how_much_more_i_can_take{current_player.specialist=="jacob"}
+        - specialist_jack_hurry_shepard{current_player.specialist=="jack"}
+        - specialist_miranda_strain_substantial{current_player.specialist=="miranda"}
+        - specialist_miranda_dont_know_how_much_more_i_can_take{current_player.specialist=="miranda"}
+        - specialist_miranda_hurry_shepard{current_player.specialist=="miranda"}
+        - specialist_samara_strain_substantial{current_player.specialist=="samara"}
+        - specialist_samara_dont_know_how_much_more_i_can_take{current_player.specialist=="samara"}
+        - specialist_samara_hurry_shepard{current_player.specialist=="samara"}
+        - specialist_thane_strain_substantial{current_player.specialist=="thane"}
+        - specialist_thane_dont_know_how_much_more_i_can_take{current_player.specialist=="thane"}
+        - specialist_thane_hurry_shepard{current_player.specialist=="thane"}
+
+### FINAL BATTLE
+  # Platforms music
+    suicide_music_platforms:
+      type: sequence
+      track: music
+      sounds: suicide_music_3a, suicide_music_3b
+      fade_in: 1s
+      fade_out: 1s
+
+
+  # Returning to Platforms mode
+    enemies_incoming:
+      track: voice
+      type: random_force_all
+      sounds:
+        - garrus_enemies_incoming{current_player.status_garrus==4}
+        - grunt_enemies_incoming{current_player.status_grunt==4}
+        - jacob_enemies_incoming{current_player.status_jacob==4}
+        - jack_enemies_incoming{current_player.status_jack==4}
+        - kasumi_enemies_incoming{current_player.status_kasumi==4}
+        - legion_enemies_incoming{current_player.status_legion==4}
+        - miranda_enemies_incoming{current_player.status_miranda==4}
+        - mordin_enemies_incoming{current_player.status_mordin==4}
+        - samara_enemies_incoming{current_player.status_samara==4}
+        - tali_enemies_incoming{current_player.status_tali==4}
+        - thane_enemies_incoming{current_player.status_thane==4}
+        - zaeed_enemies_incoming{current_player.status_zaeed==4}
+        - shepard_theyve_seen_us
+        - shepard_lets_move
+    enemies_reinforcements:
+      track: voice
+      type: random_force_all
+      sounds:
+        - garrus_reinforcements{current_player.status_garrus==4}
+        - grunt_reinforcements{current_player.status_grunt==4}
+        - jacob_reinforcements{current_player.status_jacob==4}
+        - jack_reinforcements{current_player.status_jack==4}
+        - kasumi_reinforcements{current_player.status_kasumi==4}
+        - legion_reinforcements{current_player.status_legion==4}
+        - miranda_reinforcements{current_player.status_miranda==4}
+        - mordin_reinforcements{current_player.status_mordin==4}
+        - samara_reinforcements{current_player.status_samara==4}
+        - tali_reinforcements{current_player.status_tali==4}
+        - thane_reinforcements{current_player.status_thane==4}
+        - zaeed_reinforcements{current_player.status_zaeed==4}
+        - shepard_here_they_come
+        - shepard_take_cover

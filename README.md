@@ -24,7 +24,7 @@ The core challenge of the ME2 Pinball Game is to recruit a squad to take with yo
 
 * **Archangel - Siege on Omega**
 
-  Take out mercenaries for points and hit each of the three lit shots to close the shutters to stop the assault. Get upstairs and protect Archangel to complete the mission.
+  Take out mercenaries for points and hit each of the three lit shots to close the shutters and stop the assault. Get upstairs and protect Archangel to complete the mission.
 
 * **The Warlord - Defeating the Tank-Bred**
 
@@ -36,11 +36,11 @@ The core challenge of the ME2 Pinball Game is to recruit a squad to take with yo
 
 * **The Thief - Breaking and Entering**
 
-  Hit any un-lit shot to infiltrate the stronghold, but watch out! After every round another shot will be lit with an alarm, and hitting any alarm shot fails the mission! Advance four times to complete the mission.
+  Hit any un-lit shot to infiltrate the stronghold, but watch out! After every round another shot will be alarmed, and hitting any alarm shot fails the mission! Advance four times to complete the mission.
 
 * **The Assassin - Assaulting Dantius Towers**
 
-  Advance up the ramps to build value and ascend the towers. Once high enough, hit one of the lit orbit shots to cross the bridge and complete the mission.
+  Advance up the ramps to build value and ascend the towers. Once high enough, hit one of the orbits to cross the bridge and complete the mission.
 
 * **The Quarian - Geth on Haestrom**
 
@@ -90,13 +90,13 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 
 * The Reaper
 
-  Finish the fight in this two-phase mode that alternates between taking down Collectors during a four-ball multiball and playing cat-and-mouse against a Reaper. Build up attack damage and hit the Reaper repeatedly to take it down, but watch out for its deadly beam cannon!
+  Knock out the supporting tubes and set a bomb to destroy the base, then finish the fight in a two-phase battle that alternates between taking down Collectors during a four-ball multiball and playing cat-and-mouse against a Reaper. Build up attack damage and hit the Reaper repeatedly to take it down, but watch out for its deadly beam cannon!
 
 * Escape
 
   Get your surviving squadmates to safety and build up value during this high-speed multiball, then hit the final shot to destroy the base and complete the Suicide Mission.
 
-## Additional Gameplay
+## Side Missions
 
 ### Lair of the Shadow Broker
 Drop the bank of targets to gather intel on the Shadow Broker and start this mini-wizard mode. Complete three banks to unlock the Vasir car chase, then follow the shots and defeat Vasir in combat to get the data disk. Complete additional drop banks to unlock Hagalaz, then storm the Shadow Broker's ship and defeat his mercenaries to meet him face-to-face in a high-stakes two-ball battle.
@@ -110,6 +110,17 @@ Hit the Geth target banks to clear a station on Aite and hit the left ramp to lo
 Hit the Batarian target banks to clear a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins—hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
 
 *This mission is only available after the Collector Ship mission*
+
+## Additional Gameplay
+
+### N7 Assignments
+Complete the pop-bumper counter to enable an N7 assignment, a single random shot on a hurryup. Hit the shot to complete the assignment. Complete 4 assignments to unlock *N7: Hahne Kader Facility*, a whack-a-mole multiball against waves of mechs.
+
+### Planet Scanning
+Complete the top lanes to scan a planet, increasing the efficacy of your mineral scanner (earned via pop bumper hits) and raising the minerals bonus awards. Scan 5 planets to unlock the *Normandy Crash Site*, a timed free-shoot that unlocks powerful rewards.
+
+### Harbinger
+During missions against the Collectors, Harbinger will occasionally appear at the captive ball. While Harbinger is present, two hits will start a timed 2x playfield multiplier and additional hits will increase the multiplier (up to 6x). The multiplier duration persists even after Harbinger leaves, but will end if the mission is completed.
 
 ## Credits
 
