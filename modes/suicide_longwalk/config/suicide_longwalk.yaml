@@ -77,12 +77,12 @@ timers:
         action: restart
       - event: logicblock_swarmpaths_complete
         action: stop
-      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>40}
+      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41}
         action: jump
-        value: 40
-      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>20}
+        value: 41
+      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>21}
         action: jump
-        value: 20
+        value: 21
       - event: player_tension{value==3 and current_player.suicide_longwalk_longwalk_tick>0}
         action: jump
         value: 0
@@ -92,7 +92,7 @@ variable_player:
     tension:
       action: set
       int: 0
-  timer_longwalk_tick{ticks==40 or ticks==20}:
+  timer_longwalk_tick{ticks==41 or ticks==21}:
     tension: 1
   swarmfails_hit:
     tension: 1
@@ -384,14 +384,19 @@ sound_pools:
     sounds:
       - specialist_jack_strain_substantial{current_player.specialist=="jack"}
       - specialist_jack_dont_know_how_much_more_i_can_take{current_player.specialist=="jack"}
+      - specialist_jack_hurry_shepard{current_player.specialist=="jack"}
       - specialist_jacob_strain_substantial{current_player.specialist=="jacob"}
       - specialist_jacob_dont_know_how_much_more_i_can_take{current_player.specialist=="jacob"}
+      - specialist_jack_hurry_shepard{current_player.specialist=="jack"}
       - specialist_miranda_strain_substantial{current_player.specialist=="miranda"}
       - specialist_miranda_dont_know_how_much_more_i_can_take{current_player.specialist=="miranda"}
+      - specialist_miranda_hurry_shepard{current_player.specialist=="miranda"}
       - specialist_samara_strain_substantial{current_player.specialist=="samara"}
       - specialist_samara_dont_know_how_much_more_i_can_take{current_player.specialist=="samara"}
+      - specialist_samara_hurry_shepard{current_player.specialist=="samara"}
       - specialist_thane_strain_substantial{current_player.specialist=="thane"}
       - specialist_thane_dont_know_how_much_more_i_can_take{current_player.specialist=="thane"}
+      - specialist_thane_hurry_shepard{current_player.specialist=="thane"}
 
 sounds:
   longwalk_low:
@@ -412,6 +417,21 @@ sounds:
     mode_end_action: stop
     fade_in: 1s
     fade_out: 2s
+  specialist_miranda_hurry_shepard:
+    file: en_us_hench_vixen_endgm2_biotic_fail_c_00282821_m.ogg
+    track: voice
+  specialist_thane_hurry_shepard:
+    file: en_us_hench_assassin_endgm2_biotic_fail_c_00295269_m.ogg
+    track: voice
+  specialist_jack_hurry_shepard:
+    file: en_us_hench_convict_endgm2_biotic_fail_c_00282817_m.ogg
+    track: voice
+  specialist_jacob_hurry_shepard:
+    file: en_us_hench_leading_endgm2_biotic_fail_c_00282818_m.ogg
+    track: voice
+  specialist_samara_hurry_shepard:
+    file: en_us_hench_mystic_endgm2_biotic_fail_c_00282815_m.ogg
+    track: voice
   specialist_thane_leaving_the_barrier:
     file: en_us_hench_assassin_endgm2_longwalk_a_00266720_m.ogg
     track: voice

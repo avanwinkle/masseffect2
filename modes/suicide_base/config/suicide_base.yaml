@@ -19,17 +19,18 @@ mode:
 event_player:
   mode_suicide_base_started.1:
     - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
-    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and (device.achievements.infiltration.state!="completed" or device.achievements.longwalk.state!="completed")}
-    - start_mode_suicide_platforms{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
+    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.longwalk.state!="completed"}
+    - play_platforms_intro{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
     - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
-    - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed"}
+    - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed" and device.achievements.longwalk.state!="completed"}
+    - start_mode_suicide_platforms{device.achievements.longwalk.state=="completed"}
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
   # achievement_infiltration_state_completed: start_mode_suicide_huddle  # Use the achievement state because that's what mission select checks
-  longwalk_complete: start_mode_suicide_platforms|4s # Delay for the dialog
+  # platform_intro_complete: start_mode_suicide_platforms|4s # Delay for the dialog
   platforms_complete: start_mode_suicide_humanreaper
   # reaper goes back to platforms when it "fails"
   humanreaper_failed: start_mode_suicide_platforms
@@ -49,6 +50,15 @@ event_player:
   suicidemission_ended:
     - restore_singleplayer_slide{game.num_players==1}
     - restore_multiplayer_slide{game.num_players>1}
+  squadmate_killed{not ball_is_ending and device.achievements.longwalk.state!="completed"}: start_mode_suicide_restart
+  # We play the reaper -> platforms sound here so we can control it for hit-based changes only
+  reaper_shot_hit:
+    - play_enemies_incoming{current_player.reaper_rounds > 0 and current_player.reaper_rounds % 2 == 0}
+    - play_enemies_reinforcements{current_player.reaper_rounds % 2 == 1}
+  # Also play the sound if the reaper mode ends of its own accord
+  humanreaper_timeout:
+    - play_enemies_incoming{current_player.reaper_rounds > 0 and current_player.reaper_rounds % 2 == 0}
+    - play_enemies_reinforcements{current_player.reaper_rounds % 2 == 1}
 
 queue_relay_player:
   # If we're starting a new ball and need to huddle, delay the ball eject
@@ -75,6 +85,10 @@ variable_player:
     suicide_continuing:
       action: set
       int: 0
+    # For debugging, when we start directly into reaper mode
+    reaper_hp{not current_player.reaper_hp}:
+      action: set
+      int: 10000
   # Reset the reaper ROUNDS and HP on each ball? or each suicide mission?
   mode_suicide_longwalk_started:
     reaper_rounds:
@@ -103,10 +117,31 @@ variable_player:
   mode_suicide_humanreaper_started:
     reaper_rounds: 1
 
+show_player:
+  mode_suicide_base_will_stop:
+    missions_available_show:
+      action: stop
+  play_platforms_intro:
+    platforms_intro_show:
+      loops: 0
+
+shows:
+  platforms_intro_show:
+    - time: 0
+      sounds:
+        shep_we_win_or_lose_it_all:
+          action: load
+          track: voice
+    - time: 3s
+      sounds:
+        shep_we_win_or_lose_it_all:
+          action: play
+          track: voice
+          events_when_stopped: start_mode_suicide_platforms
+
 sound_player:
   # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
   play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
-  squadmate_killed{not ball_is_ending}: suicide_music_base
   mode_type_suicide_started:
     suicide_music_base:
       action: stop
@@ -121,35 +156,13 @@ sound_player:
       # Start this first to avoid a race condition with the huddle dialoge
       events_when_played: start_mode_suicide_huddle
   # Handle the transition between platform/reaper phases for seamlessness
-  # Start by playing the intro track when the long walk is completed
-  longwalk_complete:
+  play_platforms_intro:
     suicide_music_intro:
       action: play
-    shep_we_win_or_lose_it_all:
-      action: play
-  # Seamlessly blend that one into the 3a
-  suicide_music_intro_transition:
-    suicide_music_3a:
-      start_at: 2s
-  # When it's reaper time, switch to reaper music
-  start_mode_suicide_humanreaper:
-    suicide_music_3a:
-      action: stop
-      fade_out: 1s
-    suicide_music_platforms:
-      action: stop
-      fade_out: 1s
-  # When we move from reaper back to platforms, skip the intro
-  humanreaper_failed:
-    suicide_music_platforms:
-      action: play
+  play_enemies_incoming: enemies_incoming
+  play_enemies_reinforcements: enemies_reinforcements
 
 sound_pools:
-  suicide_music_platforms:
-    type: sequence
-    track: music
-    sounds: suicide_music_3b, suicide_music_3a
-    fade_out: 1s
   specialist_inf_through:
     track: voice
     sounds:
@@ -160,31 +173,54 @@ sound_pools:
       - specialist_mordin_im_through_opening_doors_now{current_player.specialist=="mordin"}
       - specialist_tali_im_through_opening_doors_now{current_player.specialist=="tali"}
       - specialist_thane_im_through_opening_doors_now{current_player.specialist=="thane"}
+  enemies_incoming:
+    track: voice
+    type: random_force_all
+    sounds:
+      - garrus_enemies_incoming{current_player.status_garrus==4}
+      - grunt_enemies_incoming{current_player.status_grunt==4}
+      - jacob_enemies_incoming{current_player.status_jacob==4}
+      - jack_enemies_incoming{current_player.status_jack==4}
+      - kasumi_enemies_incoming{current_player.status_kasumi==4}
+      - legion_enemies_incoming{current_player.status_legion==4}
+      - miranda_enemies_incoming{current_player.status_miranda==4}
+      - mordin_enemies_incoming{current_player.status_mordin==4}
+      - samara_enemies_incoming{current_player.status_samara==4}
+      - tali_enemies_incoming{current_player.status_tali==4}
+      - thane_enemies_incoming{current_player.status_thane==4}
+      - zaeed_enemies_incoming{current_player.status_zaeed==4}
+      - shepard_theyve_seen_us
+      - shepard_lets_move
+  enemies_reinforcements:
+    track: voice
+    type: random_force_all
+    sounds:
+      - garrus_reinforcements{current_player.status_garrus==4}
+      - grunt_reinforcements{current_player.status_grunt==4}
+      - jacob_reinforcements{current_player.status_jacob==4}
+      - jack_reinforcements{current_player.status_jack==4}
+      - kasumi_reinforcements{current_player.status_kasumi==4}
+      - legion_reinforcements{current_player.status_legion==4}
+      - miranda_reinforcements{current_player.status_miranda==4}
+      - mordin_reinforcements{current_player.status_mordin==4}
+      - samara_reinforcements{current_player.status_samara==4}
+      - tali_reinforcements{current_player.status_tali==4}
+      - thane_reinforcements{current_player.status_thane==4}
+      - zaeed_reinforcements{current_player.status_zaeed==4}
+      - shepard_here_they_come
+      - shepard_take_cover
 
 sounds:
-  suicide_music_base:
-    file: mus_endgm1_attackplan.ogg
-    track: music
-    mode_end_action: stop
   suicide_music_intro:
     file: mus_endgm2_speech_conv_b.ogg
     track: music
+    start_at: 1s
+    fade_in: 200ms
+    fade_out: 1500ms
     mode_end_action: stop
     markers:
       - time: 37s
         events: suicide_music_intro_transition
-  suicide_music_3a:
-    file: mus_endgm2_combat_3a.ogg
-    track: music
-    start_at: 3s
-    fade_in: 500ms
-    mode_end_action: stop
-  suicide_music_3b:
-    file: mus_endgm2_combat_3b.ogg
-    track: music
-    start_at: 7s
-    fade_in: 2s
-    mode_end_action: stop
 
   # Death
   squadmate_thane_killed_infiltration:
@@ -208,62 +244,100 @@ sounds:
   squadmate_kasumi_killed_infiltration:
     file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
     track: voice
+  # shepard_death:
+  #   file: en_us_player_f_ss_global_player_female_00288344_f.ogg
+  #   track: voice
   # Killed Callback
-  squadmate_jacob_killed_callback_shepard_inf:
+  squadmate_jacob_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282111_f.ogg
     track: voice
-  squadmate_legion_killed_callback_shepard_inf:
+  squadmate_legion_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282112_f.ogg
     track: voice
-  squadmate_kasumi_killed_callback_shepard_inf:
+  squadmate_kasumi_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282113_f.ogg
     track: voice
-  squadmate_garrus_killed_callback_shepard_inf:
+  squadmate_garrus_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282114_f.ogg
     track: voice
-  squadmate_thane_killed_callback_shepard_inf:
+  squadmate_thane_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282115_f.ogg
     track: voice
-  squadmate_tali_killed_callback_shepard_inf:
+  squadmate_tali_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282116_f.ogg
     track: voice
-  squadmate_mordin_killed_callback_shepard_inf:
+  squadmate_mordin_killed_callback_shepard_infiltration:
     file: en_us_player_f_endgm2_tech_culmination_c_00282117_f.ogg
     track: voice
-  squadmate_jacob_killed_callback_shepard_lw:
-    file: en_us_player_f_endgm2_biotic_fail_c_00266790_f.ogg
+  # generic deaths
+  squadmate_garrus_killed:
+    file: en_us_hench_garrus_endgm1_debris_field_c_00311442_m.ogg # en_us_hench_garrus_ss_global_hench_garrus_00239418_m.ogg
     track: voice
-  squadmate_samara_killed_callback_shepard_lw:
+  squadmate_thane_killed:
+    file: en_us_hench_assassin_endgm1_debris_field_c_00311441_m.ogg # en_us_hench_assassin_ss_global_hench_assassin_00286552_m.ogg
+    track: voice
+  squadmate_jack_killed:
+    file: en_us_hench_convict_endgm1_debris_field_c_00311445_m.ogg # en_us_hench_convict_ss_global_hench_convict_00286905_m.ogg
+    track: voice
+  squadmate_legion_killed:
+    file: en_us_hench_geth_endgm1_debris_field_c_00311439_m.ogg # en_us_hench_geth_ss_global_hench_geth_00240776_m.ogg
+    track: voice
+  squadmate_grunt_killed:
+    file: en_us_hench_grunt_endgm1_debris_field_c_00311444_m.ogg # en_us_hench_grunt_ss_global_hench_grunt_00295793_m.ogg
+    track: voice
+  squadmate_jacob_killed:
+    file: en_us_hench_leading_ss_global_hench_leading_00299225_m.ogg
+    track: voice
+  squadmate_samara_killed:
+    file: en_us_hench_mystic_endgm1_debris_field_c_00311446_m.ogg # en_us_hench_mystic_ss_global_hench_mystic_00241020_m.ogg
+    track: voice
+  squadmate_mordin_killed:
+    file: en_us_hench_professor_endgm1_debris_field_c_00311448_m.ogg # en_us_hench_professor_ss_global_hench_professor_00241415_m.ogg
+    track: voice
+  squadmate_tali_killed:
+    file: en_us_hench_tali_endgm1_debris_field_c_00311440_m.ogg # en_us_hench_tali_ss_global_hench_tali_00285221_m.ogg
+    track: voice
+  squadmate_miranda_killed:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257356_m.ogg
+    track: voice
+  squadmate_zaeed_killed:
+    file: en_us_hench_veteran_endgm1_debris_field_c_00311443_m.ogg # DLC_HEN_VT_Int.103.ogg
+    track: voice
+  squadmate_kasumi_killed:
+    file: en_us_hench_thief_endgm1_debris_field_c_00311438_m.ogg # DLC_HEN_MT_Int.202.ogg
+    track: voice
+  # squadmate_miranda_killed_callback_shepard: DOES NOT EXIST
+  squadmate_jacob_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266791_f.ogg
     track: voice
-  squadmate_grunt_killed_callback_shepard_lw:
+  squadmate_samara_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266792_f.ogg
     track: voice
-  squadmate_garrus_killed_callback_shepard_lw:
+  squadmate_grunt_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266793_f.ogg
     track: voice
-  squadmate_tali_killed_callback_shepard_lw:
+  squadmate_garrus_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266794_f.ogg
     track: voice
-  squadmate_legion_killed_callback_shepard_lw:
+  squadmate_tali_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266795_f.ogg
     track: voice
-  squadmate_jack_killed_callback_shepard_lw:
+  squadmate_legion_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266796_f.ogg
     track: voice
-  squadmate_zaeed_killed_callback_shepard_lw:
+  squadmate_jack_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266797_f.ogg
     track: voice
-  squadmate_mordin_killed_callback_shepard_lw:
+  squadmate_zaeed_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266798_f.ogg
     track: voice
-  squadmate_kasumi_killed_callback_shepard_lw:
+  squadmate_mordin_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266799_f.ogg
     track: voice
-  squadmate_thane_killed_callback_shepard_lw:
+  squadmate_kasumi_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266800_f.ogg
     track: voice
-  squadmate_miranda_killed_callback_shepard_lw:
+  squadmate_thane_killed_callback_shepard:
     file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
     track: voice
   # Infiltration specialist complete
@@ -295,18 +369,92 @@ sounds:
   shep_give_us_a_minute_edi:
     file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
     track: voice
+  # Transition from reaper to platforms (on successful hit only)
+  shepard_theyve_seen_us:
+    file: en_us_player_f_ss_global_player_female_00288359_f.ogg
+    track: voice
+  shepard_take_cover:
+    file: en_us_player_f_ss_global_player_female_00314491_f.ogg
+    track: voice
+  shepard_here_they_come:
+    file: en_us_player_f_endgm2_tech_culmination_c_00281204_f.ogg
+    track: voice
+  shepard_lets_move:
+    file: en_us_player_f_endgm2_biotic_success_c_00286091_f.ogg
+    track: voice
+  garrus_enemies_incoming:
+    file: en_us_hench_garrus_endgm2_boss_fight_a_00286111_m.ogg
+    track: voice
+  grunt_enemies_incoming:
+    file: en_us_hench_grunt_endgm2_boss_fight_a_00286110_m.ogg
+    track: voice
+  jack_enemies_incoming:
+    file: en_us_hench_convict_endgm2_boss_fight_a_00286114_m.ogg
+    track: voice
+  jacob_enemies_incoming:
+    file: en_us_hench_leading_endgm2_boss_fight_a_00286108_m.ogg
+    track: voice
+  kasumi_enemies_incoming:
+    file: en_us_hench_thief_endgm2_boss_fight_a_00286118_m.ogg
+    track: voice
+  legion_enemies_incoming:
+    file: en_us_hench_geth_endgm2_boss_fight_a_00286113_m.ogg
+    track: voice
+  miranda_enemies_incoming:
+    file: en_us_hench_vixen_endgm2_boss_fight_a_00286107_m.ogg
+    track: voice
+  mordin_enemies_incoming:
+    file: en_us_hench_professor_endgm2_boss_fight_a_00286115_m.ogg
+    track: voice
+  samara_enemies_incoming:
+    file: en_us_hench_mystic_endgm2_boss_fight_a_00286109_m.ogg
+    track: voice
+  tali_enemies_incoming:
+    file: en_us_hench_tali_endgm2_boss_fight_a_00286112_m.ogg
+    track: voice
+  thane_enemies_incoming:
+    file: en_us_hench_assassin_endgm2_boss_fight_a_00286116_m.ogg
+    track: voice
+  zaeed_enemies_incoming:
+    file: en_us_hench_veteran_endgm2_boss_fight_a_00286119_m.ogg
+    track: voice
+  thane_reinforcements:
+    file: en_us_hench_assassin_endgm2_warnings_a_00317951_m.ogg
+    track: voice
+  garrus_reinforcements:
+    file: en_us_hench_garrus_endgm2_warnings_a_00317956_m.ogg
+    track: voice
+  legion_reinforcements:
+    file: en_us_hench_geth_endgm2_warnings_a_00317954_m.ogg
+    track: voice
+  grunt_reinforcements:
+    file: en_us_hench_grunt_endgm2_warnings_a_00317957_m.ogg
+    track: voice
+  jacob_reinforcements:
+    file: en_us_hench_leading_endgm2_warnings_a_00317953_m.ogg
+    track: voice
+  samara_reinforcements:
+    file: en_us_hench_mystic_endgm2_warnings_a_00317950_m.ogg
+    track: voice
+  mordin_reinforcements:
+    file: en_us_hench_professor_endgm2_warnings_a_00317952_m.ogg
+    track: voice
+  tali_reinforcements:
+    file: en_us_hench_tali_endgm2_warnings_a_00317949_m.ogg
+    track: voice
+  kasumi_reinforcements:
+    file: en_us_hench_thief_endgm2_warnings_a_00317948_m.ogg
+    track: voice
+  zaeed_reinforcements:
+    file: en_us_hench_veteran_endgm2_warnings_a_00317958_m.ogg
+    track: voice
+  miranda_reinforcements:
+    file: en_us_hench_vixen_endgm2_warnings_a_00317955_m.ogg
+    track: voice
+  jack_reinforcements:
+    file: en_us_hench_convict_endgm2_warnings_a_00317935_m.ogg
+    track: voice
 
-show_player:
-  # Light the missions arrow to select a specialist after one died
-  squadmate_killed{not ball_is_ending}:
-    missions_available_show:
-      action: play
-  mode_suicide_huddle_started:
-    missions_available_show:
-      action: stop
-  mode_suicide_base_will_stop:
-    missions_available_show:
-      action: stop
 
 slide_player:
   mode_suicide_base_started:
@@ -321,13 +469,6 @@ slide_player:
       action: remove
   slide_multiplayer_slide_created:
     multiplayer_slide:
-      action: remove
-  squadmate_killed{not ball_is_ending}: specialist_killed_slide
-  mode_suicide_huddle_started:
-    specialist_killed_slide:
-      action: remove
-  suicidemission_ended:
-    specialist_killed_slide:
       action: remove
   player_reaper_hp{value>0 and change<0}:
     reaper_hitdamage_slide:
@@ -344,13 +485,6 @@ slides:
         style: small
         anchor_y: top
         y: top-2
-  specialist_killed_slide:
-    widgets:
-      - type: text
-        text: Shoot ramp to try again
-        style: small
-        anchor_y: top
-        y: middle-4
   reaper_hitdamage_slide:
     widgets:
       - type: text
@@ -395,16 +529,18 @@ widget_player:
   mode_suicide_longwalk_will_stop:
     longwalk_title:
       action: remove
-  mode_suicide_platforms_started:
-    humanreaper_title:
+  play_platforms_intro:
+    suicide_time:
+      action: remove
+    suicide_shots:
       action: remove
     platforms_title:
       slide: suicide_slide
-  mode_suicide_humanreaper_started:
-    platforms_title:
-      action: remove
-    humanreaper_title:
-      slide: suicide_slide
+  # mode_suicide_humanreaper_started:
+  #   platforms_title:
+  #     action: remove
+  #   humanreaper_title:
+  #     slide: suicide_slide
   mode_suicide_endrun_started:
     humanreaper_title:
       action: remove
@@ -422,31 +558,12 @@ widget_player:
   timer_longwalk_tick:
     suicide_time:
       action: update
-  timer_platform_tick:
-    suicide_time:
-      action: update
-  timer_reaper_charging_tick:
-    suicide_time:
-      action: update
-  timer_reaper_firing_tick:
-    suicide_time:
-      action: update
-  timer_reaper_charging_complete:
-    reaper_firing_widget:
-      slide: suicide_slide
-  timer_reaper_firing_complete:
-    reaper_firing_widget:
-      action: remove
   logicblock_swarmpaths_hit:
     suicide_shots:
       action: update
   logicblock_valves_hit:
     suicide_shots:
       action: update
-  squadmate_killed:
-    specialist_killed_widget:
-      action: update
-      slide: specialist_killed_slide
   set_initial_suicide_shots:
     suicide_shots:
       action: update
@@ -506,25 +623,21 @@ widgets:
       anchor_y: bottom
       x: right-2
       y: 2
-  specialist_killed_widget:
+  suicide_hurryup:
     - type: text
-      text: (squadmate) is dead
+      text: (value)
+      number_grouping: true
       style: small
+      anchor_x: left
       anchor_y: bottom
-      y: middle+4
-  reaper_firing_widget:
-    type: text
-    text: REAPER FIRING!
-    style: small
-    anchor_y: top
-    y: middle-8
-    expire: 5s
-    animations:
-      add_to_slide:
-        - property: opacity
-          value: 1
-          duration: .25s
-        - property: opacity
-          value: 0.5
-          duration: .25s
-          repeat: true
+      x: 2
+      y: 2
+  suicide_damage:
+    - type: text
+      text: "(value)"
+      style: small
+      number_grouping: true
+      anchor_x: right
+      anchor_y: bottom
+      x: right-2
+      y: 2

@@ -2,8 +2,9 @@ from mpfmc.core.scriptlet import Scriptlet
 
 NAME_FORMATS = {
   "killed":          "squadmate_{squadmate}_killed",
-  "killed_callback": "squadmate_{killed_mate}_killed_callback_{callback_mate}"
+  "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}"
 }
+COMPLETED_EVENT_NAME = "squadmate_killed_complete"
 
 class SquadmateSounds(Scriptlet):
 
@@ -17,17 +18,20 @@ class SquadmateSounds(Scriptlet):
 
   def _handle_squadmate_sound(self, **kwargs):
     sound_name = NAME_FORMATS[kwargs.get("sound")].format(**kwargs)
+    action = kwargs.get("action", "play")
+    track = kwargs.get("track", "voice")
     # If a mode is supplied, append it to the sound name
-    if kwargs.get("mode"):
+    if kwargs.get("mode") == "infiltration":
       sound_name = "{}_{}".format(sound_name, kwargs["mode"])
 
-    self.mc.log.info("SquadmateSounds made an asset name to play: {}".format(sound_name))
     settings = {
       sound_name: {
-        "action": kwargs.get("action", "play"),
-        "track": kwargs.get("track", "voice"),
+        "action": action,
+        "track": track,
+        "priority": 2,
       }
     }
+    self.mc.log.info("SquadmateSounds made an asset to play: '{}' Args={}".format(sound_name, settings))
     # We can pass in playback event handlers too
     for config_name in ["events_when_played", "events_when_stopped"]:
       if kwargs.get(config_name):
@@ -37,3 +41,19 @@ class SquadmateSounds(Scriptlet):
     calling_context = None
 
     self.mc.sound_player.play(settings, context, calling_context)
+    # If a callback mate is specified, play that too
+    # EXCEPT for there's no Shepard callback for Miranda's death
+    if action == "play" and kwargs.get("callback_mate") and (kwargs.get("callback_mate") == "shepard") != (kwargs.get("squadmate") == "miranda"):
+      cb_sound_name = NAME_FORMATS["{}_callback".format(kwargs.get("sound"))].format(**kwargs)
+      cb_settings = {
+        cb_sound_name: {
+          "action": action,
+          "track": track,
+          "events_when_played": [COMPLETED_EVENT_NAME],
+          "priority": 1,
+        }
+      }
+      self.mc.log.info("SquadmateSounds made a callback to play: '{}' Args={}".format(cb_sound_name, cb_settings))
+      self.mc.sound_player.play(cb_settings, context, calling_context)
+    else:
+      self.mc.events.post(COMPLETED_EVENT_NAME)

@@ -23,13 +23,11 @@ class SuicideBase(Mode):
       avail_mates = SquadmateStatus.available_mates(self.player, include_specialist=False)
       # If the specialist is the only mate left, kill them even if include_specialist is false
       mate = random.choice(avail_mates) if avail_mates else self.player["specialist"]
-      self.add_mode_event_handler("squadmate_killed_callback",
-        self._kill_squadmate_callback,
-        squadmate=mate)
 
     self.info_log("Found a {} mate to kill: {}".format(kwargs["squadmate"], mate))
     self._set_status(mate, -1)
     self.player["squadmates_count"] -= 1
+    self.player["killed_squadmate"] = mate
     # It's useful to know whether the ball is ending or not
     ball_is_ending = self.machine.modes["base"].stopping or not self.machine.modes["base"].active
     self.machine.events.post("squadmate_killed", squadmate=mate, ball_is_ending=ball_is_ending)
@@ -46,30 +44,29 @@ class SuicideBase(Mode):
         self.machine.events.post("suicidemission_failed")
 
     # Until we have callbacks working, trigger the relay event too
-    self.machine.events.post("squadmate_killed_complete", squadmate=mate)
+    # self.machine.events.post("squadmate_killed_complete", squadmate=mate)
 
+    if kwargs.get("callback_mate") == "random":
+      callback_mate = random.choice(SquadmateStatus.available_mates(self.player))
+    else:
+      callback_mate = "shepard"
     # Make a sound
     self._play_sound({
       "sound": "killed",
       "squadmate": mate,
       "mode": self._get_current_mode(),
-    })
-
-  def _kill_squadmate_callback(self, **kwargs):
-    self._play_sound({
-      "name": "play_squadmate_sound",
-      "sound": "killed_callback",
-      "killed_mate": kwargs["squadmate"],
-      "callback_mate": random.choice(SquadmateStatus.available_mates(self.player)),
-      "events_when_played": "squadmate_killed_complete",
+      "callback_mate": callback_mate,
     })
 
   def _squadmates_can_continue(self):
-    if self.player["squadmates_count"] == 0:
+    # Infiltration requires tech specialists
+    if self.player.achievements["infiltration"] == "started" and not SquadmateStatus.available_techs(self.player):
       return False
-    elif self.player.achievements["infiltration"] == "started" and not SquadmateStatus.available_techs(self.player):
-      return False
+    # Long Walk requires biotic specialists
     elif self.player.achievements["longwalk"] == "started" and not SquadmateStatus.available_biotics(self.player):
+      return False
+    # We only need squadmates as specialists, so if longwalk is over we can continue without any
+    elif self.player.achievements["longwalk"] != "completed" and self.player["squadmates_count"] == 0:
       return False
     return True
 

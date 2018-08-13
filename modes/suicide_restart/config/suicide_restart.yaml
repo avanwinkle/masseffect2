@@ -1,0 +1,49 @@
+#config_version=5
+mode:
+  start_events: start_mode_suicide_restart
+  stop_events: stop_mode_suicide_restart, start_mode_suicide_huddle, suicidemission_ended
+  priority: 2600
+
+event_player:
+  mode_suicide_restart_started: play_suicide_music_base|1s
+
+slide_player:
+  mode_suicide_restart_started:
+    squadmate_killed_slide:
+      action: play
+  mode_suicide_restart_will_stop:
+    squadmate_killed_slide:
+      action: remove
+
+slides:
+  squadmate_killed_slide:
+    widgets:
+      - type: text
+        text: Shoot ramp to try again
+        style: small
+        anchor_y: top
+        y: middle-4
+      - type: text
+        text: (player|killed_squadmate) is dead
+        style: small
+        anchor_y: bottom
+        y: middle+4
+
+show_player:
+  mode_suicide_restart_started:
+    missions_available_show:
+      action: play
+  mode_suicide_restart_will_stop:
+    missions_available_show:
+      action: stop
+
+sound_player:
+  play_suicide_music_base: suicide_music_base
+
+sounds:
+  suicide_music_base:
+    file: mus_endgm1_attackplan.ogg
+    track: music
+    fade_in: 2s
+    fade_out: 1s
+

@@ -104,6 +104,7 @@ modes:
   - suicide_platforms
   - suicide_humanreaper
   - suicide_endrun
+  - suicide_restart
   # Recruit Missions:
   - recruitgarrus
   - recruitgrunt

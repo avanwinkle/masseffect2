@@ -3,7 +3,7 @@ mode:
   start_events: start_mode_suicide_humanreaper
   stop_events: ball_will_end, humanreaper_complete, humanreaper_failed
   events_when_started: mode_type_suicide_started, restart_reaper, stop_harbinger
-  priority: 300
+  priority: 2300
 
 event_player:
   timer_reaper_charging_complete: fire_reapercannon
@@ -19,6 +19,9 @@ event_player:
     # If the reaper has no HP and the minimum 3 rounds have passed, OR if the max rounds have passed, "complete"
     # Maximum rounds to kill the reaper... 4?
     - humanreaper_complete{(value<=0 and current_player.reaper_rounds<=3) or current_player.reaper_rounds>=4}
+  ball_save_reaper_squadmate_save_saving_ball:
+    kill_squadmate:
+      squadmate: random
 
 random_event_player:
   enable_random_reapershot:
@@ -31,12 +34,15 @@ random_event_player:
 
 variable_player:
   mode_suicide_humanreaper_started:
-    # Store the "damage" built from the last round
+    # Multiplier increases by 25% each round, to make the fight faster
+    # (this is just for display, it's calculated separately in temp_hurryup_value below)
+    temp_multiplier:
+      action: set
+      float: 1 + 0.25 * current_player.reaper_rounds
+    # Store the "damage" built from the last round times the new multiplier
     temp_hurryup_value:
       action: set
-      # We need a minimum value to progress the mode, so... 1000+
-      # Also do 25% more damage each round, to help a player out :)
-      int: (1000 + current_player.temp_build_value) * (1 + 0.25 * current_player.reaper_rounds)
+      int: current_player.temp_build_value * (1 + 0.25 * current_player.reaper_rounds)
   reaper_shot_hit:
     reaper_hp:
       action: add
@@ -50,13 +56,22 @@ ball_holds:
     release_all_events: restart_reaper
     hold_devices: bd_lock, bd_hold
 
+# We can be saved by 2 squadmates per round
+ball_saves:
+  reaper_squadmate_save:
+    enable_events: mode_suicide_humanreaper_started{current_player.squadmates_count>0}
+    disable_events: player_squadmates_count{value<1}
+    balls_to_save: 2
+    only_last_ball: true
+    delayed_eject_events: squadmate_killed_complete
+
 timers:
   # This is the "charging" phase of the reaper cannon
   reaper_charging:
-    start_value: 20
+    start_value: 12
     end_value: 0
     direction: down
-    tick_interval: 500ms
+    tick_interval: 1s
     start_running: true
     control_events:
       - event: reaper_shot_hit
@@ -65,10 +80,10 @@ timers:
         action: restart
   # This is the "firing" phase of the reaper cannon
   reaper_firing:
-    start_value: 10
+    start_value: 5
     end_value: 0
     direction: down
-    tick_interval: 500ms
+    tick_interval: 1s
     control_events:
       - event: fire_reapercannon
         action: restart
@@ -130,8 +145,15 @@ shots:
 
 slide_player:
   mode_suicide_humanreaper_started: reaper_slide
-  timer_reaper_firing_complete: reaper_firing_slide
+  timer_reaper_firing_complete:
+    reaper_firing_slide:
+      expire: 4s
   reset_reaper:
+    reaper_firing_slide:
+      action: remove
+  mode_suicide_humanreaper_will_stop:
+    reaper_slide:
+      action: remove
     reaper_firing_slide:
       action: remove
 
@@ -139,23 +161,25 @@ slides:
   reaper_slide:
     widgets:
       - type: text
+        text: the Suicide Mission
+        color: BBBBBB
+        style: small
+        anchor_y: top
+        y: top-2
+        z: 2
+      - type: text
         text: Destroy the Reaper
         style: text_default
+        z: 2
       - type: text
-        text: (player|temp_hurryup_value) Dmg
+        text: (player|temp_build_value) x (player|temp_multiplier)
         number_grouping: true
         style: small
         anchor_x: left
         anchor_y: bottom
         x: 2
         y: 2
-      - type: text
-        text: Round (player|reaper_rounds)
-        style: small
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 14
+        z: 2
       - type: text
         text: (player|reaper_hp) HP
         style: small
@@ -164,6 +188,12 @@ slides:
         anchor_y: bottom
         x: right-2
         y: 2
+        z: 2
+      - type: rectangle
+        color: black
+        width: 128
+        height: 32
+        z: 1
   reaper_firing_slide:
     widgets:
       - type: rectangle
@@ -188,27 +218,46 @@ slides:
           show_slide:
             - property: opacity
               value: 1
-              duration: .25s
+              duration: .15s
             - property: opacity
               value: 0
-              duration: .25s
+              duration: .15s
               repeat: true
 
 widget_player:
-  timer_reaper_charging_tick:
+  timer_reaper_firing_tick:
     reaper_charging_widget:
       action: update
+      slide: reaper_slide
+  timer_reaper_firing_complete:
+    reaper_charging_widget:
+      action: remove
       slide: reaper_slide
 
 widgets:
   reaper_charging_widget:
     - type: text
-      text: Firing in (player|reaper_rounds)s
+      text: Firing in (ticks)s
       style: small
-      anchor_x: left
       anchor_y: bottom
-      x: 2
-      y: 14
+      y: 1
+      z: 4
+      animations:
+        add_to_slide:
+          - property: opacity
+            value: 0
+            duration: .25s
+          - property: opacity
+            value: 1
+            duration: .25s
+            repeat: true
+    - type: rectangle
+      color: 000000
+      width: 128
+      height: 7
+      anchor_y: bottom
+      y: 0
+      z: 3
 
 sound_player:
   mode_suicide_humanreaper_started: suicide_music_reaper
@@ -218,8 +267,12 @@ sounds:
     file: mus_endgm2_reaperdeath.ogg
     track: music
     fade_in: 500ms
-    fade_out: 1s
+    fade_out: 2s
     mode_end_action: stop
+    markers:
+      # If we get to the end of the song, go back to platforms
+      - time: 36s
+        events: humanreaper_failed, humanreaper_timeout
 
 show_player:
   timer_reaper_firing_complete:

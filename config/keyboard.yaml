@@ -47,3 +47,7 @@ keyboard:
     event: levelup
   y:
     event: plunger_eject
+  x:
+    event: ball_drain
+    params:
+      balls: 1

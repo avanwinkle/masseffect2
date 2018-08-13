@@ -27,7 +27,7 @@ event_player:
     - play_specialist_preselection_lw{device.achievements.infiltration.state=="completed"}
   # If we are repeating the mode, skip the ditty and go straight to selection
   mode_suicide_huddle_started{current_player.suicide_continuing==0}:
-    - show_huddle_slide|3s
+    - show_huddle_slide|2s
 
 slide_player:
   show_huddle_slide:

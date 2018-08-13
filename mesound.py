@@ -187,10 +187,8 @@ class SoundManager():
       self.log.info("   - {} missing files available {}".format(len(self._analysis['available']), "and copied" if writeMode else "for copy"))
       self.log.debug("    : {} -> {}".format(sourcepath, filename) for filename, sourcepath in self._analysis['available'].items())
     if self._analysis['unavailable']:
-      self.log.info("   - {} files missing and unavailable:".format(len(self._analysis['unavailable'])))
-      for filename in self._analysis['unavailable']:
-        self.log.warning("    : {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
-    
+      self.log.info("   - {} files missing and unavailable".format(len(self._analysis['unavailable'])))
+
   def cleanup_machine_assets(self, writeMode=False):
     if not self._analysis:
       self.parse_machine_assets(writeMode=writeMode)
@@ -198,40 +196,45 @@ class SoundManager():
     files_changed = 0
 
     if self._analysis['orphaned']:
-      self.log.info("REMOVING ORPHANED FILES:" if writeMode else "ORPHANED FILES TO REMOVE:")
+      self.log.info(("Removing {} orphaned files:" if writeMode else "{} orphaned files to remove").format(len(self._analysis["orphaned"])))
       for orphan in self._analysis['orphaned']:
-        self.log.info("- {}".format(orphan))
+        self.log.info(" - {}".format(orphan))
         if writeMode:
           os.remove(orphan)
           files_changed += 1
     if self._analysis['duplicated']:
-      self.log.info("REMOVING DUPLICATE FILES:" if writeMode else "DUPLICATE FILES TO REMOVE:")
+      self.log.info(("Removing {} duplicate files..." if writeMode else "{} duplicate files to remove").format(len(self._analysis["duplicated"])))
       for orphan in self._analysis['duplicated']:
-        self.log.info("- {}".format(orphan))
+        self.log.info(" - {}".format(orphan))
         if writeMode:
           os.remove(orphan)
           files_changed += 1
     if self._analysis['misplaced']:
-      self.log.info("MOVING MISPLACED FILES:" if writeMode else "MISPLACED FILES TO MOVE:")
+      self.log.info(("Moving {} misplaced files..." if writeMode else "{} misplaced files will be moved").format(len(self._analysis["misplaced"])))
       for expectedpath, filepath in self._analysis['misplaced'].items():
-        self.log.debug(" {} -> {}".format(filepath, expectedpath))
+        self.log.info(" - {} -> {}".format(filepath, expectedpath))
         if writeMode:
           os.makedirs(expectedpath.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           os.rename(filepath, expectedpath)
           files_changed += 1
     if self._analysis['available']:
-      self.log.info("COPYING AVAILABLE FILES:" if writeMode else "AVAILABLE FILES TO COPY:")
+      self.log.info(("Copying {} new files..." if writeMode else "{} new files will be copied").format(len(self._analysis["available"])))
       original_umask = os.umask(0)
       for idx, availitem in enumerate(self._analysis['available'].items()):
         dst = availitem[0]
         src = availitem[1]
-        self.log.debug(" {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
+        self.log.debug(" - {}/{}: {} -> {}".format(idx+1, len(self._analysis['available']), src, dst))
         # Ensure the target directory exists
         if writeMode:
           os.makedirs(dst.rsplit("/", 1)[0], mode=0o755, exist_ok=True)
           shutil.copy2(src, dst)
           files_changed += 1
       os.umask(original_umask)
+
+    if self._analysis['unavailable']:
+      self.log.info("\nWARNING: {} file{} could not be found:".format(len(self._analysis['unavailable']), "" if len(self._analysis['unavailable']) == 1 else "s"))
+      for filename in self._analysis['unavailable']:
+        self.log.warning(" - {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
 
     # Any previous analysis is no longer valid
     if writeMode:
