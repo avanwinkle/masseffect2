@@ -102,6 +102,7 @@ modes:
   - suicide_infiltration
   - suicide_longwalk
   - suicide_tubes
+  - suicide_final
   - suicide_platforms
   - suicide_humanreaper
   - suicide_endrun

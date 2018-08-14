@@ -26,8 +26,8 @@
 #####
 mode:
   start_events: start_mode_suicide_humanreaper
-  stop_events: ball_will_end, humanreaper_complete, humanreaper_failed
-  events_when_started: mode_type_suicide_started, restart_reaper, stop_harbinger
+  stop_events: stop_mode_suicide_humanreaper
+  events_when_started: restart_reaper
   priority: 2300
 
 event_player:
@@ -84,15 +84,6 @@ ball_holds:
     disable_events: restart_reaper
     release_all_events: restart_reaper
     hold_devices: bd_lock, bd_hold
-
-# We can be saved by 2 squadmates per round
-ball_saves:
-  reaper_squadmate_save:
-    enable_events: mode_suicide_humanreaper_started{current_player.squadmates_count>0}
-    disable_events: player_squadmates_count{value<1}
-    balls_to_save: 2
-    only_last_ball: true
-    delayed_eject_events: squadmate_killed_complete
 
 timers:
   # This is the "charging" phase of the reaper cannon
@@ -186,7 +177,6 @@ slide_player:
     reaper_firing_slide:
       action: remove
 
-
 widget_player:
   timer_reaper_firing_tick:
     reaper_charging_widget:
@@ -196,9 +186,6 @@ widget_player:
     reaper_charging_widget:
       action: remove
       slide: reaper_slide
-
-sound_player:
-  mode_suicide_humanreaper_started: reaper_high
 
 show_player:
   timer_reaper_firing_complete:

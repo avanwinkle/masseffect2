@@ -139,6 +139,10 @@ class LockHandler(Mode):
         self.log.info(" - Suicide needs a specialist because infiltration/longwalk failed".format(self.machine.game.player["specialist"]))
         do_bypass = False
         mission_delay = 500
+      # If we are exiting out of tubes, we definitely want to hold the ball
+      elif self.machine.modes.suicide_tubes.active and self.machine.counters["tubes_counter"].value == 0:
+        self.log.info(" - Suicide says tubes are done, we'd better lock it up!")
+        do_bypass = False
 
     # WIZARD:
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)

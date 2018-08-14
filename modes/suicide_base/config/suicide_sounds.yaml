@@ -18,12 +18,6 @@ sound_player:
     longwalk_complete:
       shep_everyone_through_the_doors:
         events_when_stopped: start_mode_suicide_huddle
-    # # Handle the transition between platform/reaper phases for seamlessness
-    # play_platforms_intro:
-    #   platforms_low:
-    #     action: play
-    # play_enemies_incoming: enemies_incoming
-    # play_enemies_reinforcements: enemies_reinforcements
 
 sounds:
 
@@ -105,7 +99,7 @@ sounds:
       markers:
         # If we get to the end of the song, go back to platforms
         - time: 36s
-          events: humanreaper_failed, humanreaper_timeout
+          events: humanreaper_failed
 
 ### SQUADMATE DEATHS AND CALLBACKS
   # Death Groan (Infiltration)

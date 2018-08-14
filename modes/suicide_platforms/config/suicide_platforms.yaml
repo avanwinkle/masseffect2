@@ -15,16 +15,15 @@
 
 mode:
   start_events: start_mode_suicide_platforms
-  stop_events: ball_will_end, stop_mode_suicide_platforms, platforms_complete
-  events_when_started: mode_type_suicide_started, start_harbinger, reset_platforms
-  events_when_stopped: stop_harbinger
+  stop_events: stop_mode_suicide_platforms
+  events_when_started: enable_harbinger, reset_platforms
+  events_when_stopped: disable_harbinger
   priority: 2300
 
 event_player:
   platform_shots_hit_complete: reset_platforms
+  # When the hurryup drains, move on to the next mode
   player_temp_hurryup_value{value<=100}: platforms_complete
-  mode_suicide_platforms_started:
-    - play_platforms_music
 
 variable_player:
   mode_suicide_platforms_started:
@@ -152,13 +151,6 @@ show_player:
       show_tokens:
         leds: l_targets
         color: FFFFFF
-
-sound_player:
-  play_platforms_music:
-    platforms_low:
-      action: stop
-    platforms_med_high:
-      action: play
 
 widget_player:
   player_temp_hurryup_value:

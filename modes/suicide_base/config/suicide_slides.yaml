@@ -59,6 +59,8 @@ widget_player:
         action: remove
       suicide_tubes:
         action: remove
+      suicide_detonate:
+        action: remove
     mode_suicide_platforms_started:
       platforms_title:
         slide: suicide_slide
@@ -86,9 +88,14 @@ widget_player:
     logicblock_valves_hit:
       suicide_shots:
         action: update
-    logicblock_tubes_counter_updated:
+    logicblock_tubes_counter_updated{value>0}:
       suicide_tubes:
         action: update
+        slide: suicide_slide
+    logicblock_tubes_counter_complete:
+      suicide_tubes:
+        action: remove
+      suicide_detonate:
         slide: suicide_slide
   # SET INITIAL
     set_initial_suicide_shots:
@@ -274,6 +281,22 @@ widgets:
         text: "(value)"
         style: small_bot_right
         number_grouping: true
+    suicide_detonate:
+      - type: text
+        text: Shoot Ramp
+        style: small
+        anchor_y: bottom
+        y: 1
+        z: 4
+        animations:
+          add_to_slide:
+            - property: opacity
+              value: 0.2
+              duration: .75s
+            - property: opacity
+              value: 1
+              duration: .75s
+              repeat: true
     reaper_charging_widget:
       - type: text
         text: Firing in (ticks)s

@@ -1,0 +1,51 @@
+#config_version=5
+
+#####
+# SUICIDE MISSION Pt. V: THE FINAL BATTLE
+#
+# This mode is a parent mode that handles the cycling between Platforms and
+# the Human Reaper.
+#####
+
+mode:
+  start_events: start_mode_suicide_final
+  stop_events: stop_mode_suicide_final, ball_will_end, suicidemission_failed, humanreaper_complete
+  events_when_started: mode_type_suicide_started, start_mode_suicide_platforms
+  events_when_stopped: mode_type_suicide_stopped, stop_mode_suicide_platforms, stop_mode_suicide_humanreaper
+  priority: 2300
+
+event_player:
+  # Platforms goes to reaper
+  platforms_complete:
+    - stop_mode_suicide_platforms
+    - start_mode_suicide_humanreaper
+  # Reaper goes back to platforms when it "fails"
+  humanreaper_failed:
+    - stop_mode_suicide_humanreaper
+    - start_mode_suicide_platforms
+    # We play the reaper -> platforms sound here so we can control it for hit-based changes only
+    - play_enemies_incoming{current_player.reaper_rounds > 0 and current_player.reaper_rounds % 2 == 0}
+    - play_enemies_reinforcements{current_player.reaper_rounds % 2 == 1}
+
+# We can be saved by 2 squadmates per ball
+ball_saves:
+  reaper_squadmate_save:
+    enable_events: mode_suicide_final_started{current_player.squadmates_count>0}
+    disable_events: player_squadmates_count{value<1}
+    balls_to_save: 2
+    only_last_ball: true
+    delayed_eject_events: squadmate_killed_complete
+
+sound_player:
+  mode_suicide_platforms_started:
+    platforms_low:
+      action: stop
+    reaper_high:
+      action: stop
+    platforms_med_high:
+      action: play
+  mode_suicide_humanreaper_started:
+    reaper_high:
+      action: play
+    platforms_med_high:
+      action: stop

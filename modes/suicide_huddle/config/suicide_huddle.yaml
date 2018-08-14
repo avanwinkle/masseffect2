@@ -47,9 +47,15 @@ show_player:
     tubes_intro_show{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}:
       action: play
       loops: 0
+    platforms_intro_show{device.achievements.tubes.state=="completed" and device.achievements.humanreaper.state!="completed"}:
+      action: play
+      loops: 0
   play_huddle_outro_show:
     # For the time being, tubes intro and outro are the same. When the intro is longer, outro will be the tail
     tubes_intro_show{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}:
+      action: play
+      loops: 0
+    platforms_intro_show{device.achievements.tubes.state=="completed" and device.achievements.humanreaper.state!="completed"}:
       action: play
       loops: 0
   suicide_huddle_specialist_selected{mission=="infiltration"}:
@@ -121,6 +127,12 @@ shows:
         platforms_med_high:
           action: play
           track: voice
+    - time: 2s
+      sounds:
+        shep_give_us_a_minute_edi:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
 
 sound_player:
   # Sounds in shows don't playback after loading, so pre-load them!
@@ -150,6 +162,9 @@ sound_player:
       action: load
       track: music
     shep_we_win_or_lose_it_all:
+      action: load
+      track: voice
+    shep_give_us_a_minute_edi:
       action: load
       track: voice
   play_specialist_inf_intro: specialist_inf_intro

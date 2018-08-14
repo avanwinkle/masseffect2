@@ -31,12 +31,6 @@ queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt.1{mode.missionselect.active}:
     post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
-  balldevice_bd_lock_ball_eject_attempt.2{mode.suicide_huddle.active or mode.suicide_infiltration.stopping}:
-    post: blocking_balldevice_bd_lock_ball_eject_attempt
-    wait_for: mode_suicide_huddle_will_stop
-  balldevice_bd_trough_ball_eject_attempt.3{mode.suicide_huddle.active}:
-    post: blocking_balldevice_bd_trough_eject_attempt
-    wait_for: mode_suicide_huddle_will_stop
 
 # This lock needs to be here in order to be found in self.mode_devices
 multiball_locks:
