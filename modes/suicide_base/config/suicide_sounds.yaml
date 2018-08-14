@@ -13,11 +13,14 @@ sound_player:
     # Play the final valve sound here so we can stop the infiltration mode immediately
     infiltration_complete:
       specialist_inf_through:
+        action: play
         # Start this first to avoid a race condition with the huddle dialoge
-        events_when_stopped: start_mode_suicide_huddle
+        # Don't need anymore because lockhandler does it?
+        # events_when_stopped: start_mode_suicide_huddle
     longwalk_complete:
       shep_everyone_through_the_doors:
-        events_when_stopped: start_mode_suicide_huddle
+        action: play
+        # events_when_stopped: start_mode_suicide_huddle
 
 sounds:
 

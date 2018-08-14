@@ -22,7 +22,7 @@
 
 mode:
   start_events: start_mode_suicide_longwalk
-  stop_events: ball_will_end, stop_mode_suicide_longwalk, longwalk_failed
+  stop_events: stop_suicide_modes, longwalk_failed, longwalk_complete
   events_when_started: mode_type_suicide_started, reset_tension
   events_when_stopped: mode_type_suicide_stopped
   code: suicide_longwalk.LongWalk
@@ -36,27 +36,27 @@ event_player:
       count: 7
   player_tension{change>0}: increase_tension
   enable_longwalk_dropbank: reset_dropbank
+  reset_tension:
+    set_initial_suicide_ticks:
+      ticks: 60
+  # Success scenarios
   logicblock_swarmpaths_hit:
     - reset_tension
     - play_specialist_lw_advance{count>1}
     - play_specialist_lw_close{count==1}
-  player_tension{value==1}:
-    - play_specialist_lw_warning_barrier{device.counters.barrier_warning.value==0}
-    - play_specialist_lw_warning_med{device.counters.barrier_warning.value>0}
-  reset_tension:
-    set_initial_suicide_ticks:
-      ticks: 60
+    # Enable the hold for the final shot
+    - enable_transition_hold{count==1}
+  logicblock_swarmpaths_complete: longwalk_complete
+  # Failure scenarios
   timer_longwalk_complete:
     kill_squadmate:
       squadmate: random
   squadmate_killed: longwalk_failed
-  logicblock_swarmpaths_complete: longwalk_complete
-  mode_suicide_huddle_started: stop_mode_suicide_longwalk
 
 counters:
-  barrier_warning:
+  swarmfail_hits:
     starting_count: 0
-    count_events: increase_tension
+    count_events: swarmfails_hit
     reset_events: mode_suicide_longwalk_started
   swarmpaths:
     starting_count: 7
@@ -95,7 +95,8 @@ variable_player:
       int: 0
   timer_longwalk_tick{ticks==41 or ticks==21}:
     tension: 1
-  swarmfails_hit:
+  # We get one freebee to play the barrier warning, after that increase tension
+  logicblock_swarmfail_hits_hit{count>1}:
     tension: 1
   reset_tension:
     tension:
@@ -247,6 +248,8 @@ sound_player:
     longwalk_med:
       action: play
       start_at: 18s
+    specialist_lw_warning_med:
+      action: play
   player_tension{value==2}:
     longwalk_med:
       action: stop
@@ -269,9 +272,7 @@ sound_player:
       action: stop
     specialist_lw_warning_high:
       action: stop
-  # We play the "leaving the barrier" sound for the first increase
-  play_specialist_lw_warning_barrier: specialist_lw_warning_barrier
-  play_specialist_lw_warning_med: specialist_lw_warning_med
+  logicblock_swarmfail_hits_hit{count==1}: specialist_lw_warning_barrier
   play_specialist_lw_advance: specialist_lw_advance
   play_specialist_lw_close: specialist_lw_close
   # The squadmate_sounds handles the playing, but stop specialist sounds if death

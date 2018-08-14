@@ -60,10 +60,10 @@ class SuicideBase(Mode):
 
   def _squadmates_can_continue(self):
     # Infiltration requires tech specialists
-    if self.player.achievements["infiltration"] == "started" and not SquadmateStatus.available_techs(self.player):
+    if self.player.achievements["infiltration"] != "completed" and not SquadmateStatus.available_techs(self.player):
       return False
     # Long Walk requires biotic specialists
-    elif self.player.achievements["longwalk"] == "started" and not SquadmateStatus.available_biotics(self.player):
+    elif self.player.achievements["longwalk"] != "completed" and not SquadmateStatus.available_biotics(self.player):
       return False
     # We only need squadmates as specialists, so if longwalk is over we can continue without any
     elif self.player.achievements["longwalk"] != "completed" and self.player["squadmates_count"] == 0:
@@ -84,6 +84,6 @@ class SuicideBase(Mode):
     self.machine.events.post("play_squadmate_sound", **sound_event)
 
   def _get_current_mode(self):
-    for mode in ["omegarelay", "infiltration", "longwalk", "platforms", "humanreaper", "escape"]:
+    for mode in ["omegarelay", "infiltration", "longwalk", "tubes", "platforms", "humanreaper", "escape"]:
       if self.machine.modes["suicide_{}".format(mode)].active:
         return mode

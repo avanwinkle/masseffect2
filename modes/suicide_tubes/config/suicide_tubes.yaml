@@ -14,7 +14,7 @@
 
 mode:
   start_events: start_mode_suicide_tubes
-  stop_events: ball_will_end, stop_mode_suicide_tubes
+  stop_events: stop_suicide_modes, tubes_complete
   events_when_started: mode_type_suicide_started, enable_harbinger
   events_when_stopped: mode_type_suicide_stopped, disable_harbinger
   priority: 2300
@@ -27,11 +27,11 @@ event_player:
   mode_suicide_tubes_started.2{device.counters.tubes_counter.value==4}:
     logicblock_tubes_counter_updated:
       value: 4
-  tube_hint_shot_hit: play_tube_hint
+  tube_hint_shot_hit{device.counters.tubes_counter.value>0}: play_tube_hint
+  # Enable the hold for the final shot
+  logicblock_tubes_counter_complete: enable_transition_hold
   # Count the ramp exit shot as complete, which will start the huddle
   tube_complete_shot_lit_hit: tubes_complete
-  # When the ball has entered we'll have already started the huddle, so exit then
-  mode_suicide_huddle_started: stop_mode_suicide_tubes
 
 counters:
   tubes_counter:

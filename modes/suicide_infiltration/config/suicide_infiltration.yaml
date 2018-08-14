@@ -17,7 +17,7 @@
 
 mode:
   start_events: start_mode_suicide_infiltration
-  stop_events: infiltration_complete, infiltration_failed
+  stop_events: stop_suicide_modes, infiltration_complete, infiltration_failed
   events_when_started: mode_type_suicide_started, enable_harbinger, reset_tension
   events_when_stopped: mode_type_suicide_stopped, disable_harbinger
   priority: 2300
@@ -35,6 +35,8 @@ event_player:
   logicblock_valves_hit:
     - play_specialist_inf_advance{count>1}
     - play_specialist_inf_close{count==1}
+    # Enable the hold for the final shot
+    - enable_transition_hold{count==1}
   logicblock_valves_complete: infiltration_complete
   squadmate_killed: infiltration_failed
   mode_suicide_infiltration_started:

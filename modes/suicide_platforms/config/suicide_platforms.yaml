@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_suicide_platforms
-  stop_events: stop_mode_suicide_platforms
+  stop_events: stop_mode_suicide_platforms, stop_suicide_modes
   events_when_started: enable_harbinger, reset_platforms
   events_when_stopped: disable_harbinger
   priority: 2300

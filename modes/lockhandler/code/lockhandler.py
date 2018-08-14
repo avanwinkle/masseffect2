@@ -66,6 +66,10 @@ class LockHandler(Mode):
     except KeyError:
       self.log.info("LockHandler has no {} lock shot, locking will be disabled")
 
+    # We need a pointer to the suicide transition ball hold to avoid bypassing during phase transitions
+    ball_holds = self.machine.device_manager.get_monitorable_devices().get("ball_holds")
+    self._transition_hold = ball_holds["suicide_transition_hold"]
+
     self._register_handlers()
 
   def mode_stop(self, **kwargs):
@@ -116,34 +120,18 @@ class LockHandler(Mode):
     # By default we start missionselect, but during Suicide we start suicide_huddle
     selection_mode = "missionselect"
 
-    # SUICIDE:
+    # SUICIDE MISSION:
     if self.machine.modes.suicide_base.active:
-      selection_mode = "suicide_huddle"
-      # If the suicide mission wants to hold the ball for picking a specialist, allow it to handle
-      if self.machine.modes.suicide_infiltration.active:
-        self.log.info("INFILTRATION: valves state is: {}".format(self.machine.game.player["valves_state"]))
-        # counters = self.machine.device_manager.get_monitorable_devices().get("counters")
-        if self.machine.game.player["valves_state"].value <= 1:
-          self.log.info(" - Infiltration complete, need a specialist for long walk, lockhandler starting mission select")
-          # We want to start missionselect here so that the ball device doesn't eject the ball
-          # before the "complete" events propagate down to suicide_base and back up again.
-          # ...except that starts mission select before the achievement change. Let's try waiting,
-          # and changing the lockhandler queue relay to check if suicide_infiltration is active
-          do_bypass = False
-        else:
-          self.log.info(" - Infiltration in progress, player_vars is: {}".format(self.machine.game.player.vars))
-          self._bypass_lock()
-          return
-      # If a specialist has died and we need to select another, queue up mission select
-      elif (self.player.achievements["infiltration"] == "started" and not self.machine.modes.suicide_infiltration.active) or (self.player.achievements["longwalk"] == "started" and not self.machine.modes.suicide_longwalk.active):
-        self.log.info(" - Suicide needs a specialist because infiltration/longwalk failed".format(self.machine.game.player["specialist"]))
+      # Check if the ball hold is enabled, and don't bypass if it is
+      if self._transition_hold.enabled:
+        self.log.info("Suicide Mission wants to hold a ball for transitioning, not going to bypass")
+        selection_mode = "suicide_huddle"
+        mission_delay = 2000
         do_bypass = False
-        mission_delay = 500
-      # If we are exiting out of tubes, we definitely want to hold the ball
-      elif self.machine.modes.suicide_tubes.active and self.machine.counters["tubes_counter"].value == 0:
-        self.log.info(" - Suicide says tubes are done, we'd better lock it up!")
-        do_bypass = False
-        mission_delay = 0
+      else:
+        self.log.info("Suicide Mission is not transitioning, bypassing lock")
+        self._bypass_lock()
+        return
 
     # WIZARD:
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)

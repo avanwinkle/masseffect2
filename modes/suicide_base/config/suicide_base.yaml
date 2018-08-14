@@ -10,9 +10,9 @@
 
 mode:
   start_events: start_mode_suicide_base
-  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_ended
+  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained
   events_when_started: mode_type_wizard_started, enable_fullorbit, start_mode_harbinger
-  events_when_stopped: mode_type_wizard_stopped, stop_mode_harbinger
+  events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes, stop_mode_harbinger
   code: suicide_base.SuicideBase
   priority: 2000
 
@@ -23,23 +23,21 @@ config:
 
 event_player:
   mode_suicide_base_started.1:
-    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
+    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="selected"}
     # Everything between omegarelay and endrun starts with the huddle
     - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
-          # - play_platforms_intro{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
-    - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
+    - start_mode_suicide_endrun{device.achievements.endrun.state=="selected"}
   # If another mode ends, clear its environment
   mode_type_suicide_stopped: set_environment
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
-    - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
-    - start_mode_suicide_longwalk{device.achievements.infiltration.state=="completed" and device.achievements.longwalk.state!="completed"}
-    - start_mode_suicide_tubes{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}
-    - start_mode_suicide_final{device.achievements.tubes.state=="completed" and device.achievements.humanreaper.state!="completed"}
+    - start_mode_suicide_infiltration{device.achievements.infiltration.state=="selected"}
+    - start_mode_suicide_longwalk{device.achievements.longwalk.state=="selected"}
+    - start_mode_suicide_tubes{device.achievements.tubes.state=="selected"}
+    - start_mode_suicide_final{device.achievements.humanreaper.state=="selected"}
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
-  # --- infiltration and longwalk start huddle via the end of their sounds
-  tubes_complete: start_mode_suicide_huddle
+  # --- infiltration, longwalk, tubes, final start huddle via lockhandler capturing the ball
   humanreaper_complete: start_mode_suicide_endrun
   endrun_complete:
     - levelup
@@ -49,24 +47,23 @@ event_player:
     presuicide_score:
       action: set
       int: current_player.score
-  # We don't end on ball_ending for the queue player, so trigger that here
-  # TODO: move all the post-drain queue logic into the custom code and avoid the relay player?
-  ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_ended
-  # Slide player doesn't like events, so conditionally restore the main slide
-  suicidemission_ended:
-    - restore_singleplayer_slide{game.num_players==1}
-    - restore_multiplayer_slide{game.num_players>1}
+  # If the ball drains and we don't need to kill a squadmate, handle that here
+  ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_drained
+  # If the ball drains and we DO need to kill a squadmate, wait for the callback to end
+  squadmate_killed{ball_is_ending}: suicidemission_drained
+  # If a squadmate is killed but we didn't drain, go to the "restart" mode
   squadmate_killed{not ball_is_ending and device.achievements.longwalk.state!="completed"}: start_mode_suicide_restart
+  # Slide player doesn't like events, so conditionally restore the main slide
+  mode_suicide_base_will_stop:
+    - restore_multiplayer_slide{game.num_players>1}
+    - restore_singleplayer_slide{game.num_players==1}
 
 queue_relay_player:
   # If we're starting a new ball and need to huddle, delay the ball eject
   balldevice_bd_trough_ball_eject_attempt{mode.suicide_huddle.active}:
     post: huddle_waitforit
     wait_for: suicide_huddle_complete
-  balldevice_bd_lock_ball_eject_attempt{mode.suicide_huddle.active or mode.suicide_infiltration.stopping or mode.suicide_longwalk.stopping or mode.suicide_tubes.stopping}:
-    post: blocking_balldevice_bd_lock_ball_eject_attempt
-    wait_for: suicide_huddle_complete
-  # If the ball drains during infiltration or longwalk, kill the specialist too
+  # If the ball drains during infiltration or longwalk, kill a squadmate before ending
   ball_ending{mode.suicide_infiltration.active or mode.suicide_longwalk.active}:
     post: kill_squadmate
     args:
@@ -80,12 +77,20 @@ ball_saves:
     delayed_eject_events: mode_suicide_infiltration_started
     auto_launch: true # Must be true because we have a multiball starting too
 
+ball_holds:
+  # This hold keeps the ball in the lock while the huddle plays between phases
+  suicide_transition_hold:
+    hold_devices: bd_lock
+    enable_events: enable_transition_hold, mode_suicide_restart_started
+    release_one_events: suicide_huddle_complete
+    disable_events: ball_hold_suicide_transition_hold_balls_released
+
 variable_player:
   # Track whether we are progressing into a mode or starting a new ball
   mode_suicide_base_started:
     suicide_continuing:
       action: set
-      int: 1 # 1 for testing intros, 0 for skipping them
+      int: 0 # 1 for testing intros, 0 for skipping them
     # For debugging, when we start directly into reaper mode
     reaper_hp{not current_player.reaper_hp}:
       action: set
