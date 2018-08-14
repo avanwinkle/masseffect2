@@ -36,6 +36,8 @@ timers:
     control_events:
       - event: timer_harbinger_disabled_timer_complete
         action: restart
+      - event: disable_harbinger
+        action: stop
   # This timer runs while Harbinger is DISABLED and the shot is OFF
   # When it completes, the shot will be enabled again
   harbinger_disabled_timer:

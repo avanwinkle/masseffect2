@@ -1,7 +1,7 @@
 import logging
 from mpf.core.mode import Mode
 
-SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_entrance", "right_ramp", "right_ramp_entrance", "right_orbit", "right_orbit_nofull", "standuptarget", "return_lane", "dropbank", "hitbank"]
+SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_entrance", "right_ramp", "right_ramp_entrance", "right_orbit", "right_orbit_nofull", "standuptarget", "return_lane", "dropbank", "hitbank", "tenpoints"]
 
 class Environment(Mode):
   def __init__(self, machine, config, name, path):
@@ -9,6 +9,7 @@ class Environment(Mode):
     self.log = logging.getLogger("Environment")
     self.log.setLevel("DEBUG")
     self._environment = None
+    self._removal_handlers = None
 
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)
@@ -25,15 +26,30 @@ class Environment(Mode):
     env = kwargs.get("env")
     if env != self._environment:
       # Stop the previous environment mode
-      if self._environment:
-        self.machine.events.post("stop_mode_env_{}".format(self._environment))
+      self._clear_environment()
       # Start a new environment mode
       if env:
         self.machine.events.post("start_mode_env_{}".format(env))
+        if kwargs.get("stop_events"):
+          stop_events = kwargs.get("stop_events")
+          if isinstance(stop_events, str):
+            stop_events = stop_events.split(r", ?")
+          self._removal_handlers = [self.add_mode_event_handler(event, self._clear_environment) for event in stop_events]
+
       self._environment = env
+      self.log.debug("Environment is now {}, removal handlers are: {}".format(self._environment, self._removal_handlers))
 
   def _register_handlers(self):
     self.add_mode_event_handler('set_environment', self._set_environment)
+
+  def _clear_environment(self, **kwargs):
+    if self._environment:
+      self.machine.events.post("stop_mode_env_{}".format(self._environment))
+    if self._removal_handlers:
+      self.machine.events.remove_handlers_by_keys(self._removal_handlers)
+      self._removal_handlers = None
+    self._environment = None
+    self.log.debug("Environment cleared and removal handlers removed.")
 
 class EnvShot(object):
 

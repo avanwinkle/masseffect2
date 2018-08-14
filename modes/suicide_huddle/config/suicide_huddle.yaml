@@ -28,6 +28,14 @@ event_player:
     # If we are repeating a mode without specialist, skip the ditty and start it
     - play_huddle_outro_show{current_player.suicide_continuing==0 and device.achievements.longwalk.state=="completed"}|2s
 
+random_event_player:
+  ### MOCKUP: Shows don't pass events_when_played, so we have to create different shows for each path
+  play_huddle_intro_show{device.achievements.longwalk.state=="enabled" or device.achievements.longwalk.state=="stopped"}:
+    force_different: true
+    events:
+      - play_huddle_intro_show_lw_yes
+      - play_huddle_intro_show_lw_no
+
 slide_player:
   show_huddle_slide:
     huddle_slide:
@@ -41,13 +49,19 @@ show_player:
     infiltration_intro_show{device.achievements.infiltration.state!="completed"}:
       action: play
       loops: 0
-    longwalk_intro_show{device.achievements.infiltration.state=="completed" and device.achievements.longwalk.state!="completed"}:
-      action: play
-      loops: 0
     tubes_intro_show{device.achievements.longwalk.state=="completed" and device.achievements.tubes.state!="completed"}:
       action: play
       loops: 0
     platforms_intro_show{device.achievements.tubes.state=="completed" and device.achievements.humanreaper.state!="completed"}:
+      action: play
+      loops: 0
+  # MOCK separate intros for longwalk variants
+  play_huddle_intro_show_lw_yes:
+    longwalk_intro_show_yes:
+      action: play
+      loops: 0
+  play_huddle_intro_show_lw_no:
+    longwalk_intro_show_no:
       action: play
       loops: 0
   play_huddle_outro_show:
@@ -89,14 +103,20 @@ shows:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
-  longwalk_intro_show:
+  longwalk_intro_show_yes:
     - time: 0
       sounds:
-        specialist_lw_intro:
+        specialist_lw_intro_yes:
           action: play
           track: voice
-          # Longwalk has variable end points, so the sounds themselves explicitly define
-          # where the specialist_intro_complete comes in
+          events_when_stopped: play_specialist_lw_yes
+  longwalk_intro_show_no:
+    - time: 0
+      sounds:
+        specialist_lw_intro_no:
+          action: play
+          track: voice
+          events_when_stopped: play_specialist_lw_no
   longwalk_outro_show:
     - time: 0
       sounds:
@@ -124,9 +144,9 @@ shows:
   platforms_intro_show:
     - time: 0
       sounds:
-        platforms_med_high:
+        platforms_med:
           action: play
-          track: voice
+          track: music
     - time: 2s
       sounds:
         shep_give_us_a_minute_edi:
@@ -149,7 +169,10 @@ sound_player:
     longwalk_low:
       action: load
       track: music
-    specialist_lw_intro:
+    specialist_lw_intro_yes:
+      action: load
+      track: voice
+    specialist_lw_intro_no:
       action: load
       track: voice
     specialist_lw_outro:

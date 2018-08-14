@@ -11,6 +11,8 @@ shots:
     switch: s_left_orbit
   envshot_kickback:
     switch: s_kickback
+  envshot_tenpoints:
+    switch: s_tenpoints
   # Assume ramp shots are exit by default
   envshot_left_ramp:
     switch: s_left_ramp_exit

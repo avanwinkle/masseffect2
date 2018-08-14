@@ -27,7 +27,8 @@ event_player:
     - play_enemies_incoming{current_player.reaper_rounds > 0 and current_player.reaper_rounds % 2 == 0}
     - play_enemies_reinforcements{current_player.reaper_rounds % 2 == 1}
 
-# We can be saved by 2 squadmates per ball
+# We can be saved by 2 squadmates per ball. We control the save in suicide_final so it doesn't
+# reset itself everytime suicide_reaper starts.
 ball_saves:
   reaper_squadmate_save:
     enable_events: mode_suicide_final_started{current_player.squadmates_count>0}
@@ -37,7 +38,8 @@ ball_saves:
     delayed_eject_events: squadmate_killed_complete
 
 sound_player:
-  mode_suicide_platforms_started:
+  # Trigger this sound on humanreaper_failed so we don't replace music when we come in from huddle
+  humanreaper_failed:
     platforms_low:
       action: stop
     reaper_high:
@@ -47,5 +49,7 @@ sound_player:
   mode_suicide_humanreaper_started:
     reaper_high:
       action: play
+    platforms_med:
+      action: stop
     platforms_med_high:
       action: stop

@@ -31,6 +31,9 @@ mode:
   priority: 500
 
 event_player:
+  mode_derelictreaper_started:
+    set_environment:
+      env: husks
   timer_reapercore_timeout_complete:
     - disable_reapercore
     - enable_corereset

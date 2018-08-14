@@ -40,6 +40,8 @@ event_player:
   mode_suicide_infiltration_started:
     set_initial_suicide_shots:
       count: 5
+    set_environment:
+      env: collectors
   reset_tension:
     set_initial_suicide_ticks:
       ticks: 40
@@ -98,7 +100,7 @@ shots:
     enable_events: mode_suicide_infiltration_started
     reset_events: mode_suicide_infiltration_will_stop
     disable_events: valve_right_ramp_hit
-    advance_events: increase_infiltration_med
+    advance_events: increase_infiltration
     profile: valve_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
@@ -107,7 +109,7 @@ shots:
     hit_events: sh_left_orbit_hit
     enable_events: valve_right_ramp_hit
     disable_events: valve_left_orbit_hit, mode_suicide_infiltration_will_stop
-    advance_events: increase_infiltration_med
+    advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -117,7 +119,7 @@ shots:
     hit_events: sh_kickback_hit
     enable_events: valve_left_orbit_hit
     disable_events: valve_kickback_hit, mode_suicide_infiltration_will_stop
-    advance_events: increase_infiltration_med
+    advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -127,7 +129,7 @@ shots:
     hit_events: sh_right_orbit_hit
     enable_events: valve_kickback_hit
     disable_events: valve_right_orbit_hit, mode_suicide_infiltration_will_stop
-    advance_events: increase_infiltration_med
+    advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
@@ -137,7 +139,7 @@ shots:
     hit_events: sh_left_ramp_hit
     enable_events: valve_right_orbit_hit
     disable_events: valve_left_ramp_hit, mode_suicide_infiltration_will_stop
-    advance_events: increase_infiltration_med
+    advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:

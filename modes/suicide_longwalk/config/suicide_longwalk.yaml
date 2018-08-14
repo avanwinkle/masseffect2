@@ -22,7 +22,7 @@
 
 mode:
   start_events: start_mode_suicide_longwalk
-  stop_events: longwalk_complete, longwalk_failed
+  stop_events: ball_will_end, stop_mode_suicide_longwalk, longwalk_failed
   events_when_started: mode_type_suicide_started, reset_tension
   events_when_stopped: mode_type_suicide_stopped
   code: suicide_longwalk.LongWalk
@@ -31,7 +31,7 @@ mode:
 event_player:
   mode_suicide_longwalk_started:
     set_environment:
-      env: collectors
+      env: husks_lower
     set_initial_suicide_shots:
       count: 7
   player_tension{change>0}: increase_tension
@@ -51,6 +51,7 @@ event_player:
       squadmate: random
   squadmate_killed: longwalk_failed
   logicblock_swarmpaths_complete: longwalk_complete
+  mode_suicide_huddle_started: stop_mode_suicide_longwalk
 
 counters:
   barrier_warning:
@@ -259,6 +260,7 @@ sound_player:
     longwalk_low:
       action: play
       start_at: 10s
+      mode_end_action: stop
     longwalk_med:
       action: stop
     longwalk_high:
@@ -272,19 +274,8 @@ sound_player:
   play_specialist_lw_warning_med: specialist_lw_warning_med
   play_specialist_lw_advance: specialist_lw_advance
   play_specialist_lw_close: specialist_lw_close
-  squadmate_killed{squadmate==current_player.specialist}:
-    specialist_death_lw:
-      action: play
-      events_when_played: squadmate_killed_complete
-  squadmate_killed{squadmate!=current_player.specialist}:
-    random_death_lw:
-      action: play
-      priority: 100
-      events_when_stopped: squadmate_killed_callback
-    random_death_callback_lw:
-      action: play
-      priority: 1
-      events_when_played: squadmate_killed_complete
+  # The squadmate_sounds handles the playing, but stop specialist sounds if death
+  squadmate_killed:
     specialist_lw_warning_med:
       action: stop
     specialist_lw_warning_high:
@@ -294,6 +285,7 @@ sound_player:
     specialist_lw_close:
       action: stop
   # We start the music in huddle so make sure we end it on mode end
+  # This event doesn't seem to work great?
   mode_suicide_longwalk_will_stop:
     longwalk_low:
       action: stop

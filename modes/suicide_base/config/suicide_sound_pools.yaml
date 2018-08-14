@@ -206,12 +206,16 @@ sound_pools:
 ### LONG WALK
   # Huddle
     # Huddle intro pt 1
-    specialist_lw_intro:
+    specialist_lw_intro_yes:
+      track: voice
+      type: random
+      sounds:
+        - shepard_what_about_biotics
+    specialist_lw_intro_no:
       track: voice
       type: random
       sounds:
         - edi_chamber_overrun_with_seeker_swarms
-        - shepard_what_about_biotics
         - shepard_conventional_weapons_useless
     # Huddle intro pt 2-A
     specialist_lw_yes:
@@ -360,6 +364,25 @@ sound_pools:
         - tube_hint_tali{current_player.status_tali==4}
         - tube_hint_thane{current_player.status_thane==4}
         - tube_hint_zaeed{current_player.status_zaeed==4}
+  # Squadmates got one
+    tubes_got_one:
+      track: voice
+      type: random_force_all
+      sounds:
+        - garrus_nice_shot{current_player.status_garrus==4}
+        - garrus_there_we_go{current_player.status_garrus==4}
+        - garrus_scratch_one{current_player.status_garrus==4}
+        - jack_one_down{current_player.status_jack==4}
+        - jack_got_one{current_player.status_jack==4}
+        - jack_nice_shot{current_player.status_jack==4}
+        - miranda_got_one{current_player.status_miranda==4}
+        - miranda_one_down{current_player.status_miranda==4}
+    tubes_got_two:
+      track: voice
+      type: random_force_all
+      sounds:
+        - miranda_thats_another_one{current_player.status_miranda==4}
+        - garrus_down_to_two{current_player.status_garrus==4}
 
 ### FINAL BATTLE
   # Platforms music
@@ -370,6 +393,17 @@ sound_pools:
       sounds: platforms_high, platforms_med
       fade_in: 1s
       fade_out: 1s
+      # We stop on this pool because suicide_final starts it, but not on the sound because huddle starts it
+      mode_end_action: stop
+  # Reaper firing, take cover!
+    take_cover:
+      track: voice
+      type: random_force_all
+      sounds:
+        - shepard_get_to_cover_1
+        - shepard_get_to_cover_2
+        - shepard_take_cover_1
+        - shepard_take_cover_2
   # Returning to Platforms mode
     enemies_incoming:
       track: voice
@@ -406,4 +440,3 @@ sound_pools:
         - thane_reinforcements{current_player.status_thane==4}
         - zaeed_reinforcements{current_player.status_zaeed==4}
         - shepard_here_they_come
-        - shepard_take_cover

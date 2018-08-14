@@ -1,0 +1,16 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_husks
+  stop_events: stop_mode_env_husks, stop_mode_environment
+  # By default, this mode only designates the upper playfield. Include the lower.
+  events_when_started: start_mode_env_husks_lower
+  events_when_stopped: stop_mode_env_husks_lower
+  priority: 400
+
+sound_player:
+  # The sounds "husk_sound_(type)" is defined in collectorship_base
+  envshot_right_orbit_hit: husk_sound_long
+  envshot_right_ramp_hit: husk_sound_long
+  envshot_kickback_hit: husk_sound_long
+  envshot_left_ramp_hit: husk_sound_long
+  envshot_left_orbit_hit: husk_sound_long

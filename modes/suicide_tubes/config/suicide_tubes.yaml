@@ -20,33 +20,18 @@ mode:
   priority: 2300
 
 event_player:
-  tube_shots_hit_hit{current_player.temp_multiplier==0}: play_tube_hint
+  mode_suicide_tubes_started.1:
+    set_environment:
+      env: collectors
   # The tubes widget will persist value on restart, but the first load needs a value
-  mode_suicide_tubes_started{device.counters.tubes_counter.value==4}:
+  mode_suicide_tubes_started.2{device.counters.tubes_counter.value==4}:
     logicblock_tubes_counter_updated:
       value: 4
+  tube_hint_shot_hit: play_tube_hint
   # Count the ramp exit shot as complete, which will start the huddle
   tube_complete_shot_lit_hit: tubes_complete
   # When the ball has entered we'll have already started the huddle, so exit then
   mode_suicide_huddle_started: stop_mode_suicide_tubes
-
-variable_player:
-  # Use the multiplier to track whether we've said the hint
-  mode_suicide_tubes_started:
-    temp_multiplier:
-      action: set
-      int: 0
-  tube_shots_hit_hit:
-    temp_multiplier: 1
-
-ball_holds:
-  tubes_to_platforms:
-    hold_devices: bd_lock
-    balls_to_hold: 1
-    enable_events: logicblock_tubes_counter_complete
-    # Theory: Stopping the mode will trigger the release, but lockhandler will
-    # catch the eject attempt by seeing that suicide_huddle is active
-    release_all_events: mode_suicide_tubes_will_stop
 
 counters:
   tubes_counter:
@@ -62,30 +47,39 @@ shot_groups:
     shots: tube_left_orbit, tube_kickback, tube_right_ramp, tube_right_orbit
 
 shots:
+  # This shot gets enabled to prevent env sounds when the hint plays
+  tube_hint_shot:
+    hit_events: tube_shots_hit_hit
+    disable_events: tube_shots_hit_hit
+    tags: envshot_left_orbit, envshot_kickback, envshot_right_orbit, envshot_right_ramp
   tube_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: FF2200 #color_collectors
+      tags: envshot_left_orbit
   tube_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: FF2200 #color_collectors
+      tags: envshot_right_ramp
   tube_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: FF2200 #color_collectors
+      tags: envshot_right_orbit
   tube_kickback:
     hit_events: sh_kickback_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_kickback_shield_rgb
       color: FF2200 #color_collectors
+      tags: envshot_kickback
   tube_complete_shot:
     hit_events: sh_left_ramp_hit
     enable_events: logicblock_tubes_counter_complete
@@ -93,10 +87,12 @@ shots:
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: 55FF00 # color_door
+    tags: envshot_left_ramp
 
 sound_player:
   # Seamless transition from the low to the med music when the marker hits
   platforms_low_med_transition_marker: platforms_med
+  tube_shots_lit_hit: tubes_got_one
   # In case we won this super fast and the platforms_low didn't finish, stop it
   tubes_complete:
     platforms_low:

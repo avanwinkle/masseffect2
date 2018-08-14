@@ -21,6 +21,11 @@ mode:
   priority: 2300
 
 event_player:
+  mode_suicide_platforms_started:
+    set_environment:
+      env: collectors
+      # Suicide base resets env on mode_type_suicide_stopped, so do it manually
+      stop_events: mode_suicide_platforms_will_stop
   platform_shots_hit_complete: reset_platforms
   # When the hurryup drains, move on to the next mode
   player_temp_hurryup_value{value<=100}: platforms_complete
@@ -35,16 +40,18 @@ variable_player:
     temp_hurryup_value:
       action: set
       int: 1500
-  platform_shots_lit_hit:
+  platform_shots_lit_hit.1:
     temp_build_value:
       action: add
       int: current_player.temp_hurryup_value * current_player.harbinger_multiplier
-    temp_hurryup_value:
-      action: add
-      int: 400  # Each second is worth 100 hurryup points, so add 4 seconds
     score:
       action: add
       int: current_player.temp_hurryup_value * current_player.harbinger_multiplier / 10
+  # We need to cap the time the player can sit in this phase, so after 60s stop restoring hurryup time
+  platform_shots_lit_hit.2{device.timers.platform.ticks<=60}:
+    temp_hurryup_value:
+      action: add
+      int: 400  # Each second is worth 100 hurryup points, so add 4 seconds
   timer_platform_tick:
     temp_hurryup_value: -50 # 2x per second = 100/sec
   platform_shots_hit_hit:
@@ -54,9 +61,16 @@ variable_player:
   platform_targets_hit_hit:
     score: 100
 
+# Unlimited balls during platforms
+multiballs:
+  platforms:
+    ball_count: 2
+    shoot_again: -1
+
 timers:
   platform:
     start_value: 0
+    end_value: 60
     direction: up
     start_running: true  # TODO: add free-shoot period for combat squadmates
     tick_interval: 500ms
@@ -70,6 +84,7 @@ shot_groups:
     reset_events: reset_platforms
 
 shots:
+  # These shots are NOT tagged with environment, so we get collector sounds all the time!
   platform_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: color_flashing_fast_profile

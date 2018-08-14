@@ -143,6 +143,7 @@ class LockHandler(Mode):
       elif self.machine.modes.suicide_tubes.active and self.machine.counters["tubes_counter"].value == 0:
         self.log.info(" - Suicide says tubes are done, we'd better lock it up!")
         do_bypass = False
+        mission_delay = 0
 
     # WIZARD:
     # If a wizard mode is enabled, NEVER attempt to lock a ball (even for multiball)

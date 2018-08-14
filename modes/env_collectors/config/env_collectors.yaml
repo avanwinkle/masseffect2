@@ -1,0 +1,90 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_collectors
+  stop_events: stop_mode_env_collectors, stop_mode_environment
+  priority: 400
+
+sound_player:
+  # The sound "collector_hit" is defined in collectorship_base
+  envshot_right_orbit_hit: collector_hit
+  envshot_right_ramp_hit: collector_hit
+  envshot_kickback_hit: collector_hit
+  envshot_left_ramp_hit: collector_hit
+  envshot_left_orbit_hit: collector_hit
+  envshot_outlane_hit: harbinger_taunt
+  envshot_tenpoints_hit: collector_hit
+  # gunfight copied from env_gunfight
+  envshot_standuptarget_hit: env_random_gunfight
+
+random_event_player:
+  env_random_gunfight:
+    - env_gunfight_ricochet|2
+    - env_gunfight_bullet_thud
+    - env_gunfight_bullet_whiz|2
+    - env_gunfight_quick_expl
+
+sound_pools:
+  harbinger_taunt:
+    type: random
+    track: voice
+    sounds:
+      - harbinger_taunt_1
+      - harbinger_taunt_2
+      - harbinger_taunt_3
+      - harbinger_taunt_4
+      - harbinger_taunt_5
+
+sounds:
+  collector_death_1:
+    file: sfx_ss_collector_ss_collector_00315575_m.ogg
+    track: sfx
+  collector_death_2:
+    file: sfx_ss_collector_ss_collector_00315577_m.ogg
+    track: sfx
+  collector_death_3:
+    file: sfx_ss_collector_ss_collector_00315578_m.ogg
+    track: sfx
+  collector_death_4:
+    file: sfx_ss_collector_ss_collector_00315579_m.ogg
+    track: sfx
+  collector_passing_1:
+    file: sfx_ss_collector_ss_collector_00315581_m.ogg
+    track: sfx
+  collector_passing_2:
+    file: sfx_ss_collector_ss_collector_00315582_m.ogg
+    track: sfx
+  collector_passing_3:
+    file: sfx_ss_collector_ss_collector_00315583_m.ogg
+    track: sfx
+  collector_passing_4:
+    file: sfx_ss_collector_ss_collector_00315584_m.ogg
+    track: sfx
+  collector_passing_5:
+    file: sfx_ss_collector_ss_collector_00315585_m.ogg
+    track: sfx
+  harbinger_taunt_1:
+    # "Shepard, your interefence has ended"
+    file: en_us_global_collector_general_ss_collector_general_00332540_m.ogg
+    track: voice
+  harbinger_taunt_2:
+    # "You will not stop me"
+    file: en_us_global_collector_general_ss_collector_general_00332559_m.ogg
+    track: voice
+  harbinger_taunt_3:
+    # "Nothing stands against us"
+    file: en_us_global_collector_general_ss_collector_general_00332650_m.ogg
+    track: voice
+  harbinger_taunt_4:
+    # "The cycle cannot be broken"
+    file: en_us_global_collector_general_endgm2_boss_fight_a_00314679_m.ogg
+    track: voice
+  harbinger_taunt_5:
+    # "You are no longer relevant"
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00346713_m.ogg
+    track: voice
+  harbinger_you_have_failed:
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00349248_m.ogg
+    track: voice
+
+
+

@@ -28,6 +28,8 @@ event_player:
     - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
           # - play_platforms_intro{device.achievements.longwalk.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.humanreaper.state=="completed" and device.achievements.endrun.state!="completed"}
+  # If another mode ends, clear its environment
+  mode_type_suicide_stopped: set_environment
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
     - start_mode_suicide_infiltration{device.achievements.infiltration.state!="completed"}
@@ -37,7 +39,6 @@ event_player:
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
   # --- infiltration and longwalk start huddle via the end of their sounds
-  # --- tubes starts huddle via lockhandler detecting the ball hold
   tubes_complete: start_mode_suicide_huddle
   humanreaper_complete: start_mode_suicide_endrun
   endrun_complete:
@@ -62,7 +63,7 @@ queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt{mode.suicide_huddle.active}:
     post: huddle_waitforit
     wait_for: suicide_huddle_complete
-  balldevice_bd_lock_ball_eject_attempt{mode.suicide_huddle.active or mode.suicide_infiltration.stopping}:
+  balldevice_bd_lock_ball_eject_attempt{mode.suicide_huddle.active or mode.suicide_infiltration.stopping or mode.suicide_longwalk.stopping or mode.suicide_tubes.stopping}:
     post: blocking_balldevice_bd_lock_ball_eject_attempt
     wait_for: suicide_huddle_complete
   # If the ball drains during infiltration or longwalk, kill the specialist too

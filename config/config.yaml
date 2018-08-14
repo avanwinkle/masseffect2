@@ -84,9 +84,12 @@ modes:
   - env_bloodpack
   - env_bluesuns
   - env_cars
+  - env_collectors
   - env_field
   - env_geth
   - env_gunfight
+  - env_husks
+  - env_husks_lower
   - env_krogan
   # Main Story Missions:
   - collectorship_ambush

@@ -82,14 +82,12 @@ sounds:
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
-      mode_end_action: stop
     platforms_high:
       file: mus_endgm2_combat_3b.ogg
       track: music
       start_at: 5s
       fade_in: 1.5s
       fade_out: 2s
-      mode_end_action: stop
     reaper_high:
       file: mus_endgm2_reaperdeath.ogg
       track: music
@@ -844,6 +842,7 @@ sounds:
     shep_everyone_through_the_doors:
       file: en_us_player_f_endgm2_biotic_fail_c_00282838_f.ogg
       track: voice
+
 ### TUBES
   # Tubes intro
     shep_we_win_or_lose_it_all:
@@ -886,8 +885,39 @@ sounds:
     tube_hint_miranda:
       file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.ogg
       track: voice
-
-### FINAL BATTLE - PLATFORMS
+  # Squadmate got one
+    garrus_nice_shot:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.ogg
+      track: voice
+    garrus_there_we_go:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303175_m.ogg
+      track: voice
+    garrus_scratch_one:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303179_m.ogg
+      track: voice
+    jack_one_down:
+      file: en_us_hench_convict_ss_global_hench_convict_00296197_m.ogg
+      track: voice
+    jack_got_one:
+      file: en_us_hench_convict_ss_global_hench_convict_00296198_m.ogg
+      track: voice
+    jack_nice_shot:
+      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.ogg
+      track: voice
+    miranda_got_one:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257437_m.ogg
+      track: voice
+    miranda_one_down:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257438_m.ogg
+      track: voice
+    miranda_thats_another_one:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257439_m.ogg
+      track: voice
+  # Squadmate down to two
+    garrus_down_to_two:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303102_m.ogg
+      track: voice
+### FINAL BATTLE
   # Final battle intro
     shep_give_us_a_minute_edi:
       file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
@@ -895,9 +925,6 @@ sounds:
   # Transition from reaper to platforms (on successful hit only)
     shepard_theyve_seen_us:
       file: en_us_player_f_ss_global_player_female_00288359_f.ogg
-      track: voice
-    shepard_take_cover:
-      file: en_us_player_f_ss_global_player_female_00314491_f.ogg
       track: voice
     shepard_here_they_come:
       file: en_us_player_f_endgm2_tech_culmination_c_00281204_f.ogg
@@ -977,6 +1004,57 @@ sounds:
     jack_reinforcements:
       file: en_us_hench_convict_endgm2_warnings_a_00317935_m.ogg
       track: voice
+  # On reaper firing timer, get to cover!
+    shepard_get_to_cover_1:
+      file: en_us_player_f_ss_global_player_female_00314488_f.ogg
+      track: voice
+    shepard_get_to_cover_2:
+      file: en_us_player_f_ss_global_player_female_00314489_f.ogg
+      track: voice
+    shepard_take_cover_1:
+      file: en_us_player_f_ss_global_player_female_00314490_f.ogg
+      track: voice
+    shepard_take_cover_2:
+      file: en_us_player_f_ss_global_player_female_00314491_f.ogg
+      track: voice
+    miranda_watch_out:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310094_m.ogg
+  # Hit a ball lock/hold, squadmates confirm cover
+    garrus_grabbing_cover:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303052_m.ogg
+      track: voice
+    garrus_heading_to_cover:
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303053_m.ogg
+      track: voice
+    miranda_taking_cover:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310045_m.ogg
+      track: voice
+    miranda_heading_to_cover:
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310042_m.ogg
+      track: voice
+    jacob_grabbing_cover:
+      file: en_us_hench_leading_ss_global_hench_leading_00299161_m.ogg
+      track: voice
+    jacob_moving_to_cover:
+      file: en_us_hench_leading_ss_global_hench_leading_00299159_m.ogg
+      track: voice
+  # Harbinger taunts when all squadmates are dead
+    harbinger_shepard_alone_1:
+      # "And now you stand alone, Shepard"
+      file: en_us_global_collector_general_ss_collector_general_00332626_m.ogg
+      track: voice
+    harbinger_shepard_alone_2:
+      # "Your allies have fallen, Shepard"
+      file: en_us_global_collector_general_ss_collector_general_00332627_m.ogg
+      track: voice
+    harbinger_shepard_alone_3:
+      # "You have no one left, Shepard"
+      file: en_us_global_collector_general_ss_collector_general_00332628_m.ogg
+      track: voice
+    harbinger_shepard_alone_4:
+      # "Your minions have failed, Shepard"
+      file: en_us_global_collector_general_ss_collector_general_00332629_m.ogg
+      track: voice
 
 ### HUDDLES
   # Infiltration: Huddle Intro
@@ -1054,11 +1132,11 @@ sounds:
     shepard_what_about_biotics:
       file: en_us_player_f_endgm2_huddle_02a_d_00282594_f.ogg
       track: voice
-      events_when_stopped: play_specialist_lw_yes
+      # events_when_stopped: play_specialist_lw_yes
     shepard_conventional_weapons_useless:
       file: en_us_player_f_endgm2_huddle_02a_d_00282560_f.ogg
       track: voice
-      events_when_stopped: play_specialist_lw_no
+      # events_when_stopped: play_specialist_lw_no
     edi_chamber_overrun_with_seeker_swarms:
       file: en_us_hench_ai_endgm2_huddle_02a_d_00282512_m.ogg
       track: voice

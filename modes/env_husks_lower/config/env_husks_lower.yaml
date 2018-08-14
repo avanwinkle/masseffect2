@@ -1,0 +1,53 @@
+#config_version=5
+mode:
+  start_events: start_mode_env_husks_lower
+  stop_events: stop_mode_env_husks_lower, stop_mode_environment
+  priority: 400
+
+sound_player:
+  # The sounds "husk_sound_(type)" is defined in collectorship_base
+  envshot_dropbank_hit: scion_hit
+  envshot_hitbank_hit: scion_hit
+  envshot_outlane_hit: scion_groan
+  envshot_standuptarget_hit: husk_sound_short
+  envshot_tenpoints_hit: husk_sound_long
+  # The ramp entrances count as "lower" playfield, right?
+  envshot_right_ramp_entrance_hit: husk_sound_short
+  envshot_left_ramp_entrance_hit: husk_sound_short
+
+sound_pools:
+  scion_groan:
+    type: random_force_all
+    track: sfx
+    sounds: scion_groan_1, scion_groan_2, scion_groan_3, scion_groan_4
+  scion_hit:
+    type: random_force_all
+    track: sfx
+    sounds: scion_hit_1, scion_hit_2, scion_hit_3, scion_hit_4
+
+sounds:
+  scion_groan_1:
+    file: sfx_ss_scion_ss_scion_00293501_m.ogg
+    track: sfx
+  scion_groan_2:
+    file: sfx_ss_scion_ss_scion_00293502_m.ogg
+    track: sfx
+  scion_groan_3:
+    file: sfx_ss_scion_ss_scion_00293505_m.ogg
+    track: sfx
+  scion_groan_4:
+    file: sfx_ss_scion_ss_scion_00293506_m.ogg
+    track: sfx
+  scion_hit_1:
+    file: sfx_ss_scion_ss_scion_00293509_m.ogg
+    track: sfx
+  scion_hit_2:
+    file: sfx_ss_scion_ss_scion_00293510_m.ogg
+    track: sfx
+  scion_hit_3:
+    file: sfx_ss_scion_ss_scion_00293519_m.ogg
+    track: sfx
+  scion_hit_4:
+    file: sfx_ss_scion_ss_scion_00293521_m.ogg
+    track: sfx
+
