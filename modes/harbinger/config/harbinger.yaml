@@ -26,6 +26,8 @@ event_player:
   harbinger_shot_hot_hit: harbinger_shot_runout|30s
   # Between Harbingers is 30s, but from the first enabling let's go faster
   enable_harbinger: start_initial_harbinger|19s
+  # If harbinger mode is enabled, give a taunt on outlane drain
+  envshot_outlane_hit: harbinger_taunt
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
@@ -155,6 +157,10 @@ sound_pools:
     track: voice
     max_queue_time: 3s
     sounds: harbinger_killedsound_1, harbinger_killedsound_2, harbinger_killedsound_3, harbinger_killedsound_4, harbinger_killedsound_5
+  harbinger_taunt:
+    type: random
+    track: voice
+    sounds: harbinger_taunt_1, harbinger_taunt_2, harbinger_taunt_3, harbinger_taunt_4, harbinger_taunt_5
 
 sounds:
   harbinger_enabledsound_1:
@@ -201,3 +207,17 @@ sounds:
     file: en_us_global_collector_general_ss_collector_general_00332641_m.ogg # "You will know pain, Shepard"
   harbinger_killedsound_5:
     file: en_us_global_collector_general_ss_collector_general_00332603_m.ogg # "This changes nothing, Shepard"
+  harbinger_taunt_1:
+    file: en_us_global_collector_general_ss_collector_general_00332540_m.ogg # "Shepard, your interefence has ended"
+  harbinger_taunt_2:
+    file: en_us_global_collector_general_ss_collector_general_00332559_m.ogg # "You will not stop me"
+  harbinger_taunt_3:
+    file: en_us_global_collector_general_ss_collector_general_00332650_m.ogg # "Nothing stands against us"
+  harbinger_taunt_4:
+    file: en_us_global_collector_general_endgm2_boss_fight_a_00314679_m.ogg # "The cycle cannot be broken"
+  harbinger_taunt_5:
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00346713_m.ogg # "You are no longer relevant"
+  harbinger_you_have_failed:
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00349248_m.ogg # You have failed
+
+

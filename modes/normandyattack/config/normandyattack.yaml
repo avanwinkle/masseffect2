@@ -42,6 +42,8 @@ event_player:
       mission_name: Normandy Escaped
   normandy_dropbank_lit_hit.2:
     - stop_mode_normandyattack
+  # Add a slight delay to Joker's "shit" for the env collector noise
+  logicblock_normandyattack_shit_hit: play_shit|1500ms
 
 ball_saves:
   # This ball save recovers from the forced drain at power outage
@@ -68,12 +70,9 @@ counters:
   normandyattack_shit:
     starting_count: 0
     count_events:
-      - left_orbit_fail_hit
-      - left_ramp_fail_hit
-      - right_ramp_fail_hit
-      - right_orbit_fail_hit
-      - normandy_outlane_hit{not device.ball_saves.normandyattack_save.enabled}
-    multiple_hit_window: 5s # In case both hitbanks are hit together
+      - normandy_shots_off_hit
+      - envshot_outlane_hit
+    multiple_hit_window: 8s # Don't wanna say shit _too_ frequently ;)
     direction: up
 
 light_player:
@@ -257,7 +256,8 @@ sound_player:
   # For the opening intro, play a sound between the trough eject and the plunge
   normandy_plunge_hit: edi_emergency_floor_lighting
   logicblock_normandyattack_counter_hit: normandy_advance
-  logicblock_normandyattack_shit_hit: joker_shit
+  normandy_shots_off_hit: collector_hit
+  play_shit: joker_shit
   normandy_dropbank_lit_hit: edi_finished
   envshot_outlane_hit: joker_death
 
