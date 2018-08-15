@@ -133,6 +133,7 @@ shot_profiles:
 shot_groups:
   hackshots:
     shots: hackshot_left_orbit, hackshot_left_ramp, hackshot_right_orbit, hackshot_right_ramp, hackshot_kickback
+    restart_events: reset_hackshots
 
 shots:
   jackpotshot:
@@ -144,45 +145,35 @@ shots:
     tags: envshot_hitbank
   hackshot_left_orbit:
     hit_events: sh_left_orbit_hit
-    enable_events: reset_hackshots
     disable_events: disable_hackshots
-    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
     tags: envshot_left_orbit
   hackshot_right_orbit:
     hit_events: sh_right_orbit_hit
-    enable_events: reset_hackshots
     disable_events: disable_hackshots
-    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
     tags: envshot_right_orbit
   hackshot_left_ramp:
     hit_events: sh_left_ramp_hit
-    enable_events: reset_hackshots
     disable_events: disable_hackshots
-    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
     tags: envshot_left_ramp
   hackshot_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: reset_hackshots
     disable_events: disable_hackshots
-    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
   hackshot_kickback:
     hit_events: sh_kickback_hit
-    enable_events: reset_hackshots
     disable_events: disable_hackshots
-    reset_events: reset_hackshots
     profile: overlord_target_profile
     show_tokens:
       leds: l_kickback_shield_rgb

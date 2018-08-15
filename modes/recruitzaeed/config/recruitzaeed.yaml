@@ -33,7 +33,6 @@ counters:
     disable_on_complete: false
     reset_on_complete: false
     count_events: zaeed_orbitshots_hit
-    # reset_events: mode_recruitzaeed_started # Is this necessary without persist_state?
 
 event_player:
   mode_recruitzaeed_started:

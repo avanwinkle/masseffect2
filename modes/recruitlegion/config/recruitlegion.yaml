@@ -108,9 +108,10 @@ variable_player:
 shot_groups:
   heretic_sequence_shots:
     shots: heretic_shot_orbits, heretic_shot_ramps
-    rotate_events: heretic_sequence_shots_lit_hit
-    enable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
+    restart_events: mode_recruitlegion_started
+    enable_events: heretic_recovery_shots_hit
     disable_events: enable_random_heretic, logicblock_heretic_counter_complete
+    rotate_events: heretic_sequence_shots_lit_hit
   heretic_recovery_shots:
     shots: heretic_shot_dropbank, heretic_shot_hitbank
     disable_events: mode_recruitlegion_started, heretic_recovery_shots_hit
@@ -124,6 +125,7 @@ shots:
       leds: l_kickback_shield_rgb
       color: FFFFFF #color_legion
     tags: envshot_kickback
+  # Dropbank and hitbank are "recovery" shots
   heretic_shot_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     enable_events: enable_heretic_shot_dropbank
@@ -142,9 +144,9 @@ shots:
       leds: l_hitbank_shield_rgb
       color: FFFFFF #color_legion
     tags: envshot_hitbank
+  # Orbits and ramps are "sequence" shots
   heretic_shot_orbits:
     hit_events: sh_left_orbit_hit, sh_right_orbit_hit
-    reset_events: mode_recruitlegion_started
     advance_events: play_opening_heretic_dialogue
     profile: hit_to_flash_profile_noadvance
     show_tokens:
@@ -153,7 +155,6 @@ shots:
     tags: envshot_left_orbit, envshot_right_orbit
   heretic_shot_ramps:
     hit_events: sh_left_ramp_hit, sh_right_ramp_hit
-    reset_events: mode_recruitlegion_started
     profile: hit_to_flash_profile_noadvance
     show_tokens:
       leds: l_left_ramp_shield_rgb, l_right_ramp_shield_rgb

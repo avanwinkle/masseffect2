@@ -180,13 +180,13 @@ shot_profiles:
 shot_groups:
   arrival_lane_shots:
     shots: arrivallane_left_orbit, arrivallane_kickback, arrivallane_left_ramp, arrivallane_right_ramp, arrivallane_right_orbit
-    reset_events: mode_arrival_started, start_arrival_phase3, arrival_lane_shots_off_complete
-    enable_events: mode_arrival_started, start_arrival_phase3
+    restart_events: mode_arrival_started, start_arrival_phase3
+    reset_events: start_arrival_phase3, arrival_lane_shots_off_complete
     disable_events: start_arrival_phase2, start_arrival_phase4
   arrival_target_shots:
     shots: arrival_target1, arrival_target2, arrival_target3, arrival_target4, arrival_target5
-    reset_events: start_arrival_phase2, start_arrival_phase4, arrival_target_shots_off_complete
-    enable_events: start_arrival_phase2, start_arrival_phase4
+    restart_events: start_arrival_phase2, start_arrival_phase4
+    reset_events: arrival_target_shots_off_complete
     disable_events: play_arrival, start_arrival_phase3, start_arrival_phase5
 
 shots:
