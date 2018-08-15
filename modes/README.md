@@ -132,7 +132,7 @@ phase then the mode will stop when only one ball remains.
 This mode can only be played once.
 
 #### Derelict Reaper
-This mode can be selected from the Misson Select when the player reaches level 8
+The [Derelict Reaper mode](derelictreaper/config/derelictreaper.yaml) can be selected from the Misson Select when the player reaches level 8
 (by recruiting squadmates and/or completing other missions), but it does not have
 to be played immediately. The player can continue recruiting and doing
 other missions before they choose to play the Derelict Reaper.
@@ -148,7 +148,7 @@ other missions before they choose to play the Derelict Reaper.
 This mode can only be played once.
 
 #### Normandy Attack
-This mode is driven from a pop bumper counter that starts counting down immediately
+The [Normandy Attack mode](normandyattack/config/normandyattack.yaml) is driven from a pop bumper counter that starts counting down immediately
 after the Derelict Reaper mode is played (regardless of whether the achievement
 was completed). When the counter reaches zero, all other modes stop and the
 Normandy Attack begins immediately.
@@ -165,13 +165,63 @@ This is the final wizard mode of the game, a sequence of five modes with variabl
 behavior depending on which missions have been completed (and which squadmates
 recruited). It's under active development so the documentation is limited to
 the in-config comments.
-  * Omega 4 Relay
-  * Infiltration
-  * the Long Walk
-  * the Human Reaper
-    * Collector Phase
-    * Reaper Phase
-  * the End Run / Escape
+  * **[Omega 4 Relay](suicide_omegarelay/config/suicide_omegarelay.yaml)**
+    * Collect all the shots in this timed multiball, and complete the set to receive an Extra Ball. The mode automatically ends
+      when all the shots are hit, all the balls drain, or the timer runs out. There is no "failure" and the next phase begins automatically.
+  * **[Infiltration](suicide_infiltration/config/suicide_infiltration.yaml)**
+    * It's a race against time to get through the Collector Base. Choose a tech specialist and hit a series of shots to lead them
+      through the ventilation shaft. Each successful hit resets the timer and completing the full sequence finishes the mode. If the
+      timer runs out, the specialist is killed and the mode must be re-started (with a new specialist) from the ball lock shot.
+  * **[the Long Walk](suicide_longwalk/config/suicide_longwalk.yaml)**
+    * This is a high-pressure and intense mode where speed and precision are required. Choose a biotic specialist and hit a series
+      of shots to navigate to the central chamber, with each successful shot resetting the timer. Hitting an incorrect shot knocks 1/3rd
+      of the remaining time away, so don't stray! The more biotics you have in your squad, the more likely a secondary shot
+      will light for a given step of the sequence. If the timer runs out a random squadmate is killed and the mode must be restarted from
+      the ball lock. If the ball drains, the specialist is killed and a new one must be selected on the next ball.
+    * This mode uses [custom mode code](suicide_longwalk/code/suicide_longwalk.py) to handle the random lighting of shots (i.e. no shot
+      can be lit twice in a row) and the calculation of "bonus" shots lighting based on the squad composition.
+  * **[Destroy the Tubes](suicide_tubes/config/suicide_tubes.yaml)**
+    * This mode lights four shots to be hit to destroy the structural support tubes, and a final shot after they are completed.
+  * **[the Final Battle](suicide_final/config/suicide_final.yaml)**
+    * The underlying mode for the final battle is a helper mode to handle the transitions between the following two phases, to ensure
+      that sounds and shows started at the end of one can proceed through to the next. It also manages the damage value and attack
+      damage to the Reaper, for knowing when to continue cycling the phases and when to proceed to the next mode.
+    * ***[Collector Phase](suicide_platforms/config/suicide_platforms.yaml)***
+      * This is a free-shooting multiball phase with all shots lit to build a "damage" jackpot value. Each shot adds hurryup time (up to
+      a maximum playtime of 60 seconds) and completing all shots resets them to be collected again. When the hurryup expires, the damage
+      value is carried over to the next phase:
+    * ***[Human Reaper Phase](suicide_humanreaper/config/suicide_humanreaper.yaml)***
+      * This phase is a timed shot with serious risk. One random shot is lit, hitting it deals the Reaper some "damage" based on the
+        built value from the previous phase. There is a short timer while the Reaper's cannon charges, and then another when prepares
+        to fire.
+      * At the point of cannon firing, the flippers are temporarily disabled and the ball may drain. During the firing countdown, a
+        shot to any ball hold or ball lock will keep the ball save ("in cover") until after the cannon fires and flipper power is
+        restored. An audio cue helps inform the player that they should take cover.
+      * After the player damages the Reaper (or enough time has passed), this phase ends and the game returns to the *Collector Phase*
+        so the player can build a new damage value.
+      * After the Reaper takes enough damage, it is destroyed and the game progresses to the final phase.
+  * **the End Run / Escape**
+
+In short, the Suicide Mission is an inordinately complex series of play modes and helper modes. The modes above are all handled by way
+of these helper modes:
+
+  * **[Suicide Base Mode](suicide_base/config/suicide_base.yaml)**
+    * This mode is the heart of the Suicide Mission, and it runs whenever the mission is in play. It's responsible for knowing which
+      modes to start, how to transition between them, how to delay ball_eject events during specialist selection and forced drains,
+      and how to handle the success or failure of the various phases.
+    * This mode includes [custom mode code](suicide_base/code/suicide_base.py) specifically for killing squadmates. Different scenarios
+      determine which squadmates can (or cannot) be killed at a given time; this custom code is able to randomly (or explicitly) choose
+      one and handle the appropriate events/variables. It also checks whether the Suicide Mission can still be completed based on the
+      squad composition, and ends the Suicide Mission if there are not enough (or properly-talented) squadmates to proceed.
+  * **[Suicide Huddle Mode](suicide_huddle/config/suicide_huddle.yaml)**
+    * This mode is the transition between phases, and is used to play shows and delay ball eject/drain/save events until after the
+      shows are completed. This mode is also a Carousel mode for selecting a specialist.
+    * This mode includes [custom mode code](suicide_huddle/code/suicide_huddle.py) for handling the specialist selection, which
+      must display a list of squadmates based on whether a mate is recruited, still alive, and has technical or biotic skills.
+  * **[Suicide Restart](suicide_restart/config/suicide_restart.yaml)**
+    * This mode is used when the timer during _Infiltration_ or _the Long Walk_ expires and a squadmate is killed. Unlike ball-drain-kills,
+      which automatically show the specialist selection screen on the next ball, timer-expiration-kills require the player to
+      hit the ball lock to start the mode again.
 
 ### Side Missions
 Side missions provide additional gameplay during the course of collecting
