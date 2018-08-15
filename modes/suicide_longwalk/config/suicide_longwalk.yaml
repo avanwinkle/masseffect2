@@ -250,6 +250,7 @@ sound_player:
       start_at: 18s
     specialist_lw_warning_med:
       action: play
+      mode_end_action: stop
   player_tension{value==2}:
     longwalk_med:
       action: stop

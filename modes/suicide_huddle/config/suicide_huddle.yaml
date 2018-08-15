@@ -28,9 +28,15 @@ event_player:
   # If we are repeating a specialist-requiring mode, skip the ditty and go straight to the selection
   mode_suicide_huddle_started.2{current_player.suicide_continuing==0}:
     # If the mode requires a specialist, show the slide
-    - show_huddle_slide{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}|1s
+    - show_huddle_slide{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}
     # If we are repeating a mode without specialist, skip the ditty and start it
     - play_huddle_outro_show{current_player.suicide_continuing==0 and device.achievements.longwalk.state=="completed"}|1s
+  # Preload sounds
+  mode_suicide_huddle_started.3:
+    - preload_infiltration{device.achievements.infiltration.state=="selected"}
+    - preload_longwalk{device.achievements.longwalk.state=="selected"}
+    - preload_tubes{device.achievements.tubes.state=="selected"}
+    - preload_final{device.achievements.humanreaper.state=="selected"}
 
 random_event_player:
   ### MOCKUP: Shows don't pass events_when_played, so we have to create different shows for each path
@@ -160,7 +166,7 @@ shows:
 
 sound_player:
   # Sounds in shows don't playback after loading, so pre-load them!
-  mode_suicide_huddle_started:
+  preload_infiltration:
     infiltration_low:
       action: load
       track: music
@@ -170,6 +176,7 @@ sound_player:
     specialist_inf_outro:
       action: load
       track: voice
+  preload_longwalk:
     longwalk_low:
       action: load
       track: music
@@ -182,15 +189,17 @@ sound_player:
     specialist_lw_outro:
       action: load
       track: voice
+  preload_tubes:
     platforms_low:
-      action: load
-      track: music
-    platforms_med_high:
       action: load
       track: music
     shep_we_win_or_lose_it_all:
       action: load
       track: voice
+  preload_finale:
+    platforms_med_high:
+      action: load
+      track: music
     shep_give_us_a_minute_edi:
       action: load
       track: voice

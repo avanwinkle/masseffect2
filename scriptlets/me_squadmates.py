@@ -65,7 +65,7 @@ class SquadmateStatusClass():
     return self._get_available_mates(player, status=3)
 
   def dead_mates(self, player):
-    return self._get_avaliable_mates(player, status=-1)
+    return self._get_available_mates(player, status=-1)
 
 SquadmateStatus = SquadmateStatusClass()
 

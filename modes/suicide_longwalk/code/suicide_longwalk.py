@@ -46,7 +46,7 @@ class LongWalk(Mode):
       self.info_log(" - No bonus shot on first/last swarmpath")
       return
 
-    # If the num of available biotics warrants it, 50% chance of another shot lighting
+    # If the num of available biotics warrants it, XX% chance of another shot lighting
     if shots_hit + 1 <= biotic_count and random.random() < RANDOMCHANCE:
       # 50% chance it lights to the left, 50% to the right
       adj = random.choice([-1, 1])

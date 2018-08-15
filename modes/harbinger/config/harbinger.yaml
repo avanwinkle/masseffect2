@@ -19,10 +19,13 @@
 mode:
   start_events: start_mode_harbinger
   stop_events: stop_mode_harbinger, ball_will_end
+  events_when_stopped: disable_harbinger
   priority: 600
 
 event_player:
   harbinger_shot_hot_hit: harbinger_shot_runout|30s
+  # Between Harbingers is 30s, but from the first enabling let's go faster
+  enable_harbinger: start_initial_harbinger|19s
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
@@ -38,10 +41,12 @@ timers:
         action: restart
       - event: disable_harbinger
         action: stop
+      - event: start_initial_harbinger
+        action: restart
   # This timer runs while Harbinger is DISABLED and the shot is OFF
   # When it completes, the shot will be enabled again
   harbinger_disabled_timer:
-    start_value: 30
+    start_value: 27
     end_value: 0
     tick_interval: 1s
     direction: down
@@ -51,8 +56,6 @@ timers:
         action: restart
       - event: disable_harbinger
         action: stop
-      - event: enable_harbinger
-        action: restart
 
 variable_player:
   mode_harbinger_started:
@@ -86,10 +89,10 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: lit
-        show: flash
+        show: harbinger_lit_show
         speed: 2
       - name: hot
-        show: flash
+        show: harbinger_lit_show
         speed: 8
       - name: enabled
         show: on
@@ -99,20 +102,26 @@ shots:
     switch: s_battering_ram
     profile: harbinger_profile
     enable_events:
-      - timer_harbinger_disabled_timer_complete
+      - timer_harbinger_enabled_timer_started
     disable_events:
       - timer_harbinger_enabled_timer_complete
+      - timer_harbinger_enabled_timer_stopped
+      - disable_harbinger
     reset_events: player_shot_harbinger_shot_enabled
-    show_tokens:
-      leds: l_battering_ram_bot
+
+shows:
+  harbinger_lit_show:
+    - duration: 1s
+      lights:
+        l_battering_ram_arrow:
+          color: FFFFFF
+        l_battering_ram_bot:
+          color: FFFFFF
+    - duration: 1s
+      lights:
+        l_battering_ram_bot: off
 
 light_player:
-  timer_harbinger_enabled_timer_started:
-    l_battering_ram_arrow:
-      color: on
-  timer_harbinger_enabled_timer_stopped:
-    l_battering_ram_arrow:
-      color: off
   player_harbinger_multiplier.1{value>=2}:
     l_2x_multiplier: on
   player_harbinger_multiplier.2{value>=3}:
@@ -135,7 +144,6 @@ sound_pools:
   harbinger_enabledsound:
     type: random_force_all
     track: voice
-    max_queue_time: 3s
     sounds: harbinger_enabledsound_1, harbinger_enabledsound_2, harbinger_enabledsound_3, harbinger_enabledsound_4, harbinger_enabledsound_5, harbinger_enabledsound_6, harbinger_enabledsound_7, harbinger_enabledsound_8, harbinger_enabledsound_9
   harbinger_hitsound:
     type: random_force_all

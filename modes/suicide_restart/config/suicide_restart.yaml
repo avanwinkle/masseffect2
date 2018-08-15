@@ -1,7 +1,7 @@
 #config_version=5
 mode:
   start_events: start_mode_suicide_restart
-  stop_events: stop_mode_suicide_restart, start_mode_suicide_huddle
+  stop_events: stop_mode_suicide_restart, start_mode_suicide_huddle, suicidemission_drained
   priority: 2600
 
 event_player:
@@ -24,4 +24,6 @@ show_player:
       action: stop
 
 sound_player:
-  play_suicide_music_base: suicide_music_base
+  play_suicide_music_base:
+    suicide_music_base:
+      mode_end_action: stop

@@ -1,12 +1,27 @@
 #config_version=5
 sound_pools:
 
+### OMEGA 4 RELAY
+  # Dogfight callouts
+    omega_callout_sequence:
+      type: sequence
+      track: voice
+      sounds:
+        - joker_taking_evasive_maneuvers
+        - joker_come_on_come_on
+        - edi_kinetic_barriers_at_forty_percent
+        - joker_everybody_hold_on
+        - joker_how_do_you_like_that
+        - shepard_get_in_close_finish_them_off
+        - joker_mass_effect_generators_offline
+
 ### INFILTRATION
   # Huddle
     # Huddle Intro
     specialist_inf_intro:
       track: voice
       type: random
+      load: suicide_huddle_start
       sounds:
         - shepard_some_could_sneak_in_this_shaft
         - jacob_who_do_we_send_into_the_shaft{current_player.status_jacob==4}
@@ -35,6 +50,7 @@ sound_pools:
     # Infiltration starting (huddle outro)
     specialist_inf_outro:
       track: voice
+      load: suicide_huddle_start
       sounds:
         - specialist_inf_outro_garrus{current_player.specialist=="garrus"}
         - specialist_inf_outro_jacob{current_player.specialist=="jacob"}
@@ -58,7 +74,6 @@ sound_pools:
     # One shot remaining
     specialist_inf_close:
       track: voice
-      type: random_force_all
       sounds:
         - specialist_garrus_moving_on_near_the_end{current_player.specialist=="garrus"}
         - specialist_garrus_one_more_valve_to_go{current_player.specialist=="garrus"}

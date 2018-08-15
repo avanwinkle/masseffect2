@@ -188,7 +188,20 @@ widget_player:
       slide: reaper_slide
 
 sound_player:
-  timer_reaper_charging_complete: take_cover
+  timer_reaper_charging_complete:
+    take_cover:
+      action: play
+    reaper_cannon_crackling:
+      fade_in: 4s
+    reaper_cannon_hum:
+      fade_in: 2s
+  timer_reaper_firing_complete:
+    reaper_cannon_crackling:
+      action: stop
+    reaper_cannon_hum:
+      action: stop
+    reaper_cannon_bwomp_1:
+      action: play
 
 show_player:
   timer_reaper_firing_complete:

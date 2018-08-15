@@ -23,11 +23,17 @@ mode:
   priority: 2300
 
 event_player:
-  player_tension{value==1}:
+  # Enumerate the tension values so MC players don't get duplicate events
+  player_tension:
+    - set_tension_0{value==0 and change<0}
+    - set_tension_1{value==1}
+    - set_tension_2{value==2}
+  set_tension_1:
     - increase_infiltration
+    # These two have to be split here because sound_player can't parse the condition
     - play_specialist_inf_warning_first{device.counters.valves.value==5}
     - play_specialist_inf_warning_med{device.counters.valves.value<5}
-  player_tension{value==2}: increase_infiltration
+  set_tension_2: increase_infiltration
   valveshots_hit: reset_tension
   timer_infiltration_complete:
     kill_squadmate:
@@ -186,13 +192,28 @@ shows:
         (leds): off
 
 sound_player:
-  player_tension{value==1}:
+  # Only need to reset tension if we were above zero and dropped back down
+  set_tension_0:
+    infiltration_low:
+      action: play
+      start_at: 21s
+    specialist_inf_warning_first:
+      action: stop
+      fade_out: 100ms
+    specialist_inf_warning_med:
+      action: stop
+      fade_out: 100ms
+    specialist_inf_warning_high:
+      action: stop
+      fade_out: 100ms
+  set_tension_1:
     infiltration_low:
       action: stop
     infiltration_med:
       action: play
       start_at: 37s
-  player_tension{value==2}:
+      mode_end_action: stop
+  set_tension_2:
     infiltration_med:
       action: stop
     infiltration_high:
@@ -200,6 +221,7 @@ sound_player:
       start_at: 34s
     specialist_inf_warning_high:
       action: play
+      mode_end_action: stop
   play_specialist_inf_warning_first:
     specialist_inf_warning_first:
       mode_end_action: stop
@@ -214,26 +236,4 @@ sound_player:
     specialist_inf_close:
       events_when_stopped: advance_complete
       mode_end_action: stop
-  # If we were already low-tension, no need to restart the music
-  player_tension{value==0 and change<0}:
-    infiltration_low:
-      action: play
-      start_at: 21s
-    infiltration_med:
-      action: stop
-    infiltration_high:
-      action: stop
-    specialist_inf_warning_first:
-      action: stop
-      fade_out: 100ms
-    specialist_inf_warning_med:
-      action: stop
-      fade_out: 100ms
-    specialist_inf_warning_high:
-      action: stop
-      fade_out: 100ms
-  # Infiltration_low is started by huddle, it's technically possible to get through
-  # without a change so make sure we stop the track when this mode finishes
-  mode_suicide_infiltration_will_stop:
-    infiltration_low:
-      action: stop
+

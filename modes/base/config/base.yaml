@@ -73,7 +73,9 @@ achievements:
       - achievement_normandyattack_state_completed
       - reenable_suicidemission # After at least one tech and biotic are in the squad
     start_events: missionselect_suicide_selected
-    disable_events: suicidemission_failed
+    # We "stop" on failure so we know to show the player they failed. That event triggers the disabling
+    stop_events: suicidemission_failed
+    disable_events: reset_from_suicide
     complete_events: suicidemission_complete
     restart_on_next_ball_when_started: true
   # New approach: never "start" a suicide phase achievement, just "select"
@@ -196,7 +198,7 @@ ball_saves:
       - ball_will_end
       - ball_save_recruitsave_enabled # Only allow one active save at a time
       - start_mode_normandyattack # We want the ball to drain when the attack starts
-      - missionselect_suicide_selected # Suicide mission plays by its own rules
+      - start_mode_suicide_base # Suicide mission plays by its own rules
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

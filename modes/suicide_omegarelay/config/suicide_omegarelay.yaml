@@ -19,8 +19,10 @@ mode:
   priority: 2300
 
 event_player:
-  # The mode ends if all the balls drain
-  ball_save_omegarelay_save_saving_ball: omegarelay_complete
+  # Near the end of the timer, shoutout
+  timer_omegarelay_tick{ticks==5}: play_generators_offline
+  # The mode ends if all the balls drain. Wait a second for joker's sound to finish
+  ball_save_omegarelay_save_saving_ball: omegarelay_complete|1s
   # The mode ends if all the shots are hit
   omegarelay_shots_hit_complete: force_omega_end
   # The mode ends if the timer runs out
@@ -119,36 +121,22 @@ shots:
 
 sound_player:
   mode_suicide_omegarelay_started:
-    omegarelay_gunsuccess:
+    omegarelay_music:
       start_at: 4s
       fade_in: 1s
-  # timer_omegarelay_tick{ticks==5}: joker_mass_effect_generators_offline
-  force_omega_end: joker_everybody_hold_on
-
-sounds:
-  omegarelay_gunsuccess:
-    file: mus_endgm1_gunsuccess.ogg
-    track: music
-    volume: 1
-    mode_end_action: stop
-  joker_mass_effect_generators_offline:
-    file: en_us_hench_joker_endgm1_crash_landing_c_00311398_m.ogg
-    track: voice
-  joker_taking_evasive_manuevers:
-    file: en_us_hench_joker_endgm1_dogfight_c_00278990_m.ogg
-    track: voice
-  joker_sitting_ducks_out_here:
-    file: en_us_hench_joker_endgm1_enter_debris_field_a_00279538_m.ogg
-    track: voice
-  joker_how_do_you_like_that:
-    file: en_us_hench_joker_endgm1_warship_c_00279811_m.ogg
-    track: voice
-  joker_everybody_hold_on:
-    file: en_us_hench_joker_endgm1_warship_c_00279812_m.ogg
-    track: voice
-  shepard_get_in_close_finish_them_off:
-    file: en_us_player_f_endgm1_warship_c_00279857_f.ogg
-    track: voice
+      fade_out: 2s
+      volume: 0.8
+    joker_i_have_to_try_and_lose_them:
+      action: play
+      events_when_stopped: start_omegarelay_timer
+  # We have a shot sequence to play the right sound per hit
+  omegarelay_shots_lit_hit:
+    omega_callout_sequence:
+      max_queue_time: 1s
+  # An early save means an outlane drain, so time for joker to say something
+  ball_save_omegarelay_save_saving_ball{early_save}: joker_ah_shit
+  # A force end means flippers disable, so play a crash sound while we wait for the ball to drain
+  force_omega_end: normandy_crash
 
 timers:
   omegarelay:
@@ -156,8 +144,9 @@ timers:
     end_value: 0
     direction: down
     tick_interval: 1s
-    start_running: true
     control_events:
+      - event: start_omegarelay_timer
+        action: start
       - event: omegarelay_shots_hit_complete
         action: stop
       - event: force_omega_end

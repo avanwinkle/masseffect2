@@ -23,12 +23,14 @@ config:
 
 event_player:
   mode_suicide_base_started.1:
-    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state=="selected"}
+    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
     # Everything between omegarelay and endrun starts with the huddle
     - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.endrun.state=="selected"}
   # If another mode ends, clear its environment
-  mode_type_suicide_stopped: set_environment
+  mode_type_suicide_stopped:
+    - set_environment
+    - disable_harbinger
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
     - start_mode_suicide_infiltration{device.achievements.infiltration.state=="selected"}
@@ -54,9 +56,13 @@ event_player:
   # If a squadmate is killed but we didn't drain, go to the "restart" mode
   squadmate_killed{not ball_is_ending and device.achievements.longwalk.state!="completed"}: start_mode_suicide_restart
   # Slide player doesn't like events, so conditionally restore the main slide
-  mode_suicide_base_will_stop:
+  suicidemission_failed:
     - restore_multiplayer_slide{game.num_players>1}
     - restore_singleplayer_slide{game.num_players==1}
+
+# Always force the ball to eject the plunger lane, ha ha!
+coil_player:
+  balldevice_bd_plunger_ball_eject_attempt{mechanical_eject==True}: c_plunger
 
 queue_relay_player:
   # If we're starting a new ball and need to huddle, delay the ball eject
@@ -75,6 +81,7 @@ ball_saves:
     enable_events: multiball_omegarelay_ended
     only_last_ball: true
     delayed_eject_events: mode_suicide_infiltration_started
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     auto_launch: true # Must be true because we have a multiball starting too
 
 ball_holds:

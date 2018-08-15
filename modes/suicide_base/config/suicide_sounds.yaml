@@ -21,6 +21,21 @@ sound_player:
       shep_everyone_through_the_doors:
         action: play
         # events_when_stopped: start_mode_suicide_huddle
+    # Can't figure out why modes can't stop sounds, but here's for safety
+    mode_suicide_infiltration_stopped:
+      infiltration_low:
+        action: stop
+      infiltration_med:
+        action: stop
+      infiltration_hight:
+        action: stop
+    mode_suicide_longwalk_stopped:
+      longwalk_low:
+        action: stop
+      longwalk_med:
+        action: stop
+      longwalk_hight:
+        action: stop
 
 sounds:
 
@@ -31,6 +46,12 @@ sounds:
       track: music
       fade_in: 2s
       fade_out: 1s
+  # Omega 4 Relay
+    omegarelay_music:
+      file: mus_endgm1_gunsuccess.ogg
+      track: music
+      volume: 1
+      mode_end_action: stop
   # Infiltration
     infiltration_low:
       file: mus_endgm2_tension_1.ogg
@@ -222,6 +243,48 @@ sounds:
     squadmate_thane_killed_callback_shepard:
       file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
       track: voice
+
+### OMEGA 4 RELAY
+  # Intro
+    shepard_collectors_about_to_find_out_what_happens:
+      file: en_us_player_f_endgm1_relay_confirm_d_00278792_f.ogg
+      track: voice
+    joker_i_have_to_try_and_lose_them:
+      file: en_us_hench_joker_endgm1_enter_debris_field_a_00279538_m.ogg
+      track: voice
+  # Joker callouts during dogfight
+    joker_taking_evasive_maneuvers: #1
+      file: en_us_hench_joker_endgm1_dogfight_c_00278990_m.ogg
+      track: voice
+    joker_come_on_come_on: #2
+      file: en_us_hench_joker_endgm1_jump_drive_c_00311341_m.ogg
+      track: voice
+    edi_kinetic_barriers_at_forty_percent: #3
+      file: en_us_hench_ai_endgm1_debris_field_c_00311434_m.ogg
+      track: voice
+      volume: 0.9
+    joker_everybody_hold_on: #4
+      file: en_us_hench_joker_endgm1_warship_c_00279812_m.ogg
+      track: voice
+    joker_how_do_you_like_that: #5
+      file: en_us_hench_joker_endgm1_warship_c_00279811_m.ogg
+      track: voice
+    shepard_get_in_close_finish_them_off: #6
+      file: en_us_player_f_endgm1_warship_c_00279857_f.ogg
+      track: voice
+    joker_mass_effect_generators_offline: #7
+      file: en_us_hench_joker_endgm1_crash_landing_c_00311398_m.ogg
+      track: voice
+  # Outro crash
+    joker_rerouting:
+      file: en_us_hench_joker_endgm1_jump_drive_c_00311340_m.ogg
+      track: voice
+    joker_ah_shit:
+      file: en_us_hench_joker_endgm1_arrival_c_00311317_m.ogg
+      track: voice
+    normandy_crash:
+      file: cineanim_endgm1_100_crash_part2.ogg
+      track: sfx
 
 ### INFILTRATION
   # Specialist Callouts
@@ -1058,6 +1121,32 @@ sounds:
       # "Your minions have failed, Shepard"
       file: en_us_global_collector_general_ss_collector_general_00332629_m.ogg
       track: voice
+  # Misc reaper noises
+    reaper_explosion_short:
+      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_1.ogg
+      track: sfx
+    reaper_explosion_long:
+      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_2.ogg
+      track: sfx
+    reaper_cannon_crackling:
+      file: BioD_Gth002_320ReaperDeath.11.ogg
+      track: sfx
+    # Just two buzzes, there are a bunch more in this folder
+    reaper_cannon_buzz_1:
+      file: BioD_Gth002_310OnFoot_LOC_INT.41.ogg
+      track: sfx
+    reaper_cannon_buzz_2:
+      file: BioD_Gth002_310OnFoot_LOC_INT.42.ogg
+      track: sfx
+    reaper_cannon_bwomp_1:
+      file: BioD_Gth002_310OnFoot_LOC_INT.47.ogg
+      track: sfx
+    reaper_cannon_bwomp_2:
+      file: BioD_Gth002_310OnFoot_LOC_INT.48.ogg
+      track: sfx
+    reaper_cannon_hum:
+      file: BioD_Gth002_310OnFoot_LOC_INT.51.ogg
+      track: sfx
 
 ### HUDDLES
   # Infiltration: Huddle Intro

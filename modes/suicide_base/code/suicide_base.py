@@ -37,8 +37,8 @@ class SuicideBase(Mode):
       self.info_log("No squadmates available to be specialists. Suicide Mission has failed.")
       # Base will already be done if the ball is ending, set the state manually
       if ball_is_ending:
-        self.player.achievements["suicidemission"] = "disabled"
-        self.info_log(" - achievement suicidemisson has been manually disabled")
+        self.player.achievements["suicidemission"] = "stopped"
+        self.info_log(" - achievement suicidemisson has been manually stopped and available_missions subtracted")
         self._handle_failure()
       else:
         self.machine.events.post("suicidemission_failed")
@@ -79,6 +79,8 @@ class SuicideBase(Mode):
         self.player["squadmates_count"] += 1
       else:
         self._set_status(mate, 0)
+    # Subtract the Suicide Mission from the available missions
+    self.player["available_missions"] = self.player["available_missions"] - 1
 
   def _play_sound(self, sound_event):
     self.machine.events.post("play_squadmate_sound", **sound_event)
