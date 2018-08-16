@@ -63,6 +63,7 @@ variable_player:
     temp_build_value:
       action: set
       int: 0
+  # Player var 'sbchase_hits_remaning' has a default value of 5
   # If the mode fails, back up one shot
   mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5}:
     sbchase_hits_remaining: 1
@@ -70,17 +71,20 @@ variable_player:
     sbchase_hits_remaining: -1
     temp_multiplier:
       float: 0.2
+    # We add 10 seconds to the timer, so we need to add 10s' worth of hurryup
+    temp_hurryup_value: 300
     temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier
   player_temp_build_value{value>0 and prev_value>0}:
     score: prev_value
   timer_sbchase_timer_tick:
-    temp_hurryup_value: -50
+    temp_hurryup_value: -30
 
 shot_groups:
   sbchase_shots:
     shots: sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_left_ramp, sbchase_kickback
     rotate_right_events: sbchase_shots_lit_hit
-    rotate_left_events: mode_shadowbroker_chase_will_stop
+    # If any progress has been made, step back one shot for the next time
+    rotate_left_events: mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5}
 
 shot_profiles:
   chaseprofile:
@@ -170,7 +174,8 @@ slides:
         text: CHASE VASIR
         style: quadrit_big
         animations:
-          show_slide: pulse text
+          show_slide: pulse_text
+        z: 2
       - type: text
         text: "Shots: (player|sbchase_hits_remaining)"
         style: dmd_small
@@ -178,6 +183,7 @@ slides:
         anchor_y: bottom
         x: right-2
         y: 2
+        z: 2
       - type: text
         text: (player|temp_build_value)
         style: dmd_small
@@ -185,6 +191,12 @@ slides:
         anchor_y: bottom
         x: 2
         y: 2
+        z: 2
+      - type: rectangle
+        height: 32
+        width: 128
+        color: 000000
+        z: 0
 
 sound_player:
   mode_shadowbroker_chase_started:

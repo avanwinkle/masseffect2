@@ -105,8 +105,7 @@ shot_profiles:
 shots:
   valve_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: mode_suicide_infiltration_started
-    reset_events: mode_suicide_infiltration_will_stop
+    restart_events: mode_suicide_infiltration_started
     disable_events: valve_right_ramp_hit
     advance_events: increase_infiltration
     profile: valve_profile

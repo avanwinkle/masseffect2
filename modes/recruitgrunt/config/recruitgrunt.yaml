@@ -24,19 +24,15 @@ event_player:
     set_environment:
       env: krogan
   recruittimer_start: recruittimer_set_twenty
-  logicblock_grunt_shots_counter_hit: recruittimer_add_twelve
-  grunt_shots_complete: recruit_grunt_complete
+  # Add time for each successful shot, but jump directly to 12 instead of adding 12
+  logicblock_grunt_shots_counter_hit{device.timers.recruittimer.ticks<=12}: recruittimer_set_twelve
+  logicblock_grunt_shots_counter_complete: recruit_grunt_complete
 
 counters:
   grunt_shots_counter:
     starting_count: 0
     count_complete_value: 5
-    count_events:
-      - grunt_right_orbit_lit_hit
-      - grunt_right_ramp_lit_hit
-      - grunt_left_orbit_lit_hit
-      - grunt_left_ramp_lit_hit
-      - grunt_kickback_lit_hit
+    count_events: grunt_shots_lit_hit
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
@@ -74,7 +70,6 @@ variable_player:
     temp_hurryup_value:
       action: add
       int: 8000 * (1 + (current_player.temp_multiplier * 0.5))
-
 
 shot_groups:
   grunt_shots:

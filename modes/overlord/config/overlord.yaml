@@ -246,9 +246,7 @@ shows:
         l_hitbank_bot: off
 
 slide_player:
-  mode_overlord_started:
-    overlord_slide:
-      action: play
+  mode_overlord_started: overlord_slide
 
 slides:
   overlord_slide:
@@ -397,7 +395,7 @@ widgets:
       anchor_x: left
       anchor_y: bottom
       y: 2
-      x: 48
+      x: 78 # 48 was way too left
       z: 4
   jackpot_widget:
     - type: text
