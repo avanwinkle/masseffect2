@@ -9,8 +9,8 @@ shots:
   # This shot lights when medigel is available
   medigel_shot:
     hit_events:
-      - s_outlane_left_hit{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
-      - s_outlane_right_hit{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
+      - s_outlane_left_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
+      - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
     profile: medigel_profile
     enable_events: levelup, enable_medigel
     # Disable medigel during Normandy attack because it has many saves. Completing

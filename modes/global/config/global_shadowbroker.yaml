@@ -13,6 +13,10 @@ mode:
   events_when_started: enable_sbdrops_counter
   events_when_stopped: disable_sbdrops_counter
 
+event_player:
+  mode_global_started:
+    - manual_sbdrops_counter_advance{device.counters.sbdrops_counter.value==3 and device.achievements.vasir.state=="completed"}
+
 variable_player:
   drop_target_bank_dropbank_down:
     intel: 1
@@ -86,16 +90,16 @@ sound_player:
   logicblock_sbdrops_counter_hit{count==3}:
     vasir_they_took_out_three_floors:
       max_queue_time: 2s
-  achievement_vasir_state_completed:
+  logicblock_sbdrops_counter_hit{count==4}:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==4}:
+  logicblock_sbdrops_counter_hit{count==5}:
     liara_sukets_datapad_this_has_what_we_need:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==5}:
+  logicblock_sbdrops_counter_hit{count==6}:
     liara_we_can_be_at_base_in_a_few_hours:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==6}:
+  logicblock_sbdrops_counter_hit{count==7}:
     liara_land_outside_and_hunt_for_a_hatch:
       max_queue_time: 2s
   # Relays:

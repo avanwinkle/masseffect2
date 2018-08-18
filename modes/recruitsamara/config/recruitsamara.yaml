@@ -29,9 +29,9 @@ mode:
 
 counters:
   samara_shots_counter:
-    starting_count: 0
-    count_complete_value: 5
-    direction: up
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
     persist_state: true
     count_events: samara_shots_hit
 

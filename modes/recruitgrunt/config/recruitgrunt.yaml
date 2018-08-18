@@ -30,8 +30,9 @@ event_player:
 
 counters:
   grunt_shots_counter:
-    starting_count: 0
-    count_complete_value: 5
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
     count_events: grunt_shots_lit_hit
     disable_on_complete: true
     reset_on_complete: false
@@ -156,9 +157,9 @@ sound_player:
     music_recruit_grunt:
       action: play
       mode_end_action: stop
-  logicblock_grunt_shots_counter_hit{count<3}: grunt_dialogue
-  logicblock_grunt_shots_counter_hit{count==3}: grunt_dialogue_4
-  logicblock_grunt_shots_counter_hit{count==4}: grunt_bossdialogue
+  logicblock_grunt_shots_counter_hit{count>2}: grunt_dialogue
+  logicblock_grunt_shots_counter_hit{count==2}: grunt_dialogue_4
+  logicblock_grunt_shots_counter_hit{count==1}: grunt_bossdialogue
   grunt_shots_complete:
     music_recruit_grunt:
       action: stop

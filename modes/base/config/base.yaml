@@ -213,7 +213,10 @@ extra_balls:
 counters:
   # Vasir and Hagalaz are wizard modes, so global_shadowbroker misses their complete events
   sbdrops_counter:
-    count_events: drop_target_bank_dropbank_down, shadowbroker_vasir_complete, shadowbroker_hagalaz_complete
+    count_events:
+      - drop_target_bank_dropbank_down
+      # Mode global_shadowbroker will advance the counter after vasir
+      - manual_sbdrops_counter_advance
     starting_count: current_player.counter_sbdrops_counter
     count_complete_value: 7
     persist_state: true

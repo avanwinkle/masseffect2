@@ -185,7 +185,7 @@ slides:
         y: 2
         z: 2
       - type: text
-        text: (player|temp_build_value)
+        text: (player|temp_hurryup_value)
         style: dmd_small
         anchor_x: left
         anchor_y: bottom

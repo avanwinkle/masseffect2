@@ -251,6 +251,7 @@ sound_player:
   timer_vasir_timer_complete: vasir_move_sound
   vasir_shot_barrier_hit: vasir_hit_sound
   vasir_shot_armor_hit: vasir_hit_sound
+  vasir_shot_health_hit: vasir_hit_sound
   # Relays
   play_vasir_start_sound: vasir_start_sound
 

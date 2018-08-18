@@ -21,24 +21,27 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruitgarrus_started:
+  mode_recruitgarrus_started.1:
     set_environment:
       env: bloodpack
+  mode_recruitgarrus_started.2:
+    - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>0}
+    - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==0}
   door_closed: recruittimer_add_time
   clear_upstairs_hit_complete: recruit_garrus_complete
 
 counters:
   doors_closed_counter:
-    starting_count: 0
-    count_complete_value: 3
+    starting_count: 3
+    count_complete_value: 0
+    direction: down
     count_events:
       - center_door_lit_hit
       - left_door_lit_hit
       - right_door_lit_hit
     events_when_hit: door_closed
-    direction: up
     disable_on_complete: true
-    reset_events: mode_recruitgarrus_started
+    reset_events: mode_recruitgarrus_started{device.counters.door_closed_counter.value>0}
     reset_on_complete: false
 
 #####
@@ -160,15 +163,19 @@ sound_player:
     music_recruit_garrus:
       action: play
       loops: -1
+  play_garrus_intro_shutters:
     garrus_mission_start:
       action: play
-  door_closed{count==1}:
+  play_garrus_intro_upstairs:
+    garrus_last_shutter:
+      action: play
+  door_closed{count==2}:
     garrus_two_more_shutters:
       max_queue_time: 1s
-  door_closed{count==2}:
+  door_closed{count==1}:
     garrus_one_more_shutter:
       max_queue_time: 1s
-  door_closed{count==3}:
+  door_closed{count==0}:
     garrus_last_shutter:
       max_queue_time: 2s
   clear_upstairs_hit_complete:

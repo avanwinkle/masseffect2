@@ -269,14 +269,17 @@ sound_player:
     archer_need_to_go_to_both:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
   play_overlord_station_sound_2:
     archer_still_need_to_go_to_prometheus:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
   play_overlord_station_sound_3:
     archer_lockdown_cancelled:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
   # Sound player doesn't accept conditions in sound names, so conditional events only
   lockhandler_overlord_ball_will_lock.1{total_balls_locked==1}:
     vulcan_success:
@@ -301,14 +304,17 @@ sound_player:
     arr_ken_keep_shepard_contained:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
   play_arrival_station_sound_2:
     arr_annc_cooling_rod_a_inserted:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
   play_arrival_station_sound_3:
     arr_shep_i_wanna_activate_the_project:
       action: play
       max_queue_time: 1s
+      mode_end_action: stop
 # Sound player doesn't accept conditions in sound names, so conditional events only
   lockhandler_arrival_ball_will_lock.1{total_balls_locked==1}:
     arr_ken_shepards_escaped:

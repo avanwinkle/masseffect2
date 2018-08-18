@@ -62,6 +62,9 @@ multiballs:
     start_events: mode_collectorship_base_started
     start_or_add_a_ball_events: collectorship_add_ball
     shoot_again: 10s
+    # We have to use the ball lock as the device, in case there are balls stacked. They might
+    # accidentally slip out and mess up the playfield count, which causes a premature ball_will_end
+    ball_locks: bd_lock
 
 slide_player:
   mode_collectorship_base_started:

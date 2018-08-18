@@ -29,12 +29,9 @@ config:
 event_player:
   mode_global_started:
     - start_mode_field # Wait for global to start before field
-    - enable_sbdrops_counter
     - enable_lock_lightshot
-    # - enable_kickback # Can't write rules for different nodes?
   mode_global_will_stop:
     - stop_mode_field
-    - disable_sbdrops_counter
     - disable_lock_lightshot
     - stop_missions
   mode_type_mission_started:
@@ -45,12 +42,7 @@ event_player:
     - stop_mode_field
   missionselect_pass_selected:
     - start_mode_field
-#   kickback_override_hit: pulse_kickback
 
 flasher_player:
   s_spinner_active:
     l_flash_left_orbit: 50ms
-
-# shots:
-#   kickback_override:
-#     switch: s_kickback

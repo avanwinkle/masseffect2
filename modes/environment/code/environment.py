@@ -137,6 +137,8 @@ class OutlaneShot(EnvShot):
     return list(filter(lambda x: x.enabled, self.get_targets()))
 
   def get_targets(self):
-    """We actually get ball saves, not mode shots, but same diff"""
     self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
-    return self.machine.device_manager.collections["ball_saves"].values()
+    # Targets include any ball_save being active OR the medigel shot being active
+    outlane_targets = [ self.machine.device_manager.collections["shots"]["medigel_shot"] ]
+    outlane_targets.extend(self.machine.device_manager.collections["ball_saves"].values())
+    return outlane_targets

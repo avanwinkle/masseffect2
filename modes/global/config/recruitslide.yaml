@@ -147,5 +147,5 @@ widgets:
       style: small_bot_right
   shots_remaining_widget:
     - type: text
-      text: (value)
+      text: "Shots: (value)"
       style: small_bot_right_secondrow

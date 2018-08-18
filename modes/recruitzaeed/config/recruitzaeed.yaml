@@ -27,9 +27,9 @@ mode:
 
 counters:
   zaeed_orbits_counter:
-    starting_count: 0 if current_player.zaeed_path_renegade == -1 else 1
-    count_complete_value: 3
-    direction: up
+    starting_count: 3 if current_player.zaeed_path_renegade == -1 else 2
+    count_complete_value: 0
+    direction: down
     disable_on_complete: false
     reset_on_complete: false
     count_events: zaeed_orbitshots_hit
@@ -38,7 +38,7 @@ event_player:
   mode_recruitzaeed_started:
     set_environment:
       env: bluesuns
-  logicblock_zaeed_orbits_counter_hit{count==2}: recruittimer_add_ten
+  logicblock_zaeed_orbits_counter_hit{count==1}: recruittimer_add_ten
   zaeed_kickshot_hit: recruit_zaeed_complete
   player_zaeed_path_renegade{value==0}:
     update_recruitmission:
@@ -69,11 +69,11 @@ variable_player:
       action: set
       float: 1
   # If the right orbit is the first orbit hit, set path to renegade
-  zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
+  zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
     zaeed_path_renegade:
       action: set
       int: 1
-  zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==0}:
+  zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
     zaeed_path_renegade:
       action: set
       int: 0
@@ -183,12 +183,12 @@ sound_player:
       mode_end_action: stop
     zaeed_missionstart:
       action: play
-  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==0}: explosionchoice_1_paragon
-  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==1}: explosionchoice_1_renegade
+  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==0}: explosionchoice_1_paragon
+  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==1}: explosionchoice_1_renegade
   logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==0}: explosionchoice_2_paragon
   logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==1}: explosionchoice_2_renegade
-  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==0}: explosionchoice_3_paragon
-  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==1}: explosionchoice_3_renegade
+  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==0}: explosionchoice_3_paragon
+  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==1}: explosionchoice_3_renegade
 
 sound_pools:
   zaeed_missionstart:

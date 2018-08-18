@@ -12,10 +12,10 @@ mode_settings:
     - event: bonus_minerals
       score: (current_player.planets * current_player.mineral_total) / 5
     - event: bonus_assignments
-      score: 1000
+      score: 600
       player_score_entry: assigments_completed
     - event: bonus_intel
-      score: 800
+      score: 400
       player_score_entry: intel
     - event: bonus_upgrades
       score: 1500
