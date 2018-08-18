@@ -10,7 +10,7 @@
 #
 # After a round, a new random shot is lit (with full shields again) and another
 # round must be completed. Completing three rounds will finish the mode.
-# Currently, progress is saved after each round?
+# Currently, progress is saved after each round? Nope! Gotta restart!
 #
 # TODO: Scoring
 #####
@@ -87,7 +87,7 @@ shot_profiles:
 shot_groups:
   sbboss_shot:
     shots: sbboss_left_orbit, sbboss_right_orbit, sbboss_right_ramp
-    reset_events: shadowbroker_round_start
+    reset_events: mode_shadowbroker_boss_started, shadowbroker_round_start
 
 shots:
   sbboss_left_ramp:
@@ -127,6 +127,8 @@ shots:
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
+  sbboss_attack_shot:
+    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit, sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit, s_battering_ram_active
 
 show_player:
   play_sbboss_round_show_1:
@@ -215,11 +217,46 @@ slides:
     - type: text
       text: SB Boss Round 3
 
-
 sound_player:
   mode_shadowbroker_boss_started:
     shadowbroker_boss_music:
       action: play
+  # Preload the sound assets for the show
+    liara_energy_projectiles_bouncing_off:
+      action: load
+    liara_if_you_can_get_him_to:
+      action: load
+    shepard_then_we_do_this_the_hard_way:
+      action: load
+    shepard_liara_now:
+      action: load
+  sbboss_shot_hit: broker_hit
+  sbboss_attack_shot_hit: broker_attack
+  sbboss_shot_shields_hit: sbboss_shields_down
+  sbboss_shot_armor_hit: sbboss_armor_down
+
+sound_pools:
+  broker_attack:
+    type: random
+    track: sfx
+    sounds: broker_attack_1, broker_attack_2, broker_attack_3, broker_attack_4, broker_attack_5, broker_attack_6
+  broker_hit:
+    type: random
+    track: sfx
+    sounds: broker_hit_1, broker_hit_2, broker_hit_3, broker_hit_4, broker_hit_5, broker_hit_6, broker_hit_7, broker_hit_8
+  sbboss_shields_down:
+    track: voice
+    type: random_force_all
+    sounds:
+      - liara_were_through_his_shields
+      - liara_his_shields_are_down
+      - liara_his_shields_deactivated
+  sbboss_armor_down:
+    track: voice
+    type: random_force_all
+    sounds:
+      - liara_hit_him_now
+      - liara_quick_while_hes_vulnerable
 
 sounds:
   shadowbroker_boss_music:
@@ -272,27 +309,36 @@ sounds:
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.ogg
     track: voice
+    volume: 0.9
   liara_were_through_his_shields:
     file: DLC_EXP_Part01_Int.1013.ogg
     track: voice
+    volume: 0.9
   liara_his_shields_are_down:
     file: DLC_EXP_Part01_Int.1015.ogg
     track: voice
+    volume: 0.9
   liara_hit_him_now:
     file: DLC_EXP_Part01_Int.1014.ogg
     track: voice
+    volume: 0.9
   liara_quick_while_hes_vulnerable:
     file: DLC_EXP_Part01_Int.1012.ogg
     track: voice
+    volume: 0.9
   liara_energy_projectiles_bouncing_off:
     file: DLC_EXP_Part01_Int.1052.ogg
     track: voice
+    volume: 0.9
   liara_if_you_can_get_him_to:
     file: DLC_EXP_Part01_Int.1051.ogg
     track: voice
+    volume: 0.9
   shepard_then_we_do_this_the_hard_way:
     file: DLC_EXP_Part01_Int.1054.ogg
     track: voice
+    volume: 0.9
   shepard_liara_now:
     file: DLC_EXP_Part01_Int.1050.ogg
     track: voice
+    volume: 0.9

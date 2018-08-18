@@ -47,10 +47,10 @@ class SaveCareer(CustomCode):
       # For achievements, prevent "started" values (in case of hard exit)
       if key == "achievements":
         for ach, state in value.items():
-          # Don't allow suicide mission states to save, always revert to disabled
-          if ach in ("omegarelay", "infiltration", "longwalk", "humanreaper", "endrun") and state != "disabled":
-            self.log.warn(" - Suicide Achievement {} in state '{}', changing to 'disabled'".format(ach, state))
-            newcareer[key][ach] = "disabled"
+          # Don't allow suicide mission states to save selected/completed state, always revert to enabled
+          if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and state != "enabled":
+            self.log.warn(" - Suicide Achievement {} in state '{}', changing to 'enabled'".format(ach, state))
+            newcareer[key][ach] = "enabled"
           # Don't save the started-ness of the suicide mission, revert it to enabled
           elif ach == "suicidemission" and state != "disabled":
             newcareer[key][ach] = "enabled"

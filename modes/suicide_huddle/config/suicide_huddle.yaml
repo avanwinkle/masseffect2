@@ -24,13 +24,13 @@ event_player:
   # TODO: One second delay required for loading sound assets in shows. Fix that
   # If this is our first time coming to the mode, play a little ditty
   mode_suicide_huddle_started.1{current_player.suicide_continuing>0}:
-    - play_huddle_intro_show|1s
+    - play_huddle_intro_show|1500ms
   # If we are repeating a specialist-requiring mode, skip the ditty and go straight to the selection
   mode_suicide_huddle_started.2{current_player.suicide_continuing==0}:
     # If the mode requires a specialist, show the slide
     - show_huddle_slide{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}
     # If we are repeating a mode without specialist, skip the ditty and start it
-    - play_huddle_outro_show{current_player.suicide_continuing==0 and device.achievements.longwalk.state=="completed"}|1s
+    - play_huddle_outro_show{device.achievements.longwalk.state=="completed"}|1500ms
   # Preload sounds
   mode_suicide_huddle_started.3:
     - preload_infiltration{device.achievements.infiltration.state=="selected"}

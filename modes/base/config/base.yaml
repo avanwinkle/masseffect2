@@ -221,6 +221,7 @@ counters:
     count_complete_value: 7
     persist_state: true
     disable_on_complete: false
+    reset_on_complete: false
     enable_events:
       # Count is enabled if vasir and hagalaz are not enabled/stopped AND boss is disabled
       - enable_sbdrops_counter{device.achievements.chase.state!="enabled" and device.achievements.chase.state!="stopped" and device.achievements.vasir.state!="enabled" and device.achievements.vasir.state!="stopped" and device.achievements.hagalaz.state!="enabled" and device.achievements.hagalaz.state!="stopped" and device.achievements.shadowbroker.state=="disabled"}
