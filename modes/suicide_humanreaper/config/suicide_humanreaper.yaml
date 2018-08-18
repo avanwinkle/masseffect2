@@ -200,7 +200,7 @@ sound_player:
       action: stop
     reaper_cannon_hum:
       action: stop
-    reaper_cannon_bwomp_1:
+    reaper_cannon_fire:
       action: play
 
 show_player:

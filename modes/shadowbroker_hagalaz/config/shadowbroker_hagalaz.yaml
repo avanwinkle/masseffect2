@@ -30,23 +30,27 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_hagalaz_started:
+  mode_shadowbroker_hagalaz_started.1:
     - enable_random_shuntshot
     - capacitors_charged_ready|10s
+  # Fake the counter event to get the widget onscreen
+  mode_shadowbroker_hagalaz_started.2:
+    logicblock_shunt_counter_updated:
+      value: device.counters.shunt_counter.value
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
   logicblock_shunt_counter_complete: enable_hatch
   shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
   timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
-  # If the only lit shot is hit, immediately light another one
-  player_temp_counter{value==0}: enable_random_shuntshot
+  # If the only lit shot is hit, light another one so we don't idle
+  player_temp_counter{value==0}: enable_random_shuntshot|1s
   # DEBUG until we have an actual hold
   hatch_shot_hit: shadowbroker_hagalaz_complete
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
 
 random_event_player:
-  enable_random_shuntshot:
+  enable_random_shuntshot{device.counters.shunt_counter.value>0}:
     force_all: true
     events:
       - enable_shunt_left_orbit
@@ -57,9 +61,10 @@ random_event_player:
 
 counters:
   shunt_counter:
-    starting_count: 0
-    count_complete_value: 8
-    direction: up
+    starting_count: 4
+    count_complete_value: 0
+    reset_on_complete: False
+    direction: down
     count_events: shunt_shot_lit_hit
     reset_events: mode_shadowbroker_hagalaz_started
 
@@ -69,19 +74,28 @@ variable_player:
     temp_counter:
       action: set
       int: 0
-  enable_random_shuntshot:
+  # Call out each shot being enabled, since the random player may light an already-enabled one
+  player_shot_shunt_left_orbit_enabled{value==True}:
+    temp_counter: 1
+  player_shot_shunt_left_ramp_enabled{value==True}:
+    temp_counter: 1
+  player_shot_shunt_right_orbit_enabled{value==True}:
+    temp_counter: 1
+  player_shot_shunt_right_ramp_enabled{value==True}:
+    temp_counter: 1
+  player_shot_shunt_kickback_enabled{value==True}:
     temp_counter: 1
   shunt_shot_lit_hit:
     temp_counter: -1
 
-
 shot_groups:
   shunt_shot:
     shots: shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
-    disable_events: enable_hatch
+    disable_events: mode_shadowbroker_hagalaz_started, enable_hatch
   capacitor_shot:
     shots: hagalaz_target1, hagalaz_target2, hagalaz_target3, hagalaz_target4, hagalaz_target5
-    reset_events: capacitor_shot_charged_hit
+    # shot_groups don't actually have advance_events, so have to advance each shot individually
+    reset_events: capacitor_shot_charged_hit, mode_shadowbroker_hagalaz_started
     disable_events: enable_hatch
 
 shot_profiles:
@@ -109,7 +123,7 @@ shots:
   shunt_left_orbit:
     hit_events: sh_left_orbit_hit, hagalaz_target1_charged_hit
     enable_events: enable_shunt_left_orbit
-    disable_events: shunt_left_orbit_hit, enable_hatch
+    disable_events: shunt_left_orbit_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_left_orbit_shield_rgb
@@ -117,7 +131,7 @@ shots:
   shunt_kickback:
     hit_events: sh_kickback_hit, hagalaz_target1_charged_hit, hagalaz_target2_charged_hit
     enable_events: enable_shunt_kickback
-    disable_events: shunt_kickback_hit, enable_hatch
+    disable_events: shunt_kickback_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_kickback_shield_rgb
@@ -125,7 +139,7 @@ shots:
   shunt_left_ramp:
     hit_events: sh_left_ramp_hit, hagalaz_target2_charged_hit, hagalaz_target3_charged_hit
     enable_events: enable_shunt_left_ramp
-    disable_events: shunt_left_ramp_hit, enable_hatch
+    disable_events: shunt_left_ramp_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
@@ -133,7 +147,7 @@ shots:
   shunt_right_ramp:
     hit_events: sh_right_ramp_hit, hagalaz_target4_charged_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_ramp
-    disable_events: shunt_right_ramp_hit, enable_hatch
+    disable_events: shunt_right_ramp_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_right_ramp_shield_rgb
@@ -141,7 +155,7 @@ shots:
   shunt_right_orbit:
     hit_events: sh_right_orbit_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_orbit
-    disable_events: shunt_right_orbit_hit, enable_hatch
+    disable_events: shunt_right_orbit_hit
     profile: color_flashing_static
     show_tokens:
       leds: l_right_orbit_shield_rgb
@@ -184,7 +198,7 @@ show_player:
       loops: 2
   capacitors_charged_ready:
     lightning_show:
-      loops: 0
+      loops: 2
 
 shows:
   hatch_show:
@@ -197,7 +211,9 @@ shows:
   capacitor_charging_show:
     - time: 0
       lights:
-        (leds): 000000
+        (leds):
+          color: 000000
+          fade: 20ms
     - duration: 10s
       lights:
         (leds):
@@ -243,14 +259,20 @@ sound_player:
     shadowbroker_agent_music:
       action: stop
       fade_out: 3s
+    shadowbroker_enter_music:
+      action: play
   # Relays to play a call/response sound
   play_liara_that_security_upgrade: liara_that_security_upgrade
   play_liara_ive_never_broken_into_sb_before: liara_ive_never_broken_into_sb_before
   play_liara_no_time_to_talk: liara_no_time_to_talk
   play_liara_now_therell_be_fewer_inside: liara_now_therell_be_fewer_inside
   play_liara_it_didnt_come_with_a_warranty: liara_it_didnt_come_with_a_warranty
+  play_liara_more_on_the_way: liara_more_on_the_way
   play_shepard_please_dont_give_the_mercs_ideas: shepard_please_dont_give_the_mercs_ideas
   play_shepard_you_had_to_give_them_tactical_advice: shepard_you_had_to_give_them_tactical_advice
+  # Indicate that capacitors do stuff!
+  capacitors_charged_ready: capacitor_charged_sound
+  capacitor_shot_charged_hit: capacitor_explode_sound
 
 sound_pools:
   shunt_progress_sound:
@@ -271,8 +293,43 @@ sound_pools:
     track: voice
     sounds:
       - liara_try_firing_at_capacitors
+  capacitor_charged_sound:
+    track: sfx
+    sounds: capacitor_tech_charge_1, capacitor_tech_charge_2
+  capacitor_explode_sound:
+    track: sfx
+    volume: 1
+    sounds: capacitor_tech_expl_1, capacitor_tech_expl_2
 
 sounds:
+  shadowbroker_enter_music:
+    file: SBK.01.As_They_Enter.ogg
+    track: music
+    fade_out: 1s
+    mode_end_action: stop
+    markers:
+      - time: 67s
+        events: play_sbcross_music
+  shadowbroker_double_cross_music:
+    file: SBK.04.Double_Cross.ogg
+    track: music
+    fade_out: 1s
+    mode_end_action: stop
+    markers:
+      - time: 66s
+        events: play_sbenter_music
+  capacitor_tech_expl_1:
+    file: SFXGame.834.ogg
+    track: sfx
+  capacitor_tech_expl_2:
+    file: SFXGame.835.ogg
+    track: sfx
+  capacitor_tech_charge_1:
+    file: SFXGame.836.ogg
+    track: sfx
+  capacitor_tech_charge_2:
+    file: SFXGame.837.ogg
+    track: sfx
   liara_now_therell_be_fewer_inside:
     file: DLC_EXP_Part01_Int.902.ogg
     track: voice
@@ -348,7 +405,7 @@ sounds:
     file: DLC_EXP_Part01_Int.911.ogg
     track: voice
     max_queue_time: 1s
-    events_when_stopped: play_liara_no_time_to_talk
+    events_when_stopped: play_liara_more_on_the_way
   shepard_you_tested_it_right:
     file: DLC_EXP_Part01_Int.919.ogg
     track: voice
@@ -398,14 +455,14 @@ slides:
     widgets:
       - type: text
         text: ENTER
-        style: quadrit_big
+        style: text_default
         anchor_y: bottom
         y: middle+2
         animations:
           show_slide: pulse_text
       - type: text
         text: THE SHIP
-        style: quadrit_big
+        style: text_default
         anchor_y: top
         y: middle-2
         animations:
@@ -419,25 +476,20 @@ widget_player:
   timer_sbhagalaz_timer_stopped:
     hagalaz_timer_widget:
       action: remove
-  logicblock_shunt_counter_updated:
+  logicblock_shunt_counter_updated{value>0}:
     hagalaz_shunt_widget:
       action: update
       slide: hagalaz_slide
+  logicblock_shunt_counter_complete:
+    hagalaz_shunt_widget:
+      action: remove
 
 widgets:
   hagalaz_timer_widget:
     - type: text
       text: (ticks)
-      style: small
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 2
+      style: small_bot_left
   hagalaz_shunt_widget:
     - type: text
-      text: "Shots: (count)"
-      style: small
-      anchor_x: right
-      anchor_y: bottom
-      x: right-2
-      y: 2
+      text: "Shots: (value)"
+      style: small_bot_right

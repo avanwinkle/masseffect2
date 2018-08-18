@@ -23,7 +23,7 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started: 
+  mode_shadowbroker_boss_started:
     - sbboss_round_show_complete # Mock a complete event to reset the round
     - enable_random_sbboss_shot
   sbboss_shot_armor_hit: enable_sbboss_finalshot
@@ -225,6 +225,7 @@ sounds:
   shadowbroker_boss_music:
     file: SBK.07.Final_Combat.ogg
     track: music
+    mode_end_action: stop
     loops: -1
   broker_attack_1:
     file: DLC_EXP_Part01_Int.1022.ogg

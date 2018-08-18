@@ -31,9 +31,15 @@ variable_player:
   mode_recruitthane_started:
     missionname:
       string: "Assault Dantius Towers"
-  mode_recruitzaeed_started:
+  mode_recruitzaeed_started.1{current_player.zaeed_path_renegade==-1}:
     missionname:
       string: "Storm the Refinery"
+  mode_recruitzaeed_started.2{current_player.zaeed_path_renegade==0}:
+    missionname:
+      string: "Save the Workers"
+  mode_recruitzaeed_started.3{current_player.zaeed_path_renegade==1}:
+    missionname:
+      string: "Stop Vido's Escape"
 
 slide_player:
   recruit_advance:
@@ -114,10 +120,6 @@ widget_player:
       slide: recruitslide
   timer_recruittimer_tick:
     time_remaining_widget:
-      action: update
-      slide: recruitslide
-  update_recruitshots_value:
-    shots_remaining_widget:
       action: update
       slide: recruitslide
 

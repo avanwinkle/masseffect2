@@ -256,7 +256,7 @@ sound_player:
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
   praetorian_attack_one: praet_attack
-  praetorian_attack_two: praet_beam
+  praetorian_attack_two: reaper_cannon_fire # defined in suicide_sounds.yaml
   praetorian_attack_three: shep_hit
 
 sound_pools:
@@ -314,10 +314,6 @@ sounds:
   praet_attack_3:
     track: sfx
     file: sfx_ss_praetorian_ss_praetorian_00306956_m.ogg
-  praet_beam:
-    track: sfx
-    file: SFXGame.538.ogg
-    volume: 1
   praet_intro:
     max_queue_time: 1s
     track: sfx

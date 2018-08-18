@@ -38,14 +38,11 @@ event_player:
   mode_recruitzaeed_started:
     set_environment:
       env: bluesuns
+    # Fake the event update to trigger the widget?
+    logicblock_zaeed_orbits_counter_updated:
+      value: device.counters.zaeed_orbits_counter.value
   logicblock_zaeed_orbits_counter_hit{count==1}: recruittimer_add_ten
   zaeed_kickshot_hit: recruit_zaeed_complete
-  player_zaeed_path_renegade{value==0}:
-    update_recruitmission:
-      missionname: "Save the Workers"
-  player_zaeed_path_renegade{value==1}:
-    update_recruitmission:
-      missionname: "Stop Vido's Escape"
 
 #####
 # ZAEED SCORING
@@ -61,10 +58,10 @@ variable_player:
     # Build value tracks the "base" hurryup depletion
     temp_build_value:
       action: set
-      int: 8000
+      int: 2000
     temp_hurryup_value:
       action: set
-      int: 8000
+      int: 2000
     temp_multiplier:
       action: set
       float: 1
@@ -73,13 +70,17 @@ variable_player:
     zaeed_path_renegade:
       action: set
       int: 1
+    missionname:
+      string: "Stop Vido's Escape"
   zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
     zaeed_path_renegade:
       action: set
       int: 0
+    missionname:
+      string: "Save the Workers"
   timer_recruittimer_tick:
-    temp_hurryup_value: -90
-    temp_build_value:   -90
+    temp_hurryup_value: -30
+    temp_build_value:   -30
   zaeed_orbitshots_hit:
     temp_hurryup_value: current_player.temp_build_value * current_player.temp_multiplier
     temp_multiplier:
@@ -152,7 +153,7 @@ shows:
         l_null: (color)
 
 slide_player:
-  mode_recruitzaeed_started:
+  mode_recruitzaeed_started{current_player.zaeed_path_renegade==-1}:
     zaeed_instructions_slide:
       expire: 3s
 
@@ -403,7 +404,10 @@ sounds:
       release_point: 50ms
 
 widget_player:
-  logicblock_zaeed_orbits_counter_updated:
+  logicblock_zaeed_orbits_counter_updated{value>0}:
     shots_remaining_widget:
       action: update
       slide: recruitslide
+  logicblock_zaeed_orbits_counter_updated{value<=0}:
+    shots_remaining_widget:
+      action: remove

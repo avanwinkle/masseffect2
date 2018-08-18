@@ -1147,6 +1147,10 @@ sounds:
     reaper_cannon_hum:
       file: BioD_Gth002_310OnFoot_LOC_INT.51.ogg
       track: sfx
+    reaper_cannon_fire:
+      file: SFXGame.538.ogg
+      track: sfx
+      volume: 1
 
 ### HUDDLES
   # Infiltration: Huddle Intro

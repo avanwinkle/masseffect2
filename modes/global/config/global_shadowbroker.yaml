@@ -111,10 +111,12 @@ sounds:
   shadowbroker_agent_music:
     file: SBK.03.Agent_Combat.ogg
     track: music
+    fade_out: 1s
     loops: -1
   shadowbroker_vasir_music:
     file: SBK.05.Vasir_Combat.ogg
     track: music
+    fade_out: 1s
     loops: -1
   # Dropbanks for Vasir
   shepard_sounds_like_liara_found_something_big:
