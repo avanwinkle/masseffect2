@@ -25,7 +25,6 @@ config:
   - field_bumpers.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
-  - field_shipupgrades.yaml
   - field_shopping.yaml
 
 sound_player:

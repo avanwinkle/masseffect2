@@ -179,8 +179,11 @@ player_vars:
   missionname:
     initial_value: " "
     value_type: str
-  available_upgrade:
+  available_shipupgrades:
     initial_value: 0
+  available_research:
+    initial_value: " "
+    value_type: str
   credits:
     initial_value: 0
   geth_colossus_state:
@@ -191,6 +194,8 @@ player_vars:
     initial_value: 0
   level:
     initial_value: 1
+  planets:
+    initial_value: 0
   minerals_total:
     initial_value: 0
   mineral_iridium:
@@ -259,7 +264,7 @@ player_vars:
     initial_value: 0
   temp_counter:
     initial_value: 0
-  upgrades_researched:
+  research_completed:
     initial_value: 0
   zaeed_path_renegade:
     initial_value: -1

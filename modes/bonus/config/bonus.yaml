@@ -19,7 +19,7 @@ mode_settings:
       player_score_entry: intel
     - event: bonus_upgrades
       score: 1500
-      player_score_entry: upgrades_researched
+      player_score_entry: research_completed
 
 light_player:
   mode_bonus_started:

@@ -82,20 +82,25 @@ class SaveCareer(CustomCode):
             setattr(player, key, value) # e.g. player.available_missions = 2
           elif key == "achievements":
             for achievement, state in careerdata["achievements"].items():
-              # Overlord doesn't have enable_events so MPF is going to try and always enable it
-              if achievement == "overlord" and state != "enabled":
-                handler = self.machine.events.add_handler(
-                          "achievement_{}_state_enabled".format(achievement),
-                          self._force_achievement,
-                          achievement=achievement,
-                          state=state)
-                self._achievement_handlers[achievement] = handler
+              handler = None
+              # For achievements without "enable_events" set, watch for MPF to auto-enable the event
+              if achievement in ("overlord", "upgrade_armor", "upgrade_cannon", "upgrade_shields"):
+                if state != "enabled":
+                  handler = self.machine.events.add_handler(
+                            "achievement_{}_state_enabled".format(achievement),
+                            self._force_achievement,
+                            achievement=achievement,
+                            state=state)
+              # All other achievements will default to disabled, so watch for that to be set
               elif state != "disabled":
                 handler = self.machine.events.add_handler(
                             "achievement_{}_state_disabled".format(achievement),
                             self._force_achievement,
                             achievement=achievement,
                             state=state)
+
+              # Add a callback to remove the handler after we've set the achievement to the correct state
+              if handler:
                 self._achievement_handlers[achievement] = handler
         self.log.debug("Created achievement handlers: {}".format(self._achievement_handlers))
       f.close()

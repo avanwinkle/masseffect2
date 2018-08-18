@@ -112,23 +112,22 @@ achievements:
     complete_events: endrun_complete
   # SHIP UPGRADES
   upgrade_armor:
-    complete_events: capture_upgrade
-    events_when_started: upgrade_available
-    events_when_completed: upgrade_complete, upgraded_armor
+    complete_events: capture_shipupgrade_shot_hit
+    events_when_completed: shipupgrade_complete, upgraded_armor
+    restart_on_next_ball_when_started: True
   upgrade_shields:
-    complete_events: capture_upgrade
-    events_when_started: upgrade_available
-    events_when_completed: upgrade_complete, upgraded_shields
+    complete_events: capture_shipupgrade_shot_hit
+    events_when_completed: shipupgrade_complete, upgraded_shields
+    restart_on_next_ball_when_started: True
   upgrade_cannon:
-    complete_events: capture_upgrade
-    events_when_started: upgrade_available
-    events_when_completed: upgrade_complete, upgraded_cannon
+    complete_events: capture_shipupgrade_shot_hit
+    events_when_completed: shipupgrade_complete, upgraded_cannon
+    restart_on_next_ball_when_started: True
 
 achievement_groups:
   ship_upgrades_group:
     achievements: upgrade_armor, upgrade_shields, upgrade_cannon
-    start_selected_events: player_level{value%3==0}
-    auto_select: true
+    select_random_achievement_events: shipupgrade_available
     events_when_all_completed: all_upgrades_complete
 
 event_player:
@@ -160,8 +159,10 @@ event_player:
   # reaper _before_ collectorship. Since collectorship requires 4 recruits and
   # derelict reaper requires 7 levelups, only three levelups should be allowed
   # before collectorship: Overlord, Shadowbroker Vasir, and Shadowbroker Boss
-  player_level{value==8}:
-    - enable_derelictreaper
+  player_level:
+    - enable_derelictreaper{value==8}
+    # Every three levels warrants a ship upgrade!
+    - shipupgrade_available{value%3==0 and device.achievement_groups.ship_upgrades_group.enabled}
   missionselect_derelictreaper_selected:
     - start_mode_derelictreaper
   missionselect_suicide_selected:
@@ -234,28 +235,20 @@ variable_player:
   player_squadmates_count{change==1}:
     recruited_squadmates_count: 1
   # Use achievements to track available missions
-  # TODO: Use a common wizard-type class to set availability
   achievement_collectorship_state_enabled:
     available_missions: 1
-  mode_collectorship_base_started:
+  achievement_collectorship_state_started:
     available_missions: -1
   achievement_derelictreaper_state_enabled:
     available_missions: 1
-  mode_derelictreaper_started:
+  achievement_derelictreaper_state_started:
     available_missions: -1
   achievement_suicidemission_state_enabled:
     available_missions: 1
   # If a new mission becomes available, remove the player-selected bypass
-  player_available_missions{value>0}:
+  player_available_missions{change>0}:
     bypass_missionselect:
       action: set
-      int: 0
-  # Track whether an upgrade is available to be claimed
-  upgrade_available:
-    available_upgrades: 1
-  upgrade_complete:
-    available_upgrades:
-      action: set   # Set to 0, no way to collect upgrades that were missed
       int: 0
 
 shots:

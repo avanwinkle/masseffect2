@@ -7,49 +7,55 @@
 # is completed. Hitting the shot awards big points! That's about all there is
 # to it.
 #####
+event_player:
+  collect_research_shot_hit: research_completed
+  capture_shipupgrade_shot_hit: shipupgrade_completed
 
 variable_player:
-  collect_upgrade_shot_hit:
-    upgrades_researched: 1
-    score: 4000 * (1 + 0.25 * current_player.upgrades_researched)
+  research_completed:
+    research_completed: 1
+    score: 4000 * (1 + 0.25 * current_player.research_completed)
+    available_research:
+      action: set
+      string: " "
   recruit_success_garrus:
-    available_upgrade:
+    available_research:
       action: set
       string: "Omni-Tool Damage"
   recruit_success_grunt:
-    available_upgrade:
+    available_research:
       action: set
       string: "Shotgun Damage"
   recruit_success_jack:
-    available_upgrade:
+    available_research:
       action: set
       string: "Bio-Amp Interface"
   recruit_success_kasumi:
-    available_upgrade:
+    available_research:
       action: set
       string: "M22 Locust SMG"
   recruit_success_legion:
-    available_upgrade:
+    available_research:
       action: set
       string: "M80 Widow Rifle"
   recruit_success_mordin:
-    available_upgrade:
+    available_research:
       action: set
       string: "M16 Carnifax Pistol"
   recruit_success_samara:
-    available_upgrade:
+    available_research:
       action: set
       string: "Assault Rifle Damage"
   recruit_success_tali:
-    available_upgrade:
+    available_research:
       action: set
       string: "Geth Plasma Shotgun"
   recruit_success_thane:
-    available_upgrade:
+    available_research:
       action: set
       string: "M17 Viper Rifle"
   recruit_success_zaeed:
-    available_upgrade:
+    available_research:
       action: set
       string: "Heavy Weapon Ammo"
 
@@ -61,38 +67,86 @@ shot_profiles:
         show: flash
 
 shots:
-  collect_upgrade_shot:
+  collect_research_shot:
     hit_events: sh_right_ramp_hit
     profile: upgrade_shot_profile
-    enable_events: enable_upgrade
-    disable_events: collect_upgrade_shot_hit
+    enable_events:
+      - mode_global_started{current_player.available_research!=" " and current_player.available_shipupgrades==0}
+      - player_available_research{value!=" "}
+    disable_events:
+      - research_completed
+      # We can't have both upgrades at the same time, so disable research when shipupgrades are available
+      - player_available_shipupgrades{change>0}
     show_tokens:
       leds: l_right_ramp_arrow_yellow
+  capture_shipupgrade_shot:
+    hit_events: sh_right_ramp_hit
+    enable_events:
+      - mode_global_started{current_player.available_shipupgrades>0}
+      - shipupgrade_available
+    disable_events: shipupgrade_completed
+    profile: color_on
+    show_tokens:
+      leds: l_upgrade
+      color: FFFFFF
 
 slide_player:
-  collect_upgrade_shot_hit:
-    upgrade_slide:
+  collect_research_shot_hit:
+    research_slide:
       expire: 3s
+  shipupgrade_available:
+    shipupgrade_ready_slide:
+      expire: 1s
+  upgraded_armor:
+    upgrade_armor_complete_slide:
+      expire: 1s
+  upgraded_cannon:
+    upgrade_cannon_complete_slide:
+      expire: 1s
+  upgraded_shields:
+    upgrade_shields_complete_slide:
+      expire: 1s
 
 slides:
-  upgrade_slide:
+  research_slide:
     - type: text
       text: "Upgrade Researched"
-      style: dmd_small
+      style: small
       anchor_x: left
       anchor_y: top
       x: 25%
       y: top-2
     - type: text
-      text: (player|available_upgrade)
-      style: dmd_med
+      text: (player|available_research)
+      style: medium
       anchor_x: left
       anchor_y: top
       x: 25%
       y: top-12
+  shipupgrade_ready_slide:
+    widgets:
+      - type: text
+        text: Ship Upgrade Available!
+        style: medium
+  upgrade_armor_complete_slide:
+    widgets:
+      - type: text
+        text: Silaris Armor Upgraded!
+        style: medium
+  upgrade_cannon_complete_slide:
+    widgets:
+      - type: text
+        text: Thanix Cannon Upgraded!
+        style: medium
+  upgrade_shields_complete_slide:
+    widgets:
+      - type: text
+        text: Multicore Shielding Upgraded!
+        style: medium
 
 sound_player:
-  collect_upgrade_shot_hit: upgrade_collected_sound
+  collect_research_shot_hit: upgrade_collected_sound
+  capture_shipupgrade_shot_hit: upgrade_collected_sound
 
 sound_pools:
   upgrade_collected_sound:
