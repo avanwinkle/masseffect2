@@ -244,3 +244,9 @@ sounds:
   gunship_miranda:
     file: en_us_hench_vixen_twrmwa_gun_ship_amb_h_00212340_m.ogg
     track: voice
+
+widget_player:
+  logicblock_samara_shots_counter_updated:
+    shots_remaining_widget:
+      action: update
+      slide: recruitslide

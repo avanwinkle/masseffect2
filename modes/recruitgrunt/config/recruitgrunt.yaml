@@ -212,3 +212,9 @@ sounds:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.ogg
     track: voice
     max_queue_time: 1s
+
+widget_player:
+  logicblock_grunt_shots_counter_updated:
+    shots_remaining_widget:
+      action: update
+      slide: recruitslide

@@ -197,7 +197,7 @@ sounds:
     mode_end_action: stop
     fade_out: 1s
     markers:
-      - time: 43s
+      - time: 40s
         events: play_music_recruit_jack_2
   music_recruit_jack_2:
     file: mus_jack_acq_combat_2.ogg

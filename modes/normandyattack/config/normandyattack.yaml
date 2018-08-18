@@ -37,6 +37,8 @@ event_player:
   normandyattack_launchball:
     # If it's time to begin and the ball is in the plunger lane, fire it out!
     - pulse_plunger
+  # Make sure the dropbank is up so we have a fair shot to hit it
+  player_shot_normandy_dropbank_enabled: reset_dropbank
   normandy_dropbank_lit_hit.1:
     levelup:
       mission_name: Normandy Escaped
@@ -206,12 +208,18 @@ shows:
     - time: 0
       flashers:
         l_flash_dragon_left: 80ms
+    - time: '+1'
+      flashers:
+        l_flash_slingshots: 120ms
     - time: '+3'
       flashers:
         l_flash_back_panel_left: 80ms
     - time: '+2'
       flashers:
         l_flash_sword_lock: 80ms
+    - time: '+1'
+      flashers:
+        l_flash_slingshots: 120ms
     - time: '+4'
   normandy_escapelights:
     - time: 0
@@ -264,6 +272,7 @@ sound_player:
 sound_pools:
   edi_ballsave:
     track: voice
+    volume: 1
     sounds:
       - edi_main_corridors_no_longer_safe
       - edi_hostiles_approaching
@@ -271,6 +280,7 @@ sound_pools:
       - edi_hostiles_closing_in
   normandy_advance:
     track: voice
+    volume: 1
     sounds:
       - edi_instr_maint_shaft_far_end
       - edi_instr_go_through_medical_to_reach_core
@@ -289,28 +299,33 @@ sounds:
   normandyattack_music:
     file: mus_critpath3_tension_1.ogg
     track: music
+    volume: 0.8
     fade_in: 1s
     mode_end_action: stop
     markers:
-      - time: 11s
+      - time: 12s
         events: play_horizon_tension
   horizon_tension_music:
     file: mus_critpath1_tension_2.ogg
     track: music
     fade_in: 1s
-    events_when_stopped: play_horizon_tension
     mode_end_action: stop
+    markers:
+      - time: 36s
+        events: play_normandy_tension
   edi_propulsion_disabled_virus_detected:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
     track: voice
   edi_main_corridors_no_longer_safe:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
     track: voice
+    volume: 1
     events_when_played: play_normandy_tension
     events_when_stopped: normandyattack_saveball
   edi_emergency_floor_lighting:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
     track: voice
+    volume: 1
     events_when_stopped: normandyattack_begin, normandyattack_launchball
   edi_i_have_control:
     file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg

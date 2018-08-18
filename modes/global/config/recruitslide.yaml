@@ -116,6 +116,10 @@ widget_player:
     time_remaining_widget:
       action: update
       slide: recruitslide
+  update_recruitshots_value:
+    shots_remaining_widget:
+      action: update
+      slide: recruitslide
 
 widgets:
   recruitwidget_name:
@@ -140,9 +144,8 @@ widgets:
   time_remaining_widget:
     - type: text
       text: "(ticks_remaining)"
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: right
-      anchor_y: bottom
-      x: right-4
-      y: 4
+      style: small_bot_right
+  shots_remaining_widget:
+    - type: text
+      text: (value)
+      style: small_bot_right_secondrow

@@ -74,6 +74,16 @@ variable_player:
   timer_vasir_timeout_tick:
     temp_hurryup_value: -100 * current_player.temp_multiplier
 
+ball_saves:
+  # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
+  vasirsave:
+    active_time: 10s
+    hurry_up_time: 4s
+    grace_period: 2s
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+    auto_launch: true
+    balls_to_save: 1
+
 counters:
   vasir_hits_counter:
     starting_count: 1
@@ -172,6 +182,22 @@ shots:
     profile: vasirprofile
     show_tokens:
       leds: l_hitbank_shield_rgb
+
+show_player:
+  ball_save_vasirsave_timer_start:
+    ball_save_show:
+      action: play
+      speed: 3
+  ball_save_vasirsave_hurry_up:
+    ball_save_show:
+      action: play
+      speed: 9
+  ball_save_vasirsave_grace_period:
+    ball_save_show:
+      action: stop
+  ball_save_vasirsave_disabled:
+    ball_save_show:
+      action: stop
 
 shows:
   vasir_barrier_show:

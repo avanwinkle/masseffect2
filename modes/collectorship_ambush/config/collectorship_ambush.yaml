@@ -47,38 +47,38 @@ counters:
 shot_groups:
   ship_shots:
     shots: ship_left_ramp, ship_left_orbit, ship_right_ramp, ship_right_orbit, ship_kickback
-    restart_events: mode_collectorship_ambush_started
+    reset_events: mode_collectorship_ambush_started
 
 shots:
   ship_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: color_flashing_profile
     show_tokens:
-      led: l_left_ramp_shield_rgb
+      leds: l_left_ramp_shield_rgb
       color: 551100
   ship_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_profile
     show_tokens:
-      led: l_left_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
       color: 551100
   ship_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: color_flashing_profile
     show_tokens:
-      led: l_right_ramp_shield_rgb
+      leds: l_right_ramp_shield_rgb
       color: 551100
   ship_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_profile
     show_tokens:
-      led: l_right_orbit_shield_rgb
+      leds: l_right_orbit_shield_rgb
       color: 551100
   ship_kickback:
     hit_events: sh_kickback_hit
     profile: color_flashing_profile
     show_tokens:
-      led: l_kickback_shield_rgb
+      leds: l_kickback_shield_rgb
       color: 551100
 
 

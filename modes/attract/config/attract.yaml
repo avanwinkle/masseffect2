@@ -4,6 +4,10 @@ event_player:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
+  s_action_button_active:
+    - cancel_ball_search
+  s_start_button_active:
+    - cancel_ball_search
 
 show_player:
   start_suicide_intro:
@@ -32,12 +36,33 @@ show_player:
 
 slide_player:
   mode_attract_started: me_logo_slide
+  ball_search_started: ball_search_slide
+  ball_search_stopped:
+    ball_search_slide:
+      action: remove
 
 slides:
   me_logo_slide:
     widgets:
       - type: image
         image: me2_logo_x128
+  ball_search_slide:
+    widgets:
+      - type: text
+        text: Please Wait
+        style: small
+        anchor_y: top
+        y: top-2
+      - type: text
+        text: Searching For
+        style: medium
+        anchor_y: bottom
+        y: middle
+      - type: text
+        text: Balls
+        style: medium
+        anchor_y: top
+        y: middle-2
 
 sound_player:
   mode_attract_started:

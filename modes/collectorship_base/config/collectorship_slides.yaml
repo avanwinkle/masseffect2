@@ -77,7 +77,7 @@ widgets:
     - type: text
       text: (harbinger_multiplier)X
       style: small
-      anchor_x: right
+      anchor_x: left
       anchor_y: bottom
-      x: right-2
-      y: 2
+      x: 2
+      y: 9
