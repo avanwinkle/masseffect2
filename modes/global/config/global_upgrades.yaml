@@ -8,13 +8,22 @@
 # to it.
 #####
 event_player:
-  collect_research_shot_hit: research_completed
+  collect_research_shot_hit:
+    - shipupgrade_completed{current_player.available_shipupgrades>0}
+    - research_completed{current_player.available_shipupgrades==0}
   capture_shipupgrade_shot_hit: shipupgrade_completed
 
 variable_player:
+  shipupgrade_completed:
+    available_shipupgrades: -1
+    score: 4000
+    # We can't collect both a ship upgrade _and_ research for a levelup
+    available_research:
+      action: set
+      string: " "
   research_completed:
     research_completed: 1
-    score: 4000 * (1 + 0.25 * current_player.research_completed)
+    score: 1000 * (1 + 0.25 * current_player.research_completed)
     available_research:
       action: set
       string: " "
@@ -69,25 +78,15 @@ shot_profiles:
 shots:
   collect_research_shot:
     hit_events: sh_right_ramp_hit
-    profile: upgrade_shot_profile
     enable_events:
-      - mode_global_started{current_player.available_research!=" " and current_player.available_shipupgrades==0}
+      - mode_global_started{current_player.available_research!=" " or current_player.available_shipupgrades>0}
       - player_available_research{value!=" "}
-    disable_events:
-      - research_completed
-      # We can't have both upgrades at the same time, so disable research when shipupgrades are available
       - player_available_shipupgrades{change>0}
-    show_tokens:
-      leds: l_right_ramp_arrow_yellow
-  capture_shipupgrade_shot:
-    hit_events: sh_right_ramp_hit
-    enable_events:
-      - mode_global_started{current_player.available_shipupgrades>0}
-      - shipupgrade_available
-    disable_events: shipupgrade_completed
+    disable_events:
+      - collect_research_shot_hit
     profile: color_on
     show_tokens:
-      leds: l_upgrade
+      leds: l_right_ramp_arrow_yellow
       color: FFFFFF
 
 slide_player:
@@ -97,13 +96,13 @@ slide_player:
   shipupgrade_available:
     shipupgrade_ready_slide:
       expire: 1s
-  upgraded_armor:
+  achievement_upgraded_armor_state_completed:
     upgrade_armor_complete_slide:
       expire: 1s
-  upgraded_cannon:
+  achievement_upgraded_cannon_state_completed:
     upgrade_cannon_complete_slide:
       expire: 1s
-  upgraded_shields:
+  achievement_upgraded_shields_state_completed:
     upgrade_shields_complete_slide:
       expire: 1s
 
@@ -114,7 +113,7 @@ slides:
       style: small
       anchor_x: left
       anchor_y: top
-      x: 25%
+      x: 2
       y: top-2
     - type: text
       text: (player|available_research)
@@ -131,18 +130,33 @@ slides:
   upgrade_armor_complete_slide:
     widgets:
       - type: text
-        text: Silaris Armor Upgraded!
-        style: medium
+        text: Ship Upgrade Researched
+        style: small
+        anchor_y: bottom
+        y: middle+6
+      - type: text
+        text: Silaris Armor
+        style: text_default
   upgrade_cannon_complete_slide:
     widgets:
       - type: text
-        text: Thanix Cannon Upgraded!
-        style: medium
+        text: Ship Upgrade Researched
+        style: small
+        anchor_y: bottom
+        y: middle+6
+      - type: text
+        text: Thanix Cannon
+        style: text_default
   upgrade_shields_complete_slide:
     widgets:
       - type: text
-        text: Multicore Shielding Upgraded!
-        style: medium
+        text: Ship Upgrade Researched
+        style: small
+        anchor_y: bottom
+        y: middle+6
+      - type: text
+        text: Multicore Shielding
+        style: text_default
 
 sound_player:
   collect_research_shot_hit: upgrade_collected_sound

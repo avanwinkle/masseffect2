@@ -69,7 +69,9 @@ class MissionSelect(Carousel):
         self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
     elif selection == "pass":
       # Store the choice to pass so we can skip missionselect until a new mission is available
-      self.machine.game.player['bypass_missionselect'] = 1
+      # This is only applicable if there are still missions to unlock, otherwise we could get stuck
+      if self.machine.game.player["squadmates_count"] < 12:
+        self.machine.game.player['bypass_missionselect'] = 1
 
   def _update_highlighted_item(self, direction):
     h = self._get_highlighted_item()

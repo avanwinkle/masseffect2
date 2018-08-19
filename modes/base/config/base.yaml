@@ -115,17 +115,11 @@ achievements:
     complete_events: endrun_complete
   # SHIP UPGRADES
   upgrade_armor:
-    complete_events: capture_shipupgrade_shot_hit
-    events_when_completed: shipupgrade_complete, upgraded_armor
-    restart_on_next_ball_when_started: True
+    complete_events: shipupgrade_completed
   upgrade_shields:
-    complete_events: capture_shipupgrade_shot_hit
-    events_when_completed: shipupgrade_complete, upgraded_shields
-    restart_on_next_ball_when_started: True
+    complete_events: shipupgrade_completed
   upgrade_cannon:
-    complete_events: capture_shipupgrade_shot_hit
-    events_when_completed: shipupgrade_complete, upgraded_cannon
-    restart_on_next_ball_when_started: True
+    complete_events: shipupgrade_completed
 
 achievement_groups:
   ship_upgrades_group:
@@ -141,6 +135,7 @@ event_player:
     - start_mode_environment
     - enable_orbitswitches
     - flippers_on
+    - reset_missionselect_bypass
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -151,6 +146,9 @@ event_player:
     - stop_mode_global
   mode_type_wizard_stopped{not mode.base.stopping}:
     - start_mode_global
+  # If a new mission becomes available, remove the player-selected bypass
+  player_available_missions{change>0}:
+    - reset_missionselect_bypass
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{value==6}:
     - enable_collectorship
@@ -166,6 +164,7 @@ event_player:
     - enable_derelictreaper{value==8}
     # Every three levels warrants a ship upgrade!
     - shipupgrade_available{value%3==0 and device.achievement_groups.ship_upgrades_group.enabled}
+    - reset_missionselect_bypass
   missionselect_derelictreaper_selected:
     - start_mode_derelictreaper
   missionselect_suicide_selected:
@@ -238,6 +237,13 @@ counters:
 variable_player:
   levelup:
     level: 1
+    # Reset the ship upgrade every levelup. Once missed, gone forever!
+    shipupgrade_available:
+      action: set
+      int: 0
+  # Use a variable to know whether a ship upgrade is available
+  shipupgrade_available:
+    available_shipupgrades: 1
   # Track the squadmates recruited _this game_, not ones imported from saves
   player_squadmates_count{change==1}:
     recruited_squadmates_count: 1
@@ -252,8 +258,7 @@ variable_player:
     available_missions: -1
   achievement_suicidemission_state_enabled:
     available_missions: 1
-  # If a new mission becomes available, remove the player-selected bypass
-  player_available_missions{change>0}:
+  reset_missionselect_bypass:
     bypass_missionselect:
       action: set
       int: 0
