@@ -46,8 +46,8 @@ class MissionSelect(Carousel):
     for mate in self._mates:
       items.append(mate)
 
-    # If collectorship has been played but the praetorian wasn't defeated, it can be replayed (pre-derelictreaper)
-    if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "stopped" and player.achievements['derelictreaper'] == "disabled" and player.achievements['suicidemission'] == "disabled":
+    # If allowed, the collectorship can be replayed (pre-derelictreaper)
+    if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "completed" and player.achievements['derelictreaper'] == "disabled" and player.achievements['suicidemission'] == "disabled":
       items.append('collectorship')
 
     # "Pass" is the last item in the menu

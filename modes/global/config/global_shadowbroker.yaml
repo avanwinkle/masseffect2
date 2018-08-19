@@ -16,6 +16,15 @@ mode:
 event_player:
   mode_global_started:
     - manual_sbdrops_counter_advance{device.counters.sbdrops_counter.value==3 and device.achievements.vasir.state=="completed"}
+  # Have to deal with duplicate events until MC handles event priority with conditions
+  logicblock_sbdrops_counter_hit:
+    - play_sbdrops_hitsound_1{count==1}
+    - play_sbdrops_hitsound_2{count==2}
+    - play_sbdrops_hitsound_3{count==3}
+    - play_sbdrops_hitsound_4{count==4}
+    - play_sbdrops_hitsound_5{count==5}
+    - play_sbdrops_hitsound_6{count==6}
+    - play_sbdrops_hitsound_7{count==7}
 
 variable_player:
   drop_target_bank_dropbank_down:
@@ -81,25 +90,25 @@ shows:
 
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions
-  logicblock_sbdrops_counter_hit{count==1}:
+  play_sbdrops_hitsound_1:
     shepard_sounds_like_liara_found_something_big:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==2}:
+  play_sbdrops_hitsound_2:
     vasir_i_know_where_the_trade_center_is:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==3}:
+  play_sbdrops_hitsound_3:
     vasir_they_took_out_three_floors:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==4}:
+  play_sbdrops_hitsound_4:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==5}:
+  play_sbdrops_hitsound_5:
     liara_sukets_datapad_this_has_what_we_need:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==6}:
+  play_sbdrops_hitsound_6:
     liara_we_can_be_at_base_in_a_few_hours:
       max_queue_time: 2s
-  logicblock_sbdrops_counter_hit{count==7}:
+  play_sbdrops_hitsound_7:
     liara_land_outside_and_hunt_for_a_hatch:
       max_queue_time: 2s
   # Relays:

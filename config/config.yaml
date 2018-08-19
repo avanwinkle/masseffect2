@@ -194,6 +194,8 @@ player_vars:
     initial_value: 0
   level:
     initial_value: 1
+  saved_level:
+    initial_value: 1
   planets:
     initial_value: 0
   minerals_total:

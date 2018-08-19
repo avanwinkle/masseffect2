@@ -123,7 +123,7 @@ slide_player:
     overlord_lock_is_lit_slide:
       expire: 2s
       priority: 1200 # Minerals run at priority ~900
-  lockhandler_overlord_ball_will_lock:
+  lockhandler_overlord_ball_will_lock.1:
     overlord_ball_locked_slide:
       expire: 3s
       priority: 1600 # Enough to beat recruit timer?:
@@ -136,7 +136,7 @@ slide_player:
     arrival_lock_is_lit_slide:
       expire: 2s
       priority: 1200 # Minerals run at priority ~900
-  lockhandler_arrival_ball_will_lock:
+  lockhandler_arrival_ball_will_lock.1:
     arrival_ball_locked_slide:
       expire: 4s
       priority: 1600

@@ -4,7 +4,8 @@ mode_settings:
   hurry_up_delay_ms: 0
   bonus_entries:
     - event: bonus_level
-      score: 600 * (current_player.level - 1)
+      # We track the level that's loaded in the career, so only award bonus to levels gained
+      score: 600 * (current_player.level - current_player.saved_level)
     - event: bonus_squadmates
       score: 1200 * (current_player.recruited_squadmates_count)
     - event: bonus_credits
