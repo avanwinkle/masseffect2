@@ -88,6 +88,7 @@ class SaveCareer(CustomCode):
         self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
         for key,value in careerdata.items():
           if key.startswith("status_"):
+            setattr(player, key, value)
             if value == 3:
               available_missions += 1
             elif value == 4:

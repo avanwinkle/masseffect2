@@ -116,16 +116,20 @@ achievements:
   # SHIP UPGRADES
   upgrade_armor:
     complete_events: shipupgrade_completed
+    debug: true
   upgrade_shields:
     complete_events: shipupgrade_completed
+    debug: true
   upgrade_cannon:
     complete_events: shipupgrade_completed
+    debug: true
 
 achievement_groups:
   ship_upgrades_group:
     achievements: upgrade_armor, upgrade_shields, upgrade_cannon
     select_random_achievement_events: shipupgrade_available
     events_when_all_completed: all_upgrades_complete
+    debug: true
 
 event_player:
   mode_base_started:

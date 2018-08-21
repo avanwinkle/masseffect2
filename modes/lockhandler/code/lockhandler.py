@@ -138,6 +138,13 @@ class LockHandler(Mode):
     elif not self.machine.modes.get("global").active: # global is a reserved word
       self.log.info(" - A wizard mode is active, bypassing lock post")
       self._bypass_lock()
+      # Temporarily disable the lock, just in case the bypass post doesn't let a ball out
+      if self._logicallockdevice.enabled:
+        self._logicallockdevice.disable()
+        self.delay.add(callback=self._logicallockdevice.enable, ms=1000,
+                     # Detecting lock 1 inactivating will work unless the bypass and the initial
+                     # eject attempt _both_ fail. It's a workaround until we have autofire-based ejects
+                     event='s_lock_1_inactive')
       return
 
     # MULTIBALL AND MISSION

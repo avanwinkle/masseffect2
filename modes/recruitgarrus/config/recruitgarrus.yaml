@@ -41,7 +41,7 @@ counters:
       - right_door_lit_hit
     events_when_hit: door_closed
     disable_on_complete: true
-    reset_events: mode_recruitgarrus_started{device.counters.door_closed_counter.value>0}
+    reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>0}
     reset_on_complete: false
 
 #####
