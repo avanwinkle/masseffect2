@@ -594,7 +594,9 @@ coils:
     default_pulse_ms: 28
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
-    disable_events: cancel_lock_release_pulse
+    disable_events:
+      - cancel_lock_release_pulse
+      - s_lock_1_inactive
     debug: true
   c_orbit_gates:
     number: 10-0

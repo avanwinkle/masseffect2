@@ -12,7 +12,7 @@
 #####
 
 mode:
-  start_events: start_mode_lockhandler # Never stopped
+  start_events: start_mode_lockhandler
   stop_events: ball_will_end
   code: lockhandler.LockHandler
   priority: 1000
@@ -32,13 +32,13 @@ queue_relay_player:
     post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
 
-# This lock needs to be here in order to be found in self.mode_devices
+# This lock needs to be here in lockhandler.yaml in order to be found in self.mode_devices
 multiball_locks:
   fmball_lock:
     balls_to_lock: 3
     balls_to_replace: 2
     lock_devices: bd_lock
-    reset_count_for_current_player_events: fmball_stopped
+    reset_count_for_current_player_events: fmball_stopped, mode_collectorship_base_started
     enable_events: enable_fmball_lock
-    disable_events: multiball_lock_fmball_lock_locked_ball
+    disable_events: multiball_lock_fmball_lock_locked_ball, mode_collectorship_base_started
     debug: true

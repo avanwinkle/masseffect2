@@ -20,51 +20,56 @@ variable_player:
     # We can't collect both a ship upgrade _and_ research for a levelup
     available_research:
       action: set
-      string: " "
+      int: 0
   research_completed:
     research_completed: 1
     score: 1000 * (1 + 0.25 * current_player.research_completed)
+    # Research upgrades can't be stacked, collecting one resets to zero
     available_research:
       action: set
-      string: " "
+      int: 0
+  # Completing _any_ recruit mission sets a research project available
+  recruit_success.1:
+    available_research: 1
+  # Each squadmate enables a specific research project (meaningless distinctions)
   recruit_success_garrus:
-    available_research:
+    current_research:
       action: set
       string: "Omni-Tool Damage"
   recruit_success_grunt:
-    available_research:
+    current_research:
       action: set
       string: "Shotgun Damage"
   recruit_success_jack:
-    available_research:
+    current_research:
       action: set
       string: "Bio-Amp Interface"
   recruit_success_kasumi:
-    available_research:
+    current_research:
       action: set
       string: "M22 Locust SMG"
   recruit_success_legion:
-    available_research:
+    current_research:
       action: set
       string: "M80 Widow Rifle"
   recruit_success_mordin:
-    available_research:
+    current_research:
       action: set
       string: "M16 Carnifax Pistol"
   recruit_success_samara:
-    available_research:
+    current_research:
       action: set
       string: "Assault Rifle Damage"
   recruit_success_tali:
-    available_research:
+    current_research:
       action: set
       string: "Geth Plasma Shotgun"
   recruit_success_thane:
-    available_research:
+    current_research:
       action: set
       string: "M17 Viper Rifle"
   recruit_success_zaeed:
-    available_research:
+    current_research:
       action: set
       string: "Heavy Weapon Ammo"
 
@@ -79,8 +84,8 @@ shots:
   collect_research_shot:
     hit_events: sh_right_ramp_hit
     enable_events:
-      - mode_global_started{current_player.available_research!=" " or current_player.available_shipupgrades>0}
-      - player_available_research{value!=" "}
+      - mode_global_started{current_player.available_research>0 or current_player.available_shipupgrades>0}
+      - player_available_research{change>0}
       - player_available_shipupgrades{change>0}
     disable_events:
       - collect_research_shot_hit
@@ -90,19 +95,19 @@ shots:
       color: FFFFFF
 
 slide_player:
-  collect_research_shot_hit:
+  research_completed:
     research_slide:
       expire: 3s
   shipupgrade_available:
     shipupgrade_ready_slide:
-      expire: 1s
-  achievement_upgraded_armor_state_completed:
+      expire: 7s  # Levelup slide is 4s, so this needs to be longer
+  achievement_upgrade_armor_state_completed:
     upgrade_armor_complete_slide:
       expire: 1s
-  achievement_upgraded_cannon_state_completed:
+  achievement_upgrade_cannon_state_completed:
     upgrade_cannon_complete_slide:
       expire: 1s
-  achievement_upgraded_shields_state_completed:
+  achievement_upgrade_shields_state_completed:
     upgrade_shields_complete_slide:
       expire: 1s
 
@@ -116,12 +121,12 @@ slides:
       x: 2
       y: top-2
     - type: text
-      text: (player|available_research)
+      text: (player|current_research)
       style: medium
       anchor_x: left
       anchor_y: top
       x: 25%
-      y: top-12
+      y: top-16
   shipupgrade_ready_slide:
     widgets:
       - type: text
@@ -137,6 +142,7 @@ slides:
       - type: text
         text: Silaris Armor
         style: text_default
+        y: middle-4
   upgrade_cannon_complete_slide:
     widgets:
       - type: text
@@ -147,6 +153,7 @@ slides:
       - type: text
         text: Thanix Cannon
         style: text_default
+        y: middle-4
   upgrade_shields_complete_slide:
     widgets:
       - type: text
@@ -157,6 +164,7 @@ slides:
       - type: text
         text: Multicore Shielding
         style: text_default
+        y: middle-4
 
 sound_player:
   collect_research_shot_hit: upgrade_collected_sound

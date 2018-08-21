@@ -125,7 +125,7 @@ achievements:
     debug: true
 
 achievement_groups:
-  ship_upgrades_group:
+  shipupgrades_group:
     achievements: upgrade_armor, upgrade_shields, upgrade_cannon
     select_random_achievement_events: shipupgrade_available
     events_when_all_completed: all_upgrades_complete
@@ -167,7 +167,7 @@ event_player:
   player_level:
     - enable_derelictreaper{value==8}
     # Every three levels warrants a ship upgrade!
-    - shipupgrade_available{value%3==0 and device.achievement_groups.ship_upgrades_group.enabled}
+    - shipupgrade_available{value%3==0 and device.achievement_groups.shipupgrades_group.enabled}
     - reset_missionselect_bypass
   missionselect_derelictreaper_selected:
     - start_mode_derelictreaper

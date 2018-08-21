@@ -87,11 +87,13 @@ event_player:
     - play_arrival_phase4_1|64s
     # Phase5 starts at ~79
     - play_arrival_phase5_1|77s
-  arrival_escapeshot_hit:
-    - levelup
-    - stop_mode_arrival
   start_arrival_finale:
     - stop_mode_arrival
+  arrival_escapeshot_hit.1:
+    - stop_mode_arrival
+  arrival_escapeshot_hit.2:
+    levelup:
+      mission_name: Alpha Relay Destroyed
 
 #####
 # ARRIVAL SCORING

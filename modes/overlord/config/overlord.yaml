@@ -40,7 +40,7 @@ event_player:
   mode_overlord_started.2:
     set_environment:
       env: geth
-  # To light the jackpot, you have to hit n hackshots where n = jackpots already hit
+  # To light the jackpot, you have to hit n hackshots where n = 1 + jackpots already hit
   logicblock_hackshots_hit_counter_hit{count>=device.counters.jackpots_hit_counter.value}:
     - enable_jackpotshot
   jackpotshot_hit: reset_hackshots
@@ -48,7 +48,9 @@ event_player:
   # If the player collects three jackpots, this achievement is "complete"!
   logicblock_jackpots_hit_counter_hit{count==4}: overlord_complete
   # Grant a levelup for completing the achievement
-  achievement_overlord_state_completed: levelup
+  achievement_overlord_state_completed:
+    levelup:
+      mission_name: "Rogue VI Contained"
   multiball_overlord_multiball_ended: stop_mode_overlord
   # Sound_player doesn't know device states, so make events here
   hackshots_frozen_hit:

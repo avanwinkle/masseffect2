@@ -34,7 +34,7 @@ event_player:
   vasir_shot_health_hit:
     shadowbroker_vasir_complete: {}
     levelup:
-      mission_name: "Broker Intel Recovered"
+      mission_name: "Suket's Datapad Recovered"
   # Relay some sounds to delay
   vasir_shot_barrier_hit: play_vasir_start_sound|2s
   vasir_shot_armor_hit: play_vasir_start_sound|2s
