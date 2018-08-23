@@ -165,13 +165,13 @@ slides:
   samara_instructions_slide:
     widgets:
       - type: text
-        text: HIT TARGETS TO GATHER INTEL
+        text: HIT TARGETS WEAKEN ARMOR
         style: dmd_small
         anchor_y: bottom
         y: middle+4
         z: 1
       - type: text
-        text: HIT SHOTS TO PURSUE MORINTH
+        text: HIT SHOTS TO DESTROY GUNSHIP
         style: dmd_small
         anchor_y: top
         y: middle-4

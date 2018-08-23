@@ -51,30 +51,29 @@ variable_player:
   mode_recruitmordin_started:
     temp_multiplier:
       action: set
-      int: 1
-    temp_build_value:
+      float: 1.0
+    temp_hurryup_value:
       action: set
       int: 200
   spinner_hit:
-    temp_build_value: 200
+    temp_hurryup_value: 10 * current_player.temp_multiplier
+  cure_right_hit:
+    temp_multiplier:
+      action: add
+      float: 0.5
   cure_shot_hit:
-    temp_multiplier: 1
-  player_temp_build_value:
-    temp_hurryup_value:
-      action: set
-      int: value * current_player.temp_multiplier
-  player_temp_multiplier:
-    temp_hurryup_value:
-      action: set
-      int: current_player.temp_build_value * value
+    temp_hurryup_value: 50 * current_player.temp_multiplier * device.counters.recruittimer.ticks_remaining
+  fan_shots_hit:
+    temp_hurryup_value: 100 * current_player.temp_multiplier * device.counters.recruittimer.ticks_remaining
   recruit_mordin_complete:
     score: current_player.temp_hurryup_value
 
 shot_groups:
   cure_shot:
-    shots: cure
+    shots: cure_left, cure_right
   fan_shots:
     shots: fan_left, fan_right
+    reset_events: mode_recruitmordin_started
 
 shot_profiles:
   spinnerprofile:
@@ -90,16 +89,21 @@ shot_profiles:
 shots:
   spinner:
     hit_events: sh_spinner_hit
-    enable_events: mode_recruitmordin_started, enable_orbitswitches
-    # Don't let a ball save plunge count as a hit to the spinner
-    disable_events: fullorbit_fromplunger_hit
+    enable_events: cure_left_hit
     profile: spinnerprofile
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: 440000 #color_mordin
-  cure:
+  cure_left:
+    hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
+    profile: color_flashing_to_solid_profile
+    show_tokens:
+      leds: l_right_orbit_shield_rgb
+      color: 440000 #color_mordin
+    tags: envshot_right_orbit
+  cure_right:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
-    enable_events: spinner_hit
+    enable_events: cure_left_hit
     profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
@@ -107,7 +111,6 @@ shots:
     tags: envshot_right_orbit
   fan_left:
     hit_events: sh_left_ramp_hit
-    reset_events: mode_recruitmordin_started
     enable_events: enable_fans
     profile: color_flashing_profile
     show_tokens:
@@ -116,7 +119,6 @@ shots:
     tags: envshot_left_ramp
   fan_right:
     hit_events: sh_right_ramp_hit
-    reset_events: mode_recruitmordin_started
     enable_events: enable_fans
     profile: color_flashing_profile
     show_tokens:

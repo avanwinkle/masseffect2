@@ -35,7 +35,7 @@ event_player:
     - capacitors_charged_ready|10s
   # Fake the counter event to get the widget onscreen
   mode_shadowbroker_hagalaz_started.2:
-    logicblock_shunt_counter_updated:
+    logicblock_shunt_counter_hit:
       value: device.counters.shunt_counter.value
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
@@ -251,7 +251,7 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-  logicblock_shunt_counter_updated{value>0 and value<8}: shunt_progress_sound
+  logicblock_shunt_counter_hit{count>0 and count<8}: shunt_progress_sound
   # logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
   enable_hatch:
     liara_hatch_is_open:
@@ -459,14 +459,14 @@ slides:
         anchor_y: bottom
         y: middle+2
         animations:
-          show_slide: pulse_text
+          show_slide: pulse_text_slow
       - type: text
         text: THE SHIP
         style: text_default
         anchor_y: top
         y: middle-2
         animations:
-          show_slide: pulse_text
+          show_slide: pulse_text_slow
 
 widget_player:
   timer_sbhagalaz_timer_tick:

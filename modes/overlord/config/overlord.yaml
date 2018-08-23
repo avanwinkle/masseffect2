@@ -37,6 +37,7 @@ event_player:
   mode_overlord_started.1:
     - reset_hackshots
     - play_music_1
+    - show_overlord_slide
   mode_overlord_started.2:
     set_environment:
       env: geth
@@ -57,6 +58,17 @@ event_player:
     - play_frozen_hackshot_1{device.counters.jackpots_hit_counter.value==1}
     - play_frozen_hackshot_2{device.counters.jackpots_hit_counter.value==2}
     - play_frozen_hackshot_3{device.counters.jackpots_hit_counter.value==3}
+  # Force the slide widgets
+  slide_overlord_slide_active:
+    logicblock_hackshots_hit_counter_updated:
+      value:
+        value: device.counters.hackshots_hit_counter.value
+        type: int
+    logicblock_jackpots_hit_counter_updated:
+      value:
+        value: device.counters.jackpots_hit_counter.value
+        type: int
+
 
 multiballs:
   overlord_multiball:
@@ -77,6 +89,7 @@ counters:
     starting_count: 1
     count_complete_value: 5
     disable_on_complete: true
+    reset_on_complete: false
     count_events: jackpotshot_hit
 
 timers:
@@ -248,7 +261,9 @@ shows:
         l_hitbank_bot: off
 
 slide_player:
-  mode_overlord_started: overlord_slide
+  show_overlord_slide:
+    overlord_slide:
+      action: play
 
 slides:
   overlord_slide:
@@ -376,6 +391,8 @@ widget_player:
     jackpot_widget:
       slide: overlord_slide
       action: add
+    jackpots_needed_widget:
+      action: remove
   jackpotshot_hit:
     jackpot_widget:
       action: remove
@@ -397,7 +414,7 @@ widgets:
       anchor_x: left
       anchor_y: bottom
       y: 2
-      x: 78 # 48 was way too left
+      x: 47 # 48 was way too left
       z: 4
   jackpot_widget:
     - type: text

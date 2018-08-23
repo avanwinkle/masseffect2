@@ -87,6 +87,11 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
+  player_planets:
+    planet_scanned_slide:
+      action: play
+      expire: 2s
+      priority: 610
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
@@ -96,6 +101,15 @@ slide_player:
       action: remove
 
 slides:
+  planet_scanned_slide:
+    - type: text
+      text: (player|planets) Planets Scanned
+      z: 10
+    - type: rectangle
+      width: 128
+      height: 32
+      color: black
+      z: 9
   minerals_slide:
     widgets:
       # Minerals
@@ -155,16 +169,8 @@ timers:
     control_events:
       - event: mineral_shots_hit
         action: restart
-      - event: planet_shots_hit
-        action: restart
 
 widget_player:
-  player_planets:
-    planet_scanned_widget:
-      action: add
-      priority: 610
-      widget_settings:
-        expire: 2s
   mineral_shot_iridium_hit:
     mineral_highlight:
       action: update
@@ -203,15 +209,6 @@ widget_player:
         expire: 2s
 
 widgets:
-  planet_scanned_widget:
-    - type: text
-      text: (player|planets) Planets Scanned
-      z: 10
-    - type: rectangle
-      width: 128
-      height: 32
-      color: black
-      z: 9
   mineral_highlight:
     - type: rectangle
       style: mineral_highlight_style

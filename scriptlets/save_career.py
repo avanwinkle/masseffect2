@@ -5,8 +5,8 @@ from mpf.core.custom_code import CustomCode
 
 PLAYER_VARS = (
   # These are the variables that are saved in a career. Everything else resets.
-  "career_name", "level", "assignments_completed",
-  "recruits_lit_count", "counter_sbdrops_counter", "readonly")
+  "career_name", "career_started", "balls_played", "readonly", "level",
+  "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter" )
 
 ACHIEVEMENT_MISSIONS = (
   # These are achievements that qualify as available_missions if enabled/stopped
@@ -22,6 +22,7 @@ class SaveCareer(CustomCode):
     self._current_careers = {}
     self._achievement_handlers = {}
     self.machine.events.add_handler("load_career", self._load_career)
+    self.machine.events.add_handler("new_career", self._new_career)
     self.machine.events.add_handler("set_career", self._set_career)
     self.machine.events.add_handler("player_turn_will_end", self._save_career)
 
@@ -128,6 +129,14 @@ class SaveCareer(CustomCode):
         setattr(player, "saved_level", careerdata["level"])
       f.close()
     # Allow the queue to continue
+    self.machine.events.post("career_loaded", career_name=player.career_name)
+
+  def _new_career(self, **kwargs):
+    player = self.machine.game.player
+    if self._current_careers.get(player.number):
+      player.career_name = self._current_careers[player.number]["career_name"]
+      # All we have to do is set a new career_started time
+      player.career_started = datetime.now().timestamp()
     self.machine.events.post("career_loaded", career_name=player.career_name)
 
   def _force_achievement(self, **kwargs):

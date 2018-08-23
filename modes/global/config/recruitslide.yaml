@@ -1,5 +1,11 @@
 #config_version=5
 
+event_player:
+  slide_recruitslide_active:
+    # Prepopulate the slide when it comes in
+    timer_recruittimer_tick:
+      ticks_remaining: { value: device.timers.recruittimer.ticks }
+
 #####
 # Use a single slide/widget for all the missions, just update the text
 #####

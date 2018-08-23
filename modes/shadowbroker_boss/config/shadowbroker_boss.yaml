@@ -25,7 +25,7 @@ mode:
 event_player:
   mode_shadowbroker_boss_started:
     - sbboss_round_show_complete # Mock a complete event to reset the round
-    - enable_random_sbboss_shot
+    - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
   sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
     - play_sbboss_round_show_1{count==1}
@@ -87,42 +87,39 @@ shot_profiles:
 shot_groups:
   sbboss_shot:
     shots: sbboss_left_orbit, sbboss_right_orbit, sbboss_right_ramp
-    reset_events: mode_shadowbroker_boss_started, shadowbroker_round_start
 
 shots:
   sbboss_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: enable_sbboss_finalshot
-    disable_events: logicblock_sbboss_round_counter_hit
-    reset_events: shadowbroker_round_start
+    disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
   sbboss_kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_sbboss_finalshot
-    disable_events: logicblock_sbboss_round_counter_hit
-    reset_events: shadowbroker_round_start
+    disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
       leds: l_kickback_shield_rgb
   sbboss_left_orbit:
-    enable_events: enable_sbboss_left_orbit
-    disable_events: enable_sbboss_finalshot
+    restart_events: enable_sbboss_left_orbit
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
   sbboss_right_ramp:
-    enable_events: enable_sbboss_right_ramp
-    disable_events: enable_sbboss_finalshot
+    restart_events: enable_sbboss_right_ramp
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
   sbboss_right_orbit:
-    enable_events: enable_sbboss_right_orbit
-    disable_events: enable_sbboss_finalshot
+    restart_events: enable_sbboss_right_orbit
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -266,7 +263,7 @@ sound_player:
 
 sound_pools:
   broker_attack:
-    type: random
+    type: random_force_all
     track: sfx
     sounds: broker_attack_1, broker_attack_2, broker_attack_3, broker_attack_4, broker_attack_5, broker_attack_6
   broker_hit:

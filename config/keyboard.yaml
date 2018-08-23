@@ -52,4 +52,4 @@ keyboard:
     params:
       balls: 1
   b:
-    switch: s_bumper_bottom
+    event: start_mode_overlord

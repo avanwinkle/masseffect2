@@ -208,6 +208,11 @@ sound_player:
   play_specialist_lw_no: specialist_lw_no
   play_specialist_lw_yes: specialist_lw_yes
   play_specialist_lw_callback_miranda: miranda_any_biotic_could
+  # We start the music in huddle so make sure we end it on mode end
+  # This event doesn't seem to work great in longwalk, maybe it has to be bound here?
+  mode_suicide_longwalk_will_stop:
+    longwalk_low:
+      action: stop
 
 widget_player:
   ## Show the specialist selection title

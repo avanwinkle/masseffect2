@@ -11,7 +11,7 @@ spike:
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 24
+    65: 30
   # use_send_key: true
 
 machine:
@@ -574,10 +574,12 @@ coils:
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 13
+    debug: true
     # default_recycle: true
   c_slingshot_right:
     number: 8-4
     default_pulse_ms: 13
+    debug: true
     # default_recycle: true
   c_dropbank_reset:
     number: 8-2

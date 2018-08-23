@@ -79,7 +79,8 @@ class MainMenu(Carousel):
               if career["career_name"] in already_chosen:
                 continue
 
-              career["_strftime"] = datetime.fromtimestamp(career["last_played"]).strftime("%x")
+              career["_career_started"] = datetime.fromtimestamp(career.get("career_started", 0)).strftime("%x")
+              career["_last_played"] = datetime.fromtimestamp(career.get("last_played", 0)).strftime("%x")
               self.careers.append(career)
 
               # Set a default/initial selection if it's the most recently played for player 1
@@ -134,9 +135,9 @@ class MainMenu(Carousel):
     # If resume was chosen, load the career
     elif selection == "resume_game":
       self._post_career_event("load_career")
-    # If new game was chosen, mock the loading events
+    # If new game was chosen, need to set the started time
     elif selection == "new_game":
-      self._post_career_event("career_loaded")
+      self._post_career_event("new_career")
     else:
       self.error_log("Unknown selection '{}' from main menu!".format(selection))
     self.debug_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
@@ -163,7 +164,8 @@ class MainMenu(Carousel):
     career_data = self._selected_career or {}
     self.machine.events.post(evt_name,
                              career_name=career_data.get("career_name"),
-                             last_played=career_data.get("_strftime"),
+                             career_started=career_data.get("_career_started"),
+                             last_played=career_data.get("_last_played"),
                              level=career_data.get("level"),
                              **kwargs
                              )
