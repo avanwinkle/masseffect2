@@ -12,6 +12,15 @@
 event_player:
   logicblock_n7_hits_counter_complete: start_mode_n7_assignments
   logicblock_iff_counter_complete: start_mode_normandyattack
+  # Force an event to show n7/iff count when the first bumper hits
+  # TBD if somebody else is listening for "hit" events we might get bad results
+  slide_minerals_slide_active:
+    logicblock_n7_hits_counter_hit{device.achievements.normandyattack.state!="enabled"}:
+      count:
+        value: device.counters.n7_hits_counter.value
+    logicblock_iff_counter_hit{device.achievements.normandyattack.state=="enabled"}:
+      count:
+        value: device.counters.iff_counter.value
 
 counters:
   n7_hits_counter:

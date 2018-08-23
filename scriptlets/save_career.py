@@ -133,6 +133,7 @@ class SaveCareer(CustomCode):
   def _force_achievement(self, **kwargs):
     self.log.info(" - Loading achievement '{achievement}' into state '{state}'".format(**kwargs))
     player_achievements = self.machine.game.player.achievements
+    # TDB: This sets the value directly and doesn't post an achievement_(name)_state_(state) event. Do we need one?
     player_achievements[kwargs["achievement"]] = kwargs["state"]
 
     self.machine.events.remove_handler_by_key(self._achievement_handlers[kwargs["achievement"]])

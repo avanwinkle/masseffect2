@@ -264,7 +264,7 @@ sound_player:
   play_overlord_hit_sound:
     geth_hit_sfx:
       action: play
-      max_queue_time: 1s
+      max_queue_time: 200ms
   play_overlord_station_sound_1:
     archer_need_to_go_to_both:
       action: play
@@ -299,7 +299,7 @@ sound_player:
   play_arrival_hit_sound:
     batarian_hit_sfx:
       action: play
-      max_queue_time: 0
+      max_queue_time: 200ms
   play_arrival_station_sound_1:
     arr_ken_keep_shepard_contained:
       action: play

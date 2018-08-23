@@ -203,6 +203,16 @@ shows:
       lights:
         (leds): black
 
+slide_player:
+  mode_shadowbroker_boss_started:
+    shadowbroker_intro_slide:
+      action: play
+      priority: 100
+      expire: 4s
+    shadowbroker_boss_slide:
+      action: play
+      priority: 1
+
 slides:
   shadowbroker_intro_slide:
     - type: text
@@ -216,6 +226,17 @@ slides:
   shadowbroker_round_3_slide:
     - type: text
       text: SB Boss Round 3
+  shadowbroker_boss_slide:
+    - type: text
+      text: Defeat the
+      style: medium
+      anchor_y: bottom
+      y: middle+6
+    - type: text
+      text: Shadow Broker
+      style: text_default
+      anchor_y: top
+      y: middle+4
 
 sound_player:
   mode_shadowbroker_boss_started:
@@ -230,10 +251,18 @@ sound_player:
       action: load
     shepard_liara_now:
       action: load
-  sbboss_shot_hit: broker_hit
-  sbboss_attack_shot_hit: broker_attack
-  sbboss_shot_shields_hit: sbboss_shields_down
-  sbboss_shot_armor_hit: sbboss_armor_down
+  sbboss_shot_hit:
+    broker_hit:
+      volume: 0.8
+  sbboss_attack_shot_hit:
+    broker_attack:
+      volume: 0.8
+  sbboss_shot_shields_hit:
+    sbboss_shields_down:
+      volume: 0.6
+  sbboss_shot_armor_hit:
+    sbboss_armor_down:
+      volume: 0.6
 
 sound_pools:
   broker_attack:
@@ -262,6 +291,7 @@ sounds:
   shadowbroker_boss_music:
     file: SBK.07.Final_Combat.ogg
     track: music
+    fade_out: 500ms
     mode_end_action: stop
     loops: -1
   broker_attack_1:

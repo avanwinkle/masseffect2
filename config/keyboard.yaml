@@ -51,3 +51,5 @@ keyboard:
     event: ball_drain
     params:
       balls: 1
+  b:
+    switch: s_bumper_bottom
