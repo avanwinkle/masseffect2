@@ -1,4 +1,5 @@
 import logging
+import json
 from datetime import datetime
 from mpf.core.mode import Mode
 
@@ -11,7 +12,6 @@ class ModeAnalysis(Mode):
   def __init__(self, machine, config, name, path):
     super().__init__(machine, config, name, path)
     self.log = logging.getLogger("ModeAnalysis")
-    self.log.setLevel("DEBUG")
     self.settings = config.get("mode_settings")
     self._mode_states = {}
     self._handlers = {}
@@ -56,6 +56,6 @@ class ModeAnalysis(Mode):
       timestring = "{} hours {}".format(hours, timestring)
 
     self.log.info("Mode '{}' ran for {} and earned a score of {:,}. Data={}".format(
-      mode_name, timestring, self._mode_states[mode_name]["score"], self._mode_states[mode_name]))
+      mode_name, timestring, self._mode_states[mode_name]["score"], json.dumps(self._mode_states[mode_name])))
 
     self.machine.events.remove_handler_by_key(self._handlers[mode_name])

@@ -123,9 +123,7 @@ slides:
     - type: text
       text: (player|current_research)
       style: medium
-      anchor_x: left
       anchor_y: top
-      x: 25%
       y: top-16
   shipupgrade_ready_slide:
     widgets:

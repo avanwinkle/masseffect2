@@ -21,48 +21,52 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruittali_started:
+  mode_recruittali_started.1:
     set_environment:
       env: geth
-  logicblock_geth_colossus_counter_complete: recruit_tali_complete
+  mode_recruittali_started.2: play_tali_intro|2s
+  player_geth_colossus_state{value==0}: recruit_tali_complete
   drop_target_bank_dropbank_complete: recruittimer_add_time
   drop_target_bank_hitbank_complete: recruittimer_add_time
-  timer_recruittimer_tick{ticks<60 and ticks%15==0 and device.counters.geth_colossus_counter.value>3}: play_tali_shield
-  timer_recruittimer_tick{ticks<60 and ticks%15==0 and device.counters.geth_colossus_counter.value<=3}: play_tali_armor
+  timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
+  timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state<=3}: play_tali_armor
   timer_recruittimer_complete: recruit_tali_failed
 
-counters:
-  geth_colossus_counter:
-    count_events: geth_colossus_shot_hit
-    starting_count: current_player.geth_colossus_state
+timers:
+  colossus_repair_timer:
+    start_value: 10
+    end_value: 0
     direction: down
-    count_complete_value: 0
-    persist_state: true
+    start_running: false
+    control_events:
+      - event: geth_colossus_shot_hit
+        action: restart
+      - event: recruit_tali_complete
+        action: stop
 
 #####
 # TALI variable_player:
 #    Hurryup starts at 6,000
 #    Hit the colossus shot to add (100 * timer_ticks_remaining) to the hurryup
 #    Hit the colossus shot 6x to collect the hurryup and complete the mission
-#    Progress is not saved
+#    Progress is saved but the colossus gets 1 repair on restart
 #####
 variable_player:
   mode_recruittali_started:
     temp_hurryup_value:
       action: set
       int: 6000
-  mode_recruittali_will_stop:
-    geth_colossus_state: 1  # Increment the state by 1 for "reparing itself"
   timer_recruittimer_tick:
     temp_hurryup_value: -100
-  logicblock_geth_colossus_counter_hit:
-    temp_hurryup_value: current_player.recruitbase_recruittimer_tick * 100
+  geth_colossus_shot_hit:
+    temp_hurryup_value: current_player.recruitbase_recruittimer_tick * 90
     temp_multiplier:
       action: set
       int: current_player.recruitbase_recruittimer_tick
-    geth_colossus_state:
-      action: set
-      int: value
+    geth_colossus_state: -1
+  # Add a state back if the countdown timer expires
+  timer_colossus_repair_timer_complete:
+    geth_colossus_state: 1
   geth_target_shot_hit:
     score: 150
   recruit_tali_complete:
@@ -71,7 +75,6 @@ variable_player:
 shots:
   geth_colossus_shot:
     hit_events: sh_left_ramp_hit
-    reset_events: mode_recruittali_started
     tags: envshot_left_ramp
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
@@ -84,7 +87,7 @@ show_player:
   mode_recruittali_stopping:
     geth_colossus_show:
       action: stop
-  logicblock_geth_colossus_counter_updated:
+  geth_colossus_shot_hit:
     geth_colossus_show{value>=6}:
       action: play
       key: geth_colossus_show
@@ -172,7 +175,8 @@ sound_player:
     music_recruit_tali:
       action: play
       loops: -1
-    reegar_missionstart|1s:
+  play_tali_intro:
+    reegar_missionstart:
       action: play
   geth_colossus_shot_hit:
     colossus_hit_sound:
@@ -187,6 +191,10 @@ sound_player:
   recruit_tali_complete:
     music_recruit_tali:
       action: stop
+  # First repair gets an explicit repair dialogue
+  player_geth_colossus_state{change>0 and value==6}: reegar_its_repairing_itself
+  # Subsequent repairs can go random
+  player_geth_colossus_state{change>0 and value!=6}: colossus_repair
 
 sound_pools:
   tali_attack_shield:
@@ -203,6 +211,22 @@ sound_pools:
     type: random_force_all
     track: sfx
     sounds: colossus_sound_1, colossus_sound_2, colossus_sound_3, colossus_sound_4, colossus_sound_5, colossus_sound_6, colossus_sound_7, colossus_sound_8, colossus_sound_9
+  colossus_repair:
+    type: random_force_all
+    track: voice
+    sounds:
+      - squadmate_garrus_its_getting_up{current_player.status_garrus==4}
+      - squadmate_grunt_its_getting_up{current_player.status_grunt==4}
+      - squadmate_jack_its_getting_up{current_player.status_jack==4}
+      - squadmate_jacob_its_getting_up
+      - squadmate_kasumi_its_getting_up{current_player.status_kasumi==4}
+      - squadmate_legion_its_getting_up{current_player.status_legion==4}
+      - squadmate_miranda_its_getting_up
+      - squadmate_mordin_its_getting_up{current_player.status_mordin==4}
+      - squadmate_samara_its_getting_up{current_player.status_samara==4}
+      - squadmate_thane_its_getting_up{current_player.status_thane==4}
+      - squadmate_zaeed_its_getting_up{current_player.status_zaeed==4}
+      - reegar_its_coming_back_online
 
 sounds:
   music_recruit_tali:
@@ -213,29 +237,76 @@ sounds:
   tali_attack_shields_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289271_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_shields_2:
     file: en_us_hench_tali_ss_global_hench_tali_00289272_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_shields_3:
     file: en_us_hench_tali_ss_global_hench_tali_00289273_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_shields_4:
     file: en_us_hench_tali_ss_global_hench_tali_00289274_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_armor_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289276_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_armor_2:
     file: en_us_hench_tali_ss_global_hench_tali_00289277_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_armor_3:
     file: en_us_hench_tali_ss_global_hench_tali_00289278_m.ogg
     track: voice
+    max_queue_time: 0
   tali_attack_armor_4:
     file: en_us_hench_tali_ss_global_hench_tali_00289279_m.ogg
     track: voice
+    max_queue_time: 0
   reegar_missionstart:
     file: en_us_suntla_quarianleader_suntla_quarianleader_d_00253414_m.ogg
+    track: voice
+  reegar_its_repairing_itself:
+    file: en_us_suntla_quarianleader_suntla_turret_a_00261804_m.ogg
+    track: voice
+  reegar_its_coming_back_online:
+    file: en_us_suntla_quarianleader_suntla_turret_a_00261805_m.ogg
+    track: voice
+  squadmate_garrus_its_getting_up:
+    file: en_us_hench_garrus_suntla_colossusretwarn_h_00203088_m.ogg
+    track: voice
+  squadmate_grunt_its_getting_up:
+    file: en_us_hench_grunt_suntla_colossusretwarn_h_00203091_m.ogg
+    track: voice
+  squadmate_jack_its_getting_up:
+    file: en_us_hench_convict_suntla_colossusretwarn_h_00203093_m.ogg
+    track: voice
+  squadmate_jacob_its_getting_up:
+    file: en_us_hench_leading_suntla_colossusretwarn_h_00203085_m.ogg
+    track: voice
+  squadmate_kasumi_its_getting_up:
+    file: en_us_hench_thief_suntla_colossusretwarn_h_00203094_m.ogg
+    track: voice
+  squadmate_legion_its_getting_up:
+    track: voice
+    file: en_us_hench_geth_suntla_colossusretwarn_h_00203087_m.ogg
+  squadmate_miranda_its_getting_up:
+    file: en_us_hench_vixen_suntla_colossusretwarn_h_00203090_m.ogg
+    track: voice
+  squadmate_mordin_its_getting_up:
+    file: en_us_hench_professor_suntla_colossusretwarn_h_00278339_m.ogg
+    track: voice
+  squadmate_samara_its_getting_up:
+    file: en_us_hench_mystic_suntla_colossusretwarn_h_00203089_m.ogg
+    track: voice
+  squadmate_thane_its_getting_up:
+    file: en_us_hench_assassin_suntla_colossusretwarn_h_00203092_m.ogg
+    track: voice
+  squadmate_zaeed_its_getting_up:
+    file: en_us_hench_veteran_suntla_colossusretwarn_h_00203086_m.ogg
     track: voice
   colossus_sound_1:
     file: sfx_ss_geth_colossus_ss_geth_colossus_00313097_m.ogg
@@ -266,22 +337,14 @@ sounds:
     track: sfx
 
 widget_player:
-  mode_recruittali_started:
-    colossus_widget:
+  slide_recruitslide_active:
+    colossus_remaining_widget:
       action: add
-  geth_colossus_shot_geth_colossus_profile_hit:
-    colossus_widget:
-      action: update
-  mode_recruittali_stopping:
-    colossus_widget:
-      action: remove
+      slide: recruitslide
 
 widgets:
-  colossus_widget:
+  # Similar to recruitslide shots_remaining_widget but with a different player var
+  colossus_remaining_widget:
     - type: text
-      text: (player|geth_colossus_state) shots
-      anchor_x: right
-      anchor_y: top
-      x: right-2
-      y: top-2
-      font_size: 8
+      text: "Shots: (player|geth_colossus_state)"
+      style: small_bot_right_secondrow

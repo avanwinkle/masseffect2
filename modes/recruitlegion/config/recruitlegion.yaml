@@ -227,27 +227,15 @@ sounds:
 
 widget_player:
   timer_heretic_timer_tick:
-    heretic_timerwidget:
+    secondary_timer_widget:
       action: update
       slide: recruitslide
   mode_recruitlegion_will_stop:
-    heretic_timerwidget:
+    secondary_timer_widget:
       action: remove
   timer_heretic_timer_complete:
-    heretic_timerwidget:
+    secondary_timer_widget:
       action: remove
   timer_heretic_timer_stopped:
-    heretic_timerwidget:
+    secondary_timer_widget:
       action: remove
-
-widgets:
-  heretic_timerwidget:
-    - type: text
-      text: (ticks_remaining)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: right
-      anchor_y: bottom
-      x: right-4
-      y: 14
-

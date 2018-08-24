@@ -9,8 +9,8 @@ shots:
   # This shot lights when medigel is available
   medigel_shot:
     hit_events:
-      - s_outlane_left_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
-      - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled}
+      - s_outlane_left_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
+      - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
     profile: medigel_profile
     enable_events: levelup, enable_medigel
     # Disable medigel during Normandy attack because it has many saves. Completing
@@ -24,6 +24,7 @@ ball_saves:
     early_ball_save_events: ball_save_medigel_save_enabled
     auto_launch: true
     balls_to_save: 1
+    only_last_ball: true  # don't waste medigel during multiballs
 
 shot_profiles:
   medigel_profile:

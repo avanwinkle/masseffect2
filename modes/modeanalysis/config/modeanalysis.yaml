@@ -4,7 +4,6 @@ mode:
   stop_events: game_ended
   game_mode: false
   code: modeanalysis.ModeAnalysis
-  console_log: full
 
 mode_settings:
   analyze_modes:
@@ -20,6 +19,7 @@ mode_settings:
     - recruitzaeed
     - overlord
     - arrival
+    - n7_assignments
     - shadowbroker_chase
     - shadowbroker_vasir
     - shadowbroker_hagalaz
