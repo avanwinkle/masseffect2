@@ -27,7 +27,7 @@ mode:
 
 counters:
   zaeed_orbits_counter:
-    starting_count: 3 if current_player.zaeed_path_renegade == -1 else 2
+    starting_count: 4 if current_player.zaeed_path_renegade == -1 else 3
     count_complete_value: 0
     direction: down
     disable_on_complete: false
@@ -125,7 +125,7 @@ shots:
     tags: envshot_right_orbit
   zaeed_kickshot:
     hit_events: sh_kickback_hit
-    enable_events: logicblock_zaeed_orbits_counter_complete
+    enable_events: logicblock_zaeed_orbits_counter_hit{count==1}
     disable_events: mode_recruitzaeed_started
     profile: color_flashing_fast_static
     show_tokens:

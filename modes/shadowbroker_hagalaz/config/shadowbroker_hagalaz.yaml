@@ -430,6 +430,7 @@ sounds:
 timers:
   sbhagalaz_timer:
     start_value: 60
+    max_value: 60
     end_value: 0
     tick_interval: 1s
     start_running: true

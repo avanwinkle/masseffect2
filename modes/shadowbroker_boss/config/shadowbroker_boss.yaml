@@ -23,9 +23,11 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started:
+  mode_shadowbroker_boss_started.1:
     - sbboss_round_show_complete # Mock a complete event to reset the round
     - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
+  mode_shadowbroker_boss_started.2:
+    set_environment: { env: shadowbroker }
   sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
     - play_sbboss_round_show_1{count==1}
@@ -89,6 +91,7 @@ shot_groups:
     shots: sbboss_left_orbit, sbboss_right_orbit, sbboss_right_ramp
 
 shots:
+  # Left ramp and kickback have health shots because they can hold
   sbboss_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: enable_sbboss_finalshot
@@ -96,6 +99,7 @@ shots:
     profile: sbboss_health_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
+    tags: envshot_left_ramp
   sbboss_kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_sbboss_finalshot
@@ -103,43 +107,53 @@ shots:
     profile: sbboss_health_profile
     show_tokens:
       leds: l_kickback_shield_rgb
+    tags: envshot_kickback
+  # Right ramp and orbits have armor/shield shots and therefore need to reset
+  # Cannot use restart_events because we need enable_events to prevent default enabling
   sbboss_left_orbit:
-    restart_events: enable_sbboss_left_orbit
-    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
+    enable_events: enable_sbboss_left_orbit
+    disable_events: enable_sbboss_finalshot
+    reset_events: mode_shadowbroker_boss_started
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
+    tags: envshot_left_orbit
   sbboss_right_ramp:
-    restart_events: enable_sbboss_right_ramp
-    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
+    enable_events: enable_sbboss_right_ramp
+    disable_events: enable_sbboss_finalshot
+    reset_events: mode_shadowbroker_boss_started
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
+    tags: envshot_right_ramp
   sbboss_right_orbit:
-    restart_events: enable_sbboss_right_orbit
-    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
+    enable_events: enable_sbboss_right_orbit
+    disable_events: enable_sbboss_finalshot
+    reset_events: mode_shadowbroker_boss_started
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-  sbboss_attack_shot:
-    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit, sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit, s_battering_ram_active
+    tags: envshot_right_orbit
 
 show_player:
   play_sbboss_round_show_1:
     sbboss_round_show_1:
       action: play
       loops: 0
+      priority: 10
   play_sbboss_round_show_2:
     sbboss_round_show_2:
       action: play
       loops: 0
+      priority: 10
   play_sbboss_round_show_3:
     sbboss_round_show_3:
       action: play
       loops: 0
+      priority: 10
 
 shows:
   sbboss_round_show_1:
@@ -149,12 +163,12 @@ shows:
           action: play
           track: voice
       slides: shadowbroker_round_1_slide
-    - time: 3s
+    - time: 5s
       sounds:
         shepard_then_we_do_this_the_hard_way:
           action: play
           track: voice
-    - time: 5s
+    - time: 6s
       events:
         - sbboss_round_show_complete
         - enable_random_sbboss_shot
@@ -248,12 +262,6 @@ sound_player:
       action: load
     shepard_liara_now:
       action: load
-  sbboss_shot_hit:
-    broker_hit:
-      volume: 0.8
-  sbboss_attack_shot_hit:
-    broker_attack:
-      volume: 0.8
   sbboss_shot_shields_hit:
     sbboss_shields_down:
       volume: 0.6
@@ -262,14 +270,6 @@ sound_player:
       volume: 0.6
 
 sound_pools:
-  broker_attack:
-    type: random_force_all
-    track: sfx
-    sounds: broker_attack_1, broker_attack_2, broker_attack_3, broker_attack_4, broker_attack_5, broker_attack_6
-  broker_hit:
-    type: random
-    track: sfx
-    sounds: broker_hit_1, broker_hit_2, broker_hit_3, broker_hit_4, broker_hit_5, broker_hit_6, broker_hit_7, broker_hit_8
   sbboss_shields_down:
     track: voice
     type: random_force_all
@@ -288,51 +288,10 @@ sounds:
   shadowbroker_boss_music:
     file: SBK.07.Final_Combat.ogg
     track: music
+    volume: 0.5
     fade_out: 500ms
     mode_end_action: stop
     loops: -1
-  broker_attack_1:
-    file: DLC_EXP_Part01_Int.1022.ogg
-    track: voice
-  broker_attack_2:
-    file: DLC_EXP_Part01_Int.1023.ogg
-    track: voice
-  broker_attack_3:
-    file: DLC_EXP_Part01_Int.1024.ogg
-    track: voice
-  broker_attack_4:
-    file: DLC_EXP_Part01_Int.1025.ogg
-    track: voice
-  broker_attack_5:
-    file: DLC_EXP_Part01_Int.1026.ogg
-    track: voice
-  broker_attack_6:
-    file: DLC_EXP_Part01_Int.1027.ogg
-    track: voice
-  broker_hit_1:
-    file: DLC_EXP_Part01_Int.1030.ogg
-    track: voice
-  broker_hit_2:
-    file: DLC_EXP_Part01_Int.1031.ogg
-    track: voice
-  broker_hit_3:
-    file: DLC_EXP_Part01_Int.1040.ogg
-    track: voice
-  broker_hit_4:
-    file: DLC_EXP_Part01_Int.1041.ogg
-    track: voice
-  broker_hit_5:
-    file: DLC_EXP_Part01_Int.1042.ogg
-    track: voice
-  broker_hit_6:
-    file: DLC_EXP_Part01_Int.1044.ogg
-    track: voice
-  broker_hit_7:
-    file: DLC_EXP_Part01_Int.1045.ogg
-    track: voice
-  broker_hit_8:
-    file: DLC_EXP_Part01_Int.1036.ogg
-    track: voice
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.ogg
     track: voice

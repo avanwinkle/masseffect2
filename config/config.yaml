@@ -91,6 +91,7 @@ modes:
   - env_husks
   - env_husks_lower
   - env_krogan
+  - env_shadowbroker
   # Main Story Missions:
   - collectorship_ambush
   - collectorship_base
@@ -344,7 +345,7 @@ animations:
       value: 0.5
       duration: .25s
       repeat: true
-pulse_text_slow:
+  pulse_text_slow:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
       duration: .75s          # duration for this step (how long it takes to get there)

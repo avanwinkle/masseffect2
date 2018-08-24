@@ -12,6 +12,7 @@ sound_player:
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
   shadowbroker_chase_complete: car_crash
+  achievement_shadowbroker_state_completed: liara_its_finally_over
   mode_overlord_stopped: david_ending
   recruit_tali_failed: colossusrepair
   recruit_kasumi_failed: kasumi_failed
@@ -112,9 +113,12 @@ sounds:
     track: voice
   kasumi_damn_it_we_have_to_find_another_way:
     file: DLC_HEN_MT_Int.817.ogg
-    track: voice    
+    track: voice
   liara_we_lost_her:
     file: DLC_EXP_Part01_Int.695.ogg
     track: voice
     max_queue_time: 1s
     volume: 1
+  liara_its_finally_over:
+    file: DLC_EXP_Part01_Int.1167.ogg
+    track: voice

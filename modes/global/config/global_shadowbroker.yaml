@@ -25,6 +25,8 @@ event_player:
     - play_sbdrops_hitsound_5{count==5}
     - play_sbdrops_hitsound_6{count==6}
     - play_sbdrops_hitsound_7{count==7}
+  drop_target_bank_dropbank_down{device.achievements.shadowbroker.state=="completed"}:
+    - play_glyph
 
 variable_player:
   drop_target_bank_dropbank_down:
@@ -116,6 +118,17 @@ sound_player:
     shepard_ill_start_down_here:
       max_queue_time: 2s
 
+sound_pools:
+  glyph:
+    type: random_force_all
+    track: voice
+    sounds:
+      - glyph_repairs_are_underway
+      - glyph_i_can_log_that_in_the_archives
+      - glyph_let_me_know_if_i_can_organize
+      - glyph_welcome_back_shadowbroker
+      - glyph_operations_almost_fully_recovered
+
 sounds:
   shadowbroker_agent_music:
     file: SBK.03.Agent_Combat.ogg
@@ -174,4 +187,18 @@ sounds:
   liara_land_outside_and_hunt_for_a_hatch:
     file: DLC_EXP_Part01_Int.944.ogg
     track: voice
-
+  glyph_operations_almost_fully_recovered:
+    file: DLC_EXP_Part01_Int.1289.ogg
+    track: voice
+  glyph_i_can_log_that_in_the_archives:
+    file: DLC_EXP_Part01_Int.1291.ogg
+    track: voice
+  glyph_repairs_are_underway:
+    file: DLC_EXP_Part01_Int.1314.ogg
+    track: voice
+  glyph_let_me_know_if_i_can_organize:
+    file: DLC_EXP_Part01_Int.1316.ogg
+    track: voice
+  glyph_welcome_back_shadowbroker:
+    file: DLC_EXP_Part01_Int.1317.ogg
+    track: voice

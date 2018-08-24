@@ -42,10 +42,10 @@ timers:
       # During a ball save or lock, pause the timer to allow for the new ball to eject
       - event: ball_save_recruitsave_saving_ball{device.timers.recruittimer.running}
         action: pause
-        value: 3
+        value: 2
       - event: multiball_lock_fmball_lock_locked_ball{device.timers.recruittimer.running}
         action: pause
-        value: 3
+        value: 2
       # The timer starts fresh on every mission and stops on every end
       - event: recruittimer_start
         action: restart

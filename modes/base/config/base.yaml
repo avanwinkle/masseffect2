@@ -505,11 +505,11 @@ sounds:
     fade_out: 10s
     ducking:
       target: music
-      delay: 2s
-      attack: 2s
+      delay: 1500ms
+      attack: 1s
       attenuation: 0
-      release_point: 15s
-      release: 6s
+      release_point: 18s
+      release: 4s
 
 track_player:
   # Bring the music out asap to allow for the bonus music to fade in
