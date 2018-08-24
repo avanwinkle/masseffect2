@@ -1,0 +1,26 @@
+#config_version=5
+mode:
+  start_events: game_start
+  stop_events: game_ended
+  game_mode: false
+  code: modeanalysis.ModeAnalysis
+  console_log: full
+
+mode_settings:
+  analyze_modes:
+    - recruitgarrus
+    - recruitgrunt
+    - recruitjack
+    - recruitkasumi
+    - recruitlegion
+    - recruitmordin
+    - recruitsamara
+    - recruittali
+    - recruitthane
+    - recruitzaeed
+    - overlord
+    - arrival
+    - shadowbroker_chase
+    - shadowbroker_vasir
+    - shadowbroker_hagalaz
+    - shadowbroker_boss

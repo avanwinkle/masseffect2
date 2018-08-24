@@ -78,6 +78,7 @@ modes:
   - lockhandler
   - mainmenu
   - missionselect
+  - modeanalysis
   - bonus
   # Environments:
   - environment
