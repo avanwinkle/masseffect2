@@ -24,8 +24,12 @@ event_player:
   mode_recruittali_started.1:
     set_environment:
       env: geth
-  mode_recruittali_started.2: play_tali_intro|2s
-  player_geth_colossus_state{value==0}: recruit_tali_complete
+  mode_recruittali_started.2:
+    - play_colossus_show
+    - play_tali_intro|2s
+  player_geth_colossus_state:
+    - play_colossus_show{value>0}
+    - recruit_tali_complete{value==0}
   drop_target_bank_dropbank_complete: recruittimer_add_time
   drop_target_bank_hitbank_complete: recruittimer_add_time
   timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
@@ -56,6 +60,7 @@ variable_player:
     temp_hurryup_value:
       action: set
       int: 6000
+    geth_colossus_state{current_player.geth_colossus_state<6}: 1
   timer_recruittimer_tick:
     temp_hurryup_value: -100
   geth_colossus_shot_hit:
@@ -87,38 +92,38 @@ show_player:
   mode_recruittali_stopping:
     geth_colossus_show:
       action: stop
-  geth_colossus_shot_hit:
-    geth_colossus_show{value>=6}:
+  play_colossus_show:
+    geth_colossus_show{current_player.geth_colossus_state>=6}:
       action: play
       key: geth_colossus_show
       speed: 1
       show_tokens:
         color: 0066FF #color_shield
-    geth_colossus_show{value==5}:
+    geth_colossus_show{current_player.geth_colossus_state==5}:
       action: play
       key: geth_colossus_show
       speed: 2
       show_tokens:
         color: 0066FF #color_shield
-    geth_colossus_show{value==4}:
+    geth_colossus_show{current_player.geth_colossus_state==4}:
       action: play
       key: geth_colossus_show
       speed: 3
       show_tokens:
         color: 0066FF #color_shield
-    geth_colossus_show{value==3}:
+    geth_colossus_show{current_player.geth_colossus_state==3}:
       action: play
       key: geth_colossus_show
       speed: 1
       show_tokens:
         color: FFCC00 #color_armor
-    geth_colossus_show{value==2}:
+    geth_colossus_show{current_player.geth_colossus_state==2}:
       action: play
       key: geth_colossus_show
       speed: 2
       show_tokens:
         color: FFCC00 #color_armor
-    geth_colossus_show{value==1}:
+    geth_colossus_show{current_player.geth_colossus_state==1}:
       action: play
       key: geth_colossus_show
       speed: 3

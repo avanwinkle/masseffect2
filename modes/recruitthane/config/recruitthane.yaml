@@ -29,9 +29,9 @@ event_player:
 
 counters:
   thane_ascent_counter:
-    # The first time it takes three shots to light, otherwise just one
+    # Initially takes three shots to light, after it's been lit just one
     # TODO: Verify the initial state of a persisted player variable, it may not be undefined!
-    starting_count: 2 if device.counters.thane_ascent_counter.value > 0 else 0
+    starting_count: 2 if device.counters.thane_ascent_counter.value > 1 else 0
     count_complete_value: 3
     direction: up
     disable_on_complete: false
@@ -135,7 +135,7 @@ slides:
         y: middle+4
         z: 1
       - type: text
-        text: HIT ORBIT TO STORM THE BRIDGE
+        text: ORBITS STORM THE BRIDGE
         style: dmd_small
         anchor_y: top
         y: middle-4

@@ -167,6 +167,12 @@ show_player:
         leds: l_targets
         color: FFFFFF
 
+sound_player:
+  # Just in case we never stopped the huddle-initiated music, stop that too
+  mode_suicide_platform_will_stop:
+    platforms_med:
+      action: stop
+
 widget_player:
   player_temp_hurryup_value:
     suicide_hurryup:

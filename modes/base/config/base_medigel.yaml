@@ -14,8 +14,9 @@ shots:
     profile: medigel_profile
     enable_events: levelup, enable_medigel
     # Disable medigel during Normandy attack because it has many saves. Completing
-    # the attack will levelup and restore medigel anyway.
-    disable_events: ball_save_medigel_save_saving_ball, ball_will_end, mode_normandyattack_started
+    # the attack will levelup and restore medigel anyway. Suicide also manages its
+    # own ball saves, so disable for the entire suicide mission
+    disable_events: ball_save_medigel_save_saving_ball{balls>0}, ball_will_end, mode_normandyattack_started, mode_suicide_base_started
     tags: envshot_outlane
 
 ball_saves:
@@ -50,7 +51,7 @@ slide_player:
       action: play
       expire: 2s
       priority: 2000
-  ball_save_medigel_save_saving_ball:
+  ball_save_medigel_save_saving_ball{balls>0}:
     medigel_slide:
       action: play
       expire: 2s
@@ -86,7 +87,6 @@ slides:
       height: 32
       color: black
       z: 0
-
 
 sound_player:
   ball_save_medigel_save_saving_ball: medigel_sound

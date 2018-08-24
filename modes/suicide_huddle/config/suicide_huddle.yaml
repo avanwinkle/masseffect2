@@ -103,10 +103,7 @@ shows:
           events_when_stopped: specialist_intro_complete
   infiltration_outro_show:
     - time: 0
-      sounds:
-        infiltration_low:
-          action: play
-          track: music
+      events: play_music_infiltration
     - time: 2.5s
       sounds:
         specialist_inf_outro:
@@ -129,10 +126,7 @@ shows:
           events_when_stopped: play_specialist_lw_no
   longwalk_outro_show:
     - time: 0
-      sounds:
-        longwalk_low:
-          action: play
-          track: music
+      events: play_music_longwalk
     - time: 1s
       sounds:
         specialist_lw_outro:
@@ -141,10 +135,7 @@ shows:
           events_when_stopped: suicide_huddle_complete
   tubes_intro_show:
     - time: 0
-      sounds:
-        platforms_low:
-          action: play
-          track: music
+      events: play_music_tubes
     - time: 2s
       sounds:
         shep_we_win_or_lose_it_all:
@@ -153,10 +144,7 @@ shows:
           events_when_stopped: suicide_huddle_complete
   platforms_intro_show:
     - time: 0
-      sounds:
-        platforms_med:
-          action: play
-          track: music
+      events: play_music_platforms
     - time: 2s
       sounds:
         shep_give_us_a_minute_edi:
@@ -208,11 +196,11 @@ sound_player:
   play_specialist_lw_no: specialist_lw_no
   play_specialist_lw_yes: specialist_lw_yes
   play_specialist_lw_callback_miranda: miranda_any_biotic_could
-  # We start the music in huddle so make sure we end it on mode end
-  # This event doesn't seem to work great in longwalk, maybe it has to be bound here?
-  mode_suicide_longwalk_will_stop:
-    longwalk_low:
-      action: stop
+  # Music started in shows won't end on stop events, so use the show to trigger sound_player
+  play_music_infiltration: infiltration_low
+  play_music_longwalk: longwalk_low
+  play_music_tubes: platforms_low
+  play_music_platforms: platforms_med
 
 widget_player:
   ## Show the specialist selection title

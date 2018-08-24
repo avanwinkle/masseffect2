@@ -286,8 +286,7 @@ sound_player:
       action: stop
     specialist_lw_close:
       action: stop
-  # We start the music in huddle so make sure we end it on mode end
-  # This event doesn't seem to work great?
+  # Just in case we never stopped the huddle-initiated music, stop that too
   mode_suicide_longwalk_will_stop:
     longwalk_low:
       action: stop

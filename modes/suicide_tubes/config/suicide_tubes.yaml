@@ -93,9 +93,9 @@ sound_player:
   # Seamless transition from the low to the med music when the marker hits
   platforms_low_med_transition_marker: platforms_med
   tube_shots_lit_hit: tubes_got_one
-  # In case we won this super fast and the platforms_low didn't finish, stop it
-  tubes_complete:
+  play_tube_hint: tubes_hint
+  # Just in case we never stopped the huddle-initiated music, stop that too
+  mode_tubes_will_stop:
     platforms_low:
       action: stop
-  play_tube_hint: tubes_hint
 

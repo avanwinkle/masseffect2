@@ -29,7 +29,7 @@ event_player:
     - play_intro_sound{device.counters.fans_counter.value==0}
     - play_cure_sound{device.counters.fans_counter.value>0}
   spinner_hit: enable_cure
-  cure_shot_lit_hit:
+  cure_right_lit_hit:
     - enable_fans
     - play_cure_sound
   fan_shots_hit_complete: recruit_mordin_complete
@@ -61,44 +61,26 @@ variable_player:
     temp_multiplier:
       action: add
       float: 0.5
-  cure_shot_hit:
-    temp_hurryup_value: 50 * current_player.temp_multiplier * device.counters.recruittimer.ticks_remaining
+    temp_hurryup_value: 20 * current_player.temp_multiplier * device.timers.recruittimer.ticks
   fan_shots_hit:
-    temp_hurryup_value: 100 * current_player.temp_multiplier * device.counters.recruittimer.ticks_remaining
+    temp_hurryup_value: 100 * current_player.temp_multiplier * device.timers.recruittimer.ticks
   recruit_mordin_complete:
     score: current_player.temp_hurryup_value
 
 shot_groups:
-  cure_shot:
-    shots: cure_left, cure_right
   fan_shots:
     shots: fan_left, fan_right
     reset_events: mode_recruitmordin_started
-
-shot_profiles:
-  spinnerprofile:
-    # Spinner disables temporarily during orbits, but keep the show alive
-    show_when_disabled: true
-    states:
-      - name: lit
-        show: color_flashing_default
-        sync_ms: 1000
-      - name: hit
-        show: led_color
 
 shots:
   spinner:
     hit_events: sh_spinner_hit
     enable_events: cure_left_hit
-    profile: spinnerprofile
-    show_tokens:
-      leds: l_left_orbit_shield_rgb
-      color: 440000 #color_mordin
   cure_left:
     hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
     profile: color_flashing_to_solid_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_left_orbit_shield_rgb
       color: 440000 #color_mordin
     tags: envshot_right_orbit
   cure_right:

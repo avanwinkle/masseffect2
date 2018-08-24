@@ -71,8 +71,8 @@ counters:
 multiballs:
   shadowbroker_multiball:
     ball_count: 2
-    stop_events: play_sbboss_round_show
     start_events: shadowbroker_round_start
+    shoot_again: 5s
 
 shot_profiles:
   sbboss_shot_profile:
@@ -111,27 +111,24 @@ shots:
   # Right ramp and orbits have armor/shield shots and therefore need to reset
   # Cannot use restart_events because we need enable_events to prevent default enabling
   sbboss_left_orbit:
-    enable_events: enable_sbboss_left_orbit
-    disable_events: enable_sbboss_finalshot
-    reset_events: mode_shadowbroker_boss_started
+    restart_events: enable_sbboss_left_orbit
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
     tags: envshot_left_orbit
   sbboss_right_ramp:
-    enable_events: enable_sbboss_right_ramp
-    disable_events: enable_sbboss_finalshot
-    reset_events: mode_shadowbroker_boss_started
+    restart_events: enable_sbboss_right_ramp
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
   sbboss_right_orbit:
-    enable_events: enable_sbboss_right_orbit
-    disable_events: enable_sbboss_finalshot
-    reset_events: mode_shadowbroker_boss_started
+    restart_events: enable_sbboss_right_orbit
+    disable_events: mode_shadowbroker_boss_started, enable_sbboss_finalshot
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
@@ -264,10 +261,10 @@ sound_player:
       action: load
   sbboss_shot_shields_hit:
     sbboss_shields_down:
-      volume: 0.6
+      volume: 0.9
   sbboss_shot_armor_hit:
     sbboss_armor_down:
-      volume: 0.6
+      volume: 0.9
 
 sound_pools:
   sbboss_shields_down:
@@ -277,12 +274,24 @@ sound_pools:
       - liara_were_through_his_shields
       - liara_his_shields_are_down
       - liara_his_shields_deactivated
+    ducking:
+      target: music
+      attenuation: 0.6
+      attack: 1s
+      release_point: 1s
+      release: 1s
   sbboss_armor_down:
     track: voice
     type: random_force_all
     sounds:
       - liara_hit_him_now
       - liara_quick_while_hes_vulnerable
+    ducking:
+      target: music
+      attenuation: 0.6
+      attack: 1s
+      release_point: 1s
+      release: 1s
 
 sounds:
   shadowbroker_boss_music:
@@ -295,36 +304,29 @@ sounds:
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.ogg
     track: voice
-    volume: 0.9
   liara_were_through_his_shields:
     file: DLC_EXP_Part01_Int.1013.ogg
     track: voice
-    volume: 0.9
   liara_his_shields_are_down:
     file: DLC_EXP_Part01_Int.1015.ogg
     track: voice
-    volume: 0.9
   liara_hit_him_now:
     file: DLC_EXP_Part01_Int.1014.ogg
     track: voice
-    volume: 0.9
   liara_quick_while_hes_vulnerable:
     file: DLC_EXP_Part01_Int.1012.ogg
     track: voice
-    volume: 0.9
   liara_energy_projectiles_bouncing_off:
     file: DLC_EXP_Part01_Int.1052.ogg
     track: voice
-    volume: 0.9
   liara_if_you_can_get_him_to:
     file: DLC_EXP_Part01_Int.1051.ogg
     track: voice
-    volume: 0.9
   shepard_then_we_do_this_the_hard_way:
     file: DLC_EXP_Part01_Int.1054.ogg
     track: voice
-    volume: 0.9
+    volume: 1
   shepard_liara_now:
     file: DLC_EXP_Part01_Int.1050.ogg
     track: voice
-    volume: 0.9
+    volume: 1

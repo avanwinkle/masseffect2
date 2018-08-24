@@ -38,7 +38,8 @@ event_player:
     # If it's time to begin and the ball is in the plunger lane, fire it out!
     - pulse_plunger
   # Make sure the dropbank is up so we have a fair shot to hit it
-  player_shot_normandy_dropbank_enabled: reset_dropbank
+  # (this is a rotation so it's 'value', not 'enabled')
+  player_shot_normandy_dropbank{value==1}: reset_dropbank
   normandy_dropbank_lit_hit.1:
     levelup:
       mission_name: Normandy Escaped
@@ -316,6 +317,7 @@ sounds:
   edi_propulsion_disabled_virus_detected:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
     track: voice
+    volume: 1
   edi_main_corridors_no_longer_safe:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
     track: voice
