@@ -20,7 +20,7 @@ event_player:
     - play_specialist_lw_callback_miranda{current_player.status_miranda==4}|300ms
     - specialist_lw_callback_complete{current_player.status_miranda!=4}
   specialist_intro_complete: show_huddle_slide # This is an end-of-sound event
-
+  suicide_huddle_show_failsafe: suicide_huddle_complete
   # TODO: One second delay required for loading sound assets in shows. Fix that
   # If this is our first time coming to the mode, play a little ditty
   mode_suicide_huddle_started.1{current_player.suicide_continuing>0}:
@@ -110,6 +110,9 @@ shows:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
+  # Failsafe in case the audio fails to play
+    - time: 10s
+      events: suicide_huddle_show_failsafe
   longwalk_intro_show_yes:
     - time: 0
       sounds:
@@ -133,6 +136,9 @@ shows:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
+  # Failsafe in case the audio fails to play
+    - time: 10s
+      events: suicide_huddle_show_failsafe
   tubes_intro_show:
     - time: 0
       events: play_music_tubes
@@ -142,6 +148,9 @@ shows:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
+  # Failsafe in case the audio fails to play
+    - time: 10s
+      events: suicide_huddle_show_failsafe
   platforms_intro_show:
     - time: 0
       events: play_music_platforms
@@ -151,6 +160,9 @@ shows:
           action: play
           track: voice
           events_when_stopped: suicide_huddle_complete
+    # Failsafe in case the audio fails to play
+    - time: 10s
+      events: suicide_huddle_show_failsafe
 
 sound_player:
   # Sounds in shows don't playback after loading, so pre-load them!
@@ -184,7 +196,7 @@ sound_player:
     shep_we_win_or_lose_it_all:
       action: load
       track: voice
-  preload_finale:
+  preload_final:
     platforms_med_high:
       action: load
       track: music

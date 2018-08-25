@@ -64,8 +64,12 @@ widget_player:
     mode_suicide_platforms_started:
       platforms_title:
         slide: suicide_slide
-    mode_suicide_endrun_started:
+    # Until we have mode endrun, use the event to fake it
+    #mode_suicide_endrun_started:
+    start_mode_suicide_endrun:
       humanreaper_title:
+        action: remove
+      platforms_title:
         action: remove
       endrun_title:
         slide: suicide_slide
@@ -192,24 +196,24 @@ slides:
               value: 0
               duration: .15s
               repeat: true
-    # For debugging mostly, lots of numbers about the hit
-    reaper_hitdamage_slide:
-      widgets:
-        - type: text
-          text: KAPOW!
-          style: text_default
-          anchor_y: bottom
-          y: middle+2
-        - type: text
-          text: (change) damage dealt!
-          style: small
-          anchor_y: top
-          y: middle-2
-        - type: text
-          text: (value) remaining
-          style: small
-          anchor_y: bottom
-          y: 2
+  # For debugging mostly, lots of numbers about the hit
+  reaper_hitdamage_slide:
+    widgets:
+      - type: text
+        text: KAPOW!
+        style: text_default
+        anchor_y: bottom
+        y: middle+2
+      - type: text
+        text: (change) damage dealt!
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: (value) remaining
+        style: small
+        anchor_y: bottom
+        y: 2
   # Shown when a squadmate is killed, during restart mode
   squadmate_killed_slide:
     widgets:
@@ -258,6 +262,11 @@ widgets:
       - type: text
         text: the End Run
         style: text_default
+      - type: text
+        text: "Doesn't exist. You win!"
+        style: small
+        anchor_y: bottom
+        y: 2
   # Widgets for timers and shot counters
     suicide_time:
       - type: text

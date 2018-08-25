@@ -98,7 +98,9 @@ ball_holds:
     hold_devices: bd_lock
     enable_events: enable_transition_hold, mode_suicide_restart_started
     release_one_events: suicide_huddle_complete
-    disable_events: ball_hold_suicide_transition_hold_balls_released
+    disable_events:
+      - ball_hold_suicide_transition_hold_balls_released # this is standard behavior and works well
+      - mode_suicide_huddle_stopped # this is for virtual mode because the release never happens
 
 variable_player:
   # Track whether we are progressing into a mode or starting a new ball

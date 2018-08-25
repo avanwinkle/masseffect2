@@ -29,6 +29,8 @@ event_player:
   platform_shots_hit_complete: reset_platforms
   # When the hurryup drains, move on to the next mode
   player_temp_hurryup_value{value<=100}: platforms_complete
+  # If the player plays the maximum amount of time, move on
+  timer_platform_complete: platforms_complete
 
 variable_player:
   mode_suicide_platforms_started:
@@ -47,7 +49,7 @@ variable_player:
     score:
       action: add
       int: current_player.temp_hurryup_value * current_player.harbinger_multiplier / 10
-  # We need to cap the time the player can sit in this phase, so after 60s stop restoring hurryup time
+  # We need to cap the time the player can sit in this phase, so after 30s stop restoring hurryup time
   platform_shots_lit_hit.2{device.timers.platform.ticks<=60}:
     temp_hurryup_value:
       action: add
@@ -70,7 +72,7 @@ multiballs:
 timers:
   platform:
     start_value: 0
-    end_value: 60
+    end_value: 120 # Timer runs on the half second, so 120 for 60s
     direction: up
     start_running: true  # TODO: add free-shoot period for combat squadmates
     tick_interval: 500ms

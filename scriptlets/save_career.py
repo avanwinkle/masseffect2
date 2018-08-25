@@ -14,6 +14,7 @@ ACHIEVEMENT_MISSIONS = (
 )
 
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
+SAVE_SUICIDE_PROGRESS = False # Should suicide mission progress be saved to the career?
 
 class SaveCareer(CustomCode):
 
@@ -56,16 +57,17 @@ class SaveCareer(CustomCode):
       if key == "achievements":
         for ach, state in value.items():
           # Don't allow suicide mission states to save selected/completed state, always revert to enabled
-          if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and state not in ("enabled", "disabled"):
+          if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and state not in ("enabled", "disabled") and not SAVE_SUICIDE_PROGRESS:
             self.log.warn(" - Suicide Achievement {} in state '{}', changing to 'enabled'".format(ach, state))
             newcareer[key][ach] = "enabled"
           # Don't save the started-ness of the suicide mission, revert it to enabled
-          elif ach == "suicidemission" and state != "disabled":
+          elif ach == "suicidemission" and state != "disabled" and not SAVE_SUICIDE_PROGRESS:
             newcareer[key][ach] = "enabled"
           # Everything else? Save the existing state
           else:
             newcareer[key][ach] = state
-      elif key in PLAYER_VARS or (key.startswith("status_") and (value >= 0 or DO_SAVE_DEATHS)):
+      # Save the state of squadmates, unless they're dead (except if we're saving suicide progress, because death matters!)
+      elif key in PLAYER_VARS or (key.startswith("status_") and (value >= 0 or (DO_SAVE_DEATHS or SAVE_SUICIDE_PROGRESS))):
         newcareer[key] = value
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))
