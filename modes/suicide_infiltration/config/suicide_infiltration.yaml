@@ -196,6 +196,10 @@ sound_player:
     infiltration_low:
       action: play
       start_at: 21s
+    infiltration_med:
+      action: stop
+    infiltration_high:
+      action: stop
     specialist_inf_warning_first:
       action: stop
       fade_out: 100ms
@@ -235,8 +239,3 @@ sound_player:
     specialist_inf_close:
       events_when_stopped: advance_complete
       mode_end_action: stop
-  # Just in case we never stopped the huddle-initiated music, stop that too
-  mode_suicide_infiltration_will_stop:
-    infiltration_low:
-      action: stop
-

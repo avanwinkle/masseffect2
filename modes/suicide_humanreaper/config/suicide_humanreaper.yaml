@@ -40,10 +40,10 @@ event_player:
     - enable_random_reapershot
   player_reaper_hp:
     # If the reaper still has HP and there are more rounds to go, "fail" to return to platforms
-    - humanreaper_failed{value>0 and current_player.reaper_rounds>0}
-    # If the reaper has no HP and the minimum 3 rounds have passed, OR if the max rounds have passed, "complete"
+    - humanreaper_failed{value>0 and current_player.reaper_rounds<4}
+    # If the reaper has no HP or if the max rounds have passed, "complete"
     # Maximum rounds to kill the reaper... 4?
-    - humanreaper_complete{(value<=0 and current_player.reaper_rounds<=3) or current_player.reaper_rounds>=4}
+    - humanreaper_complete{value<=0 or current_player.reaper_rounds>=4}
   ball_save_reaper_squadmate_save_saving_ball:
     kill_squadmate:
       squadmate: random
@@ -58,7 +58,8 @@ random_event_player:
       - enable_reapershot_right_orbit
 
 variable_player:
-  mode_suicide_humanreaper_started:
+  # Adjust the multiplier and hurryup _after_ the round count changes
+  player_reaper_rounds:
     # Multiplier increases by 25% each round, to make the fight faster
     # (this is just for display, it's calculated separately in temp_hurryup_value below)
     temp_multiplier:

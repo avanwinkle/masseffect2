@@ -286,7 +286,3 @@ sound_player:
       action: stop
     specialist_lw_close:
       action: stop
-  # Just in case we never stopped the huddle-initiated music, stop that too
-  mode_suicide_longwalk_will_stop:
-    longwalk_low:
-      action: stop

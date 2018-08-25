@@ -9,7 +9,7 @@ sound_player:
   envshot_left_ramp_entrance_hit: bioticcharge_up
   envshot_left_ramp_hit: bioticcharge_boom
   envshot_right_ramp_entrance_hit: pull_up
-  envshot_right_ramp_hit: pull_boom
+  envshot_right_ramp_hit: pull_hit
   envshot_left_orbit_hit: singularity_up
   envshot_right_orbit_hit: warp_up
   envshot_kickback_hit: shockwave_up

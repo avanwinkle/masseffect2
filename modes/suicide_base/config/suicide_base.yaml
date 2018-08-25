@@ -77,12 +77,20 @@ queue_relay_player:
     wait_for: squadmate_killed_complete # TODO: change this to a post-sound-effect event
 
 ball_saves:
+  # This is the save that transitions from omegarelay's forced drain into infiltration
   omegarelay_save:
     enable_events: multiball_omegarelay_ended
     only_last_ball: true
     delayed_eject_events: mode_suicide_infiltration_started
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     auto_launch: true # Must be true because we have a multiball starting too
+  # This save covers infiltration, longwalk, and tubes, 8 seconds at the start
+  suicide_save:
+    enable_events: mode_type_suicide_started{device.achievements.omegarelay.state=="completed" and device.achievements.tubes.state!="completed"}
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+    balls_to_save: 1
+    active_time: 8s
+    auto_launch: true
 
 ball_holds:
   # This hold keeps the ball in the lock while the huddle plays between phases
@@ -106,7 +114,7 @@ variable_player:
   mode_suicide_longwalk_started:
     reaper_rounds:
       action: set
-      int: 1
+      int: 0
     # Human Reaper hit points... 100,000?
     reaper_hp:
       action: set
@@ -124,6 +132,8 @@ variable_player:
   infiltration_complete:
     suicide_continuing: 1
   longwalk_complete:
+    suicide_continuing: 1
+  tubes_complete:
     suicide_continuing: 1
   humanreaper_complete:
     suicide_continuing: 1

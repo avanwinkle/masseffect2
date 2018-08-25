@@ -21,21 +21,13 @@ sound_player:
       shep_everyone_through_the_doors:
         action: play
         # events_when_stopped: start_mode_suicide_huddle
-    # Can't figure out why modes can't stop sounds, but here's for safety
-    mode_suicide_infiltration_stopped:
-      infiltration_low:
-        action: stop
-      infiltration_med:
-        action: stop
-      infiltration_hight:
-        action: stop
-    mode_suicide_longwalk_stopped:
-      longwalk_low:
-        action: stop
-      longwalk_med:
-        action: stop
-      longwalk_hight:
-        action: stop
+
+# For the last time, kill all the music when a mode stops!
+track_player:
+  mode_type_suicide_stopped:
+    music:
+      action: stop_all_sounds
+      fade: 1s
 
 sounds:
 
@@ -62,13 +54,11 @@ sounds:
     infiltration_med:
       file: mus_endgm2_combat_1_low.ogg
       track: music
-      mode_end_action: stop
       fade_in: 1s
       fade_out: 2s
     infiltration_high:
       file: mus_endgm2_combat_1.ogg
       track: music
-      mode_end_action: stop
       fade_in: 1500ms
       fade_out: 2s
   # Long Walk
@@ -81,13 +71,11 @@ sounds:
     longwalk_med:
       file: mus_endgm2_combat_2_low.ogg
       track: music
-      mode_end_action: stop
       fade_in: 1s
       fade_out: 2s
     longwalk_high:
       file: mus_endgm2_combat_2.ogg
       track: music
-      mode_end_action: stop
       fade_in: 1s
       fade_out: 2s
   # Final Battle

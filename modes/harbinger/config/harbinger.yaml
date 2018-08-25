@@ -25,9 +25,9 @@ mode:
 event_player:
   harbinger_shot_hot_hit: harbinger_shot_runout|30s
   # Between Harbingers is 30s, but from the first enabling let's go faster
-  enable_harbinger: start_initial_harbinger|19s
-  # If harbinger mode is enabled, give a taunt on outlane drain
-  envshot_outlane_hit: harbinger_taunt
+  enable_harbinger: queue_initial_harbinger|19s
+  # The above events have timeouts but harbinger may have been disabled in the meantime
+  queue_initial_harbinger{current_player.harbinger_running==1}: start_initial_harbinger
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
@@ -138,9 +138,19 @@ light_player:
     l_multipliers: off
 
 sound_player:
-  player_shot_harbinger_shot_enabled: harbinger_enabledsound  # "Assuming direct control..."
-  harbinger_shot_lit_hit: harbinger_hitsound      # "This hurts you..."
-  harbinger_shot_hot_hit: harbinger_killedsound   # "This form means nothing..."
+  player_shot_harbinger_shot_enabled:
+    harbinger_enabledsound:  # "Assuming direct control..."
+      max_queue_time: 500ms
+  harbinger_shot_lit_hit:
+    harbinger_hitsound:      # "This hurts you..."
+      max_queue_time: 1s
+  harbinger_shot_hot_hit:
+    harbinger_killedsound:   # "This form means nothing..."
+      max_queue_time: 1s
+  # If harbinger mode is enabled, give a taunt on outlane drain
+  envshot_outlane_hit:
+    harbinger_taunt:
+      max_queue_time: 1s
 
 sound_pools:
   harbinger_enabledsound:
