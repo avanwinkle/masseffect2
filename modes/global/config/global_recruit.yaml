@@ -28,6 +28,26 @@ config:
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
 
+event_player:
+  player_shot_missionresume_shot_enabled{value==False}:
+    - disable_missionresume
+  enable_missionresume:
+    - enable_missionresume_singleplayer{game.num_players==1}
+    - enable_missionresume_multiplayer{game.num_players>1}
+  # Allow the player to select a mission before launching the ball
+  missionresume_shot_hit:
+    - start_mode_missionselect
+
+variable_player:
+  mode_type_mission_stopped{not mode["global"].stopping}:
+    resume_mission:
+      action: set
+      string: " "
+  disable_missionresume:
+    resume_mission:
+      action: set
+      string: " "
+
 #####
 # This is just while I'm developing and debugging missions, a little cheat ;)
 #####
@@ -88,12 +108,19 @@ sound_player:
   recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
+  timer_recruittimer_complete: shep_cant_reach_target
+  recruit_kasumi_failed: kasumi_failed
+
+track_player:
+  timer_recruittimer_complete:
+    voice:
+      action: stop_all_sounds
 
 sound_pools:
   missioncomplete_voice_garrus:
     type: random
     track: voice
-    sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2
+    sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2, garrus_fit_for_duty_whenever
     max_queue_time: 1s
   missioncomplete_voice_grunt:
     type: random
@@ -103,7 +130,7 @@ sound_pools:
   missioncomplete_voice_jack:
     type: random
     track: voice
-    sounds: missioncomplete_voice_jack_1, missioncomplete_voice_jack_2
+    sounds: missioncomplete_voice_jack_1, missioncomplete_voice_jack_2, jack_nice_little_group_and_ship
     max_queue_time: 1s
   missioncomplete_voice_kasumi:
     type: random
@@ -140,6 +167,17 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
     max_queue_time: 1s
+  shep_cant_reach_target:
+    type: random_force_all
+    track: voice
+    sounds: shep_cant_reach_target_1, shep_cant_reach_target_2, shep_cant_reach_target_3
+  kasumi_failed:
+    type: random
+    track: voice
+    sounds:
+      - kasumi_damn_it
+      - kasumi_look_out
+      - kasumi_damn_it_we_have_to_find_another_way
 
 sounds:
   missioncomplete_voice_garrus_1:
@@ -153,6 +191,15 @@ sounds:
       release_point: 500ms
   missioncomplete_voice_garrus_2:
     file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
+    track: voice
+    ducking:
+      target: levelup
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
+  garrus_fit_for_duty_whenever:
+    file: en_us_hench_garrus_norgra_debriefing_d_00225772_m.ogg
     track: voice
     ducking:
       target: levelup
@@ -216,6 +263,15 @@ sounds:
       release_point: 500ms
   missioncomplete_voice_jack_2:
     file: en_us_hench_convict_prscva_cv_join_d_00200320_m.ogg
+    track: voice
+    ducking:
+      target: levelup
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
+  jack_nice_little_group_and_ship:
+    file: en_us_hench_convict_norcv_starter_h_00191411_m.ogg
     track: voice
     ducking:
       target: levelup
@@ -442,3 +498,69 @@ sounds:
       attack: 100ms
       release: 300ms
       release_point: 500ms
+  shep_cant_reach_target_1:
+    file: en_us_player_f_ss_global_player_female_00333954_f.ogg
+    track: voice
+  shep_cant_reach_target_2:
+    file: en_us_player_f_ss_global_player_female_00333957_f.ogg
+    track: voice
+  shep_cant_reach_target_3:
+    file: en_us_player_f_ss_global_player_female_00333959_f.ogg
+    track: voice
+  kasumi_damn_it:
+    file: DLC_HEN_MT_Int.173.ogg
+    track: voice
+  kasumi_look_out:
+    file: DLC_HEN_MT_Int.110.ogg
+    track: voice
+  kasumi_damn_it_we_have_to_find_another_way:
+    file: DLC_HEN_MT_Int.817.ogg
+    track: voice
+
+widget_player:
+  enable_missionresume_singleplayer:
+    missionresume_widget:
+      action: add
+    missionresume_background_sp:
+      action: add
+  enable_missionresume_multiplayer:
+    missionresume_widget:
+      action: add
+    missionresume_background_mp:
+      action: add
+  disable_missionresume:
+    missionresume_widget:
+      action: remove
+
+widgets:
+  missionresume_widget:
+    - type: text
+      text: Press action button to
+      style: small
+      y: middle+3
+      z: 5
+      animations:
+        add_to_slide: pulse_text_slow
+    - type: text
+      text: resume (player|resume_mission) recruitment
+      style: small
+      y: middle-3
+      z: 5
+      animations:
+        add_to_slide: pulse_text_slow
+  missionresume_background_sp:
+    - type: rectangle
+      color: 000000
+      height: 17
+      anchor_y: bottom
+      y: middle-6
+      width: 128
+      z: 4
+  missionresume_background_mp:
+    - type: rectangle
+      color: 000000
+      height: 14
+      anchor_y: bottom
+      y: middle-6
+      width: 128
+      z: 4

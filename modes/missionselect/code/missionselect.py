@@ -67,6 +67,8 @@ class MissionSelect(Carousel):
     selection = self._get_highlighted_item()
     if selection in self._mates:
         self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
+        # Store this mission so we can resume if it fails
+        self.machine.game.player["resume_mission"] = selection
     elif selection == "pass":
       # Store the choice to pass so we can skip missionselect until a new mission is available
       # This is only applicable if there are still missions to unlock, otherwise we could get stuck

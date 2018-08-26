@@ -13,10 +13,16 @@ shots:
       - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
     profile: medigel_profile
     enable_events: levelup, enable_medigel
-    # Disable medigel during Normandy attack because it has many saves. Completing
-    # the attack will levelup and restore medigel anyway. Suicide also manages its
+    # Disable medigel during story wizard modes because they have many saves. Completing
+    # them will levelup and restore medigel anyway. Suicide also manages its
     # own ball saves, so disable for the entire suicide mission
-    disable_events: ball_save_medigel_save_saving_ball{balls>0}, ball_will_end, mode_normandyattack_started, mode_suicide_base_started
+    disable_events:
+      - ball_save_medigel_save_saving_ball{balls>0}
+      - ball_will_end
+      - mode_collectorship_base_started
+      - mode_derelictreaper_started
+      - mode_normandyattack_started
+      - mode_suicide_base_started
     tags: envshot_outlane
 
 ball_saves:

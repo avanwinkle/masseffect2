@@ -50,9 +50,9 @@ ball_devices:
     eject_coil: c_lock_release_post
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_enable_time: 250ms, 205ms, 202ms
+    eject_coil_enable_time: 250ms, 230ms, 215ms
                           # 1 ball:  230ms can be too short, increasing to 250
-                          # 2 balls: 200ms can be too short, increasing to 205
+                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
                           # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
     eject_timeouts: 3s
     exit_count_delay: 2s
@@ -593,12 +593,10 @@ coils:
     debug: true
   c_lock_release_post:
     number: 9-3
-    default_pulse_ms: 28
+    default_pulse_ms: 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
-    disable_events:
-      - cancel_lock_release_pulse
-      - s_lock_1_inactive
+    disable_events: cancel_lock_release_pulse
     debug: true
   c_orbit_gates:
     number: 10-0

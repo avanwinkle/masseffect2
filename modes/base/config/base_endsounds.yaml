@@ -14,8 +14,6 @@ sound_player:
   shadowbroker_chase_complete: car_crash
   achievement_shadowbroker_state_completed: liara_its_finally_over
   mode_overlord_stopped: david_ending
-  recruit_tali_failed: colossusrepair
-  recruit_kasumi_failed: kasumi_failed
 
 sound_pools:
   # N7 Assignments
@@ -27,13 +25,6 @@ sound_pools:
     sounds: david_sqrt_seemed_harmless, david_please_make_it_stop_1, david_please_make_it_stop_2
     track: voice
     type: random_force_all
-  kasumi_failed:
-    type: random
-    track: voice
-    sounds:
-      - kasumi_damn_it
-      - kasumi_look_out
-      - kasumi_damn_it_we_have_to_find_another_way
 
 sounds:
   asscompl_1:
@@ -56,15 +47,6 @@ sounds:
     track: voice
   david_please_make_it_stop_2:
     file: DLC_UNC_Pack01_Int.462.ogg
-    track: voice
-  kasumi_damn_it:
-    file: DLC_HEN_MT_Int.173.ogg
-    track: voice
-  kasumi_look_out:
-    file: DLC_HEN_MT_Int.110.ogg
-    track: voice
-  kasumi_damn_it_we_have_to_find_another_way:
-    file: DLC_HEN_MT_Int.817.ogg
     track: voice
   liara_we_lost_her:
     file: DLC_EXP_Part01_Int.695.ogg

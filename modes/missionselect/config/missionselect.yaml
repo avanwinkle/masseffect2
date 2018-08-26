@@ -26,7 +26,7 @@ mode:
 mode_settings:
   # All squadmates are included via missionselect.py, no need to list them here
   selectable_items: intro, pass
-  select_item_events: s_action_button_active
+  select_item_events: s_action_button_active, s_plunger_lane_inactive
   next_item_events: s_flipper_right_active, missionselect_skip_forwards, mode_missionselect_started, missionselect_specialist_highlighted
   previous_item_events: s_flipper_left_active, missionselect_skip_backwards
 

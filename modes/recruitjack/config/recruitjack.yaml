@@ -176,7 +176,6 @@ sound_player:
   mode_recruitjack_started:
     music_recruit_jack_1:
       action: play
-      loops: -1
     warden_start:
       action: play
   play_music_recruit_jack_2:

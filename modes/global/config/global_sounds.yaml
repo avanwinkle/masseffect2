@@ -322,6 +322,32 @@ sounds:
   target_right_zaeed_2:
     file: DLC_HEN_VT_Int.075.ogg
     track: voice
+  # It didn't work
+  tali_didnt_work_1:
+    file: en_us_hench_tali_ss_global_hench_tali_00314368_m.ogg
+    track: voice
+  tali_didnt_work_2:
+    file: en_us_hench_tali_ss_global_hench_tali_00314369_m.ogg
+    track: voice
+  tali_didnt_work_3:
+    file: en_us_hench_tali_ss_global_hench_tali_00314370_m.ogg
+    track: voice
+  tali_didnt_work_4:
+    file: en_us_hench_tali_ss_global_hench_tali_00314371_m.ogg
+    track: voice
+  mordin_no_good:
+    file: en_us_hench_professor_ss_global_hench_professor_00316881_m.ogg
+    track: voice
+  mordin_ineffective_attack:
+    file: en_us_hench_professor_ss_global_hench_professor_00316882_m.ogg
+    track: voice
+  mordin_negative_effect:
+    file: en_us_hench_professor_ss_global_hench_professor_00316884_m.ogg
+    track: voice
+
+
+
+
 
 ####
 # NOTES on misc SFXGame sounds
@@ -388,6 +414,30 @@ sounds:
 # en_us_player_f_ss_global_player_female_00334010_f.ogg     "Can't do it yet", "Need a second", "Not ready yet"
 # en_us_player_f_ss_global_player_female_00334232_f.ogg     "Running on empty"
 # en_us_player_f_ss_global_player_female_00337524_f.ogg     "Out of clips" (also 527)
+# en_us_player_f_ss_global_player_female_00288380_f Shepard hit noises (380-384, 961-964)
+# en_us_player_f_ss_global_player_female_00333954_f "Can't reach the target" (954, 957, 959)
+# en_us_player_f_ss_global_player_female_00334010_f "Can't do it yet"
+# en_us_player_f_ss_global_player_female_00334014_f "Not ready yet"
+#
+# TEAM-BUILDING PROGRESS
+# en_us_player_f_norcr2_team_meeting_d_00310498_f "Tough choice: continue to build up the team or go after the derelict reaper?"
+# en_us_player_f_norcr2_team_meeting_d_00310670_f "The more people we have the better our chances. We need to keep building the team"
+# en_us_hench_vixen_norcr3_denoument2_d_00224600_m "We've done everything we can. It's time to take the fight to the collectors"
+# en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.ogg "Your team will need to be strong, as will their resolve"
+# en_us_global_illusive_man_norcr1_debriefing_d_00320983_m.ogg "I've forwarded three more dossiers. Keep building your team while I find a way through the relay"
+# en_us_hench_vixen_norcr3_denoument2_d_00294616_m "We've got good people but more potential recruiting options. I'd be hesitant to go in short-handed"
+# en_us_global_illusive_man_profre_illusive_d_00252066_m "You're a leader, Shepard. You'll get who you need"
+# en_us_global_illusive_man_profre_illusive_d_00252067_m "I've made it clear to Miranda that you're in charge. (pause) You decide who joins your squad."
+# en_us_global_illusive_man_profre_illusive_d_00252068_m "The rest on the list, they're not cerberus material but they are the best"
+# en_us_global_illusive_man_profre_illusive_d_00324686_m "First, head to omega and find Mordin Solus. He's a brilliant salarian scientist."
+# en_us_global_illusive_man_profre_illusive_d_00332313_m "I've already compiled a list of soldiers, scientists, and mercenaries. You'll get dossiers on the best of them."
+# en_us_global_illusive_man_profre_illusive_d_00332314_m "Finding them and convincing them to work with you could be challenging, but you're a natural leader"
+# en_us_global_illusive_man_profre_illusive_d_00332316_m "I've already compiled a list of soldiers, scientists, and mercenaries. I have three dossiers for you to begin with"
+# en_us_global_illusive_man_profre_illusive_d_00332317_m "I've already compiled a list of soldiers, scientists, and mercenaries. I have four dossiers for you to begin with"
+# en_us_global_illusive_man_profre_illusive_d_00332318_m "I've already compiled a list of soldiers, scientists, and mercenaries. I have five dossiers for you to begin with"
+# en_us_global_illusive_man_profre_illusive_d_00332319_m "I've already compiled a list of soldiers, scientists, and mercenaries. I have six dossiers for you to begin with"
+# en_us_player_f_profre_illusive_d_00252102_f "You worry about the collectors, I'll make sure my team is ready"
+# en_us_player_f_profre_illusive_d_00252123_f "If this is a war I'll need an army. Or a really good team."
 #
 # EDI
 # en_us_hench_ai_nor_ai_edi_hint_h_00333682_m.ogg "Something on our sensors" (also 683)
@@ -399,6 +449,7 @@ sounds:
 # en_us_hench_ai_nor_ai_edi_hint_h_00345722_m.ogg "Research projects: Iridium"
 # en_us_hench_ai_nor_ai_edi_hint_h_00345723_m.ogg "Research projects: Platinum"
 # en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.ogg "Research projects: Palladium"
+#
 #####
 
 

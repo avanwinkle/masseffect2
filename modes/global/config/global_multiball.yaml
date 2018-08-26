@@ -49,7 +49,7 @@ event_player:
 shot_groups:
   fmball_lightshot:
     shots: light_lock_fmball_top, light_lock_fmball_bottom
-    # Since multiballs are wizards, this mode will auto enable/disable the shot with multiballs
+    # Since multiballs are wizards, this mode (global) will auto enable/disable the shot with multiballs
     enable_events: enable_lock_lightshot
     disable_events: disable_lock_lightshot
     reset_events: multiball_lock_fmball_lock_locked_ball

@@ -34,6 +34,12 @@ event_player:
     - stop_mode_field
     - disable_lock_lightshot
     - stop_missions
+  # If we have two balls locked when field mode stops, don't allow a third lock to light
+  mode_field_will_stop{device.ball_devices.bd_lock.balls==2}:
+    - disable_lock_lightshot
+  # Just in case we disabled lockshot for a third-ball situation, re-enable it
+  mode_field_started:
+    - enable_lock_lightshot
   mode_type_mission_started:
     - stop_mode_field
   mode_type_mission_stopped{not mode["global"].stopping}:

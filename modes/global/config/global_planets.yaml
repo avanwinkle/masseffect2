@@ -39,6 +39,7 @@ shot_groups:
   planet_shots:
     shots: left_planet_shot, right_planet_shot
     reset_events: planet_shots_hit_complete
+    rotate_events: s_flipper_left_active, s_flipper_right_active
   mineral_shots:
     shots: mineral_shot_iridium, mineral_shot_palladium, mineral_shot_platinum
 
