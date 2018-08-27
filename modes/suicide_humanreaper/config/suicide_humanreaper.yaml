@@ -38,7 +38,7 @@ event_player:
   restart_reaper:
     - flippers_on
     - enable_random_reapershot
-  player_reaper_hp:
+  player_reaper_hp{player_num==current_player.number}:
     # If the reaper still has HP and there are more rounds to go, "fail" to return to platforms
     - humanreaper_failed{value>0 and current_player.reaper_rounds<4}
     # If the reaper has no HP or if the max rounds have passed, "complete"
@@ -59,7 +59,7 @@ random_event_player:
 
 variable_player:
   # Adjust the multiplier and hurryup _after_ the round count changes
-  player_reaper_rounds:
+  player_reaper_rounds{player_num==current_player.number}:
     # Multiplier increases by 25% each round, to make the fight faster
     # (this is just for display, it's calculated separately in temp_hurryup_value below)
     temp_multiplier:

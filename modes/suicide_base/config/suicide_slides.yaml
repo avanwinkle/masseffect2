@@ -14,7 +14,7 @@ slide_player:
     slide_multiplayer_slide_created:
       multiplayer_slide:
         action: remove
-    player_reaper_hp{value>0 and change<0}:
+    player_reaper_hp{player_num==current_player.number and value>0 and change<0}:
       reaper_hitdamage_slide:
         expire: 4s
     restore_singleplayer_slide: singleplayer_slide

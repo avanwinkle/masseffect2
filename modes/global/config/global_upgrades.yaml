@@ -85,8 +85,8 @@ shots:
     hit_events: sh_right_ramp_hit
     enable_events:
       - mode_global_started{current_player.available_research>0 or current_player.available_shipupgrades>0}
-      - player_available_research{change>0}
-      - player_available_shipupgrades{change>0}
+      - player_available_research{player_num==current_player.number and change>0}
+      - player_available_shipupgrades{player_num==current_player.number and change>0}
     disable_events:
       - collect_research_shot_hit
     profile: color_on
@@ -203,4 +203,14 @@ sounds:
     file: en_us_player_f_ss_global_player_female_00333999_f.ogg
     track: voice
     max_queue_time: 2s
+  edi_new_upgrades_available_at_research:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345536_m.ogg
+    track: voice
+  edi_research_station_has_new_information:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345537_m.ogg
+    track: voice
+  edi_new_upgrades_available_in_cabin:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
+    track: voice
+
 

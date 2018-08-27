@@ -3,9 +3,10 @@
 # Relay through event_player because widget_player doesn't like conditions/priorities
 event_player:
   player_added:
-    - add_player_2{num==2}
-    - add_player_3{num==3}
-    - add_player_4{num==4}
+    # Give a small delay to allow the player vars to initialize, lest the placeholder text show goofy
+    - add_player_2{num==2}|150ms
+    - add_player_3{num==3}|150ms
+    - add_player_4{num==4}|150ms
   player_turn_started:
     - multiplayer_turn_start_1{number==1}
     - multiplayer_turn_start_2{number==2}
@@ -164,3 +165,131 @@ widgets:
     - type: text
       text: (machine|last_career_player_4)
       style: mp_player_4
+
+sound_player:
+  player_added{num==1}: gui_splashstart
+  play_squadmate_add_garrus: squadmate_add_garrus
+  play_squadmate_add_grunt: squadmate_add_grunt
+  play_squadmate_add_jack: squadmate_add_jack
+  play_squadmate_add_tali: squadmate_add_tali
+
+random_event_player:
+  player_added{num>1}:
+    force_all: true
+    scope: machine
+    events:
+      - play_squadmate_add_garrus
+      - play_squadmate_add_grunt
+      - play_squadmate_add_jack
+      - play_squadmate_add_tali
+
+sound_pools:
+  squadmate_add_garrus:
+    track: voice
+    type: random
+    sounds:
+      - garrus_affirmative
+      - garrus_you_got_it
+      - garrus_im_with_you
+      - garrus_lets_try_this
+      - garrus_back_in_the_game
+  squadmate_add_grunt:
+    track: voice
+    type: random
+    sounds:
+      - grunt_im_here_1
+      - grunt_yeah_yeah
+      - grunt_im_here_2
+      - grunt_shotgun_ready
+      - grunt_one_more
+      - grunt_im_back
+  squadmate_add_jack:
+    track: voice
+    type: random
+    sounds:
+      - jack_nice
+      - jack_want_some_more
+      - jack_yeah
+      - jack_on_my_way
+      - jack_im_back
+      - jack_ready_to_roll
+  squadmate_add_tali:
+    track: voice
+    type: random
+    sounds:
+      - tali_im_here
+      - tali_with_you_shepard
+      - tali_weapons_ready
+      - tali_ready_to_help
+
+sounds:
+  gui_splashstart:
+    file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
+    track: sfx
+    volume: 0.5
+  garrus_affirmative:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303024_m.ogg # "Affirmative"
+    track: voice
+  garrus_you_got_it:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303025_m.ogg # "You got it"
+    track: voice
+  garrus_im_with_you:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303032_m.ogg # "I'm with you"
+    track: voice
+  garrus_its_the_two_of_us:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303101_m.ogg # "Its the two of us"
+    track: voice
+  garrus_lets_try_this:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303208_m.ogg # "Let's try this"
+    track: voice
+  garrus_back_in_the_game:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00314420_m.ogg # "Back in the game"
+    track: voice
+  grunt_im_here_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295701_m.ogg # "I'm here"
+    track: voice
+  grunt_yeah_yeah:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295704_m.ogg # "Yeah yeah"
+    track: voice
+  grunt_im_here_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295709_m.ogg # "I'm here"
+    track: voice
+  grunt_shotgun_ready:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295719_m.ogg # "Shotgun ready"
+    track: voice
+  grunt_one_more:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295883_m.ogg # "One more"
+    track: voice
+  grunt_im_back:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00317208_m.ogg # "I'm back!"
+    track: voice
+  jack_nice:
+    file: en_us_hench_convict_ss_global_hench_convict_00296186_m.ogg # "Nice"
+    track: voice
+  jack_want_some_more:
+    file: en_us_hench_convict_ss_global_hench_convict_00296189_m.ogg # "Want some more?"
+    track: voice
+  jack_yeah:
+    file: en_us_hench_convict_ss_global_hench_convict_00296196_m.ogg # "Yeah"
+    track: voice
+  jack_on_my_way:
+    file: en_us_hench_convict_ss_global_hench_convict_00296332_m.ogg # "On my way"
+    track: voice
+  jack_im_back:
+    file: en_us_hench_convict_ss_global_hench_convict_00316548_m.ogg # "I'm back"
+    track: voice
+  jack_ready_to_roll:
+    file: en_us_hench_convict_ss_global_hench_convict_00316552_m.ogg # "Ready to roll"
+    track: voice
+  tali_im_here:
+    file: en_us_hench_tali_ss_global_hench_tali_00285145_m.ogg # "I'm here"
+    track: voice
+  tali_with_you_shepard:
+    file: en_us_hench_tali_ss_global_hench_tali_00285147_m.ogg # "With you Shepard"
+    track: voice
+  tali_weapons_ready:
+    file: en_us_hench_tali_ss_global_hench_tali_00285167_m.ogg # "Weapons ready"
+    track: voice
+  tali_ready_to_help:
+    file: en_us_hench_tali_ss_global_hench_tali_00314434_m.ogg # "Ready to help"
+    track: voice

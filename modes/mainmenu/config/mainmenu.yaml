@@ -12,6 +12,7 @@ mode_settings:
   next_item_events: s_flipper_right_active
   previous_item_events: s_flipper_left_active
   selectable_items: casual
+
 event_player:
   career_loaded: stop_mode_mainmenu
 
@@ -120,10 +121,6 @@ shows:
 
 sound_player:
   show_mainmenu: mus_gui_char_create
-  player_added:
-    gui_splashstart:
-      action: play
-      volume: 0.2
   mainmenu_change_career_selected: galaxy_zoom_in
   mainmenu_career_selected: galaxy_zoom_out
   mainmenu_item_selected:
@@ -146,10 +143,4 @@ sounds:
   galaxy_zoom_out:
     file: SFXGame.587.ogg
     track: sfx
-  gui_splashstart:
-    file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
-    track: sfx
-    volume: 0.5
-
-
 

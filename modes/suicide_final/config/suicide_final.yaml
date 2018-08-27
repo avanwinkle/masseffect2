@@ -36,7 +36,7 @@ event_player:
 ball_saves:
   reaper_squadmate_save:
     enable_events: mode_suicide_final_started{current_player.squadmates_count>0}
-    disable_events: player_squadmates_count{value<1}
+    disable_events: player_squadmates_count{player_num==current_player.number and value<1}
     balls_to_save: 2
     only_last_ball: true
     delayed_eject_events: squadmate_killed_complete

@@ -28,7 +28,7 @@ event_player:
       stop_events: mode_suicide_platforms_will_stop
   platform_shots_hit_complete: reset_platforms
   # When the hurryup drains, move on to the next mode
-  player_temp_hurryup_value{value<=100}: platforms_complete
+  player_temp_hurryup_value{player_num==current_player.number and value<=100}: platforms_complete
   # If the player plays the maximum amount of time, move on
   timer_platform_complete: platforms_complete
 

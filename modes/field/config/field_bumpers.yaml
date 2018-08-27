@@ -30,7 +30,7 @@ counters:
     count_events: n7_advance_shot_hit
     reset_events:
       - logicblock_iff_counter_complete # Reset the counter after IFF
-      - player_assignments_completed # Reset when an assignment is completed to increase count
+      - player_assignments_completed{change!=0} # Reset when an assignment is completed to increase count
     disable_on_complete: false
     reset_on_complete: true
     persist_state: true

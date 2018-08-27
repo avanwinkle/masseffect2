@@ -419,6 +419,57 @@ sounds:
 # en_us_player_f_ss_global_player_female_00334010_f "Can't do it yet"
 # en_us_player_f_ss_global_player_female_00334014_f "Not ready yet"
 #
+#
+# GARRUS
+# en_us_hench_garrus_ss_global_hench_garrus_00303024_m "Affirmative"
+# en_us_hench_garrus_ss_global_hench_garrus_00303025_m "You got it"
+# en_us_hench_garrus_ss_global_hench_garrus_00303032_m "I'm with you"
+# en_us_hench_garrus_ss_global_hench_garrus_00303091_m "Well that did nothing"
+# en_us_hench_garrus_ss_global_hench_garrus_00303092_m "Didn't work"
+# en_us_hench_garrus_ss_global_hench_garrus_00303094_m "No good"
+# en_us_hench_garrus_ss_global_hench_garrus_00303101_m "Its the two of us"
+# en_us_hench_garrus_ss_global_hench_garrus_00303102_m "We're down to two"
+# en_us_hench_garrus_ss_global_hench_garrus_00303119_m "Shepard!"
+# en_us_hench_garrus_ss_global_hench_garrus_00303208_m "Let's try this"
+# en_us_hench_garrus_ss_global_hench_garrus_00314420_m "Back in the game"
+#
+# GRUNT
+# en_us_hench_grunt_ss_global_hench_grunt_00295701_m "I'm here"
+# en_us_hench_grunt_ss_global_hench_grunt_00295704_m "Yeah yeah"
+# en_us_hench_grunt_ss_global_hench_grunt_00295709_m "I'm here"
+# en_us_hench_grunt_ss_global_hench_grunt_00295719_m "Shotgun ready"
+# en_us_hench_grunt_ss_global_hench_grunt_00295819_m "Shepard!"
+# en_us_hench_grunt_ss_global_hench_grunt_00295883_m "One more"
+# en_us_hench_grunt_ss_global_hench_grunt_00317195_m "No good"
+# en_us_hench_grunt_ss_global_hench_grunt_00317196_m "Pointless"
+# en_us_hench_grunt_ss_global_hench_grunt_00317197_m "It didn't work"
+# en_us_hench_grunt_ss_global_hench_grunt_00317198_m "Try something else"
+# en_us_hench_grunt_ss_global_hench_grunt_00317208_m "I'm back!"
+
+# JACK
+# en_us_hench_convict_ss_global_hench_convict_00286938_m "Shepard!"
+# en_us_hench_convict_ss_global_hench_convict_00296186_m "Nice"
+# en_us_hench_convict_ss_global_hench_convict_00296189_m "Want some more?"
+# en_us_hench_convict_ss_global_hench_convict_00296196_m "Yeah"
+# en_us_hench_convict_ss_global_hench_convict_00296332_m "On my way"
+# en_us_hench_convict_ss_global_hench_convict_00316527_m "Grabbing cover"
+# en_us_hench_convict_ss_global_hench_convict_00316535_m "Crap no good"
+# en_us_hench_convict_ss_global_hench_convict_00316536_m "Didn't do shit"
+# en_us_hench_convict_ss_global_hench_convict_00316548_m "I'm back"
+# en_us_hench_convict_ss_global_hench_convict_00316552_m "Ready to roll"
+#
+#
+# TALI
+# en_us_hench_tali_ss_global_hench_tali_00285145_m "I'm here"
+# en_us_hench_tali_ss_global_hench_tali_00285147_m "With you Shepard"
+# en_us_hench_tali_ss_global_hench_tali_00285167_m "Weapons ready"
+# en_us_hench_tali_ss_global_hench_tali_00285254_m "Shepard!
+# en_us_hench_tali_ss_global_hench_tali_00289245_m "Moving to cover"
+# en_us_hench_tali_ss_global_hench_tali_00289248_m "I'm taking cover"
+# en_us_hench_tali_ss_global_hench_tali_00314369_m "It didn't work"
+# en_us_hench_tali_ss_global_hench_tali_00314370_m "We need to try something else
+# en_us_hench_tali_ss_global_hench_tali_00314434_m "Ready to help"
+
 # TEAM-BUILDING PROGRESS
 # en_us_player_f_norcr2_team_meeting_d_00310498_f "Tough choice: continue to build up the team or go after the derelict reaper?"
 # en_us_player_f_norcr2_team_meeting_d_00310670_f "The more people we have the better our chances. We need to keep building the team"

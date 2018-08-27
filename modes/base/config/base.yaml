@@ -143,6 +143,9 @@ event_player:
     - flippers_on
     - reset_missionselect_bypass
     - enable_missionresume{current_player.resume_mission!=" "}|500ms
+    # If we are starting a ball, show some informative slides
+    - show_introslide_availablemissions{current_player.available_missions>1 and current_player.resume_mission==" "}
+    - show_introslide_noavailablemissions{current_player.available_missions==0}
   mode_base_started.2:
     dynamic_args_inline: { foo: "bar" }
     dynamic_args_expanded:
@@ -155,6 +158,7 @@ event_player:
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==2}
+
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -166,10 +170,10 @@ event_player:
   mode_type_wizard_stopped{not mode.base.stopping}:
     - start_mode_global
   # If a new mission becomes available, remove the player-selected bypass
-  player_available_missions{change>0}:
+  player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
-  player_squadmates_count{value==6}:
+  player_squadmates_count{player_num==current_player.number and value==6}:
     - enable_collectorship
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
@@ -179,7 +183,7 @@ event_player:
   # reaper _before_ collectorship. Since collectorship requires 4 recruits and
   # derelict reaper requires 7 levelups, only three levelups should be allowed
   # before collectorship: Overlord, Shadowbroker Vasir, and Shadowbroker Boss
-  player_level:
+  player_level{player_num==current_player.number}:
     - enable_derelictreaper{value==8}
     # Every three levels warrants a ship upgrade!
     - shipupgrade_available{value%3==0 and device.achievement_groups.shipupgrades_group.enabled}
@@ -264,7 +268,7 @@ variable_player:
   shipupgrade_available:
     available_shipupgrades: 1
   # Track the squadmates recruited _this game_, not ones imported from saves
-  player_squadmates_count{change==1}:
+  player_squadmates_count{player_num==current_player and change==1}:
     recruited_squadmates_count: 1
   # Use achievements to track available missions
   achievement_collectorship_state_enabled:
@@ -385,7 +389,7 @@ show_player:
   mode_suicide_omegarelay_stopped:
     extraball_lit_show:
       action: stop
-  player_extra_balls{value==0}:
+  player_extra_balls{player_num==current_player.number and value==0}:
     extraball_lit_show:
       action: stop
 
@@ -472,6 +476,14 @@ slide_player:
     n7_complete_slide:
       priority: 600
       expire: 3s
+  show_introslide_noavailablemissions:
+    introslide_noavailablemissions:
+      expire: 6s
+      priority: 200
+  show_introslide_availablemissions:
+    introslide_availablemissions:
+      expire: 6s
+      priority: 200
 
 slides:
   levelup_slide:
@@ -492,6 +504,40 @@ slides:
     widgets:
       - type: text
         text: Assignment Complete!
+  introslide_noavailablemissions:
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: text_default
+        anchor_y: bottom
+        y: middle
+      - type: text
+        text: Hit any lane 3x
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: to unlock missions
+        style: small
+        anchor_y: top
+        y: middle-9
+  introslide_availablemissions:
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: text_default
+        anchor_y: bottom
+        y: middle
+      - type: text
+        text: Select a mission at
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: the Galaxy Map
+        style: small
+        anchor_y: top
+        y: middle-9
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
@@ -550,6 +596,7 @@ sounds:
   illusive_already_compiled_dossiers:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
+    volume: 0.9
   illusive_find_mordin:
     file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
     track: voice
@@ -570,6 +617,15 @@ sounds:
     track: voice
   illusive_your_team_will_need_to_be_strong:
     file: en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.ogg
+    track: voice
+  chambers_the_illusive_man_wishes_to_speak_with_you:
+    file: en_us_nor_yeoman_nor_yeoman_a_00275675_m.ogg
+    track: voice
+  chambers_edi_ready_to_install_iff:
+    file: en_us_nor_yeoman_nor_yeoman_a_00295517_m.ogg
+    track: voice
+  joker_change_of_plans_patching_illusive_man_through:
+    file: en_us_hench_joker_nor_galaxy_map_a_00275671_m.ogg
     track: voice
 
 track_player:

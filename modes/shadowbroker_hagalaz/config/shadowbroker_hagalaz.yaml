@@ -44,7 +44,7 @@ event_player:
   timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
   # If the only lit shot is hit, light another one so we don't idle
-  player_temp_counter{value==0}: enable_random_shuntshot|1s
+  player_temp_counter{player_num==current_player.number and value==0}: enable_random_shuntshot|1s
   # DEBUG until we have an actual hold
   hatch_shot_hit: shadowbroker_hagalaz_complete
   ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete

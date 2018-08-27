@@ -24,11 +24,11 @@ variable_player:
     mineral_platinum: 100 * (1 + current_player.planets * 0.25)
   mineral_shot_iridium_hit:
     mineral_iridium: 100 * (1 + current_player.planets * 0.25)
-  player_mineral_palladium:
+  player_mineral_palladium{player_num==current_player.number}:
     mineral_total: (change)
-  player_mineral_platinum:
+  player_mineral_platinum{player_num==current_player.number}:
     mineral_total: (change)
-  player_mineral_iridium:
+  player_mineral_iridium{player_num==current_player.number}:
     mineral_total: (change)
 
 flasher_player:
@@ -88,7 +88,7 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
-  player_planets:
+  player_planets{player_num==current_player.number}:
     planet_scanned_slide:
       action: play
       expire: 2s

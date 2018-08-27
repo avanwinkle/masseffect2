@@ -34,7 +34,7 @@ event_player:
       env: husks_lower
     set_initial_suicide_shots:
       count: 7
-  player_tension{change>0}: increase_tension
+  player_tension{{player_num==current_player.number and change>0}: increase_tension
   enable_longwalk_dropbank: reset_dropbank
   reset_tension:
     set_initial_suicide_ticks:
@@ -78,13 +78,13 @@ timers:
         action: restart
       - event: logicblock_swarmpaths_complete
         action: stop
-      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41}
+      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}}
         action: jump
         value: 41
-      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>21}
+      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>21 and player_num==current_player.number}
         action: jump
         value: 21
-      - event: player_tension{value==3 and current_player.suicide_longwalk_longwalk_tick>0}
+      - event: player_tension{value==3 and current_player.suicide_longwalk_longwalk_tick>0 and player_num==current_player.number}
         action: jump
         value: 0
 

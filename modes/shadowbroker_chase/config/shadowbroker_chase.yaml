@@ -74,7 +74,7 @@ variable_player:
     # We add 10 seconds to the timer, so we need to add 10s' worth of hurryup
     temp_hurryup_value: 300
     temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier
-  player_temp_build_value{value>0 and prev_value>0}:
+  player_temp_build_value{player_num==current_player.number and value>0 and prev_value>0}:
     score: prev_value
   timer_sbchase_timer_tick:
     temp_hurryup_value: -30
