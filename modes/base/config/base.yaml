@@ -142,23 +142,25 @@ event_player:
     - enable_orbitswitches
     - flippers_on
     - reset_missionselect_bypass
-    - enable_missionresume{current_player.resume_mission!=" "}
-    - disable_missionresume{current_player.resume_mission==" "}
-    # If we are starting a ball, show some informative slides
-    - show_introslide_availablemissions{current_player.available_missions>1 and current_player.resume_mission==" "}
-    - show_introslide_noavailablemissions{current_player.available_missions==0}
   mode_base_started.2:
-    dynamic_args_inline: { foo: "bar" }
-    dynamic_args_expanded:
-      bat: shirt
-  # If we are starting a new game, give some instruction
+    show_base_slide:
+      is_available:
+        value: current_player.available_missions>0
+        type: bool
+      is_resume:
+        value: current_player.resume_mission!=" "
+        type: bool
+      is_multiplayer:
+        value: game.num_players>1
+        type: bool
+  # If we are starting a new game, give some instructional audio
   mode_base_started.3{current_player.squadmates_count==2}:
     - play_gameintro_norecruits_long{current_player.ball==1}
-    - play_gameintro_norecruits_short{current_player.ball==2}
+    - play_gameintro_norecruits_short{current_player.ball==3}
   # If we are starting a game and have recruited, different sounds
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
-    - play_gameintro_recruits_short{current_player.ball==2}
+    - play_gameintro_recruits_short{current_player.ball==3}
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -507,40 +509,6 @@ slides:
     widgets:
       - type: text
         text: Assignment Complete!
-  introslide_noavailablemissions:
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
-      - type: text
-        text: Hit any lane 3x
-        style: small
-        anchor_y: top
-        y: middle-2
-      - type: text
-        text: to unlock missions
-        style: small
-        anchor_y: top
-        y: middle-9
-  introslide_availablemissions:
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
-      - type: text
-        text: Select a mission at
-        style: small
-        anchor_y: top
-        y: middle-2
-      - type: text
-        text: the Galaxy Map
-        style: small
-        anchor_y: top
-        y: middle-9
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh

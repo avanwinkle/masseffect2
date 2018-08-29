@@ -19,23 +19,35 @@ event_player:
     - multiplayer_turn_end_4{number==4}
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
-  enable_missionresume:
-    - show_missionresume_sp{game.num_players==1}
-    - show_missionresume_mp{game.num_players>1}
-  disable_missionresume:
-    - hide_missionresume_sp{game.num_players==1}
-    - hide_missionresume_mp{game.num_players>1}
-  slide_singleplayer_slide_active{current_player.resume_mission==" "}: hide_missionresume_sp
-  slide_multiplayer_slide_active{current_player.resume_mission==" "}: hide_missionresume_mp
-
+  
 slide_player:
-  single_player_ball_started: singleplayer_slide
-  multi_player_ball_started: multiplayer_slide
-  show_multiplayer_slide: multiplayer_slide
-  ball_will_end:
+  show_base_slide:
+    singleplayer_slide{not is_multiplayer}:
+      action: play
+      priority: 1
+    multiplayer_slide{is_multiplayer}:
+      action: play
+      priority: 2
+    introslide_missions{is_available and not is_resume}:
+      action: play
+      priority: 3
+      expire: 6s
+    introslide_no_missions{not is_available and not is_resume}:
+      action: play
+      priority: 3
+      expire: 6s
+  show_multiplayer_slide: 
+    multiplayer_slide:
+      action: play
     singleplayer_slide:
       action: remove
-    multiplayer_slide:
+  disable_missionresume:
+    resume_slide:
+      action: remove
+  ball_will_end:
+    singleplayer_slide_base:
+      action: remove
+    multiplayer_slide_base:
       action: remove
 
 widget_player:
@@ -46,36 +58,33 @@ widget_player:
     base_ball_widget:
       slide: singleplayer_slide
   # Base starts, show a resume mission
-  show_missionresume_sp:
-    missionresume_widget:
+  show_base_slide{is_resume and not is_multiplayer}:
+    resume_widget:
       action: add
-      slide: singleplayer_slide
-    missionresume_background_sp:
+      target: dmd
+      priority: 3
+    resume_bg_widget:
       action: add
-      slide: singleplayer_slide
-  show_missionresume_mp:
-    missionresume_widget:
+      target: dmd
+      widget_settings:
+        height: 17
+        color: 990000
+        opacity: 0.5
+  show_base_slide{is_resume and is_multiplayer}:
+    resume_widget:
       action: add
-      slide: multiplayer_slide
-    missionresume_background_mp:
+      target: dmd
+      priority: 3
+    resume_bg_widget:
       action: add
-      slide: multiplayer_slide
-  hide_missionresume_sp:
-    missionresume_widget:
+      target: dmd
+      widget_settings:
+        height: 14
+        color: 009900
+        opacity: 0.5
+  disable_missionresume:
+    resume_widget:
       action: remove
-    missionresume_background_sp:
-      action: remove
-    base_score_singleplayer:
-      action: add
-      slide: singleplayer_slide
-  hide_missionresume_mp:
-    missionresume_widget:
-      action: remove
-    missionresume_background_mp:
-      action: remove
-    base_score_multiplayer:
-      action: add
-      slide: multiplayer_slide
   # Player 2 has entered the game, add widgets for player1 and player2
   add_player_2:
     base_level_widget:
@@ -150,19 +159,52 @@ widget_player:
       action: remove
 
 slides:
-  singleplayer_slide: []
-  # TODO: Move multiplayer slide behavior into a show
-  multiplayer_slide: []
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: score_style_singleplayer
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: score_style_multiplayer
+  introslide_no_missions:
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: text_default
+        anchor_y: bottom
+        y: middle
+      - type: text
+        text: Hit any lane 3x
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: to unlock missions
+        style: small
+        anchor_y: top
+        y: middle-9
+  introslide_missions:
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: text_default
+        anchor_y: bottom
+        y: middle
+      - type: text
+        text: Select a mission at
+        style: small
+        anchor_y: top
+        y: middle-2
+      - type: text
+        text: the Galaxy Map
+        style: small
+        anchor_y: top
+        y: middle-9
 
 widgets:
-  base_score_singleplayer:
-    - type: text
-      text: (score)
-      style: score_style_singleplayer
-  base_score_multiplayer:
-    - type: text
-      text: (score)
-      style: score_style_multiplayer
   base_level_widget:
     - type: text
       text: LVL (player|level)
@@ -203,7 +245,7 @@ widgets:
     - type: text
       text: (machine|last_career_player_4)
       style: mp_player_4
-  missionresume_widget:
+  resume_widget:
     - type: text
       text: Press action button to
       style: small
@@ -218,20 +260,12 @@ widgets:
       z: 5
       animations:
         add_to_slide: pulse_text_slow
-  missionresume_background_sp:
+  resume_bg_widget:
     - type: rectangle
-      color: 000000
-      height: 17
+      color: 111111
       anchor_y: bottom
       y: middle-6
-      width: 128
-      z: 4
-  missionresume_background_mp:
-    - type: rectangle
-      color: 000000
       height: 14
-      anchor_y: bottom
-      y: middle-6
       width: 128
       z: 4
 
