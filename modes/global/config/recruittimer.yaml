@@ -8,16 +8,6 @@
 # can be programmed once and shared across all missions, hurray!
 #####
 
-event_player:
-  missionselect_recruitmission_selected:
-    - recruittimer_start|3s     # It's nice to give a little delay
-  timer_recruittimer_complete:
-    - stop_recruitmission
-    - recruit_mission_ended
-  recruit_success:
-    - stop_recruitmission
-    - recruit_mission_ended
-
 timers:
   recruittimer:
     start_value: 60

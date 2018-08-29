@@ -25,7 +25,7 @@ event_player:
   # If filling the dropbank will light the "hold" shot to start vasir/boss, light the shield steady
   mode_field_started.4{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}:
     - play_shadowbroker_hold_show
-  mode_field_started.4{current_player.sbhold_enabled==1}:
+  mode_field_started.5{current_player.sbhold_enabled==1}:
     - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
   # ERROR: Hold doesn't work, so use the hold event to fake it holding a ball
   #ball_hold_shadowbroker_hold_held_ball:

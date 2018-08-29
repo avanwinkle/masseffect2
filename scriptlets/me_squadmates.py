@@ -128,20 +128,31 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.post("start_mode_recruit{}".format(mate))
 
     self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
-    self.machine.events.add_handler("mode_recruit{}_stopped".format(mate), self._on_stop)
+    self.machine.events.add_handler("mode_recruit{}_stopped".format(mate), self._on_stop, squadmate=mate)
 
   def _on_stop(self, **kwargs):
+    self.log.info("on_stop called for recruit mission, kwargs are {}".format(kwargs))
     self.machine.events.remove_handler(self._on_stop)
     self.machine.events.remove_handler(self._on_complete)
 
+    # If we stopped without an explicit success
+    if not kwargs.get("success"):
+      # If we failed or timed out, post an event
+      if  self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
+        self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
+      # If we drained, # store this mission so we can resume if it fails
+      else:
+        self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
+
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
-
     mate = kwargs["squadmate"]
+
     self.machine.events.post("levelup", mission_name="{} Recruited".format(mate))
     self.machine.events.post("recruit_success", squadmate=mate)
     self.machine.events.post("recruit_success_{}".format(mate))
     self.machine.game.player["status_{}".format(mate)] = 4
+    self._on_stop(success=True, **kwargs)
 
     # See if we had previously failed the Suicide Mission, and if so, do we now
     # have enough tech/biotic squadmates to try again?

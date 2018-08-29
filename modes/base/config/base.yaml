@@ -142,7 +142,8 @@ event_player:
     - enable_orbitswitches
     - flippers_on
     - reset_missionselect_bypass
-    - enable_missionresume{current_player.resume_mission!=" "}|500ms
+    - enable_missionresume{current_player.resume_mission!=" "}
+    - disable_missionresume{current_player.resume_mission==" "}
     # If we are starting a ball, show some informative slides
     - show_introslide_availablemissions{current_player.available_missions>1 and current_player.resume_mission==" "}
     - show_introslide_noavailablemissions{current_player.available_missions==0}
@@ -158,7 +159,6 @@ event_player:
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==2}
-
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -212,6 +212,9 @@ event_player:
   # From a plunger orbit launch, re-enable orbit switches once left orbit is hit
   fullorbit_complete_hit:
     - enable_orbitswitches|200ms
+  # Mission resume events need to be here because base is how we enable the shot
+  player_shot_missionresume_shot_enabled{value==False}:
+    - disable_missionresume
 
 ball_saves:
   default:
@@ -340,10 +343,10 @@ shots:
     enable_events: fullorbit_fromplunger_hit
     disable_events: enable_orbitswitches
   # Allow the player to start mission select before the ball is launched
-  missionselect_shot:
+  missionresume_shot:
     switch: s_action_button
-    enable_events: enable_missionresume
-    disable_events: s_plunger_lane_inactive, mode_missionselect_started
+    enable_events: mode_base_started
+    disable_events: s_plunger_lane_inactive, mode_type_mission_started
 
 sequence_shots:
   left_to_right_orbit:

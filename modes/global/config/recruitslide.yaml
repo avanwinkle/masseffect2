@@ -50,16 +50,16 @@ variable_player:
 slide_player:
   recruit_advance:
     recruiting_advance_slide_2{status==1}:
-      expire: 1s
+      expire: 3s
     recruiting_advance_slide_1{status==2}:
-      expire: 1s
+      expire: 3s
     recruiting_advance_slide_lit{status==3}:
-      expire: 2s
-  missionselect_recruitmission_selected:
+      expire: 4s
+  mode_type_mission_started:
     recruitslide:
       action: play
       priority: 100
-  recruit_mission_ended:
+  mode_type_mission_stopped:
     recruitslide:
       action: remove
 
@@ -75,7 +75,7 @@ slides:
         y: bottom+45%
         casing: title
       - type: text
-        text: 2 shots to light
+        text: 2 shots to unlock
         anchor_y: bottom
         style: dmd_small
         y: 3
@@ -89,7 +89,7 @@ slides:
         y: bottom+45%
         casing: title
       - type: text
-        text: 1 shot to light
+        text: 1 shot to unlock
         style: dmd_small
         anchor_y: bottom
         y: 3
@@ -109,7 +109,7 @@ slides:
         y: 3
 
 widget_player:
-  missionselect_recruitmission_selected:
+  mode_type_mission_started:
     recruitwidget_name:
       action: add
       slide: recruitslide

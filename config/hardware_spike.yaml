@@ -35,6 +35,8 @@ ball_devices:
     eject_timeouts: 3s
     confirm_eject_type: target # default
     entrance_count_delay: 0
+    player_controlled_eject_event: force_plunger_launch
+    debug: true
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
     eject_coil: c_trough_eject

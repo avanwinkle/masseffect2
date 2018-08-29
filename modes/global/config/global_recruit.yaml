@@ -29,20 +29,19 @@ config:
   - recruittimer.yaml    # A shared hurryup timer for recruit missions
 
 event_player:
-  player_shot_missionresume_shot_enabled{value==False}:
-    - disable_missionresume
-  enable_missionresume:
-    - enable_missionresume_singleplayer{game.num_players==1}
-    - enable_missionresume_multiplayer{game.num_players>1}
-  # Allow the player to select a mission before launching the ball
+  # See also: base.yaml for events related to enabling/disabling missionresume
+  # Allow the player to resume a mission when launching the ball
   missionresume_shot_hit:
-    - start_mode_missionselect
+    - start_mode_recruit(current_player.resume_mission){current_player.resume_mission!=" "}
+    - force_plunger_launch
+  mode_type_mission_started:
+    - recruittimer_start|3s     # It's nice to give a little delay
+  timer_recruittimer_complete:
+    - stop_recruitmission
+  recruit_success:
+    - stop_recruitmission
 
 variable_player:
-  mode_type_mission_stopped{not mode["global"].stopping}:
-    resume_mission:
-      action: set
-      string: " "
   disable_missionresume:
     resume_mission:
       action: set
@@ -54,8 +53,8 @@ variable_player:
 ball_saves:
   recruitsave:
     active_time: 10s
-    enable_events: missionselect_recruitmission_selected
-    disable_events: recruit_mission_ended
+    enable_events: mode_type_mission_started
+    disable_events: mode_type_mission_stopped
     hurry_up_time: 5s
     grace_period: 2s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -109,7 +108,14 @@ sound_player:
   recruit_success_zaeed{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
   timer_recruittimer_complete: shep_cant_reach_target
-  recruit_kasumi_failed: kasumi_failed
+  recruit_failure_kasumi: kasumi_failed
+  recruit_failure_tali: tali_failed
+  recruit_failure_mordin: mordin_failed
+  # TODO: replace these with squadmate dialogue
+  recruit_failure_garrus: shep_cant_reach_target
+  recruit_failure_grunt: shep_cant_reach_target
+  recruit_failure_jack: shep_cant_reach_target
+
 
 track_player:
   timer_recruittimer_complete:
@@ -172,12 +178,20 @@ sound_pools:
     track: voice
     sounds: shep_cant_reach_target_1, shep_cant_reach_target_2, shep_cant_reach_target_3
   kasumi_failed:
-    type: random
+    type: random_force_all
     track: voice
     sounds:
       - kasumi_damn_it
       - kasumi_look_out
       - kasumi_damn_it_we_have_to_find_another_way
+  tali_failed:
+    type: random_force_all
+    track: voice
+    sounds: tali_didnt_work_1, tali_didnt_work_2, tali_didnt_work_3, tali_didnt_work_4
+  mordin_failed:
+    type: random_force_all
+    track: voice
+    sounds: mordin_no_good, mordin_ineffective_attack, mordin_negative_effect
 
 sounds:
   missioncomplete_voice_garrus_1:
@@ -516,51 +530,3 @@ sounds:
   kasumi_damn_it_we_have_to_find_another_way:
     file: DLC_HEN_MT_Int.817.ogg
     track: voice
-
-widget_player:
-  enable_missionresume_singleplayer:
-    missionresume_widget:
-      action: add
-    missionresume_background_sp:
-      action: add
-  enable_missionresume_multiplayer:
-    missionresume_widget:
-      action: add
-    missionresume_background_mp:
-      action: add
-  disable_missionresume:
-    missionresume_widget:
-      action: remove
-
-widgets:
-  missionresume_widget:
-    - type: text
-      text: Press action button to
-      style: small
-      y: middle+3
-      z: 5
-      animations:
-        add_to_slide: pulse_text_slow
-    - type: text
-      text: resume (player|resume_mission) recruitment
-      style: small
-      y: middle-3
-      z: 5
-      animations:
-        add_to_slide: pulse_text_slow
-  missionresume_background_sp:
-    - type: rectangle
-      color: 000000
-      height: 17
-      anchor_y: bottom
-      y: middle-6
-      width: 128
-      z: 4
-  missionresume_background_mp:
-    - type: rectangle
-      color: 000000
-      height: 14
-      anchor_y: bottom
-      y: middle-6
-      width: 128
-      z: 4

@@ -36,7 +36,7 @@ counters:
     count_complete_value: 0
     count_events: kasumi_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
-    events_when_complete: recruit_kasumi_failed
+    events_when_complete: stop_recruitmission
     persist_state: false
     direction: down
 
@@ -44,9 +44,6 @@ event_player:
   mode_recruitkasumi_started:
     set_environment:
       env: kasumi
-  recruit_kasumi_failed:
-    - stop_recruitmission
-    - recruit_mission_ended
   logicblock_kasumi_shots_counter_hit:
     - sweep_alarms
   logicblock_kasumi_shots_counter_complete:
