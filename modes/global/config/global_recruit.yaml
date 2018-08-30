@@ -31,9 +31,12 @@ config:
 event_player:
   # See also: base.yaml for events related to enabling/disabling missionresume
   # Allow the player to resume a mission when launching the ball
-  missionresume_shot_hit:
-    - start_mode_recruit(current_player.resume_mission){current_player.resume_mission!=" "}
+  missionresume_shot_hit.1:
     - force_plunger_launch
+  missionresume_shot_hit.2{current_player.resume_mission!=" "}:
+    resume_mission:
+      squadmate:
+        value: current_player.resume_mission
   mode_type_mission_started:
     - recruittimer_start|3s     # It's nice to give a little delay
   timer_recruittimer_complete:

@@ -201,6 +201,7 @@ sounds:
   music_recruit_jack_2:
     file: mus_jack_acq_combat_2.ogg
     track: music
+    fade_out: 1s
     volume: 0.8
     mode_end_action: stop
   warden_start:

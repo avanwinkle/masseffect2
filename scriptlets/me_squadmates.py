@@ -90,6 +90,8 @@ class SquadmateHandlers(CustomCode):
 
     # Create a listener for a recruitmission to start
     self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
+    # Create a listener for a recruitmission to be resumed
+    self.machine.events.add_handler("resume_mission", self._on_missionselect)
     # Create a listener for the field mode to start
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 

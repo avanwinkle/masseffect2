@@ -7,19 +7,19 @@ event_player:
     - add_player_2{num==2}|150ms
     - add_player_3{num==3}|150ms
     - add_player_4{num==4}|150ms
-  player_turn_started:
+  player_turn_started{game.num_players>1}:
     - multiplayer_turn_start_1{number==1}
     - multiplayer_turn_start_2{number==2}
     - multiplayer_turn_start_3{number==3}
     - multiplayer_turn_start_4{number==4}
-  player_turn_ended:
+  player_turn_ended{game.num_players>1}:
     - multiplayer_turn_end_1{number==1}
     - multiplayer_turn_end_2{number==2}
     - multiplayer_turn_end_3{number==3}
     - multiplayer_turn_end_4{number==4}
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
-  
+
 slide_player:
   show_base_slide:
     singleplayer_slide{not is_multiplayer}:
@@ -36,7 +36,7 @@ slide_player:
       action: play
       priority: 3
       expire: 6s
-  show_multiplayer_slide: 
+  show_multiplayer_slide:
     multiplayer_slide:
       action: play
     singleplayer_slide:
@@ -45,9 +45,9 @@ slide_player:
     resume_slide:
       action: remove
   ball_will_end:
-    singleplayer_slide_base:
+    singleplayer_slide:
       action: remove
-    multiplayer_slide_base:
+    multiplayer_slide:
       action: remove
 
 widget_player:
@@ -68,8 +68,6 @@ widget_player:
       target: dmd
       widget_settings:
         height: 17
-        color: 990000
-        opacity: 0.5
   show_base_slide{is_resume and is_multiplayer}:
     resume_widget:
       action: add
@@ -80,10 +78,10 @@ widget_player:
       target: dmd
       widget_settings:
         height: 14
-        color: 009900
-        opacity: 0.5
   disable_missionresume:
     resume_widget:
+      action: remove
+    resume_bg_widget:
       action: remove
   # Player 2 has entered the game, add widgets for player1 and player2
   add_player_2:
@@ -262,7 +260,7 @@ widgets:
         add_to_slide: pulse_text_slow
   resume_bg_widget:
     - type: rectangle
-      color: 111111
+      color: 000000
       anchor_y: bottom
       y: middle-6
       height: 14
