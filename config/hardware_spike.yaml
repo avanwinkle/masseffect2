@@ -195,11 +195,11 @@ switches:
   s_left_orbit:
     number: 10-10
     tags: playfield_active
-    ignore_window_ms: 500
+    ignore_window_ms: 1100
   s_right_orbit:
     number: 10-11
     tags: playfield_active
-    ignore_window_ms: 500
+    ignore_window_ms: 1100
   s_left_ramp_entrance:
     number: 10-5
     tags: playfield_active
@@ -613,7 +613,6 @@ coils:
   c_kickback:
     number: 8-3
     default_pulse_ms: 20
-    # pulse_events: pulse_kickback
 
 playfields:
   playfield:

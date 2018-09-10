@@ -20,6 +20,7 @@ event_player:
   # If we are returning to field because we failed the suicide mission, say so
   mode_field_started.2{device.achievements.suicidemission.state=="stopped"}:
     - reset_from_suicide
+    # Looking for other mode_field_started events? Check the field submode configs!
 
 config:
   - field_bumpers.yaml
