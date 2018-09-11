@@ -1,0 +1,11 @@
+#config_version=5
+
+analytics:
+  mode_grunt:
+    start_event: mode_recruitgrunt_started
+    stop_event: mode_recruitgrunt_will_stop
+    player_variables: score
+    counts:
+      shots_hit:
+        starting_count: 5 - device.counters.grunt_shots_counter.value
+        count_events: logicblock_grunt_shots_counter_hit

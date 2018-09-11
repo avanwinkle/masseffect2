@@ -65,6 +65,7 @@ machine_vars:
 custom_code:
   - scriptlets.me_squadmates.SquadmateHandlers
   - scriptlets.save_career.SaveCareer
+  - scriptlets.mpf_analytics.MpfAnalytics
   # - mpf_arduino.MPFArduino
 
 mc_scriptlets: squadmate_sounds.SquadmateSounds
