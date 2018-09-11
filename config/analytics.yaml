@@ -2,8 +2,7 @@
 
 analytics:
   mode_grunt:
-    start_event: mode_recruitgrunt_started
-    stop_event: mode_recruitgrunt_will_stop
+    mode: recruitgrunt
     player_variables: score
     counts:
       shots_hit:

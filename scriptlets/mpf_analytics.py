@@ -13,7 +13,6 @@ class Analysis:
     self._start_time = None
 
     self._reset()
-    self._attempts = {}
 
     # Add event handlers
     self.machine.events.add_handler(self.config["start_event"], self._start_analysis)
@@ -32,9 +31,9 @@ class Analysis:
     self._handlers = []
 
     # Track attempts for each player
-    if not self.machine.game.player.number in self._attempts:
-      self._attempts[self.machine.game.player.number] = { self.name: 0 }
-    self._attempts[self.machine.game.player.number][self.name] += 1
+    if not self.machine.game.player.number in self._persists:
+      self._persists[self.machine.game.player.number] = { "attempts": 0, "time_played": 0, "aggregate": {} }
+    self._persists[self.machine.game.player.number]["attempts"] += 1
 
     # Set the initial values
     for player_var in Util.string_to_list(self.config.get("player_variables", [])):
@@ -44,6 +43,8 @@ class Analysis:
 
     # Create listeners for count events
     for key, count_config in self.config.get("counts", {}).items():
+      if key in self._player_vars:
+        raise AttributeError("Cannot store count named {}, a player_variable already exists with that name".format(key))
       starting_count = self.machine.placeholder_manager.build_int_template(count_config["starting_count"])
       self._counts[key] = [starting_count.evaluate({}), 0]
       self._handlers.append(self.machine.events.add_handler(count_config["count_events"], self._count, key=key))
@@ -54,7 +55,7 @@ class Analysis:
     stop_time = datetime.now().timestamp()
 
     for handler in self._handlers:
-      self.machine.events.remove_handler(handler)
+      self.machine.events.remove_handler_by_key(handler)
     self._handlers = []
 
     duration_secs = stop_time - self._start_time
@@ -64,21 +65,38 @@ class Analysis:
     if hours > 0:
       timestring = "{} hours {}".format(hours, timestring)
 
+    persist_values = self._persists[self.machine.game.player.number]
+    persist_values["time_played"] += duration_secs
+
     analysis = {
       "duration": duration_secs,
       "timestring": timestring,
-      "attempt": self._attempts[self.machine.game.player.number][self.name]
+      "attempt": persist_values["attempts"],
+      "total_time": persist_values["time_played"],
     }
 
     for player_var, initial_value in self._player_vars.items():
+      change = self.machine.game.player[player_var] - initial_value
+
+      if not player_var in persist_values["aggregate"]:
+        persist_values["aggregate"][player_var] = 0
+      persist_values["aggregate"][player_var] += change
+
       analysis[player_var] = {
         "starting_value": initial_value,
-        "change": self.machine.game.player[player_var] - initial_value,
+        "change": change,
+        "aggregate": persist_values["aggregate"][player_var]
       }
     for count_var, initial_value in self._counts.items():
+
+      if not count_var in persist_values["aggregate"]:
+        persist_values["aggregate"][count_var] = 0
+      persist_values["aggregate"][count_var] += initial_value[1]
+
       analysis[count_var] = {
         "starting_value": initial_value[0],
         "change": initial_value[1],
+        "aggregate": persist_values["aggregate"][count_var],
       }
 
       self._start_time = None
@@ -97,7 +115,7 @@ class Analysis:
     self._player_vars = {}
     self._counts = {}
     self._start_time = None
-    self._attempt = 0
+    self._persists = {}
 
 
 class MpfAnalytics(CustomCode):
@@ -114,4 +132,10 @@ class MpfAnalytics(CustomCode):
 
     for name, analysis_config in self.config["analytics"].items():
       self.log.info(" - creating analytics for {}".format(name))
+      if "mode" in analysis_config:
+        if not "start_event" in analysis_config:
+          analysis_config["start_event"] = "mode_{}_will_start".format(analysis_config["mode"])
+        if not "stop_event" in analysis_config:
+          analysis_config["stop_event"] = "mode_{}_will_stop".format(analysis_config["mode"])
+
       self.analytics[name] = Analysis(name, self.machine, analysis_config, self.log)
