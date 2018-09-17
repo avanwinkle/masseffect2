@@ -940,9 +940,6 @@ sounds:
       file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.ogg
       track: voice
   # Squadmate got one
-    garrus_nice_shot:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.ogg
-      track: voice
     garrus_there_we_go:
       file: en_us_hench_garrus_ss_global_hench_garrus_00303175_m.ogg
       track: voice
@@ -954,9 +951,6 @@ sounds:
       track: voice
     jack_got_one:
       file: en_us_hench_convict_ss_global_hench_convict_00296198_m.ogg
-      track: voice
-    jack_nice_shot:
-      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.ogg
       track: voice
     miranda_got_one:
       file: en_us_hench_vixen_ss_global_hench_vixen_00257437_m.ogg

@@ -384,12 +384,10 @@ sound_pools:
       track: voice
       type: random_force_all
       sounds:
-        - garrus_nice_shot{current_player.status_garrus==4}
         - garrus_there_we_go{current_player.status_garrus==4}
         - garrus_scratch_one{current_player.status_garrus==4}
         - jack_one_down{current_player.status_jack==4}
         - jack_got_one{current_player.status_jack==4}
-        - jack_nice_shot{current_player.status_jack==4}
         - miranda_got_one{current_player.status_miranda==4}
         - miranda_one_down{current_player.status_miranda==4}
     tubes_got_two:

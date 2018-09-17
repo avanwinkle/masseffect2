@@ -90,6 +90,14 @@ shot_profiles:
         show: off
       - name: lit
         show: color_flashing_default
+  hit_to_flash_fast_profile_noadvance:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: unlit
+        show: off
+      - name: lit
+        show: color_flashing_fast
   hit_to_off_profile:
     show_when_disabled: false
     states:

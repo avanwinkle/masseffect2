@@ -44,7 +44,7 @@ sound_player:
 sound_pools:
   shot_hit_sounds_garrus:
     type: random_force_all
-    sounds: garrus_shot_sound_1, garrus_shot_sound_2, garrus_shot_sound_3
+    sounds: garrus_shot_sound_1, garrus_shot_sound_2, garrus_shot_sound_3, garrus_nice_work, garrus_impressive
     track: voice
   shot_hit_sounds_grunt:
     type: random_force_all
@@ -93,8 +93,14 @@ sounds:
   garrus_shot_sound_3:
     file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.ogg
     track: voice
+  garrus_nice_work:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303089_m.ogg
+    track: voice
+  garrus_impressive:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303126_m.ogg
+    track: voice
   grunt_shot_sound_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00316600_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331030_m.ogg
     track: voice
   grunt_shot_sound_2:
     file: en_us_hench_grunt_ss_global_hench_grunt_00317212_m.ogg
@@ -130,7 +136,7 @@ sounds:
     file: DLC_HEN_MT_Int.096.ogg
     track: voice
   kasumi_shot_sound_2:
-    file: DLC_HEN_MT_Int.117.ogg
+    file: DLC_HEN_MT_Int.152.ogg
     track: voice
   kasumi_shot_sound_3:
     file: DLC_HEN_MT_Int.146.ogg
@@ -160,7 +166,7 @@ sounds:
     file: en_us_hench_geth_ss_global_hench_geth_00315345_m.ogg
     track: voice
   mordin_shot_sound_1:
-    file: en_us_hench_professor_ss_global_hench_professor_00316910_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00331212_m.ogg
     track: voice
   mordin_shot_sound_2:
     file: en_us_hench_professor_ss_global_hench_professor_00316952_m.ogg
@@ -208,7 +214,7 @@ sounds:
     file: en_us_hench_assassin_ss_global_hench_assassin_00297586_m.ogg
     track: voice
   thane_shot_sound_3:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00316484_m.ogg
     track: voice
   thane_shot_sound_4:
     file: en_us_hench_assassin_ss_global_hench_assassin_00330846_m.ogg

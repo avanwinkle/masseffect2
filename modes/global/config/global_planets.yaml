@@ -53,9 +53,9 @@ shot_profiles:
     show_when_disabled: False
     states:
       - name: lit
-        show: on
-      - name: hit
         show: off
+      - name: hit
+        show: on
 
 shots:
   left_planet_shot:

@@ -2,7 +2,8 @@ from mpfmc.core.scriptlet import Scriptlet
 
 NAME_FORMATS = {
   "killed":          "squadmate_{squadmate}_killed",
-  "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}"
+  "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}",
+  "skillshot":       "squadmate_{squadmate}_nice_shot",
 }
 COMPLETED_EVENT_NAME = "squadmate_killed_complete"
 

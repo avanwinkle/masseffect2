@@ -151,7 +151,7 @@ class SoundManager():
       for track, sounds in modesounds.byTrack().items():
         for sound in sounds:
           if sound in self._analysis['sounds']:
-            print("ERROR: Sound file '{}'' in mode {} also exists in mode {}".format(
+            print("ERROR: Sound file '{}' in mode {} also exists in mode {}".format(
                   sound, mode, self._analysis['sounds'][sound]['mode']))
             return
           modepath = "./modes/{}/sounds/{}/".format(self.machine_configs.getModeParent(mode), track)

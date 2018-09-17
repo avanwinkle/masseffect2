@@ -80,6 +80,7 @@ modes:
   - missionselect
   - modeanalysis
   - bonus
+  - skillshot
   # Environments:
   - environment
   - env_bloodpack
