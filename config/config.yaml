@@ -189,7 +189,7 @@ player_vars:
     value_type: str
   available_shipupgrades:
     initial_value: 0
-  available_upgrades:
+  available_research:
     initial_value: 0
   current_research:
     initial_value: " "

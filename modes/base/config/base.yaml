@@ -491,6 +491,11 @@ slide_player:
     introslide_availablemissions:
       expire: 6s
       priority: 200
+  skillshot_lit_hit:
+    skillshot_slide:
+      # Higher priority than the instructions slide (at 200) and planets (610+300)
+      priority: 920
+      expire: 3s
 
 slides:
   levelup_slide:
@@ -511,6 +516,25 @@ slides:
     widgets:
       - type: text
         text: Assignment Complete!
+  skillshot_slide:
+    - type: text
+      text: SKILLSHOT
+      anchor_y: bottom
+      y: middle
+      style: text_default
+      z: 12
+    - type: text
+      text: (temp_build_value)
+      number_grouping: true
+      anchor_y: top
+      y: middle-2
+      style: medium
+      z: 12
+    - type: rectangle
+      height: 32
+      width: 128
+      color: black
+      z: 10
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
@@ -527,6 +551,7 @@ sound_player:
     music_mission_success:
       action: stop
       fade_out: 1s
+  skillshot_lit_hit: skillshot_sound
 
 sound_pools:
   gameintro_norecruits_short:
