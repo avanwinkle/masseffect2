@@ -140,6 +140,7 @@ event_player:
     - start_mode_lockhandler
     - start_mode_environment
     - enable_orbitswitches
+    - enable_kickback
     - flippers_on
     - reset_missionselect_bypass
   mode_base_started.2:

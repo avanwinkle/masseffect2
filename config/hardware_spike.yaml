@@ -184,7 +184,7 @@ switches:
     number: 9-4
     tags: playfield_active
   s_outlane_right:
-    number: 8-7
+    number: 10-14 # 8-7 Moved
     tags: playfield_active
   s_battering_ram:
     number: 10-4
@@ -257,7 +257,7 @@ switches:
     ignore_window_ms: 300ms
     tags: playfield_active
   s_kickback:
-    number: 10-14
+    number: 8-7 # 10-14 Moved
     ignore_window_ms: 400
     # tags: playfield_active # Cannot be playfield active if it's a ball hold switch
   s_tenpoints:
