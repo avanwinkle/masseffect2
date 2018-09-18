@@ -1,7 +1,6 @@
 #config_version=5
 
 event_player:
-  # watch out! Recruitsave's early save can disable it before the medigel shot kicks in, causing a double save
   medigel_shot_hit:
     - do_medigel_save
 
@@ -9,15 +8,21 @@ shots:
   # This shot lights when medigel is available
   medigel_shot:
     hit_events:
-      - s_outlane_left_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
-      - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
-    profile: medigel_profile
-    enable_events: levelup, enable_medigel
+      - s_outlane_left_active
+      - s_outlane_right_active
+    enable_events:
+      - levelup
+      - ball_save_recruitsave_disabled{current_player.medigel>0}
+      - ball_save_default_disabled{current_player.medigel>0}
+      - ball_save_sbchase_save_disabled{current_player.medigel>0}
     # Disable medigel during story wizard modes because they have many saves. Completing
     # them will levelup and restore medigel anyway. Suicide also manages its
     # own ball saves, so disable for the entire suicide mission
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
+      - ball_save_recruitsave_enabled
+      - ball_save_default_enabled
+      - ball_save_sbchase_save_enabled
       - ball_will_end
       - mode_collectorship_base_started
       - mode_derelictreaper_started
@@ -33,12 +38,26 @@ ball_saves:
     balls_to_save: 1
     only_last_ball: true  # don't waste medigel during multiballs
 
-shot_profiles:
-  medigel_profile:
-    show: medigel_show
-    show_when_disabled: false
-    states:
-      - name: lit
+variable_player:
+  levelup:
+    medigel: 1
+  ball_save_medigel_save_saving_ball:
+    medigel:
+      action: set
+      int: 0
+  ball_will_end:
+    medigel:
+      action: set
+      int: 0
+
+show_player:
+  player_medigel{value>0}: medigel_show
+  player_medigel{value==0}:
+    medigel_show:
+      action: stop
+  ball_will_end:
+    medigel_show:
+      action: stop
 
 shows:
   medigel_show:
