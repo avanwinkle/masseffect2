@@ -1,4 +1,8 @@
 #config_version=5
+event_player:
+  recruit_kasumi_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}: play_kasumi_advance
+  recruit_thane_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}: play_thane_advance
+
 sound_player:
   recruit_garrus_shot_hit:
     shot_hit_sounds_garrus:
@@ -12,7 +16,7 @@ sound_player:
     shot_hit_sounds_jack:
       action: play
       max_queue_time: 1s
-  recruit_kasumi_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}:
+  play_kasumi_advance:
     shot_hit_sounds_kasumi:
       action: play
       max_queue_time: 1s
@@ -32,7 +36,7 @@ sound_player:
     shot_hit_sounds_tali:
       action: play
       max_queue_time: 1s
-  recruit_thane_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}:
+  play_thane_advance:
     shot_hit_sounds_thane:
       action: play
       max_queue_time: 1s

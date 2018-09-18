@@ -40,6 +40,12 @@ shot_groups:
     shots: left_planet_shot, right_planet_shot
     reset_events: planet_shots_hit_complete
     rotate_events: s_flipper_left_active, s_flipper_right_active
+    disable_events:
+      - mode_skillshot_started
+      - mode_global_started{mode.skillshot.active}
+    enable_events:
+      - mode_skillshot_stopped
+      - mode_global_started{not mode.skillshot.active}
   mineral_shots:
     shots: mineral_shot_iridium, mineral_shot_palladium, mineral_shot_platinum
 
@@ -266,7 +272,7 @@ sound_player:
   planet_shots_hit_complete:
     scan_complete_sound:
       action: play
-      max_queue_time: 1s
+      max_queue_time: 500ms
 
 sound_pools:
   scan_complete_sound:

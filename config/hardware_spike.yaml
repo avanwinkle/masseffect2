@@ -94,29 +94,19 @@ drop_target_banks:
     reset_on_complete: 1s
     reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
 
-kickbacks:
-  dragon_kickback:
-    coil: c_kickback
-    switch: s_kickback
-    enable_events: enable_kickback
-    disable_events: disable_kickback, ball_hold_enable
-
 autofire_coils:
-  right_slingshot:
-    switch: s_right_slingshot
-    coil: c_slingshot_right
-    enable_events: ball_started, slingshots_on
-    disable_events: ball_ending, service_mode_entered, slingshots_off
   left_slingshot:
     switch: s_left_slingshot
     coil: c_slingshot_left
     enable_events: ball_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
+    debug: true
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
     enable_events: ball_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
+    debug: true
   right_bumper:
     switch: s_bumper_right
     coil: c_bumper_right
@@ -127,6 +117,19 @@ autofire_coils:
     coil: c_bumper_bottom
     enable_events: ball_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
+  right_slingshot:
+    switch: s_right_slingshot
+    coil: c_slingshot_right
+    enable_events: ball_started, slingshots_on
+    disable_events: ball_ending, service_mode_entered, slingshots_off
+    debug: true
+# kickbacks:
+  dragon_kickback:
+    coil: c_kickback
+    switch: s_kickback
+    enable_events: enable_kickback
+    disable_events: disable_kickback, ball_hold_enable
+    debug: true
 
 switches:
   s_start_button:

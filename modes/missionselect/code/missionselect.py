@@ -3,6 +3,7 @@ from scriptlets.me_squadmates import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
 ALLOW_COLLECTORSHIP_REPLAY = False
+ALLOW_DERELICTREAPER_REPLAY = False
 
 class MissionSelect(Carousel):
 
@@ -38,7 +39,9 @@ class MissionSelect(Carousel):
     if player.achievements['suicidemission'] == "enabled":
       items.append('suicide')
     # Or if Derelict Reaper is available and not completed, it goes first
-    elif player.achievements['derelictreaper'] not in ("disabled", "completed"):
+    elif player.achievements['derelictreaper'] == "enabled" or (
+      ALLOW_DERELICTREAPER_REPLAY and player.achievements['derelictreaper'] == "started"
+    ):
       items.append('derelictreaper')
 
     # Then any squadmates who are of the "available" status
@@ -47,7 +50,7 @@ class MissionSelect(Carousel):
       items.append(mate)
 
     # If allowed, the collectorship can be replayed (pre-derelictreaper)
-    if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "completed" and player.achievements['derelictreaper'] == "disabled" and player.achievements['suicidemission'] == "disabled":
+    if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "started":
       items.append('collectorship')
 
     # "Pass" is the last item in the menu

@@ -3,11 +3,13 @@
 mode:
   start_events: start_mode_skillshot
   stop_events: stop_mode_skillshot
-  priority: 400 # Higher than global (300) which has planets turning off the lane lights
+  priority: 1400
 
 event_player:
   timer_skillshot_timer_complete: stop_mode_skillshot
   skillshot_hit: stop_mode_skillshot
+  # If a mission is resumed, no skill shot
+  mode_type_mission_started: stop_mode_skillshot
 
 variable_player:
   mode_skillshot_started:
@@ -101,7 +103,7 @@ sounds:
 
 timers:
   skillshot_timer:
-    start_value: 10
+    start_value: 5
     end_value: 0
     direction: down
     control_events:

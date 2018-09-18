@@ -136,8 +136,8 @@ achievement_groups:
 event_player:
   mode_base_started:
     - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
-    - start_mode_global{device.achievements.suicidemission.state!="started"}
     - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
+    - start_mode_global{device.achievements.suicidemission.state!="started"}
     - start_mode_lockhandler
     - start_mode_environment
     - enable_orbitswitches
