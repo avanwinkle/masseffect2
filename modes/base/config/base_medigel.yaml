@@ -25,7 +25,7 @@ shots:
       - ball_save_sbchase_save_enabled
       - ball_will_end
       - mode_collectorship_base_started
-      - mode_derelictreaper_started
+      # - mode_derelictreaper_started # Derelict Reaper has multiball but no save, rely on only_last_ball
       - mode_normandyattack_started
       - mode_suicide_base_started
     tags: envshot_outlane

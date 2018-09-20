@@ -25,6 +25,10 @@ sound_pools:
     sounds: david_sqrt_seemed_harmless, david_please_make_it_stop_1, david_please_make_it_stop_2
     track: voice
     type: random_force_all
+  explosion:
+    track: sfx
+    type: random_force_all
+    sounds: explosion_long_one, explosion_long_two, explosion_long_three, explosion_short_one, explosion_short_two, explosion_short_three
 
 sounds:
   asscompl_1:
@@ -56,3 +60,21 @@ sounds:
   liara_its_finally_over:
     file: DLC_EXP_Part01_Int.1167.ogg
     track: voice
+  explosion_long_one:
+    file: SFXGame.213.ogg
+    track: sfx
+  explosion_long_two:
+    file: SFXGame.214.ogg
+    track: sfx
+  explosion_long_three:
+    file: SFXGame.215.ogg
+    track: sfx
+  explosion_short_one:
+    file: SFXGame.216.ogg
+    track: sfx
+  explosion_short_two:
+    file: SFXGame.217.ogg
+    track: sfx
+  explosion_short_three:
+    file: SFXGame.218.ogg
+    track: sfx

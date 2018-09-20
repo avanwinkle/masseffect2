@@ -77,8 +77,8 @@ show_player:
       speed: 2
   tower_ascent_shot_hit:
     tower_flash_show:
-      speed: 10
-      loops: 6
+      speed: 12
+      loops: 4
       priority: 100
   logicblock_thane_ascent_counter_complete:
     tower_shots_show:
@@ -151,6 +151,7 @@ sound_player:
       action: play
       fade_out: 2s
       mode_end_action: stop
+    asari_youll_have_to_get_up_to_the_bridge: {}
   logicblock_thane_ascent_counter_hit{count!=3}: nas_misc_sounds
   logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
   envshot_outlane_hit: failure_sound
@@ -199,6 +200,9 @@ sounds:
     track: voice
   nas_good_work:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199750_m.ogg
+    track: voice
+  asari_youll_have_to_get_up_to_the_bridge:
+    file: en_us_twrasa_quest_giver_twrasa_shuttle_ride_d_00187374_m.ogg
     track: voice
 
 

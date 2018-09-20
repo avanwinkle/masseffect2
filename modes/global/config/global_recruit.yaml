@@ -164,7 +164,7 @@ sound_pools:
   missioncomplete_voice_thane:
     type: random
     track: voice
-    sounds: missioncomplete_voice_thane_1, missioncomplete_voice_thane_2
+    sounds: missioncomplete_voice_thane_1, missioncomplete_voice_thane_2, missioncomplete_voice_thane_3, missioncomplete_voice_thane_low_survival_odds_dont_concern_me
     max_queue_time: 1s
   missioncomplete_voice_zaeed_renegade:
     type: random
@@ -454,6 +454,15 @@ sounds:
       release_point: 500ms
   missioncomplete_voice_thane_3:
     file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.ogg
+    track: voice
+    ducking:
+      target: levelup
+      attenuation: 0.5
+      attack: 100ms
+      release: 300ms
+      release_point: 500ms
+  missioncomplete_voice_thane_low_survival_odds_dont_concern_me:
+    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00307859_m.ogg
     track: voice
     ducking:
       target: levelup

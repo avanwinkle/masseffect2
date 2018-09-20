@@ -25,7 +25,7 @@ sound_player:
   env_gunfight_ricochet: ricochet
   env_gunfight_bullet_thud: bullet_thud
   env_gunfight_bullet_whiz: bullet_whiz
-  env_gunfight_quick_expl: quick_expl
+  env_gunfight_quick_expl: explosion  # Defined in base_endsounds
   envshot_return_lane_hit: loading_weapon
   shepdead_garrus:
     shepdead_garrus:
@@ -74,7 +74,7 @@ sound_pools:
     track: sfx
     type: random_force_all
   quick_expl:
-    sounds: quick_expl_1, quick_expl_2, quick_expl_3, quick_expl_4
+    sounds: explosion_long_one, explosion_long_two, explosion_long_three, explosion_short_one, explosion_short_two, explosion_short_three
     track: sfx
     type: random_force_all
   loading_weapon:
@@ -124,18 +124,6 @@ sounds:
     track: sfx
   bullet_whizz_4:
     file: SFXGame.181.ogg
-    track: sfx
-  quick_expl_1:
-    file: SFXGame.213.ogg
-    track: sfx
-  quick_expl_2:
-    file: SFXGame.214.ogg
-    track: sfx
-  quick_expl_3:
-    file: SFXGame.215.ogg
-    track: sfx
-  quick_expl_4:
-    file: SFXGame.216.ogg
     track: sfx
   loading_weapon_1:
     file: SFXGame.879.ogg

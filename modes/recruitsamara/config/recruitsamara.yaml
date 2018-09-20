@@ -187,6 +187,9 @@ sound_player:
       action: play
     gunship_sound:
       action: play
+  logicblock_samara_shots_counter_hit:
+    explosion:  # Defined in base_endsounds
+      volume: 0.9
   recruit_samara_complete:
     music_recruit_samara:
       action: stop
