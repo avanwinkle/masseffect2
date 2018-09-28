@@ -191,6 +191,8 @@ player_vars:
     initial_value: 0
   available_research:
     initial_value: 0
+  casual:
+    initial_value: 0
   current_research:
     initial_value: " "
     value_type: str
@@ -220,15 +222,6 @@ player_vars:
     initial_value: 0
   presuicide_score:
     initial_value: 0
-  recruits_color:
-    initial_value: "FFFFFF"
-    value_type: str
-  recruits_lit:
-    initial_value: "l_null"
-    value_type: str
-  recruits_complete:
-    initial_value: "l_null"
-    value_type: str
   reputation:
     initial_value: 0
   resume_mission:

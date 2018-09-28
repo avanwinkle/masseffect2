@@ -73,10 +73,6 @@ sound_pools:
     sounds: bullet_whizz_1, bullet_whizz_2, bullet_whizz_3, bullet_whizz_4
     track: sfx
     type: random_force_all
-  quick_expl:
-    sounds: explosion_long_one, explosion_long_two, explosion_long_three, explosion_short_one, explosion_short_two, explosion_short_three
-    track: sfx
-    type: random_force_all
   loading_weapon:
     sounds: loading_weapon_1, loading_weapon_2, loading_weapon_3, loading_weapon_4, loading_weapon_5, loading_weapon_6
     track: sfx

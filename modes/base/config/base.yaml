@@ -157,7 +157,8 @@ event_player:
         type: bool
   # If we are starting a new game, give some instructional audio
   mode_base_started.3{current_player.squadmates_count==2}:
-    - play_gameintro_norecruits_long{current_player.ball==1}
+    - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
+    - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
     - play_gameintro_norecruits_short{current_player.ball==3}
   # If we are starting a game and have recruited, different sounds
   mode_base_started.4{current_player.squadmates_count>2}:
@@ -239,6 +240,8 @@ ball_saves:
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
 extra_balls:
+  recruits_extraball:
+    award_events: player_recruited_squadmates_count{player_num==current_player.number and value==3}
   omegarelay_extraball:
     award_events: omegarelay_shots_hit_complete
 
@@ -538,7 +541,8 @@ slides:
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
-  play_gameintro_norecruits_long: illusive_already_compiled_dossiers
+  play_gameintro_norecruits_long_four: illusive_already_compiled_dossiers_four
+  play_gameintro_norecruits_long_five: illusive_already_compiled_dossiers_five
   play_gameintro_norecruits_short: gameintro_norecruits_short
   play_gameintro_recruits_long: gameintro_recruits_long
   play_gameintro_recruits_short: gameintro_recruits_short
@@ -591,7 +595,11 @@ sounds:
       attenuation: 0
       release_point: 18s
       release: 4s
-  illusive_already_compiled_dossiers:
+  illusive_already_compiled_dossiers_four:
+    file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
+    track: voice
+    volume: 0.9
+  illusive_already_compiled_dossiers_five:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
     volume: 0.9

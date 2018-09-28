@@ -36,7 +36,7 @@ slides:
   change_career_slide:
     widgets:
       - type: text
-        text: Switch Career
+        text: Switch Profile
         style: savegame_title
       - type: text
         text: (career_name)
@@ -60,7 +60,7 @@ slides:
   career_select_slide:
     widgets:
       - type: text
-        text: "Load Career:"
+        text: "Load Profile:"
         style: small
         anchor_y: top
         anchor_x: left

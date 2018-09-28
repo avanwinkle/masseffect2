@@ -19,11 +19,15 @@ class MissionSelect(Carousel):
 
   def mode_start(self, **kwargs):
     self._items = self._build_items_list()
-    # Disable the intro slide after a time
-    self.delay.add(callback=self._remove_intro, ms=3000)
-
-    self.debug_log("Final list of missionselect options: {}".format(self._items.__str__()))
-    super().mode_start(**kwargs)
+    self.debug_log("List of missionselect options: {}".format(self._items.__str__()))
+    
+    # If there's only one option and it's a recruit mission, start it immediately without a slide
+    if len(self._items) == 1 and self._items[0] in self._mates:
+      self._select_item()
+    else:
+      super().mode_start(**kwargs)
+      # Disable the intro slide after a time
+      self.delay.add(callback=self._remove_intro, ms=3000)
 
   def _build_items_list(self):
     player = self.machine.game.player
@@ -33,7 +37,7 @@ class MissionSelect(Carousel):
     if player.achievements['collectorship'] == "enabled":
       return ['collectorship']
 
-    items = [self._intro]
+    items = []
 
     # If Suicide Mission is ready, it goes first
     if player.achievements['suicidemission'] == "enabled":
@@ -43,6 +47,9 @@ class MissionSelect(Carousel):
       ALLOW_DERELICTREAPER_REPLAY and player.achievements['derelictreaper'] == "started"
     ):
       items.append('derelictreaper')
+      # On casual mode, force the player to play derelict reaper
+      if player["casual"]:
+        return items
 
     # Then any squadmates who are of the "available" status
     self._mates = SquadmateStatus.recruitable_mates(player)
@@ -53,8 +60,14 @@ class MissionSelect(Carousel):
     if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'] == "started":
       items.append('collectorship')
 
-    # "Pass" is the last item in the menu
-    items.append('pass')
+    # "Pass" is the last item in the menu (not available in casual mode except for suicide)
+    if not player["casual"] or (len(items) == 1 and items[0] == "suicide"):
+      items.append('pass')
+
+    # If more than one option is available, include the intro slide
+    if len(items) > 1:
+        items.insert(0, self._intro)
+    
     return items
 
   def _get_available_items(self):
@@ -73,7 +86,7 @@ class MissionSelect(Carousel):
     elif selection == "pass":
       # Store the choice to pass so we can skip missionselect until a new mission is available
       # This is only applicable if there are still missions to unlock, otherwise we could get stuck
-      if self.machine.game.player["squadmates_count"] < 12:
+      if self.machine.game.player["squadmates_count"] < 12 and not self.machine.game.player["casual"]:
         self.machine.game.player['bypass_missionselect'] = 1
 
   def _update_highlighted_item(self, direction):

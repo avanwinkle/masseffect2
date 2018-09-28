@@ -13,6 +13,8 @@ ACHIEVEMENT_MISSIONS = (
   "collectorship", "derelictreaper", "suicidemission"
 )
 
+CASUAL_CAREER = { "career_name": " ", "readonly": 1, "status_mordin": 3, "counter_sbdrops_counter": 2 }
+
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
 SAVE_SUICIDE_PROGRESS = False # Should suicide mission progress be saved to the career?
 
@@ -20,6 +22,7 @@ class SaveCareer(CustomCode):
 
   def on_load(self):
     self.log = logging.getLogger("SaveCareer")
+    self.log.setLevel(10)
     self._current_careers = {}
     self._achievement_handlers = {}
     self.machine.events.add_handler("load_career", self._load_career)
@@ -29,13 +32,21 @@ class SaveCareer(CustomCode):
 
   def _set_career(self, **kwargs):
     if self.machine.game and self.machine.game.player:
-      career_name = kwargs.get("career_name", None)
-      # Store the career for this player's number
-      self._current_careers[self.machine.game.player.number] = kwargs if career_name else None
-      # Attach the career name to the current player
-      self.machine.game.player["career_name"] = career_name
+      player = self.machine.game.player
+      career_name = kwargs.get("career_name")
+      # Store this career name for this player number
+      self.machine.set_machine_var("last_career_player_{}".format(player.number), career_name)
 
-    self.log.debug("Set career to '{}', Args={}".format(self.machine.game.player.career_name, kwargs))
+      if career_name == " ": 
+        player["casual"] = 1
+        player["career_name"] = "Player {}".format(player.number)
+      else:
+        # Store the career for this player's number
+        self._current_careers[player.number] = kwargs
+        # Attach the career name to the current player
+        player["career_name"] = career_name
+
+    self.log.debug("Set career to '{}', Args={}".format(player.career_name, kwargs))
 
   def _save_career(self, **kwargs):
     # This is asynchronous so fetch the player from the event, not necessarily the "current" player
@@ -81,55 +92,60 @@ class SaveCareer(CustomCode):
     player = self.machine.game.player
     if self._current_careers.get(player.number):
       player.career_name = self._current_careers[player.number]["career_name"]
-      with open(self._get_filename(player.career_name)) as f:
-        # Is this necessary, or has the entire career already been loaded?
-        careerdata = json.load(f)
-        self._achievement_handlers = {}
-        available_missions = 0
-        squadmates_count = 0
+      
+      if player.career_name == " ":
+        careerdata = CASUAL_CAREER
+      else:
+        with open(self._get_filename(player.career_name)) as f:
+          careerdata = json.load(f)
+        f.close()
+      
+      self._achievement_handlers = {}
+      available_missions = 0
+      squadmates_count = 0
 
-        self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
-        for key,value in careerdata.items():
-          if key.startswith("status_"):
-            setattr(player, key, value)
-            if value == 3:
-              available_missions += 1
-            elif value == 4:
-              squadmates_count += 1
-          elif key in PLAYER_VARS:
-            setattr(player, key, value) # e.g. player.assignments_completed = 2
-          elif key == "achievements":
-            for achievement, state in careerdata["achievements"].items():
-              handler = None
-              # For achievements without "enable_events" set, listen for MPF to auto-enable the event
-              if achievement in ("overlord", "upgrade_armor", "upgrade_cannon", "upgrade_shields"):
-                if state != "enabled":
-                  handler = self.machine.events.add_handler(
-                            "achievement_{}_state_enabled".format(achievement),
-                            self._force_achievement,
-                            achievement=achievement,
-                            state=state)
-              # All other achievements will default to disabled, so listen for that to be set
-              elif state != "disabled":
+      self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
+      
+      for key,value in careerdata.items():
+        if key.startswith("status_"):
+          setattr(player, key, value)
+          if value == 3:
+            available_missions += 1
+          elif value == 4:
+            squadmates_count += 1
+        elif key in PLAYER_VARS:
+          setattr(player, key, value) # e.g. player.assignments_completed = 2
+        elif key == "achievements":
+          for achievement, state in careerdata["achievements"].items():
+            handler = None
+            # For achievements without "enable_events" set, listen for MPF to auto-enable the event
+            if achievement in ("overlord", "upgrade_armor", "upgrade_cannon", "upgrade_shields"):
+              if state != "enabled":
                 handler = self.machine.events.add_handler(
-                            "achievement_{}_state_disabled".format(achievement),
-                            self._force_achievement,
-                            achievement=achievement,
-                            state=state)
-              # Add a callback to remove the handler after we've set the achievement to the correct state
-              if handler:
-                self._achievement_handlers[achievement] = handler
+                          "achievement_{}_state_enabled".format(achievement),
+                          self._force_achievement,
+                          achievement=achievement,
+                          state=state)
+            # All other achievements will default to disabled, so listen for that to be set
+            elif state != "disabled":
+              handler = self.machine.events.add_handler(
+                          "achievement_{}_state_disabled".format(achievement),
+                          self._force_achievement,
+                          achievement=achievement,
+                          state=state)
+            # Add a callback to remove the handler after we've set the achievement to the correct state
+            if handler:
+              self._achievement_handlers[achievement] = handler
 
-              # If this achievement is to be selected from the mission select, mark it as available
-              if achievement in ACHIEVEMENT_MISSIONS and state in ("enabled", "stopped"):
-                available_missions += 1
+            # If this achievement is to be selected from the mission select, mark it as available
+            if achievement in ACHIEVEMENT_MISSIONS and state in ("enabled", "stopped"):
+              available_missions += 1
 
-        # Based on the squadmates and achievements, set the player's progress variables
-        setattr(player, "available_missions", available_missions)
-        setattr(player, "squadmates_count", squadmates_count)
-        # Set values for the level and squadmates loaded in, to avoid super high bonuses
-        setattr(player, "saved_level", careerdata["level"])
-      f.close()
+      # Based on the squadmates and achievements, set the player's progress variables
+      setattr(player, "available_missions", available_missions)
+      setattr(player, "squadmates_count", squadmates_count)
+      # Store the level the player loads at, to avoid super high bonuses
+      setattr(player, "saved_level", careerdata.get("level", 1))
     # Allow the queue to continue
     self.machine.events.post("career_loaded", career_name=player.career_name)
 
