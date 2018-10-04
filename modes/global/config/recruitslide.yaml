@@ -56,114 +56,83 @@ slide_player:
     recruiting_advance_slide_lit{status==3}:
       expire: 4s
   mode_type_mission_started:
-    recruitslide:
+    background_slide:
       action: play
       priority: 100
   mode_type_mission_stopped:
-    recruitslide:
+    background_slide:
       action: remove
 
 slides:
-  recruitslide: []
   recruiting_advance_slide_2:
     widgets:
       - type: text
         text: Recruit (squadmate)
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
         casing: title
       - type: text
         text: 2 shots to unlock
         anchor_y: bottom
-        style: dmd_small
-        y: 3
+        style: body_md, instructions_line_2
   recruiting_advance_slide_1:
     widgets:
       - type: text
         text: Recruit (squadmate)
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
         casing: title
       - type: text
         text: 1 shot to unlock
-        style: dmd_small
-        anchor_y: bottom
-        y: 3
+        style: body_md, instructions_line_2
   recruiting_advance_slide_lit:
     widgets:
       - type: text
         text: (squadmate) Ready!
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
         casing: title
       - type: text
         text: Left Ramp to Start Mission
-        style: dmd_small
-        anchor_y: bottom
-        y: 3
+        style: body_md, instructions_line_2
 
 widget_player:
   mode_type_mission_started:
     recruitwidget_name:
       action: add
-      slide: recruitslide
+      slide: background_slide
   # Adding players triggers their variables to be set, which can show an extra "0"
   # on the base slide. Check player number to prevent this.
   # TODO: Move all recruitslide logic out of global and into recruit missions?
   player_temp_hurryup_value{player_num==current_player.number}:
     recruitwidget_int:
       action: update
-      slide: recruitslide
+      slide: background_slide
   timer_recruittimer_started:
     time_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: background_slide
   timer_recruittimer_tick:
     time_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: background_slide
 
 widgets:
   recruitwidget_name:
     - type: text
       text: (missionname)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-4
+      style: body_lg, pos_missionname
   recruitwidget_int:
     - type: text
       text: (player|temp_hurryup_value)
-      number_grouping: true
-      font_size: 10
-      font_name: Quadrit-10
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 0
+      style: header_lg, pos_hurryup, num
   time_remaining_widget:
     - type: text
       text: "(ticks_remaining)"
-      style: small_bot_right
+      style: body_sm, pos_player_4
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
-      style: small_bot_right_secondrow
+      style: body_sm, pos_player_3
   secondary_timer_widget:
     - type: text
       text: (ticks_remaining)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: right
-      anchor_y: bottom
-      x: right-4
-      y: 14
+      style: body_lg, pos_secondary_timer
 

@@ -157,50 +157,28 @@ widget_player:
       action: remove
 
 slides:
-  singleplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, pos_score_singleplayer
-  multiplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, pos_score_multiplayer
   introslide_no_missions:
     widgets:
       - type: text
         text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
+        style: header_lg, instructions_title
       - type: text
         text: Hit any lane 3x
-        style: small
-        anchor_y: top
-        y: middle-2
+        style: body_md, instructions_line_1
       - type: text
         text: to unlock missions
-        style: small
-        anchor_y: top
-        y: middle-9
+        style: body_md, instructions_line_2
   introslide_missions:
     widgets:
       - type: text
         text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
+        style: header_lg, instructions_title
       - type: text
         text: Select a mission at
-        style: small
-        anchor_y: top
-        y: middle-2
+        style: body_md, instructions_line_1
       - type: text
         text: the Galaxy Map
-        style: small
-        anchor_y: top
-        y: middle-9
+        style: body_md, instructions_line_2
 
 widgets:
   base_level_widget:
@@ -246,14 +224,14 @@ widgets:
   resume_widget:
     - type: text
       text: Press action button to
-      style: small
+      style: body_md
       y: middle+3
       z: 5
       animations:
         add_to_slide: pulse_text_slow
     - type: text
       text: resume (player|resume_mission) recruitment
-      style: small
+      style: body_md
       y: middle-3
       z: 5
       animations:

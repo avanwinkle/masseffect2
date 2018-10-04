@@ -198,58 +198,47 @@ slides:
     widgets:
       - type: text
         text: Select a Mission
-        style: quadrit_big
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
   missionselect_recruit_slide:
     priority: 1
     widgets:
       - type: text
         text: (squadmate)
-        style: quadrit_big
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
         casing: title
       - type: text
         text: Start Recruitment Mission
-        style: dmd_small
-        anchor_y: bottom
-        y: 3
+        style: body_md, instructions_line_1
   missionselect_collectorship_slide:
     priority: 1
     widgets:
       - type: text
         text: Disabled
-        anchor_y: bottom
-        y: 50%
+        style: header_lg, instructions_title
       - type: text
         text: Collector Vessel
-        anchor_y: top
-        y: 50%
+        style: header_lg, instructions_line_1
   missionselect_derelictreaper_slide:
     priority: 1
     widgets:
       - type: text
         text: Derelict
-        anchor_y: bottom
-        y: 50%
+        style: header_lg, instructions_title
       - type: text
         text: Reaper
-        anchor_y: top
-        y: 50%
+        style: header_lg, instructions_line_2
   missionselect_suicide_slide:
     priority: 1
     widgets:
       - type: text
         text: LAUNCH THE
-        style: dmd_small
+        style: body_sm
         bold: true
         anchor_y: top
         y: top-3
       - type: text
         text: SUICIDE MISSION
-        font_size: 14
-        style: quadrit_big
+        style: suicide_header
         anchor_y: bottom
         y: 3
   missionselect_pass_slide:
@@ -257,9 +246,7 @@ slides:
     widgets:
       - type: text
         text: Pass for Now
-        style: quadrit_big
-        anchor_y: bottom
-        y: bottom+45%
+        style: header_lg, instructions_title
 
 widget_player:
   # The intro slide appears whenever there are multiple options, so show arrows
@@ -269,7 +256,6 @@ widgets:
   select_arrows_widget:
     - type: text
       text: < FLIPPERS TO SELECT >
-      anchor_y: bottom
-      style: small
-      y: 3
+      style: body_sm, instructions_line_2
+
 

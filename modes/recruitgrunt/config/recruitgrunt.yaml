@@ -23,7 +23,7 @@ event_player:
   mode_recruitgrunt_started:
     set_environment:
       env: krogan
-  slide_recruitslide_active:
+  slide_background_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:
         value: device.counters.grunt_shots_counter.value
@@ -142,16 +142,10 @@ slides:
     widgets:
       - type: text
         text: COMPLETE ALL SHOTS
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
+        style: body_lg, instructions_title
       - type: text
         text: TO DEFEAT KROGAN
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
+        style: body_lg, instructions_line_1
       - type: rectangle
         width: 128
         height: 32
@@ -223,4 +217,4 @@ widget_player:
   logicblock_grunt_shots_counter_updated:
     shots_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: background_slide

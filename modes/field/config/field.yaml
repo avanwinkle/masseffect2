@@ -65,7 +65,7 @@ slides:
       - type: text
         text: the Suicide Mission
         color: BBBBBB
-        style: small
+        style: body_sm
         anchor_y: top
         y: top-2
       - type: text
@@ -74,11 +74,11 @@ slides:
         y: middle+2
       - type: text
         text: You must recruit
-        style: small
+        style: body_md
         anchor_y: bottom
         y: 8
       - type: text
         text: your team again
-        style: small
+        style: body_md
         anchor_y: bottom
         y: 1

@@ -655,7 +655,7 @@ widgets:
   levelup_mission:
     - type: text
       text: (mission_name)
-      style: dmd_small
+      style: body_md
       anchor_y: bottom
       y: 3
       z: 12

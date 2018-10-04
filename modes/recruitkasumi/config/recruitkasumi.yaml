@@ -256,18 +256,10 @@ slides:
     widgets:
       - type: text
         text: Infiltrate Hock's Vault
-        font_name: pixelmix-8
-        font_size: 8
-        anchor_y: bottom
-        y: middle+2
-        z: 1
+        style: body_lg, instructions_title
       - type: text
         text: Avoid the Alarms
-        font_name: pixelmix-8
-        font_size: 8
-        anchor_y: top
-        y: middle-2
-        z: 1
+        style: body_md, instructions_line_2
       - type: rectangle
         width: 128
         height: 32
@@ -277,37 +269,40 @@ slides:
     widgets:
       - type: text
         text: Password Obtained
-        z: 1
+        style: body_lg, instructions_title
+        z: 21
       - type: rectangle
         width: 128
         height: 32
         color: black
-        z: 0
+        z: 20
   kasumi_slide_2:
     widgets:
       - type: text
         text: Voiceprint Recorded
-        z: 1
+        style: body_lg, instructions_title
+        z: 21
       - type: rectangle
         width: 128
         height: 32
         color: black
-        z: 0
+        z: 20
   kasumi_slide_3:
     widgets:
       - type: text
         text: DNA Sample Obtained
-        z: 1
+        style: body_lg, instructions_title
+        z: 21
       - type: rectangle
         width: 128
         height: 32
         color: black
-        z: 0
+        z: 20
   kasumi_slide_4:
     widgets:
       - type: text
         text: Barrier Deactivated
-        z: 1
+        style: body_lg, instructions_title
       - type: rectangle
         width: 128
         height: 32
@@ -317,14 +312,10 @@ slides:
     widgets:
       - type: text
         text: "Alarm Tripped!"
-        anchor_y: bottom
-        y: middle+2
-        z: 1
+        style: body_lg, instructions_title
       - type: text
         text: "(count) until failure"
-        anchor_y: top
-        y: middle-2
-        z: 1
+        style: body_md, instructions_line_2
       - type: rectangle
         width: 128
         height: 32
@@ -334,6 +325,7 @@ slides:
     widgets:
       - type: text
         text: FAILED!
+        style: body_lg, instructions_title
 
 sound_player:
   mode_recruitkasumi_started:

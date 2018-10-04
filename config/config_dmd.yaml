@@ -43,19 +43,48 @@ slides:
   attract_slide:
     - type: image
       image: me2_logo_x128
+  background_slide: []
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, pos_score_singleplayer, num
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, pos_score_multiplayer, num
 
 widget_styles:
 
   # TEXT FORMATS
   #----------------------------
+  suicide_header:
+    font_size: 14
+    style: quadrit_big
+    z: 1
   header_lg:
     font_size: 10
     font_name: Quadrit-10
+    z: 1
+  body_lg:
+    font_name: pixelmix-8
+    font_size: 8
+    adjust_top: 1
+    adjust_bottom: 1
+    z: 1
+  body_md:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    z: 1
   body_sm:
     font_name: smallest_pixel-7
     font_size: 9
     adjust_top: 2
     adjust_bottom: 3
+    z: 1
   num:
     number_grouping: true
     min_digits: 2
@@ -72,11 +101,6 @@ widget_styles:
     font_size: 8
     adjust_top: 1
     adjust_bottom: 1
-  small:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
   small_bot_left:
     font_name: smallest_pixel-7
     font_size: 9
@@ -145,6 +169,15 @@ widget_styles:
     anchor_x: left
     y: 4
     x: 4
+  instructions_title:
+    anchor_y: bottom
+    y: middle
+  instructions_line_1:
+    anchor_y: top
+    y: middle-2
+  instructions_line_2:
+    anchor_y: top
+    y: middle-9
   spec_default:
     anchor_x: left
     anchor_y: bottom
@@ -157,6 +190,7 @@ widget_styles:
     anchor_x: left
     anchor_y: bottom
     opacity: 1
+
   pos_player_1:
     anchor_x: left
     anchor_y: top
@@ -177,6 +211,21 @@ widget_styles:
     anchor_y: bottom
     y: 2
     x: right-2
+  pos_secondary_timer:
+    anchor_x: right
+    anchor_y: bottom
+    x: right-4
+    y: 14
+  pos_missionname:
+    anchor_x: left
+    anchor_y: top
+    x: 2
+    y: top-4
+  pos_hurryup:
+    anchor_x: left
+    anchor_y: bottom
+    x: 2
+    y: 0
 
   mineral_name_style:
     font_name: smallest_pixel-7
