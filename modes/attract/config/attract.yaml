@@ -35,17 +35,13 @@ show_player:
       action: stop
 
 slide_player:
-  mode_attract_started: me_logo_slide
+  mode_attract_started: attract_slide
   ball_search_started: ball_search_slide
   ball_search_stopped:
     ball_search_slide:
       action: remove
 
 slides:
-  me_logo_slide:
-    widgets:
-      - type: image
-        image: me2_logo_x128
   ball_search_slide:
     widgets:
       - type: text
@@ -75,3 +71,11 @@ sounds:
     file: mus_main_menu.ogg
     track: music
     fade_out: 1s
+
+widgets:
+  attract_widget_dmd:
+    - type: image
+      image: me2_logo_x128
+  attract_widget_lcd:
+    - type: image
+      image: logo_fullscreen

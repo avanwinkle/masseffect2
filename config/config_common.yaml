@@ -12,6 +12,9 @@ smart_virtual:
 mpf:
   default_pulse_ms: 10
 
+mpf-mc:
+  fps: 30
+
 logging:
   file:
     asset_manager: none
@@ -27,12 +30,14 @@ virtual_platform_start_active_switches:
   s_trough5
   s_trough6
 
-mpf-mc:
-  fps: 30
-
 game:
   balls_per_game: 5
   max_players: 4
+
+slide_player:
+  init_done:
+    window_slide_container:
+      target: window
 
 event_player:
   game_will_start: gi_on
@@ -258,11 +263,6 @@ player_vars:
   zaeed_path_renegade:
     initial_value: -1
 
-slide_player:
-  mc_ready:
-    window_slide_container:
-      target: window
-
 sound_system:
   master_volume: 1
   buffer: 2048  # previous value was 512
@@ -318,201 +318,3 @@ animations:
       value: 0.5
       duration: .75s
       repeat: true
-
-widget_styles:
-  # The below are used for LCD
-  me_default:
-    font_name: me123
-    font_size: 28
-  bottom_center:
-    anchor_y: bottom
-    y: 12.5%
-    anchor_x: left
-    x: 12.5%
-    font_size: 56
-  # The below are used for DMD
-  text_default:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_top: 2
-    adjust_bottom: 3
-  medium:
-    font_name: pixelmix-8
-    font_size: 8
-    adjust_top: 1
-    adjust_bottom: 1
-  small:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-  small_bot_left:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: bottom
-    anchor_x: left
-    y: 2
-    x: 2
-  small_bot_right:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: bottom
-    anchor_x: right
-    y: 2
-    x: right-2
-  small_bot_right_secondrow:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: bottom
-    anchor_x: right
-    y: 8
-    x: right-2
-  score_style_singleplayer:
-    number_grouping: true
-    min_digits: 2
-    font_size: 10
-    font_name: Quadrit-10
-    anchor_x: left
-    anchor_y: top
-    x: 2
-    y: top-4
-  score_style_multiplayer:
-    number_grouping: true
-    min_digits: 2
-    font_size: 10
-    font_name: Quadrit-10
-    anchor_x: left
-    anchor_y: middle
-    x: 2
-    y: middle-2
-  squad_debug_style:
-    font_size: 18
-    anchor_x: top
-    anchor_y: left
-  bonus_title_style:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_y: bottom
-    y: middle
-  bonus_score_style:
-    font_name: pixelmix-8
-    font_size: 8
-    anchor_y: top
-    adjust_top: 1
-    adjust_bottom: 1
-    y: middle-4
-    number_grouping: true
-  quadrit_big:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_bottom: 3
-    adjust_top: 2
-  savegame_title:
-    font_name: Quadrit-10
-    font_size: 10
-    anchor_y: bottom
-    anchor_x: left
-    y: 4
-    x: 4
-  spec_default:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 0.4
-  spec_dead:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 0.03
-  spec_highlight:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 1
-  mp_player_1:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: left
-    anchor_y: top
-    number_grouping: true
-    min_digits: 2
-    y: top-2
-    x: 2
-  mp_player_2:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: right
-    anchor_y: top
-    number_grouping: true
-    min_digits: 2
-    y: top-2
-    x: right-2
-  mp_player_3:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: left
-    anchor_y: bottom
-    number_grouping: true
-    min_digits: 2
-    y: 2
-    x: 2
-  mp_player_4:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_x: right
-    anchor_y: bottom
-    number_grouping: true
-    min_digits: 2
-    y: 2
-    x: right-2
-  savegame_playername:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: top
-    anchor_x: left
-    y: top-2
-    x: 4
-    z: 1
-  mineral_name_style:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_x: middle
-    anchor_y: bottom
-    z: 3
-  mineral_highlight_style:
-    width: 42
-    height: 24
-    anchor_x: left
-    anchor_y: bottom
-    color: 333333
-    y: 9
-

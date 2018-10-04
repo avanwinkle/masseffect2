@@ -1,0 +1,33 @@
+#config_version=5
+slides:
+  attract_slide:
+    - type: image
+      image: logo_fullscreen
+
+machine_vars:
+  use_lcd:
+    initial_value: 1
+    persist: false
+
+widget_styles:
+
+  # TEXT FORMATS
+  #----------------------------
+  header_lg:
+    font_name: me123
+    font_size: 96
+  body_sm:
+    font_name: jupiter
+    font_size: 96
+
+  # POSITION LAYOUTS
+  #----------------------------
+  menu_header:
+    anchor_y: bottom
+    y: middle+20%
+    anchor_x: left
+    x: 5%
+  menu_selection:
+    anchor_x: left
+    x: 5%
+

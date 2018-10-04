@@ -37,26 +37,26 @@ slides:
     widgets:
       - type: text
         text: Switch Profile
-        style: savegame_title
+        style: header_lg, menu_selection
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, menu_header
   resume_game_slide:
     widgets:
       - type: text
         text: Continue Game
-        style: savegame_title
+        style: header_lg, menu_selection
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, menu_header
   new_game_slide:
     widgets:
       - type: text
         text: Start New Game
-        style: savegame_title
+        style: header_lg, menu_selection
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, menu_header
   career_select_slide:
     widgets:
       - type: text
@@ -70,7 +70,7 @@ slides:
     widgets:
       - type: text
         text: Casual Play
-        style: savegame_title
+        style: header_lg, menu_selection
 
 widget_player:
   highlight_career:
