@@ -1,0 +1,30 @@
+#config_version=5
+config:
+  - config_common.yaml
+
+window:
+  width: 1280
+  height: 480
+  title: Mission Pinball Framework - Mass Effect 2
+  resizable: false
+  fullscreen: true
+  borderless: true
+  exit_on_escape: false
+  source_display: window
+
+displays:
+  window:
+    width: 1280
+    height: 480
+  dmd: # Actually the LCD
+    width: 1280
+    height: 480
+    default: true
+
+slides:
+  window_slide_container:
+    widgets:
+      - type: display
+        source_display: dmd # Actually the LCD
+        width: 1280
+        height: 480

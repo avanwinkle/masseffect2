@@ -1,0 +1,518 @@
+#config_version=5
+config:
+- hardware_spike.yaml
+# - hardware_fadecandy.yaml
+- keyboard.yaml
+# - keyboard_colorpicker.yaml
+
+smart_virtual:
+  console_log: basic
+  file_log: basic
+
+mpf:
+  default_pulse_ms: 10
+
+logging:
+  file:
+    asset_manager: none
+    sound_player: full
+    sounds: full
+    sound: full
+
+virtual_platform_start_active_switches:
+  s_trough1
+  s_trough2
+  s_trough3
+  s_trough4
+  s_trough5
+  s_trough6
+
+mpf-mc:
+  fps: 30
+
+game:
+  balls_per_game: 5
+  max_players: 4
+
+event_player:
+  game_will_start: gi_on
+  game_ended: gi_off
+  bypass_lock_release_pulse_short:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|210ms
+  bypass_lock_release_pulse_long:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|700ms
+
+machine_vars:
+  last_career_player_1:
+    initial_value: " "
+    value_type: str
+    persist: true
+  last_career_player_2:
+    initial_value: " "
+    value_type: str
+    persist: true
+  last_career_player_3:
+    initial_value: " "
+    value_type: str
+    persist: true
+  last_career_player_4:
+    initial_value: " "
+    value_type: str
+    persist: true
+
+custom_code:
+  - scriptlets.me_squadmates.SquadmateHandlers
+  - scriptlets.save_career.SaveCareer
+  # - mpf_arduino.MPFArduino
+
+mc_scriptlets: squadmate_sounds.SquadmateSounds
+
+modes:
+  # - colorpicker
+  # Core Logic Modes:
+  - base
+  - global
+  - field
+  - lockhandler
+  - mainmenu
+  - missionselect
+  - modeanalysis
+  - bonus
+  - skillshot
+  # Environments:
+  - environment
+  - env_bloodpack
+  - env_bluesuns
+  - env_cars
+  - env_collectors
+  - env_field
+  - env_geth
+  - env_gunfight
+  - env_husks
+  - env_husks_lower
+  - env_krogan
+  - env_shadowbroker
+  # Main Story Missions:
+  - collectorship_ambush
+  - collectorship_base
+  - collectorship_husk
+  - collectorship_praetorian
+  - derelictreaper
+  - normandyattack
+  # Suicide Mission:
+  - suicide_base
+  - suicide_huddle
+  - suicide_omegarelay
+  - suicide_infiltration
+  - suicide_longwalk
+  - suicide_tubes
+  - suicide_final
+  - suicide_platforms
+  - suicide_humanreaper
+  - suicide_endrun
+  - suicide_restart
+  # Recruit Missions:
+  - recruitgarrus
+  - recruitgrunt
+  - recruitjack
+  - recruitkasumi
+  - recruitlegion
+  - recruitmordin
+  - recruitsamara
+  - recruittali
+  - recruitthane
+  - recruitzaeed
+  # Lair of the Shadow Broker:
+  - shadowbroker_boss
+  - shadowbroker_chase
+  - shadowbroker_hagalaz
+  - shadowbroker_vasir
+  # Side Missions:
+  - harbinger
+  - n7_assignments
+  # Multiballs:
+  - overlord
+  - arrival
+
+light_player:
+  init_done:
+    backbox: on
+  gi_on:
+    gi:
+      color: DDDDDD
+  gi_off:
+    gi:
+      color: black
+
+player_vars:
+  career_name:
+    initial_value: " "
+    value_type: str
+  career_started:
+    initial_value: 0.0
+    value_type: float
+  readonly:
+    initial_value: 0
+  balls_played:
+    initial_value: 0
+  bypass_missionselect:
+    initial_value: 0
+  assignments_completed:
+    initial_value: 0
+  available_missions:
+    initial_value: 0
+  missionname:
+    initial_value: " "
+    value_type: str
+  available_shipupgrades:
+    initial_value: 0
+  available_research:
+    initial_value: 0
+  casual:
+    initial_value: 0
+  current_research:
+    initial_value: " "
+    value_type: str
+  credits:
+    initial_value: 0
+  geth_colossus_state:
+    initial_value: 6
+  harbinger_multiplier:
+    initial_value: 1
+  intel:
+    initial_value: 0
+  level:
+    initial_value: 1
+  saved_level:
+    initial_value: 1
+  planets:
+    initial_value: 0
+  medigel:
+    initial_value: 0
+  minerals_total:
+    initial_value: 0
+  mineral_iridium:
+    initial_value: 0
+  mineral_palladium:
+    initial_value: 0
+  mineral_platinum:
+    initial_value: 0
+  presuicide_score:
+    initial_value: 0
+  reputation:
+    initial_value: 0
+  resume_mission:
+    initial_value: " "
+    value_type: str
+  counter_sbdrops_counter:
+    initial_value: 0
+  sbchase_hits_remaining:
+    initial_value: 5
+  sbhold_enabled:
+    initial_value: 0
+  specialist:
+    initial_value: "none"
+    value_type: str
+  squadmates_count:
+    initial_value: 2
+  # squadmates_count is saved, recruited_squadmates_count resets each game
+  recruited_squadmates_count:
+    initial_value: 0
+  status_garrus:
+    initial_value: 0
+  status_grunt:
+    initial_value: 0
+  status_jacob:
+    initial_value: 4
+  status_jack:
+    initial_value: 0
+  status_kasumi:
+    initial_value: 0
+  status_legion:
+    initial_value: 0
+  status_miranda:
+    initial_value: 4
+  status_mordin:
+    initial_value: 0
+  status_samara:
+    initial_value: 0
+  status_tali:
+    initial_value: 0
+  status_thane:
+    initial_value: 0
+  status_zaeed:
+    initial_value: 0
+  temp_multiplier:
+    initial_value: 0.0
+    value_type: float
+  temp_build_value:
+    initial_value: 0
+  temp_hurryup_value:
+    initial_value: 0
+  temp_counter:
+    initial_value: 0
+  research_completed:
+    initial_value: 0
+  zaeed_path_renegade:
+    initial_value: -1
+
+slide_player:
+  mc_ready:
+    window_slide_container:
+      target: window
+
+sound_system:
+  master_volume: 1
+  buffer: 2048  # previous value was 512
+  frequency: 44100
+  channels: 1
+  enabled: true
+  tracks:
+    music:
+      simultaneous_sounds: 2
+      volume: 0.7
+    voice:
+      priority: 2
+      simultaneous_sounds: 1
+      preload: true
+      volume: 0.8
+    sfx:
+      simultaneous_sounds: 7
+      volume: 0.4
+      preload: true
+      priority: 1
+    levelup:
+      simultaneous_sounds: 1
+      volume: 0.5
+
+assets:
+  sounds:
+    default:
+      track: sfx
+    music:
+      track: music
+      load: on_demand
+    sfx:
+      track: sfx
+      load: on_demand
+    voice:
+      track: voice
+      load: on_demand
+
+animations:
+  pulse_text:
+    - property: opacity      # name of the widget property we're animating
+      value: 1               # target value of that property for this step
+      duration: .25s          # duration for this step (how long it takes to get there)
+    - property: opacity      # second step in the animation (starts with a hyphen)
+      value: 0.5
+      duration: .25s
+      repeat: true
+  pulse_text_slow:
+    - property: opacity      # name of the widget property we're animating
+      value: 1               # target value of that property for this step
+      duration: .75s          # duration for this step (how long it takes to get there)
+    - property: opacity      # second step in the animation (starts with a hyphen)
+      value: 0.5
+      duration: .75s
+      repeat: true
+
+widget_styles:
+  # The below are used for LCD
+  me_default:
+    font_name: me123
+    font_size: 28
+  bottom_center:
+    anchor_y: bottom
+    y: 12.5%
+    anchor_x: left
+    x: 12.5%
+    font_size: 56
+  # The below are used for DMD
+  text_default:
+    font_name: Quadrit-10
+    font_size: 10
+    adjust_top: 2
+    adjust_bottom: 3
+  medium:
+    font_name: pixelmix-8
+    font_size: 8
+    adjust_top: 1
+    adjust_bottom: 1
+  small:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+  small_bot_left:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: bottom
+    anchor_x: left
+    y: 2
+    x: 2
+  small_bot_right:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: bottom
+    anchor_x: right
+    y: 2
+    x: right-2
+  small_bot_right_secondrow:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: bottom
+    anchor_x: right
+    y: 8
+    x: right-2
+  score_style_singleplayer:
+    number_grouping: true
+    min_digits: 2
+    font_size: 10
+    font_name: Quadrit-10
+    anchor_x: left
+    anchor_y: top
+    x: 2
+    y: top-4
+  score_style_multiplayer:
+    number_grouping: true
+    min_digits: 2
+    font_size: 10
+    font_name: Quadrit-10
+    anchor_x: left
+    anchor_y: middle
+    x: 2
+    y: middle-2
+  squad_debug_style:
+    font_size: 18
+    anchor_x: top
+    anchor_y: left
+  bonus_title_style:
+    font_name: Quadrit-10
+    font_size: 10
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_y: bottom
+    y: middle
+  bonus_score_style:
+    font_name: pixelmix-8
+    font_size: 8
+    anchor_y: top
+    adjust_top: 1
+    adjust_bottom: 1
+    y: middle-4
+    number_grouping: true
+  quadrit_big:
+    font_name: Quadrit-10
+    font_size: 10
+    adjust_bottom: 3
+    adjust_top: 2
+  savegame_title:
+    font_name: Quadrit-10
+    font_size: 10
+    anchor_y: bottom
+    anchor_x: left
+    y: 4
+    x: 4
+  spec_default:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.4
+  spec_dead:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.03
+  spec_highlight:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 1
+  mp_player_1:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: top
+    number_grouping: true
+    min_digits: 2
+    y: top-2
+    x: 2
+  mp_player_2:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: right
+    anchor_y: top
+    number_grouping: true
+    min_digits: 2
+    y: top-2
+    x: right-2
+  mp_player_3:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: left
+    anchor_y: bottom
+    number_grouping: true
+    min_digits: 2
+    y: 2
+    x: 2
+  mp_player_4:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_bottom: 3
+    adjust_top: 2
+    anchor_x: right
+    anchor_y: bottom
+    number_grouping: true
+    min_digits: 2
+    y: 2
+    x: right-2
+  savegame_playername:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_y: top
+    anchor_x: left
+    y: top-2
+    x: 4
+    z: 1
+  mineral_name_style:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_x: middle
+    anchor_y: bottom
+    z: 3
+  mineral_highlight_style:
+    width: 42
+    height: 24
+    anchor_x: left
+    anchor_y: bottom
+    color: 333333
+    y: 9
+

@@ -2,7 +2,6 @@
 config:
   - config_common.yaml
 
-#config_version=5
 window:
   width: 800
   height: 600
@@ -17,25 +16,19 @@ displays:
   window:
     width: 800
     height: 600
-  dmd:
-    width: 128
-    height: 32
+  dmd: # Actually the LCD
+    width: 1280
+    height: 480
     default: true
-    round_anchor_x: right
-    round_anchor_y: top
 
 slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: dmd
+        source_display: dmd # Actually the LCD
         width: 768
-        height: 192
-        effects:
-          - type: color_dmd
-            gain: 1.2
-            dot_filter: true
+        height: 288
       - type: rectangle
         width: 772
-        height: 196
+        height: 292
         color: 444444
