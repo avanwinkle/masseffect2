@@ -61,21 +61,21 @@ widget_player:
   show_base_slide{is_resume and not is_multiplayer}:
     resume_widget:
       action: add
-      target: dmd
+      # target: dmd
       priority: 3
     resume_bg_widget:
       action: add
-      target: dmd
+      # target: dmd
       widget_settings:
         height: 17
   show_base_slide{is_resume and is_multiplayer}:
     resume_widget:
       action: add
-      target: dmd
+      # target: dmd
       priority: 3
     resume_bg_widget:
       action: add
-      target: dmd
+      # target: dmd
       widget_settings:
         height: 14
   disable_missionresume:

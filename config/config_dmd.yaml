@@ -20,8 +20,19 @@ displays:
     round_anchor_x: right
     round_anchor_y: top
 
+dmds:
+  spike_dmd:  # name of this DMD which can be whatever you want
+    fps: 15
+    gamma: 0.8
+    only_send_changes: true
+    source_display: dmd
+    platform: spike
+
 machine_vars:
   use_lcd:
+    initial_value: 0
+    persist: false
+  is_fullscreen:
     initial_value: 0
     persist: false
 

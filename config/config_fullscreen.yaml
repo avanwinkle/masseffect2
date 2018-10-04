@@ -17,7 +17,7 @@ displays:
   window:
     width: 1280
     height: 480
-  dmd: # Actually the LCD
+  lcd:
     width: 1280
     height: 480
     default: true
@@ -26,6 +26,14 @@ slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: dmd # Actually the LCD
+        source_display: lcd
         width: 1280
         height: 480
+
+machine_vars:
+  use_lcd:
+    initial_value: 1
+    persist: false
+  is_fullscreen:
+    initial_value: 1
+    persist: false

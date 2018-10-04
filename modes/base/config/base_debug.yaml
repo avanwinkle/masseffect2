@@ -1,6 +1,9 @@
 #config_version=5
+event_player:
+  mode_base_started.10{not machine.is_fullscreen}: show_debug_widgets
+
 widget_player:
-  mode_base_started:
+  show_debug_widgets:
     squad_debug:
       target: window
     vars_debug:
