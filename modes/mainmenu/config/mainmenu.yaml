@@ -61,11 +61,7 @@ slides:
     widgets:
       - type: text
         text: "Load Profile:"
-        style: small
-        anchor_y: top
-        anchor_x: left
-        y: top-2
-        x: 4
+        style: body_sm, menu_header
   casual_slide:
     widgets:
       - type: text
@@ -82,23 +78,13 @@ widgets:
   highlighted_career_widget:
     - type: text
       text: (career_name)
-      style: savegame_title
-      anchor_x: right
-      x: right-2
+      style: body_lg, menu_selection
     - type: text
       text: LVL (level)
-      style: small
-      anchor_y: bottom
-      anchor_x: right
-      y: 17
-      x: right-4
+      style: body_sm, pos_secondary_timer
     - type: text
       text: (last_played)
-      style: small
-      anchor_y: bottom
-      anchor_x: right
-      y: 8
-      x: right-4
+      style: body_sm, pos_player_4
 
 show_player:
   show_mainmenu: mainmenu_show
