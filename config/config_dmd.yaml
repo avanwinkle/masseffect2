@@ -66,6 +66,32 @@ slides:
         text: (score)
         style: header_lg, pos_score_multiplayer, num
 
+widget_player:
+  show_grid:
+    grid_widget:
+      target: dmd
+  remove_grid:
+    grid_widget:
+      action: remove
+
+widgets:
+  grid_widget:
+    - type: image
+      image: grid_dmd
+      z: 1000
+  console_background:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  background_overlord:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 002200
+      z: 0
+
 widget_styles:
 
   # TEXT FORMATS
@@ -77,24 +103,30 @@ widget_styles:
   header_lg:
     font_size: 10
     font_name: Quadrit-10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 1
   body_lg:
     font_name: pixelmix-8
     font_size: 8
-    adjust_top: 1
-    adjust_bottom: 1
+    line_height: 0.9
+    adjust_top: 0
+    adjust_bottom: 2
     z: 1
   body_md:
     font_name: smallest_pixel-7
     font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
     z: 1
   body_sm:
     font_name: smallest_pixel-7
     font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
     z: 1
   num:
     number_grouping: true
@@ -104,50 +136,56 @@ widget_styles:
   #----------------------------
   col_left_anchor:
     anchor_x: left
-    x: 8.1%
+    x: 2
   col_left_indent:
     anchor_x: left
-    x: 13.2%
+    x: 6
   col_left_inner:
     anchor_x: left
-    x: 20.8%
+    x: 8
   col_left_center:
     anchor_x: right
-    x: 46.6%
+    x: 60
   col_right_center:
     anchor_x: left
-    x: 53.4%
+    x: right-60
   col_right_inner:
     anchor_x: right
-    x: 79.2%
+    x: right-8
   col_right_indent:
     anchor_x: right
-    x: 86.8%
+    x: right-6
   col_right_anchor:
     anchor_x: right
-    x: 91.9%
+    x: right-2
   col_center:
     anchor_x: center
     x: 50%
 
   row_top:
     anchor_y: bottom
-    y: 77.2%
+    y: 27
   row_super:
     anchor_y: bottom
-    y: 64.5%
+    y: 27
   row_main:
     anchor_y: bottom
-    y: 43.8%
+    valign: bottom
+    y: 16
   row_sub:
     anchor_y: bottom
-    y: 31.2%
+    valign: bottom
+    y: 8
+  row_sub_under:
+    anchor_y: top
+    valign: top
+    y: 14
   row_bottom:
     anchor_y: bottom
-    y: 13.2%
+    y: 4
   row_gutter:
     anchor_y: bottom
-    y: 0.6%
+    y: 1
   row_middle:
     anchor_y: middle
     y: 50%

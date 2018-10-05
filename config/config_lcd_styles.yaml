@@ -42,6 +42,29 @@ machine_vars:
     initial_value: 1
     persist: false
 
+widget_player:
+  show_grid:
+    grid_widget:
+      target: lcd
+  remove_grid:
+    grid_widget:
+      action: remove
+
+widgets:
+  grid_widget:
+    - type: image
+      image: grid
+      z: 1000
+  console_background:
+    - type: image
+      image: console_background
+      z: 0
+  background_overlord:
+    - type: image
+      image: background_overlord
+      opacity: 0.5
+      z: 0
+
 widget_styles:
 
   # TEXT FORMATS
@@ -68,6 +91,7 @@ widget_styles:
   body_md:
     font_name: jupiter
     font_size: 96
+    line_height: 0.8
     adjust_top: 36
     adjust_bottom: 20
     z: 1

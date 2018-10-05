@@ -155,12 +155,6 @@ widget_player:
       slide: multiplayer_slide
     mp_name_widget_player_4:
       action: remove
-  show_grid:
-    grid_widget:
-      target: lcd
-  remove_grid:
-    grid_widget:
-      action: remove
 
 slides:
   introslide_no_missions:
@@ -169,28 +163,18 @@ slides:
         text: Build Your Team
         style: header_lg, row_main, col_center
       - type: text
-        text: Hit any lane 3x
+        text: "Hit any lane 3x\nto unlock missions"
         style: body_md, row_sub_under, col_center
-      - type: text
-        text: to unlock missions
-        style: body_md, row_bottom, col_center
   introslide_missions:
     widgets:
       - type: text
         text: Build Your Team
         style: header_lg, row_main, col_center
       - type: text
-        text: Select a mission at
+        text: "Select a mission at\nthe Galaxy Map"
         style: body_md, row_sub_under, col_center
-      - type: text
-        text: the Galaxy Map
-        style: body_md, row_bottom, col_center
 
 widgets:
-  grid_widget:
-    - type: image
-      image: grid
-      z: 1000
   base_level_widget:
     - type: text
       text: LVL (player|level)

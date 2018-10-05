@@ -68,14 +68,26 @@ slide_player:
     recruiting_advance_slide_lit{status==3}:
       expire: 4s
   mode_type_mission_started:
-    background_slide:
+    recruit_mission_slide:
       action: play
       priority: 100
   mode_type_mission_stopped:
-    background_slide:
+    recruit_mission_slide:
       action: remove
 
 slides:
+  recruit_mission_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: body_md, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
+        text: (missionname)
+        style: header_sm, row_main, col_left_anchor
+      - type: text
+        text: (global_recruittimer_tick)
+        style: body_sm, row_gutter, col_right_anchor
   recruiting_advance_slide_2:
     widgets:
       - type: text
@@ -105,46 +117,27 @@ slides:
         text: Left Ramp to Start Mission
         style: body_md, row_sub_under
 
-widget_player:
-  mode_type_mission_started:
-    recruitwidget_name:
-      action: add
-      slide: background_slide
-  # Adding players triggers their variables to be set, which can show an extra "0"
-  # on the base slide. Check player number to prevent this.
-  # TODO: Move all recruitslide logic out of global and into recruit missions?
-  player_temp_hurryup_value{player_num==current_player.number}:
-    recruitwidget_int:
-      action: update
-      slide: background_slide
-  timer_recruittimer_started:
-    time_remaining_widget:
-      action: update
-      slide: background_slide
-  timer_recruittimer_tick:
-    time_remaining_widget:
-      action: update
-      slide: background_slide
+# widget_player:
+#   timer_recruittimer_started:
+#     time_remaining_widget:
+#       action: update
+#       slide: recruit_mission_slide
+#   timer_recruittimer_tick:
+#     time_remaining_widget:
+#       action: update
+#       slide: recruit_mission_slide
 
-widgets:
-  recruitwidget_name:
-    - type: text
-      text: (missionname)
-      style: body_lg, row_top, col_left_anchor
-  recruitwidget_int:
-    - type: text
-      text: (player|temp_hurryup_value)
-      style: header_lg, row_main, col_left_anchor, num
-  time_remaining_widget:
-    - type: text
-      text: "(ticks_remaining)"
-      style: body_sm, row_gutter, col_right_anchor
-  shots_remaining_widget:
-    - type: text
-      text: "Shots: (value)"
-      style: body_sm, row_bottom, col_left_anchor
-  secondary_timer_widget:
-    - type: text
-      text: (ticks_remaining)
-      style: body_lg, row_bottom, col_right_anchor
+# widgets:
+#   time_remaining_widget:
+#     - type: text
+#       text: "(ticks_remaining)"
+#       style: body_sm, row_gutter, col_right_anchor
+#   shots_remaining_widget:
+#     - type: text
+#       text: "Shots: (value)"
+#       style: body_sm, row_bottom, col_left_anchor
+#   secondary_timer_widget:
+#     - type: text
+#       text: (ticks_remaining)
+#       style: body_lg, row_bottom, col_right_anchor
 
