@@ -23,7 +23,7 @@ event_player:
   mode_recruitgrunt_started:
     set_environment:
       env: krogan
-  slide_background_slide_active:
+  slide_recruit_mission_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:
         value: device.counters.grunt_shots_counter.value
@@ -198,4 +198,4 @@ widget_player:
   logicblock_grunt_shots_counter_updated:
     shots_remaining_widget:
       action: update
-      slide: background_slide
+      slide: recruit_mission_slide

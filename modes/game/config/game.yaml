@@ -158,6 +158,8 @@ widget_player:
 
 slides:
   introslide_no_missions:
+    transition_out:
+      type: fade
     widgets:
       - type: text
         text: Build Your Team
@@ -166,7 +168,10 @@ slides:
         text: "Hit any lane 3x\nto unlock missions"
         style: body_sm, row_sub_under, col_center
       - widget: popup_console
+      - widget: background_galaxy
   introslide_missions:
+    transition_out:
+      type: fade
     widgets:
       - type: text
         text: Build Your Team
@@ -175,6 +180,7 @@ slides:
         text: "Select a mission at\nthe Galaxy Map"
         style: body_sm, row_sub_under, col_center
       - widget: popup_console
+      - widget: background_galaxy
 
 widgets:
   base_level_widget:

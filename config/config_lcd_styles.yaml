@@ -3,15 +3,14 @@ slides:
   attract_slide:
     - type: image
       image: logo_fullscreen
+      anchor_y: top
+      y: top+8%
+      scale: 0.75
       z: 1
-      anchor_y: bottom
-      y: 12.5%
     - type: text
       text: Press Start
-      color: 660000
-      style: header_sm
-      anchor_y: bottom
-      y: 6.25%
+      color: 990000
+      style: header_sm, row_sub
     - type: image
       image: splashscreen
       z: 0
@@ -21,12 +20,18 @@ slides:
         image: console_background
         z: 0
   singleplayer_slide:
+    transition:
+      type: fade
     widgets:
       - type: text
         text: (score)
         style: header_lg, row_main, col_left_anchor, num
+      # Can't use widget names here, they're not loaded yet
       - type: image
         image: console_background
+        z: 1
+      - type: image
+        image: background_galaxy
         z: 0
   multiplayer_slide:
     widgets:
@@ -35,6 +40,9 @@ slides:
         style: header_lg, row_main, col_left_anchor, num
       - type: image
         image: console_background
+        z: 1
+      - type: image
+        image: background_galaxy
         z: 0
 
 machine_vars:
@@ -58,6 +66,10 @@ widgets:
   console_background:
     - type: image
       image: console_background
+      z: 1
+  background_galaxy:
+    - type: image
+      image: background_galaxy
       z: 0
   background_overlord:
     - type: image
@@ -67,7 +79,7 @@ widgets:
   popup_console:
     - type: image
       image: popup_console
-      z: 0
+      z: 1
 
 widget_styles:
 
@@ -76,54 +88,57 @@ widget_styles:
   suicide_header:
     font_name: me123
     font_size: 80
-    z: 1
+    z: 10
   header_lg:
     font_name: me123
     font_size: 96
     adjust_bottom: 14
-    z: 1
+    z: 10
   header_md:
     font_name: me123
     font_size: 64
     adjust_bottom: 0
-    z: 1
+    z: 10
   header_sm:
     font_name: me123
     font_size: 48
     adjust_bottom: 6
-    z: 1
+    z: 10
   body_lg:
     font_name: jupiter
     font_size: 128
     adjust_bottom: 28
-    z: 1
+    z: 10
   body_md:
     font_name: jupiter
     font_size: 96
     line_height: 0.8
     adjust_top: 36
     adjust_bottom: 20
-    z: 1
+    z: 10
   body_sm:
     font_name: me123
     font_size: 32
     adjust_bottom: 2
-    z: 1
+    z: 10
   squad_debug_style:
     font_size: 18
     anchor_x: left
-    anchor_y: top
-    z: 1
+    anchor_y: bottom
+    z: 10
   timer_primary:
     font_name: unispace_rg
     font_size: 44
-    adjust_bottom: 2
+    adjust_bottom: 0
+    z: 10
   timer_secondary:
     font_name: unispace_bd_it
     font_size: 96
+    z: 10
   num:
     number_grouping: true
     min_digits: 2
+  lcd_only: {}
 
   # GRID POSITIONS
   #----------------------------

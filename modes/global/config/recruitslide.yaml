@@ -28,9 +28,15 @@ variable_player:
     missionname:
       string: "Defeat the Tank-Bred"
       action: set
+    mission_instructions:
+      string: ""
+      action: set
   start_mode_recruitjack:
     missionname:
       string: "Escape from Purgatory"
+      action: set
+    mission_instructions:
+      string: " "
       action: set
   start_mode_recruitkasumi:
     missionname:
@@ -47,6 +53,9 @@ variable_player:
     missionname:
       string: "Cure the Plague"
       action: set
+    mission_instructions:
+      string: " "
+      action: set
   start_mode_recruitsamara:
     missionname:
       string: "Follow Morinth's Trail"
@@ -55,21 +64,36 @@ variable_player:
     missionname:
       string: "Destroy the Colossus"
       action: set
+    mission_instructions:
+      string: " "
+      action: set
   start_mode_recruitthane:
     missionname:
       string: "Assault Dantius Towers"
+      action: set
+    mission_instructions:
+      string: " "
       action: set
   start_mode_recruitzaeed.1{current_player.zaeed_path_renegade==-1}:
     missionname:
       string: "Storm the Refinery"
       action: set
+    mission_instructions:
+      string: " "
+      action: set
   start_mode_recruitzaeed.2{current_player.zaeed_path_renegade==0}:
     missionname:
       string: "Save the Workers"
       action: set
+    mission_instructions:
+      string: " "
+      action: set
   start_mode_recruitzaeed.3{current_player.zaeed_path_renegade==1}:
     missionname:
       string: "Stop Vido's Escape"
+      action: set
+    mission_instructions:
+      string: " "
       action: set
 
 slide_player:
@@ -93,14 +117,14 @@ slides:
     widgets:
       - type: text
         text: (score)
-        style: body_md, row_top, col_left_anchor
+        style: body_md, row_top, col_left_anchor, num
         opacity: 0.5
       - type: text
         text: (missionname)
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (mission_instructions)
-        style: body_md, row_sub, col_left_anchor
+        style: body_sm, row_sub, col_left_anchor, lcd_only
         animations:
           show_slide: pulse_text_slow
       - type: text
@@ -108,55 +132,59 @@ slides:
         style: timer_primary, row_gutter, col_right_anchor
       - widget: console_background
   recruiting_advance_slide_2:
+    transition:
+      type: wipe
+    transition_out:
+      type: wipe
     widgets:
       - type: text
         text: Recruit (squadmate)
-        style: header_lg, row_main
+        style: header_md, row_main
         casing: title
       - type: text
         text: 2 shots to unlock
         anchor_y: bottom
         style: body_md, row_sub_under
+      - widget: popup_console
+      - widget: background_galaxy
   recruiting_advance_slide_1:
+    transition:
+      type: wipe
+    transition_out:
+      type: wipe
     widgets:
       - type: text
         text: Recruit (squadmate)
-        style: header_lg, row_main
+        style: header_md, row_main
         casing: title
       - type: text
         text: 1 shot to unlock
         style: body_md, row_sub_under
+      - widget: popup_console
+      - widget: background_galaxy
   recruiting_advance_slide_lit:
+    transition:
+      type: wipe
+    transition_out:
+      type: wipe
     widgets:
       - type: text
         text: (squadmate) Ready!
-        style: header_lg, row_main
+        style: header_md, row_main
         casing: title
       - type: text
         text: Left Ramp to Start Mission
-        style: body_md, row_sub_under
+        style: body_sm, row_sub_under
+      - widget: popup_console
+      - widget: background_galaxy
 
-# widget_player:
-#   timer_recruittimer_started:
-#     time_remaining_widget:
-#       action: update
-#       slide: recruit_mission_slide
-#   timer_recruittimer_tick:
-#     time_remaining_widget:
-#       action: update
-#       slide: recruit_mission_slide
-
-# widgets:
-#   time_remaining_widget:
-#     - type: text
-#       text: "(ticks_remaining)"
-#       style: body_sm, row_gutter, col_right_anchor
-#   shots_remaining_widget:
-#     - type: text
-#       text: "Shots: (value)"
-#       style: body_sm, row_bottom, col_left_anchor
-#   secondary_timer_widget:
-#     - type: text
-#       text: (ticks_remaining)
-#       style: body_lg, row_bottom, col_right_anchor
+widgets:
+  shots_remaining_widget:
+    - type: text
+      text: "Shots: (value)"
+      style: body_sm, row_bottom, col_left_anchor
+  secondary_timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: body_lg, row_bottom, col_right_anchor
 

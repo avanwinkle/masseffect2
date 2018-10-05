@@ -85,6 +85,12 @@ widgets:
       height: 32
       color: 000000
       z: 0
+  background_galaxy:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
   background_overlord:
     - type: rectangle
       width: 128
@@ -159,6 +165,9 @@ widget_styles:
   num:
     number_grouping: true
     min_digits: 2
+  lcd_only:
+    font_size: 0
+    opacity: 0
 
   # GRID POSITIONS
   #----------------------------
@@ -210,7 +219,7 @@ widget_styles:
     y: 14
   row_bottom:
     anchor_y: bottom
-    y: 4
+    y: 1
   row_gutter:
     anchor_y: bottom
     y: 1

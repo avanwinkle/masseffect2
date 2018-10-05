@@ -229,10 +229,7 @@ widget_player:
   timer_heretic_timer_tick:
     secondary_timer_widget:
       action: update
-      slide: recruitslide
-  mode_recruitlegion_will_stop:
-    secondary_timer_widget:
-      action: remove
+      slide: recruit_mission_slide
   timer_heretic_timer_complete:
     secondary_timer_widget:
       action: remove

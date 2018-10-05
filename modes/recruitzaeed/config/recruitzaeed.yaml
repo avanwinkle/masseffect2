@@ -86,6 +86,10 @@ variable_player:
     temp_multiplier:
       action: add
       float: 0.25
+  logicblock_zaeed_orbits_counter_hit{count==1}:
+    mission_instructions:
+      string: "Hit kickback to complete!"
+      action: set
   zaeed_kickshot_hit:
     score: current_player.temp_hurryup_value
 

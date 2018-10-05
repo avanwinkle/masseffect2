@@ -60,6 +60,10 @@ variable_player:
     score: current_player.temp_build_value
   tower_ascent_shot_hit:
     temp_build_value: device.counters.thane_ascent_counter.value * 1000
+  logicblock_thane_ascent_counter_complete:
+    mission_instructions:
+      string: "Hit orbits to complete!"
+      action: set
 
 shots:
   tower_ascent_shot:
@@ -119,31 +123,6 @@ shows:
       lights:
         l_left_orbit_shield_rgb: black
         l_right_orbit_shield_rgb: black
-
-slide_player:
-  mode_recruitthane_started:
-    thane_instructions_slide:
-      expire: 3s
-
-slides:
-  thane_instructions_slide:
-    widgets:
-      - type: text
-        text: HIT RAMPS TO ASCEND TOWER
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: ORBITS STORM THE BRIDGE
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   mode_recruitthane_started:

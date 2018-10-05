@@ -35,6 +35,10 @@ event_player:
   timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
   timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state<=3}: play_tali_armor
   timer_recruittimer_complete: recruit_tali_failed
+  # Force the timer widget to show the full value, so we don't wait for another tick
+  geth_colossus_shot_hit:
+    timer_colossus_repair_timer_tick:
+      ticks_remaining: 10
 
 timers:
   colossus_repair_timer:
@@ -61,6 +65,9 @@ variable_player:
       action: set
       int: 6000
     geth_colossus_state{current_player.geth_colossus_state<6}: 1
+    geth_colossus_state{current_player.geth_colossus_state>=6}:
+      action: set
+      int: 6
   timer_recruittimer_tick:
     temp_hurryup_value: -100
   geth_colossus_shot_hit:
@@ -69,9 +76,15 @@ variable_player:
       action: set
       int: current_player.recruitbase_recruittimer_tick
     geth_colossus_state: -1
+    mission_instructions:
+      string: "Strike before it self-repairs!"
+      action: set
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
     geth_colossus_state: 1
+    mission_instructions:
+      string: " "
+      action: set
   geth_target_shot_hit:
     score: 150
   recruit_tali_complete:
@@ -149,31 +162,6 @@ shows:
     - time: '+1'
       lights:
         l_targets: black
-
-slide_player:
-  mode_recruittali_started:
-    tali_instructions_slide:
-      expire: 3s
-
-slides:
-  tali_instructions_slide:
-    widgets:
-      - type: text
-        text: HIT THE GETH COLOSSUS
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: 6X BEFORE SELF-REPAIR
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   mode_recruittali_started:
@@ -342,14 +330,14 @@ sounds:
     track: sfx
 
 widget_player:
-  slide_recruitslide_active:
-    colossus_remaining_widget:
-      action: add
-      slide: recruitslide
-
-widgets:
-  # Similar to recruitslide shots_remaining_widget but with a different player var
-  colossus_remaining_widget:
-    - type: text
-      text: "Shots: (player|geth_colossus_state)"
-      style: small_bot_right_secondrow
+  timer_colossus_repair_timer_tick:
+    secondary_timer_widget:
+      action: update
+      slide: recruit_mission_slide
+  timer_colossus_repair_timer_stopped:
+    secondary_timer_widget:
+      action: remove
+  player_geth_colossus_state:
+    shots_remaining_widget:
+      action: update
+      slide: recruit_mission_slide

@@ -201,7 +201,7 @@ slides:
         style: header_md, row_main
       - type: text
         text: < FLIPPERS TO SELECT >
-        style: body_sm, row_bottom
+        style: body_sm, row_sub_under
       - widget: popup_console
   missionselect_recruit_slide:
     priority: 1
