@@ -113,32 +113,11 @@ shots:
     tags: envshot_right_ramp
 
 slide_player:
-  mode_recruitgarrus_started:
-    garrus_instructions_slide:
-      expire: 3s
   close_doors_hit_complete:
     doors_closed_slide:
       expire: 2s
 
 slides:
-  garrus_instructions_slide:
-    widgets:
-      - type: text
-        text: CLOSE 3 SHUTTERS
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: AND SAVE ARCHANGEL
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
   doors_closed_slide:
     widgets:
       - type: text

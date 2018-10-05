@@ -132,25 +132,6 @@ show_player:
       show_tokens:
         color: FF6611 #color_grunt
 
-slide_player:
-  mode_recruitgrunt_started:
-    grunt_instructions_slide:
-      expire: 3s
-
-slides:
-  grunt_instructions_slide:
-    widgets:
-      - type: text
-        text: COMPLETE ALL SHOTS
-        style: body_lg, instructions_title
-      - type: text
-        text: TO DEFEAT KROGAN
-        style: body_lg, instructions_line_1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
-
 sound_player:
   mode_recruitgrunt_started:
     music_recruit_grunt:

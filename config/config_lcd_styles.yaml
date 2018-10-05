@@ -64,6 +64,10 @@ widgets:
       image: background_overlord
       opacity: 0.5
       z: 0
+  popup_console:
+    - type: image
+      image: popup_console
+      z: 0
 
 widget_styles:
 
@@ -77,6 +81,11 @@ widget_styles:
     font_name: me123
     font_size: 96
     adjust_bottom: 14
+    z: 1
+  header_md:
+    font_name: me123
+    font_size: 64
+    adjust_bottom: 0
     z: 1
   header_sm:
     font_name: me123
@@ -102,9 +111,16 @@ widget_styles:
     z: 1
   squad_debug_style:
     font_size: 18
-    anchor_x: top
-    anchor_y: left
+    anchor_x: left
+    anchor_y: top
     z: 1
+  timer_primary:
+    font_name: unispace_rg
+    font_size: 44
+    adjust_bottom: 2
+  timer_secondary:
+    font_name: unispace_bd_it
+    font_size: 96
   num:
     number_grouping: true
     min_digits: 2

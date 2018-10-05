@@ -161,18 +161,20 @@ slides:
     widgets:
       - type: text
         text: Build Your Team
-        style: header_lg, row_main, col_center
+        style: header_md, row_main, col_center
       - type: text
         text: "Hit any lane 3x\nto unlock missions"
-        style: body_md, row_sub_under, col_center
+        style: body_sm, row_sub_under, col_center
+      - widget: popup_console
   introslide_missions:
     widgets:
       - type: text
         text: Build Your Team
-        style: header_lg, row_main, col_center
+        style: header_md, row_main, col_center
       - type: text
         text: "Select a mission at\nthe Galaxy Map"
-        style: body_md, row_sub_under, col_center
+        style: body_sm, row_sub_under, col_center
+      - widget: popup_console
 
 widgets:
   base_level_widget:

@@ -8,6 +8,17 @@
 # can be programmed once and shared across all missions, hurray!
 #####
 
+# Set the player variable before the mission starts for a clean slide
+variable_player:
+  missionselect_recruitmission_selected{squadmate!="grunt"}:
+    global_recruittimer_tick:
+      int: 60
+      action: set
+  missionselect_recruitmission_selected{squadmate=="grunt"}:
+    global_recruittimer_tick:
+      int: 20
+      action: set
+
 timers:
   recruittimer:
     start_value: 60

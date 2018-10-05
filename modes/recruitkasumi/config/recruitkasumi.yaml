@@ -225,9 +225,6 @@ shows:
     - time: '+4'
 
 slide_player:
-  mode_recruitkasumi_started:
-    kasumi_instructions_slide:
-      expire: 3s
   recruit_kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
@@ -252,19 +249,6 @@ slide_player:
       expire: 3s
 
 slides:
-  kasumi_instructions_slide:
-    widgets:
-      - type: text
-        text: Infiltrate Hock's Vault
-        style: body_lg, instructions_title
-      - type: text
-        text: Avoid the Alarms
-        style: body_md, instructions_line_2
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
   kasumi_slide_1:
     widgets:
       - type: text
