@@ -28,7 +28,9 @@ keyboard:
   o:
     event: disable_gates
   i:
-    event: gi_on
+    event: show_grid
+  shift+i:
+    event: remove_grid
   9:
     switch: s_hitbank_top
   0:

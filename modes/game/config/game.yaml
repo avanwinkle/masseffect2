@@ -155,40 +155,50 @@ widget_player:
       slide: multiplayer_slide
     mp_name_widget_player_4:
       action: remove
+  show_grid:
+    grid_widget:
+      target: lcd
+  remove_grid:
+    grid_widget:
+      action: remove
 
 slides:
   introslide_no_missions:
     widgets:
       - type: text
         text: Build Your Team
-        style: header_lg, instructions_title
+        style: header_lg, row_main, col_center
       - type: text
         text: Hit any lane 3x
-        style: body_md, instructions_line_1
+        style: body_md, row_sub_under, col_center
       - type: text
         text: to unlock missions
-        style: body_md, instructions_line_2
+        style: body_md, row_bottom, col_center
   introslide_missions:
     widgets:
       - type: text
         text: Build Your Team
-        style: header_lg, instructions_title
+        style: header_lg, row_main, col_center
       - type: text
         text: Select a mission at
-        style: body_md, instructions_line_1
+        style: body_md, row_sub_under, col_center
       - type: text
         text: the Galaxy Map
-        style: body_md, instructions_line_2
+        style: body_md, row_bottom, col_center
 
 widgets:
+  grid_widget:
+    - type: image
+      image: grid
+      z: 1000
   base_level_widget:
     - type: text
       text: LVL (player|level)
-      style: body_sm, pos_player_3
+      style: body_sm, row_gutter, col_right_center
   base_ball_widget:
     - type: text
       text: BALL (ball)
-      style: body_sm, pos_player_4
+      style: body_sm, row_gutter, col_right_anchor
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)

@@ -13,39 +13,51 @@ variable_player:
   mode_recruitgarrus_started:
     missionname:
       string: "Defend Archangel"
+      action: set
   mode_recruitgrunt_started:
     missionname:
       string: "Defeat the Tank-Bred"
+      action: set
   mode_recruitjack_started:
     missionname:
       string: "Escape from Purgatory"
+      action: set
   mode_recruitkasumi_started:
     missionname:
       string: "Infiltrate the Vault"
+      action: set
   mode_recruitlegion_started:
     missionname:
       string: "Stop the Heretics"
+      action: set
   mode_recruitmordin_started:
     missionname:
       string: "Cure the Plague"
+      action: set
   mode_recruitsamara_started:
     missionname:
       string: "Find Morinth"
+      action: set
   mode_recruittali_started:
     missionname:
       string: "Destroy the Colossus"
+      action: set
   mode_recruitthane_started:
     missionname:
       string: "Assault Dantius Towers"
+      action: set
   mode_recruitzaeed_started.1{current_player.zaeed_path_renegade==-1}:
     missionname:
       string: "Storm the Refinery"
+      action: set
   mode_recruitzaeed_started.2{current_player.zaeed_path_renegade==0}:
     missionname:
       string: "Save the Workers"
+      action: set
   mode_recruitzaeed_started.3{current_player.zaeed_path_renegade==1}:
     missionname:
       string: "Stop Vido's Escape"
+      action: set
 
 slide_player:
   recruit_advance:
@@ -68,30 +80,30 @@ slides:
     widgets:
       - type: text
         text: Recruit (squadmate)
-        style: header_lg, instructions_title
+        style: header_lg, row_main
         casing: title
       - type: text
         text: 2 shots to unlock
         anchor_y: bottom
-        style: body_md, instructions_line_2
+        style: body_md, row_sub_under
   recruiting_advance_slide_1:
     widgets:
       - type: text
         text: Recruit (squadmate)
-        style: header_lg, instructions_title
+        style: header_lg, row_main
         casing: title
       - type: text
         text: 1 shot to unlock
-        style: body_md, instructions_line_2
+        style: body_md, row_sub_under
   recruiting_advance_slide_lit:
     widgets:
       - type: text
         text: (squadmate) Ready!
-        style: header_lg, instructions_title
+        style: header_lg, row_main
         casing: title
       - type: text
         text: Left Ramp to Start Mission
-        style: body_md, instructions_line_2
+        style: body_md, row_sub_under
 
 widget_player:
   mode_type_mission_started:
@@ -118,21 +130,21 @@ widgets:
   recruitwidget_name:
     - type: text
       text: (missionname)
-      style: body_lg, pos_missionname
+      style: body_lg, row_top, col_left_anchor
   recruitwidget_int:
     - type: text
       text: (player|temp_hurryup_value)
-      style: header_lg, pos_hurryup, num
+      style: header_lg, row_main, col_left_anchor, num
   time_remaining_widget:
     - type: text
       text: "(ticks_remaining)"
-      style: body_sm, pos_player_4
+      style: body_sm, row_gutter, col_right_anchor
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
-      style: body_sm, pos_player_3
+      style: body_sm, row_bottom, col_left_anchor
   secondary_timer_widget:
     - type: text
       text: (ticks_remaining)
-      style: body_lg, pos_secondary_timer
+      style: body_lg, row_bottom, col_right_anchor
 

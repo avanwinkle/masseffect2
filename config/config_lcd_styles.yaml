@@ -24,7 +24,7 @@ slides:
     widgets:
       - type: text
         text: (score)
-        style: header_lg, pos_score_singleplayer, num
+        style: header_lg, row_main, col_left_anchor, num
       - type: image
         image: console_background
         z: 0
@@ -32,7 +32,7 @@ slides:
     widgets:
       - type: text
         text: (score)
-        style: header_lg, pos_score_multiplayer, num
+        style: header_lg, row_main, col_left_anchor, num
       - type: image
         image: console_background
         z: 0
@@ -48,27 +48,33 @@ widget_styles:
   #----------------------------
   suicide_header:
     font_name: me123
-    font_size: 128
+    font_size: 80
     z: 1
   header_lg:
     font_name: me123
     font_size: 96
+    adjust_bottom: 14
     z: 1
   header_sm:
     font_name: me123
     font_size: 48
+    adjust_bottom: 6
     z: 1
   body_lg:
     font_name: jupiter
     font_size: 128
+    adjust_bottom: 28
     z: 1
   body_md:
     font_name: jupiter
     font_size: 96
+    adjust_top: 36
+    adjust_bottom: 20
     z: 1
   body_sm:
     font_name: me123
     font_size: 32
+    adjust_bottom: 2
     z: 1
   squad_debug_style:
     font_size: 18
@@ -78,6 +84,64 @@ widget_styles:
   num:
     number_grouping: true
     min_digits: 2
+
+  # GRID POSITIONS
+  #----------------------------
+  col_left_anchor:
+    anchor_x: left
+    x: 8.1%
+  col_left_indent:
+    anchor_x: left
+    x: 13.2%
+  col_left_inner:
+    anchor_x: left
+    x: 20.8%
+  col_left_center:
+    anchor_x: right
+    x: 46.6%
+  col_right_center:
+    anchor_x: left
+    x: 53.4%
+  col_right_inner:
+    anchor_x: right
+    x: 79.2%
+  col_right_indent:
+    anchor_x: right
+    x: 86.8%
+  col_right_anchor:
+    anchor_x: right
+    x: 91.9%
+  col_right_gutter:
+    anchor_x: right
+    x: 99.4%
+  col_center:
+    anchor_x: center
+    x: 50%
+
+  row_top:
+    anchor_y: bottom
+    y: 77.2%
+  row_super:
+    anchor_y: bottom
+    y: 64.5%
+  row_main:
+    anchor_y: bottom
+    y: 43.8%
+  row_sub:
+    anchor_y: bottom
+    y: 31.2%
+  row_sub_under:
+    anchor_y: top
+    y: 31.2%
+  row_bottom:
+    anchor_y: bottom
+    y: 13.2%
+  row_gutter:
+    anchor_y: center
+    y: 6.4%
+  row_middle:
+    anchor_y: middle
+    y: 50%
 
   # POSITION LAYOUTS
   #----------------------------

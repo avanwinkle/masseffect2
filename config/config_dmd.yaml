@@ -100,6 +100,59 @@ widget_styles:
     number_grouping: true
     min_digits: 2
 
+  # GRID POSITIONS
+  #----------------------------
+  col_left_anchor:
+    anchor_x: left
+    x: 8.1%
+  col_left_indent:
+    anchor_x: left
+    x: 13.2%
+  col_left_inner:
+    anchor_x: left
+    x: 20.8%
+  col_left_center:
+    anchor_x: right
+    x: 46.6%
+  col_right_center:
+    anchor_x: left
+    x: 53.4%
+  col_right_inner:
+    anchor_x: right
+    x: 79.2%
+  col_right_indent:
+    anchor_x: right
+    x: 86.8%
+  col_right_anchor:
+    anchor_x: right
+    x: 91.9%
+  col_center:
+    anchor_x: center
+    x: 50%
+
+  row_top:
+    anchor_y: bottom
+    y: 77.2%
+  row_super:
+    anchor_y: bottom
+    y: 64.5%
+  row_main:
+    anchor_y: bottom
+    y: 43.8%
+  row_sub:
+    anchor_y: bottom
+    y: 31.2%
+  row_bottom:
+    anchor_y: bottom
+    y: 13.2%
+  row_gutter:
+    anchor_y: bottom
+    y: 0.6%
+  row_middle:
+    anchor_y: middle
+    y: 50%
+
+
   # POSITION LAYOUTS
   #----------------------------
   text_default:

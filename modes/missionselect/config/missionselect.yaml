@@ -198,17 +198,17 @@ slides:
     widgets:
       - type: text
         text: Select a Mission
-        style: header_lg, instructions_title
+        style: header_lg, row_main
   missionselect_recruit_slide:
     priority: 1
     widgets:
       - type: text
         text: (squadmate)
-        style: header_lg, instructions_title
+        style: header_lg, row_main
         casing: title
       - type: text
         text: Start Recruitment Mission
-        style: body_md, instructions_line_1
+        style: body_md, row_sub_under
   missionselect_collectorship_slide:
     priority: 1
     widgets:
@@ -246,7 +246,7 @@ slides:
     widgets:
       - type: text
         text: Pass for Now
-        style: header_lg, instructions_title
+        style: header_lg, row_main
 
 widget_player:
   # The intro slide appears whenever there are multiple options, so show arrows
@@ -256,6 +256,6 @@ widgets:
   select_arrows_widget:
     - type: text
       text: < FLIPPERS TO SELECT >
-      style: body_sm, instructions_line_2
+      style: body_sm, row_bottom
 
 

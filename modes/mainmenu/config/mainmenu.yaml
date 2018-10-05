@@ -37,36 +37,36 @@ slides:
     widgets:
       - type: text
         text: Switch Profile
-        style: header_lg, menu_selection
+        style: header_lg, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_sm, menu_header
+        style: body_sm, row_top, col_left_anchor
   resume_game_slide:
     widgets:
       - type: text
         text: Continue Game
-        style: header_lg, menu_selection
+        style: header_lg, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_sm, menu_header
+        style: body_sm, row_top, col_left_anchor
   new_game_slide:
     widgets:
       - type: text
-        text: Start New Game
-        style: header_lg, menu_selection
+        text: New Game
+        style: header_lg, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_sm, menu_header
+        style: body_sm, row_top, col_left_anchor
   career_select_slide:
     widgets:
       - type: text
         text: "Load Profile:"
-        style: body_sm, menu_header
+        style: body_sm, row_top, col_left_anchor
   casual_slide:
     widgets:
       - type: text
         text: Casual Play
-        style: header_lg, menu_selection
+        style: header_lg, row_main, col_left_anchor
 
 widget_player:
   highlight_career:
@@ -78,13 +78,13 @@ widgets:
   highlighted_career_widget:
     - type: text
       text: (career_name)
-      style: body_lg, menu_selection
+      style: body_lg, row_main, col_left_anchor
     - type: text
       text: LVL (level)
-      style: body_sm, pos_secondary_timer
+      style: body_sm, row_main, col_right_anchor
     - type: text
       text: (last_played)
-      style: body_sm, pos_player_4
+      style: body_sm, row_sub, col_right_anchor
 
 show_player:
   show_mainmenu: mainmenu_show
