@@ -46,19 +46,10 @@ slides:
     widgets:
       - type: text
         text: Please Wait
-        style: small
-        anchor_y: top
-        y: top-2
+        style: body_sm, row_top
       - type: text
-        text: Searching For
-        style: medium
-        anchor_y: bottom
-        y: middle
-      - type: text
-        text: Balls
-        style: medium
-        anchor_y: top
-        y: middle-2
+        text: Searching For Balls
+        style: body_md, row_sub
 
 sound_player:
   mode_attract_started:

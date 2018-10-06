@@ -18,7 +18,7 @@ event_player:
 
 queue_relay_player:
   # For the first ball, allow the player to pick a profile
-  player_turn_starting{player.ball==0}:
+  player_turn_starting{current_player.ball==0}:
     post: show_mainmenu
     wait_for: mainmenu_item_selected
 
@@ -26,7 +26,11 @@ slide_player:
   # Highlighting options in the main menu
   mainmenu_new_game_highlighted: new_game_slide
   mainmenu_resume_game_highlighted: resume_game_slide
-  mainmenu_change_career_highlighted: change_career_slide
+  mainmenu_change_career_highlighted:
+    change_career_slide{career_name!=" "}:
+      action: play
+    select_career_slide{career_name==" "}:
+      action: play
   mainmenu_casual_highlighted: casual_slide
   # Selecting and moving between menus
   mainmenu_change_career_selected: career_select_slide
@@ -41,6 +45,12 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
+      - widget: console_background
+  select_career_slide:
+    widgets:
+      - type: text
+        text: Select a Profile
+        style: header_lg, row_main, col_left_anchor
       - widget: console_background
   resume_game_slide:
     widgets:

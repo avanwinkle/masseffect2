@@ -168,6 +168,8 @@ widget_styles:
   lcd_only:
     font_size: 0
     opacity: 0
+    anchor_y: bottom
+    y: 200%
 
   # GRID POSITIONS
   #----------------------------

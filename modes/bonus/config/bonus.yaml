@@ -44,69 +44,70 @@ slides:
     widgets:
       - type: text
         text: Critical Mission Failure
+        style: header_md, row_main
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_squadmates_slide:
     - type: text
       text: "(player|recruited_squadmates_count) New Squadmates"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_credits_slide:
     - type: text
       text: "Credits Bonus"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_minerals_slide:
     - type: text
       text: "Minerals Collected"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_assignments_slide:
     - type: text
       text: "N7 Bonus"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_intel_slide:
     - type: text
       text: "Intel Gathered"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_upgrades_slide:
     - type: text
       text: "Upgrades Researched"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_multiplier_slide:
     - type: text
       text: "Reputation Multiplier"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: "(multiplier)X"
-      style: bonus_score_style
+      style: header_sm, row_sub
   bonus_total_slide:
     - type: text
       text: "Total Bonus"
-      style: bonus_title_style
+      style: header_md, row_main
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_sm, row_sub
 
 sound_player:
   mode_bonus_started:

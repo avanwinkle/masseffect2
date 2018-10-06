@@ -86,32 +86,12 @@ slides:
   medigel_slide:
     - type: image
       image: medigel
-      anchor_x: left
-      anchor_y: bottom
-      x: 0
-      y: 0
+      style: col_left_anchor
       z: 2
     - type: text
-      text: Medigel
-      style: medium
-      anchor_x: left
-      anchor_y: bottom
-      y: middle+2
-      x: 38
+      text: "Medigel\nDeployed"
+      style: header_lg, row_main, col_left_inner
       casing: upper
-    - type: text
-      text: Deployed
-      style: medium
-      anchor_x: left
-      anchor_y: top
-      y: middle-2
-      x: 38
-      casing: upper
-    - type: rectangle
-      width: 128
-      height: 32
-      color: black
-      z: 0
 
 sound_player:
   # During multiballs the save event will post even if it's not the last ball (i.e. no save)

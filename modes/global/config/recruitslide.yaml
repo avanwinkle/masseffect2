@@ -14,10 +14,10 @@ variable_player:
     missionname:
       string: "Defend Archangel"
       action: set
-    mission_instructions{not device.counters.doors_closed_counter.complete}:
+    mission_instructions{not device.counters.doors_closed_counter.completed}:
       string: "Close the shutters"
       action: set
-    mission_instructions{device.counters.doors_closed_counter.complete}:
+    mission_instructions{device.counters.doors_closed_counter.completed}:
       string: "Get upstairs!"
       action: set
   logicblock_doors_closed_counter_complete:
@@ -49,6 +49,9 @@ variable_player:
     missionname:
       string: "Stop the Heretics"
       action: set
+    mission_instructions:
+      string: " "
+      action: set
   start_mode_recruitmordin:
     missionname:
       string: "Cure the Plague"
@@ -59,6 +62,9 @@ variable_player:
   start_mode_recruitsamara:
     missionname:
       string: "Follow Morinth's Trail"
+      action: set
+    mission_instructions:
+      string: "Hit targets to light shots"
       action: set
   start_mode_recruittali:
     missionname:

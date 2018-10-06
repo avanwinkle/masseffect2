@@ -36,8 +36,11 @@ class SaveCareer(CustomCode):
       career_name = kwargs.get("career_name")
       # Store this career name for this player number
       self.machine.set_machine_var("last_career_player_{}".format(player.number), career_name)
+      # Store a nice name to display for the player number
+      pretty_name = "Player {}".format(player.number) if career_name == " " else career_name
+      self.machine.set_machine_var("current_career_player_{}".format(player.number), pretty_name)
 
-      if career_name == " ": 
+      if career_name == " ":
         player["casual"] = 1
         player["career_name"] = "Player {}".format(player.number)
       else:
@@ -92,20 +95,20 @@ class SaveCareer(CustomCode):
     player = self.machine.game.player
     if self._current_careers.get(player.number):
       player.career_name = self._current_careers[player.number]["career_name"]
-      
+
       if player.career_name == " ":
         careerdata = CASUAL_CAREER
       else:
         with open(self._get_filename(player.career_name)) as f:
           careerdata = json.load(f)
         f.close()
-      
+
       self._achievement_handlers = {}
       available_missions = 0
       squadmates_count = 0
 
       self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
-      
+
       for key,value in careerdata.items():
         if key.startswith("status_"):
           setattr(player, key, value)

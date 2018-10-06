@@ -80,6 +80,10 @@ widgets:
     - type: image
       image: popup_console
       z: 1
+  popup_selector:
+    - type: image
+      image: popup_selector
+      z: 1
 
 widget_styles:
 
