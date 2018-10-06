@@ -20,8 +20,8 @@ displays:
   lcd_left:
     width: 758
     height: 468
-    default: true
   lcd_right:
+    default: true
     width: 484
     height: 468
 

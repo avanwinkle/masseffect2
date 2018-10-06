@@ -24,24 +24,31 @@ queue_relay_player:
 
 slide_player:
   # Highlighting options in the main menu
-  mainmenu_new_game_highlighted: new_game_slide
-  mainmenu_resume_game_highlighted: resume_game_slide
+  mainmenu_new_game_highlighted:
+    new_game_slide:
+      target: lcd_left
+  mainmenu_resume_game_highlighted:
+    resume_game_slide:
+      target: lcd_left
   mainmenu_change_career_highlighted:
     change_career_slide{career_name!=" "}:
-      action: play
+      target: lcd_left
     select_career_slide{career_name==" "}:
-      action: play
-  mainmenu_casual_highlighted: casual_slide
+      target: lcd_left
+  mainmenu_casual_highlighted:
+    casual_slide:
+      target: lcd_left
   # Selecting and moving between menus
-  mainmenu_change_career_selected: career_select_slide
-  # mainmenu_career_selected: resume_game_slide
+  highlight_career:
+    career_select_slide:
+      target: lcd_left
 
 slides:
   change_career_slide:
     widgets:
       - type: text
         text: Switch Profile
-        style: header_lg, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
@@ -50,13 +57,13 @@ slides:
     widgets:
       - type: text
         text: Select a Profile
-        style: header_lg, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
       - widget: console_background
   resume_game_slide:
     widgets:
       - type: text
         text: Continue Game
-        style: header_lg, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
@@ -65,7 +72,7 @@ slides:
     widgets:
       - type: text
         text: New Game
-        style: header_lg, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
@@ -75,31 +82,23 @@ slides:
       - type: text
         text: "Load Profile:"
         style: body_sm, row_top, col_left_anchor
+      - type: text
+        text: (career_name)
+        style: body_lg, row_main, col_left_anchor
+      - type: text
+        text: Level (level)
+        style: body_sm, row_sub_under, col_left_anchor
+      - type: text
+        text: "Started: (career_started)\nLast played: (last_played)"
+        halign: right
+        style: body_sm, row_sub_under, col_right_anchor
       - widget: console_background
   casual_slide:
     widgets:
       - type: text
         text: Casual Play
-        style: header_lg, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
       - widget: console_background
-
-widget_player:
-  highlight_career:
-    highlighted_career_widget:
-      slide: career_select_slide
-      action: update
-
-widgets:
-  highlighted_career_widget:
-    - type: text
-      text: (career_name)
-      style: body_lg, row_main, col_left_anchor
-    - type: text
-      text: LVL (level)
-      style: body_sm, row_main, col_right_anchor
-    - type: text
-      text: (last_played)
-      style: body_sm, row_sub, col_right_anchor
 
 show_player:
   show_mainmenu: mainmenu_show

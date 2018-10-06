@@ -29,7 +29,7 @@ variable_player:
       string: "Defeat the Tank-Bred"
       action: set
     mission_instructions:
-      string: ""
+      string: " "
       action: set
   start_mode_recruitjack:
     missionname:
@@ -134,7 +134,6 @@ slides:
 widget_player:
   recruit_advance{status==1}:
     recruiting_advance_widget_2:
-      target: lcd_right
       widget_settings:
         expire: 3s
   recruit_advance{status==2}:
@@ -146,38 +145,120 @@ widget_player:
     recruiting_advance_widget_lit:
       target: lcd_right
       widget_settings:
-        expire: 4s
+        expire: 3s
 
 widgets:
   # Widgets that appear when advance shots are hit
   recruiting_advance_widget_2:
     - type: text
       text: Recruit (squadmate)
-      style: header_md, row_main
+      style: header_popup
       casing: title
+      animations:
+        add_to_slide: popup_enter_animation
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
-      style: body_md, row_sub_under
-    - widget: popup_console
+      style: body_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - widget: popup_image_(squadmate)
+    - widget: popup_image_border
+    - widget: popup_right
   recruiting_advance_widget_1:
     - type: text
       text: Recruit (squadmate)
-      style: header_md, row_main
+      style: header_popup
       casing: title
+      animations:
+        add_to_slide: popup_enter_animation
     - type: text
       text: 1 shot to unlock
-      style: body_md, row_sub_under
-    - widget: popup_console
+      style: body_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - widget: popup_image_(squadmate)
+    - widget: popup_image_border
+    - widget: popup_right
   recruiting_advance_widget_lit:
     - type: text
       text: (squadmate) Ready!
-      style: header_md, row_main
+      style: header_popup
       casing: title
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_from_slide: popup_exit_animation
     - type: text
       text: Left Ramp to Start Mission
-      style: body_sm, row_sub_under
-    - widget: popup_console
+      style: body_popup
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_from_slide: popup_exit_animation
+    - widget: popup_image_(squadmate)
+    - widget: popup_image_border
+    - widget: popup_right
+
+  popup_image_garrus:
+    - type: image
+      image: popup_image_garrus
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_grunt:
+    - type: image
+      image: popup_image_grunt
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_jack:
+    - type: image
+      image: popup_image_jack
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_kasumi:
+    - type: image
+      image: popup_image_kasumi
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_legion:
+    - type: image
+      image: popup_image_legion
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_mordin:
+    - type: image
+      image: popup_image_mordin
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_samara:
+    - type: image
+      image: popup_image_samara
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_tali:
+    - type: image
+      image: popup_image_tali
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_thane:
+    - type: image
+      image: popup_image_thane
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_image_zaeed:
+    - type: image
+      image: popup_image_zaeed
+      z: 3
+      animations:
+        add_to_slide: popup_enter_animation
+
 
 # Widgets that overlay DURING a mission
   shots_remaining_widget:

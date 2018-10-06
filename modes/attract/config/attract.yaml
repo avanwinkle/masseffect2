@@ -35,7 +35,9 @@ show_player:
       action: stop
 
 slide_player:
-  mode_attract_started: attract_slide
+  mode_attract_started:
+    attract_slide:
+      target: lcd_left
   ball_search_started: ball_search_slide
   ball_search_stopped:
     ball_search_slide:

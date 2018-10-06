@@ -186,12 +186,24 @@ shows:
           fade: (fadetime)
 
 slide_player:
-  missionselect_intro_highlighted: missionselect_intro_slide
-  missionselect_recruit_highlighted: missionselect_recruit_slide
-  missionselect_pass_highlighted: missionselect_pass_slide
-  missionselect_collectorship_highlighted: missionselect_collectorship_slide
-  missionselect_derelictreaper_highlighted: missionselect_derelictreaper_slide
-  missionselect_suicide_highlighted: missionselect_suicide_slide
+  missionselect_intro_highlighted:
+    missionselect_intro_slide:
+      target: lcd_left
+  missionselect_recruit_highlighted:
+    missionselect_recruit_slide:
+      target: lcd_left
+  missionselect_pass_highlighted:
+    missionselect_pass_slide:
+      target: lcd_left
+  missionselect_collectorship_highlighted:
+    missionselect_collectorship_slide:
+      target: lcd_left
+  missionselect_derelictreaper_highlighted:
+    missionselect_derelictreaper_slide:
+      target: lcd_left
+  missionselect_suicide_highlighted:
+    missionselect_suicide_slide:
+      target: lcd_left
 
 slides:
   missionselect_intro_slide:
@@ -203,7 +215,6 @@ slides:
         text: < FLIPPERS TO SELECT >
         style: body_sm, row_sub_under
       - widget: popup_selector
-      - widget: background_galaxy
   missionselect_recruit_slide:
     priority: 1
     widgets:
@@ -215,7 +226,6 @@ slides:
         text: Start Recruitment Mission
         style: body_sm, row_sub_under
       - widget: popup_selector
-      - widget: background_galaxy
   missionselect_collectorship_slide:
     priority: 1
     widgets:
@@ -250,4 +260,3 @@ slides:
         text: Pass for Now
         style: header_md, row_main
       - widget: popup_selector
-      - widget: background_galaxy

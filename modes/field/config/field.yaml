@@ -72,7 +72,7 @@ slides:
           add_to_slide:
             - property: rotation
               value: -360
-              duration: 6000s
+              duration: 1000s
   reset_from_suicide_slide:
     widgets:
       - type: text

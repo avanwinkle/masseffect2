@@ -5,7 +5,7 @@ slides:
       image: logo_fullscreen
       anchor_y: top
       y: top+8%
-      scale: 0.75
+      scale: 0.5
       z: 1
     - type: text
       text: Press Start
@@ -81,6 +81,20 @@ widgets:
     - type: image
       image: popup_console
       z: 1
+  popup_image_border:
+    - type: image
+      image: popup_image_border
+      z: 2
+      animations:
+        add_to_slide: popup_enter_animation
+  popup_right:
+    - type: image
+      image: popup_right
+      anchor_y: top
+      y: 316 # 78.2% (row_top) of height (468) = 366, minus 50 = 316
+      z: 1
+      animations:
+        add_to_slide: popup_enter_animation
   popup_selector:
     - type: image
       image: popup_selector
@@ -106,7 +120,7 @@ widget_styles:
     z: 10
   header_sm:
     font_name: me123
-    font_size: 48
+    font_size: 36
     adjust_bottom: 6
     z: 10
   body_lg:
@@ -207,6 +221,30 @@ widget_styles:
     anchor_y: middle
     y: 50%
 
+  # POPUPS
+  #----------------------------
+  header_popup:
+    font_name: me123
+    font_size: 32
+    opacity: 0
+    anchor_y: top
+    y: 44% # row_main
+    adjust_top: -42
+    z: 10
+  body_popup:
+    font_name: jupiter
+    font_size: 36
+    opacity: 0
+    anchor_y: top
+    y: 31% # row_sub
+    adjust_top: -36
+    z: 10
+  image_popup:
+    anchor_y: top
+    y: 300 # top of container (316) minus angle wedge (16)
+    z: 10
+    opacity: 0
+
   # POSITION LAYOUTS
   #----------------------------
   menu_header:
@@ -259,3 +297,27 @@ widget_styles:
   pos_hurryup:
     anchor_x: left
     x: 3.125%
+
+
+animations:
+  popup_enter_animation:
+    - property: y
+      value: 50
+      relative: true
+      duration: 500ms
+    - property: opacity
+      value: 1
+      duration: 500ms
+      timing: with_previous
+    - property: opacity     # Hold for 2s
+      value: 1
+      duration: 2s
+    - property: opacity
+      value: 0
+      duration: 500ms
+    - property: y
+      value: -50
+      relative: true
+      duration: 500ms
+      timing: with_previous
+

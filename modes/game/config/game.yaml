@@ -26,23 +26,16 @@ slide_player:
   show_base_slide:
     singleplayer_slide{not is_multiplayer}:
       action: play
+      target: lcd_left
       priority: 1
     multiplayer_slide{is_multiplayer}:
       action: play
+      target: lcd_left
       priority: 2
-    introslide_missions{is_available and not is_resume}:
-      action: play
-      priority: 3
-      expire: 6s
-      target: lcd_right
-    introslide_no_missions{not is_available and not is_resume}:
-      action: play
-      priority: 3
-      expire: 6s
-      target: lcd_right
   show_multiplayer_slide:
     multiplayer_slide:
       action: play
+      target: lcd_left
     singleplayer_slide:
       action: remove
   disable_missionresume:
@@ -61,7 +54,17 @@ widget_player:
       slide: singleplayer_slide
     base_ball_widget:
       slide: singleplayer_slide
-  # Base starts, show a resume mission
+  show_base_slide{is_available and not is_resume}:
+    introslide_missions:
+      slide: field_rightslide_base
+      widget_settings:
+        expire: 6s
+  show_base_slide{not is_available and not is_resume}:
+    introslide_no_missions:
+      slide: field_rightslide_base
+      widget_settings:
+        expire: 6s
+  # Base starts, show a resume mission?
   show_base_slide{is_resume and not is_multiplayer}:
     resume_widget:
       action: add
@@ -162,31 +165,31 @@ widget_player:
     mp_name_widget_player_4:
       action: remove
 
-slides:
-  introslide_no_missions:
-    transition_out:
-      type: fade
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: header_md, row_main, col_center
-      - type: text
-        text: "Hit any lane 3x\nto unlock missions"
-        style: body_sm, row_sub_under, col_center
-      - widget: popup_console
-  introslide_missions:
-    transition_out:
-      type: fade
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: header_md, row_main, col_center
-      - type: text
-        text: "Select a mission at\nthe Galaxy Map"
-        style: body_sm, row_sub_under, col_center
-      - widget: popup_console
-
 widgets:
+  introslide_no_missions:
+    - type: text
+      text: Build Your Team
+      style: header_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - type: text
+      text: "Hit any lane 3x\nto unlock missions"
+      style: body_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - widget: popup_right
+  introslide_missions:
+    - type: text
+      text: Build Your Team
+      style: header_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - type: text
+      text: "Select a mission at\nthe Galaxy Map"
+      style: body_popup
+      animations:
+        add_to_slide: popup_enter_animation
+    - widget: popup_right
   base_level_widget:
     - type: text
       text: LVL (player|level)
