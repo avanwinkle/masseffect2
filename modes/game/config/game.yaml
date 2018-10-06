@@ -34,10 +34,12 @@ slide_player:
       action: play
       priority: 3
       expire: 6s
+      target: lcd_right
     introslide_no_missions{not is_available and not is_resume}:
       action: play
       priority: 3
       expire: 6s
+      target: lcd_right
   show_multiplayer_slide:
     multiplayer_slide:
       action: play
@@ -172,7 +174,6 @@ slides:
         text: "Hit any lane 3x\nto unlock missions"
         style: body_sm, row_sub_under, col_center
       - widget: popup_console
-      - widget: background_galaxy
   introslide_missions:
     transition_out:
       type: fade
@@ -184,17 +185,16 @@ slides:
         text: "Select a mission at\nthe Galaxy Map"
         style: body_sm, row_sub_under, col_center
       - widget: popup_console
-      - widget: background_galaxy
 
 widgets:
   base_level_widget:
     - type: text
       text: LVL (player|level)
-      style: body_sm, row_gutter, col_right_center
+      style: body_sm, row_gutter, col_left_center
   base_ball_widget:
     - type: text
       text: BALL (ball)
-      style: body_sm, row_gutter, col_right_anchor
+      style: body_sm, row_gutter, col_right_indent
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)

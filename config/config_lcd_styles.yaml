@@ -28,22 +28,17 @@ slides:
         style: header_lg, row_main, col_left_anchor, num
       # Can't use widget names here, they're not loaded yet
       - type: image
-        image: console_background
+        image: texture_console
         z: 1
-      - type: image
-        image: background_galaxy
-        z: 0
+  background_overlord:
   multiplayer_slide:
     widgets:
       - type: text
         text: (score)
         style: header_lg, row_main, col_left_anchor, num
       - type: image
-        image: console_background
+        image: texture_console
         z: 1
-      - type: image
-        image: background_galaxy
-        z: 0
 
 machine_vars:
   use_lcd:
@@ -53,7 +48,7 @@ machine_vars:
 widget_player:
   show_grid:
     grid_widget:
-      target: lcd
+      target: window
   remove_grid:
     grid_widget:
       action: remove
@@ -61,16 +56,22 @@ widget_player:
 widgets:
   grid_widget:
     - type: image
-      image: grid
+      image: grid_dual
       z: 1000
   console_background:
     - type: image
-      image: console_background
+      image: texture_console
+      opacity: 0.5
       z: 1
   background_galaxy:
     - type: image
       image: background_galaxy
       z: 0
+      animations:
+        add_to_slide:
+          - property: rotation
+            value: 360
+            duration: 20s
   background_overlord:
     - type: image
       image: background_overlord
@@ -95,12 +96,12 @@ widget_styles:
     z: 10
   header_lg:
     font_name: me123
-    font_size: 96
+    font_size: 72
     adjust_bottom: 14
     z: 10
   header_md:
     font_name: me123
-    font_size: 64
+    font_size: 56
     adjust_bottom: 0
     z: 10
   header_sm:
@@ -110,19 +111,19 @@ widget_styles:
     z: 10
   body_lg:
     font_name: jupiter
-    font_size: 128
+    font_size: 96
     adjust_bottom: 28
     z: 10
   body_md:
     font_name: jupiter
-    font_size: 96
+    font_size: 72
     line_height: 0.8
     adjust_top: 36
     adjust_bottom: 20
     z: 10
   body_sm:
     font_name: me123
-    font_size: 32
+    font_size: 24
     adjust_bottom: 2
     z: 10
   squad_debug_style:
@@ -148,28 +149,29 @@ widget_styles:
   #----------------------------
   col_left_anchor:
     anchor_x: left
-    x: 8.1%
+    x: 3.4%
   col_left_indent:
     anchor_x: left
-    x: 13.2%
+    x: 8.9%
   col_left_inner:
     anchor_x: left
-    x: 20.8%
+    x: 23.4%
   col_left_center:
-    anchor_x: right
-    x: 46.6%
-  col_right_center:
     anchor_x: left
-    x: 53.4%
+    x: 38%
+  col_right_center:
+    anchor_x: right
+    x: right-38%
   col_right_inner:
     anchor_x: right
-    x: 79.2%
+    x: right-23.4%
   col_right_indent:
     anchor_x: right
-    x: 86.8%
+    x: right-8.9%
   col_right_anchor:
     anchor_x: right
-    x: 91.9%
+    x: right-3.4%
+
   col_right_gutter:
     anchor_x: right
     x: 99.4%
@@ -179,25 +181,28 @@ widget_styles:
 
   row_top:
     anchor_y: bottom
-    y: 77.2%
+    y: 78.2%
   row_super:
     anchor_y: bottom
-    y: 64.5%
+    y: 65.4%
   row_main:
     anchor_y: bottom
-    y: 43.8%
+    y: 44%
   row_sub:
     anchor_y: bottom
-    y: 31.2%
+    y: 31%
   row_sub_under:
     anchor_y: top
-    y: 31.2%
+    y: 31%
+  row_bottom_margin:
+    anchor_y: bottom
+    y: 12%
   row_bottom:
     anchor_y: bottom
-    y: 13.2%
+    y: 10.2%
   row_gutter:
     anchor_y: center
-    y: 6.4%
+    y: 5.6%
   row_middle:
     anchor_y: middle
     y: 50%

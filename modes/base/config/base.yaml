@@ -156,7 +156,7 @@ event_player:
         value: game.num_players>1
         type: bool
       is_lcd:
-        value: machine.use_lcd==1
+        value: machine.is_lcd==1
         type: bool
 
   # If we are starting a new game, give some instructional audio

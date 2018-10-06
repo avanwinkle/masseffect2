@@ -103,13 +103,6 @@ variable_player:
       action: set
 
 slide_player:
-  recruit_advance:
-    recruiting_advance_slide_2{status==1}:
-      expire: 3s
-    recruiting_advance_slide_1{status==2}:
-      expire: 3s
-    recruiting_advance_slide_lit{status==3}:
-      expire: 4s
   mode_type_mission_started:
     recruit_mission_slide:
       action: play
@@ -137,54 +130,56 @@ slides:
         text: (global_recruittimer_tick)
         style: timer_primary, row_gutter, col_right_anchor
       - widget: console_background
-  recruiting_advance_slide_2:
-    transition:
-      type: wipe
-    transition_out:
-      type: wipe
-    widgets:
-      - type: text
-        text: Recruit (squadmate)
-        style: header_md, row_main
-        casing: title
-      - type: text
-        text: 2 shots to unlock
-        anchor_y: bottom
-        style: body_md, row_sub_under
-      - widget: popup_console
-      - widget: background_galaxy
-  recruiting_advance_slide_1:
-    transition:
-      type: wipe
-    transition_out:
-      type: wipe
-    widgets:
-      - type: text
-        text: Recruit (squadmate)
-        style: header_md, row_main
-        casing: title
-      - type: text
-        text: 1 shot to unlock
-        style: body_md, row_sub_under
-      - widget: popup_console
-      - widget: background_galaxy
-  recruiting_advance_slide_lit:
-    transition:
-      type: wipe
-    transition_out:
-      type: wipe
-    widgets:
-      - type: text
-        text: (squadmate) Ready!
-        style: header_md, row_main
-        casing: title
-      - type: text
-        text: Left Ramp to Start Mission
-        style: body_sm, row_sub_under
-      - widget: popup_console
-      - widget: background_galaxy
+
+widget_player:
+  recruit_advance{status==1}:
+    recruiting_advance_widget_2:
+      target: lcd_right
+      widget_settings:
+        expire: 3s
+  recruit_advance{status==2}:
+    recruiting_advance_widget_1:
+      target: lcd_right
+      widget_settings:
+        expire: 3s
+  recruit_advance{status==3}:
+    recruiting_advance_widget_lit:
+      target: lcd_right
+      widget_settings:
+        expire: 4s
 
 widgets:
+  # Widgets that appear when advance shots are hit
+  recruiting_advance_widget_2:
+    - type: text
+      text: Recruit (squadmate)
+      style: header_md, row_main
+      casing: title
+    - type: text
+      text: 2 shots to unlock
+      anchor_y: bottom
+      style: body_md, row_sub_under
+    - widget: popup_console
+  recruiting_advance_widget_1:
+    - type: text
+      text: Recruit (squadmate)
+      style: header_md, row_main
+      casing: title
+    - type: text
+      text: 1 shot to unlock
+      style: body_md, row_sub_under
+    - widget: popup_console
+  recruiting_advance_widget_lit:
+    - type: text
+      text: (squadmate) Ready!
+      style: header_md, row_main
+      casing: title
+    - type: text
+      text: Left Ramp to Start Mission
+      style: body_sm, row_sub_under
+    - widget: popup_console
+
+# Widgets that overlay DURING a mission
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"

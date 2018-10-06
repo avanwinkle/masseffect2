@@ -4,10 +4,10 @@ config:
   - config_lcd_styles.yaml
 
 window:
-  width: 800
-  height: 600
+  width: 1280
+  height: 480
   title: Mission Pinball Framework - Mass Effect 2
-  resizable: true
+  resizable: false
   fullscreen: false
   borderless: false
   exit_on_escape: true
@@ -15,15 +15,18 @@ window:
 
 displays:
   window:
-    width: 800
-    height: 600
-  lcd:
     width: 1280
     height: 480
+  lcd_left:
+    width: 758
+    height: 468
     default: true
+  lcd_right:
+    width: 484
+    height: 468
 
 machine_vars:
-  use_lcd:
+  is_lcd:
     initial_value: 1
     persist: false
   is_fullscreen:
@@ -34,10 +37,24 @@ slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: lcd
-        width: 768
-        height: 288
-      - type: rectangle
-        width: 772
-        height: 292
-        color: 444444
+        source_display: lcd_left
+        width: 758
+        height: 468
+        anchor_y: bottom
+        anchor_x: left
+        x: 8
+        y: 6
+        z: 1
+      - type: display
+        source_display: lcd_right
+        width: 484
+        height: 468
+        anchor_x: right
+        anchor_y: bottom
+        x: right-8
+        y: 6
+        z: 1
+      - type: image
+        image: dual_lcd_mask_shadow
+        z: 2
+
