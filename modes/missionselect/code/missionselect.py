@@ -20,7 +20,7 @@ class MissionSelect(Carousel):
   def mode_start(self, **kwargs):
     self._items = self._build_items_list()
     self.debug_log("List of missionselect options: {}".format(self._items.__str__()))
-    
+
     # If there's only one option and it's a recruit mission, start it immediately without a slide
     if len(self._items) == 1 and self._items[0] in self._mates:
       self._select_item()
@@ -67,7 +67,7 @@ class MissionSelect(Carousel):
     # If more than one option is available, include the intro slide
     if len(items) > 1:
         items.insert(0, self._intro)
-    
+
     return items
 
   def _get_available_items(self):
@@ -91,9 +91,15 @@ class MissionSelect(Carousel):
 
   def _update_highlighted_item(self, direction):
     h = self._get_highlighted_item()
-    self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction)
+    idx = self._items.index(h) + (0 if self._items[0] == self._intro else 1)
+    total = len(self._items) - (1 if self._items[0] == self._intro else 0)
+    self.machine.events.post("{}_{}_highlighted".format(self.name, h), direction=direction,
+                                                                       index=idx,
+                                                                       items=total)
     if h in self._mates:
-      self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h)
+      self.machine.events.post("{}_recruit_highlighted".format(self.name), squadmate=h,
+                                                                           index=idx,
+                                                                           items=total)
     # If we moved away from the intro, remove it
     if h != self._intro and self._intro in self._items:
       self._items = self._items[1:]

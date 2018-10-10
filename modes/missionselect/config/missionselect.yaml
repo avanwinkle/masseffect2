@@ -214,7 +214,7 @@ slides:
       - type: text
         text: < FLIPPERS TO SELECT >
         style: body_sm, row_sub_under
-      - widget: popup_selector
+      - widget: console_background
   missionselect_recruit_slide:
     priority: 1
     widgets:
@@ -225,7 +225,8 @@ slides:
       - type: text
         text: Start Recruitment Mission
         style: body_sm, row_sub_under
-      - widget: popup_selector
+      - widget: missionselect_count_widget
+      - widget: console_background
   missionselect_collectorship_slide:
     priority: 1
     widgets:
@@ -238,7 +239,8 @@ slides:
       - type: text
         text: "Derelict\nReaper"
         style: header_md, row_main
-      - widget: popup_selector
+      - widget: missionselect_count_widget
+      - widget: console_background
   missionselect_suicide_slide:
     priority: 1
     widgets:
@@ -253,10 +255,12 @@ slides:
         style: suicide_header
         anchor_y: bottom
         y: 3
+      - widget: console_background
   missionselect_pass_slide:
     priority: 10
     widgets:
       - type: text
         text: Pass for Now
         style: header_md, row_main
-      - widget: popup_selector
+      - widget: missionselect_count_widget
+      - widget: console_background

@@ -99,6 +99,16 @@ widgets:
     - type: image
       image: popup_selector
       z: 1
+  missionselect_count_widget:
+    - type: text
+      text: (index) / (items) >
+      style: body_sm, row_gutter, col_right_indent
+    - type: text
+      text: <
+      style: body_sm, row_gutter, col_right_indent
+      # Fix the left caret to avoid digit width shifts
+      adjust_right: -136
+
 
 widget_styles:
 
