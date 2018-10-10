@@ -30,14 +30,16 @@ class Analysis:
     self._start_time = datetime.now().timestamp()
     self._handlers = []
 
-    # Track attempts for each player
-    if not self.machine.game.player.number in self._persists:
-      self._persists[self.machine.game.player.number] = { "attempts": 0, "time_played": 0, "aggregate": {} }
-    self._persists[self.machine.game.player.number]["attempts"] += 1
+    player = self.machine.game.player
 
-    # Set the initial values
+    # Track attempts for each player
+    if not player.number in self._persists:
+      self._persists[player.number] = { "attempts": 0, "time_played": 0, "aggregate": {} }
+    self._persists[player.number]["attempts"] += 1
+
+    # Set the starting-time values for the variables we're tracking in the analysis
     for player_var in Util.string_to_list(self.config.get("player_variables", [])):
-      self._player_vars[player_var] = self.machine.game.player[player_var]
+      self._player_vars[player_var] = player[player_var]
 
     self.log.info("Created player vars: {}".format(self._player_vars))
 
@@ -50,30 +52,53 @@ class Analysis:
       self._handlers.append(self.machine.events.add_handler(count_config["count_events"], self._count, key=key))
     self.log.info("Created counts: {}".format(self._counts))
 
-  def _stop_analysis(self, **kwargs):
-    self.log.info("Stopping analysis for {}".format(self.name))
-    stop_time = datetime.now().timestamp()
+    # Create trophies and listeners
+    for trophy, trophy_config in self.config.get("trophies", {}).items():
+      if trophy_config["aggregate_type"] == "first_only" and self._persists[player.number]["attempts"] > 1:
+        self.log.debug(" - Trophy {} won't be tracked because this is not the first attempt".format(trophy_config["name"]))
+        continue
+      self._handlers.append(self.machine.events.add_handler(
+        trophy_config["award_event"], self._award_trophy, name=trophy, config=trophy_config))
 
-    for handler in self._handlers:
-      self.machine.events.remove_handler_by_key(handler)
-    self._handlers = []
+  def _calculate_time(self, **kwargs):
+    eval_time = datetime.now().timestamp()
 
-    duration_secs = stop_time - self._start_time
+    duration_secs = eval_time - self._start_time
     hours, remainder = divmod(duration_secs, 3600)
     minutes, seconds = divmod(remainder, 60)
     timestring = "{} minutes {} seconds".format(minutes, int(seconds))
     if hours > 0:
       timestring = "{} hours {}".format(hours, timestring)
 
-    persist_values = self._persists[self.machine.game.player.number]
-    persist_values["time_played"] += duration_secs
+    return duration, timestring
+
+  def _award_trophy(self, name, config, **kwargs):
+    player_var = config["value"]
+    if player_var == "duration":
+      value, timestring = self._calculate_time()
+    else:
+      value = self.machine.game.player[player_var] - self._player_vars[player_var]
+    self.log.info("Awarding trophy {} with a value of {}".format(name, value))
+
+  def _stop_analysis(self, **kwargs):
+    self.log.info("Stopping analysis for {}".format(self.name))
+    duration, timestring = self._calculate_time()
+
+    persistent_values = self._persists[self.machine.game.player.number]
 
     analysis = {
       "duration": duration_secs,
       "timestring": timestring,
       "attempt": persist_values["attempts"],
-      "total_time": persist_values["time_played"],
+      "total_duration": persist_values["time_played"],
     }
+
+    for handler in self._handlers:
+      self.machine.events.remove_handler_by_key(handler)
+    self._handlers = []
+
+    analysis = self._run_analysis()
+    persist_values["time_played"] += analysis["duration_secs"]
 
     for player_var, initial_value in self._player_vars.items():
       change = self.machine.game.player[player_var] - initial_value
@@ -117,6 +142,12 @@ class Analysis:
     self._start_time = None
     self._persists = {}
 
+class Trophy:
+  def __init__(self, name, machine, config, log):
+    self.name = name
+    self.machine = machine
+    self.config = config
+    self.log = log
 
 class MpfAnalytics(CustomCode):
   def on_load(self):
