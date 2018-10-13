@@ -160,10 +160,6 @@ event_player:
         type: bool
 
   # If we are starting a new game, give some instructional audio
-  mode_base_started.3{current_player.squadmates_count==2}:
-    - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
-    - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
-    - play_gameintro_norecruits_short{current_player.ball==3}
   # If we are starting a game and have recruited, different sounds
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
@@ -406,6 +402,10 @@ show_player:
   player_extra_balls{player_num==current_player.number and value==0}:
     extraball_lit_show:
       action: stop
+  slide_field_rightslide_base_active:
+    introshow:
+      loops: 0
+
 
 shows:
   ball_save_preshow:
@@ -480,6 +480,21 @@ shows:
     - lights:
         (leds): black
         l_null: (color)
+  introshow:
+    - time: 0
+      widgets: introslide_missions
+      events:
+        - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
+        - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
+        - play_gameintro_norecruits_short{current_player.ball==3}
+    - time: 8
+      events: remove_popup
+    - time: 9
+      widgets:
+        introslide_missions:
+          action: remove
+
+
 
 slide_player:
   levelup:
@@ -503,6 +518,7 @@ slide_player:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
       expire: 3s
+
 
 slides:
   levelup_slide:
@@ -532,6 +548,9 @@ slides:
       style: body_md row_sub_under num
 
 sound_player:
+  mode_base_started:
+    illusive_your_team_will_need_to_be_strong:
+      action: load
   s_plunger_lane_inactive: galaxy_whoosh
   play_gameintro_norecruits_long_four: illusive_already_compiled_dossiers_four
   play_gameintro_norecruits_long_five: illusive_already_compiled_dossiers_five
@@ -595,10 +614,6 @@ sounds:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
     volume: 0.9
-    events_when_played: play_introslide
-    events_when_stopped: remove_introslide
-    events_when_about_to_finish: remove_popup
-    about_to_finish_time: 500ms
   illusive_find_mordin:
     file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
     track: voice
@@ -641,12 +656,3 @@ track_player:
     __all__:
       action: stop_all_sounds
       fade: 500ms
-
-widget_player:
-  play_introslide:
-    introslide_no_missions:
-      action: add
-      slide: field_rightslide_base
-  remove_introslide:
-    introslide_no_missions:
-      action: remove
