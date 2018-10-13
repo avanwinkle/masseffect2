@@ -131,131 +131,118 @@ slides:
         style: timer_primary, row_gutter, col_right_anchor
       - widget: console_background
 
-widget_player:
-  recruit_advance{status==1}:
-    recruiting_advance_widget_2:
-      widget_settings:
-        expire: 3s
-  recruit_advance{status==2}:
-    recruiting_advance_widget_1:
-      target: lcd_right
-      widget_settings:
-        expire: 3s
-  recruit_advance{status==3}:
-    recruiting_advance_widget_lit:
-      target: lcd_right
-      widget_settings:
-        expire: 3s
-
 widgets:
   # Widgets that appear when advance shots are hit
-  recruiting_advance_widget_2:
+  recruit_advance_widget_1:
     - type: text
       text: Recruit (squadmate)
-      style: header_popup
+      style: header_popup, row_main
       casing: title
       animations:
         add_to_slide: popup_enter_animation
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
-      style: body_popup
+      style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
     - widget: popup_image_(squadmate)
-    - widget: popup_image_border
+    # - widget: popup_image_border
     - widget: popup_right
-  recruiting_advance_widget_1:
+  recruit_advance_widget_2:
     - type: text
       text: Recruit (squadmate)
-      style: header_popup
+      style: header_popup, row_main
       casing: title
       animations:
         add_to_slide: popup_enter_animation
     - type: text
       text: 1 shot to unlock
-      style: body_popup
+      style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
     - widget: popup_image_(squadmate)
-    - widget: popup_image_border
+    # - widget: popup_image_border
     - widget: popup_right
-  recruiting_advance_widget_lit:
+  recruit_advance_widget_3:
     - type: text
       text: (squadmate) Ready!
-      style: header_popup
+      style: header_popup, row_main
       casing: title
       animations:
         add_to_slide: popup_enter_animation
-        remove_from_slide: popup_exit_animation
     - type: text
-      text: Left Ramp to Start Mission
-      style: body_popup
+      text: Mission Available
+      style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
-        remove_from_slide: popup_exit_animation
+    - type: text
+      text: Left Ramp to Start
+      style: body_popup, row_bottom
+      animations:
+        add_to_slide: popup_enter_animation
     - widget: popup_image_(squadmate)
-    - widget: popup_image_border
+    # - widget: popup_image_border
     - widget: popup_right
 
   popup_image_garrus:
     - type: image
       image: popup_image_garrus
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_grunt:
     - type: image
       image: popup_image_grunt
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_jack:
     - type: image
       image: popup_image_jack
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_kasumi:
     - type: image
       image: popup_image_kasumi
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_legion:
     - type: image
       image: popup_image_legion
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_mordin:
     - type: image
       image: popup_image_mordin
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_samara:
     - type: image
       image: popup_image_samara
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_tali:
     - type: image
       image: popup_image_tali
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_thane:
     - type: image
       image: popup_image_thane
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
   popup_image_zaeed:
     - type: image
       image: popup_image_zaeed
-      z: 3
+      style: image_popup
       animations:
         add_to_slide: popup_enter_animation
 

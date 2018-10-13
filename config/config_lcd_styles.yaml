@@ -96,6 +96,15 @@ widgets:
       opacity: 0
       animations:
         add_to_slide: popup_enter_animation
+  popup_right_6s:
+    - type: image
+      image: popup_right_full
+      anchor_y: bottom
+      y: -50
+      z: 1
+      opacity: 0
+      animations:
+        add_to_slide: popup_enter_animation_6s
   popup_selector:
     - type: image
       image: popup_selector
@@ -103,12 +112,12 @@ widgets:
   missionselect_count_widget:
     - type: text
       text: (index) / (items) >
-      style: body_sm, row_gutter, col_right_indent
+      style: header_xs, row_gutter, col_right_indent
     - type: text
       text: <
-      style: body_sm, row_gutter, col_right_indent
+      style: header_xs, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
-      adjust_right: -156
+      adjust_right: -142
 
 
 widget_styles:
@@ -134,6 +143,16 @@ widget_styles:
     font_size: 36
     adjust_bottom: 6
     z: 10
+  header_xs:
+    font_name: me123
+    font_size: 24
+    adjust_bottom: 2
+    z: 10
+  header_popup: # Same as header_sm but with -50 adjust
+    font_name: me123
+    font_size: 36
+    adjust_bottom: 56
+    z: 10
   body_lg:
     font_name: jupiter
     font_size: 96
@@ -142,14 +161,23 @@ widget_styles:
   body_md:
     font_name: jupiter
     font_size: 72
-    line_height: 0.8
+    line_height: 0.85
     adjust_top: 36
     adjust_bottom: 20
     z: 10
   body_sm:
-    font_name: me123
-    font_size: 24
-    adjust_bottom: 2
+    font_name: jupiter
+    font_size: 56
+    adjust_top: 20
+    adjust_bottom: 12
+    line_height: 0.9
+    z: 10
+  body_popup: # Same as body_sm but with -50 adjust
+    font_name: jupiter
+    font_size: 56
+    adjust_top: 20
+    adjust_bottom: 62
+    line_height: 0.9
     z: 10
   squad_debug_style:
     font_size: 18
@@ -234,26 +262,10 @@ widget_styles:
 
   # POPUPS
   #----------------------------
-  header_popup:
-    font_name: me123
-    font_size: 32
-    opacity: 0
-    anchor_y: top
-    y: 44% # row_main
-    adjust_top: -42
-    z: 10
-  body_popup:
-    font_name: jupiter
-    font_size: 48
-    opacity: 0
-    anchor_y: top
-    y: 31% # row_sub
-    adjust_top: -36
-    z: 10
   image_popup:
     z: 1
     anchor_y: bottom
-    y: 240 # includes -50px for transition
+    y: 258 # includes -50px for transition
     anchor_x: center
     opacity: 0
 
@@ -329,11 +341,35 @@ animations:
     - property: opacity
       value: 0
       duration: 500ms
-      easing: in_circ
+      easing: in_sine
     - property: y
       value: -50
       relative: true
       duration: 500ms
       timing: with_previous
-      easing: in_circ
+      easing: in_sine
+  popup_enter_animation_6s:
+    - property: y
+      value: 50
+      relative: true
+      duration: 500ms
+      easing: out_circ
+    - property: opacity
+      value: 1
+      duration: 500ms
+      easing: out_circ
+      timing: with_previous
+    - property: opacity     # Hold for 5s
+      value: 1
+      duration: 5s
+    - property: opacity
+      value: 0
+      duration: 500ms
+      easing: in_sine
+    - property: y
+      value: -50
+      relative: true
+      duration: 500ms
+      timing: with_previous
+      easing: in_sine
 
