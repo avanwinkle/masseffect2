@@ -595,6 +595,10 @@ sounds:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
     volume: 0.9
+    events_when_played: play_introslide
+    events_when_stopped: remove_introslide
+    events_when_about_to_finish: remove_popup
+    about_to_finish_time: 500ms
   illusive_find_mordin:
     file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
     track: voice
@@ -637,3 +641,12 @@ track_player:
     __all__:
       action: stop_all_sounds
       fade: 500ms
+
+widget_player:
+  play_introslide:
+    introslide_no_missions:
+      action: add
+      slide: field_rightslide_base
+  remove_introslide:
+    introslide_no_missions:
+      action: remove

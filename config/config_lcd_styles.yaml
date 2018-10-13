@@ -96,15 +96,7 @@ widgets:
       opacity: 0
       animations:
         add_to_slide: popup_enter_animation
-  popup_right_6s:
-    - type: image
-      image: popup_right_full
-      anchor_y: bottom
-      y: -50
-      z: 1
-      opacity: 0
-      animations:
-        add_to_slide: popup_enter_animation_6s
+        remove_popup: popup_exit_animation
   popup_selector:
     - type: image
       image: popup_selector
@@ -324,6 +316,30 @@ widget_styles:
 
 
 animations:
+  # popup_enter_animation:
+  #   - property: y
+  #     value: 50
+  #     relative: true
+  #     duration: 500ms
+  #     easing: out_circ
+  #   - property: opacity
+  #     value: 1
+  #     duration: 500ms
+  #     easing: out_circ
+  #     timing: with_previous
+  #   - property: opacity     # Hold for 2s
+  #     value: 1
+  #     duration: 2s
+  #   - property: opacity
+  #     value: 0
+  #     duration: 500ms
+  #     easing: in_sine
+  #   - property: y
+  #     value: -50
+  #     relative: true
+  #     duration: 500ms
+  #     timing: with_previous
+  #     easing: in_sine
   popup_enter_animation:
     - property: y
       value: 50
@@ -335,33 +351,7 @@ animations:
       duration: 500ms
       easing: out_circ
       timing: with_previous
-    - property: opacity     # Hold for 2s
-      value: 1
-      duration: 2s
-    - property: opacity
-      value: 0
-      duration: 500ms
-      easing: in_sine
-    - property: y
-      value: -50
-      relative: true
-      duration: 500ms
-      timing: with_previous
-      easing: in_sine
-  popup_enter_animation_6s:
-    - property: y
-      value: 50
-      relative: true
-      duration: 500ms
-      easing: out_circ
-    - property: opacity
-      value: 1
-      duration: 500ms
-      easing: out_circ
-      timing: with_previous
-    - property: opacity     # Hold for 5s
-      value: 1
-      duration: 5s
+  popup_exit_animation:
     - property: opacity
       value: 0
       duration: 500ms

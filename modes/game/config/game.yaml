@@ -22,16 +22,16 @@ event_player:
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
 
-  show_base_slide{not is_available and not is_resume}:
-    queue_widget:
-      widget: introslide_no_missions
-      slide: field_rightslide_base
-      expire: 7s
-  show_base_slide{is_available and not is_resume}:
-    queue_widget:
-      widget: introslide_missions
-      slide: field_rightslide_base
-      expire: 7s
+  # show_base_slide{not is_available and not is_resume}:
+  #   queue_widget:
+  #     widget: introslide_no_missions
+  #     slide: field_rightslide_base
+  #     expire: 7s
+  # show_base_slide{is_available and not is_resume}:
+  #   queue_widget:
+  #     widget: introslide_missions
+  #     slide: field_rightslide_base
+  #     expire: 7s
 
 slide_player:
   show_base_slide:
@@ -174,35 +174,38 @@ widgets:
       text: Build Your Team
       style: header_popup, row_main
       animations:
-        add_to_slide: popup_enter_animation_6s
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: text
       text: "Hit any lane 3x\nto unlock missions"
       style: body_popup, row_bottom
       animations:
-        add_to_slide: popup_enter_animation_6s
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: image
       image: popup_image_squad
       style: image_popup
       animations:
-        add_to_slide: popup_enter_animation_6s
-    - widget: popup_right_6s
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - widget: popup_right
   introslide_missions:
     - type: text
       text: Build Your Team
       style: header_popup, row_main
       animations:
-        add_to_slide: popup_enter_animation_6s
+        add_to_slide: popup_enter_animation
     - type: text
       text: "Select a mission at\nthe Galaxy Map"
       style: body_popup, row_bottom
       animations:
-        add_to_slide: popup_enter_animation_6s
+        add_to_slide: popup_enter_animation
     - type: image
       image: popup_image_squad
       style: image_popup
       animations:
-        add_to_slide: popup_enter_animation_6s
-    - widget: popup_right_6s
+        add_to_slide: popup_enter_animation
+    - widget: popup_right
   base_level_widget:
     - type: text
       text: LVL (player|level)
