@@ -89,10 +89,11 @@ widgets:
         add_to_slide: popup_enter_animation
   popup_right:
     - type: image
-      image: popup_right
-      anchor_y: top
-      y: 316 # 78.2% (row_top) of height (468) = 366, minus 50 = 316
+      image: popup_right_full
+      anchor_y: bottom
+      y: -50
       z: 1
+      opacity: 0
       animations:
         add_to_slide: popup_enter_animation
   popup_selector:
@@ -107,7 +108,7 @@ widgets:
       text: <
       style: body_sm, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
-      adjust_right: -136
+      adjust_right: -156
 
 
 widget_styles:
@@ -243,16 +244,17 @@ widget_styles:
     z: 10
   body_popup:
     font_name: jupiter
-    font_size: 36
+    font_size: 48
     opacity: 0
     anchor_y: top
     y: 31% # row_sub
     adjust_top: -36
     z: 10
   image_popup:
-    anchor_y: top
-    y: 300 # top of container (316) minus angle wedge (16)
-    z: 10
+    z: 1
+    anchor_y: bottom
+    y: 240 # includes -50px for transition
+    anchor_x: center
     opacity: 0
 
   # POSITION LAYOUTS
@@ -315,9 +317,11 @@ animations:
       value: 50
       relative: true
       duration: 500ms
+      easing: out_circ
     - property: opacity
       value: 1
       duration: 500ms
+      easing: out_circ
       timing: with_previous
     - property: opacity     # Hold for 2s
       value: 1
@@ -325,9 +329,11 @@ animations:
     - property: opacity
       value: 0
       duration: 500ms
+      easing: in_circ
     - property: y
       value: -50
       relative: true
       duration: 500ms
       timing: with_previous
+      easing: in_circ
 

@@ -51,7 +51,7 @@ slides:
         height: 468
         anchor_x: right
         anchor_y: bottom
-        x: right-8
+        x: right-7
         y: 6
         z: 1
       - type: image
