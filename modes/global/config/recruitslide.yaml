@@ -102,6 +102,7 @@ variable_player:
       string: " "
       action: set
 
+
 slide_player:
   mode_type_mission_started:
     recruit_mission_slide:
@@ -140,12 +141,14 @@ widgets:
       casing: title
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
       style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - widget: popup_image_(squadmate)
     # - widget: popup_image_border
     - widget: popup_right
@@ -156,11 +159,13 @@ widgets:
       casing: title
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: text
       text: 1 shot to unlock
       style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - widget: popup_image_(squadmate)
     # - widget: popup_image_border
     - widget: popup_right
@@ -171,16 +176,19 @@ widgets:
       casing: title
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: text
       text: Mission Available
       style: body_popup, row_sub
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - type: text
       text: Left Ramp to Start
       style: body_popup, row_bottom
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
     - widget: popup_image_(squadmate)
     # - widget: popup_image_border
     - widget: popup_right
@@ -191,60 +199,70 @@ widgets:
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_grunt:
     - type: image
       image: popup_image_grunt
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_jack:
     - type: image
       image: popup_image_jack
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_kasumi:
     - type: image
       image: popup_image_kasumi
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_legion:
     - type: image
       image: popup_image_legion
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_mordin:
     - type: image
       image: popup_image_mordin
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_samara:
     - type: image
       image: popup_image_samara
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_tali:
     - type: image
       image: popup_image_tali
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_thane:
     - type: image
       image: popup_image_thane
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   popup_image_zaeed:
     - type: image
       image: popup_image_zaeed
       style: image_popup
       animations:
         add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
 
 
 # Widgets that overlay DURING a mission

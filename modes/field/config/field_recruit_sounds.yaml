@@ -1,46 +1,53 @@
 #config_version=5
 event_player:
-  recruit_kasumi_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}: play_kasumi_advance
-  recruit_thane_shot_hit{current_player.available_shipupgrades==0 and current_player.available_research==0}: play_thane_advance
+  play_queued_widget_recruit_advance_widget_1:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
+  play_queued_widget_recruit_advance_widget_2:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
+  play_queued_widget_recruit_advance_widget_3:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
 
 sound_player:
-  recruit_garrus_shot_hit:
+  play_recruit_advance_garrus:
     shot_hit_sounds_garrus:
       action: play
       max_queue_time: 1s
-  recruit_grunt_shot_hit:
+  play_recruit_advance_grunt:
     shot_hit_sounds_grunt:
       action: play
       max_queue_time: 1s
-  recruit_jack_shot_hit:
+  play_recruit_advance_jack:
     shot_hit_sounds_jack:
       action: play
       max_queue_time: 1s
-  play_kasumi_advance:
+  play_recruit_advance_kasumi:
     shot_hit_sounds_kasumi:
       action: play
       max_queue_time: 1s
-  recruit_legion_shot_hit:
+  play_recruit_advance_legion:
     shot_hit_sounds_legion:
       action: play
       max_queue_time: 1s
-  recruit_mordin_shot_hit:
+  play_recruit_advance_mordin:
     shot_hit_sounds_mordin:
       action: play
       max_queue_time: 1s
-  recruit_samara_shot_hit:
+  play_recruit_advance_samara:
     shot_hit_sounds_samara:
       action: play
       max_queue_time: 1s
-  recruit_tali_shot_hit:
+  play_recruit_advance_tali:
     shot_hit_sounds_tali:
       action: play
       max_queue_time: 1s
-  play_thane_advance:
+  play_recruit_advance_thane:
     shot_hit_sounds_thane:
       action: play
       max_queue_time: 1s
-  recruit_zaeed_shot_hit:
+  play_recruit_advance_zaeed:
     shot_hit_sounds_zaeed:
       action: play
       max_queue_time: 1s

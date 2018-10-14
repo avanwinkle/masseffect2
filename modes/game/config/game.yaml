@@ -169,46 +169,6 @@ widget_player:
       action: remove
 
 widgets:
-  introslide_no_missions:
-    - type: text
-      text: Build Your Team
-      style: header_popup, row_main
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: text
-      text: "Hit any lane 3x\nto unlock missions"
-      style: body_popup, row_bottom
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - widget: popup_right
-  introslide_missions:
-    - type: text
-      text: Build Your Team
-      style: header_popup, row_main
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: text
-      text: "Select a mission at\nthe Galaxy Map"
-      style: body_popup, row_bottom
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - widget: popup_right
   base_level_widget:
     - type: text
       text: LVL (player|level)

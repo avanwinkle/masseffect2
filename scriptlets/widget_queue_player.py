@@ -3,7 +3,7 @@ from mpfmc.core.scriptlet import Scriptlet
 from mpf.core.utility_functions import Util
 
 EXPIRE_MS = 4000
-EXPIRE_OVERLAP_MS = 1000
+EXPIRE_OVERLAP_MS = 500
 
 class WidgetQueuePlayer(Scriptlet):
   """
@@ -47,7 +47,7 @@ class WidgetQueuePlayer(Scriptlet):
           settings[widget_name][key] = widget_kwargs.pop(key)
 
       self.mc.widget_player.play(settings, context, calling_context, **widget_kwargs)
-      self.mc.events.post("play_queued_widget_{}".format(widget_name), **widget_kwargs)
+      self.mc.post_mc_native_event("play_queued_widget_{}".format(widget_name), **widget_kwargs)
       self._current_timeout = self.mc.clock.schedule_once(self._advance_queue, timeout / 1000)
       self._play_count += 1
 

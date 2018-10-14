@@ -30,7 +30,6 @@ slides:
       - type: image
         image: texture_console
         z: 1
-  background_overlord:
   multiplayer_slide:
     widgets:
       - type: text
@@ -261,85 +260,8 @@ widget_styles:
     anchor_x: center
     opacity: 0
 
-  # POSITION LAYOUTS
-  #----------------------------
-  menu_header:
-    anchor_y: bottom
-    y: middle+20%
-    anchor_x: left
-    x: 5%
-  menu_selection:
-    anchor_x: left
-    x: 5%
-
-  instructions_title:
-    anchor_y: bottom
-    y: middle
-  instructions_line_1:
-    anchor_y: top
-    y: middle-10%
-  instructions_line_2:
-    anchor_y: top
-    y: middle-25%
-
-  pos_score_singleplayer:
-    anchor_x: left
-    x: 5%
-    anchor_y: bottom
-  pos_score_multiplayer:
-    anchor_x: left
-    x: 5%
-    anchor_y: bottom
-
-  pos_player_3:
-    anchor_x: left
-    anchor_y: bottom
-    y: 3.125%
-    x: 40%
-  pos_player_4:
-    anchor_x: right
-    anchor_y: bottom
-    y: 3.125%
-    x: right-3.125%
-  pos_secondary_timer:
-    anchor_x: right
-    anchor_y: bottom
-    y: 12.5%
-  pos_missionname:
-    anchor_x: left
-    x: 3.125%
-    anchor_y: top
-    y: top-12.5%
-  pos_hurryup:
-    anchor_x: left
-    x: 3.125%
-
 
 animations:
-  # popup_enter_animation:
-  #   - property: y
-  #     value: 50
-  #     relative: true
-  #     duration: 500ms
-  #     easing: out_circ
-  #   - property: opacity
-  #     value: 1
-  #     duration: 500ms
-  #     easing: out_circ
-  #     timing: with_previous
-  #   - property: opacity     # Hold for 2s
-  #     value: 1
-  #     duration: 2s
-  #   - property: opacity
-  #     value: 0
-  #     duration: 500ms
-  #     easing: in_sine
-  #   - property: y
-  #     value: -50
-  #     relative: true
-  #     duration: 500ms
-  #     timing: with_previous
-  #     easing: in_sine
   popup_enter_animation:
     - property: y
       value: 50

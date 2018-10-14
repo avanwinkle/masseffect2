@@ -5,133 +5,11 @@ mode:
   priority: 100
 
 config:
+  - base_achievements.yaml
   - base_debug.yaml
   - base_endsounds.yaml
   - base_medigel.yaml
   - base_shows.yaml
-
-achievements:
-  # SHADOW BROKER
-  chase:
-    enable_events: logicblock_sbdrops_counter_hit{count==3}
-    start_events: mode_shadowbroker_chase_started
-    stop_events: mode_shadowbroker_chase_will_stop
-    complete_events: shadowbroker_chase_complete
-    restart_on_next_ball_when_started: false
-  vasir:
-    enable_events: shadowbroker_chase_complete
-    start_events: mode_shadowbroker_vasir_started
-    stop_events: mode_shadowbroker_vasir_will_stop
-    complete_events: shadowbroker_vasir_complete
-    restart_on_next_ball_when_started: false
-  hagalaz:
-    enable_events: logicblock_sbdrops_counter_complete
-    start_events: mode_shadowbroker_hagalaz_started
-    stop_events: mode_shadowbroker_hagalaz_will_stop
-    complete_events: enable_hatch # We don't have to hit the hatch, just opening it is enough
-    restart_on_next_ball_when_started: false
-  shadowbroker:
-    enable_events: enable_hatch
-    start_events: mode_shadowbroker_boss_started
-    stop_events: mode_shadowbroker_boss_will_stop
-    complete_events: shadowbroker_boss_complete
-    restart_on_next_ball_when_started: false
-  # MULTIBALLS
-  overlord:
-    start_events: mode_overlord_started
-    stop_events: mode_overlord_stopped, mode_collectorship_base_started
-    complete_events: overlord_complete
-    restart_on_next_ball_when_started: false
-  arrival:
-    enable_events: mode_collectorship_base_started
-    start_events: mode_arrival_started
-    stop_events: mode_arrival_stopped
-    complete_events: arrival_escapeshot_hit
-    restart_on_next_ball_when_started: false
-  # COLLECTOR MISSIONS
-  collectorship:
-    enable_events: enable_collectorship
-    start_events: mode_collectorship_base_started
-    # Allow replay of Collector Ship until (a) praetorian is beaten or (b) Derelict Reaper is available
-    # That means we keep the achievement "started" because otherwise it can't "complete"
-    complete_events:
-      - collectorship_praetorian_complete
-      - achievement_derelictreaper_state_enabled
-    restart_on_next_ball_when_started: true
-  derelictreaper:
-    enable_events: enable_derelictreaper
-    start_events: start_mode_derelictreaper
-    # Allow replay of Derelict Reaper until (a) it's beaten or (b) the Normandy Attack occurs
-    # That means we keep the achievement "started" because otherwise it can't "complete"
-    complete_events:
-      - derelictreaper_complete
-      - achievement_normandyattack_state_started
-    restart_on_next_ball_when_started: true
-  normandyattack:
-    enable_events: mode_derelictreaper_will_stop # Automatically enabled after derelict reaper
-    start_events: mode_normandyattack_started
-    complete_events: mode_normandyattack_will_stop # Only played once, completed after playing
-    restart_on_next_ball_when_started: false
-  # SUICIDE MISSION
-  suicidemission:
-    enable_events:
-      - mode_normandyattack_started
-      - reenable_suicidemission # After at least one tech and biotic are in the squad
-    start_events: missionselect_suicide_selected
-    # We "stop" on failure so we know to show the player they failed. That event triggers the disabling
-    stop_events: suicidemission_failed
-    disable_events: reset_from_suicide
-    complete_events: suicidemission_complete
-    restart_on_next_ball_when_started: true
-  # TODO: restructure to avoid these achievements resetting each other on restore
-  # New approach: never "start" a suicide phase achievement, just "select"
-  omegarelay:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.omegarelay.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: missionselect_suicide_selected
-    complete_events: omegarelay_complete
-  infiltration:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.infiltration.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: omegarelay_complete
-    complete_events: infiltration_complete
-  longwalk:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.longwalk.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: infiltration_complete
-    complete_events: longwalk_complete
-  tubes:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.tubes.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: longwalk_complete
-    complete_events: tubes_complete
-  humanreaper:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.humanreaper.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: tubes_complete
-    complete_events: humanreaper_complete
-  endrun:
-    enable_events: achievement_normandyattack_state_completed{device.achievements.endrun.state=="disabled"}
-    reset_events: suicidemission_failed
-    select_events: humanreaper_complete
-    complete_events: endrun_complete
-  # SHIP UPGRADES
-  upgrade_armor:
-    complete_events: shipupgrade_completed
-    debug: true
-  upgrade_shields:
-    complete_events: shipupgrade_completed
-    debug: true
-  upgrade_cannon:
-    complete_events: shipupgrade_completed
-    debug: true
-
-achievement_groups:
-  shipupgrades_group:
-    achievements: upgrade_armor, upgrade_shields, upgrade_cannon
-    select_random_achievement_events: shipupgrade_available
-    events_when_all_completed: all_upgrades_complete
-    debug: true
 
 event_player:
   mode_base_started:
@@ -164,6 +42,10 @@ event_player:
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
+
+  slide_field_rightslide_base_active:
+    play_intro_show:
+
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -300,11 +182,11 @@ variable_player:
     balls_played: 1
 
 shots:
-# These "core" shots for the main shots
-# This way, the mode-specific shots can always be enabled and show shows, but
-# they won't trigger hits unless the underlying core shot is enabled. This allows
-# us to use global methods of disabling core shots, e.g. ball save and full orbit,
-# without having to duplicate the logic in modes or re-sync mode shot shows.
+  # These "core" shots for the main shots
+  # This way, the mode-specific shots can always be enabled and show shows, but
+  # they won't trigger hits unless the underlying core shot is enabled. This allows
+  # us to use global methods of disabling core shots, e.g. ball save and full orbit,
+  # without having to duplicate the logic in modes or re-sync mode shot shows.
   sh_left_ramp:
     switch: s_left_ramp_exit
   sh_left_orbit:
@@ -402,8 +284,8 @@ show_player:
   player_extra_balls{player_num==current_player.number and value==0}:
     extraball_lit_show:
       action: stop
-  slide_field_rightslide_base_active:
-    introshow:
+  play_intro_show:
+    introshow_missions:
       loops: 0
 
 
@@ -480,45 +362,38 @@ shows:
     - lights:
         (leds): black
         l_null: (color)
-  introshow:
+  introshow_missions:
     - time: 0
-      widgets: introslide_missions
+      events:
+        queue_widget{current_player.available_missions>0}:
+          widget: intro_missions_widget
+          expire: 8s
+        queue_widget{current_player.available_missions==0}:
+          widget: intro_no_missions_widget
+          expire: 8s
+    - time: 1
       events:
         - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
         - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
         - play_gameintro_norecruits_short{current_player.ball==3}
-    - time: 8
+    - time: 7
       events: remove_popup
-    - time: 9
-      widgets:
-        introslide_missions:
-          action: remove
-
-
 
 slide_player:
   levelup:
     levelup_slide:
+      target: lcd_left
       expire: 4s
       priority: 1999      # Normandy attack runs at 2000
   n7_assignment_shot_hit:
     n7_complete_slide:
       priority: 600
       expire: 3s
-  show_introslide_noavailablemissions:
-    introslide_noavailablemissions:
-      expire: 6s
-      priority: 200
-  show_introslide_availablemissions:
-    introslide_availablemissions:
-      expire: 6s
-      priority: 200
   skillshot_lit_hit:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
       expire: 3s
-
 
 slides:
   levelup_slide:
@@ -548,9 +423,6 @@ slides:
       style: body_md row_sub_under num
 
 sound_player:
-  mode_base_started:
-    illusive_your_team_will_need_to_be_strong:
-      action: load
   s_plunger_lane_inactive: galaxy_whoosh
   play_gameintro_norecruits_long_four: illusive_already_compiled_dossiers_four
   play_gameintro_norecruits_long_five: illusive_already_compiled_dossiers_five
@@ -656,3 +528,45 @@ track_player:
     __all__:
       action: stop_all_sounds
       fade: 500ms
+
+widgets:
+  intro_no_missions_widget:
+    - type: text
+      text: Build Your Team
+      style: header_popup, row_main
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - type: text
+      text: "Hit any lane 3x\nto unlock missions"
+      style: body_popup, row_bottom
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - type: image
+      image: popup_image_squad
+      style: image_popup
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - widget: popup_right
+  intro_missions_widget:
+    - type: text
+      text: Build Your Team
+      style: header_popup, row_main
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - type: text
+      text: "Select a mission at\nthe Galaxy Map"
+      style: body_popup, row_bottom
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - type: image
+      image: popup_image_squad
+      style: image_popup
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
+    - widget: popup_right
