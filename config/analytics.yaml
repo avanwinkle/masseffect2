@@ -1,23 +1,27 @@
 #config_version=5
 
-analytics:
-  mode_grunt:
-    mode: recruitgrunt
-    player_variables: score
-    counts:
-      shots_hit:
-        starting_count: 5 - device.counters.grunt_shots_counter.value
-        count_events: logicblock_grunt_shots_counter_hit
+mode_settings:
+    analytics:
+      mode_grunt:
+        mode: recruitgrunt
+        player_variables: score
+        counts:
+          shots_hit:
+            starting_count: 5 - device.counters.grunt_shots_counter.value
+            count_events: logicblock_grunt_shots_counter_hit
+
     trophies:
       grunt_time:
         name: Best Grunt Time
         value: duration
         aggregate_type: first_only
-        award_event: recruit_grunt_complete
+        start_events: mode_recruitgrunt_started
+        award_events: recruit_grunt_complete
         award_levels: 30, 45, 60
       grunt_score:
         name: Best Grunt Score
         value: score
         aggregate_type: first_only
+        start_events: mode_recruitgrunt_started
         award_event: recruit_grunt_complete
         award_levels: 30000, 20000, 10000

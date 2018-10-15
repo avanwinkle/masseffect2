@@ -4,7 +4,7 @@ from datetime import datetime
 from mpf.core.custom_code import CustomCode
 from mpf.core.utility_functions import Util
 
-class Analysis:
+class ValueTracker:
   def __init__(self, name, machine, config, log):
     self.name = name
     self.machine = machine
@@ -142,7 +142,7 @@ class Analysis:
     self._start_time = None
     self._persists = {}
 
-class Trophy:
+class Trophy(ValueTracker):
   def __init__(self, name, machine, config, log):
     self.name = name
     self.machine = machine
@@ -156,17 +156,24 @@ class MpfAnalytics(CustomCode):
 
     self.log.info("Loading analytics")
     self.analytics = {}
+    self.trophies = {}
 
     config_file = os.path.join(self.machine.machine_path, "config", "analytics.yaml")
-    self.config = self.machine.config_processor.load_config_file(config_file, "machine")
+    self.config = self.machine.config_processor.load_config_file(config_file, "machine").get("mode_settings")
     self.log.info(" - config: {}".format(self.config))
 
     for name, analysis_config in self.config["analytics"].items():
-      self.log.info(" - creating analytics for {}".format(name))
+      self.log.info(" - creating analysis for {}".format(name))
       if "mode" in analysis_config:
         if not "start_event" in analysis_config:
           analysis_config["start_event"] = "mode_{}_will_start".format(analysis_config["mode"])
         if not "stop_event" in analysis_config:
           analysis_config["stop_event"] = "mode_{}_will_stop".format(analysis_config["mode"])
 
-      self.analytics[name] = Analysis(name, self.machine, analysis_config, self.log)
+      self.analytics[name] = ValueTracker(name, self.machine, analysis_config, self.log)
+
+    for name, trophy_config in self.config["trophies"].items():
+      self.log.info(" - creating trophy for {}".format(name))
+
+      self.trophies[name] = Trophy(name, self.machine, trophy_config, self.log)
+
