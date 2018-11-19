@@ -18,6 +18,7 @@ class WidgetQueuePlayer(Scriptlet):
     self._current_timeout = None
 
     self.mc.events.add_handler("queue_widget", self._add_widget_to_queue)
+    self.mc.events.add_handler("check_widget_queue", self._check_queue_clear)
     self.log.info("Widget Queue Player Ready!")
 
   def _add_widget_to_queue(self, **kwargs):
@@ -54,3 +55,8 @@ class WidgetQueuePlayer(Scriptlet):
     else:
       self._current_timeout = None
       self._play_count = 0
+      self._check_queue_clear()
+
+  def _check_queue_clear(self, **kwargs):
+    if not self._current_timeout:
+      self.mc.post_mc_native_event("widget_queue_clear")

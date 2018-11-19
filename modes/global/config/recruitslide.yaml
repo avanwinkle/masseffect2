@@ -106,6 +106,7 @@ variable_player:
 slide_player:
   mode_type_mission_started:
     recruit_mission_slide:
+      target: lcd_left
       action: play
       priority: 100
   mode_type_mission_stopped:
@@ -121,7 +122,7 @@ slides:
         opacity: 0.5
       - type: text
         text: (missionname)
-        style: header_md, row_main, col_left_anchor
+        style: header_sm, row_main, col_left_anchor
       - type: text
         text: (mission_instructions)
         style: body_sm, row_sub, col_left_anchor, lcd_only
@@ -129,7 +130,7 @@ slides:
           show_slide: pulse_text_slow
       - type: text
         text: (global_recruittimer_tick)
-        style: timer_primary, row_gutter, col_right_anchor
+        style: timer_primary, row_gutter, col_right_indent
       - widget: console_background
 
 widgets:
@@ -269,7 +270,7 @@ widgets:
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
-      style: body_sm, row_bottom, col_left_anchor
+      style: header_xs, row_gutter, col_left_center
   secondary_timer_widget:
     - type: text
       text: (ticks_remaining)

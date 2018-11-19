@@ -118,14 +118,14 @@ class LockHandler(Mode):
     do_bypass = True
     mission_delay = -1
     # By default we start missionselect, but during Suicide we start suicide_huddle
-    selection_mode = "missionselect"
+    selection_event = "lockhandler_start_missionselect"
 
     # SUICIDE MISSION:
     if self.machine.modes.suicide_base.active:
       # Check if the ball hold is enabled, and don't bypass if it is
       if self._transition_hold.enabled:
         self.log.info("Suicide Mission wants to hold a ball for transitioning, not going to bypass")
-        selection_mode = "suicide_huddle"
+        selection_event = "start_mode_suicide_huddle"
         mission_delay = 2000
         do_bypass = False
       else:
@@ -157,7 +157,7 @@ class LockHandler(Mode):
       if self._logicallockdevice.enabled:
         self._logicallockdevice.disable()
         self.delay.add(callback=self._logicallockdevice.enable, ms=1000,
-                     event='start_mode_missionselect')
+                     event=selection_event)
       return
 
     # LOCK:
@@ -198,7 +198,7 @@ class LockHandler(Mode):
     # If the above handler wants to start mission select, do so after the requested delay
     if mission_delay > -1:
       self.delay.add(callback=self._post_event, ms=mission_delay,
-                     event='start_mode_{}'.format(selection_mode))
+                     event=selection_event)
 
     # BYPASS:
     # If neither of the above locking conditions, bypass the lock/hold

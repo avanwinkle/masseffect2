@@ -76,9 +76,6 @@ variable_player:
       action: set
       int: current_player.recruitbase_recruittimer_tick
     geth_colossus_state: -1
-    mission_instructions:
-      string: "Strike before it self-repairs!"
-      action: set
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
     geth_colossus_state: 1
@@ -334,10 +331,26 @@ widget_player:
     secondary_timer_widget:
       action: update
       slide: recruit_mission_slide
+      target: lcd_left
+    colossus_instructions_widget:
+      action: update
+      slide: recruit_mission_slide
+      target: lcd_left
   timer_colossus_repair_timer_stopped:
     secondary_timer_widget:
+      action: remove
+    colossus_instructions_widget:
       action: remove
   player_geth_colossus_state:
     shots_remaining_widget:
       action: update
       slide: recruit_mission_slide
+      target: lcd_left
+
+widgets:
+  colossus_instructions_widget:
+    - type: text
+      text: Self-repairing in (ticks_remaining)s
+      style: body_sm, row_sub, col_left_anchor, lcd_only
+      animations:
+        show_slide: pulse_text_slow

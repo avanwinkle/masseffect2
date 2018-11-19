@@ -24,6 +24,12 @@ mode_settings:
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
 
+# Dont start mission select until all queued widgets have cleared
+queue_event_player:
+  lockhandler_start_missionselect:
+    queue_event: lockhandler_queue_missionselect
+    events_when_finished: start_mode_missionselect
+
 queue_relay_player:
   balldevice_bd_lock_ball_eject_attempt.1{mode.missionselect.active}:
     post: blocking_balldevice_bd_lock_ball_eject_attempt
@@ -31,6 +37,9 @@ queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt.1{mode.missionselect.active}:
     post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
+  lockhandler_queue_missionselect:
+    post: check_widget_queue
+    wait_for: widget_queue_clear
 
 # This lock needs to be here in lockhandler.yaml in order to be found in self.mode_devices
 multiball_locks:
