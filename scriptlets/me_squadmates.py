@@ -122,8 +122,8 @@ class SquadmateHandlers(CustomCode):
       if future_mate_status == 3:
         self.machine.events.post("recruit_lit", squadmate=mate)
         # If there were no mates lit before, bonus the xp
-        xp = self.machine.get_machine_var("mission_xp") * (
-          1 + (self.machine.get_machine_var("bonus_xp") if not len(SquadmateStatus.recruitable_mates(player)) else 0))
+        xp = self.machine.get_machine_var("unlock_xp") * (
+          1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.get_machine_var("bonus_xp")))
         player["xp"] += xp
 
       player["status_{}".format(mate)] = future_mate_status

@@ -112,6 +112,7 @@ slide_player:
   mode_type_mission_stopped:
     recruit_mission_slide:
       action: remove
+      target: lcd_left
 
 slides:
   recruit_mission_slide:
