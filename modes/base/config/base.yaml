@@ -43,7 +43,7 @@ event_player:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
 
-  slide_field_rightslide_base_active:
+  slide_field_rightslide_base_active{not current_player.intro_played}:
     play_intro_show:
 
   mode_base_will_stop:
@@ -180,6 +180,9 @@ variable_player:
   # For save careers, how many balls has the player played in total?
   mode_base_started:
     balls_played: 1
+    intro_played: 0
+  play_intro_show:
+    intro_played: 1
 
 shots:
   # These "core" shots for the main shots

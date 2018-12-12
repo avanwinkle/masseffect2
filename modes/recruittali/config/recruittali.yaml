@@ -328,17 +328,17 @@ sounds:
 
 widget_player:
   timer_colossus_repair_timer_tick:
-    secondary_timer_widget:
-      action: update
-      slide: recruit_mission_slide
-      target: lcd_left
+    # secondary_timer_widget:
+    #   action: update
+    #   slide: recruit_mission_slide
+    #   target: lcd_left
     colossus_instructions_widget:
       action: update
       slide: recruit_mission_slide
       target: lcd_left
   timer_colossus_repair_timer_stopped:
-    secondary_timer_widget:
-      action: remove
+    # secondary_timer_widget:
+    #   action: remove
     colossus_instructions_widget:
       action: remove
   player_geth_colossus_state:

@@ -74,6 +74,7 @@ variable_player:
   n7_assignment_shot_hit:
     score: current_player.temp_build_value
     assignments_completed: 1
+    xp: machine.assignment_xp
 
 shot_groups:
   n7_assignment_shot:
@@ -168,8 +169,9 @@ shows:
 slide_player:
   set_n7_mission:
     n7_hurryupslide:
+      target: lcd_left
       action: play
-      priority: 1
+      priority: 100
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
@@ -179,18 +181,10 @@ slides:
     widgets:
       - type: image
         image: n7_logo_33x11
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 3
+        style: row_top, col_left_anchor
       - type: text
         text: (title)
-        anchor_x: left
-        anchor_y: top
-        x: 2
-        y: top-2
-        font_size: 8
-        font_name: pixelmix-8
+        style: header_sm, row_main, col_left_anchor
 
 sound_player:
   mode_n7_assignments_started:
@@ -381,16 +375,12 @@ widget_player:
     hurryup_widget:
       action: update
       slide: n7_hurryupslide
+      target: lcd_left
 
 widgets:
   hurryup_widget:
     - type: text
       text: (value)
       number_grouping: true
-      anchor_x: left
-      anchor_y: bottom
-      x: 40
-      y: 2
-      font_size: 10
-      font_name: quadrit
+      style: body_md, row_sub, col_left_anchor
 

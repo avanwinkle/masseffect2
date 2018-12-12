@@ -11,8 +11,12 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
+  6:
+    switch: s_bumper_left
+  7:
+    switch: s_bumper_right
   8:
-    switch: s_dropbank_top
+    switch: s_bumper_bottom
   l:
     event: bypass_lock_release_pulse
   n:

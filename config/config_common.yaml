@@ -66,6 +66,17 @@ machine_vars:
     initial_value: " "
     value_type: str
     persist: true
+  base_points:
+    initial_value: 10000
+  mission_xp:
+    initial_value: 1000
+  assignment_xp:
+    initial_value: 200
+  unlock_xp:
+    initial_value: 125
+  xp_bonus:
+    initial_value: 0.25
+    value_type: float
 
 custom_code:
   - scriptlets.me_squadmates.SquadmateHandlers
@@ -262,6 +273,8 @@ player_vars:
     initial_value: 0
   zaeed_path_renegade:
     initial_value: -1
+  xp:
+    initial_value: 0
 
 sound_system:
   master_volume: 1

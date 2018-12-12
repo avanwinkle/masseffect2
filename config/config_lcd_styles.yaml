@@ -1,19 +1,22 @@
 #config_version=5
 slides:
-  attract_slide:
+  attract_slide_right:
     - type: image
       image: logo_fullscreen
+      style: row_main
       anchor_y: top
-      y: top+8%
       scale: 0.5
-      z: 1
     - type: text
       text: Press Start
       color: 990000
       style: header_sm, row_sub
+      animations:
+        show_slide: pulse_text_slow
+  attract_slide:
     - type: image
       image: splashscreen
-      z: 0
+      anchor_x: right
+      x: 130%
   background_slide:
     widgets:
       - type: image
@@ -100,6 +103,13 @@ widgets:
     - type: image
       image: popup_selector
       z: 1
+  planet_widget_1:
+    - type: image
+      image: popup_planet_viantel
+      style: image_popup
+      animations:
+        add_to_slide: popup_enter_animation
+        remove_popup: popup_exit_animation
   missionselect_count_widget:
     - type: text
       text: (index) / (items) >
@@ -260,6 +270,12 @@ widget_styles:
     anchor_x: center
     opacity: 0
 
+  # OTHER STYLES
+  #-----------------------------
+  mineral_highlight_style:
+    z: 2
+    color: FFFFFF
+    opacity: 0.2
 
 animations:
   popup_enter_animation:

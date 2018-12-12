@@ -109,9 +109,10 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
   def _on_hit(self, **kwargs):
+    player = self.machine.game.player
     self.log.debug("Received recruit HIT event with kwargs: {}".format(kwargs))
     mate = kwargs["squadmate"]
-    future_mate_status = self.machine.game.player["status_{}".format(mate)] + 1
+    future_mate_status = player["status_{}".format(mate)] + 1
 
     if 0 < future_mate_status <= 3:
       self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
@@ -120,10 +121,13 @@ class SquadmateHandlers(CustomCode):
 
       if future_mate_status == 3:
         self.machine.events.post("recruit_lit", squadmate=mate)
+        # If there were no mates lit before, bonus the xp
+        xp = self.machine.get_machine_var("mission_xp") * (
+          1 + (self.machine.get_machine_var("bonus_xp") if not len(SquadmateStatus.recruitable_mates(player)) else 0))
+        player["xp"] += xp
 
-
-      self.machine.game.player["status_{}".format(mate)] = future_mate_status
-      self.machine.game.player["recruits_color"] = COLORS[mate]
+      player["status_{}".format(mate)] = future_mate_status
+      player["recruits_color"] = COLORS[mate]
       self.machine.events.post("flash_all_shields")
 
   def _on_missionselect(self, **kwargs):
@@ -151,6 +155,9 @@ class SquadmateHandlers(CustomCode):
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
     mate = kwargs["squadmate"]
+
+    self.machine.game.player["xp"] += self.machine.get_machine_var("mission_xp") * (
+      1 + (self.machine.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
 
     self.machine.events.post("levelup", mission_name="{} Recruited".format(mate))
     self.machine.events.post("recruit_success", squadmate=mate)

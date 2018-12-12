@@ -225,14 +225,14 @@ sounds:
       release: 100ms
       release_point: 50ms
 
-widget_player:
-  timer_heretic_timer_tick:
-    secondary_timer_widget:
-      action: update
-      slide: recruit_mission_slide
-  timer_heretic_timer_complete:
-    secondary_timer_widget:
-      action: remove
-  timer_heretic_timer_stopped:
-    secondary_timer_widget:
-      action: remove
+# widget_player:
+#   timer_heretic_timer_tick:
+#     secondary_timer_widget:
+#       action: update
+#       slide: recruit_mission_slide
+#   timer_heretic_timer_complete:
+#     secondary_timer_widget:
+#       action: remove
+#   timer_heretic_timer_stopped:
+#     secondary_timer_widget:
+#       action: remove

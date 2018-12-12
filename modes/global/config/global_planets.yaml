@@ -112,11 +112,8 @@ slides:
     - type: text
       text: (player|planets) Planets Scanned
       z: 10
-    - type: rectangle
-      width: 128
-      height: 32
-      color: black
-      z: 9
+    - widget: planet_widget_1
+    - widget: popup_right
   minerals_slide:
     widgets:
       # Minerals
@@ -124,49 +121,39 @@ slides:
         text: (player|mineral_iridium)
         min_digits: 1
         number_grouping: true
-        style: mineral_name_style
-        x: 21
-        y: 24
-        z: 4
+        style: body_popup, row_main
+        x: 5%
+        anchor_x: left
       - type: text
         text: irid.
-        style: mineral_name_style
-        x: 21
-        y: 12
-        z: 4
+        style: body_popup, row_sub
+        x: 5%
+        anchor_x: left
       - type: text
         text: (player|mineral_palladium)
         min_digits: 1
         number_grouping: true
-        style: mineral_name_style
+        style: body_popup, row_main
         x: 50%
-        y: 24
-        z: 4
+        anchor_x: center
       - type: text
         text: pallad.
-        style: mineral_name_style
+        style: body_popup, row_sub
         x: 50%
-        y: 12
-        z: 4
+        anchor_x: center
       - type: text
         text: (player|mineral_platinum)
         min_digits: 1
         number_grouping: true
-        style: mineral_name_style
-        x: 106
-        y: 24
-        z: 4
+        style: body_popup, row_main
+        x: 95%
+        anchor_x: right
       - type: text
         text: plat.
-        style: mineral_name_style
-        x: 106
-        y: 12
-        z: 4
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
+        style: body_popup, row_sub
+        x: 95%
+        anchor_x: right
+      - widget: popup_right
 
 timers:
   planet_slide_timer:
@@ -185,7 +172,8 @@ widget_player:
       slide: minerals_slide
       widget_settings:
         expire: 200ms
-        x: 0
+        x: 5%
+        anchor_x: left
   mineral_shot_palladium_hit:
     mineral_highlight:
       action: update
@@ -193,7 +181,8 @@ widget_player:
       slide: minerals_slide
       widget_settings:
         expire: 200ms
-        x: 43
+        x: 50%
+        anchor_x: center
   mineral_shot_platinum_hit:
     mineral_highlight:
       action: update
@@ -201,7 +190,8 @@ widget_player:
       slide: minerals_slide
       widget_settings:
         expire: 200ms
-        x: 86
+        x: 95%
+        anchor_x: right
   logicblock_n7_hits_counter_hit:
     n7_progress_widget:
       action: update
@@ -218,14 +208,14 @@ widget_player:
 widgets:
   mineral_highlight:
     - type: rectangle
-      style: mineral_highlight_style
-      width: 42
-      height: 24
+      style: mineral_highlight_style row_sub
+      width: 160
+      height: 60
       z: 2
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"
-      style: dmd_small
+      style: body_popup row_bottom col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1
@@ -234,21 +224,12 @@ widgets:
   reaperiff_progress_widget:
     - type: text
       text: "IFF ready in (count)"
-      style: dmd_small
+      style: body_popup row_bottom col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1
       x: 2
       z: 3
-    # - type: rectangle
-    #   width: 128
-    #   height: 8
-    #   color: 000000
-    #   anchor_y: bottom
-    #   anchor_x: left
-    #   x: 0
-    #   y: 0
-    #   z: 19
 
 show_player:
   planet_shots_hit_complete:

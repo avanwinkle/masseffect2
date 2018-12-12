@@ -37,6 +37,8 @@ show_player:
 slide_player:
   mode_attract_started:
     attract_slide:
+      target: lcd_right
+    attract_slide_right:
       target: lcd_left
   ball_search_started: ball_search_slide
   ball_search_stopped:

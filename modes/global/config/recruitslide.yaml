@@ -271,8 +271,8 @@ widgets:
     - type: text
       text: "Shots: (value)"
       style: header_xs, row_gutter, col_left_center
-  secondary_timer_widget:
-    - type: text
-      text: (ticks_remaining)
-      style: body_lg, row_bottom, col_right_anchor
+  # secondary_timer_widget:
+  #   - type: text
+  #     text: (ticks_remaining)
+  #     style: body_lg, row_bottom, col_right_anchor
 
