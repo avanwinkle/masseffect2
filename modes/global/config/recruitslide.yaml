@@ -195,6 +195,7 @@ widgets:
     # - widget: popup_image_border
     - widget: popup_right
 
+
   popup_image_garrus:
     - type: image
       image: popup_image_garrus

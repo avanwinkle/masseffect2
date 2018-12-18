@@ -429,8 +429,10 @@ slides:
       text: (temp_build_value)
       style: body_md row_sub_under num
   squadicon_slide:
-    - type: image
-      image: background_slate
+    - type: rectangle
+      width: 484
+      height: 468
+      color: black
       z: 0
 
 sound_player:
@@ -541,22 +543,19 @@ track_player:
       fade: 500ms
 
 widget_player:
-  set_recruiticon_available:
+  set_recruiticon:
     recruit_lit_icon:
-      action: add
+      action: update
       target: lcd_right
       slide: squadicon_slide
       key: recruit_icon_(squadmate)
-  set_recruiticon_complete:
-    recruit_lit_icon:
-      action: add
-      target: lcd_right
-      slide: squadicon_slide
-      key: recruit_icon_(squadmate)
+      widget_settings:
+        style: sqicon_style_(squadmate)
 
 widgets:
   recruit_lit_icon:
     - widget: sqicon_(squadmate)
+    - widget: sqicon_status_(status)
   intro_no_missions_widget:
     - type: text
       text: Build Your Team

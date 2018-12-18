@@ -53,8 +53,8 @@ slides:
         anchor_y: bottom
         x: right-7
         y: 6
-        z: 4
+        z: 1
       - type: image
-        image: single_lcd_mask
-        z: 2
+        image: single_lcd_squadmates
+        z: 4
 
