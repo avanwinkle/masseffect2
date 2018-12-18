@@ -119,7 +119,102 @@ widgets:
       style: header_xs, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
       adjust_right: -142
-
+  sqicon_garrus:
+    - type: image
+      image: sqicon_garrus
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
+      z: 3
+  sqicon_grunt:
+    - type: image
+      image: sqicon_grunt
+      anchor_x: left
+      anchor_y: bottom
+      x: 122
+      y: 0
+      z: 3
+  sqicon_jacob:
+    - type: image
+      image: sqicon_jacob
+      anchor_x: left
+      anchor_y: bottom
+      x: 244
+      y: 0
+      z: 3
+  sqicon_jack:
+    - type: image
+      image: sqicon_jack
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 118
+      z: 3
+  sqicon_kasumi:
+    - type: image
+      image: sqicon_kasumi
+      anchor_y: bottom
+      anchor_x: left
+      x: 122
+      y: 118
+      z: 3
+  sqicon_legion:
+    - type: image
+      image: sqicon_legion
+      anchor_y: bottom
+      anchor_x: left
+      x: 244
+      y: 118
+      z: 3
+  sqicon_miranda:
+    - type: image
+      image: sqicon_miranda
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 236
+      z: 3
+  sqicon_mordin:
+    - type: image
+      image: sqicon_mordin
+      anchor_y: bottom
+      anchor_x: left
+      x: 122
+      y: 236
+      z: 3
+  sqicon_samara:
+    - type: image
+      image: sqicon_samara
+      anchor_y: bottom
+      anchor_x: left
+      x: 244
+      y: 236
+      z: 3
+  sqicon_tali:
+    - type: image
+      image: sqicon_tali
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 354
+      z: 3
+  sqicon_thane:
+    - type: image
+      image: sqicon_thane
+      anchor_y: bottom
+      anchor_x: left
+      x: 122
+      y: 354
+      z: 3
+  sqicon_zaeed:
+    - type: image
+      image: sqicon_zaeed
+      anchor_y: bottom
+      anchor_x: left
+      x: 244
+      y: 354
+      z: 3
 
 widget_styles:
 

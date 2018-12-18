@@ -385,7 +385,6 @@ shows:
 slide_player:
   levelup:
     levelup_slide:
-      target: lcd_left
       expire: 4s
       priority: 1999      # Normandy attack runs at 2000
   n7_assignment_shot_hit:
@@ -397,6 +396,11 @@ slide_player:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
       expire: 3s
+  mode_base_started:
+    squadicon_slide:
+      action: play
+      target: lcd_right
+      priority: 100
 
 slides:
   levelup_slide:
@@ -424,6 +428,10 @@ slides:
     - type: text
       text: (temp_build_value)
       style: body_md row_sub_under num
+  squadicon_slide:
+    - type: image
+      image: background_slate
+      z: 0
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
@@ -532,7 +540,23 @@ track_player:
       action: stop_all_sounds
       fade: 500ms
 
+widget_player:
+  set_recruiticon_available:
+    recruit_lit_icon:
+      action: add
+      target: lcd_right
+      slide: squadicon_slide
+      key: recruit_icon_(squadmate)
+  set_recruiticon_complete:
+    recruit_lit_icon:
+      action: add
+      target: lcd_right
+      slide: squadicon_slide
+      key: recruit_icon_(squadmate)
+
 widgets:
+  recruit_lit_icon:
+    - widget: sqicon_(squadmate)
   intro_no_missions_widget:
     - type: text
       text: Build Your Team

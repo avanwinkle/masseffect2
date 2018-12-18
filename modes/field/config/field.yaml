@@ -54,25 +54,12 @@ sounds:
     track: music
 
 slide_player:
-  mode_field_started:
-    field_rightslide_base:
-      target: lcd_right
   reset_from_suicide:
     reset_from_suicide_slide:
       action: play
       expire: 5s
 
 slides:
-  field_rightslide_base:
-    widgets:
-      - type: image
-        image: galaxy_fullsize
-        z: 0
-        animations:
-          add_to_slide:
-            - property: rotation
-              value: -360
-              duration: 1000s
   reset_from_suicide_slide:
     widgets:
       - type: text

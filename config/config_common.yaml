@@ -74,7 +74,7 @@ machine_vars:
     initial_value: 200
   unlock_xp:
     initial_value: 125
-  xp_bonus:
+  bonus_xp:
     initial_value: 0.25
     value_type: float
 

@@ -1,7 +1,7 @@
 import logging
 from mpf.core.custom_code import CustomCode
 
-SQUADMATES = ("garrus", "grunt", "jack", "kasumi", "legion", "mordin", "samara", "tali", "thane", "zaeed")
+SQUADMATES = ("garrus", "grunt", "jack", "jacob", "kasumi", "legion", "miranda", "mordin", "samara", "tali", "thane", "zaeed")
 BIOTICMATES = ("jack", "jacob", "miranda", "samara", "thane")
 TECHMATES = ("garrus", "jacob", "kasumi", "legion", "mordin", "tali", "thane")
 
@@ -94,6 +94,8 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.add_handler("resume_mission", self._on_missionselect)
     # Create a listener for the field mode to start
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
+    # Create a listener for a ball to start
+    self.machine.events.add_handler("mode_base_started", self._initialize_icons)
 
   def _enable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._enable_shothandlers)
@@ -108,6 +110,19 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.remove_handler(self._disable_shothandlers)
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
+  def _initialize_icons(self, **kwargs):
+    for mate in SQUADMATES:
+      status = self.machine.game.player["status_{}".format(mate)]
+      event = None
+      if status == 3:
+        event = "set_recruiticon_available"
+      elif status == 4:
+        event = "set_recruiticon_complete"
+      elif status == -1:
+        event = "set_recruiticon_dead"
+      if event:
+        self.machine.events.post(event, squadmate=mate)
+
   def _on_hit(self, **kwargs):
     player = self.machine.game.player
     self.log.debug("Received recruit HIT event with kwargs: {}".format(kwargs))
@@ -121,6 +136,7 @@ class SquadmateHandlers(CustomCode):
 
       if future_mate_status == 3:
         self.machine.events.post("recruit_lit", squadmate=mate)
+        self.machine.events.post("set_recruiticon_available", squadmate=mate)
         # If there were no mates lit before, bonus the xp
         xp = self.machine.get_machine_var("unlock_xp") * (
           1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.get_machine_var("bonus_xp")))
@@ -161,6 +177,7 @@ class SquadmateHandlers(CustomCode):
 
     self.machine.events.post("levelup", mission_name="{} Recruited".format(mate))
     self.machine.events.post("recruit_success", squadmate=mate)
+    self.machine.events.post("set_recruiticon_complete", squadmate=mate)
     self.machine.events.post("recruit_success_{}".format(mate))
     self.machine.game.player["status_{}".format(mate)] = 4
     self._on_stop(success=True, **kwargs)

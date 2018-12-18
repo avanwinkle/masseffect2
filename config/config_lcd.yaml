@@ -18,10 +18,10 @@ displays:
     width: 1280
     height: 480
   lcd_left:
+    default: true
     width: 758
     height: 468
   lcd_right:
-    default: true
     width: 484
     height: 468
 
@@ -53,8 +53,8 @@ slides:
         anchor_y: bottom
         x: right-7
         y: 6
-        z: 1
+        z: 4
       - type: image
-        image: dual_lcd_mask_shadow
+        image: single_lcd_mask
         z: 2
 
