@@ -139,21 +139,16 @@ widgets:
   recruit_advance_widget_1:
     - type: text
       text: Recruit (squadmate)
-      style: header_popup, row_main
+      style: header_md, row_main, col_left_anchor, num
       casing: title
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
+      z: 11
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
-      style: body_popup, row_sub
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
+      style: body_md, row_sub, col_left_anchor
+      z: 11
     - widget: popup_image_(squadmate)
-    # - widget: popup_image_border
-    - widget: popup_right
+    - widget: console_background_overlay
   recruit_advance_widget_2:
     - type: text
       text: Recruit (squadmate)

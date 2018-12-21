@@ -65,6 +65,11 @@ widgets:
       image: texture_console
       opacity: 0.5
       z: 1
+  console_background_overlay:
+    - type: image
+      image: texture_console
+      opacity: 0.5
+      z: 10
   background_galaxy:
     - type: image
       image: background_galaxy
@@ -74,6 +79,10 @@ widgets:
           - property: rotation
             value: 360
             duration: 20s
+  background_console:
+    - type: image
+      image: texture_console
+      z: 1
   background_overlord:
     - type: image
       image: background_overlord
@@ -120,72 +129,118 @@ widgets:
       # Fix the left caret to avoid digit width shifts
       adjust_right: -142
   # SQUADMATES
-  sqicon_status_3:
-    - type: rectangle
-      width: 121
-      height: 158
-      color: 666666
-      z: 2
-  sqicon_status_4:
-    - type: rectangle
-      width: 121
-      height: 158
-      color: FFFFFF
-      z: 2
-  sqicon_status_-1:
-    - type: rectangle
-      width: 121
-      height: 158
-      color: AA0000
-      z: 2
   sqicon_garrus:
-    - type: image
-      image: sqicon_garrus
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
+      animations:
+        add_to_slide{current_player.status_garrus==3}: pulse_sqicon
   sqicon_grunt:
-    - type: image
-      image: sqicon_grunt
-      z: 3
-  sqicon_jacob:
-    - type: image
-      image: sqicon_jacob
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      x: 121
+      y: 0
+      animations:
+        add_to_slide{current_player.status_grunt==3}: pulse_sqicon
   sqicon_jack:
-    - type: image
-      image: sqicon_jack
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      x: 242
+      y: 0
+  sqicon_jacob:
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 363
+      y: 0
+      animations:
+        add_to_slide{current_player.status_jacob==3}: pulse_sqicon
   sqicon_kasumi:
-    - type: image
-      image: sqicon_kasumi
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 158
+      animations:
+        add_to_slide{current_player.status_kasumi==3}: pulse_sqicon
   sqicon_legion:
-    - type: image
-      image: sqicon_legion
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 121
+      y: 158
   sqicon_miranda:
-    - type: image
-      image: sqicon_miranda
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 242
+      y: 158
+      animations:
+        add_to_slide{current_player.status_miranda==3}: pulse_sqicon
   sqicon_mordin:
-    - type: image
-      image: sqicon_mordin
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 363
+      y: 158
   sqicon_samara:
-    - type: image
-      image: sqicon_samara
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 0
+      y: 316
   sqicon_tali:
-    - type: image
-      image: sqicon_tali
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 121
+      y: 316
+      animations:
+        add_to_slide{current_player.status_tali==3}: pulse_sqicon
   sqicon_thane:
-    - type: image
-      image: sqicon_thane
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 242
+      y: 316
+      animations:
+        add_to_slide{current_player.status_thane==3}: pulse_sqicon
   sqicon_zaeed:
-    - type: image
-      image: sqicon_zaeed
-      z: 3
+    - type: rectangle
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      x: 363
+      y: 316
+      animations:
+        add_to_slide{current_player.status_zaeed==3}: pulse_sqicon
 
 
 widget_styles:
@@ -331,10 +386,11 @@ widget_styles:
   # POPUPS
   #----------------------------
   image_popup:
-    z: 1
+    z: 11
     anchor_y: bottom
-    y: 258 # includes -50px for transition
-    anchor_x: center
+    y: 278 # includes -50px for transition
+    anchor_x: right
+    x: right-8.9%
     opacity: 0
 
   # OTHER STYLES
@@ -347,61 +403,18 @@ widget_styles:
 
   # SQUAD ICON POSITIONS
   #----------------------------
-  sqicon_pos_grunt:
-      anchor_x: left
-      anchor_y: bottom
-      x: 121
-      y: 0
-  sqicon_pos_jacob:
-      anchor_x: left
-      anchor_y: bottom
-      x: 242
-      y: 0
-  sqicon_pos_jack:
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 363
-  sqicon_pos_kasumi:
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 158
-  sqicon_pos_legion:
-      anchor_y: bottom
-      anchor_x: left
-      x: 121
-      y: 158
-  sqicon_pos_miranda:
-      anchor_y: bottom
-      anchor_x: left
-      x: 242
-      y: 158
-  sqicon_pos_mordin:
-      anchor_y: bottom
-      anchor_x: left
-      x: 363
-      y: 158
-  sqicon_pos_samara:
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 316
-  sqicon_pos_tali:
-      anchor_y: bottom
-      anchor_x: left
-      x: 121
-      y: 316
-  sqicon_pos_thane:
-      anchor_y: bottom
-      anchor_x: left
-      x: 242
-      y: 316
-  sqicon_pos_zaeed:
-      anchor_y: bottom
-      anchor_x: left
-      x: 363
-      y: 316
+  sqicon_color_available:
+    color: FFFFFF
+    z: 0
+  sqicon_color_recruited:
+    color: CCCCCC
+    z: 0
+  sqicon_color_dead:
+    color: CE0000
+    z: 0
+  sqicon_color_specialist:
+    color: 0059ce
+    z: 0
 
 animations:
   popup_enter_animation:
@@ -426,4 +439,11 @@ animations:
       duration: 500ms
       timing: with_previous
       easing: in_sine
-
+  pulse_sqicon:
+    - property: opacity      # name of the widget property we're animating
+      value: 1               # target value of that property for this step
+      duration: 0.75s          # duration for this step (how long it takes to get there)
+    - property: opacity      # second step in the animation (starts with a hyphen)
+      value: 0.25
+      duration: 0.75s
+      repeat: true
