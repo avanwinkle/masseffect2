@@ -1,15 +1,4 @@
 #config_version=5
-event_player:
-  play_queued_widget_recruit_advance_widget_1:
-    - play_recruit_advance_(squadmate)|500ms
-    - remove_popup|3s
-  play_queued_widget_recruit_advance_widget_2:
-    - play_recruit_advance_(squadmate)|500ms
-    - remove_popup|3s
-  play_queued_widget_recruit_advance_widget_3:
-    - play_recruit_advance_(squadmate)|500ms
-    - remove_popup|3s
-
 sound_player:
   play_recruit_advance_garrus:
     shot_hit_sounds_garrus:

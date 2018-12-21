@@ -29,6 +29,7 @@ class SaveCareer(CustomCode):
     self.machine.events.add_handler("new_career", self._new_career)
     self.machine.events.add_handler("set_career", self._set_career)
     self.machine.events.add_handler("player_turn_will_end", self._save_career)
+    self.log.info("SaveCarrer loaded, what about squadmates?")
 
   def _set_career(self, **kwargs):
     if self.machine.game and self.machine.game.player:

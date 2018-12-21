@@ -28,19 +28,20 @@ slides:
     widgets:
       - type: text
         text: (score)
-        style: header_lg, row_main, col_left_anchor, num
+        style: header_lg_lowz, row_main, col_left_anchor, num
       # Can't use widget names here, they're not loaded yet
       - type: image
-        image: texture_console
-        z: 1
+        image: background_galaxy
+        z: 0
   multiplayer_slide:
     widgets:
       - type: text
         text: (score)
         style: header_lg, row_main, col_left_anchor, num
+        z: 10
       - type: image
-        image: texture_console
-        z: 1
+        image: background_galaxy
+        z: 0
 
 machine_vars:
   use_lcd:
@@ -63,8 +64,7 @@ widgets:
   console_background:
     - type: image
       image: texture_console
-      opacity: 0.5
-      z: 1
+      z: 100
   console_background_overlay:
     - type: image
       image: texture_console
@@ -250,72 +250,77 @@ widget_styles:
   suicide_header:
     font_name: me123
     font_size: 80
+    z: 110
+  header_lg_lowz:
+    font_name: me123
+    font_size: 72
+    adjust_bottom: 14
     z: 10
   header_lg:
     font_name: me123
     font_size: 72
     adjust_bottom: 14
-    z: 10
+    z: 110
   header_md:
     font_name: me123
     font_size: 56
     adjust_bottom: 0
-    z: 10
+    z: 110
   header_sm:
     font_name: me123
     font_size: 36
     adjust_bottom: 6
-    z: 10
+    z: 110
   header_xs:
     font_name: me123
     font_size: 24
     adjust_bottom: 2
-    z: 10
+    z: 110
   header_popup: # Same as header_sm but with -50 adjust
     font_name: me123
     font_size: 36
     adjust_bottom: 56
-    z: 10
+    z: 110
   body_lg:
     font_name: jupiter
     font_size: 96
     adjust_bottom: 28
-    z: 10
+    z: 110
   body_md:
     font_name: jupiter
     font_size: 72
     line_height: 0.85
     adjust_top: 36
     adjust_bottom: 20
-    z: 10
+    z: 110
   body_sm:
     font_name: jupiter
     font_size: 56
     adjust_top: 20
     adjust_bottom: 12
     line_height: 0.9
-    z: 10
+    z: 110
   body_popup: # Same as body_sm but with -50 adjust
     font_name: jupiter
     font_size: 56
     adjust_top: 20
     adjust_bottom: 62
     line_height: 0.9
-    z: 10
+    z: 110
   squad_debug_style:
     font_size: 18
     anchor_x: left
     anchor_y: bottom
-    z: 10
+    z: 110
   timer_primary:
     font_name: unispace_rg
     font_size: 44
     adjust_bottom: 0
-    z: 10
+    z: 110
   timer_secondary:
     font_name: unispace_bd_it
     font_size: 96
-    z: 10
+    z: 110
   num:
     number_grouping: true
     min_digits: 2
@@ -392,6 +397,8 @@ widget_styles:
     anchor_x: right
     x: right-8.9%
     opacity: 0
+  profile:
+    z: 11
 
   # OTHER STYLES
   #-----------------------------

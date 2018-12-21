@@ -115,54 +115,39 @@ slides:
   research_slide:
     - type: text
       text: "Upgrade Researched"
-      style: small
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-2
+      style: body_md, row_top, col_left_anchor, num
     - type: text
       text: (player|current_research)
-      style: medium
-      anchor_y: top
-      y: top-16
+      style: header_sm, row_main, col_left_anchor
   shipupgrade_ready_slide:
     widgets:
       - type: text
         text: Ship Upgrade Available!
-        style: medium
+        style: header_sm, row_main, col_left_anchor
   upgrade_armor_complete_slide:
     widgets:
       - type: text
         text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
+        style: body_md, row_top, col_left_anchor, num
       - type: text
         text: Silaris Armor
-        style: text_default
-        y: middle-4
+        style: header_sm, row_main, col_left_anchor
   upgrade_cannon_complete_slide:
     widgets:
       - type: text
         text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
+        style: body_md, row_top, col_left_anchor, num
       - type: text
         text: Thanix Cannon
-        style: text_default
-        y: middle-4
+        style: header_sm, row_main, col_left_anchor
   upgrade_shields_complete_slide:
     widgets:
       - type: text
         text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
+        style: body_md, row_top, col_left_anchor, num
       - type: text
         text: Multicore Shielding
-        style: text_default
-        y: middle-4
+        style: header_sm, row_main, col_left_anchor
 
 sound_player:
   collect_research_shot_hit: upgrade_collected_sound

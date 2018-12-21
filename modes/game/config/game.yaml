@@ -181,18 +181,22 @@ widgets:
     - type: text
       text: (player1|score)
       style: header_xs, row_top, col_left_anchor, num
+      z: 10
   mp_score_widget_player_2:
     - type: text
       text: (player2|score)
       style: header_xs, row_top, col_right_anchor, num
+      z: 10
   mp_score_widget_player_3:
     - type: text
       text: (player3|score)
       style: header_xs, row_bottom, col_left_anchor, num
+      z: 10
   mp_score_widget_player_4:
     - type: text
       text: (player4|score)
       style: header_xs, row_bottom, col_right_anchor, num
+      z: 10
   mp_name_widget_player_1:
     - type: text
       text: (machine|current_career_player_1)

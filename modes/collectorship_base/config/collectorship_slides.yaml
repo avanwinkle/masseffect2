@@ -24,15 +24,10 @@ slides:
     widgets:
       - type: text
         text: (last_mission)
-        style: medium
+        style: header_sm, row_main, col_left_anchor
       - type: text
         text: (score)
-        style: small
-        anchor_x: left
-        anchor_y: top
-        x: 2
-        y: top-2
-
+        style: body_md, row_top, col_left_anchor, num
 
 widget_player:
   mode_harbinger_started: harbinger_widget
@@ -60,7 +55,6 @@ widgets:
   cs_hurryup_widget:
     - type: text
       text: (temp_hurryup_value)
-      style: small
       anchor_x: left
       anchor_y: bottom
       x: 2
@@ -68,15 +62,10 @@ widgets:
   cs_timer_widget:
     - type: text
       text: (ticks_remaining)
-      style: small
-      anchor_x: right
-      anchor_y: top
-      x: right-2
-      y: top-2
+      style: timer_primary, row_gutter, col_right_indent
   harbinger_widget:
     - type: text
       text: (harbinger_multiplier)X
-      style: small
       anchor_x: left
       anchor_y: bottom
       x: 2

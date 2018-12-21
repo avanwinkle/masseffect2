@@ -139,57 +139,39 @@ widgets:
   recruit_advance_widget_1:
     - type: text
       text: Recruit (squadmate)
-      style: header_md, row_main, col_left_anchor, num
+      style: header_lg, row_main, col_left_anchor
       casing: title
-      z: 11
+      z: 110
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
       style: body_md, row_sub, col_left_anchor
-      z: 11
+      z: 110
     - widget: popup_image_(squadmate)
-    - widget: console_background_overlay
+    - widget: console_background
   recruit_advance_widget_2:
     - type: text
       text: Recruit (squadmate)
-      style: header_popup, row_main
+      style: header_lg, row_main, col_left_anchor
       casing: title
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
     - type: text
       text: 1 shot to unlock
-      style: body_popup, row_sub
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
+      style: body_md, row_sub, col_left_anchor
     - widget: popup_image_(squadmate)
-    # - widget: popup_image_border
-    - widget: popup_right
+    - widget: console_background
   recruit_advance_widget_3:
     - type: text
       text: (squadmate) Ready!
-      style: header_popup, row_main
+      style: header_lg, row_main, col_left_anchor, num
       casing: title
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
     - type: text
       text: Mission Available
-      style: body_popup, row_sub
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
+      style: body_md, row_super, col_left_anchor
     - type: text
       text: Left Ramp to Start
-      style: body_popup, row_bottom
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
+      style: body_md, row_sub, col_left_anchor
     - widget: popup_image_(squadmate)
-    # - widget: popup_image_border
-    - widget: popup_right
-
+    - widget: console_background
 
   popup_image_garrus:
     - type: image
@@ -201,7 +183,7 @@ widgets:
   popup_image_grunt:
     - type: image
       image: popup_image_grunt
-      style: image_popup
+      style: profile
       animations:
         add_to_slide: popup_enter_animation
         remove_popup: popup_exit_animation

@@ -432,6 +432,9 @@ slides:
     - type: image
       image: squadmates_grid
       z: 1
+    - type: image
+      image: squadmates_grid_overlay
+      z: 100
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh

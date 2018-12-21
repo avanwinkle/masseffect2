@@ -20,6 +20,17 @@ config:
   - field_recruit_sounds.yaml
   - field_recruit_shows.yaml
 
+event_player:
+  play_queued_widget_recruit_advance_widget_1:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
+  play_queued_widget_recruit_advance_widget_2:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
+  play_queued_widget_recruit_advance_widget_3:
+    - play_recruit_advance_(squadmate)|500ms
+    - remove_popup|3s
+
 variable_player:
   recruit_advance:
     score: 500
@@ -145,3 +156,108 @@ shots:
       leds: shot_shield_zaeed
       color: FF7700 #color_zaeed
     tags: envshot_left_orbit
+
+# slide_player:
+#   # Use queue playback of main slides to show portraits
+#   play_queued_widget_recruit_advance_widget_1:
+#     portrait_slide_advance:
+#       target: lcd_right
+#       priority: 200
+#       expire: 4s
+
+# slides:
+#   portrait_slide_advance:
+#     - widget: portrait_widget_(squadmate)_advance
+
+widget_player:
+  play_queued_widget_recruit_advance_widget_1:
+    portrait_widget_advance:
+      target: lcd_right
+      widget_settings:
+        expire: 4s
+        z: 200
+  play_queued_widget_recruit_advance_widget_2:
+    portrait_widget_advance:
+      target: lcd_right
+      widget_settings:
+        expire: 4s
+        z: 200
+  play_queued_widget_recruit_advance_widget_3:
+    portrait_widget_advance:
+      target: lcd_right
+      widget_settings:
+        expire: 4s
+        z: 200
+  recruit_success:
+    portrait_widget_complete:
+      target: lcd_right
+      widget_settings:
+        expire: 4s
+        z: 200
+
+
+widgets:
+  portrait_widget_advance:
+    - widget: portrait_widget_(squadmate)_advance
+  portrait_widget_complete:
+    - widget: portrait_widget_(squadmate)_complete
+  portrait_widget_garrus_advance:
+    - type: image
+      image: portrait_garrus_recruit
+  portrait_widget_grunt_advance:
+    - type: image
+      image: portrait_grunt_recruit
+  portrait_widget_jack_advance:
+    - type: image
+      image: portrait_jack_recruit
+  portrait_widget_kasumi_advance:
+    - type: image
+      image: portrait_kasumi_recruit
+  portrait_widget_legion_advance:
+    - type: image
+      image: portrait_legion_recruit
+  portrait_widget_mordin_advance:
+    - type: image
+      image: portrait_mordin_recruit
+  portrait_widget_samara_advance:
+    - type: image
+      image: portrait_samara_recruit
+  portrait_widget_tali_advance:
+    - type: image
+      image: portrait_tali_recruit
+  portrait_widget_thane_advance:
+    - type: image
+      image: portrait_thane_recruit
+  portrait_widget_zaeed_advance:
+    - type: image
+      image: portrait_zaeed_recruit
+  portrait_widget_garrus_complete:
+    - type: image
+      image: portrait_garrus_complete
+  portrait_widget_grunt_complete:
+    - type: image
+      image: portrait_grunt_complete
+  portrait_widget_jack_complete:
+    - type: image
+      image: portrait_jack_complete
+  portrait_widget_kasumi_complete:
+    - type: image
+      image: portrait_kasumi_complete
+  portrait_widget_legion_complete:
+    - type: image
+      image: portrait_legion_complete
+  portrait_widget_mordin_complete:
+    - type: image
+      image: portrait_mordin_complete
+  portrait_widget_samara_complete:
+    - type: image
+      image: portrait_samara_complete
+  portrait_widget_tali_complete:
+    - type: image
+      image: portrait_tali_complete
+  portrait_widget_thane_complete:
+    - type: image
+      image: portrait_thane_complete
+  portrait_widget_zaeed_complete:
+    - type: image
+      image: portrait_zaeed_complete

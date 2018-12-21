@@ -11,11 +11,6 @@ class SquadmateSounds(Scriptlet):
 
   def on_load(self):
     self.mc.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
-    self.mc.log.info("SquadmateSounds ready to go!")
-    self.mc.log.info("MC: {}".format(self.mc))
-    self.mc.log.info("{}".format(dir(self.mc)))
-    self.mc.log.info("SOUND SYSTEM: {}".format(self.mc.sound_system))
-    self.mc.log.info("{}".format(dir(self.mc.sound_system)))
 
   def _handle_squadmate_sound(self, **kwargs):
     sound_name = NAME_FORMATS[kwargs.get("sound")].format(**kwargs)

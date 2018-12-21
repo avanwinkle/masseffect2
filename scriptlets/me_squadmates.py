@@ -35,6 +35,7 @@ class SquadmateStatusClass():
   def __init__(self):
     self.log = logging.getLogger("SquadmateStatus")
     self.log.info("Squadmate Status ready!")
+    self.log.setLevel(0)
 
   def _mate_status_is(self, player, squadmate, status):
     return player["status_{}".format(squadmate)] == status
@@ -82,11 +83,7 @@ class SquadmateHandlers(CustomCode):
    """
   def on_load(self):
     self.log = logging.getLogger("MESquadmates")
-    self.log.setLevel('DEBUG')
     self._current_recruit = None
-
-    self.machine.log.info("MPF BCP: {}".format(self.machine.bcp))
-    self.machine.log.info(" - BCP Transports: {}".format(self.machine.bcp.transport._transports))
 
     # Create a listener for a recruitmission to start
     self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
@@ -103,7 +100,7 @@ class SquadmateHandlers(CustomCode):
     for mate in SQUADMATES:
       if self.machine.game.player["status_{}".format(mate)] < 4:
         self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
-    self.machine.log.info("Created a bunch of shothandlers! {}".format(self))
+    self.log.debug("Created a bunch of shothandlers! {}".format(self))
 
   def _disable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._on_hit)

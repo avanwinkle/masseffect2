@@ -1,4 +1,12 @@
 #config_version=5
 config:
   - config_common.yaml
-  - config_dmd.yaml
+  - config_lcd.yaml
+
+# Custom code can't be included, or it will get double-inits
+custom_code:
+  - scriptlets.me_squadmates.SquadmateHandlers
+  - scriptlets.save_career.SaveCareer
+  # - mpf_arduino.MPFArduino
+
+mc_scriptlets: squadmate_sounds.SquadmateSounds widget_queue_player.WidgetQueuePlayer

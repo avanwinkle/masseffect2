@@ -78,13 +78,6 @@ machine_vars:
     initial_value: 0.25
     value_type: float
 
-custom_code:
-  - scriptlets.me_squadmates.SquadmateHandlers
-  - scriptlets.save_career.SaveCareer
-  # - mpf_arduino.MPFArduino
-
-mc_scriptlets: squadmate_sounds.SquadmateSounds widget_queue_player.WidgetQueuePlayer
-
 modes:
   # - colorpicker
   # Core Logic Modes:

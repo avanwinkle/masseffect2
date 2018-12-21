@@ -46,6 +46,7 @@ class WidgetQueuePlayer(Scriptlet):
       for key in ["slide", "target"]:
         if widget_kwargs.get(key):
           settings[widget_name][key] = widget_kwargs.pop(key)
+      widget_kwargs["expire"] = expire
 
       self.mc.widget_player.play(settings, context, calling_context, **widget_kwargs)
       self.mc.post_mc_native_event("play_queued_widget_{}".format(widget_name), **widget_kwargs)
