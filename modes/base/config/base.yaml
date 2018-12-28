@@ -583,7 +583,7 @@ widgets:
         remove_popup: popup_exit_animation
     - type: text
       text: "Hit any lane 3x\nto unlock missions"
-      style: body_popup, row_bottom
+      style: header_sm, row_bottom
       animations:
         add_to_slide: popup_enter_animation
         remove_popup: popup_exit_animation
@@ -603,7 +603,7 @@ widgets:
         remove_popup: popup_exit_animation
     - type: text
       text: "Select a mission at\nthe Galaxy Map"
-      style: body_popup, row_bottom
+      style: header_sm, row_bottom
       animations:
         add_to_slide: popup_enter_animation
         remove_popup: popup_exit_animation

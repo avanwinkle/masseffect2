@@ -12,6 +12,16 @@
 # After each ball, a bonus is awarded for the total minerals collected.
 #####
 
+event_player:
+  player_planets{player_num==current_player.number}:
+    planet_scanned:
+      planets:
+        value: current_player.planets
+        type: int
+      planets_mod:
+        value: current_player.planets % 10
+        type: int
+
 variable_player:
   planet_shots_hit_complete:
     planets: 1
@@ -94,11 +104,12 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
-  player_planets{player_num==current_player.number}:
+  planet_scanned:
     planet_scanned_slide:
       action: play
       expire: 2s
       priority: 610
+      target: lcd_right
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
@@ -110,10 +121,9 @@ slide_player:
 slides:
   planet_scanned_slide:
     - type: text
-      text: (player|planets) Planets Scanned
-      z: 10
-    - widget: planet_widget_1
-    - widget: popup_right
+      text: "(planets) Planets\n Scanned"
+      style: header_md, row_main
+    - widget: planet_widget_(planets_mod)
   minerals_slide:
     widgets:
       # Minerals
@@ -121,39 +131,38 @@ slides:
         text: (player|mineral_iridium)
         min_digits: 1
         number_grouping: true
-        style: body_popup, row_main
+        style: body_md, row_main
         x: 5%
         anchor_x: left
       - type: text
-        text: irid.
-        style: body_popup, row_sub
+        text: iridium
+        style: header_xs, row_sub
         x: 5%
         anchor_x: left
       - type: text
         text: (player|mineral_palladium)
         min_digits: 1
         number_grouping: true
-        style: body_popup, row_main
+        style: body_md, row_main
         x: 50%
         anchor_x: center
       - type: text
-        text: pallad.
-        style: body_popup, row_sub
+        text: palladium
+        style: header_xs, row_sub
         x: 50%
         anchor_x: center
       - type: text
         text: (player|mineral_platinum)
         min_digits: 1
         number_grouping: true
-        style: body_popup, row_main
+        style: body_md, row_main
         x: 95%
         anchor_x: right
       - type: text
-        text: plat.
-        style: body_popup, row_sub
+        text: platinum
+        style: header_xs, row_sub
         x: 95%
         anchor_x: right
-      - widget: popup_right
 
 timers:
   planet_slide_timer:
@@ -209,13 +218,13 @@ widgets:
   mineral_highlight:
     - type: rectangle
       style: mineral_highlight_style row_sub
-      width: 160
-      height: 60
+      width: 180
+      height: 120
       z: 2
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"
-      style: body_popup row_bottom col_left_indent
+      style: header_sm, row_top, col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1
@@ -224,12 +233,42 @@ widgets:
   reaperiff_progress_widget:
     - type: text
       text: "IFF ready in (count)"
-      style: body_popup row_bottom col_left_indent
+      style: header_sm, row_top, col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1
       x: 2
       z: 3
+  planet_widget_1:
+    - type: image
+      image: Aequitas
+  planet_widget_2:
+    - type: image
+      image: Bindur
+  planet_widget_3:
+    - type: image
+      image: Corang
+  planet_widget_4:
+    - type: image
+      image: Erinle
+  planet_widget_5:
+    - type: image
+      image: Gotha
+  planet_widget_6:
+    - type: image
+      image: Kralla
+  planet_widget_7:
+    - type: image
+      image: Lusia
+  planet_widget_8:
+    - type: image
+      image: Pragia
+  planet_widget_9:
+    - type: image
+      image: Viantel
+  planet_widget_0:
+    - type: image
+      image: Watchman
 
 show_player:
   planet_shots_hit_complete:

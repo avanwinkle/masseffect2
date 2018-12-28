@@ -211,7 +211,7 @@ widgets:
         add_to_slide: popup_enter_animation
     - type: text
       text: Intel Collected
-      style: body_popup, row_sub
+      style: header_md, row_sub
       animations:
         add_to_slide: popup_enter_animation
     - type: image
