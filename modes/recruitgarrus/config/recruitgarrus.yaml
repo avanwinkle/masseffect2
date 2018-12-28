@@ -24,10 +24,18 @@ event_player:
   mode_recruitgarrus_started.1:
     set_environment:
       env: bloodpack
+    show_recruit_instructions:
+      squadmate: garrus
+      instructions_main: Hit Ramp to Attack Colossus
+      instructions_sub: Move Fast to Avoid Self-Repair
   mode_recruitgarrus_started.2:
     - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>0}
     - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==0}
   door_closed: recruittimer_add_time
+  close_doors_hit_complete:
+    show_recruit_instructions:
+      instructions_main: Shutters Closed
+      instructions_sub: Get back upstairs!
   clear_upstairs_hit_complete: recruit_garrus_complete
 
 counters:
@@ -111,31 +119,6 @@ shots:
       leds: l_right_ramp_shield_rgb
       color: 55FF00 #color_door_green
     tags: envshot_right_ramp
-
-slide_player:
-  close_doors_hit_complete:
-    doors_closed_slide:
-      expire: 2s
-
-slides:
-  doors_closed_slide:
-    widgets:
-      - type: text
-        text: Shutters Closed
-        style: dmd_med
-        anchor_y: bottom
-        y: middle+2
-        z: 1
-      - type: text
-        text: Get Back Upstairs!
-        style: dmd_med
-        anchor_y: top
-        y: middle-2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   mode_recruitgarrus_started:

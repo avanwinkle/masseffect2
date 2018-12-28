@@ -38,6 +38,10 @@ event_player:
   mode_recruitzaeed_started:
     set_environment:
       env: bluesuns
+    show_recruit_instructions:
+      squadmate: zaeed
+      instructions_main: 3x orbits to catch Vido
+      instructions_sub: "Left: Paragon, Right: Renegade"
     # Fake the event update to trigger the widget?
     logicblock_zaeed_orbits_counter_updated:
       value: device.counters.zaeed_orbits_counter.value
@@ -155,31 +159,6 @@ shows:
       lights:
         (leds): 000000
         l_null: (color)
-
-slide_player:
-  mode_recruitzaeed_started{current_player.zaeed_path_renegade==-1}:
-    zaeed_instructions_slide:
-      expire: 3s
-
-slides:
-  zaeed_instructions_slide:
-    widgets:
-      - type: text
-        text: PARAGON OR RENEGADE
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: HIT ORBIT 3X TO CATCH VIDO
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   mode_recruitzaeed_started:

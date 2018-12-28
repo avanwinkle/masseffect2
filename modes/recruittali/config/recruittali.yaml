@@ -25,6 +25,7 @@ event_player:
     set_environment:
       env: geth
     show_recruit_instructions:
+      squadmate: tali
       instructions_main: Hit Ramp to Attack Colossus
       instructions_sub: Move Fast to Avoid Self-Repair
   mode_recruittali_started.2:
@@ -353,7 +354,7 @@ widget_player:
 widgets:
   colossus_instructions_widget:
     - type: text
-      text: Self-repairing in (ticks_remaining)s
+      text: Self-repairing in (ticks_remaining)
       style: body_sm, row_sub, col_left_anchor, lcd_only
       animations:
         show_slide: pulse_text_slow

@@ -24,6 +24,7 @@ event_player:
     set_environment:
       env: bluesuns
     show_recruit_instructions:
+      squadmate: jack
       instructions_main: Hit Shots to Light Bank
       instructions_sub: 3x Banks to Defeat Warden
 

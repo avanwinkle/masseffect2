@@ -107,13 +107,21 @@ slide_player:
     recruit_mission_slide:
       action: play
       priority: 100
+    recruit_portrait_slide:
+      action: play
+      target: lcd_right
     recruit_instructions_slide:
       expire: 3s
       priority: 200
+  # This mode runs globally, so explicitly remove slides
   mode_type_mission_stopped:
+    recruit_instructions_slide:
+      action: remove
     recruit_mission_slide:
       action: remove
-      target: lcd_left
+    recruit_portrait_slide:
+      action: remove
+      target: lcd_right
 
 slides:
   recruit_mission_slide:
@@ -133,7 +141,7 @@ slides:
       - type: text
         text: (global_recruittimer_tick)
         style: timer_primary, row_gutter, col_right_indent
-      - widget: console_background
+      - widget: background_console
   recruit_instructions_slide:
     widgets:
       - type: text
@@ -142,7 +150,11 @@ slides:
       - type: text
         text: (instructions_sub)
         style: body_md, row_sub, col_left_anchor
-      - widget: console_background
+      - widget: background_console
+  recruit_portrait_slide:
+    widgets:
+      - widget: missionbg_(squadmate)
+
 
 widgets:
   # Widgets that appear when advance shots are hit
@@ -158,7 +170,6 @@ widgets:
       text: 2 shots to unlock
       anchor_y: bottom
       style: body_md, row_sub, col_left_anchor
-    - widget: popup_image_(squadmate)
     - widget: console_background
   recruit_advance_widget_2:
     - type: text
@@ -171,7 +182,6 @@ widgets:
     - type: text
       text: 1 shot to unlock
       style: body_md, row_sub, col_left_anchor
-    - widget: popup_image_(squadmate)
     - widget: console_background
   recruit_advance_widget_3:
     - type: text
@@ -184,80 +194,13 @@ widgets:
     - type: text
       text: Left Ramp to Start
       style: body_md, row_sub, col_left_anchor
-    - widget: popup_image_(squadmate)
     - widget: console_background
-
-  popup_image_garrus:
+  missionbg_jack:
     - type: image
-      image: popup_image_garrus
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_grunt:
+      image: missionbg_jack
+  missionbg_tali:
     - type: image
-      image: popup_image_grunt
-      style: profile
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_jack:
-    - type: image
-      image: popup_image_jack
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_kasumi:
-    - type: image
-      image: popup_image_kasumi
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_legion:
-    - type: image
-      image: popup_image_legion
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_mordin:
-    - type: image
-      image: popup_image_mordin
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_samara:
-    - type: image
-      image: popup_image_samara
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_tali:
-    - type: image
-      image: popup_image_tali
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_thane:
-    - type: image
-      image: popup_image_thane
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_image_zaeed:
-    - type: image
-      image: popup_image_zaeed
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-
+      image: missionbg_tali
 
 # Widgets that overlay DURING a mission
   shots_remaining_widget:

@@ -25,6 +25,10 @@ event_player:
   mode_recruitmordin_started.1:
     set_environment:
       env: bloodpack
+    show_recruit_instructions:
+      squadmate: mordin
+      instructions_main: Hit orbits to build value,
+      instructions_sub: Both ramps to turn on fans
   mode_recruitmordin_started.2:
     - play_intro_sound{device.counters.fans_counter.value==0}
     - play_cure_sound{device.counters.fans_counter.value>0}
@@ -223,28 +227,3 @@ sounds:
     file: en_us_ss_sub_krogan_ss_sub_krogan_00304056_m.ogg
   krogan_fear_the_battlemaster:
     file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.ogg
-
-slide_player:
-  mode_recruitmordin_started:
-    mordin_instructions_slide:
-      expire: 3s
-
-slides:
-  mordin_instructions_slide:
-    widgets:
-      - type: text
-        text: ORBITS BUILD VALUE
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: RAMPS TURN ON FANS
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000

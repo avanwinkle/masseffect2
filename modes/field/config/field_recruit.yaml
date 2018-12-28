@@ -188,13 +188,6 @@ widget_player:
       widget_settings:
         expire: 4s
         z: 200
-  recruit_success:
-    portrait_widget_complete:
-      target: lcd_right
-      widget_settings:
-        expire: 4s
-        z: 200
-
 
 widgets:
   portrait_widget_advance:
@@ -210,6 +203,11 @@ widgets:
   portrait_widget_jack_advance:
     - type: image
       image: portrait_jack_recruit
+      # TODO: fade out the galaxy map instead of fading in every widget popup
+      opacity: 0
+      animations:
+        add_to_slide: portrait_enter_animation
+        remove_popup: portrait_exit_animation
   portrait_widget_kasumi_advance:
     - type: image
       image: portrait_kasumi_recruit
@@ -231,33 +229,3 @@ widgets:
   portrait_widget_zaeed_advance:
     - type: image
       image: portrait_zaeed_recruit
-  portrait_widget_garrus_complete:
-    - type: image
-      image: portrait_garrus_complete
-  portrait_widget_grunt_complete:
-    - type: image
-      image: portrait_grunt_complete
-  portrait_widget_jack_complete:
-    - type: image
-      image: portrait_jack_complete
-  portrait_widget_kasumi_complete:
-    - type: image
-      image: portrait_kasumi_complete
-  portrait_widget_legion_complete:
-    - type: image
-      image: portrait_legion_complete
-  portrait_widget_mordin_complete:
-    - type: image
-      image: portrait_mordin_complete
-  portrait_widget_samara_complete:
-    - type: image
-      image: portrait_samara_complete
-  portrait_widget_tali_complete:
-    - type: image
-      image: portrait_tali_complete
-  portrait_widget_thane_complete:
-    - type: image
-      image: portrait_thane_complete
-  portrait_widget_zaeed_complete:
-    - type: image
-      image: portrait_zaeed_complete

@@ -311,12 +311,9 @@ widget_styles:
     adjust_bottom: 12
     line_height: 0.9
     z: 110
-  body_popup: # Same as body_sm but with -50 adjust
-    font_name: jupiter
-    font_size: 56
-    adjust_top: 20
-    adjust_bottom: 62
-    line_height: 0.9
+  instructions_md:
+    font_name: myriadpro-regular
+    font_size: 34
     z: 110
   squad_debug_style:
     font_size: 18
@@ -456,6 +453,16 @@ animations:
       relative: true
       duration: 500ms
       timing: with_previous
+      easing: in_sine
+  portrait_enter_animation:
+    - property: opacity
+      value: 1
+      duration: 500ms
+      easing: out_circ
+  portrait_exit_animation:
+    - property: opacity
+      value: 0
+      duration: 500ms
       easing: in_sine
   pulse_sqicon:
     - property: opacity      # name of the widget property we're animating
