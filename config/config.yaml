@@ -9,4 +9,4 @@ custom_code:
   - scriptlets.save_career.SaveCareer
   # - mpf_arduino.MPFArduino
 
-mc_scriptlets: squadmate_sounds.SquadmateSounds widget_queue_player.WidgetQueuePlayer
+mc_scriptlets: squadmate_sounds.SquadmateSounds widget_queue_player.SlideQueuePlayer

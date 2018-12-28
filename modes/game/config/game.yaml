@@ -33,8 +33,10 @@ event_player:
   #     slide: field_rightslide_base
   #     expire: 7s
 
+slide_player:
+  queue_slide: {}
+
 widget_player:
-  queue_widget: {}
   # First event, before additional players have a chance to enter
   game_started:
     base_level_widget:

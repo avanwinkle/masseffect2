@@ -122,7 +122,7 @@ class SquadmateHandlers(CustomCode):
 
     if 0 < future_mate_status <= 3:
       self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
-      self.machine.events.post("queue_widget", widget="recruit_advance_widget_{}".format(future_mate_status),
+      self.machine.events.post("queue_slide", slide="recruit_advance_slide_{}".format(future_mate_status),
                                                squadmate=mate, status=future_mate_status)
 
       if future_mate_status == 3:

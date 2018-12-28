@@ -21,13 +21,13 @@ config:
   - field_recruit_shows.yaml
 
 event_player:
-  play_queued_widget_recruit_advance_widget_1:
+  play_queued_slide_recruit_advance_slide_1:
     - play_recruit_advance_(squadmate)|50ms
     - remove_popup|4s
-  play_queued_widget_recruit_advance_widget_2:
+  play_queued_slide_recruit_advance_slide_2:
     - play_recruit_advance_(squadmate)|50ms
     - remove_popup|4s
-  play_queued_widget_recruit_advance_widget_3:
+  play_queued_slide_recruit_advance_slide_3:
     - play_recruit_advance_(squadmate)|50ms
     - remove_popup|4s
 
@@ -170,19 +170,19 @@ shots:
 #     - widget: portrait_widget_(squadmate)_advance
 
 widget_player:
-  play_queued_widget_recruit_advance_widget_1:
+  play_queued_slide_recruit_advance_widget_1:
     portrait_widget_advance:
       target: lcd_right
       widget_settings:
         expire: 4s
         z: 200
-  play_queued_widget_recruit_advance_widget_2:
+  play_queued_slide_recruit_advance_widget_2:
     portrait_widget_advance:
       target: lcd_right
       widget_settings:
         expire: 4s
         z: 200
-  play_queued_widget_recruit_advance_widget_3:
+  play_queued_slide_recruit_advance_widget_3:
     portrait_widget_advance:
       target: lcd_right
       widget_settings:

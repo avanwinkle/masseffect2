@@ -151,6 +151,52 @@ slides:
         text: (instructions_sub)
         style: body_md, row_sub, col_left_anchor
       - widget: background_console
+  recruit_advance_slide_1:
+    transition:
+      type: fade
+    widgets:
+      - type: text
+        text: Recruit
+        style: header_sm, row_super, col_left_anchor
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
+        casing: title
+      - type: text
+        text: 2 shots to unlock
+        anchor_y: bottom
+        style: body_md, row_sub, col_left_anchor
+      - widget: console_background
+  recruit_advance_slide_2:
+    transition:
+      type: fade
+    widgets:
+      - type: text
+        text: Recruit
+        style: header_sm, row_super, col_left_anchor
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
+        casing: title
+      - type: text
+        text: 1 shot to unlock
+        style: body_md, row_sub, col_left_anchor
+      - widget: console_background
+  recruit_advance_slide_3:
+    transition:
+      type: fade
+    widgets:
+      - type: text
+        text: Mission Available
+        style: body_md, row_super, col_left_anchor
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
+        casing: title
+      - type: text
+        text: Left Ramp to Start
+        style: body_md, row_sub, col_left_anchor
+      - widget: console_background
   recruit_portrait_slide:
     widgets:
       - widget: missionbg_(squadmate)
@@ -158,43 +204,7 @@ slides:
 
 widgets:
   # Widgets that appear when advance shots are hit
-  recruit_advance_widget_1:
-    - type: text
-      text: Recruit
-      style: header_sm, row_super, col_left_anchor
-    - type: text
-      text: (squadmate)
-      style: header_lg, row_main, col_left_anchor
-      casing: title
-    - type: text
-      text: 2 shots to unlock
-      anchor_y: bottom
-      style: body_md, row_sub, col_left_anchor
-    - widget: console_background
-  recruit_advance_widget_2:
-    - type: text
-      text: Recruit
-      style: header_sm, row_super, col_left_anchor
-    - type: text
-      text: (squadmate)
-      style: header_lg, row_main, col_left_anchor
-      casing: title
-    - type: text
-      text: 1 shot to unlock
-      style: body_md, row_sub, col_left_anchor
-    - widget: console_background
-  recruit_advance_widget_3:
-    - type: text
-      text: Mission Available
-      style: body_md, row_super, col_left_anchor
-    - type: text
-      text: (squadmate)
-      style: header_lg, row_main, col_left_anchor
-      casing: title
-    - type: text
-      text: Left Ramp to Start
-      style: body_md, row_sub, col_left_anchor
-    - widget: console_background
+
   missionbg_jack:
     - type: image
       image: missionbg_jack

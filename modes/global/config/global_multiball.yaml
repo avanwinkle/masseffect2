@@ -43,22 +43,22 @@ event_player:
 
   # QUEUE WIDGETS
   enable_fmball_lock{mode.field.active and device.achievements.arrival.state=="disabled"}:
-    queue_widget:
-      widget: overlord_lock_lit_widget
+    queue_slide:
+      slide: overlord_lock_lit_slide
       ball:
         value: device.ball_devices.bd_lock.balls
         type: int
   lockhandler_overlord_ball_will_lock:
-    queue_widget{total_balls_locked==1}:
-      widget: overlord_ball_locked_widget
+    queue_slide{total_balls_locked==1}:
+      slide: overlord_ball_locked_slide
       station: Vulcan Station
       ball: 1
-    queue_widget{total_balls_locked==2}:
-      widget: overlord_ball_locked_widget
+    queue_slide{total_balls_locked==2}:
+      slide: overlord_ball_locked_slide
       station: Prometheus Station
       ball: 2
-    queue_widget{total_balls_locked==3}:
-      widget: overlord_ball_locked_widget
+    queue_slide{total_balls_locked==3}:
+      slide: overlord_ball_locked_slide
       station: Atlas Station
       ball: 3
 
@@ -134,14 +134,13 @@ shows:
         l_lock_lit: black
 
 slide_player:
-  play_queued_widget_overlord_lock_lit_widget:
+  play_queued_slide_overlord_lock_lit_slide:
     overlord_portrait_slide:
       target: lcd_right
-      expire: 4s
-  play_queued_widget_overlord_ball_locked_widget:
+      # No need to set expire, the play_queued_widget kwargs include it
+  play_queued_slide_overlord_ball_locked_slide:
     overlord_portrait_slide:
       target: lcd_right
-      expire: 4s
   #### ARRIVAL ####
   play_arrival_lock_sound:
     arrival_lock_is_lit_slide:
@@ -157,6 +156,22 @@ slide_player:
       priority: 5599 # Just below the "ball 3 locked" slide but 3s longer
 
 slides:
+  overlord_lock_lit_slide:
+    - type: text
+      text: OVERLORD
+      style: header_sm, row_super, col_left_anchor
+    - type: text
+      text: Lock is Lit
+      style: header_md, row_main, col_left_anchor
+    - widget: console_background
+  overlord_ball_locked_slide:
+    - type: text
+      text: (station)
+      style: header_sm, row_super, col_left_anchor
+    - type: text
+      text: Ball (ball) Locked!
+      style: header_md, row_main, col_left_anchor
+    - widget: console_background
   overlord_portrait_slide:
     widgets:
       - type: image
@@ -422,22 +437,6 @@ widget_player:
       slide: arrival_ball_locked_slide
 
 widgets:
-  overlord_lock_lit_widget:
-    - type: text
-      text: OVERLORD
-      style: header_popup, row_main
-    - type: text
-      text: Lock is Lit
-      style: header_md, row_sub
-    - widget: console_background
-  overlord_ball_locked_widget:
-    - type: text
-      text: (station)
-      style: header_popup, row_main
-    - type: text
-      text: Ball (ball) Locked!
-      style: header_md, row_sub
-    - widget: console_background
   arrival_widget_ball1:
     - type: text
       text: Med Bay Escaped

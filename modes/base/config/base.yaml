@@ -354,11 +354,11 @@ shows:
   introshow_missions:
     - time: 0
       events:
-        queue_widget{current_player.available_missions>0}:
-          widget: intro_missions_widget
+        queue_slide{current_player.available_missions>0}:
+          slide: intro_missions_slide
           expire: 8s
-        queue_widget{current_player.available_missions==0}:
-          widget: intro_no_missions_widget
+        queue_slide{current_player.available_missions==0}:
+          slide: intro_no_missions_slide
           expire: 8s
     - time: 1
       events:
@@ -429,6 +429,29 @@ slides:
     - type: image
       image: squadmates_grid_overlay
       z: 100
+  intro_no_missions_slide:
+    - type: text
+      text: Build Your Team
+      style: header_md, row_main
+    - type: text
+      text: "Hit any lane 3x\nto unlock missions"
+      style: header_sm, row_bottom
+    - type: image
+      image: popup_image_squad
+      style: image_popup
+    - widget: console_background
+  intro_missions_slide:
+    - type: text
+      text: Build Your Team
+      style: header_md, row_main
+    - type: text
+      text: "Select a mission at\nthe Galaxy Map"
+      style: header_sm, row_bottom
+    - type: image
+      image: popup_image_squad
+      style: image_popup
+    - widget: console_background
+
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
@@ -574,43 +597,4 @@ widget_player:
 widgets:
   sqicon_status_widget:
     - widget: sqicon_(squadmate)
-  intro_no_missions_widget:
-    - type: text
-      text: Build Your Team
-      style: header_popup, row_main
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: text
-      text: "Hit any lane 3x\nto unlock missions"
-      style: header_sm, row_bottom
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - widget: popup_right
-  intro_missions_widget:
-    - type: text
-      text: Build Your Team
-      style: header_popup, row_main
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: text
-      text: "Select a mission at\nthe Galaxy Map"
-      style: header_sm, row_bottom
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-    - widget: popup_right
+
