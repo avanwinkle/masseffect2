@@ -23,6 +23,9 @@ event_player:
   mode_recruitjack_started:
     set_environment:
       env: bluesuns
+    show_recruit_instructions:
+      instructions_main: Hit Shots to Light Bank
+      instructions_sub: 3x Banks to Defeat Warden
 
 counters:
   jack_rounds_counter:
@@ -121,31 +124,6 @@ shots:
       leds: l_hitbank_shield_rgb
       color: 4D00CC #color_jack
     tags: envshot_hitbank
-
-slide_player:
-  mode_recruitjack_started:
-    jack_instructions_slide:
-      expire: 3s
-
-slides:
-  jack_instructions_slide:
-    widgets:
-      - type: text
-        text: HIT SHOTS TO LIGHT BANK
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: 3 BANKS TO DEFEAT WARDEN
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   jack_shots_one_hit:

@@ -253,7 +253,7 @@ slides:
     widgets:
       - type: text
         text: Password Obtained
-        style: body_lg, instructions_title
+        style: body_lg
         z: 21
       - type: rectangle
         width: 128
@@ -264,7 +264,7 @@ slides:
     widgets:
       - type: text
         text: Voiceprint Recorded
-        style: body_lg, instructions_title
+        style: body_lg
         z: 21
       - type: rectangle
         width: 128
@@ -275,7 +275,7 @@ slides:
     widgets:
       - type: text
         text: DNA Sample Obtained
-        style: body_lg, instructions_title
+        style: body_lg
         z: 21
       - type: rectangle
         width: 128
@@ -286,7 +286,7 @@ slides:
     widgets:
       - type: text
         text: Barrier Deactivated
-        style: body_lg, instructions_title
+        style: body_lg
       - type: rectangle
         width: 128
         height: 32
@@ -296,10 +296,10 @@ slides:
     widgets:
       - type: text
         text: "Alarm Tripped!"
-        style: body_lg, instructions_title
+        style: body_lg
       - type: text
         text: "(count) until failure"
-        style: body_md, instructions_line_2
+        style: body_md
       - type: rectangle
         width: 128
         height: 32
@@ -309,7 +309,7 @@ slides:
     widgets:
       - type: text
         text: FAILED!
-        style: body_lg, instructions_title
+        style: body_lg
 
 sound_player:
   mode_recruitkasumi_started:

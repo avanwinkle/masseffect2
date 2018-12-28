@@ -33,6 +33,11 @@ slides:
       - type: image
         image: background_galaxy
         z: 0
+        animations:
+          add_to_slide:
+            - property: rotation
+              value: -360
+              duration: 1000s
   multiplayer_slide:
     widgets:
       - type: text
@@ -42,6 +47,12 @@ slides:
       - type: image
         image: background_galaxy
         z: 0
+        animations:
+          add_to_slide:
+            - property: rotation
+              value: -360
+              duration: 1000s
+
 
 machine_vars:
   use_lcd:

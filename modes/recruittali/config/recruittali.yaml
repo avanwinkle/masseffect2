@@ -24,6 +24,9 @@ event_player:
   mode_recruittali_started.1:
     set_environment:
       env: geth
+    show_recruit_instructions:
+      instructions_main: Hit Ramp to Attack Colossus
+      instructions_sub: Move Fast to Avoid Self-Repair
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s

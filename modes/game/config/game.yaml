@@ -33,31 +33,6 @@ event_player:
   #     slide: field_rightslide_base
   #     expire: 7s
 
-slide_player:
-  show_base_slide:
-    singleplayer_slide{not is_multiplayer}:
-      action: play
-      target: lcd_left
-      priority: 1
-    multiplayer_slide{is_multiplayer}:
-      action: play
-      target: lcd_left
-      priority: 2
-  show_multiplayer_slide:
-    multiplayer_slide:
-      action: play
-      target: lcd_left
-    singleplayer_slide:
-      action: remove
-  disable_missionresume:
-    resume_slide:
-      action: remove
-  ball_will_end:
-    singleplayer_slide:
-      action: remove
-    multiplayer_slide:
-      action: remove
-
 widget_player:
   queue_widget: {}
   # First event, before additional players have a chance to enter

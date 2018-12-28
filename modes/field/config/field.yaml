@@ -21,6 +21,20 @@ event_player:
   mode_field_started.2{device.achievements.suicidemission.state=="stopped"}:
     - reset_from_suicide
     # Looking for other mode_field_started events? Check the field submode configs!
+  mode_field_started.3:
+    show_base_slide:
+      is_available:
+        value: current_player.available_missions>0
+        type: bool
+      is_resume:
+        value: current_player.resume_mission!=" "
+        type: bool
+      is_multiplayer:
+        value: game.num_players>1
+        type: bool
+      is_lcd:
+        value: machine.is_lcd==1
+        type: bool
 
 config:
   - field_bumpers.yaml
@@ -58,6 +72,26 @@ slide_player:
     reset_from_suicide_slide:
       action: play
       expire: 5s
+  show_base_slide:
+    singleplayer_slide{not is_multiplayer}:
+      action: play
+      priority: 1
+    multiplayer_slide{is_multiplayer}:
+      action: play
+      priority: 2
+  show_multiplayer_slide:
+    multiplayer_slide:
+      action: play
+    singleplayer_slide:
+      action: remove
+  disable_missionresume:
+    resume_slide:
+      action: remove
+  mode_field_will_stop:
+    singleplayer_slide:
+      action: remove
+    multiplayer_slide:
+      action: remove
 
 slides:
   reset_from_suicide_slide:

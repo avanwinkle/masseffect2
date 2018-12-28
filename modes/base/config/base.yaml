@@ -22,20 +22,6 @@ event_player:
     - enable_kickback
     - flippers_on
     - reset_missionselect_bypass
-  mode_base_started.2:
-    show_base_slide:
-      is_available:
-        value: current_player.available_missions>0
-        type: bool
-      is_resume:
-        value: current_player.resume_mission!=" "
-        type: bool
-      is_multiplayer:
-        value: game.num_players>1
-        type: bool
-      is_lcd:
-        value: machine.is_lcd==1
-        type: bool
 
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
@@ -401,8 +387,16 @@ slide_player:
       action: play
       target: lcd_right
       priority: 100
+    base_console_slide:
+      action: play
+      priority: 0
 
 slides:
+  base_console_slide:
+    widgets:
+      - type: image
+        image: texture_console
+        z: 0
   levelup_slide:
     widgets:
       - type: text

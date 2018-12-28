@@ -102,13 +102,14 @@ variable_player:
       string: " "
       action: set
 
-
 slide_player:
-  mode_type_mission_started:
+  show_recruit_instructions:
     recruit_mission_slide:
-      target: lcd_left
       action: play
       priority: 100
+    recruit_instructions_slide:
+      expire: 3s
+      priority: 200
   mode_type_mission_stopped:
     recruit_mission_slide:
       action: remove
@@ -133,25 +134,38 @@ slides:
         text: (global_recruittimer_tick)
         style: timer_primary, row_gutter, col_right_indent
       - widget: console_background
+  recruit_instructions_slide:
+    widgets:
+      - type: text
+        text: (instructions_main)
+        style: body_md, row_main, col_left_anchor
+      - type: text
+        text: (instructions_sub)
+        style: body_md, row_sub, col_left_anchor
+      - widget: console_background
 
 widgets:
   # Widgets that appear when advance shots are hit
   recruit_advance_widget_1:
     - type: text
-      text: Recruit (squadmate)
+      text: Recruit
+      style: header_sm, row_super, col_left_anchor
+    - type: text
+      text: (squadmate)
       style: header_lg, row_main, col_left_anchor
       casing: title
-      z: 110
     - type: text
       text: 2 shots to unlock
       anchor_y: bottom
       style: body_md, row_sub, col_left_anchor
-      z: 110
     - widget: popup_image_(squadmate)
     - widget: console_background
   recruit_advance_widget_2:
     - type: text
-      text: Recruit (squadmate)
+      text: Recruit
+      style: header_sm, row_super, col_left_anchor
+    - type: text
+      text: (squadmate)
       style: header_lg, row_main, col_left_anchor
       casing: title
     - type: text
@@ -161,12 +175,12 @@ widgets:
     - widget: console_background
   recruit_advance_widget_3:
     - type: text
-      text: (squadmate) Ready!
-      style: header_lg, row_main, col_left_anchor, num
-      casing: title
-    - type: text
       text: Mission Available
       style: body_md, row_super, col_left_anchor
+    - type: text
+      text: (squadmate)
+      style: header_lg, row_main, col_left_anchor
+      casing: title
     - type: text
       text: Left Ramp to Start
       style: body_md, row_sub, col_left_anchor
