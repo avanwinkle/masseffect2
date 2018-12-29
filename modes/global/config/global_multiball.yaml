@@ -45,20 +45,24 @@ event_player:
   enable_fmball_lock{mode.field.active and device.achievements.arrival.state=="disabled"}:
     queue_slide:
       slide: overlord_lock_lit_slide
+      portrait: overlord_light
       ball:
         value: device.ball_devices.bd_lock.balls
         type: int
   lockhandler_overlord_ball_will_lock:
     queue_slide{total_balls_locked==1}:
       slide: overlord_ball_locked_slide
+      portrait: overlord_light
       station: Vulcan Station
       ball: 1
     queue_slide{total_balls_locked==2}:
       slide: overlord_ball_locked_slide
+      portrait: overlord_light
       station: Prometheus Station
       ball: 2
     queue_slide{total_balls_locked==3}:
       slide: overlord_ball_locked_slide
+      portrait: overlord_light
       station: Atlas Station
       ball: 3
 
@@ -134,13 +138,6 @@ shows:
         l_lock_lit: black
 
 slide_player:
-  play_queued_slide_overlord_lock_lit_slide:
-    overlord_portrait_slide:
-      target: lcd_right
-      # No need to set expire, the play_queued_widget kwargs include it
-  play_queued_slide_overlord_ball_locked_slide:
-    overlord_portrait_slide:
-      target: lcd_right
   #### ARRIVAL ####
   play_arrival_lock_sound:
     arrival_lock_is_lit_slide:
@@ -172,10 +169,6 @@ slides:
       text: Ball (ball) Locked!
       style: header_md, row_main, col_left_anchor
     - widget: console_background
-  overlord_portrait_slide:
-    widgets:
-      - type: image
-        image: missionbg_overlord_light
   overlord_full_slide:
     widgets:
       - type: text
@@ -437,6 +430,12 @@ widget_player:
       slide: arrival_ball_locked_slide
 
 widgets:
+  portrait_overlord_light:
+    - type: image
+      image: portrait_overlord_light
+  portrait_overlord:
+    - type: image
+      image: overlord
   arrival_widget_ball1:
     - type: text
       text: Med Bay Escaped

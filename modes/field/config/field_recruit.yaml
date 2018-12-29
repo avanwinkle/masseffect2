@@ -157,75 +157,35 @@ shots:
       color: FF7700 #color_zaeed
     tags: envshot_left_orbit
 
-# slide_player:
-#   # Use queue playback of main slides to show portraits
-#   play_queued_widget_recruit_advance_widget_1:
-#     portrait_slide_advance:
-#       target: lcd_right
-#       priority: 200
-#       expire: 4s
-
-# slides:
-#   portrait_slide_advance:
-#     - widget: portrait_widget_(squadmate)_advance
-
-widget_player:
-  play_queued_slide_recruit_advance_widget_1:
-    portrait_widget_advance:
-      target: lcd_right
-      widget_settings:
-        expire: 4s
-        z: 200
-  play_queued_slide_recruit_advance_widget_2:
-    portrait_widget_advance:
-      target: lcd_right
-      widget_settings:
-        expire: 4s
-        z: 200
-  play_queued_slide_recruit_advance_widget_3:
-    portrait_widget_advance:
-      target: lcd_right
-      widget_settings:
-        expire: 4s
-        z: 200
-
 widgets:
-  portrait_widget_advance:
-    - widget: portrait_widget_(squadmate)_advance
-  portrait_widget_complete:
-    - widget: portrait_widget_(squadmate)_complete
-  portrait_widget_garrus_advance:
+  portrait_squadmate_garrus_advance:
     - type: image
-      image: portrait_garrus_recruit
-  portrait_widget_grunt_advance:
+      image: portrait_squadmate_garrus_advance
+  portrait_squadmate_grunt_advance:
     - type: image
-      image: portrait_grunt_recruit
-  portrait_widget_jack_advance:
+      image: portrait_squadmate_grunt_advance
+  portrait_squadmate_jack_advance:
     - type: image
-      image: portrait_jack_recruit
-      # TODO: fade out the galaxy map instead of fading in every widget popup
-      opacity: 0
-      animations:
-        add_to_slide: portrait_enter_animation
-        remove_popup: portrait_exit_animation
-  portrait_widget_kasumi_advance:
+      image: portrait_squadmate_jack_advance
+  portrait_squadmate_kasumi_advance:
     - type: image
-      image: portrait_kasumi_recruit
-  portrait_widget_legion_advance:
+      image: portrait_squadmate_kasumi_advance
+  portrait_squadmate_legion_advance:
     - type: image
-      image: portrait_legion_recruit
-  portrait_widget_mordin_advance:
+      image: portrait_squadmate_legion_advance
+  portrait_squadmate_mordin_advance:
     - type: image
-      image: portrait_mordin_recruit
-  portrait_widget_samara_advance:
+      image: portrait_squadmate_mordin_advance
+  portrait_squadmate_samara_advance:
     - type: image
-      image: portrait_samara_recruit
-  portrait_widget_tali_advance:
+      image: portrait_squadmate_samara_advance
+  portrait_squadmate_tali_advance:
     - type: image
-      image: portrait_tali_recruit
-  portrait_widget_thane_advance:
+      image: portrait_squadmate_tali_advance
+  portrait_squadmate_thane_advance:
     - type: image
-      image: portrait_thane_recruit
-  portrait_widget_zaeed_advance:
+      image: portrait_squadmate_thane_advance
+  portrait_squadmate_zaeed_advance:
     - type: image
-      image: portrait_zaeed_recruit
+      image: portrait_squadmate_zaeed_advance
+

@@ -152,8 +152,6 @@ slides:
         style: body_md, row_sub, col_left_anchor
       - widget: background_console
   recruit_advance_slide_1:
-    transition:
-      type: fade
     widgets:
       - type: text
         text: Recruit
@@ -168,8 +166,6 @@ slides:
         style: body_md, row_sub, col_left_anchor
       - widget: console_background
   recruit_advance_slide_2:
-    transition:
-      type: fade
     widgets:
       - type: text
         text: Recruit
@@ -183,8 +179,6 @@ slides:
         style: body_md, row_sub, col_left_anchor
       - widget: console_background
   recruit_advance_slide_3:
-    transition:
-      type: fade
     widgets:
       - type: text
         text: Mission Available
@@ -199,18 +193,21 @@ slides:
       - widget: console_background
   recruit_portrait_slide:
     widgets:
-      - widget: missionbg_(squadmate)
-
+      - widget: portrait_recruit(squadmate)
 
 widgets:
-  # Widgets that appear when advance shots are hit
-
-  missionbg_jack:
+  portrait_recruitgarrus:
     - type: image
-      image: missionbg_jack
-  missionbg_tali:
+      image: portrait_recruitgarrus
+  portrait_recruitgrunt:
     - type: image
-      image: missionbg_tali
+      image: portrait_recruitgrunt
+  portrait_recruitjack:
+    - type: image
+      image: portrait_recruitjack
+  portrait_recruittali:
+    - type: image
+      image: portrait_recruittali
 
 # Widgets that overlay DURING a mission
   shots_remaining_widget:

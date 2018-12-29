@@ -22,6 +22,9 @@ slides:
       - type: image
         image: console_background
         z: 0
+  portrait_slide:
+    widgets:
+      - widget: (portrait_name)
   singleplayer_slide:
     transition:
       type: fade

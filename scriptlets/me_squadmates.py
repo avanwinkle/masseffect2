@@ -123,7 +123,8 @@ class SquadmateHandlers(CustomCode):
     if 0 < future_mate_status <= 3:
       self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
       self.machine.events.post("queue_slide", slide="recruit_advance_slide_{}".format(future_mate_status),
-                                               squadmate=mate, status=future_mate_status)
+                                              squadmate=mate, status=future_mate_status,
+                                              portrait="squadmate_{}_advance".format(mate))
 
       if future_mate_status == 3:
         self.machine.events.post("recruit_lit", squadmate=mate)
@@ -166,7 +167,8 @@ class SquadmateHandlers(CustomCode):
     self.machine.game.player["xp"] += self.machine.get_machine_var("mission_xp") * (
       1 + (self.machine.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
 
-    self.machine.events.post("levelup", mission_name="{} Recruited".format(mate))
+    self.machine.events.post("levelup", mission_name="{} Recruited".format(mate),
+                                        portrait="squadmate_{}_complete".format(mate))
     self.machine.events.post("recruit_success", squadmate=mate, status=4)
     self.machine.events.post("set_recruiticon_complete", squadmate=mate)
     self.machine.events.post("recruit_success_{}".format(mate))

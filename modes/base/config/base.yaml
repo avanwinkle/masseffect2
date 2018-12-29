@@ -88,6 +88,15 @@ event_player:
   # Mission resume events need to be here because base is how we enable the shot
   player_shot_missionresume_shot_enabled{value==False}:
     - disable_missionresume
+  levelup:
+    queue_slide:
+      slide: levelup_slide
+      mission_name:
+        value: mission_name
+      portrait:
+        value: portrait
+        type: string
+      priority: 1999 # Normandy attack runs at 2000
 
 ball_saves:
   default:
@@ -369,10 +378,6 @@ shows:
       events: remove_popup
 
 slide_player:
-  levelup:
-    levelup_slide:
-      expire: 4s
-      priority: 1999      # Normandy attack runs at 2000
   n7_assignment_shot_hit:
     n7_complete_slide:
       priority: 600

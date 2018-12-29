@@ -4,6 +4,7 @@ from mpf.core.utility_functions import Util
 
 EXPIRE_SECS = 4
 EXPIRE_OVERLAP_SECS = 0.5
+DEFAULT_TRANS = { "type": "fade", "duration": 0.25 }
 
 class SlideQueuePlayer(Scriptlet):
   """
@@ -22,7 +23,7 @@ class SlideQueuePlayer(Scriptlet):
     self.log.info("slide Queue Player Ready!")
 
   def _add_slide_to_queue(self, **kwargs):
-    slide_name = kwargs["slide"]
+    slide_name = kwargs.pop("slide")
     self._queue.append((slide_name, kwargs))
 
     if not self._current_timeout:
@@ -38,8 +39,7 @@ class SlideQueuePlayer(Scriptlet):
       context = "global"
       calling_context = None
       settings = {
-        "slides": {
-          slide_name: {
+        slide_name: {
           "expire": expire,
           "action": "play",
           # "key": slide_kwargs.get("key"),
@@ -51,9 +51,15 @@ class SlideQueuePlayer(Scriptlet):
           # 'show': True,
           # 'force': False,
           # 'slide': None,
-          # 'transition': None,
-          # 'transition_out': None,
-      }}}
+          'transition': slide_kwargs.get("transition", DEFAULT_TRANS),
+          'transition_out': slide_kwargs.get("transition_out", DEFAULT_TRANS),
+      }}
+
+      portrait = slide_kwargs.pop("portrait")
+      if portrait:
+        portrait_name = "portrait_{}".format(portrait)
+        settings["portrait_slide"] = self._generate_portrait(expire, slide_kwargs)
+        slide_kwargs["portrait_name"] = portrait_name
 
       self.mc.slide_player.play(settings, context, calling_context, **slide_kwargs)
       self.mc.post_mc_native_event("play_queued_slide_{}".format(slide_name), **slide_kwargs)
@@ -64,6 +70,17 @@ class SlideQueuePlayer(Scriptlet):
       self._current_timeout = None
       self._play_count = 0
       self._check_queue_clear()
+
+  def _generate_portrait(self, expire, slide_kwargs):
+    slide_settings = {
+      "expire": expire,
+      "action": "play",
+      "target": "lcd_right",
+      "priority": 1000 + self._play_count,
+      'transition': slide_kwargs.get("transition", DEFAULT_TRANS),
+      'transition_out': slide_kwargs.get("transition_out", DEFAULT_TRANS),
+    }
+    return slide_settings
 
   def _check_queue_clear(self, **kwargs):
     if not self._current_timeout:
