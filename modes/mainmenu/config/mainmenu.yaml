@@ -52,13 +52,13 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   select_career_slide:
     widgets:
       - type: text
         text: Select a Profile
         style: header_md, row_main, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   resume_game_slide:
     widgets:
       - type: text
@@ -67,7 +67,7 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   new_game_slide:
     widgets:
       - type: text
@@ -76,7 +76,7 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   career_select_slide:
     widgets:
       - type: text
@@ -92,13 +92,13 @@ slides:
         text: "Started: (career_started)\nLast played: (last_played)"
         halign: right
         style: body_sm, row_sub_under, col_right_anchor
-      - widget: console_background
+      - widget: background_console
   casual_slide:
     widgets:
       - type: text
         text: Casual Play
         style: header_md, row_main, col_left_anchor
-      - widget: console_background
+      - widget: background_console
 
 show_player:
   show_mainmenu: mainmenu_show

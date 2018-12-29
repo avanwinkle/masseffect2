@@ -459,7 +459,7 @@ slides:
       - type: text
         text: Infiltrate the Ship
         style: header_sm, row_main, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   hagalaz_portrait:
     widgets:
       - type: image
@@ -475,7 +475,7 @@ slides:
         style: header_sm, row_main, col_left_anchor
         animations:
           show_slide: pulse_text_slow
-      - widget: console_background
+      - widget: background_console
 
 widget_player:
   timer_sbhagalaz_timer_tick:

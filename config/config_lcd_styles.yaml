@@ -6,22 +6,23 @@ slides:
       style: row_main
       anchor_y: top
       scale: 0.5
+      z: 2
     - type: text
       text: Press Start
       color: 990000
       style: header_sm, row_sub
       animations:
         show_slide: pulse_text_slow
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      x: 0
+      z: 0
   attract_slide:
     - type: image
       image: splashscreen
       anchor_x: right
-      x: 130%
-  background_slide:
-    widgets:
-      - type: image
-        image: console_background
-        z: 0
+      x: 110%
   portrait_slide:
     widgets:
       - widget: (portrait_name)
@@ -40,7 +41,7 @@ slides:
           add_to_slide:
             - property: rotation
               value: -360
-              duration: 1000s
+              duration: 2000s
   multiplayer_slide:
     widgets:
       - type: text
@@ -54,7 +55,7 @@ slides:
           add_to_slide:
             - property: rotation
               value: -360
-              duration: 1000s
+              duration: 2000s
 
 
 machine_vars:
@@ -75,15 +76,6 @@ widgets:
     - type: image
       image: grid_dual
       z: 1000
-  console_background:
-    - type: image
-      image: texture_console
-      z: 100
-  console_background_overlay:
-    - type: image
-      image: texture_console
-      opacity: 0.5
-      z: 10
   background_galaxy:
     - type: image
       image: background_galaxy
@@ -102,37 +94,6 @@ widgets:
       image: background_overlord
       opacity: 0.5
       z: 0
-  popup_console:
-    - type: image
-      image: popup_console
-      z: 1
-  popup_image_border:
-    - type: image
-      image: popup_image_border
-      z: 2
-      animations:
-        add_to_slide: popup_enter_animation
-  popup_right:
-    - type: image
-      image: popup_right_full
-      anchor_y: bottom
-      y: -50
-      z: 1
-      opacity: 0
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
-  popup_selector:
-    - type: image
-      image: popup_selector
-      z: 1
-  planet_widget_1:
-    - type: image
-      image: popup_planet_viantel
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-        remove_popup: popup_exit_animation
   missionselect_count_widget:
     - type: text
       text: (index) / (items) >

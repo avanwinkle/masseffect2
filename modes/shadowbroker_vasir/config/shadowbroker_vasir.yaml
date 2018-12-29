@@ -241,7 +241,7 @@ slides:
         style: header_md, row_main
         animations:
           show_slide: pulse_text
-      - widget: console_background
+      - widget: background_console
   sbvasir_portrait:
     widgets:
       - type: image

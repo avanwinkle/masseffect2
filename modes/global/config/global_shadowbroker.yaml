@@ -105,7 +105,7 @@ slides:
     - type: text
       text: Intel Collected
       style: header_md, row_main, col_left_anchor
-    - widget: console_background
+    - widget: background_console
 
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions

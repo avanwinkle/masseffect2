@@ -22,17 +22,6 @@ event_player:
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
 
-  # show_base_slide{not is_available and not is_resume}:
-  #   queue_widget:
-  #     widget: introslide_no_missions
-  #     slide: field_rightslide_base
-  #     expire: 7s
-  # show_base_slide{is_available and not is_resume}:
-  #   queue_widget:
-  #     widget: introslide_missions
-  #     slide: field_rightslide_base
-  #     expire: 7s
-
 slide_player:
   queue_slide: {}
 

@@ -164,7 +164,7 @@ slides:
         text: 2 shots to unlock
         anchor_y: bottom
         style: body_md, row_sub, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   recruit_advance_slide_2:
     widgets:
       - type: text
@@ -177,7 +177,7 @@ slides:
       - type: text
         text: 1 shot to unlock
         style: body_md, row_sub, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   recruit_advance_slide_3:
     widgets:
       - type: text
@@ -190,7 +190,7 @@ slides:
       - type: text
         text: Left Ramp to Start
         style: body_md, row_sub, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   recruit_portrait_slide:
     widgets:
       - widget: portrait_recruit(squadmate)

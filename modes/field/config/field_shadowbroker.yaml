@@ -189,7 +189,7 @@ slides:
         style: header_sm, row_sub, col_left_anchor
         animations:
           show_slide: pulse_text
-      - widget: console_background
+      - widget: background_console
 
 sound_player:
   shadowbroker_hold_enabled_slide{mname=="vasir"}: vasir_hold_enabled_sounds

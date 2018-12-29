@@ -25,12 +25,11 @@ event_player:
 
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
+  mode_base_started.3{current_player.squadmates_count==2}:
+    - play_intro_show
   mode_base_started.4{current_player.squadmates_count>2}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
-
-  slide_field_rightslide_base_active{not current_player.intro_played}:
-    play_intro_show:
 
   mode_base_will_stop:
     - stop_mode_global
@@ -365,17 +364,19 @@ shows:
       events:
         queue_slide{current_player.available_missions>0}:
           slide: intro_missions_slide
+          transition_type: none
+          portrait: squad
           expire: 8s
         queue_slide{current_player.available_missions==0}:
           slide: intro_no_missions_slide
+          transition_type: none
+          portrait: squad
           expire: 8s
     - time: 1
       events:
         - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
         - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
         - play_gameintro_norecruits_short{current_player.ball==3}
-    - time: 7
-      events: remove_popup
 
 slide_player:
   n7_assignment_shot_hit:
@@ -392,16 +393,8 @@ slide_player:
       action: play
       target: lcd_right
       priority: 100
-    base_console_slide:
-      action: play
-      priority: 0
 
 slides:
-  base_console_slide:
-    widgets:
-      - type: image
-        image: texture_console
-        z: 0
   levelup_slide:
     widgets:
       - type: text
@@ -440,22 +433,16 @@ slides:
       style: header_md, row_main
     - type: text
       text: "Hit any lane 3x\nto unlock missions"
-      style: header_sm, row_bottom
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-    - widget: console_background
+      style: header_xs, row_bottom
+    - widget: background_console
   intro_missions_slide:
     - type: text
       text: Build Your Team
       style: header_md, row_main
     - type: text
       text: "Select a mission at\nthe Galaxy Map"
-      style: header_sm, row_bottom
-    - type: image
-      image: popup_image_squad
-      style: image_popup
-    - widget: console_background
+      style: header_xs, row_bottom
+    - widget: background_console
 
 
 sound_player:
@@ -602,4 +589,7 @@ widget_player:
 widgets:
   sqicon_status_widget:
     - widget: sqicon_(squadmate)
+  portrait_squad:
+    - type: image
+      image: portrait_squad
 

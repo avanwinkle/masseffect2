@@ -184,7 +184,7 @@ slides:
       - type: text
         text: "Shots: (player|sbchase_hits_remaining)"
         style: header_xs, row_gutter, col_left_center
-      - widget: console_background
+      - widget: background_console
   sbchase_portrait:
     widgets:
       - type: image

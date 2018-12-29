@@ -272,7 +272,7 @@ slides:
       - type: text
         text: OVERLORD
         style: header_sm, row_main, col_left_anchor
-      - widget: console_background
+      - widget: background_console
   overlord_portrait:
     widgets:
       - type: image

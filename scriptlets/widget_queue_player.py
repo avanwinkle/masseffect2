@@ -51,8 +51,14 @@ class SlideQueuePlayer(Scriptlet):
           # 'show': True,
           # 'force': False,
           # 'slide': None,
-          'transition': slide_kwargs.get("transition", DEFAULT_TRANS),
-          'transition_out': slide_kwargs.get("transition_out", DEFAULT_TRANS),
+          'transition': {
+            "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
+            "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
+          },
+          'transition_out': {
+            "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
+            "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
+          },
       }}
 
       portrait = slide_kwargs.pop("portrait")
@@ -77,8 +83,14 @@ class SlideQueuePlayer(Scriptlet):
       "action": "play",
       "target": "lcd_right",
       "priority": 1000 + self._play_count,
-      'transition': slide_kwargs.get("transition", DEFAULT_TRANS),
-      'transition_out': slide_kwargs.get("transition_out", DEFAULT_TRANS),
+      'transition': {
+            "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
+            "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
+          },
+          'transition_out': {
+            "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
+            "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
+          },
     }
     return slide_settings
 

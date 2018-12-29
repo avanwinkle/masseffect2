@@ -160,7 +160,7 @@ slides:
     - type: text
       text: Lock is Lit
       style: header_md, row_main, col_left_anchor
-    - widget: console_background
+    - widget: background_console
   overlord_ball_locked_slide:
     - type: text
       text: (station)
@@ -168,7 +168,7 @@ slides:
     - type: text
       text: Ball (ball) Locked!
       style: header_md, row_main, col_left_anchor
-    - widget: console_background
+    - widget: background_console
   overlord_full_slide:
     widgets:
       - type: text
