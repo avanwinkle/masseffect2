@@ -262,23 +262,21 @@ shows:
 
 slide_player:
   show_overlord_slide:
-    overlord_slide:
-      action: play
+    overlord_slide: {}
+    overlord_portrait:
+      target: lcd_right
 
 slides:
   overlord_slide:
     widgets:
       - type: text
         text: OVERLORD
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
+        style: header_sm, row_main, col_left_anchor
+      - widget: console_background
+  overlord_portrait:
+    widgets:
+      - type: image
+        image: portrait_overlord
 
 sound_player:
   play_music_1:
@@ -401,36 +399,16 @@ widgets:
   hackshots_widget:
     - type: text
       text: "Targets: (value)"
-      style: small
-      anchor_x: left
-      anchor_y: bottom
-      y: 2
-      x: 2
-      z: 4
+      style: header_xs, row_gutter, col_left_center
   jackpots_needed_widget:
     - type: text
       text: " / (value)"
-      style: small
+      style: header_xs, row_gutter
       anchor_x: left
-      anchor_y: bottom
-      y: 2
-      x: 47 # 48 was way too left
-      z: 4
+      x: 62% # default is 38%, 60% too low, 65% too high
   jackpot_widget:
     - type: text
       text: "JACKPOT LIT"
-      style: small
-      anchor_x: right
-      anchor_y: bottom
-      y: 2
-      x: right-2
-      z: 4
+      style: header_md, row_sub, col_left_anchor
       animations:
-        add_to_slide:                # animation trigger event
-          - property: opacity      # name of the widget property we're animating
-            value: 1               # target value of that property for this step
-            duration: 1s          # duration for this step (how long it takes to get there)
-          - property: opacity      # second step in the animation (starts with a hyphen)
-            value: 0
-            duration: 1s
-            repeat: true
+        add_to_slide: pulse_text

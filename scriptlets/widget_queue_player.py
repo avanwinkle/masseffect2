@@ -4,7 +4,7 @@ from mpf.core.utility_functions import Util
 
 EXPIRE_SECS = 4
 EXPIRE_OVERLAP_SECS = 0.5
-DEFAULT_TRANS = { "type": "fade", "duration": 0.25 }
+DEFAULT_TRANS = { "type": "fade", "duration": 0.15 }
 
 class SlideQueuePlayer(Scriptlet):
   """

@@ -443,31 +443,39 @@ timers:
         value: 12
 
 slide_player:
-  mode_shadowbroker_hagalaz_started: hagalaz_slide
+  mode_shadowbroker_hagalaz_started:
+    hagalaz_slide: {}
+    hagalaz_portrait:
+      target: lcd_right
   logicblock_shunt_counter_complete: hagalaz_complete_slide
 
 slides:
   hagalaz_slide:
     widgets:
       - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
         text: Infiltrate the Ship
-        style: medium
+        style: header_sm, row_main, col_left_anchor
+      - widget: console_background
+  hagalaz_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_hagalaz
   hagalaz_complete_slide:
     widgets:
       - type: text
-        text: ENTER
-        style: text_default
-        anchor_y: bottom
-        y: middle+2
-        animations:
-          show_slide: pulse_text_slow
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
       - type: text
-        text: THE SHIP
-        style: text_default
-        anchor_y: top
-        y: middle-2
+        text: ENTER THE SHIP
+        style: header_sm, row_main, col_left_anchor
         animations:
           show_slide: pulse_text_slow
+      - widget: console_background
 
 widget_player:
   timer_sbhagalaz_timer_tick:
@@ -489,8 +497,8 @@ widgets:
   hagalaz_timer_widget:
     - type: text
       text: (ticks)
-      style: small_bot_left
+      style: timer_primary, row_gutter, col_right_indent
   hagalaz_shunt_widget:
     - type: text
       text: "Shots: (value)"
-      style: small_bot_right
+      style: header_xs, row_gutter, col_left_center

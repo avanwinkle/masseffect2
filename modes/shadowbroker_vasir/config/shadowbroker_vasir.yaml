@@ -35,6 +35,7 @@ event_player:
     shadowbroker_vasir_complete: {}
     levelup:
       mission_name: "Suket's Datapad Recovered"
+      portrait: shadowbroker_vasir_complete
   # Relay some sounds to delay
   vasir_shot_barrier_hit: play_vasir_start_sound|2s
   vasir_shot_armor_hit: play_vasir_start_sound|2s
@@ -223,16 +224,28 @@ shows:
         (leds): black
 
 slide_player:
-  mode_shadowbroker_vasir_started: sbvasir_slide
+  mode_shadowbroker_vasir_started:
+    sbvasir_slide: {}
+    sbvasir_portrait:
+      target: lcd_right
 
 slides:
   sbvasir_slide:
     widgets:
       - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
         text: DEFEAT VASIR
-        style: quadrit_big
+        style: header_md, row_main
         animations:
           show_slide: pulse_text
+      - widget: console_background
+  sbvasir_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_vasir
 
 sound_player:
   mode_shadowbroker_vasir_started:
@@ -385,15 +398,7 @@ widgets:
   timer_widget:
     - type: text
       text: (ticks_remaining)
-      style: dmd_small
-      anchor_x: right
-      anchor_y: top
-      x: right-2
-      y: top-2
-    - type: text
-      text: (temp_hurryup_value)
-      style: dmd_small
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 2
+      style: timer_primary, row_gutter, col_right_indent
+  portrait_shadowbroker_vasir_complete:
+    - type: image
+      image: portrait_shadowbroker_vasir_complete

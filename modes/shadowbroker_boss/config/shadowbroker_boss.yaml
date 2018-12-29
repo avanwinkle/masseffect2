@@ -159,7 +159,9 @@ shows:
         liara_energy_projectiles_bouncing_off:
           action: play
           track: voice
-      slides: shadowbroker_round_1_slide
+      slides:
+        shadowbroker_round_2_portrait:
+          target: lcd_right
     - time: 5s
       sounds:
         shepard_then_we_do_this_the_hard_way:
@@ -175,7 +177,9 @@ shows:
         liara_if_you_can_get_him_to:
           action: play
           track: voice
-      slides: shadowbroker_round_2_slide
+      slides:
+        shadowbroker_round_3_portrait:
+          target: lcd_right
     - time: 3s
       events:
         - sbboss_round_show_complete
@@ -186,7 +190,9 @@ shows:
         shepard_liara_now:
           action: play
           track: voice
-      slides: shadowbroker_round_3_slide
+      slides:
+        shadowbroker_complete_portrait:
+          target: lcd_right
     - time: 1500ms
       events: shadowbroker_boss_complete
   sbboss_shields_show:
@@ -213,38 +219,39 @@ shows:
 
 slide_player:
   mode_shadowbroker_boss_started:
-    shadowbroker_intro_slide:
-      action: play
-      priority: 100
-      expire: 4s
-    shadowbroker_boss_slide:
-      action: play
-      priority: 1
+    shadowbroker_boss_slide: {}
+    shadowbroker_round_1_portrait:
+      target: lcd_right
 
 slides:
   shadowbroker_intro_slide:
     - type: text
       text: SB Boss Intro
-  shadowbroker_round_1_slide:
-    - type: text
-      text: SB Boss Round 1
-  shadowbroker_round_2_slide:
-    - type: text
-      text: SB Boss Round 2
-  shadowbroker_round_3_slide:
-    - type: text
-      text: SB Boss Round 3
+  shadowbroker_round_1_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_1
+  shadowbroker_round_2_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_2
+  shadowbroker_round_3_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_3
+  shadowbroker_complete_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_advance_3
   shadowbroker_boss_slide:
-    - type: text
-      text: Defeat the
-      style: medium
-      anchor_y: bottom
-      y: middle+6
-    - type: text
-      text: Shadow Broker
-      style: text_default
-      anchor_y: top
-      y: middle+4
+    widgets:
+      - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
+        text: "Defeat the\nShadow Broker"
+        style: header_sm, row_main, col_left_anchor
 
 sound_player:
   mode_shadowbroker_boss_started:

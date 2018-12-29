@@ -36,14 +36,19 @@ event_player:
     # Get a ball in the ball hold to begin Boss Combat
     - start_mode_shadowbroker_boss{device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
     - disable_shadowbroker_hold
-  enable_shadowbroker_hold.1{current_player.sbhold_enabled==0 and (device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped")}:
-    shadowbroker_hold_enabled_slide:
+  enable_shadowbroker_hold:
+    queue_slide{current_player.sbhold_enabled==0 and (device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped")}:
+      slide: shadowbroker_ready_slide
       mission: Capture Vasir
       mname: vasir
-  enable_shadowbroker_hold.2{current_player.sbhold_enabled==0 and (device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped")}:
-    shadowbroker_hold_enabled_slide:
+      expire: 5s
+      portrait: shadowbroker_vasir_light
+    queue_slide{current_player.sbhold_enabled==0 and (device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped")}:
+      slide: shadowbroker_ready_slide
       mission: Final Confrontation
       mname: shadowbroker
+      expire: 5s
+      portrait: shadowbroker_boss_light
 
 # Use a player variable to mock the hold state of the ball hold
 variable_player:
@@ -169,29 +174,22 @@ shows:
         gi: off
         l_flash_dragon_left: on
 
-slide_player:
-  shadowbroker_hold_enabled_slide:
-    shadowbroker_ready_slide:
-      expire: 5s
-
 slides:
   shadowbroker_ready_slide:
     widgets:
       - type: text
         text: (mission)
-        style: text_default
-        anchor_y: bottom
-        y: bottom+30%
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: Lair of the Shadow Broker
-        style: small
-        anchor_y: top
-        y: top-1
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
       - type: text
         text: Hit Lane to Start
-        style: dmd_small
-        anchor_y: bottom
-        y: 1
+        style: header_sm, row_sub, col_left_anchor
+        animations:
+          show_slide: pulse_text
+      - widget: console_background
 
 sound_player:
   shadowbroker_hold_enabled_slide{mname=="vasir"}: vasir_hold_enabled_sounds
@@ -245,3 +243,10 @@ sounds:
     file: DLC_EXP_Part01_Int.699.ogg
     track: voice
 
+widgets:
+  portrait_shadowbroker_vasir_light:
+    - type: image
+      image: portrait_shadowbroker_vasir_light
+  portrait_shadowbroker_boss_light:
+    - type: image
+      image: portrait_shadowbroker_boss_light

@@ -19,10 +19,17 @@ event_player:
   drop_target_bank_dropbank_down{device.achievements.shadowbroker.state=="completed"}:
     - play_glyph
 
-  # QUEUE WIDGETS
+  # QUEUE SLIDE
   logicblock_sbdrops_counter_hit:
-    queue_widget:
-      widget: shadowbroker_drop_widget
+    queue_slide{device.achievements.vasir.state!="completed"}:
+      slide: shadowbroker_advance_slide
+      portrait: shadowbroker_advance_1
+    queue_slide{device.achievements.vasir.state=="completed" and device.achievements.shadowbroker.state!="completed"}:
+      slide: shadowbroker_advance_slide
+      portrait: shadowbroker_advance_2
+    queue_slide{device.achievements.shadowbroker.state=="completed"}:
+      slide: shadowbroker_advance_slide
+      portrait: shadowbroker_advance_3
       count:
         value: device.counters.sbdrops_counter.value
         type: int
@@ -89,27 +96,38 @@ shows:
         l_dropbank_middle: black
         l_dropbank_top: black
 
+
+slides:
+  shadowbroker_advance_slide:
+    - type: text
+      text: "Lair of the Shadow Broker"
+      style: header_xs, row_top, col_left_anchor
+    - type: text
+      text: Intel Collected
+      style: header_md, row_main, col_left_anchor
+    - widget: console_background
+
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions
-  play_queued_widget_shadowbroker_drop_widget{count==1}:
+  play_queued_slide_shadowbroker_advance_slide{count==1}:
     shepard_sounds_like_liara_found_something_big:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==2}:
+  play_queued_slide_shadowbroker_advance_slide{count==2}:
     vasir_i_know_where_the_trade_center_is:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==3}:
+  play_queued_slide_shadowbroker_advance_slide{count==3}:
     vasir_they_took_out_three_floors:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==4}:
+  play_queued_slide_shadowbroker_advance_slide{count==4}:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==5}:
+  play_queued_slide_shadowbroker_advance_slide{count==5}:
     liara_sukets_datapad_this_has_what_we_need:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==6}:
+  play_queued_slide_shadowbroker_advance_slide{count==6}:
     liara_we_can_be_at_base_in_a_few_hours:
       max_queue_time: 2s
-  play_queued_widget_shadowbroker_drop_widget{count==7}:
+  play_queued_slide_shadowbroker_advance_slide{count==7}:
     liara_land_outside_and_hunt_for_a_hatch:
       max_queue_time: 2s
   # Relays:
@@ -203,20 +221,13 @@ sounds:
     track: voice
 
 widgets:
-  shadowbroker_drop_widget:
-    - type: text
-      text: "Lair of the\nShadow Broker"
-      style: header_popup, row_main
-      animations:
-        add_to_slide: popup_enter_animation
-    - type: text
-      text: Intel Collected
-      style: header_md, row_sub
-      animations:
-        add_to_slide: popup_enter_animation
+  portrait_shadowbroker_advance_1:
     - type: image
-      image: popup_image_shadowbroker_liara
-      style: image_popup
-      animations:
-        add_to_slide: popup_enter_animation
-    - widget: popup_right
+      image: portrait_shadowbroker_advance_1
+  portrait_shadowbroker_advance_2:
+    - type: image
+      image: portrait_shadowbroker_advance_2
+  portrait_shadowbroker_advance_3:
+    - type: image
+      image: portrait_shadowbroker_advance_3
+

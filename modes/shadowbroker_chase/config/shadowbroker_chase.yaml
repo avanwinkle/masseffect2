@@ -165,38 +165,30 @@ shows:
     - duration: 500ms
 
 slide_player:
-  mode_shadowbroker_chase_started: sbchase_slide
-
+  mode_shadowbroker_chase_started:
+    sbchase_slide: {}
+    sbchase_portrait:
+      target: lcd_right
 slides:
   sbchase_slide:
     widgets:
       - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
         text: CHASE VASIR
-        style: quadrit_big
+        style: header_md, row_main, col_left_anchor
         animations:
           show_slide: pulse_text
-        z: 2
       - type: text
         text: "Shots: (player|sbchase_hits_remaining)"
-        style: dmd_small
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 2
-        z: 2
-      - type: text
-        text: (player|temp_hurryup_value)
-        style: dmd_small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
-        z: 2
-      - type: rectangle
-        height: 32
-        width: 128
-        color: 000000
-        z: 0
+        style: header_xs, row_gutter, col_left_center
+      - widget: console_background
+  sbchase_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_chase
 
 sound_player:
   mode_shadowbroker_chase_started:
@@ -433,9 +425,9 @@ timers:
         value: 10
 
 widget_player:
-  timer_sbchase_timer_started: timer_widget
   timer_sbchase_timer_tick:
     timer_widget:
+      slide: sbchase_slide
       action: update
   stop_mode_shadowbroker_chase:
     timer_widget:
@@ -445,8 +437,4 @@ widgets:
   timer_widget:
     - type: text
       text: (ticks_remaining)
-      style: dmd_small
-      anchor_x: right
-      anchor_y: top
-      x: right-2
-      y: top-2
+      style: timer_primary, row_gutter, col_right_indent
