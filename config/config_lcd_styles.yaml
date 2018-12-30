@@ -103,120 +103,6 @@ widgets:
       style: header_xs, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
       adjust_right: -142
-  # SQUADMATES
-  sqicon_garrus:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      x: 0
-      y: 0
-      animations:
-        add_to_slide{current_player.status_garrus==3}: pulse_sqicon
-  sqicon_grunt:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      x: 121
-      y: 0
-      animations:
-        add_to_slide{current_player.status_grunt==3}: pulse_sqicon
-  sqicon_jack:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      x: 242
-      y: 0
-  sqicon_jacob:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 363
-      y: 0
-      animations:
-        add_to_slide{current_player.status_jacob==3}: pulse_sqicon
-  sqicon_kasumi:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 158
-      animations:
-        add_to_slide{current_player.status_kasumi==3}: pulse_sqicon
-  sqicon_legion:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 121
-      y: 158
-  sqicon_miranda:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 242
-      y: 158
-      animations:
-        add_to_slide{current_player.status_miranda==3}: pulse_sqicon
-  sqicon_mordin:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 363
-      y: 158
-  sqicon_samara:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 0
-      y: 316
-  sqicon_tali:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 121
-      y: 316
-      animations:
-        add_to_slide{current_player.status_tali==3}: pulse_sqicon
-  sqicon_thane:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 242
-      y: 316
-      animations:
-        add_to_slide{current_player.status_thane==3}: pulse_sqicon
-  sqicon_zaeed:
-    - type: rectangle
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      x: 363
-      y: 316
-      animations:
-        add_to_slide{current_player.status_zaeed==3}: pulse_sqicon
-
 
 widget_styles:
 
@@ -384,16 +270,14 @@ widget_styles:
   #----------------------------
   sqicon_color_available:
     color: FFFFFF
-    z: 0
   sqicon_color_recruited:
     color: CCCCCC
-    z: 0
   sqicon_color_dead:
     color: CE0000
-    z: 0
   sqicon_color_specialist:
     color: 0059ce
-    z: 0
+  sqicon_color_none:
+    color: 000000
 
 animations:
   popup_enter_animation:
@@ -428,7 +312,7 @@ animations:
       value: 0
       duration: 500ms
       easing: in_sine
-  pulse_sqicon:
+  sqicon_available:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
       duration: 0.75s          # duration for this step (how long it takes to get there)
@@ -436,3 +320,17 @@ animations:
       value: 0.25
       duration: 0.75s
       repeat: true
+  sqicon_complete:
+    - property: color
+      value: 000000
+      duration: 1s
+    - property: color
+      value: CCCCCC
+      duration: 1s
+  sqicon_dead:
+    - property: color
+      value: 000000
+      duration: 1s
+    - property: color
+      duration: 1s
+      value: CE0000

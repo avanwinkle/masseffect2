@@ -25,11 +25,12 @@ event_player:
 
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
-  mode_base_started.3{current_player.squadmates_count==2}:
-    - play_intro_show
-  mode_base_started.4{current_player.squadmates_count>2}:
-    - play_gameintro_recruits_long{current_player.ball==1}
-    - play_gameintro_recruits_short{current_player.ball==3}
+  # *** Disable while working on sqicons
+  # mode_base_started.3{current_player.squadmates_count==2}:
+  #   - play_intro_show
+  # mode_base_started.4{current_player.squadmates_count>2}:
+  #   - play_gameintro_recruits_long{current_player.ball==1}
+  #   - play_gameintro_recruits_short{current_player.ball==3}
 
   mode_base_will_stop:
     - stop_mode_global
@@ -393,6 +394,10 @@ slide_player:
       action: play
       target: lcd_right
       priority: 100
+  recruit_lit:
+    squadicon_slide: {}
+  recruit_success:
+    squadicon_slide: {}
 
 slides:
   levelup_slide:
@@ -423,7 +428,147 @@ slides:
   squadicon_slide:
     - type: image
       image: squadmates_grid
-      z: 1
+      z: 10
+    - type: rectangle
+      color: 000000
+      width: 500
+      height: 500
+      z: 0
+    # SQUADMATES
+    - type: rectangle
+      key: sqicon_garrus
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      animations:
+        show_slide: sqicon_available
+      x: 0
+      y: 0
+      z: 2
+    - type: rectangle
+      key: sqicon_grunt
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      animations:
+        show_slide: sqicon_available
+      x: 121
+      y: 0
+      z: 2
+    - type: rectangle
+      key: sqicon_jack
+      width: 121
+      height: 158
+      anchor_x: left
+      anchor_y: bottom
+      animations:
+        show_slide: sqicon_available
+      x: 242
+      y: 0
+      z: 2
+    - type: rectangle
+      key: sqicon_jacob
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 363
+      y: 0
+      z: 2
+    - type: rectangle
+      key: sqicon_kasumi
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      # animations:
+      #   show_slide: sqicon_available
+      x: 0
+      y: 158
+      z: 2
+    - type: rectangle
+      key: sqicon_legion
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 121
+      y: 158
+      z: 2
+    - type: rectangle
+      key: sqicon_miranda
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 242
+      y: 158
+      z: 2
+    - type: rectangle
+      key: sqicon_mordin
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 363
+      y: 158
+      z: 2
+    - type: rectangle
+      key: sqicon_samara
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 0
+      y: 316
+      z: 2
+    - type: rectangle
+      key: sqicon_tali
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 121
+      y: 316
+      z: 2
+    - type: rectangle
+      key: sqicon_thane
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 242
+      y: 316
+      z: 2
+    - type: rectangle
+      key: sqicon_zaeed
+      width: 121
+      height: 158
+      anchor_y: bottom
+      anchor_x: left
+      animations:
+        show_slide: sqicon_available
+      x: 363
+      y: 316
+      z: 2
     - type: image
       image: squadmates_grid_overlay
       z: 100
@@ -552,43 +697,7 @@ track_player:
       action: stop_all_sounds
       fade: 500ms
 
-widget_player:
-  set_recruiticon{status==3}:
-    sqicon_status_widget:
-      action: update
-      target: lcd_right
-      slide: squadicon_slide
-      key: sqicon_status_(squadmate)
-      widget_settings:
-        style: sqicon_color_available
-  set_recruiticon{status==4}:
-    sqicon_status_widget:
-      action: update
-      target: lcd_right
-      slide: squadicon_slide
-      key: sqicon_status_(squadmate)
-      widget_settings:
-        style: sqicon_color_recruited
-  set_recruiticon{status==-1}:
-    sqicon_status_widget:
-      action: update
-      target: lcd_right
-      slide: squadicon_slide
-      key: sqicon_status_(squadmate)
-      widget_settings:
-        style: sqicon_color_dead
-  suicide_huddle_specialist_selected:
-    sqicon_status_widget:
-      action: update
-      target: lcd_right
-      slide: squadicon_slide
-      key: sqicon_status_(squadmate)
-      widget_settings:
-        style: sqicon_color_specialist
-
 widgets:
-  sqicon_status_widget:
-    - widget: sqicon_(squadmate)
   portrait_squad:
     - type: image
       image: portrait_squad

@@ -1,4 +1,6 @@
+import logging
 from mpfmc.core.scriptlet import Scriptlet
+from mpf.core.rgba_color import RGBAColor
 
 NAME_FORMATS = {
   "killed":          "squadmate_{squadmate}_killed",
@@ -7,10 +9,24 @@ NAME_FORMATS = {
 }
 COMPLETED_EVENT_NAME = "squadmate_killed_complete"
 
+SQICON_STATUSES = {
+  "none": RGBAColor([0,0,0]),
+  "dead" : RGBAColor([0.8, 0, 0]),
+  "available": RGBAColor([1.0, 1.0, 1.0]),
+  "complete": RGBAColor([0.78, 0.26, 0.07]),
+  "specialist": RGBAColor([0, 0.35, 0.8]),
+}
+
 class SquadmateSounds(Scriptlet):
 
   def on_load(self):
+    self.log = logging.getLogger("SquadmatesMC")
+    self.log.setLevel(10)
     self.mc.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
+    self.mc.events.add_handler("slide_squadicon_slide_created", self._update_sqicons)
+    self.mc.events.add_handler("recruit_lit", self._update_sqicons)
+    self.mc.events.add_handler("recruit_success", self._update_sqicons)
+    self._sqicons = None
 
   def _handle_squadmate_sound(self, **kwargs):
     sound_name = NAME_FORMATS[kwargs.get("sound")].format(**kwargs)
@@ -53,3 +69,71 @@ class SquadmateSounds(Scriptlet):
       self.mc.sound_player.play(cb_settings, context, calling_context)
     else:
       self.mc.events.post(COMPLETED_EVENT_NAME)
+
+  def _update_sqicons(self, **kwargs):
+    self.log.info("Updating sqicons")
+    # self.log.info(" - Slides: {}".format(self.mc.slides))
+    sqicon_slide = self.mc.slides["squadicon_slide"]
+    # self.log.info(" - Sqicon Slide: {}".format(sqicon_slide))
+    # self.log.info("{}".format(dir(sqicon_slide)))
+    if not self._sqicons:
+      self._sqicons = {}
+      # for widget in sqicon_slide["widgets"]:
+      #   if widget.get("key") and widget.get("key").startswith("sqicon_"):
+      #     mate = widget["key"].replace("sqicon_", "")
+      #     self._sqicons[mate] = widget
+      #     # widget["style"] = [ SQICON_STATUSES[self.mc.player["status_{}".format(mate)]]]
+      # self.log.info("Widgets: {}".format(self._sqicons))
+
+    self.log.info("Displays: {}".format(self.mc.displays))
+    lcd_right = self.mc.displays['lcd_right']
+
+    slide = None
+    for s in lcd_right.slides:
+      self.log.info(" - slide: {}".format(s))
+      if s.name == "squadicon_slide":
+        slide = s
+
+    if not slide:
+      self.log.error("Unable to find squadicon slide")
+      return
+
+    self.log.info("Current slide: {}".format(slide))
+    # self.log.info(dir(slide))
+    self.log.info("Current widgets: {}".format(slide.widgets))
+    if slide.name == "squadicon_slide":
+      for container in slide.widgets:
+        widget = container.widget
+        if widget.key and widget.key.startswith("sqicon_"):
+          mate = widget.key.replace("sqicon_", "")
+          status = self.mc.player["status_{}".format(mate)]
+          # widget.config["animations"] = {}
+
+          # if status == 3:
+          #   widget.opacity = 0.5
+          # else:
+          #   widget.opacity = 1
+
+          if 0 <= status < 3:
+            color = SQICON_STATUSES["none"]
+            # self.log.info(dir(widget))
+            # self.log.info("Widget after opacity/animation: {}".format(widget))
+            # self.log.info("Config after opacity/animation: {}".format(widget.config))
+          else:
+            if self.mc.player["specialist"] == mate:
+              color = SQICON_STATUSES["specialist"]
+            elif status == -1:
+              color = SQICON_STATUSES["dead"]
+            elif status == 3:
+              color = SQICON_STATUSES["available"]
+            elif status == 4:
+              color = SQICON_STATUSES["complete"]
+          widget.color = color
+          widget.config["color"] = color
+
+          self.log.info("Setting sqicon {} (status {}) to opacity {} color {}".format(mate, status, widget.opacity, widget.color))
+          # widget._apply_style()
+          # self.log.info(widget.color)
+          # widget._draw_widget()
+    else:
+      self.log.error("Current slide is NOT squadicon")
