@@ -24,9 +24,15 @@ event_player:
     queue_slide{device.achievements.vasir.state!="completed"}:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_1
+      count:
+        value: device.counters.sbdrops_counter.value
+        type: int
     queue_slide{device.achievements.vasir.state=="completed" and device.achievements.shadowbroker.state!="completed"}:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_2
+      count:
+        value: device.counters.sbdrops_counter.value
+        type: int
     queue_slide{device.achievements.shadowbroker.state=="completed"}:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_3

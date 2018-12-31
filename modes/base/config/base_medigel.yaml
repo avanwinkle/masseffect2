@@ -90,8 +90,7 @@ slides:
       z: 2
     - type: text
       text: "Medigel\nDeployed"
-      style: header_sm, row_main
-      casing: upper
+      style: header_md, row_main
 
 sound_player:
   # During multiballs the save event will post even if it's not the last ball (i.e. no save)

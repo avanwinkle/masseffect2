@@ -43,8 +43,8 @@ slides:
   end_slide:
     widgets:
       - type: text
-        text: Critical Mission Failure
-        style: header_sm, row_main
+        text: "Critical\nMission\nFailure"
+        style: header_lg
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
