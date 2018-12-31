@@ -106,13 +106,13 @@ slide_player:
   show_recruit_instructions:
     recruit_mission_slide:
       action: play
-      priority: 100
+      priority: 2000
     recruit_portrait_slide:
       action: play
       target: lcd_right
     recruit_instructions_slide:
       expire: 3s
-      priority: 200
+      priority: 2010
   # This mode runs globally, so explicitly remove slides
   mode_type_mission_stopped:
     recruit_instructions_slide:

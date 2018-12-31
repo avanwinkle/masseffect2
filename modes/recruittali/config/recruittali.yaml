@@ -28,7 +28,7 @@ event_player:
       squadmate: tali
       portrait: recruittali
       instructions_main: Hit Ramp to Attack Colossus
-      instructions_sub: Move Fast to Avoid Self-Repair
+      instructions_sub: before it Self-Repairs
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s
@@ -340,7 +340,6 @@ widget_player:
     colossus_instructions_widget:
       action: update
       slide: recruit_mission_slide
-      target: lcd_left
   timer_colossus_repair_timer_stopped:
     # secondary_timer_widget:
     #   action: remove
@@ -350,7 +349,6 @@ widget_player:
     shots_remaining_widget:
       action: update
       slide: recruit_mission_slide
-      target: lcd_left
 
 widgets:
   colossus_instructions_widget:

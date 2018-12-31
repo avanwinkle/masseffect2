@@ -180,8 +180,12 @@ slides:
   n7_hurryupslide:
     widgets:
       - type: image
-        image: n7_logo_33x11
-        style: row_top, col_left_anchor
+        image: n7_logo
+        style: row_top, col_right_anchor
+      - type: text
+        text: N7 Assignment
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
       - type: text
         text: (title)
         style: header_sm, row_main, col_left_anchor

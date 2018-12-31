@@ -210,31 +210,31 @@ sound_player:
     geth_hit_sfx:
       action: play
       max_queue_time: 200ms
-  play_queued_widget_overlord_lock_lit_widget{ball==0}:
+  play_queued_slide_overlord_lock_lit_slide{ball==0}:
     archer_need_to_go_to_both:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_queued_widget_overlord_lock_lit_widget{ball==1}:
+  play_queued_slide_overlord_lock_lit_slide{ball==1}:
     archer_still_need_to_go_to_prometheus:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_queued_widget_overlord_lock_lit_widget{ball==2}:
+  play_queued_slide_overlord_lock_lit_slide{ball==2}:
     archer_lockdown_cancelled:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
   # Sound player doesn't accept conditions in sound names, so conditional events only
-  play_queued_widget_overlord_ball_locked_widget.1{ball==1}:
+  play_queued_slide_overlord_ball_locked_slide.1{ball==1}:
     vulcan_success:
       action: play
       max_queue_time: 2s
-  play_queued_widget_overlord_ball_locked_widget.2{ball==2}:
+  play_queued_slide_overlord_ball_locked_slide.2{ball==2}:
     archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 2s
-  play_queued_widget_overlord_ball_locked_widget.3{ball==3}:
+  play_queued_slide_overlord_ball_locked_slide.3{ball==3}:
     archer_start:
       action: play
       # No max queue time since we _have_ to play this track to start the multiball

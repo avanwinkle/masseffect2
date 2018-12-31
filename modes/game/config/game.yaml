@@ -34,30 +34,12 @@ widget_player:
       slide: singleplayer_slide
 
   # Base starts, show a resume mission?
-  show_base_slide{is_resume and not is_multiplayer}:
+  show_base_slide{is_resume}:
     resume_widget:
       action: add
-      # target: dmd
       priority: 3
-    resume_bg_widget:
-      action: add
-      # target: dmd
-      widget_settings:
-        height: 17
-  show_base_slide{is_resume and is_multiplayer}:
-    resume_widget:
-      action: add
-      # target: dmd
-      priority: 3
-    resume_bg_widget:
-      action: add
-      # target: dmd
-      widget_settings:
-        height: 14
   disable_missionresume:
     resume_widget:
-      action: remove
-    resume_bg_widget:
       action: remove
   # Player 2 has entered the game, add widgets for player1 and player2
   add_player_2:
@@ -181,27 +163,12 @@ widgets:
       style: header_xs, row_bottom, col_right_anchor
   resume_widget:
     - type: text
-      text: Press action button to
-      style: body_md
-      y: middle+3
+      text: "Press action button to\nresume (player|resume_mission) recruitment"
+      style: header_xs, row_sub_under, col_left_anchor
+      casing: upper
       z: 5
       animations:
         add_to_slide: pulse_text_slow
-    - type: text
-      text: resume (player|resume_mission) recruitment
-      style: body_md
-      y: middle-3
-      z: 5
-      animations:
-        add_to_slide: pulse_text_slow
-  resume_bg_widget:
-    - type: rectangle
-      color: 000000
-      anchor_y: bottom
-      y: middle-6
-      height: 14
-      width: 128
-      z: 4
 
 sound_player:
   player_added{num==1}: gui_splashstart

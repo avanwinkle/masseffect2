@@ -86,11 +86,11 @@ slides:
   medigel_slide:
     - type: image
       image: medigel
-      style: col_left_anchor
+      style: row_sub_under
       z: 2
     - type: text
       text: "Medigel\nDeployed"
-      style: header_lg, row_main, col_left_inner
+      style: header_sm, row_main
       casing: upper
 
 sound_player:

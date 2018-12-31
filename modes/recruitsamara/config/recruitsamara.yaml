@@ -259,4 +259,3 @@ widget_player:
     shots_remaining_widget:
       action: update
       slide: recruitslide
-      target: lcd_left

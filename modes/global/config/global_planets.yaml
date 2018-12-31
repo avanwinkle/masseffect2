@@ -108,12 +108,12 @@ slide_player:
     planet_scanned_slide:
       action: play
       expire: 2s
-      priority: 610
+      priority: 1000
       target: lcd_right
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
-      priority: 600 # Recruit missions run at 500
+      priority: 1000
   timer_planet_slide_timer_complete:
     minerals_slide:
       action: remove
