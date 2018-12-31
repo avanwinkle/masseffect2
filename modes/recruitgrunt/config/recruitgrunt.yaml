@@ -23,6 +23,11 @@ event_player:
   mode_recruitgrunt_started:
     set_environment:
       env: krogan
+    show_recruit_instructions:
+      squadmate: grunt
+      portrait: recruitgrunt
+      instructions_main: Defeat the Krogan
+      instructions_sub: ""
   slide_recruit_mission_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:

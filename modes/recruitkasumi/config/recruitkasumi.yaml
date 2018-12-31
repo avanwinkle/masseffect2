@@ -44,6 +44,11 @@ event_player:
   mode_recruitkasumi_started:
     set_environment:
       env: kasumi
+    show_recruit_instructions:
+      squadmate: kasumi
+      portrait: recruitkasumi
+      instructions_main: Avoid the Alarms
+      instructions_sub: to enter the vault
   logicblock_kasumi_shots_counter_hit:
     - sweep_alarms
   logicblock_kasumi_shots_counter_complete:

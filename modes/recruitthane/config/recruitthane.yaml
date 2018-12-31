@@ -25,6 +25,11 @@ event_player:
   mode_recruitthane_started:
     set_environment:
       env: eclipse
+    show_recruit_instructions:
+      squadmate: thane
+      portrait: recruitthane
+      instructions_main: Hit ramps to ascend
+      instructions_sub: Hit orbits to complete
   tower_complete_shot_hit: recruit_thane_complete
 
 counters:

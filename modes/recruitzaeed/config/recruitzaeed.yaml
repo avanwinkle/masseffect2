@@ -40,6 +40,7 @@ event_player:
       env: bluesuns
     show_recruit_instructions:
       squadmate: zaeed
+      portrait: recruitzaeed
       instructions_main: 3x orbits to catch Vido
       instructions_sub: "Left: Paragon, Right: Renegade"
     # Fake the event update to trigger the widget?

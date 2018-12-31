@@ -14,7 +14,7 @@ class MissionSelect(Carousel):
     self.debug_log("MissionSelect is ready to go!!!")
     self.debug_log(" - items: {}".format(self._items))
     self._all_items = copy.copy(self._items)
-    self._mates = [];
+    self._mates = []
     self._specialist = "jacob"
 
   def mode_start(self, **kwargs):

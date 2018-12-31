@@ -27,6 +27,7 @@ event_player:
       env: bloodpack
     show_recruit_instructions:
       squadmate: mordin
+      portrait: recruitmordin
       instructions_main: Hit orbits to build value,
       instructions_sub: Both ramps to turn on fans
   mode_recruitmordin_started.2:

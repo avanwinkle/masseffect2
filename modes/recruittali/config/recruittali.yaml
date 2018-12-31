@@ -26,6 +26,7 @@ event_player:
       env: geth
     show_recruit_instructions:
       squadmate: tali
+      portrait: recruittali
       instructions_main: Hit Ramp to Attack Colossus
       instructions_sub: Move Fast to Avoid Self-Repair
   mode_recruittali_started.2:

@@ -26,8 +26,9 @@ event_player:
       env: bloodpack
     show_recruit_instructions:
       squadmate: garrus
-      instructions_main: Hit Ramp to Attack Colossus
-      instructions_sub: Move Fast to Avoid Self-Repair
+      portrait: recruitgarrus
+      instructions_main: Close Shutters
+      instructions_sub: ""
   mode_recruitgarrus_started.2:
     - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>0}
     - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==0}

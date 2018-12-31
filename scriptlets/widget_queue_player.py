@@ -2,7 +2,7 @@ import logging
 from mpfmc.core.scriptlet import Scriptlet
 from mpf.core.utility_functions import Util
 
-EXPIRE_SECS = 4
+EXPIRE_SECS = 3
 EXPIRE_OVERLAP_SECS = 0.5
 DEFAULT_TRANS = { "type": "fade", "duration": 0.15 }
 

@@ -23,21 +23,22 @@ mode_settings:
 
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
+  lockhandler_start_missionselect: start_mode_missionselect
 
 # Dont start mission select until all queued widgets have cleared
-queue_event_player:
-  lockhandler_start_missionselect:
-    queue_event: lockhandler_queue_missionselect
-    events_when_finished: start_mode_missionselect
+# queue_event_player:
+#   lockhandler_start_missionselect:
+#     queue_event: lockhandler_queue_missionselect
+#     events_when_finished: start_mode_missionselect
 
 queue_relay_player:
-  balldevice_bd_lock_ball_eject_attempt.1{mode.missionselect.active}:
+  balldevice_bd_lock_ball_eject_attempt.1{mode.missionselect.active or mode.missionselect._starting}:
     post: blocking_balldevice_bd_lock_ball_eject_attempt
     wait_for: mode_missionselect_will_stop
-  balldevice_bd_trough_ball_eject_attempt.1{mode.missionselect.active}:
+  balldevice_bd_trough_ball_eject_attempt.1{mode.missionselect.active or mode.missionselect._starting}:
     post: blocking_balldevice_bd_trough_eject_attempt
     wait_for: mode_missionselect_will_stop
-  lockhandler_queue_missionselect:
+  mode_missionselect_starting:
     post: check_slide_queue
     wait_for: slide_queue_clear
 

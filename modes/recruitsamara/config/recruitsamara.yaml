@@ -36,6 +36,12 @@ counters:
     count_events: samara_shots_hit
 
 event_player:
+  mode_recruitsamara_started:
+    show_recruit_instructions:
+      squadmate: samara
+      portrait: recruitsamara
+      instructions_main: Targets weaken armor
+      instructions_sub: Shots destroy gunship
   logicblock_samara_shots_counter_complete: recruit_samara_complete
 
 #####

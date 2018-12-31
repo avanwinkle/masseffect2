@@ -186,6 +186,7 @@ shows:
           fade: (fadetime)
 
 slide_player:
+  check_slide_queue: {}
   missionselect_intro_highlighted:
     missionselect_intro_slide:
       target: lcd_left

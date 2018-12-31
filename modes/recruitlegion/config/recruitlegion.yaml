@@ -33,6 +33,11 @@ event_player:
   mode_recruitlegion_started.1:
     set_environment:
       env: geth
+    show_recruit_instructions:
+      squadmate: legion
+      portrait: recruitlegion
+      instructions_main: 3x shots to hack
+      instructions_sub: 10s before lockout
   mode_recruitlegion_started.2:
     - play_opening_heretic_dialogue
   timer_heretic_timer_complete:
