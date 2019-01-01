@@ -34,10 +34,14 @@ widget_player:
       slide: singleplayer_slide
 
   # Base starts, show a resume mission?
-  show_base_slide{is_resume}:
+  show_base_slide{is_resume and not is_multiplayer}:
     resume_widget:
       action: add
-      priority: 3
+      slide: singleplayer_slide
+  show_base_slide{is_resume and is_multiplayer}:
+    resume_widget:
+      action: add
+      slide: multiplayer_slide
   disable_missionresume:
     resume_widget:
       action: remove

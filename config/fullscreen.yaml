@@ -1,0 +1,13 @@
+#config_version=5
+config:
+  - config_common.yaml
+  - config_lcd_styles.yaml
+
+window:
+  title: Mission Pinball Framework - Mass Effect 2
+  resizable: false
+  fullscreen: auto
+  exit_on_escape: false
+  source_display: window
+  left: 1680
+  top: 0
