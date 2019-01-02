@@ -14,30 +14,69 @@ variable_player:
       string: "Defeat the Praetorian"
 
 slide_player:
-  mode_collectorship_base_started: collectorship_baseslide
+  mode_collectorship_base_started:
+    collectorship_baseslide:
+      target: lcd_left
+    collectorship_portrait_slide:
+      target: lcd_right
   stop_mode_collectorship_base:
     collectorship_baseslide:
+      action: remove
+    collectorship_portrait_slide:
       action: remove
 
 slides:
   collectorship_baseslide:
     widgets:
       - type: text
+        text: Disabled Collector Ship
+        style: header_xs, row_top, col_left_anchor
+      - type: text
         text: (last_mission)
         style: header_sm, row_main, col_left_anchor
       - type: text
         text: (score)
-        style: body_md, row_top, col_left_anchor, num
+        style: body_sm, row_sub, col_left_anchor, num
+      - widget: background_console
+  collectorship_portrait_slide: []
 
 widget_player:
-  mode_harbinger_started: harbinger_widget
-  stop_mode_harbinger:
+  mode_collectorship_ambush_started:
+    portrait_collectorship_praetorian:
+      action: remove
+    portrait_collectorship_ambush:
+      slide: collectorship_portrait_slide
+  mode_collectorship_husk_started:
+    portrait_collectorship_ambush:
+      action: remove
+    portrait_collectorship_husk:
+      slide: collectorship_portrait_slide
+  mode_collectorship_praetorian_started:
+    portrait_collectorship_husk:
+      action: remove
+    portrait_collectorship_praetorian:
+      slide: collectorship_portrait_slide
+  timer_harbinger_enabled_timer_started:
+    harbinger_widget:
+      action: update
+      slide: collectorship_baseslide
+    portrait_harbinger:
+      slide: collectorship_portrait_slide
+  # Always remove the portrait when harbinger disables
+  timer_harbinger_enabled_timer_complete.1:
+    portrait_harbinger:
+      action: remove
+  # If there's no multiplier when harbinger disables, remove the 1X widget
+  timer_harbinger_enabled_timer_complete{current_player.harbinger_multiplier<=1}:
     harbinger_widget:
       action: remove
-  player_temp_hurryup_value:
-    cs_hurryup_widget:
-      action: update
-  timer_husktimer_started: cs_timer_widget
+  # If the multiplier times out and harbinger is disabled, remove the 1X widget
+  player_harbinger_multiplier{player_num==current_player.number and value<=1 and not current_player.harbinger_running}:
+    harbinger_widget:
+      action: remove
+  timer_husktimer_started:
+    cs_timer_widget:
+      slide: collectorship_baseslide
   timer_husktimer_tick:
     cs_timer_widget:
       action: update
@@ -52,21 +91,31 @@ widget_player:
       action: remove
 
 widgets:
-  cs_hurryup_widget:
-    - type: text
-      text: (temp_hurryup_value)
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 2
+  portrait_collectorship_ambush:
+    - type: image
+      image: portrait_collectorship_ambush
+  portrait_collectorship_husk:
+    - type: image
+      image: portrait_collectorship_husk
+  portrait_collectorship_praetorian:
+    - type: image
+      image: portrait_collectorship_praetorian
+  portrait_harbinger:
+    - type: image
+      image: portrait_harbinger
+      z: 10
   cs_timer_widget:
     - type: text
       text: (ticks_remaining)
       style: timer_primary, row_gutter, col_right_indent
   harbinger_widget:
     - type: text
+      text: Harbinger
+      style: header_sm, row_bottom, col_left_center
+      animations:
+        add_to_slide: pulse_text
+    - type: text
       text: (harbinger_multiplier)X
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 9
+      style: header_sm, row_bottom, col_right_indent
+      animations:
+        add_to_slide: pulse_text

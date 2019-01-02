@@ -28,13 +28,15 @@ event_player:
       squadmate: garrus
       portrait: recruitgarrus
       instructions_main: Close Shutters
-      instructions_sub: ""
+      instructions_sub: " "
   mode_recruitgarrus_started.2:
     - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>0}
     - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==0}
   door_closed: recruittimer_add_time
   close_doors_hit_complete:
     show_recruit_instructions:
+      squadmate: garrus
+      portrait: recruitgarrus
       instructions_main: Shutters Closed
       instructions_sub: Get back upstairs!
   clear_upstairs_hit_complete: recruit_garrus_complete

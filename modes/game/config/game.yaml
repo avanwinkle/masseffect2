@@ -21,6 +21,8 @@ event_player:
     - multiplayer_turn_end_4{number==4}
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
+  # While SPIKE is being troublesome, allow manual flipper restore
+  flipper_cancel: flippers_on
 
 slide_player:
   queue_slide: {}

@@ -199,6 +199,8 @@ slide_player:
   missionselect_collectorship_highlighted:
     missionselect_collectorship_slide:
       target: lcd_left
+    missionselect_portrait_collectorship:
+      target: lcd_right
   missionselect_derelictreaper_highlighted:
     missionselect_derelictreaper_slide:
       target: lcd_left
@@ -265,3 +267,9 @@ slides:
         style: header_md, row_main
       - widget: missionselect_count_widget
       - widget: background_console
+  missionselect_portrait_slide: []
+  missionselect_portrait_collectorship:
+    widgets:
+      - type: image
+        image: portrait_collectorship_intro
+

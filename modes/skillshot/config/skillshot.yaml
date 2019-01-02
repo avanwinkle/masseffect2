@@ -3,7 +3,7 @@
 mode:
   start_events: start_mode_skillshot
   stop_events: stop_mode_skillshot
-  priority: 1400
+  priority: 3000
 
 event_player:
   timer_skillshot_timer_complete: stop_mode_skillshot

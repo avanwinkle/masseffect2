@@ -76,8 +76,8 @@ slides:
   collectorship_started_slide:
     widgets:
       - type: text
-        text: Collector Ship
-        style: dmd_small
+        text: "Disabled\nCollector Ship"
+        style: header_md, row_main
 
 show_player:
   mode_collectorship_base_started:
@@ -252,5 +252,4 @@ sounds:
     max_queue_time: 1s
     track: sfx
     file: sfx_ss_husk_ss_husk_00300986_m.ogg
-
 

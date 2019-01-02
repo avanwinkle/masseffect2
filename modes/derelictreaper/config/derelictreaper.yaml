@@ -302,22 +302,6 @@ widgets:
   corereset_widget:
     - type: text
       text: Hit bank to expose core!
-      style: small
-      anchor_y: top
-      y: middle
-      z: 5
-      animations:
-        show_slide:
-          - property: opacity
-            value: 1
-            duration: 500ms
-          - property: opacity
-            value: 1
-            duration: 500ms
-          - property: opacity
-            value: 0.2
-            duration: 500ms
-            repeat: true
     # Use this rectangle to cover up the shots/timer widgets
     - type: rectangle
       width: 128
@@ -329,21 +313,11 @@ widgets:
   reapershots_widget:
     - type: text
       text: "Shots: (value)"
-      style: small
-      anchor_y: bottom
-      anchor_x: left
-      x: 2
-      y: 2
-      z: 1
+      style: header_xs, row_gutter, col_left_center
   reapertimeout_widget:
     - type: text
       text: (ticks)
-      style: small
-      anchor_y: bottom
-      anchor_x: right
-      x: right-2
-      y: 2
-      z: 1
+      style: header_sm, row_gutter, col_right_indent
 
 timers:
   reapercore_timeout:

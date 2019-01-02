@@ -357,18 +357,8 @@ slides:
     widgets:
       - type: text
         text: ARRIVAL
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 1
-      - type: text
-        text: (player|temp_hurryup_value)
-        number_grouping: true
-        style: small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
+        style: header_sm, row_main, col_left_anchor
+      - widget: background_console
 
 sound_player:
   play_arrival: arrival_music
@@ -473,14 +463,8 @@ widgets:
   arr_phase_widget:
     - type: text
       text: Phase (value)
-      style: small
-      anchor_x: right
-      anchor_y: bottom
-      x: right-2
-      y: 2
+      style: header_md, row_sub, col_left_anchor
   arr_multiplier_widget:
     - type: text
       text: (player|temp_multiplier)X
-      style: small
-      anchor_y: bottom
-      y: 2
+      style: header_xs, row_gutter, col_left_center

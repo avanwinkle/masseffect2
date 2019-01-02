@@ -379,7 +379,6 @@ widget_player:
     hurryup_widget:
       action: update
       slide: n7_hurryupslide
-      target: lcd_left
 
 widgets:
   hurryup_widget:

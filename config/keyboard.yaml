@@ -63,3 +63,5 @@ keyboard:
     switch: s_top_lane_left
   h:
     switch: s_top_lane_right
+  space:
+    event: flippers_on

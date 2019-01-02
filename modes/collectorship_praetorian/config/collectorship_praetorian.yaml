@@ -343,12 +343,9 @@ widget_player:
   mode_collectorship_praetorian_started:
     praetorian_startwidget:
       action: add
-  counter_praetorian_hits_counter_hit{count==1}:
+  counter_praetorian_hits_counter_hit:
     praetorian_startwidget:
       action: remove
-    praetorian_widget:
-      action: add
-  counter_praetorian_hits_counter_hit{count>1}:
     praetorian_widget:
       action: update
   stop_mode_collectorship_praetorian:
@@ -359,16 +356,8 @@ widgets:
   praetorian_startwidget:
     - type: text
       text: "Shots: 4"
-      style: dmd_small
-      anchor_x: right
-      anchor_y: bottom
-      x: right-2
-      y: 2
+      style: header_xs, row_gutter, col_left_center
   praetorian_widget:
     - type: text
       text: "Shots: (remaining)"
-      style: dmd_small
-      anchor_x: right
-      anchor_y: bottom
-      x: right-2
-      y: 2
+      style: header_xs, row_gutter, col_left_center

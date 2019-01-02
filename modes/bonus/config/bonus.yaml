@@ -48,66 +48,66 @@ slides:
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_squadmates_slide:
     - type: text
       text: "(player|recruited_squadmates_count) New Squadmates"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_credits_slide:
     - type: text
       text: "Credits Bonus"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_minerals_slide:
     - type: text
       text: "Minerals Collected"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_assignments_slide:
     - type: text
       text: "N7 Bonus"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_intel_slide:
     - type: text
       text: "Intel Gathered"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_upgrades_slide:
     - type: text
       text: "Upgrades Researched"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_multiplier_slide:
     - type: text
       text: "Reputation Multiplier"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: "(multiplier)X"
-      style: header_sm, row_sub
+      style: header_md, row_main, num
   bonus_total_slide:
     - type: text
       text: "Total Bonus"
-      style: header_md, row_main
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: header_sm, row_sub
+      style: header_md, row_main, num
 
 sound_player:
   mode_bonus_started:

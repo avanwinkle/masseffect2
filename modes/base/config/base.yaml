@@ -576,16 +576,16 @@ slides:
       text: Build Your Team
       style: header_md, row_main
     - type: text
-      text: "Hit any lane 3x\nto unlock missions"
-      style: header_xs, row_bottom
+      text: "Hit any lane 3x to unlock missions"
+      style: header_xs, row_sub_under
     - widget: background_console
   intro_missions_slide:
     - type: text
       text: Build Your Team
       style: header_md, row_main
     - type: text
-      text: "Select a mission at\nthe Galaxy Map"
-      style: header_xs, row_bottom
+      text: "Select a mission at the Galaxy Map"
+      style: header_xs, row_sub_under
     - widget: background_console
 
 

@@ -6,13 +6,13 @@ hardware:
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
-  baud: 115200 #115200
-  runtime_baud: 2000000
+  baud: 115200
+  runtime_baud: 921600
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 40
-  use_send_key: true
+    65: 100
+  # use_send_key: true
 
 machine:
   balls_installed: 6
@@ -131,10 +131,10 @@ switches:
     number: 1-2
   s_flipper_left:
     number: 8-2
-    tags: flipper_left, flipper
+    tags: left_flipper
   s_flipper_right:
     number: 8-3
-    tags: flipper_right, flipper
+    tags: right_flipper
   s_plunger_lane:
     number: 9-1
   s_trough1:

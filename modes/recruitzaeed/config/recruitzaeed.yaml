@@ -391,7 +391,7 @@ widget_player:
   logicblock_zaeed_orbits_counter_updated{value>0}:
     shots_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: recruit_mission_slide
   logicblock_zaeed_orbits_counter_updated{value<=0}:
     shots_remaining_widget:
       action: remove
