@@ -106,8 +106,8 @@ shows:
 slides:
   shadowbroker_advance_slide:
     - type: text
-      text: "Lair of the Shadow Broker"
-      style: header_xs, row_top, col_left_anchor
+      text: Lair of the Shadow Broker
+      style: header_xs, row_top, col_left_anchor, mission_title
     - type: text
       text: Intel Collected
       style: header_md, row_main, col_left_anchor

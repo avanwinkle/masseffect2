@@ -174,8 +174,7 @@ slides:
     widgets:
       - type: text
         text: Lair of the Shadow Broker
-        style: header_xs, row_top, col_left_anchor
-        opacity: 0.5
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: CHASE VASIR
         style: header_md, row_main, col_left_anchor

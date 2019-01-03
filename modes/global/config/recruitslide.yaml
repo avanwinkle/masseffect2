@@ -154,8 +154,8 @@ slides:
   recruit_advance_slide_1:
     widgets:
       - type: text
-        text: Recruit
-        style: header_sm, row_super, col_left_anchor
+        text: Recruit Your Squad
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (squadmate)
         style: header_lg, row_main, col_left_anchor
@@ -168,8 +168,8 @@ slides:
   recruit_advance_slide_2:
     widgets:
       - type: text
-        text: Recruit
-        style: header_sm, row_super, col_left_anchor
+        text: Recruit Your Squad
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (squadmate)
         style: header_lg, row_main, col_left_anchor
@@ -182,7 +182,7 @@ slides:
     widgets:
       - type: text
         text: Mission Available
-        style: body_md, row_super, col_left_anchor
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (squadmate)
         style: header_lg, row_main, col_left_anchor

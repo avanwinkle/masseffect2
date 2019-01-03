@@ -84,6 +84,7 @@ class SquadmateHandlers(CustomCode):
   def on_load(self):
     self.log = logging.getLogger("MESquadmates")
     self._current_recruit = None
+    self._just_resumed = False
 
     # Create a listener for a recruitmission to start
     self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
@@ -160,9 +161,14 @@ class SquadmateHandlers(CustomCode):
       # If we failed or timed out, post an event
       if  self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
         self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
+      # Track that we didn't just fail a resumed mission, to prevent consecutive resumes
+      elif self._just_resumed:
+        self._just_resumed = False
+        self.machine.game.player["resume_mission"] = " "
       # If we drained, store this mission so we can resume if it fails
-      else:
+      elif not self._just_resumed:
         self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
+        self._just_resumed = True
 
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))

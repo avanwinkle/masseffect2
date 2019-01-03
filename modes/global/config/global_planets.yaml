@@ -29,9 +29,9 @@ variable_player:
   mineral_shots_hit:
     score: 10
   mineral_shot_palladium_hit:
-    mineral_palladium: 100 * (1 + current_player.planets * 0.25)
+    mineral_palladium: 80 * (1 + current_player.planets * 0.25)
   mineral_shot_platinum_hit:
-    mineral_platinum: 100 * (1 + current_player.planets * 0.25)
+    mineral_platinum: 50 * (1 + current_player.planets * 0.25)
   mineral_shot_iridium_hit:
     mineral_iridium: 100 * (1 + current_player.planets * 0.25)
   player_mineral_palladium{player_num==current_player.number}:

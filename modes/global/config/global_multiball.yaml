@@ -165,9 +165,8 @@ slides:
   fmball_lock_lit_slide:
     - type: text
       text: (mball_name)
-      style: header_sm, row_top, col_left_anchor
-      casing: upper
-      opacity: 0.5
+      style: header_xs, row_top, col_left_anchor, mission_title
+      casing: title
     - type: text
       text: Lock is Lit
       style: header_md, row_main, col_left_anchor
@@ -175,8 +174,8 @@ slides:
   fmball_ball_locked_slide:
     - type: text
       text: (mball_name)
-      casing: upper
-      style: header_sm, row_top, col_left_anchor
+      style: header_xs, row_top, col_left_anchor, mission_title
+      casing: title
       opacity: 0.5
     - type: text
       text: Ball (ball) Locked!

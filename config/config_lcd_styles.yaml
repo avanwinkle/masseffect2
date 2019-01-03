@@ -183,6 +183,8 @@ widget_styles:
     number_grouping: true
     min_digits: 2
   lcd_only: {}
+  mission_title:
+    opacity: 0.8
 
   # GRID POSITIONS
   #----------------------------

@@ -190,4 +190,7 @@ sounds:
     file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
     track: voice
 
-
+widgets:
+  portrait_upgrades:
+    - type: image
+      image: portrait_upgrades
