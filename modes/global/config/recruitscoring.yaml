@@ -17,3 +17,56 @@ variable_player:
     status_legion:
       action: set
       int: 4
+
+  #### FIXED SCORING ####
+  #---------------------#
+  # Set the initial values necessary
+  set_mission_shots.2:
+    mission_shot_value: 
+      action: set
+      int: machine.base_points / (shots_total * shots_total)
+    mission_shots_remaining:
+      action: set
+      int: shots_remaining
+    mission_is_resumable:
+      action: set
+      int: is_resumable
+    mission_starting_ticks:
+      action: set
+      int: ticks
+    mission_tick_value:
+      action: set
+      int: current_player.mission_shot_value / ticks
+    temp_build_value:
+      action: set
+      int: 0
+    temp_hurryup_value:
+      action: set
+      int: 0
+  # Use the values set above to calculate the starting value for _this_ attempt
+  set_mission_shots.1:
+    mission_starting_value:
+      action: set
+      int: current_player.mission_shot_value * current_player.mission_shots_remaining
+  # When a shot is hit, score the starting value minus a tick value for each tick remaining
+  mission_shot_hit.100:
+    mission_ticks:
+      action: set
+      int: device.timers.recruittimer.ticks
+    temp_hurryup_value: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.recruittimer.ticks))
+    # If the mission is not resumable (and this is not a bonus shot), reset the hurryup ticks
+    # so that the next shot has a chance to score the full starting_value
+    mission_starting_ticks{not current_player.mission_is_resumable and not is_bonus_shot}:
+      action: set
+      int: device.timers.recruittimer.ticks
+  mission_shot_hit.99:
+    # Track the total value accumulated via build_value, which will cash out when collected
+    temp_build_value: current_player.temp_hurryup_value
+    # Reset the hurryup value to capture the next shot hit
+    temp_hurryup_value:
+      action: set
+      int: 0
+  # When a shot, round, or mission is completed, award the build value for that round
+  mission_collect_score:
+    score: current_player.temp_build_value
+

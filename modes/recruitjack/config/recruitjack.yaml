@@ -28,6 +28,16 @@ event_player:
       portrait: recruitjack
       instructions_main: Hit Shots to Light Bank
       instructions_sub: 3x Banks to Defeat Warden
+    set_mission_shots:
+      is_resumable: 1
+      ticks: 60
+      shots_total: 3  # Each round counts as a shot
+      shots_remaining:
+        value: devicecounters.jack_rounds_counter
+        type: int
+    ### SCORING capture the value when the hurryup is hit, collect when the round is hit
+    jack_hurryup_shots_hit: mission_shot_hit
+    logicblock_jack_rounds_counter_hit: mission_collect_score
 
 counters:
   jack_rounds_counter:
@@ -40,44 +50,6 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
-
-#####
-# JACK variable_player:
-#    Hurryup starts at 10,000
-#    Hit the round shot to stop the hurryup value depletion
-#    Hit the hitbank shot to collect the hurryup value and start another round
-#    New hurryup is double the collected one [THIS SHOULD CHANGE]
-#    3 rounds completes the mission
-#    Progress is saved after each round
-#####
-variable_player:
-  mode_recruitjack_started:
-    temp_hurryup_value:
-      action: set
-      int: 10000
-    # Store the multiplier as the "base" hurryup value to tick off 1/60th of it
-    temp_multiplier:
-      action: set
-      int: 10000
-  timer_recruittimer_tick{current_player.temp_multiplier>0}:
-    temp_hurryup_value: -1 * current_player.temp_multiplier / 600 * 10
-  # Store the build value as the value of the hurry-up at the time it's hit
-  jack_hurryup_shots_hit:
-    temp_build_value:
-      action: set
-      int: current_player.temp_hurryup_value
-    temp_multiplier:
-      action: set
-      int: 0
-  # Capture the build value and add it to the new hurryup
-  jack_hitbank_shot_hit:
-    score: current_player.temp_build_value
-    temp_hurryup_value:
-      action: set
-      int: current_player.temp_build_value * 2
-    temp_multiplier:
-      action: set
-      int: current_player.temp_build_value * 2
 
 shot_groups:
   jack_hurryup_shots:

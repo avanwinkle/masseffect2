@@ -29,59 +29,36 @@ event_player:
       portrait: recruitgarrus
       instructions_main: Close Shutters
       instructions_sub: " "
+    set_mission_shots:
+      shots_total: 4
+      is_resumable: 0
+      shots_remaining:
+        value: device.counters.doors_closed_counter.value
+        type: int
   mode_recruitgarrus_started.2:
-    - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>0}
-    - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==0}
-  door_closed: recruittimer_add_time
+    - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>1}
+    - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==1}
   close_doors_hit_complete:
+    mission_collect_score: {}
     show_recruit_instructions:
       squadmate: garrus
       portrait: recruitgarrus
       instructions_main: Shutters Closed
       instructions_sub: Get back upstairs!
-  clear_upstairs_hit_complete: recruit_garrus_complete
+  logicblock_doors_closed_counter_complete: recruit_garrus_complete
 
 counters:
   doors_closed_counter:
-    starting_count: 3
+    starting_count: 4
     count_complete_value: 0
     direction: down
     count_events:
-      - center_door_lit_hit
-      - left_door_lit_hit
-      - right_door_lit_hit
-    events_when_hit: door_closed
+      - close_doors_lit_hit
+      - clear_upstairs_hit
+    events_when_hit: door_closed, mission_shot_hit
     disable_on_complete: true
-    reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>0}
+    reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>1}
     reset_on_complete: false
-
-#####
-# GARRUS variable_player:
-#   The hurryup starts at 12,000 and ticks down 180/s
-#   Closing a door adds the time value of the hurryup (not the built value)
-#   Close all 3 doors to light the upstairs shot
-#   Hit the upstairs shot to award the hurryup value and complete the mission
-#   Progress is not saved
-#
-# An alternative approach would be to have a point-per-second value and ,on
-# door close, add timer_remaining_ticks * per_second_value to the hurryup.
-#####
-variable_player:
-  mode_recruitgarrus_started:
-    temp_hurryup_value:
-      action: set
-      int: 12000
-    # Multiplier is the _original_ hurryup value
-    temp_multiplier:
-      action: set
-      int: 12000
-  timer_recruittimer_tick:
-    temp_hurryup_value: -180
-    temp_multiplier: -180
-  door_closed:
-    temp_hurryup_value: current_player.temp_multiplier
-  recruit_garrus_complete:
-    score: current_player.temp_hurryup_value
 
 shot_groups:
   close_doors:
@@ -134,16 +111,16 @@ sound_player:
   play_garrus_intro_upstairs:
     garrus_last_shutter:
       action: play
-  door_closed{count==2}:
+  logicblock_doors_closed_counter_hit{count==3}:
     garrus_two_more_shutters:
       max_queue_time: 1s
-  door_closed{count==1}:
+  logicblock_doors_closed_counter_hit{count==2}:
     garrus_one_more_shutter:
       max_queue_time: 1s
-  door_closed{count==0}:
+  logicblock_doors_closed_counter_hit{count==1}:
     garrus_last_shutter:
       max_queue_time: 2s
-  clear_upstairs_hit_complete:
+  logicblock_doors_closed_counter_complete:
     music_recruit_garrus:
       action: stop
   envshot_outlane_hit: boss_sound

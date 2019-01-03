@@ -67,7 +67,7 @@ machine_vars:
     value_type: str
     persist: true
   base_points:
-    initial_value: 10000
+    initial_value: 100000
   mission_xp:
     initial_value: 1000
   assignment_xp:

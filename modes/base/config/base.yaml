@@ -25,11 +25,12 @@ event_player:
 
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
-  mode_base_started.3{current_player.squadmates_count==2 and current_player.resume_mission==" "}:
-    - play_intro_show
-  mode_base_started.4{current_player.squadmates_count>2}:
-    - play_gameintro_recruits_long{current_player.ball==1}
-    - play_gameintro_recruits_short{current_player.ball==3}
+  #### DISABLE for faster playtesting
+  # mode_base_started.3{current_player.squadmates_count==2 and current_player.resume_mission==" "}:
+  #   - play_intro_show
+  # mode_base_started.4{current_player.squadmates_count>2}:
+  #   - play_gameintro_recruits_long{current_player.ball==1}
+  #   - play_gameintro_recruits_short{current_player.ball==3}
 
   mode_base_will_stop:
     - stop_mode_global

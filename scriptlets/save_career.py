@@ -49,6 +49,7 @@ class SaveCareer(CustomCode):
         self._current_careers[player.number] = kwargs
         # Attach the career name to the current player
         player["career_name"] = career_name
+        player["casual"] = 0
 
     self.log.debug("Set career to '{}', Args={}".format(player.career_name, kwargs))
 

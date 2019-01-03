@@ -20,26 +20,6 @@ mode:
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
-counters:
-  # This counter tracks how many unalarmed shots must be hit to succeed
-  kasumi_shots_counter:
-    starting_count: 0
-    count_complete_value: 4
-    persist_state: true
-    count_events: kasumi_shots_unalarmed_hit
-    disable_on_complete: true
-    reset_on_complete: false
-    direction: up
-  # This counter tracks how many alarmed shots are hit before failure
-  kasumi_alarms_counter:
-    starting_count: 3
-    count_complete_value: 0
-    count_events: kasumi_shots_alarmed_hit
-    reset_events: mode_recruitkasumi_started
-    events_when_complete: stop_recruitmission
-    persist_state: false
-    direction: down
-
 event_player:
   mode_recruitkasumi_started:
     set_environment:
@@ -49,38 +29,36 @@ event_player:
       portrait: recruitkasumi
       instructions_main: Avoid the Alarms
       instructions_sub: to enter the vault
+    set_mission_shots:
+      shots_total: 4
+      is_resumable: 1
+      shots_remaining:
+        value: device.counters.kasume_shots_counter.value
+        type: int
   logicblock_kasumi_shots_counter_hit:
     - sweep_alarms
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
 
-#####
-# KASUMI variable_player:
-#    Hurryup starts at 8,000
-#    Hit any unalarmed shot to collect the hurryup value
-#    New hurryup is 8,000 plus previously-collected value (resets on restart)
-#    Hurryup depletion scales (bigger hurryup => faster depletion)
-#    4 unalarmed shots completes the mission
-#    Score is collected after each shot
-#####
-variable_player:
-  mode_recruitkasumi_started:
-    temp_hurryup_value:
-      action: set
-      int: 8000
-    temp_multiplier:
-      action: set
-      int: 8000 / 59
-  timer_recruittimer_tick{current_player.temp_multiplier>0}:
-    temp_hurryup_value: -1 * current_player.temp_multiplier
-  logicblock_kasumi_shots_counter_hit:
-    score: current_player.temp_hurryup_value
-    temp_hurryup_value:
-      action: set
-      int: current_player.temp_hurryup_value + 8000
-    temp_multiplier:
-      action: set
-      int: (current_player.temp_hurryup_value + 8000) / 59
+counters:
+  # This counter tracks how many unalarmed shots must be hit to succeed
+  kasumi_shots_counter:
+    starting_count: 4
+    count_complete_value: 0
+    persist_state: true
+    count_events: kasumi_shots_unalarmed_hit
+    disable_on_complete: true
+    reset_on_complete: false
+    direction: down
+  # This counter tracks how many alarmed shots are hit before failure
+  kasumi_alarms_counter:
+    starting_count: 3
+    count_complete_value: 0
+    count_events: kasumi_shots_alarmed_hit
+    reset_events: mode_recruitkasumi_started
+    events_when_complete: stop_recruitmission
+    persist_state: false
+    direction: down
 
 shot_groups:
   kasumi_shots:
@@ -234,16 +212,16 @@ slide_player:
     kasumi_failed_slide:
       expire: 5s
   # Until MC supports priority and condition, deal with duplicate warnings
-  logicblock_kasumi_shots_counter_hit{count==1}:
+  logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_slide_1:
       expire: 3s
   logicblock_kasumi_shots_counter_hit{count==2}:
     kasumi_slide_2:
       expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==3}:
+  logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_slide_3:
       expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==4}:
+  logicblock_kasumi_shots_counter_hit{count==0}:
     kasumi_slide_4:
       expire: 3s
   logicblock_kasumi_alarms_counter_hit{count>0}:
@@ -329,7 +307,7 @@ sound_player:
     kasumi_careful:
       action: play
   # First shot hit, got the password
-  logicblock_kasumi_shots_counter_hit{count==1}:
+  logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_password_complete:
       action: play
   # Second shot hit, got the voice print
@@ -337,11 +315,11 @@ sound_player:
     kasumi_voice_complete:
       action: play
   # Third shot hit, got the DNA sample
-  logicblock_kasumi_shots_counter_hit{count==3}:
+  logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_not_great_saliva_sample:
       action: play
   # Fourth shot hit, get the barrier down
-  logicblock_kasumi_shots_counter_hit{count==4}:
+  logicblock_kasumi_shots_counter_hit{count==0}:
     kasumi_barrier_is_down:
       action: play
 
