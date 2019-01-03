@@ -351,6 +351,8 @@ slide_player:
   play_arrival:
     arrival_slide:
       action: play
+    arrival_portrait:
+      target: lcd_right
 
 slides:
   arrival_slide:
@@ -359,6 +361,10 @@ slides:
         text: ARRIVAL
         style: header_sm, row_main, col_left_anchor
       - widget: background_console
+  arrival_portrait:
+    widgets:
+      - type: image
+        image: portrait_arrival_phase_4
 
 sound_player:
   play_arrival: arrival_music
