@@ -201,6 +201,7 @@ shows:
       slides:
         blank_slide:
           action: play
+          target: window
       tracks:
         __all__:
           action: stop_all_sounds

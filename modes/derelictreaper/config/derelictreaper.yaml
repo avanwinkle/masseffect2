@@ -235,16 +235,33 @@ shows:
 
 slide_player:
   mode_derelictreaper_started: derelictreaper_slide
+  enable_reapercore:
+    derelictreaper_portrait_core:
+      target: lcd_right
+  disable_reapercore:
+    derelictreaper_portrait_husks:
+      target: lcd_right
 
 slides:
   derelictreaper_slide:
+    - type: text
+      text: Derelict Reaper
+      style: header_xs, row_top, col_left_anchor, mission_title
+    - type: text
+      text: Destroy the Core
+      style: header_md, row_main, col_left_anchor
+    - type: text
+      text: (score)
+      style: body_sm, row_sub, col_left_anchor, num
+    - widget: background_console
+  derelictreaper_portrait_core:
     widgets:
-      - type: text
-        text: DERELICT REAPER
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 1
+      - type: image
+        image: portrait_derelictreaper_core
+  derelictreaper_portrait_husks:
+    widgets:
+      - type: image
+        image: portrait_derelictreaper_husks
 
 sound_player:
   enable_reapercore:
@@ -280,12 +297,12 @@ sounds:
     track: sfx
 
 widget_player:
-  enable_corereset:
-    corereset_widget:
-      slide: derelictreaper_slide
   enable_reapercore:
-    corereset_widget:
+    core_disabled_widget:
       action: remove
+  disable_reapercore:
+    core_disabled_widget:
+      slide: derelictreaper_slide
   reapercore_shots_hit_complete:
     reapertimeout_widget:
       action: remove
@@ -294,22 +311,19 @@ widget_player:
   timer_reapercore_timeout_tick:
     reapertimeout_widget:
       action: update
+      slide: derelictreaper_slide
   logicblock_reapercore_counter_updated:
     reapershots_widget:
       action: update
+      slide: derelictreaper_slide
 
 widgets:
-  corereset_widget:
+  core_disabled_widget:
     - type: text
       text: Hit bank to expose core!
-    # Use this rectangle to cover up the shots/timer widgets
-    - type: rectangle
-      width: 128
-      height: 10
-      color: black
-      anchor_y: bottom
-      y: 0
-      z: 4
+      style: header_sm, row_sub, col_left_anchor
+      animations:
+        add_to_slide: pulse_text
   reapershots_widget:
     - type: text
       text: "Shots: (value)"
@@ -317,7 +331,7 @@ widgets:
   reapertimeout_widget:
     - type: text
       text: (ticks)
-      style: header_sm, row_gutter, col_right_indent
+      style: timer_primary, row_gutter, col_right_indent
 
 timers:
   reapercore_timeout:

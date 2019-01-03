@@ -193,9 +193,21 @@ slide_player:
   missionselect_recruit_highlighted:
     missionselect_recruit_slide:
       target: lcd_left
+    missionselect_portrait_derelictreaper:
+      action: remove
+      target: lcd_right
+    missionselect_portrait_suicide:
+      action: remove
+      target: lcd_right
   missionselect_pass_highlighted:
     missionselect_pass_slide:
       target: lcd_left
+    missionselect_portrait_derelictreaper:
+      action: remove
+      target: lcd_right
+    missionselect_portrait_suicide:
+      action: remove
+      target: lcd_right
   missionselect_collectorship_highlighted:
     missionselect_collectorship_slide:
       target: lcd_left
@@ -204,9 +216,13 @@ slide_player:
   missionselect_derelictreaper_highlighted:
     missionselect_derelictreaper_slide:
       target: lcd_left
+    missionselect_portrait_derelictreaper:
+      target: lcd_right
   missionselect_suicide_highlighted:
     missionselect_suicide_slide:
       target: lcd_left
+    missionselect_portrait_suicide:
+      target: lcd_right
 
 slides:
   missionselect_intro_slide:
@@ -240,7 +256,7 @@ slides:
     priority: 1
     widgets:
       - type: text
-        text: "Derelict\nReaper"
+        text: "Derelict Reaper"
         style: header_md, row_main
       - widget: missionselect_count_widget
       - widget: background_console
@@ -249,15 +265,10 @@ slides:
     widgets:
       - type: text
         text: LAUNCH THE
-        style: body_sm
-        bold: true
-        anchor_y: top
-        y: top-3
+        style: header_sm, row_super
       - type: text
-        text: SUICIDE MISSION
-        style: suicide_header
-        anchor_y: bottom
-        y: 3
+        text: "SUICIDE\nMISSION"
+        style: header_lg
       - widget: background_console
   missionselect_pass_slide:
     priority: 10
@@ -272,4 +283,12 @@ slides:
     widgets:
       - type: image
         image: portrait_collectorship_intro
+  missionselect_portrait_derelictreaper:
+    widgets:
+      - type: image
+        image: portrait_derelictreaper_intro
+  missionselect_portrait_suicide:
+    widgets:
+      - type: image
+        image: portrait_suicide_intro
 

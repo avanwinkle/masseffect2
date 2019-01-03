@@ -30,7 +30,7 @@ slides:
     widgets:
       - type: text
         text: Disabled Collector Ship
-        style: header_xs, row_top, col_left_anchor
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (last_mission)
         style: header_sm, row_main, col_left_anchor
