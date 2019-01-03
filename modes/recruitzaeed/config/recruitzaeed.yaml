@@ -42,7 +42,7 @@ event_player:
       squadmate: zaeed
       portrait: recruitzaeed
       instructions_main: 3x orbits to catch Vido
-      instructions_sub: "Left: Paragon, Right: Renegade"
+      instructions_sub: "< Paragon    Renegade >"
     # Fake the event update to trigger the widget?
     logicblock_zaeed_orbits_counter_updated:
       value: device.counters.zaeed_orbits_counter.value
@@ -76,12 +76,14 @@ variable_player:
       action: set
       int: 1
     missionname:
+      action: set
       string: "Stop Vido's Escape"
   zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
     zaeed_path_renegade:
       action: set
       int: 0
     missionname:
+      action: set
       string: "Save the Workers"
   timer_recruittimer_tick:
     temp_hurryup_value: -30
@@ -93,8 +95,8 @@ variable_player:
       float: 0.25
   logicblock_zaeed_orbits_counter_hit{count==1}:
     mission_instructions:
-      string: "Hit kickback to complete!"
       action: set
+      string: "Hit kickback to complete!"
   zaeed_kickshot_hit:
     score: current_player.temp_hurryup_value
 

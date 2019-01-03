@@ -41,7 +41,7 @@ slides:
           add_to_slide:
             - property: rotation
               value: -360
-              duration: 2000s
+              duration: 1200s
   multiplayer_slide:
     widgets:
       - type: text

@@ -151,12 +151,16 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.remove_handler(self._on_stop)
     self.machine.events.remove_handler(self._on_complete)
 
+    # If we drained on legion but completed the recruitment, that's fine
+    if kwargs.get("squadmate") == "legion" and self.machine.game.player["status_legion"] == 4:
+      return
+
     # If we stopped without an explicit success
     if not kwargs.get("success"):
       # If we failed or timed out, post an event
       if  self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
         self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
-      # If we drained, # store this mission so we can resume if it fails
+      # If we drained, store this mission so we can resume if it fails
       else:
         self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
 

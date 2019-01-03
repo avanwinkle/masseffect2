@@ -230,31 +230,31 @@ sound_player:
     batarian_hit_sfx:
       action: play
       max_queue_time: 200ms
-  play_queued_slide_fmball_lock_lit_slide.4{ball==1 and mball_name=="arrival"}:
+  play_queued_slide_fmball_lock_lit_slide.4{ball==0 and mball_name=="arrival"}:
     arr_ken_keep_shepard_contained:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_queued_slide_fmball_lock_lit_slide.5{ball==2 and mball_name=="arrival"}:
+  play_queued_slide_fmball_lock_lit_slide.5{ball==1 and mball_name=="arrival"}:
     arr_annc_cooling_rod_a_inserted:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_queued_slide_fmball_lock_lit_slide.6{ball==3 and mball_name=="arrival"}:
+  play_queued_slide_fmball_lock_lit_slide.6{ball==2 and mball_name=="arrival"}:
     arr_shep_i_wanna_activate_the_project:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
 # Sound player doesn't accept conditions in sound names, so conditional events only
-  play_queued_slide_fmball_ball_locked_slide.4{total_balls_locked==1 and mball_name=="arrival"}:
+  play_queued_slide_fmball_ball_locked_slide.4{ball==1 and mball_name=="arrival"}:
     arr_ken_shepards_escaped:
       action: play
       max_queue_time: 2s
-  play_queued_slide_fmball_ball_locked_slide.5{total_balls_locked==2 and mball_name=="arrival"}:
+  play_queued_slide_fmball_ball_locked_slide.5{ball==2 and mball_name=="arrival"}:
     arr_annc_cooling_rod_b_inserted:
       action: play
       max_queue_time: 2s
-  play_queued_slide_fmball_ball_locked_slide.6{total_balls_locked==3 and mball_name=="arrival"}:
+  play_queued_slide_fmball_ball_locked_slide.6{ball==3 and mball_name=="arrival"}:
     arr_annc_project_activated_collision_imminent:
       action: play
 
