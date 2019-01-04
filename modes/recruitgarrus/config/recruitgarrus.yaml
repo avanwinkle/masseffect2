@@ -32,20 +32,22 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 0
+      ticks: 60
       shots_remaining:
         value: device.counters.doors_closed_counter.value
         type: int
   mode_recruitgarrus_started.2:
     - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>1}
     - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==1}
-  close_doors_hit_complete:
+  logicblock_doors_closed_counter_hit.100: mission_shot_hit
+  logicblock_doors_closed_counter_hit{count==1}:
     mission_collect_score: {}
     show_recruit_instructions:
       squadmate: garrus
       portrait: recruitgarrus
       instructions_main: Shutters Closed
       instructions_sub: Get back upstairs!
-  logicblock_doors_closed_counter_complete: recruit_garrus_complete
+  logicblock_doors_closed_counter_complete: mission_collect_score, recruit_garrus_complete
 
 counters:
   doors_closed_counter:
@@ -55,7 +57,6 @@ counters:
     count_events:
       - close_doors_lit_hit
       - clear_upstairs_hit
-    events_when_hit: door_closed, mission_shot_hit
     disable_on_complete: true
     reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>1}
     reset_on_complete: false

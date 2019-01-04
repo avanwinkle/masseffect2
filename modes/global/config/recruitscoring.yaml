@@ -34,9 +34,6 @@ variable_player:
     mission_starting_ticks:
       action: set
       int: ticks
-    mission_tick_value:
-      action: set
-      int: current_player.mission_shot_value / ticks
     temp_build_value:
       action: set
       int: 0
@@ -48,6 +45,9 @@ variable_player:
     mission_starting_value:
       action: set
       int: current_player.mission_shot_value * current_player.mission_shots_remaining
+    mission_tick_value:
+      action: set
+      int: current_player.mission_shot_value / current_player.mission_starting_ticks
   # When a shot is hit, score the starting value minus a tick value for each tick remaining
   mission_shot_hit.100:
     mission_ticks:
@@ -67,6 +67,9 @@ variable_player:
       action: set
       int: 0
   # When a shot, round, or mission is completed, award the build value for that round
-  mission_collect_score:
+  mission_collect_score.98:
     score: current_player.temp_build_value
+    temp_build_value:
+      action: set
+      int: 0
 

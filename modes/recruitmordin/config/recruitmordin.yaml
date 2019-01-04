@@ -33,12 +33,13 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
+      ticks: 60
       shots_remaining:
         value: device.counters.cure_counter.value + device.counters.fans_counter.value
         type: int
   mode_recruitmordin_started.2:
-    - play_intro_sound{device.counters.fans_counter.value==0}
-    - play_cure_sound{device.counters.fans_counter.value>0}
+    - play_intro_sound{not device.counters.cure_counter.completed}
+    - play_cure_sound{device.counters.cure_counter.completed}
   fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
@@ -46,14 +47,20 @@ counters:
   cure_counter:
     starting_count: 2
     count_complete_value: 0
+    direction: down
     count_events: cure_left_lit_hit, cure_right_lit_hit
-    events_when_complete: enable_fans, play_cure_sound
+    events_when_hit: mission_shot_hit
+    events_when_complete: enable_fans, play_cure_sound, mission_collect_score
     disable_on_complete: true
-    reset_events: mode_recruitmordin_started{device.counters.cure_counter.value>0}
+    reset_on_complete: false
+    persist_state: true
   fans_counter:
     starting_count: 2
     count_complete_value: 0
+    direction: down
     count_events: fan_left_lit_hit, fan_right_lit_hit
+    events_when_hit: logicblock_fans_counter_hit, mission_shot_hit
+    events_when_complete: mission_collect_score
     disable_on_complete: true
     reset_events: mode_recruitmordin_started
 

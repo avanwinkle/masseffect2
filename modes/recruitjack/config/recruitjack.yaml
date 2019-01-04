@@ -33,20 +33,20 @@ event_player:
       ticks: 60
       shots_total: 3  # Each round counts as a shot
       shots_remaining:
-        value: devicecounters.jack_rounds_counter
+        value: device.counters.jack_rounds_counter.value
         type: int
-    ### SCORING capture the value when the hurryup is hit, collect when the round is hit
-    jack_hurryup_shots_hit: mission_shot_hit
-    logicblock_jack_rounds_counter_hit: mission_collect_score
+  ### SCORING capture the value when the hurryup is hit, collect when the round is hit
+  jack_hurryup_shots_hit: mission_shot_hit
+  logicblock_jack_rounds_counter_hit: mission_collect_score
+  logicblock_jack_rounds_counter_complete: recruit_jack_complete
 
 counters:
   jack_rounds_counter:
-    starting_count: 0
-    count_complete_value: 3
+    starting_count: 3
+    count_complete_value: 0
     count_events: jack_hitbank_shot_hit
     multiple_hit_window: 500ms # In case both hitbanks are hit together
-    events_when_complete: recruit_jack_complete
-    direction: up
+    direction: down
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
@@ -59,7 +59,7 @@ shots:
   jack_shots_one:
     hit_events: sh_kickback_hit, sh_left_orbit_hit sh_right_orbit_hit
     enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==0}
+      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==3}
     disable_events: jack_shots_one_hit, mode_recruitjack_will_stop
     profile: color_flashing_static
     show_tokens:
@@ -69,8 +69,8 @@ shots:
   jack_shots_two:
     hit_events: sh_left_ramp_hit, sh_right_ramp_hit
     enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==1}
-      - logicblock_jack_rounds_counter_hit{count==1}
+      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==2}
+      - logicblock_jack_rounds_counter_hit{count==2}
     disable_events: jack_shots_two_hit, mode_recruitjack_will_stop
     profile: color_flashing_static
     show_tokens:
@@ -80,8 +80,8 @@ shots:
   jack_shots_three:
     hit_events: sh_left_orbit_hit, sh_right_orbit_hit
     enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==2}
-      - logicblock_jack_rounds_counter_hit{count==2}
+      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==1}
+      - logicblock_jack_rounds_counter_hit{count==1}
     disable_events: jack_shots_three_hit, mode_recruitjack_will_stop
     profile: color_flashing_static
     show_tokens:
@@ -115,12 +115,12 @@ sound_player:
       action: play
       max_queue_time: 1s
       priority: 100
-  logicblock_jack_rounds_counter_hit{count==1}:
+  logicblock_jack_rounds_counter_hit{count==2}:
     warden_shepard_1:
       action: play
       max_queue_time: 1s
       priority: 100
-  logicblock_jack_rounds_counter_hit{count==2}:
+  logicblock_jack_rounds_counter_hit{count==1}:
     warden_shepard_2:
       action: play
       max_queue_time: 1s

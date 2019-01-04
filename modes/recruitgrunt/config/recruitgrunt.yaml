@@ -16,7 +16,7 @@ mode:
   start_events: start_mode_recruitgrunt
   stop_events: stop_mode_recruitgrunt, stop_recruitmission, stop_missions
   events_when_started: mode_type_mission_started
-  events_when_stopped: mode_type_mission_stopped, mission_collect_score
+  events_when_stopped: mode_type_mission_stopped
   priority: 500
 
 event_player:
@@ -29,7 +29,7 @@ event_player:
       instructions_main: Defeat the Krogan
       instructions_sub: " "
     set_mission_shots:
-      is_resumable: 0
+      is_resumable: 1
       ticks: 12
       shots_total: 5
       shots_remaining:
@@ -51,7 +51,10 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: grunt_shots_lit_hit
-    events_when_hit: mission_shot_hit
+    events_when_hit: 
+      - logicblock_grunt_shots_counter_hit
+      - mission_shot_hit
+      - mission_collect_score
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true

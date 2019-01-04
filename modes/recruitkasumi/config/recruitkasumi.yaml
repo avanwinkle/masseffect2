@@ -32,8 +32,9 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
+      ticks: 60
       shots_remaining:
-        value: device.counters.kasume_shots_counter.value
+        value: device.counters.kasumi_shots_counter.value
         type: int
   logicblock_kasumi_shots_counter_hit:
     - sweep_alarms
@@ -47,6 +48,10 @@ counters:
     count_complete_value: 0
     persist_state: true
     count_events: kasumi_shots_unalarmed_hit
+    events_when_hit: 
+      - logicblock_kasumi_shots_counter_hit
+      - mission_shot_hit
+      - mission_collect_score
     disable_on_complete: true
     reset_on_complete: false
     direction: down
