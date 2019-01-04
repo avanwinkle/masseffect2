@@ -8,7 +8,7 @@ import logging
 import tempfile, pickle
 from datetime import datetime
 
-configProcessor = ConfigProcessor(ConfigValidator(None))
+configProcessor = ConfigProcessor(ConfigValidator(None, False, False))
 
 class SoundManager():
   def __init__(self, verbose=False):
