@@ -29,12 +29,19 @@ event_player:
       portrait: recruittali
       instructions_main: Hit Ramp to Attack Colossus
       instructions_sub: before it Self-Repairs
+    set_mission_shots:
+      shots_total: 6
+      ticks: 40
+      is_resumable: 1
+      shots_remaining: 
+        value: current_player.geth_colossus_state
+        type: int
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s
+  recruittimer_start: recruittimer_set_forty
   player_geth_colossus_state{player_num==current_player.number}:
     - play_colossus_show{value>0}
-    - recruit_tali_complete{value==0}
   drop_target_bank_dropbank_complete: recruittimer_add_time
   drop_target_bank_hitbank_complete: recruittimer_add_time
   timer_recruittimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
@@ -44,6 +51,17 @@ event_player:
   geth_colossus_shot_hit:
     timer_colossus_repair_timer_tick:
       ticks_remaining: 10
+
+counters:
+  # A counter to track the lowest colossus state, to only score on NEW hits
+  colossus_maxhits_counter:
+    starting_count: 6
+    count_complete_value: 0
+    direction: down
+    count_events: 
+      - player_geth_colossus_state{player_num==current_player.number and value<device.counters.colossus_maxhits_counter.value}
+    events_when_hit: mission_shot_hit, mission_collect_score
+    events_when_complete: recruit_tali_complete
 
 timers:
   colossus_repair_timer:
@@ -57,29 +75,15 @@ timers:
       - event: recruit_tali_complete
         action: stop
 
-#####
-# TALI variable_player:
-#    Hurryup starts at 6,000
-#    Hit the colossus shot to add (100 * timer_ticks_remaining) to the hurryup
-#    Hit the colossus shot 6x to collect the hurryup and complete the mission
-#    Progress is saved but the colossus gets 1 repair on restart
-#####
 variable_player:
   mode_recruittali_started:
-    temp_hurryup_value:
-      action: set
-      int: 6000
+    # If the colossus ended the last round at less than 6, add one
     geth_colossus_state{current_player.geth_colossus_state<6}: 1
+    # If the colossus ended up over six, drop it down to six
     geth_colossus_state{current_player.geth_colossus_state>=6}:
       action: set
       int: 6
-  timer_recruittimer_tick:
-    temp_hurryup_value: -100
   geth_colossus_shot_hit:
-    temp_hurryup_value: current_player.recruitbase_recruittimer_tick * 90
-    temp_multiplier:
-      action: set
-      int: current_player.recruitbase_recruittimer_tick
     geth_colossus_state: -1
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
@@ -87,11 +91,7 @@ variable_player:
     mission_instructions:
       string: " "
       action: set
-  geth_target_shot_hit:
-    score: 150
-  recruit_tali_complete:
-    score: current_player.temp_hurryup_value
-
+  
 shots:
   geth_colossus_shot:
     hit_events: sh_left_ramp_hit

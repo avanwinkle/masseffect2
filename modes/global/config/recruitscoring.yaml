@@ -8,11 +8,9 @@ variable_player:
   # Legion calls awards recruitment before the mode ends
   recruit_success{squadmate!="legion"}:
     squadmates_count: 1
-    score: 10000
     available_missions: -1
   recruit_legion_precomplete:
     squadmates_count: 1
-    score: 10000
     available_missions: -1
     status_legion:
       action: set
@@ -67,7 +65,7 @@ variable_player:
       action: set
       int: 0
   # When a shot, round, or mission is completed, award the build value for that round
-  mission_collect_score.98:
+  mission_collect_score.90:
     score: current_player.temp_build_value
     temp_build_value:
       action: set

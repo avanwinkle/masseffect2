@@ -40,6 +40,9 @@ timers:
       - event: recruittimer_set_twenty
         action: jump
         value: 20
+      - event: recruittimer_set_forty
+        action: jump
+        value: 40
       # During a ball save or lock, pause the timer to allow for the new ball to eject
       - event: ball_save_recruitsave_saving_ball{device.timers.recruittimer.running}
         action: pause

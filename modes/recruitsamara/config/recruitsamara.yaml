@@ -27,14 +27,6 @@ mode:
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
-counters:
-  samara_shots_counter:
-    starting_count: 5
-    count_complete_value: 0
-    direction: down
-    persist_state: true
-    count_events: samara_shots_hit
-
 event_player:
   mode_recruitsamara_started:
     show_recruit_instructions:
@@ -42,47 +34,23 @@ event_player:
       portrait: recruitsamara
       instructions_main: Targets weaken armor
       instructions_sub: Shots destroy gunship
+    set_mission_shots:
+      is_resumable: 1
+      ticks: 60
+      shots_total: 5
+      shots_remaining:
+        value: device.counters.samara_shots_counter.value
+        type: int
   logicblock_samara_shots_counter_complete: recruit_samara_complete
 
-#####
-# SAMARA variable_player:
-#    Hurryup starts at 6,000 with a 1x multiplier
-#    Hit a standup target to add 200
-#    Hit a lit standup target to increase multiplier by 0.25x
-#    Hit a shot to collect (hurryup * multiplier)
-#    Hurryup depletes at a fixed rate of 100/sec
-#    Progress is saved after each shot, but base value and multiplier reset
-#
-# TODO: This mode has only been mocked out, not thoroughly tested
-#####
-variable_player:
-  mode_recruitsamara_started:
-    temp_build_value:
-      action: set
-      int: 0
-    temp_hurryup_value:
-      action: set
-      int: 6000
-    temp_multiplier:
-      action: set
-      float: 0.75
-  samara_targets_samara_target_profile_lit_hit:
-    temp_multiplier:
-      action: add
-      float: 0.25
-  timer_recruittimer_tick:
-    temp_hurryup_value: -100
-  samara_shots_hit:
-    # The temp_build_value is the hurryup value at the time the last shot was hit,
-    # which means the amount that will actually be collected
-    temp_build_value:
-      action: set
-      int: (current_player.temp_hurryup_value * current_player.temp_multiplier)
-    temp_hurryup_value: current_player.temp_hurryup_value * current_player.temp_multiplier
-  standuptarget_active:
-    temp_hurryup_value: 200
-  mode_recruitsamara_will_stop:
-    score: current_player.temp_build_value
+counters:
+  samara_shots_counter:
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
+    persist_state: true
+    count_events: samara_shots_hit
+    events_when_hit: mission_shot_hit, mission_collect_score
 
 shot_groups:
   samara_targets:
@@ -168,7 +136,7 @@ sound_player:
       action: play
     gunship_sound:
       action: play
-  logicblock_samara_shots_counter_hit:
+  mission_shot_hit:
     explosion:  # Defined in base_endsounds
       volume: 0.9
   recruit_samara_complete:

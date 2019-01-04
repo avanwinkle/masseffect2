@@ -38,6 +38,11 @@ event_player:
       portrait: recruitlegion
       instructions_main: 3x shots to hack
       instructions_sub: 10s before lockout
+    set_mission_shots:
+      is_resumable: 0
+      ticks: 60
+      shots_total: 3
+      shots_remaining: 3
   mode_recruitlegion_started.2:
     - play_opening_heretic_dialogue
   timer_heretic_timer_complete:
@@ -52,9 +57,14 @@ event_player:
   # Set legion recruited but only "success" on kickback
   logicblock_heretic_counter_complete:
     - recruit_legion_precomplete
+    - mission_collect_score
     # It's mean to enable the bonus shot with only a few seconds to spare :(
     - recruittimer_set_twelve{device.timers.recruittimer.ticks<12}
-  heretic_shot_bonus_hit: recruit_legion_complete
+  # The bonus shot is worth another shot, collected immediately
+  heretic_shot_bonus_hit: 
+    - mission_shot_hit
+    - mission_collect_score
+    - recruit_legion_complete
 
 random_event_player:
   enable_random_heretic:
@@ -64,10 +74,14 @@ random_event_player:
 
 counters:
   heretic_counter:
-    starting_count: 0
-    count_complete_value: 3
+    starting_count: 3
+    count_complete_value: 0
+    disable_on_complete: false
+    reset_on_complete: false
+    direction: down
     count_events: heretic_sequence_shots_lit_hit
     reset_events: mode_recruitlegion_started
+    events_when_hit: mission_shot_hit
 
 timers:
   heretic_timer:
@@ -80,35 +94,6 @@ timers:
         action: restart
       - event: logicblock_heretic_counter_complete
         action: stop
-
-#####
-# LEGION SCORING
-#   The hurryup starts at 600 and ticks down 10/s
-#   The build value starts at 1000
-#   Hitting a lit shot awards the hurryup immediately and
-#   adds a build value of hurryup times 10x num. of shots hit
-#   Completing the mode awards the built value
-#####
-variable_player:
-  mode_recruitlegion_started:
-    temp_multiplier:
-      action: set
-      int: 1
-    temp_build_value:
-      action: set
-      int: 1000
-    temp_hurryup_value:
-      action: set
-      int: 600
-  logicblock_heretic_counter_hit:
-    temp_multiplier: 1
-  timer_recruittimer_tick:
-    temp_hurryup_value: -10
-  heretic_shots_lit_hit:
-    temp_build_value: current_player.temp_multiplier * temp_hurryup_value * 10
-    score: current_player.temp_hurryup_value
-  heretic_kickback_shot_hit:
-    score: current_player.temp_build_value
 
 shot_groups:
   heretic_sequence_shots:
@@ -173,8 +158,8 @@ sound_player:
       mode_end_action: stop
       volume: 1
   play_opening_heretic_dialogue: shepard_start_your_upload
-  logicblock_heretic_counter_hit{count==1}: legion_alert_mobile_platforms
-  logicblock_heretic_counter_hit{count==2}: legion_alert_close_combat
+  mission_shot_hit{count==2}: legion_alert_mobile_platforms
+  mission_shot_hit{count==1}: legion_alert_close_combat
   player_shot_heretic_shot_dropbank_enabled{value==True}: squad_target_left
   player_shot_heretic_shot_hitbank_enabled{value==True}: squad_target_right
   recruit_legion_precomplete:
