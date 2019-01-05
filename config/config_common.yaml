@@ -89,6 +89,7 @@ modes:
   - missionselect
   - modeanalysis
   - bonus
+  - tilt
   - skillshot
   # Environments:
   - environment

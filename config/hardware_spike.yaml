@@ -248,6 +248,12 @@ switches:
     number: 9-2
   s_lock_3:
     number: 9-3
+  s_tilt:
+    number: 1-14
+    tags: tilt
+  s_slam_tilt:
+    number: 1-21
+    tags: slam_tilt
   s_null:
     number: 1-0
 
