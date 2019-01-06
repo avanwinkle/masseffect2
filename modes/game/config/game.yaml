@@ -1,4 +1,6 @@
 #config_version=5
+config:
+  - config_tilt.yaml
 
 # Relay through event_player because widget_player doesn't like conditions/priorities
 event_player:

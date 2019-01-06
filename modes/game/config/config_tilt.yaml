@@ -1,0 +1,185 @@
+#config_version=5
+tilt:
+  warnings_to_tilt: 2
+
+slide_player:
+  tilt_warning_1:
+    me_tilt_warning_1:
+      force: true
+      target: lcd_left
+    tilt_portrait:
+      force: true
+      target: lcd_right
+  tilt_warning_2:
+    me_tilt_warning_2:
+      force: true
+      target: lcd_left
+    tilt_portrait:
+      force: true
+      target: lcd_right
+  tilt:
+    me_tilt:
+      force: true
+  tilt_clear:
+    tilt:
+      action: remove
+
+slides:
+  me_tilt_warning_1:
+    expire: 2s
+    widgets:
+    - type: text
+      text: WARNING
+      style: header_lg, row_main
+    - widget: background_console
+  me_tilt_warning_2:
+    expire: 2s
+    widgets:
+    - type: text
+      text: DANGER
+      style: header_lg, row_main
+    - widget: background_console
+  tilt_portrait:
+    expire: 2s
+    widgets:
+      - type: image
+        image: portrait_tilt
+  me_tilt:
+    widgets:
+    - type: text
+      text: TILT
+      style: header_lg, row_main
+
+sound_player:
+  tilt_warning_1: tilt_warning_normal
+  tilt_warning_2: tilt_warning_severe
+  tilt: tilt_reaper
+
+sound_pools:
+  tilt_warning_normal:
+    track: voice
+    type: random_force_all
+    sounds:
+      - tilt_kasumi_watch_where_youre_shooting{current_player.status_kasumi==4}
+      - tilt_kasumi_watch_it{current_player.status_kasumi==4}
+      - tilt_zaeed_watch_it{current_player.status_zaeed==4}
+      - tilt_zaeed_watch_your_aim{current_player.status_zaeed==4}
+      - tilt_thane_watch_your_shots{current_player.status_thane==4}
+      - tilt_jack_damn_it_watch_where_youre_shooting{current_player.status_jack==4}
+      - tilt_jack_hold_your_fire_shepard{current_player.status_jack==4}
+      - tilt_garrus_careful{current_player.status_garrus==4}
+      - tilt_legion_adjust_aim{current_player.status_legion==4}
+      - tilt_grunt_stop_it_1{current_player.status_grunt==4}
+      - tilt_grunt_hold_fire_shepard_1{current_player.status_grunt==4}
+      - tilt_jacob_damnit_shepard
+      - tilt_samara_cease_fire_shepard{current_player.status_samara==4}
+      - tilt_mordin_stop_shooting_shepard{current_player.status_mordin==4}
+      - tilt_tali_hold_your_fire{current_player.status_tali==4}
+      - tilt_tali_shepard_back_off{current_player.status_tali==4}
+      - tilt_miranda_careful_shepard_1
+      - tilt_miranda_careful_shepard_2
+  tilt_warning_severe:
+    track: voice
+    type: random_force_all
+    sounds:
+      - tilt_jack_get_off_my_ass{current_player.status_jack==4}
+      - tilt_garrus_hold_fire{current_player.status_garrus==4}
+      - tilt_grunt_stop_it_2{current_player.status_grunt==4}
+      - tilt_grunt_hold_fire_shepard_2{current_player.status_grunt==4}
+      - tilt_grunt_stop_firing_at_me_idiot{current_player.status_grunt==4}
+      - tilt_jacob_back_off
+      - tilt_jacob_watch_your_fire
+      - tilt_miranda_watch_it
+
+sounds:
+  tilt_thane_watch_your_shots:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00332074_m.ogg
+    track: voice
+  tilt_jack_damn_it_watch_where_youre_shooting:
+    file: en_us_hench_convict_ss_global_hench_convict_00332096_m.ogg
+    track: voice
+  tilt_jack_hold_your_fire_shepard:
+    file: en_us_hench_convict_ss_global_hench_convict_00332100_m.ogg
+    track: voice
+  tilt_jack_get_off_my_ass:
+    file: en_us_hench_convict_ss_global_hench_convict_00332108_m.ogg
+    track: voice
+  tilt_garrus_careful:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00332123_m.ogg
+    track: voice
+  tilt_garrus_hold_fire:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+    track: voice
+  tilt_legion_adjust_aim:
+    file: en_us_hench_geth_ss_global_hench_geth_00332150_m.ogg
+    track: voice
+  tilt_grunt_stop_it_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332170_m.ogg
+    track: voice
+  tilt_grunt_stop_it_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332171_m.ogg
+    track: voice
+  tilt_grunt_hold_fire_shepard_1:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332174_m.ogg
+    track: voice
+  tilt_grunt_hold_fire_shepard_2:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332175_m.ogg
+    track: voice
+  tilt_grunt_stop_firing_at_me_idiot:
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332176_m.ogg
+    track: voice
+  tilt_jacob_back_off:
+    file: en_us_hench_leading_ss_global_hench_leading_00331101_m.ogg
+    track: voice
+  tilt_jacob_watch_your_fire:
+    file: en_us_hench_leading_ss_global_hench_leading_00332194_m.ogg
+    track: voice
+  tilt_jacob_damnit_shepard:
+    file: en_us_hench_leading_ss_global_hench_leading_00332197_m.ogg
+    track: voice
+  tilt_samara_cease_fire_shepard:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00332221_m.ogg
+    track: voice
+  tilt_mordin_stop_shooting_shepard:
+    file: en_us_hench_professor_ss_global_hench_professor_00332246_m.ogg
+    track: voice
+  tilt_tali_hold_your_fire:
+    file: en_us_hench_tali_ss_global_hench_tali_00332269_m.ogg
+    track: voice
+  tilt_tali_shepard_back_off:
+    file: en_us_hench_tali_ss_global_hench_tali_00332272_m.ogg
+    track: voice
+  tilt_miranda_watch_it:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332048_m.ogg
+    track: voice
+  tilt_miranda_careful_shepard_1:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332051_m.ogg
+    track: voice
+  tilt_miranda_careful_shepard_2:
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332052_m.ogg
+    track: voice
+  tilt_kasumi_watch_where_youre_shooting:
+    file: DLC_HEN_MT_Int.119.ogg
+    track: voice
+  tilt_kasumi_watch_it:
+    file: DLC_HEN_MT_Int.123.ogg
+    track: voice
+  tilt_zaeed_watch_it:
+    file: DLC_HEN_VT_Int.032.ogg
+    track: voice
+  tilt_zaeed_watch_your_aim:
+    file: DLC_HEN_VT_Int.037.ogg
+    track: voice
+  tilt_joker_commander_1:
+    file: en_us_hench_joker_endgm2_escape_c_00311920_m.ogg
+    track: voice
+  tilt_joker_commander_2:
+    file: en_us_hench_joker_endgm2_escape_c_00333854_m.ogg
+    track: voice
+  tilt_joker_shepard:
+    file: en_us_hench_joker_endgm2_escape_c_00333855_m.ogg
+    track: voice
+  tilt_reaper:
+    file: BioD_Gth002_220ReaperAwakes.36.ogg
+    track: sfx
+

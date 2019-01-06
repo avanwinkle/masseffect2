@@ -52,7 +52,7 @@ keyboard:
   g:
     event: levelup
   y:
-    event: plunger_eject
+    switch: s_tilt
   x:
     event: ball_drain
     params:

@@ -250,7 +250,7 @@ switches:
     number: 9-3
   s_tilt:
     number: 1-14
-    tags: tilt
+    tags: tilt_warning
   s_slam_tilt:
     number: 1-21
     tags: slam_tilt

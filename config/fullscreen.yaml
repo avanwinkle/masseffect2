@@ -1,8 +1,4 @@
 #config_version=5
-config:
-  - config_common.yaml
-  - config_lcd_styles.yaml
-
 window:
   title: Mission Pinball Framework - Mass Effect 2
   resizable: false
