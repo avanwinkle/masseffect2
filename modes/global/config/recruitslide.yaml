@@ -1,10 +1,10 @@
 #config_version=5
 
-event_player:
-  slide_recruit_mission_slide_active:
-    # Prepopulate the slide when it comes in
-    timer_recruittimer_tick:
-      ticks_remaining: { value: device.timers.recruittimer.ticks }
+# event_player:
+#   slide_recruit_mission_slide_active:
+#     # Prepopulate the slide when it comes in
+#     timer_missiontimer_tick:
+#       ticks_remaining: { value: device.timers.missiontimer.ticks }
 
 #####
 # Use a single slide/widget for all the missions, just update the text
@@ -139,7 +139,7 @@ slides:
         animations:
           show_slide: pulse_text_slow
       - type: text
-        text: (global_recruittimer_tick)
+        text: (base_missiontimer_tick)
         style: timer_primary, row_gutter, col_right_indent
       - widget: background_console
   recruit_instructions_slide:

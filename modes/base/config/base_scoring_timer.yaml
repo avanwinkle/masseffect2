@@ -1,21 +1,9 @@
 #config_version=5
-variable_player:
-  sw_standuptarget_active:
-    score: 200
-  recruit_lit:
-    score: 5000
-    available_missions: 1
-  # Legion calls awards recruitment before the mode ends
-  recruit_success{squadmate!="legion"}:
-    squadmates_count: 1
-    available_missions: -1
-  recruit_legion_precomplete:
-    squadmates_count: 1
-    available_missions: -1
-    status_legion:
-      action: set
-      int: 4
+event_player:
+  player_mission_starting_ticks{player_num==current_player.number}: 
+    - missiontimer_set_(value)
 
+variable_player:
   #### FIXED SCORING ####
   #---------------------#
   # Set the initial values necessary
@@ -30,6 +18,10 @@ variable_player:
       action: set
       int: is_resumable
     mission_starting_ticks:
+      action: set
+      int: ticks
+    # Set the player variable for the timer before the mission starts, for a clean widget
+    base_missiontimer_tick:
       action: set
       int: ticks
     temp_build_value:
@@ -50,13 +42,13 @@ variable_player:
   mission_shot_hit.100:
     mission_ticks:
       action: set
-      int: device.timers.recruittimer.ticks
-    temp_hurryup_value: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.recruittimer.ticks))
+      int: device.timers.missiontimer.ticks
+    temp_hurryup_value: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.missiontimer.ticks))
     # If the mission is not resumable (and this is not a bonus shot), reset the hurryup ticks
     # so that the next shot has a chance to score the full starting_value
     mission_starting_ticks{not current_player.mission_is_resumable and not is_bonus_shot}:
       action: set
-      int: device.timers.recruittimer.ticks
+      int: device.timers.missiontimer.ticks
   mission_shot_hit.99:
     # Track the total value accumulated via build_value, which will cash out when collected
     temp_build_value: current_player.temp_hurryup_value
@@ -71,3 +63,44 @@ variable_player:
       action: set
       int: 0
 
+timers:
+  missiontimer:
+    start_value: 60
+    max_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      # Some missions use different timing, so a few handlers to adjust the clock
+      - event: missiontimer_add_ten
+        action: add
+        value: 10
+      - event: missiontimer_add_twelve
+        action: add
+        value: 12
+      - event: missiontimer_set_12
+        action: jump
+        value: 12
+      - event: missiontimer_set_20
+        action: jump
+        value: 20
+      - event: missiontimer_set_40
+        action: jump
+        value: 40
+      - event: missiontimer_set_60
+        action: jump
+        value: 60
+      # During a ball save or lock, pause the timer to allow for the new ball to eject
+      - event: ball_save_recruitsave_saving_ball{device.timers.missiontimer.running}
+        action: pause
+        value: 2
+      - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
+        action: pause
+        value: 2
+      # The timer starts fresh on every mission and stops on every end
+      - event: missiontimer_start
+        action: start
+      - event: mode_type_mission_stopped
+        action: stop
+      - event: mode_type_wizard_stopped
+        action: stop

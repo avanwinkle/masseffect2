@@ -24,10 +24,8 @@
 # There is a lot of logic in recruitbase, so let's break it up into files
 #####
 config:
-  - recruitscoring.yaml  # Everything in the variable_player: section
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
-  - recruittimer.yaml    # A shared hurryup timer for recruit missions
-
+  
 event_player:
   # See also: base.yaml for events related to enabling/disabling missionresume
   # Allow the player to resume a mission when launching the ball
@@ -38,8 +36,8 @@ event_player:
       squadmate:
         value: current_player.resume_mission
   mode_type_mission_started:
-    - recruittimer_start|3s     # It's nice to give a little delay
-  timer_recruittimer_complete:
+    - missiontimer_start|3s     # It's nice to give a little delay
+  timer_missiontimer_complete:
     - stop_recruitmission
   recruit_success:
     - stop_recruitmission
@@ -49,6 +47,17 @@ variable_player:
     resume_mission:
       action: set
       string: " "
+  # All non-legion squadmates tally up on success
+  recruit_success{squadmate!="legion"}:
+    squadmates_count: 1
+    available_missions: -1
+  # Legion calls awards recruitment before the mode ends
+  recruit_legion_precomplete:
+    squadmates_count: 1
+    available_missions: -1
+    status_legion:
+      action: set
+      int: 4
 
 #####
 # This is just while I'm developing and debugging missions, a little cheat ;)
@@ -128,7 +137,7 @@ sound_player:
   recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
-  timer_recruittimer_complete: shep_cant_reach_target
+  timer_missiontimer_complete: shep_cant_reach_target
   recruit_failure_kasumi: kasumi_failed
   recruit_failure_tali: tali_failed
   recruit_failure_mordin: mordin_failed
@@ -139,7 +148,7 @@ sound_player:
 
 
 track_player:
-  timer_recruittimer_complete:
+  timer_missiontimer_complete:
     voice:
       action: stop_all_sounds
 

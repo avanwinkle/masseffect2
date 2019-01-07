@@ -163,6 +163,8 @@ player_vars:
   career_started:
     initial_value: 0.0
     value_type: float
+  difficulty: 
+    initial_value: 0
   readonly:
     initial_value: 0
   balls_played:
@@ -175,6 +177,9 @@ player_vars:
     initial_value: 0
   missionname:
     initial_value: " "
+    value_type: str
+  mission_instructions:
+    initial_value: "<mission_instructions initial value>"
     value_type: str
   available_shipupgrades:
     initial_value: 0

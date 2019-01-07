@@ -10,6 +10,7 @@ config:
   - base_endsounds.yaml
   - base_medigel.yaml
   - base_shows.yaml
+  - base_scoring_timer.yaml
 
 event_player:
   mode_base_started:

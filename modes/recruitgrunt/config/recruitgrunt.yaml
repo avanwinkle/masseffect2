@@ -30,7 +30,9 @@ event_player:
       instructions_sub: " "
     set_mission_shots:
       is_resumable: 1
-      ticks: 12
+      ticks: 
+        value: 12 if current_player.difficulty else 20
+        type: int
       shots_total: 5
       shots_remaining:
         value: device.counters.grunt_shots_counter.value
@@ -40,9 +42,8 @@ event_player:
       value:
         value: device.counters.grunt_shots_counter.value
         type: int
-  recruittimer_start: recruittimer_set_twelve
   # Add time for each successful shot by resetting directly to 12
-  mission_shot_hit: recruittimer_set_twelve
+  mission_shot_hit: missiontimer_set_12
   logicblock_grunt_shots_counter_complete: recruit_grunt_complete
   
 counters:

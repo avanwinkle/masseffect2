@@ -5,7 +5,7 @@ from mpf.core.custom_code import CustomCode
 
 PLAYER_VARS = (
   # These are the variables that are saved in a career. Everything else resets.
-  "career_name", "career_started", "balls_played", "readonly", "level",
+  "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
   "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp" )
 
 ACHIEVEMENT_MISSIONS = (
