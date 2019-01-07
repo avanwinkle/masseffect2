@@ -72,18 +72,9 @@ class SquadmateSounds(Scriptlet):
 
   def _update_sqicons(self, **kwargs):
     self.log.info("Updating sqicons")
-    # self.log.info(" - Slides: {}".format(self.mc.slides))
     sqicon_slide = self.mc.slides["squadicon_slide"]
-    # self.log.info(" - Sqicon Slide: {}".format(sqicon_slide))
-    # self.log.info("{}".format(dir(sqicon_slide)))
     if not self._sqicons:
       self._sqicons = {}
-      # for widget in sqicon_slide["widgets"]:
-      #   if widget.get("key") and widget.get("key").startswith("sqicon_"):
-      #     mate = widget["key"].replace("sqicon_", "")
-      #     self._sqicons[mate] = widget
-      #     # widget["style"] = [ SQICON_STATUSES[self.mc.player["status_{}".format(mate)]]]
-      # self.log.info("Widgets: {}".format(self._sqicons))
 
     self.log.info("Displays: {}".format(self.mc.displays))
     lcd_right = self.mc.displays['lcd_right']
@@ -107,18 +98,9 @@ class SquadmateSounds(Scriptlet):
         if widget.key and widget.key.startswith("sqicon_"):
           mate = widget.key.replace("sqicon_", "")
           status = self.mc.player["status_{}".format(mate)]
-          # widget.config["animations"] = {}
-
-          # if status == 3:
-          #   widget.opacity = 0.5
-          # else:
-          #   widget.opacity = 1
 
           if 0 <= status < 3:
             color = SQICON_STATUSES["none"]
-            # self.log.info(dir(widget))
-            # self.log.info("Widget after opacity/animation: {}".format(widget))
-            # self.log.info("Config after opacity/animation: {}".format(widget.config))
           else:
             if self.mc.player["specialist"] == mate:
               color = SQICON_STATUSES["specialist"]
@@ -132,8 +114,5 @@ class SquadmateSounds(Scriptlet):
           widget.config["color"] = color
 
           self.log.info("Setting sqicon {} (status {}) to opacity {} color {}".format(mate, status, widget.opacity, widget.color))
-          # widget._apply_style()
-          # self.log.info(widget.color)
-          # widget._draw_widget()
     else:
       self.log.error("Current slide is NOT squadicon")

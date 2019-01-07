@@ -394,10 +394,11 @@ slide_player:
       action: play
       target: lcd_right
       priority: 100
-  recruit_lit:
-    squadicon_slide: {}
-  recruit_success:
-    squadicon_slide: {}
+  # Commenting these as possible cause of sqicons appearing lcd_left
+  # recruit_lit:
+  #   squadicon_slide: {}
+  # recruit_success:
+  #   squadicon_slide: {}
 
 slides:
   levelup_slide:
