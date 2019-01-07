@@ -265,7 +265,7 @@ slides:
     widgets:
       - type: text
         text: LAUNCH THE
-        style: header_sm, row_super
+        style: header_sm, row_top
       - type: text
         text: "SUICIDE\nMISSION"
         style: header_lg

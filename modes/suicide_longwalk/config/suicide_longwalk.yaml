@@ -78,7 +78,7 @@ timers:
         action: restart
       - event: logicblock_swarmpaths_complete
         action: stop
-      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}}
+      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}
         action: jump
         value: 41
       - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>21 and player_num==current_player.number}

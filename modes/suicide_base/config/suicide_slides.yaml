@@ -19,6 +19,28 @@ slide_player:
         expire: 4s
     restore_singleplayer_slide: singleplayer_slide
     restore_multiplayer_slide: multiplayer_slide
+    # Portraits
+    mode_suicide_omegarelay_started:
+      portrait_omegarelay:
+        target: lcd_right
+    mode_suicide_infiltration_started:
+      portrait_infiltration:
+        target: lcd_right
+    mode_suicide_longwalk_started:
+      portrait_longwalk:
+        target: lcd_right
+    mode_suicide_tubes_started:
+      portrait_tubes:
+        target: lcd_right
+    mode_suicide_platforms_started:
+      portrait_platforms:
+        target: lcd_right
+    mode_suicide_humanreaper_started:
+      portrait_humanreaper:
+        target: lcd_right
+    mode_suicide_endrun_started:
+      portrait_endrun:
+        target: lcd_right
 
 widget_player:
   # START/STOP Modes (Titles and add/remove)
@@ -112,79 +134,48 @@ widget_player:
         slide: suicide_slide
 
 slides:
-  # No longer used?
   huddle_slide:
     widgets:
-      - type: rectangle
-        color: black
-        width: 128
-        height: 32
-        z: 1
+      - type: text
+        text: Huddle up!
+        style: header_xs, row_top, col_left_anchor
+      - widget: background_console
   # Basic slide for all uses
   suicide_slide:
     widgets:
       - type: text
         text: the Suicide Mission
-        color: BBBBBB
-        style: small
-        anchor_y: top
-        y: top-2
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - widget: background_console
   # Identical to suicide_slide but separate because of all the widgets
   reaper_slide:
     widgets:
       - type: text
         text: the Suicide Mission
-        color: BBBBBB
-        style: small
-        anchor_y: top
-        y: top-2
-        z: 2
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: Destroy the Reaper
-        style: text_default
-        z: 2
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (player|temp_build_value) x (player|temp_multiplier)
         number_grouping: true
-        style: small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
-        z: 2
+        style: header_sm, row_sub, col_left_anchor
       - type: text
         text: (player|reaper_hp) HP
-        style: small
         number_grouping: true
-        anchor_x: right
-        anchor_y: bottom
-        x: right-2
-        y: 2
-        z: 2
-      - type: rectangle
-        color: black
-        width: 128
-        height: 32
-        z: 1
+        style: header_sm, row_sub, col_right_anchor
+      - widget: background_console
   # Fancy flashing to show the reaper is firing
   reaper_firing_slide:
     widgets:
       - type: rectangle
-        width: 128
-        height: 32
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+        width: 758
+        height: 468
         z: 0
         color: 000000
       - type: rectangle
-        width: 128
-        height: 32
-        anchor_x: left
-        anchor_y: bottom
-        x: 0
-        y: 0
+        width: 758
+        height: 468
         z: 1
         color: FFFFFF
         animations:
@@ -201,102 +192,109 @@ slides:
     widgets:
       - type: text
         text: KAPOW!
-        style: text_default
-        anchor_y: bottom
-        y: middle+2
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (change) damage dealt!
-        style: small
-        anchor_y: top
-        y: middle-2
+        style: header_sm, row_sub, col_left_anchor
       - type: text
         text: (value) remaining
-        style: small
-        anchor_y: bottom
-        y: 2
+        style: header_sm, row_sub_under, col_left_anchor
   # Shown when a squadmate is killed, during restart mode
   squadmate_killed_slide:
     widgets:
       - type: text
-        text: Shoot ramp to try again
-        style: small
-        anchor_y: top
-        y: middle-4
-      - type: text
         text: (player|killed_squadmate) is dead
-        style: small
-        anchor_y: bottom
-        y: middle+4
+        style: body_md, row_super
+      - type: text
+        text: Shoot ramp to try again
+        style: body_md, row_sub
+  portrait_omegarelay:
+    - type: image
+      image: portrait_suicide_omegarelay
+  portrait_infiltration:
+    - type: image
+      image: portrait_suicide_infiltration
+  portrait_longwalk:
+    - type: image
+      image: portrait_suicide_longwalk
+  portrait_tubes:
+    - type: image
+      image: portrait_suicide_tubes
+  portrait_platforms:
+    - type: image
+      image: portrait_suicide_platforms
+  portrait_humanreaper:
+    - type: image
+      image: portrait_suicide_humanreaper
+  portrait_endrun:
+    - type: image
+      image: portrait_suicide_endrun
+
 
 widgets:
   # Titles for the different modes
     huddle_title:
       - type: text
         text: Specialist Required
-        style: medium
+        style: header_md, row_main, col_left_anchor
     omegarelay_title:
       - type: text
         text: Omega 4 Relay
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     infiltration_title:
       - type: text
         text: Infiltration
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     longwalk_title:
       - type: text
         text: the Long Walk
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     tubes_title:
       - type: text
         text: Destroy the Tubes
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     platforms_title:
       - type: text
         text: Final Battle
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     humanreaper_title:
       - type: text
         text: the Human Reaper
-        style: text_default
+        style: header_md, row_main, col_left_anchor
     endrun_title:
       - type: text
         text: the End Run
-        style: text_default
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: "Doesn't exist. You win!"
-        style: small
-        anchor_y: bottom
-        y: 2
+        style: header_sm, row_sub, col_left_anchor
   # Widgets for timers and shot counters
     suicide_time:
       - type: text
         text: (ticks)
-        style: small_bot_left
+        style: timer_primary, row_gutter, col_right_indent
     suicide_shots:
       - type: text
         text: "Shots: (count)"
-        style: small_bot_right
+        style: header_xs, row_gutter, col_left_center
     suicide_tubes:
       - type: text
         text: "Tubes: (value)"
-        style: small_bot_right
+        style: header_xs, row_gutter, col_left_anchor
     suicide_hurryup:
       - type: text
         text: (value)
         number_grouping: true
-        style: small_bot_left
+        style: body_sm, row_sub, col_left_anchor
     suicide_damage:
       - type: text
         text: "(value)"
-        style: small_bot_right
+        style: body_sm, row_sub, col_left_anchor
         number_grouping: true
     suicide_detonate:
       - type: text
         text: Shoot Ramp
-        style: small
-        anchor_y: bottom
-        y: 1
-        z: 4
+        style: header_sm, row_sub, col_left_anchor
         animations:
           add_to_slide:
             - property: opacity
@@ -309,10 +307,7 @@ widgets:
     reaper_charging_widget:
       - type: text
         text: Firing in (ticks)s
-        style: small
-        anchor_y: bottom
-        y: 1
-        z: 4
+        style: header_md, row_sub_under, col_left_anchor
         animations:
           add_to_slide:
             - property: opacity
@@ -322,13 +317,6 @@ widgets:
               value: 1
               duration: .25s
               repeat: true
-      - type: rectangle
-        color: 000000
-        width: 128
-        height: 7
-        anchor_y: bottom
-        y: 0
-        z: 3
   # Individual squadmate names for specialist selection
     specialist_garrus_widget:
       - type: text

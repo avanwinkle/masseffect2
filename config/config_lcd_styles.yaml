@@ -134,7 +134,7 @@ widget_styles:
     z: 110
   header_xs:
     font_name: me123
-    font_size: 24
+    font_size: 28
     adjust_bottom: 2
     z: 110
   header_popup: # Same as header_sm but with -50 adjust
@@ -267,6 +267,23 @@ widget_styles:
     color: FFFFFF
     opacity: 0.2
 
+  # SQUAD SPECIALISTS
+  #----------------------------
+  spec_default:
+    anchor_x: left
+    anchor_y: bottom
+    z: 120
+    opacity: 0.4
+  spec_dead:
+    z: 120
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.03
+  spec_highlight:
+    z: 120
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 1
 
   # SQUAD ICON POSITIONS
   #----------------------------

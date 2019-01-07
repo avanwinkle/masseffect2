@@ -228,179 +228,209 @@ widget_player:
     specialist_garrus_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_garrus_highlighted:
     specialist_garrus_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_garrus_dead:
     specialist_garrus_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_jack_default:
     specialist_jack_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_jack_highlighted:
     specialist_jack_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_jack_dead:
     specialist_jack_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_jacob_default:
     specialist_jacob_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_jacob_highlighted:
     specialist_jacob_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_jacob_dead:
     specialist_jacob_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_kasumi_default:
     specialist_kasumi_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_kasumi_highlighted:
     specialist_kasumi_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_kasumi_dead:
     specialist_kasumi_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_legion_default:
     specialist_legion_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_legion_highlighted:
     specialist_legion_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_legion_dead:
     specialist_legion_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_miranda_default:
     specialist_miranda_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_miranda_highlighted:
     specialist_miranda_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_miranda_dead:
     specialist_miranda_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_mordin_default:
     specialist_mordin_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_mordin_highlighted:
     specialist_mordin_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_mordin_dead:
     specialist_mordin_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_samara_default:
     specialist_samara_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_samara_highlighted:
     specialist_samara_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_samara_dead:
     specialist_samara_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_tali_default:
     specialist_tali_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_tali_highlighted:
     specialist_tali_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_tali_dead:
     specialist_tali_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
   suicide_huddle_thane_default:
     specialist_thane_widget:
       action: update
       slide: huddle_slide
+      priority: 10
       widget_settings:
         style: spec_default
   suicide_huddle_thane_highlighted:
     specialist_thane_widget:
       action: update
       slide: huddle_slide
+      priority: 20
       widget_settings:
         style: spec_highlight
   suicide_huddle_thane_dead:
     specialist_thane_widget:
       action: update
       slide: huddle_slide
+      priority: 30
       widget_settings:
         style: spec_dead
