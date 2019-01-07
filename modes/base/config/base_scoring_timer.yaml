@@ -30,6 +30,9 @@ variable_player:
     temp_hurryup_value:
       action: set
       int: 0
+    temp_multiplier:
+      action: set
+      float: 1.0
   # Use the values set above to calculate the starting value for _this_ attempt
   set_mission_shots.1:
     mission_starting_value:
@@ -43,19 +46,17 @@ variable_player:
     mission_ticks:
       action: set
       int: device.timers.missiontimer.ticks
-    temp_hurryup_value: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.missiontimer.ticks))
+    temp_hurryup_value: 
+      action: set
+      int: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.missiontimer.ticks))
     # If the mission is not resumable (and this is not a bonus shot), reset the hurryup ticks
     # so that the next shot has a chance to score the full starting_value
     mission_starting_ticks{not current_player.mission_is_resumable and not is_bonus_shot}:
       action: set
       int: device.timers.missiontimer.ticks
-  mission_shot_hit.99:
+  mission_shot_hit.90:
     # Track the total value accumulated via build_value, which will cash out when collected
-    temp_build_value: current_player.temp_hurryup_value
-    # Reset the hurryup value to capture the next shot hit
-    temp_hurryup_value:
-      action: set
-      int: 0
+    temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier
   # When a shot, round, or mission is completed, award the build value for that round
   mission_collect_score.90:
     score: current_player.temp_build_value

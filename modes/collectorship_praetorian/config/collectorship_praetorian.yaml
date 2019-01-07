@@ -23,23 +23,36 @@ mode:
   priority: 500
 
 event_player:
-  mode_collectorship_praetorian_started:
+  mode_collectorship_praetorian_started.1:
     - start_base_praetorian_show
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
+  mode_collectorship_praetorian_started.2:
+    set_mission_shots:
+      shots_total: 2 # Undercut the number of shots for big score
+      shots_remaining: 2
+      ticks: 20
+      is_resumable: 0
   praetorian_shot_hit:
     - flippers_on
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
-  timer_praetoriantimer_complete{current_player.temp_multiplier==0}:
+    - mission_shot_hit
+    - missiontimer_set_20
+  timer_missiontimer_complete{current_player.temp_multiplier==1}:
     - stop_base_praetorian_show
     - praetorian_attack_one
     - praetorian_attack_two|800ms
     - praetorian_attack_three|1600ms
     - start_base_praetorian_show|2400ms
-  timer_praetoriantimer_complete{current_player.temp_multiplier>0}: collectorship_praetorian_failed
+    - missiontimer_set_20|2400ms
+    - missiontimer_start|2800ms
+  # If the timer runs out a _second_ time, the mission fails
+  timer_missiontimer_complete{current_player.temp_multiplier>1}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
-  collectorship_praetorian_complete: stop_mode_collectorship_praetorian
+  collectorship_praetorian_complete: 
+    - mission_collect_score
+    - stop_mode_collectorship_praetorian
   collectorship_praetorian_failed: stop_mode_collectorship_praetorian
   # Re-enable the flippers, unless the game is over and we're stopping
   mode_collectorship_praetorian_will_stop{mode.base.stopping!=True}:
@@ -82,24 +95,16 @@ counters:
 
 # For scoring, the temp_hurryup_value carried over from husks is our base
 variable_player:
-  # Add a little for each shot hit
+  # Reset the timer when the praetorian is hit, since we get both flippers back
   praetorian_shot_hit:
-    score: 1000 + (current_player.temp_build_value * 0.25)
     temp_multiplier:
       action: set
-      int: 0
-  # Add a bunch for defeating the praetorian
-  praetorian_hits_counter_complete:
-    score: 4000 + (current_player.temp_build_value * 10)
-  # Use the multiplier to track hits
-  mode_collectorship_praetorian_started:
-    temp_multiplier:
-      action: set
-      int: 0
-  timer_praetoriantimer_complete:
-    temp_multiplier:
+      float: 1.0
+  # Add to the multiplier for each timeout, so we can track how many flippers are disabled
+  timer_missiontimer_complete:
+    temp_multiplier: 
       action: add
-      int: 1
+      float: 1.0
 
 shot_groups:
   praetorian_shot:
@@ -324,20 +329,6 @@ sounds:
   praet_alarm:
     track: sfx
     file: mus_generic_stinger_053.ogg
-
-timers:
-  praetoriantimer:
-    start_value: 16
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: yes
-    restart_on_complete: true
-    control_events:
-      - event: stop_mode_collectorship_praetorian
-        action: stop
-      - event: praetorian_shot_hit
-        action: restart
 
 widget_player:
   mode_collectorship_praetorian_started:

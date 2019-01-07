@@ -34,10 +34,22 @@ event_player:
   mode_derelictreaper_started:
     set_environment:
       env: husks
-  timer_reapercore_timeout_complete:
+  timer_missiontimer_complete:
     - disable_reapercore
     - enable_corereset
-  corereset_hit: enable_reapercore
+  corereset_hit: 
+    - enable_reapercore
+    - missiontimer_set_20
+    - missiontimer_start|1s
+  # Reset the mission shots on each reapercore, to reduce values on "resume"
+  enable_reapercore:
+    set_mission_shots:
+      shots_total: 5
+      ticks: 20
+      is_resumable: 1
+      shots_remaining: 
+        value: device.counters.reapercore_counter.value
+        type: int
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
@@ -50,6 +62,8 @@ event_player:
   multiball_reapercoremb_ended{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
   ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
+  # Award whatever was accumulated when the mode ends
+  mode_derelictreaper_will_stop: mission_collect_score
 
 counters:
   reapercore_counter:
@@ -69,43 +83,14 @@ multiballs:
     # every time the reaper core opens and there is only one ball in play
     start_events: mode_derelictreaper_started, enable_reapercore{game.balls_in_play<2}
 
-#####
-# DERELICT REAPER SCORING
-#
-# Each round begins with a hurryup value of 1,000 plus a 0.2x multiple for each
-# starting shot lit, saved in the temp_multiplier value. Hitting a shot stores
-# the hurryup value and re-adds the starting value to the hurryup, and the
-# hurryup drains at a constant rate (1,000 pts per 18 seconds) down to a minimum
-# value of 500.
-#
-# Restarting the mode or re-enabling the core triggers a recalculation of the
-# multiplier based on the number of lit shots, so the more tries a player takes
-# the less value each completed shot awards.
-#
-# Hitting the jackpot shot multiplies the _entire_ built value by the shot-count
-# multiplier.
-#####
 variable_player:
-  mode_derelictreaper_started:
-    temp_build_value:
-      action: set
-      int: 0
-  enable_reapercore:
-    temp_multiplier:
-      action: set
-      float: 1 + (0.2 * device.counters.reapercore_counter.value)
-    temp_hurryup_value:
-      action: set
-      int: 1000 * current_player.temp_multiplier
-  reapercore_shots_lit_hit:
-    temp_hurryup_value: 1000 * current_player.temp_multiplier
-    temp_build_value: current_player.temp_hurryup_value
-  timer_reapercore_timeout_tick{current_player.temp_hurryup_value>500}:
-    temp_hurryup_value: -55
   reaperjackpot_hit:
-    temp_build_value: current_player.temp_build_value * current_player.temp_multiplier
-  mode_derelictreaper_will_stop:
+    # Jackpot awards the built up value IN ADDITION TO it being awarded at mode end
     score: current_player.temp_build_value
+    # Jackpot also increases multiplier for subsequent build values!
+    temp_multiplier:
+      action: add
+      float: 0.5
 
 shot_groups:
   reapercore_shots:
@@ -308,7 +293,7 @@ widget_player:
       action: remove
     reapershots_widget:
       action: remove
-  timer_reapercore_timeout_tick:
+  timer_missiontimer_tick:
     reapertimeout_widget:
       action: update
       slide: derelictreaper_slide
