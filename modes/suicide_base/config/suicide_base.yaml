@@ -27,6 +27,8 @@ event_player:
     # Everything between omegarelay and endrun starts with the huddle
     - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
     - start_mode_suicide_endrun{device.achievements.endrun.state=="selected"}
+    # Give 2s for the opening, then start the timer
+    - missiontimer_start|2s
   # If another mode ends, clear its environment
   mode_type_suicide_stopped:
     - set_environment

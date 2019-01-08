@@ -19,43 +19,33 @@ mode:
   priority: 2300
 
 event_player:
+  mode_type_suicide_started:
+    set_mission_shots:
+      shots: 7
+      shots_remaining: 7
+      ticks: 54
+      is_resumable: 1
+  omegarelay_shots_lit_hit: mission_shot_hit
   # Near the end of the timer, shoutout
-  timer_omegarelay_tick{ticks==5}: play_generators_offline
-  # The mode ends if all the balls drain. Wait a second for joker's sound to finish
-  ball_save_omegarelay_save_saving_ball: omegarelay_complete|1s
+  timer_missiontimer_tick{ticks==5}: play_generators_offline
   # The mode ends if all the shots are hit
-  omegarelay_shots_hit_complete: force_omega_end
+  omegarelay_shots_hit_complete: 
+    - force_omega_end
+    - missiontimer_stop
   # The mode ends if the timer runs out
-  timer_omegarelay_complete: force_omega_end
+  timer_missiontimer_complete: force_omega_end
   # Force the end by disabling flippers and making the balls drain
-  force_omega_end:
-    - flippers_off
-
+  force_omega_end: flippers_off
+  # The mode ends when all the balls drain. Wait a second for joker's sound to finish
+  ball_save_omegarelay_save_saving_ball: 
+    - mission_collect_score
+    - omegarelay_complete|1s
+  
 variable_player:
-  mode_suicide_omegarelay_started:
-    temp_hurryup_value:
-      action: set
-      int: 6000
-    temp_multiplier:
-      action: set
-      float: 1.0
-    temp_build_value:
-      action: set
-      int: 0
-  omegarelay_shots_lit_hit:
-    temp_hurryup_value:
-      action: set
-      int: 6000 * current_player.temp_multiplier
-    score: current_player.temp_hurryup_value
-    temp_build_value: current_player.temp_hurryup_value
-    temp_multiplier:
-      action: add
-      float: 0.5
   omegarelay_shots_hit_complete:
-    score: temp_build_value
-  timer_omegarelay_tick:  # 6000 over 60s = 100 per second
-    temp_hurryup_value: -100 * current_player.temp_multiplier
-
+    # Completing the final shot doubles the score!
+    temp_build_value: current_player.temp_build_value
+      
 counters:
   omegarelay_extraball_counter:
     starting_count: 0
@@ -128,7 +118,7 @@ sound_player:
       volume: 0.8
     joker_i_have_to_try_and_lose_them:
       action: play
-      events_when_stopped: start_omegarelay_timer
+      events_when_stopped: missiontimer_set_omegarelay
   # We have a shot sequence to play the right sound per hit
   omegarelay_shots_lit_hit:
     omega_callout_sequence:
@@ -137,17 +127,3 @@ sound_player:
   ball_save_omegarelay_save_saving_ball{early_save}: joker_ah_shit
   # A force end means flippers disable, so play a crash sound while we wait for the ball to drain
   force_omega_end: normandy_crash
-
-timers:
-  omegarelay:
-    start_value: 54
-    end_value: 0
-    direction: down
-    tick_interval: 1s
-    control_events:
-      - event: start_omegarelay_timer
-        action: start
-      - event: omegarelay_shots_hit_complete
-        action: stop
-      - event: force_omega_end
-        action: stop

@@ -73,10 +73,10 @@ timers:
     direction: down
     control_events:
       # Some missions use different timing, so a few handlers to adjust the clock
-      - event: missiontimer_add_ten
+      - event: missiontimer_add_10
         action: add
         value: 10
-      - event: missiontimer_add_twelve
+      - event: missiontimer_add_12
         action: add
         value: 12
       - event: missiontimer_set_12
@@ -85,12 +85,31 @@ timers:
       - event: missiontimer_set_20
         action: jump
         value: 20
+      - event: missiontimer_set_30
+        action: jump
+        value: 30
       - event: missiontimer_set_40
         action: jump
         value: 40
       - event: missiontimer_set_60
         action: jump
         value: 60
+      # Specific jumps for missions
+      - event: missiontimer_set_omegarelay
+        action: jump
+        value: 54 # Dependent on the duration of the music track
+      - event: missiontimer_set_longwalk_1
+        action: jump
+        value: 41
+      - event: missiontimer_set_longwalk_2
+        action: jump
+        value: 21
+      - event: missiontimer_set_longwalk_3
+        action: jump
+        value: 0
+      - event: missiontimer_add_platforms
+        action: add
+        value: 4
       # During a ball save or lock, pause the timer to allow for the new ball to eject
       - event: ball_save_recruitsave_saving_ball{device.timers.missiontimer.running}
         action: pause
@@ -101,7 +120,11 @@ timers:
       # The timer starts fresh on every mission and stops on every end
       - event: missiontimer_start
         action: start
+      - event: missiontimer_stop
+        action: stop
       - event: mode_type_mission_stopped
         action: stop
       - event: mode_type_wizard_stopped
+        action: stop
+      - event: mode_type_suicide_stopped
         action: stop
