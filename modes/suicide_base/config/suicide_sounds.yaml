@@ -1,26 +1,62 @@
 #config_version=5
 sound_player:
-    # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
-    play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
-    mode_type_suicide_started:
-      suicide_music_base:
-        action: stop
-        fade_out: 2s
-    mode_suicide_base_will_stop:
-      suicide_music_base:
-        action: stop
-        fade_out: 2s
-    # Play the final valve sound here so we can stop the infiltration mode immediately
-    infiltration_complete:
-      specialist_inf_through:
-        action: play
-        # Start this first to avoid a race condition with the huddle dialoge
-        # Don't need anymore because lockhandler does it?
-        # events_when_stopped: start_mode_suicide_huddle
-    longwalk_complete:
-      shep_everyone_through_the_doors:
-        action: play
-        # events_when_stopped: start_mode_suicide_huddle
+  # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
+  play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
+  mode_type_suicide_started:
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
+  mode_suicide_base_will_stop:
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
+  # Sounds in shows don't playback after loading, so pre-load them!
+  omegarelay_complete: #preload_infiltration:
+    infiltration_low:
+      action: load
+      track: music
+    specialist_inf_intro:
+      action: load
+      track: voice
+    specialist_inf_outro:
+      action: load
+      track: voice
+  infiltration_complete:
+    # Play the final valve sound in this file so we can stop mode_suicide_infiltration immediately
+    specialist_inf_through:
+      action: play
+      # Start this first to avoid a race condition with the huddle dialoge
+      # Don't need anymore because lockhandler does it?
+      # events_when_stopped: start_mode_suicide_huddle
+    longwalk_low:
+      action: load
+      track: music
+    specialist_lw_intro_yes:
+      action: load
+      track: voice
+    specialist_lw_intro_no:
+      action: load
+      track: voice
+    specialist_lw_outro:
+      action: load
+      track: voice
+  longwalk_complete:
+    shep_everyone_through_the_doors:
+      action: play
+      # events_when_stopped: start_mode_suicide_huddle
+    platforms_low:
+      action: load
+      track: music
+    shep_we_win_or_lose_it_all:
+      action: load
+      track: voice
+  tubes_complete:
+    platforms_med_high:
+      action: load
+      track: music
+    shep_give_us_a_minute_edi:
+      action: load
+      track: voice
 
 # For the last time, kill all the music when a mode stops!
 track_player:

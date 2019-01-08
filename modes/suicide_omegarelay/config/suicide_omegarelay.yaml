@@ -19,7 +19,7 @@ mode:
   priority: 2300
 
 event_player:
-  mode_type_suicide_started:
+  mode_suicide_omegarelay_started:
     set_mission_shots:
       shots: 7
       shots_remaining: 7
@@ -29,7 +29,7 @@ event_player:
   # Near the end of the timer, shoutout
   timer_missiontimer_tick{ticks==5}: play_generators_offline
   # The mode ends if all the shots are hit
-  omegarelay_shots_hit_complete: 
+  omegarelay_shots_hit_complete:
     - force_omega_end
     - missiontimer_stop
   # The mode ends if the timer runs out
@@ -37,15 +37,15 @@ event_player:
   # Force the end by disabling flippers and making the balls drain
   force_omega_end: flippers_off
   # The mode ends when all the balls drain. Wait a second for joker's sound to finish
-  ball_save_omegarelay_save_saving_ball: 
+  ball_save_omegarelay_save_saving_ball:
     - mission_collect_score
     - omegarelay_complete|1s
-  
+
 variable_player:
   omegarelay_shots_hit_complete:
     # Completing the final shot doubles the score!
     temp_build_value: current_player.temp_build_value
-      
+
 counters:
   omegarelay_extraball_counter:
     starting_count: 0

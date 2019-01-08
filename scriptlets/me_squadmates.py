@@ -1,9 +1,6 @@
 import logging
+from .squadmate_status import SquadmateStatus
 from mpf.core.custom_code import CustomCode
-
-SQUADMATES = ("garrus", "grunt", "jack", "jacob", "kasumi", "legion", "miranda", "mordin", "samara", "tali", "thane", "zaeed")
-BIOTICMATES = ("jack", "jacob", "miranda", "samara", "thane")
-TECHMATES = ("garrus", "jacob", "kasumi", "legion", "mordin", "tali", "thane")
 
 LEDS = {
   "garrus": "color_shield_blue",
@@ -30,45 +27,6 @@ COLORS = {
   "thane": "00FF00",
   "zaeed": "FF0000",
 }
-
-class SquadmateStatusClass():
-  def __init__(self):
-    self.log = logging.getLogger("SquadmateStatus")
-    self.log.info("Squadmate Status ready!")
-    self.log.setLevel(0)
-
-  def _mate_status_is(self, player, squadmate, status):
-    return player["status_{}".format(squadmate)] == status
-
-  def _get_available_mates(self, player, mates=SQUADMATES, status=4, include_specialist=True):
-    specialist = None if include_specialist else player["specialist"]
-    return [mate for mate in mates if (self._mate_status_is(player, mate, status) and mate != specialist)]
-
-  def all_mates(self):
-    return SQUADMATES
-
-  def all_biotics(self):
-    return BIOTICMATES
-
-  def all_techs(self):
-    return TECHMATES
-
-  def available_mates(self, player, **kwargs):
-    return self._get_available_mates(player, **kwargs)
-
-  def available_biotics(self, player):
-    return self._get_available_mates(player, mates=BIOTICMATES)
-
-  def available_techs(self, player):
-    return self._get_available_mates(player, mates=TECHMATES)
-
-  def recruitable_mates(self, player):
-    return self._get_available_mates(player, status=3)
-
-  def dead_mates(self, player):
-    return self._get_available_mates(player, status=-1)
-
-SquadmateStatus = SquadmateStatusClass()
 
 class SquadmateHandlers(CustomCode):
   """
@@ -98,7 +56,7 @@ class SquadmateHandlers(CustomCode):
   def _enable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._enable_shothandlers)
     self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)
-    for mate in SQUADMATES:
+    for mate in SquadmateStatus.all_mates():
       if self.machine.game.player["status_{}".format(mate)] < 4:
         self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
     self.log.debug("Created a bunch of shothandlers! {}".format(self))
@@ -109,7 +67,7 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
 
   def _initialize_icons(self, **kwargs):
-    for mate in SQUADMATES:
+    for mate in SquadmateStatus.all_mates():
       status = self.machine.game.player["status_{}".format(mate)]
       event = None
       if status == 3 or status == 4 or status == -1:
@@ -173,6 +131,7 @@ class SquadmateHandlers(CustomCode):
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
     mate = kwargs["squadmate"]
+    player = self.machine.game.player
 
     self.machine.game.player["xp"] += self.machine.get_machine_var("mission_xp") * (
       1 + (self.machine.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
@@ -182,7 +141,7 @@ class SquadmateHandlers(CustomCode):
     self.machine.events.post("recruit_success", squadmate=mate, status=4)
     self.machine.events.post("set_recruiticon_complete", squadmate=mate)
     self.machine.events.post("recruit_success_{}".format(mate))
-    self.machine.game.player["status_{}".format(mate)] = 4
+    player["status_{}".format(mate)] = 4
     self._on_stop(success=True, **kwargs)
 
     # See if we had previously failed the Suicide Mission, and if so, do we now
@@ -190,7 +149,7 @@ class SquadmateHandlers(CustomCode):
     achs = self.machine.game.player.achievements
     if (achs["normandyattack"] == "completed" and achs["suicidemission"] == "disabled"):
       self.log.debug("Recruitmend successful, should we re-enable the suicide mission? {} techs, {} biotics".format(
-        len(SquadmateStatus.available_techs), len(SquadmateStatus.available_biotics)))
-      if len(SquadmateStatus.available_techs) > 1 and len(SquadmateStatus.available_biotics) > 1:
+        len(SquadmateStatus.available_techs(player)), len(SquadmateStatus.available_biotics(player))))
+      if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
         achs["suicidemission"].enable()
 

@@ -16,7 +16,7 @@ ACHIEVEMENT_MISSIONS = (
 CASUAL_CAREER = { "career_name": " ", "readonly": 1, "status_mordin": 3, "counter_sbdrops_counter": 2 }
 
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
-SAVE_SUICIDE_PROGRESS = False # Should suicide mission progress be saved to the career?
+SAVE_SUICIDE_PROGRESS = True # Should suicide mission progress be saved to the career?
 
 class SaveCareer(CustomCode):
 

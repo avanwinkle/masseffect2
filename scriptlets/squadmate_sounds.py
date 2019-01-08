@@ -1,6 +1,7 @@
 import logging
 from mpfmc.core.scriptlet import Scriptlet
 from mpf.core.rgba_color import RGBAColor
+from .squadmate_status import SquadmateStatus
 
 NAME_FORMATS = {
   "killed":          "squadmate_{squadmate}_killed",
@@ -24,6 +25,9 @@ class SquadmateSounds(Scriptlet):
     self.log.setLevel(10)
     self.mc.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
     self.mc.events.add_handler("slide_squadicon_slide_created", self._update_sqicons)
+    self.mc.events.add_handler("slide_huddle_slide_created", self._update_huddle)
+    self.mc.events.add_handler("mode_suicide_base_started", self._update_sqicons, is_suicide=True)
+    self.mc.events.add_handler("suicide_huddle_specialist_selected", self._update_specialist)
     self.mc.events.add_handler("recruit_lit", self._update_sqicons)
     self.mc.events.add_handler("recruit_success", self._update_sqicons)
     self._sqicons = None
@@ -70,21 +74,22 @@ class SquadmateSounds(Scriptlet):
     else:
       self.mc.events.post(COMPLETED_EVENT_NAME)
 
-  def _update_sqicons(self, **kwargs):
+  def _get_slide(self, slide_name, display):
+    display = self.mc.displays[display]
+    for s in display.slides:
+      self.log.info(" - slide: {}".format(s))
+      if s.name == slide_name:
+        return s
+
+  def _update_specialist(self, **kwargs):
+    self._update_sqicons(is_suicide=True, specialist=kwargs["squadmate"])
+
+  def _update_sqicons(self, is_suicide=False, specialist=None, **kwargs):
     self.log.info("Updating sqicons")
-    sqicon_slide = self.mc.slides["squadicon_slide"]
     if not self._sqicons:
       self._sqicons = {}
 
-    self.log.info("Displays: {}".format(self.mc.displays))
-    lcd_right = self.mc.displays['lcd_right']
-
-    slide = None
-    for s in lcd_right.slides:
-      self.log.info(" - slide: {}".format(s))
-      if s.name == "squadicon_slide":
-        slide = s
-
+    slide = self._get_slide("squadicon_slide", "lcd_right")
     if not slide:
       self.log.error("Unable to find squadicon slide")
       return
@@ -99,10 +104,10 @@ class SquadmateSounds(Scriptlet):
           mate = widget.key.replace("sqicon_", "")
           status = self.mc.player["status_{}".format(mate)]
 
-          if 0 <= status < 3:
+          if 0 <= status < 3 or (status == 3 and is_suicide):
             color = SQICON_STATUSES["none"]
           else:
-            if self.mc.player["specialist"] == mate:
+            if mate == specialist:
               color = SQICON_STATUSES["specialist"]
             elif status == -1:
               color = SQICON_STATUSES["dead"]
@@ -116,3 +121,35 @@ class SquadmateSounds(Scriptlet):
           self.log.info("Setting sqicon {} (status {}) to opacity {} color {}".format(mate, status, widget.opacity, widget.color))
     else:
       self.log.error("Current slide is NOT squadicon")
+
+  def _update_huddle(self, **kwargs):
+    self.log.info("Updating huddle slide")
+    huddle_slide = self._get_slide("huddle_slide", "lcd_left")
+
+    # Using the priority to distinguish between infiltration and longwalk? Yuk
+    if huddle_slide.priority % 10 == 1:
+      mates = SquadmateStatus.all_techs()
+    elif huddle_slide.priority % 10 == 2:
+      mates = SquadmateStatus.all_biotics()
+    else:
+      self.log.error("NO MATES for the huddle!")
+      return
+
+    if huddle_slide:
+      widget_pos = 0
+      for container in huddle_slide.widgets:
+        widget = container.widget
+        if widget.key and widget.key.startswith("specialist_"):
+          mate = widget.key.replace("specialist_", "")
+          status = self.mc.player["status_{}".format(mate)]
+
+          if mate not in mates or 0 <= status < 4:
+            widget.opacity = 0
+            continue
+          else:
+            y = 468 - (130 + widget_pos * 50)
+            widget.y = y
+            widget.opacity = 1
+            widget_pos += 1
+
+
