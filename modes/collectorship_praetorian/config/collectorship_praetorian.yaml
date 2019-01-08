@@ -29,17 +29,16 @@ event_player:
     - enable_praet_side_shot|500ms
   mode_collectorship_praetorian_started.2:
     set_mission_shots:
-      shots_total: 2 # Undercut the number of shots for big score
-      shots_remaining: 2
-      ticks: 20
+      shots_total: 2 # Undercut the number of shots for bigger score
       is_resumable: 0
+      ticks: 20
   praetorian_shot_hit:
     - flippers_on
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
     - mission_shot_hit
     - missiontimer_set_20
-  timer_missiontimer_complete{current_player.temp_multiplier==1}:
+  timer_missiontimer_complete{current_player.temp_counter==0}:
     - stop_base_praetorian_show
     - praetorian_attack_one
     - praetorian_attack_two|800ms
@@ -48,7 +47,7 @@ event_player:
     - missiontimer_set_20|2400ms
     - missiontimer_start|2800ms
   # If the timer runs out a _second_ time, the mission fails
-  timer_missiontimer_complete{current_player.temp_multiplier>1}: collectorship_praetorian_failed
+  timer_missiontimer_complete{current_player.temp_counter>1}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
   collectorship_praetorian_complete: 
     - mission_collect_score
@@ -93,18 +92,20 @@ counters:
     direction: up
     reset_events: mode_collectorship_praetorian_started
 
-# For scoring, the temp_hurryup_value carried over from husks is our base
+# Use the temp_counter to track how many flippers are disabled
 variable_player:
-  # Reset the timer when the praetorian is hit, since we get both flippers back
-  praetorian_shot_hit:
-    temp_multiplier:
+  mode_collectorship_praetorian_started:
+    temp_counter:
       action: set
-      float: 1.0
+      int: 0
+  # Reset the counter when the praetorian is hit, since we get both flippers back
+  praetorian_shot_hit:
+    temp_counter:
+      action: set
+      int: 1
   # Add to the multiplier for each timeout, so we can track how many flippers are disabled
   timer_missiontimer_complete:
-    temp_multiplier: 
-      action: add
-      float: 1.0
+    temp_counter: 1
 
 shot_groups:
   praetorian_shot:

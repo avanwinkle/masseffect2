@@ -40,9 +40,7 @@ event_player:
       instructions_sub: 10s before lockout
     set_mission_shots:
       is_resumable: 0
-      ticks: 60
       shots_total: 3
-      shots_remaining: 3
   mode_recruitlegion_started.2:
     - play_opening_heretic_dialogue
   timer_heretic_timer_complete:

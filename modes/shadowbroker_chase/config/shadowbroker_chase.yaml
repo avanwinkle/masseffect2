@@ -7,11 +7,7 @@
 # that must be hit within a time limit (LO > LR > RO > KB). Completing the series
 # begins the Vasir Combat mode.
 #
-# TODO: Scoring
-#
-# Progress is not saved for this mode, not even completing it. Failing this mode
-# or Vasir Combat requires the player to restart from the beginning of the chase.
-# ...maybe. That's annoying. For now, completion of this mode is saved ;)
+# Progress is saved for this mode, although failing will roll back one shot.
 #####
 
 mode:
@@ -25,8 +21,16 @@ event_player:
   mode_shadowbroker_chase_started:
     set_environment:
       env: cars
+    set_mission_shots:
+      shots_total: 5
+      is_resumable: 1
+      shots_remaining: 
+        value: current_player.sbchase_hits_remaining
+        type: int
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
-  shadowbroker_chase_complete: stop_mode_shadowbroker_chase
+  shadowbroker_chase_complete: 
+    - mission_collect_score
+    - stop_mode_shadowbroker_chase
   timer_sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
   # If the ball is saved, the mode is ended
   ball_save_sbchase_save_saving_ball:
@@ -45,39 +49,27 @@ light_player:
     gi:
       color: 444444
 
-#####
-# SHADOWBROKER CHASE SCORING:
-#   Hurryup starts at 1,200 * multiplier
-#   Multiplier starts at shots-to-hit (i.e. repeat attempts have lower multiple)
-#   Hitting one shot caches the hurryup as a build value
-#   Hitting a second shot awards the previous shot's score
-#####
+counters:
+  # A counter to track the lowest chase score, to only score on NEW hits
+  chase_maxhits_counter:
+    starting_count: 5
+    count_complete_value: 0
+    direction: down
+    persist_state: true
+    count_events:
+      - player_sbchase_hits_remaining{player_num==current_player.number and value<device.counters.chase_maxhits_counter.value}
+    events_when_hit: mission_shot_hit
+
 variable_player:
-  mode_shadowbroker_chase_started:
-    temp_hurryup_value:
-      action: set
-      int: 1200
-    temp_multiplier:
-      action: set
-      float: current_player.sbchase_hits_remaining
-    temp_build_value:
-      action: set
-      int: 0
   # Player var 'sbchase_hits_remaning' has a default value of 5
   # If the mode fails, back up one shot
   mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5}:
     sbchase_hits_remaining: 1
   sbchase_shots_lit_hit:
     sbchase_hits_remaining: -1
-    temp_multiplier:
-      float: 0.2
-    # We add 10 seconds to the timer, so we need to add 10s' worth of hurryup
-    temp_hurryup_value: 300
-    temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier
-  player_temp_build_value{player_num==current_player.number and value>0 and prev_value>0}:
-    score: prev_value
-  timer_sbchase_timer_tick:
-    temp_hurryup_value: -30
+  # If the mode ends without being completed, award _half_ the earned score
+  mode_shadowbroker_chase_will_stop{device.achievements.chase!="completed"}:
+    score: current_player.temp_build_value / 2
 
 shot_groups:
   sbchase_shots:
@@ -409,31 +401,17 @@ sounds:
     max_queue_time: 1s
     volume: 1
 
-timers:
-  sbchase_timer:
-    start_value: 40
-    end_value: 0
-    start_running: true
-    tick_interval: 1s
-    direction: down
-    control_events:
-      - event: shadowbroker_chase_complete
-        action: stop
-      - event: sbchase_shots_lit_hit
-        action: add
-        value: 10
-
 widget_player:
-  timer_sbchase_timer_tick:
-    timer_widget:
+  timer_missiontimertimer_tick:
+    sbtimer_widget:
       slide: sbchase_slide
       action: update
   stop_mode_shadowbroker_chase:
-    timer_widget:
+    sbtimer_widget:
       action: remove
 
 widgets:
-  timer_widget:
+  sbtimer_widget:
     - type: text
       text: (ticks_remaining)
       style: timer_primary, row_gutter, col_right_indent

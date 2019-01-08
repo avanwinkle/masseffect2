@@ -32,7 +32,6 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
-      ticks: 60
       shots_remaining:
         value: device.counters.kasumi_shots_counter.value
         type: int

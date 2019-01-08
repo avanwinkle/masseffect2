@@ -20,9 +20,8 @@ event_player:
   mode_collectorship_husk_started.2:
     set_mission_shots:
       shots_total: 10
-      ticks: 20
-      shots_remaining: 10
       is_resumable: 1
+      ticks: 20
   mode_collectorship_husk_started: missiontimer_start
   husk_collect_shot_hit: mission_shot_hit
   timer_missiontimer_complete: 

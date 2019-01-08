@@ -98,6 +98,7 @@ shot_groups:
     enable_events: enable_reapercore
     reset_events: reaperjackpot_hit
     disable_events: disable_reapercore, reapercore_shots_hit_complete
+    rotate_right_events: sw_bumper_active # Shake the shots around, why not? It's contextually appropriate :)
 
 shot_profiles:
   corereset_profile:

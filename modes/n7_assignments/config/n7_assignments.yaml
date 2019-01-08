@@ -20,10 +20,19 @@ mode:
   priority: 500
 
 event_player:
-  n7_assignment_shot_hit: n7_assignment_ended
-  timer_n7timer_complete: n7_assignment_ended
   mode_n7_assignments_started:
-    - restart_n7timer|500ms
+    set_mission_shots:
+      shots_total: 5 # Will yield base value / 25 = 4,000pts
+      shots_remaining: 1
+      ticks: 30
+      multiplier: 
+        value: 1.0 + (0.25 * current_player.assignments_completed)
+        type: float
+  n7_assignment_shot_hit: 
+    - mission_shot_hit
+    - mission_collect_store
+    - n7_assignment_ended
+  timer_missiontimer_complete: n7_assignment_ended
   n7_assignment_ended:
     - stop_mode_n7_assignments
   player_shot_n7_anomalous_weather_shot_enabled:
@@ -61,18 +70,7 @@ random_event_player:
       - start_n7_msv_strontium_mule
 
 variable_player:
-  mode_n7_assignments_started:
-    temp_build_value:
-      action: set
-      # Max value is 4000 plus 10% per mission completed
-      int: 4000 * (1 + (0.1 * current_player.assignments_completed))
-  timer_n7timer_tick:
-    temp_build_value:
-      action: add
-      # Each tick is 1/2s, so burn 1/60th (60 + 10%) each time
-      int: (1 + (0.1 * current_player.assignments_completed)) * -60
   n7_assignment_shot_hit:
-    score: current_player.temp_build_value
     assignments_completed: 1
     xp: machine.assignment_xp
 
@@ -357,22 +355,6 @@ sounds:
       attack: 200ms
       release: 200ms
       release_point: 100ms
-
-timers:
-  n7timer:
-    start_value: 60 # 2x the number of seconds
-    end_value: 1
-    direction: down
-    tick_interval: 500ms
-    control_events:
-      - event: mode_n7_assignments_started
-        action: reset
-      - event: restart_n7timer # Give a delay to start the mission
-        action: restart
-      - event: n7_assignment_shot_hit
-        action: stop
-      - event: ball_will_end
-        action: stop
 
 widget_player:
   player_temp_build_value:

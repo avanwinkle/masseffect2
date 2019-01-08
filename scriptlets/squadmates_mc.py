@@ -18,7 +18,7 @@ SQICON_STATUSES = {
   "specialist": RGBAColor([0, 0.35, 0.8]),
 }
 
-class SquadmateSounds(Scriptlet):
+class MCSquadmateHandlers(Scriptlet):
 
   def on_load(self):
     self.log = logging.getLogger("SquadmatesMC")

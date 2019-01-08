@@ -30,7 +30,6 @@ event_player:
       instructions_sub: 3x Banks to Defeat Warden
     set_mission_shots:
       is_resumable: 1
-      ticks: 60
       shots_total: 3  # Each round counts as a shot
       shots_remaining:
         value: device.counters.jack_rounds_counter.value

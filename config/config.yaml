@@ -5,8 +5,10 @@ config:
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
-  - scriptlets.me_squadmates.SquadmateHandlers
+  - scriptlets.squadmates_mpf.MPFSquadmateHandlers
   - scriptlets.save_career.SaveCareer
   # - mpf_arduino.MPFArduino
 
-mc_scriptlets: squadmate_sounds.SquadmateSounds widget_queue_player.SlideQueuePlayer
+mc_custom_code: 
+  - squadmates_mc.MCSquadmateHandlers
+  - slide_queue_player.SlideQueuePlayer

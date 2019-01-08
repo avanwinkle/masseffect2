@@ -39,7 +39,6 @@ event_player:
       value: device.counters.zaeed_orbits_counter.value
     set_mission_shots:
       is_resumable: 0
-      ticks: 60
       shots_total: 4
       shots_remaining:
         value: device.counters.zaeed_orbits_counter.value

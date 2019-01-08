@@ -22,9 +22,8 @@ event_player:
   mode_collectorship_ambush_started.2:
     set_mission_shots:
       shots_total: 5
-      ticks: 20
       is_resumable: 0
-      shots_remaining: 5
+      ticks: 20
   mode_collectorship_ambush_started: missiontimer_start
   ship_shots_lit_hit:
     - mission_shot_hit

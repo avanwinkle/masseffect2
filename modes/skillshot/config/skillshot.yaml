@@ -3,7 +3,7 @@
 mode:
   start_events: start_mode_skillshot
   stop_events: stop_mode_skillshot
-  priority: 3000
+  priority: 5000
 
 event_player:
   timer_skillshot_timer_complete: stop_mode_skillshot
@@ -15,15 +15,15 @@ variable_player:
   mode_skillshot_started:
     temp_build_value:
       action: set
-      int: 1000 * current_player.ball
+      int: machine.base_points / 100 * current_player.ball
   s_flipper_left_active:
     temp_build_value:
       action: set
-      int: 500 * current_player.ball
+      int: machine.base_points / 200 * current_player.ball
   s_flipper_right_active:
     temp_build_value:
       action: set
-      int: 500 * current_player.ball
+      int: machine.base_points / 200 * current_player.ball
   skillshot_lit_hit:
     score: current_player.temp_build_value
 

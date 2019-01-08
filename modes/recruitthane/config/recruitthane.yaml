@@ -32,7 +32,6 @@ event_player:
       instructions_sub: Hit orbits to complete
     set_mission_shots:
       shots_total: 4
-      ticks: 60
       is_resumable: 0
       shots_remaining: 
         value: 4 - device.counters.thane_ascent_counter.value

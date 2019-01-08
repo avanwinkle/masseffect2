@@ -29,52 +29,36 @@ event_player:
   mode_shadowbroker_vasir_started:
     set_environment:
       env: field
-  timer_vasir_timeout_complete: stop_mode_shadowbroker_vasir
+    set_mission_shots:
+      shots_total: 6
+      is_resumable: 0
+  timer_missiontimer_complete: stop_mode_shadowbroker_vasir
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
-  vasir_shot_health_hit:
+  vasir_shot_health_2_hit:
     shadowbroker_vasir_complete: {}
     levelup:
       mission_name: "Suket's Datapad Recovered"
       portrait: shadowbroker_vasir_complete
   # Relay some sounds to delay
-  vasir_shot_barrier_hit: play_vasir_start_sound|2s
-  vasir_shot_armor_hit: play_vasir_start_sound|2s
+  vasir_shot_barrier_2_hit: play_vasir_start_sound|2s
+  vasir_shot_armor_2_hit: play_vasir_start_sound|2s
   # Reset the dropbank whenever it is lit, to ensure a fair shot
   player_shot_sbvasir_dropbank{value>0}: reset_dropbank
 
 #####
 # VASIR COMBAT SCORING:
-#   Hurryup starts at 6,000
-#   Barrier (first) shot awards 1x hurryup
-#   Armor (second) shot awards 1.25x hurryup
-#   Health (third) shot awards 1.5x hurryup
+#   Barrier (first) shots award 1x hurryup
+#   Armor (second) shots award 1.25x hurryup
+#   Health (third) shots award 1.5x hurryup
 #####
 variable_player:
-  mode_shadowbroker_vasir_started:
-    temp_hurryup_value:
-      action: set
-      int: 6000
-    temp_build_value:
-      action: set
-      int: 0
-    temp_multiplier:
-      action: set
-      float: 1.0
-  vasir_shot_barrier_hit:
-    temp_build_value: current_player.temp_hurryup_value
-    temp_hurryup_value: current_player.temp_hurryup_value * (current_player.temp_multiplier + 0.25)
+  vasir_shot_barrier_2_hit:
     temp_multiplier:
       float: 0.25
-  # Award the hurryup * multiple but _not_ what was already awarded
-  vasir_shot_armor_hit:
-    temp_hurryup_value: (current_player.temp_hurryup_value - current_player.temp_build_value) * (current_player.temp_multiplier + 0.25)
+  vasir_shot_armor_2_hit:
     temp_multiplier:
       float: 0.25
-  vasir_shot_health_hit:
-    score: current_player.temp_hurryup_value
-  timer_vasir_timeout_tick:
-    temp_hurryup_value: -100 * current_player.temp_multiplier
-
+  
 ball_saves:
   # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
   vasirsave:
@@ -88,15 +72,19 @@ ball_saves:
 counters:
   vasir_hits_counter:
     starting_count: 1
-    count_events: vasir_shot_barrier_hit, vasir_shot_armor_hit
+    count_events: 
+      - vasir_shot_barrier_1_hit
+      - vasir_shot_barrier_2_hit
+      - vasir_shot_armor_1_hit
+      - vasir_shot_armor_2_hit
+      - vasir_shot_health_1_hit
     reset_events: mode_shadowbroker_vasir_started
 
 shot_groups:
   vasir_shot:
     rotate_right_events:
       - timer_vasir_timer_complete
-      - vasir_shot_barrier_hit
-      - vasir_shot_armor_hit
+      - logicblock_vasir_hits_counter_hit
     shots:
       - sbvasir_hitbank
       - sbvasir_left_orbit
@@ -112,19 +100,37 @@ shot_profiles:
       - name: off
         show: off
         priority: 100
-      - name: barrier
+      - name: barrier_1
         show: vasir_barrier_show
         speed: 2
         priority: 10
         show_tokens:
           color: purple
-      - name: armor
-        show: vasir_armor_show
+      - name: barrier_2
+        show: vasir_barrier_show
         speed: 4
         priority: 10
         show_tokens:
+          color: purple
+      - name: armor_1
+        show: vasir_armor_show
+        speed: 3
+        priority: 10
+        show_tokens:
           color: yellow
-      - name: health
+      - name: armor_2
+        show: vasir_armor_show
+        speed: 6
+        priority: 10
+        show_tokens:
+          color: yellow
+      - name: health_1
+        show: vasir_health_show
+        speed: 4
+        priority: 10
+        show_tokens:
+          color: red
+      - name: health_2
         show: vasir_health_show
         speed: 8
         priority: 10
@@ -371,23 +377,12 @@ timers:
     control_events:
       - event: mode_shadowbroker_vasir_will_stop
         action: stop
-      - event: vasir_shot_barrier_hit
+      - event: logicblock_vasir_hits_counter_hit
         action: restart
-      - event: vasir_shot_armor_hit
-        action: restart
-  vasir_timeout: # Timer for the mode to fail
-    start_value: 60
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: true
-    control_events:
-      - event: shadowbroker_vasir_complete
-        action: stop
 
 widget_player:
-  timer_vasir_timeout_started: timer_widget
-  timer_vasir_timeout_tick:
+  timer_missiontimer_started: timer_widget
+  timer_missiontimer_tick:
     timer_widget:
       action: update
   stop_mode_shadowbroker_chase:

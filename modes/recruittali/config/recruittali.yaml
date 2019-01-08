@@ -31,7 +31,6 @@ event_player:
       instructions_sub: before it Self-Repairs
     set_mission_shots:
       shots_total: 6
-      ticks: 40
       is_resumable: 1
       shots_remaining: 
         value: current_player.geth_colossus_state
@@ -54,6 +53,7 @@ counters:
     starting_count: 6
     count_complete_value: 0
     direction: down
+    persist_state: true
     count_events: 
       - player_geth_colossus_state{player_num==current_player.number and value<device.counters.colossus_maxhits_counter.value}
     events_when_hit: mission_shot_hit, mission_collect_score

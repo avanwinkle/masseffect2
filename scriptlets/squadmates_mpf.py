@@ -28,7 +28,7 @@ COLORS = {
   "zaeed": "FF0000",
 }
 
-class SquadmateHandlers(CustomCode):
+class MPFSquadmateHandlers(CustomCode):
   """
   This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
   a convenient way to automate the event postings over all squadmates without a bunch of copy+paste in the yaml

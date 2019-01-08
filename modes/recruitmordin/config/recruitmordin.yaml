@@ -33,7 +33,6 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
-      ticks: 60
       shots_remaining:
         value: device.counters.cure_counter.value + device.counters.fans_counter.value
         type: int

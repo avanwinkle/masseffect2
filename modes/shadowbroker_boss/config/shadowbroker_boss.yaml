@@ -11,8 +11,6 @@
 # After a round, a new random shot is lit (with full shields again) and another
 # round must be completed. Completing three rounds will finish the mode.
 # Currently, progress is saved after each round? Nope! Gotta restart!
-#
-# TODO: Scoring
 #####
 
 mode:
@@ -28,17 +26,27 @@ event_player:
     - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
   mode_shadowbroker_boss_started.2:
     set_environment: { env: shadowbroker }
+    set_mission_shots:
+      shots_total: 4
+      shots_remaining: 2
+      ticks: 30
+      is_resumable: 0
+  sbboss_shot_hit:
+    - mission_shot_hit
   sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
+    - mission_shot_hit
     - play_sbboss_round_show_1{count==1}
     - play_sbboss_round_show_2{count==2}
     - play_sbboss_round_show_3{count==3}
   sbboss_round_show_complete:
     - shadowbroker_round_start
     - flippers_on
-  shadowbroker_boss_complete:
-    stop_mode_shadowbroker_boss: {}
-    exit_shadowbroker_modes: {}
+  shadowbroker_boss_complete.1:
+    - mission_collect_score
+    - stop_mode_shadowbroker_boss
+    - exit_shadowbroker_modes
+  shadowbroker_boss_complete.2:
     levelup:
       mission_name: "Greetings, Shadow Broker"
   # Disable the flippers during the inter-round show, reenable after
@@ -73,6 +81,12 @@ multiballs:
     ball_count: 2
     start_events: shadowbroker_round_start
     shoot_again: 5s
+
+variable_player:
+  # Increase the multiplier 25% after each round
+  logicblock_sbboss_round_counter_hit:
+    temp_multiplier:
+      float: 0.25
 
 shot_profiles:
   sbboss_shot_profile:

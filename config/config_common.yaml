@@ -179,7 +179,7 @@ player_vars:
     initial_value: " "
     value_type: str
   mission_instructions:
-    initial_value: "<mission_instructions initial value>"
+    initial_value: " "
     value_type: str
   available_shipupgrades:
     initial_value: 0
