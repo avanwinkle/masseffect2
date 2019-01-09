@@ -56,9 +56,8 @@ counters:
     count_events:
       - close_doors_lit_hit
       - clear_upstairs_hit
-    disable_on_complete: true
     reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>1}
-    reset_on_complete: false
+    persist_state: true
 
 shot_groups:
   close_doors:

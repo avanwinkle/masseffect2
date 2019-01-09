@@ -18,17 +18,18 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_chase_started:
+  mode_shadowbroker_chase_started.1:
     set_environment:
       env: cars
     set_mission_shots:
       shots_total: 5
       is_resumable: 1
-      shots_remaining: 
+      shots_remaining:
         value: current_player.sbchase_hits_remaining
         type: int
+  mode_shadowbroker_chase_started: missiontimer_start
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
-  shadowbroker_chase_complete: 
+  shadowbroker_chase_complete:
     - mission_collect_score
     - stop_mode_shadowbroker_chase
   timer_sbchase_timer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes

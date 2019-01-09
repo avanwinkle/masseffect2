@@ -91,7 +91,7 @@ class MPFSquadmateHandlers(CustomCode):
         # If there were no mates lit before, bonus the xp
         xp = self.machine.get_machine_var("unlock_xp") * (
           1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.get_machine_var("bonus_xp")))
-        player["xp"] += xp
+        player["xp"] += int(xp)
 
       player["status_{}".format(mate)] = future_mate_status
       player["recruits_color"] = COLORS[mate]
@@ -105,6 +105,12 @@ class MPFSquadmateHandlers(CustomCode):
     self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
     self.machine.events.add_handler("mode_recruit{}_stopped".format(mate), self._on_stop, squadmate=mate)
 
+    # If we selected the mission via resume, note it
+    if mate == self.machine.game.player["resume_mission"]:
+      self._just_resumed = True
+    # Clear the resume mission
+    self.machine.game.player["resume_mission"] = " "
+
   def _on_stop(self, **kwargs):
     self.log.info("on_stop called for recruit mission, kwargs are {}".format(kwargs))
     self.machine.events.remove_handler(self._on_stop)
@@ -112,21 +118,17 @@ class MPFSquadmateHandlers(CustomCode):
 
     # If we drained on legion but completed the recruitment, that's fine
     if kwargs.get("squadmate") == "legion" and self.machine.game.player["status_legion"] == 4:
-      return
-
+      pass
     # If we stopped without an explicit success
-    if not kwargs.get("success"):
-      # If we failed or timed out, post an event
-      if  self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
+    elif not kwargs.get("success"):
+      # If we failed or timed out, post an event (no resuming because we didn't drain)
+      if self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
         self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
-      # Track that we didn't just fail a resumed mission, to prevent consecutive resumes
-      elif self._just_resumed:
-        self._just_resumed = False
-        self.machine.game.player["resume_mission"] = " "
       # If we drained, store this mission so we can resume if it fails
       elif not self._just_resumed:
         self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
-        self._just_resumed = True
+
+    self._just_resumed = False
 
   def _on_complete(self, **kwargs):
     self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))

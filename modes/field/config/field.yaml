@@ -35,6 +35,8 @@ event_player:
       is_lcd:
         value: machine.is_lcd==1
         type: bool
+  # Route this event through event_player to avoid playing while field is inactive
+  music_intro_stopped: play_galaxy_map
 
 config:
   - field_bumpers.yaml
@@ -49,7 +51,7 @@ sound_player:
       loops: 0
       fade_out: 1s
       mode_end_action: stop
-      events_when_stopped: play_galaxy_map
+      events_when_stopped: music_intro_stopped
       priority: 1
   play_galaxy_map:
     music_galaxy_map:

@@ -1,44 +1,37 @@
 #config_version=5
 event_player:
-  player_mission_starting_ticks{player_num==current_player.number}: 
-    - missiontimer_set_(value)
+  set_mission_shots:
+    - missiontimer_set_(current_player.mission_starting_ticks)
 
 variable_player:
   #### FIXED SCORING ####
   #---------------------#
   # Set the initial values necessary
   set_mission_shots.3:
-    mission_shot_value: 
+    mission_shot_value:
       action: set
       int: machine.base_points / (shots_total * shots_total)
     mission_shots_remaining:
       action: set
       int: shots_remaining
     # For normal/hardcore, set the is_resumable
-    mission_is_resumable{current_player.difficulty<2}:
+    mission_is_resumable:
       action: set
-      int: is_resumable 
-    # For insanity, never resumable
-    mission_is_resumable{current_player.difficulty>=2}:
-      action: set
-      int: 0
-    # If ticks are defined, use them
+    # # For insanity, never resumable
+      int: is_resumable if current_player.difficulty < 2 else 0
+    # Set the player variable for the timer before the mission starts, for a clean widget
     mission_starting_ticks:
       action: set
       int: ticks
-    # Set the player variable for the timer before the mission starts, for a clean widget
     temp_build_value:
       action: set
       int: 0
     temp_hurryup_value:
       action: set
       int: 0
-    temp_multiplier{multiplier>0}:
+    temp_multiplier:
       action: set
       float: multiplier
-    temp_multiplier{multiplier<=0}:
-      action: set
-      float: 1.0
   # Make some adjustments for default values
   set_mission_shots.2:
     # Default ticks: 60 for non-resumable, 40 for resumable
@@ -50,6 +43,10 @@ variable_player:
     mission_shots_remaining{not current_player.mission_shots_remaining}:
       action: set
       int: shots_total
+    # I dunno why so many conditionals fail, i.e. can't do "float: multiplier or 1.0"
+    temp_multiplier{not current_player.temp_multiplier}:
+      action: set
+      float: 1.0
   # Use the values set above to calculate the starting value for _this_ attempt
   set_mission_shots.1:
     mission_starting_value:
@@ -66,7 +63,7 @@ variable_player:
     mission_ticks:
       action: set
       int: device.timers.missiontimer.ticks
-    temp_hurryup_value: 
+    temp_hurryup_value:
       action: set
       int: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.missiontimer.ticks))
     # If the mission is not resumable (and this is not a bonus shot), reset the hurryup ticks
@@ -76,7 +73,9 @@ variable_player:
       int: device.timers.missiontimer.ticks
   mission_shot_hit.90:
     # Track the total value accumulated via build_value, which will cash out when collected
-    temp_build_value: current_player.temp_hurryup_value * current_player.temp_multiplier * current_player.harbinger_multiplier
+    temp_build_value:
+      action: add
+      int: current_player.temp_hurryup_value * current_player.temp_multiplier * current_player.harbinger_multiplier
   # When a shot, round, or mission is completed, award the build value for that round
   mission_collect_score.80:
     score: current_player.temp_build_value
@@ -148,3 +147,8 @@ timers:
         action: stop
       - event: mode_type_suicide_stopped
         action: stop
+      # If we're locking a ball, pause for the new one to eject
+      - event: multiball_lock_fmball_lock_locked_ball
+        action: pause
+        value: 3
+

@@ -58,7 +58,7 @@ variable_player:
   vasir_shot_armor_2_hit:
     temp_multiplier:
       float: 0.25
-  
+
 ball_saves:
   # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
   vasirsave:
@@ -72,7 +72,7 @@ ball_saves:
 counters:
   vasir_hits_counter:
     starting_count: 1
-    count_events: 
+    count_events:
       - vasir_shot_barrier_1_hit
       - vasir_shot_barrier_2_hit
       - vasir_shot_armor_1_hit
@@ -268,9 +268,7 @@ sound_player:
       action: play
       volume: 0.5
   timer_vasir_timer_complete: vasir_move_sound
-  vasir_shot_barrier_hit: vasir_hit_sound
-  vasir_shot_armor_hit: vasir_hit_sound
-  vasir_shot_health_hit: vasir_hit_sound
+  logicblock_vasir_hits_counter_hit: vasir_hit_sound
   # Relays
   play_vasir_start_sound: vasir_start_sound
 

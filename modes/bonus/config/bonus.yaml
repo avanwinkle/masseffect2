@@ -5,21 +5,21 @@ mode_settings:
   bonus_entries:
     - event: bonus_level
       # We track the level that's loaded in the career, so only award bonus to levels gained
-      score: 600 * (current_player.level - current_player.saved_level)
+      score: (machine.base_points / 200) * (current_player.level - current_player.saved_level)
     - event: bonus_squadmates
-      score: 1200 * (current_player.recruited_squadmates_count)
+      score: (machine.base_points / 100) * (current_player.recruited_squadmates_count)
     - event: bonus_credits
-      score: (current_player.credits * 0.25)
+      score: (current_player.credits * machine.base_points / 1000)
     - event: bonus_minerals
-      score: (current_player.planets * current_player.mineral_total) / 10
+      score: (current_player.planets * current_player.mineral_total) / (machine.base_points)
     - event: bonus_assignments
-      score: 300
+      score: (machine.base_points / 100 * 3)
       player_score_entry: assigments_completed
     - event: bonus_intel
-      score: 400
+      score: (machine.base_points / 100 * 5)
       player_score_entry: intel
     - event: bonus_upgrades
-      score: 1500
+      score: (machine.base_points / 100 * 15)
       player_score_entry: research_completed
 
 light_player:

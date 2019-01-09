@@ -67,7 +67,7 @@ machine_vars:
     value_type: str
     persist: true
   base_points:
-    initial_value: 100000
+    initial_value: 10000
   mission_xp:
     initial_value: 1000
   assignment_xp:
@@ -163,7 +163,7 @@ player_vars:
   career_started:
     initial_value: 0.0
     value_type: float
-  difficulty: 
+  difficulty:
     initial_value: 0
   readonly:
     initial_value: 0
@@ -260,7 +260,7 @@ player_vars:
   status_zaeed:
     initial_value: 0
   temp_multiplier:
-    initial_value: 0.0
+    initial_value: 1.0
     value_type: float
   temp_build_value:
     initial_value: 0
