@@ -1,0 +1,467 @@
+#config_version=5
+hardware:
+  platform: fast
+
+fast:
+  ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
+
+machine:
+  balls_installed: 6
+  min_balls: 6
+
+coils:
+  c_flipper_left_main:
+    number: 0-0
+    default_pulse_ms: 35
+    default_hold_power: 0.2
+  c_flipper_right_main:
+    number: 0-1
+    default_pulse_ms: 35
+    default_hold_power: 0.2
+  c_plunger:
+    number: 0-5
+    default_pulse_ms: 18
+    pulse_events: pulse_plunger
+  c_trough_eject:
+    number: 0-4
+    default_pulse_ms: 24
+    debug: true
+    # pulse_power: 2
+  c_bumper_left:
+    number: 1-0
+    default_pulse_ms: 16
+  c_bumper_right:
+    number: 1-1
+    default_pulse_ms: 18
+  c_bumper_bottom:
+    number: 1-2
+    default_pulse_ms: 14
+  c_slingshot_left:
+    number: 0-2
+    default_pulse_ms: 13
+    debug: true
+    # default_recycle: true
+  c_slingshot_right:
+    number: 0-3
+    default_pulse_ms: 13
+    debug: true
+    # default_recycle: true
+  c_dropbank_reset:
+    number: 0-7
+    default_pulse_ms: 35
+  c_up_post:
+    number: 0-6
+    default_pulse_ms: 14
+    default_hold_power: 0.3
+    enable_events: hold_post_enable
+    disable_events: hold_post_disable
+    debug: true
+  c_lock_release_post:
+    number: 2-0
+    default_pulse_ms: 32
+    default_hold_power: 0.1
+    enable_events: bypass_lock_release_pulse
+    disable_events: cancel_lock_release_pulse
+    debug: true
+  c_orbit_gates:
+    number: 1-3
+    default_pulse_ms: 58
+    default_hold_power: 0.4
+    enable_events: enable_gates
+    disable_events: disable_gates
+  c_sword:
+    number: 2-3
+  c_dragon:
+    number: 2-2
+  c_kickback:
+    number: 2-1
+    default_pulse_ms: 20
+
+switches:
+  # BOARD 0:
+  s_dropbank_bottom:
+    number: 0-0
+  s_dropbank_middle:
+    number: 0-1
+  s_dropbank_top:
+    number: 0-2
+  s_target1:
+    number: 0-3
+  s_target2:
+    number: 0-4
+  s_target3:
+    number: 0-5
+  s_target4:
+    number: 0-6
+  s_target5:
+    number: 0-7
+  s_plunger_lane:
+    number: 0-8
+  s_trough_jam:
+    number: 0-9
+  s_trough1:
+    number: 0-10
+  s_trough2:
+    number: 0-11
+  s_trough3:
+    number: 0-12
+  s_trough4:
+    number: 0-13
+  s_trough5:
+    number: 0-14
+  s_trough6:
+    number: 0-15
+  s_flipper_left:
+    number: 0-16
+    tags: left_flipper
+  s_flipper_right:
+    number: 0-17
+    tags: right_flipper
+  s_start_button:
+    number: 0-18
+    tags: start
+  s_action_button:
+    number: 0-19
+  s_outlane_left:
+    number: 0-20
+  s_return_lane_left:
+    number: 0-21
+  s_left_slingshot:
+    number: 0-22
+  s_spinner:
+    number: 0-23
+  s_missionselect:
+    number: 0-24
+  s_hitbank_top:
+    number: 0-25
+  s_hitbank_bottom:
+    number: 0-26
+  s_tenpoints:
+    number: 0-27
+  s_outlane_right:
+    number: 0-28
+  s_left_ramp_exit:
+    number: 0-29
+  s_right_slingshot:
+    number: 0-30
+  s_return_lane_right:
+    number: 0-31
+    ignore_window_ms: 1000
+  # BOARD 1
+  s_bumper_left:
+    number: 1-0
+    tags: bumper
+  s_bumper_right:
+    number: 1-1
+    tags: bumper
+  s_bumper_bottom:
+    number: 1-2
+    tags: bumper
+  s_top_lane_left:
+    number: 1-3
+  s_top_lane_right:
+    number: 1-4
+  s_right_orbit:
+    number: 1-5
+    ignore_window_ms: 1100
+  s_right_ramp_exit:
+    number: 1-6
+  s_left_orbit:
+    number: 1-7
+    ignore_window_ms: 1100
+  # BOARD 2
+  s_lock_1:
+    number: 2-0
+  s_lock_2:
+    number: 2-1
+  s_lock_3:
+    number: 2-2
+  s_battering_ram:
+    number: 2-3
+  s_right_ramp_entrance:
+    number: 2-4
+    ignore_window_ms: 1500
+  s_left_ramp_entrance:
+    number: 2-5
+    ignore_window_ms: 1500
+  s_airlock_enter:
+    number: 2-6
+  s_kickback:
+    number: 2-7
+  s_null:
+    number: 12-0
+
+lights:
+  l_null:
+    number: 1-3
+  l_backbox:
+    number: 0-0
+    tags: backbox
+  l_2x_multiplier: # 2x Multiplier [#28]
+    number: 9-10
+    tags: l_multipliers
+  l_3x_multiplier: # 3x Multiplier [#29]
+    number: 9-11
+    tags: l_multipliers
+  l_4x_multiplier: # 4x Multiplier [#30]
+    number: 9-12
+    tags: l_multipliers
+  l_5x_multiplier: # 5x Multiplier [#31]
+    number: 9-13
+    tags: l_multipliers
+  l_battering_ram_arrow: # Battering Ram Arrow [#63]
+    number: 10-22
+    tags: lane_arrows
+  l_battering_ram_bot: # Battering Ram 3 (Bot) [#60]
+    number: 10-19
+    tags: batram_multipliers
+  l_battering_ram_mid: # Battering Ram 2 (Mid) [#61]
+    number: 10-20
+    tags: batram_multipliers
+  l_battering_ram_top: # Battering Ram 1 (Top) [#62]
+    number: 10-21
+    tags: batram_multipliers
+  # l_coin_enable: # Coin Enable [#1]
+  #   number: 1-0
+  l_dragon_fire: # Dragon Fire [#51]
+    number: 10-29
+  l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
+    number: 9-34
+    tags: l_dropbanks, outer_circles
+  l_dropbank_middle: # Left 3-Bank (Mid) [#14]
+    number: 9-35
+    tags: l_dropbanks, outer_circles
+  l_dropbank_top: # Left 3-Bank (Top) [#15]
+    number: 9-36
+    tags: l_dropbanks, outer_circles
+  l_flash_back_panel_left: # Back Panel Left [#100]
+    number: 10-7
+  l_flash_back_panel_right: # Back Panel Right [#101]
+    number: 10-8
+  l_flash_battering_ram: # Battering Ram [#103]
+    number: 10-6
+  l_flash_kickback_lane: # Kickback Lane [#99]
+    number: 10-26
+    tags: upfield_flashers
+  l_flash_left_orbit: # Left Loop (Spinner) [#102]
+    number: 10-13
+  l_flash_left_ramp: # Left Ramp [#98]
+    number: 10-27
+    tags: upfield_flashers
+  l_flash_pop_bumpers: # Pop Bumpers [#97]
+    number: 10-5
+  l_flash_right_ramp: # Right Ramp [#96]
+    number: 10-4
+    tags: upfield_flashers
+  l_flash_slingshots: # Left/Right Sling [#104]
+    number: 8-2
+  l_flash_sword_lock: # Sword Lock [#95]
+    number: 9-14
+    tags: upfield_flashers
+  l_flash_throne: # Throne [#105]
+    number: 10-30
+  l_flash_dragon_right: # Dragon Right (Purple) [#106]
+    number: 10-31
+  l_flash_dragon_left: # Dragon Left (2x Red & White) [#107]
+    number: 9-15
+  l_gi_coin_door: # Coin Door GI [#85]
+    number: 1-1
+  l_gi_left_playfield: # Left Playfield GI [#87]
+    number: 9-0
+    tags: gi
+  l_gi_lower_playfield: # Lower Playfield GI [#86]
+    number: 8-4
+    tags: gi
+  l_gi_upper: # Upper GI [#88]
+    number: 10-0
+    tags: gi
+  l_hand_of_the_king: # Hand of the King [#19]
+    number: 9-1
+    tags: outer_circles
+  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
+    number: 9-22
+    tags: l_hitbanks, outer_circles
+  l_hitbank_top: # Right 2-Bank (Top) [#38]
+    number: 9-21
+    tags: l_hitbanks, outer_circles
+  l_iron_throne: # Iron Throne [#21]
+    number: 9-3
+    tags: outer_circles
+  l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
+    number: 9-40
+    tags: lane_wedges
+  l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
+    number: 9-39
+    tags: l_store, lane_wedges
+  l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
+    number: 9-41
+    tags: lane_arrows
+  l_left_orbit_arrow_red: # Left Loop Arrow [#43]
+    number: 10-12
+    tags: lane_arrows
+  l_left_outlane: # Left Outlane [#11]
+    number: 9-32
+    tags: l_outlane
+  l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
+    number: 10-16
+    tags: lane_wedges
+  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
+    number: 10-17
+    tags: l_lock_lit, lane_wedges
+  l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
+    number: 10-18
+    tags: lane_arrows
+  l_left_return_lane: # Left Return Lane [#12]
+    number: 9-33
+    tags: l_return_lane
+  l_left_top_lane: # Left Top Lane [#75]
+    number: 10-14
+  l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
+    number: 10-3
+    tags: l_pop_bumpers
+  l_pop_bumper_left: # Pop Bumper Left [#77]
+    number: 10-1
+    tags: l_pop_bumpers
+  l_pop_bumper_right: # Pop Bumper Right [#78]
+    number: 10-2
+    tags: l_pop_bumpers
+  l_right_orbit_arrow_red: # Right Loop Arrow [#74]
+    number: 9-20
+    tags: lane_arrows
+  l_right_outlane: # Right Outlane [#34]
+    number: 8-1
+    tags: l_outlane, outer_circles
+  l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
+    number: 9-18
+    tags: lane_arrows
+  l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
+    number: 9-17
+    tags: lane_wedges, l_upgrade
+  l_right_return_lane: # Right Return Lane [#33]
+    number: 8-0
+    tags: l_return_lane, outer_circles
+  l_right_top_lane: # Right Top Lane [#76]
+    number: 10-15
+  l_ball_save: # Shoot Again [#32]
+    number: 8-3
+    tags: outer_circles
+  l_shield_baratheon: # Sigil Baratheon [#23]
+    number: 9-5
+    tags: color_shields, color_shield_yellow
+  l_shield_greyjoy: # Sigil Greyjoy [#25]
+    number: 9-7
+    tags: color_shields, color_shield_purple
+  l_shield_lannister: # Sigil Lannister [#24]
+    number: 9-6
+    tags: color_shields, color_shield_red
+  l_shield_martell: # Sigil Martell [#27]
+    number: 9-9
+    tags: color_shields, color_shield_orange
+  l_shield_stark: # Sigil Stark [#22]
+    number: 9-4
+    tags: color_shields, color_shield_white
+  l_shield_targaryen: # Sigil Targaryen [#20]
+    number: 9-2
+    tags: color_shields, color_shield_blue
+  l_shield_tyrell: # Sigil Tyrell [#26]
+    number: 9-8
+    tags: color_shields, color_shield_green
+  l_standup_1: # Standup 1 [#44]
+    number: 9-37
+    tags: l_targets
+  l_standup_2: # Standup 2 [#52]
+    number: 9-38
+    tags: l_targets
+  l_standup_3: # Standup 3 [#59]
+    number: 10-28
+    tags: l_targets
+  l_standup_4: # Standup 4 [#64]
+    number: 9-16
+    tags: l_targets
+  l_standup_5: # Standup 5 [#70]
+    number: 9-19
+    tags: l_targets
+  l_start_button: # Start Button [#2]
+    number: 1-2
+  # l_tournament_start: # Tournament Start [#3]
+  #   number: 1-3
+  l_hitbank_shield_rgb: # Right 2-Bank Sigil R [#35]
+    type: rgb
+    channels:
+      red:
+        number: 9-29
+      green:
+        number: 9-30
+      blue:
+        number: 9-31
+    tags: shot_shields
+  l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
+    type: rgb
+    channels:
+      red:
+        number: 9-23
+      green:
+        number: 9-24
+      blue:
+        number: 9-25
+    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+  l_action_button_rgb: # Lockdown R [#4]
+    type: rgb
+    channels:
+      red:
+        number: 1-5
+      green:
+        number: 1-4
+      blue:
+        number: 1-7
+    tags: l_action_button
+  l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
+    type: rgb
+    channels:
+      red:
+        number: 10-23
+      green:
+        number: 10-24
+      blue:
+        number: 10-25
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
+  l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
+    type: rgb
+    channels:
+      red:
+        number: 10-9
+      green:
+        number: 10-10
+      blue:
+        number: 10-11
+    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+  l_kickback_shield_rgb: # Kickback Sigil R [#47]
+    type: rgb
+    channels:
+      red:
+        number: 9-45
+      green:
+        number: 9-46
+      blue:
+        number: 9-47
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
+  l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
+    type: rgb
+    channels:
+      red:
+        number: 9-42
+      green:
+        number: 9-43
+      blue:
+        number: 9-44
+    tags: shot_shields
+  l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
+    type: rgb
+    channels:
+      red:
+        number: 9-26
+      green:
+        number: 9-27
+      blue:
+        number: 9-28
+    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali

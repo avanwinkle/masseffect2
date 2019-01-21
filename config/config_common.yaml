@@ -1,7 +1,6 @@
 #config_version=5
 config:
-- hardware_spike.yaml
-# - hardware_fadecandy.yaml
+- hardware_common.yaml
 - keyboard.yaml
 # - keyboard_colorpicker.yaml
 
