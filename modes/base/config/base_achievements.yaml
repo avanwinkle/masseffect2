@@ -121,3 +121,84 @@ achievement_groups:
     select_random_achievement_events: shipupgrade_available
     events_when_all_completed: all_upgrades_complete
     debug: true
+
+state_machines:
+  shadowbroker:
+    states:
+      pre_chase:
+        events_when_started: shadowbroker_statemachine_pre_chase_started
+      chase:
+        events_when_started: shadowbroker_statemachine_chase_started
+      vasir:
+        events_when_started: shadowbroker_statemachine_vasir_started
+      pre_hagalaz:
+        events_when_started: shadowbroker_statemachine_pre_hagalaz_started
+      hagalaz:
+        events_when_started: shadowbroker_statemachine_hagalaz_started
+      boss:
+        events_when_started: shadowbroker_statemachine_boss_started
+      completed:
+        events_when_started: shadowbroker_statemachine_completed_started
+    transitions:
+      - source: pre_chase
+        target: chase
+        events: logicblock_sbdrops_counter_hit{count==3}
+      - source: chase
+        target: vasir
+        events: shadowbroker_chase_complete
+      - source: vasir
+        target: pre_hagalaz
+        events: shadowbroker_vasir_complete
+      - source: pre_hagalaz
+        target: hagalaz
+        events: logicblock_sbdrops_counter_complete
+      - source: hagalaz
+        target: boss
+        events: enable_hatch
+      - source: boss
+        target: complete
+        events: shadowbroker_boss_complete
+
+  suicide_progress:
+    states:
+      disabled:
+        events_when_started: suicide_progression_disabled
+      omegarelay:
+        events_when_started: suicide_progression_omegarelay
+      infiltration:
+        events_when_started: suicide_progression_infiltration
+      longwalk:
+        events_when_started: suicide_progression_longwalk
+      tubes:
+        events_when_started: suicide_progression_tubes
+      final:
+        events_when_started: suicide_progression_final
+      endrun:
+        events_when_started: suicide_progression_endrun
+      completed:
+        events_when_started: suicide_progression_completed
+    transitions:
+      - source: disabled
+        target: omegarelay
+        events: mode_normandyattack_started
+      - source: omegarelay
+        target: infiltration
+        events: omegarelay_complete
+      - source: infiltration
+        target: longwalk
+        events: infiltration_complete
+      - source: longwalk
+        target: tubes
+        events: longwalk_complete
+      - source: tubes
+        target: final
+        events: tubes_complete
+      - source: final
+        target: endrun
+        events: humanreaper_complete
+      - source: endrun
+        target: completed
+        events: suicidemission_complete
+      - source: infiltration, longwalk, tubes, final
+        target: disabled
+        events: suicidemission_failed   
