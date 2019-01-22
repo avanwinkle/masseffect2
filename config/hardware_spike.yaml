@@ -168,101 +168,86 @@ switches:
     # type: NC
   s_bumper_left:
     number: 10-1
-    tags: playfield_active, bumper
+    tags: bumper
   s_bumper_right:
     number: 10-2
-    tags: playfield_active, bumper
+    tags: bumper
   s_bumper_bottom:
     number: 10-3
-    tags: playfield_active, bumper
+    tags: bumper
   s_return_lane_left:
     number: 9-5
-    tags: playfield_active
     ignore_window_ms: 1000
   s_return_lane_right:
     number: 8-6
-    tags: playfield_active
     ignore_window_ms: 1000
   s_outlane_left:
     number: 9-4
-    tags: playfield_active
   s_outlane_right:
     number: 10-14 # 8-7 Moved
-    tags: playfield_active
   s_battering_ram:
     number: 10-4
-    tags: playfield_active
   s_spinner:
     number: 10-7
-    tags: playfield_active
   s_left_orbit:
     number: 10-10
-    tags: playfield_active
     ignore_window_ms: 1100
   s_right_orbit:
     number: 10-11
-    tags: playfield_active
     ignore_window_ms: 1100
   s_left_ramp_entrance:
     number: 10-5
-    tags: playfield_active
     ignore_window_ms: 1500
   s_left_ramp_exit:
     number: 10-6
   s_right_ramp_entrance:
     number: 9-7
-    tags: playfield_active
     ignore_window_ms: 1500
   s_right_ramp_exit:
     number: 10-15
   s_top_lane_left:
     number: 10-12
-    tags: playfield_active
   s_top_lane_right:
     number: 10-13
-    tags: playfield_active
   s_dropbank_bottom:
     number: 9-15
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_dropbank_middle:
     number: 9-14
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_dropbank_top:
     number: 9-13
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_hitbank_top:
     number: 9-10
-    tags: playfield_active, hitbank
+    tags: hitbank
   s_hitbank_bottom:
     number: 9-11
-    tags: playfield_active, hitbank
+    tags: hitbank
   s_target1:
     number: 10-8
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target2:
     number: 10-9
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target3:
     number: 10-0
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target4:
     number: 9-8
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target5:
     number: 9-9
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_left_slingshot:
     number: 8-1
     ignore_window_ms: 300ms
-    tags: playfield_active
   s_right_slingshot:
     number: 8-4
     ignore_window_ms: 300ms
-    tags: playfield_active
   s_kickback:
     number: 8-7 # 10-14 Moved
     ignore_window_ms: 400
-    # tags: playfield_active # Cannot be playfield active if it's a ball hold switch
   s_tenpoints:
     number: 9-12
   s_lock_1:
