@@ -2,13 +2,13 @@
 config:
   - config_common.yaml
   - config_lcd.yaml
+  - hardware_fast.yaml
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
   - scriptlets.squadmates_mpf.MPFSquadmateHandlers
   - scriptlets.save_career.SaveCareer
-  # - mpf_arduino.MPFArduino
 
-mc_custom_code: 
+mc_custom_code:
   - squadmates_mc.MCSquadmateHandlers
   - slide_queue_player.SlideQueuePlayer

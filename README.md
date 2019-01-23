@@ -8,7 +8,33 @@ The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWar
 
 ## Requirements
 
-This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine (configuration coming soon) or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
+This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
+
+### Installation
+
+Clone the repo into the folder of your choosing, and install the [Mission Pinball Framework](http://docs.missionpinball.org/en/latest/install/index.html) (MPF).
+
+### Running with Config Options
+
+* *-x for virtual* The default configuration for ME2 Pinball is a homebrew FAST machine, which can be virtualized with the `-x` parameter.
+* *--no-sound for audio-free* The audio files for ME2 Pinball are extracted from the Mass Effect directly and are not included in the repo. To avoid missing file errors, audio can be disabled with the `--no-sound` parameter.
+
+### Running on Stern Game of Thrones
+
+ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the MPF Spike Bridge installed. To run the game using the Spike configuration instead of the default FAST, specify the "spike" config with the `-c spike` parameter.
+
+```
+$ mpf both --no-audio -c spike
+```
+
+The most recent versions of ME2 Pinball use a 1280x480 LCD screen as the display, which will be rendered on the computer display. During alpha development the Game of Thrones DMD was used, and that version of the game can still be played by checking out the `spike-dmd` branch of this repo. *No config param is required*
+
+```
+$ git checkout spike-dmd
+$ mpf both --no-audio
+```
+
+###
 
 ## Main Gameplay
 

@@ -125,8 +125,8 @@ achievement_groups:
 state_machines:
   shadowbroker:
     states:
-      pre_chase:
-        events_when_started: shadowbroker_statemachine_pre_chase_started
+      start:
+        events_when_started: shadowbroker_statemachine_start_started
       chase:
         events_when_started: shadowbroker_statemachine_chase_started
       vasir:
@@ -140,7 +140,7 @@ state_machines:
       completed:
         events_when_started: shadowbroker_statemachine_completed_started
     transitions:
-      - source: pre_chase
+      - source: start
         target: chase
         events: logicblock_sbdrops_counter_hit{count==3}
       - source: chase
@@ -161,8 +161,8 @@ state_machines:
 
   suicide_progress:
     states:
-      disabled:
-        events_when_started: suicide_progression_disabled
+      start:
+        events_when_started: suicide_progression_start
       omegarelay:
         events_when_started: suicide_progression_omegarelay
       infiltration:
@@ -178,7 +178,7 @@ state_machines:
       completed:
         events_when_started: suicide_progression_completed
     transitions:
-      - source: disabled
+      - source: start
         target: omegarelay
         events: mode_normandyattack_started
       - source: omegarelay
@@ -201,4 +201,4 @@ state_machines:
         events: suicidemission_complete
       - source: infiltration, longwalk, tubes, final
         target: disabled
-        events: suicidemission_failed   
+        events: suicidemission_failed
