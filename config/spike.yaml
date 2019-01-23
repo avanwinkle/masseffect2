@@ -149,7 +149,7 @@ switches:
   s_slam_tilt:
     number: 1-21
     tags: slam_tilt
-  s_null:
+  s_airlock_enter:
     number: 1-0
 
 lights:

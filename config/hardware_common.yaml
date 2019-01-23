@@ -39,7 +39,7 @@ ball_devices:
     hold_coil: c_up_post
     hold_coil_release_time: 1s
     # hold_switches: s_kickback
-    entrance_switch: s_null
+    entrance_switch: s_airlock_enter
 
 flippers:
   right_flipper:
