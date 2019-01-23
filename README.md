@@ -16,15 +16,21 @@ Clone the repo into the folder of your choosing, and install the [Mission Pinbal
 
 ### Running with Config Options
 
-* *-x for virtual* The default configuration for ME2 Pinball is a homebrew FAST machine, which can be virtualized with the `-x` parameter.
-* *--no-sound for audio-free* The audio files for ME2 Pinball are extracted from the Mass Effect directly and are not included in the repo. To avoid missing file errors, audio can be disabled with the `--no-sound` parameter.
+* **-x for virtual** The default configuration for ME2 Pinball is a homebrew FAST machine, which can be virtualized with the `-x` parameter.
+* **--no-sound for audio-free** The audio files for ME2 Pinball are extracted from Mass Effect 2 directly and are not included in the repo. To avoid missing file errors, audio can be disabled with the `--no-sound` parameter.
+
+Therefore, the simplest way to see ME2 in action is to run the following command from the repo folder:
+
+```
+$ mpf both -x --no-sound
+```
 
 ### Running on Stern Game of Thrones
 
-ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the MPF Spike Bridge installed. To run the game using the Spike configuration instead of the default FAST, specify the "spike" config with the `-c spike` parameter.
+ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the [MPF Spike Bridge](http://docs.missionpinball.org/en/latest/hardware/spike/mpf-spike-bridge.html) installed. To run the game using the Spike configuration instead of the default FAST, specify the "spike" config with the `-c spike` parameter.
 
 ```
-$ mpf both --no-audio -c spike
+$ mpf both --no-sound -c spike
 ```
 
 The most recent versions of ME2 Pinball use a 1280x480 LCD screen as the display, which will be rendered on the computer display. During alpha development the Game of Thrones DMD was used, and that version of the game can still be played by checking out the `spike-dmd` branch of this repo. *No config param is required*
