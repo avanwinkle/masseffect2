@@ -8,13 +8,27 @@ mode:
   console_log: full
 
 mode_settings:
-  select_item_events: s_action_button_active
-  next_item_events: s_flipper_right_active
-  previous_item_events: s_flipper_left_active
+  select_item_events: s_action_button_active, flipper_cancel
+  next_item_events: s_flipper_right_inactive{machine.flipper_cancelling==0}
+  previous_item_events: s_flipper_left_inactive{machine.flipper_cancelling==0}
   selectable_items: casual
 
 event_player:
   career_loaded: stop_mode_mainmenu
+
+variable_player:
+  mode_mainmenu_started:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
+  flipper_cancel:
+    flipper_cancelling:
+      int: 1
+      action: set_machine
+  both_flippers_inactive:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
 
 queue_relay_player:
   # For the first ball, allow the player to pick a profile

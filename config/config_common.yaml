@@ -76,6 +76,8 @@ machine_vars:
   bonus_xp:
     initial_value: 0.25
     value_type: float
+  flipper_cancelling:
+    initial_value: 0
 
 modes:
   # - colorpicker
