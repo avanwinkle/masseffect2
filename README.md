@@ -37,7 +37,7 @@ The most recent versions of ME2 Pinball use a 1280x480 LCD screen as the display
 
 ```
 $ git checkout spike-dmd
-$ mpf both --no-audio
+$ mpf both --no-sound
 ```
 
 ###
