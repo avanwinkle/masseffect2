@@ -11,8 +11,21 @@ The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWar
 This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
 
 ### Installation
-
 Clone the repo into the folder of your choosing, and install the [Mission Pinball Framework](http://docs.missionpinball.org/en/latest/install/index.html) (MPF).
+
+#### Release Versions
+Mass Effect 2 Pinball maintains "release" versions compatible with the major and minor releases of MPF. The release versions may have 
+placeholders where sigificant changes are being developed, but are fully playable. The newest release will always be the default, but
+you may download any release branch that corresponds to your version of MPF.
+
+#### Developer Version
+Both MPF and Mass Effect 2 Pinball are under constant development, with new features and improvements added every few days. The developer version of Mass Effect 
+is considered stable but requires the latest dev release of MPF. You can upgrade your MPF to pre-release versions like so:
+```
+pip install mpf mpf-mc --pre --upgrade
+```
+
+More details on installing MPF are available [in the MPF Documentation](http://docs.missionpinball.org/en/latest/install/index.html).
 
 ### Running with Config Options
 
@@ -27,17 +40,19 @@ $ mpf both -x --no-sound
 
 ### Running on Stern Game of Thrones
 
-ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the [MPF Spike Bridge](http://docs.missionpinball.org/en/latest/hardware/spike/mpf-spike-bridge.html) installed. To run the game using the Spike configuration instead of the default FAST, specify the "spike" config with the `-c spike` parameter.
+ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the [MPF Spike Bridge](http://docs.missionpinball.org/en/latest/hardware/spike/mpf-spike-bridge.html) installed. This fully-playable version features the complete gameplay along with lighting effects and use of the built-in DMD screen. To play Mass Effect 2 on Game of Thrones, [download the `spike-dmd` version](https://github.com/avanwinkle/masseffect2/archive/spike-dmd.zip) or use `git checkout spike-dmd`.
 
 ```
-$ mpf both --no-sound -c spike
-```
-
-The most recent versions of ME2 Pinball use a 1280x480 LCD screen as the display, which will be rendered on the computer display. During alpha development the Game of Thrones DMD was used, and that version of the game can still be played by checking out the `spike-dmd` branch of this repo. *No config param is required*
-
-```
-$ git checkout spike-dmd
+// On branch spike-dmd
 $ mpf both --no-sound
+```
+
+The most recent release and development versions of ME2 Pinball use a 1280x480 LCD screen as the display, which is incompatible with the Game of Thrones DMD but can be rendered on the computer screen. 
+To run the latest Mass Effect 2 (any `release` branch or `master`) on Game of Thrones, you can use the Spike hardware configuration instead of FAST by specifying the "spike" config in the command line.
+
+```
+// On release or master branch
+$ mpf both --no-sound -c spike
 ```
 
 ###
