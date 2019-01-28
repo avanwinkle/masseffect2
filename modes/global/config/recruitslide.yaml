@@ -13,39 +13,51 @@ variable_player:
   mode_recruitgarrus_started:
     missionname:
       string: "Defend Archangel"
+      action: set
   mode_recruitgrunt_started:
     missionname:
       string: "Defeat the Tank-Bred"
+      action: set
   mode_recruitjack_started:
     missionname:
       string: "Escape from Purgatory"
+      action: set
   mode_recruitkasumi_started:
     missionname:
       string: "Infiltrate the Vault"
+      action: set
   mode_recruitlegion_started:
     missionname:
       string: "Stop the Heretics"
+      action: set
   mode_recruitmordin_started:
     missionname:
       string: "Cure the Plague"
+      action: set
   mode_recruitsamara_started:
     missionname:
       string: "Find Morinth"
+      action: set
   mode_recruittali_started:
     missionname:
       string: "Destroy the Colossus"
+      action: set
   mode_recruitthane_started:
     missionname:
       string: "Assault Dantius Towers"
+      action: set
   mode_recruitzaeed_started.1{current_player.zaeed_path_renegade==-1}:
     missionname:
       string: "Storm the Refinery"
+      action: set
   mode_recruitzaeed_started.2{current_player.zaeed_path_renegade==0}:
     missionname:
       string: "Save the Workers"
+      action: set
   mode_recruitzaeed_started.3{current_player.zaeed_path_renegade==1}:
     missionname:
       string: "Stop Vido's Escape"
+      action: set
 
 slide_player:
   recruit_advance:
