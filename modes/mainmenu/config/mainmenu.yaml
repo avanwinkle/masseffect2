@@ -25,11 +25,19 @@ variable_player:
     flipper_cancelling:
       int: 0
       action: set_machine
+  flipper_cradle:
+    flipper_cancelling:
+      int: 1
+      action: set_machine
   flipper_cancel:
     flipper_cancelling:
       int: 1
       action: set_machine
   both_flippers_inactive:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
+  flipper_cradle_release:
     flipper_cancelling:
       int: 0
       action: set_machine
