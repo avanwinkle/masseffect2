@@ -25,10 +25,7 @@ slides:
       x: 110%
   portrait_slide:
     widgets:
-      # 0.51 doesn't support event kwarg evals, so hard-code a temp portrait
-      # - widget: (portrait_name)
-      - type: image
-        image: portrait_squad
+      - widget: (portrait_name)
   singleplayer_slide:
     transition:
       type: fade

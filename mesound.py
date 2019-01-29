@@ -1,6 +1,7 @@
 from mpf.core.config_processor import ConfigProcessor
 from mpf.core.config_validator import ConfigValidator
 from mpf.core.utility_functions import Util
+from mpf import _version
 import re
 import os, sys
 import shutil
@@ -8,7 +9,11 @@ import logging
 import tempfile, pickle
 from datetime import datetime
 
-configProcessor = ConfigProcessor(ConfigValidator(None, False, False))
+# MPF <= 0.51 ConfigValidator requires no args. >=0.52 uses args.
+if float(_version.__short_version__) <= 0.51:
+  configProcessor = ConfigProcessor(ConfigValidator(None))
+else:
+  configProcessor = ConfigProcessor(ConfigValidator(None, False, False))
 
 class SoundManager():
   def __init__(self, verbose=False):
