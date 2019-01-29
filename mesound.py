@@ -23,6 +23,7 @@ class SoundManager():
     self.source_path = None
     self._analysis = None
     self.cache_file_name = "mesound_cache"
+    self.exports_folder = "./mesound_exports"
 
     self.log = logging.getLogger()
     self.log.addHandler(logging.StreamHandler(sys.stdout))
@@ -68,7 +69,7 @@ class SoundManager():
   def _load_machine_assets(self, refresh=False):
     if refresh or not self.machine_assets:
       self.log.info("  Loading assets from machine folder...")
-      self.machine_assets = GameSounds("./")
+      self.machine_assets = GameSounds("./",  paths_to_exclude=[self.exports_folder])
 
   def refresh(self):
     self._load_machine_configs(refresh=True)
@@ -248,6 +249,23 @@ class SoundManager():
     else:
       self.log.info("\nSimulation complete, no files changed.")
 
+  def export_machine_assets(self):
+    if not self._analysis:
+      self.parse_machine_assets()
+
+    os.makedirs(self.exports_folder, mode=0o755, exist_ok=True)
+    count = 0
+    size = 0
+
+    for filename in self._analysis['found']:
+      sound = self._analysis['sounds'][filename] 
+      path = "{}{}".format(sound['modepath'], filename)
+      shutil.copy2(path, "{}/{}".format(self.exports_folder, filename))
+      size += sound['exists'].st_size
+      count += 1
+
+    self.log.info("\nExport complete: {} files, {} MB".format(count, round(size/100000)/10))
+
 class RequiredSounds(object):
   def __init__(self):
     self._allconfigs = {} # Key: mode/config name, Value: ModeSounds object
@@ -305,10 +323,13 @@ class RequiredSounds(object):
     return len(self._allconfigs)
 
 class GameSounds(object):
-  def __init__(self, fileroot):
+  def __init__(self, fileroot, paths_to_exclude=[]):
     # Most efficient way: two arrays in parallel?
     self._soundfiles, self._soundpaths = [], []
     for path, dirs, files in os.walk(fileroot):
+      # Don't look in the exports folder!
+      if path in paths_to_exclude:
+        continue
       for filename in files:
         if re.search(r'\.(ogg|wav)$', filename):
           if filename in self._soundfiles:
@@ -429,6 +450,8 @@ MPF Sound Asset Manager
 
   5. Clear cached media source tree
 
+  6. Export assets
+
   0. Exit this program
 """.format(os.getcwd(), soundManager.source_path))
     selection = input(">> ")
@@ -441,6 +464,8 @@ MPF Sound Asset Manager
       soundManager.refresh()
     elif selection == "5":
       soundManager.clear_cache()
+    elif selection == "6":
+      soundManager.export_machine_assets()
     elif selection == "0" or not selection:
       running = False
 
@@ -469,6 +494,8 @@ def main():
       soundManager.cleanup_machine_assets(writeMode=writeMode)
     elif args[0] == "clear":
       soundManager.clear_cache()
+    elif args[0] == "export":
+      soundManager.export_machine_assets()
     endtime = datetime.now()
     soundManager.log.info("\nOperation complete in {:.2f} seconds".format((endtime - starttime).total_seconds()))
 
