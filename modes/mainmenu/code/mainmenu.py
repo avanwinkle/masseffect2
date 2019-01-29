@@ -1,4 +1,4 @@
-import os, json
+import os, json, logging
 from datetime import datetime
 from operator import itemgetter
 from mpf.modes.game.code.game import Game
@@ -14,22 +14,29 @@ class MainMenu(Carousel):
     self.mainmenu = []
     self.careers = []
     self._selected_career = None
+    self.log = logging.getLogger("MainMenu")
+    self.log.setLevel(2)
 
   def mode_start(self, **kwargs):
+    if self.config.get("mode_settings", {}).get("casual_only"):
+      self.log.info("Casual mode only, skipping menu")
+      self.stop()
+      return
     """ When the mode starts, create a handler to trigger the Carousel start. """
     self.add_mode_event_handler("show_mainmenu", self.show_menu)
 
   def show_menu(self, **kwargs):
     # Load career data
     self._load_careers()
-    self._load_mainmenu()
     # If no careers to choose from, skip the menu completely
     if not self.careers:
-      self.info_log("No careers to show, skipping menu")
+      self.log.info("No careers to show, skipping menu")
       self.stop()
       return
+    
+    self._load_mainmenu()
 
-    self.debug_log("Showing career menu for player {}".format(self.machine.game.player.number))
+    self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))
     self._shown_menu = self.mainmenu
     super().mode_start()
     if self._selected_career:
@@ -45,8 +52,8 @@ class MainMenu(Carousel):
     self._set_selected_career(self._selected_career)
 
   def _load_mainmenu(self):
-    menu = ["casual"]
-    if self.careers:
+    menu = ["casual", "create_career"]
+    if len(self.careers) > 1:
       menu = ["change_career"] + menu
     if self._selected_career:
       menu = ["new_game"] + menu
@@ -54,7 +61,7 @@ class MainMenu(Carousel):
         menu = ["resume_game"] + menu
     self.mainmenu = menu
     self._highlighted_item_index = 0
-    self.debug_log("Created main menu with {}".format(", ".join(self.mainmenu)))
+    self.log.debug("Created main menu with {}".format(", ".join(self.mainmenu)))
 
   def _load_careers(self):
     gamepath = self.machine.machine_path + "/savegames/"
@@ -66,10 +73,10 @@ class MainMenu(Carousel):
 
     # Don't include careers chosen by previous players
     already_chosen = [self.machine.get_machine_var("last_career_player_{}".format(x)) for x in range(1, player_num)]
-    self.debug_log("Already chosen careers: {}".format(already_chosen))
+    self.log.debug("Already chosen careers: {}".format(already_chosen))
 
     for path, dirs, files in os.walk(gamepath):
-      self.debug_log("Searching savegame files: {}".format(files))
+      self.log.debug("Searching savegame files: {}".format(files))
       for file in files:
         if file.endswith(".json"):
           with open("{}/{}".format(path,file)) as f:
@@ -90,7 +97,7 @@ class MainMenu(Carousel):
 
     # Sort by the date last played (newest first)
     self.careers.sort(key=itemgetter("last_played"), reverse=True)
-    self.debug_log("Created player {} career menu with {}; initial selection is {}".format(player_num,
+    self.log.debug("Created player {} career menu with {}; initial selection is {}".format(player_num,
                     ", ".join([c["career_name"] for c in self.careers]), self._selected_career))
 
   def _get_available_items(self):
@@ -102,8 +109,9 @@ class MainMenu(Carousel):
     else:
       return self._shown_menu[self._highlighted_item_index]
 
-  def _select_item(self, **kwargs):
-    selection = self._get_highlighted_item()
+  def _select_item(self, force=None, **kwargs):
+    selection = force or self._get_highlighted_item()
+    self.log.debug("Selecting item {} for shown menu {}".format(selection, self._shown_menu))
     # If a career was selected, track it and return to main menu
     if self._shown_menu == self.careers:
       # Use the index of the selected name to get the entire career object
@@ -139,12 +147,23 @@ class MainMenu(Carousel):
     # If new game was chosen, need to set the started time
     elif selection == "new_game":
       self._post_career_event("new_career")
+    # If create career was chosen, switch modes
+    elif selection == "create_career":
+      self.machine.events.post("start_mode_createprofile")
+      self.add_mode_event_handler("createprofile_complete", self._create_profile)
+      # Prevent the super from calling select, which closes the carousel mode
+      return
     else:
-      self.error_log("Unknown selection '{}' from main menu!".format(selection))
-    self.debug_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
+      self.log.error("Unknown selection '{}' from main menu!".format(selection))
+    self.log.debug("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
     super()._select_item()
 
   def _update_highlighted_item(self, direction):
+    # If create mode is open, don't highlight anything
+    if self.machine.modes.createprofile.active:
+      self.log.debug("Highlight selected but Create Profile active, so aborting")
+      return
+    self.log.debug("Highlight selected, look for the next event:")
     # Career menu: select the highlighted career to post the name/level and update the widget
     if self._shown_menu == self.careers:
       self._set_selected_career(self.careers[self._highlighted_item_index])
@@ -155,8 +174,17 @@ class MainMenu(Carousel):
 
   def _set_selected_career(self, career):
     self._selected_career = career
-    self.debug_log("Setting career to {}".format(self._selected_career))
+    self.log.debug("Setting career to {}".format(self._selected_career))
     self._post_career_event("set_career")
+
+  def _create_profile(self, **kwargs):
+    if not kwargs.get('name') or not kwargs['name'].strip():
+      self.log.info("Invalid profile name.")
+      return
+
+    self._set_selected_career({ "career_name": kwargs['name'], "last_played": -1 })
+    # Jump immediately into a new game
+    self._select_item("new_game")
 
   def _post_career_event(self, evt_name, **kwargs):
     career_data = self._selected_career or  { "career_name": " " }

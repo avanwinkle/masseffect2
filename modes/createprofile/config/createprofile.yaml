@@ -1,0 +1,46 @@
+#config_version=5
+mode:
+  start_events: start_mode_createprofile
+  stop_events: stop_mode_createprofile, createprofile_complete
+  game_mode: false
+
+event_player:
+  s_flipper_right_inactive{machine.flipper_cancelling==0}: next_char
+  s_flipper_left_inactive{machine.flipper_cancelling==0}: prev_char
+  text_input_profile_name_complete:
+    createprofile_complete:
+      name:
+        value: text
+        type: str
+  flipper_cradle: stop_mode_createprofile
+
+slide_player:
+  mode_createprofile_started: profile_creation_slide
+
+slides:
+  profile_creation_slide:
+    widgets:
+      - type: text
+        text: "Create New Profile:"
+        style: body_sm, row_top, col_left_anchor
+      - type: text_input
+        key: profile_name
+        style: header_md, row_main, col_left_anchor
+        max_chars: 10
+        # dynamic_x: false
+        shift_left_event: prev_char
+        shift_right_event: next_char
+        select_event: s_action_button_active
+        animations:
+          show_slide:
+          - property: opacity
+            value: 1
+            duration: .25s
+          - property: opacity
+            value: 0
+            duration: .25s
+            repeat: yes
+      - type: text
+        text: ""
+        key: profile_name
+        style: header_md, row_main, col_left_anchor
