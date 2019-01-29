@@ -11,4 +11,4 @@ custom_code:
   - scriptlets.slide_queue_player.SlideQueuePlayer
 
 mc_custom_code:
-  - slide_queue_player.SlideQueuePlayer
+  - squadmates_mc.MCSquadmateHandlers
