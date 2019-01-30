@@ -1,6 +1,6 @@
 #config_version=5
 slides:
-  attract_slide_right:
+  attract_slide_main:
     - type: image
       image: logo_fullscreen
       style: row_main
