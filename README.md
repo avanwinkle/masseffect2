@@ -8,7 +8,7 @@ The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWar
 
 ## Requirements
 
-This project requires the Mission Pinball Framework 0.50 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
+This project requires the Mission Pinball Framework 0.52 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
 
 ### Installation
 Clone the repo into the folder of your choosing, and install the [Mission Pinball Framework](http://docs.missionpinball.org/en/latest/install/index.html) (MPF).
@@ -54,6 +54,8 @@ To run the latest Mass Effect 2 (any `release` branch or `master`) on Game of Th
 // On release or master branch
 $ mpf both --no-sound -c spike
 ```
+
+Different hardware setups and USB-Serial cables have varying throughput for communication with the Stern Spike boards. In the file hardware_spike.yaml you can adjust the `runtime_baud:` setting to any number from the [MPF Spike Bridge baudrates](https://github.com/missionpinball/mpf-spike-bridge/blob/master/bridge.c#L273). A higher number will increase responsiveness but may decrease stability. If your Game of Thrones machine loses sync or coils stop working, try reducing the number.
 
 ###
 
