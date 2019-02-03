@@ -31,12 +31,6 @@ class MainMenu(Carousel):
   def show_menu(self, **kwargs):
     # Load career data
     self._load_careers()
-    # If no careers to choose from, skip the menu completely
-    if not self.careers:
-      self.log.info("No careers to show, skipping menu")
-      self.stop()
-      return
-    
     self._load_mainmenu()
 
     self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))

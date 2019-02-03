@@ -52,7 +52,7 @@ slide_player:
   # Highlighting options in the main menu
   mainmenu_new_game_highlighted: new_game_slide
   mainmenu_resume_game_highlighted: resume_game_slide
-  mainmenu_change_career_highlighted: 
+  mainmenu_change_career_highlighted:
     change_career_slide{career_name!=" "}: {}
     select_career_slide{career_name==" "}: {}
   mainmenu_casual_highlighted: casual_slide
@@ -113,7 +113,7 @@ slides:
   career_new_slide:
     widgets:
       - type: text
-        text: Create New Profile
+        text: Create Profile
         style: header_md, row_main, col_left_anchor
       - widget: background_console
   casual_slide:
