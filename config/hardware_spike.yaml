@@ -6,13 +6,12 @@ hardware:
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
-  baud: 115200 #115200
+  baud: 115200
   runtime_baud: 2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 30
-  # use_send_key: true
+    65: 100
 
 machine:
   balls_installed: 6
@@ -123,13 +122,6 @@ autofire_coils:
     enable_events: ball_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
     debug: true
-# kickbacks:
-  dragon_kickback:
-    coil: c_kickback
-    switch: s_kickback
-    enable_events: enable_kickback
-    disable_events: disable_kickback, ball_hold_enable
-    debug: true
 
 switches:
   s_start_button:
@@ -184,7 +176,7 @@ switches:
   s_outlane_left:
     number: 9-4
   s_outlane_right:
-    number: 10-14 # 8-7 Moved
+    number: 8-7
   s_battering_ram:
     number: 10-4
   s_spinner:
@@ -246,7 +238,7 @@ switches:
     number: 8-4
     ignore_window_ms: 300ms
   s_kickback:
-    number: 8-7 # 10-14 Moved
+    number: 10-14
     ignore_window_ms: 400
   s_tenpoints:
     number: 9-12
