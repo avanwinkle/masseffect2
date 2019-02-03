@@ -79,6 +79,7 @@ class SoundManager():
     f = open("./.mesound_path", "w")
     f.write(source_path)
     f.close()
+    self.clear_cache()
     return source_path
 
   def _get_source_path(self):
