@@ -18,7 +18,7 @@ slides:
       anchor_x: left
       x: 0
       z: 0
-  attract_slide:
+  attract_slide_right:
     - type: image
       image: splashscreen
       anchor_x: right
