@@ -20,15 +20,17 @@ mode:
   priority: 500
 
 event_player:
-  mode_n7_assignments_started:
+  mode_n7_assignments_started.2:
     set_mission_shots:
-      shots_total: 5 # Will yield base value / 25 = 4,000pts
+      shots_total: 5  # Will yield base value / 25 = 4,000pts
       shots_remaining: 1
-      ticks: 30
-      multiplier: 
+      ticks: 20
+      multiplier:
         value: 1.0 + (0.25 * current_player.assignments_completed)
         type: float
-  n7_assignment_shot_hit: 
+  mode_n7_assignments_started.1:
+    - missiontimer_start|1s
+  n7_assignment_shot_hit:
     - mission_shot_hit
     - mission_collect_store
     - n7_assignment_ended
@@ -77,7 +79,7 @@ variable_player:
 shot_groups:
   n7_assignment_shot:
     shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_hahne_kedar_facility_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
-    rotate_right_events: sw_bumper_active # Bumper hits determine randomness
+    rotate_right_events: sw_bumper_active  # Bumper hits determine randomness
 
 shots:
   n7_anomalous_weather_shot:
@@ -132,7 +134,7 @@ shots:
 
 shot_profiles:
   n7_shot_profile:
-    show_when_disabled: False
+    show_when_disabled: false
     states:
       - name: active
         show: n7_show
@@ -239,7 +241,7 @@ sounds:
     file: mus_n7_8_combat_1.ogg
     track: music
   intro_imminent_ship_crash:
-    file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.ogg # "Warning: collision imminent"
+    file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.ogg  # "Warning: collision imminent"
     track: voice
     ducking:
       target: music
@@ -357,15 +359,16 @@ sounds:
       release_point: 100ms
 
 widget_player:
-  player_temp_build_value:
-    hurryup_widget:
+  timer_missiontimer_started: timer_widget
+  timer_missiontimer_tick:
+    timer_widget:
       action: update
-      slide: n7_hurryupslide
+  stop_mode_n7_assignments:
+    timer_widget:
+      action: remove
 
 widgets:
-  hurryup_widget:
+  timer_widget:
     - type: text
-      text: (value)
-      number_grouping: true
-      style: body_md, row_sub, col_left_anchor
-
+      text: (ticks_remaining)
+      style: timer_primary, row_gutter, col_right_indent
