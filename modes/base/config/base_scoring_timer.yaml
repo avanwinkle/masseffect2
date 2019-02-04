@@ -17,7 +17,7 @@ variable_player:
     # For normal/hardcore, set the is_resumable
     mission_is_resumable:
       action: set
-    # # For insanity, never resumable
+      # For insanity, never resumable
       int: is_resumable if current_player.difficulty < 2 else 0
     # Set the player variable for the timer before the mission starts, for a clean widget
     mission_starting_ticks:
@@ -116,7 +116,7 @@ timers:
       # Specific jumps for missions
       - event: missiontimer_set_omegarelay
         action: jump
-        value: 54 # Dependent on the duration of the music track
+        value: 54  # Dependent on the duration of the music track
       - event: missiontimer_set_longwalk_1
         action: jump
         value: 41
@@ -148,7 +148,6 @@ timers:
       - event: mode_type_suicide_stopped
         action: stop
       # If we're locking a ball, pause for the new one to eject
-      - event: multiball_lock_fmball_lock_locked_ball
+      - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
         action: pause
         value: 3
-

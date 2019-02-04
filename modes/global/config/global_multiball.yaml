@@ -31,8 +31,9 @@ event_player:
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
   # about_to_finish events not working? Do it manually!
   multiball_lock_fmball_lock_full:
-    - start_mode_overlord{device.achievements.arrival.state=="disabled"}|7s
-    - start_mode_arrival{device.achievements.arrival.state!="disabled"}|7s
+    # TODO: Use a queue slide to trigger the start of the multiballs
+    - start_mode_overlord{device.achievements.arrival.state=="disabled"}
+    - start_mode_arrival{device.achievements.arrival.state!="disabled"}
 
   # QUEUE SLIDES
   enable_fmball_lock{mode.field.active and device.achievements.arrival.state=="disabled"}:

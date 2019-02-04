@@ -90,7 +90,7 @@ class SaveCareer(CustomCode):
         else:
           newcareer[key] = value
       # Everything else we just save as-is
-      elif key in PLAYER_VARS:
+      elif key in PLAYER_VARS or key.startswith("state_machine"):
         newcareer[key] = value
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))
@@ -125,7 +125,7 @@ class SaveCareer(CustomCode):
             available_missions += 1
           elif value == 4:
             squadmates_count += 1
-        elif key in PLAYER_VARS:
+        elif key in PLAYER_VARS or key.startswith("state_machine"):
           setattr(player, key, value) # e.g. player.assignments_completed = 2
         elif key == "achievements":
           for achievement, state in careerdata["achievements"].items():

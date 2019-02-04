@@ -124,21 +124,22 @@ achievement_groups:
 
 state_machines:
   shadowbroker:
+    persist_state: true
     states:
       start:
-        events_when_started: shadowbroker_statemachine_start_started
+        events_when_started: shadowbroker_progression_start_started
       chase:
-        events_when_started: shadowbroker_statemachine_chase_started
+        events_when_started: shadowbroker_progression_chase_started
       vasir:
-        events_when_started: shadowbroker_statemachine_vasir_started
+        events_when_started: shadowbroker_progression_vasir_started
       pre_hagalaz:
-        events_when_started: shadowbroker_statemachine_pre_hagalaz_started
+        events_when_started: shadowbroker_progression_pre_hagalaz_started
       hagalaz:
-        events_when_started: shadowbroker_statemachine_hagalaz_started
+        events_when_started: shadowbroker_progression_hagalaz_started
       boss:
-        events_when_started: shadowbroker_statemachine_boss_started
+        events_when_started: shadowbroker_progression_boss_started
       completed:
-        events_when_started: shadowbroker_statemachine_completed_started
+        events_when_started: shadowbroker_progression_completed_started
     transitions:
       - source: start
         target: chase
@@ -160,6 +161,7 @@ state_machines:
         events: shadowbroker_boss_complete
 
   suicide_progress:
+    persist_state: true
     states:
       start:
         events_when_started: suicide_progression_start

@@ -31,7 +31,7 @@ class LockHandler(Mode):
   def __init__(self, machine, config, name, path):
     super().__init__(machine, config, name, path)
     self.log = logging.getLogger("LockHandler")
-    self.log.setLevel("DEBUG")
+    self.log.setLevel(10)
     self.settings = config.get("mode_settings")
 
     # We want to track whether to lock this ball, so when handling external events we can act accordingly
@@ -165,18 +165,22 @@ class LockHandler(Mode):
     if self._logicallockdevice.enabled:
       self.log.info(" - Lock is lit, not going to bypass lock post")
       do_bypass = False
+      future_locked_balls = self._logicallockdevice.locked_balls+1
 
       # **Warning** This is a hard-coded conditional, which shouldn't be in a python file
-      self.log.debug("{}".format(self.player.achievements))
       fmball = "overlord" if self.player.achievements["arrival"] == "disabled" else "arrival"
       # Show the slide for the upcoming ball while we wait for it to settle into the device
       self.machine.events.post("lockhandler_{}_ball_will_lock".format(fmball),
-                               total_balls_locked=self._logicallockdevice.locked_balls+1,
+                               total_balls_locked=future_locked_balls,
                                fmball=fmball)
 
       # If we're about to start a multiball, don't offer missionselect
-      if self._logicallockdevice.locked_balls == 2:
+      # TBD: This was set == 2, but player_fmball_lock_locked_balls incremented before lockhandler_ball_entered
+      #      Is there a race condition? Or can we guarantee that the locked_balls count will increment first?
+      if future_locked_balls == 3:
+        self.log.debug("   -- Future locked balls is {}, skipping missionselect".format(future_locked_balls))
         return
+      self.log.debug("    -- Future locked balls is {}, going to allow missionselect".format(future_locked_balls))
 
     # HOLD:
     # If no mission currently running (i.e. field mode is active) and a mission is available
