@@ -19,8 +19,10 @@ displays:
     height: 480
   lcd_left:
     default: true
-    width: 758
-    height: 468
+    width: 95
+    height: 60
+    round_anchor_x: right
+    round_anchor_y: top
   lcd_right:
     width: 484
     height: 468
@@ -35,13 +37,22 @@ slides:
     widgets:
       - type: display
         source_display: lcd_left
-        width: 758
-        height: 468
+        width: 760
+        height: 480
         anchor_y: bottom
         anchor_x: left
         x: 8
         y: 6
         z: 1
+        effects:
+          - type: pixelate
+            pixel_size: 8
+          - type: color_dmd
+            dots_x: 95
+            dots_y: 60
+            dot_size: 0.7
+            background_color: 000000
+            blur: 0.0
       - type: display
         source_display: lcd_right
         width: 484
@@ -54,5 +65,3 @@ slides:
       - type: image
         image: dual_lcd_mask_shadow
         z: 4
-
-

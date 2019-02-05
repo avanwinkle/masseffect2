@@ -109,56 +109,67 @@ widget_styles:
   # TEXT FORMATS
   #----------------------------
   suicide_header:
-    font_name: me123
-    font_size: 80
+    font_name: Quadrit-10
+    font_size: 20
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 110
   header_lg_lowz:
-    font_name: me123
-    font_size: 72
-    adjust_bottom: 14
+    font_name: Quadrit-10
+    font_size: 20
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 10
   header_lg:
-    font_name: me123
-    font_size: 72
-    adjust_bottom: 14
+    font_name: Quadrit-10
+    font_size: 20
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 110
   header_md:
-    font_name: me123
-    font_size: 56
-    adjust_bottom: 0
+    font_name: Quadrit-10
+    font_size: 10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 110
   header_sm:
-    font_name: me123
-    font_size: 36
+    font_name: Quadrit-10
+    font_size: 10
+    line_height: 0.75
     adjust_bottom: 6
+    adjust_top: 1
     z: 110
   header_xs:
-    font_name: me123
-    font_size: 28
-    adjust_bottom: 2
+    font_name: Quadrit-10
+    font_size: 10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
     z: 110
   header_popup: # Same as header_sm but with -50 adjust
-    font_name: me123
-    font_size: 36
-    adjust_bottom: 56
+    font_name: Quadrit-10
+    font_size: 10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
+    anchor_x: bottom
     z: 110
   body_lg:
-    font_name: jupiter
-    font_size: 96
-    adjust_bottom: 28
+    font_name: pixelmix-8
+    font_size: 8
     z: 110
   body_md:
-    font_name: jupiter
-    font_size: 72
+    font_name: pixelmix-8
+    font_size: 8
     line_height: 0.85
-    adjust_top: 36
-    adjust_bottom: 20
     z: 110
   body_sm:
-    font_name: jupiter
-    font_size: 56
-    adjust_top: 20
-    adjust_bottom: 12
+    font_name: pixelmix-8
+    font_size: 8
     line_height: 0.9
     z: 110
   instructions_md:
@@ -173,7 +184,6 @@ widget_styles:
   timer_primary:
     font_name: unispace_rg
     font_size: 44
-    adjust_bottom: 0
     z: 110
   timer_secondary:
     font_name: unispace_bd_it
