@@ -693,7 +693,7 @@ track_player:
     music:
       action: stop_all_sounds
       fade: 500ms
-    field_music:
+    field_music_track:
       action: stop_all_sounds
       fade: 500ms
   # In case a mode has audio that wants to queue-block on ball_ending

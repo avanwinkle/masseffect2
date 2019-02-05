@@ -261,10 +261,20 @@ sound_player:
   play_normandy_tension: normandyattack_music
   play_horizon_tension: horizon_tension_music
   play_edi: edi_propulsion_disabled_virus_detected
-  ball_save_normandyattack_openingsave_saving_ball: edi_ballsave
-  ball_save_normandyattack_save_saving_ball: edi_ballsave
+  ball_save_normandyattack_openingsave_saving_ball:
+    edi_ballsave:
+      track: voice
+      events_when_played: play_normandy_tension
+      events_when_stopped: normandyattack_saveball
+  ball_save_normandyattack_save_saving_ball:
+    edi_ballsave:
+      events_when_stopped: normandyattack_saveball
   # For the opening intro, play a sound between the trough eject and the plunge
-  normandy_plunge_hit: edi_emergency_floor_lighting
+  normandy_plunge_hit:
+    edi_emergency_floor_lighting:
+      events_when_stopped:
+        - normandyattack_begin
+        - normandyattack_launchball
   logicblock_normandyattack_counter_hit: normandy_advance
   normandy_shots_off_hit: collector_hit
   play_shit: joker_shit
@@ -323,13 +333,10 @@ sounds:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
     track: voice
     volume: 1
-    events_when_played: play_normandy_tension
-    events_when_stopped: normandyattack_saveball
   edi_emergency_floor_lighting:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
     track: voice
     volume: 1
-    events_when_stopped: normandyattack_begin, normandyattack_launchball
   edi_i_have_control:
     file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg
     track: voice
@@ -354,15 +361,12 @@ sounds:
   edi_hostiles_approaching:
     file: en_us_hench_ai_norcr3_ai_level1_a_00211037_m.ogg
     track: voice
-    events_when_stopped: normandyattack_saveball
   edi_hostiles_closing_in:
     file: en_us_hench_ai_norcr3_ai_level2_a_00314751_m.ogg
     track: voice
-    events_when_stopped: normandyattack_saveball
   edi_hostiles_returning:
     file: en_us_hench_ai_norcr3_ai_level3_a_00314752_m.ogg
     track: voice
-    events_when_stopped: normandyattack_saveball
   edi_finished:
     file: en_us_hench_ai_norcr3_escape_c_00193467_m.ogg
     track: voice
