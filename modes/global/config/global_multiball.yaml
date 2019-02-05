@@ -18,8 +18,8 @@ event_player:
   fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
-  # If overlord has not been played, a single hit will light. (Arrival always takes both)
-  # We know a mode has been played if it is "stopped" rather than "enabled"
+    # If overlord has not been played, a single hit will light. (Arrival always takes both)
+    # We know a mode has been played if it is "stopped" rather than "enabled"
     - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled" and not device.multiball_locks.fmball_lock.enabled}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{not device.multiball_locks.fmball_lock.enabled}:
@@ -29,8 +29,8 @@ event_player:
   mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
   # ... or if ball 2 is locked during a mission
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
-  # about_to_finish events not working? Do it manually!
-  multiball_lock_fmball_lock_full:
+  # Wait for the queued slide to play
+  play_queued_slide_fmball_full_slide:
     # TODO: Use a queue slide to trigger the start of the multiballs
     - start_mode_overlord{device.achievements.arrival.state=="disabled"}
     - start_mode_arrival{device.achievements.arrival.state!="disabled"}
@@ -90,6 +90,16 @@ event_player:
       mball_name: arrival
       description: Project Activated
       ball: 3
+  multiball_lock_fmball_lock_full{device.achievements.arrival.state=="disabled"}:
+    queue_slide:
+      slide: fmball_full_slide
+      portrait: overlord
+      mball_name: overlord
+  multiball_lock_fmball_lock_full{device.achievements.arrival.state!="disabled"}:
+    queue_slide:
+      slide: fmball_full_slide
+      portrait: arrival
+      mball_name: arrival
 
 shot_groups:
   fmball_lightshot:
@@ -245,7 +255,7 @@ sound_player:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-# Sound player doesn't accept conditions in sound names, so conditional events only
+  # Sound player doesn't accept conditions in sound names, so conditional events only
   play_queued_slide_fmball_ball_locked_slide.4{ball==1 and mball_name=="arrival"}:
     arr_ken_shepards_escaped:
       action: play
