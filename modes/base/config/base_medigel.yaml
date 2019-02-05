@@ -3,6 +3,13 @@
 event_player:
   medigel_shot_hit:
     - do_medigel_save
+  # Disable medigel during story wizard modes because they have many saves. Completing
+  # them will levelup and restore medigel anyway. Suicide also manages its
+  # own ball saves, so disable for the entire suicide mission
+  mode_collectorship_base_started: cancel_medigel
+  mode_normandyattack_started: cancel_medigel
+  # mode_derelictreaper_started # Derelict Reaper has multiball but no save, rely on only_last_ball
+  mode_suicide_base_started: cancel_medigel
 
 shots:
   # This shot lights when medigel is available
@@ -15,19 +22,13 @@ shots:
       - ball_save_recruitsave_disabled{current_player.medigel>0}
       - ball_save_default_disabled{current_player.medigel>0}
       - ball_save_sbchase_save_disabled{current_player.medigel>0}
-    # Disable medigel during story wizard modes because they have many saves. Completing
-    # them will levelup and restore medigel anyway. Suicide also manages its
-    # own ball saves, so disable for the entire suicide mission
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
       - ball_save_recruitsave_enabled
       - ball_save_default_enabled
       - ball_save_sbchase_save_enabled
       - ball_will_end
-      - mode_collectorship_base_started
-      # - mode_derelictreaper_started # Derelict Reaper has multiball but no save, rely on only_last_ball
-      - mode_normandyattack_started
-      - mode_suicide_base_started
+      - cancel_medigel
     tags: envshot_outlane
 
 ball_saves:
@@ -56,6 +57,9 @@ show_player:
     medigel_show:
       action: stop
   ball_will_end:
+    medigel_show:
+      action: stop
+  cancel_medigel:
     medigel_show:
       action: stop
 
@@ -170,4 +174,3 @@ sounds:
       attack: 10ms
       release: 10ms
       release_point: 0
-
