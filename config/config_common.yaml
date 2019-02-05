@@ -299,6 +299,10 @@ sound_system:
     levelup:
       simultaneous_sounds: 1
       volume: 0.5
+    field_music_track:
+      simultaneous_sounds: 1
+      volume: 0.7
+      type: playlist
 
 assets:
   sounds:

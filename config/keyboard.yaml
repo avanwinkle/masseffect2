@@ -57,8 +57,6 @@ keyboard:
     event: ball_drain
     params:
       balls: 1
-  b:
-    event: start_mode_overlord
   d:
     switch: s_top_lane_left
   h:

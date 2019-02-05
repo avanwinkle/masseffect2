@@ -44,22 +44,19 @@ config:
   - field_shadowbroker.yaml
   - field_shopping.yaml
 
-sound_player:
+playlists:
+  field_music:
+    repeat: true
+    sounds:
+      - music_normandy_walkin_intro
+      - music_galaxy_map
+
+playlist_player:
   mode_field_started:
-    music_normandy_walkin_intro:
+    field_music_track:
       action: play
-      loops: 0
-      fade_out: 1s
-      mode_end_action: stop
-      events_when_stopped: music_intro_stopped
-      priority: 1
-  play_galaxy_map:
-    music_galaxy_map:
-      action: play
-      loops: -1 # TODO: integrate with scanning loop
-      fade_out: 1s
-      mode_end_action: stop
-      priority: 1
+      playlist: field_music
+      crossfade_time: 1s
 
 sounds:
   music_normandy_walkin_intro:
