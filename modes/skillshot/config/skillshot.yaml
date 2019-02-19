@@ -1,0 +1,114 @@
+#config_version=5
+
+mode:
+  start_events: start_mode_skillshot
+  stop_events: stop_mode_skillshot
+  priority: 7000
+
+event_player:
+  timer_skillshot_timer_complete: stop_mode_skillshot
+  skillshot_hit: stop_mode_skillshot
+  # If a mission is resumed, no skill shot
+  mode_type_mission_started: stop_mode_skillshot
+
+variable_player:
+  mode_skillshot_started:
+    temp_build_value:
+      action: set
+      int: machine.base_points / 10 * current_player.ball
+  s_flipper_left_active:
+    temp_build_value:
+      action: set
+      int: machine.base_points / 20 * current_player.ball
+  s_flipper_right_active:
+    temp_build_value:
+      action: set
+      int: machine.base_points / 20 * current_player.ball
+  skillshot_lit_hit:
+    score: current_player.temp_build_value
+
+random_event_player:
+  mode_skillshot_started:
+    events:
+      - enable_skillshot_left
+      - enable_skillshot_right
+
+shot_groups:
+  skillshot:
+    shots: skillshot_left, skillshot_right
+    reset_events: mode_skillshot_will_stop
+    rotate_events:
+      - s_flipper_left_active{device.timers.skillshot_timer.running==False}
+      - s_flipper_right_active{device.timers.skillshot_timer.running==False}
+
+shots:
+  skillshot_left:
+    switch: s_top_lane_left
+    advance_events: enable_skillshot_left
+    profile: hit_to_flash_fast_profile_noadvance
+    show_tokens:
+      leds: l_left_top_lane
+      color: FFFFFF
+  skillshot_right:
+    switch: s_top_lane_right
+    advance_events: enable_skillshot_right
+    profile: hit_to_flash_fast_profile_noadvance
+    show_tokens:
+      leds: l_right_top_lane
+      color: FFFFFF
+
+# Slides and sound_player are in base.yaml to persist after this mode stops
+
+sound_pools:
+  skillshot_sound:
+    track: voice
+    max_queue_time: 1s
+    type: random_force_all
+    volume: 1
+    sounds:
+      - squadmate_garrus_nice_shot{current_player.status_garrus==4}
+      - squadmate_grunt_nice_shot{current_player.status_grunt==4}
+      - squadmate_jack_nice_shot{current_player.status_jack==4}
+      - squadmate_jacob_nice_shot
+      - squadmate_kasumi_nice_shot{current_player.status_kasumi==4}
+      - squadmate_miranda_nice_shot
+      - squadmate_mordin_nice_shot{current_player.status_mordin==4}
+      - squadmate_thane_nice_shot{current_player.status_thane==4}
+
+sounds:
+  squadmate_garrus_nice_shot:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.ogg
+    track: voice
+  squadmate_grunt_nice_shot:
+    track: voice
+    file: en_us_hench_grunt_ss_global_hench_grunt_00316600_m.ogg
+  squadmate_jack_nice_shot:
+      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.ogg
+      track: voice
+  squadmate_jacob_nice_shot:
+    track: voice
+    file: en_us_hench_leading_ss_global_hench_leading_00316637_m.ogg
+  squadmate_kasumi_nice_shot:
+    track: voice
+    file: DLC_HEN_MT_Int.117.ogg
+  squadmate_miranda_nice_shot:
+    track: voice
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310127_m.ogg
+  squadmate_mordin_nice_shot:
+    track: voice
+    file: en_us_hench_professor_ss_global_hench_professor_00316910_m.ogg
+  squadmate_thane_nice_shot:
+    track: voice
+    file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.ogg
+
+timers:
+  skillshot_timer:
+    start_value: 5
+    end_value: 0
+    direction: down
+    control_events:
+      - event: s_plunger_lane_inactive
+        action: restart
+      - event: skillshot_hit
+        action: stop
+

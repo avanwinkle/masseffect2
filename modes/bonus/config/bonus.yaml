@@ -5,21 +5,21 @@ mode_settings:
   bonus_entries:
     - event: bonus_level
       # We track the level that's loaded in the career, so only award bonus to levels gained
-      score: 600 * (current_player.level - current_player.saved_level)
+      score: (machine.base_points / 200) * (current_player.level - current_player.saved_level)
     - event: bonus_squadmates
-      score: 1200 * (current_player.recruited_squadmates_count)
+      score: (machine.base_points / 100) * (current_player.recruited_squadmates_count)
     - event: bonus_credits
-      score: (current_player.credits * 0.25)
+      score: (current_player.credits * machine.base_points / 1000)
     - event: bonus_minerals
-      score: (current_player.planets * current_player.mineral_total) / 10
+      score: (current_player.planets * current_player.mineral_total) / (machine.base_points)
     - event: bonus_assignments
-      score: 300
+      score: (machine.base_points / 100 * 3)
       player_score_entry: assigments_completed
     - event: bonus_intel
-      score: 400
+      score: (machine.base_points / 100 * 5)
       player_score_entry: intel
     - event: bonus_upgrades
-      score: 1500
+      score: (machine.base_points / 100 * 15)
       player_score_entry: research_completed
 
 light_player:
@@ -43,70 +43,71 @@ slides:
   end_slide:
     widgets:
       - type: text
-        text: Critical Mission Failure
+        text: "Critical\nMission\nFailure"
+        style: header_lg
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_squadmates_slide:
     - type: text
       text: "(player|recruited_squadmates_count) New Squadmates"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_credits_slide:
     - type: text
       text: "Credits Bonus"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_minerals_slide:
     - type: text
       text: "Minerals Collected"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_assignments_slide:
     - type: text
       text: "N7 Bonus"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_intel_slide:
     - type: text
       text: "Intel Gathered"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_upgrades_slide:
     - type: text
       text: "Upgrades Researched"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_multiplier_slide:
     - type: text
       text: "Reputation Multiplier"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: "(multiplier)X"
-      style: bonus_score_style
+      style: header_md, row_main, num
   bonus_total_slide:
     - type: text
       text: "Total Bonus"
-      style: bonus_title_style
+      style: header_sm, row_sub
     - type: text
       text: (score)
-      style: bonus_score_style
+      style: header_md, row_main, num
 
 sound_player:
   mode_bonus_started:

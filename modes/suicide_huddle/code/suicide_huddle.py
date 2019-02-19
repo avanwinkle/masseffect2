@@ -1,4 +1,4 @@
-from scriptlets.me_squadmates import SquadmateStatus
+from scriptlets.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
 class SuicideHuddle(Carousel):

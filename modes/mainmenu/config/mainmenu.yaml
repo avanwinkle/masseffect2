@@ -8,97 +8,111 @@ mode:
   console_log: full
 
 mode_settings:
-  select_item_events: s_action_button_active
-  next_item_events: s_flipper_right_active
-  previous_item_events: s_flipper_left_active
+  select_item_events: s_action_button_active, flipper_cancel
+  next_item_events: s_flipper_right_inactive{machine.flipper_cancelling==0}
+  previous_item_events: s_flipper_left_inactive{machine.flipper_cancelling==0}
   selectable_items: casual
 
 event_player:
   career_loaded: stop_mode_mainmenu
 
+variable_player:
+  mode_mainmenu_started:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
+  flipper_cancel:
+    flipper_cancelling:
+      int: 1
+      action: set_machine
+  both_flippers_inactive:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
+
 queue_relay_player:
   # For the first ball, allow the player to pick a profile
-  player_turn_starting{player.ball==0}:
+  player_turn_starting{current_player.ball==0}:
     post: show_mainmenu
     wait_for: mainmenu_item_selected
 
 slide_player:
   # Highlighting options in the main menu
-  mainmenu_new_game_highlighted: new_game_slide
-  mainmenu_resume_game_highlighted: resume_game_slide
-  mainmenu_change_career_highlighted: change_career_slide
-  mainmenu_casual_highlighted: casual_slide
+  mainmenu_new_game_highlighted:
+    new_game_slide:
+      target: lcd_left
+  mainmenu_resume_game_highlighted:
+    resume_game_slide:
+      target: lcd_left
+  mainmenu_change_career_highlighted:
+    change_career_slide{career_name!=" "}:
+      target: lcd_left
+    select_career_slide{career_name==" "}:
+      target: lcd_left
+  mainmenu_casual_highlighted:
+    casual_slide:
+      target: lcd_left
   # Selecting and moving between menus
-  mainmenu_change_career_selected: career_select_slide
-  # mainmenu_career_selected: resume_game_slide
+  highlight_career:
+    career_select_slide:
+      target: lcd_left
 
 slides:
   change_career_slide:
     widgets:
       - type: text
-        text: Switch Career
-        style: savegame_title
+        text: Switch Profile
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, row_top, col_left_anchor
+      - widget: background_console
+  select_career_slide:
+    widgets:
+      - type: text
+        text: Select a Profile
+        style: header_md, row_main, col_left_anchor
+      - widget: background_console
   resume_game_slide:
     widgets:
       - type: text
         text: Continue Game
-        style: savegame_title
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, row_top, col_left_anchor
+      - widget: background_console
   new_game_slide:
     widgets:
       - type: text
-        text: Start New Game
-        style: savegame_title
+        text: New Game
+        style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: savegame_playername
+        style: body_sm, row_top, col_left_anchor
+      - widget: background_console
   career_select_slide:
     widgets:
       - type: text
-        text: "Load Career:"
-        style: small
-        anchor_y: top
-        anchor_x: left
-        y: top-2
-        x: 4
+        text: "Load Profile:"
+        style: body_sm, row_top, col_left_anchor
+      - type: text
+        text: (career_name)
+        style: body_lg, row_main, col_left_anchor
+      - type: text
+        text: Level (level)
+        style: body_sm, row_sub_under, col_left_anchor
+      - type: text
+        text: "Started: (career_started)\nLast played: (last_played)"
+        halign: right
+        style: body_sm, row_sub_under, col_right_anchor
+      - widget: background_console
   casual_slide:
     widgets:
       - type: text
         text: Casual Play
-        style: savegame_title
-
-widget_player:
-  highlight_career:
-    highlighted_career_widget:
-      slide: career_select_slide
-      action: update
-
-widgets:
-  highlighted_career_widget:
-    - type: text
-      text: (career_name)
-      style: savegame_title
-      anchor_x: right
-      x: right-2
-    - type: text
-      text: LVL (level)
-      style: small
-      anchor_y: bottom
-      anchor_x: right
-      y: 17
-      x: right-4
-    - type: text
-      text: (last_played)
-      style: small
-      anchor_y: bottom
-      anchor_x: right
-      y: 8
-      x: right-4
+        style: header_md, row_main, col_left_anchor
+      - widget: background_console
 
 show_player:
   show_mainmenu: mainmenu_show

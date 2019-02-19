@@ -18,9 +18,9 @@ event_player:
   fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
-  # If overlord has not been played, a single hit will light. (Arrival always takes both)
-  # We know a mode has been played if it is "stopped" rather than "enabled"
-    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and not device.multiball_locks.fmball_lock.enabled}
+    # If overlord has not been played, a single hit will light. (Arrival always takes both)
+    # We know a mode has been played if it is "stopped" rather than "enabled"
+    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled" and not device.multiball_locks.fmball_lock.enabled}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
@@ -29,22 +29,77 @@ event_player:
   mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
   # ... or if ball 2 is locked during a mission
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
-  # Only play the "lock is lit" sound if mode.field is active
-  enable_fmball_lock{mode.field.active}:
-    - play_overlord_lock_sound{device.achievements.arrival.state=="disabled"}
-    - play_arrival_lock_sound{device.achievements.arrival.state!="disabled"}
-  play_overlord_lock_sound:
-    - play_overlord_station_sound_1{device.ball_devices.bd_lock.balls==0}|1.5s
-    - play_overlord_station_sound_2{device.ball_devices.bd_lock.balls==1}|1.5s
-    - play_overlord_station_sound_3{device.ball_devices.bd_lock.balls==2}|1.5s
-  play_arrival_lock_sound:
-    - play_arrival_station_sound_1{device.ball_devices.bd_lock.balls==0}
-    - play_arrival_station_sound_2{device.ball_devices.bd_lock.balls==1}
-    - play_arrival_station_sound_3{device.ball_devices.bd_lock.balls==2}
-  # about_to_finish events not working? Do it manually!
-  multiball_lock_fmball_lock_full:
-    - start_mode_overlord{device.achievements.arrival.state=="disabled"}|7s
-    - start_mode_arrival{device.achievements.arrival.state!="disabled"}|7s
+  # Wait for the queued slide to play
+  play_queued_slide_fmball_full_slide:
+    # TODO: Use a queue slide to trigger the start of the multiballs
+    - start_mode_overlord{device.achievements.arrival.state=="disabled"}
+    - start_mode_arrival{device.achievements.arrival.state!="disabled"}
+
+  # QUEUE SLIDES
+  enable_fmball_lock{mode.field.active and device.achievements.arrival.state=="disabled"}:
+    queue_slide:
+      slide: fmball_lock_lit_slide
+      portrait: overlord_light
+      mball_name: overlord
+      ball:
+        value: device.ball_devices.bd_lock.balls
+        type: int
+  enable_fmball_lock{mode.field.active and device.achievements.arrival.state!="disabled"}:
+    queue_slide:
+      slide: fmball_lock_lit_slide
+      portrait: arrival_light
+      mball_name: arrival
+      ball:
+        value: device.ball_devices.bd_lock.balls
+        type: int
+  lockhandler_overlord_ball_will_lock:
+    queue_slide{total_balls_locked==1}:
+      slide: fmball_ball_locked_slide
+      portrait: overlord_light
+      mball_name: overlord
+      description: Vulcan Station Cleared
+      ball: 1
+    queue_slide{total_balls_locked==2}:
+      slide: fmball_ball_locked_slide
+      portrait: overlord_light
+      mball_name: overlord
+      description: Prometheus Station Cleared
+      ball: 2
+    queue_slide{total_balls_locked==3}:
+      slide: fmball_ball_locked_slide
+      portrait: overlord_light
+      mball_name: overlord
+      description: Atlas Station Cleared
+      ball: 3
+  lockhandler_arrival_ball_will_lock:
+    queue_slide{total_balls_locked==1}:
+      slide: fmball_ball_locked_slide
+      portrait: arrival_light
+      mball_name: arrival
+      description: Med Bay Escaped
+      ball: 1
+    queue_slide{total_balls_locked==2}:
+      slide: fmball_ball_locked_slide
+      portrait: arrival_light
+      mball_name: arrival
+      description: Reactor Online
+      ball: 2
+    queue_slide{total_balls_locked==3}:
+      slide: fmball_ball_locked_slide
+      portrait: arrival_light
+      mball_name: arrival
+      description: Project Activated
+      ball: 3
+  multiball_lock_fmball_lock_full{device.achievements.arrival.state=="disabled"}:
+    queue_slide:
+      slide: fmball_full_slide
+      portrait: overlord
+      mball_name: overlord
+  multiball_lock_fmball_lock_full{device.achievements.arrival.state!="disabled"}:
+    queue_slide:
+      slide: fmball_full_slide
+      portrait: arrival
+      mball_name: arrival
 
 shot_groups:
   fmball_lightshot:
@@ -117,147 +172,35 @@ shows:
     - lights:
         l_lock_lit: black
 
-slide_player:
-  #### OVERLORD ####
-  play_overlord_lock_sound:
-    overlord_lock_is_lit_slide:
-      expire: 2s
-      priority: 1200 # Minerals run at priority ~900
-  lockhandler_overlord_ball_will_lock.1:
-    overlord_ball_locked_slide:
-      expire: 3s
-      priority: 1600 # Enough to beat recruit timer?:
-  lockhandler_overlord_ball_will_lock{total_balls_locked==3}:
-    overlord_full_slide:
-      expire: 6s
-      priority: 1599 # Just below the "ball 3 locked" slide but 3s longer
-  #### ARRIVAL ####
-  play_arrival_lock_sound:
-    arrival_lock_is_lit_slide:
-      expire: 2s
-      priority: 1200 # Minerals run at priority ~900
-  lockhandler_arrival_ball_will_lock.1:
-    arrival_ball_locked_slide:
-      expire: 4s
-      priority: 1600
-  lockhandler_arrival_ball_will_lock{total_balls_locked==3}:
-    arrival_full_slide:
-      expire: 8s
-      priority: 1599 # Just below the "ball 3 locked" slide but 3s longer
-
 slides:
-  overlord_lock_is_lit_slide:
-    widgets:
-      - type: text
-        text: OVERLORD
-        style: dmd_small
-        anchor_y: top
-        y: top-2
-        z: 21
-      - type: text
-        text: Lock is lit
-        casing: upper
-        style: medium
-        z: 21
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 20
-  overlord_ball_locked_slide:
-    widgets:
-      - type: text
-        text: OVERLORD
-        style: dmd_small
-        anchor_y: top
-        y: top-2
-        z: 2
-      - type: text
-        text: Ball (total_balls_locked) Locked!
-        style: dmd_small
-        anchor_y: bottom
-        y: 2
-        z: 2
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
-  overlord_full_slide:
-    widgets:
-      - type: text
-        text: OVERLORD
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 2
-      - type: text
-        text: MULTIBALL
-        style: dmd_big
-        anchor_y: top
-        y: middle-2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
-  arrival_lock_is_lit_slide:
-    widgets:
-      - type: text
-        text: ARRIVAL
-        style: dmd_small
-        anchor_y: top
-        y: top-2
-        z: 21
-      - type: text
-        text: Lock is lit
-        casing: upper
-        style: medium
-        z: 21
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 20
-  arrival_ball_locked_slide:
-    widgets:
-      - type: text
-        text: ARRIVAL
-        style: dmd_small
-        anchor_y: top
-        y: top-2
-        z: 2
-      - type: text
-        text: Ball (total_balls_locked) Locked!
-        style: dmd_small
-        anchor_y: bottom
-        y: 2
-        z: 2
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
-  arrival_full_slide:
-    widgets:
-      - type: text
-        text: ARRIVAL
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 2
-      - type: text
-        text: MULTIBALL
-        style: dmd_big
-        anchor_y: top
-        y: middle-2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
+  fmball_lock_lit_slide:
+    - type: text
+      text: (mball_name)
+      style: header_xs, row_top, col_left_anchor, mission_title
+      casing: title
+    - type: text
+      text: Lock is Lit
+      style: header_md, row_main, col_left_anchor
+    - widget: background_console
+  fmball_ball_locked_slide:
+    - type: text
+      text: (mball_name)
+      style: header_xs, row_top, col_left_anchor, mission_title
+      casing: title
+      opacity: 0.5
+    - type: text
+      text: Ball (ball) Locked!
+      style: header_md, row_main, col_left_anchor
+    - type: text
+      text: (description)
+      style: header_sm, row_sub, col_left_anchor
+    - widget: background_console
+  fmball_full_slide:
+    - type: text
+      text: "(mball_name)\nMULTIBALL"
+      style: header_lg, row_main
+      casing: upper
+    - widget: background_console
 
 sound_player:
   #### OVERLORD ####
@@ -265,71 +208,65 @@ sound_player:
     geth_hit_sfx:
       action: play
       max_queue_time: 200ms
-  play_overlord_station_sound_1:
+  play_queued_slide_fmball_lock_lit_slide.1{ball==0 and mball_name=="overlord"}:
     archer_need_to_go_to_both:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_overlord_station_sound_2:
+  play_queued_slide_fmball_lock_lit_slide.2{ball==1 and mball_name=="overlord"}:
     archer_still_need_to_go_to_prometheus:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_overlord_station_sound_3:
+  play_queued_slide_fmball_lock_lit_slide.3{ball==2 and mball_name=="overlord"}:
     archer_lockdown_cancelled:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
   # Sound player doesn't accept conditions in sound names, so conditional events only
-  lockhandler_overlord_ball_will_lock.1{total_balls_locked==1}:
+  play_queued_slide_fmball_ball_locked_slide.1{ball==1 and mball_name=="overlord"}:
     vulcan_success:
       action: play
       max_queue_time: 2s
-  lockhandler_overlord_ball_will_lock.2{total_balls_locked==2}:
+  play_queued_slide_fmball_ball_locked_slide.2{ball==2 and mball_name=="overlord"}:
     archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 2s
-  lockhandler_overlord_ball_will_lock.3{total_balls_locked==3}:
+  play_queued_slide_fmball_ball_locked_slide.3{ball==3 and mball_name=="overlord"}:
     archer_start:
       action: play
-      # No max queue time since we _have_ to play this track to start the multiball
-      about_to_finish_time: 500ms
-      events_when_about_to_finish: start_mode_overlord
   #### ARRIVAL ####
   play_arrival_hit_sound:
     batarian_hit_sfx:
       action: play
       max_queue_time: 200ms
-  play_arrival_station_sound_1:
+  play_queued_slide_fmball_lock_lit_slide.4{ball==0 and mball_name=="arrival"}:
     arr_ken_keep_shepard_contained:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_arrival_station_sound_2:
+  play_queued_slide_fmball_lock_lit_slide.5{ball==1 and mball_name=="arrival"}:
     arr_annc_cooling_rod_a_inserted:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  play_arrival_station_sound_3:
+  play_queued_slide_fmball_lock_lit_slide.6{ball==2 and mball_name=="arrival"}:
     arr_shep_i_wanna_activate_the_project:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-# Sound player doesn't accept conditions in sound names, so conditional events only
-  lockhandler_arrival_ball_will_lock.1{total_balls_locked==1}:
+  # Sound player doesn't accept conditions in sound names, so conditional events only
+  play_queued_slide_fmball_ball_locked_slide.4{ball==1 and mball_name=="arrival"}:
     arr_ken_shepards_escaped:
       action: play
       max_queue_time: 2s
-  lockhandler_arrival_ball_will_lock.2{total_balls_locked==2}:
+  play_queued_slide_fmball_ball_locked_slide.5{ball==2 and mball_name=="arrival"}:
     arr_annc_cooling_rod_b_inserted:
       action: play
       max_queue_time: 2s
-  lockhandler_arrival_ball_will_lock.3{total_balls_locked==3}:
+  play_queued_slide_fmball_ball_locked_slide.6{ball==3 and mball_name=="arrival"}:
     arr_annc_project_activated_collision_imminent:
       action: play
-      # No max queue time since we _have_ to play this track to start the multiball
-      about_to_finish_time: 300ms
-      events_when_about_to_finish: why_not_about_to_finish_arrival
 
 sound_pools:
   geth_hit_sfx:
@@ -461,78 +398,16 @@ sounds:
     file: DLC_EXP_Part02_Int.676.ogg
     track: voice
 
-widget_player:
-  lockhandler_overlord_ball_will_lock.1{total_balls_locked==1}:
-    overlord_widget_ball1:
-      slide: overlord_ball_locked_slide
-    overlord_widget_ball2:
-      action: remove
-    overlord_widget_ball3:
-      action: remove
-  lockhandler_overlord_ball_will_lock.2{total_balls_locked==2}:
-    overlord_widget_ball1:
-      action: remove
-    overlord_widget_ball2:
-      slide: overlord_ball_locked_slide
-    overlord_widget_ball3:
-      action: remove
-  lockhandler_overlord_ball_will_lock.3{total_balls_locked==3}:
-    overlord_widget_ball1:
-      action: remove
-    overlord_widget_ball2:
-      action: remove
-    overlord_widget_ball3:
-      slide: overlord_ball_locked_slide
-  lockhandler_arrival_ball_will_lock.1{total_balls_locked==1}:
-    arrival_widget_ball1:
-      slide: arrival_ball_locked_slide
-    arrival_widget_ball2:
-      action: remove
-    arrival_widget_ball3:
-      action: remove
-  lockhandler_arrival_ball_will_lock.2{total_balls_locked==2}:
-    arrival_widget_ball1:
-      action: remove
-    arrival_widget_ball2:
-      slide: arrival_ball_locked_slide
-    arrival_widget_ball3:
-      action: remove
-  lockhandler_arrival_ball_will_lock.3{total_balls_locked==3}:
-    arrival_widget_ball1:
-      action: remove
-    arrival_widget_ball2:
-      action: remove
-    arrival_widget_ball3:
-      slide: arrival_ball_locked_slide
-
 widgets:
-  overlord_widget_ball1:
-    - type: text
-      text: Vulcan Station
-      style: dmd_big
-      z: 2
-  overlord_widget_ball2:
-    - type: text
-      text: Prometheus Station
-      style: dmd_big
-      z: 2
-  overlord_widget_ball3:
-    - type: text
-      text: Atlas Station
-      style: dmd_big
-      z: 2
-  arrival_widget_ball1:
-    - type: text
-      text: Med Bay Escaped
-      style: dmd_big
-      z: 2
-  arrival_widget_ball2:
-    - type: text
-      text: Reactor Online
-      style: dmd_big
-      z: 2
-  arrival_widget_ball3:
-    - type: text
-      text: Project Activated
-      style: dmd_big
-      z: 2
+  portrait_overlord_light:
+    - type: image
+      image: portrait_overlord_light
+  portrait_overlord:
+    - type: image
+      image: overlord
+  portrait_arrival_light:
+    - type: image
+      image: portrait_arrival_light
+  portrait_arrival:
+    - type: image
+      image: portrait_arrival

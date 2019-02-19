@@ -16,6 +16,7 @@
 # once the multiballs drain this mode ends and cannot be restarted.
 #####
 
+
 mode:
   start_events: start_mode_collectorship_base
   stop_events: stop_mode_collectorship_base, stop_wizards
@@ -38,16 +39,16 @@ event_player:
     - start_mode_collectorship_husk
   collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
-  collectorship_praetorian_complete{device.achievements.collectorship.state!="completed"}:
-    levelup:
-      mission_name: Praetorian Defeated
   # If the player drains to one ball AFTER defeating the praetorian, stop the mode
-  multiball_collectorship_multiball_ended{device.achievements.collectorship.state=="completed"}:
+  multiball_collectorship_multiball_ended.1{device.achievements.collectorship.state=="completed"}:
     - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
     - stop_mode_collectorship_praetorian
     - stop_mode_harbinger
+  multiball_collectorship_multiball_ended.2{device.achievements.collectorship.state=="completed"}:
+    levelup:
+      mission_name: Collector Ship Escaped
   # If the player hasn't defeated the praetorian, the mode continues until end of ball
   ball_will_end:
     - stop_mode_collectorship_base
@@ -75,8 +76,8 @@ slides:
   collectorship_started_slide:
     widgets:
       - type: text
-        text: Collector Ship
-        style: dmd_small
+        text: "Disabled\nCollector Ship"
+        style: header_md, row_main
 
 show_player:
   mode_collectorship_base_started:
@@ -251,5 +252,4 @@ sounds:
     max_queue_time: 1s
     track: sfx
     file: sfx_ss_husk_ss_husk_00300986_m.ogg
-
 

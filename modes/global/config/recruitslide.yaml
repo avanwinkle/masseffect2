@@ -1,169 +1,239 @@
 #config_version=5
 
-event_player:
-  slide_recruitslide_active:
-    # Prepopulate the slide when it comes in
-    timer_recruittimer_tick:
-      ticks_remaining: { value: device.timers.recruittimer.ticks }
+# event_player:
+#   slide_recruit_mission_slide_active:
+#     # Prepopulate the slide when it comes in
+#     timer_missiontimer_tick:
+#       ticks_remaining: { value: device.timers.missiontimer.ticks }
 
 #####
 # Use a single slide/widget for all the missions, just update the text
 #####
 variable_player:
-  mode_recruitgarrus_started:
+  start_mode_recruitgarrus:
     missionname:
       string: "Defend Archangel"
-  mode_recruitgrunt_started:
+      action: set
+    mission_instructions{not device.counters.doors_closed_counter.completed}:
+      string: "Close the shutters"
+      action: set
+    mission_instructions{device.counters.doors_closed_counter.completed}:
+      string: "Get upstairs!"
+      action: set
+  logicblock_doors_closed_counter_complete:
+    mission_instructions:
+      string: "Get upstairs!"
+      action: set
+  start_mode_recruitgrunt:
     missionname:
       string: "Defeat the Tank-Bred"
-  mode_recruitjack_started:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitjack:
     missionname:
       string: "Escape from Purgatory"
-  mode_recruitkasumi_started:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitkasumi:
     missionname:
       string: "Infiltrate the Vault"
-  mode_recruitlegion_started:
+      action: set
+    mission_instructions:
+      string: "Avoid the Alarms"
+      action: set
+  start_mode_recruitlegion:
     missionname:
       string: "Stop the Heretics"
-  mode_recruitmordin_started:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitmordin:
     missionname:
       string: "Cure the Plague"
-  mode_recruitsamara_started:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitsamara:
     missionname:
-      string: "Find Morinth"
-  mode_recruittali_started:
+      string: "Follow Morinth's Trail"
+      action: set
+    mission_instructions:
+      string: "Hit targets to light shots"
+      action: set
+  start_mode_recruittali:
     missionname:
       string: "Destroy the Colossus"
-  mode_recruitthane_started:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitthane:
     missionname:
       string: "Assault Dantius Towers"
-  mode_recruitzaeed_started.1{current_player.zaeed_path_renegade==-1}:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitzaeed.1{current_player.zaeed_path_renegade==-1}:
     missionname:
       string: "Storm the Refinery"
-  mode_recruitzaeed_started.2{current_player.zaeed_path_renegade==0}:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitzaeed.2{current_player.zaeed_path_renegade==0}:
     missionname:
       string: "Save the Workers"
-  mode_recruitzaeed_started.3{current_player.zaeed_path_renegade==1}:
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
+  start_mode_recruitzaeed.3{current_player.zaeed_path_renegade==1}:
     missionname:
       string: "Stop Vido's Escape"
+      action: set
+    mission_instructions:
+      string: " "
+      action: set
 
 slide_player:
-  recruit_advance:
-    recruiting_advance_slide_2{status==1}:
-      expire: 3s
-    recruiting_advance_slide_1{status==2}:
-      expire: 3s
-    recruiting_advance_slide_lit{status==3}:
-      expire: 4s
-  mode_type_mission_started:
-    recruitslide:
+  show_recruit_instructions:
+    recruit_mission_slide:
       action: play
-      priority: 100
+      priority: 2000
+    recruit_portrait_slide:
+      action: play
+      target: lcd_right
+    recruit_instructions_slide:
+      expire: 3s
+      priority: 2010
+  # This mode runs globally, so explicitly remove slides
   mode_type_mission_stopped:
-    recruitslide:
+    recruit_instructions_slide:
       action: remove
+    recruit_mission_slide:
+      action: remove
+    recruit_portrait_slide:
+      action: remove
+      target: lcd_right
 
 slides:
-  recruitslide: []
-  recruiting_advance_slide_2:
+  recruit_mission_slide:
     widgets:
       - type: text
-        text: Recruit (squadmate)
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        text: (score)
+        style: body_md, row_top, col_left_anchor, num
+        opacity: 0.5
+      - type: text
+        text: (missionname)
+        style: header_sm, row_main, col_left_anchor
+      - type: text
+        text: (mission_instructions)
+        style: body_sm, row_sub, col_left_anchor, lcd_only
+        animations:
+          show_slide: pulse_text_slow
+      - type: text
+        text: (base_missiontimer_tick)
+        style: timer_primary, row_gutter, col_right_indent
+      - widget: background_console
+  recruit_instructions_slide:
+    widgets:
+      - type: text
+        text: (instructions_main)
+        style: body_md, row_main, col_left_anchor
+      - type: text
+        text: (instructions_sub)
+        style: body_md, row_sub, col_left_anchor
+      - widget: background_console
+  recruit_advance_slide_1:
+    widgets:
+      - type: text
+        text: Recruit Your Squad
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
         casing: title
       - type: text
         text: 2 shots to unlock
         anchor_y: bottom
-        style: dmd_small
-        y: 3
-  recruiting_advance_slide_1:
+        style: body_md, row_sub, col_left_anchor
+      - widget: background_console
+  recruit_advance_slide_2:
     widgets:
       - type: text
-        text: Recruit (squadmate)
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        text: Recruit Your Squad
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
         casing: title
       - type: text
         text: 1 shot to unlock
-        style: dmd_small
-        anchor_y: bottom
-        y: 3
-  recruiting_advance_slide_lit:
+        style: body_md, row_sub, col_left_anchor
+      - widget: background_console
+  recruit_advance_slide_3:
     widgets:
       - type: text
-        text: (squadmate) Ready!
-        font_name: Quadrit-10
-        font_size: 10
-        anchor_y: bottom
-        y: bottom+45%
+        text: Mission Available
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
         casing: title
       - type: text
-        text: Left Ramp to Start Mission
-        style: dmd_small
-        anchor_y: bottom
-        y: 3
-
-widget_player:
-  mode_type_mission_started:
-    recruitwidget_name:
-      action: add
-      slide: recruitslide
-  # Adding players triggers their variables to be set, which can show an extra "0"
-  # on the base slide. Check player number to prevent this.
-  # TODO: Move all recruitslide logic out of global and into recruit missions?
-  player_temp_hurryup_value{player_num==current_player.number}:
-    recruitwidget_int:
-      action: update
-      slide: recruitslide
-  timer_recruittimer_started:
-    time_remaining_widget:
-      action: update
-      slide: recruitslide
-  timer_recruittimer_tick:
-    time_remaining_widget:
-      action: update
-      slide: recruitslide
+        text: Left Ramp to Start
+        style: body_md, row_sub, col_left_anchor
+      - widget: background_console
+  recruit_portrait_slide:
+    widgets:
+      - widget: portrait_recruit(squadmate)
 
 widgets:
-  recruitwidget_name:
-    - type: text
-      text: (missionname)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-4
-  recruitwidget_int:
-    - type: text
-      text: (player|temp_hurryup_value)
-      number_grouping: true
-      font_size: 10
-      font_name: Quadrit-10
-      anchor_x: left
-      anchor_y: bottom
-      x: 2
-      y: 0
-  time_remaining_widget:
-    - type: text
-      text: "(ticks_remaining)"
-      style: small_bot_right
+  portrait_recruitgarrus:
+    - type: image
+      image: portrait_recruitgarrus
+  portrait_recruitgrunt:
+    - type: image
+      image: portrait_recruitgrunt
+  portrait_recruitjack:
+    - type: image
+      image: portrait_recruitjack
+  portrait_recruitkasumi:
+    - type: image
+      image: portrait_recruitkasumi
+  portrait_recruitmordin:
+    - type: image
+      image: portrait_recruitmordin
+  portrait_recruitlegion:
+    - type: image
+      image: portrait_recruitlegion
+  portrait_recruitsamara:
+    - type: image
+      image: portrait_recruitsamara
+  portrait_recruittali:
+    - type: image
+      image: portrait_recruittali
+  portrait_recruitthane:
+    - type: image
+      image: portrait_recruitthane
+  portrait_recruitzaeed:
+    - type: image
+      image: portrait_recruitzaeed
+
+# Widgets that overlay DURING a mission
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
-      style: small_bot_right_secondrow
-  secondary_timer_widget:
-    - type: text
-      text: (ticks_remaining)
-      font_name: pixelmix-8
-      font_size: 8
-      anchor_x: right
-      anchor_y: bottom
-      x: right-4
-      y: 14
+      style: header_xs, row_gutter, col_left_center
+  # secondary_timer_widget:
+  #   - type: text
+  #     text: (ticks_remaining)
+  #     style: body_lg, row_bottom, col_right_anchor
 

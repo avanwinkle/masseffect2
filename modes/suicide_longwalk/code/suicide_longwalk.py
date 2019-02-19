@@ -1,7 +1,7 @@
 import logging
 import random
 from mpf.core.mode import Mode
-from scriptlets.me_squadmates import SquadmateStatus
+from scriptlets.squadmate_status import SquadmateStatus
 
 PATHSHOTS = ["dropbank", "left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "hitbank"]
 SHOTS_TO_COMPLETE = 7 # This value must match the swarmpaths counter starting_count value!

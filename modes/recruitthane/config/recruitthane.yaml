@@ -25,14 +25,34 @@ event_player:
   mode_recruitthane_started:
     set_environment:
       env: eclipse
-  tower_complete_shot_hit: recruit_thane_complete
+    show_recruit_instructions:
+      squadmate: thane
+      portrait: recruitthane
+      instructions_main: Hit ramps to ascend
+      instructions_sub: Hit orbits to complete
+    set_mission_shots:
+      shots_total: 4
+      is_resumable: 0
+      shots_remaining: 
+        value: 4 - device.counters.thane_ascent_counter.value
+        type: int
+  # After completion more shots will keep adding hurryup, but won't reset
+  logicblock_thane_ascent_counter_hit:
+    mission_shot_hit:
+      is_bonus_shot:
+        value: 1 if device.counters.thane_ascent_counter.value>3 else 0
+        type: int
+  tower_complete_shot_hit:
+    - mission_shot_hit
+    - mission_collect_score
+    - recruit_thane_complete
 
 counters:
   thane_ascent_counter:
     # Initially takes three shots to light, after it's been lit just one
-    # TODO: Verify the initial state of a persisted player variable, it may not be undefined!
-    starting_count: 2 if device.counters.thane_ascent_counter.value > 1 else 0
+    starting_count: 0 if device.counters.thane_ascent_counter.value<2 else 2
     count_complete_value: 3
+    # Have to count UP because the counter always has value 0 when the mode inits
     direction: up
     disable_on_complete: false
     reset_on_complete: false
@@ -40,26 +60,11 @@ counters:
     count_events: tower_ascent_shot_hit
     reset_events: mode_recruitthane_started
 
-#####
-# THANE variable_player:
-#    Build value starts at 0
-#    Hit either tower ascent shot to add (10,000 points * ascent_shots_hit)
-#    Exponential growth! Maybe this should be mitigated or depleted over time?
-#    After 3 ascent shots, hit either orbit to collect built value and complete
-#      the mission (only 1 ascent shot required if mission was restarted)
-#    Player can continue to try for ascent shots for maximum score buildup
-#      before the timer runs out.. no maximum score for this mission?
-#    Progress is not saved
-#####
 variable_player:
-  mode_recruitthane_started:
-    temp_build_value:
+  logicblock_thane_ascent_counter_complete:
+    mission_instructions:
+      string: "Hit orbits to complete!"
       action: set
-      int: 0
-  recruit_thane_complete:
-    score: current_player.temp_build_value
-  tower_ascent_shot_hit:
-    temp_build_value: device.counters.thane_ascent_counter.value * 1000
 
 shots:
   tower_ascent_shot:
@@ -77,8 +82,8 @@ show_player:
       speed: 2
   tower_ascent_shot_hit:
     tower_flash_show:
-      speed: 10
-      loops: 6
+      speed: 12
+      loops: 4
       priority: 100
   logicblock_thane_ascent_counter_complete:
     tower_shots_show:
@@ -120,37 +125,13 @@ shows:
         l_left_orbit_shield_rgb: black
         l_right_orbit_shield_rgb: black
 
-slide_player:
-  mode_recruitthane_started:
-    thane_instructions_slide:
-      expire: 3s
-
-slides:
-  thane_instructions_slide:
-    widgets:
-      - type: text
-        text: HIT RAMPS TO ASCEND TOWER
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: ORBITS STORM THE BRIDGE
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
-
 sound_player:
   mode_recruitthane_started:
     music_thane:
       action: play
       fade_out: 2s
       mode_end_action: stop
+    asari_youll_have_to_get_up_to_the_bridge: {}
   logicblock_thane_ascent_counter_hit{count!=3}: nas_misc_sounds
   logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
   envshot_outlane_hit: failure_sound
@@ -200,6 +181,7 @@ sounds:
   nas_good_work:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199750_m.ogg
     track: voice
-
-
+  asari_youll_have_to_get_up_to_the_bridge:
+    file: en_us_twrasa_quest_giver_twrasa_shuttle_ride_d_00187374_m.ogg
+    track: voice
 

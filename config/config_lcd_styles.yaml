@@ -1,0 +1,374 @@
+#config_version=5
+slides:
+  attract_slide_main:
+    - type: image
+      image: logo_fullscreen
+      style: row_main
+      anchor_y: top
+      scale: 0.5
+      z: 2
+    - type: text
+      text: Press Start
+      color: 990000
+      style: header_sm, row_sub
+      animations:
+        show_slide: pulse_text_slow
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      x: 0
+      z: 0
+  attract_slide_right:
+    - type: image
+      image: splashscreen
+      anchor_x: right
+      x: 110%
+  portrait_slide:
+    widgets:
+      - widget: (portrait_name)
+  singleplayer_slide:
+    transition:
+      type: fade
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg_lowz, row_main, col_left_anchor, num
+      # Can't use widget names here, they're not loaded yet
+      - type: image
+        image: background_galaxy
+        z: 0
+        animations:
+          add_to_slide:
+            - property: rotation
+              value: -360
+              duration: 1200s
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+        z: 10
+      - type: image
+        image: background_galaxy
+        z: 0
+        animations:
+          add_to_slide:
+            - property: rotation
+              value: -360
+              duration: 2000s
+
+
+machine_vars:
+  use_lcd:
+    initial_value: 1
+    persist: false
+
+widget_player:
+  show_grid:
+    grid_widget:
+      target: window
+  remove_grid:
+    grid_widget:
+      action: remove
+
+widgets:
+  grid_widget:
+    - type: image
+      image: grid_dual
+      z: 1000
+  background_galaxy:
+    - type: image
+      image: background_galaxy
+      z: 0
+      animations:
+        add_to_slide:
+          - property: rotation
+            value: 360
+            duration: 20s
+  background_console:
+    - type: image
+      image: texture_console
+      z: 1
+  background_overlord:
+    - type: image
+      image: background_overlord
+      opacity: 0.5
+      z: 0
+  missionselect_count_widget:
+    - type: text
+      text: (index) / (items) >
+      style: header_xs, row_gutter, col_right_indent
+    - type: text
+      text: <
+      style: header_xs, row_gutter, col_right_indent
+      # Fix the left caret to avoid digit width shifts
+      adjust_right: -142
+
+widget_styles:
+
+  # TEXT FORMATS
+  #----------------------------
+  suicide_header:
+    font_name: me123
+    font_size: 80
+    z: 110
+  header_lg_lowz:
+    font_name: me123
+    font_size: 72
+    adjust_bottom: 14
+    z: 10
+  header_lg:
+    font_name: me123
+    font_size: 72
+    adjust_bottom: 14
+    z: 110
+  header_md:
+    font_name: me123
+    font_size: 56
+    adjust_bottom: 0
+    z: 110
+  header_sm:
+    font_name: me123
+    font_size: 36
+    adjust_bottom: 6
+    z: 110
+  header_xs:
+    font_name: me123
+    font_size: 28
+    adjust_bottom: 2
+    z: 110
+  header_popup: # Same as header_sm but with -50 adjust
+    font_name: me123
+    font_size: 36
+    adjust_bottom: 56
+    z: 110
+  body_lg:
+    font_name: jupiter
+    font_size: 96
+    adjust_bottom: 28
+    z: 110
+  body_md:
+    font_name: jupiter
+    font_size: 72
+    line_height: 0.85
+    adjust_top: 36
+    adjust_bottom: 20
+    z: 110
+  body_sm:
+    font_name: jupiter
+    font_size: 56
+    adjust_top: 20
+    adjust_bottom: 12
+    line_height: 0.9
+    z: 110
+  instructions_md:
+    font_name: myriadpro-regular
+    font_size: 34
+    z: 110
+  squad_debug_style:
+    font_size: 18
+    anchor_x: left
+    anchor_y: bottom
+    z: 110
+  timer_primary:
+    font_name: unispace_rg
+    font_size: 44
+    adjust_bottom: 0
+    z: 110
+  timer_secondary:
+    font_name: unispace_bd_it
+    font_size: 96
+    z: 110
+  num:
+    number_grouping: true
+    min_digits: 2
+  lcd_only: {}
+  mission_title:
+    opacity: 0.8
+
+  # GRID POSITIONS
+  #----------------------------
+  col_left_anchor:
+    anchor_x: left
+    x: 3.4%
+  col_left_indent:
+    anchor_x: left
+    x: 8.9%
+  col_left_inner:
+    anchor_x: left
+    x: 23.4%
+  col_left_center:
+    anchor_x: left
+    x: 38%
+  col_right_center:
+    anchor_x: right
+    x: right-38%
+  col_right_inner:
+    anchor_x: right
+    x: right-23.4%
+  col_right_indent:
+    anchor_x: right
+    x: right-8.9%
+  col_right_anchor:
+    anchor_x: right
+    x: right-3.4%
+
+  col_right_gutter:
+    anchor_x: right
+    x: 99.4%
+  col_center:
+    anchor_x: center
+    x: 50%
+
+  row_top:
+    anchor_y: bottom
+    y: 78.2%
+  row_super:
+    anchor_y: bottom
+    y: 65.4%
+  row_main:
+    anchor_y: bottom
+    y: 44%
+  row_sub:
+    anchor_y: bottom
+    y: 31%
+  row_sub_under:
+    anchor_y: top
+    y: 31%
+  row_bottom_margin:
+    anchor_y: bottom
+    y: 12%
+  row_bottom:
+    anchor_y: bottom
+    y: 10.2%
+  row_gutter:
+    anchor_y: center
+    y: 5.6%
+  row_middle:
+    anchor_y: middle
+    y: 50%
+
+  # POPUPS
+  #----------------------------
+  image_popup:
+    z: 11
+    anchor_y: bottom
+    y: 278 # includes -50px for transition
+    anchor_x: right
+    x: right-8.9%
+    opacity: 0
+  profile:
+    z: 11
+
+  # OTHER STYLES
+  #-----------------------------
+  mineral_highlight_style:
+    z: 2
+    color: FFFFFF
+    opacity: 0.2
+
+  # SQUAD SPECIALISTS
+  #----------------------------
+  spec_default:
+    anchor_x: left
+    anchor_y: bottom
+    z: 120
+    opacity: 0.4
+  spec_dead:
+    z: 120
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.03
+  spec_highlight:
+    z: 120
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 1
+
+  # SQUAD ICON POSITIONS
+  #----------------------------
+  sqicon_color_available:
+    color: FFFFFF
+  sqicon_color_recruited:
+    color: CCCCCC
+  sqicon_color_dead:
+    color: CE0000
+  sqicon_color_specialist:
+    color: 0059ce
+  sqicon_color_none:
+    color: 000000
+  specialist:
+    font_size: 24
+    font_name: me123
+    color: 999999
+    anchor_x: left
+    x: 50
+    z: 120
+
+animations:
+  popup_enter_animation:
+    - property: y
+      value: 50
+      relative: true
+      duration: 500ms
+      easing: out_circ
+    - property: opacity
+      value: 1
+      duration: 500ms
+      easing: out_circ
+      timing: with_previous
+  popup_exit_animation:
+    - property: opacity
+      value: 0
+      duration: 500ms
+      easing: in_sine
+    - property: y
+      value: -50
+      relative: true
+      duration: 500ms
+      timing: with_previous
+      easing: in_sine
+  portrait_enter_animation:
+    - property: opacity
+      value: 1
+      duration: 500ms
+      easing: out_circ
+  portrait_exit_animation:
+    - property: opacity
+      value: 0
+      duration: 500ms
+      easing: in_sine
+  sqicon_available:
+    - property: opacity      # name of the widget property we're animating
+      value: 1               # target value of that property for this step
+      duration: 0.75s          # duration for this step (how long it takes to get there)
+    - property: opacity      # second step in the animation (starts with a hyphen)
+      value: 0.25
+      duration: 0.75s
+      repeat: true
+  sqicon_complete:
+    - property: color
+      value: 000000
+      duration: 1s
+    - property: color
+      value: CCCCCC
+      duration: 1s
+  sqicon_dead:
+    - property: color
+      value: 000000
+      duration: 1s
+    - property: color
+      duration: 1s
+      value: CE0000
+  specialist_select:
+    - property: color, x, font_size
+      value: 0, 1, 0, 1, 80, 28
+      duration: 200ms
+  specialist_deselect:
+    - property: color, x, font_size
+      value: 1, 1, 1, 0.6, 50, 24
+      duration: 200ms
+  specialist_dead:
+    - property: color
+      value: 0.8, 0, 0, 1
+      duration: 1s

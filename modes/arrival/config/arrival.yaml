@@ -95,60 +95,6 @@ event_player:
     levelup:
       mission_name: Alpha Relay Destroyed
 
-#####
-# ARRIVAL SCORING
-#
-# Hitting each lane shot awards 1,000 points on the first hit and decreasing
-# points on subsequent hits (it's worth more to hit different shots than the
-# same one repeatedly).
-#
-# Hitting each target awards 400 points (it's easier to hit targets than lanes
-# during a multiball).
-#
-# The hurryup starts at the built value and burns down to 50%. Hitting each
-# multiplier shot increases the hurryup multiplier by 25%.
-#
-# Hitting the escape shot before the hurryup ends awards the hurryup value and
-# the complete built value, If the hurryup runs out, a small portion of the
-# built value is awarded. If the ball drains, a smaller portion of the built
-# value is awarded.
-#####
-variable_player:
-  mode_arrival_started:
-    temp_hurryup_value:
-      action: set
-      int: 1200
-    temp_multiplier:
-      action: set
-      float: 1.0
-  arrival_lane_shots_one_hit:
-    temp_hurryup_value: 1800
-  arrival_lane_shots_two_hit:
-    temp_hurryup_value: 900
-  arrival_lane_shots_three_hit:
-    temp_hurryup_value: 450
-  arrival_target_shots_lit_hit{device.counters.arrival_phase.value<4}:
-    temp_build_value: 600
-  start_arrival_phase4:
-    temp_build_value:
-      action: set
-      int: current_player.temp_hurryup_value
-  arrival_target_shots_lit_hit{device.counters.arrival_phase.value==4}:
-    temp_multiplier:
-      float: 0.25
-  arrival_escapeshot_lit_hit:
-    score: current_player.temp_build_value + (current_player.temp_hurryup_value * current_player.temp_multiplier)
-  timer_arrival_phase4_complete:
-    score: current_player.temp_build_value * 0.8
-  ball_will_end:
-    score: current_player.temp_build_value * 0.5
-  # For Phase 1-3, just burn off the 1,200 we started with
-  timer_arrival_easytimer_tick{current_player.temp_hurryup_value>100}: # Remember the timer ticks at 500ms so double the values for seconds
-    temp_hurryup_value: -10 * device.counters.arrival_phase.value
-  # Phase 4 starts at 120s, start burning the hurryup for reals
-  timer_arrival_hardtimer_tick:
-    temp_hurryup_value: current_player.temp_build_value / -60 # Each tick is 1/30th of 50% of the build value
-
 shot_profiles:
   arrival_lane_profile:
     show_when_disabled: false
@@ -351,24 +297,20 @@ slide_player:
   play_arrival:
     arrival_slide:
       action: play
+    arrival_portrait:
+      target: lcd_right
 
 slides:
   arrival_slide:
     widgets:
       - type: text
         text: ARRIVAL
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 1
-      - type: text
-        text: (player|temp_hurryup_value)
-        number_grouping: true
-        style: small
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 2
+        style: header_sm, row_main, col_left_anchor
+      - widget: background_console
+  arrival_portrait:
+    widgets:
+      - type: image
+        image: portrait_arrival_phase_4
 
 sound_player:
   play_arrival: arrival_music
@@ -473,14 +415,8 @@ widgets:
   arr_phase_widget:
     - type: text
       text: Phase (value)
-      style: small
-      anchor_x: right
-      anchor_y: bottom
-      x: right-2
-      y: 2
+      style: header_md, row_sub, col_left_anchor
   arr_multiplier_widget:
     - type: text
       text: (player|temp_multiplier)X
-      style: small
-      anchor_y: bottom
-      y: 2
+      style: header_xs, row_gutter, col_left_center

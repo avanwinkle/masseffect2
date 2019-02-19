@@ -26,56 +26,26 @@ event_player:
       env: collectors
       # Suicide base resets env on mode_type_suicide_stopped, so do it manually
       stop_events: mode_suicide_platforms_will_stop
+    set_mission_shots:
+      shots_total: 1
+      is_resumable: 0
+      shots_remaining: 1
+      ticks: 60
+
+  platform_shots_lit_hit: 
+    - mission_shot_hit
+    - missiontimer_add_platforms
   platform_shots_hit_complete: reset_platforms
   # When the hurryup drains, move on to the next mode
   player_temp_hurryup_value{player_num==current_player.number and value<=100}: platforms_complete
   # If the player plays the maximum amount of time, move on
-  timer_platform_complete: platforms_complete
-
-variable_player:
-  mode_suicide_platforms_started:
-    # Build value is how much damage we'll do to the reaper
-    temp_build_value:
-      action: set
-      int: 100 + 100 * current_player.squadmates_count
-    # Hurryup value increases the damage built
-    temp_hurryup_value:
-      action: set
-      int: 1500
-  platform_shots_lit_hit.1:
-    temp_build_value:
-      action: add
-      int: current_player.temp_hurryup_value * current_player.harbinger_multiplier
-    score:
-      action: add
-      int: current_player.temp_hurryup_value * current_player.harbinger_multiplier / 10
-  # We need to cap the time the player can sit in this phase, so after 30s stop restoring hurryup time
-  platform_shots_lit_hit.2{device.timers.platform.ticks<=60}:
-    temp_hurryup_value:
-      action: add
-      int: 400  # Each second is worth 100 hurryup points, so add 4 seconds
-  timer_platform_tick:
-    temp_hurryup_value: -50 # 2x per second = 100/sec
-  platform_shots_hit_hit:
-    score: 200
-  platform_targets_lit_hit:
-    temp_build_value: 100
-  platform_targets_hit_hit:
-    score: 100
+  timer_missiontimer_complete: platforms_complete
 
 # Unlimited balls during platforms
 multiballs:
   platforms:
     ball_count: 2
     shoot_again: -1
-
-timers:
-  platform:
-    start_value: 0
-    end_value: 120 # Timer runs on the half second, so 120 for 60s
-    direction: up
-    start_running: true  # TODO: add free-shoot period for combat squadmates
-    tick_interval: 500ms
 
 shot_groups:
   platform_targets:

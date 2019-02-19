@@ -25,47 +25,43 @@ event_player:
   mode_recruitmordin_started.1:
     set_environment:
       env: bloodpack
+    show_recruit_instructions:
+      squadmate: mordin
+      portrait: recruitmordin
+      instructions_main: Hit orbits to build value,
+      instructions_sub: Both ramps to turn on fans
+    set_mission_shots:
+      shots_total: 4
+      is_resumable: 1
+      shots_remaining:
+        value: device.counters.cure_counter.value + device.counters.fans_counter.value
+        type: int
   mode_recruitmordin_started.2:
-    - play_intro_sound{device.counters.fans_counter.value==0}
-    - play_cure_sound{device.counters.fans_counter.value>0}
-  spinner_hit: enable_cure
-  cure_right_lit_hit:
-    - enable_fans
-    - play_cure_sound
+    - play_intro_sound{not device.counters.cure_counter.completed}
+    - play_cure_sound{device.counters.cure_counter.completed}
   fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
   # The counter lets us play the correct sound for each fan hit
+  cure_counter:
+    starting_count: 2
+    count_complete_value: 0
+    direction: down
+    count_events: cure_left_lit_hit, cure_right_lit_hit
+    events_when_hit: mission_shot_hit
+    events_when_complete: enable_fans, play_cure_sound, mission_collect_score
+    disable_on_complete: true
+    reset_on_complete: false
+    persist_state: true
   fans_counter:
+    starting_count: 2
+    count_complete_value: 0
+    direction: down
     count_events: fan_left_lit_hit, fan_right_lit_hit
-
-#####
-# MORDIN variable_player:
-#    Each hit to the spinner adds 200 to the "base" value
-#    Each hit to the cure shot adds 1x to the multiplier
-#    Hit both fans to collect (base * multiplier) and complete the mission
-#    Progress is not saved
-#####
-variable_player:
-  # temp_build_value is the accumulated spinner value, temp_multiplier is the cure hits
-  mode_recruitmordin_started:
-    temp_multiplier:
-      action: set
-      float: 1.0
-    temp_hurryup_value:
-      action: set
-      int: 200
-  spinner_hit:
-    temp_hurryup_value: 10 * current_player.temp_multiplier
-  cure_right_hit:
-    temp_multiplier:
-      action: add
-      float: 0.5
-    temp_hurryup_value: 20 * current_player.temp_multiplier * device.timers.recruittimer.ticks
-  fan_shots_hit:
-    temp_hurryup_value: 100 * current_player.temp_multiplier * device.timers.recruittimer.ticks
-  recruit_mordin_complete:
-    score: current_player.temp_hurryup_value
+    events_when_hit: logicblock_fans_counter_hit, mission_shot_hit
+    events_when_complete: mission_collect_score
+    disable_on_complete: true
+    reset_events: mode_recruitmordin_started
 
 shot_groups:
   fan_shots:
@@ -75,9 +71,10 @@ shot_groups:
 shots:
   spinner:
     hit_events: sh_spinner_hit
-    enable_events: cure_left_hit
+    disable_events: spinner_hit
   cure_left:
     hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
+    enable_events: spinner_hit
     profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
@@ -223,28 +220,3 @@ sounds:
     file: en_us_ss_sub_krogan_ss_sub_krogan_00304056_m.ogg
   krogan_fear_the_battlemaster:
     file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.ogg
-
-slide_player:
-  mode_recruitmordin_started:
-    mordin_instructions_slide:
-      expire: 3s
-
-slides:
-  mordin_instructions_slide:
-    widgets:
-      - type: text
-        text: ORBITS BUILD VALUE
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: RAMPS TURN ON FANS
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000

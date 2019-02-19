@@ -1,0 +1,153 @@
+#config_version=5
+event_player:
+  set_mission_shots:
+    - missiontimer_set_(current_player.mission_starting_ticks)
+
+variable_player:
+  #### FIXED SCORING ####
+  #---------------------#
+  # Set the initial values necessary
+  set_mission_shots.3:
+    mission_shot_value:
+      action: set
+      int: machine.base_points / (shots_total * shots_total)
+    mission_shots_remaining:
+      action: set
+      int: shots_remaining
+    # For normal/hardcore, set the is_resumable
+    mission_is_resumable:
+      action: set
+      # For insanity, never resumable
+      int: is_resumable if current_player.difficulty < 2 else 0
+    # Set the player variable for the timer before the mission starts, for a clean widget
+    mission_starting_ticks:
+      action: set
+      int: ticks
+    temp_build_value:
+      action: set
+      int: 0
+    temp_hurryup_value:
+      action: set
+      int: 0
+    temp_multiplier:
+      action: set
+      float: multiplier
+  # Make some adjustments for default values
+  set_mission_shots.2:
+    # Default ticks: 60 for non-resumable, 40 for resumable
+    mission_starting_ticks{not current_player.mission_starting_ticks}:
+      action: set
+      int: 60 - (20 * current_player.mission_is_resumable)
+    # If not defined, shots remaining is total shots. Don't depend on is_resumable,
+    # because we can reduce total shots on non-resumable replays for discounting points
+    mission_shots_remaining{not current_player.mission_shots_remaining}:
+      action: set
+      int: shots_total
+    # I dunno why so many conditionals fail, i.e. can't do "float: multiplier or 1.0"
+    temp_multiplier{not current_player.temp_multiplier}:
+      action: set
+      float: 1.0
+  # Use the values set above to calculate the starting value for _this_ attempt
+  set_mission_shots.1:
+    mission_starting_value:
+      action: set
+      int: current_player.mission_shot_value * current_player.mission_shots_remaining
+    mission_tick_value:
+      action: set
+      int: current_player.mission_shot_value / current_player.mission_starting_ticks
+    base_missiontimer_tick:
+      action: set
+      int: current_player.mission_starting_ticks
+  # When a shot is hit, score the starting value minus a tick value for each tick remaining
+  mission_shot_hit.100:
+    mission_ticks:
+      action: set
+      int: device.timers.missiontimer.ticks
+    temp_hurryup_value:
+      action: set
+      int: current_player.mission_starting_value - (current_player.mission_tick_value * (current_player.mission_starting_ticks - device.timers.missiontimer.ticks))
+    # If the mission is not resumable (and this is not a bonus shot), reset the hurryup ticks
+    # so that the next shot has a chance to score the full starting_value
+    mission_starting_ticks{not current_player.mission_is_resumable and not is_bonus_shot}:
+      action: set
+      int: device.timers.missiontimer.ticks
+  mission_shot_hit.90:
+    # Track the total value accumulated via build_value, which will cash out when collected
+    temp_build_value:
+      action: add
+      int: current_player.temp_hurryup_value * current_player.temp_multiplier * current_player.harbinger_multiplier
+  # When a shot, round, or mission is completed, award the build value for that round
+  mission_collect_score.80:
+    score: current_player.temp_build_value
+    temp_build_value:
+      action: set
+      int: 0
+
+timers:
+  missiontimer:
+    start_value: 60
+    max_value: 60
+    end_value: 0
+    tick_interval: 1s
+    direction: down
+    control_events:
+      # Some missions use different timing, so a few handlers to adjust the clock
+      - event: missiontimer_add_10
+        action: add
+        value: 10
+      - event: missiontimer_add_12
+        action: add
+        value: 12
+      - event: missiontimer_set_12
+        action: jump
+        value: 12
+      - event: missiontimer_set_20
+        action: jump
+        value: 20
+      - event: missiontimer_set_30
+        action: jump
+        value: 30
+      - event: missiontimer_set_40
+        action: jump
+        value: 40
+      - event: missiontimer_set_60
+        action: jump
+        value: 60
+      # Specific jumps for missions
+      - event: missiontimer_set_omegarelay
+        action: jump
+        value: 54  # Dependent on the duration of the music track
+      - event: missiontimer_set_longwalk_1
+        action: jump
+        value: 41
+      - event: missiontimer_set_longwalk_2
+        action: jump
+        value: 21
+      - event: missiontimer_set_longwalk_3
+        action: jump
+        value: 0
+      - event: missiontimer_add_platforms
+        action: add
+        value: 4
+      # During a ball save or lock, pause the timer to allow for the new ball to eject
+      - event: ball_save_recruitsave_saving_ball{device.timers.missiontimer.running}
+        action: pause
+        value: 2
+      - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
+        action: pause
+        value: 2
+      # The timer starts fresh on every mission and stops on every end
+      - event: missiontimer_start
+        action: start
+      - event: missiontimer_stop
+        action: stop
+      - event: mode_type_mission_stopped
+        action: stop
+      - event: mode_type_wizard_stopped
+        action: stop
+      - event: mode_type_suicide_stopped
+        action: stop
+      # If we're locking a ball, pause for the new one to eject
+      - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
+        action: pause
+        value: 3

@@ -11,8 +11,6 @@
 # After a round, a new random shot is lit (with full shields again) and another
 # round must be completed. Completing three rounds will finish the mode.
 # Currently, progress is saved after each round? Nope! Gotta restart!
-#
-# TODO: Scoring
 #####
 
 mode:
@@ -28,17 +26,27 @@ event_player:
     - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
   mode_shadowbroker_boss_started.2:
     set_environment: { env: shadowbroker }
+    set_mission_shots:
+      shots_total: 4
+      shots_remaining: 2
+      ticks: 30
+      is_resumable: 0
+  sbboss_shot_hit:
+    - mission_shot_hit
   sbboss_shot_armor_hit: enable_sbboss_finalshot
   logicblock_sbboss_round_counter_hit:
+    - mission_shot_hit
     - play_sbboss_round_show_1{count==1}
     - play_sbboss_round_show_2{count==2}
     - play_sbboss_round_show_3{count==3}
   sbboss_round_show_complete:
     - shadowbroker_round_start
     - flippers_on
-  shadowbroker_boss_complete:
-    stop_mode_shadowbroker_boss: {}
-    exit_shadowbroker_modes: {}
+  shadowbroker_boss_complete.1:
+    - mission_collect_score
+    - stop_mode_shadowbroker_boss
+    - exit_shadowbroker_modes
+  shadowbroker_boss_complete.2:
     levelup:
       mission_name: "Greetings, Shadow Broker"
   # Disable the flippers during the inter-round show, reenable after
@@ -73,6 +81,12 @@ multiballs:
     ball_count: 2
     start_events: shadowbroker_round_start
     shoot_again: 5s
+
+variable_player:
+  # Increase the multiplier 25% after each round
+  logicblock_sbboss_round_counter_hit:
+    temp_multiplier:
+      float: 0.25
 
 shot_profiles:
   sbboss_shot_profile:
@@ -159,7 +173,9 @@ shows:
         liara_energy_projectiles_bouncing_off:
           action: play
           track: voice
-      slides: shadowbroker_round_1_slide
+      slides:
+        shadowbroker_round_2_portrait:
+          target: lcd_right
     - time: 5s
       sounds:
         shepard_then_we_do_this_the_hard_way:
@@ -175,7 +191,9 @@ shows:
         liara_if_you_can_get_him_to:
           action: play
           track: voice
-      slides: shadowbroker_round_2_slide
+      slides:
+        shadowbroker_round_3_portrait:
+          target: lcd_right
     - time: 3s
       events:
         - sbboss_round_show_complete
@@ -186,7 +204,9 @@ shows:
         shepard_liara_now:
           action: play
           track: voice
-      slides: shadowbroker_round_3_slide
+      slides:
+        shadowbroker_complete_portrait:
+          target: lcd_right
     - time: 1500ms
       events: shadowbroker_boss_complete
   sbboss_shields_show:
@@ -213,38 +233,40 @@ shows:
 
 slide_player:
   mode_shadowbroker_boss_started:
-    shadowbroker_intro_slide:
-      action: play
-      priority: 100
-      expire: 4s
-    shadowbroker_boss_slide:
-      action: play
-      priority: 1
+    shadowbroker_boss_slide: {}
+    shadowbroker_round_1_portrait:
+      target: lcd_right
 
 slides:
   shadowbroker_intro_slide:
     - type: text
       text: SB Boss Intro
-  shadowbroker_round_1_slide:
-    - type: text
-      text: SB Boss Round 1
-  shadowbroker_round_2_slide:
-    - type: text
-      text: SB Boss Round 2
-  shadowbroker_round_3_slide:
-    - type: text
-      text: SB Boss Round 3
+  shadowbroker_round_1_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_1
+  shadowbroker_round_2_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_2
+  shadowbroker_round_3_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_boss_3
+  shadowbroker_complete_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_advance_3
   shadowbroker_boss_slide:
-    - type: text
-      text: Defeat the
-      style: medium
-      anchor_y: bottom
-      y: middle+6
-    - type: text
-      text: Shadow Broker
-      style: text_default
-      anchor_y: top
-      y: middle+4
+    widgets:
+      - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
+        text: "Defeat the\nShadow Broker"
+        style: header_sm, row_main, col_left_anchor
+      - widget: background_console
 
 sound_player:
   mode_shadowbroker_boss_started:

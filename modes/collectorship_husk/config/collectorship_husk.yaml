@@ -17,7 +17,16 @@ mode:
   priority: 500
 
 event_player:
-  timer_husktimer_complete: collectorship_husk_complete
+  mode_collectorship_husk_started.2:
+    set_mission_shots:
+      shots_total: 10
+      is_resumable: 1
+      ticks: 20
+  mode_collectorship_husk_started: missiontimer_start
+  husk_collect_shot_hit: mission_shot_hit
+  timer_missiontimer_complete: 
+    - mission_collect_score
+    - collectorship_husk_complete
   collectorship_husk_complete: stop_mode_collectorship_husk
 
 random_event_player:
@@ -32,30 +41,15 @@ random_event_player:
       - enable_husk_kickback
 
 variable_player:
-  mode_collectorship_husk_started:
-    temp_build_value: # track the total accumulated value for the praetorian phase
-      action: set
-      int: 0
-    temp_hurryup_value:
-      action: set
-      int: 0
-    temp_multiplier: # track whether a shot has been enabled
-      action: set
-      int: 0
-  mode_collectorship_husk_will_stop:
-    temp_build_value: current_player.temp_hurryup_value # cash out any uncollected value too!
   husk_build_shot_hit:
-    temp_hurryup_value: 300 + (current_player.temp_multiplier * 100)
-    temp_multiplier: 1
+    # Hitting more build shots multiplies the value of the collected shot by 10%
+    temp_multiplier: 
+      action: add
+      float: 0.1
   husk_collect_shot_hit:
-    score: current_player.temp_hurryup_value
-    temp_build_value: current_player.temp_hurryup_value
-    temp_hurryup_value:
-      action: set
-      int: 0
     temp_multiplier:
       action: set
-      int: 0
+      float: 1.0
 
 shot_groups:
   husk_collect_shot:
@@ -164,6 +158,7 @@ sound_player:
       action: play
 
 sound_pools:
+  # TODO: Add more squadmate sounds for husks!
   husk_squadmate:
     track: voice
     type: random
@@ -219,15 +214,4 @@ sounds:
     file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.ogg
     track: voice
 
-
-timers:
-  husktimer:
-    start_value: 20
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: yes
-    control_events:
-      - event: stop_mode_collectorship_husk
-        action: stop
 

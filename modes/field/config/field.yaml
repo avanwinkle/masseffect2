@@ -21,6 +21,22 @@ event_player:
   mode_field_started.2{device.achievements.suicidemission.state=="stopped"}:
     - reset_from_suicide
     # Looking for other mode_field_started events? Check the field submode configs!
+  mode_field_started.3:
+    show_base_slide:
+      is_available:
+        value: current_player.available_missions>0
+        type: bool
+      is_resume:
+        value: current_player.resume_mission!=" "
+        type: bool
+      is_multiplayer:
+        value: game.num_players>1
+        type: bool
+      is_lcd:
+        value: machine.is_lcd==1
+        type: bool
+  # Route this event through event_player to avoid playing while field is inactive
+  music_intro_stopped: play_galaxy_map
 
 config:
   - field_bumpers.yaml
@@ -28,22 +44,19 @@ config:
   - field_shadowbroker.yaml
   - field_shopping.yaml
 
-sound_player:
+playlists:
+  field_music:
+    repeat: true
+    sounds:
+      - music_normandy_walkin_intro
+      - music_galaxy_map
+
+playlist_player:
   mode_field_started:
-    music_normandy_walkin_intro:
+    field_music_track:
       action: play
-      loops: 0
-      fade_out: 1s
-      mode_end_action: stop
-      events_when_stopped: play_galaxy_map
-      priority: 1
-  play_galaxy_map:
-    music_galaxy_map:
-      action: play
-      loops: -1 # TODO: integrate with scanning loop
-      fade_out: 1s
-      mode_end_action: stop
-      priority: 1
+      playlist: field_music
+      crossfade_time: 1s
 
 sounds:
   music_normandy_walkin_intro:
@@ -58,6 +71,26 @@ slide_player:
     reset_from_suicide_slide:
       action: play
       expire: 5s
+  show_base_slide:
+    singleplayer_slide{not is_multiplayer}:
+      action: play
+      priority: 1
+    multiplayer_slide{is_multiplayer}:
+      action: play
+      priority: 2
+  show_multiplayer_slide:
+    multiplayer_slide:
+      action: play
+    singleplayer_slide:
+      action: remove
+  disable_missionresume:
+    resume_slide:
+      action: remove
+  mode_field_will_stop:
+    singleplayer_slide:
+      action: remove
+    multiplayer_slide:
+      action: remove
 
 slides:
   reset_from_suicide_slide:
@@ -65,7 +98,7 @@ slides:
       - type: text
         text: the Suicide Mission
         color: BBBBBB
-        style: small
+        style: body_sm
         anchor_y: top
         y: top-2
       - type: text
@@ -74,11 +107,11 @@ slides:
         y: middle+2
       - type: text
         text: You must recruit
-        style: small
+        style: body_md
         anchor_y: bottom
         y: 8
       - type: text
         text: your team again
-        style: small
+        style: body_md
         anchor_y: bottom
         y: 1

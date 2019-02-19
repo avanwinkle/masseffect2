@@ -132,6 +132,7 @@ class MainMenu(Carousel):
     # If casual mode was chosen, clear the career
     elif selection == "casual":
       self._set_selected_career(None)
+      self._post_career_event("load_career")
     # If resume was chosen, load the career
     elif selection == "resume_game":
       self._post_career_event("load_career")
@@ -152,16 +153,13 @@ class MainMenu(Carousel):
       self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
                                  direction=direction)
 
-  def _set_selected_career(self, career=None):
+  def _set_selected_career(self, career):
     self._selected_career = career
-    career_data = self._selected_career or {}
-    self.debug_log("Setting career to {}".format(career))
-    self.machine.set_machine_var("last_career_player_{}".format(self.machine.game.player.number),
-                                 career_data.get("career_name", " "))
+    self.debug_log("Setting career to {}".format(self._selected_career))
     self._post_career_event("set_career")
 
   def _post_career_event(self, evt_name, **kwargs):
-    career_data = self._selected_career or {}
+    career_data = self._selected_career or  { "career_name": " " }
     self.machine.events.post(evt_name,
                              career_name=career_data.get("career_name"),
                              career_started=career_data.get("_career_started"),

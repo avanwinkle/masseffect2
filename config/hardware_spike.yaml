@@ -6,127 +6,17 @@ hardware:
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
-  baud: 115200 #115200
-  runtime_baud: 2000000
+  baud: 115200
+  runtime_baud: 921600
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 30
+    65: 100
   # use_send_key: true
 
 machine:
   balls_installed: 6
   min_balls: 6
-
-dmds:
-  spike_dmd:  # name of this DMD which can be whatever you want
-    fps: 15
-    gamma: 0.8
-    only_send_changes: true
-    source_display: dmd
-    platform: spike
-
-ball_devices:
-  bd_plunger:
-    ball_switches: s_plunger_lane
-    eject_coil: c_plunger
-    mechanical_eject: true
-    ball_missing_timeouts: 10s
-    eject_timeouts: 3s
-    confirm_eject_type: target # default
-    entrance_count_delay: 0
-    player_controlled_eject_event: force_plunger_launch
-    debug: true
-  bd_trough:
-    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
-    eject_coil: c_trough_eject
-    tags: trough, home, drain
-    jam_switch: s_trough_jam
-    eject_targets: bd_plunger
-    eject_timeouts: 1500ms
-    auto_fire_on_unexpected_ball: False
-    confirm_eject_switch: s_plunger_lane
-  bd_lock:
-    entrance_count_delay: 500ms # Default: 500ms
-    ball_switches: s_lock_1, s_lock_2, s_lock_3
-    eject_coil: c_lock_release_post
-    eject_events: lock_eject_one_ball
-    eject_all_events: game_ended
-    eject_coil_enable_time: 250ms, 230ms, 215ms
-                          # 1 ball:  230ms can be too short, increasing to 250
-                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
-                          # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
-    eject_timeouts: 3s
-    exit_count_delay: 2s
-    ball_missing_timeouts: 5s
-    debug: true
-  bd_hold:
-    ball_capacity: 1
-    hold_coil: c_up_post
-    hold_coil_release_time: 1s
-    # hold_switches: s_kickback
-    entrance_switch: s_null
-
-flippers:
-  right_flipper:
-    main_coil: c_flipper_right_main
-    activation_switch: s_flipper_right
-    enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, service_mode_entered, flippers_off, right_flipper_off
-  left_flipper:
-    main_coil: c_flipper_left_main
-    activation_switch: s_flipper_left
-    enable_events: ball_starting, flippers_on
-    disable_events: ball_ending, service_mode_entered, flippers_off, left_flipper_off
-
-drop_targets:
-  bottom:
-    switch: s_dropbank_bottom
-  middle:
-    switch: s_dropbank_middle
-  top:
-    switch: s_dropbank_top
-
-drop_target_banks:
-  dropbank:
-    drop_targets: bottom, middle, top
-    reset_coils: c_dropbank_reset
-    reset_on_complete: 1s
-    reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
-
-kickbacks:
-  dragon_kickback:
-    coil: c_kickback
-    switch: s_kickback
-    enable_events: enable_kickback
-    disable_events: disable_kickback, ball_hold_enable
-
-autofire_coils:
-  right_slingshot:
-    switch: s_right_slingshot
-    coil: c_slingshot_right
-    enable_events: ball_started, slingshots_on
-    disable_events: ball_ending, service_mode_entered, slingshots_off
-  left_slingshot:
-    switch: s_left_slingshot
-    coil: c_slingshot_left
-    enable_events: ball_started, slingshots_on
-    disable_events: ball_ending, service_mode_entered, slingshots_off
-  left_bumper:
-    switch: s_bumper_left
-    coil: c_bumper_left
-    enable_events: ball_started, bumpers_on
-    disable_events: ball_ending, service_mode_entered, bumpers_off
-  right_bumper:
-    switch: s_bumper_right
-    coil: c_bumper_right
-    enable_events: ball_started, bumpers_on
-    disable_events: ball_ending, service_mode_entered, bumpers_off
-  bottom_bumper:
-    switch: s_bumper_bottom
-    coil: c_bumper_bottom
-    enable_events: ball_started, bumpers_on
-    disable_events: ball_ending, service_mode_entered, bumpers_off
 
 switches:
   s_start_button:
@@ -136,10 +26,10 @@ switches:
     number: 1-2
   s_flipper_left:
     number: 8-2
-    tags: flipper_left, flipper
+    tags: left_flipper
   s_flipper_right:
     number: 8-3
-    tags: flipper_right, flipper
+    tags: right_flipper
   s_plunger_lane:
     number: 9-1
   s_trough1:
@@ -165,101 +55,86 @@ switches:
     # type: NC
   s_bumper_left:
     number: 10-1
-    tags: playfield_active, bumper
+    tags: bumper
   s_bumper_right:
     number: 10-2
-    tags: playfield_active, bumper
+    tags: bumper
   s_bumper_bottom:
     number: 10-3
-    tags: playfield_active, bumper
+    tags: bumper
   s_return_lane_left:
     number: 9-5
-    tags: playfield_active
     ignore_window_ms: 1000
   s_return_lane_right:
     number: 8-6
-    tags: playfield_active
     ignore_window_ms: 1000
   s_outlane_left:
     number: 9-4
-    tags: playfield_active
   s_outlane_right:
-    number: 8-7
-    tags: playfield_active
+    number: 8-7 # Restored 10-14 # 8-7 Moved
   s_battering_ram:
     number: 10-4
-    tags: playfield_active
   s_spinner:
     number: 10-7
-    tags: playfield_active
   s_left_orbit:
     number: 10-10
-    tags: playfield_active
     ignore_window_ms: 1100
   s_right_orbit:
     number: 10-11
-    tags: playfield_active
     ignore_window_ms: 1100
   s_left_ramp_entrance:
     number: 10-5
-    tags: playfield_active
     ignore_window_ms: 1500
   s_left_ramp_exit:
     number: 10-6
   s_right_ramp_entrance:
     number: 9-7
-    tags: playfield_active
     ignore_window_ms: 1500
   s_right_ramp_exit:
     number: 10-15
   s_top_lane_left:
     number: 10-12
-    tags: playfield_active
   s_top_lane_right:
     number: 10-13
-    tags: playfield_active
   s_dropbank_bottom:
     number: 9-15
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_dropbank_middle:
     number: 9-14
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_dropbank_top:
     number: 9-13
-    tags: playfield_active, dropbank
+    tags: dropbank
   s_hitbank_top:
     number: 9-10
-    tags: playfield_active, hitbank
+    tags: hitbank
   s_hitbank_bottom:
     number: 9-11
-    tags: playfield_active, hitbank
+    tags: hitbank
   s_target1:
     number: 10-8
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target2:
     number: 10-9
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target3:
     number: 10-0
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target4:
     number: 9-8
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_target5:
     number: 9-9
-    tags: playfield_active, standuptarget
+    tags: standuptarget
   s_left_slingshot:
     number: 8-1
     ignore_window_ms: 300ms
-    tags: playfield_active
   s_right_slingshot:
     number: 8-4
     ignore_window_ms: 300ms
-    tags: playfield_active
   s_kickback:
-    number: 10-14
+    number: 10-14 # Restored 8-7 # 10-14 Moved
     ignore_window_ms: 400
-    # tags: playfield_active # Cannot be playfield active if it's a ball hold switch
   s_tenpoints:
     number: 9-12
   s_lock_1:
@@ -268,7 +143,13 @@ switches:
     number: 9-2
   s_lock_3:
     number: 9-3
-  s_null:
+  s_tilt:
+    number: 1-14
+    tags: tilt_warning
+  s_slam_tilt:
+    number: 1-21
+    tags: slam_tilt
+  s_airlock_enter:
     number: 1-0
 
 lights:
@@ -613,12 +494,3 @@ coils:
   c_kickback:
     number: 8-3
     default_pulse_ms: 20
-
-playfields:
-  playfield:
-    default_source_device: bd_plunger
-    tags: default
-    enable_ball_search: False
-    ball_search_timeout: 5s
-    ball_search_interval: 5s
-

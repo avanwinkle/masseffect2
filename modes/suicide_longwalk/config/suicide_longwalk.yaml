@@ -32,23 +32,33 @@ event_player:
   mode_suicide_longwalk_started:
     set_environment:
       env: husks_lower
-    set_initial_suicide_shots:
-      count: 7
-  player_tension{{player_num==current_player.number and change>0}: increase_tension
-  enable_longwalk_dropbank: reset_dropbank
-  reset_tension:
-    set_initial_suicide_ticks:
+    set_mission_shots:
+      shots_total: 7
+      shots_remaining: 7
       ticks: 60
+      is_resumable: 0
+  player_tension: 
+    - increase_tension{player_num==current_player.number and change>0}
+    - missiontimer_set_longwalk_1{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}
+    - missiontimer_set_longwalk_2{value==2 and current_player.suicide_longwalk_longwalk_tick>21 and player_num==current_player.number}
+    - missiontimer_set_longwalk_3{value==3 and current_player.suicide_longwalk_longwalk_tick>0 and player_num==current_player.number}
+    
+  enable_longwalk_dropbank: reset_dropbank
+  reset_tension: missiontimer_set_60
   # Success scenarios
   logicblock_swarmpaths_hit:
+    - mission_shot_hit
     - reset_tension
     - play_specialist_lw_advance{count>1}
     - play_specialist_lw_close{count==1}
     # Enable the hold for the final shot
     - enable_transition_hold{count==1}
-  logicblock_swarmpaths_complete: longwalk_complete
+  logicblock_swarmpaths_complete: 
+    - mission_collect_score
+    - missiontimer_stop # Explicitly stop to prevent race condition from killing squadmate
+    - longwalk_complete
   # Failure scenarios
-  timer_longwalk_complete:
+  timer_missiontimer_complete:
     kill_squadmate:
       squadmate: random
   squadmate_killed: longwalk_failed
@@ -66,34 +76,12 @@ counters:
     persist_state: true
     reset_events: mode_suicide_longwalk_started
 
-timers:
-  longwalk:
-    start_value: 60
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    start_running: true
-    control_events:
-      - event: reset_tension
-        action: restart
-      - event: logicblock_swarmpaths_complete
-        action: stop
-      - event: player_tension{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}}
-        action: jump
-        value: 41
-      - event: player_tension{value==2 and current_player.suicide_longwalk_longwalk_tick>21 and player_num==current_player.number}
-        action: jump
-        value: 21
-      - event: player_tension{value==3 and current_player.suicide_longwalk_longwalk_tick>0 and player_num==current_player.number}
-        action: jump
-        value: 0
-
 variable_player:
   mode_suicide_longwalk_started:
     tension:
       action: set
       int: 0
-  timer_longwalk_tick{ticks==41 or ticks==21}:
+  timer_missiontimer_tick{ticks==41 or ticks==21}:
     tension: 1
   # We get one freebee to play the barrier warning, after that increase tension
   logicblock_swarmfail_hits_hit{count>1}:

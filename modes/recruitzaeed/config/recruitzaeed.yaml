@@ -25,6 +25,30 @@ mode:
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
+event_player:
+  mode_recruitzaeed_started:
+    set_environment:
+      env: bluesuns
+    show_recruit_instructions{current_player.zaeed_path_renegade==-1}:
+      squadmate: zaeed
+      portrait: recruitzaeed
+      instructions_main: 3x orbits to catch Vido
+      instructions_sub: "< Paragon       Renegade >"
+    show_recruit_instructions{current_player.zaeed_path_renegade!=-1}:
+      squadmate: zaeed
+      portrait: recruitzaeed
+      instructions_main: 3x orbits to catch Vido
+    # Fake the event update to trigger the widget?
+    logicblock_zaeed_orbits_counter_updated:
+      value: device.counters.zaeed_orbits_counter.value
+    set_mission_shots:
+      is_resumable: 0
+      shots_total: 4
+      shots_remaining:
+        value: device.counters.zaeed_orbits_counter.value
+        type: int
+  zaeed_kickshot_hit: mission_collect_score, recruit_zaeed_complete
+
 counters:
   zaeed_orbits_counter:
     starting_count: 4 if current_player.zaeed_path_renegade == -1 else 3
@@ -33,61 +57,28 @@ counters:
     disable_on_complete: false
     reset_on_complete: false
     count_events: zaeed_orbitshots_hit
+    events_when_hit: mission_shot_hit
 
-event_player:
-  mode_recruitzaeed_started:
-    set_environment:
-      env: bluesuns
-    # Fake the event update to trigger the widget?
-    logicblock_zaeed_orbits_counter_updated:
-      value: device.counters.zaeed_orbits_counter.value
-  logicblock_zaeed_orbits_counter_hit{count==1}: recruittimer_add_ten
-  zaeed_kickshot_hit: recruit_zaeed_complete
-
-#####
-# ZAEED SCORING
-#    Hurryup starts at 8,000
-#    Hurryup depletes at a constant rate of 90/s
-#    Each orbit hit builds the hurryup at that time
-#    Subsequent orbit hits increase the multiplier of the built value
-#    Hit the kickback to complete the mode and collect the built value
-#    Progress is not saved
-#####
 variable_player:
-  mode_recruitzaeed_started:
-    # Build value tracks the "base" hurryup depletion
-    temp_build_value:
-      action: set
-      int: 2000
-    temp_hurryup_value:
-      action: set
-      int: 2000
-    temp_multiplier:
-      action: set
-      float: 1
   # If the right orbit is the first orbit hit, set path to renegade
-  zaeed_right_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
+  zaeed_right_orbit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 1
     missionname:
+      action: set
       string: "Stop Vido's Escape"
-  zaeed_left_orbit_hit{device.counters.zaeed_orbits_counter.value==3}:
+  zaeed_left_orbit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 0
     missionname:
+      action: set
       string: "Save the Workers"
-  timer_recruittimer_tick:
-    temp_hurryup_value: -30
-    temp_build_value:   -30
-  zaeed_orbitshots_hit:
-    temp_hurryup_value: current_player.temp_build_value * current_player.temp_multiplier
-    temp_multiplier:
-      action: add
-      float: 0.25
-  zaeed_kickshot_hit:
-    score: current_player.temp_hurryup_value
+  mission_shot_hit{count==1}:
+    mission_instructions:
+      action: set
+      string: "Hit kickback to complete!"
 
 shot_profiles:
   zaeed_orbit_profile:
@@ -125,7 +116,7 @@ shots:
     tags: envshot_right_orbit
   zaeed_kickshot:
     hit_events: sh_kickback_hit
-    enable_events: logicblock_zaeed_orbits_counter_hit{count==1}
+    enable_events: mission_shot_hit{count==1}
     disable_events: mode_recruitzaeed_started
     profile: color_flashing_fast_static
     show_tokens:
@@ -152,31 +143,6 @@ shows:
         (leds): 000000
         l_null: (color)
 
-slide_player:
-  mode_recruitzaeed_started{current_player.zaeed_path_renegade==-1}:
-    zaeed_instructions_slide:
-      expire: 3s
-
-slides:
-  zaeed_instructions_slide:
-    widgets:
-      - type: text
-        text: PARAGON OR RENEGADE
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: HIT ORBIT 3X TO CATCH VIDO
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
-
 sound_player:
   mode_recruitzaeed_started:
     music_recruit_zaeed:
@@ -184,12 +150,12 @@ sound_player:
       mode_end_action: stop
     zaeed_missionstart:
       action: play
-  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==0}: explosionchoice_1_paragon
-  logicblock_zaeed_orbits_counter_hit{count==3 and current_player.zaeed_path_renegade==1}: explosionchoice_1_renegade
-  logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==0}: explosionchoice_2_paragon
-  logicblock_zaeed_orbits_counter_hit{count==2 and current_player.zaeed_path_renegade==1}: explosionchoice_2_renegade
-  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==0}: explosionchoice_3_paragon
-  logicblock_zaeed_orbits_counter_hit{count==1 and current_player.zaeed_path_renegade==1}: explosionchoice_3_renegade
+  mission_shot_hit{count==3 and current_player.zaeed_path_renegade==0}: explosionchoice_1_paragon
+  mission_shot_hit{count==3 and current_player.zaeed_path_renegade==1}: explosionchoice_1_renegade
+  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==0}: explosionchoice_2_paragon
+  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==1}: explosionchoice_2_renegade
+  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==0}: explosionchoice_3_paragon
+  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==1}: explosionchoice_3_renegade
 
 sound_pools:
   zaeed_missionstart:
@@ -407,7 +373,7 @@ widget_player:
   logicblock_zaeed_orbits_counter_updated{value>0}:
     shots_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: recruit_mission_slide
   logicblock_zaeed_orbits_counter_updated{value<=0}:
     shots_remaining_widget:
       action: remove

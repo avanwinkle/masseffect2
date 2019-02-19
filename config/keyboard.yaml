@@ -11,8 +11,12 @@ keyboard:
     switch: s_right_ramp_exit
   5:
     switch: s_right_orbit
+  6:
+    switch: s_bumper_left
+  7:
+    switch: s_bumper_right
   8:
-    switch: s_dropbank_top
+    switch: s_bumper_bottom
   l:
     event: bypass_lock_release_pulse
   n:
@@ -28,7 +32,9 @@ keyboard:
   o:
     event: disable_gates
   i:
-    event: gi_on
+    event: show_grid
+  shift+i:
+    event: remove_grid
   9:
     switch: s_hitbank_top
   0:
@@ -46,10 +52,16 @@ keyboard:
   g:
     event: levelup
   y:
-    event: plunger_eject
+    switch: s_tilt
   x:
     event: ball_drain
     params:
       balls: 1
-  b:
-    event: start_mode_overlord
+  d:
+    switch: s_top_lane_left
+  h:
+    switch: s_top_lane_right
+  s:
+    switch: s_spinner
+  space:
+    event: flippers_on

@@ -23,15 +23,25 @@ event_player:
   mode_suicide_tubes_started.1:
     set_environment:
       env: collectors
-  # The tubes widget will persist value on restart, but the first load needs a value
+    set_mission_shots:
+      shots_total: 5
+      is_resumable: 1
+      ticks: 60 # No actual timer, but still need to depreciate the value
+      shots_remaining: 
+        value: device.counters.tubes_counter.value
+        type: int
+  # The tubes widget will persist value on restart, but the first load needs a value to post to the widget
   mode_suicide_tubes_started.2{device.counters.tubes_counter.value==4}:
     logicblock_tubes_counter_updated:
       value: 4
   tube_hint_shot_hit{device.counters.tubes_counter.value>0}: play_tube_hint
+  logicblock_tubes_counter_hit: mission_shot_hit
   # Enable the hold for the final shot
   logicblock_tubes_counter_complete: enable_transition_hold
   # Count the ramp exit shot as complete, which will start the huddle
-  tube_complete_shot_lit_hit: tubes_complete
+  tube_complete_shot_lit_hit: 
+    - mission_collect_score
+    - tubes_complete
 
 counters:
   tubes_counter:

@@ -30,19 +30,30 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_hagalaz_started.1:
+  mode_shadowbroker_hagalaz_started.2:
     - enable_random_shuntshot
     - capacitors_charged_ready|10s
   # Fake the counter event to get the widget onscreen
-  mode_shadowbroker_hagalaz_started.2:
+  mode_shadowbroker_hagalaz_started.1:
     logicblock_shunt_counter_hit:
       value: device.counters.shunt_counter.value
+    set_mission_shots:
+      shots_total: 8
+      is_resumable: 1 # Not actually, but don't reset hurryup after shots
+      ticks: 60
+  shunt_shot_lit_hit:
+    - mission_shot_hit
+    - missiontimer_add_twelve
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
-  logicblock_shunt_counter_complete: enable_hatch
-  shadowbroker_hagalaz_complete: stop_mode_shadowbroker_hagalaz
-  timer_sbhagalaz_timer_tick{ticks % 8 == 0}: enable_random_shuntshot
-  timer_sbhagalaz_timer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+  logicblock_shunt_counter_complete: 
+    - enable_hatch
+    - missiontimer_stop
+    - mission_collect_score
+  shadowbroker_hagalaz_complete: 
+    - stop_mode_shadowbroker_hagalaz
+  timer_missiontimer_tick{ticks % 8 == 0}: enable_random_shuntshot
+  timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
   # If the only lit shot is hit, light another one so we don't idle
   player_temp_counter{player_num==current_player.number and value==0}: enable_random_shuntshot|1s
   # DEBUG until we have an actual hold
@@ -61,7 +72,7 @@ random_event_player:
 
 counters:
   shunt_counter:
-    starting_count: 4
+    starting_count: 6 if current_player.difficulty==0 else 8
     count_complete_value: 0
     reset_on_complete: False
     direction: down
@@ -427,54 +438,47 @@ sounds:
     max_queue_time: 1s
     events_when_stopped: play_liara_ive_never_broken_into_sb_before
 
-timers:
-  sbhagalaz_timer:
-    start_value: 60
-    max_value: 60
-    end_value: 0
-    tick_interval: 1s
-    start_running: true
-    direction: down
-    control_events:
-      - event: enable_hatch
-        action: stop
-      - event: shunt_shot_hit
-        action: add
-        value: 12
-
 slide_player:
-  mode_shadowbroker_hagalaz_started: hagalaz_slide
+  mode_shadowbroker_hagalaz_started:
+    hagalaz_slide: {}
+    hagalaz_portrait:
+      target: lcd_right
   logicblock_shunt_counter_complete: hagalaz_complete_slide
 
 slides:
   hagalaz_slide:
     widgets:
       - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
+      - type: text
         text: Infiltrate the Ship
-        style: medium
+        style: header_sm, row_main, col_left_anchor
+      - widget: background_console
+  hagalaz_portrait:
+    widgets:
+      - type: image
+        image: portrait_shadowbroker_hagalaz
   hagalaz_complete_slide:
     widgets:
       - type: text
-        text: ENTER
-        style: text_default
-        anchor_y: bottom
-        y: middle+2
-        animations:
-          show_slide: pulse_text_slow
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
       - type: text
-        text: THE SHIP
-        style: text_default
-        anchor_y: top
-        y: middle-2
+        text: ENTER THE SHIP
+        style: header_sm, row_main, col_left_anchor
         animations:
           show_slide: pulse_text_slow
+      - widget: background_console
 
 widget_player:
-  timer_sbhagalaz_timer_tick:
+  timer_missiontimer_tick:
     hagalaz_timer_widget:
       action: update
       slide: hagalaz_slide
-  timer_sbhagalaz_timer_stopped:
+  timer_missiontimer_stopped:
     hagalaz_timer_widget:
       action: remove
   logicblock_shunt_counter_updated{value>0}:
@@ -489,8 +493,8 @@ widgets:
   hagalaz_timer_widget:
     - type: text
       text: (ticks)
-      style: small_bot_left
+      style: timer_primary, row_gutter, col_right_indent
   hagalaz_shunt_widget:
     - type: text
       text: "Shots: (value)"
-      style: small_bot_right
+      style: header_xs, row_gutter, col_left_center

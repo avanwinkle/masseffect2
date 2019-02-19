@@ -1,28 +1,34 @@
 #config_version=5
 
 event_player:
-  # watch out! Recruitsave's early save can disable it before the medigel shot kicks in, causing a double save
   medigel_shot_hit:
     - do_medigel_save
+  # Disable medigel during story wizard modes because they have many saves. Completing
+  # them will levelup and restore medigel anyway. Suicide also manages its
+  # own ball saves, so disable for the entire suicide mission
+  mode_collectorship_base_started: cancel_medigel
+  mode_normandyattack_started: cancel_medigel
+  # mode_derelictreaper_started # Derelict Reaper has multiball but no save, rely on only_last_ball
+  mode_suicide_base_started: cancel_medigel
 
 shots:
   # This shot lights when medigel is available
   medigel_shot:
     hit_events:
-      - s_outlane_left_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
-      - s_outlane_right_active{not device.ball_saves.default.enabled and not device.ball_saves.recruitsave.enabled and not device.ball_saves.sbchase_save.enabled}
-    profile: medigel_profile
-    enable_events: levelup, enable_medigel
-    # Disable medigel during story wizard modes because they have many saves. Completing
-    # them will levelup and restore medigel anyway. Suicide also manages its
-    # own ball saves, so disable for the entire suicide mission
+      - s_outlane_left_active
+      - s_outlane_right_active
+    enable_events:
+      - levelup
+      - ball_save_recruitsave_disabled{current_player.medigel>0}
+      - ball_save_default_disabled{current_player.medigel>0}
+      - ball_save_sbchase_save_disabled{current_player.medigel>0}
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
+      - ball_save_recruitsave_enabled
+      - ball_save_default_enabled
+      - ball_save_sbchase_save_enabled
       - ball_will_end
-      - mode_collectorship_base_started
-      - mode_derelictreaper_started
-      - mode_normandyattack_started
-      - mode_suicide_base_started
+      - cancel_medigel
     tags: envshot_outlane
 
 ball_saves:
@@ -33,12 +39,29 @@ ball_saves:
     balls_to_save: 1
     only_last_ball: true  # don't waste medigel during multiballs
 
-shot_profiles:
-  medigel_profile:
-    show: medigel_show
-    show_when_disabled: false
-    states:
-      - name: lit
+variable_player:
+  levelup:
+    medigel: 1
+  ball_save_medigel_save_saving_ball:
+    medigel:
+      action: set
+      int: 0
+  ball_will_end:
+    medigel:
+      action: set
+      int: 0
+
+show_player:
+  player_medigel{value>0}: medigel_show
+  player_medigel{value==0}:
+    medigel_show:
+      action: stop
+  ball_will_end:
+    medigel_show:
+      action: stop
+  cancel_medigel:
+    medigel_show:
+      action: stop
 
 shows:
   medigel_show:
@@ -67,35 +90,16 @@ slides:
   medigel_slide:
     - type: image
       image: medigel
-      anchor_x: left
-      anchor_y: bottom
-      x: 0
-      y: 0
+      style: row_sub_under
       z: 2
     - type: text
-      text: Medigel
-      style: medium
-      anchor_x: left
-      anchor_y: bottom
-      y: middle+2
-      x: 38
-      casing: upper
-    - type: text
-      text: Deployed
-      style: medium
-      anchor_x: left
-      anchor_y: top
-      y: middle-2
-      x: 38
-      casing: upper
-    - type: rectangle
-      width: 128
-      height: 32
-      color: black
-      z: 0
+      text: "Medigel\nDeployed"
+      style: header_md, row_main
 
 sound_player:
-  ball_save_medigel_save_saving_ball: medigel_sound
+  # During multiballs the save event will post even if it's not the last ball (i.e. no save)
+  # Count the balls being saved to avoid playing the sound unnecessarily
+  ball_save_medigel_save_saving_ball{balls==1}: medigel_sound
   ball_save_default_saving_ball: medigel_sound
   ball_save_recruitsave_saving_ball: medigel_sound
 
@@ -170,4 +174,3 @@ sounds:
       attack: 10ms
       release: 10ms
       release_point: 0
-

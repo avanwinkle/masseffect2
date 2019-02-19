@@ -23,14 +23,27 @@ event_player:
   mode_recruitgrunt_started:
     set_environment:
       env: krogan
-  slide_recruitslide_active:
+    show_recruit_instructions:
+      squadmate: grunt
+      portrait: recruitgrunt
+      instructions_main: Defeat the Krogan
+      instructions_sub: " "
+    set_mission_shots:
+      is_resumable: 1
+      ticks:
+        value: 12 if current_player.difficulty else 20
+        type: int
+      shots_total: 5
+      shots_remaining:
+        value: device.counters.grunt_shots_counter.value
+        type: int
+  slide_recruit_mission_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:
         value: device.counters.grunt_shots_counter.value
         type: int
-  recruittimer_start: recruittimer_set_twenty
-  # Add time for each successful shot, but jump directly to 12 instead of adding 12
-  logicblock_grunt_shots_counter_hit{device.timers.recruittimer.ticks<=12}: recruittimer_set_twelve
+  # Add time for each successful shot by resetting directly to 12
+  mission_shot_hit{device.timers.missiontimer.ticks<=12}: missiontimer_set_12
   logicblock_grunt_shots_counter_complete: recruit_grunt_complete
 
 counters:
@@ -39,43 +52,13 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: grunt_shots_lit_hit
+    events_when_hit:
+      - logicblock_grunt_shots_counter_hit
+      - mission_shot_hit
+      - mission_collect_score
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
-
-#####
-# GRUNT variable_player:
-#    Hurryup starts at 8,000
-#    Hit any lit shot to collect the hurryup
-#    New hurryup is 8,000 plus 50% bonus for each hit shot *since mode start*
-#    Hurryup depletion is fixed (always 390 points-per-second)
-#    Hit all 5 shots to complete the mission
-#    Progress is saved after each shot (but the bonus multiplier resets)
-#####
-variable_player:
-  mode_recruitgrunt_started:
-    temp_hurryup_value:
-      action: set
-      int: 8000
-    temp_multiplier:
-      action: set
-      int: 1
-    temp_build_value:
-      action: set
-      int: 0
-  timer_recruittimer_tick{current_player.temp_multiplier>0}:
-    temp_hurryup_value: -390
-  logicblock_grunt_shots_counter_hit:
-    # Capture the net hurryup value, but display the cumulative captured + hurryup
-    score: current_player.temp_hurryup_value- current_player.temp_build_value
-    # temp_build value is how much has already been captured, while temp_hurryup is that plus new hurryup value
-    temp_build_value:
-      action: set
-      int: current_player.temp_hurryup_value - current_player.temp_build_value
-    # Each consecutive hit increases the hurryup starting value by 50%
-    temp_hurryup_value:
-      action: add
-      int: 8000 * (1 + (current_player.temp_multiplier * 0.5))
 
 shot_groups:
   grunt_shots:
@@ -131,31 +114,6 @@ show_player:
       priority: 100
       show_tokens:
         color: FF6611 #color_grunt
-
-slide_player:
-  mode_recruitgrunt_started:
-    grunt_instructions_slide:
-      expire: 3s
-
-slides:
-  grunt_instructions_slide:
-    widgets:
-      - type: text
-        text: COMPLETE ALL SHOTS
-        style: dmd_small
-        anchor_y: bottom
-        y: middle+4
-        z: 1
-      - type: text
-        text: TO DEFEAT KROGAN
-        style: dmd_small
-        anchor_y: top
-        y: middle-4
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: 000000
 
 sound_player:
   mode_recruitgrunt_started:
@@ -223,4 +181,4 @@ widget_player:
   logicblock_grunt_shots_counter_updated:
     shots_remaining_widget:
       action: update
-      slide: recruitslide
+      slide: recruit_mission_slide

@@ -1,4 +1,6 @@
 #config_version=5
+config:
+  - config_tilt.yaml
 
 # Relay through event_player because widget_player doesn't like conditions/priorities
 event_player:
@@ -6,7 +8,9 @@ event_player:
     # Give a small delay to allow the player vars to initialize, lest the placeholder text show goofy
     - add_player_2{num==2}|150ms
     - add_player_3{num==3}|150ms
+    - remove_level{num==3 and not is_lcd}|150ms
     - add_player_4{num==4}|150ms
+    - remove_ball{num==3 and not is_lcd}|150ms
   player_turn_started{game.num_players>1}:
     - multiplayer_turn_start_1{number==1}
     - multiplayer_turn_start_2{number==2}
@@ -21,34 +25,7 @@ event_player:
   multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
 
 slide_player:
-  show_base_slide:
-    singleplayer_slide{not is_multiplayer}:
-      action: play
-      priority: 1
-    multiplayer_slide{is_multiplayer}:
-      action: play
-      priority: 2
-    introslide_missions{is_available and not is_resume}:
-      action: play
-      priority: 3
-      expire: 6s
-    introslide_no_missions{not is_available and not is_resume}:
-      action: play
-      priority: 3
-      expire: 6s
-  show_multiplayer_slide:
-    multiplayer_slide:
-      action: play
-    singleplayer_slide:
-      action: remove
-  disable_missionresume:
-    resume_slide:
-      action: remove
-  ball_will_end:
-    singleplayer_slide:
-      action: remove
-    multiplayer_slide:
-      action: remove
+  queue_slide: {}
 
 widget_player:
   # First event, before additional players have a chance to enter
@@ -57,31 +34,18 @@ widget_player:
       slide: singleplayer_slide
     base_ball_widget:
       slide: singleplayer_slide
-  # Base starts, show a resume mission
+
+  # Base starts, show a resume mission?
   show_base_slide{is_resume and not is_multiplayer}:
     resume_widget:
       action: add
-      target: dmd
-      priority: 3
-    resume_bg_widget:
-      action: add
-      target: dmd
-      widget_settings:
-        height: 17
+      slide: singleplayer_slide
   show_base_slide{is_resume and is_multiplayer}:
     resume_widget:
       action: add
-      target: dmd
-      priority: 3
-    resume_bg_widget:
-      action: add
-      target: dmd
-      widget_settings:
-        height: 14
+      slide: multiplayer_slide
   disable_missionresume:
     resume_widget:
-      action: remove
-    resume_bg_widget:
       action: remove
   # Player 2 has entered the game, add widgets for player1 and player2
   add_player_2:
@@ -98,6 +62,7 @@ widget_player:
   add_player_3:
     mp_score_widget_player_3:
       slide: multiplayer_slide
+  remove_level:
     # Remove the "Level" widget and place the player3 score
     base_level_widget:
       action: remove
@@ -105,6 +70,7 @@ widget_player:
   add_player_4:
     mp_score_widget_player_4:
       slide: multiplayer_slide
+  remove_ball:
     # Remove the "Ball" widget and place the player4 score
     base_ball_widget:
       action: remove
@@ -156,116 +122,59 @@ widget_player:
     mp_name_widget_player_4:
       action: remove
 
-slides:
-  singleplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: score_style_singleplayer
-  multiplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: score_style_multiplayer
-  introslide_no_missions:
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
-      - type: text
-        text: Hit any lane 3x
-        style: small
-        anchor_y: top
-        y: middle-2
-      - type: text
-        text: to unlock missions
-        style: small
-        anchor_y: top
-        y: middle-9
-  introslide_missions:
-    widgets:
-      - type: text
-        text: Build Your Team
-        style: text_default
-        anchor_y: bottom
-        y: middle
-      - type: text
-        text: Select a mission at
-        style: small
-        anchor_y: top
-        y: middle-2
-      - type: text
-        text: the Galaxy Map
-        style: small
-        anchor_y: top
-        y: middle-9
-
 widgets:
   base_level_widget:
     - type: text
       text: LVL (player|level)
-      style: mp_player_3
+      style: header_xs, row_gutter, col_left_center
   base_ball_widget:
     - type: text
       text: BALL (ball)
-      style: mp_player_4
+      style: header_xs, row_gutter, col_right_indent
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)
-      style: mp_player_1
+      style: header_xs, row_top, col_left_anchor, num
+      z: 10
   mp_score_widget_player_2:
     - type: text
       text: (player2|score)
-      style: mp_player_2
+      style: header_xs, row_top, col_right_anchor, num
+      z: 10
   mp_score_widget_player_3:
     - type: text
       text: (player3|score)
-      style: mp_player_3
+      style: header_xs, row_bottom, col_left_anchor, num
+      z: 10
   mp_score_widget_player_4:
     - type: text
       text: (player4|score)
-      style: mp_player_4
+      style: header_xs, row_bottom, col_right_anchor, num
+      z: 10
   mp_name_widget_player_1:
     - type: text
-      text: (machine|last_career_player_1)
-      style: mp_player_1
+      text: (machine|current_career_player_1)
+      style: header_xs, row_top, col_left_anchor
   mp_name_widget_player_2:
     - type: text
-      text: (machine|last_career_player_2)
-      style: mp_player_2
+      text: (machine|current_career_player_2)
+      style: header_xs, row_top, col_right_anchor
   mp_name_widget_player_3:
     - type: text
-      text: (machine|last_career_player_3)
-      style: mp_player_3
+      text: (machine|current_career_player_3)
+      style: header_xs, row_bottom, col_left_anchor
   mp_name_widget_player_4:
     - type: text
-      text: (machine|last_career_player_4)
-      style: mp_player_4
+      text: (machine|current_career_player_4)
+      style: header_xs, row_bottom, col_right_anchor
   resume_widget:
     - type: text
-      text: Press action button to
-      style: small
-      y: middle+3
+      text: "Press action button to\nresume (player|resume_mission) recruitment"
+      style: header_xs, row_sub_under, col_left_anchor
+      casing: upper
       z: 5
       animations:
         add_to_slide: pulse_text_slow
-    - type: text
-      text: resume (player|resume_mission) recruitment
-      style: small
-      y: middle-3
-      z: 5
-      animations:
-        add_to_slide: pulse_text_slow
-  resume_bg_widget:
-    - type: rectangle
-      color: 000000
-      anchor_y: bottom
-      y: middle-6
-      height: 14
-      width: 128
-      z: 4
 
 sound_player:
   player_added{num==1}: gui_splashstart

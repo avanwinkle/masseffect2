@@ -1,6 +1,9 @@
 #config_version=5
+event_player:
+  mode_base_started.10{not machine.is_lcd}: show_debug_widgets
+
 widget_player:
-  mode_base_started:
+  show_debug_widgets:
     squad_debug:
       target: window
     vars_debug:
@@ -80,17 +83,17 @@ widgets:
       text: "Temp Hurryup: (temp_hurryup_value)"
       style: squad_debug_style
       x: 10
-      y: 24
+      y: 4
     - type: text
       text: "Temp Build: (temp_build_value)"
       style: squad_debug_style
       x: 10
-      y: 44
+      y: 24
     - type: text
       text: "Temp Multiplier: (temp_multiplier)"
       style: squad_debug_style
       x: 10
-      y: 64
+      y: 44
   vars_debug:
     - type: text
       text: "PLAYER VARS:"

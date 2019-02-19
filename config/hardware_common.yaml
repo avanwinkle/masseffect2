@@ -1,0 +1,115 @@
+#config_version=5
+
+ball_devices:
+  bd_plunger:
+    ball_switches: s_plunger_lane
+    eject_coil: c_plunger
+    mechanical_eject: true
+    ball_missing_timeouts: 10s
+    eject_timeouts: 3s
+    confirm_eject_type: target # default
+    entrance_count_delay: 0
+    player_controlled_eject_event: force_plunger_launch
+    debug: true
+  bd_trough:
+    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
+    eject_coil: c_trough_eject
+    tags: trough, home, drain
+    jam_switch: s_trough_jam
+    eject_targets: bd_plunger
+    eject_timeouts: 1500ms
+    auto_fire_on_unexpected_ball: False
+    confirm_eject_switch: s_plunger_lane
+  bd_lock:
+    entrance_count_delay: 500ms # Default: 500ms
+    ball_switches: s_lock_1, s_lock_2, s_lock_3
+    eject_coil: c_lock_release_post
+    eject_events: lock_eject_one_ball
+    eject_all_events: game_ended
+    eject_coil_enable_time: 250ms, 230ms, 215ms
+                          # 1 ball:  230ms can be too short, increasing to 250
+                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
+                          # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
+    eject_timeouts: 3s
+    exit_count_delay: 2s
+    ball_missing_timeouts: 5s
+    debug: true
+  bd_hold:
+    ball_capacity: 1
+    hold_coil: c_up_post
+    hold_coil_release_time: 1s
+    # hold_switches: s_kickback
+    entrance_switch: s_airlock_enter
+
+flippers:
+  right_flipper:
+    main_coil: c_flipper_right_main
+    activation_switch: s_flipper_right
+    enable_events: ball_starting, flippers_on
+    disable_events: ball_ending, service_mode_entered, flippers_off, right_flipper_off
+  left_flipper:
+    main_coil: c_flipper_left_main
+    activation_switch: s_flipper_left
+    enable_events: ball_starting, flippers_on
+    disable_events: ball_ending, service_mode_entered, flippers_off, left_flipper_off
+
+drop_targets:
+  bottom:
+    switch: s_dropbank_bottom
+  middle:
+    switch: s_dropbank_middle
+  top:
+    switch: s_dropbank_top
+
+drop_target_banks:
+  dropbank:
+    drop_targets: bottom, middle, top
+    reset_coils: c_dropbank_reset
+    reset_on_complete: 1s
+    reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
+
+autofire_coils:
+  left_slingshot:
+    switch: s_left_slingshot
+    coil: c_slingshot_left
+    enable_events: ball_started, slingshots_on
+    disable_events: ball_ending, service_mode_entered, slingshots_off
+    debug: true
+  left_bumper:
+    switch: s_bumper_left
+    coil: c_bumper_left
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
+    debug: true
+  right_bumper:
+    switch: s_bumper_right
+    coil: c_bumper_right
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
+  bottom_bumper:
+    switch: s_bumper_bottom
+    coil: c_bumper_bottom
+    enable_events: ball_started, bumpers_on
+    disable_events: ball_ending, service_mode_entered, bumpers_off
+  right_slingshot:
+    switch: s_right_slingshot
+    coil: c_slingshot_right
+    enable_events: ball_started, slingshots_on
+    disable_events: ball_ending, service_mode_entered, slingshots_off
+    debug: true
+# kickbacks:
+  # dragon_kickback:
+  #   coil: c_kickback
+  #   switch: s_kickback
+  #   enable_events: enable_kickback
+  #   disable_events: disable_kickback, ball_hold_enable
+  #   debug: true
+
+playfields:
+  playfield:
+    default_source_device: bd_plunger
+    tags: default
+    enable_ball_search: False
+    ball_search_timeout: 5s
+    ball_search_interval: 5s
+

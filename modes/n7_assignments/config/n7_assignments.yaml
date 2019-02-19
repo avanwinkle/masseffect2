@@ -20,10 +20,21 @@ mode:
   priority: 500
 
 event_player:
-  n7_assignment_shot_hit: n7_assignment_ended
-  timer_n7timer_complete: n7_assignment_ended
-  mode_n7_assignments_started:
-    - restart_n7timer|500ms
+  mode_n7_assignments_started.2:
+    set_mission_shots:
+      shots_total: 5  # Will yield base value / 25 = 4,000pts
+      shots_remaining: 1
+      ticks: 20
+      multiplier:
+        value: 1.0 + (0.25 * current_player.assignments_completed)
+        type: float
+  mode_n7_assignments_started.1:
+    - missiontimer_start|1s
+  n7_assignment_shot_hit:
+    - mission_shot_hit
+    - mission_collect_store
+    - n7_assignment_ended
+  timer_missiontimer_complete: n7_assignment_ended
   n7_assignment_ended:
     - stop_mode_n7_assignments
   player_shot_n7_anomalous_weather_shot_enabled:
@@ -61,24 +72,14 @@ random_event_player:
       - start_n7_msv_strontium_mule
 
 variable_player:
-  mode_n7_assignments_started:
-    temp_build_value:
-      action: set
-      # Max value is 4000 plus 10% per mission completed
-      int: 4000 * (1 + (0.1 * current_player.assignments_completed))
-  timer_n7timer_tick:
-    temp_build_value:
-      action: add
-      # Each tick is 1/2s, so burn 1/60th (60 + 10%) each time
-      int: (1 + (0.1 * current_player.assignments_completed)) * -60
   n7_assignment_shot_hit:
-    score: current_player.temp_build_value
     assignments_completed: 1
+    xp: machine.assignment_xp
 
 shot_groups:
   n7_assignment_shot:
     shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_hahne_kedar_facility_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
-    rotate_right_events: sw_bumper_active # Bumper hits determine randomness
+    rotate_right_events: sw_bumper_active  # Bumper hits determine randomness
 
 shots:
   n7_anomalous_weather_shot:
@@ -133,7 +134,7 @@ shots:
 
 shot_profiles:
   n7_shot_profile:
-    show_when_disabled: False
+    show_when_disabled: false
     states:
       - name: active
         show: n7_show
@@ -168,8 +169,9 @@ shows:
 slide_player:
   set_n7_mission:
     n7_hurryupslide:
+      target: lcd_left
       action: play
-      priority: 1
+      priority: 100
   n7_assignment_ended:
     n7_hurryupslide:
       action: remove
@@ -178,19 +180,15 @@ slides:
   n7_hurryupslide:
     widgets:
       - type: image
-        image: n7_logo_33x11
-        anchor_x: left
-        anchor_y: bottom
-        x: 2
-        y: 3
+        image: n7_logo
+        style: row_top, col_right_anchor
+      - type: text
+        text: N7 Assignment
+        style: header_xs, row_top, col_left_anchor
+        opacity: 0.5
       - type: text
         text: (title)
-        anchor_x: left
-        anchor_y: top
-        x: 2
-        y: top-2
-        font_size: 8
-        font_name: pixelmix-8
+        style: header_sm, row_main, col_left_anchor
 
 sound_player:
   mode_n7_assignments_started:
@@ -243,7 +241,7 @@ sounds:
     file: mus_n7_8_combat_1.ogg
     track: music
   intro_imminent_ship_crash:
-    file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.ogg # "Warning: collision imminent"
+    file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.ogg  # "Warning: collision imminent"
     track: voice
     ducking:
       target: music
@@ -360,37 +358,17 @@ sounds:
       release: 200ms
       release_point: 100ms
 
-timers:
-  n7timer:
-    start_value: 60 # 2x the number of seconds
-    end_value: 1
-    direction: down
-    tick_interval: 500ms
-    control_events:
-      - event: mode_n7_assignments_started
-        action: reset
-      - event: restart_n7timer # Give a delay to start the mission
-        action: restart
-      - event: n7_assignment_shot_hit
-        action: stop
-      - event: ball_will_end
-        action: stop
-
 widget_player:
-  player_temp_build_value:
-    hurryup_widget:
+  timer_missiontimer_started: timer_widget
+  timer_missiontimer_tick:
+    timer_widget:
       action: update
-      slide: n7_hurryupslide
+  stop_mode_n7_assignments:
+    timer_widget:
+      action: remove
 
 widgets:
-  hurryup_widget:
+  timer_widget:
     - type: text
-      text: (value)
-      number_grouping: true
-      anchor_x: left
-      anchor_y: bottom
-      x: 40
-      y: 2
-      font_size: 10
-      font_name: quadrit
-
+      text: (ticks_remaining)
+      style: timer_primary, row_gutter, col_right_indent

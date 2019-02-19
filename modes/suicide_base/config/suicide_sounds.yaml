@@ -1,26 +1,58 @@
 #config_version=5
 sound_player:
-    # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
-    play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
-    mode_type_suicide_started:
-      suicide_music_base:
-        action: stop
-        fade_out: 2s
-    mode_suicide_base_will_stop:
-      suicide_music_base:
-        action: stop
-        fade_out: 2s
-    # Play the final valve sound here so we can stop the infiltration mode immediately
-    infiltration_complete:
-      specialist_inf_through:
-        action: play
-        # Start this first to avoid a race condition with the huddle dialoge
-        # Don't need anymore because lockhandler does it?
-        # events_when_stopped: start_mode_suicide_huddle
-    longwalk_complete:
-      shep_everyone_through_the_doors:
-        action: play
-        # events_when_stopped: start_mode_suicide_huddle
+  # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
+  play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration
+  mode_type_suicide_started:
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
+  mode_suicide_base_will_stop:
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
+  # Sounds in shows don't playback after loading, so pre-load them!
+  omegarelay_complete: #preload_infiltration:
+    infiltration_low:
+      action: load
+      track: music
+    specialist_inf_intro:
+      action: load
+      track: voice
+    specialist_inf_outro:
+      action: load
+      track: voice
+  infiltration_complete:
+    # Play the final valve sound in this file so we can stop mode_suicide_infiltration immediately
+    specialist_inf_through:
+      action: play
+    longwalk_low:
+      action: load
+      track: music
+    specialist_lw_intro_yes:
+      action: load
+      track: voice
+    specialist_lw_intro_no:
+      action: load
+      track: voice
+    specialist_lw_outro:
+      action: load
+      track: voice
+  longwalk_complete:
+    shep_everyone_through_the_doors:
+      action: play
+    platforms_low:
+      action: load
+      track: music
+    shep_we_win_or_lose_it_all:
+      action: load
+      track: voice
+  tubes_complete:
+    platforms_med_high:
+      action: load
+      track: music
+    shep_give_us_a_minute_edi:
+      action: load
+      track: voice
 
 # For the last time, kill all the music when a mode stops!
 track_player:
@@ -940,9 +972,6 @@ sounds:
       file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.ogg
       track: voice
   # Squadmate got one
-    garrus_nice_shot:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.ogg
-      track: voice
     garrus_there_we_go:
       file: en_us_hench_garrus_ss_global_hench_garrus_00303175_m.ogg
       track: voice
@@ -954,9 +983,6 @@ sounds:
       track: voice
     jack_got_one:
       file: en_us_hench_convict_ss_global_hench_convict_00296198_m.ogg
-      track: voice
-    jack_nice_shot:
-      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.ogg
       track: voice
     miranda_got_one:
       file: en_us_hench_vixen_ss_global_hench_vixen_00257437_m.ogg
@@ -1216,60 +1242,46 @@ sounds:
     shepard_what_about_biotics:
       file: en_us_player_f_endgm2_huddle_02a_d_00282594_f.ogg
       track: voice
-      # events_when_stopped: play_specialist_lw_yes
     shepard_conventional_weapons_useless:
       file: en_us_player_f_endgm2_huddle_02a_d_00282560_f.ogg
       track: voice
-      # events_when_stopped: play_specialist_lw_no
     edi_chamber_overrun_with_seeker_swarms:
       file: en_us_hench_ai_endgm2_huddle_02a_d_00282512_m.ogg
       track: voice
       start_at: 1500ms
-      events_when_stopped: play_specialist_lw_no
     miranda_any_biotic_could:
       file: en_us_hench_vixen_endgm2_huddle_02a_d_00282526_m.ogg
       track: voice
-      events_when_stopped: specialist_intro_complete
     specialist_biotic_field_yes_thane:
       file: en_us_hench_assassin_endgm2_huddle_02a_d_00282695_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_no_thane:
       file: en_us_hench_assassin_endgm2_huddle_02a_d_00282698_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_yes_jack:
       file: en_us_hench_convict_endgm2_huddle_02a_d_00282515_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_no_jack:
       file: en_us_hench_convict_endgm2_huddle_02a_d_00282522_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_yes_jacob:
       file: en_us_hench_leading_endgm2_huddle_02a_d_00282516_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_no_jacob:
       file: en_us_hench_leading_endgm2_huddle_02a_d_00282524_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_yes_samara:
       file: en_us_hench_mystic_endgm2_huddle_02a_d_00282513_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_no_samara:
       file: en_us_hench_mystic_endgm2_huddle_02a_d_00282518_m.ogg
       track: voice
-      events_when_stopped: specialist_lw_callback_miranda
     specialist_biotic_field_yes_miranda:
       file: en_us_hench_vixen_endgm2_huddle_02a_d_00282517_m.ogg
       track: voice
-      events_when_stopped: specialist_intro_complete
     specialist_biotic_field_no_miranda:
       file: en_us_hench_vixen_endgm2_huddle_02a_d_00282527_m.ogg
       track: voice
-      events_when_stopped: specialist_intro_complete
   # Long Walk: Confirmation/Outro
     specialist_im_ready_samara:
       file: en_us_hench_mystic_endgm2_huddle_03b_d_00267109_m.ogg

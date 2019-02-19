@@ -12,6 +12,25 @@ event_player:
     - shipupgrade_completed{current_player.available_shipupgrades>0}
     - research_completed{current_player.available_shipupgrades==0}
   capture_shipupgrade_shot_hit: shipupgrade_completed
+  research_completed:
+    queue_slide:
+      slide: research_slide
+      portrait: upgrades
+  achievement_upgrade_armor_state_completed:
+    queue_slide:
+      slide: upgrade_complete_slide
+      portrait: upgrades
+      upgrade_name: Silaris Armor
+  achievement_upgrade_cannon_state_completed:
+    queue_slide:
+      slide: upgrade_complete_slide
+      portrait: upgrades
+      upgrade_name: Thanix Cannon
+  achievement_upgrade_shields_state_completed:
+    queue_slide:
+      slide: upgrade_complete_slide
+      portrait: upgrades
+      upgrade_name: Multicore Shielding
 
 variable_player:
   shipupgrade_completed:
@@ -95,74 +114,32 @@ shots:
       color: FFFFFF
 
 slide_player:
-  research_completed:
-    research_slide:
-      expire: 3s
   shipupgrade_available:
     shipupgrade_ready_slide:
       expire: 7s  # Levelup slide is 4s, so this needs to be longer
-  achievement_upgrade_armor_state_completed:
-    upgrade_armor_complete_slide:
-      expire: 1s
-  achievement_upgrade_cannon_state_completed:
-    upgrade_cannon_complete_slide:
-      expire: 1s
-  achievement_upgrade_shields_state_completed:
-    upgrade_shields_complete_slide:
-      expire: 1s
+
 
 slides:
   research_slide:
     - type: text
       text: "Upgrade Researched"
-      style: small
-      anchor_x: left
-      anchor_y: top
-      x: 2
-      y: top-2
+      style: body_md, row_top, col_left_anchor, num
     - type: text
       text: (player|current_research)
-      style: medium
-      anchor_y: top
-      y: top-16
+      style: header_sm, row_main, col_left_anchor
   shipupgrade_ready_slide:
     widgets:
       - type: text
         text: Ship Upgrade Available!
-        style: medium
-  upgrade_armor_complete_slide:
+        style: header_sm, row_main, col_left_anchor
+  upgrade_complete_slide:
     widgets:
       - type: text
         text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
+        style: body_md, row_top, col_left_anchor, num
       - type: text
-        text: Silaris Armor
-        style: text_default
-        y: middle-4
-  upgrade_cannon_complete_slide:
-    widgets:
-      - type: text
-        text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
-      - type: text
-        text: Thanix Cannon
-        style: text_default
-        y: middle-4
-  upgrade_shields_complete_slide:
-    widgets:
-      - type: text
-        text: Ship Upgrade Researched
-        style: small
-        anchor_y: bottom
-        y: middle+6
-      - type: text
-        text: Multicore Shielding
-        style: text_default
-        y: middle-4
+        text: (upgrade_name)
+        style: header_sm, row_main, col_left_anchor
 
 sound_player:
   collect_research_shot_hit: upgrade_collected_sound
@@ -213,4 +190,7 @@ sounds:
     file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
     track: voice
 
-
+widgets:
+  portrait_upgrades:
+    - type: image
+      image: portrait_upgrades

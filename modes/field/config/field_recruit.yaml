@@ -20,6 +20,17 @@ config:
   - field_recruit_sounds.yaml
   - field_recruit_shows.yaml
 
+event_player:
+  play_queued_slide_recruit_advance_slide_1:
+    - play_recruit_advance_(squadmate)|50ms
+    - remove_popup|4s
+  play_queued_slide_recruit_advance_slide_2:
+    - play_recruit_advance_(squadmate)|50ms
+    - remove_popup|4s
+  play_queued_slide_recruit_advance_slide_3:
+    - play_recruit_advance_(squadmate)|50ms
+    - remove_popup|4s
+
 variable_player:
   recruit_advance:
     score: 500
@@ -69,7 +80,8 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
     enable_events:
-      - mode_field_started{current_player.status_kasumi<3}
+      # No kasumi on casual mode
+      - mode_field_started{current_player.status_kasumi<3 and current_player.casual==0}
     disable_events:
       - recruit_lit{squadmate=="kasumi"}
     show_tokens:
@@ -124,7 +136,8 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
     enable_events:
-      - mode_field_started{current_player.status_kasumi>3 and current_player.status_thane<3}
+      # If casual mode, thane lights after grunt. Otherwise, thane lights after kasumi.
+      - mode_field_started{(current_player.status_kasumi>3 if current_player.casual==0 else current_player.status_grunt>3) and current_player.status_thane<3}
     disable_events:
       - recruit_lit{squadmate=="thane"}
     show_tokens:
@@ -135,10 +148,44 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
     enable_events:
-      - mode_field_started{current_player.status_grunt>3 and current_player.status_zaeed<3}
+      # No zaeed on casual mode
+      - mode_field_started{current_player.status_grunt>3 and current_player.status_zaeed<3 and current_player.casual==0}
     disable_events:
       - recruit_lit{squadmate=="zaeed"}
     show_tokens:
       leds: shot_shield_zaeed
       color: FF7700 #color_zaeed
     tags: envshot_left_orbit
+
+widgets:
+  portrait_squadmate_garrus_advance:
+    - type: image
+      image: portrait_squadmate_garrus_advance
+  portrait_squadmate_grunt_advance:
+    - type: image
+      image: portrait_squadmate_grunt_advance
+  portrait_squadmate_jack_advance:
+    - type: image
+      image: portrait_squadmate_jack_advance
+  portrait_squadmate_kasumi_advance:
+    - type: image
+      image: portrait_squadmate_kasumi_advance
+  portrait_squadmate_legion_advance:
+    - type: image
+      image: portrait_squadmate_legion_advance
+  portrait_squadmate_mordin_advance:
+    - type: image
+      image: portrait_squadmate_mordin_advance
+  portrait_squadmate_samara_advance:
+    - type: image
+      image: portrait_squadmate_samara_advance
+  portrait_squadmate_tali_advance:
+    - type: image
+      image: portrait_squadmate_tali_advance
+  portrait_squadmate_thane_advance:
+    - type: image
+      image: portrait_squadmate_thane_advance
+  portrait_squadmate_zaeed_advance:
+    - type: image
+      image: portrait_squadmate_zaeed_advance
+

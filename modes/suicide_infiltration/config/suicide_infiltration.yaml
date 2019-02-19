@@ -23,6 +23,18 @@ mode:
   priority: 2300
 
 event_player:
+  mode_suicide_infiltration_started:
+    set_mission_shots:
+      shots_total: 5
+      shots_remaining: 5
+      ticks: 40
+      is_resumable: 1
+    set_initial_suicide_shots:
+      count: 5
+    set_environment:
+      env: collectors
+  reset_tension:
+    - missiontimer_set_40
   # Enumerate the tension values so MC players don't get duplicate events
   player_tension{player_num==current_player.number}:
     - set_tension_0{value==0 and change<0}
@@ -35,25 +47,20 @@ event_player:
     - play_specialist_inf_warning_med{device.counters.valves.value<5}
   set_tension_2: increase_infiltration
   valveshots_hit: reset_tension
-  timer_infiltration_complete:
+  timer_missiontimer_complete:
     kill_squadmate:
       squadmate: specialist
   logicblock_valves_hit:
+    - mission_shot_hit
     - play_specialist_inf_advance{count>1}
     - play_specialist_inf_close{count==1}
     # Enable the hold for the final shot
     - enable_transition_hold{count==1}
-  logicblock_valves_complete: infiltration_complete
+  logicblock_valves_complete: 
+    - mission_collect_score
+    - infiltration_complete
   squadmate_killed: infiltration_failed
-  mode_suicide_infiltration_started:
-    set_initial_suicide_shots:
-      count: 5
-    set_environment:
-      env: collectors
-  reset_tension:
-    set_initial_suicide_ticks:
-      ticks: 40
-
+  
 multiballs:
   infiltration:
     ball_count: 2
@@ -70,18 +77,6 @@ counters:
     count_events: valveshots_hit
     reset_events: mode_suicide_infiltration_started
     persist_state: true
-
-timers:
-  infiltration:
-    start_value: 40
-    end_value: 0
-    tick_interval: 1s
-    direction: down
-    control_events:
-      - event: reset_tension
-        action: restart
-      - event: logicblock_valves_complete
-        action: stop
 
 shot_groups:
   valveshots:
@@ -154,9 +149,9 @@ shots:
     tags: envshot_left_ramp
 
 variable_player:
-  timer_infiltration_tick{ticks==32}:
+  timer_missiontimer_tick{ticks==32}:
     tension: 1
-  timer_infiltration_tick{ticks==16}:
+  timer_missiontimer_tick{ticks==16}:
     tension: 1
   reset_tension:
     tension:

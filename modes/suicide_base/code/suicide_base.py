@@ -1,7 +1,7 @@
 import random
 from mpf.core.mode import Mode
 from mpf.core.utility_functions import Util
-from scriptlets.me_squadmates import SquadmateStatus
+from scriptlets.squadmates_mpf import SquadmateStatus
 
 class SuicideBase(Mode):
 

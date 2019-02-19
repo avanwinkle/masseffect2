@@ -209,4 +209,4 @@ sounds:
 
 variable_player:
   all_storetargets_hit:
-    credits: 1000
+    credits: 10

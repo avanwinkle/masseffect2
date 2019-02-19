@@ -41,11 +41,26 @@ event_player:
   mode_overlord_started.2:
     set_environment:
       env: geth
+    set_mission_shots:
+      shots_total: 5
+      shots_remaining: 5
+      is_resumable: 0
+      ticks: 30
   # To light the jackpot, you have to hit n hackshots where n = 1 + jackpots already hit
-  logicblock_hackshots_hit_counter_hit{count>=device.counters.jackpots_hit_counter.value}:
-    - enable_jackpotshot
-  jackpotshot_hit: reset_hackshots
-  timer_overlord_timer_complete: disable_hackshots
+  logicblock_hackshots_hit_counter_hit.1:
+    - missiontimer_add_10
+    - enable_jackpotshot{count>=device.counters.jackpots_hit_counter.value}
+  logicblock_hackshots_hit_counter_hit.2:
+    mission_shot_hit:
+      is_bonus_shot:
+        value: 1 if count>=device.counters.jackpots_hit_counter.value else 0
+        type: int
+  jackpotshot_hit: 
+    - reset_hackshots
+    - mission_collect_score
+    - missiontimer_set_30
+    - missiontimer_start|1s
+  timer_missiontimer_complete: disable_hackshots
   # If the player collects three jackpots, this achievement is "complete"!
   logicblock_jackpots_hit_counter_hit{count==4}: overlord_complete
   # Grant a levelup for completing the achievement
@@ -69,7 +84,6 @@ event_player:
         value: device.counters.jackpots_hit_counter.value
         type: int
 
-
 multiballs:
   overlord_multiball:
     ball_count: 3
@@ -92,36 +106,12 @@ counters:
     reset_on_complete: false
     count_events: jackpotshot_hit
 
-timers:
-  overlord_timer:
-    start_value: 30
-    end_value: 0
-    direction: down
-    tick_interval: 1s
-    control_events:
-      - event: reset_hackshots
-        action: restart
-      - event: hackshots_lit_hit
-        action: add
-        value: 10
-
 variable_player:
-  reset_hackshots:
-    temp_build_value:
-      action: set
-      int: 0
-    temp_multiplier:
-      action: set
-      int: 30
-  timer_overlord_timer_tick:
-    temp_multiplier:
-      action: set
-      int: ticks
-  hackshots_lit_hit:
-    score: 500
-    temp_build_value: 100 * current_player.temp_multiplier
   jackpotshot_hit:
-    score: current_player.temp_build_value * device.counters.hackshots_hit_counter.value * (1 + 0.25 * (device.counters.jackpots_hit_counter.value - 1))
+    # Every jackpot doubles the value of the next round's shots
+    temp_multiplier:
+      action: add
+      float: 1.0
 
 shot_profiles:
   overlord_target_profile:
@@ -153,7 +143,7 @@ shot_groups:
 shots:
   jackpotshot:
     switches: s_hitbank_top, s_hitbank_bottom
-    enable_events: enable_jackpotshot
+    enable_events: enable_jackpotshot, disable_hackshots
     disable_events: disable_jackpotshot, jackpotshot_hit
     reset_events: mode_overlord_started
     profile: overlord_jackpot_profile
@@ -262,23 +252,21 @@ shows:
 
 slide_player:
   show_overlord_slide:
-    overlord_slide:
-      action: play
+    overlord_slide: {}
+    overlord_portrait:
+      target: lcd_right
 
 slides:
   overlord_slide:
     widgets:
       - type: text
         text: OVERLORD
-        style: dmd_big
-        anchor_y: bottom
-        y: middle+2
-        z: 1
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
+        style: header_sm, row_main, col_left_anchor
+      - widget: background_console
+  overlord_portrait:
+    widgets:
+      - type: image
+        image: portrait_overlord
 
 sound_player:
   play_music_1:
@@ -401,36 +389,16 @@ widgets:
   hackshots_widget:
     - type: text
       text: "Targets: (value)"
-      style: small
-      anchor_x: left
-      anchor_y: bottom
-      y: 2
-      x: 2
-      z: 4
+      style: header_xs, row_gutter, col_left_center
   jackpots_needed_widget:
     - type: text
       text: " / (value)"
-      style: small
+      style: header_xs, row_gutter
       anchor_x: left
-      anchor_y: bottom
-      y: 2
-      x: 47 # 48 was way too left
-      z: 4
+      x: 62% # default is 38%, 60% too low, 65% too high
   jackpot_widget:
     - type: text
       text: "JACKPOT LIT"
-      style: small
-      anchor_x: right
-      anchor_y: bottom
-      y: 2
-      x: right-2
-      z: 4
+      style: header_md, row_sub, col_left_anchor
       animations:
-        add_to_slide:                # animation trigger event
-          - property: opacity      # name of the widget property we're animating
-            value: 1               # target value of that property for this step
-            duration: 1s          # duration for this step (how long it takes to get there)
-          - property: opacity      # second step in the animation (starts with a hyphen)
-            value: 0
-            duration: 1s
-            repeat: true
+        add_to_slide: pulse_text

@@ -31,12 +31,9 @@ event_player:
     - show_huddle_slide{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}
     # If we are repeating a mode without specialist, skip the ditty and start it
     - play_huddle_outro_show{device.achievements.longwalk.state=="completed"}|1500ms
-  # Preload sounds
-  mode_suicide_huddle_started.3:
-    - preload_infiltration{device.achievements.infiltration.state=="selected"}
-    - preload_longwalk{device.achievements.longwalk.state=="selected"}
-    - preload_tubes{device.achievements.tubes.state=="selected"}
-    - preload_final{device.achievements.humanreaper.state=="selected"}
+  show_huddle_slide:
+    - play_huddle_slide_infiltration{device.achievements.infiltration.state=="selected"}
+    - play_huddle_slide_longwalk{device.achievements.longwalk.state=="selected"}
 
 random_event_player:
   ### MOCKUP: Shows don't pass events_when_played, so we have to create different shows for each path
@@ -47,9 +44,16 @@ random_event_player:
       - play_huddle_intro_show_lw_no
 
 slide_player:
-  show_huddle_slide:
-    huddle_slide:
+  play_huddle_slide_infiltration:
+    huddle_slide_infiltration:
       action: play
+      slide: huddle_slide
+      priority: 101
+  play_huddle_slide_longwalk:
+    huddle_slide_longwalk:
+      action: play
+      slide: huddle_slide
+      priority: 102
   suicide_huddle_specialist_selected:
     huddle_slide:
       action: remove
@@ -165,242 +169,19 @@ shows:
       events: suicide_huddle_show_failsafe
 
 sound_player:
-  # Sounds in shows don't playback after loading, so pre-load them!
-  preload_infiltration:
-    infiltration_low:
-      action: load
-      track: music
-    specialist_inf_intro:
-      action: load
-      track: voice
-    specialist_inf_outro:
-      action: load
-      track: voice
-  preload_longwalk:
-    longwalk_low:
-      action: load
-      track: music
-    specialist_lw_intro_yes:
-      action: load
-      track: voice
-    specialist_lw_intro_no:
-      action: load
-      track: voice
-    specialist_lw_outro:
-      action: load
-      track: voice
-  preload_tubes:
-    platforms_low:
-      action: load
-      track: music
-    shep_we_win_or_lose_it_all:
-      action: load
-      track: voice
-  preload_final:
-    platforms_med_high:
-      action: load
-      track: music
-    shep_give_us_a_minute_edi:
-      action: load
-      track: voice
   play_specialist_inf_intro: specialist_inf_intro
   play_specialist_lw_intro: specialist_lw_intro
-  play_specialist_lw_no: specialist_lw_no
-  play_specialist_lw_yes: specialist_lw_yes
-  play_specialist_lw_callback_miranda: miranda_any_biotic_could
+  play_specialist_lw_no:
+    specialist_lw_no:
+      events_when_stopped: specialist_lw_callback_miranda
+  play_specialist_lw_yes:
+    specialist_lw_yes:
+      events_when_stopped: specialist_lw_callback_miranda
+  play_specialist_lw_callback_miranda:
+    miranda_any_biotic_could:
+      events_when_stopped: specialist_intro_complete
   # Music started in shows won't end on stop events, so use the show to trigger sound_player
   play_music_infiltration: infiltration_low
   play_music_longwalk: longwalk_low
   play_music_tubes: platforms_low
   play_music_platforms: platforms_med
-
-widget_player:
-  ## Show the specialist selection title
-  mode_suicide_huddle_started{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}:
-    huddle_title:
-      slide: suicide_slide
-  slide_huddle_slide_active:
-    huddle_title:
-      action: remove
-      slide: suicide_slide
-  ## Change styles on all the specialist widgets
-  suicide_huddle_garrus_default:
-    specialist_garrus_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_garrus_highlighted:
-    specialist_garrus_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_garrus_dead:
-    specialist_garrus_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_jack_default:
-    specialist_jack_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_jack_highlighted:
-    specialist_jack_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_jack_dead:
-    specialist_jack_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_jacob_default:
-    specialist_jacob_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_jacob_highlighted:
-    specialist_jacob_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_jacob_dead:
-    specialist_jacob_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_kasumi_default:
-    specialist_kasumi_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_kasumi_highlighted:
-    specialist_kasumi_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_kasumi_dead:
-    specialist_kasumi_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_legion_default:
-    specialist_legion_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_legion_highlighted:
-    specialist_legion_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_legion_dead:
-    specialist_legion_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_miranda_default:
-    specialist_miranda_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_miranda_highlighted:
-    specialist_miranda_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_miranda_dead:
-    specialist_miranda_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_mordin_default:
-    specialist_mordin_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_mordin_highlighted:
-    specialist_mordin_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_mordin_dead:
-    specialist_mordin_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_samara_default:
-    specialist_samara_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_samara_highlighted:
-    specialist_samara_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_samara_dead:
-    specialist_samara_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_tali_default:
-    specialist_tali_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_tali_highlighted:
-    specialist_tali_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_tali_dead:
-    specialist_tali_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead
-  suicide_huddle_thane_default:
-    specialist_thane_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_default
-  suicide_huddle_thane_highlighted:
-    specialist_thane_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_highlight
-  suicide_huddle_thane_dead:
-    specialist_thane_widget:
-      action: update
-      slide: huddle_slide
-      widget_settings:
-        style: spec_dead

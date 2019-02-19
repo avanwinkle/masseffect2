@@ -357,11 +357,13 @@ sounds:
 # 178-186 : bullet whizz by
 # 190-196 : biotic effects absorbing
 # 213-216 : quick explosions
-# 226-235 : misc battlefield sounds
+# 226-232 : misc battlefield sounds
+# 233-235 : laser sounds
 # 251-254 : kung fu whiffs
 # 320-330 : warble wobble
 # 336-353 : loading weapons
 # 370-375, 393-397 : powering up electronics
+# 400-537 : footsteps (503-517 splashes)
 # 538 : reaper whazaaam
 # 543 : engine powerdown
 # 558-559 : shuttly flybys
