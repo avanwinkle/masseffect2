@@ -6,7 +6,8 @@ from mpf.core.custom_code import CustomCode
 PLAYER_VARS = (
   # These are the variables that are saved in a career. Everything else resets.
   "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
-  "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp" )
+  "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
+  "trophies" )
 
 ACHIEVEMENT_MISSIONS = (
   # These are achievements that qualify as available_missions if enabled/stopped
@@ -108,9 +109,7 @@ class SaveCareer(CustomCode):
       if player.career_name == " ":
         careerdata = CASUAL_CAREER
       else:
-        with open(self._get_filename(player.career_name)) as f:
-          careerdata = json.load(f)
-        f.close()
+        careerdata = self._fetch_careerdata(player.career_name)
 
       self._achievement_handlers = {}
       available_missions = 0
@@ -167,6 +166,10 @@ class SaveCareer(CustomCode):
       player.career_name = self._current_careers[player.number]["career_name"]
       # All we have to do is set a new career_started time
       player.career_started = datetime.now().timestamp()
+      # But also, transfer over the trophies
+      if player.career_name:
+        careerdata = self._fetch_careerdata(player.career_name)
+        player.trophies = careerdata.get("trophies")
     self.machine.events.post("career_loaded", career_name=player.career_name)
 
   def _force_achievement(self, **kwargs):
@@ -183,3 +186,9 @@ class SaveCareer(CustomCode):
 
   def _get_filename(self, career_name):
     return "{}/{}.json".format(self.machine.machine_path + "/savegames", career_name)
+
+  def _fetch_careerdata(self, career_name):
+    with open(self._get_filename(career_name)) as f:
+      careerdata = json.load(f)
+    f.close()
+    return careerdata

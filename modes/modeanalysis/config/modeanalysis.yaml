@@ -24,3 +24,28 @@ mode_settings:
     - shadowbroker_vasir
     - shadowbroker_hagalaz
     - shadowbroker_boss
+  analytics:
+    mode_grunt:
+      mode: recruitgrunt
+      player_variables: score
+      counts:
+        shots_hit:
+          starting_count: 5 - device.counters.grunt_shots_counter.value
+          count_events: logicblock_grunt_shots_counter_hit
+  trophy_settings:
+      level_names: gold, silver, bronze
+  trophies:
+    grunt_time:
+      name: Best Grunt Time
+      mode: recruitgrunt
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_grunt_complete
+      award_levels: 30, 45, 60
+    grunt_score:
+      name: Best Grunt Score
+      mode: recruitgrunt
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_grunt_complete
+      award_levels: 9000, 8000, 7000
