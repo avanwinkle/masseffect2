@@ -1,4 +1,6 @@
+import errno
 import logging
+import os
 from datetime import datetime
 
 from mpf.core.mode import Mode
@@ -13,9 +15,24 @@ class ModeAnalysis(Mode):
 
     def __init__(self, machine, config, name, path):
         super().__init__(machine, config, name, path)
-        self.log = logging.getLogger("ModeAnalysis")
-        self.log.setLevel(10)
+        # Default log output goes to the main MPF logger
         self.settings = config.get("mode_settings")
+        self.log = logging.getLogger("ModeAnalysis")
+        self.log.setLevel(1)
+
+        # Analytics-specific logs dump separately, for parsing/ingestion
+        try:
+            os.makedirs(os.path.join(machine.machine_path, "analytics"))
+        except OSError as exception:
+            if exception.errno != errno.EEXIST:
+                raise
+        self.analytics_log = logging.getLogger("MPFAnalytics")
+        output_file_path = os.path.join(machine.machine_path, "analytics",
+                                        datetime.now().strftime("%Y-%m-%d-%H-%M-%S-analytics.log"))
+        analytics_handler = logging.FileHandler(output_file_path)
+        self.analytics_log.addHandler(analytics_handler)
+        self.analytics_log.setLevel(10)
+        self.analytics_log.info("Analytics log ready!")
 
     def mode_start(self, **kwargs):
         self.handlers = {}
@@ -30,26 +47,29 @@ class ModeAnalysis(Mode):
         # Register modes for simple-setup analysis
         for mode_name in self.settings.get("analyze_modes", []):
             config = {
-                "mode": mode_name,
+                "type": "mode",
                 "player_variables": "score"
             }
-            analytics = Analytics("mode_{}".format(mode_name), self.machine, config, self.log)
+            analytics = Analytics(mode_name, self.machine, config, self.analytics_log)
             self._register_tracker_handler(analytics)
         # Register arbitrary analytics
         for name, analysis_config in self.settings.get("analytics", {}).items():
-            self.log.info(" - creating analysis for {}".format(name))
-            analytics = Analytics(name, self.machine, analysis_config, self.log)
+            self.log.debug(" - creating analysis for {}".format(name))
+            analysis_config["type"] = "count"
+            analytics = Analytics(name, self.machine, analysis_config, self.analytics_log)
             self.analytics[name] = analytics
             self._register_tracker_handler(analytics)
         # Register trophies
         for name, trophy_config in self.settings.get("trophies", {}).items():
-            self.log.info(" - creating trophy for {}".format(name))
+            self.log.debug(" - creating trophy for {}".format(name))
 
             trophy = Trophy(name, self.machine, trophy_config, self.log, level_names=trophy_levels)
             self.trophies[name] = trophy
             self._register_tracker_handler(trophy)
 
     def _register_tracker_handler(self, tracker):
+        if "start_events" not in tracker.config:
+            self.log.error("Tracker {} config has no start events! {}".format(tracker.name, tracker.config))
         # Consolidate start events
         for evt in Util.string_to_list(tracker.config["start_events"]):
             if not self.handlers.get(evt):
@@ -71,17 +91,20 @@ class ValueTrackerBase:
         self.machine = machine
         self.config = config
         self.log = log
+        self.type = config.get("type")
         self._start_time = None
         self._starting_player_values = {}
         self._persists = {}
 
         self._reset()
 
-        if "mode" in self.config:
+        # If this is a mode analysis or an analysis with a "mode" value, set default start/stop events
+        mode_name = self.name if self.config.get("type") == "mode" else self.config.get("mode")
+        if mode_name:
             if "start_events" not in self.config:
-                self.config["start_events"] = "mode_{}_will_start".format(self.config["mode"])
+                self.config["start_events"] = "mode_{}_will_start".format(mode_name)
             if "stop_events" not in self.config:
-                self.config["stop_events"] = "mode_{}_will_stop".format(self.config["mode"])
+                self.config["stop_events"] = "mode_{}_will_stop".format(mode_name)
 
         # # Add event handlers
         # for evt in Util.string_to_list(self.config["start_events"]):
@@ -89,7 +112,7 @@ class ValueTrackerBase:
         # for evt in Util.string_to_list(self.config.get("reset_events", "game_started")):
         #   self.machine.events.add_handler(evt, self._reset)
 
-        # self.log.info("Created events for {} and {}".format(self.config["start_events"], self.config["stop_events"]))
+        self.log.debug("Created value tracker {}: {}".format(name, self.config))
 
     def start(self, **kwargs):
         if self._start_time:
@@ -131,6 +154,8 @@ class ValueTrackerBase:
         persistent_values["time_played"] += duration_secs
 
         analysis = {
+            "name": self.name,
+            "type": self.type,
             "duration": duration_secs,
             "timestring": timestring,
             "attempt": persistent_values["attempts"],
@@ -151,7 +176,7 @@ class ValueTrackerBase:
     def _count(self, **kwargs):
         key = kwargs["key"]
         self._counts[key][1] += 1
-        self.log.info("Adding a count to {}, new value is {}".format(key, self._counts[key][1]))
+        self.log.debug("Adding a count to {}, new value is {}".format(key, self._counts[key][1]))
 
     def _reset(self, **kwargs):
         if self._start_time:
@@ -173,7 +198,7 @@ class Analytics(ValueTrackerBase):
         # Set the starting-time values for the variables we're tracking
         for player_var in Util.string_to_list(self.config.get("player_variables", [])):
             self._starting_player_values[player_var] = self.machine.game.player.vars[player_var]
-        self.log.info("Noted player vars at the start of tracking: {}".format(self._starting_player_values))
+        self.log.debug("Noted player vars at the start of tracking: {}".format(self._starting_player_values))
 
         # Create listeners for count events
         for key, count_config in self.config.get("counts", {}).items():
@@ -183,7 +208,7 @@ class Analytics(ValueTrackerBase):
             starting_count = self.machine.placeholder_manager.build_int_template(count_config["starting_count"])
             self._counts[key] = [starting_count.evaluate({}), 0]
             self._handlers.append(self.machine.events.add_handler(count_config["count_events"], self._count, key=key))
-        self.log.info("Created counts: {}".format(self._counts))
+        self.log.debug("Created counts: {}".format(self._counts))
 
     def _run_analysis(self, analysis, **kwargs):
         persist_values = self._persists[self.machine.game.player.number]
@@ -211,7 +236,7 @@ class Analytics(ValueTrackerBase):
                 "aggregate": persist_values["aggregate"][count_var],
             }
 
-        self.log.info("Analysis complete: {}".format(analysis))
+        self.log.info("{}".format(analysis))
         return analysis
 
 
@@ -223,6 +248,7 @@ class Trophy(ValueTrackerBase):
         super().__init__(name, machine, config, log)
         self._level_names = level_names
         self._level_bases = Util.string_to_list(config["award_levels"])
+        self.config["type"] = "trophy"
 
     def start(self, **kwargs):
         # Some trophies can only be awarded on the first attempt (i.e. resuming a mission disqualifies the trophy)
@@ -236,7 +262,7 @@ class Trophy(ValueTrackerBase):
         player_var = self.config["value"]
         if player_var != "duration":
             self._starting_player_values[player_var] = self.machine.game.player.vars[player_var]
-            self.log.info("{}: value at the start of tracking: {}".format(self.name, self._starting_player_values))
+            self.log.debug("{}: value at the start of tracking: {}".format(self.name, self._starting_player_values))
 
         self._handlers.append(self.machine.events.add_handler(
             self.config["award_event"], self._stop_tracking, from_award_event=True))
@@ -261,18 +287,20 @@ class Trophy(ValueTrackerBase):
         for idx, level in enumerate(self._level_bases):
             if ((value - float(level)) >= 0) == greater_wins:
                 award = idx + 1
-                self.log.info(" - Awarded trophy level {} because score is better than {}".format(award, level))
+                self.log.info(" - Qualified for trophy level {} because score is better than {}".format(award, level))
                 break
 
         if not award:
-            self.log.info(" - Player score does not qualify for any trophies. Sorry.")
-        elif award < trophies.get(self.name, 1000):
-            self.log.info(" - That's a new trophy for the player! Hurray!")
+            self.log.debug(" - Player score does not qualify for any trophies. Sorry.")
+        elif award < trophies.get(self.name, {}).get("level", 1000):
+            self.log.debug(" - That's a new trophy for the player! Hurray!")
+            award_level = self._level_names[award - 1]
             trophies[self.name] = {"level": award, "value": value, "timestamp": datetime.now().timestamp()}
+            self.machine.events.post("trophy_awarded", name=self.name, level=award_level)
             self.machine.events.post("trophy_awarded_{}".format(self.name),
                                      value=value,                            # The player's score that won a trophy
-                                     level=self._level_names[award - 1],     # The friendly name of the trophy level
+                                     level=award_level,                      # The friendly name of the trophy level
                                      baseline=self._level_bases[award - 1]   # The baseline value that was beaten
                                      )
         else:
-            self.log.info(" - Player already has trophy level {}, no new trophy awarded.".format(trophies[self.name]))
+            self.log.debug(" - Player already has trophy level {}, no new trophy awarded.".format(trophies[self.name]))

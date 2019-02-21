@@ -25,7 +25,7 @@ mode_settings:
     - shadowbroker_hagalaz
     - shadowbroker_boss
   analytics:
-    mode_grunt:
+    grunt_shots_hit:
       mode: recruitgrunt
       player_variables: score
       counts:
@@ -35,6 +35,20 @@ mode_settings:
   trophy_settings:
       level_names: gold, silver, bronze
   trophies:
+    garrus_time:
+      name: Best Garrus Time
+      mode: recruitgarrus
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_garrus_complete
+      award_levels: 30, 45, 60
+    garrus_score:
+      name: Best Garrus Score
+      mode: recruitgarrus
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_garrus_complete
+      award_levels: 9000, 8000, 7000
     grunt_time:
       name: Best Grunt Time
       mode: recruitgrunt
@@ -48,4 +62,116 @@ mode_settings:
       value: score
       aggregate_type: first_only
       award_event: recruit_grunt_complete
+      award_levels: 9000, 8000, 7000
+    jack_time:
+      name: Best Jack Time
+      mode: recruitjack
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_jack_complete
+      award_levels: 30, 45, 60
+    jack_score:
+      name: Best Jack Score
+      mode: recruitjack
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_jack_complete
+      award_levels: 9000, 8000, 7000
+    kasumi_time:
+      name: Best Kasumi Time
+      mode: recruitkasumi
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_kasumi_complete
+      award_levels: 30, 45, 60
+    kasumi_score:
+      name: Best Kasumi Score
+      mode: recruitkasumi
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_kasumi_complete
+      award_levels: 9000, 8000, 7000
+    legion_time:
+      name: Best Legion Time
+      mode: recruitlegion
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_legion_complete
+      award_levels: 30, 45, 60
+    legion_score:
+      name: Best Legion Score
+      mode: recruitlegion
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_legion_complete
+      award_levels: 9000, 8000, 7000
+    mordin_time:
+      name: Best Mordin Time
+      mode: recruitmordin
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_mordin_complete
+      award_levels: 30, 45, 60
+    mordin_score:
+      name: Best Mordin Score
+      mode: recruitmordin
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_mordin_complete
+      award_levels: 9000, 8000, 7000
+    samara_time:
+      name: Best Samara Time
+      mode: recruitsamara
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_samara_complete
+      award_levels: 30, 45, 60
+    samara_score:
+      name: Best Samara Score
+      mode: recruitsamara
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_samara_complete
+      award_levels: 9000, 8000, 7000
+    tali_time:
+      name: Best Tali Time
+      mode: recruittali
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_tali_complete
+      award_levels: 30, 45, 60
+    tali_score:
+      name: Best Tali Score
+      mode: recruittali
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_tali_complete
+      award_levels: 9000, 8000, 7000
+    thane_time:
+      name: Best Thane Time
+      mode: recruitthane
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_thane_complete
+      award_levels: 30, 45, 60
+    thane_score:
+      name: Best Thane Score
+      mode: recruitthane
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_thane_complete
+      award_levels: 9000, 8000, 7000
+    zaeed_time:
+      name: Best Zaeed Time
+      mode: recruitzaeed
+      value: duration
+      aggregate_type: first_only
+      award_event: recruit_zaeed_complete
+      award_levels: 30, 45, 60
+    zaeed_score:
+      name: Best Zaeed Score
+      mode: recruitzaeed
+      value: score
+      aggregate_type: first_only
+      award_event: recruit_zaeed_complete
       award_levels: 9000, 8000, 7000
