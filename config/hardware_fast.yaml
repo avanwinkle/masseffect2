@@ -200,6 +200,21 @@ switches:
     number: 0-6
   s_kickback:
     number: 0-7
+  # s_door_open:
+  #   number: 3-0
+  #   tags: service_door_open, power_off
+  # s_service_enter:
+  #   number: 3-1
+  #   tags: service_enter
+  # s_service_esc:
+  #   number: 3-2
+  #   tags: service_esc
+  # s_service_up:
+  #   number: 3-3
+  #   tags: service_up
+  # s_service_down:
+  #   number: 3-4
+  #   tags: service_down
 
 
 lights:
