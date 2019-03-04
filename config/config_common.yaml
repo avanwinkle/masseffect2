@@ -59,13 +59,7 @@ slide_player:
 event_player:
   game_will_start: gi_on
   game_ended: gi_off
-  bypass_lock_release_pulse_short:
-    - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|210ms
-  bypass_lock_release_pulse_long:
-    - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|700ms
-
+  
 machine_vars:
   last_career_player_1:
     initial_value: " "
@@ -104,7 +98,6 @@ modes:
   - base
   - global
   - field
-  - lockhandler
   - mainmenu
   - missionselect
   - modeanalysis

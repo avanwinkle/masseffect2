@@ -5,13 +5,16 @@ hardware:
   # net_buffer: 10
   # lights: virtual
 
+modes:
+  - airlock
+
 fast:
   ports: /dev/tty.usbserial-00002014B, /dev/tty.usbserial-00002014C
   rgb_buffer: 10000
 
 machine:
   balls_installed: 6
-  min_balls: 6
+  min_balls: 3
 
 coils:
   c_flipper_left_main:

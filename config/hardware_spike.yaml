@@ -3,6 +3,9 @@
 hardware:
   platform: spike #, fadecandy
 
+modes:
+  - lockhandler
+
 spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
@@ -17,6 +20,14 @@ spike:
 machine:
   balls_installed: 6
   min_balls: 6
+
+event_player:
+  bypass_lock_release_pulse_short:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|210ms
+  bypass_lock_release_pulse_long:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|700ms
 
 switches:
   s_start_button:
