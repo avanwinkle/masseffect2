@@ -1,4 +1,13 @@
 #config_version=5
+sounds:
+  power_off:
+    file: SFXGame.649.ogg
+    track: sfx
+  switch_hit:
+    file: SFXGame.646.ogg
+    track: sfx
+
+
 slide_player:
   # door open
   service_door_opened:
@@ -202,7 +211,6 @@ slides:
     text: "(value_label)"
     style: body_md, row_sub, col_right_anchor
 
-
 widgets:
   # power off on door open slide
   meservice_power_off_door_open:
@@ -237,7 +245,6 @@ widgets:
         value: 0
         duration: 0.5s
         repeat: true
-
 
   # menu items
   meservice_menu_item_switch:
