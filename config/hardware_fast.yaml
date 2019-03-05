@@ -225,11 +225,70 @@ switches:
   # s_service_down:
   #   number: 3-4
   #   tags: service_down
-
+light_rings:
+  l_left_orbit_ring:
+    number_start: 23
+    number_template: 0-{}
+    count: 6
+  l_kickback_ring:
+    number_start: 30
+    number_template: 0-{}
+    count: 6
+  l_left_ramp_ring:
+    number_start: 37
+    number_template: 0-{}
+    count: 6
+  l_right_ramp_ring:
+    number_start: 44
+    number_template: 0-{}
+    count: 6
+  l_right_orbit_ring:
+    number_start: 51
+    number_template: 0-{}
+    count: 6
 
 lights:
   l_null:
     number: 2-63
+  # First chain of lights
+  l_left_outlane: # Left Outlane [#11]
+    number: 0-6
+    tags: l_outlane
+  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
+    number: 0-18
+    tags: l_lock_lit, lane_wedges
+  l_left_return_lane: # Left Return Lane [#12]
+    number: 0-7
+    tags: l_return_lane
+  l_left_top_lane: # Left Top Lane [#75]
+    number: 0-0
+    type: grb
+  #------------------------------------------
+  # NeoPixel Jewels (Center Lights)
+  #------------------------------------------
+  l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
+    type: grb
+    number: 0-22
+    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+  l_kickback_shield_rgb: # Kickback Sigil R [#47]
+    type: grb
+    number: 0-29
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
+  l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
+    type: grb
+    number: 0-36
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
+  l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
+    type: grb
+    number: 0-43
+    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+  l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
+    type: grb
+    number: 0-50
+    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
+
+  # Unassigned lights carried over from Spike
+  #------------------------------------------
   l_backbox:
     number: 1-63
     tags: backbox
@@ -335,24 +394,12 @@ lights:
   l_left_orbit_arrow_red: # Left Loop Arrow [#43]
     number: 3-12
     tags: lane_arrows
-  l_left_outlane: # Left Outlane [#11]
-    number: 0-6
-    tags: l_outlane
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 3-16
     tags: lane_wedges
-  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
-    number: 0-18
-    tags: l_lock_lit, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 3-18
     tags: lane_arrows
-  l_left_return_lane: # Left Return Lane [#12]
-    number: 0-7
-    tags: l_return_lane
-  l_left_top_lane: # Left Top Lane [#75]
-    number: 0-0
-    type: grb
   l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
     number: 3-3
     tags: l_pop_bumpers
@@ -424,34 +471,14 @@ lights:
   # l_tournament_start: # Tournament Start [#3]
   #   number: 0-3
   l_hitbank_shield_rgb: # Right 2-Bank Sigil R [#35]
-    type: rgb
+    type: grb
     number: 1-31
     tags: shot_shields
-  l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
-    type: rgb
-    number: 1-25
-    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
   l_action_button_rgb: # Lockdown R [#4]
-    type: rgb
+    type: grb
     number: 1-57
     tags: l_action_button
-  l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
-    type: rgb
-    number: 3-25
-    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
-  l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
-    type: rgb
-    number: 3-11
-    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
-  l_kickback_shield_rgb: # Kickback Sigil R [#47]
-    type: rgb
-    number: 1-47
-    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
   l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
-    type: rgb
+    type: grb
     number: 1-44
     tags: shot_shields
-  l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
-    type: rgb
-    number: 1-28
-    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
