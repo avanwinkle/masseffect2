@@ -9,7 +9,7 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-00002014B, /dev/tty.usbserial-00002014C
+  ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
   rgb_buffer: 10000
 
 machine:
@@ -20,11 +20,11 @@ coils:
   c_flipper_left_main:
     number: 1-7
     default_pulse_ms: 35
-    default_hold_power: 0.2
+    default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
     default_pulse_ms: 35
-    default_hold_power: 0.2
+    default_hold_power: 0.1
   c_plunger:
     number: 1-1
     default_pulse_ms: 18
@@ -35,7 +35,7 @@ coils:
     debug: true
     # pulse_power: 2
   c_bumper_left:
-    number: 2-0
+    number: 2-2
     default_pulse_ms: 16
     debug: true
   c_bumper_right:
@@ -43,7 +43,7 @@ coils:
     default_pulse_ms: 18
     debug: true
   c_bumper_bottom:
-    number: 2-2
+    number: 2-0
     default_pulse_ms: 14
     debug: true
   c_slingshot_left:
@@ -67,7 +67,7 @@ coils:
     disable_events: hold_post_disable
     debug: true
   c_lock_release_post:
-    number: 0-0
+    number: 0-2
     default_pulse_ms: 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
@@ -82,13 +82,13 @@ coils:
   c_sword:
     number: 0-3
   c_dragon:
-    number: 0-2
+    number: 0-0
   c_kickback:
     number: 0-1
     default_pulse_ms: 20
 
 switches:
-  # BOARD 0:
+  # BOARD 0-C (Purple)
   s_dropbank_bottom:
     number: 1-16
   s_dropbank_middle:
@@ -105,29 +105,31 @@ switches:
     number: 1-22
   s_target5:
     number: 1-23
+  # BOARD 0-B (Blue)
   s_plunger_lane:
     number: 1-8
   s_trough_jam:
     number: 1-9
-    type: NC
+    # type: NC
   s_trough1:
     number: 1-10
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
   s_trough2:
     number: 1-11
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
   s_trough3:
     number: 1-12
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
   s_trough4:
     number: 1-13
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
   s_trough5:
     number: 1-14
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
   s_trough6:
     number: 1-15
-    type: NC # Temp to allow game start without balls
+    # type: NC # Temp to allow game start without balls
+  # BOARD 0-A (Pink)
   s_flipper_left:
     number: 1-0
     tags: left_flipper
@@ -145,8 +147,9 @@ switches:
     number: 1-5
   s_left_slingshot:
     number: 1-6
-  s_spinner:
+  s_left_ramp_exit:
     number: 1-7
+  # BOARD 0-D (Green)
   s_missionselect:
     number: 1-24
   s_hitbank_top:
@@ -157,21 +160,20 @@ switches:
     number: 1-27
   s_outlane_right:
     number: 1-28
-  s_left_ramp_exit:
-    number: 1-29
+  # NOT USED: 1-29
   s_right_slingshot:
     number: 1-30
   s_return_lane_right:
     number: 1-31
     ignore_window_ms: 1000
   # BOARD 1
-  s_bumper_left:
+  s_bumper_bottom:
     number: 2-0
     tags: bumper
   s_bumper_right:
     number: 2-1
     tags: bumper
-  s_bumper_bottom:
+  s_bumper_left:
     number: 2-2
     tags: bumper
   s_top_lane_left:
@@ -181,29 +183,32 @@ switches:
   s_right_orbit:
     number: 2-5
     ignore_window_ms: 1100
-  s_right_ramp_exit:
-    number: 2-6
   s_left_orbit:
+    number: 2-6
+  s_right_ramp_exit:
     number: 2-7
     ignore_window_ms: 1100
   # BOARD 2
   s_lock_1:
     number: 0-0
+    type: NC
   s_lock_2:
     number: 0-1
+    type: NC
   s_lock_3:
     number: 0-2
-  s_battering_ram:
-    number: 0-3
+    type: NC
   s_right_ramp_entrance:
-    number: 0-4
+    number: 0-3
     ignore_window_ms: 1500
   s_left_ramp_entrance:
-    number: 0-5
+    number: 0-4
     ignore_window_ms: 1500
-  s_airlock_enter:
-    number: 0-6
+  s_battering_ram: # rename: s_airlock_entrance
+    number: 0-5
   s_kickback:
+    number: 0-6
+  s_spinner:
     number: 0-7
   # s_door_open:
   #   number: 3-0
