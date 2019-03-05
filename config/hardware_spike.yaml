@@ -1,7 +1,7 @@
 #config_version=5
 #STERN Game of Thrones [Pro Edition]
 hardware:
-  platform: spike #, fadecandy
+  platform: spike
 
 modes:
   - lockhandler
@@ -146,6 +146,7 @@ switches:
   s_kickback:
     number: 10-14 # Restored 8-7 # 10-14 Moved
     ignore_window_ms: 400
+    tags: switch_hold_en
   s_tenpoints:
     number: 9-12
   s_lock_1:
@@ -478,20 +479,21 @@ coils:
   c_dropbank_reset:
     number: 8-2
     default_pulse_ms: 35
-  c_up_post:
+  c_hold_post:
     number: 8-7
     default_pulse_ms: 14
     default_hold_power: 0.3
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
-  c_lock_release_post:
+  c_lock_release:
     number: 9-3
     default_pulse_ms: 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
     debug: true
+    tags: coil_missionselect, coil_airlock
   c_orbit_gates:
     number: 10-0
     default_pulse_ms: 58

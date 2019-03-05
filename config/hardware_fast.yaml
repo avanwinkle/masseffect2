@@ -59,33 +59,35 @@ coils:
   c_dropbank_reset:
     number: 1-5
     default_pulse_ms: 35
-  c_up_post:
+  c_hold_post:
     number: 1-2
     default_pulse_ms: 14
     default_hold_power: 0.3
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
-  c_lock_release_post:
+    tags: coil_missionselect
+  c_lock_release:
     number: 0-2
     default_pulse_ms: 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
     debug: true
+    tags: coil_airlock
   c_orbit_gates:
     number: 2-3
     default_pulse_ms: 58
     default_hold_power: 0.4
     enable_events: enable_gates
     disable_events: disable_gates
-  c_sword:
-    number: 0-3
-  c_dragon:
-    number: 0-0
+  # UNUSED ADDRESSES
   c_kickback:
     number: 0-1
-    default_pulse_ms: 20
+  c_dragon:
+    number: 0-0
+  c_sword:
+    number: 0-3
 
 switches:
   # BOARD 0-C (Purple)
@@ -110,25 +112,18 @@ switches:
     number: 1-8
   s_trough_jam:
     number: 1-9
-    # type: NC
   s_trough1:
     number: 1-10
-    # type: NC # Temp to allow game start without balls
   s_trough2:
     number: 1-11
-    # type: NC # Temp to allow game start without balls
   s_trough3:
     number: 1-12
-    # type: NC # Temp to allow game start without balls
   s_trough4:
     number: 1-13
-    # type: NC # Temp to allow game start without balls
   s_trough5:
     number: 1-14
-    # type: NC # Temp to allow game start without balls
   s_trough6:
     number: 1-15
-    # type: NC # Temp to allow game start without balls
   # BOARD 0-A (Pink)
   s_flipper_left:
     number: 1-0
@@ -140,7 +135,8 @@ switches:
     number: 1-2
     tags: start
   s_action_button:
-    number: 1-3 # N/A
+    number: 1-3 # Not connected
+    # TODO: Move the tilt for now?
   s_outlane_left:
     number: 1-4
   s_return_lane_left:
@@ -149,6 +145,7 @@ switches:
     number: 1-6
   s_left_ramp_exit:
     number: 1-7
+    tags: switch_hold_entrance
   # BOARD 0-D (Green)
   s_missionselect:
     number: 1-24
@@ -210,6 +207,7 @@ switches:
     number: 0-6
   s_spinner:
     number: 0-7
+  # BOARD 3 ?
   # s_door_open:
   #   number: 3-0
   #   tags: service_door_open, power_off
@@ -225,6 +223,13 @@ switches:
   # s_service_down:
   #   number: 3-4
   #   tags: service_down
+  # s_credit:
+  #   number: 3-5
+  # s_tilt:
+  #   number: 3-6
+  # s_slam_tilt:
+  #   number: 3-7
+
 light_rings:
   l_left_orbit_ring:
     number_start: 23
@@ -250,20 +255,79 @@ light_rings:
 lights:
   l_null:
     number: 2-63
+  
   # First chain of lights
-  l_left_outlane: # Left Outlane [#11]
-    number: 0-6
-    tags: l_outlane
-  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
-    number: 0-18
-    tags: l_lock_lit, lane_wedges
-  l_left_return_lane: # Left Return Lane [#12]
-    number: 0-7
-    tags: l_return_lane
+  #------------------------------------------
   l_left_top_lane: # Left Top Lane [#75]
     number: 0-0
     type: grb
-  #------------------------------------------
+  l_right_top_lane: # Right Top Lane [#76]
+    number: 0-1
+    type: grb
+  
+  l_dropbank_top: # Left 3-Bank (Top) [#15]
+    number: 0-3
+    tags: l_dropbanks, outer_circles
+  l_dropbank_middle: # Left 3-Bank (Mid) [#14]
+    number: 0-4
+    tags: l_dropbanks, outer_circles
+  l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
+    number: 0-5
+    tags: l_dropbanks, outer_circles
+
+  l_left_outlane: # Left Outlane [#11]
+    number: 0-6
+    tags: l_outlane, outer_circles
+  l_left_return_lane: # Left Return Lane [#12]
+    number: 0-7
+    tags: l_return_lane, outer_circles
+  
+  l_ball_save: # Shoot Again [#32]
+    number: 0-8
+    tags: outer_circles
+  
+  l_right_return_lane: # Right Return Lane [#33]
+    number: 0-9
+    tags: l_return_lane, outer_circles
+  l_right_outlane: # Right Outlane [#34]
+    number: 0-10
+    tags: l_outlane, outer_circles
+  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
+    number: 0-11
+    tags: l_hitbanks, outer_circles
+  l_hitbank_top: # Right 2-Bank (Top) [#38]
+    number: 0-12
+    tags: l_hitbanks, outer_circles
+
+  l_standup_1: # Standup 1 [#44]
+    number: 0-21
+    tags: l_targets
+  l_standup_2: # Standup 2 [#52]
+    number: 0-19
+    tags: l_targets
+  l_standup_3: # Standup 3 [#59]
+    number: 0-17
+    tags: l_targets
+  l_standup_4: # Standup 4 [#64]
+    number: 0-15
+    tags: l_targets
+  l_standup_5: # Standup 5 [#70]
+    number: 0-14
+    tags: l_targets
+
+  l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
+    number: 0-13
+    tags: lane_wedges, l_upgrade
+  l_battering_ram_top: # Battering Ram 1 (Top) [#62]
+    number: 0-16
+    tags: batram_multipliers
+  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
+    number: 0-18
+    tags: l_lock_lit, lane_wedges
+  l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
+    number: 0-20  # shadowbroker mission start
+    tags: l_store, lane_wedges
+
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
@@ -313,22 +377,10 @@ lights:
   l_battering_ram_mid: # Battering Ram 2 (Mid) [#61]
     number: 3-20
     tags: batram_multipliers
-  l_battering_ram_top: # Battering Ram 1 (Top) [#62]
-    number: 0-16
-    tags: batram_multipliers
   # l_coin_enable: # Coin Enable [#1]
   #   number: 0-0
   l_dragon_fire: # Dragon Fire [#51]
     number: 3-29
-  l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
-    number: 0-5
-    tags: l_dropbanks, outer_circles
-  l_dropbank_middle: # Left 3-Bank (Mid) [#14]
-    number: 0-4
-    tags: l_dropbanks, outer_circles
-  l_dropbank_top: # Left 3-Bank (Top) [#15]
-    number: 0-3
-    tags: l_dropbanks, outer_circles
   l_flash_back_panel_left: # Back Panel Left [#100]
     number: 3-7
   l_flash_back_panel_right: # Back Panel Right [#101]
@@ -373,21 +425,12 @@ lights:
   l_hand_of_the_king: # Hand of the King [#19]
     number: 1-1
     tags: outer_circles
-  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
-    number: 0-11
-    tags: l_hitbanks, outer_circles
-  l_hitbank_top: # Right 2-Bank (Top) [#38]
-    number: 0-12
-    tags: l_hitbanks, outer_circles
   l_iron_throne: # Iron Throne [#21]
     number: 1-3
     tags: outer_circles
   l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
     number: 1-40
     tags: lane_wedges
-  l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
-    number: 0-20  # shadowbroker mission start
-    tags: l_store, lane_wedges
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 1-41
     tags: lane_arrows
@@ -412,24 +455,9 @@ lights:
   l_right_orbit_arrow_red: # Right Loop Arrow [#74]
     number: 1-20
     tags: lane_arrows
-  l_right_outlane: # Right Outlane [#34]
-    number: 0-10
-    tags: l_outlane, outer_circles
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 1-18
     tags: lane_arrows
-  l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
-    number: 0-13
-    tags: lane_wedges, l_upgrade
-  l_right_return_lane: # Right Return Lane [#33]
-    number: 0-9
-    tags: l_return_lane, outer_circles
-  l_right_top_lane: # Right Top Lane [#76]
-    number: 0-1
-    type: grb
-  l_ball_save: # Shoot Again [#32]
-    number: 0-8
-    tags: outer_circles
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 1-5
     tags: color_shields, color_shield_yellow
@@ -451,21 +479,6 @@ lights:
   l_shield_tyrell: # Sigil Tyrell [#26]
     number: 1-8
     tags: color_shields, color_shield_green
-  l_standup_1: # Standup 1 [#44]
-    number: 0-21
-    tags: l_targets
-  l_standup_2: # Standup 2 [#52]
-    number: 0-19
-    tags: l_targets
-  l_standup_3: # Standup 3 [#59]
-    number: 0-17
-    tags: l_targets
-  l_standup_4: # Standup 4 [#64]
-    number: 0-15
-    tags: l_targets
-  l_standup_5: # Standup 5 [#70]
-    number: 0-14
-    tags: l_targets
   l_start_button: # Start Button [#2]
     number: 3-62
   # l_tournament_start: # Tournament Start [#3]

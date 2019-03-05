@@ -23,7 +23,7 @@ ball_devices:
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
-    eject_coil: c_lock_release_post
+    eject_coil: c_lock_release
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
     eject_coil_enable_time: 250ms, 230ms, 215ms
@@ -36,10 +36,10 @@ ball_devices:
     debug: true
   bd_hold:
     ball_capacity: 1
-    hold_coil: c_up_post
+    hold_coil: c_hold_post
     hold_coil_release_time: 1s
     # hold_switches: s_kickback
-    entrance_switch: s_battering_ram
+    entrance_switch: s_left_ramp_exit
 
 flippers:
   right_flipper:
