@@ -33,6 +33,24 @@ game:
   balls_per_game: 5
   max_players: 4
 
+settings:
+  enable_careers:
+    label: "Enable Career Profiles"
+    key_type: int
+    default: 1
+    sort: 10
+    values:
+      0: "NO"
+      1: "YES"
+  enable_create_profile:
+    label: "Allow Profile Creation"
+    key_type: int
+    default: 1
+    sort: 20
+    values:
+      0: "NO"
+      1: "YES"
+
 slide_player:
   init_done:
     window_slide_container:
@@ -78,6 +96,7 @@ machine_vars:
     value_type: float
   flipper_cancelling:
     initial_value: 0
+    persist: false
 
 modes:
   # - colorpicker
@@ -91,6 +110,7 @@ modes:
   - modeanalysis
   - bonus
   - tilt
+  - service
   - skillshot
   # Environments:
   - environment

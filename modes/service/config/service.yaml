@@ -1,0 +1,265 @@
+#config_version=5
+sounds:
+  power_off:
+    file: SFXGame.649.ogg
+    track: sfx
+  switch_hit:
+    file: SFXGame.646.ogg
+    track: sfx
+
+
+slide_player:
+  # door open
+  service_door_opened:
+    meservice_door_open:
+      action: play
+  service_door_closed:
+    meservice_door_open:
+      action: remove
+
+  # menu
+  service_menu_show:
+    meservice_menu:
+      action: play
+      priority: 10
+  service_menu_hide:
+    meservice_menu:
+      action: remove
+
+  # switch test
+  service_switch_test_start:
+    meservice_switch_test:
+      action: play
+      priority: 20
+  service_switch_test_stop:
+    meservice_switch_test:
+      action: remove
+
+  # coil test:
+  service_coil_test_start:
+    meservice_coil_test:
+      action: play
+      priority: 20
+  service_coil_test_stop:
+    meservice_coil_test:
+      action: remove
+
+  # light test:
+  service_light_test_start:
+    meservice_light_test:
+      action: play
+      priority: 20
+  service_light_test_stop:
+    meservice_light_test:
+      action: remove
+
+  # settings:
+  service_settings_start:
+    meservice_settings:
+      action: play
+      priority: 20
+    meservice_settings_edit:
+      action: remove
+  service_settings_edit:
+    meservice_settings_edit:
+      action: play
+      priority: 21
+  service_settings_stop:
+    meservice_settings:
+      action: remove
+
+widget_player:
+  # power off
+  service_power_off:
+    meservice_power_off_door_open:
+      action: add
+      slide: meservice_door_open
+    meservice_power_off_coil_test:
+      action: add
+      slide: meservice_coil_test
+  service_power_on:
+    meservice_power_off_door_open:
+      action: remove
+      slide: meservice_door_open
+    meservice_power_off_coil_test:
+      action: remove
+      slide: meservice_coil_test
+
+  # menu items
+  service_menu_deselected:
+    meservice_menu_item_switch:
+      action: remove
+      slide: service_menu
+    meservice_menu_item_coil:
+      action: remove
+      slide: service_menu
+    meservice_menu_item_light:
+      action: remove
+      slide: meservice_menu
+    meservice_menu_item_settings:
+      action: remove
+      slide: meservice_menu
+  service_menu_selected_switch:
+    meservice_menu_item_switch:
+      action: add
+      slide: meservice_menu
+  service_menu_selected_coil:
+    meservice_menu_item_coil:
+      action: add
+      slide: meservice_menu
+  service_menu_selected_light:
+    meservice_menu_item_light:
+      action: add
+      slide: meservice_menu
+  service_menu_selected_settings:
+    meservice_menu_item_settings:
+      action: add
+      slide: meservice_menu
+
+slides:
+  # door open
+  meservice_door_open:
+  - type: text
+    text: Door Open
+    style: medium
+    anchor_y: bottom
+    x: center
+    y: bottom+21
+  - type: text
+    text: Press enter for service
+    style: small
+    anchor_y: bottom
+    x: center
+    y: bottom+12
+  # menu
+  meservice_menu:
+  - type: text
+    text: Service Menu
+    style: header_sm, row_title, col_center
+  # switch test
+  meservice_switch_test:
+  - type: text
+    text: Switch Test
+    style: header_sm, row_title, col_center
+  - type: text
+    text: "Last: (switch_num)"
+    style: body_md, row_super, col_left_anchor
+  - type: text
+    text: "(switch_name)"
+    style: body_md, row_main, col_left_anchor
+  - type: text
+    text: "(switch_label)"
+    style: body_sm, row_sub, col_left_anchor
+  - type: text
+    text: (switch_state)
+    style: body_md, row_sub, col_right_anchor
+  # coil test
+  meservice_coil_test:
+  - type: text
+    text: "Coil Test - (board_name)"
+    style: header_sm, row_title, col_center
+  - type: text
+    text: "(coil_name)"
+    style: body_md, row_main, col_left_anchor
+  - type: text
+    text: "(coil_label)"
+    style: body_sm, row_super, col_left_anchor
+  - type: text
+    text: "(coil_num)"
+    style: body_md, row_sub, col_right_anchor
+  # coil test
+  meservice_light_test:
+  - type: text
+    text: "Light Test - (board_name)"
+    style: small
+    anchor_y: top
+    x: center
+    y: top
+  - type: text
+    text: "(light_name)"
+    style: small
+    y: center+6
+  - type: text
+    text: "(light_label)"
+    style: small
+    y: center
+  - type: text
+    text: "(light_num)/(test_color)"
+    style: small
+    y: center-6
+  # settings
+  meservice_settings:
+  - type: text
+    text: "Settings"
+    style: header_sm, row_title, col_center
+  - type: text
+    text: "(settings_label)"
+    style: body_md, row_main, col_left_anchor
+  - type: text
+    text: "(value_label)"
+    style: body_md, row_sub, col_right_anchor
+    opacity: 0.5
+  meservice_settings_edit:
+  - type: text
+    text: "Settings"
+    style: header_sm, row_title, col_center
+  - type: text
+    text: "(settings_label)"
+    style: body_md, row_main, col_left_anchor
+    opacity: 0.5
+  - type: text
+    text: "(value_label)"
+    style: body_md, row_sub, col_right_anchor
+
+widgets:
+  # power off on door open slide
+  meservice_power_off_door_open:
+    type: text
+    text: Coil Power Off
+    anchor_y: bottom
+    x: center
+    y: bottom+4
+    style: medium
+    animations:
+      add_to_slide:
+      - property: opacity
+        value: 1
+        duration: 0.5s
+      - property: opacity
+        value: 0
+        duration: 0.5s
+        repeat: true
+  # power off on coil test slide
+  meservice_power_off_coil_test:
+    type: text
+    text: Coil Power Off
+    style: small
+    anchor_y: bottom
+    y: bottom-2
+    animations:
+      add_to_slide:
+      - property: opacity
+        value: 1
+        duration: 0.5s
+      - property: opacity
+        value: 0
+        duration: 0.5s
+        repeat: true
+
+  # menu items
+  meservice_menu_item_switch:
+    type: text
+    text: Switch Test
+    style: header_md, row_main, col_center
+  meservice_menu_item_coil:
+    type: text
+    text: Coil Test
+    style: header_md, row_main, col_center
+  meservice_menu_item_light:
+    type: text
+    text: Light Test
+    style: header_md, row_main, col_center
+  meservice_menu_item_settings:
+    type: text
+    text: Settings
+    style: header_md, row_main, col_center
