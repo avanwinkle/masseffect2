@@ -15,27 +15,18 @@ class ModeAnalysis(Mode):
 
     def __init__(self, machine, config, name, path):
         super().__init__(machine, config, name, path)
-        # Default log output goes to the main MPF logger
         self.settings = config.get("mode_settings")
+        self.analytics_log = None
+        # Default log output goes to the main MPF logger
         self.log = logging.getLogger("ModeAnalysis")
         if self.settings.get("debug"):
             self.log.setLevel(1)
 
-        # Analytics-specific logs dump separately, for parsing/ingestion
-        try:
-            os.makedirs(os.path.join(machine.machine_path, "analytics"))
-        except OSError as exception:
-            if exception.errno != errno.EEXIST:
-                raise
-
-        # Create a separate logger to dump the analytics data to a file
-        self.analytics_log = logging.getLogger("MPFAnalytics")
-        output_file_path = os.path.join(machine.machine_path, "analytics",
-                                        datetime.now().strftime("%Y-%m-%d-%H-%M-%S-analytics.log"))
-        analytics_handler = logging.FileHandler(output_file_path)
-        self.analytics_log.addHandler(analytics_handler)
-
     def mode_start(self, **kwargs):
+        # If we are starting for the first time, setup our log
+        if not self.analytics_log:
+            self._create_analytics_log()
+
         self.handlers = {}
         self.analytics = {}
         self.trophies = {}
@@ -80,6 +71,21 @@ class ModeAnalysis(Mode):
     def _start_trackers(self, event_name, **kwargs):
         for tracker in self.handlers[event_name]:
             tracker.start()
+
+    def _create_analytics_log(self):
+        # Analytics-specific logs dump separately, for parsing/ingestion
+        try:
+            os.makedirs(os.path.join(self.machine.machine_path, "analytics"))
+        except OSError as exception:
+            if exception.errno != errno.EEXIST:
+                raise
+
+        # Create a separate logger to dump the analytics data to a file
+        self.analytics_log = logging.getLogger("MPFAnalytics")
+        output_file_path = os.path.join(self.machine.machine_path, "analytics",
+                                        datetime.now().strftime("%Y-%m-%d-%H-%M-%S-analytics.log"))
+        analytics_handler = logging.FileHandler(output_file_path)
+        self.analytics_log.addHandler(analytics_handler)
 
 
 class ValueTrackerBase:

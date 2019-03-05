@@ -1,6 +1,6 @@
 #config_version=5
 mode:
-  start_events: game_start
+  start_events: game_start{settings.enable_analytics}
   stop_events: game_ended
   game_mode: false
   code: modeanalysis.ModeAnalysis
