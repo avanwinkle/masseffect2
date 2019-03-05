@@ -18,7 +18,8 @@ class ModeAnalysis(Mode):
         # Default log output goes to the main MPF logger
         self.settings = config.get("mode_settings")
         self.log = logging.getLogger("ModeAnalysis")
-        self.log.setLevel(1)
+        if self.settings.get("debug"):
+            self.log.setLevel(1)
 
         # Analytics-specific logs dump separately, for parsing/ingestion
         try:
@@ -26,13 +27,13 @@ class ModeAnalysis(Mode):
         except OSError as exception:
             if exception.errno != errno.EEXIST:
                 raise
+
+        # Create a separate logger to dump the analytics data to a file
         self.analytics_log = logging.getLogger("MPFAnalytics")
         output_file_path = os.path.join(machine.machine_path, "analytics",
                                         datetime.now().strftime("%Y-%m-%d-%H-%M-%S-analytics.log"))
         analytics_handler = logging.FileHandler(output_file_path)
         self.analytics_log.addHandler(analytics_handler)
-        self.analytics_log.setLevel(10)
-        self.analytics_log.info("Analytics log ready!")
 
     def mode_start(self, **kwargs):
         self.handlers = {}
@@ -50,19 +51,18 @@ class ModeAnalysis(Mode):
                 "type": "mode",
                 "player_variables": "score"
             }
-            analytics = Analytics(mode_name, self.machine, config, self.analytics_log)
+            analytics = Analytics(mode_name, self.machine, config, self.log, analytics_log=self.analytics_log)
             self._register_tracker_handler(analytics)
         # Register arbitrary analytics
         for name, analysis_config in self.settings.get("analytics", {}).items():
             self.log.debug(" - creating analysis for {}".format(name))
             analysis_config["type"] = "count"
-            analytics = Analytics(name, self.machine, analysis_config, self.analytics_log)
+            analytics = Analytics(name, self.machine, analysis_config, self.log, analytics_log=self.analytics_log)
             self.analytics[name] = analytics
             self._register_tracker_handler(analytics)
         # Register trophies
         for name, trophy_config in self.settings.get("trophies", {}).items():
             self.log.debug(" - creating trophy for {}".format(name))
-
             trophy = Trophy(name, self.machine, trophy_config, self.log, level_names=trophy_levels)
             self.trophies[name] = trophy
             self._register_tracker_handler(trophy)
@@ -116,7 +116,7 @@ class ValueTrackerBase:
 
     def start(self, **kwargs):
         if self._start_time:
-            self.log.info("Tracking for {} already in progress, ignoring duplicate start event".format(self.name))
+            self.log.debug("Tracking for {} already in progress, ignoring duplicate start event".format(self.name))
             return
 
         self.log.debug("Starting tracking for {}".format(self.name))
@@ -147,7 +147,7 @@ class ValueTrackerBase:
         return duration_secs, timestring
 
     def _stop_tracking(self, **kwargs):
-        self.log.info("Stopping tracking for {}".format(self.name))
+        self.log.debug("Stopping tracking for {}".format(self.name))
 
         duration_secs, timestring = self._calculate_time()
         persistent_values = self._persists[self.machine.game.player.number]
@@ -190,9 +190,12 @@ class ValueTrackerBase:
 
 
 class Analytics(ValueTrackerBase):
-    """
-    Analytics class for assessing and aggregating deltas between a start and stop event
-    """
+    """Analytics class for assessing and aggregating deltas between a start and stop event."""
+
+    def __init__(self, name, machine, config, log, analytics_log):
+        super().__init__(name, machine, config, log)
+        self.analytics_log = analytics_log
+
     def start(self, **kwargs):
         super().start(**kwargs)
         # Set the starting-time values for the variables we're tracking
@@ -236,7 +239,8 @@ class Analytics(ValueTrackerBase):
                 "aggregate": persist_values["aggregate"][count_var],
             }
 
-        self.log.info("{}".format(analysis))
+        self.log.debug("{}".format(analysis))
+        self.analytics_log.info("{}".format(analysis))
         return analysis
 
 
@@ -282,12 +286,12 @@ class Trophy(ValueTrackerBase):
             value = self.machine.game.player.vars[player_var] - self._starting_player_values[player_var]
             greater_wins = True
 
-        self.log.info("Evaluating trophy award {} with a value of {}".format(self.name, value))
+        self.log.debug("Evaluating trophy award {} with a value of {}".format(self.name, value))
         award = 0
         for idx, level in enumerate(self._level_bases):
             if ((value - float(level)) >= 0) == greater_wins:
                 award = idx + 1
-                self.log.info(" - Qualified for trophy level {} because score is better than {}".format(award, level))
+                self.log.debug(" - Qualified for trophy level {} because score is better than {}".format(award, level))
                 break
 
         if not award:

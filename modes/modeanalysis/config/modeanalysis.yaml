@@ -6,6 +6,7 @@ mode:
   code: modeanalysis.ModeAnalysis
 
 mode_settings:
+  debug: true
   analyze_modes:
     - recruitgarrus
     - recruitgrunt
