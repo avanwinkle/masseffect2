@@ -95,6 +95,7 @@ class MPFSquadmateHandlers(CustomCode):
 
       player["status_{}".format(mate)] = future_mate_status
       player["recruits_color"] = COLORS[mate]
+      player["available_missions"] += 1
       self.machine.events.post("flash_all_shields")
 
   def _on_missionselect(self, **kwargs):

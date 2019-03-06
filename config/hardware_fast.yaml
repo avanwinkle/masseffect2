@@ -62,7 +62,7 @@ coils:
   c_hold_post:
     number: 1-2
     default_pulse_ms: 14
-    default_hold_power: 0.3
+    default_hold_power: 0.1
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
@@ -77,7 +77,7 @@ coils:
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 58
+    default_pulse_ms: 20
     default_hold_power: 0.4
     enable_events: enable_gates
     disable_events: disable_gates
@@ -112,8 +112,10 @@ switches:
     number: 1-8
   s_trough_jam:
     number: 1-9
+    type: NC
   s_trough1:
     number: 1-10
+    type: NC
   s_trough2:
     number: 1-11
   s_trough3:
@@ -235,27 +237,37 @@ light_rings:
     number_start: 23
     number_template: 0-{}
     count: 6
+    light_template:
+      type: grb
   l_kickback_ring:
     number_start: 30
     number_template: 0-{}
     count: 6
+    light_template:
+      type: grb
   l_left_ramp_ring:
     number_start: 37
     number_template: 0-{}
     count: 6
+    light_template:
+      type: grb
   l_right_ramp_ring:
     number_start: 44
     number_template: 0-{}
     count: 6
+    light_template:
+      type: grb
   l_right_orbit_ring:
     number_start: 51
     number_template: 0-{}
     count: 6
+    light_template:
+      type: grb
 
 lights:
   l_null:
     number: 2-63
-  
+
   # First chain of lights
   #------------------------------------------
   l_left_top_lane: # Left Top Lane [#75]
@@ -264,7 +276,7 @@ lights:
   l_right_top_lane: # Right Top Lane [#76]
     number: 0-1
     type: grb
-  
+
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 0-3
     tags: l_dropbanks, outer_circles
@@ -281,11 +293,11 @@ lights:
   l_left_return_lane: # Left Return Lane [#12]
     number: 0-7
     tags: l_return_lane, outer_circles
-  
+
   l_ball_save: # Shoot Again [#32]
     number: 0-8
     tags: outer_circles
-  
+
   l_right_return_lane: # Right Return Lane [#33]
     number: 0-9
     tags: l_return_lane, outer_circles

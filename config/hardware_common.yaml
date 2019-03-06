@@ -39,7 +39,9 @@ ball_devices:
     hold_coil: c_hold_post
     hold_coil_release_time: 1s
     # hold_switches: s_kickback
+    hold_switches: s_left_ramp_exit
     entrance_switch: s_left_ramp_exit
+    debug: true
 
 flippers:
   right_flipper:
