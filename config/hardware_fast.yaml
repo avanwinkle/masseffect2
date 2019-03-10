@@ -9,7 +9,8 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
+  # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
+  ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   rgb_buffer: 10000
 
 machine:
@@ -19,15 +20,15 @@ machine:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 35
+    default_pulse_ms: 45  # Increased from Spike 35
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 35
+    default_pulse_ms: 45  # Increased from Spike 35
     default_hold_power: 0.1
   c_plunger:
     number: 1-1
-    default_pulse_ms: 18
+    default_pulse_ms: 25  # Increased from Spike 18
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -62,14 +63,14 @@ coils:
   c_hold_post:
     number: 1-2
     default_pulse_ms: 14
-    default_hold_power: 0.1
+    default_hold_power: 0.08
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
     tags: coil_missionselect
   c_lock_release:
     number: 0-2
-    default_pulse_ms: 32
+    default_pulse_ms: 50  # Increase from Spike 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
@@ -270,10 +271,10 @@ lights:
 
   # First chain of lights
   #------------------------------------------
-  l_left_top_lane: # Left Top Lane [#75]
+  l_right_top_lane: # Right Top Lane [#76]
     number: 0-0
     type: grb
-  l_right_top_lane: # Right Top Lane [#76]
+  l_left_top_lane: # Left Top Lane [#75]
     number: 0-1
     type: grb
 
