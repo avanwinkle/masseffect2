@@ -113,12 +113,17 @@ class SaveCareer(CustomCode):
   def _load_career(self, **kwargs):
     player = self.machine.game.player
     if self._current_careers.get(player.number):
-      player.career_name = self._current_careers[player.number]["career_name"]
+      career_name = kwargs.get("career_name",
+                               self._current_careers[player.number]["career_name"])
 
-      if player.career_name == " ":
+      setattr(player, "career_name", career_name)
+
+      if career_name == " ":
         careerdata = CASUAL_CAREER
+        setattr(player, "casual", 1)
       else:
-        careerdata = self._fetch_careerdata(player.career_name)
+        careerdata = self._fetch_careerdata(career_name)
+        setattr(player, "casual", 0)
 
       self._achievement_handlers = {}
       available_missions = 0
@@ -126,7 +131,7 @@ class SaveCareer(CustomCode):
 
       self.log.debug("Loading career {} for Player {} ====== Args={}".format(careerdata["career_name"], player.number, careerdata))
 
-      for key,value in careerdata.items():
+      for key, value in careerdata.items():
         if key.startswith("status_"):
           setattr(player, key, value)
           if value == 3:
@@ -175,10 +180,13 @@ class SaveCareer(CustomCode):
       player.career_name = self._current_careers[player.number]["career_name"]
       # All we have to do is set a new career_started time
       player.career_started = datetime.now().timestamp()
-      # But also, transfer over the trophies
-      if player.career_name:
+      # But also, transfer over the trophies if this profile existed
+      try:
         careerdata = self._fetch_careerdata(player.career_name)
         player.trophies = careerdata.get("trophies")
+      # If this career has never been saved, that's okay
+      except(FileNotFoundError):
+        pass
     self.machine.events.post("career_loaded", career_name=player.career_name)
 
   def _force_achievement(self, **kwargs):

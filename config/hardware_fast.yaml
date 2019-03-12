@@ -62,8 +62,8 @@ coils:
     default_pulse_ms: 35
   c_hold_post:
     number: 1-2
-    default_pulse_ms: 14
-    default_hold_power: 0.01
+    default_pulse_ms: 18
+    default_hold_power: 0.08
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
@@ -78,8 +78,8 @@ coils:
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 20
-    default_hold_power: 0.4
+    default_pulse_ms: 40
+    default_hold_power: 0.5
     enable_events: enable_gates
     disable_events: disable_gates
   # UNUSED ADDRESSES

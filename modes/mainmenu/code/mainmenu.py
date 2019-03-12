@@ -22,7 +22,7 @@ class MainMenu(Carousel):
       self.log.info("Casual mode only, skipping menu")
       self.stop()
       return
-    
+
     # When the mode starts, create a handler to trigger the Carousel start.
     self.add_mode_event_handler("show_mainmenu", self.show_menu)
     # Watch for adding players, which we prevent during creation.
@@ -50,7 +50,7 @@ class MainMenu(Carousel):
 
   def _load_mainmenu(self):
     menu = ["casual", "create_career"]
-    if len(self.careers) > 1:
+    if len(self.careers) > (0 if not self._selected_career else 1):
       menu = ["change_career"] + menu
     if self._selected_career:
       menu = ["new_game"] + menu
@@ -94,7 +94,7 @@ class MainMenu(Carousel):
 
     # Sort by the date last played (newest first)
     self.careers.sort(key=itemgetter("last_played"), reverse=True)
-    self.log.debug("Created player {} career menu with {}; initial selection is {}".format(player_num,
+    self.log.debug("Created player {} career menu with [{}]; initial selection is {}".format(player_num,
                     ", ".join([c["career_name"] for c in self.careers]), self._selected_career))
 
   def _get_available_items(self):
@@ -137,7 +137,7 @@ class MainMenu(Carousel):
     # If casual mode was chosen, clear the career
     elif selection == "casual":
       self._set_selected_career(None)
-      self._post_career_event("load_career")
+      # self._post_career_event("load_career")
     # If resume was chosen, load the career
     elif selection == "resume_game":
       self._post_career_event("load_career")
@@ -185,12 +185,12 @@ class MainMenu(Carousel):
 
   def _player_add_request(self, **kwargs):
     del kwargs
-    
+
     # Don't add players during profile creation, to free up the start button
     if self.machine.modes.createprofile.active:
       return False
 
-    return True    
+    return True
 
   def _post_career_event(self, evt_name, **kwargs):
     career_data = self._selected_career or  { "career_name": " " }

@@ -142,6 +142,9 @@ slides:
     text: Switch Test
     style: header_sm, row_title, col_center
   - type: text
+    text: (board_name)
+    style: body_sm, row_top, col_center
+  - type: text
     text: "Last: (switch_num)"
     style: body_md, row_super, col_left_anchor
   - type: text
@@ -156,8 +159,11 @@ slides:
   # coil test
   meservice_coil_test:
   - type: text
-    text: "Coil Test - (board_name)"
+    text: "Coil Test"
     style: header_sm, row_title, col_center
+  - type: text
+    text: (board_name)
+    style: body_sm, row_top, col_center
   - type: text
     text: "(coil_name)"
     style: body_md, row_main, col_left_anchor
@@ -170,8 +176,11 @@ slides:
   # coil test
   meservice_light_test:
   - type: text
-    text: "Light Test - (board_name)"
+    text: "Light Test"
     style: header_sm, row_title, col_center
+  - type: text
+    text: (board_name)
+    style: body_sm, row_top, col_center
   - type: text
     text: "(light_name)"
     style: body_md, row_main, col_left_anchor
