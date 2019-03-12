@@ -54,6 +54,9 @@ slide_player:
       action: play
       slide: huddle_slide
       priority: 102
+  suicide_huddle_specialist_selected:
+    huddle_slide:
+      action: remove
 
 show_player:
   play_huddle_intro_show:
@@ -168,9 +171,15 @@ shows:
 sound_player:
   play_specialist_inf_intro: specialist_inf_intro
   play_specialist_lw_intro: specialist_lw_intro
-  play_specialist_lw_no: specialist_lw_no
-  play_specialist_lw_yes: specialist_lw_yes
-  play_specialist_lw_callback_miranda: miranda_any_biotic_could
+  play_specialist_lw_no:
+    specialist_lw_no:
+      events_when_stopped: specialist_lw_callback_miranda
+  play_specialist_lw_yes:
+    specialist_lw_yes:
+      events_when_stopped: specialist_lw_callback_miranda
+  play_specialist_lw_callback_miranda:
+    miranda_any_biotic_could:
+      events_when_stopped: specialist_intro_complete
   # Music started in shows won't end on stop events, so use the show to trigger sound_player
   play_music_infiltration: infiltration_low
   play_music_longwalk: longwalk_low

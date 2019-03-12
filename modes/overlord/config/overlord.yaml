@@ -55,7 +55,7 @@ event_player:
       is_bonus_shot:
         value: 1 if count>=device.counters.jackpots_hit_counter.value else 0
         type: int
-  jackpotshot_hit: 
+  jackpotshot_hit:
     - reset_hackshots
     - mission_collect_score
     - missiontimer_set_30

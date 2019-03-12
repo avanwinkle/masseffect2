@@ -65,3 +65,11 @@ keyboard:
     switch: s_spinner
   space:
     event: flippers_on
+  right:
+    event: sw_service_enter_active #sw_service_enter_active
+  left:
+    event: sw_service_esc_active #sw_service_enter_active
+  up:
+    event: sw_service_up_active #sw_service_enter_active
+  down:
+    event: sw_service_down_active #sw_service_enter_active

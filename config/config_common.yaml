@@ -33,6 +33,24 @@ game:
   balls_per_game: 5
   max_players: 4
 
+settings:
+  enable_careers:
+    label: "Enable Career Profiles"
+    key_type: int
+    default: 1
+    sort: 10
+    values:
+      0: "NO"
+      1: "YES"
+  enable_create_profile:
+    label: "Allow Profile Creation"
+    key_type: int
+    default: 1
+    sort: 20
+    values:
+      0: "NO"
+      1: "YES"
+
 slide_player:
   init_done:
     window_slide_container:
@@ -41,13 +59,7 @@ slide_player:
 event_player:
   game_will_start: gi_on
   game_ended: gi_off
-  bypass_lock_release_pulse_short:
-    - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|210ms
-  bypass_lock_release_pulse_long:
-    - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|700ms
-
+  
 machine_vars:
   last_career_player_1:
     initial_value: " "
@@ -78,6 +90,7 @@ machine_vars:
     value_type: float
   flipper_cancelling:
     initial_value: 0
+    persist: false
 
 modes:
   # - colorpicker
@@ -85,12 +98,12 @@ modes:
   - base
   - global
   - field
-  - lockhandler
   - mainmenu
   - missionselect
   - modeanalysis
   - bonus
   - tilt
+  - service
   - skillshot
   # Environments:
   - environment

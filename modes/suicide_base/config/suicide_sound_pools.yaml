@@ -240,7 +240,8 @@ sound_pools:
         - specialist_biotic_field_yes_thane{current_player.status_thane==4}
         - specialist_biotic_field_yes_jacob{current_player.status_jacob==4}
         - specialist_biotic_field_yes_samara{current_player.status_samara==4}
-        - specialist_biotic_field_yes_miranda{current_player.status_miranda==4}
+        # Disable the miranda specialist calls until we can prevent her callback on herself
+        # - specialist_biotic_field_yes_miranda{current_player.status_miranda==4}
         - specialist_biotic_field_yes_jack{current_player.status_jack==4}
     # Huddle intro pt 2-B
     specialist_lw_no:
@@ -250,7 +251,7 @@ sound_pools:
         - specialist_biotic_field_no_thane{current_player.status_thane==4}
         - specialist_biotic_field_no_jacob{current_player.status_jacob==4}
         - specialist_biotic_field_no_samara{current_player.status_samara==4}
-        - specialist_biotic_field_no_miranda{current_player.status_miranda==4}
+        # - specialist_biotic_field_no_miranda{current_player.status_miranda==4}
         - specialist_biotic_field_no_jack{current_player.status_jack==4}
     # Huddle outro
     specialist_lw_outro:

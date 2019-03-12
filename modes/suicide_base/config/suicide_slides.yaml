@@ -41,6 +41,22 @@ slide_player:
     mode_suicide_endrun_started:
       portrait_endrun:
         target: lcd_right
+    # Huddle videos
+    mode_suicide_base_started{device.achievements.infiltration.state=="selected"}:
+      video_huddle_infiltration:
+        target: lcd_right
+    mode_suicide_base_started{device.achievements.longwalk.state=="selected"}:
+      video_huddle_longwalk:
+        target: lcd_right
+    omegarelay_complete:
+      video_huddle_infiltration:
+        target: lcd_right
+    infiltration_complete:
+      video_huddle_longwalk:
+        target: lcd_right
+    longwalk_complete:
+      video_huddle_platforms:
+        target: lcd_right
 
 widget_player:
   # START/STOP Modes (Titles and add/remove)
@@ -96,18 +112,12 @@ widget_player:
       endrun_title:
         slide: suicide_slide
   # TIMERS AND SHOTS Updating Widgets
-    timer_omegarelay_tick:
+    timer_missiontimer_tick:
       suicide_time:
         action: update
-    timer_omegarelay_stopped:
+    timer_missiontimer_stopped:
       suicide_time:
         action: remove
-    timer_infiltration_tick:
-      suicide_time:
-        action: update
-    timer_longwalk_tick:
-      suicide_time:
-        action: update
     logicblock_swarmpaths_hit:
       suicide_shots:
         action: update
@@ -223,7 +233,6 @@ slides:
           suicide_huddle_thane_dead: specialist_dead
       - widget: background_console
 
-
   # Basic slide for all uses
   suicide_slide:
     widgets:
@@ -288,6 +297,7 @@ slides:
     widgets:
       - type: text
         text: (player|killed_squadmate) is dead
+        casing: upper
         style: body_md, row_super
       - type: text
         text: Shoot ramp to try again
@@ -313,7 +323,25 @@ slides:
   portrait_endrun:
     - type: image
       image: portrait_suicide_endrun
-
+  # Videos
+  video_huddle_infiltration:
+    - type: video
+      video: suicide_huddle_infiltration
+      end_behavior: loop
+      anchor_x: left
+      x: -116
+  video_huddle_longwalk:
+    - type: video
+      video: suicide_huddle_longwalk
+      end_behavior: loop
+      anchor_x: left
+      x: -116
+  video_huddle_platforms:
+    - type: video
+      video: suicide_huddle_platforms
+      end_behavior: loop
+      anchor_x: left
+      x: -116
 
 widgets:
   # Titles for the different modes

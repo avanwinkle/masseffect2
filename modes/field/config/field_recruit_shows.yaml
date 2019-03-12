@@ -170,10 +170,10 @@ shows:
   missions_available_show:
     - duration: 500ms
       lights:
-        l_left_ramp_arrow_clear: white
+        light_missionselect: white
     - duration: 500ms
       lights:
-        l_left_ramp_arrow_clear: black
+        light_missionselect: black
   recruits_lit_show:
     - duration: 1000ms
       lights:

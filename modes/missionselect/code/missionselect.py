@@ -24,6 +24,8 @@ class MissionSelect(Carousel):
     # If there's only one option and it's a recruit mission, start it immediately without a slide
     if len(self._items) == 1 and self._items[0] in self._mates:
       self._select_item()
+      # We never technically start the mode, so fake the ending of it
+      self.machine.events.post("mode_missionselect_will_stop")
     else:
       super().mode_start(**kwargs)
       # Disable the intro slide after a time

@@ -116,20 +116,20 @@ shots:
     disable_events: multiball_lock_fmball_lock_locked_ball
     profile: color_flashing_static
     show_tokens:
-      leds: l_lock_lit
-      color: FFFFFF
+      leds: light_lock_lit
+      color: 22FF33
   light_lock_fmball_top:
     switch: s_hitbank_top
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_top
-      color: FFFFFF
+      color: 22FF33
   light_lock_fmball_bottom:
     switch: s_hitbank_bottom
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_bot
-      color: FFFFFF
+      color: 22FF33
 
 show_player:
   fmball_light_shot_hit:
@@ -162,15 +162,15 @@ shows:
   fmball_lock_flash:
     - time: 0
       lights:
-        l_hitbank_bot: white
-        l_hitbank_top: white
+        l_hitbank_bot: 22FF33
+        l_hitbank_top: 22FF33
     - time: '+1'
       lights:
         l_hitbank_bot: black
         l_hitbank_top: black
   fmball_disabled_show:
     - lights:
-        l_lock_lit: black
+        light_lock_lit: black
 
 slides:
   fmball_lock_lit_slide:
@@ -404,7 +404,7 @@ widgets:
       image: portrait_overlord_light
   portrait_overlord:
     - type: image
-      image: overlord
+      image: portrait_overlord
   portrait_arrival_light:
     - type: image
       image: portrait_arrival_light

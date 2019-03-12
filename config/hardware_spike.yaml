@@ -1,7 +1,10 @@
 #config_version=5
 #STERN Game of Thrones [Pro Edition]
 hardware:
-  platform: spike #, fadecandy
+  platform: spike
+
+modes:
+  - lockhandler
 
 spike:
   port: /dev/tty.usbserial-FTA6MU05
@@ -17,6 +20,14 @@ spike:
 machine:
   balls_installed: 6
   min_balls: 6
+
+event_player:
+  bypass_lock_release_pulse_short:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|210ms
+  bypass_lock_release_pulse_long:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|700ms
 
 switches:
   s_start_button:
@@ -135,6 +146,7 @@ switches:
   s_kickback:
     number: 10-14 # Restored 8-7 # 10-14 Moved
     ignore_window_ms: 400
+    tags: switch_hold_en
   s_tenpoints:
     number: 9-12
   s_lock_1:
@@ -268,7 +280,7 @@ lights:
     tags: lane_wedges
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
     number: 10-17
-    tags: l_lock_lit, lane_wedges
+    tags: light_lock_lit, light_missionselect, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
     tags: lane_arrows
@@ -467,20 +479,21 @@ coils:
   c_dropbank_reset:
     number: 8-2
     default_pulse_ms: 35
-  c_up_post:
+  c_hold_post:
     number: 8-7
     default_pulse_ms: 14
     default_hold_power: 0.3
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
-  c_lock_release_post:
+  c_lock_release:
     number: 9-3
     default_pulse_ms: 32
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
     debug: true
+    tags: coil_missionselect, coil_airlock
   c_orbit_gates:
     number: 10-0
     default_pulse_ms: 58
