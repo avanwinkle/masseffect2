@@ -34,28 +34,28 @@ slides:
         text: (score)
         style: header_lg_lowz, row_main, col_left_anchor, num
       # Can't use widget names here, they're not loaded yet
-      - type: image
-        image: background_galaxy
-        z: 0
-        animations:
-          add_to_slide:
-            - property: rotation
-              value: -360
-              duration: 1200s
+      # - type: image
+      #   image: background_galaxy
+      #   z: 0
+      #   animations:
+      #     add_to_slide:
+      #       - property: rotation
+      #         value: -360
+      #         duration: 1200s
   multiplayer_slide:
     widgets:
       - type: text
         text: (score)
         style: header_lg, row_main, col_left_anchor, num
         z: 10
-      - type: image
-        image: background_galaxy
-        z: 0
-        animations:
-          add_to_slide:
-            - property: rotation
-              value: -360
-              duration: 2000s
+      # - type: image
+      #   image: background_galaxy
+      #   z: 0
+      #   animations:
+      #     add_to_slide:
+      #       - property: rotation
+      #         value: -360
+      #         duration: 2000s
 
 
 machine_vars:
@@ -117,14 +117,14 @@ widget_styles:
     z: 110
   header_lg_lowz:
     font_name: Quadrit-10
-    font_size: 20
+    font_size: 10
     line_height: 0.75
     adjust_bottom: 6
     adjust_top: 1
     z: 10
   header_lg:
     font_name: Quadrit-10
-    font_size: 20
+    font_size: 10
     line_height: 0.75
     adjust_bottom: 6
     adjust_top: 1
@@ -174,7 +174,7 @@ widget_styles:
     z: 110
   instructions_md:
     font_name: myriadpro-regular
-    font_size: 34
+    font_size: 12
     z: 110
   squad_debug_style:
     font_size: 18
@@ -183,11 +183,11 @@ widget_styles:
     z: 110
   timer_primary:
     font_name: unispace_rg
-    font_size: 44
+    font_size: 8
     z: 110
   timer_secondary:
     font_name: unispace_bd_it
-    font_size: 96
+    font_size: 8
     z: 110
   num:
     number_grouping: true
