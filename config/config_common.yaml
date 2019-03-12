@@ -50,6 +50,14 @@ settings:
     values:
       0: "NO"
       1: "YES"
+  enable_analytics:
+    label: "Mode Analytics"
+    sort: 303
+    key_type: int
+    default: 0
+    values:
+      0: "OFF"
+      1: "ON"
 
 slide_player:
   init_done:
@@ -96,6 +104,7 @@ modes:
   # - colorpicker
   # Core Logic Modes:
   - base
+  - createprofile
   - global
   - field
   - mainmenu
