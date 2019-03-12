@@ -5,27 +5,39 @@ mode:
   priority: 100
   game_mode: false
   code: mainmenu.MainMenu
-  console_log: full
 
 mode_settings:
-  select_item_events: s_action_button_active, flipper_cancel
-  next_item_events: s_flipper_right_inactive{machine.flipper_cancelling==0}
-  previous_item_events: s_flipper_left_inactive{machine.flipper_cancelling==0}
+  select_item_events: select_item
+  next_item_events: next_item
+  previous_item_events: prev_item
   selectable_items: casual
+  casual_only: false
 
 event_player:
   career_loaded: stop_mode_mainmenu
+  s_flipper_right_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: next_item
+  s_flipper_left_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: prev_item
+  s_action_button_active{not mode.createprofile.active}: select_item
+  flipper_cancel{not mode.createprofile.active}: select_item
 
 variable_player:
   mode_mainmenu_started:
     flipper_cancelling:
       int: 0
       action: set_machine
+  flipper_cradle:
+    flipper_cancelling:
+      int: 1
+      action: set_machine
   flipper_cancel:
     flipper_cancelling:
       int: 1
       action: set_machine
   both_flippers_inactive:
+    flipper_cancelling:
+      int: 0
+      action: set_machine
+  flipper_cradle_release:
     flipper_cancelling:
       int: 0
       action: set_machine
@@ -38,24 +50,15 @@ queue_relay_player:
 
 slide_player:
   # Highlighting options in the main menu
-  mainmenu_new_game_highlighted:
-    new_game_slide:
-      target: lcd_left
-  mainmenu_resume_game_highlighted:
-    resume_game_slide:
-      target: lcd_left
+  mainmenu_new_game_highlighted: new_game_slide
+  mainmenu_resume_game_highlighted: resume_game_slide
   mainmenu_change_career_highlighted:
-    change_career_slide{career_name!=" "}:
-      target: lcd_left
-    select_career_slide{career_name==" "}:
-      target: lcd_left
-  mainmenu_casual_highlighted:
-    casual_slide:
-      target: lcd_left
+    change_career_slide{career_name!=" "}: {}
+    select_career_slide{career_name==" "}: {}
+  mainmenu_casual_highlighted: casual_slide
+  mainmenu_create_career_highlighted: career_new_slide
   # Selecting and moving between menus
-  highlight_career:
-    career_select_slide:
-      target: lcd_left
+  highlight_career: career_select_slide
 
 slides:
   change_career_slide:
@@ -106,6 +109,12 @@ slides:
         text: "Started: (career_started)\nLast played: (last_played)"
         halign: right
         style: body_sm, row_sub_under, col_right_anchor
+      - widget: background_console
+  career_new_slide:
+    widgets:
+      - type: text
+        text: Create Profile
+        style: header_md, row_main, col_left_anchor
       - widget: background_console
   casual_slide:
     widgets:

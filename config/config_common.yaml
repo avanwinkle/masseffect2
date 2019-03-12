@@ -110,6 +110,7 @@ modes:
   # - colorpicker
   # Core Logic Modes:
   - base
+  - createprofile
   - global
   - field
   - lockhandler

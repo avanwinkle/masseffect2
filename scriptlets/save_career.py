@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from datetime import datetime
 from mpf.core.custom_code import CustomCode
 
@@ -26,6 +27,7 @@ class SaveCareer(CustomCode):
     self.log.setLevel(10)
     self._current_careers = {}
     self._achievement_handlers = {}
+    self._savepath = "{}/savegames".format(self.machine.machine_path)
     self.machine.events.add_handler("load_career", self._load_career)
     self.machine.events.add_handler("new_career", self._new_career)
     self.machine.events.add_handler("set_career", self._set_career)
@@ -93,6 +95,13 @@ class SaveCareer(CustomCode):
       # Everything else we just save as-is
       elif key in PLAYER_VARS or key.startswith("state_machine"):
         newcareer[key] = value
+
+    # Make sure the save folder is there
+    try:
+      os.stat(self._savepath)
+    except(FileNotFoundError):
+      self.log.debug("Saved career path '{}' not found, creating it.".format(self._savepath))
+      os.makedirs(self._savepath, mode=0o755)
 
     self.log.debug("Saving career for '{}': {}".format(player.career_name, newcareer))
     json.dump(newcareer,
@@ -185,7 +194,7 @@ class SaveCareer(CustomCode):
     self.log.debug("Save handlers are now: {}".format(self._achievement_handlers))
 
   def _get_filename(self, career_name):
-    return "{}/{}.json".format(self.machine.machine_path + "/savegames", career_name)
+    return "{}/{}.json".format(self._savepath, career_name)
 
   def _fetch_careerdata(self, career_name):
     with open(self._get_filename(career_name)) as f:
