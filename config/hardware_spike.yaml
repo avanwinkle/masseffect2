@@ -265,7 +265,7 @@ lights:
     tags: lane_wedges
   l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
     number: 9-39
-    tags: l_store, lane_wedges
+    tags: light_shadowbroker_start, l_store, lane_wedges
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 9-41
     tags: lane_arrows

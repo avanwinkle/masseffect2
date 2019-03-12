@@ -8,7 +8,7 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 3s
     confirm_eject_type: target # default
-    entrance_count_delay: 0
+    entrance_count_delay: 500ms
     player_controlled_eject_event: force_plunger_launch
     debug: true
   bd_trough:
@@ -38,8 +38,8 @@ ball_devices:
     ball_capacity: 1
     hold_coil: c_hold_post
     hold_coil_release_time: 1s
-    # hold_switches: s_kickback
-    hold_switches: s_left_ramp_exit
+    # hold_switches: s_left_ramp_exit
+    hold_events: s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled}
     entrance_switch: s_left_ramp_exit
     debug: true
 

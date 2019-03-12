@@ -9,8 +9,8 @@ modes:
   - airlock
 
 fast:
-  # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
-  ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
+  ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
+  # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   rgb_buffer: 10000
 
 machine:
@@ -28,7 +28,7 @@ coils:
     default_hold_power: 0.1
   c_plunger:
     number: 1-1
-    default_pulse_ms: 25  # Increased from Spike 18
+    default_pulse_ms: 40  # Increased from Spike 18
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -63,7 +63,7 @@ coils:
   c_hold_post:
     number: 1-2
     default_pulse_ms: 14
-    default_hold_power: 0.08
+    default_hold_power: 0.01
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
@@ -281,52 +281,67 @@ lights:
 
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 0-3
+    type: grb
     tags: l_dropbanks, outer_circles
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 0-4
+    type: grb
     tags: l_dropbanks, outer_circles
   l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 0-5
+    type: grb
     tags: l_dropbanks, outer_circles
 
   l_left_outlane: # Left Outlane [#11]
     number: 0-6
+    type: grb
     tags: l_outlane, outer_circles
   l_left_return_lane: # Left Return Lane [#12]
     number: 0-7
+    type: grb
     tags: l_return_lane, outer_circles
 
   l_ball_save: # Shoot Again [#32]
     number: 0-8
+    type: grb
     tags: outer_circles
 
   l_right_return_lane: # Right Return Lane [#33]
     number: 0-9
+    type: grb
     tags: l_return_lane, outer_circles
   l_right_outlane: # Right Outlane [#34]
     number: 0-10
+    type: grb
     tags: l_outlane, outer_circles
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
     number: 0-11
+    type: grb
     tags: l_hitbanks, outer_circles
   l_hitbank_top: # Right 2-Bank (Top) [#38]
     number: 0-12
+    type: grb
     tags: l_hitbanks, outer_circles
 
   l_standup_1: # Standup 1 [#44]
     number: 0-21
+    type: grb
     tags: l_targets
   l_standup_2: # Standup 2 [#52]
     number: 0-19
+    type: grb
     tags: l_targets
   l_standup_3: # Standup 3 [#59]
     number: 0-17
+    type: grb
     tags: l_targets
   l_standup_4: # Standup 4 [#64]
     number: 0-15
+    type: grb
     tags: l_targets
   l_standup_5: # Standup 5 [#70]
     number: 0-14
+    type: grb
     tags: l_targets
 
   l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
@@ -344,7 +359,7 @@ lights:
   l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-20  # shadowbroker mission start
     type: grb
-    tags: light_lock_lit, l_store, lane_wedges
+    tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
 
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------

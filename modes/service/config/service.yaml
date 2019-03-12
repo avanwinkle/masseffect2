@@ -171,22 +171,16 @@ slides:
   meservice_light_test:
   - type: text
     text: "Light Test - (board_name)"
-    style: small
-    anchor_y: top
-    x: center
-    y: top
+    style: header_sm, row_title, col_center
   - type: text
     text: "(light_name)"
-    style: small
-    y: center+6
+    style: body_md, row_main, col_left_anchor
   - type: text
     text: "(light_label)"
-    style: small
-    y: center
+    style: body_sm, row_super, col_left_anchor
   - type: text
     text: "(light_num)/(test_color)"
-    style: small
-    y: center-6
+    style: body_md, row_sub, col_right_anchor
   # settings
   meservice_settings:
   - type: text

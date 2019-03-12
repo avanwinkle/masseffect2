@@ -117,19 +117,19 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: light_lock_lit
-      color: 22FF33
+      color: $color_overlord
   light_lock_fmball_top:
     switch: s_hitbank_top
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_top
-      color: 22FF33
+      color: $color_overlord
   light_lock_fmball_bottom:
     switch: s_hitbank_bottom
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_bot
-      color: 22FF33
+      color: $color_overlord
 
 show_player:
   fmball_light_shot_hit:
@@ -162,8 +162,8 @@ shows:
   fmball_lock_flash:
     - time: 0
       lights:
-        l_hitbank_bot: 22FF33
-        l_hitbank_top: 22FF33
+        l_hitbank_bot: $color_overlord
+        l_hitbank_top: $color_overlord
     - time: '+1'
       lights:
         l_hitbank_bot: black

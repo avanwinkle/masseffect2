@@ -92,10 +92,10 @@ class MPFSquadmateHandlers(CustomCode):
         xp = self.machine.get_machine_var("unlock_xp") * (
           1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.get_machine_var("bonus_xp")))
         player["xp"] += int(xp)
+        player["available_missions"] += 1
 
       player["status_{}".format(mate)] = future_mate_status
       player["recruits_color"] = COLORS[mate]
-      player["available_missions"] += 1
       self.machine.events.post("flash_all_shields")
 
   def _on_missionselect(self, **kwargs):

@@ -14,7 +14,7 @@ mode:
   priority: 1000
 
 event_player:
-  balldevice_bd_hold_ball_entered: start_mode_missionselect{mode.field.active}
+  ball_hold_missionselect_hold_held_ball: start_mode_missionselect
 
 queue_relay_player:
   mode_missionselect_starting:

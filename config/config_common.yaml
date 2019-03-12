@@ -59,7 +59,7 @@ slide_player:
 event_player:
   game_will_start: gi_on
   game_ended: gi_off
-  
+
 machine_vars:
   last_career_player_1:
     initial_value: " "
@@ -288,6 +288,31 @@ player_vars:
     initial_value: -1
   xp:
     initial_value: 0
+
+text_strings:
+  # COLORS: Squadmates
+  color_garrus: 0055FF
+  color_grunt: FF6611
+  color_jack: 4D00CC
+  color_kasumi: eeff00
+  color_legion: ffffff
+  color_mordin: 440000
+  color_samara: 008899
+  color_tali: ff11dd
+  color_thane: 00ff11
+  color_zaeed: ff7700
+  # COLORS: ME Palette
+  color_shield: 0066FF
+  color_armor: FFCC00
+  color_barrier: 5500FF
+  color_health: 990000
+  color_paragon: 1166FF
+  color_renegade: 660000
+  # COLORS: Other Modes
+  color_collectors: ff2200
+  color_overlord: 22FF33
+  color_overlord_orange: FF4400
+  color_shadowbroker: ff1f00
 
 sound_system:
   master_volume: 1
