@@ -111,6 +111,7 @@ switches:
   # BOARD 0-B (Blue)
   s_plunger_lane:
     number: 1-8
+    debounce: normal  # Let the ball set a moment before auto-kicking
   s_trough_jam:
     number: 1-9
     type: NC
@@ -328,18 +329,22 @@ lights:
     number: 0-14
     tags: l_targets
 
-  l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
+  l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
     number: 0-13
+    type: grb
     tags: lane_wedges, l_upgrade
-  l_battering_ram_top: # Battering Ram 1 (Top) [#62]
+  l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
     number: 0-16
+    type: grb
     tags: batram_multipliers
-  l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
+  l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
     number: 0-18
-    tags: l_lock_lit, lane_wedges
-  l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
+    type: grb
+    tags: light_missionselect, lane_wedges
+  l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-20  # shadowbroker mission start
-    tags: l_store, lane_wedges
+    type: grb
+    tags: light_lock_lit, l_store, lane_wedges
 
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------

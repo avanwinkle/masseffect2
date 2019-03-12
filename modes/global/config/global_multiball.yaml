@@ -116,7 +116,7 @@ shots:
     disable_events: multiball_lock_fmball_lock_locked_ball
     profile: color_flashing_static
     show_tokens:
-      leds: l_lock_lit
+      leds: light_lock_lit
       color: 22FF33
   light_lock_fmball_top:
     switch: s_hitbank_top
@@ -170,7 +170,7 @@ shows:
         l_hitbank_top: black
   fmball_disabled_show:
     - lights:
-        l_lock_lit: black
+        light_lock_lit: black
 
 slides:
   fmball_lock_lit_slide:
@@ -404,7 +404,7 @@ widgets:
       image: portrait_overlord_light
   portrait_overlord:
     - type: image
-      image: overlord
+      image: portrait_overlord
   portrait_arrival_light:
     - type: image
       image: portrait_arrival_light
