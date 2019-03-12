@@ -42,7 +42,8 @@ event_player:
       portrait: overlord_light
       mball_name: overlord
       ball:
-        value: device.ball_devices.bd_lock.balls
+        # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?
+        value: device.multiball_locks.fmball_lock.locked_balls
         type: int
   enable_fmball_lock{mode.field.active and device.achievements.arrival.state!="disabled"}:
     queue_slide:
@@ -50,9 +51,9 @@ event_player:
       portrait: arrival_light
       mball_name: arrival
       ball:
-        value: device.ball_devices.bd_lock.balls
+        value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-  lockhandler_overlord_ball_will_lock:
+  overlord_ball_will_lock:
     queue_slide{total_balls_locked==1}:
       slide: fmball_ball_locked_slide
       portrait: overlord_light
@@ -71,7 +72,7 @@ event_player:
       mball_name: overlord
       description: Atlas Station Cleared
       ball: 3
-  lockhandler_arrival_ball_will_lock:
+  arrival_ball_will_lock:
     queue_slide{total_balls_locked==1}:
       slide: fmball_ball_locked_slide
       portrait: arrival_light

@@ -272,10 +272,10 @@ lights:
 
   # First chain of lights
   #------------------------------------------
-  l_right_top_lane: # Right Top Lane [#76]
+  l_left_top_lane: # Left Top Lane [#75]
     number: 0-0
     type: grb
-  l_left_top_lane: # Left Top Lane [#75]
+  l_right_top_lane: # Right Top Lane [#76]
     number: 0-1
     type: grb
 

@@ -28,6 +28,17 @@ mode_settings:
 event_player:
   s_left_ramp_exit_active: lockhandler_check_bypass
   lockhandler_start_missionselect: start_mode_missionselect
+  # Relay these events to be agnostic with airlock
+  lockhandler_overlord_ball_will_lock:
+    overlord_ball_will_lock:
+      total_balls_locked:
+        value: total_balls_locked
+        type: int
+  lockhandler_arrival_ball_will_lock:
+    arrival_ball_will_lock:
+      total_balls_locked:
+        value: total_balls_locked
+        type: int
 
 queue_relay_player:
   balldevice_bd_lock_ball_eject_attempt.1{mode.missionselect.active or mode.missionselect._starting}:
