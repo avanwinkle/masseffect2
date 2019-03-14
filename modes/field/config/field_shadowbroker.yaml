@@ -118,25 +118,25 @@ shows:
         l_dropbank_middle: black
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: $color_shadowbroker
+        l_dropbank_bottom: color_shadowbroker
         l_dropbank_middle: black
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: $color_shadowbroker
-        l_dropbank_middle: $color_shadowbroker
+        l_dropbank_bottom: color_shadowbroker
+        l_dropbank_middle: color_shadowbroker
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: $color_shadowbroker
-        l_dropbank_middle: $color_shadowbroker
-        l_dropbank_top: $color_shadowbroker
+        l_dropbank_bottom: color_shadowbroker
+        l_dropbank_middle: color_shadowbroker
+        l_dropbank_top: color_shadowbroker
   shadowbroker_lit_show:
     - duration: 500ms
       lights:
-        l_dropbank_bottom: $color_shadowbroker
-        l_dropbank_top: $color_shadowbroker
-        l_dropbank_middle: $color_shadowbroker
+        l_dropbank_bottom: color_shadowbroker
+        l_dropbank_top: color_shadowbroker
+        l_dropbank_middle: color_shadowbroker
         l_dropbank_shield_rgb:
-          color: $color_shadowbroker
+          color: color_shadowbroker
           fade: 20ms
     - duration: 500ms
       lights:
@@ -145,12 +145,12 @@ shows:
           fade: 20ms
   shadowbroker_hold_show:
     - lights:
-        l_dropbank_shield_rgb: $color_shadowbroker
+        l_dropbank_shield_rgb: color_shadowbroker
   shadowbroker_hold_enabled_show:
     - duration: 500ms
       lights:
         light_shadowbroker_start:
-          color: $color_shadowbroker
+          color: color_shadowbroker
           fade: 20ms
     - duration: 500ms
       lights:

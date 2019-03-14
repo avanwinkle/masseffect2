@@ -367,7 +367,7 @@ lights:
         number: 9-30
       blue:
         number: 9-31
-    tags: shot_shields
+    tags: shot_shields, light_hitbank_rgb
   l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
     type: rgb
     channels:

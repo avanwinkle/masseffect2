@@ -235,7 +235,7 @@ shows:
     - time: 0
       lights:
         (leds):
-          color: 2200AA #color_praetorian
+          color: color_praetorian
           fade: 100ms
     - time: '+1'
       lights:

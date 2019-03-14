@@ -78,7 +78,7 @@ shots:
     profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: 440000 #color_mordin
+      color: color_mordin
     tags: envshot_right_orbit
   cure_right:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
@@ -86,7 +86,7 @@ shots:
     profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: 440000 #color_mordin
+      color: color_mordin
     tags: envshot_right_orbit
   fan_left:
     hit_events: sh_left_ramp_hit
@@ -94,7 +94,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_left_ramp
   fan_right:
     hit_events: sh_right_ramp_hit
@@ -102,7 +102,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_right_ramp
 
 sound_player:

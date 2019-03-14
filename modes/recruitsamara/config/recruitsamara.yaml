@@ -65,7 +65,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: 008899 #color_samara
+      color: color_samara
   samara_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
@@ -73,7 +73,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: 008899 #color_samara
+      color: color_samara
   samara_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: samara_target5_lit_hit
@@ -81,7 +81,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: 008899 #color_samara
+      color: color_samara
   samara_right_ramp:
     hit_events: sh_right_ramp_hit
     enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
@@ -89,7 +89,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: 008899 #color_samara
+      color: color_samara
   samara_kickback:
     hit_events: sh_kickback_hit
     enable_events: samara_target1_lit_hit, samara_target2_lit_hit
@@ -97,7 +97,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: 008899 #color_samara
+      color: color_samara
   samara_target1:
     switch: s_target1
     profile: hit_to_off_profile

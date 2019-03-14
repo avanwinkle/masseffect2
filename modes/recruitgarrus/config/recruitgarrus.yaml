@@ -74,21 +74,21 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_kickback
   left_door:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_left_orbit
   right_door:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_right_orbit
   stairs:
     hit_events: sh_right_ramp_hit
@@ -96,7 +96,7 @@ shots:
     enable_events: close_doors_hit_complete
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: 55FF00 #color_door_green
+      color: color_door_green
     tags: envshot_right_ramp
 
 sound_player:

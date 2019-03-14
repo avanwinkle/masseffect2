@@ -62,43 +62,43 @@ shots:
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_kickback:
     hit_events: sh_kickback_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_dropbank:
     hit_events: sh_dropbank_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_dropbank_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_hitbank:
     hit_events: sh_hitbank_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_hitbank_shield_rgb
-      color: FF2200 #color_collectors
+      color: color_collectors
   platform_target1:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile

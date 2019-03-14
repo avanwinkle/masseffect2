@@ -71,43 +71,43 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_kickback:
     hit_events: sh_kickback_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_dropbank_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
   omg_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: color_flashing_profile
     show_tokens:
       leds: l_hitbank_shield_rgb
-      color: FF2200 # color_collectors
+      color: color_collectors
 
 sound_player:
   mode_suicide_omegarelay_started:

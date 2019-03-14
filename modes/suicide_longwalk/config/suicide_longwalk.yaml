@@ -204,7 +204,7 @@ shows:
     - time: 0
       lights:
         (leds):
-          color: 0066ff #color_paragon
+          color: color_shield
           fade: (fadetime)
     - time: '+1'
       lights:

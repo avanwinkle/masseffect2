@@ -71,7 +71,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: $color_grunt
+      color: color_grunt
     tags: envshot_left_ramp
   grunt_left_orbit:
     hit_events: sh_left_orbit_hit
@@ -79,7 +79,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: $color_grunt
+      color: color_grunt
     tags: envshot_left_orbit
   grunt_right_ramp:
     hit_events: sh_right_ramp_hit
@@ -87,7 +87,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: $color_grunt
+      color: color_grunt
     tags: envshot_right_ramp
   grunt_right_orbit:
     hit_events: sh_right_orbit_hit
@@ -95,7 +95,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: $color_grunt
+      color: color_grunt
     tags: envshot_right_orbit
   grunt_kickback:
     hit_events: sh_kickback_hit
@@ -103,7 +103,7 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: $color_grunt
+      color: color_grunt
     tags: envshot_kickback
 
 show_player:
@@ -113,7 +113,7 @@ show_player:
       speed: 12
       priority: 100
       show_tokens:
-        color: FF6611 #color_grunt
+        color: color_grunt
 
 sound_player:
   mode_recruitgrunt_started:

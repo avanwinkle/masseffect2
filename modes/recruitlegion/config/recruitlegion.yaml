@@ -111,7 +111,7 @@ shots:
     profile: color_flashing_fast_profile
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: FFFFFF #color_legion
+      color: color_legion
     tags: envshot_kickback
   # Dropbank and hitbank are "recovery" shots
   heretic_shot_dropbank:
@@ -121,7 +121,7 @@ shots:
     profile: color_flashing_fast_static
     show_tokens:
       leds: l_dropbank_shield_rgb
-      color: FFFFFF #color_legion
+      color: color_legion
     tags: envshot_dropbank
   heretic_shot_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
@@ -130,7 +130,7 @@ shots:
     profile: color_flashing_fast_static
     show_tokens:
       leds: l_hitbank_shield_rgb
-      color: FFFFFF #color_legion
+      color: color_legion
     tags: envshot_hitbank
   # Orbits and ramps are "sequence" shots
   heretic_shot_orbits:
@@ -139,14 +139,14 @@ shots:
     profile: hit_to_flash_profile_noadvance
     show_tokens:
       leds: l_left_orbit_shield_rgb, l_right_orbit_shield_rgb
-      color: FFFFFF #color_legion
+      color: color_legion
     tags: envshot_left_orbit, envshot_right_orbit
   heretic_shot_ramps:
     hit_events: sh_left_ramp_hit, sh_right_ramp_hit
     profile: hit_to_flash_profile_noadvance
     show_tokens:
       leds: l_left_ramp_shield_rgb, l_right_ramp_shield_rgb
-      color: FFFFFF #color_legion
+      color: color_legion
     tags: envshot_left_ramp, envshot_right_ramp
 
 sound_player:

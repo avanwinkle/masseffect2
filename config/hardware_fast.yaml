@@ -317,11 +317,11 @@ lights:
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
     number: 0-11
     type: grb
-    tags: l_hitbanks, outer_circles
+    tags: light_hitbank_rgb, l_hitbanks, outer_circles
   l_hitbank_top: # Right 2-Bank (Top) [#38]
     number: 0-12
     type: grb
-    tags: l_hitbanks, outer_circles
+    tags: light_hitbank_rgb, l_hitbanks, outer_circles
 
   l_standup_1: # Standup 1 [#44]
     number: 0-21

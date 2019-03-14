@@ -298,29 +298,32 @@ player_vars:
   xp:
     initial_value: 0
 
-text_strings:
-  # COLORS: Squadmates
+named_colors:
+  # Squadmates
   color_garrus: 0055FF
   color_grunt: FF6611
   color_jack: 4D00CC
   color_kasumi: eeff00
   color_legion: ffffff
-  color_mordin: 440000
+  color_mordin: "440000"
   color_samara: 008899
   color_tali: ff11dd
   color_thane: 00ff11
   color_zaeed: ff7700
-  # COLORS: ME Palette
+  # ME Palette
   color_shield: 0066FF
   color_armor: FFCC00
   color_barrier: 5500FF
-  color_health: 990000
+  color_health: "990000"
   color_paragon: 1166FF
-  color_renegade: 660000
-  # COLORS: Other Modes
+  color_renegade: "660000"
+  color_door_green: 55FF00
+  # Other Modes
   color_collectors: ff2200
+  color_husk: 00101E
   color_overlord: 22FF33
   color_overlord_orange: FF4400
+  collectorship_praetorian: 2200AA
   color_shadowbroker: ff1f00
 
 sound_system:

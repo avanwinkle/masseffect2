@@ -109,37 +109,37 @@ show_player:
       key: geth_colossus_show
       speed: 1
       show_tokens:
-        color: 0066FF #color_shield
+        color: color_shield
     geth_colossus_show{current_player.geth_colossus_state==5}:
       action: play
       key: geth_colossus_show
       speed: 2
       show_tokens:
-        color: 0066FF #color_shield
+        color: color_shield
     geth_colossus_show{current_player.geth_colossus_state==4}:
       action: play
       key: geth_colossus_show
       speed: 3
       show_tokens:
-        color: 0066FF #color_shield
+        color: color_shield
     geth_colossus_show{current_player.geth_colossus_state==3}:
       action: play
       key: geth_colossus_show
       speed: 1
       show_tokens:
-        color: FFCC00 #color_armor
+        color: color_armor
     geth_colossus_show{current_player.geth_colossus_state==2}:
       action: play
       key: geth_colossus_show
       speed: 2
       show_tokens:
-        color: FFCC00 #color_armor
+        color: color_armor
     geth_colossus_show{current_player.geth_colossus_state==1}:
       action: play
       key: geth_colossus_show
       speed: 3
       show_tokens:
-        color: FFCC00 #color_armor
+        color: color_armor
 
 shows:
   geth_colossus_show:
