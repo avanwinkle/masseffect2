@@ -1,48 +1,4 @@
 #config_version=5
-
-ball_devices:
-  bd_plunger:
-    ball_switches: s_plunger_lane
-    eject_coil: c_plunger
-    mechanical_eject: true
-    ball_missing_timeouts: 10s
-    eject_timeouts: 3s
-    confirm_eject_type: target # default
-    entrance_count_delay: 500ms
-    player_controlled_eject_event: force_plunger_launch
-    debug: true
-  bd_trough:
-    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
-    eject_coil: c_trough_eject
-    tags: trough, home, drain
-    jam_switch: s_trough_jam
-    eject_targets: bd_plunger
-    eject_timeouts: 1500ms
-    auto_fire_on_unexpected_ball: False
-    confirm_eject_switch: s_plunger_lane
-  bd_lock:
-    entrance_count_delay: 500ms # Default: 500ms
-    ball_switches: s_lock_1, s_lock_2, s_lock_3
-    eject_coil: c_lock_release
-    eject_events: lock_eject_one_ball
-    eject_all_events: game_ended
-    eject_coil_enable_time: 250ms, 230ms, 215ms
-                          # 1 ball:  230ms can be too short, increasing to 250
-                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
-                          # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
-    eject_timeouts: 3s
-    exit_count_delay: 2s
-    ball_missing_timeouts: 5s
-    debug: true
-  bd_hold:
-    ball_capacity: 1
-    hold_coil: c_hold_post
-    hold_coil_release_time: 1s
-    # hold_switches: s_left_ramp_exit
-    hold_events: s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled}
-    entrance_switch: s_left_ramp_exit
-    debug: true
-
 flippers:
   right_flipper:
     main_coil: c_flipper_right_main

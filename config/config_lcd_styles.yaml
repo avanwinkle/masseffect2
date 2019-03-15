@@ -85,6 +85,10 @@ widgets:
       # Fix the left caret to avoid digit width shifts
       adjust_right: -142
 
+text_strings:
+  gameover: "Critical\nMission\nFailure"
+
+
 widget_styles:
 
   # TEXT FORMATS
@@ -155,6 +159,7 @@ widget_styles:
   num:
     number_grouping: true
     min_digits: 2
+  dmd_md: {}
   dmd_hide: {}
   mission_title:
     opacity: 0.8
@@ -208,7 +213,6 @@ widget_styles:
   row_sub_under:
     anchor_y: top
     y: 31%
-  row_sub_dmd_bottom: []
   row_bottom_margin:
     anchor_y: bottom
     y: 12%
@@ -221,14 +225,20 @@ widget_styles:
   row_middle:
     anchor_y: middle
     y: 50%
+  row_dmd_bottom: []
 
 
   # OTHER STYLES
   #-----------------------------
-  mineral_highlight_style:
-    z: 2
-    color: FFFFFF
-    opacity: 0.2
+  mineral_highlight_pos_iridium:
+    x: 5%
+    anchor_x: left
+  mineral_highlight_pos_palladium:
+    x: 50%
+    anchor_x: center
+  mineral_highlight_pos_platinum:
+    x: 95%
+    anchor_x: right
 
   # SQUAD SPECIALISTS
   #----------------------------

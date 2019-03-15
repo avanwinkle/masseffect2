@@ -2,6 +2,7 @@
 config:
   - config_common.yaml
   - config_lcd_styles.yaml
+  - slides_lcd.yaml
 
 window:
   width: 1280
@@ -32,6 +33,9 @@ machine_vars:
   has_secondscreen:
     initial_value: 1
     persist: false
+
+text_strings:
+  gameover: "Critical\nMission\nFailure"
 
 widget_player:
   show_grid:

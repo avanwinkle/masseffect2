@@ -1,0 +1,90 @@
+#config_version=5
+slides:
+  medigel_slide:
+    - type: image
+      image: medigel_icon
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
+      z: 2
+    - type: text
+      text: "Medigel\nDeployed"
+      style: body_lg, row_main, col_left_inner
+      casing: upper
+  minerals_slide:
+    - type: text
+      text: (player|mineral_iridium)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 21
+      y: 24
+      z: 4
+    - type: text
+      text: irid.
+      style: mineral_name_style
+      x: 21
+      y: 12
+      z: 4
+    - type: text
+      text: (player|mineral_palladium)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 50%
+      y: 24
+      z: 4
+    - type: text
+      text: pallad.
+      style: mineral_name_style
+      x: 50%
+      y: 12
+      z: 4
+    - type: text
+      text: (player|mineral_platinum)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 106
+      y: 24
+      z: 4
+    - type: text
+      text: plat.
+      style: mineral_name_style
+      x: 106
+      y: 12
+      z: 4
+    - type: rectangle
+      width: 128
+      height: 32
+      color: black
+      z: 0
+  planet_scanned_slide:
+    - type: text
+      text: "(planets) Planets\n Scanned"
+      style: header_md, row_main
+
+widgets:
+  mineral_highlight:
+    - type: rectangle
+      anchor_x: left
+      anchor_y: bottom
+      color: 333333
+      y: 9
+      z: 1
+      width: 42
+      height: 24
+  resume_widget:
+    - type: text
+      text: "Press action button\nto resume\n(player|resume_mission) recruitment"
+      style: header_xs, row_main, col_center
+      casing: upper
+      z: 5
+      animations:
+        add_to_slide: pulse_text_slow
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 2

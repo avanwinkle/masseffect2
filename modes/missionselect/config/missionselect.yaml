@@ -232,7 +232,7 @@ slides:
         style: header_md, row_main
       - type: text
         text: < FLIPPERS TO SELECT >
-        style: body_sm, row_sub_under, row_sub_dmd_bottom
+        style: body_sm, row_sub_under, row_dmd_bottom
       - widget: background_console
   missionselect_recruit_slide:
     priority: 1
@@ -243,7 +243,7 @@ slides:
         casing: title
       - type: text
         text: Start Recruitment Mission
-        style: body_sm, row_sub_under, row_sub_dmd_bottom
+        style: body_sm, row_sub_under, row_dmd_bottom
       - widget: missionselect_count_widget
       - widget: background_console
   missionselect_collectorship_slide:

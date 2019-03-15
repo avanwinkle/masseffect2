@@ -1,6 +1,7 @@
 #config_version=5
 config:
   - config_dmd_styles.yaml
+  - slides_dmd.yaml
 
 window:
   width: 800
@@ -41,6 +42,9 @@ machine_vars:
   has_secondscreen:
     initial_value: 0
     persist: false
+
+text_strings:
+  gameover: "Critical Mission Failure"
 
 slides:
   window_slide_container:

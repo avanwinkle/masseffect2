@@ -51,12 +51,6 @@ queue_relay_player:
     post: check_slide_queue
     wait_for: slide_queue_clear
 
-ball_holds:
-  # missionselect_hold is required for FAST compatibility, but is never enabled
-  missionselect_hold:
-    balls_to_hold: 1
-    hold_devices: bd_lock
-
 # This lock needs to be here in lockhandler.yaml in order to be found in self.mode_devices
 multiball_locks:
   fmball_lock:

@@ -36,6 +36,7 @@ widgets:
       z: 0
   missionselect_count_widget: []
 
+
 widget_styles:
 
   # TEXT FORMATS
@@ -116,6 +117,13 @@ widget_styles:
   num:
     number_grouping: true
     min_digits: 2
+  dmd_md:
+    font_name: pixelmix-8
+    font_size: 8
+    line_height: 0.9
+    adjust_top: 0
+    adjust_bottom: 2
+    z: 1
   dmd_hide:
     font_size: 0
     opacity: 0
@@ -134,7 +142,7 @@ widget_styles:
     x: 1
   col_left_inner:
     anchor_x: left
-    x: 1
+    x: 38
   col_left_center:
     anchor_x: left
     x: 1
@@ -179,10 +187,6 @@ widget_styles:
     anchor_y: top
     valign: top
     y: 14
-  row_sub_dmd_bottom:
-    anchor_y: bottom
-    valign: bottom
-    y: 2
   row_bottom_margin:
     anchor_y: bottom
     y: 2
@@ -195,6 +199,11 @@ widget_styles:
   row_middle:
     anchor_y: middle
     y: 50%
+  # Specific DMD overrides
+  row_dmd_bottom:
+    anchor_y: bottom
+    valign: bottom
+    y: 2
 
   # SQUAD SPECIALISTS
   #--------------------------------
@@ -232,13 +241,20 @@ widget_styles:
     y: 2
     x: right-2
 
-  mineral_highlight_style:
-    width: 42
-    height: 24
-    anchor_x: left
+  mineral_name_style:
+    font_name: smallest_pixel-7
+    font_size: 9
+    adjust_top: 2
+    adjust_bottom: 3
+    anchor_x: middle
     anchor_y: bottom
-    color: 333333
-    y: 9
+    z: 3
+  mineral_highlight_pos_iridium:
+    x: 0
+  mineral_highlight_pos_palladium:
+    x: 43
+  mineral_highlight_pos_platinum:
+    x: 86
 
 animations:
   sqicon_available: []

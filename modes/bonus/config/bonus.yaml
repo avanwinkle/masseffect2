@@ -43,7 +43,7 @@ slides:
   end_slide:
     widgets:
       - type: text
-        text: "Critical\nMission\nFailure"
+        text: $gameover
         style: header_lg
   bonus_level_slide:
     - type: text

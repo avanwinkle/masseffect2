@@ -10,11 +10,12 @@ spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
   baud: 115200
-  runtime_baud: 921600
+  runtime_baud: 2000000
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 100
+    65: 12
+    128: 5
   # use_send_key: true
 
 machine:
@@ -28,6 +29,48 @@ event_player:
   bypass_lock_release_pulse_long:
     - bypass_lock_release_pulse|0
     - cancel_lock_release_pulse|700ms
+
+
+ball_devices:
+  bd_plunger:
+    ball_switches: s_plunger_lane
+    eject_coil: c_plunger
+    mechanical_eject: true
+    ball_missing_timeouts: 10s
+    eject_timeouts: 3s
+    confirm_eject_type: target # default
+    entrance_count_delay: 500ms
+    player_controlled_eject_event: force_plunger_launch
+    debug: true
+  bd_trough:
+    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
+    eject_coil: c_trough_eject
+    tags: trough, home, drain
+    jam_switch: s_trough_jam
+    eject_targets: bd_plunger
+    eject_timeouts: 1500ms
+    auto_fire_on_unexpected_ball: False
+    confirm_eject_switch: s_plunger_lane
+  bd_lock:
+    entrance_count_delay: 500ms # Default: 500ms
+    ball_switches: s_lock_1, s_lock_2, s_lock_3
+    eject_coil: c_lock_release
+    eject_events: lock_eject_one_ball
+    eject_all_events: game_ended
+    eject_coil_enable_time: 250ms, 230ms, 215ms
+                          # 1 ball:  230ms can be too short, increasing to 250
+                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
+                          # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
+    eject_timeouts: 3s
+    exit_count_delay: 2s
+    ball_missing_timeouts: 5s
+    debug: true
+  bd_hold:
+    ball_capacity: 1
+    hold_coil: c_hold_post
+    hold_coil_release_time: 1s
+    entrance_switch: s_kickback
+    debug: true
 
 switches:
   s_start_button:
@@ -161,8 +204,9 @@ switches:
   s_slam_tilt:
     number: 1-21
     tags: slam_tilt
-  s_airlock_enter:
+  s_null:
     number: 1-0
+    tags: switch_hold_entrance
 
 lights:
   l_null:
@@ -488,7 +532,7 @@ coils:
     debug: true
   c_lock_release:
     number: 9-3
-    default_pulse_ms: 32
+    default_pulse_ms: 40
     default_hold_power: 0.1
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse

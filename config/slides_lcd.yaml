@@ -1,0 +1,69 @@
+#config_version=5
+slides:
+  medigel_slide:
+    - type: image
+      image: medigel
+      style: row_sub_under
+      z: 2
+    - type: text
+      text: "Medigel\nDeployed"
+      style: header_md, row_main
+  minerals_slide:
+    - type: text
+      text: (player|mineral_iridium)
+      min_digits: 1
+      number_grouping: true
+      style: body_md, row_main
+      x: 5%
+      anchor_x: left
+    - type: text
+      text: iridium
+      style: header_xs, row_sub
+      x: 5%
+      anchor_x: left
+    - type: text
+      text: (player|mineral_palladium)
+      min_digits: 1
+      number_grouping: true
+      style: body_md, row_main
+      x: 50%
+      anchor_x: center
+    - type: text
+      text: palladium
+      style: header_xs, row_sub
+      x: 50%
+      anchor_x: center
+    - type: text
+      text: (player|mineral_platinum)
+      min_digits: 1
+      number_grouping: true
+      style: body_md, row_main
+      x: 95%
+      anchor_x: right
+    - type: text
+      text: platinum
+      style: header_xs, row_sub
+      x: 95%
+      anchor_x: right
+  planet_scanned_slide:
+    - type: text
+      text: "(planets) Planets\n Scanned"
+      style: header_md, row_main
+    - widget: planet_widget_(planets_mod)
+
+widgets:
+  mineral_highlight:
+    - type: rectangle
+      z: 2
+      color: FFFFFF
+      opacity: 0.2
+      width: 180
+      height: 120
+  resume_widget:
+    - type: text
+      text: "Both flippers to\nresume (player|resume_mission) recruitment"
+      style: header_xs, row_sub_under, col_left_anchor
+      casing: upper
+      z: 5
+      animations:
+        add_to_slide: pulse_text_slow

@@ -167,14 +167,6 @@ widgets:
     - type: text
       text: (machine|current_career_player_4)
       style: header_xs, row_bottom, col_right_anchor
-  resume_widget:
-    - type: text
-      text: "Press action button to\nresume (player|resume_mission) recruitment"
-      style: header_xs, row_sub_under, col_left_anchor
-      casing: upper
-      z: 5
-      animations:
-        add_to_slide: pulse_text_slow
 
 sound_player:
   player_added{num==1}: gui_splashstart
