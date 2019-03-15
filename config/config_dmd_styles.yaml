@@ -1,0 +1,255 @@
+#config_version=5
+
+slides:
+  attract_slide_main:
+    - type: image
+      image: me2_logo_x128
+  attract_slide_right: []
+  portrait_slide: []
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+
+widgets:
+  grid_widget:
+    - type: image
+      image: grid_dmd
+      z: 1000
+  background_console:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  background_galaxy:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  missionselect_count_widget: []
+
+widget_styles:
+
+  # TEXT FORMATS
+  #----------------------------
+  suicide_header:
+    font_size: 14
+    style: quadrit_big
+    z: 1
+  header_lg:
+    font_size: 10
+    font_name: Quadrit-10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
+    z: 1
+  header_md:
+    font_size: 10
+    font_name: Quadrit-10
+    line_height: 0.75
+    adjust_bottom: 6
+    adjust_top: 1
+    z: 1
+  header_sm:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
+  header_xs:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
+  body_lg:
+    font_name: pixelmix-8
+    font_size: 8
+    line_height: 0.9
+    adjust_top: 0
+    adjust_bottom: 2
+    z: 1
+  body_md:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
+  body_sm:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
+  squad_debug_style:
+    font_size: 18
+    anchor_x: left
+    anchor_y: bottom
+    z: 110
+  timer_primary:
+    body_sm:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
+  timer_secondary:
+    font_name: pixelmix-8
+    font_size: 8
+    line_height: 0.9
+    adjust_top: 0
+    adjust_bottom: 2
+    z: 1
+  num:
+    number_grouping: true
+    min_digits: 2
+  dmd_hide:
+    font_size: 0
+    opacity: 0
+    anchor_y: bottom
+    y: 200%
+  mission_title:
+    color: 999999
+
+  # GRID POSITIONS
+  #----------------------------
+  col_left_anchor:
+    anchor_x: left
+    x: 1
+  col_left_indent:
+    anchor_x: left
+    x: 1
+  col_left_inner:
+    anchor_x: left
+    x: 1
+  col_left_center:
+    anchor_x: left
+    x: 1
+  col_right_center:
+    anchor_x: left
+    x: right-1
+  col_right_inner:
+    anchor_x: right
+    x: right-1
+  col_right_indent:
+    anchor_x: right
+    x: right-1
+  col_right_anchor:
+    anchor_x: right
+    x: right-1
+  col_center:
+    anchor_x: center
+    x: 50%
+
+  row_title:
+    anchor_y: top
+    y: 31
+  row_top:
+    anchor_y: bottom
+    y: 27
+  row_super:
+    anchor_y: bottom
+    y: 27
+  row_main:
+    anchor_y: bottom
+    valign: bottom
+    y: 12
+  row_main_dmd_high:
+    anchor_y: bottom
+    valign: bottom
+    y: 16
+  row_sub:
+    anchor_y: bottom
+    valign: bottom
+    y: 2
+  row_sub_under:
+    anchor_y: top
+    valign: top
+    y: 14
+  row_sub_dmd_bottom:
+    anchor_y: bottom
+    valign: bottom
+    y: 2
+  row_bottom_margin:
+    anchor_y: bottom
+    y: 2
+  row_bottom:
+    anchor_y: bottom
+    y: 2
+  row_gutter:
+    anchor_y: bottom
+    y: 2
+  row_middle:
+    anchor_y: middle
+    y: 50%
+
+  # SQUAD SPECIALISTS
+  #--------------------------------
+  spec_default:
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.4
+  spec_dead:
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 0.03
+  spec_highlight:
+    anchor_x: left
+    anchor_y: bottom
+    opacity: 1
+
+  pos_player_1:
+    anchor_x: left
+    anchor_y: top
+    y: top-2
+    x: 2
+  pos_player_2:
+    anchor_x: right
+    anchor_y: top
+    y: top-2
+    x: right-2
+  pos_player_3:
+    anchor_x: left
+    anchor_y: bottom
+    y: 2
+    x: 2
+  pos_player_4:
+    anchor_x: right
+    anchor_y: bottom
+    y: 2
+    x: right-2
+
+  mineral_highlight_style:
+    width: 42
+    height: 24
+    anchor_x: left
+    anchor_y: bottom
+    color: 333333
+    y: 9
+
+animations:
+  sqicon_available: []
+  sqicon_complete: []
+  sqicon_dead: []
+  specialist_select:
+    - property: opacity
+      value: 1
+      duration: 200ms
+  specialist_deselect:
+    - property: opacity
+      value: 0.4
+      duration: 200ms
+  specialist_dead: []

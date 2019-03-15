@@ -85,14 +85,14 @@ class MCSquadmateHandlers(Scriptlet):
     self._update_sqicons(is_suicide=True, specialist=kwargs["squadmate"])
 
   def _update_sqicons(self, is_suicide=False, specialist=None, **kwargs):
+    slide = self._get_slide("squadicon_slide", "lcd_right")
+    # In DMD mode (for example) there is no squadicon slide, so ignore it
+    if not slide:
+      return
+
     self.log.info("Updating sqicons")
     if not self._sqicons:
       self._sqicons = {}
-
-    slide = self._get_slide("squadicon_slide", "lcd_right")
-    if not slide:
-      self.log.error("Unable to find squadicon slide")
-      return
 
     self.log.info("Current slide: {}".format(slide))
     # self.log.info(dir(slide))
@@ -124,7 +124,7 @@ class MCSquadmateHandlers(Scriptlet):
 
   def _update_huddle(self, **kwargs):
     self.log.info("Updating huddle slide")
-    huddle_slide = self._get_slide("huddle_slide", "lcd_left")
+    huddle_slide = self._get_slide("huddle_slide", "main")
 
     # Using the priority to distinguish between infiltration and longwalk? Yuk
     if huddle_slide.priority % 10 == 1:

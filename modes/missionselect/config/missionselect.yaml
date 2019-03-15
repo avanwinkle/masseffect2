@@ -189,10 +189,10 @@ slide_player:
   check_slide_queue: {}
   missionselect_intro_highlighted:
     missionselect_intro_slide:
-      target: lcd_left
+      target: main
   missionselect_recruit_highlighted:
     missionselect_recruit_slide:
-      target: lcd_left
+      target: main
     missionselect_portrait_derelictreaper:
       action: remove
       target: lcd_right
@@ -201,7 +201,7 @@ slide_player:
       target: lcd_right
   missionselect_pass_highlighted:
     missionselect_pass_slide:
-      target: lcd_left
+      target: main
     missionselect_portrait_derelictreaper:
       action: remove
       target: lcd_right
@@ -210,17 +210,17 @@ slide_player:
       target: lcd_right
   missionselect_collectorship_highlighted:
     missionselect_collectorship_slide:
-      target: lcd_left
+      target: main
     missionselect_portrait_collectorship:
       target: lcd_right
   missionselect_derelictreaper_highlighted:
     missionselect_derelictreaper_slide:
-      target: lcd_left
+      target: main
     missionselect_portrait_derelictreaper:
       target: lcd_right
   missionselect_suicide_highlighted:
     missionselect_suicide_slide:
-      target: lcd_left
+      target: main
     missionselect_portrait_suicide:
       target: lcd_right
 
@@ -232,7 +232,7 @@ slides:
         style: header_md, row_main
       - type: text
         text: < FLIPPERS TO SELECT >
-        style: body_sm, row_sub_under
+        style: body_sm, row_sub_under, row_sub_dmd_bottom
       - widget: background_console
   missionselect_recruit_slide:
     priority: 1
@@ -243,7 +243,7 @@ slides:
         casing: title
       - type: text
         text: Start Recruitment Mission
-        style: body_sm, row_sub_under
+        style: body_sm, row_sub_under, row_sub_dmd_bottom
       - widget: missionselect_count_widget
       - widget: background_console
   missionselect_collectorship_slide:

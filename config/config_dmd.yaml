@@ -1,4 +1,7 @@
 #config_version=5
+config:
+  - config_dmd_styles.yaml
+
 window:
   width: 800
   height: 600
@@ -13,26 +16,29 @@ displays:
   window:
     width: 800
     height: 600
-  dmd:
+  main:
     width: 128
     height: 32
     default: true
     round_anchor_x: right
     round_anchor_y: top
+  lcd_right:
+    width: 1
+    height: 1
 
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
     fps: 15
     gamma: 0.8
     only_send_changes: true
-    source_display: dmd
+    source_display: main
     platform: spike
 
 machine_vars:
-  use_lcd:
+  is_lcd:
     initial_value: 0
     persist: false
-  is_fullscreen:
+  has_secondscreen:
     initial_value: 0
     persist: false
 
@@ -40,347 +46,23 @@ slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: dmd
+        source_display: main
         width: 768
         height: 192
         effects:
           - type: color_dmd
             gain: 1.2
             dot_filter: true
+      # Can we get away with not having lcd_right?
       - type: rectangle
         width: 772
         height: 196
         color: 444444
-  attract_slide:
-    - type: image
-      image: me2_logo_x128
-  background_slide: []
-  singleplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, pos_score_singleplayer, num
-  multiplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, pos_score_multiplayer, num
 
 widget_player:
   show_grid:
     grid_widget:
-      target: dmd
+      target: main
   remove_grid:
     grid_widget:
       action: remove
-
-widgets:
-  grid_widget:
-    - type: image
-      image: grid_dmd
-      z: 1000
-  console_background:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 000000
-      z: 0
-  background_galaxy:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 000000
-      z: 0
-  background_overlord:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 002200
-      z: 0
-  popup_console:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 000000
-      z: 0
-
-widget_styles:
-
-  # TEXT FORMATS
-  #----------------------------
-  suicide_header:
-    font_size: 14
-    style: quadrit_big
-    z: 1
-  header_lg:
-    font_size: 10
-    font_name: Quadrit-10
-    line_height: 0.75
-    adjust_bottom: 6
-    adjust_top: 1
-    z: 1
-  header_md:
-    font_size: 10
-    font_name: Quadrit-10
-    line_height: 0.75
-    adjust_bottom: 6
-    adjust_top: 1
-    z: 1
-  body_lg:
-    font_name: pixelmix-8
-    font_size: 8
-    line_height: 0.9
-    adjust_top: 0
-    adjust_bottom: 2
-    z: 1
-  body_md:
-    font_name: smallest_pixel-7
-    font_size: 9
-    line_height: 0.7
-    adjust_top: 1
-    adjust_bottom: 4
-    z: 1
-  body_sm:
-    font_name: smallest_pixel-7
-    font_size: 9
-    line_height: 0.7
-    adjust_top: 1
-    adjust_bottom: 4
-    z: 1
-  timer_primary:
-    body_sm:
-    font_name: smallest_pixel-7
-    font_size: 9
-    line_height: 0.7
-    adjust_top: 1
-    adjust_bottom: 4
-    z: 1
-  timer_secondary:
-    font_name: pixelmix-8
-    font_size: 8
-    line_height: 0.9
-    adjust_top: 0
-    adjust_bottom: 2
-    z: 1
-  num:
-    number_grouping: true
-    min_digits: 2
-  lcd_only:
-    font_size: 0
-    opacity: 0
-    anchor_y: bottom
-    y: 200%
-
-  # GRID POSITIONS
-  #----------------------------
-  col_left_anchor:
-    anchor_x: left
-    x: 2
-  col_left_indent:
-    anchor_x: left
-    x: 6
-  col_left_inner:
-    anchor_x: left
-    x: 8
-  col_left_center:
-    anchor_x: right
-    x: 60
-  col_right_center:
-    anchor_x: left
-    x: right-60
-  col_right_inner:
-    anchor_x: right
-    x: right-8
-  col_right_indent:
-    anchor_x: right
-    x: right-6
-  col_right_anchor:
-    anchor_x: right
-    x: right-2
-  col_center:
-    anchor_x: center
-    x: 50%
-
-  row_top:
-    anchor_y: bottom
-    y: 27
-  row_super:
-    anchor_y: bottom
-    y: 27
-  row_main:
-    anchor_y: bottom
-    valign: bottom
-    y: 16
-  row_sub:
-    anchor_y: bottom
-    valign: bottom
-    y: 8
-  row_sub_under:
-    anchor_y: top
-    valign: top
-    y: 14
-  row_bottom:
-    anchor_y: bottom
-    y: 1
-  row_gutter:
-    anchor_y: bottom
-    y: 1
-  row_middle:
-    anchor_y: middle
-    y: 50%
-
-
-  # POSITION LAYOUTS
-  #----------------------------
-  text_default:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_top: 2
-    adjust_bottom: 3
-  medium:
-    font_name: pixelmix-8
-    font_size: 8
-    adjust_top: 1
-    adjust_bottom: 1
-  small_bot_left:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: bottom
-    anchor_x: left
-    y: 2
-    x: 2
-  small_bot_right:
-    anchor_y: bottom
-    anchor_x: right
-    y: 2
-    x: right-2
-  small_bot_right_secondrow:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_y: bottom
-    anchor_x: right
-    y: 8
-    x: right-2
-  pos_score_singleplayer:
-    anchor_x: left
-    anchor_y: top
-    x: 2
-    y: top-4
-  pos_score_multiplayer:
-    anchor_x: left
-    anchor_y: middle
-    x: 2
-    y: middle-2
-  squad_debug_style:
-    font_size: 18
-    anchor_x: top
-    anchor_y: left
-  bonus_title_style:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_bottom: 3
-    adjust_top: 2
-    anchor_y: bottom
-    y: middle
-  bonus_score_style:
-    font_name: pixelmix-8
-    font_size: 8
-    anchor_y: top
-    adjust_top: 1
-    adjust_bottom: 1
-    y: middle-4
-    number_grouping: true
-  quadrit_big:
-    font_name: Quadrit-10
-    font_size: 10
-    adjust_bottom: 3
-    adjust_top: 2
-  menu_header:
-    anchor_y: top
-    anchor_x: left
-    y: top-2
-    x: 4
-    z: 1
-  menu_selection:
-    anchor_y: bottom
-    anchor_x: left
-    y: 4
-    x: 4
-  instructions_title:
-    anchor_y: bottom
-    y: middle
-  instructions_line_1:
-    anchor_y: top
-    y: middle-2
-  instructions_line_2:
-    anchor_y: top
-    y: middle-9
-  spec_default:
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 0.4
-  spec_dead:
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 0.03
-  spec_highlight:
-    anchor_x: left
-    anchor_y: bottom
-    opacity: 1
-
-  pos_player_1:
-    anchor_x: left
-    anchor_y: top
-    y: top-2
-    x: 2
-  pos_player_2:
-    anchor_x: right
-    anchor_y: top
-    y: top-2
-    x: right-2
-  pos_player_3:
-    anchor_x: left
-    anchor_y: bottom
-    y: 2
-    x: 2
-  pos_player_4:
-    anchor_x: right
-    anchor_y: bottom
-    y: 2
-    x: right-2
-  pos_secondary_timer:
-    anchor_x: right
-    anchor_y: bottom
-    x: right-4
-    y: 14
-  pos_missionname:
-    anchor_x: left
-    anchor_y: top
-    x: 2
-    y: top-4
-  pos_hurryup:
-    anchor_x: left
-    anchor_y: bottom
-    x: 2
-    y: 0
-
-  mineral_name_style:
-    font_name: smallest_pixel-7
-    font_size: 9
-    adjust_top: 2
-    adjust_bottom: 3
-    anchor_x: middle
-    anchor_y: bottom
-    z: 3
-  mineral_highlight_style:
-    width: 42
-    height: 24
-    anchor_x: left
-    anchor_y: bottom
-    color: 333333
-    y: 9
-

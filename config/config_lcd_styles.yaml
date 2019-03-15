@@ -32,7 +32,7 @@ slides:
     widgets:
       - type: text
         text: (score)
-        style: header_lg_lowz, row_main, col_left_anchor, num
+        style: header_lg, row_main, col_left_anchor, num
       # Can't use widget names here, they're not loaded yet
       - type: image
         image: background_galaxy
@@ -57,20 +57,6 @@ slides:
               value: -360
               duration: 2000s
 
-
-machine_vars:
-  use_lcd:
-    initial_value: 1
-    persist: false
-
-widget_player:
-  show_grid:
-    grid_widget:
-      target: window
-  remove_grid:
-    grid_widget:
-      action: remove
-
 widgets:
   grid_widget:
     - type: image
@@ -89,11 +75,6 @@ widgets:
     - type: image
       image: texture_console
       z: 1
-  background_overlord:
-    - type: image
-      image: background_overlord
-      opacity: 0.5
-      z: 0
   missionselect_count_widget:
     - type: text
       text: (index) / (items) >
@@ -112,11 +93,12 @@ widget_styles:
     font_name: me123
     font_size: 80
     z: 110
-  header_lg_lowz:
-    font_name: me123
-    font_size: 72
-    adjust_bottom: 14
-    z: 10
+  # Commented out, can do without?
+  # header_lg_lowz:
+  #   font_name: me123
+  #   font_size: 72
+  #   adjust_bottom: 14
+  #   z: 10
   header_lg:
     font_name: me123
     font_size: 72
@@ -137,11 +119,6 @@ widget_styles:
     font_size: 28
     adjust_bottom: 2
     z: 110
-  header_popup: # Same as header_sm but with -50 adjust
-    font_name: me123
-    font_size: 36
-    adjust_bottom: 56
-    z: 110
   body_lg:
     font_name: jupiter
     font_size: 96
@@ -161,10 +138,6 @@ widget_styles:
     adjust_bottom: 12
     line_height: 0.9
     z: 110
-  instructions_md:
-    font_name: myriadpro-regular
-    font_size: 34
-    z: 110
   squad_debug_style:
     font_size: 18
     anchor_x: left
@@ -182,7 +155,7 @@ widget_styles:
   num:
     number_grouping: true
     min_digits: 2
-  lcd_only: {}
+  dmd_hide: {}
   mission_title:
     opacity: 0.8
 
@@ -212,10 +185,6 @@ widget_styles:
   col_right_anchor:
     anchor_x: right
     x: right-3.4%
-
-  col_right_gutter:
-    anchor_x: right
-    x: 99.4%
   col_center:
     anchor_x: center
     x: 50%
@@ -232,12 +201,14 @@ widget_styles:
   row_main:
     anchor_y: bottom
     y: 44%
+  row_main_dmd_high: []
   row_sub:
     anchor_y: bottom
     y: 31%
   row_sub_under:
     anchor_y: top
     y: 31%
+  row_sub_dmd_bottom: []
   row_bottom_margin:
     anchor_y: bottom
     y: 12%
@@ -251,17 +222,6 @@ widget_styles:
     anchor_y: middle
     y: 50%
 
-  # POPUPS
-  #----------------------------
-  image_popup:
-    z: 11
-    anchor_y: bottom
-    y: 278 # includes -50px for transition
-    anchor_x: right
-    x: right-8.9%
-    opacity: 0
-  profile:
-    z: 11
 
   # OTHER STYLES
   #-----------------------------

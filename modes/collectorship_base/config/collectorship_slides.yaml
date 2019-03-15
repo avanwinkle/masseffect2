@@ -16,7 +16,7 @@ variable_player:
 slide_player:
   mode_collectorship_base_started:
     collectorship_baseslide:
-      target: lcd_left
+      target: main
     collectorship_portrait_slide:
       target: lcd_right
   stop_mode_collectorship_base:

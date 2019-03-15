@@ -6,14 +6,12 @@ slide_player:
   tilt_warning_1:
     me_tilt_warning_1:
       force: true
-      target: lcd_left
     tilt_portrait:
       force: true
       target: lcd_right
   tilt_warning_2:
     me_tilt_warning_2:
       force: true
-      target: lcd_left
     tilt_portrait:
       force: true
       target: lcd_right

@@ -17,7 +17,7 @@ displays:
   window:
     width: 1280
     height: 480
-  lcd_left:
+  main:
     default: true
     width: 758
     height: 468
@@ -29,12 +29,23 @@ machine_vars:
   is_lcd:
     initial_value: 1
     persist: false
+  has_secondscreen:
+    initial_value: 1
+    persist: false
+
+widget_player:
+  show_grid:
+    grid_widget:
+      target: window
+  remove_grid:
+    grid_widget:
+      action: remove
 
 slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: lcd_left
+        source_display: main
         width: 758
         height: 468
         anchor_y: bottom

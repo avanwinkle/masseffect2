@@ -169,7 +169,6 @@ shows:
 slide_player:
   set_n7_mission:
     n7_hurryupslide:
-      target: lcd_left
       action: play
       priority: 100
   n7_assignment_ended:

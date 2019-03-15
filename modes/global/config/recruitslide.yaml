@@ -135,7 +135,7 @@ slides:
         style: header_sm, row_main, col_left_anchor
       - type: text
         text: (mission_instructions)
-        style: body_sm, row_sub, col_left_anchor, lcd_only
+        style: body_sm, row_sub, col_left_anchor #, dmd_hide ?
         animations:
           show_slide: pulse_text_slow
       - type: text
