@@ -193,6 +193,7 @@ widget_styles:
   col_center:
     anchor_x: center
     x: 50%
+  col_dmd_right: []
 
   row_title:
     anchor_y: bottom
@@ -206,7 +207,6 @@ widget_styles:
   row_main:
     anchor_y: bottom
     y: 44%
-  row_main_dmd_high: []
   row_sub:
     anchor_y: bottom
     y: 31%
@@ -225,7 +225,10 @@ widget_styles:
   row_middle:
     anchor_y: middle
     y: 50%
+  row_main_dmd_high: []
+  row_main_dmd_low: []
   row_dmd_bottom: []
+  row_dmd_sub: []
 
 
   # OTHER STYLES

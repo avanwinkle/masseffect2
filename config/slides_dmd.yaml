@@ -1,5 +1,22 @@
 #config_version=5
 slides:
+  # Core gameplay slides
+  attract_slide_main:
+    - type: image
+      image: me2_logo_x128
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+  attract_slide_right: []
+  portrait_slide: []
+  # Miscellaneous slides
   medigel_slide:
     - type: image
       image: medigel_icon
@@ -62,7 +79,7 @@ slides:
       z: 0
   planet_scanned_slide:
     - type: text
-      text: "(planets) Planets\n Scanned"
+      text: "(planets) Planet(suffix) Scanned"
       style: header_md, row_main
   recruit_instructions_slide:
     widgets:
@@ -86,6 +103,22 @@ slides:
         y: 4
 
 widgets:
+  background_console:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  background_galaxy:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  grid_widget:
+    - type: image
+      image: grid_dmd
+      z: 1000
   levelup_background:
     - type: rectangle
       width: 128
@@ -101,14 +134,20 @@ widgets:
       z: 1
       width: 42
       height: 24
+  missionselect_count_widget: []
   n7_logo:
     - type: image
       image: n7_logo_33x11
-      style: row_top, col_right_anchor
+      style: row_title, col_right_anchor
   resume_widget:
     - type: text
       text: "Action button to retry\n(player|resume_mission) recruitment"
-      style: header_xs, col_center
+      # Don't use a header style because we want high z
+      font_name: smallest_pixel-7
+      font_size: 9
+      adjust_top: 1
+      adjust_bottom: 4
+      z: 10
       anchor_y: bottom
       y: 10
       casing: upper
@@ -120,4 +159,4 @@ widgets:
       anchor_y: bottom
       y: 8
       color: 000000
-      z: 0
+      z: 9

@@ -27,7 +27,7 @@ event_player:
     show_recruit_instructions:
       squadmate: tali
       portrait: recruittali
-      instructions_main: Hit Ramp to Attack Colossus
+      instructions_main: Hit Ramp to Attack
       instructions_sub: before it Self-Repairs
     set_mission_shots:
       shots_total: 6
@@ -329,15 +329,10 @@ sounds:
 
 widget_player:
   timer_colossus_repair_timer_tick:
-    # secondary_timer_widget:
-    #   action: update
-    #   slide: recruit_mission_slide
     colossus_instructions_widget:
       action: update
       slide: recruit_mission_slide
   timer_colossus_repair_timer_stopped:
-    # secondary_timer_widget:
-    #   action: remove
     colossus_instructions_widget:
       action: remove
   player_geth_colossus_state:
@@ -349,6 +344,6 @@ widgets:
   colossus_instructions_widget:
     - type: text
       text: Self-repairing in (ticks_remaining)
-      style: body_sm, row_sub, col_left_anchor #, dmd_hide ?
+      style: body_sm, row_sub, row_dmd_sub, col_left_anchor
       animations:
         show_slide: pulse_text_slow

@@ -403,7 +403,7 @@ sounds:
     volume: 1
 
 widget_player:
-  timer_missiontimertimer_tick:
+  timer_missiontimer_tick:
     sbtimer_widget:
       slide: sbchase_slide
       action: update

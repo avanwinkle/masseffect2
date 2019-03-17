@@ -46,12 +46,12 @@ show_player:
     missionselect_highlight_show:
       show_tokens:
         leds: shot_shields
-        color: color_collector
+        color: color_collectors
   missionselect_derelictreaper_highlighted:
     missionselect_highlight_show:
       show_tokens:
         leds: shot_shields
-        color: color_collector
+        color: color_collectors
   missionselect_recruit_highlighted:
     missionselect_highlight_show{squadmate=="garrus"}:
       show_tokens:
@@ -251,7 +251,7 @@ slides:
     widgets:
       - type: text
         text: "Disabled\nCollector Vessel"
-        style: header_md, row_main
+        style: header_md, row_main, row_main_dmd_low
   missionselect_derelictreaper_slide:
     priority: 1
     widgets:

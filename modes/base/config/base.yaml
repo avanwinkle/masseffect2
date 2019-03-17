@@ -237,7 +237,7 @@ shots:
     disable_events: enable_orbitswitches
   # Allow the player to start mission select before the ball is launched
   missionresume_shot:
-    switch: s_action_button
+    hit_events: s_action_button_active, flipper_cancel
     enable_events: mode_base_started
     disable_events: s_plunger_lane_inactive, mode_type_mission_started
 
@@ -406,7 +406,7 @@ slides:
     widgets:
       - type: text
         text: LEVEL UP!
-        style: header_lg row_middle
+        style: header_lg row_main row_main_dmd_high
       - type: text
         text: (mission_name)
         style: body_md row_sub_under

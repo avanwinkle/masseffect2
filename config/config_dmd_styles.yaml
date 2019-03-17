@@ -1,42 +1,4 @@
 #config_version=5
-
-slides:
-  attract_slide_main:
-    - type: image
-      image: me2_logo_x128
-  attract_slide_right: []
-  portrait_slide: []
-  singleplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, row_main, col_left_anchor, num
-  multiplayer_slide:
-    widgets:
-      - type: text
-        text: (score)
-        style: header_lg, row_main, col_left_anchor, num
-
-widgets:
-  grid_widget:
-    - type: image
-      image: grid_dmd
-      z: 1000
-  background_console:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 000000
-      z: 0
-  background_galaxy:
-    - type: rectangle
-      width: 128
-      height: 32
-      color: 000000
-      z: 0
-  missionselect_count_widget: []
-
-
 widget_styles:
 
   # TEXT FORMATS
@@ -160,6 +122,9 @@ widget_styles:
   col_center:
     anchor_x: center
     x: 50%
+  col_dmd_right:
+    anchor_x: right
+    x: right-1
 
   row_title:
     anchor_y: top
@@ -178,6 +143,10 @@ widget_styles:
     anchor_y: bottom
     valign: bottom
     y: 16
+  row_main_dmd_low:
+    anchor_y: bottom
+    valign: bottom
+    y: 8
   row_sub:
     anchor_y: bottom
     valign: bottom
@@ -203,6 +172,10 @@ widget_styles:
     anchor_y: bottom
     valign: bottom
     y: 2
+  row_dmd_sub:
+    anchor_y: bottom
+    valign: bottom
+    y: 9
 
   # SQUAD SPECIALISTS
   #--------------------------------
@@ -256,7 +229,7 @@ widget_styles:
     x: 86
   jackpot_x:
     anchor_x: left
-    x: 16
+    x: 46
 
 animations:
   sqicon_available: []

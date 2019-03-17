@@ -38,6 +38,7 @@ event_player:
       squadmate: zaeed
       portrait: recruitzaeed
       instructions_main: 3x orbits to catch Vido
+      instructions_sub: " "
     # Fake the event update to trigger the widget?
     logicblock_zaeed_orbits_counter_updated:
       value: device.counters.zaeed_orbits_counter.value

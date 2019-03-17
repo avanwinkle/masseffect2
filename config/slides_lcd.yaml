@@ -47,7 +47,7 @@ slides:
       anchor_x: right
   planet_scanned_slide:
     - type: text
-      text: "(planets) Planets\n Scanned"
+      text: "(planets) Planet(suffix)\n Scanned"
       style: header_md, row_main
     - widget: planet_widget_(planets_mod)
   recruit_instructions_slide:
