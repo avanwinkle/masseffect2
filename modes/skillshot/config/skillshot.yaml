@@ -48,14 +48,14 @@ shots:
     profile: hit_to_flash_fast_profile_noadvance
     show_tokens:
       leds: l_left_top_lane
-      color: color_paragon
+      color: color_ss_left
   skillshot_right:
     switch: s_top_lane_right
     advance_events: enable_skillshot_right
     profile: hit_to_flash_fast_profile_noadvance
     show_tokens:
       leds: l_right_top_lane
-      color: color_renegade
+      color: color_ss_right
 
 # Slides and sound_player are in base.yaml to persist after this mode stops
 

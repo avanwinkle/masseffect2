@@ -50,8 +50,26 @@ slides:
       text: "(planets) Planets\n Scanned"
       style: header_md, row_main
     - widget: planet_widget_(planets_mod)
+  recruit_instructions_slide:
+    widgets:
+      - type: text
+        text: (missionname)
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (instructions_main)
+        style: body_md, row_main, col_left_anchor
+      - type: text
+        text: (instructions_sub)
+        style: body_md, row_sub, col_left_anchor
+      - widget: background_console
 
 widgets:
+  levelup_background:
+    - type: image
+        image: background_levelup
+        anchor_y: bottom
+        y: 0
+        z: 0
   mineral_highlight:
     - type: rectangle
       z: 2
@@ -59,6 +77,10 @@ widgets:
       opacity: 0.2
       width: 180
       height: 120
+  n7_logo:
+    - type: image
+      image: n7_logo
+      style: row_top, col_right_anchor
   resume_widget:
     - type: text
       text: "Both flippers to\nresume (player|resume_mission) recruitment"

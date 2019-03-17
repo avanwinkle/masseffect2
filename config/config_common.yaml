@@ -325,6 +325,9 @@ named_colors:
   color_overlord_orange: FF4400
   collectorship_praetorian: 2200AA
   color_shadowbroker: ff1f00
+  # Skillshot: paragon/renegade for FAST, white for Spike
+  color_ss_left: 1166FF
+  color_ss_right: FF0000
 
 sound_system:
   master_volume: 1

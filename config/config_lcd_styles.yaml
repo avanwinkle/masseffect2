@@ -239,6 +239,9 @@ widget_styles:
   mineral_highlight_pos_platinum:
     x: 95%
     anchor_x: right
+  jackpot_x:
+    anchor_x: left
+    x: 63% # default is 38%, 60% too low, 65% too high
 
   # SQUAD SPECIALISTS
   #----------------------------

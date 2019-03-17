@@ -178,9 +178,6 @@ slide_player:
 slides:
   n7_hurryupslide:
     widgets:
-      - type: image
-        image: n7_logo
-        style: row_top, col_right_anchor
       - type: text
         text: N7 Assignment
         style: header_xs, row_top, col_left_anchor
@@ -188,6 +185,7 @@ slides:
       - type: text
         text: (title)
         style: header_sm, row_main, col_left_anchor
+      - widget: n7_logo
 
 sound_player:
   mode_n7_assignments_started:

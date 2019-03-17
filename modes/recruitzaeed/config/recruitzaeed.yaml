@@ -65,16 +65,22 @@ variable_player:
     zaeed_path_renegade:
       action: set
       int: 1
-    missionname:
+    mission_instructions:
       action: set
       string: "Stop Vido's Escape"
+    mission_secondary:
+      string: " "
+      action: set
   zaeed_left_orbit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 0
-    missionname:
+    mission_instructions:
       action: set
       string: "Save the Workers"
+    mission_secondary:
+      string: " "
+      action: set
   mission_shot_hit{count==1}:
     mission_instructions:
       action: set

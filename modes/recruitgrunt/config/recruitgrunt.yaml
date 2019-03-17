@@ -26,7 +26,7 @@ event_player:
     show_recruit_instructions:
       squadmate: grunt
       portrait: recruitgrunt
-      instructions_main: Defeat the Krogan
+      instructions_main: "Defeat the Tank-Bred\nKrogan Bezerkers"
       instructions_sub: " "
     set_mission_shots:
       is_resumable: 1

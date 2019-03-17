@@ -100,7 +100,6 @@ widget_styles:
     anchor_y: bottom
     z: 110
   timer_primary:
-    body_sm:
     font_name: smallest_pixel-7
     font_size: 9
     line_height: 0.7
@@ -255,6 +254,9 @@ widget_styles:
     x: 43
   mineral_highlight_pos_platinum:
     x: 86
+  jackpot_x:
+    anchor_x: left
+    x: 16
 
 animations:
   sqicon_available: []

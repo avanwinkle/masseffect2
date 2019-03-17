@@ -321,10 +321,10 @@ lights:
     tags: l_outlane
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
-    tags: lane_wedges
+    tags: lane_wedges, light_missionselect
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
     number: 10-17
-    tags: light_lock_lit, light_missionselect, lane_wedges
+    tags: light_lock_lit, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
     tags: lane_arrows

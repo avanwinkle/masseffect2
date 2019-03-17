@@ -12,9 +12,12 @@
 variable_player:
   start_mode_recruitgarrus:
     missionname:
+      string: "Recruit Garrus"
+      action: set
+    mission_instructions:
       string: "Defend Archangel"
       action: set
-    mission_instructions{not device.counters.doors_closed_counter.completed}:
+    mission_secondary{not device.counters.doors_closed_counter.completed}:
       string: "Close the shutters"
       action: set
     mission_instructions{device.counters.doors_closed_counter.completed}:
@@ -26,79 +29,112 @@ variable_player:
       action: set
   start_mode_recruitgrunt:
     missionname:
-      string: "Defeat the Tank-Bred"
+      string: "Recruit Grunt"
       action: set
     mission_instructions:
+      string: "Defeat the Tank-Bred"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitjack:
     missionname:
-      string: "Escape from Purgatory"
+      string: "Recruit Jack"
       action: set
     mission_instructions:
+      string: "Escape from Purgatory"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitkasumi:
     missionname:
-      string: "Infiltrate the Vault"
+      string: "Recruit Kasumi"
       action: set
     mission_instructions:
+      string: "Infiltrate the Vault"
+      action: set
+    mission_secondary:
       string: "Avoid the Alarms"
       action: set
   start_mode_recruitlegion:
     missionname:
-      string: "Stop the Heretics"
+      string: "Recruit Legion"
       action: set
     mission_instructions:
+      string: "Stop the Heretics"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitmordin:
     missionname:
-      string: "Cure the Plague"
+      string: "Recruit Mordin"
       action: set
     mission_instructions:
+      string: "Cure the Plague"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitsamara:
     missionname:
-      string: "Follow Morinth's Trail"
+      string: "Recruit Samara"
       action: set
     mission_instructions:
+      string: "Destroy the Gunship"
+      action: set
+    mission_secondary:
       string: "Hit targets to light shots"
       action: set
   start_mode_recruittali:
     missionname:
-      string: "Destroy the Colossus"
+      string: "Recruit Tali"
       action: set
     mission_instructions:
+      string: "Destroy the Colossus"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitthane:
     missionname:
-      string: "Assault Dantius Towers"
+      string: "Recruit Thane"
       action: set
     mission_instructions:
+      string: "Assault Dantius Towers"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitzaeed.1{current_player.zaeed_path_renegade==-1}:
     missionname:
-      string: "Storm the Refinery"
+      string: "Recruit Zaeed"
       action: set
     mission_instructions:
-      string: " "
+      string: "Storm the Refinery"
+      action: set
+    mission_secondary:
+      string: "Choose your path"
       action: set
   start_mode_recruitzaeed.2{current_player.zaeed_path_renegade==0}:
     missionname:
-      string: "Save the Workers"
+      string: "Recruit Zaeed"
       action: set
     mission_instructions:
+      string: "Save the Workers"
+      action: set
+    mission_secondary:
       string: " "
       action: set
   start_mode_recruitzaeed.3{current_player.zaeed_path_renegade==1}:
     missionname:
-      string: "Stop Vido's Escape"
+      string: "Recruit Zaeed"
       action: set
     mission_instructions:
+      string: "Stop Vido's Escape"
+      action: set
+    mission_secondary:
       string: " "
       action: set
 
@@ -106,13 +142,13 @@ slide_player:
   show_recruit_instructions:
     recruit_mission_slide:
       action: play
-      priority: 2000
+      priority: 720
     recruit_portrait_slide:
       action: play
       target: lcd_right
     recruit_instructions_slide:
       expire: 3s
-      priority: 2010
+      priority: 721
   # This mode runs globally, so explicitly remove slides
   mode_type_mission_stopped:
     recruit_instructions_slide:
@@ -127,29 +163,23 @@ slides:
   recruit_mission_slide:
     widgets:
       - type: text
+        text: (missionname)
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
         text: (score)
-        style: body_md, row_top, col_left_anchor, num
+        style: body_md, row_top, col_right_anchor, num
         opacity: 0.5
       - type: text
-        text: (missionname)
+        text: (mission_instructions)
         style: header_sm, row_main, col_left_anchor
       - type: text
-        text: (mission_instructions)
-        style: body_sm, row_sub, col_left_anchor #, dmd_hide ?
+        text: (mission_secondary)
+        style: body_sm, row_sub, col_left_anchor, dmd_hide
         animations:
           show_slide: pulse_text_slow
       - type: text
         text: (base_missiontimer_tick)
         style: timer_primary, row_gutter, col_right_indent
-      - widget: background_console
-  recruit_instructions_slide:
-    widgets:
-      - type: text
-        text: (instructions_main)
-        style: body_md, row_main, col_left_anchor
-      - type: text
-        text: (instructions_sub)
-        style: body_md, row_sub, col_left_anchor
       - widget: background_console
   recruit_advance_slide_1:
     widgets:

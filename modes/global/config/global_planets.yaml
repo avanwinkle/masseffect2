@@ -13,13 +13,13 @@
 #####
 
 event_player:
-  player_planets{player_num==current_player.number}:
+  planet_shots_hit_complete:
     planet_scanned:
       planets:
-        value: current_player.planets
+        value: current_player.planets + 1
         type: int
       planets_mod:
-        value: current_player.planets % 10
+        value: (current_player.planets + 1) % 10
         type: int
 
 variable_player:
@@ -104,21 +104,21 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
-  planet_scanned_lcd:
+  planet_scanned{machine.is_lcd}:
     planet_scanned_slide:
       action: play
       expire: 2s
-      priority: 1000
+      priority: 620
       target: lcd_right
-  planet_scanned_dmd:
+  planet_scanned{not machine.is_lcd}:
     planet_scanned_slide:
       action: play
       expire: 2s
-      priority: 1010
+      priority: 620
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
-      priority: 1000
+      priority: 610
   timer_planet_slide_timer_complete:
     minerals_slide:
       action: remove

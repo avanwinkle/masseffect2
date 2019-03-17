@@ -411,10 +411,7 @@ slides:
         text: (mission_name)
         style: body_md row_sub_under
         casing: title
-      - type: image
-        image: background_levelup
-        anchor_y: bottom
-        y: 0
+      - widget: levelup_background
   n7_complete_slide:
     widgets:
       - type: text
@@ -423,7 +420,7 @@ slides:
   skillshot_slide:
     - type: text
       text: SKILLSHOT
-      style: header_lg row_middle
+      style: header_lg row_middle row_main_dmd_high
     - type: text
       text: (temp_build_value)
       style: body_md row_sub_under num

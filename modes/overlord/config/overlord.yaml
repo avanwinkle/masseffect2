@@ -243,7 +243,7 @@ shows:
         l_hitbank_top: off
     - duration: 1s
       lights:
-        l_hitbank_shield_rgb: color_overlord_green
+        l_hitbank_shield_rgb: color_overlord
         l_hitbank_bot: color_overlord
     - duration: 500ms
       lights:
@@ -261,7 +261,7 @@ slides:
     widgets:
       - type: text
         text: OVERLORD
-        style: header_sm, row_main, col_left_anchor
+        style: header_xs, row_top, col_left_anchor, mission_title
       - widget: background_console
   overlord_portrait:
     widgets:
@@ -393,12 +393,10 @@ widgets:
   jackpots_needed_widget:
     - type: text
       text: " / (value)"
-      style: header_xs, row_gutter
-      anchor_x: left
-      x: 63% # default is 38%, 60% too low, 65% too high
+      style: header_xs, row_gutter, jackpot_x
   jackpot_widget:
     - type: text
       text: "JACKPOT LIT"
-      style: header_md, row_sub, col_left_anchor
+      style: header_md, row_main, col_left_anchor
       animations:
         add_to_slide: pulse_text

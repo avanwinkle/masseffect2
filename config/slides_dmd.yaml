@@ -64,8 +64,34 @@ slides:
     - type: text
       text: "(planets) Planets\n Scanned"
       style: header_md, row_main
+  recruit_instructions_slide:
+    widgets:
+      - type: text
+        text: (missionname)
+        style: header_md, row_title, col_left_anchor
+      - type: text
+        text: (instructions_main)
+        style: body_sm
+        anchor_x: left
+        x: 1
+        # These y values correspond to row_main but drop
+        anchor_y: top
+        y: 17
+        halign: left
+        valign: top
+      - type: text
+        text: (instructions_sub)
+        style: body_md, col_left_anchor
+        anchor_y: bottom
+        y: 4
 
 widgets:
+  levelup_background:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
   mineral_highlight:
     - type: rectangle
       anchor_x: left
@@ -75,16 +101,23 @@ widgets:
       z: 1
       width: 42
       height: 24
+  n7_logo:
+    - type: image
+      image: n7_logo_33x11
+      style: row_top, col_right_anchor
   resume_widget:
     - type: text
-      text: "Press action button\nto resume\n(player|resume_mission) recruitment"
-      style: header_xs, row_main, col_center
+      text: "Action button to retry\n(player|resume_mission) recruitment"
+      style: header_xs, col_center
+      anchor_y: bottom
+      y: 10
       casing: upper
-      z: 5
       animations:
         add_to_slide: pulse_text_slow
     - type: rectangle
       width: 128
-      height: 32
+      height: 14
+      anchor_y: bottom
+      y: 8
       color: 000000
-      z: 2
+      z: 0
