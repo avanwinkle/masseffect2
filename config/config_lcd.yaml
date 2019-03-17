@@ -36,6 +36,7 @@ machine_vars:
 
 text_strings:
   gameover: "Critical\nMission\nFailure"
+  suicidemission: "Suicide\nMission"
 
 widget_player:
   show_grid:

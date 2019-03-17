@@ -161,6 +161,8 @@ widget_styles:
     min_digits: 2
   dmd_md: {}
   dmd_hide: {}
+  dmd_only:
+    opacity: 0
   mission_title:
     opacity: 0.8
 

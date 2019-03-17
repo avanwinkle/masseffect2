@@ -267,7 +267,8 @@ slides:
         text: LAUNCH THE
         style: header_sm, row_top
       - type: text
-        text: "SUICIDE\nMISSION"
+        text: $suicidemission
+        casing: upper
         style: header_lg
       - widget: background_console
   missionselect_pass_slide:

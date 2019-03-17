@@ -37,19 +37,20 @@ event_player:
   timer_missiontimer_complete:
     - disable_reapercore
     - enable_corereset
-  corereset_hit: 
+  corereset_hit:
     - enable_reapercore
     - missiontimer_set_20
     - missiontimer_start|1s
   # Reset the mission shots on each reapercore, to reduce values on "resume"
-  enable_reapercore:
+  enable_reapercore.2:
     set_mission_shots:
       shots_total: 5
       ticks: 20
       is_resumable: 1
-      shots_remaining: 
+      shots_remaining:
         value: device.counters.reapercore_counter.value
         type: int
+  enable_reapercore.1: missiontimer_start
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
@@ -238,7 +239,8 @@ slides:
       style: header_md, row_main, col_left_anchor
     - type: text
       text: (score)
-      style: body_sm, row_sub, col_left_anchor, num
+      style: body_sm, row_sub, row_dmd_top, col_left_anchor, col_dmd_right, num
+      opacity: 0.5
     - widget: background_console
   derelictreaper_portrait_core:
     widgets:
@@ -304,12 +306,6 @@ widget_player:
       slide: derelictreaper_slide
 
 widgets:
-  core_disabled_widget:
-    - type: text
-      text: Hit bank to expose core!
-      style: header_sm, row_sub, col_left_anchor
-      animations:
-        add_to_slide: pulse_text
   reapershots_widget:
     - type: text
       text: "Shots: (value)"
@@ -318,18 +314,3 @@ widgets:
     - type: text
       text: (ticks)
       style: timer_primary, row_gutter, col_right_indent
-
-timers:
-  reapercore_timeout:
-    start_value: 18
-    end_value: 0
-    start_running: yes
-    direction: down
-    control_events:
-      - event: reaperhusk_hit
-        action: add
-        value: 2
-      - event: corereset_hit
-        action: restart
-      - event: reapercore_shots_hit_complete
-        action: stop

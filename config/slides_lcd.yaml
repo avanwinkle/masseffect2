@@ -64,6 +64,12 @@ slides:
       - widget: background_console
 
 widgets:
+  core_disabled_widget:
+    - type: text
+      text: Hit bank to expose core!
+      style: header_sm, row_sub, col_left_anchor
+      animations:
+        add_to_slide: pulse_text
   levelup_background:
     - type: image
         image: background_levelup

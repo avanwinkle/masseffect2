@@ -45,6 +45,7 @@ machine_vars:
 
 text_strings:
   gameover: "Critical Mission Failure"
+  suicidemission: "Suicide Mission"
 
 slides:
   window_slide_container:

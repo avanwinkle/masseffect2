@@ -85,6 +85,7 @@ widget_styles:
     adjust_top: 0
     adjust_bottom: 2
     z: 1
+  dmd_only: {}
   dmd_hide:
     font_size: 0
     opacity: 0
@@ -168,6 +169,10 @@ widget_styles:
     anchor_y: middle
     y: 50%
   # Specific DMD overrides
+  row_dmd_top:
+    anchor_y: top
+    valign: top
+    y: top
   row_dmd_bottom:
     anchor_y: bottom
     valign: bottom
