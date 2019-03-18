@@ -416,11 +416,11 @@ slides:
     widgets:
       - type: text
         text: "Assignment\nComplete!"
-        style: header_md row_middle
+        style: header_md row_main
   skillshot_slide:
     - type: text
       text: SKILLSHOT
-      style: header_lg row_middle row_main_dmd_high
+      style: header_lg row_main row_main_dmd_high
     - type: text
       text: (temp_build_value)
       style: body_md row_sub_under num

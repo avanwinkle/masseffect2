@@ -32,7 +32,7 @@ variable_player:
       string: "Recruit Grunt"
       action: set
     mission_instructions:
-      string: "Defeat the Tank-Bred"
+      string: "Defeat the Tank Krogan"
       action: set
     mission_secondary:
       string: " "
@@ -139,19 +139,31 @@ variable_player:
       action: set
 
 slide_player:
-  show_recruit_instructions:
+  show_recruit_instructions.1:
     recruit_mission_slide:
       action: play
       priority: 20
     recruit_portrait_slide:
       action: play
       target: lcd_right
-    recruit_instructions_slide:
+      priority: 20
+  show_recruit_instructions.2{machine.is_lcd}:
+    recruit_instructions_slide_lcd:
+      expire: 3s
+      priority: 21
+    recruit_instructions_portrait_slide:
+      expire: 3s
+      target: lcd_right
+      priority: 21
+  show_recruit_instructions.3{not machine.is_lcd}:
+    recruit_instructions_slide_dmd:
       expire: 3s
       priority: 21
   # This mode runs globally, so explicitly remove slides
   mode_type_mission_stopped:
-    recruit_instructions_slide:
+    recruit_instructions_slide_lcd:
+      action: remove
+    recruit_instructions_slide_dmd:
       action: remove
     recruit_mission_slide:
       action: remove
@@ -224,6 +236,41 @@ slides:
   recruit_portrait_slide:
     widgets:
       - widget: portrait_recruit(squadmate)
+  recruit_instructions_portrait_slide:
+    widgets:
+      - widget: portrait_squadmate_(squadmate)_advance
+  recruit_instructions_slide_lcd:
+    widgets:
+      - type: text
+        text: (missionname)
+        style: header_md, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (instructions_main)
+        style: body_lg, row_main, col_left_anchor
+      - type: text
+        text: (instructions_sub)
+        style: body_md, row_sub_under, col_left_anchor
+      - widget: dossier_(portrait)
+  recruit_instructions_slide_dmd:
+    widgets:
+      - type: text
+        text: (missionname)
+        style: header_md, row_title, col_left_anchor
+      - type: text
+        text: (instructions_main)
+        style: body_sm
+        anchor_x: left
+        x: 1
+        # These y values correspond to row_main but drop
+        anchor_y: top
+        y: 17
+        halign: left
+        valign: top
+      - type: text
+        text: (instructions_sub)
+        style: body_md, col_left_anchor
+        anchor_y: bottom
+        y: 4
 
 widgets:
   portrait_recruitgarrus:
@@ -256,6 +303,9 @@ widgets:
   portrait_recruitzaeed:
     - type: image
       image: portrait_recruitzaeed
+  dossier_recruitgrunt:
+    - type: image
+      image: dossier_recruitgrunt
 
 # Widgets that overlay DURING a mission
   shots_remaining_widget:

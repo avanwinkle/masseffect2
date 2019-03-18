@@ -26,8 +26,8 @@ event_player:
     show_recruit_instructions:
       squadmate: grunt
       portrait: recruitgrunt
-      instructions_main: "Defeat the Tank-Bred\nKrogan Bezerkers"
-      instructions_sub: " "
+      instructions_main: "Tank-Bred Krogan"
+      instructions_sub: "Hit all shots to defeat"
     set_mission_shots:
       is_resumable: 1
       ticks:

@@ -51,6 +51,12 @@ event_player:
         value: device.counters.reapercore_counter.value
         type: int
   enable_reapercore.1: missiontimer_start
+  disable_reapercore:
+    play_core_widget:
+      message: Hit bank to expose core!
+  reapercore_shots_hit_complete:
+    play_core_widget:
+      message: Jackpot Lit!
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
@@ -286,10 +292,10 @@ sounds:
 
 widget_player:
   enable_reapercore:
-    core_disabled_widget:
+    derelict_core_widget:
       action: remove
-  disable_reapercore:
-    core_disabled_widget:
+  play_core_widget:
+    derelict_core_widget:
       slide: derelictreaper_slide
   reapercore_shots_hit_complete:
     reapertimeout_widget:

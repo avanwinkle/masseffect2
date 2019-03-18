@@ -344,6 +344,6 @@ widgets:
   colossus_instructions_widget:
     - type: text
       text: Self-repairing in (ticks_remaining)
-      style: body_sm, row_sub, row_dmd_sub, col_left_anchor
+      style: body_sm, row_sub, col_left_anchor, dmd_hide
       animations:
         show_slide: pulse_text_slow

@@ -4,6 +4,7 @@ slides:
   attract_slide_main:
     - type: image
       image: me2_logo_x128
+  attract_slide_right: []
   singleplayer_slide:
     widgets:
       - type: text
@@ -14,8 +15,6 @@ slides:
       - type: text
         text: (score)
         style: header_lg, row_main, col_left_anchor, num
-  attract_slide_right: []
-  portrait_slide: []
   # Miscellaneous slides
   medigel_slide:
     - type: image
@@ -81,26 +80,7 @@ slides:
     - type: text
       text: "(planets) Planet(suffix) Scanned"
       style: header_md, row_main
-  recruit_instructions_slide:
-    widgets:
-      - type: text
-        text: (missionname)
-        style: header_md, row_title, col_left_anchor
-      - type: text
-        text: (instructions_main)
-        style: body_sm
-        anchor_x: left
-        x: 1
-        # These y values correspond to row_main but drop
-        anchor_y: top
-        y: 17
-        halign: left
-        valign: top
-      - type: text
-        text: (instructions_sub)
-        style: body_md, col_left_anchor
-        anchor_y: bottom
-        y: 4
+  portrait_slide: []
 
 widgets:
   background_console:
@@ -115,9 +95,9 @@ widgets:
       height: 32
       color: 000000
       z: 0
-  core_disabled_widget:
+  derelict_core_widget:
     - type: text
-      text: Hit bank to expose core!
+      text: (message)
       style: row_sub, col_left_anchor
       font_name: smallest_pixel-7
       font_size: 9

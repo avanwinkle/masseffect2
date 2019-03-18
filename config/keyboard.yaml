@@ -1,7 +1,7 @@
 #config_version=5
 keyboard:
   "`":
-    event: planet_shots_hit_complete
+    event: start_mode_derelictreaper
   # Advance major shots
   1:
     switch: s_left_orbit
