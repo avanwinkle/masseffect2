@@ -303,9 +303,36 @@ widgets:
   portrait_recruitzaeed:
     - type: image
       image: portrait_recruitzaeed
+  dossier_recruitgarrus:
+    - type: image
+      image: dossier_recruitgarrus
   dossier_recruitgrunt:
     - type: image
       image: dossier_recruitgrunt
+  dossier_recruitjack:
+    - type: image
+      image: dossier_recruitjack
+  dossier_recruitkasumi:
+    - type: image
+      image: dossier_recruitkasumi
+  dossier_recruitmordin:
+    - type: image
+      image: dossier_recruitmordin
+  dossier_recruitlegion:
+    - type: image
+      image: dossier_recruitlegion
+  dossier_recruitsamara:
+    - type: image
+      image: dossier_recruitsamara
+  dossier_recruittali:
+    - type: image
+      image: dossier_recruittali
+  dossier_recruitthane:
+    - type: image
+      image: dossier_recruitthane
+  dossier_recruitzaeed:
+    - type: image
+      image: dossier_recruitzaeed
 
 # Widgets that overlay DURING a mission
   shots_remaining_widget:
@@ -316,4 +343,3 @@ widgets:
   #   - type: text
   #     text: (ticks_remaining)
   #     style: body_lg, row_bottom, col_right_anchor
-
