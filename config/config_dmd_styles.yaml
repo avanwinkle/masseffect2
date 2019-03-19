@@ -184,6 +184,15 @@ widget_styles:
 
   # SQUAD SPECIALISTS
   #--------------------------------
+  specialist:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    anchor_x: left
+    anchor_y: bottom
+    z: 1
   spec_default:
     anchor_x: left
     anchor_y: bottom
@@ -235,6 +244,23 @@ widget_styles:
   jackpot_x:
     anchor_x: left
     x: 46
+
+  # SERVICE MODE
+  #----------------------------
+  medium:
+    font_name: pixelmix-8
+    font_size: 8
+    line_height: 0.9
+    adjust_top: 0
+    adjust_bottom: 2
+    z: 1
+  small:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
 
 animations:
   sqicon_available: []

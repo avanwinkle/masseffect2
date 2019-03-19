@@ -23,10 +23,10 @@ config:
 
 event_player:
   mode_suicide_base_started.1:
-    - start_mode_suicide_omegarelay{device.achievements.omegarelay.state!="completed"}
+    - start_mode_suicide_omegarelay{current_player.state_machine_suicide_progress=="omegarelay"}
     # Everything between omegarelay and endrun starts with the huddle
-    - start_mode_suicide_huddle{device.achievements.omegarelay.state=="completed" and device.achievements.humanreaper.state!="completed"}
-    - start_mode_suicide_endrun{device.achievements.endrun.state=="selected"}
+    - start_mode_suicide_huddle{current_player.state_machine_suicide_progress!="omegarelay" and current_player.state_machine_suicide_progress!="endrun"}
+    - start_mode_suicide_endrun{current_player.state_machine_suicide_progress=="endrun"}
   mode_type_suicide_started:
     # Give 2s for the opening, then start the timer
     - missiontimer_start|2s
@@ -36,13 +36,15 @@ event_player:
     - disable_harbinger
   # Wait for the mission selection of a specialist before starting infiltration or long walk
   suicide_huddle_complete:
-    - start_mode_suicide_infiltration{device.achievements.infiltration.state=="selected"}
-    - start_mode_suicide_longwalk{device.achievements.longwalk.state=="selected"}
-    - start_mode_suicide_tubes{device.achievements.tubes.state=="selected"}
-    - start_mode_suicide_final{device.achievements.humanreaper.state=="selected"}
+    - start_mode_suicide_infiltration{current_player.state_machine_suicide_progress=="infiltration"}
+    - start_mode_suicide_longwalk{current_player.state_machine_suicide_progress=="longwalk"}
+    - start_mode_suicide_tubes{current_player.state_machine_suicide_progress=="tubes"}
+    - start_mode_suicide_final{current_player.state_machine_suicide_progress=="humanreaper"}
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
-  # --- infiltration, longwalk, tubes, final start huddle via lockhandler capturing the ball
+  # --- SPIKE: infiltration, longwalk, tubes, final start huddle via lockhandler capturing the ball
+  # --- FAST: airlock will hold the ball
+  ball_hold_suicide_hold_held_ball: start_mode_suicide_huddle
   humanreaper_complete: start_mode_suicide_endrun
   endrun_complete:
     - levelup
@@ -56,8 +58,8 @@ event_player:
   ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_drained
   # If the ball drains and we DO need to kill a squadmate, wait for the callback to end
   squadmate_killed{ball_is_ending}: suicidemission_drained
-  # If a squadmate is killed but we didn't drain, go to the "restart" mode
-  squadmate_killed{not ball_is_ending and device.achievements.longwalk.state!="completed"}: start_mode_suicide_restart
+  # If a squadmate is killed but we didn't drain, go to the "restart" mode (Except during reaper)
+  squadmate_killed{not ball_is_ending and current_player.state_machine_suicide_progress!="humanreaper"}: start_mode_suicide_restart
   # Slide player doesn't like events, so conditionally restore the main slide
   suicidemission_failed:
     - restore_multiplayer_slide{game.num_players>1}
@@ -86,10 +88,13 @@ ball_saves:
     only_last_ball: true
     delayed_eject_events: mode_suicide_infiltration_started
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
-    auto_launch: true # Must be true because we have a multiball starting too
+    auto_launch: true  # Must be true because we have a multiball starting too
   # This save covers infiltration, longwalk, and tubes, 8 seconds at the start
   suicide_save:
-    enable_events: mode_type_suicide_started{device.achievements.omegarelay.state=="completed" and device.achievements.tubes.state!="completed"}
+    enable_events:
+      - mode_suicide_infiltration_started
+      - mode_suicide_longwalk_started
+      - mode_suicide_tubes_started
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: 1
     active_time: 8s

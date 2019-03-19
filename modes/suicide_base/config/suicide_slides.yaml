@@ -1,154 +1,156 @@
 #config_version=5
-
 slide_player:
-    mode_suicide_base_started:
-      singleplayer_slide:
-        action: remove
-      multiplayer_slide:
-        action: remove
-      suicide_slide:
-        action: play
-    slide_singleplayer_slide_created:
-      singleplayer_slide:
-        action: remove
-    slide_multiplayer_slide_created:
-      multiplayer_slide:
-        action: remove
-    player_reaper_hp{player_num==current_player.number and value>0 and change<0}:
-      reaper_hitdamage_slide:
-        expire: 4s
-    restore_singleplayer_slide: singleplayer_slide
-    restore_multiplayer_slide: multiplayer_slide
-    # Portraits
-    mode_suicide_omegarelay_started:
-      portrait_omegarelay:
-        target: lcd_right
-    mode_suicide_infiltration_started:
-      portrait_infiltration:
-        target: lcd_right
-    mode_suicide_longwalk_started:
-      portrait_longwalk:
-        target: lcd_right
-    mode_suicide_tubes_started:
-      portrait_tubes:
-        target: lcd_right
-    mode_suicide_platforms_started:
-      portrait_platforms:
-        target: lcd_right
-    mode_suicide_humanreaper_started:
-      portrait_humanreaper:
-        target: lcd_right
-    mode_suicide_endrun_started:
-      portrait_endrun:
-        target: lcd_right
-    # Huddle videos
-    mode_suicide_base_started{device.achievements.infiltration.state=="selected"}:
-      video_huddle_infiltration:
-        target: lcd_right
-    mode_suicide_base_started{device.achievements.longwalk.state=="selected"}:
-      video_huddle_longwalk:
-        target: lcd_right
-    omegarelay_complete:
-      video_huddle_infiltration:
-        target: lcd_right
-    infiltration_complete:
-      video_huddle_longwalk:
-        target: lcd_right
-    longwalk_complete:
-      video_huddle_platforms:
-        target: lcd_right
+  mode_suicide_base_started:
+    singleplayer_slide:
+      action: remove
+    multiplayer_slide:
+      action: remove
+    suicide_slide:
+      action: play
+  slide_singleplayer_slide_created:
+    singleplayer_slide:
+      action: remove
+  slide_multiplayer_slide_created:
+    multiplayer_slide:
+      action: remove
+  player_reaper_hp{player_num==current_player.number and value>0 and change<0}:
+    reaper_hitdamage_slide:
+      expire: 4s
+  restore_singleplayer_slide: singleplayer_slide
+  restore_multiplayer_slide: multiplayer_slide
+  # Portraits
+  mode_suicide_omegarelay_started:
+    portrait_omegarelay:
+      target: lcd_right
+  mode_suicide_infiltration_started:
+    portrait_infiltration:
+      target: lcd_right
+  mode_suicide_longwalk_started:
+    portrait_longwalk:
+      target: lcd_right
+  mode_suicide_tubes_started:
+    portrait_tubes:
+      target: lcd_right
+  mode_suicide_platforms_started:
+    portrait_platforms:
+      target: lcd_right
+  mode_suicide_humanreaper_started:
+    portrait_humanreaper:
+      target: lcd_right
+  mode_suicide_endrun_started:
+    portrait_endrun:
+      target: lcd_right
+  # Huddle videos
+  mode_suicide_base_started{device.achievements.infiltration.state=="selected"}:
+    video_huddle_infiltration:
+      target: lcd_right
+  mode_suicide_base_started{device.achievements.longwalk.state=="selected"}:
+    video_huddle_longwalk:
+      target: lcd_right
+  omegarelay_complete:
+    video_huddle_infiltration:
+      target: lcd_right
+  infiltration_complete:
+    video_huddle_longwalk:
+      target: lcd_right
+  longwalk_complete:
+    video_huddle_platforms:
+      target: lcd_right
 
 widget_player:
   # START/STOP Modes (Titles and add/remove)
-    mode_type_suicide_stopped:
-      suicide_shots:
-        action: remove
-      suicide_time:
-        action: remove
-    mode_suicide_omegarelay_started:
-      omegarelay_title:
-        slide: suicide_slide
-    mode_suicide_omegarelay_will_stop:
-      omegarelay_title:
-        action: remove
-    suicide_huddle_specialist_selected{mission=="infiltration"}:
-      infiltration_title:
-        slide: suicide_slide
-    mode_suicide_infiltration_will_stop:
-      infiltration_title:
-        action: remove
-    suicide_huddle_specialist_selected{mission=="longwalk"}:
-      longwalk_title:
-        slide: suicide_slide
-    mode_suicide_longwalk_will_stop:
-      longwalk_title:
-        action: remove
-    mode_suicide_tubes_started:
-      suicide_time:
-        action: remove
-      suicide_shots:
-        action: remove
-      suicide_tubes:
-        slide: suicide_slide
-      tubes_title:
-        slide: suicide_slide
-    mode_suicide_tubes_will_stop:
-      tubes_title:
-        action: remove
-      suicide_tubes:
-        action: remove
-      suicide_detonate:
-        action: remove
-    mode_suicide_platforms_started:
-      platforms_title:
-        slide: suicide_slide
-    # Until we have mode endrun, use the event to fake it
-    #mode_suicide_endrun_started:
-    start_mode_suicide_endrun:
-      humanreaper_title:
-        action: remove
-      platforms_title:
-        action: remove
-      endrun_title:
-        slide: suicide_slide
+  mode_type_suicide_stopped:
+    suicide_shots:
+      action: remove
+    suicide_time:
+      action: remove
+  mode_suicide_omegarelay_started:
+    omegarelay_title:
+      slide: suicide_slide
+  mode_suicide_omegarelay_will_stop:
+    omegarelay_title:
+      action: remove
+  suicide_huddle_specialist_selected{mission=="infiltration"}:
+    infiltration_title:
+      slide: suicide_slide
+  mode_suicide_infiltration_will_stop:
+    infiltration_title:
+      action: remove
+  suicide_huddle_specialist_selected{mission=="longwalk"}:
+    longwalk_title:
+      slide: suicide_slide
+  mode_suicide_longwalk_will_stop:
+    longwalk_title:
+      action: remove
+  mode_suicide_tubes_started:
+    suicide_time:
+      action: remove
+    suicide_shots:
+      action: remove
+    suicide_tubes:
+      slide: suicide_slide
+    tubes_title:
+      slide: suicide_slide
+  mode_suicide_tubes_will_stop:
+    tubes_title:
+      action: remove
+    suicide_tubes:
+      action: remove
+    suicide_detonate:
+      action: remove
+  mode_suicide_platforms_started:
+    platforms_title:
+      slide: suicide_slide
+  # Until we have mode endrun, use the event to fake it
+  #mode_suicide_endrun_started:
+  start_mode_suicide_endrun:
+    humanreaper_title:
+      action: remove
+    platforms_title:
+      action: remove
+    endrun_title:
+      slide: suicide_slide
   # TIMERS AND SHOTS Updating Widgets
-    timer_missiontimer_tick:
-      suicide_time:
-        action: update
-    timer_missiontimer_stopped:
-      suicide_time:
-        action: remove
-    logicblock_swarmpaths_hit:
-      suicide_shots:
-        action: update
-    logicblock_valves_hit:
-      suicide_shots:
-        action: update
-    logicblock_tubes_counter_updated{value>0}:
-      suicide_tubes:
-        action: update
-        slide: suicide_slide
-    logicblock_tubes_counter_complete:
-      suicide_tubes:
-        action: remove
-      suicide_detonate:
-        slide: suicide_slide
+  timer_missiontimer_tick:
+    suicide_time:
+      action: update
+  timer_missiontimer_stopped:
+    suicide_time:
+      action: remove
+  logicblock_swarmpaths_hit:
+    suicide_shots:
+      action: update
+  logicblock_valves_hit:
+    suicide_shots:
+      action: update
+  logicblock_tubes_counter_updated{value>0}:
+    suicide_tubes:
+      action: update
+      slide: suicide_slide
+  logicblock_tubes_counter_complete:
+    suicide_tubes:
+      action: remove
+    suicide_detonate:
+      slide: suicide_slide
   # SET INITIAL
-    set_initial_suicide_shots:
-      suicide_shots:
-        action: update
-        slide: suicide_slide
-    set_initial_suicide_ticks:
-      suicide_time:
-        action: update
-        slide: suicide_slide
+  set_initial_suicide_shots:
+    suicide_shots:
+      action: update
+      slide: suicide_slide
+  set_initial_suicide_ticks:
+    suicide_time:
+      action: update
+      slide: suicide_slide
 
 slides:
   huddle_slide:
     widgets:
       - type: text
-        text: "the Suicide Mission: Infiltration"
-        style: header_xs, row_top, col_left_anchor, mission_title
+        text: the Suicide Mission
+        style: header_xs, row_title, col_left_indent, mission_title, dmd_hide
+      - type: text
+        text: "Select a Specialist:"
+        style: header_xs, row_top, col_left_anchor
       - type: text
         key: specialist_garrus
         text: Garrus

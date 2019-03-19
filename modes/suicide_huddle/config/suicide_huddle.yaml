@@ -28,16 +28,16 @@ event_player:
   # If we are repeating a specialist-requiring mode, skip the ditty and go straight to the selection
   mode_suicide_huddle_started.2{current_player.suicide_continuing==0}:
     # If the mode requires a specialist, show the slide
-    - show_huddle_slide{device.achievements.infiltration.state=="selected" or device.achievements.longwalk.state=="selected"}
+    - show_huddle_slide{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}
     # If we are repeating a mode without specialist, skip the ditty and start it
-    - play_huddle_outro_show{device.achievements.longwalk.state=="completed"}|1500ms
+    - play_huddle_outro_show{current_player.state_machine_suicide_progress=="tubes" or current_player.state_machine_suicide_progress=="humanreaper"}|1500ms
   show_huddle_slide:
-    - play_huddle_slide_infiltration{device.achievements.infiltration.state=="selected"}
-    - play_huddle_slide_longwalk{device.achievements.longwalk.state=="selected"}
+    - play_huddle_slide_infiltration{current_player.state_machine_suicide_progress=="infiltration"}
+    - play_huddle_slide_longwalk{current_player.state_machine_suicide_progress=="longwalk"}
 
 random_event_player:
   ### MOCKUP: Shows don't pass events_when_played, so we have to create different shows for each path
-  play_huddle_intro_show{device.achievements.longwalk.state=="selected"}:
+  play_huddle_intro_show{current_player.state_machine_suicide_progress=="longwalk"}:
     force_different: true
     events:
       - play_huddle_intro_show_lw_yes
@@ -60,13 +60,13 @@ slide_player:
 
 show_player:
   play_huddle_intro_show:
-    infiltration_intro_show{device.achievements.infiltration.state=="selected"}:
+    infiltration_intro_show{current_player.state_machine_suicide_progress=="infiltration"}:
       action: play
       loops: 0
-    tubes_intro_show{device.achievements.tubes.state=="selected"}:
+    tubes_intro_show{current_player.state_machine_suicide_progress=="tubes"}:
       action: play
       loops: 0
-    platforms_intro_show{device.achievements.humanreaper.state=="selected"}:
+    platforms_intro_show{current_player.state_machine_suicide_progress=="humanreaper"}:
       action: play
       loops: 0
   # MOCK separate intros for longwalk variants
@@ -80,10 +80,10 @@ show_player:
       loops: 0
   play_huddle_outro_show:
     # For the time being, tubes intro and outro are the same. When the intro is longer, outro will be the tail
-    tubes_intro_show{device.achievements.tubes.state=="selected"}:
+    tubes_intro_show{current_player.state_machine_suicide_progress=="tubes"}:
       action: play
       loops: 0
-    platforms_intro_show{device.achievements.humanreaper.state=="selected"}:
+    platforms_intro_show{current_player.state_machine_suicide_progress=="humanreaper"}:
       action: play
       loops: 0
   suicide_huddle_specialist_selected{mission=="infiltration"}:
