@@ -8,9 +8,9 @@ event_player:
     # Give a small delay to allow the player vars to initialize, lest the placeholder text show goofy
     - add_player_2{num==2}|150ms
     - add_player_3{num==3}|150ms
-    - remove_level{num==3 and not is_lcd}|150ms
+    - remove_level{num==3 and not machine.is_lcd}|150ms
     - add_player_4{num==4}|150ms
-    - remove_ball{num==3 and not is_lcd}|150ms
+    - remove_ball{num==3 and not machine.is_lcd}|150ms
   player_turn_started{game.num_players>1}:
     - multiplayer_turn_start_1{number==1}
     - multiplayer_turn_start_2{number==2}
@@ -134,39 +134,39 @@ widgets:
   mp_score_widget_player_1:
     - type: text
       text: (player1|score)
-      style: header_xs, row_top, col_left_anchor, num
+      style: header_xs, pos_player_1
       z: 10
   mp_score_widget_player_2:
     - type: text
       text: (player2|score)
-      style: header_xs, row_top, col_right_anchor, num
+      style: header_xs, pos_player_2
       z: 10
   mp_score_widget_player_3:
     - type: text
       text: (player3|score)
-      style: header_xs, row_bottom, col_left_anchor, num
+      style: header_xs, pos_player_3
       z: 10
   mp_score_widget_player_4:
     - type: text
       text: (player4|score)
-      style: header_xs, row_bottom, col_right_anchor, num
+      style: header_xs, pos_player_4
       z: 10
   mp_name_widget_player_1:
     - type: text
       text: (machine|current_career_player_1)
-      style: header_xs, row_top, col_left_anchor
+      style: header_xs, pos_player_1
   mp_name_widget_player_2:
     - type: text
       text: (machine|current_career_player_2)
-      style: header_xs, row_top, col_right_anchor
+      style: header_xs, pos_player_2
   mp_name_widget_player_3:
     - type: text
       text: (machine|current_career_player_3)
-      style: header_xs, row_bottom, col_left_anchor
+      style: header_xs, pos_player_3
   mp_name_widget_player_4:
     - type: text
       text: (machine|current_career_player_4)
-      style: header_xs, row_bottom, col_right_anchor
+      style: header_xs, pos_player_4
 
 sound_player:
   player_added{num==1}: gui_splashstart
