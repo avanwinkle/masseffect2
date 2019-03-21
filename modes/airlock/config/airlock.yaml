@@ -25,6 +25,9 @@ event_player:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls + 1
         type: int
+  # Delay the release of suicide balls
+  infiltration_specialist_selected: release_suicide_hold|2s
+  longwalk_specialist_selected: release_suicide_hold|2s
 
 queue_relay_player:
   mode_missionselect_starting:
@@ -46,6 +49,16 @@ ball_holds:
       - player_available_missions{value<=0}
     release_all_events:
       - mode_missionselect_will_stop
+  suicide_hold:
+    balls_to_hold: 1
+    hold_devices: bd_hold
+    debug: true
+    enable_events:
+      - infiltration_complete
+      - longwalk_complete
+      - tubes_complete
+    disable_events: mode_suicide_huddle_will_stop
+    release_all_events: release_suicide_hold
 
 multiball_locks:
   fmball_lock:

@@ -108,6 +108,12 @@ slides:
   portrait_slide:
     widgets:
       - widget: (portrait_name)
+  recruit_portrait_slide:
+    widgets:
+      - widget: portrait_recruit(squadmate)
+  recruit_instructions_portrait_slide:
+    widgets:
+      - widget: portrait_squadmate_(squadmate)_advance
   
 widgets:
   grid_widget:
@@ -167,3 +173,71 @@ widgets:
       z: 5
       animations:
         add_to_slide: pulse_text_slow
+  
+  # PORTRAITS
+  # Here to avoid loading assets into memory for spike
+  #----------------------------------------------------
+  portrait_squad:
+    - type: image
+      image: portrait_squad
+  # Squadmates
+  portrait_recruitgarrus:
+    - type: image
+      image: portrait_recruitgarrus
+  portrait_recruitgrunt:
+    - type: image
+      image: portrait_recruitgrunt
+  portrait_recruitjack:
+    - type: image
+      image: portrait_recruitjack
+  portrait_recruitkasumi:
+    - type: image
+      image: portrait_recruitkasumi
+  portrait_recruitmordin:
+    - type: image
+      image: portrait_recruitmordin
+  portrait_recruitlegion:
+    - type: image
+      image: portrait_recruitlegion
+  portrait_recruitsamara:
+    - type: image
+      image: portrait_recruitsamara
+  portrait_recruittali:
+    - type: image
+      image: portrait_recruittali
+  portrait_recruitthane:
+    - type: image
+      image: portrait_recruitthane
+  portrait_recruitzaeed:
+    - type: image
+      image: portrait_recruitzaeed
+  dossier_recruitgarrus:
+    - type: image
+      image: dossier_recruitgarrus
+  dossier_recruitgrunt:
+    - type: image
+      image: dossier_recruitgrunt
+  dossier_recruitjack:
+    - type: image
+      image: dossier_recruitjack
+  dossier_recruitkasumi:
+    - type: image
+      image: dossier_recruitkasumi
+  dossier_recruitmordin:
+    - type: image
+      image: dossier_recruitmordin
+  dossier_recruitlegion:
+    - type: image
+      image: dossier_recruitlegion
+  dossier_recruitsamara:
+    - type: image
+      image: dossier_recruitsamara
+  dossier_recruittali:
+    - type: image
+      image: dossier_recruittali
+  dossier_recruitthane:
+    - type: image
+      image: dossier_recruitthane
+  dossier_recruitzaeed:
+    - type: image
+      image: dossier_recruitzaeed

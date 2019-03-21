@@ -81,6 +81,8 @@ slides:
       text: "(planets) Planet(suffix) Scanned"
       style: header_md, row_main
   portrait_slide: []
+  recruit_portrait_slide: []
+  recruit_instructions_portrait_slide: []
 
 widgets:
   background_console:

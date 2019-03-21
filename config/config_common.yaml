@@ -361,15 +361,21 @@ assets:
   sounds:
     default:
       track: sfx
+      # load: on_demand
     music:
       track: music
       load: on_demand
+      streaming: true
     sfx:
       track: sfx
       load: on_demand
     voice:
       track: voice
+      load: mode_start
+    levelup:
+      track: levelup
       load: on_demand
+      streaming: true
 
 animations:
   pulse_text:

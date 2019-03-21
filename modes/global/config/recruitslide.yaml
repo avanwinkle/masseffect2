@@ -233,12 +233,6 @@ slides:
         text: Left Ramp to Start
         style: body_md, row_sub, col_left_anchor
       - widget: background_console
-  recruit_portrait_slide:
-    widgets:
-      - widget: portrait_recruit(squadmate)
-  recruit_instructions_portrait_slide:
-    widgets:
-      - widget: portrait_squadmate_(squadmate)_advance
   recruit_instructions_slide_lcd:
     widgets:
       - type: text
@@ -273,41 +267,7 @@ slides:
         y: 4
 
 widgets:
-  portrait_recruitgarrus:
-    - type: image
-      image: portrait_recruitgarrus
-  portrait_recruitgrunt:
-    - type: image
-      image: portrait_recruitgrunt
-  portrait_recruitjack:
-    - type: image
-      image: portrait_recruitjack
-  portrait_recruitkasumi:
-    - type: image
-      image: portrait_recruitkasumi
-  portrait_recruitmordin:
-    - type: image
-      image: portrait_recruitmordin
-  portrait_recruitlegion:
-    - type: image
-      image: portrait_recruitlegion
-  portrait_recruitsamara:
-    - type: image
-      image: portrait_recruitsamara
-  portrait_recruittali:
-    - type: image
-      image: portrait_recruittali
-  portrait_recruitthane:
-    - type: image
-      image: portrait_recruitthane
-  portrait_recruitzaeed:
-    - type: image
-      image: portrait_recruitzaeed
-  dossier_recruitgrunt:
-    - type: image
-      image: dossier_recruitgrunt
-
-# Widgets that overlay DURING a mission
+  # Widgets that overlay DURING a mission
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
@@ -316,4 +276,3 @@ widgets:
   #   - type: text
   #     text: (ticks_remaining)
   #     style: body_lg, row_bottom, col_right_anchor
-

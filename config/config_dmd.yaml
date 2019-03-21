@@ -24,8 +24,8 @@ displays:
     round_anchor_x: right
     round_anchor_y: top
   lcd_right:
-    width: 1
-    height: 1
+    width: 0
+    height: 0
 
 dmds:
   spike_dmd:  # name of this DMD which can be whatever you want
@@ -34,6 +34,11 @@ dmds:
     only_send_changes: true
     source_display: main
     platform: spike
+
+assets:
+  images:
+    default: 
+      load: on_demand
 
 machine_vars:
   is_lcd:

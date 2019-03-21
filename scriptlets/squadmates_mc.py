@@ -123,8 +123,9 @@ class MCSquadmateHandlers(Scriptlet):
       self.log.error("Current slide is NOT squadicon")
 
   def _update_huddle(self, **kwargs):
-    self.log.info("Updating huddle slide")
     huddle_slide = self._get_slide("huddle_slide", "main")
+    # Look for lcd_right as a way to determine LCD state, since we don't have access to machine vars
+    is_lcd = self.mc.targets["lcd_right"].native_size[0] > 0
 
     # Using the priority to distinguish between infiltration and longwalk? Yuk
     if huddle_slide.priority % 10 == 1:
@@ -147,9 +148,23 @@ class MCSquadmateHandlers(Scriptlet):
             widget.opacity = 0
             continue
           else:
-            y = 468 - (130 + widget_pos * 50)
+            if is_lcd:
+              x, y = self._calculate_huddle_widget_pos_lcd(widget_pos)
+            else:
+              x, y = self._calculate_huddle_widget_pos_dmd(widget_pos)
+            widget.x = x
             widget.y = y
             widget.opacity = 1
             widget_pos += 1
+
+  def _calculate_huddle_widget_pos_lcd(self, widget_pos):
+    x = 50
+    y = 468 - (130 + widget_pos * 50)
+    return (x, y) 
+
+  def _calculate_huddle_widget_pos_dmd(self, widget_pos):
+    x = 1 if (widget_pos < 3) else 44 if (widget_pos < 6) else 86
+    y = 18 - (8 * (widget_pos % 3))
+    return (x, y)
 
 

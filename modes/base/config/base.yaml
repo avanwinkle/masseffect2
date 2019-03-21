@@ -699,7 +699,3 @@ track_player:
       action: stop_all_sounds
       fade: 500ms
 
-widgets:
-  portrait_squad:
-    - type: image
-      image: portrait_squad
