@@ -165,6 +165,14 @@ widgets:
     - type: image
       image: n7_logo
       style: row_top, col_right_anchor
+  # TBD: Do I need separate images or will transparency do it?
+  player_score_bg:
+    - type: rectangle
+      width: 156
+      height: 46
+      color: green
+      anchor_y: bottom
+      y: 90%
   resume_widget:
     - type: text
       text: "Both flippers to\nresume (player|resume_mission) recruitment"

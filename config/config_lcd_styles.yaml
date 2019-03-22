@@ -180,6 +180,45 @@ widget_styles:
     anchor_y: bottom
     opacity: 1
 
+  # MULTIPLAYER NAMES AND SCORES
+  #------------------------------
+  pos_player_1:
+    anchor_y: bottom
+    y: 90%  # row_title
+    anchor_x: left
+    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
+    x: 9%
+  pos_player_2:
+    anchor_y: bottom
+    y: 90%  # row_title
+    anchor_x: left
+    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
+    x: 29.5%
+  pos_player_3:
+    anchor_y: bottom
+    y: 90%  # row_title
+    anchor_x: left
+    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
+    x: 50%
+  pos_player_4:
+    anchor_y: bottom
+    y: 90%  # row_title
+    anchor_x: left
+    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
+    x: 70.5%
+  text_player_name:
+    font_name: me123
+    font_size: 28
+    adjust_bottom: 2
+    z: 110
+  text_player_score:
+    font_name: me123
+    font_size: 28
+    adjust_bottom: 2
+    z: 110
+    color: 999999
+
+
   # SQUAD ICON POSITIONS
   #----------------------------
   sqicon_color_available:

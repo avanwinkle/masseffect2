@@ -139,6 +139,8 @@ widgets:
     - type: image
       image: n7_logo_33x11
       style: row_title, col_right_anchor
+  player_name_bg: []
+  player_score_bg: []
   resume_widget:
     - type: text
       text: "Action button to retry\n(player|resume_mission) recruitment"

@@ -365,7 +365,6 @@ assets:
     music:
       track: music
       load: on_demand
-      streaming: true
     sfx:
       track: sfx
       load: on_demand
@@ -375,7 +374,6 @@ assets:
     levelup:
       track: levelup
       load: on_demand
-      streaming: true
 
 animations:
   pulse_text:

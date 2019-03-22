@@ -234,16 +234,15 @@ widget_styles:
     line_height: 0.7
     adjust_top: 1
     adjust_bottom: 4
-    z: 1
+    z: 10
   text_player_score:
     font_name: smallest_pixel-7
     font_size: 9
     line_height: 0.7
     adjust_top: 1
     adjust_bottom: 4
-    z: 1
+    z: 10
     color: 999999
-    number_grouping: true
 
   mineral_name_style:
     font_name: smallest_pixel-7

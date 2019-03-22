@@ -20,11 +20,11 @@ variable_player:
     mission_secondary{not device.counters.doors_closed_counter.completed}:
       string: "Close the shutters"
       action: set
-    mission_instructions{device.counters.doors_closed_counter.completed}:
+    mission_secondary{device.counters.doors_closed_counter.completed}:
       string: "Get upstairs!"
       action: set
   logicblock_doors_closed_counter_complete:
-    mission_instructions:
+    mission_secondary:
       string: "Get upstairs!"
       action: set
   start_mode_recruitgrunt:
@@ -260,6 +260,7 @@ slides:
         y: 17
         halign: left
         valign: top
+        color: BBBBBB
       - type: text
         text: (instructions_sub)
         style: body_md, col_left_anchor
