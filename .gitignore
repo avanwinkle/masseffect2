@@ -6,3 +6,4 @@ savegames
 .mesound_path
 *.mp4
 analytics
+profiler
