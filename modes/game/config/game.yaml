@@ -32,18 +32,22 @@ widget_player:
   game_started:
     base_level_widget:
       slide: singleplayer_slide
+      priority: 10
     base_ball_widget:
       slide: singleplayer_slide
+      priority: 9
 
   # Base starts, show a resume mission?
-  show_base_slide{is_resume and not is_multiplayer}:
+  show_base_slide.1{is_resume and not is_multiplayer}:
     resume_widget:
       action: add
       slide: singleplayer_slide
-  show_base_slide{is_resume and is_multiplayer}:
+      priority: 2
+  show_base_slide.2{is_resume and is_multiplayer}:
     resume_widget:
       action: add
       slide: multiplayer_slide
+      priority: 2
   disable_missionresume:
     resume_widget:
       action: remove
@@ -51,13 +55,17 @@ widget_player:
   add_player_2:
     base_level_widget:
       slide: multiplayer_slide
+      priority: 10
     base_ball_widget:
       slide: multiplayer_slide
+      priority: 9
     # Start with player1 name, player2 score
     mp_name_widget_player_1:
       slide: multiplayer_slide
+      priority: 8
     mp_score_widget_player_2:
       slide: multiplayer_slide
+      priority: 7
   # Player 3 has entered the game
   add_player_3:
     mp_score_widget_player_3:

@@ -36,8 +36,8 @@ event_player:
     show_recruit_instructions:
       squadmate: legion
       portrait: recruitlegion
-      instructions_main: 3x shots to hack
-      instructions_sub: 10s before lockout
+      instructions_main: 3 shots to hack heretics
+      instructions_sub: Lockout after 10 secs
     set_mission_shots:
       is_resumable: 0
       shots_total: 3

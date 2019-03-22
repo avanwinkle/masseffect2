@@ -22,18 +22,21 @@ event_player:
   # QUEUE SLIDE
   logicblock_sbdrops_counter_hit:
     queue_slide{device.achievements.vasir.state!="completed"}:
+      priority: 2
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_1
       count:
         value: device.counters.sbdrops_counter.value
         type: int
     queue_slide{device.achievements.vasir.state=="completed" and device.achievements.shadowbroker.state!="completed"}:
+      priority: 1
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_2
       count:
         value: device.counters.sbdrops_counter.value
         type: int
     queue_slide{device.achievements.shadowbroker.state=="completed"}:
+      priority: 3
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_3
       count:
@@ -115,25 +118,25 @@ slides:
 
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions
-  play_queued_slide_shadowbroker_advance_slide{count==1}:
+  play_queued_slide_shadowbroker_advance_slide.1{count==1}:
     shepard_sounds_like_liara_found_something_big:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==2}:
+  play_queued_slide_shadowbroker_advance_slide.2{count==2}:
     vasir_i_know_where_the_trade_center_is:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==3}:
+  play_queued_slide_shadowbroker_advance_slide.3{count==3}:
     vasir_they_took_out_three_floors:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==4}:
+  play_queued_slide_shadowbroker_advance_slide.4{count==4}:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==5}:
+  play_queued_slide_shadowbroker_advance_slide.5{count==5}:
     liara_sukets_datapad_this_has_what_we_need:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==6}:
+  play_queued_slide_shadowbroker_advance_slide.6{count==6}:
     liara_we_can_be_at_base_in_a_few_hours:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==7}:
+  play_queued_slide_shadowbroker_advance_slide.7{count==7}:
     liara_land_outside_and_hunt_for_a_hatch:
       max_queue_time: 2s
   # Relays:

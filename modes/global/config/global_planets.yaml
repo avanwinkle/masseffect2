@@ -13,6 +13,9 @@
 #####
 
 event_player:
+  mode_global_started:
+    - enable_planets{not mode.skillshot.active}
+    - disable_planets{mode.skillshot.active}
   planet_shots_hit_complete:
     planet_scanned:
       planets:
@@ -54,11 +57,11 @@ shot_groups:
     reset_events: planet_shots_hit_complete
     rotate_events: s_flipper_left_active, s_flipper_right_active
     disable_events:
+      - disable_planets
       - mode_skillshot_started
-      - mode_global_started{mode.skillshot.active}
     enable_events:
+      - enable_planets
       - mode_skillshot_stopped
-      - mode_global_started{not mode.skillshot.active}
   mineral_shots:
     shots: mineral_shot_iridium, mineral_shot_palladium, mineral_shot_platinum
 
@@ -107,13 +110,13 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
-  planet_scanned{machine.is_lcd}:
+  planet_scanned.2{machine.is_lcd}:
     planet_scanned_slide:
       action: play
       expire: 2s
       priority: 620
       target: lcd_right
-  planet_scanned{not machine.is_lcd}:
+  planet_scanned.1{not machine.is_lcd}:
     planet_scanned_slide:
       action: play
       expire: 2s

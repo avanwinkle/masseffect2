@@ -36,7 +36,7 @@ event_player:
     - start_mode_arrival{device.achievements.arrival.state!="disabled"}
 
   # QUEUE SLIDES
-  enable_fmball_lock{mode.field.active and device.achievements.arrival.state=="disabled"}:
+  enable_fmball_lock.1{mode.field.active and device.achievements.arrival.state=="disabled"}:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: overlord_light
@@ -45,7 +45,7 @@ event_player:
         # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-  enable_fmball_lock{mode.field.active and device.achievements.arrival.state!="disabled"}:
+  enable_fmball_lock.2{mode.field.active and device.achievements.arrival.state!="disabled"}:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: arrival_light
@@ -55,18 +55,21 @@ event_player:
         type: int
   overlord_ball_will_lock:
     queue_slide{total_balls_locked==1}:
+      priority: 1
       slide: fmball_ball_locked_slide
       portrait: overlord_light
       mball_name: overlord
       description: Vulcan Station Cleared
       ball: 1
     queue_slide{total_balls_locked==2}:
+      priority: 2
       slide: fmball_ball_locked_slide
       portrait: overlord_light
       mball_name: overlord
       description: Prometheus Station Cleared
       ball: 2
     queue_slide{total_balls_locked==3}:
+      priority: 3
       slide: fmball_ball_locked_slide
       portrait: overlord_light
       mball_name: overlord
@@ -74,29 +77,32 @@ event_player:
       ball: 3
   arrival_ball_will_lock:
     queue_slide{total_balls_locked==1}:
+      priority: 4
       slide: fmball_ball_locked_slide
       portrait: arrival_light
       mball_name: arrival
       description: Med Bay Escaped
       ball: 1
     queue_slide{total_balls_locked==2}:
+      priority: 5
       slide: fmball_ball_locked_slide
       portrait: arrival_light
       mball_name: arrival
       description: Reactor Online
       ball: 2
     queue_slide{total_balls_locked==3}:
+      priority: 6
       slide: fmball_ball_locked_slide
       portrait: arrival_light
       mball_name: arrival
       description: Project Activated
       ball: 3
-  multiball_lock_fmball_lock_full{device.achievements.arrival.state=="disabled"}:
+  multiball_lock_fmball_lock_full.1{device.achievements.arrival.state=="disabled"}:
     queue_slide:
       slide: fmball_full_slide
       portrait: overlord
       mball_name: overlord
-  multiball_lock_fmball_lock_full{device.achievements.arrival.state!="disabled"}:
+  multiball_lock_fmball_lock_full.2{device.achievements.arrival.state!="disabled"}:
     queue_slide:
       slide: fmball_full_slide
       portrait: arrival

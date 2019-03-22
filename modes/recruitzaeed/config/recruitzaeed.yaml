@@ -377,10 +377,10 @@ sounds:
       release_point: 50ms
 
 widget_player:
-  logicblock_zaeed_orbits_counter_updated{value>0}:
+  logicblock_zaeed_orbits_counter_updated.1{value>0}:
     shots_remaining_widget:
       action: update
       slide: recruit_mission_slide
-  logicblock_zaeed_orbits_counter_updated{value<=0}:
+  logicblock_zaeed_orbits_counter_updated.2{value<=0}:
     shots_remaining_widget:
       action: remove

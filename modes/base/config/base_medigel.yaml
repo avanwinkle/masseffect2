@@ -56,8 +56,8 @@ variable_player:
       int: 0
 
 show_player:
-  player_medigel{value>0}: medigel_show
-  player_medigel{value==0}:
+  player_medigel.1{value>0}: medigel_show
+  player_medigel.2{value==0}:
     medigel_show:
       action: stop
   ball_will_end:

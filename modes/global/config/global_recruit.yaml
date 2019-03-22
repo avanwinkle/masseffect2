@@ -135,8 +135,8 @@ sound_player:
   recruit_success_samara: missioncomplete_voice_samara
   recruit_success_tali: missioncomplete_voice_tali
   recruit_success_thane: missioncomplete_voice_thane
-  recruit_success_zaeed{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
-  recruit_success_zaeed{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
+  recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
+  recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
   timer_missiontimer_complete: shep_cant_reach_target
   recruit_failure_kasumi: kasumi_failed
   recruit_failure_tali: tali_failed

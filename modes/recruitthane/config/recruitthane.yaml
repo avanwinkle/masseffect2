@@ -28,8 +28,8 @@ event_player:
     show_recruit_instructions:
       squadmate: thane
       portrait: recruitthane
-      instructions_main: Hit ramps to ascend
-      instructions_sub: Hit orbits to complete
+      instructions_main: Hit ramps to ascend tower
+      instructions_sub: Hit orbits to cross bridge
     set_mission_shots:
       shots_total: 4
       is_resumable: 0

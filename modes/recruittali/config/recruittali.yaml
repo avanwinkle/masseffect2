@@ -27,8 +27,8 @@ event_player:
     show_recruit_instructions:
       squadmate: tali
       portrait: recruittali
-      instructions_main: Hit Ramp to Attack
-      instructions_sub: before it Self-Repairs
+      instructions_main: Attack the Colossus quickly
+      instructions_sub: before it self-repairs
     set_mission_shots:
       shots_total: 6
       is_resumable: 1

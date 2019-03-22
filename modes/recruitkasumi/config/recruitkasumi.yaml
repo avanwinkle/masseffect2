@@ -27,8 +27,8 @@ event_player:
     show_recruit_instructions:
       squadmate: kasumi
       portrait: recruitkasumi
-      instructions_main: Avoid the Alarms
-      instructions_sub: to enter the vault
+      instructions_main: Hit 4 Lanes to Enter Vault
+      instructions_sub: Don't touch the alarms!
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
