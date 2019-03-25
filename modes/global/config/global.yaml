@@ -42,6 +42,7 @@ event_player:
     - enable_lock_lightshot
   mode_type_mission_started:
     - stop_mode_field
+    - start_mode_powers
   mode_type_mission_stopped{not mode["global"].stopping}:
     - start_mode_field
   start_mode_missionselect:

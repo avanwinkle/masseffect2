@@ -1,0 +1,94 @@
+#config_version=5
+
+#####
+# Powers: Global (Non-Field)
+#
+# This mode enables during recruitment missions as a "Super Jets" counter to
+# replace the N7/IFF counter that's disabled during missions. Each bumper hit
+# randomizes the powers on it or the other bumpers, and completing the count
+# awards the active power on the bumper that completes.
+#
+# At any given time, a bumper can have one of three powers highlighted: its own
+# (pure) power, or either hybrid powers with the other two bumpers. By extension,
+# hybrid powers can appear on 2 bumpers but pure powers only on one.
+#####
+
+mode:
+  start_events: start_mode_powers
+  stop_events: stop_mode_powers, stop_missions, mode_type_mission_stopped
+  priority: 800
+
+event_player:
+  # Enumerate each profile separately because they pass the state name as an arg
+  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled}:
+    award_power:
+      power:
+        value: (state)
+        type: str
+  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled}:
+    award_power:
+      power:
+        value: (state)
+        type: str
+  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled}:
+    award_power:
+      power:
+        value: (state)
+        type: str
+
+counters:
+  powers_cooldown:
+      starting_count: 10
+      count_complete_value: 1
+      direction: down
+      count_events: cooldown_shots_hit
+      disable_on_complete: true
+      restart_events: award_power
+      persist_state: true
+
+variable_player:
+  award_power:
+    power_active: 
+      value: (power)
+      type: str
+
+shot_groups:
+  cooldown_shots:
+    shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
+
+shots:
+  cooldown_shot_tech:
+    switches: s_bumper_left
+    profile: tech_powers
+    advance_events:
+      - cooldown_shot_tech_hit
+  cooldown_shot_biotic:
+    switches: s_bumper_right
+    profile: biotic_powers
+    advance_events:
+      - cooldown_shot_biotic_hit
+  cooldown_shot_combat:
+    switches: s_bumper_bottom
+    profile: combat_powers
+    advance_events:
+      - cooldown_shot_combat_hit
+
+shot_profiles:
+  combat_powers:
+    states:
+      - name: adrenaline
+      - name: cloak
+      - name: adrenaline
+      - name: charge
+  tech_powers:
+    states:
+      - name: drone
+      - name: armor
+      - name: drone
+      - name: cloak
+  biotic_powers:
+    states:
+      - name: singularity
+      - name: charge
+      - name: singularity
+      - name: armor

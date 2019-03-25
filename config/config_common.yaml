@@ -112,6 +112,7 @@ modes:
   - modeanalysis
   - bonus
   - tilt
+  - powers
   - service
   - skillshot
   # Environments:
@@ -227,6 +228,9 @@ player_vars:
     initial_value: 1
   planets:
     initial_value: 0
+  power_active:
+    initial_value: " "
+    value_type: str
   medigel:
     initial_value: 0
   minerals_total:
