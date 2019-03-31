@@ -182,6 +182,50 @@ widgets:
       animations:
         add_to_slide: pulse_text_slow
   
+  # POWERS
+  power_widget_adrenaline:
+    - type: image
+      image: power_adrenaline
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Adren.\nRush"
+  power_widget_armor:
+    - type: image
+      image: power_armor
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Tech\nArmor"
+  power_widget_cloak:
+    - type: image
+      image: power_cloak
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Tactical\nCloak"
+  power_widget_charge:
+    - type: image
+      image: power_charge
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Biotic\nCharge"
+  power_widget_drone:
+    - type: image
+      image: power_drone
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Combat\nDrone"
+  power_widget_singularity:
+    - type: image
+      image: power_singularity
+      anchor_y: bottom
+      y: 65.4% # row_super
+    - type: text
+      text: "Singu-\nlarity"
+
   # PORTRAITS
   # Here to avoid loading assets into memory for spike
   #----------------------------------------------------

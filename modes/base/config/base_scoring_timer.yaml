@@ -136,6 +136,10 @@ timers:
       - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
         action: pause
         value: 3
+      # Adrenaline rush pauses the timer for 10s
+      - event: power_activation_success{power=="adrenaline"}
+        action: pause
+        value: 10
       # The timer starts fresh on every mission and stops on every end
       - event: missiontimer_start
         action: start

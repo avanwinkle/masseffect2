@@ -36,6 +36,12 @@ machine_vars:
 
 text_strings:
   gameover: "Critical\nMission\nFailure"
+  power_adrenaline: Adrenaline Rush
+  power_armor: Tech Armor
+  power_charge: Biotic Charge
+  power_cloak: Tactical Cloak
+  power_drone: Combat Drone
+  power_singularity: Singularity
   suicidemission: "Suicide\nMission"
 
 widget_player:

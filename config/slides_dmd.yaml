@@ -141,6 +141,30 @@ widgets:
       style: row_title, col_right_anchor
   player_name_bg: []
   player_score_bg: []
+  power_widget_adrenaline:
+    - type: text
+      text: "Adren.\nRush"
+      style: body_sm
+  power_widget_armor:
+    - type: text
+      text: "Tech\nArmor"
+      style: body_sm
+  power_widget_cloak:
+    - type: text
+      text: "Tactical\nCloak"
+      style: body_sm
+  power_widget_charge:
+    - type: text
+      text: "Biotic\nCharge"
+      style: body_sm
+  power_widget_drone:
+    - type: text
+      text: "Combat\nDrone"
+      style: body_sm
+  power_widget_singularity:
+    - type: text
+      text: "Singu-\nlarity"
+      style: body_sm
   resume_widget:
     - type: text
       text: "Action button to retry\n(player|resume_mission) recruitment"

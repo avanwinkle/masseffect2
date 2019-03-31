@@ -14,9 +14,10 @@
 #####
 
 mode:
-  start_events: start_mode_powers
+  start_events: start_mode_powers, mode_base_started  # for testing
   stop_events: stop_mode_powers, stop_missions, mode_type_mission_stopped
   priority: 800
+  code: powers.Powers
 
 event_player:
   # Enumerate each profile separately because they pass the state name as an arg
@@ -35,60 +36,271 @@ event_player:
       power:
         value: (state)
         type: str
+  timer_activate_power_complete: activate_power
+  # Coerce initial widgets
+  slide_powers_slide_created:
+    player_shot_cooldown_shot_biotic:
+      value:
+        value: current_player.shot_cooldown_shot_biotic
+        type: int
+    player_shot_cooldown_shot_combat:
+      value:
+        value: current_player.shot_cooldown_shot_combat
+        type: int
+    player_shot_cooldown_shot_tech:
+      value:
+        value: current_player.shot_cooldown_shot_tech
+        type: int
 
 counters:
   powers_cooldown:
-      starting_count: 10
-      count_complete_value: 1
-      direction: down
-      count_events: cooldown_shots_hit
-      disable_on_complete: true
-      restart_events: award_power
-      persist_state: true
+    starting_count: 10
+    count_complete_value: 1
+    direction: down
+    count_events: cooldown_shots_hit
+    disable_on_complete: true
+    restart_events: award_power
+    persist_state: true
 
-variable_player:
-  award_power:
-    power_active: 
-      value: (power)
-      type: str
+multiballs:
+  combat_drone:
+    ball_count: 1
+    ball_count_type: add
+    enable_events: enable_drone
+    shoot_again: 1s
+    start_events: multiball_combat_drone_enabled
+
+timers:
+  activate_power:
+    start_value: 4
+    end_value: 0
+    tick_interval: 500ms
+    direction: down
+    control_events:
+      - event: activate_power_hit
+        action: restart
+      - event: flipper_cancel_one
+        action: stop
+  power_active:
+    start_value: 10
+    end_value: 0
+    direction: down
+    control_events:
+      - event: power_activation_success
+        action: restart
+  powers_slide_timer:
+    start_value: 2
+    end_value: 0
+    direction: down
+    control_events:
+      - event: logicblock_powers_cooldown_hit
+        action: restart
+
+ball_saves:
+  armor:
+    enable_events: enable_armor
+    auto_launch: true
+    balls_to_save: 1
+    active_time: 6s
+    hurry_up_time: 2s
+    grace_period: 1s
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+
+sequence_shots:
+  clock_rotate_left:
+    event_sequence:
+      - s_flipper_left_active
+      - flipper_cancel
+    cancel_events:
+      - s_flipper_left_inactive
 
 shot_groups:
   cooldown_shots:
     shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
 
 shots:
+  activate_power:
+    enable_events: award_power
+    hit_events: flipper_cancel
   cooldown_shot_tech:
     switches: s_bumper_left
     profile: tech_powers
     advance_events:
-      - cooldown_shot_tech_hit
+      - cooldown_shot_tech_hit{device.counters.powers_cooldown.enabled}
   cooldown_shot_biotic:
     switches: s_bumper_right
     profile: biotic_powers
     advance_events:
-      - cooldown_shot_biotic_hit
+      - cooldown_shot_biotic_hit{device.counters.powers_cooldown.enabled}
   cooldown_shot_combat:
     switches: s_bumper_bottom
     profile: combat_powers
     advance_events:
-      - cooldown_shot_combat_hit
+      - cooldown_shot_combat_hit{device.counters.powers_cooldown.enabled}
+  singularity_left_orbit:
+    switches: s_target1
+    profile: singularity
+    enable_events: enable_singularity_left_orbit
+    disable_events: singularity_left_orbit_hit, power_activation_complete
+  singularity_kickback:
+    switches: s_target2
+    profile: singularity
+    enable_events: enable_singularity_kickback
+    disable_events: singularity_kicback_hit, power_activation_complete
+  singularity_left_ramp:
+    switches: s_target3
+    profile: singularity
+    enable_events: enable_singularity_left_ramp
+    disable_events: singularity_left_ramp_hit, power_activation_complete
+  singularity_right_ramp:
+    switches: s_target4
+    profile: singularity
+    enable_events: enable_singularity_right_ramp
+    disable_events: singularity_right_ramp_hit, power_activation_complete
+  singularity_right_orbit:
+    switches: s_target5
+    profile: singularity
+    enable_events: enable_singularity_right_orbit
+    disable_events: singularity_right_orbit_hit, power_activation_complete
 
 shot_profiles:
   combat_powers:
+    advance_on_hit: false
+    loop: true
     states:
       - name: adrenaline
       - name: cloak
       - name: adrenaline
       - name: charge
   tech_powers:
+    advance_on_hit: false
+    loop: true
     states:
       - name: drone
       - name: armor
       - name: drone
       - name: cloak
   biotic_powers:
+    advance_on_hit: false
+    loop: true
     states:
       - name: singularity
       - name: charge
       - name: singularity
       - name: armor
+  singularity:
+    states:
+      - name: lit
+        show: color_flashing_static
+        priority: 1000
+        show_tokens:
+          color: color_barrier
+
+show_player:
+  ball_save_armor_enabled:
+    ball_save_show:
+      action: play
+      speed: 3
+  ball_save_armor_hurry_up:
+    ball_save_show:
+      action: play
+      speed: 9
+  ball_save_armor_disabled:
+    ball_save_show:
+      action: stop
+
+slide_player:
+  timer_powers_slide_timer_started: powers_slide
+  timer_powers_slide_timer_complete:
+    powers_slide:
+      action: remove
+  power_awarded:
+    power_awarded_slide:
+      expire: 4s
+
+slides:
+  powers_slide:
+    transition: fade
+    widgets: []
+  power_awarded_slide:
+    - type: text
+      text: Power Available!
+      style: header_sm, row_top, row_dmd_bottom, col_left_indent
+    - type: text
+      text: (power_name)
+      style: header_md, row_main, col_left_indent
+
+widget_player:
+  logicblock_powers_cooldown_hit:
+    power_cooldown_widget:
+      action: update
+      slide: powers_slide
+  player_shot_cooldown_shot_biotic{value==0 or value==2}:
+    power_widget_singularity:
+      key: power_widget_biotic
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_biotic, body_sm
+  player_shot_cooldown_shot_biotic{value==1}:
+    power_widget_charge:
+      key: power_widget_biotic
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_biotic, body_sm
+  player_shot_cooldown_shot_biotic{value==3}:
+    power_widget_armor:
+      key: power_widget_biotic
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_biotic, body_sm
+  player_shot_cooldown_shot_combat{value==0 or value==2}:
+    power_widget_adrenaline:
+      key: power_widget_combat
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_combat, body_sm
+  player_shot_cooldown_shot_combat{value==1}:
+    power_widget_cloak:
+      key: power_widget_combat
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_combat, body_sm
+  player_shot_cooldown_shot_combat{value==3}:
+    power_widget_charge:
+      key: power_widget_combat
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_combat, body_sm
+  player_shot_cooldown_shot_tech{value==0 or value==2}:
+    power_widget_drone:
+      key: power_widget_tech
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_tech, body_sm
+  player_shot_cooldown_shot_tech{value==1}:
+    power_widget_armor:
+      key: power_widget_tech
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_tech, body_sm
+  player_shot_cooldown_shot_tech{value==3}:
+    power_widget_cloak:
+      key: power_widget_tech
+      action: update
+      slide: powers_slide
+      widget_settings:
+        style: power_tech, body_sm
+
+widgets:
+  power_cooldown_widget:
+    - type: text
+      text: "Power cooldown in (count)"
+      style: header_sm, row_top, row_dmd_bottom, col_left_indent

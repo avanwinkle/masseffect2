@@ -16,9 +16,9 @@ keyboard:
   6:
     switch: s_bumper_left
   7:
-    switch: s_bumper_right
-  8:
     switch: s_bumper_bottom
+  8:
+    switch: s_bumper_right
   l:
     event: bypass_lock_release_pulse
   n:

@@ -239,6 +239,18 @@ widget_styles:
     x: 50
     z: 120
 
+  # POWERS POSITIONS
+  #---------------------------
+  power_combat:
+    anchor_x: center
+    x: 50%
+  power_tech:
+    anchor_x: center
+    x: 15%
+  power_biotic:
+    anchor_x: center
+    x: 85%
+
   # SERVICE MODE
   #---------------------------
   medium:
