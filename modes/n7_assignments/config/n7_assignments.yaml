@@ -9,7 +9,8 @@
 # shot and collect a hurryup value. Once collected or when the timer runs out,
 # the mode ends and regular gameplay resumes.
 #
-# TODO: Some sort of bonus mode after x number of N7 assignments are completed
+# When enough missions are completed, the player unlocks the trilogy assignments
+# for Wrecked Merchant Freighter, Abandoned Research Station, Hahne-Kedar Facility
 #####
 
 mode:
@@ -43,9 +44,9 @@ event_player:
   player_shot_n7_eclipse_smuggling_depot_shot_enabled:
     set_n7_mission:
       title: "Eclipse Smuggling Depot"
-  player_shot_n7_hahne_kedar_facility_shot_enabled:
+  player_shot_n7_quarian_crash_site_shot_enabled:
     set_n7_mission:
-      title: "Hahne-Kedar Facility"
+      title: "Quarian Crash Site"
   player_shot_n7_imminent_ship_crash_shot_enabled:
     set_n7_mission:
       title: "Imminent Ship Crash"
@@ -65,7 +66,7 @@ random_event_player:
     events:
       - start_n7_anomalous_weather
       - start_n7_eclipse_smuggling_depot
-      - start_n7_hahne_kedar_facility
+      - start_n7_quarian_crash_site
       - start_n7_imminent_ship_crash
       - start_n7_javelin_missiles_launched
       - start_n7_lost_operative
@@ -78,7 +79,7 @@ variable_player:
 
 shot_groups:
   n7_assignment_shot:
-    shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_hahne_kedar_facility_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
+    shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_quarian_crash_site_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
     rotate_right_events: sw_bumper_active  # Bumper hits determine randomness
 
 shots:
@@ -96,10 +97,10 @@ shots:
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_ramp_shield_rgb
-  n7_hahne_kedar_facility_shot:
+  n7_quarian_crash_site_shot:
     hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
-    enable_events: start_n7_hahne_kedar_facility
+    enable_events: start_n7_quarian_crash_site
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_orbit_shield_rgb
@@ -195,13 +196,13 @@ sound_player:
       fade_in: 3s
       fade_out: 1s
       mode_end_action: stop
-  player_shot_n7_anomalous_weather_shot_enabled{value==true}: intro_anomalous_weather
-  player_shot_n7_eclipse_smuggling_depot_shot_enabled{value==true}: aria_sending_you_cache_coordinates
-  player_shot_n7_imminent_ship_crash_shot_enabled{value==true}: intro_imminent_ship_crash
-  player_shot_n7_hahne_kedar_facility_shot_enabled{value==true}: intro_hahne_kedar_facility
-  player_shot_n7_javelin_missiles_launched_shot_enabled{value==true}: intro_javelin_missiles
-  player_shot_n7_lost_operative_shot_enabled{value==true}: edi_anomaly_detected
-  player_shot_n7_msv_strontium_mule_shot_enabled{value==true}: edi_distress_signal
+  start_n7_anomalous_weather: intro_anomalous_weather
+  start_n7_eclipse_smuggling_depot: aria_sending_you_cache_coordinates
+  start_n7_imminent_ship_crash: intro_imminent_ship_crash
+  start_n7_quarian_crash_site: intro_quarian_crash_site
+  start_n7_javelin_missiles_launched: intro_javelin_missiles
+  start_n7_lost_operative: edi_anomaly_detected
+  start_n7_msv_strontium_mule: edi_distress_signal
 
 sound_pools:
   music_n7:
@@ -264,8 +265,8 @@ sounds:
       attack: 200ms
       release: 200ms
       release_point: 100ms
-  intro_hahne_kedar_facility:
-    file: en_us_hench_ai_n7bldinv2_generator_00344670_m.ogg
+  intro_quarian_crash_site:
+    file: en_us_hench_ai_n7mmnt2_biosign_detected_00344662_m.ogg
     track: voice
     ducking:
       target: music

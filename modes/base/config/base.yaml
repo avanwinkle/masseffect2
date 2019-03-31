@@ -415,7 +415,7 @@ slides:
   n7_complete_slide:
     widgets:
       - type: text
-        text: "Assignment\nComplete!"
+        text: $assignment_complete
         style: header_md row_main
   skillshot_slide:
     - type: text

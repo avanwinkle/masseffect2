@@ -37,10 +37,14 @@ event_player:
   timer_missiontimer_complete:
     - disable_reapercore
     - enable_corereset
-  corereset_hit:
+  corereset_hit.2:
     - enable_reapercore
     - missiontimer_set_20
     - missiontimer_start|1s
+  corereset_hit.1:
+    play_squadmate_sound:
+      sound: destroy_core
+      exclude: jacob  # No sound file for jacob, unfortunately
   # Reset the mission shots on each reapercore, to reduce values on "resume"
   enable_reapercore.2:
     set_mission_shots:
@@ -144,6 +148,7 @@ shots:
     profile: corereset_profile
     enable_events: enable_corereset
     disable_events: corereset_hit, enable_reapercore
+    tags: envshot_hitbank
   reapercore_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: reapercore_profile
@@ -289,6 +294,36 @@ sounds:
   derelictreaper_close_stinger:
     file: mus_legion_acq_sting_2.ogg
     track: sfx
+  squadmate_garrus_destroy_core:
+    file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.ogg
+    track: voice
+  squadmate_grunt_destroy_core:
+    file: en_us_hench_grunt_rprgta_reminder_h_00185233_m.ogg
+    track: voice
+  squadmate_jack_destroy_core:
+    file: en_us_hench_convict_rprgta_reminder_h_00185232_m.ogg
+    track: voice
+  squadmate_kasumi_destroy_core:
+    file: en_us_hench_thief_rprgta_reminder_h_00185230_m.ogg
+    track: voice
+  squadmate_miranda_destroy_core:
+    file: en_us_hench_vixen_rprgta_reminder_h_00185234_m.ogg
+    track: voice
+  squadmate_mordin_destroy_core:
+    file: en_us_hench_professor_rprgta_reminder_h_00185228_m.ogg
+    track: voice
+  squadmate_samara_destroy_core:
+    file: en_us_hench_mystic_rprgta_reminder_h_00185235_m.ogg
+    track: voice
+  squadmate_tali_destroy_core:
+    file: en_us_hench_tali_rprgta_reminder_h_00185229_m.ogg
+    track: voice
+  squadmate_thane_destroy_core:
+    file: en_us_hench_assassin_rprgta_reminder_h_00185231_m.ogg
+    track: voice
+  squadmate_zaeed_destroy_core:
+    file: en_us_hench_veteran_rprgta_reminder_h_00185237_m.ogg
+    track: voice
 
 widget_player:
   enable_reapercore:

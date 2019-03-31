@@ -314,10 +314,13 @@ class SoundManager():
       for filename in self._analysis['unavailable']:
         self.log.warning(" - {} ({})".format(filename, self._analysis['sounds'][filename]['mode']))
 
+
     # Any previous analysis is no longer valid
     if writeMode:
+      videocount = self.copy_video_assets(export=False)
       self._analysis = None
-      self.log.info("\nMachine copy and cleanup complete! {} file{} changed.".format(files_changed or "No", "" if files_changed == 1 else "s"))
+      self.log.info("\nMachine copy and cleanup complete! {} audiofile{} and {} video file{} changed.".format(
+        files_changed or "No", "" if files_changed == 1 else "s", videocount or "No", "" if videocount == 1 else "s"))
     else:
       self.log.info("\nSimulation complete, no files changed.")
 
@@ -336,12 +339,44 @@ class SoundManager():
       size += sound['exists'].st_size
       count += 1
 
+    videocount = self.copy_video_assets(export=True)
+
     # Dump the readme too, to have instructions handy on the in-cabinet controller
     text = open("{}/_README.txt".format(self.exports_folder), mode="w")
     text.write(README)
     text.close()
 
-    self.log.info("\nExport complete: {} files, {} MB".format(count, round(size/100000)/10))
+    self.log.info("\nExport complete: {} audio files, {} MB (plus {} videos)".format(count, round(size/100000)/10, videocount))
+
+  def copy_video_assets(self, export=True):
+    videoroot = "./videos"
+    exportroot = "{}/videos".format(self.exports_folder)
+    count = 0
+    
+    if export:
+      src = videoroot
+      dst = exportroot
+    else:
+      src = exportroot
+      dst = videoroot
+
+    os.makedirs(dst, mode=0o755, exist_ok=True)
+    for path, dirs, files in os.walk(src):
+      for filename in files:
+        if filename[0] == ".":
+          continue
+        target = "{}/{}".format(dst, filename)
+        # Always copy on export, but not import
+        docopy = export
+        try:
+          os.stat(target)
+        except(FileNotFoundError):
+          docopy = True
+        
+        if docopy:
+          shutil.copy2("{}/{}".format(src, filename), target)
+          count += 1
+    return count
 
 class RequiredSounds(object):
   def __init__(self):
