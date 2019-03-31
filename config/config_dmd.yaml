@@ -49,6 +49,7 @@ machine_vars:
     persist: false
 
 text_strings:
+  assignment_complete: "Assignment Complete!"
   gameover: "Critical Mission Failure"
   suicidemission: "Suicide Mission"
 

@@ -35,6 +35,7 @@ machine_vars:
     persist: false
 
 text_strings:
+  assignment_complete: "Assignment\nComplete!"
   gameover: "Critical\nMission\nFailure"
   suicidemission: "Suicide\nMission"
 
@@ -71,4 +72,7 @@ slides:
         image: dual_lcd_mask_shadow
         z: 4
 
-
+# assets:
+#   images:
+#     default:
+#       load: preload

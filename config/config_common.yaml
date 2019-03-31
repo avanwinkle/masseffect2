@@ -361,7 +361,7 @@ assets:
   sounds:
     default:
       track: sfx
-      # load: on_demand
+      load: on_demand
     music:
       track: music
       load: on_demand
@@ -370,7 +370,8 @@ assets:
       load: on_demand
     voice:
       track: voice
-      load: mode_start
+      load: on_demand
+      # load: mode_start
     levelup:
       track: levelup
       load: on_demand
