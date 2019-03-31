@@ -31,10 +31,6 @@ event_player:
     - play_recruit_advance_(squadmate)|50ms
     - remove_popup|4s
 
-variable_player:
-  recruit_advance:
-    score: 500
-
 shot_profiles:
   recruit_shot_profile:
     show_when_disabled: false
@@ -188,4 +184,3 @@ widgets:
   portrait_squadmate_zaeed_advance:
     - type: image
       image: portrait_squadmate_zaeed_advance
-

@@ -16,7 +16,7 @@ variable_player:
 slide_player:
   mode_collectorship_base_started:
     collectorship_baseslide:
-      target: lcd_left
+      target: main
     collectorship_portrait_slide:
       target: lcd_right
   stop_mode_collectorship_base:
@@ -33,10 +33,13 @@ slides:
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (last_mission)
-        style: header_sm, row_main, col_left_anchor
+        style: header_sm, row_main, row_main_dmd_high, col_left_anchor
+        animations:
+          show_slide: pulse_text
       - type: text
         text: (score)
-        style: body_sm, row_sub, col_left_anchor, num
+        style: body_sm, row_sub, row_dmd_top, col_left_anchor, col_dmd_right, num
+        opacity: 0.5
       - widget: background_console
   collectorship_portrait_slide: []
 
@@ -77,13 +80,10 @@ widget_player:
   timer_husktimer_started:
     cs_timer_widget:
       slide: collectorship_baseslide
-  timer_husktimer_tick:
+  timer_missiontimer_tick{mode.collectorship_husk.active or mode.collectorship_praetorian.active}:
     cs_timer_widget:
       action: update
-  timer_praetoriantimer_tick:
-    cs_timer_widget:
-      action: update
-  mode_collectorship_ambush_will_start:
+  timer_missiontimer_stopped:
     cs_timer_widget:
       action: remove
   stop_mode_collectorship_base:
@@ -110,12 +110,7 @@ widgets:
       style: timer_primary, row_gutter, col_right_indent
   harbinger_widget:
     - type: text
-      text: Harbinger
-      style: header_sm, row_bottom, col_left_center
-      animations:
-        add_to_slide: pulse_text
-    - type: text
-      text: (harbinger_multiplier)X
-      style: header_sm, row_bottom, col_right_indent
+      text: Harbinger (harbinger_multiplier)X
+      style: header_sm, row_bottom, row_dmd_sub, col_left_center
       animations:
         add_to_slide: pulse_text

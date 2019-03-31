@@ -77,7 +77,7 @@ slides:
     widgets:
       - type: text
         text: "Disabled\nCollector Ship"
-        style: header_md, row_main
+        style: header_md, row_main, row_main_dmd_low
 
 show_player:
   mode_collectorship_base_started:

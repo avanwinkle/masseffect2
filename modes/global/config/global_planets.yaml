@@ -13,14 +13,20 @@
 #####
 
 event_player:
-  player_planets{player_num==current_player.number}:
+  mode_global_started:
+    - enable_planets{not mode.skillshot.active}
+    - disable_planets{mode.skillshot.active}
+  planet_shots_hit_complete:
     planet_scanned:
       planets:
-        value: current_player.planets
+        value: current_player.planets + 1
         type: int
       planets_mod:
-        value: current_player.planets % 10
+        value: (current_player.planets + 1) % 10
         type: int
+      suffix:
+        value: (current_player.planets > 0 and "s") or ""
+        type: string
 
 variable_player:
   planet_shots_hit_complete:
@@ -29,11 +35,11 @@ variable_player:
   mineral_shots_hit:
     score: 10
   mineral_shot_palladium_hit:
-    mineral_palladium: 80 * (1 + current_player.planets * 0.25)
+    mineral_palladium: 0.0823 * machine.base_points * (1 + current_player.planets * 0.25)
   mineral_shot_platinum_hit:
-    mineral_platinum: 50 * (1 + current_player.planets * 0.25)
+    mineral_platinum: 0.0571 * machine.base_points * (1 + current_player.planets * 0.25)
   mineral_shot_iridium_hit:
-    mineral_iridium: 100 * (1 + current_player.planets * 0.25)
+    mineral_iridium: 0.1096 * machine.base_points * (1 + current_player.planets * 0.25)
   player_mineral_palladium{player_num==current_player.number}:
     mineral_total: (change)
   player_mineral_platinum{player_num==current_player.number}:
@@ -51,11 +57,11 @@ shot_groups:
     reset_events: planet_shots_hit_complete
     rotate_events: s_flipper_left_active, s_flipper_right_active
     disable_events:
+      - disable_planets
       - mode_skillshot_started
-      - mode_global_started{mode.skillshot.active}
     enable_events:
+      - enable_planets
       - mode_skillshot_stopped
-      - mode_global_started{not mode.skillshot.active}
   mineral_shots:
     shots: mineral_shot_iridium, mineral_shot_palladium, mineral_shot_platinum
 
@@ -104,65 +110,24 @@ shots:
       leds: l_pop_bumper_left
 
 slide_player:
-  planet_scanned:
+  planet_scanned.2{machine.is_lcd}:
     planet_scanned_slide:
       action: play
       expire: 2s
-      priority: 1000
+      priority: 620
       target: lcd_right
+  planet_scanned.1{not machine.is_lcd}:
+    planet_scanned_slide:
+      action: play
+      expire: 2s
+      priority: 620
   timer_planet_slide_timer_started:
     minerals_slide:
       action: play
-      priority: 1000
+      priority: 610
   timer_planet_slide_timer_complete:
     minerals_slide:
       action: remove
-
-slides:
-  planet_scanned_slide:
-    - type: text
-      text: "(planets) Planets\n Scanned"
-      style: header_md, row_main
-    - widget: planet_widget_(planets_mod)
-  minerals_slide:
-    widgets:
-      # Minerals
-      - type: text
-        text: (player|mineral_iridium)
-        min_digits: 1
-        number_grouping: true
-        style: body_md, row_main
-        x: 5%
-        anchor_x: left
-      - type: text
-        text: iridium
-        style: header_xs, row_sub
-        x: 5%
-        anchor_x: left
-      - type: text
-        text: (player|mineral_palladium)
-        min_digits: 1
-        number_grouping: true
-        style: body_md, row_main
-        x: 50%
-        anchor_x: center
-      - type: text
-        text: palladium
-        style: header_xs, row_sub
-        x: 50%
-        anchor_x: center
-      - type: text
-        text: (player|mineral_platinum)
-        min_digits: 1
-        number_grouping: true
-        style: body_md, row_main
-        x: 95%
-        anchor_x: right
-      - type: text
-        text: platinum
-        style: header_xs, row_sub
-        x: 95%
-        anchor_x: right
 
 timers:
   planet_slide_timer:
@@ -179,28 +144,28 @@ widget_player:
       action: update
       key: mineral_highlight_iridium
       slide: minerals_slide
+      priority: 1
       widget_settings:
         expire: 200ms
-        x: 5%
-        anchor_x: left
+        style: mineral_highlight_pos_iridium
   mineral_shot_palladium_hit:
     mineral_highlight:
       action: update
       key: mineral_highlight_palladium
       slide: minerals_slide
+      priority: 2
       widget_settings:
         expire: 200ms
-        x: 50%
-        anchor_x: center
+        style: mineral_highlight_pos_palladium
   mineral_shot_platinum_hit:
     mineral_highlight:
       action: update
       key: mineral_highlight_platinum
       slide: minerals_slide
+      priority: 3
       widget_settings:
         expire: 200ms
-        x: 95%
-        anchor_x: right
+        style: mineral_highlight_pos_platinum
   logicblock_n7_hits_counter_hit:
     n7_progress_widget:
       action: update
@@ -215,16 +180,10 @@ widget_player:
         expire: 2s
 
 widgets:
-  mineral_highlight:
-    - type: rectangle
-      style: mineral_highlight_style row_sub
-      width: 180
-      height: 120
-      z: 2
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"
-      style: header_sm, row_top, col_left_indent
+      style: header_sm, row_top, row_dmd_bottom, col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1
@@ -233,7 +192,7 @@ widgets:
   reaperiff_progress_widget:
     - type: text
       text: "IFF ready in (count)"
-      style: header_sm, row_top, col_left_indent
+      style: header_sm, row_top, row_dmd_bottom, col_left_indent
       anchor_y: bottom
       anchor_x: left
       y: 1

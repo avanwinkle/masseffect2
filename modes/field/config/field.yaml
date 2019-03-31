@@ -32,9 +32,6 @@ event_player:
       is_multiplayer:
         value: game.num_players>1
         type: bool
-      is_lcd:
-        value: machine.is_lcd==1
-        type: bool
   # Route this event through event_player to avoid playing while field is inactive
   music_intro_stopped: play_galaxy_map
 

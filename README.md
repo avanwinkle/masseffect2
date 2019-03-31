@@ -8,7 +8,7 @@ The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWar
 
 ## Requirements
 
-This project requires the Mission Pinball Framework 0.52 and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
+This project requires the Mission Pinball Framework 0.52+ and can be simulated using the MPF virtual machine and MPF monitor interface. Playing in the real world requires either a FAST-based pinball machine or a Stern Game of Thrones Pro Edition pinball machine and the MPF-Spike-Bridge, or you are welcome to build a config file for your particular hardware setup.
 
 ### Installation
 Clone the repo into the folder of your choosing, and install the [Mission Pinball Framework](http://docs.missionpinball.org/en/latest/install/index.html) (MPF).
@@ -40,22 +40,15 @@ $ mpf both -x --no-sound
 
 ### Running on Stern Game of Thrones
 
-ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the [MPF Spike Bridge](http://docs.missionpinball.org/en/latest/hardware/spike/mpf-spike-bridge.html) installed. This fully-playable version features the complete gameplay along with lighting effects and use of the built-in DMD screen. To play Mass Effect 2 on Game of Thrones, [download the `spike-dmd` version](https://github.com/avanwinkle/masseffect2/archive/spike-dmd.zip) or use `git checkout spike-dmd`.
+ME2 Pinball was alpha-tested (and can still be played) on a Stern Game of Thrones Pro machine with the [MPF Spike Bridge](http://docs.missionpinball.org/en/latest/hardware/spike/mpf-spike-bridge.html) installed. This fully-playable version features the complete gameplay along with lighting effects and use of the built-in DMD screen.
+
+To play Mass Effect 2 on Game of Thrones, you must first change your local *hardware_spike.yaml* file and set the spike `port:` that corresponds to your local machine's serial connection to the Spike machine (as detailed in the instructions linked above). Then you can run MPF with the "spike" configuration file.
 
 ```
-// On branch spike-dmd
-$ mpf both --no-sound
-```
-
-The most recent release and development versions of ME2 Pinball use a 1280x480 LCD screen as the display, which is incompatible with the Game of Thrones DMD but can be rendered on the computer screen. 
-To run the latest Mass Effect 2 (any `release` branch or `master`) on Game of Thrones, you can use the Spike hardware configuration instead of FAST by specifying the "spike" config in the command line.
-
-```
-// On release or master branch
 $ mpf both --no-sound -c spike
 ```
 
-Different hardware setups and USB-Serial cables have varying throughput for communication with the Stern Spike boards. In the file hardware_spike.yaml you can adjust the `runtime_baud:` setting to any number from the [MPF Spike Bridge baudrates](https://github.com/missionpinball/mpf-spike-bridge/blob/master/bridge.c#L273). A higher number will increase responsiveness but may decrease stability. If your Game of Thrones machine loses sync or coils stop working, try reducing the number.
+Different hardware setups and USB-Serial cables have varying throughput for communication with the Stern Spike boards. In the file *hardware_spike.yaml* you can adjust the `runtime_baud:` setting to any number from the [MPF Spike Bridge baudrates](https://github.com/missionpinball/mpf-spike/blob/master/src/main.rs#L435). A higher number will increase responsiveness but may decrease stability. If your Game of Thrones machine loses sync or coils stop working, try reducing the number.
 
 ###
 
@@ -93,19 +86,19 @@ The core challenge of the ME2 Pinball Game is to recruit a squad to take with yo
 
 * **The Quarian - Geth on Haestrom**
 
-  Hit the lit shot to weaken the Geth Colossus, hit either bank to take cover and add time. Hit the Colossus six times to defeat it and complete the mission, but if the timer runs out the Colossus will self-repair and the mission must be restarted.
+  Hit the lit shot to weaken the Geth Colossus. Hit the Colossus six times to defeat it and complete the mission, but hurry! The Colossus will self-repair after a few seconds, requiring an additional hit to defeat.
 
 * **Legion - Hacking the Heretics**
 
-  Hit the lit shots to move through the Geth base and build value, then hit the kickback lane to begin the hack. Additional shots will build value until the hack is complete, then hit the left bank (to reprogram) or the right bank (to destroy) and complete the mission.
+  Hit the lit shots to defend the console, then hit the kickback lane to complete the hack. If you're not fast enough, geth shots will light on the banks and must be hit before progress can continue.
 
 * **The Mercenary - Blue Suns Refinery**
 
-  Choose the blue shot to rescue the factory workers (with higher hurry-up times), or the red shot to pursue Vido (with higher multipliers), and hit additional shots to build value. Shoot a full orbit to complete the mission.
+  Choose the blue shot to rescue the factory workers (with higher hurry-up times), or the red shot to pursue Vido (with higher multipliers), and hit either orbit to advance the mission. Hit the kickback to collect your jackpot and complete.
 
 * **The Justicar - Chasing Morinth**
 
-  Hit the standup targets to collect intel and light shots, hit the lit shots to collect value and pursue Morinth. Hit five shots to complete the mission.
+  Hit the standup targets to damage the gunship's armor, hit the lit shots to collect value. Hit five shots to complete the mission.
 
 ### Collector Missions
 At various points in the game, special missions will become available which present Commander Shepard with opportunities to face the Collectors head-on. Some of these missions are unlocked based on the number of squadmates recruited, others are unlocked based on the player's level.
@@ -131,7 +124,7 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 
 * Infiltrating the Collector Base
 
-  Choose a tech specialist to enter the vent, then follow the lit shots to activate the valves and get them through safely—fighting Collectors all the while in this exciting two-ball battle. Don't let the timer run out!
+  Choose a tech specialist to enter the vent, then follow the lit shots to open the valves and get them through safely—fighting Collectors all the while in this exciting two-ball battle. Don't let the timer run out!
 
 * The Long Walk
 
@@ -151,25 +144,25 @@ Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wi
 Drop the bank of targets to gather intel on the Shadow Broker and start this mini-wizard mode. Complete three banks to unlock the Vasir car chase, then follow the shots and defeat Vasir in combat to get the data disk. Complete additional drop banks to unlock Hagalaz, then storm the Shadow Broker's ship and defeat his mercenaries to meet him face-to-face in a high-stakes two-ball battle.
 
 ### Overlord
-Hit the Geth target banks to clear a station on Aite and hit the left ramp to lock a ball and disable the geth. When all three stations are complete the Overlord three-ball multiball begins—hit the glowing shots to build value, and watch out for the blinking lights of data upload shots. When they appear, no more value can be built until the uploads are destroyed.
+Hit the Geth target banks to clear a station on Aite and hit the left ramp to lock a ball and disable the geth. When all three stations are complete the Overlord three-ball multiball begins: hit the glowing shots to build value, and watch out for the blinking lights of data upload shots. When they appear, no more value can be built until the uploads are destroyed.
 
 *This mission is only available prior to the Collector Ship mission*
 
 ### Arrival
-Hit the Batarian target banks to clear a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins—hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
+Hit the Batarian target banks to clear a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins: hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
 
 *This mission is only available after the Collector Ship mission*
 
 ## Additional Gameplay
 
 ### N7 Assignments
-Complete the pop-bumper counter to enable an N7 assignment, a single random shot on a hurryup. Hit the shot to complete the assignment. Complete 4 assignments to unlock *N7: Hahne Kader Facility*, a whack-a-mole multiball against waves of mechs.
+Complete the pop-bumper counter to enable an N7 assignment, a single random shot on a hurryup. Hit the shot to complete the assignment. Complete more assignments to unlock *N7: Hahne Kader Facility*, a whack-a-mole multiball against waves of mechs.
 
 ### Planet Scanning
-Complete the top lanes to scan a planet, increasing the efficacy of your mineral scanner (earned via pop bumper hits) and raising the minerals bonus awards. Scan 5 planets to unlock the *Normandy Crash Site*, a timed free-shoot that unlocks powerful rewards.
+Complete the top lanes to scan a planet, increasing the efficacy of your mineral scanner (earned via pop bumper hits) and raising the minerals bonus awards. Scan additional planets to unlock the *Normandy Crash Site*, a timed free-shoot that unlocks powerful rewards.
 
 ### Harbinger
-During missions against the Collectors, Harbinger will occasionally appear at the captive ball. While Harbinger is present, two hits will start a timed 2x playfield multiplier and additional hits will increase the multiplier (up to 6x). The multiplier duration persists even after Harbinger leaves, but will end if the mission is completed.
+During missions against the Collectors, Harbinger will occasionally appear at the captive ball. While Harbinger is present, two hits will start a timed 2x playfield multiplier and additional hits will increase the multiplier (up to 6x). The multiplier duration persists even after Harbinger leaves, but will end when the mission is completed.
 
 ## Credits
 

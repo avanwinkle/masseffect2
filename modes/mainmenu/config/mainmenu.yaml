@@ -101,7 +101,7 @@ slides:
         style: body_sm, row_top, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_lg, row_main, col_left_anchor
+        style: body_lg, row_main, row_main_dmd_high, col_left_anchor
       - type: text
         text: Level (level)
         style: body_sm, row_sub_under, col_left_anchor

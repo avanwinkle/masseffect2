@@ -28,8 +28,8 @@ event_player:
     show_recruit_instructions:
       squadmate: mordin
       portrait: recruitmordin
-      instructions_main: Hit orbits to build value,
-      instructions_sub: Both ramps to turn on fans
+      instructions_main: Hit orbits to build value
+      instructions_sub: 2X Ramps to turn on fans
     set_mission_shots:
       shots_total: 4
       is_resumable: 1

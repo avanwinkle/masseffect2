@@ -28,6 +28,16 @@ COLORS = {
   "zaeed": "FF0000",
 }
 
+SOUND_NAME_FORMATS = {
+  "destroy_core":    "squadmate_{squadmate}_destroy_core",
+  "killed":          "squadmate_{squadmate}_killed",
+  "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}",
+  "skillshot":       "squadmate_{squadmate}_nice_shot",
+}
+COMPLETED_EVENT_NAME = {
+  "killed":          "squadmate_killed_complete"
+}
+
 class MPFSquadmateHandlers(CustomCode):
   """
   This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking. It's
@@ -52,6 +62,8 @@ class MPFSquadmateHandlers(CustomCode):
     self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
     # Create a listener for a ball to start
     self.machine.events.add_handler("mode_base_started", self._initialize_icons)
+    # Create a listener for playing a squadmate sound
+    self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
 
   def _enable_shothandlers(self, **kwargs):
     self.machine.events.remove_handler(self._enable_shothandlers)
@@ -72,6 +84,50 @@ class MPFSquadmateHandlers(CustomCode):
       event = None
       if status == 3 or status == 4 or status == -1:
         self.machine.events.post("set_recruiticon", squadmate=mate, status=status)
+
+  def _handle_squadmate_sound(self, **kwargs):
+    squadmate = kwargs.pop("squadmate", "random")
+    if squadmate == "random":
+      squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
+    self.machine.log.info("Got a squadmate ({}) for playing sound '{}'".format(squadmate, kwargs['sound']))
+    sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, **kwargs)
+    action = kwargs.get("action", "play")
+    track = kwargs.get("track", "voice")
+    # If a mode is supplied, append it to the sound name
+    if kwargs.get("mode") == "infiltration":
+      sound_name = "{}_{}".format(sound_name, kwargs["mode"])
+
+    settings = {
+      sound_name: {
+        "action": action,
+        "track": track,
+      }
+    }
+    self.machine.log.info("SquadmateSounds made an asset to play: '{}' Args={}".format(sound_name, settings))
+    # We can pass in playback event handlers too
+    for config_name in ["events_when_played", "events_when_stopped"]:
+      if kwargs.get(config_name):
+        settings[sound_name][config_name] = kwargs.get(config_name)
+    # Dunno what these do but the sound player expects them
+    context = "squadmate_sounds"
+    calling_context = None
+
+    self.machine.events.post("sounds_play", settings=settings, context=context, calling_context=calling_context, priority=2)
+    # If a callback mate is specified, play that too
+    # EXCEPT for there's no Shepard callback for Miranda's death
+    if action == "play" and kwargs.get("callback_mate") and (kwargs.get("callback_mate") == "shepard") != (kwargs.get("squadmate") == "miranda"):
+      cb_sound_name = SOUND_NAME_FORMATS["{}_callback".format(kwargs.get("sound"))].format(**kwargs)
+      cb_settings = {
+        cb_sound_name: {
+          "action": action,
+          "track": track,
+          "events_when_played": [COMPLETED_EVENT_NAME],
+        }
+      }
+      self.machine.log.info("SquadmateSounds made a callback to play: '{}' Args={}".format(cb_sound_name, cb_settings))
+      self.machine.events.post("sounds_play", settings=cb_settings, context=context, calling_context=calling_context, priority=1)
+    elif COMPLETED_EVENT_NAME.get(kwargs["sound"]):
+      self.machine.events.post(COMPLETED_EVENT_NAME[kwargs["sound"]])
 
   def _on_hit(self, **kwargs):
     player = self.machine.game.player

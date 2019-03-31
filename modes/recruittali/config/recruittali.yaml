@@ -27,12 +27,12 @@ event_player:
     show_recruit_instructions:
       squadmate: tali
       portrait: recruittali
-      instructions_main: Hit Ramp to Attack Colossus
-      instructions_sub: before it Self-Repairs
+      instructions_main: Attack the Colossus quickly
+      instructions_sub: before it self-repairs
     set_mission_shots:
       shots_total: 6
       is_resumable: 1
-      shots_remaining: 
+      shots_remaining:
         value: current_player.geth_colossus_state
         type: int
   mode_recruittali_started.2:
@@ -54,7 +54,7 @@ counters:
     count_complete_value: 0
     direction: down
     persist_state: true
-    count_events: 
+    count_events:
       - player_geth_colossus_state{player_num==current_player.number and value<device.counters.colossus_maxhits_counter.value}
     events_when_hit: mission_shot_hit, mission_collect_score
     events_when_complete: recruit_tali_complete
@@ -87,7 +87,7 @@ variable_player:
     mission_instructions:
       string: " "
       action: set
-  
+
 shots:
   geth_colossus_shot:
     hit_events: sh_left_ramp_hit
@@ -329,16 +329,10 @@ sounds:
 
 widget_player:
   timer_colossus_repair_timer_tick:
-    # secondary_timer_widget:
-    #   action: update
-    #   slide: recruit_mission_slide
-    #   target: lcd_left
     colossus_instructions_widget:
       action: update
       slide: recruit_mission_slide
   timer_colossus_repair_timer_stopped:
-    # secondary_timer_widget:
-    #   action: remove
     colossus_instructions_widget:
       action: remove
   player_geth_colossus_state:
@@ -350,6 +344,6 @@ widgets:
   colossus_instructions_widget:
     - type: text
       text: Self-repairing in (ticks_remaining)
-      style: body_sm, row_sub, col_left_anchor, lcd_only
+      style: body_sm, row_sub, col_left_anchor, dmd_hide
       animations:
         show_slide: pulse_text_slow

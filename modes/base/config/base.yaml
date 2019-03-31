@@ -89,6 +89,9 @@ event_player:
   # Mission resume events need to be here because base is how we enable the shot
   player_shot_missionresume_shot_enabled{value==False}:
     - disable_missionresume
+  # Defer the awarding of points to avoid a blip in the slide.
+  # Do this in base so starting missionselect won't miss it
+  recruit_advance: defer_recruit_advance_score|1s
   levelup:
     queue_slide:
       slide: levelup_slide
@@ -146,6 +149,8 @@ counters:
       - achievement_shadowbroker_state_enabled
 
 variable_player:
+  defer_recruit_advance_score:
+    score: 500
   levelup:
     level: 1
     # Reset the ship upgrade every levelup. Once missed, gone forever!
@@ -232,7 +237,7 @@ shots:
     disable_events: enable_orbitswitches
   # Allow the player to start mission select before the ball is launched
   missionresume_shot:
-    switch: s_action_button
+    hit_events: s_action_button_active, flipper_cancel
     enable_events: mode_base_started
     disable_events: s_plunger_lane_inactive, mode_type_mission_started
 
@@ -390,40 +395,32 @@ slide_player:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
       expire: 3s
-  mode_base_started:
+  mode_base_started{machine.has_secondscreen}:
     squadicon_slide:
       action: play
       target: lcd_right
       priority: 100
-  # Commenting these as possible cause of sqicons appearing lcd_left
-  # recruit_lit:
-  #   squadicon_slide: {}
-  # recruit_success:
-  #   squadicon_slide: {}
 
 slides:
   levelup_slide:
     widgets:
       - type: text
         text: LEVEL UP!
-        style: header_lg row_middle
+        style: header_lg row_main row_main_dmd_high
       - type: text
         text: (mission_name)
         style: body_md row_sub_under
         casing: title
-      - type: image
-        image: background_levelup
-        anchor_y: bottom
-        y: 0
+      - widget: levelup_background
   n7_complete_slide:
     widgets:
       - type: text
-        text: "Assignment\nComplete!"
-        style: header_md row_middle
+        text: $assignment_complete
+        style: header_md row_main
   skillshot_slide:
     - type: text
       text: SKILLSHOT
-      style: header_lg row_middle
+      style: header_lg row_main row_main_dmd_high
     - type: text
       text: (temp_build_value)
       style: body_md row_sub_under num
@@ -577,17 +574,17 @@ slides:
   intro_no_missions_slide:
     - type: text
       text: Build Your Team
-      style: header_md, row_main
+      style: header_md, row_main, row_main_dmd_high
     - type: text
-      text: "Hit any lane 3x to unlock missions"
+      text: "Hit any lane 3x\nto unlock missions"
       style: header_xs, row_sub_under
     - widget: background_console
   intro_missions_slide:
     - type: text
       text: Build Your Team
-      style: header_md, row_main
+      style: header_md, row_main, row_main_dmd_high
     - type: text
-      text: "Select a mission at the Galaxy Map"
+      text: "Select a mission\nat the Galaxy Map"
       style: header_xs, row_sub_under
     - widget: background_console
 
@@ -702,7 +699,3 @@ track_player:
       action: stop_all_sounds
       fade: 500ms
 
-widgets:
-  portrait_squad:
-    - type: image
-      image: portrait_squad

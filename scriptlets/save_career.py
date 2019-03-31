@@ -59,7 +59,7 @@ class SaveCareer(CustomCode):
   def _save_career(self, **kwargs):
     # This is asynchronous so fetch the player from the event, not necessarily the "current" player
     player = self.machine.game.player_list[kwargs.get("number") - 1]
-    if not self._current_careers.get(player.number):
+    if player.vars.get("casual"):
       self.log.info("Player {} is casual, not saving career".format(
         player.number))
       return

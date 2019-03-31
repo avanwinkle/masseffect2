@@ -1,7 +1,7 @@
 #config_version=5
 config:
   - config_common.yaml
-  - config_lcd.yaml
+  - config_dmd.yaml
   - hardware_spike.yaml
 
 # Custom code can't be included, or it will get double-inits

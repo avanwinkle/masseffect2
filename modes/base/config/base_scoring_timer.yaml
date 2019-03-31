@@ -135,7 +135,7 @@ timers:
         value: 2
       - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
         action: pause
-        value: 2
+        value: 3
       # The timer starts fresh on every mission and stops on every end
       - event: missiontimer_start
         action: start
@@ -147,7 +147,3 @@ timers:
         action: stop
       - event: mode_type_suicide_stopped
         action: stop
-      # If we're locking a ball, pause for the new one to eject
-      - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
-        action: pause
-        value: 3

@@ -1,0 +1,164 @@
+#config_version=5
+slides:
+  # Core gameplay slides
+  attract_slide_main:
+    - type: image
+      image: me2_logo_x128
+  attract_slide_right: []
+  singleplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+  multiplayer_slide:
+    widgets:
+      - type: text
+        text: (score)
+        style: header_lg, row_main, col_left_anchor, num
+  # Miscellaneous slides
+  medigel_slide:
+    - type: image
+      image: medigel_icon
+      anchor_x: left
+      anchor_y: bottom
+      x: 0
+      y: 0
+      z: 2
+    - type: text
+      text: "Medigel\nDeployed"
+      style: body_lg, row_main, col_left_inner
+      casing: upper
+  minerals_slide:
+    - type: text
+      text: (player|mineral_iridium)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 21
+      y: 24
+      z: 4
+    - type: text
+      text: irid.
+      style: mineral_name_style
+      x: 21
+      y: 12
+      z: 4
+    - type: text
+      text: (player|mineral_palladium)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 50%
+      y: 24
+      z: 4
+    - type: text
+      text: pallad.
+      style: mineral_name_style
+      x: 50%
+      y: 12
+      z: 4
+    - type: text
+      text: (player|mineral_platinum)
+      min_digits: 1
+      number_grouping: true
+      style: mineral_name_style
+      x: 106
+      y: 24
+      z: 4
+    - type: text
+      text: plat.
+      style: mineral_name_style
+      x: 106
+      y: 12
+      z: 4
+    - type: rectangle
+      width: 128
+      height: 32
+      color: black
+      z: 0
+  planet_scanned_slide:
+    - type: text
+      text: "(planets) Planet(suffix) Scanned"
+      style: header_md, row_main
+  portrait_slide: []
+  recruit_portrait_slide: []
+  recruit_instructions_portrait_slide: []
+
+widgets:
+  background_console:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  background_galaxy:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  derelict_core_widget:
+    - type: text
+      text: (message)
+      style: row_sub, col_left_anchor
+      font_name: smallest_pixel-7
+      font_size: 9
+      adjust_top: 1
+      adjust_bottom: 4
+      z: 10
+      animations:
+        add_to_slide: pulse_text
+    - type: rectangle
+      width: 128
+      height: 7
+      anchor_y: bottom
+      color: 000000
+      y: 0
+      z: 9
+  grid_widget:
+    - type: image
+      image: grid_dmd
+      z: 1000
+  levelup_background:
+    - type: rectangle
+      width: 128
+      height: 32
+      color: 000000
+      z: 0
+  mineral_highlight:
+    - type: rectangle
+      anchor_x: left
+      anchor_y: bottom
+      color: 333333
+      y: 9
+      z: 1
+      width: 42
+      height: 24
+  missionselect_count_widget: []
+  n7_logo:
+    - type: image
+      image: n7_logo_33x11
+      style: row_title, col_right_anchor
+  player_name_bg: []
+  player_score_bg: []
+  resume_widget:
+    - type: text
+      text: "Action button to retry\n(player|resume_mission) recruitment"
+      # Don't use a header style because we want high z
+      font_name: smallest_pixel-7
+      font_size: 9
+      adjust_top: 1
+      adjust_bottom: 4
+      z: 10
+      anchor_y: bottom
+      y: 10
+      casing: upper
+      animations:
+        add_to_slide: pulse_text_slow
+    - type: rectangle
+      width: 128
+      height: 14
+      anchor_y: bottom
+      y: 8
+      color: 000000
+      z: 9

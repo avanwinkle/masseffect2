@@ -10,6 +10,10 @@ event_player:
   mode_normandyattack_started: cancel_medigel
   # mode_derelictreaper_started # Derelict Reaper has multiball but no save, rely on only_last_ball
   mode_suicide_base_started: cancel_medigel
+  # Relay the slide play event for dmd version
+  ball_save_default_saving_ball: play_medigel_slide
+  ball_save_recruitsave_saving_ball: play_medigel_slide
+  ball_save_medigel_save_saving_ball{balls>0}: play_medigel_slide
 
 shots:
   # This shot lights when medigel is available
@@ -52,8 +56,8 @@ variable_player:
       int: 0
 
 show_player:
-  player_medigel{value>0}: medigel_show
-  player_medigel{value==0}:
+  player_medigel.1{value>0}: medigel_show
+  player_medigel.2{value==0}:
     medigel_show:
       action: stop
   ball_will_end:
@@ -70,31 +74,11 @@ shows:
         l_right_outlane: on
 
 slide_player:
-  ball_save_default_saving_ball:
+  play_medigel_slide:
     medigel_slide:
       action: play
       expire: 2s
       priority: 2000
-  ball_save_recruitsave_saving_ball:
-    medigel_slide:
-      action: play
-      expire: 2s
-      priority: 2000
-  ball_save_medigel_save_saving_ball{balls>0}:
-    medigel_slide:
-      action: play
-      expire: 2s
-      priority: 2000
-
-slides:
-  medigel_slide:
-    - type: image
-      image: medigel
-      style: row_sub_under
-      z: 2
-    - type: text
-      text: "Medigel\nDeployed"
-      style: header_md, row_main
 
 sound_player:
   # During multiballs the save event will post even if it's not the last ball (i.e. no save)

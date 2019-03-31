@@ -27,6 +27,7 @@ event_player:
     - start_base_praetorian_show
     - enable_praet_main_shot|500ms
     - enable_praet_side_shot|500ms
+    - missiontimer_start
   mode_collectorship_praetorian_started.2:
     set_mission_shots:
       shots_total: 2 # Undercut the number of shots for bigger score
@@ -38,6 +39,9 @@ event_player:
     - enable_praet_side_shot|500ms
     - mission_shot_hit
     - missiontimer_set_20
+  # Enable the disabled flipper after 5s
+  timer_missiontimer_tick{ticks==15 and current_player.temp_counter>0}:
+    - flippers_on
   timer_missiontimer_complete{current_player.temp_counter==0}:
     - stop_base_praetorian_show
     - praetorian_attack_one
@@ -47,9 +51,9 @@ event_player:
     - missiontimer_set_20|2400ms
     - missiontimer_start|2800ms
   # If the timer runs out a _second_ time, the mission fails
-  timer_missiontimer_complete{current_player.temp_counter>1}: collectorship_praetorian_failed
+  timer_missiontimer_complete{current_player.temp_counter>0}: collectorship_praetorian_failed
   logicblock_praetorian_hits_counter_complete: collectorship_praetorian_complete
-  collectorship_praetorian_complete: 
+  collectorship_praetorian_complete:
     - mission_collect_score
     - stop_mode_collectorship_praetorian
   collectorship_praetorian_failed: stop_mode_collectorship_praetorian
@@ -102,8 +106,8 @@ variable_player:
   praetorian_shot_hit:
     temp_counter:
       action: set
-      int: 1
-  # Add to the multiplier for each timeout, so we can track how many flippers are disabled
+      int: 0
+  # Add to the counter for each timeout, so we can track how many flippers are disabled
   timer_missiontimer_complete:
     temp_counter: 1
 

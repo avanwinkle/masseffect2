@@ -11,11 +11,11 @@ Spike Bridge Instructions (OSX):
       - -o means include read/write
       - force may be required to override filesystem warnings
 5. Remove the old version of bridge (copy-overwrite may not work with fuse-ext2)
-  - rm ~/mnt/bridge
+  - rm ~/mnt/bin/bridge
 6. Copy the new version of bridge
-  - cp ~/mpf-spike-bridge/bridge ~/mnt/bridge
+  - cp ~/mpf-spike/bridge ~/mnt/bin/bridge
 7. Set the new version to be executable
-  - chmod 755 ~/mnt/bridge
+  - chmod 755 ~/mnt/bin/bridge
 8. Unmount the volume
   - sudo umount /dev/disk2s3
 9. From "Disk Utility", eject the disk

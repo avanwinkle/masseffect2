@@ -2,6 +2,7 @@
 config:
   - config_common.yaml
   - config_lcd_styles.yaml
+  - slides_lcd.yaml
 
 window:
   width: 1280
@@ -17,7 +18,7 @@ displays:
   window:
     width: 1280
     height: 480
-  lcd_left:
+  main:
     default: true
     width: 758
     height: 468
@@ -29,12 +30,28 @@ machine_vars:
   is_lcd:
     initial_value: 1
     persist: false
+  has_secondscreen:
+    initial_value: 1
+    persist: false
+
+text_strings:
+  assignment_complete: "Assignment\nComplete!"
+  gameover: "Critical\nMission\nFailure"
+  suicidemission: "Suicide\nMission"
+
+widget_player:
+  show_grid:
+    grid_widget:
+      target: window
+  remove_grid:
+    grid_widget:
+      action: remove
 
 slides:
   window_slide_container:
     widgets:
       - type: display
-        source_display: lcd_left
+        source_display: main
         width: 758
         height: 468
         anchor_y: bottom
@@ -55,4 +72,7 @@ slides:
         image: dual_lcd_mask_shadow
         z: 4
 
-
+# assets:
+#   images:
+#     default:
+#       load: preload

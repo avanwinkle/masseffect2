@@ -27,12 +27,17 @@ event_player:
     show_recruit_instructions:
       squadmate: kasumi
       portrait: recruitkasumi
-      instructions_main: Avoid the Alarms
-      instructions_sub: to enter the vault
+      instructions_main: Hit 4 Lanes to Enter Vault
+      instructions_sub: Don't touch the alarms!
     set_mission_shots:
       shots_total: 4
       is_resumable: 1
       shots_remaining:
+        value: device.counters.kasumi_shots_counter.value
+        type: int
+  slide_recruit_mission_slide_active:
+    logicblock_kasumi_shots_counter_updated:
+      value:
         value: device.counters.kasumi_shots_counter.value
         type: int
   logicblock_kasumi_shots_counter_hit:
@@ -47,7 +52,7 @@ counters:
     count_complete_value: 0
     persist_state: true
     count_events: kasumi_shots_unalarmed_hit
-    events_when_hit: 
+    events_when_hit:
       - logicblock_kasumi_shots_counter_hit
       - mission_shot_hit
       - mission_collect_score
@@ -230,9 +235,11 @@ slide_player:
       expire: 3s
   logicblock_kasumi_alarms_counter_hit{count>0}:
     kasumi_alarm_slide:
+      action: play
       expire: 3s
   logicblock_kasumi_alarms_counter_hit{count==0}:
     kasumi_failed_slide:
+      action: play
       expire: 3s
 
 slides:
@@ -241,57 +248,29 @@ slides:
       - type: text
         text: Password Obtained
         style: body_lg
-        z: 21
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 20
   kasumi_slide_2:
     widgets:
       - type: text
         text: Voiceprint Recorded
         style: body_lg
-        z: 21
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 20
   kasumi_slide_3:
     widgets:
       - type: text
         text: DNA Sample Obtained
         style: body_lg
-        z: 21
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 20
   kasumi_slide_4:
     widgets:
       - type: text
         text: Barrier Deactivated
         style: body_lg
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
   kasumi_alarm_slide:
     widgets:
       - type: text
         text: "Alarm Tripped!"
-        style: body_lg
+        style: body_lg, row_main
       - type: text
         text: "(count) until failure"
-        style: body_md
-      - type: rectangle
-        width: 128
-        height: 32
-        color: black
-        z: 0
+        style: body_md, row_sub
   kasumi_failed_slide:
     widgets:
       - type: text

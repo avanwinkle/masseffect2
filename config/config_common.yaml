@@ -323,8 +323,11 @@ named_colors:
   color_husk: 00101E
   color_overlord: 22FF33
   color_overlord_orange: FF4400
-  collectorship_praetorian: 2200AA
+  color_praetorian: 2200AA
   color_shadowbroker: ff1f00
+  # Skillshot: paragon/renegade for FAST, white for Spike
+  color_ss_left: 1166FF
+  color_ss_right: FF0000
 
 sound_system:
   master_volume: 1
@@ -358,6 +361,7 @@ assets:
   sounds:
     default:
       track: sfx
+      load: on_demand
     music:
       track: music
       load: on_demand
@@ -366,6 +370,10 @@ assets:
       load: on_demand
     voice:
       track: voice
+      load: on_demand
+      # load: mode_start
+    levelup:
+      track: levelup
       load: on_demand
 
 animations:
