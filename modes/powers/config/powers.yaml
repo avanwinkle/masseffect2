@@ -79,14 +79,14 @@ timers:
     control_events:
       - event: activate_power_hit
         action: restart
-      - event: flipper_cancel_one
+      - event: both_flippers_one
         action: stop
   power_active:
     start_value: 10
     end_value: 0
     direction: down
     control_events:
-      - event: power_activation_success
+      - event: power_activation_success{power!="charge"}
         action: restart
   powers_slide_timer:
     start_value: 2
@@ -106,12 +106,15 @@ ball_saves:
     grace_period: 1s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
-sequence_shots:
-  clock_rotate_left:
-    event_sequence:
+sequences:  # No way to enable/disable a sequence_shot, so sequence instead?
+  cloak_rotate_left:
+    enable_events: power_activation_success{power=="cloak"}
+    disable_events: power_activation_complete
+    events:
       - s_flipper_left_active
       - flipper_cancel
-    cancel_events:
+    reset_events:
+      - mode_powers_started
       - s_flipper_left_inactive
 
 shot_groups:
@@ -120,8 +123,11 @@ shot_groups:
 
 shots:
   activate_power:
-    enable_events: award_power
+    enable_events: 
+      - award_power
+      - mode_powers_started{current_player.power!=" "}
     hit_events: flipper_cancel
+    disable_events: power_activation_success
   cooldown_shot_tech:
     switches: s_bumper_left
     profile: tech_powers
@@ -246,6 +252,7 @@ widget_player:
       key: power_widget_biotic
       action: update
       slide: powers_slide
+      priority: 2
       widget_settings:
         style: power_biotic, body_sm
   player_shot_cooldown_shot_biotic{value==1}:
@@ -253,6 +260,7 @@ widget_player:
       key: power_widget_biotic
       action: update
       slide: powers_slide
+      priority: 1
       widget_settings:
         style: power_biotic, body_sm
   player_shot_cooldown_shot_biotic{value==3}:
@@ -260,6 +268,7 @@ widget_player:
       key: power_widget_biotic
       action: update
       slide: powers_slide
+      priority: 3
       widget_settings:
         style: power_biotic, body_sm
   player_shot_cooldown_shot_combat{value==0 or value==2}:
@@ -267,6 +276,7 @@ widget_player:
       key: power_widget_combat
       action: update
       slide: powers_slide
+      priority: 5
       widget_settings:
         style: power_combat, body_sm
   player_shot_cooldown_shot_combat{value==1}:
@@ -274,6 +284,7 @@ widget_player:
       key: power_widget_combat
       action: update
       slide: powers_slide
+      priority: 4
       widget_settings:
         style: power_combat, body_sm
   player_shot_cooldown_shot_combat{value==3}:
@@ -281,6 +292,7 @@ widget_player:
       key: power_widget_combat
       action: update
       slide: powers_slide
+      priority: 6
       widget_settings:
         style: power_combat, body_sm
   player_shot_cooldown_shot_tech{value==0 or value==2}:
@@ -289,6 +301,7 @@ widget_player:
       action: update
       slide: powers_slide
       widget_settings:
+        priority: 8
         style: power_tech, body_sm
   player_shot_cooldown_shot_tech{value==1}:
     power_widget_armor:
@@ -296,6 +309,7 @@ widget_player:
       action: update
       slide: powers_slide
       widget_settings:
+        priority: 7
         style: power_tech, body_sm
   player_shot_cooldown_shot_tech{value==3}:
     power_widget_cloak:
@@ -303,10 +317,21 @@ widget_player:
       action: update
       slide: powers_slide
       widget_settings:
+        priority: 9
         style: power_tech, body_sm
+  timer_activate_power_started:
+    power_activating_countdown_widget:
+      action: add
+      target: main
+  timer_activate_power_stopped:
+    power_activating_countdown_widget:
+      action: remove
+      target: main
 
 widgets:
   power_cooldown_widget:
     - type: text
       text: "Power cooldown in (count)"
       style: header_sm, row_top, row_dmd_bottom, col_left_indent
+
+

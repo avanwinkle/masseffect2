@@ -137,7 +137,7 @@ timers:
         action: pause
         value: 3
       # Adrenaline rush pauses the timer for 10s
-      - event: power_activation_success{power=="adrenaline"}
+      - event: missiontimer_pause_ten
         action: pause
         value: 10
       # The timer starts fresh on every mission and stops on every end

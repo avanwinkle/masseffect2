@@ -141,6 +141,31 @@ widgets:
       style: row_title, col_right_anchor
   player_name_bg: []
   player_score_bg: []
+  power_activating_countdown_widget:
+    - type: text
+      text: "Activating (player|power)"
+      color: FFFFFF
+      font_name: smallest_pixel-7
+      font_size: 9
+      z: 103
+      anchor_x: left
+      x: 2
+      anchor_y: bottom
+      y: -3
+    - type: rectangle
+      color: 666666
+      width: 0
+      height: 6
+      anchor_x: left
+      x: 0
+      anchor_y: bottom
+      y: 0
+      z: 101
+      animations:
+        add_to_slide:
+          - property: width
+            value: 126
+            duration: 2s
   power_widget_adrenaline:
     - type: text
       text: "Adren.\nRush"
@@ -230,7 +255,11 @@ widgets:
       y: -2
       z: 1
       animations:
-        add_to_slide: pulse_text_slow
+        # charge is used immediately, so instead of pulsing, a slow fadeout
+        add_to_slide:
+          - property: opacity
+            value: 0
+            duration: 5s
   power_active_cloak:
     - type: image
       image: power_cloak

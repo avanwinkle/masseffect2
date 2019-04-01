@@ -183,6 +183,25 @@ widgets:
         add_to_slide: pulse_text_slow
   
   # POWERS
+  power_activating_countdown_widget:
+    - type: text
+      text: "Activating (player|power)"
+      color: FFFFFF
+      style: row_sub_under, col_left_anchor
+      font_name: me123
+      font_size: 36
+      z: 103
+    - type: rectangle
+      color: 666666
+      width: 0
+      height: 6
+      style: row_sub_under, col_left_anchor
+      z: 101
+      animations:
+        add_to_slide:
+          - property: width
+            value: 448
+            duration: 2s
   power_widget_adrenaline:
     - type: image
       image: power_adrenaline
@@ -225,9 +244,73 @@ widgets:
       y: 65.4% # row_super
     - type: text
       text: "Singu-\nlarity"
+  power_available_adrenaline:
+    - type: image
+      image: power_adrenaline
+      style: row_super, col_right_indent
+  power_available_armor:
+    - type: image
+      image: power_armor
+      style: row_super, col_right_indent
+  power_available_cloak:
+    - type: image
+      image: power_cloak
+      style: row_super, col_right_indent
+  power_available_charge:
+    - type: image
+      image: power_charge
+      style: row_super, col_right_indent
+  power_available_drone:
+    - type: image
+      image: power_drone
+      style: row_super, col_right_indent
+  power_available_singularity:
+    - type: image
+      image: power_singularity
+      style: row_super, col_right_indent
+  power_active_adrenaline:
+    - type: image
+      image: power_adrenaline
+      style: row_super, col_right_indent
+      animations:
+        add_to_slide: pulse_text
+  power_active_armor:
+    - type: image
+      image: power_armor
+      style: row_super, col_right_indent
+      animations:
+        add_to_slide: pulse_text
+  power_active_cloak:
+    - type: image
+      image: power_cloak
+      style: row_super, col_right_indent
+      animations:
+        add_to_slide: pulse_text
+  power_active_charge:
+    - type: image
+      image: power_charge
+      style: row_super, col_right_indent
+      animations:
+        # charge is used immediately, so instead of pulsing, a slow fadeout
+        add_to_slide:
+          - property: opacity
+            value: 0
+            duration: 5s
+  power_active_drone:
+    - type: image
+      image: power_drone
+      style: row_super, col_right_indent
+      animations:
+        add_to_slide: pulse_text
+  power_active_singularity:
+    - type: image
+      image: power_singularity
+      style: row_super, col_right_indent
+      animations:
+        add_to_slide: pulse_text
 
   # PORTRAITS
-  # Here to avoid loading assets into memory for spike
+  # Here to avoid loading assets into memory for dmd
   #----------------------------------------------------
   portrait_squad:
     - type: image
