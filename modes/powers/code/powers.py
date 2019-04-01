@@ -7,14 +7,14 @@ SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dr
 POWER_NAMES = {
     "adrenaline": "Adrenaline Rush"
 }
-TEST_POWER = None
+TEST_POWER = "charge"
 
 class Powers(Mode):
 
   def __init__(self, machine, config, name, path):
     super().__init__(machine, config, name, path)
     self.log = logging.getLogger("Powers")
-    self.log.setLevel(10)
+    self.log.setLevel(1)
     self.shot_group = None
     self.handlers = []
     self.power_handlers = {
@@ -33,20 +33,42 @@ class Powers(Mode):
     self.add_mode_event_handler('timer_power_active_complete', self._complete)
     self.add_mode_event_handler('mode_powers_will_stop', self._complete)
 
+    # If we have a power already available, add it to the slide
+    if self.player["power"]in self.power_handlers:
+        self._add_power_to_main_slide()
+
+
   def _activate_power(self, **kwargs):
     power = self.player["power"]
     self.log.debug("Activating power {}".format(power))
     try:
         self.power_handlers[power]()
         self.machine.events.post("power_activation_success", power=power)
-    except:
+        self._add_power_to_main_slide(style="active")
+    except IndexError:
         self.machine.events.post("power_activation_failure", power=power)
+
+  def _add_power_to_main_slide(self, style="available"):
+    widget_evt = {
+        "settings": {
+            "power_{}_{}".format(style, self.player["power"]): {
+                "key": "power_available_widget",
+                "action": "update",
+                "slide": "recruit_mission_slide",
+            },
+        },
+        "context": "powers",
+        "calling_context": "power_awarded",
+        "priority": 100,
+    }
+    self.machine.events.post("widgets_play", **widget_evt)
 
   def _award_power(self, **kwargs):
     power = TEST_POWER or kwargs["power"]
     # variable_player can't sub values, so do it manually
     self.player["power"] = power
     self.machine.events.post("power_awarded", power=power, power_name=self.machine.config['text_strings']['power_{}'.format(power)])
+    self._add_power_to_main_slide()
 
   def _complete(self, **kwargs):
     self.player["power"] = " "
@@ -54,17 +76,17 @@ class Powers(Mode):
         self.machine.events.remove_handler_by_key(handler)
     self.machine.events.post("power_activation_complete")
 
-  def _get_power_shots(self, include_off=False):
+  def _get_power_shots(self, include_off=False, explicit_target=None):
     shots = []
     # Include any shots tagged with power_target_(shot) that are enabled and not "off", unless do
     if include_off:
         filter_fn = lambda x: x.enabled
     else:
-        filter_fn = lambda x: x.enabled and x.state_name != "off"
+        filter_fn = lambda x: (x.enabled and x.state_name != "off")
     
-    for shot in SHOTS:
-        shots += list(filter(
-            filter_fn, self.machine.device_manager.collections["shots"].items_tagged("power_target_{}".format(shot))))
+    # We can search for an explicit target, if desired. Otherwise, any power_target tag
+    tag = "power_target_{}".format(explicit_target) if explicit_target else "power_target"
+    shots = list(filter(filter_fn, self.machine.device_manager.collections["shots"].items_tagged(tag)))
 
     if shots:
         return shots
@@ -82,12 +104,16 @@ class Powers(Mode):
     self.shot_group = ShotGroup(self.machine, "{}_group".format(self.name))
     self.shot_group.rotation_enabled = True
     self.shot_group.config['shots'] = targets
-    self.handlers.push(self.add_mode_event_handler('cloak_rotate_left', self.shot_group.rotate_left))
-    self.handlers.push(self.add_mode_event_handler('cloak_rotate_right', self.shot_group.rotate_right))
+    self.handlers.append(self.add_mode_event_handler('cloak_rotate_left', self.shot_group.rotate_left))
+    self.handlers.append(self.add_mode_event_handler('cloak_rotate_right', self.shot_group.rotate_right))
 
   def _activate_charge(self):
-    targets = self._get_power_shots()
-    self.log.debug("BIOTIC CHARGE: Hitting a random shot from {}".format(targets))
+    # If there is an explicit charge target, shoot that
+    try:
+        targets = self._get_power_shots(explicit_target="power_target_charge")
+    # If not, go for any shot
+    except IndexError:
+        targets = self._get_power_shots()
     random.choice(targets).hit()
 
   def _activate_drone(self):
@@ -96,8 +122,9 @@ class Powers(Mode):
   def _activate_singularity(self):
     targets = self._get_power_shots()
     for target in targets:
-        shot = target.tags.next(lambda x: x.startswith("power_target_")).replace("power_target_", "")
+        # Find the shot that corresponds to this target so we can light the appropriate standup
+        shot = next(iter(target.tags), lambda x: x.startswith("power_target_")).replace("power_target_", "")
         self.machine.events.post("enable_singularity_{}".format(shot))
-        self.handlers.push(self.add_mode_event_handler('singularity_{}_hit', target.hit))
+        self.handlers.append(self.add_mode_event_handler('singularity_{}_hit', target.hit))
 
   

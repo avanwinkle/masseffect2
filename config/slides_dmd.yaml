@@ -165,6 +165,102 @@ widgets:
     - type: text
       text: "Singu-\nlarity"
       style: body_sm
+  power_available_adrenaline:
+    - type: text
+      text: AR
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_available_armor:
+    - type: text
+      text: TA
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_available_charge:
+    - type: text
+      text: BC
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_available_cloak:
+    - type: text
+      text: TC
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_available_drone:
+    - type: text
+      text: CD
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_available_singularity:
+    - type: text
+      text: SG
+      style: body_sm, row_main, col_right_anchor
+      animations:
+        add_to_slide: pulse_text
+  power_active_adrenaline:
+    - type: image
+      image: power_adrenaline
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
+  power_active_armor:
+    - type: image
+      image: power_armor
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
+  power_active_charge:
+    - type: image
+      image: power_charge
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
+  power_active_cloak:
+    - type: image
+      image: power_cloak
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
+  power_active_drone:
+    - type: image
+      image: power_drone
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
+  power_active_singularity:
+    - type: image
+      image: power_singularity
+      anchor_x: right
+      x: right
+      anchor_y: bottom
+      y: -2
+      z: 1
+      animations:
+        add_to_slide: pulse_text_slow
   resume_widget:
     - type: text
       text: "Action button to retry\n(player|resume_mission) recruitment"

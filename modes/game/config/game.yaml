@@ -143,42 +143,34 @@ widgets:
     - type: text
       text: (player1|score)
       style: text_player_score, pos_player_1, num
-    # - widget: player_score_bg
   mp_score_widget_player_2:
     - type: text
       text: (player2|score)
       style: text_player_score, pos_player_2, num
-    # - widget: player_score_bg
   mp_score_widget_player_3:
     - type: text
       text: (player3|score)
       style: text_player_score, pos_player_3, num
-    # - widget: player_score_bg
   mp_score_widget_player_4:
     - type: text
       text: (player4|score)
       style: text_player_score, pos_player_4, num
-    # - widget: player_score_bg
   mp_name_widget_player_1:
     - type: text
       text: (machine|current_career_player_1)
       style: text_player_name, pos_player_1
-    # - widget: player_name_bg
   mp_name_widget_player_2:
     - type: text
       text: (machine|current_career_player_2)
       style: text_player_name, pos_player_2
-    # - widget: player_name_bg
   mp_name_widget_player_3:
     - type: text
       text: (machine|current_career_player_3)
       style: text_player_name, pos_player_3
-    # - widget: player_name_bg
   mp_name_widget_player_4:
     - type: text
       text: (machine|current_career_player_4)
       style: text_player_name, pos_player_4
-    # - widget: player_name_bg
 
 sound_player:
   player_added{num==1}: gui_splashstart

@@ -51,7 +51,7 @@ counters:
     starting_count: 4
     count_complete_value: 0
     persist_state: true
-    count_events: kasumi_shots_unalarmed_hit
+    count_events: kasumi_shots_lit_hit
     events_when_hit:
       - logicblock_kasumi_shots_counter_hit
       - mission_shot_hit
@@ -63,7 +63,7 @@ counters:
   kasumi_alarms_counter:
     starting_count: 3
     count_complete_value: 0
-    count_events: kasumi_shots_alarmed_hit
+    count_events: kasumi_shots_off_hit
     reset_events: mode_recruitkasumi_started
     events_when_complete: stop_recruitmission
     persist_state: false
@@ -77,9 +77,9 @@ shot_profiles:
   alarmed_shot_profile:
     show_when_disabled: false
     states:
-      - name: unalarmed
+      - name: lit
         show: unalarmed_show
-      - name: alarmed
+      - name: off
         show: alarmed_show
         sync_ms: 700
 
@@ -90,35 +90,35 @@ shots:
     advance_events: set_alarm_left_orbit
     show_tokens:
       led: l_left_orbit_arrow_red
-    tags: alarmshot, envshot_left_orbit
+    tags: alarmshot, envshot_left_orbit, power_target, power_target_left_orbit
   kasumi_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: alarmed_shot_profile
-    advance_events: set_alarm_left_ramp, mode_recruitkasumi_started # Starting shot
+    advance_events: set_alarm_left_ramp, mode_recruitkasumi_started  # Starting shot
     show_tokens:
       led: l_left_ramp_arrow_red
-    tags: alarmshot, envshot_left_ramp
+    tags: alarmshot, envshot_left_ramp, power_target, power_target_left_ramp
   kasumi_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_orbit
     show_tokens:
       led: l_right_orbit_arrow_red
-    tags: alarmshot, envshot_right_orbit
+    tags: alarmshot, envshot_right_orbit, power_target, power_target_right_orbit
   kasumi_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_ramp
     show_tokens:
       led: l_right_ramp_arrow_red
-    tags: alarmshot, envshot_right_ramp
+    tags: alarmshot, envshot_right_ramp, power_target, power_target_right_ramp
   kasumi_kickback:
     hit_events: sh_kickback_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_kickback
     show_tokens:
       led: l_kickback_arrow_red
-    tags: alarmshot, envshot_kickback
+    tags: alarmshot, envshot_kickback, power_target, power_target_kickback
 
 show_player:
   mode_recruitkasumi_started:

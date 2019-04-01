@@ -14,7 +14,7 @@
 #####
 
 mode:
-  start_events: start_mode_powers, mode_base_started  # for testing
+  start_events: start_mode_powers
   stop_events: stop_mode_powers, stop_missions, mode_type_mission_stopped
   priority: 800
   code: powers.Powers
@@ -141,27 +141,27 @@ shots:
     switches: s_target1
     profile: singularity
     enable_events: enable_singularity_left_orbit
-    disable_events: singularity_left_orbit_hit, power_activation_complete
+    disable_events: singularity_left_orbit_hit, sw_power_target_left_orbit_active, power_activation_complete
   singularity_kickback:
     switches: s_target2
     profile: singularity
     enable_events: enable_singularity_kickback
-    disable_events: singularity_kicback_hit, power_activation_complete
+    disable_events: singularity_kickback_hit, sw_power_target_kickback_active, power_activation_complete
   singularity_left_ramp:
     switches: s_target3
     profile: singularity
     enable_events: enable_singularity_left_ramp
-    disable_events: singularity_left_ramp_hit, power_activation_complete
+    disable_events: singularity_left_ramp_hit, sw_power_target_left_ramp_active, power_activation_complete
   singularity_right_ramp:
     switches: s_target4
     profile: singularity
     enable_events: enable_singularity_right_ramp
-    disable_events: singularity_right_ramp_hit, power_activation_complete
+    disable_events: singularity_right_ramp_hit, sw_power_target_right_ramp_active, power_activation_complete
   singularity_right_orbit:
     switches: s_target5
     profile: singularity
     enable_events: enable_singularity_right_orbit
-    disable_events: singularity_right_orbit_hit, power_activation_complete
+    disable_events: singularity_right_orbit_hit, sw_power_target_right_orbit_active, power_activation_complete
 
 shot_profiles:
   combat_powers:
@@ -231,6 +231,12 @@ slides:
       style: header_md, row_main, col_left_indent
 
 widget_player:
+  mode_powers_will_stop:
+    power_available_widget:
+      action: remove
+  power_activation_complete:
+    power_available_widget:
+      action: remove
   logicblock_powers_cooldown_hit:
     power_cooldown_widget:
       action: update

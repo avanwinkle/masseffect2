@@ -121,13 +121,6 @@ slide_player:
       action: play
       expire: 2s
       priority: 620
-  timer_planet_slide_timer_started:
-    minerals_slide:
-      action: play
-      priority: 610
-  timer_planet_slide_timer_complete:
-    minerals_slide:
-      action: remove
 
 timers:
   planet_slide_timer:
@@ -138,66 +131,8 @@ timers:
       - event: mineral_shots_hit
         action: restart
 
-widget_player:
-  mineral_shot_iridium_hit:
-    mineral_highlight:
-      action: update
-      key: mineral_highlight_iridium
-      slide: minerals_slide
-      priority: 1
-      widget_settings:
-        expire: 200ms
-        style: mineral_highlight_pos_iridium
-  mineral_shot_palladium_hit:
-    mineral_highlight:
-      action: update
-      key: mineral_highlight_palladium
-      slide: minerals_slide
-      priority: 2
-      widget_settings:
-        expire: 200ms
-        style: mineral_highlight_pos_palladium
-  mineral_shot_platinum_hit:
-    mineral_highlight:
-      action: update
-      key: mineral_highlight_platinum
-      slide: minerals_slide
-      priority: 3
-      widget_settings:
-        expire: 200ms
-        style: mineral_highlight_pos_platinum
-  logicblock_n7_hits_counter_hit:
-    n7_progress_widget:
-      action: update
-      slide: minerals_slide
-      widget_settings:
-        expire: 2s
-  logicblock_iff_counter_hit:
-    reaperiff_progress_widget:
-      action: update
-      slide: minerals_slide
-      widget_settings:
-        expire: 2s
-
 widgets:
-  n7_progress_widget:
-    - type: text
-      text: "N7 assignment in (count)"
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
-      anchor_y: bottom
-      anchor_x: left
-      y: 1
-      x: 2
-      z: 3
-  reaperiff_progress_widget:
-    - type: text
-      text: "IFF ready in (count)"
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
-      anchor_y: bottom
-      anchor_x: left
-      y: 1
-      x: 2
-      z: 3
+  
   planet_widget_1:
     - type: image
       image: Aequitas
