@@ -107,6 +107,7 @@ modes:
   - createprofile
   - global
   - field
+  - instantinfo
   - mainmenu
   - missionselect
   - modeanalysis

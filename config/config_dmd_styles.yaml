@@ -140,6 +140,10 @@ widget_styles:
     anchor_y: bottom
     valign: bottom
     y: 12
+  row_main_under:
+    anchor_y: top
+    valign: top
+    y: 22
   row_main_dmd_high:
     anchor_y: bottom
     valign: bottom

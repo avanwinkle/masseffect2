@@ -123,6 +123,9 @@ widget_styles:
   row_main:
     anchor_y: bottom
     y: 44%
+  row_main_under:
+    anchor_y: top
+    y: 54.7%
   row_sub:
     anchor_y: bottom
     y: 31%

@@ -1,0 +1,223 @@
+#config_version=5
+
+#####
+# INSTANT INFO
+#
+# - Player career name, level, play time, total balls
+# - SUICIDE: 
+#     * If not Collector Ship, squadmates until unlocked
+#     * If not Derelict Reaper, levels until unlocked
+# - Multiball info (Overlord or Arrival)
+# - Shadowbroker info
+# - N7 Assignments info
+
+mode:
+  start_events: start_mode_instantinfo
+  stop_events: stop_mode_instantinfo
+  code: instantinfo.InstantInfo
+  priority: 9000
+
+event_player:
+  mode_instantinfo_started: remove_instantinfo_intro|1500ms
+  flipper_cancel:
+    - instantinfo_next{not current_player.introslide}
+    - remove_instantinfo_intro{current_player.introslide}
+  
+  instantinfo_player_highlighted:
+    play_instantinfo_mission_slide{current_player.casual}:
+      mission_title:
+        value: "Arcade Player"
+        type: str
+      mission_text: "Balls played: (player|balls_played)"
+    play_instantinfo_mission_slide{not current_player.casual}:
+      mission_title: (player|career_name)
+      mission_text: "Balls played: (player|balls_played)\nLevel: (level) ((xp) XP)"
+  # EVENTS for RECRUITMENT MISSIONS : Max 27 chars per line (on DMD)
+  instantinfo_recruitgarrus_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Garrus
+      mission_text: "Hit 3 shots to light ramp.\nHit ramp to complete.\nProgress partially saved."
+  instantinfo_recruitgrunt_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Grunt
+      mission_text: "Hit each shot to complete.\nTimer restarts after a hit.\nProgress is saved."
+  instantinfo_recruitjack_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Jack
+      mission_text: "Hit a lane to light bank.\nHit bank 3X to complete.\nProgress partially saved."
+  instantinfo_recruitkasumi_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Kasumi
+      mission_text: "Complete all UNLIT shots.\nFailure if 3 lit shots hit.\nProgress is saved."
+  instantinfo_recruitlegion_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Legion
+      mission_text: "Hit lanes to elapse 30s.\nTimer paused if banks lit.\nProgress is saved."
+  instantinfo_recruitmordin_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Mordin
+      mission_text: "Hit orbits to light ramps.\nHit ramps to complete.\nProgress partially saved."
+  instantinfo_recruitsamara_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Samara
+      mission_text: "Hit targets to light lanes.\nHit 5 lanes to complete.\nProgress is saved."
+  instantinfo_recruittali_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Tali
+      mission_text: "Hit ramp 6X to complete.\nCount backsteps after 10s.\nProgress is saved."
+  instantinfo_recruitthane_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Thane
+      mission_text: "Hit ramps to light orbits.\nHit an orbit to complete.\nProgress not saved."
+  instantinfo_recruitzaeed_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Recruit Zaeed
+      mission_text: "Hit orbits to light lane.\nHit lane to complete.\nProgress not saved."
+  # EVENTS for MISSION SLIDES
+  instantinfo_collectorship_disabled_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: the Suicide Mission
+      mission_text: "You have (squadmates_count) squadmates.\nRecruit (squadmates_next) more to unlock\nthe Collector Ship."    
+      squadmates_next:
+        value: 5 - current_player.squadmates_count
+        type: int
+  instantinfo_collectorship_ambush_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Collector Ship: Ambush"
+      mission_text: "Complete lanes to advance.\nEach shot hit adds a ball\n(up to 4)."
+  instantinfo_collectorship_husk_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Collector Ship: Husks"
+      mission_text: "Survive for 20s to advance.\nHit targets to light lanes,\nhit lanes tocollect value."
+  instantinfo_collectorship_praetorian_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Collector Ship: Praetorian"
+      mission_text: "Hit 4X shots to complete.\nTimeout disables a flipper,\nhit a shot to restore."
+  instantinfo_derelictreaper_disabled_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: the Suicide Mission
+      mission_text: "You are at level (level).\nReach level 9 to unlock\nthe Derelict Reaper."
+  instantinfo_derelictreaper_enabled_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Derelict Reaper"
+      mission_text: "Hit lanes to light jackpot\nbefore timeout. Hit bank\nto restart timer."
+  instantinfo_normandyattack_highlight:
+    play_instantinfo_mission_slide:
+      mission_title: the Suicide Mission
+      mission_text: "Complete pop bumpers to\nactivate the Reaper IFF."
+  instantinfo_suicide_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: the Suicide Mission
+      mission_text: "Use the left ramp to open\nMission Select and launch\nthe Suicide Mission"
+  # EVENTS for SHADOW BROKER
+  instantinfo_shadowbroker_start_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets for\nIntel: gather (intel_remaining) more to\nstart Shadow broker modes."
+      intel_remaining:
+        value: 3 - current_player.intel
+        type: int
+  instantinfo_shadowbroker_chase_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets\nto pursue Vasir.\nProgress is saved."
+  instantinfo_shadowbroker_vasir_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets to\nlight Vasir, then hit inner\nlane to restart mission."
+  instantinfo_shadowbroker_pre_hagalaz_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets for\nIntel: collect (intel_remaining) more to\nface the Shadow broker."
+      intel_remaining:
+        value: 6 - current_player.intel
+        type: int
+  instantinfo_shadowbroker_hagalaz_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets to\nboard Shadow Brokers ship.\nProgress is not saved."
+  instantinfo_shadowbroker_boss_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Complete drop targets to\nlight final confrontation,\nthen inner lane to start."
+  instantinfo_shadowbroker_complete_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Shadow Broker defeated!\nComplete drop targets to\ncontinue gathering Intel."
+  # EVENTS for MULTIBALLS ETC
+  instantinfo_overlord_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Project Overlord
+      mission_text: "Green lanes to light bank,\nbank to collect. Hits req'd\nincreases each time."
+  instantinfo_arrival_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Arrival
+      mission_text: "Survive the countdown to\nlight the escape shot.\nEscape before destruction."
+  # POWERS
+  instantinfo_powers_none_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Unlockable Powers
+      mission_text: "Hit bumpers during missions\nto enable a power. Hold\nflippers 3s to activate."
+  instantinfo_powers_adrenaline_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Adrenaline Rush"
+      mission_text: "Pauses mission timer for\n10 seconds.\nHold flippers to activate."
+  instantinfo_powers_armor_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Tech Armor"
+      mission_text: "Enables a ball save for\n5 seconds.\nHold flippers to activate."
+  instantinfo_powers_charge_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Biotic Charge"
+      mission_text: "Hits a lit shot at random.\n\nHold flippers to activate."
+  instantinfo_powers_cloak_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Tactical Cloak"
+      mission_text: "Tap both flippers to rotate\nlit lanes. Active for 10s.\nHold flippers to activate."
+  instantinfo_powers_drone_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Combat Drone"
+      mission_text: "Add a ball to any mission.\n\nHold flippers to activate."
+  instantinfo_powers_singularity_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: "Power: Singularity"
+      mission_text: "Target hits count as lane\nhits. Active for 10s.\nHold flippers to activate."
+  
+variable_player:
+  mode_instantinfo_started:
+    introslide:
+      action: set
+      int: 1
+  remove_instantinfo_intro:
+    introslide:
+      action: set
+      int: 0
+
+mode_settings:
+  selectable_items: intro
+  next_item_events: instantinfo_next
+  previous_item_events: instantinfo_prev
+
+slide_player:
+  mode_instantinfo_started:
+    instantinfo_intro:
+      action: play
+      priority: 10
+  remove_instantinfo_intro:
+    instantinfo_intro:
+      action: remove
+  play_instantinfo_mission_slide: instantinfo_missionslide
+
+slides:
+  instantinfo_intro:
+    - type: text
+      text: Instant Info
+      style: header_md, row_main
+  instantinfo_missionslide:
+    - type: text
+      text: (mission_title)
+      style: header_xs, mission_title, row_top, col_left_anchor
+    - type: text
+      text: (mission_text)
+      style: body_md, row_main_under, col_left_anchor
+      halign: left
