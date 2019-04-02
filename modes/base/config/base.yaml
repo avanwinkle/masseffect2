@@ -89,6 +89,10 @@ event_player:
   # Mission resume events need to be here because base is how we enable the shot
   player_shot_missionresume_shot_enabled{value==False}:
     - disable_missionresume
+  flipper_cradle:
+    - start_mode_instantinfo
+  flipper_cradle_release:
+    - stop_mode_instantinfo
   # Defer the awarding of points to avoid a blip in the slide.
   # Do this in base so starting missionselect won't miss it
   recruit_advance: defer_recruit_advance_score|1s
