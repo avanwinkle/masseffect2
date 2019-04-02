@@ -7,7 +7,7 @@ SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dr
 POWER_NAMES = {
     "adrenaline": "Adrenaline Rush"
 }
-TEST_POWER = "cloak"
+TEST_POWER = None
 
 def filter_enabled_shots(x):
     return x.enabled

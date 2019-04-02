@@ -334,4 +334,36 @@ widgets:
       text: "Power cooldown in (count)"
       style: header_sm, row_top, row_dmd_bottom, col_left_indent
 
+sound_player:
+  power_activation_failure{power=="charge" or power=="cloak"}: shepard_power_failure_target
+  power_activation_failure{power!="charge" and power!="cloak"}: shepard_power_failure_general
 
+sound_pools:
+  shepard_power_failure_general:
+    sounds: shepard_need_a_second, shepard_not_ready_yet, shepard_cant_do_it_yet
+    track: voice
+  shepard_power_failure_target:
+    sounds: shepard_cant_reach_target, shepard_cant_target_them, shepard_cant_get_a_lock
+    track: voice
+
+sounds:
+  shepard_cant_reach_target:
+    file: en_us_player_f_ss_global_player_female_00333954_f.ogg
+  shepard_cant_get_a_lock:
+    file: en_us_player_f_ss_global_player_female_00333957_f.ogg
+  shepard_cant_target_them:
+    file: en_us_player_f_ss_global_player_female_00333954_f.ogg
+  shepard_cant_do_it_yet:
+    file: en_us_player_f_ss_global_player_female_00334010_f.ogg
+  shepard_need_a_second:
+    file: en_us_player_f_ss_global_player_female_00334012_f.ogg
+  shepard_not_ready_yet:
+    file: en_us_player_f_ss_global_player_female_00334014_f.ogg
+  shepard_locked_on:
+    file: en_us_player_f_ss_global_player_female_00288362_f.ogg
+  shepard_attack_long_1:
+    file: en_us_player_f_ss_global_player_female_00333967_f.ogg
+  shepard_attack_long_2:
+    file: en_us_player_f_ss_global_player_female_00333968_f.ogg
+  shepard_attack_long_3:
+    file: en_us_player_f_ss_global_player_female_00333969_f.ogg
