@@ -201,7 +201,11 @@ shots:
     switches: s_target1
     hit_events: sh_left_orbit_hit
     advance_events: heretic_shot_left_orbit_advance
-    disable_events: heretic_shot_left_orbit_hit, heretic_shot_left_orbit_timeout, recruit_legion_precomplete
+    disable_events: 
+      - mode_recruitlegion_started 
+      - heretic_shot_left_orbit_hit
+      - heretic_shot_left_orbit_timeout
+      - recruit_legion_precomplete
     restart_events: enable_heretic_shot_left_orbit
     profile: heretic_profile
     show_tokens:
@@ -213,7 +217,11 @@ shots:
     switches: s_target1
     hit_events: sh_kickback_hit
     advance_events: heretic_shot_kickback_advance
-    disable_events: heretic_shot_kickback_hit, heretic_shot_kickback_timeout, recruit_legion_precomplete
+    disable_events: 
+      - mode_recruitlegion_started 
+      - heretic_shot_kickback_hit
+      - heretic_shot_kickback_timeout
+      - recruit_legion_precomplete
     restart_events: enable_heretic_shot_kickback
     profile: heretic_profile
     show_tokens:
@@ -225,7 +233,11 @@ shots:
     switches: s_target1
     hit_events: sh_left_ramp_hit
     advance_events: heretic_shot_left_ramp_advance
-    disable_events: heretic_shot_left_ramp_hit, heretic_shot_left_ramp_timeout, recruit_legion_precomplete
+    disable_events: 
+      - mode_recruitlegion_started 
+      - heretic_shot_left_ramp_hit
+      - heretic_shot_left_ramp_timeout
+      - recruit_legion_precomplete
     restart_events: enable_heretic_shot_left_ramp
     profile: heretic_profile
     show_tokens:
@@ -237,7 +249,11 @@ shots:
     switches: s_target5
     hit_events: sh_right_ramp_hit
     advance_events: heretic_shot_right_ramp_advance
-    disable_events: heretic_shot_right_ramp_hit, heretic_shot_right_ramp_timeout, recruit_legion_precomplete
+    disable_events: 
+      - mode_recruitlegion_started 
+      - heretic_shot_right_ramp_hit
+      - heretic_shot_right_ramp_timeout
+      - recruit_legion_precomplete
     restart_events: enable_heretic_shot_right_ramp
     profile: heretic_profile
     show_tokens:
@@ -249,7 +265,11 @@ shots:
     switches: s_target5
     hit_events: sh_right_orbit_hit
     advance_events: heretic_shot_right_orbit_advance
-    disable_events: heretic_shot_right_orbit_hit, heretic_shot_right_orbit_timeout, recruit_legion_precomplete
+    disable_events: 
+      - mode_recruitlegion_started 
+      - heretic_shot_right_orbit_hit
+      - heretic_shot_right_orbit_timeout
+      - recruit_legion_precomplete
     restart_events: enable_heretic_shot_right_orbit
     profile: heretic_profile
     show_tokens:
@@ -279,12 +299,45 @@ show_player:
       loops: 0
       show_tokens:
         shot: left_orbit
+  heretic_shot_left_orbit_hit:
+    heretic_shot_left_orbit_shot:
+      action: stop
+  enable_heretic_shot_kickback:
+    heretic_shot_show:
+      key: heretic_shot_kickback_show
+      loops: 0
+      show_tokens:
+        shot: kickback
+  heretic_shot_kickback_hit:
+    heretic_show_kickback_show:
+      action: stop
+  enable_heretic_shot_left_ramp:
+    heretic_shot_show:
+      key: heretic_shot_left_ramp_show
+      loops: 0
+      show_tokens:
+        shot: left_ramp
+  heretic_shot_left_ramp_hit:
+    heretic_show_left_ramp_show:
+      action: stop
+  enable_heretic_shot_right_ramp:
+    heretic_shot_show:
+      key: heretic_shot_right_ramp_show
+      loops: 0
+      show_tokens:
+        shot: right_ramp
+  heretic_shot_right_ramp_hit:
+    heretic_show_right_ramp_show:
+      action: stop
   enable_heretic_shot_right_orbit:
     heretic_shot_show:
       key: heretic_shot_right_orbit_show
       loops: 0
       show_tokens:
         shot: right_orbit
+  heretic_shot_right_orbit_hit:
+    heretic_show_right_orbit_show:
+      action: stop
 
 shows:
   heretic_shot_show:

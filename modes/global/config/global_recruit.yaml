@@ -137,14 +137,15 @@ sound_player:
   recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
-  timer_missiontimer_complete: shep_cant_reach_target
+  # TODO: Find better sounds, or learn to share with powers
+#  timer_missiontimer_complete: shep_cant_reach_target
   recruit_failure_kasumi: kasumi_failed
   recruit_failure_tali: tali_failed
   recruit_failure_mordin: mordin_failed
   # TODO: replace these with squadmate dialogue
-  recruit_failure_garrus: shep_cant_reach_target
-  recruit_failure_grunt: shep_cant_reach_target
-  recruit_failure_jack: shep_cant_reach_target
+  # recruit_failure_garrus: shep_cant_reach_target
+  # recruit_failure_grunt: shep_cant_reach_target
+  # recruit_failure_jack: shep_cant_reach_target
 
 
 track_player:
@@ -203,10 +204,6 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
     max_queue_time: 1s
-  shep_cant_reach_target:
-    type: random_force_all
-    track: voice
-    sounds: shep_cant_reach_target_1, shep_cant_reach_target_2, shep_cant_reach_target_3
   kasumi_failed:
     type: random_force_all
     track: voice
@@ -551,15 +548,6 @@ sounds:
       attack: 100ms
       release: 300ms
       release_point: 500ms
-  shep_cant_reach_target_1:
-    file: en_us_player_f_ss_global_player_female_00333954_f.ogg
-    track: voice
-  shep_cant_reach_target_2:
-    file: en_us_player_f_ss_global_player_female_00333957_f.ogg
-    track: voice
-  shep_cant_reach_target_3:
-    file: en_us_player_f_ss_global_player_female_00333959_f.ogg
-    track: voice
   kasumi_damn_it:
     file: DLC_HEN_MT_Int.173.ogg
     track: voice

@@ -229,7 +229,7 @@ player_vars:
     initial_value: 1
   planets:
     initial_value: 0
-  power_active:
+  power:
     initial_value: " "
     value_type: str
   medigel:

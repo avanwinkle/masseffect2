@@ -320,7 +320,7 @@ class SoundManager():
       videocount = self.copy_video_assets(export=False)
       self._analysis = None
       self.log.info("\nMachine copy and cleanup complete! {} audiofile{} and {} video file{} changed.".format(
-        files_changed or "No", "" if files_changed == 1 else "s", videocount or "No", "" if videocount == 1 else "s"))
+        files_changed or "No", "" if files_changed == 1 else "s", videocount or "no", "" if videocount == 1 else "s"))
     else:
       self.log.info("\nSimulation complete, no files changed.")
 
