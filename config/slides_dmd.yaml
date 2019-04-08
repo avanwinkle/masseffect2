@@ -155,7 +155,7 @@ widgets:
     - type: rectangle
       color: 666666
       width: 0
-      height: 6
+      height: 5
       anchor_x: left
       x: 0
       anchor_y: bottom
