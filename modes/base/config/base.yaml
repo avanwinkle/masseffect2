@@ -158,6 +158,7 @@ variable_player:
     score: 500
   levelup:
     level: 1
+    earned_level: 1
     # Reset the ship upgrade every levelup. Once missed, gone forever!
     shipupgrade_available:
       action: set
@@ -167,7 +168,7 @@ variable_player:
     available_shipupgrades: 1
   # Track the squadmates recruited _this game_, not ones imported from saves
   player_squadmates_count{player_num==current_player and change==1}:
-    recruited_squadmates_count: 1
+    earned_squadmates_count: 1
   # Use achievements to track available missions
   achievement_collectorship_state_enabled:
     available_missions: 1

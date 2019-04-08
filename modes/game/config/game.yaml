@@ -299,3 +299,12 @@ sounds:
   tali_ready_to_help:
     file: en_us_hench_tali_ss_global_hench_tali_00314434_m.ogg # "Ready to help"
     track: voice
+  shep_i_should_go_1:
+    file: en_us_player_f_krohub_merchant_d_00193498_f.ogg
+    track: voice
+  shep_ill_just_be_going:
+    file: en_us_player_f_omghub_gavorn_d_00271276_f.ogg
+    track: voice
+  shep_i_should_be_going:
+    file: en_us_player_f_cithub_info_giver_d_00248676_f.ogg
+    track: voice

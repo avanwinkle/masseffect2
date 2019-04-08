@@ -46,6 +46,7 @@ event_player:
 variable_player:
   drop_target_bank_dropbank_down:
     intel: 1
+    earned_intel: 1
   # Track the value of this counter as a player variable (for saved careers)
   logicblock_sbdrops_counter_hit:
     counter_sbdrops_counter:

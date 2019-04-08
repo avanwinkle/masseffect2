@@ -75,6 +75,7 @@ random_event_player:
 variable_player:
   n7_assignment_shot_hit:
     assignments_completed: 1
+    earned_assignments_completed: 1
     xp: machine.assignment_xp
 
 shot_groups:

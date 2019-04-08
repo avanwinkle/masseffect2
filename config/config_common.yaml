@@ -219,6 +219,16 @@ player_vars:
     value_type: str
   credits:
     initial_value: 0
+  # some values are tracked through a career but only get bonus for
+  # what's "earned" during the game
+  earned_assignments_completed:
+    initial_value: 0
+  earned_intel:
+    initial_value: 0
+  earned_level:
+    initial_value: 0
+  earned_squadmates_count:
+    initial_value: 0
   geth_colossus_state:
     initial_value: 6
   harbinger_multiplier:
@@ -228,8 +238,6 @@ player_vars:
   intel:
     initial_value: 0
   level:
-    initial_value: 1
-  saved_level:
     initial_value: 1
   planets:
     initial_value: 0
@@ -271,9 +279,6 @@ player_vars:
     value_type: str
   squadmates_count:
     initial_value: 2
-  # squadmates_count is saved, recruited_squadmates_count resets each game
-  recruited_squadmates_count:
-    initial_value: 0
   status_garrus:
     initial_value: 0
   status_grunt:
