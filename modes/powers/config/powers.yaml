@@ -300,24 +300,24 @@ widget_player:
       key: power_widget_tech
       action: update
       slide: powers_slide
+      priority: 8
       widget_settings:
-        priority: 8
         style: power_tech, body_sm
   player_shot_cooldown_shot_tech{value==1}:
     power_widget_armor:
       key: power_widget_tech
       action: update
       slide: powers_slide
+      priority: 7
       widget_settings:
-        priority: 7
         style: power_tech, body_sm
   player_shot_cooldown_shot_tech{value==3}:
     power_widget_cloak:
       key: power_widget_tech
       action: update
       slide: powers_slide
+      priority: 9
       widget_settings:
-        priority: 9
         style: power_tech, body_sm
   timer_activate_power_started:
     power_activating_countdown_widget:

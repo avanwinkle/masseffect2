@@ -1,144 +1,164 @@
+"""Custom mode and Shot objects for managing environment sounds."""
+
 import logging
 from mpf.core.mode import Mode
 
-SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_entrance", "right_ramp", "right_ramp_entrance", "right_orbit", "right_orbit_nofull", "standuptarget", "return_lane", "dropbank", "hitbank", "tenpoints"]
+SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_entrance",
+         "right_ramp", "right_ramp_entrance", "right_orbit", "right_orbit_nofull",
+         "standuptarget", "return_lane", "dropbank", "hitbank", "tenpoints"]
+
 
 class Environment(Mode):
-  def __init__(self, machine, config, name, path):
-    super().__init__(machine, config, name, path)
-    self.log = logging.getLogger("Environment")
-    self.log.setLevel("DEBUG")
-    self._environment = None
-    self._removal_handlers = None
+    """Mode code for creating handlers to set/unset environment shots."""
 
-  def mode_start(self, **kwargs):
-    super().mode_start(**kwargs)
-    self.shots = [EnvShot(self.machine, self, shot, self.log) for shot in SHOTS]
-    self.shots.append(OutlaneShot(self.machine, self, "outlane", self.log))
-    self._register_handlers()
+    def __init__(self, machine, config, name, path):
+        """Initialize mode, create logger, set environment."""
+        super().__init__(machine, config, name, path)
+        self.log = logging.getLogger("Environment")
+        self.log.setLevel("DEBUG")
+        self._environment = None
+        self._removal_handlers = None
 
-  def _set_environment(self, **kwargs):
-    self.log.debug("Setting environment with kwargs: {}".format(kwargs))
-    for shot in self.shots:
-      shot.reset()
+    def mode_start(self, **kwargs):
+        """Mode start: create shots and register handlers."""
+        super().mode_start(**kwargs)
+        self.shots = [EnvShot(self.machine, self, shot, self.log) for shot in SHOTS]
+        self.shots.append(OutlaneShot(self.machine, self, "outlane", self.log))
+        self._register_handlers()
 
-    # If the environment is changing
-    env = kwargs.get("env")
-    if env != self._environment:
-      # Stop the previous environment mode
-      self._clear_environment()
-      # Start a new environment mode
-      if env:
-        self.machine.events.post("start_mode_env_{}".format(env))
-        if kwargs.get("stop_events"):
-          stop_events = kwargs.get("stop_events")
-          if isinstance(stop_events, str):
-            stop_events = stop_events.split(r", ?")
-          self._removal_handlers = [self.add_mode_event_handler(event, self._clear_environment) for event in stop_events]
+    def _set_environment(self, **kwargs):
+        self.log.debug("Setting environment with kwargs: {}".format(kwargs))
+        for shot in self.shots:
+            shot.reset()
 
-      self._environment = env
-      self.log.debug("Environment is now {}, removal handlers are: {}".format(self._environment, self._removal_handlers))
+        # If the environment is changing
+        env = kwargs.get("env")
+        if env != self._environment:
+            # Stop the previous environment mode
+            self._clear_environment()
+            # Start a new environment mode
+            if env:
+                self.machine.events.post("start_mode_env_{}".format(env))
+                if kwargs.get("stop_events"):
+                    stop_events = kwargs.get("stop_events")
+                    if isinstance(stop_events, str):
+                        stop_events = stop_events.split(r", ?")
+                    self._removal_handlers = [
+                        self.add_mode_event_handler(event, self._clear_environment) for event in stop_events
+                    ]
 
-  def _register_handlers(self):
-    self.add_mode_event_handler('set_environment', self._set_environment)
+            self._environment = env
+            self.log.debug("Environment is now {}".format(self._environment))
 
-  def _clear_environment(self, **kwargs):
-    if self._environment:
-      self.machine.events.post("stop_mode_env_{}".format(self._environment))
-    if self._removal_handlers:
-      self.machine.events.remove_handlers_by_keys(self._removal_handlers)
-      self._removal_handlers = None
-    self._environment = None
-    self.log.debug("Environment cleared and removal handlers removed.")
+    def _register_handlers(self):
+        self.add_mode_event_handler('set_environment', self._set_environment)
+
+    def _clear_environment(self, **kwargs):
+        if self._environment:
+            self.machine.events.post("stop_mode_env_{}".format(self._environment))
+        if self._removal_handlers:
+            self.machine.events.remove_handlers_by_keys(self._removal_handlers)
+            self._removal_handlers = None
+        self._environment = None
+        self.log.debug("Environment cleared and removal handlers removed.")
+
 
 class EnvShot(object):
+    """Object wrapper for a shot in the current mode defined as an environment shot."""
 
-  # Two events: a change in the enabled state and a change in the profile state
-  target_statechange_events = ["player_shot_{}_enabled", "player_shot_{}"]
+    # Two events: a change in the enabled state and a change in the profile state
+    target_statechange_events = ["player_shot_{}_enabled", "player_shot_{}"]
 
-  def __init__(self, machine, mode, tag, log):
-    self.machine = machine
-    self.mode = mode
-    self.name = tag
-    self.log = log
-    self._event_handlers = []
+    def __init__(self, machine, mode, tag, log):
+        """Initialize a shot object for a given environment shot."""
+        self.machine = machine
+        self.mode = mode
+        self.name = tag
+        self.log = log
+        self._event_handlers = []
 
-    try:
-      self._shot = self.machine.device_manager.collections["shots"]["envshot_{}".format(self.name)]
-      self._shot.disable() # Disable by default, for safety
-      # self.mode.add_mode_event_handler('s_{}{}_inactive'.format(
-      #   self.name, "_exit" if self.name.endswith("_ramp") else ""), self.check_shot)
-    except KeyError as e:
-      self.log.error("Missing environment shot for {}".format(e))
-      raise
+        try:
+            self._shot = self.machine.device_manager.collections["shots"]["envshot_{}".format(self.name)]
+            self._shot.disable()  # Disable by default, for safety
+            # self.mode.add_mode_event_handler('s_{}{}_inactive'.format(
+            #   self.name, "_exit" if self.name.endswith("_ramp") else ""), self.check_shot)
+        except KeyError as e:
+            self.log.error("Missing environment shot for {}".format(e))
+            raise
 
-  def reset(self):
-    do_enable = True
-    # Remove any old handlers
-    for handler in self._event_handlers:
-      self.machine.events.remove_handler_by_key(handler)
-    self._event_handlers = []
+    def reset(self):
+        """Remove old handlers from this shot and find new tagged shots to add handlers for."""
+        do_enable = True
+        # Remove any old handlers
+        for handler in self._event_handlers:
+            self.machine.events.remove_handler_by_key(handler)
+        self._event_handlers = []
 
-    for target in self.get_targets():
-      # Attach handlers for if this target changes state
-      for evt in self.target_statechange_events:
-        self._event_handlers.append(
-          self.mode.add_mode_event_handler(evt.format(target.name), self.check_shot))
-      # If it's already enabled? This envshot is disabled
-      if target.enabled:
-        do_enable = False
+        for target in self.get_targets():
+            # Attach handlers for if this target changes state
+            for evt in self.target_statechange_events:
+                self._event_handlers.append(
+                    self.mode.add_mode_event_handler(evt.format(target.name), self._check_shot))
+            # If it's already enabled? This envshot is disabled
+            if target.enabled:
+                do_enable = False
 
-    if do_enable:
-      self._enable()
-    else:
-      self._disable()
+        if do_enable:
+            self._enable()
+        else:
+            self._disable()
 
-  def check_shot(self, **kwargs):
-    """Check if any shots tagged 'envshot_(name)' are enabled; disable this envshot if true, enable if false"""
-    if bool(self.enabled_count):
-        self._disable()
-    else:
-      self._enable()
-    self.log.debug("Just checked {}, {} targets are enabled so this is now {}".format(
-      self.name, self.enabled_count, self._shot.enabled))
+    def _check_shot(self, **kwargs):
+        """Check if any shots tagged 'envshot_(name)' are enabled; disable this envshot if true, enable if false."""
+        if bool(self.enabled_count):
+                self._disable()
+        else:
+            self._enable()
+        self.log.debug("Just checked {}, {} targets are enabled so this is now {}".format(
+            self.name, self.enabled_count, self._shot.enabled))
 
-  def _enable(self):
-    if self._shot.enabled:
-      self.log.debug("Envshot {} is already enabled!".format(self.name))
-      return
-    self.log.debug("Enabling envshot {}".format(self.name))
-    self._shot.enable()
+    def _enable(self):
+        if self._shot.enabled:
+            self.log.debug("Envshot {} is already enabled!".format(self.name))
+            return
+        self.log.debug("Enabling envshot {}".format(self.name))
+        self._shot.enable()
 
-  def _disable(self):
-    if not self._shot.enabled:
-      self.log.debug("Envshot {} is already disabled!".format(self.name))
-      return
-    self.log.debug("Disabling envshot {}".format(self.name))
-    self._shot.disable()
+    def _disable(self):
+        if not self._shot.enabled:
+            self.log.debug("Envshot {} is already disabled!".format(self.name))
+            return
+        self.log.debug("Disabling envshot {}".format(self.name))
+        self._shot.disable()
 
-  def get_enabled_shots(self):
-    # Return a list of shots tagged with this env_shot name that are enabled and not "off" state
-    return list(filter(lambda x: x.enabled and x.state_name != "off", self.get_targets()))
+    def get_enabled_shots(self):
+        """Return a list of shots tagged with this env_shot name that are enabled and not "off" state."""
+        return list(filter(lambda x: x.enabled and x.state_name != "off", self.get_targets()))
 
-  def get_targets(self):
-    self.machine.log.info("Getting shots for EnvShot '{}'".format(self.name))
-    return self.machine.device_manager.collections["shots"].items_tagged("envshot_{}".format(self.name))
+    def get_targets(self):
+        """Return all shots tagged as environment shots for this EnvShot."""
+        self.machine.log.info("Getting shots for EnvShot '{}'".format(self.name))
+        return self.machine.device_manager.collections["shots"].items_tagged("envshot_{}".format(self.name))
 
-  @property
-  def enabled_count(self):
-    return len(self.get_enabled_shots())
+    @property
+    def enabled_count(self):
+        """Return the number of shots tagged with this env_shot name that are currently lit."""
+        return len(self.get_enabled_shots())
+
 
 class OutlaneShot(EnvShot):
+    """Specific EnvShot class for an outlane, with ball-save behavior."""
 
-  target_statechange_events = ["ball_save_{}_enabled", "ball_save_{}_disabled"]
+    target_statechange_events = ["ball_save_{}_enabled", "ball_save_{}_disabled"]
 
-  def get_enabled_shots(self):
-    # Return a list of ball_saves that are enabled
-    return list(filter(lambda x: x.enabled, self.get_targets()))
+    def get_enabled_shots(self):
+        """Return a list of ball_saves that are enabled."""
+        return list(filter(lambda x: x.enabled, self.get_targets()))
 
-  def get_targets(self):
-    self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
-    # Targets include any ball_save being active OR the medigel shot being active
-    outlane_targets = [ self.machine.device_manager.collections["shots"]["medigel_shot"] ]
-    outlane_targets.extend(self.machine.device_manager.collections["ball_saves"].values())
-    return outlane_targets
+    def get_targets(self):
+        """Get outlane targets based on medigel early-saves."""
+        self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
+        # Targets include any ball_save being active OR the medigel shot being active
+        outlane_targets = [self.machine.device_manager.collections["shots"]["medigel_shot"]]
+        outlane_targets.extend(self.machine.device_manager.collections["ball_saves"].values())
+        return outlane_targets
