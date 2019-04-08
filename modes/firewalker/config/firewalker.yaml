@@ -1,0 +1,162 @@
+#config_version=5
+
+#####
+# PROJECT FIREWALKER
+#
+# This is a universal mode that grants multipliers to every shot lane,
+# irrespective of what modes are running or what shots are enabled on
+# the lane.
+#####
+
+mode:
+  start_events: start_mode_firewalker
+  stop_events: stop_mode_firewalker, ball_will_end
+  # code: firewalker.Firewalker
+  priority: 200
+
+mode_settings:
+  combo_multipliers:
+    firewalker:
+      switches: s_left_orbit, s_kickback, s_left_ramp, s_right_ramp, s_right_orbit
+      starting_value: 1.0
+      increment_hit: 0.0
+      increment_previous: 0.0
+      increment_others: 1.0
+      timeout: 10s
+      reset_events: mode_base_started
+
+counters:
+  firewalker:
+    starting_count: 0
+    count_complete_value: 20
+    direction: up
+    count_events: firewalker_shots_4X_hit
+    enable_events: mode_firewalker_started, timer_firewalker_complete
+    disable_events: logicblock_firewalker_hit
+
+timers:
+  firewalker:
+    # Reduce log/event clutter by doing a few big ticks instead of 1s ticks
+    start_value: 3
+    end_value: 0
+    direction: down
+    tick_interval: 5s
+    control_events:
+      # Hitting an off shot doesn't reset the timer, but a lit shot does
+      - event: firewalker_shots_hit{state!="off"}
+        action: restart
+
+shot_groups:
+  firewalker_shots:
+    shots: firewalker_left_orbit, firewalker_kickback, firewalker_left_ramp, firewalker_right_ramp, firewalker_right_orbit
+
+shots:
+  firewalker_left_orbit:
+    switches: s_left_orbit
+    restart_events: s_left_orbit_active, timer_firewalker_complete
+    advance_events: mode_firewalker_started, firewalker_shots_hit
+    profile: firewalker_profile
+    show_tokens:
+      led: light_firewalker_left_orbit
+  firewalker_kickback:
+    switches: s_kickback
+    restart_events: s_kickback_active, timer_firewalker_complete
+    advance_events: mode_firewalker_started, firewalker_shots_hit
+    profile: firewalker_profile
+    show_tokens:
+      led: light_firewalker_kickback
+  firewalker_left_ramp:
+    switches: s_left_ramp_exit
+    restart_events: s_left_ramp_active, timer_firewalker_complete
+    advance_events: mode_firewalker_started, firewalker_shots_hit
+    profile: firewalker_profile
+    show_tokens:
+      led: light_firewalker_left_ramp
+  firewalker_right_ramp:
+    switches: s_right_ramp_exit
+    restart_events: s_right_ramp_active, timer_firewalker_complete
+    advance_events: mode_firewalker_started, firewalker_shots_hit
+    profile: firewalker_profile
+    show_tokens:
+      led: light_firewalker_right_ramp
+  firewalker_right_orbit:
+    switches: s_right_orbit
+    restart_events: s_right_orbit_active, timer_firewalker_complete
+    advance_events: mode_firewalker_started, firewalker_shots_hit
+    profile: firewalker_profile
+    show_tokens:
+      led: light_firewalker_right_orbit
+
+shot_profiles:
+  firewalker_profile:
+    advance_on_hit: false
+    show: firewalker_show
+    states:
+      - name: "off"
+      - name: "1X"
+      - name: "2X"
+      - name: "3X"
+      - name: "4X"
+
+show_player:
+  # The hurryup show plays overtop the lane show to flash any lights that are lit
+  timer_firewalker_tick{value==1}:
+    firewalker_hurryup:
+      action: play
+      priority: 10
+  timer_firewalker_started:
+    firewalker_hurryup:
+      action: stop
+  timer_firewalker_stopped:
+    firewalker_hurryup:
+      action: stop
+
+shows:
+  firewalker_hurryup:
+    - time: 0
+      lights:
+        light_firewalker: 000000
+    - time: '+1'
+      lights:
+        light_firewalker: off
+  firewalker_show:
+    - time: '+1'
+      lights:
+        (led): off
+    - time: '+1'
+      lights:
+        (led): red
+    - time: '+1'
+      lights:
+        (led): orange
+    - time: '+1'
+      lights:
+        (led): yellow
+    - time: '+1'
+      lights:
+        (led): green
+
+widget_player:
+  logicblock_firewalker_hit:
+    firewalker_advance_widget:
+      target: main
+      widget_settings:
+        expire: 3s
+
+widgets:
+  firewalker_advance_widget:
+    - type: text
+      text: "Firewalker: (count) Scans"
+      font_name: smallest_pixel-7
+      font_size: 9
+      z: 103
+      anchor_x: left
+      x: 2
+      anchor_y: bottom
+      y: -3
+    - type: rectangle
+      color: 000000
+      height: 6
+      width: 128
+      anchor_y: bottom
+      y: 0

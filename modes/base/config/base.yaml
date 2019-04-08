@@ -19,6 +19,7 @@ event_player:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
     - start_mode_lockhandler
     - start_mode_environment
+    - start_mode_firewalker
     - enable_orbitswitches
     - enable_kickback
     - flippers_on

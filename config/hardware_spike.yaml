@@ -312,10 +312,10 @@ lights:
     tags: light_shadowbroker_start, l_store, lane_wedges
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 9-41
-    tags: lane_arrows
+    tags: lane_arrows, light_firewalker, light_firewalker_kickback
   l_left_orbit_arrow_red: # Left Loop Arrow [#43]
     number: 10-12
-    tags: lane_arrows
+    tags: lane_arrows, light_firewalker, light_firewalker_left_orbit
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
     tags: l_outlane
@@ -327,7 +327,7 @@ lights:
     tags: light_lock_lit, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
-    tags: lane_arrows
+    tags: lane_arrows, light_firewalker, light_firewalker_left_ramp
   l_left_return_lane: # Left Return Lane [#12]
     number: 9-33
     tags: l_return_lane
@@ -344,13 +344,13 @@ lights:
     tags: l_pop_bumpers
   l_right_orbit_arrow_red: # Right Loop Arrow [#74]
     number: 9-20
-    tags: lane_arrows
+    tags: lane_arrows, light_firewalker, light_firewalker_right_orbit
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
     tags: l_outlane, outer_circles
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
-    tags: lane_arrows
+    tags: lane_arrows, light_firewalker, light_firewalker_right_ramp
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
     tags: lane_wedges, l_upgrade
