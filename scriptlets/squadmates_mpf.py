@@ -1,6 +1,7 @@
 """MPF handlers for bulk squadmate behaviors."""
 
 import logging
+import random
 from .squadmate_status import SquadmateStatus
 from mpf.core.custom_code import CustomCode
 
@@ -35,6 +36,9 @@ SOUND_NAME_FORMATS = {
     "killed": "squadmate_{squadmate}_killed",
     "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}",
     "skillshot": "squadmate_{squadmate}_nice_shot",
+    "target_center": "target_center_{squadmate}_{variant}",
+    "target_left": "target_left_{squadmate}_{variant}",
+    "target_right": "target_right_{squadmate}_{variant}",
 }
 COMPLETED_EVENT_NAME = {
     "killed": "squadmate_killed_complete"
@@ -92,10 +96,11 @@ class MPFSquadmateHandlers(CustomCode):
 
     def _handle_squadmate_sound(self, **kwargs):
         squadmate = kwargs.pop("squadmate", "random")
+        variant = random.randint(1, kwargs["variants"]) if kwargs.get("variants") else None
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
         self.machine.log.info("Got a squadmate ({}) for playing sound '{}'".format(squadmate, kwargs['sound']))
-        sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, **kwargs)
+        sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant, **kwargs)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")
         # If a mode is supplied, append it to the sound name
