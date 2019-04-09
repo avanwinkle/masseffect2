@@ -111,7 +111,7 @@ class EnvShot(object):
     def _check_shot(self, **kwargs):
         """Check if any shots tagged 'envshot_(name)' are enabled; disable this envshot if true, enable if false."""
         if bool(self.enabled_count):
-                self._disable()
+            self._disable()
         else:
             self._enable()
         self.log.debug("Just checked {}, {} targets are enabled so this is now {}".format(
