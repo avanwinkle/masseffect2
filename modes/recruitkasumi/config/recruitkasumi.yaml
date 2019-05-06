@@ -188,32 +188,32 @@ shows:
   alarm_sweep_show:
     - time: 0
       lights:
-        l_left_orbit_arrow_red: white
-        l_kickback_arrow_red: black
-        l_left_ramp_arrow_red: black
-        l_right_ramp_arrow_red: black
-        l_right_orbit_arrow_red: white
+        light_alarm_left_orbit: white
+        light_alarm_kickback: black
+        light_alarm_left_ramp: black
+        light_alarm_right_ramp: black
+        light_alarm_right_orbit: white
     - time: '+1'
       lights:
-        l_left_orbit_arrow_red: black
-        l_kickback_arrow_red: white
-        l_left_ramp_arrow_red: black
-        l_right_ramp_arrow_red: white
-        l_right_orbit_arrow_red: black
+        light_alarm_left_orbit: black
+        light_alarm_kickback: white
+        light_alarm_left_ramp: black
+        light_alarm_right_ramp: white
+        light_alarm_right_orbit: black
     - time: '+2'
       lights:
-        l_left_orbit_arrow_red: white
-        l_kickback_arrow_red: black
-        l_left_ramp_arrow_red: black
-        l_right_ramp_arrow_red: black
-        l_right_orbit_arrow_red: white
+        light_alarm_left_orbit: white
+        light_alarm_kickback: black
+        light_alarm_left_ramp: black
+        light_alarm_right_ramp: black
+        light_alarm_right_orbit: white
     - time: '+3'
       lights:
-        l_left_orbit_arrow_red: black
-        l_kickback_arrow_red: white
-        l_left_ramp_arrow_red: black
-        l_right_ramp_arrow_red: white
-        l_right_orbit_arrow_red: black
+        light_alarm_left_orbit: black
+        light_alarm_kickback: white
+        light_alarm_left_ramp: black
+        light_alarm_right_ramp: white
+        light_alarm_right_orbit: black
     - time: '+4'
 
 slide_player:

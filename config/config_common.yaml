@@ -115,8 +115,8 @@ modes:
   - tilt
   - service
   # Support Modes
-  - firewalker
-  - powers
+  # - firewalker
+  # - powers
   - skillshot
   # Environments:
   - environment
@@ -175,10 +175,11 @@ modes:
 
 light_player:
   init_done:
-    backbox: on
+    backbox:
+      color: backbox_tone
   gi_on:
     gi:
-      color: DDDDDD
+      color: dddddd
   gi_off:
     gi:
       color: black

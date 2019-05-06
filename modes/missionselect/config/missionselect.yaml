@@ -108,7 +108,7 @@ shows:
         gi:
           color: off
           fade: 2s
-        l_left_ramp_arrow_clear: off
+        light_missionselect: off
         l_dropbank_bottom: off
         l_dropbank_middle: off
         l_dropbank_top: off

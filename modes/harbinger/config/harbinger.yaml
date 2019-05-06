@@ -115,13 +115,13 @@ shows:
   harbinger_lit_show:
     - duration: 1s
       lights:
-        l_battering_ram_arrow:
+        batram_arrow:
           color: FFFFFF
-        l_battering_ram_bot:
+        batram_multipliers:
           color: FFFFFF
     - duration: 1s
       lights:
-        l_battering_ram_bot: off
+        batram_multipliers: off
 
 light_player:
   player_harbinger_multiplier.1{value>=2}:

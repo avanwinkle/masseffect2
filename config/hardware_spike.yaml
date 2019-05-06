@@ -72,6 +72,9 @@ ball_devices:
     entrance_switch: s_kickback
     debug: true
 
+named_colors:
+  backbox_tone: ffffff
+
 switches:
   s_start_button:
     number: 1-11
@@ -228,7 +231,7 @@ lights:
     tags: l_multipliers
   l_battering_ram_arrow: # Battering Ram Arrow [#63]
     number: 10-22
-    tags: lane_arrows
+    tags: lane_arrows, batram_arrow
   l_battering_ram_bot: # Battering Ram 3 (Bot) [#60]
     number: 10-19
     tags: batram_multipliers
@@ -312,10 +315,10 @@ lights:
     tags: light_shadowbroker_start, l_store, lane_wedges
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 9-41
-    tags: lane_arrows, light_firewalker, light_firewalker_kickback
+    tags: lane_arrows, light_firewalker, light_firewalker_kickback, light_alarm_kickback
   l_left_orbit_arrow_red: # Left Loop Arrow [#43]
     number: 10-12
-    tags: lane_arrows, light_firewalker, light_firewalker_left_orbit
+    tags: lane_arrows, light_firewalker, light_firewalker_left_orbit, light_alarm_left_orbit
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
     tags: l_outlane
@@ -327,7 +330,7 @@ lights:
     tags: light_lock_lit, lane_wedges
   l_left_ramp_arrow_red: # Left Ramp Arrow (Red) [#58]
     number: 10-18
-    tags: lane_arrows, light_firewalker, light_firewalker_left_ramp
+    tags: lane_arrows, light_firewalker, light_firewalker_left_ramp, light_alarm_left_ramp
   l_left_return_lane: # Left Return Lane [#12]
     number: 9-33
     tags: l_return_lane
@@ -344,13 +347,13 @@ lights:
     tags: l_pop_bumpers
   l_right_orbit_arrow_red: # Right Loop Arrow [#74]
     number: 9-20
-    tags: lane_arrows, light_firewalker, light_firewalker_right_orbit
+    tags: lane_arrows, light_firewalker, light_firewalker_right_orbit, light_alarm_right_orbit
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
     tags: l_outlane, outer_circles
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
-    tags: lane_arrows, light_firewalker, light_firewalker_right_ramp
+    tags: lane_arrows, light_firewalker, light_firewalker_right_ramp, light_alarm_right_ramp
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
     tags: lane_wedges, l_upgrade
