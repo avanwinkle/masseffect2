@@ -14,7 +14,7 @@ spike:
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 12
+    65: 32
     128: 5
   # use_send_key: true
 
@@ -74,6 +74,9 @@ ball_devices:
 
 named_colors:
   backbox_tone: ffffff
+  standup_color: ffffff
+  skillshot_color_paragon: ffffff
+  skillshot_color_renegade: ffffff
 
 switches:
   s_start_button:

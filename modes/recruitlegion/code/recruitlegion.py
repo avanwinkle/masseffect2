@@ -27,6 +27,7 @@ class RecruitLegion(Mode):
         self._significant_ticks = []
         self._shot_times = {}
         self.add_mode_event_handler("timer_missiontimer_tick", self._on_tick)
+        self.add_mode_event_handler("legion_precomplete", self._on_precomplete)
         for shot_name in SHOTS:
             self.add_mode_event_handler("player_shot_heretic_shot_{}_enabled".format(shot_name),
                                         self._start_shot_tracking,
@@ -37,17 +38,18 @@ class RecruitLegion(Mode):
         self.log.debug("Added mode event handlers for shots: {}".format(SHOTS))
 
     def _start_shot_tracking(self, **kwargs):
+        shot_name = kwargs["shot_name"]
         # If the shot was disabled, reset and quit (or if the mode hasn't started yet)
         if not kwargs["value"] or not self.active:
-            self._clear_shot(kwargs["shot_name"])
+            self._clear_shot(shot_name)
             return
 
         timestamp = self._timer.ticks_remaining
         ticks = [timestamp - interval for interval in TICK_WINDOW]
-        self._shot_times[kwargs["shot_name"]] = ticks
+        self._shot_times[shot_name] = ticks
         # Calculate some significant ticks
         self._significant_ticks += ticks
-        self.log.debug("Added significant ticks for {} based at {}: {}".format(kwargs["shot_name"], timestamp, ticks))
+        self.log.debug("Added significant ticks for {} based at {}: {}".format(shot_name, timestamp, ticks))
 
     def _on_tick(self, **kwargs):
         tick = kwargs["ticks_remaining"]
@@ -89,6 +91,10 @@ class RecruitLegion(Mode):
         if not self._shot_times:
             self.log.info("All heretic shots have been hit, forcing one to enable.")
             self.machine.events.post("enable_random_heretic")
+
+    def _on_precomplete(self, **kwargs):
+        # Clear out significant ticks to avoid any advancement processing
+        self._significant_ticks = []
 
     def _get_shot(self, shot_name):
         return self.machine.device_manager.collections["shots"]["heretic_shot_{}".format(shot_name)]

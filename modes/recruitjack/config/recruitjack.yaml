@@ -53,10 +53,12 @@ counters:
 shot_groups:
   jack_hurryup_shots:
     shots: jack_left_orbit, jack_kickback, jack_left_ramp, jack_right_ramp, jack_right_orbit
+    enable_events: []
     disable_events: jack_hurryup_shots_hit, mode_recruitjack_will_stop
   jack_shots_one:
     shots: jack_kickback, jack_left_orbit, jack_right_orbit
-    enable_events: mode_recruitjack_started{device.counters.jack_rounds_counter.value==3}
+    enable_events:
+      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==3}
   jack_shots_two:
     shots: jack_left_ramp, jack_right_ramp
     enable_events:

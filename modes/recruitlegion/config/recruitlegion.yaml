@@ -28,7 +28,7 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruitlegion_started.1:
+  mode_recruitlegion_started.2:
     set_environment:
       env: geth
     show_recruit_instructions:
@@ -40,7 +40,7 @@ event_player:
       is_resumable: 0
       shots_total: 5
       ticks: 60
-  mode_recruitlegion_started.2:
+  mode_recruitlegion_started.1:
     - play_opening_heretic_dialogue
     - enable_random_heretic
   timer_heretic_timer_complete:

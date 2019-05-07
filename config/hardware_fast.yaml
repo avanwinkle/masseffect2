@@ -63,6 +63,9 @@ ball_devices:
 
 named_colors:
   backbox_tone: ffdf8f
+  standup_color: color_armor
+  skillshot_color_paragon: color_paragon
+  skillshot_color_renegade: color_renegade
 
 coils:
   c_flipper_left_main:

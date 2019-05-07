@@ -108,31 +108,31 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_1
-      color: color_armor
+      color: standup_color
   samara_target2:
     switch: s_target2
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_2
-      color: color_armor
+      color: standup_color
   samara_target3:
     switch: s_target3
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_3
-      color: color_armor
+      color: standup_color
   samara_target4:
     switch: s_target4
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_4
-      color: color_armor
+      color: standup_color
   samara_target5:
     switch: s_target5
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_5
-      color: color_armor
+      color: standup_color
 
 sound_player:
   mode_recruitsamara_started:
