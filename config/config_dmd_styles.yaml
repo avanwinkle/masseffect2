@@ -200,7 +200,7 @@ widget_styles:
   spec_default:
     anchor_x: left
     anchor_y: bottom
-    opacity: 0.4
+    opacity: 0.3
   spec_dead:
     anchor_x: left
     anchor_y: bottom
@@ -305,6 +305,9 @@ animations:
       duration: 200ms
   specialist_deselect:
     - property: opacity
-      value: 0.4
+      value: 0.3
       duration: 200ms
-  specialist_dead: []
+  specialist_dead:
+    - property: opacity
+      value: 0.03
+      duration: 200ms

@@ -41,10 +41,10 @@ slide_player:
     portrait_endrun:
       target: lcd_right
   # Huddle videos
-  mode_suicide_base_started{device.achievements.infiltration.state=="selected"}:
+  mode_suicide_base_started{device.state_machines.suicide_progress.state=="infiltration"}:
     video_huddle_infiltration:
       target: lcd_right
-  mode_suicide_base_started{device.achievements.longwalk.state=="selected"}:
+  mode_suicide_base_started{device.state_machines.suicide_progress.state=="longwalk"}:
     video_huddle_longwalk:
       target: lcd_right
   omegarelay_complete:

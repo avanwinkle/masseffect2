@@ -11,7 +11,7 @@ mode:
 
 mode_settings:
   selectable_items: intro
-  select_item_events: s_action_button_active
+  select_item_events: s_action_button_active, flipper_cancel
   next_item_events: s_flipper_right_active
   previous_item_events: s_flipper_left_active
 
@@ -30,7 +30,7 @@ event_player:
     # If the mode requires a specialist, show the slide
     - show_huddle_slide{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}
     # If we are repeating a mode without specialist, skip the ditty and start it
-    - play_huddle_outro_show{current_player.state_machine_suicide_progress=="tubes" or current_player.state_machine_suicide_progress=="humanreaper"}|1500ms
+    - play_huddle_outro_show{current_player.state_machine_suicide_progress=="tubes" or current_player.state_machine_suicide_progress=="final"}|1500ms
   show_huddle_slide:
     - play_huddle_slide_infiltration{current_player.state_machine_suicide_progress=="infiltration"}
     - play_huddle_slide_longwalk{current_player.state_machine_suicide_progress=="longwalk"}
@@ -66,7 +66,7 @@ show_player:
     tubes_intro_show{current_player.state_machine_suicide_progress=="tubes"}:
       action: play
       loops: 0
-    platforms_intro_show{current_player.state_machine_suicide_progress=="humanreaper"}:
+    platforms_intro_show{current_player.state_machine_suicide_progress=="final"}:
       action: play
       loops: 0
   # MOCK separate intros for longwalk variants
@@ -83,7 +83,7 @@ show_player:
     tubes_intro_show{current_player.state_machine_suicide_progress=="tubes"}:
       action: play
       loops: 0
-    platforms_intro_show{current_player.state_machine_suicide_progress=="humanreaper"}:
+    platforms_intro_show{current_player.state_machine_suicide_progress=="final"}:
       action: play
       loops: 0
   suicide_huddle_specialist_selected{mission=="infiltration"}:

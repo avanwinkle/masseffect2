@@ -22,15 +22,16 @@ event_player:
     - start_mode_firewalker
     - enable_orbitswitches
     - enable_kickback
-    - flippers_on
+    - right_flipper_on
+    - left_flipper_on
     - reset_missionselect_bypass
 
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
   #### DISABLE for faster playtesting
-  mode_base_started.3{current_player.squadmates_count==2 and current_player.resume_mission==" "}:
+  mode_base_started.3{current_player.squadmates_count==2 and current_player.resume_mission==" " and device.achievements.suicidemission.state!="started"}:
     - play_intro_show
-  mode_base_started.4{current_player.squadmates_count>2}:
+  mode_base_started.4{current_player.squadmates_count>2 and device.achievements.suicidemission.state!="started"}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
 
@@ -71,6 +72,7 @@ event_player:
     - enable_gates
     - disable_orbitswitches
     - disable_gates|900ms
+    # TODO: Replace these delay events with a timer that can reset on every entrance event
     - enable_orbitswitches|1200ms  # Tried 900 but got false positives on longwalk, increasing to 1100 (min +40)
                                    # Tried 1100 but came up 2ms shy on Kasumi, increasing to 1200
   # From an auto-plunger launch, open the gates and disable the switches
@@ -178,7 +180,7 @@ variable_player:
     available_missions: 1
   achievement_derelictreaper_state_started:
     available_missions: -1
-  achievement_suicidemission_state_enabled:
+  suicide_progression_omegarelay:
     available_missions: 1
   reset_missionselect_bypass:
     bypass_missionselect:

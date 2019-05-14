@@ -100,7 +100,7 @@ class MPFSquadmateHandlers(CustomCode):
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
         self.machine.log.info("Got a squadmate ({}) for playing sound '{}'".format(squadmate, kwargs['sound']))
-        sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant, **kwargs)
+        sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")
         # If a mode is supplied, append it to the sound name
@@ -127,18 +127,23 @@ class MPFSquadmateHandlers(CustomCode):
                                  context=context,
                                  calling_context=calling_context,
                                  priority=2)
+
+        # There may be an event to play when this finishes. Base on the kwargs because it's not dependent on squadmate
+        completed_event = COMPLETED_EVENT_NAME.get(kwargs["sound"])
+
         # If a callback mate is specified, play that too
         if action == "play" and kwargs.get("callback_mate"):
             # EXCEPT for there's no Shepard callback for Miranda's death
-            if kwargs.get("callback_mate") == "shepard" and kwargs.get("squadmate") == "miranda":
+            if kwargs.get("callback_mate") == "shepard" and squadmate == "miranda":
                 pass
             else:
-                cb_sound_name = SOUND_NAME_FORMATS["{}_callback".format(kwargs.get("sound"))].format(**kwargs)
+                cb_sound_name = SOUND_NAME_FORMATS["{}_callback".format(kwargs.get("sound"))].format(
+                    squadmate=squadmate, callback_mate=kwargs.get("callback_mate"), variant=variant)
                 cb_settings = {
                     cb_sound_name: {
                         "action": action,
                         "track": track,
-                        "events_when_played": [COMPLETED_EVENT_NAME],
+                        "events_when_played": [completed_event] if completed_event else [],
                     }
                 }
                 self.machine.log.info("Squadmates made a callback: '{}' Args={}".format(cb_sound_name, cb_settings))
@@ -147,8 +152,8 @@ class MPFSquadmateHandlers(CustomCode):
                                          context=context,
                                          calling_context=calling_context,
                                          priority=1)
-        elif COMPLETED_EVENT_NAME.get(kwargs["sound"]):
-            self.machine.events.post(COMPLETED_EVENT_NAME[kwargs["sound"]])
+        elif completed_event:
+            self.machine.events.post(completed_event)
 
     def _on_hit(self, **kwargs):
         player = self.machine.game.player

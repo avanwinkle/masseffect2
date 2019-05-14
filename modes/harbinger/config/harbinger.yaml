@@ -77,6 +77,9 @@ variable_player:
     harbinger_multiplier:
       action: set
       int: 1
+    harbinger_running:
+      action: set
+      int: 0
   disable_harbinger:
     harbinger_running:
       action: set

@@ -37,12 +37,12 @@ event_player:
       shots_remaining: 7
       ticks: 60
       is_resumable: 0
-  player_tension: 
+  player_tension:
     - increase_tension{player_num==current_player.number and change>0}
-    - missiontimer_set_longwalk_1{value==1 and current_player.suicide_longwalk_longwalk_tick>41 and player_num==current_player.number}
-    - missiontimer_set_longwalk_2{value==2 and current_player.suicide_longwalk_longwalk_tick>21 and player_num==current_player.number}
-    - missiontimer_set_longwalk_3{value==3 and current_player.suicide_longwalk_longwalk_tick>0 and player_num==current_player.number}
-    
+    - missiontimer_set_longwalk_1{value==1 and current_player.base_missiontimer_tick>41 and player_num==current_player.number}
+    - missiontimer_set_longwalk_2{value==2 and current_player.base_missiontimer_tick>21 and player_num==current_player.number}
+    - missiontimer_set_longwalk_3{value==3 and current_player.base_missiontimer_tick>0 and player_num==current_player.number}
+
   enable_longwalk_dropbank: reset_dropbank
   reset_tension: missiontimer_set_60
   # Success scenarios
@@ -53,7 +53,7 @@ event_player:
     - play_specialist_lw_close{count==1}
     # Enable the hold for the final shot
     - enable_transition_hold{count==1}
-  logicblock_swarmpaths_complete: 
+  logicblock_swarmpaths_complete:
     - mission_collect_score
     - missiontimer_stop # Explicitly stop to prevent race condition from killing squadmate
     - longwalk_complete
@@ -73,7 +73,7 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: swarmpaths_hit
-    persist_state: true
+    # persist_state: true
     reset_events: mode_suicide_longwalk_started
 
 variable_player:
@@ -235,6 +235,7 @@ sound_player:
       action: stop
     longwalk_med:
       action: play
+      track: music
       start_at: 18s
     specialist_lw_warning_med:
       action: play
@@ -244,6 +245,7 @@ sound_player:
       action: stop
     longwalk_high:
       action: play
+      track: music
       start_at: 34s
     specialist_lw_warning_high:
       action: play
@@ -251,6 +253,7 @@ sound_player:
   player_tension{value==0 and change<0}:
     longwalk_low:
       action: play
+      track: music
       start_at: 10s
       mode_end_action: stop
     longwalk_med:

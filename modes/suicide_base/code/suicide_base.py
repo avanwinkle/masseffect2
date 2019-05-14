@@ -2,6 +2,8 @@ import random
 from mpf.core.mode import Mode
 from scriptlets.squadmates_mpf import SquadmateStatus
 
+SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "platforms", "humanreaper", "escape"]
+
 
 class SuicideBase(Mode):
 
@@ -37,8 +39,8 @@ class SuicideBase(Mode):
             self.info_log("No squadmates available to be specialists. Suicide Mission has failed.")
             # Base will already be done if the ball is ending, set the state manually
             if ball_is_ending:
-                self.player.achievements["suicidemission"] = "stopped"
-                self.info_log(" - achievement suicidemisson manually stopped, available_missions subtracted")
+                self.player["state_machine_suicide_progress"] = "failed"
+                self.info_log(" - state_machine suicidemisson manually failed, available_missions subtracted")
                 self._handle_failure()
             else:
                 self.machine.events.post("suicidemission_failed")
@@ -60,14 +62,15 @@ class SuicideBase(Mode):
 
     def _squadmates_can_continue(self):
         # Infiltration requires tech specialists
-        if self.player.achievements["infiltration"] != "completed" and not SquadmateStatus.available_techs(self.player):
+        if not self._is_mode_completed("infiltration") and not SquadmateStatus.available_techs(self.player):
             return False
         # Long Walk requires biotic specialists
-        elif self.player.achievements["longwalk"] != "completed" and not SquadmateStatus.available_biotics(self.player):
+        elif not self._is_mode_completed("longwalk") and not SquadmateStatus.available_biotics(self.player):
             return False
         # We only need squadmates as specialists, so if longwalk is over we can continue without any
-        elif self.player.achievements["longwalk"] != "completed" and self.player["squadmates_count"] == 0:
-            return False
+        # -- Refactoring for state_machine, this feels redundant so I'm commenting out to see!
+        # elif not self._is_mode_completed("longwalk") and self.player["squadmates_count"] == 0:
+        #     return False
         return True
 
     def _handle_failure(self, **kwargs):
@@ -86,6 +89,9 @@ class SuicideBase(Mode):
         self.machine.events.post("play_squadmate_sound", **sound_event)
 
     def _get_current_mode(self):
-        for mode in ["omegarelay", "infiltration", "longwalk", "tubes", "platforms", "humanreaper", "escape"]:
+        for mode in SUICIDE_MODES:
             if self.machine.modes["suicide_{}".format(mode)].active:
                 return mode
+
+    def _is_mode_completed(self, mode):
+        return SUICIDE_MODES.index(mode) < SUICIDE_MODES.index(self.player["state_machine_suicide_progress"])

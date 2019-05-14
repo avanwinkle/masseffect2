@@ -23,9 +23,9 @@ config:
 
 event_player:
   mode_suicide_base_started.1:
-    - start_mode_suicide_omegarelay{current_player.state_machine_suicide_progress=="omegarelay"}
+    - start_mode_suicide_omegarelay{current_player.state_machine_suicide_progress=="ready"}
     # Everything between omegarelay and endrun starts with the huddle
-    - start_mode_suicide_huddle{current_player.state_machine_suicide_progress!="omegarelay" and current_player.state_machine_suicide_progress!="endrun"}
+    - start_mode_suicide_huddle{current_player.state_machine_suicide_progress!="ready" and current_player.state_machine_suicide_progress!="endrun"}
     - start_mode_suicide_endrun{current_player.state_machine_suicide_progress=="endrun"}
   mode_type_suicide_started:
     # Give 2s for the opening, then start the timer
@@ -79,7 +79,7 @@ queue_relay_player:
     post: kill_squadmate
     args:
       squadmate: specialist
-    wait_for: squadmate_killed_complete # TODO: change this to a post-sound-effect event
+    wait_for: squadmate_killed_complete  # TODO: change this to a post-sound-effect event
 
 ball_saves:
   # This is the save that transitions from omegarelay's forced drain into infiltration
@@ -108,15 +108,15 @@ ball_holds:
     enable_events: enable_transition_hold, mode_suicide_restart_started
     release_one_events: suicide_huddle_complete
     disable_events:
-      - ball_hold_suicide_transition_hold_balls_released # this is standard behavior and works well
-      - mode_suicide_huddle_stopped # this is for virtual mode because the release never happens
+      - ball_hold_suicide_transition_hold_balls_released  # this is standard behavior and works well
+      - mode_suicide_huddle_stopped  # this is for virtual mode because the release never happens
 
 variable_player:
   # Track whether we are progressing into a mode or starting a new ball
   mode_suicide_base_started:
     suicide_continuing:
       action: set
-      int: 0 # 1 for testing intros, 0 for skipping them
+      int: 0  # 1 for testing intros, 0 for skipping them
     # For debugging, when we start directly into reaper mode
     reaper_hp{not current_player.reaper_hp}:
       action: set

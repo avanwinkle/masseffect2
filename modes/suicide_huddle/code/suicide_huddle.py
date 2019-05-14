@@ -20,14 +20,14 @@ class SuicideHuddle(Carousel):
         player = self.machine.game.player
 
         # If we are suiciding, filter for the correct type of squadmate
-        if player.achievements['infiltration'] != "completed":
+        if player['state_machine_suicide_progress'] == "infiltration":
             self._mates = SquadmateStatus.all_techs()
             self._items = SquadmateStatus.available_techs(player)
-        elif player.achievements['longwalk'] != "completed":
+        elif player['state_machine_suicide_progress'] == "longwalk":
             self._mates = SquadmateStatus.all_biotics()
             self._items = SquadmateStatus.available_biotics(player)
         else:
-            raise KeyError("What specialist are we building for?", player.achievements)
+            raise KeyError("What specialist are we building for?", player['state_machine_suicide_progress'])
 
         # Select the first available mate
         self._specialist = self._mates[0]
@@ -61,7 +61,7 @@ class SuicideHuddle(Carousel):
         super()._select_item()
         selection = self._get_highlighted_item()
         self.machine.game.player["specialist"] = selection
-        mission = "longwalk" if self.machine.game.player.achievements["infiltration"] == "completed" else "infiltration"
+        mission = self.machine.game.player["state_machine_suicide_progress"]
         self.machine.events.post("{}_specialist_selected".format(self.name), squadmate=selection, mission=mission)
 
     def _update_highlighted_item(self, direction):
