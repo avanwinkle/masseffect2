@@ -111,6 +111,12 @@ variable_player:
   timer_missiontimer_complete:
     temp_counter: 1
 
+light_player:
+  mode_collectorship_praetorian_started:
+    light_backwall_gi:
+      color: color_praetorian
+      fade: 500ms
+
 shot_groups:
   praetorian_shot:
     shots: praet_left_ramp, praet_left_orbit, praet_right_ramp, praet_right_orbit, praet_kickback, praet_dropbank, praet_hitbank

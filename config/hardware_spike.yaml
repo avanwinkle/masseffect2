@@ -217,6 +217,12 @@ switches:
 lights:
   l_null:
     number: 1-3
+  l_backwall_gi:
+    number: 1-4
+    tags: light_backwall_gi
+  l_backwall_ambient:
+    number: 1-5
+    tags: light_backwall_ambient
   l_backbox:
     number: 0-0
     tags: backbox

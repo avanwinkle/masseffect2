@@ -324,9 +324,26 @@ light_rings:
       tags: light_alarm_right_orbit
       type: grb
 
+light_stripes:
+  l_backwall_gi:
+    number_start: 0
+    number_template: 3-{}
+    count: 10
+    light_template:
+      tags: light_backwall_gi
+      type: grb
+  l_backwall_ambient:
+    number_start: 10
+    number_template: 3-{}
+    count: 14
+    light_template:
+      tags: light_backwall_ambient
+      type: grb
+
 lights:
   l_null:
     number: 0-63
+    tags: gi, backbox
 
   # First chain of lights
   #------------------------------------------
@@ -442,72 +459,6 @@ lights:
     number: 0-50
     tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
 
-  # Backbox RGB 8x8 Grid
-  #------------------------------------------
-  l_backbox_1:
-    number: 3-0
-    type: grb
-    tags: backbox
-  l_backbox_8:
-    number: 3-7
-    type: grb
-    tags: backbox
-  l_backbox_9:
-    number: 3-8
-    type: grb
-    tags: backbox
-  l_backbox_16:
-    number: 3-15
-    type: grb
-    tags: backbox
-  l_backbox_17:
-    number: 3-16
-    type: grb
-    tags: backbox
-  l_backbox_24:
-    number: 3-23
-    type: grb
-    tags: backbox
-  l_backbox_25:
-    number: 3-24
-    type: grb
-    tags: backbox
-  l_backbox_32:
-    number: 3-31
-    type: grb
-    tags: backbox
-  l_backbox_33:
-    number: 3-32
-    type: grb
-    tags: backbox
-  l_backbox_40:
-    number: 3-39
-    type: grb
-    tags: backbox
-  l_backbox_41:
-    number: 3-40
-    type: grb
-    tags: backbox
-  l_backbox_48:
-    number: 3-47
-    type: grb
-    tags: backbox
-  l_backbox_49:
-    number: 3-48
-    type: grb
-    tags: backbox
-  l_backbox_56:
-    number: 3-55
-    type: grb
-    tags: backbox
-  l_backbox_57:
-    number: 3-56
-    type: grb
-    tags: backbox
-  l_backbox_64:
-    number: 3-63
-    type: grb
-    tags: backbox
 
   # Unassigned lights carried over from Spike
   #------------------------------------------
