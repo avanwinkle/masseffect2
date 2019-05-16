@@ -115,6 +115,7 @@ sounds:
       file: mus_endgm2_speech_conv_b.ogg
       track: music
       start_at: 1s
+      volume: 1.0
       fade_in: 200ms
       fade_out: 1500ms
       markers:

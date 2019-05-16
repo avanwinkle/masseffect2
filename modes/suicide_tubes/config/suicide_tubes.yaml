@@ -39,7 +39,7 @@ event_player:
   # Enable the hold for the final shot
   logicblock_tubes_counter_complete: enable_transition_hold
   # Count the ramp exit shot as complete, which will start the huddle
-  tube_complete_shot_lit_hit: 
+  tube_complete_shot_lit_hit:
     - mission_collect_score
     - tubes_complete
 
@@ -50,7 +50,7 @@ counters:
     reset_on_complete: false
     direction: down
     count_events: tube_shots_lit_hit
-    persist_state: true
+    persist_state: false
 
 shot_groups:
   tube_shots:
@@ -108,4 +108,3 @@ sound_player:
   mode_tubes_will_stop:
     platforms_low:
       action: stop
-

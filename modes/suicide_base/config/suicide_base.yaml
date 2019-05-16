@@ -10,7 +10,7 @@
 
 mode:
   start_events: start_mode_suicide_base
-  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained
+  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained, stop_wizards
   events_when_started: mode_type_wizard_started, enable_fullorbit, start_mode_harbinger
   events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes, stop_mode_harbinger
   code: suicide_base.SuicideBase
@@ -39,7 +39,7 @@ event_player:
     - start_mode_suicide_infiltration{current_player.state_machine_suicide_progress=="infiltration"}
     - start_mode_suicide_longwalk{current_player.state_machine_suicide_progress=="longwalk"}
     - start_mode_suicide_tubes{current_player.state_machine_suicide_progress=="tubes"}
-    - start_mode_suicide_final{current_player.state_machine_suicide_progress=="humanreaper"}
+    - start_mode_suicide_final{current_player.state_machine_suicide_progress=="final"}
   # Progression
   omegarelay_complete: start_mode_suicide_huddle
   # --- SPIKE: infiltration, longwalk, tubes, final start huddle via lockhandler capturing the ball
@@ -59,7 +59,7 @@ event_player:
   # If the ball drains and we DO need to kill a squadmate, wait for the callback to end
   squadmate_killed{ball_is_ending}: suicidemission_drained
   # If a squadmate is killed but we didn't drain, go to the "restart" mode (Except during reaper)
-  squadmate_killed{not ball_is_ending and current_player.state_machine_suicide_progress!="humanreaper"}: start_mode_suicide_restart
+  squadmate_killed{not ball_is_ending and current_player.state_machine_suicide_progress!="final"}: start_mode_suicide_restart
   # Slide player doesn't like events, so conditionally restore the main slide
   suicidemission_failed:
     - restore_multiplayer_slide{game.num_players>1}

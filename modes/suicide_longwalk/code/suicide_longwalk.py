@@ -31,9 +31,13 @@ class LongWalk(Mode):
         shots_hit = SHOTS_TO_COMPLETE - shots_remaining
         shot1 = None
 
-        # Pick a random shot
-        while not shot1 or shot1 in self._last_shots:
-            shot1 = random.choice(PATHSHOTS)
+        # Last shot is always left ramp
+        if shots_remaining == 1:
+            shot1 = "left_ramp"
+        else:
+            # Pick a random shot
+            while not shot1 or shot1 in self._last_shots:
+                shot1 = random.choice(PATHSHOTS)
 
         self._enable_shot(shot1)
         self._last_shots = [shot1]

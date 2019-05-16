@@ -239,6 +239,7 @@ sound_player:
       start_at: 18s
     specialist_lw_warning_med:
       action: play
+      max_queue_time: 1s
       mode_end_action: stop
   player_tension{value==2}:
     longwalk_med:
@@ -249,6 +250,8 @@ sound_player:
       start_at: 34s
     specialist_lw_warning_high:
       action: play
+      max_queue_time: 1s
+      mode_end_action: stop
   # If we were already low-tension, no need to restart the music
   player_tension{value==0 and change<0}:
     longwalk_low:
