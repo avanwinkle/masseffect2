@@ -117,8 +117,10 @@ shows:
 light_player:
   mode_collectorship_ambush_started:
     gi: off
+    light_backwall_ambient: color_collectors
   mode_collectorship_base_will_stop:
     gi: on
+    light_backwall_ambient: off
 
 sound_player:
   mode_collectorship_ambush_started:

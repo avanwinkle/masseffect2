@@ -28,8 +28,14 @@ mode_settings:
 light_player:
   mode_bonus_started:
     gi:
-      color: 000000
+      color: black
       fade: 500ms
+    light_backwall_gi:
+      color: AA0000
+      fade: 1s
+    light_backwall_ambient:
+      color: black
+      fade: 1s
 
 slide_player:
   mode_bonus_started: end_slide

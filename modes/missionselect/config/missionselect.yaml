@@ -37,6 +37,14 @@ show_player:
       action: stop
     missionselect_highlight_show:
       action: stop
+  missionselect_recruitmission_selected:
+    led_10_chase_delay:
+      action: play
+      loops: 1
+      show_tokens:
+        color: color_shields
+        ledring: l_backwall_gi
+        fade: 50ms
   missionselect_pass_highlighted:
     missionselect_highlight_show:
       show_tokens:

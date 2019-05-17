@@ -155,6 +155,13 @@ counters:
       - achievement_hagalaz_state_enabled
       - achievement_shadowbroker_state_enabled
 
+light_player:
+  mode_base_started:
+    light_backwall_gi:
+      color: 9999AA
+    light_backwall_ambient:
+      color: 0044AA
+
 variable_player:
   defer_recruit_advance_score:
     score: 500

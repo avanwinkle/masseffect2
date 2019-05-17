@@ -81,6 +81,8 @@ counters:
 light_player:
   mode_normandyattack_started:
     gi: off
+    light_backwall_gi: off
+    light_backwall_ambient: off
   normandy_dropbank_lit_hit:
     gi:
       color: on
@@ -193,7 +195,16 @@ shots:
 
 show_player:
   mode_normandyattack_started: normandyattack_shutdown_show
-  normandyattack_begin: normandyattack_show
+  normandyattack_begin:
+    normandyattack_show:
+      action: play
+    led_10_chase_delay:
+      action: play
+      speed: 0.5
+      show_tokens:
+        ledring: l_backwall_gi
+        fade: 50ms
+        delay: 4s
 
 shows:
   normandyattack_shutdown_show:
