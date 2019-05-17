@@ -11,8 +11,7 @@ mode_settings:
   next_item_events: next_item
   previous_item_events: prev_item
   selectable_items: casual
-  casual_only: false
-
+  
 event_player:
   career_loaded: stop_mode_mainmenu
   s_flipper_right_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: next_item

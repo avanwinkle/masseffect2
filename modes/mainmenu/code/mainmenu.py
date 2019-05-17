@@ -23,7 +23,7 @@ class MainMenu(Carousel):
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""
-        if self.config.get("mode_settings", {}).get("casual_only"):
+        if not self.machine.settings.enable_careers:
             self.log.info("Casual mode only, skipping menu")
             self.stop()
             return
