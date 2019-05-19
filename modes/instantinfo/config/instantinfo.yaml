@@ -4,7 +4,7 @@
 # INSTANT INFO
 #
 # - Player career name, level, play time, total balls
-# - SUICIDE: 
+# - SUICIDE:
 #     * If not Collector Ship, squadmates until unlocked
 #     * If not Derelict Reaper, levels until unlocked
 # - Multiball info (Overlord or Arrival)
@@ -22,12 +22,10 @@ event_player:
   flipper_cancel:
     - instantinfo_next{not current_player.introslide}
     - remove_instantinfo_intro{current_player.introslide}
-  
+
   instantinfo_player_highlighted:
     play_instantinfo_mission_slide{current_player.casual}:
-      mission_title:
-        value: "Arcade Player"
-        type: str
+      mission_title: "Casual Play"
       mission_text: "Balls played: (player|balls_played)"
     play_instantinfo_mission_slide{not current_player.casual}:
       mission_title: (player|career_name)
@@ -77,7 +75,7 @@ event_player:
   instantinfo_collectorship_disabled_highlighted:
     play_instantinfo_mission_slide:
       mission_title: the Suicide Mission
-      mission_text: "You have (squadmates_count) squadmates.\nRecruit (squadmates_next) more to unlock\nthe Collector Ship."    
+      mission_text: "You have (squadmates_count) squadmates.\nRecruit (squadmates_next) more to unlock\nthe Collector Ship."
       squadmates_next:
         value: 5 - current_player.squadmates_count
         type: int
@@ -182,7 +180,7 @@ event_player:
     play_instantinfo_mission_slide:
       mission_title: "Power: Singularity"
       mission_text: "Target hits count as lane\nhits. Active for 10s.\nHold flippers to activate."
-  
+
 variable_player:
   mode_instantinfo_started:
     introslide:

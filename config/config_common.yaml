@@ -333,7 +333,7 @@ named_colors:
   color_thane: 00ff11
   color_zaeed: ff7700
   # ME Palette
-  color_shield: 0066FF
+  color_shields: 0066FF
   color_armor: FFCC00
   color_barrier: 5500FF
   color_health: "990000"

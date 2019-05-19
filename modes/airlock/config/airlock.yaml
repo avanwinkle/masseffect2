@@ -11,6 +11,7 @@
 mode:
   start_events: start_mode_lockhandler
   stop_events: ball_will_end
+  code: airlock.Airlock
   priority: 1000
 
 event_player:
@@ -25,6 +26,9 @@ event_player:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls + 1
         type: int
+  # Hold open the gates if no balls are there
+  s_battering_ram_active{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls==0}:
+    - bypass_lock_release_pulse_long
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
   longwalk_specialist_selected: release_suicide_hold|2s
@@ -42,7 +46,7 @@ ball_holds:
     enable_events:
       - mode_field_started{current_player.available_missions>0 and not current_player.bypass_missionselect}
       - player_available_missions{player_num==current_player.number and value>0 and mode.field.active}
-      # - s_left_ramp_exit_active{current_player.status_garrus==2 or current_player.status_samara==2}
+      - s_left_ramp_exit_active{current_player.status_garrus==2 or current_player.status_samara==2}
     disable_events:
       - mode_field_stopped
       - mode_missionselect_stopped

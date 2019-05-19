@@ -274,11 +274,11 @@ shows:
   reaper_cannon_lanes_show:
     - time: 0
       lights:
-        color_shields: FF0000
+        shot_shields: FF0000
         lane_arrows: off
     - time: '+1'
       lights:
-        color_shields: 330000
+        shot_shields: 330000
         lane_arrows: on
   reaper_cannon_flashers_show:
     - time: 0
