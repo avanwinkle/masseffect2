@@ -32,8 +32,6 @@ event_player:
       is_multiplayer:
         value: game.num_players>1
         type: bool
-  # Route this event through event_player to avoid playing while field is inactive
-  music_intro_stopped: play_galaxy_map
 
 config:
   - field_bumpers.yaml
@@ -41,19 +39,21 @@ config:
   - field_shadowbroker.yaml
   - field_shopping.yaml
 
-playlists:
-  field_music:
-    repeat: true
-    sounds:
-      - music_normandy_walkin_intro
-      - music_galaxy_map
-
-playlist_player:
+sound_player:
   mode_field_started:
-    field_music_track:
+    music_normandy_walkin_intro:
       action: play
-      playlist: field_music
-      crossfade_time: 1s
+      mode_end_action: stop
+      events_when_about_to_finish: play_galaxy_map
+      about_to_finish_time: 4s
+      fade_out: 2s
+  play_galaxy_map:
+    music_galaxy_map:
+      action: play
+      loops: -1
+      mode_end_action: stop
+      fade_in: 500ms
+      fade_out: 2s
 
 sounds:
   music_normandy_walkin_intro:

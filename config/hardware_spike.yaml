@@ -14,9 +14,9 @@ spike:
   debug: true
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 32
+    65: 64
     128: 5
-  # use_send_key: true
+  use_send_key: true
 
 machine:
   balls_installed: 6
