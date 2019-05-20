@@ -42,6 +42,10 @@ event_player:
     - missiontimer_set_longwalk_1{value==1 and current_player.base_missiontimer_tick>41 and player_num==current_player.number}
     - missiontimer_set_longwalk_2{value==2 and current_player.base_missiontimer_tick>21 and player_num==current_player.number}
     - missiontimer_set_longwalk_3{value==3 and current_player.base_missiontimer_tick>0 and player_num==current_player.number}
+    # Trying to fix the double sounds
+    - play_tension_1{value==1}
+    - play_tension_2{value==2}
+    - play_tension_0{value==0 and change<0}
 
   enable_longwalk_dropbank: reset_dropbank
   reset_tension: missiontimer_set_60
@@ -230,7 +234,7 @@ light_player:
       fade: 1s
 
 sound_player:
-  player_tension{value==1}:
+  play_tension_1:
     longwalk_low:
       action: stop
     longwalk_med:
@@ -241,7 +245,7 @@ sound_player:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
-  player_tension{value==2}:
+  play_tension_2:
     longwalk_med:
       action: stop
     longwalk_high:
@@ -253,7 +257,7 @@ sound_player:
       max_queue_time: 1s
       mode_end_action: stop
   # If we were already low-tension, no need to restart the music
-  player_tension{value==0 and change<0}:
+  play_tension_0:
     longwalk_low:
       action: play
       track: music

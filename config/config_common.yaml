@@ -30,7 +30,7 @@ virtual_platform_start_active_switches:
   s_trough6
 
 game:
-  balls_per_game: 5
+  balls_per_game: settings.balls_per_game
   max_players: 4
 
 settings:
@@ -52,12 +52,20 @@ settings:
       1: "YES"
   enable_analytics:
     label: "Mode Analytics"
-    sort: 303
+    sort: 30
     key_type: int
     default: 0
     values:
       0: "OFF"
       1: "ON"
+  balls_per_game:
+    label: "Balls Per Game"
+    sort: 1
+    default: 3
+    values:
+      3: 3
+      5: 5
+      7: 7
 
 slide_player:
   init_done:

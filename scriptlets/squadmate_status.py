@@ -16,7 +16,7 @@ def _mate_status_is(player, squadmate, status):
 def _get_available_mates(player, mates=SQUADMATES, status=4, include_specialist=True, exclude=None):
     exclude = Util.string_to_list(exclude)
     if not include_specialist:
-        exclude.push(player["specialist"])
+        exclude.append(player["specialist"])
     return [mate for mate in mates if (_mate_status_is(player, mate, status) and mate not in exclude)]
 
 

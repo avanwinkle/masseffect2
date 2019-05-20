@@ -68,7 +68,7 @@ sounds:
     suicide_music_base:
       file: mus_endgm1_attackplan.ogg
       track: music
-      fade_in: 2s
+      fade_in: 6s
       fade_out: 1s
   # Omega 4 Relay
     omegarelay_music:

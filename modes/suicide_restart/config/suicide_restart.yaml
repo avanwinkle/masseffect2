@@ -5,7 +5,7 @@ mode:
   priority: 2600
 
 event_player:
-  mode_suicide_restart_started: play_suicide_music_base|1s
+  mode_suicide_restart_started: play_suicide_music_base|2s
 
 slide_player:
   mode_suicide_restart_started:
