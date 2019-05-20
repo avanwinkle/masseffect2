@@ -292,7 +292,7 @@ widgets:
         add_to_slide: pulse_text_slow
   resume_widget:
     - type: text
-      text: "Action button to retry\n(player|resume_mission) recruitment"
+      text: "Both flippers to retry\n(player|resume_mission) recruitment"
       # Don't use a header style because we want high z
       font_name: smallest_pixel-7
       font_size: 9

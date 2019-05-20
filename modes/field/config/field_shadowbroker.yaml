@@ -118,23 +118,23 @@ shows:
         l_dropbank_middle: black
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: color_shadowbroker
+        l_dropbank_bottom: dropbank_color_shadowbroker
         l_dropbank_middle: black
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: color_shadowbroker
-        l_dropbank_middle: color_shadowbroker
+        l_dropbank_bottom: dropbank_color_shadowbroker
+        l_dropbank_middle: dropbank_color_shadowbroker
         l_dropbank_top: black
     - lights:
-        l_dropbank_bottom: color_shadowbroker
-        l_dropbank_middle: color_shadowbroker
-        l_dropbank_top: color_shadowbroker
+        l_dropbank_bottom: dropbank_color_shadowbroker
+        l_dropbank_middle: dropbank_color_shadowbroker
+        l_dropbank_top: dropbank_color_shadowbroker
   shadowbroker_lit_show:
     - duration: 500ms
       lights:
-        l_dropbank_bottom: color_shadowbroker
-        l_dropbank_top: color_shadowbroker
-        l_dropbank_middle: color_shadowbroker
+        l_dropbank_bottom: dropbank_color_shadowbroker
+        l_dropbank_top: dropbank_color_shadowbroker
+        l_dropbank_middle: dropbank_color_shadowbroker
         l_dropbank_shield_rgb:
           color: color_shadowbroker
           fade: 20ms

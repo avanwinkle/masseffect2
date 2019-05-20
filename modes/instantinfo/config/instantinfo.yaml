@@ -113,7 +113,14 @@ event_player:
       mission_title: Lair of the Shadow Broker
       mission_text: "Complete drop targets for\nIntel: gather (intel_remaining) more to\nstart Shadow broker modes."
       intel_remaining:
-        value: 3 - current_player.intel
+        value: 3 - current_player.counter_sbdrops_counter
+        type: int
+  instantinfo_shadowbroker_chase_ready_highlighted:
+    play_instantinfo_mission_slide:
+      mission_title: Lair of the Shadow Broker
+      mission_text: "Mission ready: Complete\ndrop bank to pursue Vasir."
+      intel_remaining:
+        value: 3 - current_player.counter_sbdrops_counter
         type: int
   instantinfo_shadowbroker_chase_highlighted:
     play_instantinfo_mission_slide:
@@ -128,7 +135,7 @@ event_player:
       mission_title: Lair of the Shadow Broker
       mission_text: "Complete drop targets for\nIntel: collect (intel_remaining) more to\nface the Shadow broker."
       intel_remaining:
-        value: 6 - current_player.intel
+        value: 6 - current_player.counter_sbdrops_counter
         type: int
   instantinfo_shadowbroker_hagalaz_highlighted:
     play_instantinfo_mission_slide:

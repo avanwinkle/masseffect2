@@ -93,7 +93,7 @@ show_player:
   all_storetargets_hit:
     storetargets_flash:
       priority: 100
-      loops: 6
+      loops: 3
       speed: 10
 
 shows:

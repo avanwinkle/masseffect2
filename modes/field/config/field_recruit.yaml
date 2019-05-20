@@ -76,8 +76,7 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
     enable_events:
-      # No kasumi on casual mode
-      - mode_field_started{current_player.status_kasumi<3 and current_player.casual==0}
+      - mode_field_started{current_player.status_kasumi<3}
     disable_events:
       - recruit_lit{squadmate=="kasumi"}
     show_tokens:
@@ -132,8 +131,7 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
     enable_events:
-      # If casual mode, thane lights after grunt. Otherwise, thane lights after kasumi.
-      - mode_field_started{(current_player.status_kasumi>3 if current_player.casual==0 else current_player.status_grunt>3) and current_player.status_thane<3}
+      - mode_field_started{current_player.status_kasumi>3 and current_player.status_thane<3}
     disable_events:
       - recruit_lit{squadmate=="thane"}
     show_tokens:
@@ -144,8 +142,7 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
     enable_events:
-      # No zaeed on casual mode
-      - mode_field_started{current_player.status_grunt>3 and current_player.status_zaeed<3 and current_player.casual==0}
+      - mode_field_started{current_player.status_grunt>3 and current_player.status_zaeed<3}
     disable_events:
       - recruit_lit{squadmate=="zaeed"}
     show_tokens:

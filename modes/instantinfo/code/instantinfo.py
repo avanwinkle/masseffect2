@@ -52,7 +52,12 @@ class InstantInfo(Carousel):
                 items.append(achievement)
 
         if not current_mode:
-            items.append("shadowbroker_{}".format(player["state_machine_shadowbroker"]))
+            shadowbroker_state = player["state_machine_shadowbroker"]
+            # Special case: if chase hasn't started but it's lit
+            if shadowbroker_state == "start" and player["counter_sbdrops_counter"] == 3:
+                items.append("shadowbroker_chase_ready")
+            else:
+                items.append("shadowbroker_{}".format(shadowbroker_state))
         elif current_mode.startswith("shadowbroker_"):
             items.append(current_mode)
 

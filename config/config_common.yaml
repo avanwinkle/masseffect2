@@ -222,7 +222,7 @@ player_vars:
   available_research:
     initial_value: 0
   casual:
-    initial_value: 0
+    initial_value: 1
   current_research:
     initial_value: " "
     value_type: str

@@ -75,7 +75,7 @@ queue_relay_player:
     post: huddle_waitforit
     wait_for: suicide_huddle_complete
   # If the ball drains during infiltration or longwalk, kill a squadmate before ending
-  ball_ending{mode.suicide_infiltration.active or mode.suicide_longwalk.active}:
+  ball_ending{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}:
     post: kill_squadmate
     args:
       squadmate: specialist

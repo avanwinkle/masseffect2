@@ -97,9 +97,9 @@ shows:
   sbdrops_flash:
     - time: 0
       lights:
-        l_dropbank_bottom: color_shadowbroker
-        l_dropbank_middle: color_shadowbroker
-        l_dropbank_top: color_shadowbroker
+        l_dropbank_bottom: dropbank_color_shadowbroker
+        l_dropbank_middle: dropbank_color_shadowbroker
+        l_dropbank_top: dropbank_color_shadowbroker
     - time: '+1'
       lights:
         l_dropbank_bottom: black
