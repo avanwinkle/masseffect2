@@ -6,7 +6,7 @@ config:
 
 smart_virtual:
   console_log: basic
-  file_log: basic
+  file_log: full
 
 mpf:
   default_pulse_ms: 10
@@ -107,6 +107,10 @@ machine_vars:
   flipper_cancelling:
     initial_value: 0
     persist: false
+  # This needs to be a machine variable so that it can exist outside of game modes (i.e. mainmenu)
+  players_widget_text:
+    initial_value: " "
+    value_type: str
 
 modes:
   # - colorpicker

@@ -16,7 +16,7 @@ spike:
   wait_times:
     65: 64
     128: 5
-  use_send_key: true
+  # use_send_key: true
 
 machine:
   balls_installed: 6
@@ -520,12 +520,16 @@ lights:
 coils:
   c_flipper_left_main:
     number: 8-0
+    # default_pulse_ms: 200
+    # default_pulse_power: 0.85
     default_pulse_ms: 35
-    default_hold_power: 0.2
+    default_hold_power: 0.25
   c_flipper_right_main:
     number: 8-5
+    # default_pulse_ms: 200
+    # default_pulse_power: 0.85
     default_pulse_ms: 35
-    default_hold_power: 0.2
+    default_hold_power: 0.25
   c_plunger:
     number: 9-1
     default_pulse_ms: 18
@@ -537,13 +541,13 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 10-1
-    default_pulse_ms: 16
+    default_pulse_ms: 18
   c_bumper_right:
     number: 10-2
-    default_pulse_ms: 18
+    default_pulse_ms: 16
   c_bumper_bottom:
     number: 10-3
-    default_pulse_ms: 14
+    default_pulse_ms: 12
   c_slingshot_left:
     number: 8-1
     default_pulse_ms: 13

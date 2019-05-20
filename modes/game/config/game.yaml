@@ -193,36 +193,31 @@ random_event_player:
 
 sound_pools:
   squadmate_add_garrus:
-    track: voice
+    track: sfx
     type: random
     sounds:
-      - garrus_affirmative
-      - garrus_you_got_it
       - garrus_im_with_you
       - garrus_lets_try_this
       - garrus_back_in_the_game
   squadmate_add_grunt:
-    track: voice
+    track: sfx
     type: random
     sounds:
       - grunt_im_here_1
-      - grunt_yeah_yeah
       - grunt_im_here_2
       - grunt_shotgun_ready
       - grunt_one_more
       - grunt_im_back
   squadmate_add_jack:
-    track: voice
+    track: sfx
     type: random
     sounds:
-      - jack_nice
       - jack_want_some_more
-      - jack_yeah
       - jack_on_my_way
       - jack_im_back
       - jack_ready_to_roll
   squadmate_add_tali:
-    track: voice
+    track: sfx
     type: random
     sounds:
       - tali_im_here
@@ -235,17 +230,8 @@ sounds:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx
     volume: 0.5
-  garrus_affirmative:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303024_m.ogg # "Affirmative"
-    track: voice
-  garrus_you_got_it:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303025_m.ogg # "You got it"
-    track: voice
   garrus_im_with_you:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303032_m.ogg # "I'm with you"
-    track: voice
-  garrus_its_the_two_of_us:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303101_m.ogg # "Its the two of us"
     track: voice
   garrus_lets_try_this:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303208_m.ogg # "Let's try this"
@@ -255,9 +241,6 @@ sounds:
     track: voice
   grunt_im_here_1:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295701_m.ogg # "I'm here"
-    track: voice
-  grunt_yeah_yeah:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295704_m.ogg # "Yeah yeah"
     track: voice
   grunt_im_here_2:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295709_m.ogg # "I'm here"
@@ -271,14 +254,8 @@ sounds:
   grunt_im_back:
     file: en_us_hench_grunt_ss_global_hench_grunt_00317208_m.ogg # "I'm back!"
     track: voice
-  jack_nice:
-    file: en_us_hench_convict_ss_global_hench_convict_00296186_m.ogg # "Nice"
-    track: voice
   jack_want_some_more:
     file: en_us_hench_convict_ss_global_hench_convict_00296189_m.ogg # "Want some more?"
-    track: voice
-  jack_yeah:
-    file: en_us_hench_convict_ss_global_hench_convict_00296196_m.ogg # "Yeah"
     track: voice
   jack_on_my_way:
     file: en_us_hench_convict_ss_global_hench_convict_00296332_m.ogg # "On my way"

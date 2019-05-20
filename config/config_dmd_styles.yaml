@@ -215,12 +215,12 @@ widget_styles:
   pos_player_1:
     anchor_x: left
     anchor_y: top
-    y: top-2
+    y: top
     x: 2
   pos_player_2:
     anchor_x: right
     anchor_y: top
-    y: top-2
+    y: top
     x: right-2
   pos_player_3:
     anchor_x: left

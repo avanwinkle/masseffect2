@@ -32,9 +32,15 @@ class MainMenu(Carousel):
         self.add_mode_event_handler("show_mainmenu", self.show_menu)
         # Watch for adding players, which we prevent during creation.
         self.add_mode_event_handler('player_add_request', self._player_add_request)
+        self.add_mode_event_handler("player_added", self._player_added)
 
     def show_menu(self, **kwargs):
         """Load career data and display the main menu."""
+
+        if self.machine.game and self.machine.game.num_players > 1:
+            self.machine.set_machine_var("players_widget_text", "Player {} of {}".format(
+                                         self.machine.game.player.number, self.machine.game.num_players))
+
         self._load_careers()
         self._load_mainmenu()
 
@@ -198,6 +204,11 @@ class MainMenu(Carousel):
             return False
 
         return True
+
+    def _player_added(self, **kwargs):
+        if kwargs.get("num") > 1:
+            self.machine.set_machine_var("players_widget_text", "Player {} of {}".format(
+                                         self.machine.game.player.number, kwargs["num"]))
 
     def _post_career_event(self, evt_name, **kwargs):
         career_data = self._selected_career or {"career_name": " "}

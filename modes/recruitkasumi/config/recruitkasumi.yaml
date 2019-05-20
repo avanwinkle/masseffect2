@@ -132,7 +132,7 @@ show_player:
     alarm_sweep_show:
       action: play
       loops: 2
-      speed: 30
+      speed: 60
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -147,7 +147,7 @@ show_player:
       action: play
       priority: 100
       loops: 0
-      speed: 30
+      speed: 60
 
 shows:
   # Dim the general illumination to make it feel more heist-y
@@ -172,7 +172,7 @@ shows:
   unalarmed_show:
     - time: 0
       lights:
-        (led): black
+        (led): color_kasumi
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
     - duration: 600ms

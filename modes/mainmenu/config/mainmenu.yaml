@@ -11,7 +11,7 @@ mode_settings:
   next_item_events: next_item
   previous_item_events: prev_item
   selectable_items: casual
-  
+
 event_player:
   career_loaded: stop_mode_mainmenu
   s_flipper_right_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: next_item
@@ -67,13 +67,19 @@ slides:
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_sm, row_top, col_left_anchor
+        style: body_sm, row_top, col_left_anchor 
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
   select_career_slide:
     widgets:
       - type: text
         text: Select a Profile
         style: header_md, row_main, col_left_anchor
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
   resume_game_slide:
     widgets:
@@ -83,6 +89,9 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
   new_game_slide:
     widgets:
@@ -92,6 +101,9 @@ slides:
       - type: text
         text: (career_name)
         style: body_sm, row_top, col_left_anchor
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
   career_select_slide:
     widgets:
@@ -114,12 +126,18 @@ slides:
       - type: text
         text: Create Profile
         style: header_md, row_main, col_left_anchor
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
   casual_slide:
     widgets:
       - type: text
         text: Casual Play
         style: header_md, row_main, col_left_anchor
+      - type: text
+        text: "(machine|players_widget_text)"
+        style: body_sm row_bottom col_left_anchor
       - widget: background_console
 
 show_player:

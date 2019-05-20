@@ -74,7 +74,7 @@ shots:
     disable_events: spinner_hit
   cure_left:
     hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
-    enable_events: spinner_hit
+    enable_events: mode_recruitmordin_started
     profile: color_flashing_to_solid_profile
     show_tokens:
       leds: l_left_orbit_shield_rgb
