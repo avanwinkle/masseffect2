@@ -9,14 +9,23 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-0010121AB, /dev/tty.usbserial-0010121AC
+  ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
-  rgb_buffer: 10000
+  # rgb_buffer: 10000
+  # debug: true
 
 machine:
   balls_installed: 6
   min_balls: 3
+
+event_player:
+  bypass_lock_release_pulse_short:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|210ms
+  bypass_lock_release_pulse_long:
+    - bypass_lock_release_pulse|0
+    - cancel_lock_release_pulse|700ms
 
 ball_devices:
   bd_plunger:
@@ -44,10 +53,7 @@ ball_devices:
     eject_coil: c_lock_release
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended
-    eject_coil_enable_time: 250ms, 230ms, 215ms
-                          # 1 ball:  230ms can be too short, increasing to 250
-                          # 2 balls: 200ms can be too short, having trouble at 205, increasing to 230
-                          # 3 balls: 200ms is too long! 190 can be too short! 198 still slightly too short. Up to 202?
+    eject_coil_enable_time: 280ms, 250ms, 235ms
     eject_timeouts: 3s
     exit_count_delay: 2s
     ball_missing_timeouts: 5s
@@ -57,7 +63,9 @@ ball_devices:
     hold_coil: c_hold_post
     hold_coil_release_time: 1s
     # hold_switches: s_left_ramp_exit
-    hold_events: s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled}
+    hold_events:
+      - s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled}
+      - recruit_lit{squadmate=="garrus" or squadmate=="samara"}
     entrance_switch: s_left_ramp_exit
     debug: true
 
@@ -70,11 +78,11 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 45  # Increased from Spike 35
+    default_pulse_ms: 40  # Increased from Spike 35
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 45  # Increased from Spike 35
+    default_pulse_ms: 40  # Increased from Spike 35
     default_hold_power: 0.1
   c_plunger:
     number: 1-1
@@ -87,11 +95,11 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 2-2
-    default_pulse_ms: 16
+    default_pulse_ms: 14
     debug: true
   c_bumper_right:
     number: 2-1
-    default_pulse_ms: 18
+    default_pulse_ms: 16
     debug: true
   c_bumper_bottom:
     number: 2-0
@@ -113,7 +121,7 @@ coils:
   c_hold_post:
     number: 1-2
     default_pulse_ms: 18
-    default_hold_power: 0.08
+    default_hold_power: 0.045  # 0.08 buzzes a lot, lower? So does 0.04?
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
@@ -121,15 +129,15 @@ coils:
   c_lock_release:
     number: 0-2
     default_pulse_ms: 50  # Increase from Spike 32
-    default_hold_power: 0.1
+    default_hold_power: 0.12
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
     debug: true
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 40
-    default_hold_power: 0.5
+    default_pulse_ms: 45
+    default_hold_power: 0.8
     enable_events: enable_gates
     disable_events: disable_gates
   # UNUSED ADDRESSES
@@ -326,14 +334,14 @@ light_rings:
 
 light_stripes:
   l_backwall_gi:
-    number_start: 0
+    number_start: 14
     number_template: 3-{}
     count: 10
     light_template:
       tags: light_backwall_gi
       type: grb
   l_backwall_ambient:
-    number_start: 10
+    number_start: 0
     number_template: 3-{}
     count: 14
     light_template:

@@ -109,19 +109,19 @@ show_player:
       key: geth_colossus_show
       speed: 1
       show_tokens:
-        color: color_shield
+        color: color_shields
     geth_colossus_show{current_player.geth_colossus_state==5}:
       action: play
       key: geth_colossus_show
       speed: 2
       show_tokens:
-        color: color_shield
+        color: color_shields
     geth_colossus_show{current_player.geth_colossus_state==4}:
       action: play
       key: geth_colossus_show
       speed: 3
       show_tokens:
-        color: color_shield
+        color: color_shields
     geth_colossus_show{current_player.geth_colossus_state==3}:
       action: play
       key: geth_colossus_show

@@ -208,7 +208,7 @@ shows:
     - time: 0
       lights:
         (leds):
-          color: color_shield
+          color: color_shields
           fade: (fadetime)
     - time: '+1'
       lights:
