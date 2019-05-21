@@ -137,8 +137,8 @@ state_machines:
         events_when_started: suicide_progression_start
       ready:
         events_when_started: suicide_progression_ready
-      omegarelay:
-        events_when_started: suicide_progression_omegarelay
+      # omegarelay:
+      #   events_when_started: suicide_progression_omegarelay
       infiltration:
         events_when_started: suicide_progression_infiltration
       longwalk:
@@ -158,20 +158,21 @@ state_machines:
         target: ready
         events: mode_normandyattack_started
       - source: ready
-        target: omegarelay
+        target: infiltration  # omegarelay
         events: mode_suicide_omegarelay_started
-      - source: omegarelay
-        target: infiltration
-        events: omegarelay_complete
+      # - source: omegarelay
+      #   target: infiltration
+      #   events: omegarelay_complete
       - source: infiltration
         target: longwalk
         events: infiltration_complete
       - source: longwalk
         target: tubes
         events: longwalk_complete
+      # Move straight from tubes to final, no replay of tubes
       - source: tubes
         target: final
-        events: tubes_complete
+        events: mode_suicide_tubes_started
       - source: final
         target: endrun
         events: humanreaper_complete

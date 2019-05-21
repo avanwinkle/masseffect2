@@ -46,7 +46,6 @@ event_player:
     - play_specialist_inf_warning_first{device.counters.valves.value==5}
     - play_specialist_inf_warning_med{device.counters.valves.value<5}
   set_tension_2: increase_infiltration
-  valveshots_hit: reset_tension
   timer_missiontimer_complete:
     kill_squadmate:
       squadmate: specialist
@@ -56,11 +55,13 @@ event_player:
     - play_specialist_inf_close{count==1}
     # Enable the hold for the final shot
     - enable_transition_hold{count==1}
-  logicblock_valves_complete: 
+    # Only reset tension if count is high, to avoid restarting music
+    - reset_tension{count>0}
+  logicblock_valves_complete:
     - mission_collect_score
     - infiltration_complete
   squadmate_killed: infiltration_failed
-  
+
 multiballs:
   infiltration:
     ball_count: 2

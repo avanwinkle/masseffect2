@@ -33,6 +33,8 @@ keyboard:
     event: enable_gates
   o:
     event: disable_gates
+  f:
+    event: ball_save_omegarelay_save_saving_ball
   i:
     event: show_grid
   shift+i:
@@ -46,7 +48,7 @@ keyboard:
   shift+enter:
     switch: s_action_button
   e:
-    event: drop_target_bank_dropbank_down
+    event: sh_dropbank_top_hit
   w:
     switch: s_flipper_left
   v:

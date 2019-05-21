@@ -461,7 +461,7 @@ lights:
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: grb
     number: 0-29
-    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance
   l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
     type: grb
     number: 0-36

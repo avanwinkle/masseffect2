@@ -44,7 +44,7 @@ event_player:
   omegarelay_complete: start_mode_suicide_huddle
   # --- SPIKE: infiltration, longwalk, tubes, final start huddle via lockhandler capturing the ball
   # --- FAST: airlock will hold the ball
-  ball_hold_suicide_hold_held_ball: start_mode_suicide_huddle
+  tubes_complete: start_mode_suicide_huddle
   humanreaper_complete: start_mode_suicide_endrun
   endrun_complete:
     - levelup
@@ -121,6 +121,15 @@ variable_player:
     reaper_hp{not current_player.reaper_hp}:
       action: set
       int: 10000
+  # Reset the tension so longwalk doesn't think it dropped
+  mode_suicide_infiltration_stopped:
+    tension:
+      action: set
+      int: -1
+  mode_suicide_longwalk_stopped:
+    tension:
+      action: set
+      int: -1
   # Reset the reaper ROUNDS and HP on each ball? or each suicide mission?
   mode_suicide_longwalk_started:
     reaper_rounds:
@@ -150,3 +159,96 @@ variable_player:
     suicide_continuing: 1
   mode_suicide_humanreaper_started:
     reaper_rounds: 1
+
+# The tubes failure behavior is here so it can bridge tubes -> final without huddle
+show_player:
+  play_huddle_outro_show:
+    infiltration_outro_show{mission=="infiltration"}:
+      action: play
+      loops: 0
+    longwalk_outro_show{mission=="longwalk"}:
+      action: play
+      loops: 0
+    tubes_outro_show{mission=="tubes"}:
+      action: play
+      loops: 0
+    final_outro_show{mission=="final"}:
+      action: play
+      loops: 0
+  tubes_failed:
+    tubes_to_final_show:
+      action: play
+      loops: 0
+
+shows:
+  infiltration_outro_show:
+    - time: 0
+      sounds: 
+        infiltration_low:
+          action: play
+          track: music
+          loops: -1
+    - time: 2.5s
+      sounds:
+        specialist_inf_outro:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
+  longwalk_outro_show:
+    - time: 0
+      sounds:
+        longwalk_low:
+          action: play
+          track: music
+          loops: -1
+    - time: 1s
+      sounds:
+        specialist_lw_outro:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
+  tubes_outro_show:
+    - time: 0
+      sounds:
+        platforms_low:
+          action: play
+          track: music
+    - time: 2s
+      sounds:
+        shep_we_win_or_lose_it_all:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
+  tubes_to_final_show:
+    - time: 0
+      events: stop_mode_suicide_tubes
+      sounds:
+        shep_give_us_a_minute_edi:
+          action: play
+          track: voice
+    - time: 3s
+      sounds:
+        platforms_med:
+          action: play
+          track: music
+        platforms_low:
+          action: stop
+    - time: 4s
+      events: start_mode_suicide_final
+  final_outro_show:
+    - time: 0
+      events: stop_mode_suicide_tubes
+    - time: 500ms
+      sounds:
+        shep_give_us_a_minute_edi:
+          action: play
+          track: voice
+          events_when_stopped: suicide_huddle_complete
+    - time: 3s
+      sounds:
+        # Wait to stop platforms_low so it fades seamlessly into platforms_med
+        platforms_low:
+          action: stop
+        platforms_med:
+          action: play
+          track: music

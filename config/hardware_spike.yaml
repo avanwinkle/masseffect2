@@ -477,7 +477,7 @@ lights:
         number: 10-24
       blue:
         number: 10-25
-    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, light_lock_entrance
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: rgb
     channels:

@@ -369,7 +369,7 @@ widgets:
         style: header_md, row_main, col_left_anchor
     platforms_title:
       - type: text
-        text: Final Battle
+        text: Defeat the Collectors
         style: header_md, row_main, col_left_anchor
     humanreaper_title:
       - type: text

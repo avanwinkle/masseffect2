@@ -52,11 +52,12 @@ event_player:
   # Success scenarios
   logicblock_swarmpaths_hit:
     - mission_shot_hit
-    - reset_tension
     - play_specialist_lw_advance{count>1}
     - play_specialist_lw_close{count==1}
     # Enable the hold for the final shot
     - enable_transition_hold{count==1}
+    # Only reset tension if count is high, to avoid restarting music as mode ends
+    - reset_tension{count>0}
   logicblock_swarmpaths_complete:
     - mission_collect_score
     - missiontimer_stop # Explicitly stop to prevent race condition from killing squadmate
@@ -94,11 +95,6 @@ variable_player:
     tension:
       action: set
       int: 0
-  # Clear the tension value so we don't duplicate the music when the reset jumps it to zero
-  longwalk_failed:
-    tension:
-      action: set
-      int: -1
 
 shot_groups:
   swarmpaths:

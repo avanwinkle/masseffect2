@@ -27,3 +27,9 @@ sound_player:
   play_suicide_music_base:
     suicide_music_base:
       mode_end_action: stop
+
+track_player:
+  mode_suicide_restart_started:
+    music:
+      action: stop_all_sounds
+      fade: 2s

@@ -25,6 +25,12 @@ sound_player:
     # Play the final valve sound in this file so we can stop mode_suicide_infiltration immediately
     specialist_inf_through:
       action: play
+    infiltration_low:
+      action: stop
+    infiltration_med:
+      action: stop
+    infiltration_high:
+      action: stop
     longwalk_low:
       action: load
       track: music
@@ -40,6 +46,12 @@ sound_player:
   longwalk_complete:
     shep_everyone_through_the_doors:
       action: play
+    longwalk_low:
+      action: stop
+    longwalk_med:
+      action: stop
+    longwalk_high:
+      action: stop
     platforms_low:
       action: load
       track: music
@@ -54,12 +66,25 @@ sound_player:
       action: load
       track: voice
 
+  # Fake the show from huddle if we fail tubes, and straight to platforms
+  # tubes_failed:
+  #   shep_give_us_a_minute_edi:
+  #     action: play
+  #     track: voice
+  #     events_when_played: stop_mode_suicide_tubes
+  #     events_when_stopped: tubes_failed_complete
+  # tubes_failed_complete:
+  #   platforms_med_high:
+  #     action: play
+  #     track: music
+  #     events_when_played: start_mode_suicide_final
+
 # For the last time, kill all the music when a mode stops!
-track_player:
-  mode_type_suicide_stopped:
-    music:
-      action: stop_all_sounds
-      fade: 1s
+# track_player:
+#   mode_type_suicide_stopped:
+#     music:
+#       action: stop_all_sounds
+#       fade: 1s
 
 sounds:
 
@@ -115,18 +140,19 @@ sounds:
       file: mus_endgm2_speech_conv_b.ogg
       track: music
       start_at: 1s
-      volume: 1.0
+      volume: 1.2
       fade_in: 200ms
-      fade_out: 1500ms
-      markers:
-        - time: 37s
-          events: platforms_low_med_transition_marker
+      fade_out: 2s
+      # markers:
+      #   - time: 37s
+      #     events: platforms_low_med_transition_marker
     platforms_med:
       file: mus_endgm2_combat_3a.ogg
       track: music
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
+      volume: 1.0
     platforms_high:
       file: mus_endgm2_combat_3b.ogg
       track: music

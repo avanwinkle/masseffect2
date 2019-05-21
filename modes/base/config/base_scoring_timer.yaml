@@ -98,6 +98,9 @@ timers:
       - event: missiontimer_add_12
         action: add
         value: 12
+      - event: missiontimer_add_30
+        action: add
+        value: 30
       - event: missiontimer_set_12
         action: jump
         value: 12
@@ -114,7 +117,10 @@ timers:
         action: jump
         value: 60
       # Specific jumps for missions
-      - event: missiontimer_set_omegarelay
+      - event: missiontimer_set_23
+        action: jump
+        value: 23
+      - event: missiontimer_set_54
         action: jump
         value: 54  # Dependent on the duration of the music track
       - event: missiontimer_set_longwalk_1

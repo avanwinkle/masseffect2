@@ -31,21 +31,32 @@ event_player:
       is_resumable: 0
       shots_remaining: 1
       ticks: 60
-
-  platform_shots_lit_hit: 
+  platform_shots_lit_hit:
     - mission_shot_hit
     - missiontimer_add_platforms
-  platform_shots_hit_complete: reset_platforms
+  # Completing all the platforms resets the shots and adds time
+  platform_shots_hit_complete:
+    - reset_platforms
+    - missiontimer_add_30
   # When the hurryup drains, move on to the next mode
-  player_temp_hurryup_value{player_num==current_player.number and value<=100}: platforms_complete
-  # If the player plays the maximum amount of time, move on
   timer_missiontimer_complete: platforms_complete
+  # If the player plays the maximum amount of time, move on
+  timer_platformtimer_complete: platforms_complete
 
 # Unlimited balls during platforms
 multiballs:
   platforms:
     ball_count: 2
     shoot_again: -1
+
+# There is a maximum amount of time that platforms will play
+timers:
+  platformtimer:
+    start_value: 12
+    end_value: 0
+    tick_interval: 10s
+    direction: down
+    start_running: true
 
 shot_groups:
   platform_targets:
