@@ -26,7 +26,6 @@ mode:
   start_events: start_mode_shadowbroker_hagalaz
   stop_events: stop_mode_shadowbroker_hagalaz, stop_wizards
   events_when_started: mode_type_wizard_started
-  events_when_stopped: mode_type_wizard_stopped
   priority: 800
 
 event_player:
@@ -38,7 +37,7 @@ event_player:
     logicblock_shunt_counter_hit:
       value: device.counters.shunt_counter.value
     set_mission_shots:
-      shots_total: 8
+      shots_total: 9
       is_resumable: 1 # Not actually, but don't reset hurryup after shots
       ticks: 60
   shunt_shot_lit_hit:
@@ -52,6 +51,7 @@ event_player:
     - mission_collect_score
   shadowbroker_hagalaz_complete:
     - stop_mode_shadowbroker_hagalaz
+    - start_mode_shadowbroker_boss
   timer_missiontimer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
   # If the only lit shot is hit, light another one so we don't idle
@@ -69,12 +69,25 @@ random_event_player:
       - enable_shunt_left_ramp
       - enable_shunt_right_ramp
       - enable_shunt_right_orbit
+  # Random sounds to play to allow callbacks
+  logicblock_shunt_counter_hit{count>0 and count<8}:
+    disable_random: true
+    events:
+      - play_shepard_how_long_will_it_take
+      - play_shepard_you_sure_shunt_is_working
+      - play_shepard_you_tested_it_right
+      - play_shepard_tell_me_you_tested_it
+      - play_liara_their_attacks_are_disorganized
+      - play_shepard_slap_omnigel
+      - play_liara_next_wave_looks_big
+      - play_shepard_so_much_for_covert_infiltration
+      - play_liara_here_come_more
 
 counters:
   shunt_counter:
-    starting_count: 6 if current_player.difficulty==0 else 8
+    starting_count: 8  # 6 if current_player.difficulty==0 else 8
     count_complete_value: 0
-    reset_on_complete: False
+    reset_on_complete: false
     direction: down
     count_events: shunt_shot_lit_hit
     reset_events: mode_shadowbroker_hagalaz_started
@@ -262,8 +275,6 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-  logicblock_shunt_counter_hit{count>0 and count<8}: shunt_progress_sound
-  # logicblock_shunt_counter_updated{value>0 and value<10 and value % 2 == 0}: attack_comment_sound
   enable_hatch:
     liara_hatch_is_open:
       action: play
@@ -272,33 +283,75 @@ sound_player:
       fade_out: 3s
     shadowbroker_enter_music:
       action: play
-  # Relays to play a call/response sound
-  play_liara_that_security_upgrade: liara_that_security_upgrade
-  play_liara_ive_never_broken_into_sb_before: liara_ive_never_broken_into_sb_before
-  play_liara_no_time_to_talk: liara_no_time_to_talk
-  play_liara_now_therell_be_fewer_inside: liara_now_therell_be_fewer_inside
-  play_liara_it_didnt_come_with_a_warranty: liara_it_didnt_come_with_a_warranty
-  play_liara_more_on_the_way: liara_more_on_the_way
-  play_shepard_please_dont_give_the_mercs_ideas: shepard_please_dont_give_the_mercs_ideas
-  play_shepard_you_had_to_give_them_tactical_advice: shepard_you_had_to_give_them_tactical_advice
+  # Stub out some music loops
+  play_sbagent_music: shadowbroker_agent_music
+  play_sbcross_music: shadowbroker_double_cross_music
+  play_sbenter_music: shadowbroker_enter_music
   # Indicate that capacitors do stuff!
   capacitors_charged_ready: capacitor_charged_sound
   capacitor_shot_charged_hit: capacitor_explode_sound
+  # Call and response
+  # --- random plays
+  play_shepard_how_long_will_it_take:
+    shepard_how_long_will_it_take:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_ive_never_broken_into_sb_before
+  play_shepard_you_sure_shunt_is_working:
+    shepard_you_sure_shunt_is_working:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_it_didnt_come_with_a_warranty
+  play_shepard_you_tested_it_right:
+    shepard_you_tested_it_right:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_no_time_to_talk
+  play_shepard_tell_me_you_tested_it:
+    shepard_tell_me_you_tested_it:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_more_on_the_way
+  play_liara_their_attacks_are_disorganized:
+    liara_their_attacks_are_disorganized:
+      max_queue_time: 1s
+      events_when_stopped: callback_shepard_please_dont_give_the_mercs_ideas
+  play_shepard_slap_omnigel:
+    shepard_slap_omnigel:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_that_security_upgrade
+  play_liara_next_wave_looks_big:
+    liara_next_wave_looks_big:
+      max_queue_time: 1s
+      events_when_stopped: callback_shepard_you_had_to_give_them_tactical_advice
+  play_shepard_so_much_for_covert_infiltration:
+    shepard_so_much_for_covert_infiltration:
+      max_queue_time: 1s
+      events_when_stopped: callback_liara_now_therell_be_fewer_inside
+  # play_liara_here_come_more: liara_here_come_more
+  # --- callbacks
+  callback_liara_ive_never_broken_into_sb_before:
+    liara_ive_never_broken_into_sb_before:
+      max_queue_time: 500ms
+  callback_liara_it_didnt_come_with_a_warranty:
+    liara_it_didnt_come_with_a_warranty:
+      max_queue_time: 500ms
+  callback_liara_no_time_to_talk:
+    liara_no_time_to_talk:
+      max_queue_time: 500ms
+  callback_shepard_please_dont_give_the_mercs_ideas:
+    shepard_please_dont_give_the_mercs_ideas:
+      max_queue_time: 500ms
+  callback_liara_that_security_upgrade:
+    liara_that_security_upgrade:
+      max_queue_time: 500ms
+  callback_shepard_you_had_to_give_them_tactical_advice:
+    shepard_you_had_to_give_them_tactical_advice:
+      max_queue_time: 500ms
+  callback_liara_now_therell_be_fewer_inside:
+    liara_now_therell_be_fewer_inside:
+      max_queue_time: 500ms
+  callback_liara_more_on_the_way:
+    liara_more_on_the_way:
+      max_queue_time: 500ms
 
 sound_pools:
-  shunt_progress_sound:
-    type: sequence
-    track: voice
-    sounds:
-      - shepard_how_long_will_it_take
-      - shepard_you_sure_shunt_is_working
-      - shepard_you_tested_it_right
-      - shepard_tell_me_you_tested_it
-      - liara_their_attacks_are_disorganized
-      - shepard_slap_omnigel
-      - liara_next_wave_looks_big
-      - shepard_so_much_for_covert_infiltration
-      - liara_here_come_more
   attack_comment_sound:
     type: sequence
     track: voice
@@ -309,10 +362,17 @@ sound_pools:
     sounds: capacitor_tech_charge_1, capacitor_tech_charge_2
   capacitor_explode_sound:
     track: sfx
-    volume: 1
+    volume: 0.9
     sounds: capacitor_tech_expl_1, capacitor_tech_expl_2
 
 sounds:
+  shadowbroker_agent_music:
+    file: SBK.03.Agent_Combat.ogg
+    track: music
+    fade_out: 1s
+    markers:
+      - time: 60s
+        events: play_sbagent_music
   shadowbroker_enter_music:
     file: SBK.01.As_They_Enter.ogg
     track: music
@@ -344,99 +404,79 @@ sounds:
   liara_now_therell_be_fewer_inside:
     file: DLC_EXP_Part01_Int.902.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_no_time_to_talk:
     file: DLC_EXP_Part01_Int.912.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_next_wave_looks_big:
     file: DLC_EXP_Part01_Int.913.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_shepard_you_had_to_give_them_tactical_advice
+    volume: 0.8
   liara_more_on_the_way:
     file: DLC_EXP_Part01_Int.922.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_here_come_more:
     file: DLC_EXP_Part01_Int.925.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_their_attacks_are_disorganized:
     file: DLC_EXP_Part01_Int.942.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_shepard_please_dont_give_the_mercs_ideas
+    volume: 0.8
   liara_that_security_upgrade:
     file: DLC_EXP_Part01_Int.923.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_it_wont_be_much_longer:
     file: DLC_EXP_Part01_Int.924.ogg
     track: voice
-    max_queue_time: 1s
   liara_it_didnt_come_with_a_warranty:
     file: DLC_EXP_Part01_Int.926.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_hatch_is_open:
     file: DLC_EXP_Part01_Int.935.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_careful_capacitors:
     file: DLC_EXP_Part01_Int.939.ogg
     track: voice
-    max_queue_time: 1s
   liara_try_firing_at_capacitors:
     file: DLC_EXP_Part01_Int.938.ogg
     track: voice
-    max_queue_time: 1s
   liara_ive_never_broken_into_sb_before:
     file: DLC_EXP_Part01_Int.953.ogg
     track: voice
-    max_queue_time: 1s
+    volume: 0.8
   liara_its_locked_ive_got_a_shunt_program:
     file: DLC_EXP_Part01_Int.954.ogg
     track: voice
-    max_queue_time: 1s
   shepard_you_had_to_give_them_tactical_advice:
     file: DLC_EXP_Part01_Int.895.ogg
     track: voice
-    max_queue_time: 1s
   shepard_please_dont_give_the_mercs_ideas:
     file: DLC_EXP_Part01_Int.899.ogg
     track: voice
-    max_queue_time: 1s
   shepard_so_much_for_covert_infiltration:
     file: DLC_EXP_Part01_Int.901.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_now_therell_be_fewer_inside
   shepard_tell_me_you_tested_it:
     file: DLC_EXP_Part01_Int.911.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_more_on_the_way
   shepard_you_tested_it_right:
     file: DLC_EXP_Part01_Int.919.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_no_time_to_talk
   shepard_you_sure_shunt_is_working:
     file: DLC_EXP_Part01_Int.921.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_it_didnt_come_with_a_warranty
   shepard_slap_omnigel:
     file: DLC_EXP_Part01_Int.915.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_that_security_upgrade
   shepard_how_long_will_it_take:
     file: DLC_EXP_Part01_Int.951.ogg
     track: voice
-    max_queue_time: 1s
-    events_when_stopped: play_liara_ive_never_broken_into_sb_before
 
 slide_player:
   mode_shadowbroker_hagalaz_started:
@@ -450,11 +490,12 @@ slides:
     widgets:
       - type: text
         text: Lair of the Shadow Broker
-        style: header_xs, row_top, col_left_anchor
-        opacity: 0.5
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: Infiltrate the Ship
-        style: header_sm, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
+        animations:
+          show_slide: pulse_text
       - widget: background_console
   hagalaz_portrait:
     widgets:
@@ -464,11 +505,10 @@ slides:
     widgets:
       - type: text
         text: Lair of the Shadow Broker
-        style: header_xs, row_top, col_left_anchor
-        opacity: 0.5
+        style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: ENTER THE SHIP
-        style: header_sm, row_main, col_left_anchor
+        style: header_md, row_main, col_left_anchor
         animations:
           show_slide: pulse_text_slow
       - widget: background_console

@@ -16,8 +16,6 @@ mode:
 event_player:
   mode_global_started:
     - manual_sbdrops_counter_advance{device.counters.sbdrops_counter.value==3 and current_player.state_machine_shadowbroker=="pre_hagalaz"}
-  drop_target_bank_dropbank_down{current_player.state_machine_shadowbroker=="completed"}:
-    - play_glyph
 
   # QUEUE SLIDE
   logicblock_sbdrops_counter_hit:
@@ -35,7 +33,8 @@ event_player:
       count:
         value: device.counters.sbdrops_counter.value
         type: int
-    queue_slide{current_player.state_machine_shadowbroker=="completed"}:
+  drop_target_bank_dropbank_down{current_player.state_machine_shadowbroker=="completed"}:
+    queue_slide:
       priority: 3
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_3
@@ -144,6 +143,9 @@ sound_player:
   play_shepard_ill_start_down_here:
     shepard_ill_start_down_here:
       max_queue_time: 2s
+  play_queued_slide_shadowbroker_advance_slide{count>7}:
+    glyph:
+      max_queue_time: 1s
 
 sound_pools:
   glyph:
@@ -157,11 +159,6 @@ sound_pools:
       - glyph_operations_almost_fully_recovered
 
 sounds:
-  shadowbroker_agent_music:
-    file: SBK.03.Agent_Combat.ogg
-    track: music
-    fade_out: 1s
-    loops: -1
   shadowbroker_vasir_music:
     file: SBK.05.Vasir_Combat.ogg
     track: music

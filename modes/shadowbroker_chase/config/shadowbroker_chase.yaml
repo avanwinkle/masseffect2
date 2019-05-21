@@ -193,7 +193,7 @@ slides:
         text: CHASE VASIR
         style: header_md, row_main, col_left_anchor
         animations:
-          show_slide: pulse_text
+          show_slide: pulse_text_slow
       - type: text
         text: "Shots: (player|sbchase_hits_remaining)"
         style: header_xs, row_gutter, col_left_center
@@ -277,25 +277,25 @@ sound_player:
   # -- callbacks
   callback_shepard_i_hear_those_can_be_bad:
     shepard_i_hear_those_can_be_bad:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_shepard_im_going:
     shepard_im_going:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_shepard_well_be_fine:
     shepard_well_be_fine:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_liara_youre_enjoying_this:
     liara_youre_enjoying_this:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_liara_its_a_taxi:
     liara_its_a_taxi:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_shepard_truck:
     shepard_truck_reply:
-      max_queue_time: 0
+      max_queue_time: 500ms
   callback_shepard_generic_reply:
     shepard_generic_reply:
-      max_queue_time: 0
+      max_queue_time: 500ms
 
 sound_pools:
   car_takeoff:

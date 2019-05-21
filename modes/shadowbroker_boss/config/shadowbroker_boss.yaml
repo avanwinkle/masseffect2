@@ -21,16 +21,16 @@ mode:
   priority: 800
 
 event_player:
-  mode_shadowbroker_boss_started.1:
-    - sbboss_round_show_complete # Mock a complete event to reset the round
-    - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
-  mode_shadowbroker_boss_started.2:
+  mode_shadowbroker_boss_started:
     set_environment: {env: shadowbroker}
     set_mission_shots:
       shots_total: 4
       shots_remaining: 2
       ticks: 30
       is_resumable: 0
+  start_boss_combat:
+    - sbboss_round_show_complete  # Mock a complete event to reset the round
+    - enable_random_sbboss_shot|1s  # Delay to give the shots time to reset
   sbboss_shot_hit:
     - mission_shot_hit
   sbboss_shot_armor_hit: enable_sbboss_finalshot
@@ -150,6 +150,9 @@ shots:
     tags: envshot_right_orbit
 
 show_player:
+  mode_shadowbroker_boss_started:
+    sbboss_intro_show:
+      loops: 0
   play_sbboss_round_show_1:
     sbboss_round_show_1:
       action: play
@@ -167,6 +170,14 @@ show_player:
       priority: 10
 
 shows:
+  sbboss_intro_show:
+    - time: 200ms
+      sounds:
+        boss_enough_talk:
+          action: play
+    - time: 5s
+      events:
+        - start_boss_combat
   sbboss_round_show_1:
     - time: 0
       sounds:
@@ -176,7 +187,7 @@ shows:
       slides:
         shadowbroker_round_2_portrait:
           target: lcd_right
-    - time: 5s
+    - time: 4.5s
       sounds:
         shepard_then_we_do_this_the_hard_way:
           action: play
@@ -238,9 +249,6 @@ slide_player:
       target: lcd_right
 
 slides:
-  shadowbroker_intro_slide:
-    - type: text
-      text: SB Boss Intro
   shadowbroker_round_1_portrait:
     widgets:
       - type: image
@@ -261,18 +269,14 @@ slides:
     widgets:
       - type: text
         text: Lair of the Shadow Broker
-        style: header_xs, row_top, col_left_anchor
-        opacity: 0.5
-      - type: text
-        text: "Defeat the\nShadow Broker"
-        style: header_sm, row_main, col_left_anchor
+        style: header_xs, row_top, col_left_anchor, mission_title
       - widget: background_console
 
 sound_player:
-  mode_shadowbroker_boss_started:
+  start_boss_combat:
     shadowbroker_boss_music:
       action: play
-  # Preload the sound assets for the show
+    # Preload the sound assets for the show
     liara_energy_projectiles_bouncing_off:
       action: load
     liara_if_you_can_get_him_to:
@@ -298,10 +302,10 @@ sound_pools:
       - liara_his_shields_deactivated
     ducking:
       target: music
-      attenuation: 0.6
-      attack: 1s
-      release_point: 1s
-      release: 1s
+      attenuation: 0.7
+      attac2: 1s
+      release_poin1: 1s
+      releas3: 1s
   sbboss_armor_down:
     track: voice
     type: random_force_all
@@ -310,10 +314,10 @@ sound_pools:
       - liara_quick_while_hes_vulnerable
     ducking:
       target: music
-      attenuation: 0.6
-      attack: 1s
-      release_point: 1s
-      release: 1s
+      attenuation: 0.7
+      attac2: 1s
+      release_poin1: 1s
+      releas3: 1s
 
 sounds:
   shadowbroker_boss_music:
@@ -323,32 +327,110 @@ sounds:
     fade_out: 500ms
     mode_end_action: stop
     loops: -1
+  boss_enough_talk:
+    file: DLC_EXP_Part01_Int.1059.ogg
+    volume: 0.9
+    track: voice
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_were_through_his_shields:
     file: DLC_EXP_Part01_Int.1013.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_his_shields_are_down:
     file: DLC_EXP_Part01_Int.1015.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_hit_him_now:
     file: DLC_EXP_Part01_Int.1014.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_quick_while_hes_vulnerable:
     file: DLC_EXP_Part01_Int.1012.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_energy_projectiles_bouncing_off:
     file: DLC_EXP_Part01_Int.1052.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   liara_if_you_can_get_him_to:
     file: DLC_EXP_Part01_Int.1051.ogg
     track: voice
+    volume: 0.8
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   shepard_then_we_do_this_the_hard_way:
     file: DLC_EXP_Part01_Int.1054.ogg
     track: voice
-    volume: 1
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
   shepard_liara_now:
     file: DLC_EXP_Part01_Int.1050.ogg
     track: voice
-    volume: 1
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 200ms
+      release: 1200ms
+
+widget_player:
+  start_boss_combat:
+    boss_widget:
+      slide: shadowbroker_boss_slide
+
+widgets:
+  boss_widget:
+    - type: text
+      text: "Battle the Broker"
+      style: header_md, row_main
+      animations:
+        add_to_slide: pulse_text

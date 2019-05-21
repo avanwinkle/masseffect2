@@ -127,7 +127,7 @@ state_machines:
         target: boss
         events: enable_hatch
       - source: boss
-        target: complete
+        target: completed
         events: shadowbroker_boss_complete
 
   suicide_progress:

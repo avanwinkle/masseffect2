@@ -196,20 +196,20 @@ sound_player:
   play_queued_slide_shadowbroker_ready_slide.1{mname=="vasir"}: vasir_hold_enabled_sounds
   play_queued_slide_shadowbroker_ready_slide.2{mname=="shadowbroker"}:
     boss_intro_cineanim_diag:
-      volume: 0.9
+      volume: 0.8
       mode_end_action: stop
 
 sound_pools:
   boss_intro_cineanim_diag:
-    sounds: boss_your_interference, boss_enough_talk, boss_its_pointless_to_challenge_me, boss_reckless_even_for_you_commander
+    sounds: boss_your_interference, boss_its_pointless_to_challenge_me, boss_reckless_even_for_you_commander
     type: random_force_all
     track: voice
     ducking:
       target: music
-      attenuation: 0.6
-      attack: 1s
-      release_point: 1s
-      release: 1s
+      attenuation: 0.5
+      attack: 500ms
+      release_point: 200ms
+      release: 500ms
   vasir_hold_enabled_sounds:
     sounds: liara_theres_vasirs_car, liara_we_can_climb_over, liara_vasir_its_over, vasir_ive_crashed_on_azure
     type: random_force_all
@@ -218,9 +218,6 @@ sound_pools:
 sounds:
   boss_your_interference:
     file: DLC_EXP_Part01_Int.1058.ogg
-    track: voice
-  boss_enough_talk:
-    file: DLC_EXP_Part01_Int.1059.ogg
     track: voice
   boss_its_pointless_to_challenge_me:
     file: DLC_EXP_Part01_Int.1065.ogg

@@ -14,7 +14,7 @@ sound_player:
   shadowbroker_chase_complete:
     car_crash:
       events_when_stopped: start_mode_shadowbroker_vasir
-  achievement_shadowbroker_state_completed: liara_its_finally_over
+  shadowbroker_progression_pre_hagalaz_started: liara_its_finally_over
   mode_overlord_stopped: david_ending
 
 sound_pools:
