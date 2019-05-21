@@ -38,7 +38,7 @@ slides:
           show_slide: pulse_text
       - type: text
         text: (score)
-        style: body_sm, row_sub, row_dmd_top, col_left_anchor, col_dmd_right, num
+        style: body_sm, row_sub, col_left_anchor, dmd_hide, num
         opacity: 0.5
       - widget: background_console
   collectorship_portrait_slide: []

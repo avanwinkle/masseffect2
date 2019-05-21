@@ -118,6 +118,8 @@ light_player:
   mode_collectorship_ambush_started:
     gi: off
     light_backwall_ambient: color_collectors
+    l_gi_left_playfield: 444444
+    l_gi_lower_playfield: 444444
   mode_collectorship_base_will_stop:
     gi: on
     light_backwall_ambient: off

@@ -89,35 +89,40 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_left_orbit
     show_tokens:
-      led: l_left_orbit_arrow_red
+      arrow_led: l_left_orbit_arrow_red
+      lane_led: l_left_orbit_shield_rgb
     tags: alarmshot, envshot_left_orbit, power_target, power_target_left_orbit
   kasumi_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_left_ramp, mode_recruitkasumi_started  # Starting shot
     show_tokens:
-      led: l_left_ramp_arrow_red
+      arrow_led: l_left_ramp_arrow_red
+      lane_led: l_left_ramp_shield_rgb
     tags: alarmshot, envshot_left_ramp, power_target, power_target_left_ramp
   kasumi_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_orbit
     show_tokens:
-      led: l_right_orbit_arrow_red
+      arrow_led: l_right_orbit_arrow_red
+      lane_led: l_right_orbit_shield_rgb
     tags: alarmshot, envshot_right_orbit, power_target, power_target_right_orbit
   kasumi_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_ramp
     show_tokens:
-      led: l_right_ramp_arrow_red
+      arrow_led: l_right_ramp_arrow_red
+      lane_led: l_right_ramp_shield_rgb
     tags: alarmshot, envshot_right_ramp, power_target, power_target_right_ramp
   kasumi_kickback:
     hit_events: sh_kickback_hit
     profile: alarmed_shot_profile
     advance_events: set_alarm_kickback
     show_tokens:
-      led: l_kickback_arrow_red
+      arrow_led: l_kickback_arrow_red
+      lane_led: l_kickback_shield_rgb
     tags: alarmshot, envshot_kickback, power_target, power_target_kickback
 
 show_player:
@@ -172,17 +177,20 @@ shows:
   unalarmed_show:
     - time: 0
       lights:
-        (led): color_kasumi
+        (arrow_led): off
+        (lane_led): color_kasumi
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
     - duration: 600ms
       lights:
-        (led):
+        (arrow_led):
           color: FFFFFF
           fade: 120ms
+        (lane_led):
+          color: off
     - duration: 1200ms
       lights:
-        (led):
+        (arrow_led):
           color: 000000
           fade: 120ms
   alarm_sweep_show:

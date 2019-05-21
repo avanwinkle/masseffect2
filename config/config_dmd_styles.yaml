@@ -246,7 +246,7 @@ widget_styles:
     adjust_top: 1
     adjust_bottom: 4
     z: 10
-    color: 999999
+    color: 444444
 
   mineral_name_style:
     font_name: smallest_pixel-7

@@ -111,6 +111,7 @@ machine_vars:
   players_widget_text:
     initial_value: " "
     value_type: str
+    persist: false
 
 modes:
   # - colorpicker

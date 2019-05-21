@@ -15,7 +15,7 @@ event_player:
       name:
         value: text
         type: str
-  
+
 slide_player:
   mode_createprofile_started: profile_creation_slide
 

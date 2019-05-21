@@ -40,6 +40,8 @@ event_player:
     - play_tali_intro|2s
   player_geth_colossus_state{player_num==current_player.number}:
     - play_colossus_show{value>0}
+    - play_colossus_repair_reegar{change>0 and value==6}
+    - play_colossus_repair_random{change>0 and value!=6}
   timer_missiontimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
   timer_missiontimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state<=3}: play_tali_armor
   # Force the timer widget to show the full value, so we don't wait for another tick
@@ -100,6 +102,19 @@ show_player:
     geth_target_show:
       speed: 12
       loops: 6
+  geth_colossus_shot_hit:
+    colossus_hit_show{current_player.geth_colossus_state>3}:
+      speed: 12
+      loops: 6
+      priority: 100
+      show_tokens:
+        color: color_shields
+    colossus_hit_show{current_player.geth_colossus_state<=3}:
+      speed: 12
+      loops: 6
+      priority: 100
+      show_tokens:
+        color: color_armor
   mode_recruittali_stopping:
     geth_colossus_show:
       action: stop
@@ -153,6 +168,15 @@ shows:
         l_left_ramp_shield_rgb:
           color: black
           fade: 20ms
+  colossus_hit_show:
+    - time: 0
+      lights:
+        l_left_ramp_shield_rgb:
+          color: 000000
+    - time: '+1'
+      lights:
+        l_left_ramp_shield_rgb:
+          color: (color)
   geth_target_show:
     - time: 0
       lights:
@@ -183,9 +207,9 @@ sound_player:
     music_recruit_tali:
       action: stop
   # First repair gets an explicit repair dialogue
-  player_geth_colossus_state{change>0 and value==6}: reegar_its_repairing_itself
+  play_colossus_repair_reegar: reegar_its_repairing_itself
   # Subsequent repairs can go random
-  player_geth_colossus_state{change>0 and value!=6}: colossus_repair
+  play_colossus_repair_random: colossus_repair
 
 sound_pools:
   tali_attack_shield:

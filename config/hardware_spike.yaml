@@ -10,11 +10,12 @@ spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
   baud: 115200
-  runtime_baud: 2000000
+  runtime_baud: 1152000
   debug: true
+  # file_log: full
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 64
+    65: 50
     128: 5
   # use_send_key: true
 

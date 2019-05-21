@@ -26,10 +26,10 @@ event_player:
   instantinfo_player_highlighted:
     play_instantinfo_mission_slide{current_player.casual}:
       mission_title: "Casual Play"
-      mission_text: "Balls played: (player|balls_played)"
+      mission_text: "Balls played: (player|balls_played)\nScore: (score)\nAssignments: (assignments_completed)"
     play_instantinfo_mission_slide{not current_player.casual}:
       mission_title: (player|career_name)
-      mission_text: "Balls played: (player|balls_played)\nLevel: (level) ((xp) XP)"
+      mission_text: "Balls played: (player|balls_played)\nLevel: (level) ((xp) XP)\nAssignments: (assignments_completed)"
   # EVENTS for RECRUITMENT MISSIONS : Max 27 chars per line (on DMD)
   instantinfo_recruitgarrus_highlighted:
     play_instantinfo_mission_slide:
