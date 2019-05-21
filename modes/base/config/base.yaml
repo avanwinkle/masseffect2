@@ -316,11 +316,11 @@ shows:
     - time: 0
       lights:
         l_ball_save:
-          color: black
+          color: off
     - time: '+1'
       lights:
         l_ball_save:
-          color: white
+          color: on
   flash_all_shields_show:
     - time: 0
       lights:

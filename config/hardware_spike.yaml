@@ -161,6 +161,7 @@ switches:
     ignore_window_ms: 1500
   s_left_ramp_exit:
     number: 10-6
+    tags: lock_entrance
   s_right_ramp_entrance:
     number: 9-7
     ignore_window_ms: 1500

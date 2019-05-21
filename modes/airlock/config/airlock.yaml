@@ -17,7 +17,7 @@ mode:
 event_player:
   ball_hold_missionselect_hold_held_ball: start_mode_missionselect
   # Relay these events to be agnostic with lockhandler
-  s_battering_ram_active{device.multiball_locks.fmball_lock.enabled}:
+  sw_airlock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls + 1

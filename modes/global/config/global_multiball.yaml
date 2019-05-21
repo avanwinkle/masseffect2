@@ -118,7 +118,7 @@ shot_groups:
 
 shots:
   fmball_lock_shot:
-    switch: s_left_ramp_exit
+    hit_events: sw_lock_entrance_active
     enable_events: enable_fmball_lock
     disable_events: multiball_lock_fmball_lock_locked_ball
     profile: color_flashing_static
