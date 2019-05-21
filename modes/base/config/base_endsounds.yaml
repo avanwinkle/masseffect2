@@ -11,7 +11,9 @@ sound_player:
   # Shadowbroker Chase
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
-  shadowbroker_chase_complete: car_crash
+  shadowbroker_chase_complete:
+    car_crash:
+      events_when_stopped: start_mode_shadowbroker_vasir
   achievement_shadowbroker_state_completed: liara_its_finally_over
   mode_overlord_stopped: david_ending
 
@@ -60,6 +62,13 @@ sounds:
   liara_its_finally_over:
     file: DLC_EXP_Part01_Int.1167.ogg
     track: voice
+    volume: 1
+    ducking:
+      target: music
+      attenuation: 0.6
+      attack: 1s
+      release_point: 1s
+      release: 1s
   explosion_long_one:
     file: SFXGame.213.ogg
     track: sfx

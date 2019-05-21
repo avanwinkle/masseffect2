@@ -26,7 +26,7 @@ mode:
   priority: 850
 
 event_player:
-  mode_shadowbroker_vasir_started:
+  start_vasir_combat:
     set_environment:
       env: field
     set_mission_shots:
@@ -148,7 +148,7 @@ shots:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
     advance_events:
-      - mode_shadowbroker_vasir_started  # Start with this shot enabled
+      - start_vasir_combat  # Start with this shot enabled
       - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_orbit_hit
     profile: vasirprofile
@@ -191,6 +191,9 @@ shots:
       leds: l_hitbank_shield_rgb
 
 show_player:
+  mode_shadowbroker_vasir_started: 
+    vasir_intro_show:
+      loops: 0
   ball_save_vasirsave_timer_start:
     ball_save_show:
       action: play
@@ -207,6 +210,20 @@ show_player:
       action: stop
 
 shows:
+  vasir_intro_show:
+    - time: 0
+      sounds:
+        shuttle_land:
+          start_at: 2.4s
+          fade_in: 500ms
+          volume: 0.6
+    - time: 2.5s
+      sounds:
+        vasir_start_sound:
+          action: play
+          volume: 1
+    - time: 3s
+      events: start_vasir_combat
   vasir_barrier_show:
     - duration: 2
       lights:
@@ -242,11 +259,6 @@ slides:
         text: Lair of the Shadow Broker
         style: header_xs, row_top, col_left_anchor
         opacity: 0.5
-      - type: text
-        text: DEFEAT VASIR
-        style: header_md, row_main
-        animations:
-          show_slide: pulse_text
       - widget: background_console
   sbvasir_portrait:
     widgets:
@@ -254,19 +266,13 @@ slides:
         image: portrait_shadowbroker_vasir
 
 sound_player:
-  mode_shadowbroker_vasir_started:
+  start_vasir_combat:
     shadowbroker_vasir_music:
-      key: shadowbroker_vasir_music
       action: play
-      start_at: 102s
+      start_at: 100s
       fade_out: 2s
-      fade_in: 500ms
+      fade_in: 100ms
       mode_end_action: stop
-    vasir_start_sound:
-      action: play
-    shuttle_land:
-      action: play
-      volume: 0.5
   timer_vasir_timer_complete: vasir_move_sound
   logicblock_vasir_hits_counter_hit: vasir_hit_sound
   # Relays
@@ -379,6 +385,9 @@ timers:
         action: restart
 
 widget_player:
+  start_vasir_combat:
+    vasir_widget:
+      slide: sbvasir_slide
   timer_missiontimer_started: timer_widget
   timer_missiontimer_tick:
     timer_widget:
@@ -388,6 +397,12 @@ widget_player:
       action: remove
 
 widgets:
+  vasir_widget:
+    - type: text  
+      text: DEFEAT VASIR
+      style: header_md, row_main
+      animations:
+        add_to_slide: pulse_text
   timer_widget:
     - type: text
       text: (ticks_remaining)

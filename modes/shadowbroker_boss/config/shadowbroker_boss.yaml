@@ -25,7 +25,7 @@ event_player:
     - sbboss_round_show_complete # Mock a complete event to reset the round
     - enable_random_sbboss_shot|1s # Delay to give the shots time to reset
   mode_shadowbroker_boss_started.2:
-    set_environment: { env: shadowbroker }
+    set_environment: {env: shadowbroker}
     set_mission_shots:
       shots_total: 4
       shots_remaining: 2

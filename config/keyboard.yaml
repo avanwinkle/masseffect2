@@ -48,7 +48,7 @@ keyboard:
   shift+enter:
     switch: s_action_button
   e:
-    event: sh_dropbank_top_hit
+    event: drop_target_bank_dropbank_down
   w:
     switch: s_flipper_left
   v:

@@ -11,39 +11,39 @@ event_player:
   # Shadow Broker modes are only triggered from Field
   drop_target_bank_dropbank_down:
     # Complete the dropbank after chase+vasir is enabled to begin the chase
-    - start_mode_shadowbroker_chase{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped"}
+    - start_mode_shadowbroker_chase{current_player.state_machine_shadowbroker=="chase"}
     # Complete the dropbank after hagalaz is enabled to begin hagalaz
-    - start_mode_shadowbroker_hagalaz{device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}
+    - start_mode_shadowbroker_hagalaz{current_player.state_machine_shadowbroker=="hagalaz"}
     # Complete the dropbank after chase to re-enable vasir combat
     # Complete the dropbank after hagalaz to re-enable boss combat
-    - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
+    - enable_shadowbroker_hold{current_player.state_machine_shadowbroker=="vasir" or current_player.state_machine_shadowbroker=="boss"}
     # Complete the dropbank after boss is defeated for extra prizes!
-    - award_shadowbroker_prize{device.achievements.shadowbroker.state=="completed"}
-  # If the mode is restarted and the hold was enabled before, re-enable the hold
-  mode_field_started.13{device.achievements.chase.state=="enabled" or device.achievements.chase.state=="stopped" or device.achievements.hagalaz.state=="enabled" or device.achievements.hagalaz.state=="stopped"}:
+    - award_shadowbroker_prize{current_player.state_machine_shadowbroker=="completed"}
+  # If the mode is restarted and the flashing shield show was lit before, re-light
+  mode_field_started.13{current_player.state_machine_shadowbroker=="chase" or current_player.state_machine_shadowbroker=="hagalaz"}:
     - play_shadowbroker_lit_show
   # If filling the dropbank will light the "hold" shot to start vasir/boss, light the shield steady
-  mode_field_started.14{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}:
+  mode_field_started.14{current_player.state_machine_shadowbroker=="vasir" or current_player.state_machine_shadowbroker=="boss"}:
     - play_shadowbroker_hold_show
-  mode_field_started.15{current_player.sbhold_enabled==1}:
-    - enable_shadowbroker_hold{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped" or device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
+    # If the hold was already enabled before we left field mode, re-enable it too
+    - enable_shadowbroker_hold{current_player.sbhold_enabled==1}
   # ERROR: Hold doesn't work, so use the hold event to fake it holding a ball
   #ball_hold_shadowbroker_hold_held_ball:
   sh_kickback_hit{current_player.sbhold_enabled==1}:
     - enter_shadowbroker_modes
     # Get a ball in the ball hold to begin Vasir
-    - start_mode_shadowbroker_vasir{device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped"}
+    - start_mode_shadowbroker_vasir{current_player.state_machine_shadowbroker=="vasir"}
     # Get a ball in the ball hold to begin Boss Combat
-    - start_mode_shadowbroker_boss{device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped"}
+    - start_mode_shadowbroker_boss{current_player.state_machine_shadowbroker=="boss"}
     - disable_shadowbroker_hold
   enable_shadowbroker_hold:
-    queue_slide{current_player.sbhold_enabled==0 and (device.achievements.vasir.state=="enabled" or device.achievements.vasir.state=="stopped")}:
+    queue_slide{current_player.sbhold_enabled==0 and current_player.state_machine_shadowbroker=="vasir"}:
       slide: shadowbroker_ready_slide
       mission: Capture Vasir
       mname: vasir
       expire: 5s
       portrait: shadowbroker_vasir_light
-    queue_slide{current_player.sbhold_enabled==0 and (device.achievements.shadowbroker.state=="enabled" or device.achievements.shadowbroker.state=="stopped")}:
+    queue_slide{current_player.sbhold_enabled==0 and current_player.state_machine_shadowbroker=="boss"}:
       slide: shadowbroker_ready_slide
       mission: Final Confrontation
       mname: shadowbroker
@@ -78,7 +78,7 @@ show_player:
   logicblock_sbdrops_counter_hit:
     sbdrops_show:
       action: advance
-  achievement_chase_state_enabled:
+  shadowbroker_progression_chase_started:
     shadowbroker_lit_show:
       action: play
       priority: 10
@@ -90,13 +90,14 @@ show_player:
     shadowbroker_hold_show:
       action: stop
   enter_shadowbroker_modes:
+    # TODO: Track whether this is the first attempt, to only show cinema intro once per game
     vasir_intro_cineanim{device.achievements.vasir.state=="enabled"}:
       action: play
     boss_intro_cineanim{device.achievements.shadowbroker.state=="enabled"}:
       action: play
     shadowbroker_hold_enabled_show:
       action: stop
-  achievement_hagalaz_state_enabled:
+  shadowbroker_progression_hagalaz_started:
     shadowbroker_lit_show:
       action: play
       priority: 10
@@ -192,8 +193,8 @@ slides:
       - widget: background_console
 
 sound_player:
-  shadowbroker_hold_enabled_slide.1{mname=="vasir"}: vasir_hold_enabled_sounds
-  shadowbroker_hold_enabled_slide.2{mname=="shadowbroker"}:
+  play_queued_slide_shadowbroker_ready_slide.1{mname=="vasir"}: vasir_hold_enabled_sounds
+  play_queued_slide_shadowbroker_ready_slide.2{mname=="shadowbroker"}:
     boss_intro_cineanim_diag:
       volume: 0.9
       mode_end_action: stop

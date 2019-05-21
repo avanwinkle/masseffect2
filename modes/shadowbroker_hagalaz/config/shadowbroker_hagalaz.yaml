@@ -46,11 +46,11 @@ event_player:
     - missiontimer_add_twelve
   capacitor_shot_charged_hit:
     - capacitors_charged_ready|10s
-  logicblock_shunt_counter_complete: 
+  logicblock_shunt_counter_complete:
     - enable_hatch
     - missiontimer_stop
     - mission_collect_score
-  shadowbroker_hagalaz_complete: 
+  shadowbroker_hagalaz_complete:
     - stop_mode_shadowbroker_hagalaz
   timer_missiontimer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
