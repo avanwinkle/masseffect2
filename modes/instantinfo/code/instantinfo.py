@@ -17,8 +17,7 @@ class InstantInfo(Carousel):
 
     def _build_items_list(self):
         player = self.machine.game.player
-        items = ["player"]
-
+        items = []
         # If the player is not in field mode, only show the current mode's info
         current_mode = self._find_current_mode()
 
@@ -63,6 +62,15 @@ class InstantInfo(Carousel):
 
         items.append("powers_{}".format("none" if player["power"] == " " else player["power"]))
 
+        # If there is a current mode, it goes first and player goes second.
+        if current_mode:
+            items.append("player")
+        # Otherwise, player goes first
+        else:
+            items.insert(0, "player")
+
+        # self.machine.log.info("InstantInfo in mode {} created {} items for player {}".format(
+        #     current_mode, items, player))
         return items
 
     def _find_current_mode(self):

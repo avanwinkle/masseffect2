@@ -84,14 +84,13 @@ random_event_player:
       - play_liara_here_come_more
 
 ball_saves:
-  # I want to win! Lemme win!
-  hagalaz_save:
-    active_time: 100s
+  sbhagalaz_save:
+    active_time: 10s
     hurry_up_time: 4s
     grace_period: 2s
-    # early_ball_save_events: s_outlane_left_active, s_outlane_right_active
-    # auto_launch: true
-    balls_to_save: -1
+    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+    auto_launch: true
+    balls_to_save: 1
 
 counters:
   shunt_counter:

@@ -38,9 +38,7 @@ event_player:
       priority: 3
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_3
-      count:
-        value: device.counters.sbdrops_counter.value
-        type: int
+      count: 8
 
 variable_player:
   drop_target_bank_dropbank_down:
@@ -143,7 +141,7 @@ sound_player:
   play_shepard_ill_start_down_here:
     shepard_ill_start_down_here:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count>7}:
+  play_queued_slide_shadowbroker_advance_slide{count==8}:
     glyph:
       max_queue_time: 1s
 

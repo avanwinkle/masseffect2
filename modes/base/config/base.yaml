@@ -140,12 +140,13 @@ counters:
       - drop_target_bank_dropbank_down
       # Mode global_shadowbroker will advance the counter after vasir
       - manual_sbdrops_counter_advance
+      - shadowbroker_progression_completed
       # DEBUG for NWPAS playtesting
       - s_action_button_active
     starting_count: current_player.counter_sbdrops_counter
     count_complete_value: 7
     persist_state: true
-    disable_on_complete: false
+    disable_on_complete: true
     reset_on_complete: false
     enable_events:
       # Count is enabled before chase (i.e. start) and before hagalaz

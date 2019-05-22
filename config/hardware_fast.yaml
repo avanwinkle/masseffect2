@@ -122,7 +122,9 @@ coils:
     number: 1-5
     default_pulse_ms: 25
   c_hold_post:
-    number: 1-2
+    # MOVED while the 3208 is burned out
+    # number: 1-2
+    number: 0-0
     default_pulse_ms: 18
     default_hold_power: 0.08  # 0.08 buzzes a lot, but less is too weak
     enable_events: hold_post_enable
@@ -146,8 +148,8 @@ coils:
   # UNUSED ADDRESSES
   c_kickback:
     number: 0-1
-  c_dragon:
-    number: 0-0
+  # c_dragon:
+  #   number: 0-0
   c_sword:
     number: 0-3
 

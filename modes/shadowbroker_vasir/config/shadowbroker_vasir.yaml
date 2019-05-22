@@ -60,7 +60,7 @@ variable_player:
 
 ball_saves:
   # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
-  vasirsave:
+  sbvasir_save:
     active_time: 10s
     hurry_up_time: 4s
     grace_period: 2s
@@ -190,7 +190,7 @@ shots:
       leds: l_hitbank_shield_rgb
 
 show_player:
-  mode_shadowbroker_vasir_started: 
+  mode_shadowbroker_vasir_started:
     vasir_intro_show:
       loops: 0
   ball_save_vasirsave_timer_start:

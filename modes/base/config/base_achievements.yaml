@@ -109,7 +109,7 @@ state_machines:
       boss:
         events_when_started: shadowbroker_progression_boss_started
       completed:
-        events_when_started: shadowbroker_progression_completed_started
+        events_when_started: shadowbroker_progression_completed
     transitions:
       - source: start
         target: chase

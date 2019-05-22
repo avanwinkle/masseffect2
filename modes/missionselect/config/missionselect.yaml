@@ -309,3 +309,5 @@ slides:
       - type: image
         image: portrait_suicide_intro
 
+sound_player:
+  missionselect_pass_selected: shep_i_should_go

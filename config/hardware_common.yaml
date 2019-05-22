@@ -3,12 +3,14 @@ flippers:
   right_flipper:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
-    enable_events: ball_starting, flippers_on, right_flipper_on
+    # Maybe different enable_events for flippers will reduce desync?
+    enable_events: player_turn_started, flippers_on, right_flipper_on
     disable_events: ball_ending, service_mode_entered, flippers_off, right_flipper_off
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
-    enable_events: ball_starting, flippers_on, left_flipper_on
+    # Maybe different enable_events for flippers will reduce desync?
+    enable_events: player_turn_started, flippers_on, left_flipper_on
     disable_events: ball_ending, service_mode_entered, flippers_off, left_flipper_off
 
 drop_targets:

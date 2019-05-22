@@ -26,14 +26,19 @@ shots:
       - ball_save_recruitsave_disabled{current_player.medigel>0}
       - ball_save_default_disabled{current_player.medigel>0}
       - ball_save_sbchase_save_disabled{current_player.medigel>0}
-      - ball_save_hagalaz_save_disabled{current_player.medigel>0}
+      - ball_save_sbvasir_save_disabled{current_player.medigel>0}
+      - ball_save_sbhagalaz_save_disabled{current_player.medigel>0}
+      - ball_save_sbboss_save_disabled{current_player.medigel>0}
       - ball_save_armor_disabled{current_player.medigel>0}
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
       - ball_save_recruitsave_enabled
       - ball_save_default_enabled
+      # TODO: Create shadowbroker_base and unify the ball saves
       - ball_save_sbchase_save_enabled
-      - ball_save_hagalaz_save_enabled
+      - ball_save_sbvasir_save_enabled
+      - ball_save_sbhagalaz_save_enabled
+      - ball_save_sbboss_save_enabled
       - ball_save_armor_enabled
       - ball_will_end
       - cancel_medigel

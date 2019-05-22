@@ -76,10 +76,10 @@ shots:
     hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
     enable_events: mode_recruitmordin_started
     profile: color_flashing_to_solid_profile
+    # tags: envshot_right_orbit. # No env tag so we'll get a sound when its hit
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: color_mordin
-    tags: envshot_right_orbit
   cure_right:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
     enable_events: cure_left_hit

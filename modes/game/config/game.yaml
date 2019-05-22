@@ -223,6 +223,13 @@ sound_pools:
       - tali_with_you_shepard
       - tali_weapons_ready
       - tali_ready_to_help
+  shep_i_should_go:
+    track: voice
+    type: random_force_all
+    sounds:
+      - shep_i_should_go_1
+      - shep_ill_just_be_going
+      - shep_i_should_be_going
 
 sounds:
   garrus_im_with_you:

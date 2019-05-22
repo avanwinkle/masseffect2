@@ -80,9 +80,9 @@ class SaveCareer(CustomCode):
                 for ach, state in value.items():
                     # Don't allow suicide mission states to save selected/completed state, always revert to enabled
                     if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and \
-                       state not in ("enabled", "disabled") and not SAVE_SUICIDE_PROGRESS:
-                            self.log.warn(" - Suicide {} in state '{}', changing to 'enabled'".format(ach, state))
-                            newcareer[key][ach] = "enabled"
+                           state not in ("enabled", "disabled") and not SAVE_SUICIDE_PROGRESS:
+                        self.log.warn(" - Suicide {} in state '{}', changing to 'enabled'".format(ach, state))
+                        newcareer[key][ach] = "enabled"
                     # Don't save the started-ness of the suicide mission, revert it to enabled
                     elif ach == "suicidemission" and state != "disabled" and not SAVE_SUICIDE_PROGRESS:
                         newcareer[key][ach] = "enabled"
@@ -91,8 +91,8 @@ class SaveCareer(CustomCode):
                         newcareer[key][ach] = state
             # Save the state of squadmates, unless they're dead (except if we're saving suicide progress)
             elif key.startswith("status_") and (value >= 0 or (DO_SAVE_DEATHS or SAVE_SUICIDE_PROGRESS)):
-                # Try this: don't save partial progress on harder difficulties
-                if 0 < value < 3 and player.vars.get("difficulty") > 0:
+                # Try this: don't save partial progress ever ( formerly: on harder difficulties )
+                if 0 < value < 3:  # and player.vars.get("difficulty") > 0:
                     newcareer[key] = 0
                 else:
                     newcareer[key] = value
