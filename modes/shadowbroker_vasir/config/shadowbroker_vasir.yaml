@@ -32,7 +32,6 @@ event_player:
     set_mission_shots:
       shots_total: 6
       is_resumable: 0
-  timer_missiontimer_complete: stop_mode_shadowbroker_vasir
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
   vasir_shot_health_2_hit:
     shadowbroker_vasir_complete: {}
@@ -387,17 +386,10 @@ widget_player:
   start_vasir_combat:
     vasir_widget:
       slide: sbvasir_slide
-  timer_missiontimer_started: timer_widget
-  timer_missiontimer_tick:
-    timer_widget:
-      action: update
-  stop_mode_shadowbroker_chase:
-    timer_widget:
-      action: remove
 
 widgets:
   vasir_widget:
-    - type: text  
+    - type: text
       text: DEFEAT VASIR
       style: header_md, row_main
       animations:

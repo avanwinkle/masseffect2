@@ -151,7 +151,7 @@ shows:
     - duration: 500ms
       lights:
         light_shadowbroker_start:
-          color: color_shadowbroker
+          color: on
           fade: 20ms
     - duration: 500ms
       lights:

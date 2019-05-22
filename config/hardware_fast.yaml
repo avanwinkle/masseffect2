@@ -451,6 +451,7 @@ lights:
     number: 0-20  # shadowbroker mission start
     type: grb
     tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
+    default_on_color: color_shadowbroker
 
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------

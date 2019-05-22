@@ -147,6 +147,14 @@ show_player:
       loops: 0
       show_tokens:
         flashers: l_flash_battering_ram
+    color_flashing_fast:
+      action: play
+      loops: 3
+      speed: 4
+      priority: 100
+      show_tokens:
+        leds: shot_shields
+        color: color_health
   sweep_alarms:
     alarm_sweep_show:
       action: play
@@ -178,7 +186,7 @@ shows:
     - time: 0
       lights:
         (arrow_led): off
-        (lane_led): color_kasumi
+        (lane_led): color_kasumi%30
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
     - duration: 600ms

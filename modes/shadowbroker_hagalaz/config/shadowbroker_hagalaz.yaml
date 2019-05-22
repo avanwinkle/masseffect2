@@ -30,7 +30,6 @@ mode:
 
 event_player:
   mode_shadowbroker_hagalaz_started.2:
-    - enable_random_shuntshot
     - capacitors_charged_ready|10s
   # Fake the counter event to get the widget onscreen
   mode_shadowbroker_hagalaz_started.1:
@@ -55,6 +54,7 @@ event_player:
   timer_missiontimer_tick{ticks % 8 == 0}: enable_random_shuntshot
   timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
   # If the only lit shot is hit, light another one so we don't idle
+  # This also triggers our initial shuntshot when the variable_player resets the value
   player_temp_counter{player_num==current_player.number and value==0}: enable_random_shuntshot|1s
   # DEBUG until we have an actual hold
   hatch_shot_hit: shadowbroker_hagalaz_complete
@@ -82,6 +82,16 @@ random_event_player:
       - play_liara_next_wave_looks_big
       - play_shepard_so_much_for_covert_infiltration
       - play_liara_here_come_more
+
+ball_saves:
+  # I want to win! Lemme win!
+  hagalaz_save:
+    active_time: 100s
+    hurry_up_time: 4s
+    grace_period: 2s
+    # early_ball_save_events: s_outlane_left_active, s_outlane_right_active
+    # auto_launch: true
+    balls_to_save: -1
 
 counters:
   shunt_counter:
@@ -275,6 +285,7 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
+      events_when_stopped: missiontimer_start
   enable_hatch:
     liara_hatch_is_open:
       action: play
@@ -404,42 +415,42 @@ sounds:
   liara_now_therell_be_fewer_inside:
     file: DLC_EXP_Part01_Int.902.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_no_time_to_talk:
     file: DLC_EXP_Part01_Int.912.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_next_wave_looks_big:
     file: DLC_EXP_Part01_Int.913.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_more_on_the_way:
     file: DLC_EXP_Part01_Int.922.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_here_come_more:
     file: DLC_EXP_Part01_Int.925.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_their_attacks_are_disorganized:
     file: DLC_EXP_Part01_Int.942.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_that_security_upgrade:
     file: DLC_EXP_Part01_Int.923.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_it_wont_be_much_longer:
     file: DLC_EXP_Part01_Int.924.ogg
     track: voice
   liara_it_didnt_come_with_a_warranty:
     file: DLC_EXP_Part01_Int.926.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_hatch_is_open:
     file: DLC_EXP_Part01_Int.935.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_careful_capacitors:
     file: DLC_EXP_Part01_Int.939.ogg
     track: voice
@@ -449,7 +460,7 @@ sounds:
   liara_ive_never_broken_into_sb_before:
     file: DLC_EXP_Part01_Int.953.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   liara_its_locked_ive_got_a_shunt_program:
     file: DLC_EXP_Part01_Int.954.ogg
     track: voice
@@ -495,7 +506,7 @@ slides:
         text: Infiltrate the Ship
         style: header_md, row_main, col_left_anchor
         animations:
-          show_slide: pulse_text
+          missiontimer_start: pulse_text
       - widget: background_console
   hagalaz_portrait:
     widgets:
