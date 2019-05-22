@@ -13,6 +13,9 @@ import sys
 import tempfile
 from datetime import datetime
 
+# Requires: pysoundfile (via pip)
+import soundfile as sf
+
 README = """
 ME2 Sound Manager
 =================
@@ -103,6 +106,10 @@ class SoundManager():
         self._analysis = None
         self.cache_file_name = "mesound_cache"
         self.exports_folder = "./mesound_exports"
+        self.conversion_root_folder = "./mesound_conversion"
+        self.conversion_originals_folder = "{}/originals".format(self.conversion_root_folder)
+        self.conversion_converted_folder = "{}/converted".format(self.conversion_root_folder)
+        self.converted_media = None
 
         self.log = logging.getLogger()
         self.log.addHandler(logging.StreamHandler(sys.stdout))
@@ -147,10 +154,19 @@ class SoundManager():
             self.log.info("   - creating cache of source media...")
             self._write_to_cache(self.source_media)
 
+        if refresh or not self.converted_media:
+            try:
+                os.stat(self.conversion_converted_folder)
+                self.log.info("  Loading converted media files...")
+                self.converted_media = GameSounds(self.conversion_converted_folder)
+            except(FileNotFoundError):
+                self.log.info("  No converted media files found.")
+
     def _load_machine_assets(self, refresh=False):
         if refresh or not self.machine_assets:
             self.log.info("  Loading assets from machine folder...")
-            self.machine_assets = GameSounds("./", paths_to_exclude=[self.exports_folder])
+            self.machine_assets = GameSounds("./", paths_to_exclude=[
+                self.exports_folder, self.conversion_originals_folder, self.conversion_converted_folder])
 
     def refresh(self):
         """Re-traverse the configs and asset folders."""
@@ -222,7 +238,8 @@ class SoundManager():
             if not mode:
                 self._analysis['orphaned'].append(filepath)
             else:
-                expectedpath = "./modes/{}/sounds/{}/{}".format(mode.name, mode.find_track_for_sound(filename), filename)
+                expectedpath = "./modes/{}/sounds/{}/{}".format(
+                    mode.name, mode.find_track_for_sound(filename), filename)
                 if filepath != expectedpath:
                     self.log.info("{} is in the wrong place. Expected {}".format(filepath, expectedpath))
                     self._analysis['misplaced'][expectedpath] = filepath
@@ -381,6 +398,65 @@ class SoundManager():
         self.log.info("\nExport complete: {} audio files, {} MB (plus {} videos)".format(
                       count, round(size / 100000) / 10, videocount))
 
+    def analyze_sample_rates(self, mode=None):
+        """Assess all sound files to determine sample rates."""
+        if not self._analysis:
+            self.parse_machine_assets()
+        if mode == "export":
+            os.makedirs(self.conversion_originals_folder, mode=0o755, exist_ok=True)
+
+        rates = {}
+        mostCommonRate = None
+        leastCommonFiles = []
+
+        self.log.info("\nAnalyzing sample rates for {} files...".format(len(self._analysis['sounds'])))
+
+        if mode != "import":
+            for filename in self._analysis['found']:
+                sound = self._analysis['sounds'][filename]
+                path = "{}{}".format(sound['modepath'], filename)
+                data, samplerate = sf.read(path)
+                if samplerate not in rates:
+                    rates[samplerate] = {"count": 0, "files": []}
+                rates[samplerate]["count"] += 1
+                rates[samplerate]["files"].append(path)
+
+            self.log.info("\nAnalysis complete:")
+            for rank, rankedRate in enumerate(sorted(rates.keys(), key=lambda x: rates[x]["count"], reverse=True)):
+                self.log.info("  {}: {} files".format(rankedRate, rates[rankedRate]["count"]))
+                if rank == 0:
+                    mostCommonRate = rankedRate
+                else:
+                    leastCommonFiles += rates[rankedRate]["files"]
+
+        if mode == "export":
+            text = open("{}/RatesAnalysis.txt".format(self.conversion_root_folder), mode="w")
+            text.write("\n".join(leastCommonFiles))
+            text.close()
+            self.log.info("\n{} files are not {} Hz, see mesound_conversions/RatesAnalysis.txt for details".format(
+                len(leastCommonFiles), mostCommonRate))
+
+            for filename in leastCommonFiles:
+                shutil.copy2(filename, "{}/{}".format(self.conversion_originals_folder, filename.split("/").pop()))
+            self.log.info("\n - Those files have been copied to {}".format(self.conversion_originals_folder))
+            self.log.info(" - If you batch process them into {},\n".format(self.conversion_converted_folder) +
+                          "   this program will import them to their correct mode folders")
+
+        elif mode == "import":
+            self.log.info("\nCopying converted files back into mode folders...")
+            count = 0
+            for filename in self.converted_media.get_files():
+                source_path = "{}/{}".format(self.conversion_converted_folder, filename)
+                sound = self._analysis['sounds'][filename]
+                dest_path = "{}{}".format(sound['modepath'], filename)
+
+                self.log.debug("{} -> {}".format(source_path, dest_path))
+                # Make a backup of the original
+                shutil.move(dest_path, re.sub(r'\.ogg$', '.original.ogg', dest_path))
+                shutil.copy2(source_path, dest_path)
+                count += 1
+            self.log.info("Successfully copied {} converted files into their mode folders".format(count))
+
     def _copy_video_assets(self, export=True):
         videoroot = "./videos"
         exportroot = "{}/videos".format(self.exports_folder)
@@ -482,17 +558,22 @@ class GameSounds(object):
         """Initialize: traverse the asset files path and map asset filenames."""
         # Most efficient way: two arrays in parallel?
         self._soundfiles, self._soundpaths = [], []
+        self._originalfiles, self._originalpaths = [], []
         for path, dirs, files in os.walk(fileroot):
             # Don't look in the exports folder!
             if path in paths_to_exclude:
                 continue
             for filename in files:
                 if re.search(r'\.(ogg|wav)$', filename):
-                    if filename in self._soundfiles:
-                        print("File {} found in {} but also in {}".format(
-                              filename, path, self._soundpaths[self._soundfiles.index(filename)]))
-                    self._soundfiles.append(filename)
-                    self._soundpaths.append(path)
+                    if re.search(r'\.original\.ogg$', filename):
+                        self._originalfiles.append(filename)
+                        self._originalpaths.append(path)
+                    else:
+                        if filename in self._soundfiles:
+                            print("File {} found in {} but also in {}".format(
+                                  filename, path, self._soundpaths[self._soundfiles.index(filename)]))
+                        self._soundfiles.append(filename)
+                        self._soundpaths.append(path)
 
     def get_file_path(self, filename):
         """Return the path of the first occurance of a filename."""
@@ -613,6 +694,8 @@ MPF Sound Asset Manager
 
     6. Export assets
 
+    7. Analyze sample rates (takes time)
+
     0. Exit this program
 """.format(os.getcwd(), manager.source_path))
         selection = input(">> ")
@@ -627,6 +710,8 @@ MPF Sound Asset Manager
             manager.clear_cache()
         elif selection == "6":
             manager.export_machine_assets()
+        elif selection == "7":
+            manager.analyze_sample_rates()
         elif selection == "0" or not selection:
             running = False
 
@@ -659,6 +744,9 @@ def main():
             manager.clear_cache()
         elif args[0] == "export":
             manager.export_machine_assets()
+        elif args[0] == "convert":
+            mode = "export" if "--export" in args else "import" if "--import" in args else None
+            manager.analyze_sample_rates(mode=mode)
         endtime = datetime.now()
         manager.log.info("\nOperation complete in {:.2f} seconds".format((endtime - starttime).total_seconds()))
 
@@ -694,6 +782,7 @@ Flags:
 Usage:
 >> python mesound.py [copy|parse|clear] [<path_to_sounds>] [-v|-w]
 """)
+
 
 if __name__ == "__main__":
     main()

@@ -364,7 +364,7 @@ named_colors:
 sound_system:
   master_volume: 1
   buffer: 2048  # previous value was 512
-  frequency: 44100
+  frequency: 24000
   channels: 1
   enabled: true
   tracks:
