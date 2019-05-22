@@ -304,23 +304,23 @@ sound_player:
   # Alarm hit
   logicblock_kasumi_alarms_counter_hit:
     kasumi_careful:
-      action: play
+      max_queue_time: 2s
   # First shot hit, got the password
   logicblock_kasumi_shots_counter_hit{count==3}:
     kasumi_password_complete:
-      action: play
+      max_queue_time: 2s
   # Second shot hit, got the voice print
   logicblock_kasumi_shots_counter_hit{count==2}:
     kasumi_voice_complete:
-      action: play
+      max_queue_time: 2s
   # Third shot hit, got the DNA sample
   logicblock_kasumi_shots_counter_hit{count==1}:
     kasumi_not_great_saliva_sample:
-      action: play
+      max_queue_time: 2s
   # Fourth shot hit, get the barrier down
   logicblock_kasumi_shots_counter_hit{count==0}:
     kasumi_barrier_is_down:
-      action: play
+      max_queue_time: 2s
 
 sound_pools:
   kasumi_careful:

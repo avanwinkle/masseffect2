@@ -33,7 +33,7 @@ event_player:
     set_mission_shots:
       shots_total: 4
       is_resumable: 0
-      shots_remaining: 
+      shots_remaining:
         value: 4 - device.counters.thane_ascent_counter.value
         type: int
   # After completion more shots will keep adding hurryup, but won't reset
@@ -132,9 +132,13 @@ sound_player:
       fade_out: 2s
       mode_end_action: stop
     asari_youll_have_to_get_up_to_the_bridge: {}
-  logicblock_thane_ascent_counter_hit{count!=3}: nas_misc_sounds
+  logicblock_thane_ascent_counter_hit{count!=3}:
+    nas_misc_sounds:
+      max_queue_time: 2s
   logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
-  envshot_outlane_hit: failure_sound
+  envshot_outlane_hit:
+    failure_sound:
+      max_queue_time: 3s
 
 sound_pools:
   nas_misc_sounds:
@@ -184,4 +188,3 @@ sounds:
   asari_youll_have_to_get_up_to_the_bridge:
     file: en_us_twrasa_quest_giver_twrasa_shuttle_ride_d_00187374_m.ogg
     track: voice
-

@@ -301,11 +301,15 @@ sound_player:
       mode_end_action: stop
       volume: 1
   play_opening_heretic_dialogue: shepard_start_your_upload
-  mission_shot_hit{count==2}: legion_alert_mobile_platforms
-  mission_shot_hit{count==1}: legion_alert_close_combat
+  mission_shot_hit{count==2}:
+    legion_alert_mobile_platforms:
+      max_queue_time: 1s
+  mission_shot_hit{count==1}:
+    legion_alert_close_combat:
+      max_queue_time: 1s
   recruit_legion_precomplete:
     legion_hack_complete:
-      action: play
+      max_queue_time: 3s
     music_legion_low:
       action: play
       mode_end_action: stop
@@ -328,7 +332,6 @@ sounds:
   legion_alert_mobile_platforms:
     file: en_us_hench_geth_gthgtl_towerdef_h_00183217_m.ogg
     track: voice
-    max_queue_time: 1s
     ducking:
       target: music
       attenuation: 0.5
@@ -338,7 +341,6 @@ sounds:
   legion_alert_close_combat:
     file: en_us_hench_geth_gthgtl_towerdef_h_00183218_m.ogg
     track: voice
-    max_queue_time: 1s
     ducking:
       target: music
       attenuation: 0.5
@@ -348,7 +350,6 @@ sounds:
   legion_hack_complete:
     file: en_us_hench_geth_gthgtl_towerdef_h_00183219_m.ogg
     track: voice
-    max_queue_time: 3s
     ducking:
       target: music
       attenuation: 0.5

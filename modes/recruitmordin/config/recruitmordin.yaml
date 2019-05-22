@@ -111,12 +111,18 @@ sound_player:
       action: play
       loops: -1
   play_intro_sound: mission_intro
-  play_cure_sound: step1_voice
-  logicblock_fans_counter_hit{count==1}: step2_voice
+  play_cure_sound:
+    step1_voice:
+      max_queue_time: 1s
+  logicblock_fans_counter_hit{count==1}:
+    step2_voice:
+      max_queue_time: 1s
   recruit_mordin_complete:
     music_recruit_mordin:
       action: stop
-  envshot_outlane_hit: recruitmordin_failure_sounds
+  envshot_outlane_hit:
+    recruitmordin_failure_sounds:
+      max_queue_time: 500ms
 
 sound_pools:
   step1_voice:
@@ -131,7 +137,6 @@ sound_pools:
       - step1_voice_zaeed{current_player.status_zaeed>=4}|3
       - step1_voice_tali{current_player.status_tali>=4}|3
       - step1_voice_jack{current_player.status_jack>=4}|2
-    max_queue_time: 1s
   step2_voice:
     type: random
     track: voice
@@ -144,17 +149,14 @@ sound_pools:
       - step2_voice_zaeed{current_player.status_zaeed>=4}|3
       - step2_voice_tali{current_player.status_tali>=4}|3
       - step2_voice_jack{current_player.status_jack>=4}|2
-    max_queue_time: 1s
   step3_voice:
     type: random
     track: voice
     sounds: step3_voice_miranda, step3_voice_jacob
-    max_queue_time: 1s
   recruitmordin_failure_sounds:
     sounds: vorcha_laughing, vorcha_got_you, krogan_strong_survive, krogan_fear_the_battlemaster
     track: voice
     type: random_force_all
-    max_queue_time: 0
 
 sounds:
   music_recruit_mordin:

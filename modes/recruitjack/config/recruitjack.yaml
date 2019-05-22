@@ -53,7 +53,6 @@ counters:
 shot_groups:
   jack_hurryup_shots:
     shots: jack_left_orbit, jack_kickback, jack_left_ramp, jack_right_ramp, jack_right_orbit
-    enable_events: just_dont
     disable_events: jack_hurryup_shots_hit, mode_recruitjack_will_stop
   jack_shots_one:
     shots: jack_kickback, jack_left_orbit, jack_right_orbit
@@ -74,6 +73,7 @@ shots:
   jack_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: color_flashing_static
+    start_enabled: false
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: color_jack
@@ -81,6 +81,7 @@ shots:
   jack_kickback:
     hit_events: sh_kickback_hit
     profile: color_flashing_static
+    start_enabled: false
     show_tokens:
       leds: l_kickback_shield_rgb
       color: color_jack
@@ -88,6 +89,7 @@ shots:
   jack_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: color_flashing_static
+    start_enabled: false
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: color_jack
@@ -95,6 +97,7 @@ shots:
   jack_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: color_flashing_static
+    start_enabled: false
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: color_jack
@@ -102,6 +105,7 @@ shots:
   jack_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: color_flashing_static
+    start_enabled: false
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: color_jack

@@ -272,7 +272,9 @@ sound_player:
       fade_in: 100ms
       mode_end_action: stop
   timer_vasir_timer_complete: vasir_move_sound
-  logicblock_vasir_hits_counter_hit: vasir_hit_sound
+  logicblock_vasir_hits_counter_hit:
+    vasir_hit_sound:
+      max_queue_time: 1s
   # Relays
   play_vasir_start_sound: vasir_start_sound
 
@@ -284,7 +286,6 @@ sound_pools:
     sounds: vasir_hit_1, vasir_hit_2, vasir_hit_3, vasir_hit_4, vasir_hit_5
     type: random_force_next
     track: voice
-    max_queue_time: 1s
   vasir_move_sound:
     sounds:
       - vasir_heads_up

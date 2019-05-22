@@ -9,10 +9,18 @@ sound_player:
   envshot_right_ramp_entrance_hit: broker_hit
   envshot_left_orbit_hit: broker_hit
   envshot_right_orbit_hit: broker_hit
-  envshot_kickback_hit: broker_attack
-  envshot_dropbank_hit: broker_attack
-  envshot_hitbank_hit: broker_attack
-  envshot_outlane_hit: broker_attack
+  envshot_kickback_hit:
+    broker_attack:
+      max_queue_time: 0
+  envshot_dropbank_hit:
+    broker_attack:
+      max_queue_time: 0
+  envshot_hitbank_hit:
+    broker_attack:
+      max_queue_time: 0
+  envshot_outlane_hit:
+    broker_attack:
+      max_queue_time: 0
 
 sound_pools:
   broker_attack:
@@ -43,32 +51,26 @@ sounds:
     file: DLC_EXP_Part01_Int.1022.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_2:
     file: DLC_EXP_Part01_Int.1023.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_3:
     file: DLC_EXP_Part01_Int.1024.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_4:
     file: DLC_EXP_Part01_Int.1025.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_5:
     file: DLC_EXP_Part01_Int.1026.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_6:
     file: DLC_EXP_Part01_Int.1027.ogg
     track: voice
     volume: 0.9
-    max_queue_time: 0
   broker_attack_7:
     file: DLC_EXP_Part01_Int.1036.ogg
     track: voice

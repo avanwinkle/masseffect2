@@ -60,12 +60,20 @@ sound_player:
     mus_main_menu:
       action: play
       mode_end_action: stop
+    # Preload the start sound
+    gui_splashstart:
+      action: load
+  game_start: gui_splashstart
 
 sounds:
   mus_main_menu:
     file: mus_main_menu.ogg
     track: music
     fade_out: 1s
+  gui_splashstart:
+    file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
+    track: sfx
+    volume: 0.5
 
 widgets:
   attract_widget_dmd:

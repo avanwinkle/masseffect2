@@ -286,9 +286,13 @@ sound_player:
       events_when_stopped:
         - normandyattack_begin
         - normandyattack_launchball
-  logicblock_normandyattack_counter_hit: normandy_advance
+  logicblock_normandyattack_counter_hit:
+    normandy_advance:
+      max_queue_time: 3s
   normandy_shots_off_hit: collector_hit
-  play_shit: joker_shit
+  play_shit:
+    joker_shit:
+      max_queue_time: 500ms
   normandy_dropbank_lit_hit: edi_finished
   envshot_outlane_hit: joker_death
 
@@ -314,9 +318,7 @@ sound_pools:
       - edi_i_have_control
   joker_shit:
     sounds: joker_shit_1, joker_shit_2, joker_shit_3, joker_shit_4, joker_shit_5, joker_shit_6, joker_shit_7, joker_shit_8, joker_shit_9
-    type: random_force_all
     track: voice
-    max_queue_time: 500ms
 
 sounds:
   normandyattack_music:

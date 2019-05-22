@@ -229,6 +229,7 @@ sound_player:
       mode_end_action: stop
   play_specialist_inf_advance:
     specialist_inf_advance:
+      max_queue_time: 2s
       events_when_stopped: advance_complete
       mode_end_action: stop
   play_specialist_inf_close:

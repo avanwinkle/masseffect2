@@ -199,10 +199,10 @@ sound_player:
       volume: 0.5
   play_tali_shield:
     tali_attack_shield:
-      action: play
+      max_queue_time: 1s
   play_tali_armor:
     tali_attack_armor:
-      action: play
+      max_queue_time: 1s
   recruit_tali_complete:
     music_recruit_tali:
       action: stop
@@ -216,12 +216,10 @@ sound_pools:
     type: random_force_all
     track: voice
     sounds: tali_attack_shields_1, tali_attack_shields_2, tali_attack_shields_3, tali_attack_shields_4
-    max_queue_time: 1s
   tali_attack_armor:
     type: random_force_all
     track: voice
     sounds: tali_attack_armor_1, tali_attack_armor_2, tali_attack_armor_3, tali_attack_armor_4
-    max_queue_time: 1s
   colossus_hit_sound:
     type: random_force_all
     track: sfx

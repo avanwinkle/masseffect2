@@ -120,9 +120,15 @@ sound_player:
     music_recruit_grunt:
       action: play
       mode_end_action: stop
-  logicblock_grunt_shots_counter_hit{count>2}: grunt_dialogue
-  logicblock_grunt_shots_counter_hit{count==2}: grunt_dialogue_4
-  logicblock_grunt_shots_counter_hit{count==1}: grunt_bossdialogue
+  logicblock_grunt_shots_counter_hit{count>2}: 
+    grunt_dialogue:
+      max_queue_time: 500ms
+  logicblock_grunt_shots_counter_hit{count==2}:
+    grunt_dialogue_4:
+      max_queue_time: 500ms
+  logicblock_grunt_shots_counter_hit{count==1}: 
+    grunt_bossdialogue:
+      max_queue_time: 500ms
   grunt_shots_complete:
     music_recruit_grunt:
       action: stop
@@ -155,27 +161,21 @@ sounds:
   grunt_bossdialogue_1:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
     track: voice
-    max_queue_time: 1s
   grunt_bossdialogue_2:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282306_m.ogg
     track: voice
-    max_queue_time: 1s
   grunt_dialogue_1:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310955_m.ogg
     track: voice
-    max_queue_time: 1s
   grunt_dialogue_2:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310956_m.ogg
     track: voice
-    max_queue_time: 1s
   grunt_dialogue_3:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310953_m.ogg
     track: voice
-    max_queue_time: 1s
   grunt_dialogue_4:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.ogg
     track: voice
-    max_queue_time: 1s
 
 widget_player:
   logicblock_grunt_shots_counter_updated:

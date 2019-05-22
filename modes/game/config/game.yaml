@@ -175,7 +175,6 @@ widgets:
       style: text_player_name, pos_player_4
 
 sound_player:
-  player_added{num==1}: gui_splashstart
   play_squadmate_add_garrus: squadmate_add_garrus
   play_squadmate_add_grunt: squadmate_add_grunt
   play_squadmate_add_jack: squadmate_add_jack
@@ -226,10 +225,6 @@ sound_pools:
       - tali_ready_to_help
 
 sounds:
-  gui_splashstart:
-    file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
-    track: sfx
-    volume: 0.5
   garrus_im_with_you:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303032_m.ogg # "I'm with you"
     track: voice

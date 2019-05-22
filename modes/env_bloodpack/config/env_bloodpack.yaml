@@ -11,7 +11,9 @@ sound_player:
   envshot_right_ramp_hit: krogan_hit
   envshot_left_ramp_hit: vorcha_hit
   envshot_left_orbit_hit: vorcha_hit
-  envshot_kickback_hit: vorcha_talking
+  envshot_kickback_hit:
+    vorcha_talking:
+      max_queue_time: 0
   envshot_dropbank_hit: varren_hit
 
 sound_pools:
