@@ -10,28 +10,34 @@ shows:
         l_(shot)_ring_light_0: on
         l_(shot)_ring_light_5:
           color: AA
+        l_(shot)_ring_light_4: off
     - time: '+1'
       lights:
         l_(shot)_ring_light_1: on
         l_(shot)_ring_light_0:
           color: AA
+        l_(shot)_ring_light_5: off
     - time: '+1'
       lights:
         l_(shot)_ring_light_2: on
         l_(shot)_ring_light_1:
           color: AA
+        l_(shot)_ring_light_0: off
     - time: '+1'
       lights:
         l_(shot)_ring_light_3: on
         l_(shot)_ring_light_2:
           color: AA
+        l_(shot)_ring_light_1: off
     - time: '+1'
       lights:
         l_(shot)_ring_light_4: on
         l_(shot)_ring_light_3:
           color: AA
+        l_(shot)_ring_light_2: off
     - time: '+1'
       lights:
         l_(shot)_ring_light_5: on
         l_(shot)_ring_light_4:
           color: AA
+        l_(shot)_ring_light_3: off
