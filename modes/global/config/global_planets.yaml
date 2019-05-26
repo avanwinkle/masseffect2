@@ -49,7 +49,7 @@ variable_player:
 
 flasher_player:
   sw_bumper_active:
-    l_flash_pop_bumpers: 50ms
+    l_flash_right_orbit: 50ms
 
 shot_groups:
   planet_shots:
@@ -132,7 +132,7 @@ timers:
         action: restart
 
 widgets:
-  
+
   planet_widget_1:
     - type: image
       image: Aequitas

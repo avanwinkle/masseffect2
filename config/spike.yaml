@@ -3,6 +3,7 @@ config:
   - config_common.yaml
   - config_dmd.yaml
   - hardware_spike.yaml
+  - shows_spike.yaml
 
 # Custom code can't be included, or it will get double-inits
 custom_code:

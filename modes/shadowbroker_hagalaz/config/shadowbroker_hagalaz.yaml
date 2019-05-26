@@ -269,7 +269,7 @@ shows:
         l_flash_throne: 120ms
     - time: 400ms
       flashers:
-        l_flash_kickback_lane: 200ms
+        l_flash_kickback: 200ms
         l_flash_right_ramp: 200ms
     - time: 700ms
       flashers:

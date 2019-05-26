@@ -1,0 +1,25 @@
+#config_version=5
+
+shows:
+  sbchase_sequence_off:
+    - lights:
+        l_(shot)_shield_rgb: off
+        l_(shot)_arrow_red: off
+        l_flash_(shot): off
+  sbchase_sequence_show:
+    - time: 0
+      lights:
+        l_(shot)_shield_rgb: on
+        l_(shot)_arrow_red: off
+        l_flash_(shot): off
+    - time: '+1'
+      lights:
+        l_(shot)_shield_rgb: off
+        l_(shot)_arrow_red: on
+        l_flash_(shot): off
+    - time: '+1'
+      lights:
+        l_(shot)_shield_rgb: off
+        l_(shot)_arrow_red: off
+        l_flash_(shot): on
+    - duration: 500ms

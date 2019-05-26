@@ -9,8 +9,9 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
+  # ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
+  ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
   # rgb_buffer: 10000
   # debug: true
@@ -515,7 +516,7 @@ lights:
     number: 2-8
   l_flash_battering_ram: # Battering Ram [#103]
     number: 2-6
-  l_flash_kickback_lane: # Kickback Lane [#99]
+  l_flash_kickback: # Kickback Lane [#99]
     number: 2-26
     tags: upfield_flashers
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
@@ -523,7 +524,7 @@ lights:
   l_flash_left_ramp: # Left Ramp [#98]
     number: 2-27
     tags: upfield_flashers
-  l_flash_pop_bumpers: # Pop Bumpers [#97]
+  l_flash_right_orbit: # Pop Bumpers [#97]
     number: 2-5
   l_flash_right_ramp: # Right Ramp [#96]
     number: 2-4

@@ -18,7 +18,7 @@
     l_flash_back_panel_left: off
     l_start_button: off
   flashers:
-    l_flash_pop_bumpers: 80ms
+    l_flash_right_orbit: 80ms
 - duration: 258ms
   lights:
     l_flash_back_panel_left: on

@@ -194,7 +194,7 @@ show_player:
       key: praet_flasher_main
       speed: 0.7
       show_tokens:
-        flashers: l_flash_kickback_lane, l_flash_slingshots
+        flashers: l_flash_kickback, l_flash_slingshots
   stop_base_praetorian_show:
     praet_flasher_dragon:
       action: stop
@@ -204,7 +204,7 @@ show_player:
     flasher_show_triple:
       loops: 0
       show_tokens:
-        flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_pop_bumpers, l_flash_dragon_left
+        flashers: l_flash_right_ramp, l_flash_left_ramp, l_flash_right_orbit, l_flash_dragon_left
   praetorian_attack_one:
     praet_attack_show_pre:
       action: play
@@ -230,7 +230,7 @@ show_player:
       loops: 3
       speed: 7
       show_tokens:
-        flashers: l_flash_kickback_lane, l_flash_pop_bumpers, l_flash_dragon_left
+        flashers: l_flash_kickback, l_flash_right_orbit, l_flash_dragon_left
   praetorian_attack_three:
     flash:
       action: play

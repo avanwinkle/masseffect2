@@ -3,6 +3,7 @@ config:
   - config_common.yaml
   - config_lcd.yaml
   - hardware_fast.yaml
+  - shows_fast.yaml
 
 # Custom code can't be included, or it will get double-inits
 custom_code:

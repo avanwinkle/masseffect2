@@ -293,7 +293,7 @@ lights:
     number: 10-8
   l_flash_battering_ram: # Battering Ram [#103]
     number: 10-6
-  l_flash_kickback_lane: # Kickback Lane [#99]
+  l_flash_kickback: # Kickback Lane [#99]
     number: 10-26
     tags: upfield_flashers
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
@@ -301,7 +301,7 @@ lights:
   l_flash_left_ramp: # Left Ramp [#98]
     number: 10-27
     tags: upfield_flashers
-  l_flash_pop_bumpers: # Pop Bumpers [#97]
+  l_flash_right_orbit: # Pop Bumpers [#97]
     number: 10-5
   l_flash_right_ramp: # Right Ramp [#96]
     number: 10-4

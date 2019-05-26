@@ -1,0 +1,37 @@
+#config_version=5
+
+shows:
+  sbchase_sequence_off:
+    - lights:
+        l_(shot)_ring: off
+  sbchase_sequence_show:
+    - time: 0
+      lights:
+        l_(shot)_ring_light_0: on
+        l_(shot)_ring_light_5:
+          color: AA
+    - time: '+1'
+      lights:
+        l_(shot)_ring_light_1: on
+        l_(shot)_ring_light_0:
+          color: AA
+    - time: '+1'
+      lights:
+        l_(shot)_ring_light_2: on
+        l_(shot)_ring_light_1:
+          color: AA
+    - time: '+1'
+      lights:
+        l_(shot)_ring_light_3: on
+        l_(shot)_ring_light_2:
+          color: AA
+    - time: '+1'
+      lights:
+        l_(shot)_ring_light_4: on
+        l_(shot)_ring_light_3:
+          color: AA
+    - time: '+1'
+      lights:
+        l_(shot)_ring_light_5: on
+        l_(shot)_ring_light_4:
+          color: AA

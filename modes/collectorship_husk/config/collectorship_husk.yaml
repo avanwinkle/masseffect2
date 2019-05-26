@@ -125,7 +125,7 @@ show_player:
     flasher_show_triple:
       loops: 0
       show_tokens:
-        flashers: l_flash_left_ramp, l_flash_sword_lock, l_flash_throne, l_flash_pop_bumpers
+        flashers: l_flash_left_ramp, l_flash_sword_lock, l_flash_throne, l_flash_right_orbit
   mode_collectorship_husk_will_stop:
     husk_standup_show:
       action: stop

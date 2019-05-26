@@ -46,7 +46,7 @@ shots:
 
 flasher_player:
   envshot_kickback_hit:
-    l_flash_kickback_lane: 50ms
+    l_flash_kickback: 50ms
   envshot_left_ramp_hit:
     l_flash_left_ramp: 50ms
   envshot_right_ramp_hit:
@@ -54,7 +54,7 @@ flasher_player:
   envshot_left_orbit_hit:
     l_flash_left_orbit: 50ms
   envshot_right_orbit_hit:
-    l_flash_pop_bumpers: 50ms
+    l_flash_right_orbit: 50ms
   bypass_lock_release_pulse:
     l_flash_sword_lock: 150ms
 
