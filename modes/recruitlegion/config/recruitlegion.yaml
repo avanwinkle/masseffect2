@@ -79,9 +79,6 @@ random_event_player:
 counters:
   hacking_counter:
     starting_count: 0
-    count_complete_value: 60
-    disable_on_complete: false
-    reset_on_complete: false
     direction: up
     count_events: heretic_sequence_shots_lit_hit
     events_when_hit: mission_shot_hit
@@ -301,11 +298,15 @@ sound_player:
       mode_end_action: stop
       volume: 1
   play_opening_heretic_dialogue: shepard_start_your_upload
-  mission_shot_hit{count==2}:
-    legion_alert_mobile_platforms:
+  # If the progress goes up, play a shot confirmation sound
+  player_heretic_progress{change>0}:
+    legion_shot_sound:
+      max_queue_time: 500ms
+  heretic_shot_dropbank_enabled{value==True}:
+    legion_warning_left_sound:
       max_queue_time: 1s
-  mission_shot_hit{count==1}:
-    legion_alert_close_combat:
+  heretic_shot_hitbank_enabled{value==True}:
+    legion_warning_right_sound:
       max_queue_time: 1s
   recruit_legion_precomplete:
     legion_hack_complete:
@@ -313,6 +314,36 @@ sound_player:
     music_legion_low:
       action: play
       mode_end_action: stop
+
+sound_pools:
+  legion_warning_left_sound:
+    type: sequential
+    track: voice
+    sounds:
+      - legion_alert_mobile_platforms
+      - legion_target_positive_y
+      - legion_target_negative_x
+  legion_warning_right_sound:
+    type: sequential
+    track: voice
+    sounds:
+      - legion_alert_close_combat
+      - legion_target_negative_y
+      - legion_target_positive_x
+  legion_shot_sound:
+    type: random_force_all
+    track: voice
+    sounds:
+      - legion_attacking_target
+      - legion_hostiles_eliminated
+      - legion_targets_eliminated
+      - legion_engaging_hostiles
+      - legion_attacking_requested_target
+      - legion_critical_target_strike
+      - legion_enemy_hit
+      - legion_successful_shot
+      - legion_target_eliminated
+      - legion_enemy_disabled
 
 sounds:
   music_legion:
@@ -347,6 +378,15 @@ sounds:
       attack: 50ms
       release: 100ms
       release_point: 50ms
+  legion_clear_reactivate_defense_turrets:
+    file: en_us_hench_geth_gthgtl_towerdef_h_00193277_m.ogg
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 50ms
+      release: 100ms
+      release_point: 50ms
   legion_hack_complete:
     file: en_us_hench_geth_gthgtl_towerdef_h_00183219_m.ogg
     track: voice
@@ -356,6 +396,50 @@ sounds:
       attack: 50ms
       release: 100ms
       release_point: 50ms
+  # Hit sounds for lane shots
+  legion_attacking_target:
+    file: en_us_hench_geth_ss_global_hench_geth_00240680_m.ogg
+    track: voice
+  legion_hostiles_eliminated:
+    file: en_us_hench_geth_ss_global_hench_geth_00240768_m.ogg
+    track: voice
+  legion_targets_eliminated:
+    file: en_us_hench_geth_ss_global_hench_geth_00240769_m.ogg
+    track: voice
+  legion_engaging_hostiles:
+    file: en_us_hench_geth_ss_global_hench_geth_00315342_m.ogg
+    track: voice
+  legion_attacking_requested_target:
+    file: en_us_hench_geth_ss_global_hench_geth_00315352_m.ogg
+    track: voice
+  legion_critical_target_strike:
+    file: en_us_hench_geth_ss_global_hench_geth_00315407_m.ogg
+    track: voice
+  legion_enemy_hit:
+    file: en_us_hench_geth_ss_global_hench_geth_00315451_m.ogg
+    track: voice
+  legion_successful_shot:
+    file: en_us_hench_geth_ss_global_hench_geth_00315453_m.ogg
+    track: voice
+  legion_target_eliminated:
+    file: en_us_hench_geth_ss_global_hench_geth_00315458_m.ogg
+    track: voice
+  legion_enemy_disabled:
+    file: en_us_hench_geth_ss_global_hench_geth_00315466_m.ogg
+    track: voice
+  # Sounds for banks
+  legion_target_positive_y:
+    file: en_us_hench_geth_ss_global_hench_geth_00242507_m.ogg
+    track: voice
+  legion_target_negative_x:
+    file: en_us_hench_geth_ss_global_hench_geth_00242508_m.ogg
+    track: voice
+  legion_target_positive_x:
+    file: en_us_hench_geth_ss_global_hench_geth_00242509_m.ogg
+    track: voice
+  legion_target_negative_y:
+    file: en_us_hench_geth_ss_global_hench_geth_00242510_m.ogg
+    track: voice
 
 # widget_player:
 #   timer_heretic_timer_tick:
