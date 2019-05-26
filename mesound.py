@@ -617,7 +617,11 @@ class ModeSounds(object):
                 if soundname in self._pool_tracks and self._pool_tracks[soundname] != sound_pool['track']:
                     print("ERROR: Sound {} exists in multiple pools/tracks in config {}".format(soundname, self.name))
                     return
-                self._pool_tracks[soundname] = sound_pool['track']
+                try:
+                    self._pool_tracks[soundname] = sound_pool['track']
+                except KeyError:
+                    raise AttributeError("Sound pool '{}'' has no track".format(soundname))
+
 
         for soundname, sound in mode_config['sounds'].items():
             self._add_sound(sound, pool_track=self._pool_tracks.get(soundname))

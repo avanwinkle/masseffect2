@@ -1024,6 +1024,11 @@ sounds:
     garrus_down_to_two:
       file: en_us_hench_garrus_ss_global_hench_garrus_00303102_m.ogg
       track: voice
+  # Squadmate one left
+    legion_one_left:
+      file: en_us_hench_geth_ss_global_hench_geth_00315376_m.ogg
+      track: voice
+  # Squadmate that's all
 ### FINAL BATTLE
   # Final battle intro
     shep_give_us_a_minute_edi:
