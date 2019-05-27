@@ -75,6 +75,13 @@ widget_styles:
     adjust_top: 0
     adjust_bottom: 2
     z: 1
+  recruitslide_score:
+    font_name: smallest_pixel-7
+    font_size: 9
+    line_height: 0.7
+    adjust_top: 1
+    adjust_bottom: 4
+    z: 1
   num:
     number_grouping: true
     min_digits: 2

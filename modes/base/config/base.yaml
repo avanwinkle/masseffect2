@@ -159,7 +159,7 @@ counters:
 light_player:
   mode_base_started:
     light_backwall_gi:
-      color: 9999AA
+      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
     light_backwall_ambient:
       color: 0044AA
 

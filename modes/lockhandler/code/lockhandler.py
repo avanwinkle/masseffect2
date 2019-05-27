@@ -62,7 +62,7 @@ class LockHandler(Mode):
                                 lockshot.state, lockshot.state_name, lockshot.enabled)
                           )
             # If that shot is enabled when this mode starts, make an event to enable the lock
-            # AVW: Is this still necessary? Doesn't feel like it would do anything
+            # This is necessary unless we use another way to track the enabled state between balls
             if lockshot.enabled:
                 self._post_event('enable_{}'.format(self._logicallockdevice.name))
         except KeyError:

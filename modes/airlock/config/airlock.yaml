@@ -14,10 +14,14 @@ mode:
   code: airlock.Airlock
   priority: 1000
 
+mode_settings:
+  ball_device: bd_lock
+  lock_device: fmball_lock
+
 event_player:
   ball_hold_missionselect_hold_held_ball: start_mode_missionselect
   # Relay these events to be agnostic with lockhandler
-  sw_airlock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
+  sw_lock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls + 1

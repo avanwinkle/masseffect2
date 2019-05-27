@@ -74,6 +74,7 @@ ball_saves:
     active_time: 10s
     hurry_up_time: 4s
     grace_period: 2s
+    enable_events: start_boss_combat, shadowbroker_round_start
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     auto_launch: true
     balls_to_save: 1

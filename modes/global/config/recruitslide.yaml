@@ -176,7 +176,7 @@ slides:
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (score)
-        style: body_md, row_top, col_right_anchor, num
+        style: recruitslide_score, row_top, col_right_anchor, num
         opacity: 0.5
       - type: text
         text: (mission_instructions)

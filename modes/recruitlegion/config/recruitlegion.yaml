@@ -244,12 +244,16 @@ shot_profiles:
     states:
       - name: lit
         show: heretic_lane_show
+        sync_ms: 500
       - name: lit
         show: heretic_lane_show_fast
+        sync_ms: 500
       - name: lit_target
         show: heretic_target_show
+        sync_ms: 500
       - name: lit_target
         show: heretic_target_show_fast
+        sync_ms: 500
       - name: timeout
         show: off
 
@@ -462,5 +466,5 @@ widget_player:
 widgets:
   heretic_hack_progress_widget:
     - type: text
-      text: "Hacking: (player|heretic_progress) / 60"
+      text: "Hack: (player|heretic_progress) / 60"
       style: header_xs, row_gutter, col_left_center

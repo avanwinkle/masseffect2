@@ -70,6 +70,11 @@ widget_styles:
     font_name: unispace_bd_it
     font_size: 96
     z: 110
+  recruitslide_score:
+    font_name: unispace_rg
+    font_size: 44
+    adjust_bottom: 0
+    z: 110
   num:
     number_grouping: true
     min_digits: 2

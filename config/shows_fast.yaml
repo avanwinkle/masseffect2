@@ -1,6 +1,15 @@
 #config_version=5
 
 shows:
+  overlord_jackpot_show:
+    - duration: 500ms
+      lights:
+        l_hitbank_bot: color_overlord_orange
+        l_hitbank_top: color_overlord
+    - duration: 500ms
+      lights:
+        l_hitbank_bot: color_overlord
+        l_hitbank_top: color_overlord_orange
   sbchase_sequence_off:
     - lights:
         l_(shot)_ring: off

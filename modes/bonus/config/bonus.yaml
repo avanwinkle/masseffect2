@@ -29,10 +29,10 @@ light_player:
   mode_bonus_started:
     gi:
       color: black
-      fade: 500ms
+      fade: 1s
     light_backwall_gi:
       color: AA0000
-      fade: 1s
+      fade: 3s
     light_backwall_ambient:
       color: black
       fade: 1s

@@ -1,45 +1,44 @@
 #show_version=5
 - time: 0
   lights:
-    shot_shields:
-      color: FF1F00 #color_shadowbroker
+    shot_shields: color_shadowbroker
+    light_backwall_ambient: color_shadowbroker
 - time: '+1'
   lights:
-    shot_shields:
-      color: FF7700 #color_zaeed
+    shot_shields: color_zaeed
+    light_backwall_ambient: color_zaeed
 - time: '+1'
   lights:
-    shot_shields:
-      color: EEFF00 #color_kasumi
+    shot_shields: color_kasumi
+    light_backwall_ambient: color_kasumi
 - time: '+1'
   lights:
-    shot_shields:
-      color: 0055FF #color_garrus
+    shot_shields: color_garrus
+    light_backwall_ambient: color_garrus
 - time: '+1'
   lights:
-    shot_shields:
-      color: 008899 #color_samara
+    shot_shields: color_samara
+    light_backwall_ambient: color_samara
   flashers:
     l_flash_dragon_right: 100ms
 - time: '+1'
   lights:
-    shot_shields:
-      color: 00FF11 #color_thane
+    shot_shields: color_thane
+    light_backwall_ambient: color_thane
   flashers:
     l_flash_throne: 100ms
 - time: '+1'
   lights:
-    shot_shields:
-      color: FF11DD #color_tali
+    shot_shields: color_tali
+    light_backwall_ambient: color_tali
   flashers:
     l_flash_dragon_left: 100ms
 - time: '+1'
   lights:
-    shot_shields:
-      color: 5500FF #color_barrier
+    shot_shields: color_barrier
+    light_backwall_ambient: color_barrier
 - time: '+1'
   lights:
-    shot_shields:
-      color: 990000 #color_health
+    shot_shields: color_health
+    light_backwall_ambient: color_health
 - time: '+1'
-
