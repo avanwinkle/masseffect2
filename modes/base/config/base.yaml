@@ -161,7 +161,7 @@ light_player:
     light_backwall_gi:
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
     light_backwall_ambient:
-      color: 0044AA
+      color: color_space
 
 variable_player:
   defer_recruit_advance_score:

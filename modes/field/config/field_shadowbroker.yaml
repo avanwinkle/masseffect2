@@ -70,7 +70,7 @@ show_player:
     shadowbroker_lit_show:
       action: play
       priority: 10
-      sync_ms: 1000
+      sync_ms: 800
   play_shadowbroker_hold_show:
     shadowbroker_hold_show:
       action: play
@@ -82,11 +82,11 @@ show_player:
     shadowbroker_lit_show:
       action: play
       priority: 10
-      sync_ms: 1000
+      sync_ms: 800
   enable_shadowbroker_hold:
     shadowbroker_hold_enabled_show:
       action: play
-      sync_ms: 1000
+      sync_ms: 800
     shadowbroker_hold_show:
       action: stop
   enter_shadowbroker_modes:
@@ -101,7 +101,7 @@ show_player:
     shadowbroker_lit_show:
       action: play
       priority: 10
-      sync_ms: 1000
+      sync_ms: 800
   mode_field_will_stop:
     shadowbroker_lit_show:
       action: stop

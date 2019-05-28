@@ -51,6 +51,9 @@ slide_player:
   ball_search_stopped:
     ball_search_slide:
       action: remove
+  # cancel_ball_search:
+  #   ball_search_cancel_slide:
+  #     expire: 3s
 
 slides:
   ball_search_slide:
@@ -61,6 +64,11 @@ slides:
       - type: text
         text: Searching For Balls
         style: body_md, row_sub
+  ball_search_cancel_slide:
+    widgets:
+      - type: text
+        text: Balls Missing
+        style: header_sm, row_main
 
 sound_player:
   mode_attract_started:

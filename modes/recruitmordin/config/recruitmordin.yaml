@@ -91,7 +91,7 @@ shots:
   fan_left:
     hit_events: sh_left_ramp_hit
     enable_events: enable_fans
-    profile: color_flashing_profile
+    profile: color_flashing_fast_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: color_door_green
@@ -99,7 +99,7 @@ shots:
   fan_right:
     hit_events: sh_right_ramp_hit
     enable_events: enable_fans
-    profile: color_flashing_profile
+    profile: color_flashing_fast_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: color_door_green
@@ -111,6 +111,10 @@ sound_player:
       action: play
       loops: -1
   play_intro_sound: mission_intro
+  player_shot_cure_right_enabled{change==1}:
+    step0_voice:
+      max_queue_time: 1s
+  # Use a special event so we can re-play the sound on mission resume
   play_cure_sound:
     step1_voice:
       max_queue_time: 1s
@@ -125,6 +129,17 @@ sound_player:
       max_queue_time: 500ms
 
 sound_pools:
+  step0_voice:
+    type: random
+    track: voice
+    sounds:
+      - step0_voice_miranda
+      - step0_voice_jacob
+      - step0_voice_garrus{current_player.status_garrus>=4}|2
+      - step0_voice_kasumi{current_player.status_kasumi>=4}|2
+      - step0_voice_zaeed{current_player.status_zaeed>=4}|3
+      - step0_voice_tali{current_player.status_tali>=4}|3
+      - step0_voice_jack{current_player.status_jack>=4}|2
   step1_voice:
     type: random
     track: voice
@@ -166,6 +181,20 @@ sounds:
     fade_out: 1s
   mission_intro:
     file: en_us_hench_professor_omgpra_mordin_d_00210618_m.ogg
+  step0_voice_jack:
+    file: en_us_hench_convict_omgpra_plant_shutdown_a_00211827_m.ogg
+  step0_voice_tali:
+    file: en_us_hench_tali_omgpra_plant_shutdown_a_00211819_m.ogg
+  step0_voice_garrus:
+    file: en_us_hench_garrus_omgpra_plant_shutdown_a_00211828_m.ogg
+  step0_voice_kasumi:
+    file: en_us_hench_thief_omgpra_plant_shutdown_a_00211826_m.ogg
+  step0_voice_zaeed:
+    file: en_us_hench_veteran_omgpra_plant_shutdown_a_00211831_m.ogg
+  step0_voice_jacob:
+    file: en_us_hench_leading_omgpra_plant_shutdown_a_00211829_m.ogg
+  step0_voice_miranda:
+    file: en_us_hench_vixen_omgpra_plant_shutdown_a_00211830_m.ogg
   step1_voice_garrus:
     file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.ogg
   step2_voice_garrus:

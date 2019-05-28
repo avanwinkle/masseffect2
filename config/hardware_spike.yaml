@@ -79,6 +79,7 @@ named_colors:
   skillshot_color_paragon: ffffff
   skillshot_color_renegade: ffffff
   dropbank_color_shadowbroker: ffffff
+  color_kasumi_alarm: ffffff
 
 switches:
   s_start_button:

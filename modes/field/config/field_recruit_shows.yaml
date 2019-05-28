@@ -3,73 +3,73 @@ show_player:
   player_available_missions{value>0}:
     missions_available_show:
       action: play
-      sync_ms: 1000
+      sync_ms: 800
   player_bypass_missionselect{value>0}:
     missions_available_show:
       action: stop
   mode_field_started.1:
     missions_available_show{current_player.available_missions>0 and current_player.bypass_missionselect==0}:
       action: play
-      sync_ms: 1000
+      sync_ms: 800
     # All of the following are to flash/light the colored shields for available/completed recruit missions
     recruits_lit_show{current_player.status_garrus==3}:
       action: play
       key: recruits_lit_show_garrus
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_blue
     recruits_lit_show{current_player.status_grunt==3}:
       action: play
       key: recruits_lit_show_grunt
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_orange
     recruits_lit_show{current_player.status_jack==3}:
       action: play
       key: recruits_lit_show_jack
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_purple
     recruits_lit_show{current_player.status_kasumi==3}:
       action: play
       key: recruits_lit_show_kasumi
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_yellow
     recruits_lit_show{current_player.status_legion==3}:
       action: play
       key: recruits_lit_show_legion
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_white
     recruits_lit_show{current_player.status_mordin==3}:
       action: play
       key: recruits_lit_show_mordin
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_red
     recruits_lit_show{current_player.status_samara==3}:
       action: play
       key: recruits_lit_show_samara
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: l_iron_throne
     recruits_lit_show{current_player.status_tali==3}:
       action: play
       key: recruits_lit_show_tali
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: l_return_lane
     recruits_lit_show{current_player.status_thane==3}:
       action: play
       key: recruits_lit_show_thane
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: color_shield_green
     recruits_lit_show{current_player.status_zaeed==3}:
       action: play
       key: recruits_lit_show_zaeed
-      sync_ms: 1000
+      sync_ms: 800
       show_tokens:
         leds: l_hand_of_the_king
     recruits_complete_show{current_player.status_garrus==4}:
@@ -168,23 +168,23 @@ show_player:
 
 shows:
   missions_available_show:
-    - duration: 500ms
+    - duration: 400ms
       lights:
-        light_missionselect: white
-    - duration: 500ms
+        light_missionselect: on
+    - duration: 400ms
       lights:
-        light_missionselect: black
+        light_missionselect: off
   recruits_lit_show:
-    - duration: 1000ms
+    - duration: 800ms
       lights:
         (leds):
           color: off
-          fade: 250ms
-    - duration: 500ms
+          fade: 200ms
+    - duration: 400ms
       lights:
         (leds):
           color: EEEEEE
-          fade: 250ms
+          fade: 200ms
   recruits_complete_show:
     - time: 0
       lights:

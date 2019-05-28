@@ -18,6 +18,9 @@ slide_player:
   tilt:
     me_tilt:
       force: true
+    tilt_portrait:
+      force: true
+      target: lcd_right
   tilt_clear:
     tilt:
       action: remove
@@ -26,17 +29,17 @@ slides:
   me_tilt_warning_1:
     expire: 2s
     widgets:
-    - type: text
-      text: WARNING
-      style: header_lg, row_main
-    - widget: background_console
+      - type: text
+        text: WARNING
+        style: header_lg, row_main
+      - widget: background_console
   me_tilt_warning_2:
     expire: 2s
     widgets:
-    - type: text
-      text: DANGER
-      style: header_lg, row_main
-    - widget: background_console
+      - type: text
+        text: DANGER
+        style: header_lg, row_main
+      - widget: background_console
   tilt_portrait:
     expire: 2s
     widgets:
@@ -44,9 +47,10 @@ slides:
         image: portrait_tilt
   me_tilt:
     widgets:
-    - type: text
-      text: TILT
-      style: header_lg, row_main
+      - type: text
+        text: TILT
+        style: header_lg, row_main
+      - widget: background_console
 
 sound_player:
   tilt_warning_1: tilt_warning_normal
@@ -180,4 +184,3 @@ sounds:
   tilt_reaper:
     file: BioD_Gth002_220ReaperAwakes.36.ogg
     track: sfx
-

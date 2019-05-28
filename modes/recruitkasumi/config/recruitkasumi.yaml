@@ -81,7 +81,7 @@ shot_profiles:
         show: unalarmed_show
       - name: off
         show: alarmed_show
-        sync_ms: 700
+        sync_ms: 800
 
 shots:
   kasumi_left_orbit:
@@ -189,46 +189,46 @@ shows:
         (lane_led): color_kasumi%30
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
-    - duration: 600ms
+    - duration: 400ms
       lights:
         (arrow_led):
-          color: FFFFFF
-          fade: 120ms
+          color: color_kasumi_alarm
+          fade: 200ms
         (lane_led):
           color: off
-    - duration: 1200ms
+    - duration: 800ms
       lights:
         (arrow_led):
           color: 000000
-          fade: 120ms
+          fade: 200ms
   alarm_sweep_show:
     - time: 0
       lights:
-        light_alarm_left_orbit: white
+        light_alarm_left_orbit: color_kasumi_alarm
         light_alarm_kickback: black
         light_alarm_left_ramp: black
         light_alarm_right_ramp: black
-        light_alarm_right_orbit: white
+        light_alarm_right_orbit: color_kasumi_alarm
     - time: '+1'
       lights:
         light_alarm_left_orbit: black
-        light_alarm_kickback: white
+        light_alarm_kickback: color_kasumi_alarm
         light_alarm_left_ramp: black
-        light_alarm_right_ramp: white
+        light_alarm_right_ramp: color_kasumi_alarm
         light_alarm_right_orbit: black
     - time: '+2'
       lights:
-        light_alarm_left_orbit: white
+        light_alarm_left_orbit: color_kasumi_alarm
         light_alarm_kickback: black
         light_alarm_left_ramp: black
         light_alarm_right_ramp: black
-        light_alarm_right_orbit: white
+        light_alarm_right_orbit: color_kasumi_alarm
     - time: '+3'
       lights:
         light_alarm_left_orbit: black
-        light_alarm_kickback: white
+        light_alarm_kickback: color_kasumi_alarm
         light_alarm_left_ramp: black
-        light_alarm_right_ramp: white
+        light_alarm_right_ramp: color_kasumi_alarm
         light_alarm_right_orbit: black
     - time: '+4'
 

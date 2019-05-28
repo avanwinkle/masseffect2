@@ -353,6 +353,7 @@ named_colors:
   color_paragon: 1166FF
   color_renegade: "660000"
   color_door_green: 55FF00
+  color_space: 0044AA
   # Other Modes
   color_collectors: ff2200
   color_husk: 00101E
