@@ -150,7 +150,7 @@ shots:
     disable_events: mode_recruitlegion_started, recruit_legion_precomplete
     profile: color_flashing_fast_static
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
       color: color_legion
     tags: envshot_dropbank, power_target_charge
   heretic_shot_hitbank:
@@ -162,7 +162,7 @@ shots:
     disable_events: mode_recruitlegion_started, recruit_legion_precomplete
     profile: color_flashing_fast_static
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
       color: color_legion
     tags: envshot_hitbank, power_target_charge
   # Main shots

@@ -125,7 +125,7 @@ shots:
     enable_events: start_n7_lost_operative
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
   n7_msv_strontium_mule_shot:
     hit_events: sh_right_ramp_hit
     profile: n7_shot_profile

@@ -1,12 +1,12 @@
 #show_version=5
 - time: 0
   lights:
-    l_dropbank_shield_rgb: red
-    l_hitbank_shield_rgb: 0
+    light_dropbank_rgb: red
+    light_hitbank_rgb: 0
 - time: '+1'
   lights:
     l_left_orbit_shield_rgb: orange
-    l_dropbank_shield_rgb: 0
+    light_dropbank_rgb: 0
 - time: '+1'
   lights:
     l_kickback_shield_rgb: yellow
@@ -25,5 +25,5 @@
     l_right_ramp_shield_rgb: 0
 - time: '+1'
   lights:
-    l_hitbank_shield_rgb: purple
+    light_hitbank_rgb: purple
     l_right_orbit_shield_rgb: 0

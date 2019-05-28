@@ -176,14 +176,14 @@ shots:
     hit_events: sh_dropbank_top_hit, sh_dropbank_bottom_hit, sh_dropbank_middle_hit
     profile: normandy_bank_profile
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
       flashers: l_flash_slingshots
     tags: envshot_dropbank
   normandy_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: normandy_bank_profile
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
       flashers: l_flash_sword_lock
     tags: envshot_hitbank
   normandy_outlane:

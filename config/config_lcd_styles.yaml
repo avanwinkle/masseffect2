@@ -53,7 +53,7 @@ widget_styles:
     font_name: jupiter
     font_size: 56
     adjust_top: 20
-    adjust_bottom: 12
+    adjust_bottom: 2
     line_height: 0.9
     z: 110
   squad_debug_style:
@@ -192,28 +192,24 @@ widget_styles:
   #------------------------------
   pos_player_1:
     anchor_y: bottom
-    y: 90%  # row_title
     anchor_x: left
-    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
-    x: 9%
+    y: 90%  # row_title
+    x: 8.9%  # col_left_indent
   pos_player_2:
     anchor_y: bottom
+    anchor_x: right
     y: 90%  # row_title
-    anchor_x: left
-    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
-    x: 29.5%
+    x: right-8.9%  # col_right_indent
   pos_player_3:
-    anchor_y: bottom
-    y: 90%  # row_title
+    anchor_y: top
     anchor_x: left
-    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
-    x: 50%
+    y: 87.8%  # row_bottom
+    x: 8.9%  # col_left_indent
   pos_player_4:
-    anchor_y: bottom
-    y: 90%  # row_title
-    anchor_x: left
-    # Indents are 8.9%, round up to 9. 82% / 4 = 20.5% each
-    x: 70.5%
+    anchor_y: top
+    anchor_x: right
+    y: 87.8%  # row_bottom
+    x: right-8.9%  # col_right_indent
   text_player_name:
     font_name: me123
     font_size: 28

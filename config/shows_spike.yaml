@@ -1,6 +1,15 @@
 #config_version=5
 
 shows:
+  corereset_show:
+    - time: 0
+      lights:
+        l_hitbanks: off
+        light_hitbank_rgb: 00FF00
+    - time: '+1'
+      lights:
+        l_hitbanks: on
+        light_hitbank_rgb: 000000
   overlord_jackpot_show:
     - duration: 1s
       lights:

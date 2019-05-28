@@ -1,5 +1,24 @@
 #config_version=5
 shows:
+  ball_save_preshow:
+    - lights:
+        l_ball_save: on
+  ball_save_show:
+    - time: 0
+      lights:
+        l_ball_save:
+          color: off
+    - time: '+1'
+      lights:
+        l_ball_save:
+          color: on
+  color_on:
+    - lights:
+        (leds): (color)
+  color_off:
+    - lights:
+        (leds): black
+        l_null: (color)
   color_flashing_default:
     - duration: 400ms
       lights:
@@ -23,6 +42,59 @@ shows:
     - duration: 400ms
       lights:
         (leds): (color2)
+  flash_all_shields_show:
+    - time: 0
+      lights:
+        l_left_orbit_shield_rgb: (color)
+        l_left_ramp_shield_rgb: (color)
+        l_kickback_shield_rgb: (color)
+        l_right_ramp_shield_rgb: (color)
+        l_right_orbit_shield_rgb: (color)
+        light_dropbank_rgb: (color)
+        light_hitbank_rgb: (color)
+    - time: '+1'
+      lights:
+        l_left_orbit_shield_rgb: black
+        l_left_ramp_shield_rgb: black
+        l_kickback_shield_rgb: black
+        l_right_ramp_shield_rgb: black
+        l_right_orbit_shield_rgb: black
+        light_dropbank_rgb: black
+        light_hitbank_rgb: black
+        l_null: (color)
+    - time: '+1'
+  flash_color_show:
+    - time: 0
+      lights:
+        (leds): (color)
+    - time: '+1'
+      lights:
+        (leds): black
+        l_null: (color)
+  flasher_show_single:
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 10s
+  flasher_show_double:
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 10s
+  flasher_show_triple:
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 200ms
+      flashers:
+        (flashers): 120ms
+    - duration: 10s
 
 shot_profiles:
   color_on:

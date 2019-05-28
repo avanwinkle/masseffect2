@@ -4,13 +4,13 @@ flippers:
     main_coil: c_flipper_right_main
     activation_switch: s_flipper_right
     # Maybe different enable_events for flippers will reduce desync?
-    enable_events: player_turn_started, flippers_on, right_flipper_on
+    enable_events: ball_started, flippers_on, right_flipper_on
     disable_events: ball_ending, service_mode_entered, flippers_off, right_flipper_off
   left_flipper:
     main_coil: c_flipper_left_main
     activation_switch: s_flipper_left
     # Maybe different enable_events for flippers will reduce desync?
-    enable_events: player_turn_started, flippers_on, left_flipper_on
+    enable_events: ball_started, flippers_on, left_flipper_on
     disable_events: ball_ending, service_mode_entered, flippers_off, left_flipper_off
 
 drop_targets:
@@ -32,24 +32,24 @@ autofire_coils:
   left_slingshot:
     switch: s_left_slingshot
     coil: c_slingshot_left
-    enable_events: ball_started, slingshots_on
+    enable_events: player_turn_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
     debug: true
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
-    enable_events: ball_started, bumpers_on
+    enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
     debug: true
   right_bumper:
     switch: s_bumper_right
     coil: c_bumper_right
-    enable_events: ball_started, bumpers_on
+    enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
-    enable_events: ball_started, bumpers_on
+    enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
     timeout_watch_time: 1s
     timeout_max_hits: 1
@@ -57,7 +57,7 @@ autofire_coils:
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
-    enable_events: ball_started, slingshots_on
+    enable_events: player_turn_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
     debug: true
 # kickbacks:

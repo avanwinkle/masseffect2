@@ -132,8 +132,7 @@ shows:
         l_pop_bumpers: off
         l_left_top_lane: off
         l_right_top_lane: off
-        l_hitbank_bot: off
-        l_hitbank_top: off
+        l_hitbanks: off
         l_upgrade: off
         light_lock_lit: off
   missionselect_highlight_show:
@@ -147,7 +146,7 @@ shows:
   missionselect_suicide_show:
     - time: 0
       lights:
-        l_dropbank_shield_rgb:
+        light_dropbank_rgb:
           color: (color)
           fade: (fadetime)
         l_right_orbit_shield_rgb:
@@ -158,7 +157,7 @@ shows:
         l_left_orbit_shield_rgb:
           color: (color)
           fade: (fadetime)
-        l_hitbank_shield_rgb:
+        light_hitbank_rgb:
           color: 0
           fade: (fadetime)
     - time: '+1'
@@ -166,7 +165,7 @@ shows:
         l_kickback_shield_rgb:
           color: (color)
           fade: (fadetime)
-        l_dropbank_shield_rgb:
+        light_dropbank_rgb:
           color: 0
           fade: (fadetime)
     - time: '+1'
@@ -195,7 +194,7 @@ shows:
           fade: (fadetime)
     - time: '+1'
       lights:
-        l_hitbank_shield_rgb:
+        light_hitbank_rgb:
           color: (color)
           fade: (fadetime)
         l_right_ramp_shield_rgb:

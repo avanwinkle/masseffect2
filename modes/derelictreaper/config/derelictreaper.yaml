@@ -191,15 +191,6 @@ show_player:
       speed: 6
 
 shows:
-  corereset_show:
-    - time: 0
-      lights:
-        l_hitbanks: off
-        l_hitbank_shield_rgb: 00FF00
-    - time: '+1'
-      lights:
-        l_hitbanks: on
-        l_hitbank_shield_rgb: 000000
   reaperhusk_show:
     - time: 0
       lights:

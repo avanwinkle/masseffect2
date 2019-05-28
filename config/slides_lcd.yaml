@@ -114,7 +114,7 @@ slides:
   recruit_instructions_portrait_slide:
     widgets:
       - widget: portrait_squadmate_(squadmate)_advance
-  
+
 widgets:
   grid_widget:
     - type: image
@@ -160,7 +160,7 @@ widgets:
       text: <
       style: header_xs, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
-      adjust_right: -142
+      adjust_right: -156
   n7_logo:
     - type: image
       image: n7_logo
@@ -175,13 +175,13 @@ widgets:
       y: 90%
   resume_widget:
     - type: text
-      text: "Both flippers to\nresume (player|resume_mission) recruitment"
+      text: "Both flippers to resume\n(player|resume_mission) recruitment"
       style: header_xs, row_sub_under, col_left_anchor
       casing: upper
       z: 5
       animations:
         add_to_slide: pulse_text_slow
-  
+
   # POWERS
   power_activating_countdown_widget:
     - type: text

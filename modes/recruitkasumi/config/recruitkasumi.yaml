@@ -81,7 +81,7 @@ shot_profiles:
         show: unalarmed_show
       - name: off
         show: alarmed_show
-        sync_ms: 800
+        sync_ms: 2400
 
 shots:
   kasumi_left_orbit:
@@ -130,23 +130,17 @@ show_player:
     kasumi_gi_show:
       action: play
       loops: -1
-    flasher_show_single:
-      action: play
-      show_tokens:
-        flashers: l_flash_back_panel_left
-    alarm_sweep_show:
-      action: play
-      loops: 2
-      speed: 60
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
   logicblock_kasumi_alarms_counter_hit:
-    flasher_show_triple:
+    flash_color_show:
       action: play
-      loops: 0
+      speed: 9
+      loops: 3
       show_tokens:
-        flashers: l_flash_battering_ram
+        leds: light_flash_alarm
+        color: color_kasumi_alarm
     color_flashing_fast:
       action: play
       loops: 3
@@ -189,18 +183,18 @@ shows:
         (lane_led): color_kasumi%30
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
-    - duration: 400ms
+    - duration: 1200ms
       lights:
         (arrow_led):
           color: color_kasumi_alarm
-          fade: 200ms
+          fade: 800ms
         (lane_led):
           color: off
-    - duration: 800ms
+    - duration: 1200ms
       lights:
         (arrow_led):
           color: 000000
-          fade: 200ms
+          fade: 800ms
   alarm_sweep_show:
     - time: 0
       lights:
@@ -216,21 +210,21 @@ shows:
         light_alarm_left_ramp: black
         light_alarm_right_ramp: color_kasumi_alarm
         light_alarm_right_orbit: black
-    - time: '+2'
+    - time: '+1'
       lights:
         light_alarm_left_orbit: color_kasumi_alarm
         light_alarm_kickback: black
         light_alarm_left_ramp: black
         light_alarm_right_ramp: black
         light_alarm_right_orbit: color_kasumi_alarm
-    - time: '+3'
+    - time: '+1'
       lights:
         light_alarm_left_orbit: black
         light_alarm_kickback: color_kasumi_alarm
         light_alarm_left_ramp: black
         light_alarm_right_ramp: color_kasumi_alarm
         light_alarm_right_orbit: black
-    - time: '+4'
+    - time: '+1'
 
 slide_player:
   recruit_kasumi_failed:

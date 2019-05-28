@@ -131,33 +131,33 @@ shows:
         l_dropbank_middle: dropbank_color_shadowbroker
         l_dropbank_top: dropbank_color_shadowbroker
   shadowbroker_lit_show:
-    - duration: 500ms
+    - duration: 1500ms
       lights:
         l_dropbank_bottom: dropbank_color_shadowbroker
         l_dropbank_top: dropbank_color_shadowbroker
         l_dropbank_middle: dropbank_color_shadowbroker
-        l_dropbank_shield_rgb:
+        light_dropbank_rgb:
           color: color_shadowbroker
-          fade: 20ms
-    - duration: 500ms
+          fade: 1200ms
+    - duration: 1500ms
       lights:
-        l_dropbank_shield_rgb:
-          color: black
-          fade: 20ms
+        light_dropbank_rgb:
+          color: color_shadowbroker%10
+          fade: 1200ms
   shadowbroker_hold_show:
     - lights:
-        l_dropbank_shield_rgb: color_shadowbroker
+        light_dropbank_rgb: color_shadowbroker
   shadowbroker_hold_enabled_show:
-    - duration: 500ms
+    - duration: 1500ms
       lights:
         light_shadowbroker_start:
           color: on
-          fade: 20ms
-    - duration: 500ms
+          fade: 1200ms
+    - duration: 1500ms
       lights:
         light_shadowbroker_start:
           color: off
-          fade: 20ms
+          fade: 1200ms
   vasir_intro_cineanim:
     - sounds:
         liara_vasir_its_over:

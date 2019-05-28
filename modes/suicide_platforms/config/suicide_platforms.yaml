@@ -102,13 +102,13 @@ shots:
     hit_events: sh_dropbank_hit
     profile: color_flashing_fast_profile
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
       color: color_collectors
   platform_hitbank:
     hit_events: sh_hitbank_hit
     profile: color_flashing_fast_profile
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
       color: color_collectors
   platform_target1:
     hit_events: sw_standuptarget_active

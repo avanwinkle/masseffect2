@@ -174,14 +174,14 @@ shots:
     enable_events: enable_praet_dropbank
     disable_events: praetorian_shot_hit
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
   praet_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: praet_shot_profile
     enable_events: enable_praet_hitbank
     disable_events: praetorian_shot_hit
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
 
 show_player:
   start_base_praetorian_show:

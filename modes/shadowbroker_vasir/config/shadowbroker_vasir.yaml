@@ -180,14 +180,14 @@ shots:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
     profile: vasirprofile
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
   sbvasir_hitbank:
     advance_events:
       - player_shot_sbvasir_hitbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: vasirprofile
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
 
 show_player:
   mode_shadowbroker_vasir_started:

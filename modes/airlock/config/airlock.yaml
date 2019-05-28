@@ -42,6 +42,13 @@ queue_relay_player:
     post: check_slide_queue
     wait_for: slide_queue_clear
 
+ball_saves:
+  airlock_save:
+    balls_to_save: 1
+    enable_events: balldevice_bd_lock_ejecting_ball
+    active_time: 3s
+    auto_launch: true
+
 ball_holds:
   missionselect_hold:
     balls_to_hold: 1
@@ -77,3 +84,15 @@ multiball_locks:
     enable_events: enable_fmball_lock
     disable_events: multiball_lock_fmball_lock_locked_ball, mode_collectorship_base_started
     debug: true
+
+show_player:
+  ball_save_airlock_save_enabled:
+    color_flashing_default:
+      key: airlock_save_show
+      speed: 3
+      show_tokens:
+        leds: l_ball_save
+        color: color_shields
+  ball_save_airlock_save_disabled:
+    airlock_save_show:
+      action: stop

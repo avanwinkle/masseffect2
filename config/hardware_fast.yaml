@@ -15,7 +15,7 @@ fast:
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
   # rgb_buffer: 10000
   # debug: true
-  hardware_led_fade_time: 20
+  hardware_led_fade_time: 100
 
 machine:
   balls_installed: 6
@@ -82,17 +82,17 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 22  # Increased from Spike 35
+    default_pulse_ms: 38  # Increased from Spike 35
     # default_pulse_power: 0.8
-    default_hold_power: 0.10
+    default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 22  # Increased from Spike 35
+    default_pulse_ms: 38  # Increased from Spike 35
     # default_pulse_power: 0.8
-    default_hold_power: 0.10
+    default_hold_power: 0.1
   c_plunger:
     number: 1-1
-    default_pulse_ms: 55  # Increased from Spike 18, bumped from 40
+    default_pulse_ms: 45  # Increased from Spike 18, bumped from 40
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -128,8 +128,8 @@ coils:
     # MOVED while the 3208 is burned out
     # number: 1-2
     number: 0-0
-    default_pulse_ms: 28
-    default_hold_power: 0.16  # 0.08 buzzes a lot, but less is too weak
+    default_pulse_ms: 35
+    default_hold_power: 0.2  # 0.08 buzzes a lot, but less is too weak
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true
@@ -255,6 +255,7 @@ switches:
     ignore_window_ms: 1100
   s_left_orbit:
     number: 2-6
+    ignore_window_ms: 1100
   s_right_ramp_exit:
     number: 2-7
     ignore_window_ms: 1100
@@ -277,8 +278,10 @@ switches:
   s_battering_ram: # rename: s_airlock_entrance
     number: 0-5
     tags: lock_entrance
+    ignore_window_ms: 1100
   s_kickback:
     number: 0-6
+    ignore_window_ms: 600
   s_spinner:
     number: 0-7
   # BOARD 3 ?
@@ -347,7 +350,7 @@ light_stripes:
     number_template: 3-{}
     count: 10
     light_template:
-      tags: light_backwall_gi
+      tags: light_backwall_gi, light_flash_alarm
       type: rgb
   l_backwall_ambient:
     number_start: 10
@@ -374,17 +377,17 @@ lights:
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 0-3
     type: grb
-    tags: l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, l_dropbanks, outer_circles
     default_on_color: color_shadowbroker
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 0-4
     type: grb
-    tags: l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, l_dropbanks, outer_circles
     default_on_color: color_shadowbroker
   l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 0-5
     type: grb
-    tags: l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, l_dropbanks, outer_circles
     default_on_color: color_shadowbroker
 
   l_left_outlane: # Left Outlane [#11]
@@ -622,15 +625,15 @@ lights:
     number: 2-62
   # # l_tournament_start: # Tournament Start [#3]
   # #   number: 0-3
-  l_hitbank_shield_rgb: # Right 2-Bank Sigil R [#35]
-    type: grb
-    number: 2-47
-    tags: shot_shields
+  # l_hitbank_shield_rgb: # Right 2-Bank Sigil R [#35]
+  #   type: grb
+  #   number: 2-47
+  #   tags: shot_shields
   l_action_button_rgb: # Lockdown R [#4]
     type: grb
     number: 2-48
     tags: l_action_button
-  l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
-    type: grb
-    number: 2-44
-    tags: shot_shields
+  # l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
+  #   type: grb
+  #   number: 2-44
+  #   tags: shot_shields

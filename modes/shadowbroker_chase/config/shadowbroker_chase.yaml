@@ -41,6 +41,10 @@ event_player:
   mode_shadowbroker_chase_will_stop:
     # If we failed the chase, end of wizard time
     - mode_type_wizard_stopped{current_player.state_machine_shadowbroker=="chase"}
+  # Sounds for misses
+  logicblock_truck_counter_hit{count%2==0}: play_truck_sound
+  logicblock_truck_counter_hit{count%2==1 or count>5}: play_miss_sound
+  sbchase_shots_off_hit: play_miss_sound
 
 ball_saves:
   sbchase_save:
@@ -64,6 +68,10 @@ counters:
     count_events:
       - player_sbchase_hits_remaining{player_num==current_player.number and value<device.counters.chase_maxhits_counter.value}
     events_when_hit: mission_shot_hit
+  truck_counter:
+    starting_count: 0
+    direction: up
+    count_events: envshot_hitbank_hit, envshot_dropbank_hit
 
 variable_player:
   # Player var 'sbchase_hits_remaning' has a default value of 5
@@ -84,7 +92,7 @@ random_event_player:
       - play_shepard_there_we_go
       - play_shepard_what_kind_of_guns
       - play_liara_go_go_go
-  sbchase_shots_off_hit:
+  play_miss_sound:
     events:
       - play_liara_oncoming_traffic
       - play_liara_need_to_go_faster
@@ -232,11 +240,7 @@ sound_player:
   play_liara_dont_lose_her: liara_dont_lose_her
   play_liara_going_the_wrong_way: liara_going_the_wrong_way
   # -- truck
-  envshot_hitbank_hit:
-    liara_sound_truck:
-      max_queue_time: 100ms
-      events_when_stopped: callback_shepard_truck
-  envshot_dropbank_hit:
+  play_truck_sound:
     liara_sound_truck:
       max_queue_time: 100ms
       events_when_stopped: callback_shepard_truck

@@ -92,9 +92,15 @@ slide_player:
 sound_player:
   # During multiballs the save event will post even if it's not the last ball (i.e. no save)
   # Count the balls being saved to avoid playing the sound unnecessarily
-  ball_save_medigel_save_saving_ball{balls==1}: medigel_sound
-  ball_save_default_saving_ball: medigel_sound
-  ball_save_recruitsave_saving_ball: medigel_sound
+  ball_save_medigel_save_saving_ball{balls==1}:
+    medigel_sound:
+      max_queue_time: 1s
+  ball_save_default_saving_ball:
+    medigel_sound:
+      max_queue_time: 1s
+  ball_save_recruitsave_saving_ball:
+    medigel_sound:
+      max_queue_time: 1s
 
 sound_pools:
   medigel_sound:

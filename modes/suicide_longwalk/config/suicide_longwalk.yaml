@@ -161,7 +161,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_dropbank_shield_rgb
+      leds: light_dropbank_rgb
     tags: envshot_dropbank
   longwalk_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
@@ -171,7 +171,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_hitbank_shield_rgb
+      leds: light_hitbank_rgb
     tags: envshot_hitbank
 
 shot_profiles:

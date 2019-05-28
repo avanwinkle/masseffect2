@@ -290,10 +290,12 @@ lights:
     tags: l_dropbanks, outer_circles
   l_flash_back_panel_left: # Back Panel Left [#100]
     number: 10-7
+    tags: light_flash_alarm
   l_flash_back_panel_right: # Back Panel Right [#101]
     number: 10-8
   l_flash_battering_ram: # Battering Ram [#103]
     number: 10-6
+    tags: light_flash_alarm
   l_flash_kickback: # Kickback Lane [#99]
     number: 10-26
     tags: upfield_flashers
@@ -508,7 +510,7 @@ lights:
         number: 9-43
       blue:
         number: 9-44
-    tags: shot_shields
+    tags: light_dropbank_rgb, shot_shields
   l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
     type: rgb
     channels:
