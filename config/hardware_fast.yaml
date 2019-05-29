@@ -18,7 +18,7 @@ fast:
   hardware_led_fade_time: 100
 
 machine:
-  balls_installed: 6
+  balls_installed: 5
   min_balls: 3
 
 event_player:
@@ -60,6 +60,7 @@ ball_devices:
     exit_count_delay: 2s
     ball_missing_timeouts: 5s
     debug: true
+    ball_search_order: 20
   bd_hold:
     ball_capacity: 1
     hold_coil: c_hold_post
@@ -70,6 +71,7 @@ ball_devices:
       - recruit_lit{squadmate=="garrus" or squadmate=="samara"}
     entrance_switch: s_left_ramp_exit
     debug: true
+    ball_search_order: 50
 
 named_colors:
   backbox_tone: ffdf8f
@@ -124,6 +126,7 @@ coils:
   c_dropbank_reset:
     number: 1-5
     default_pulse_ms: 30  # Bumped up from 25
+    pulse_events: ball_search_phase_1
   c_hold_post:
     # MOVED while the 3208 is burned out
     # number: 1-2
@@ -148,6 +151,7 @@ coils:
     default_hold_power: 0.8
     enable_events: enable_gates
     disable_events: disable_gates
+    pulse_events: ball_search_phase_1
   # UNUSED ADDRESSES
   c_kickback:
     number: 0-1

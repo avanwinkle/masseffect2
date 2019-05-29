@@ -297,7 +297,10 @@ slide_player:
   play_arrival:
     arrival_slide:
       action: play
-    arrival_portrait:
+    arrival_portrait_1:
+      target: lcd_right
+  play_arrival_phase3_3:
+    arrival_portrait_4:
       target: lcd_right
 
 slides:
@@ -307,7 +310,11 @@ slides:
         text: ARRIVAL
         style: header_sm, row_main, col_left_anchor
       - widget: background_console
-  arrival_portrait:
+  arrival_portrait_1:
+    widgets:
+      - type: image
+        image: portrait_arrival_phase_1
+  arrival_portrait_4:
     widgets:
       - type: image
         image: portrait_arrival_phase_4
@@ -333,18 +340,18 @@ sounds:
     start_at: 45s
     mode_end_action: stop
     markers:
-        - time: 53s
-          events: start_arrival_phase1
-        - time: 65s
-          events: start_arrival_phase2
-        - time: 92s
-          events: start_arrival_phase3
-        - time: 120s
-          events: start_arrival_phase4
-        - time: 132s
-          events: start_arrival_phase5
-        - time: 147s
-          events: start_arrival_finale
+      - time: 53s
+        events: start_arrival_phase1
+      - time: 65s
+        events: start_arrival_phase2
+      - time: 92s
+        events: start_arrival_phase3
+      - time: 120s
+        events: start_arrival_phase4
+      - time: 132s
+        events: start_arrival_phase5
+      - time: 147s
+        events: start_arrival_finale
   arr_annc_engine_at_25pct:
     file: DLC_EXP_Part02_Int.026.ogg
     track: voice

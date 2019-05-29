@@ -51,15 +51,16 @@ autofire_coils:
     coil: c_bumper_bottom
     enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
-    timeout_watch_time: 1s
-    timeout_max_hits: 1
-    timeout_disable_time: 2s
+    timeout_watch_time: 600ms
+    timeout_max_hits: 2
+    timeout_disable_time: 3s
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right
     enable_events: player_turn_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
     debug: true
+
 # kickbacks:
   # dragon_kickback:
   #   coil: c_kickback
@@ -72,7 +73,7 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
-    enable_ball_search: False
+    enable_ball_search: true
     ball_search_timeout: 5s
     ball_search_interval: 5s
 

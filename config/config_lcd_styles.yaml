@@ -151,6 +151,7 @@ widget_styles:
     y: 50%
   row_main_dmd_high: []
   row_main_dmd_low: []
+  row_dmd_top: []
   row_dmd_bottom: []
   row_dmd_sub: []
 

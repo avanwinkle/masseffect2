@@ -417,4 +417,4 @@ widgets:
       image: portrait_arrival_light
   portrait_arrival:
     - type: image
-      image: portrait_arrival
+      image: portrait_arrival_phase_1

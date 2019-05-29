@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_missionselect
-  stop_events: stop_mode_missionselect, missionselect_item_selected
+  stop_events: stop_mode_missionselect, missionselect_item_selected, s_return_lane_right_active
   events_when_started: flippers_off
   events_when_stopped: left_flipper_on, right_flipper_on
   priority: 3000

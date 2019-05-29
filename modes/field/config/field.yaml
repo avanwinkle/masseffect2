@@ -14,14 +14,14 @@ mode:
   priority: 310
 
 event_player:
-  mode_field_started.1:
+  mode_field_started.10:
     set_environment:
       env: field
   # If we are returning to field because we failed the suicide mission, say so
-  mode_field_started.2{device.achievements.suicidemission.state=="stopped"}:
+  mode_field_started.20{device.achievements.suicidemission.state=="stopped"}:
     - reset_from_suicide
     # Looking for other mode_field_started events? Check the field submode configs!
-  mode_field_started.3:
+  mode_field_started.30:
     show_base_slide:
       is_available:
         value: current_player.available_missions>0
@@ -32,6 +32,11 @@ event_player:
       is_multiplayer:
         value: game.num_players>1
         type: bool
+  # Add a delay on start, in case we're coming out of a mode with a left ramp shot
+  mode_field_started.1:
+    - enable_airlock_missionselect_hold{current_player.available_missions>0 and not current_player.bypass_missionselect}|1s
+  player_available_missions{player_num==current_player.number}:
+    - enable_airlock_missionselect_hold
 
 config:
   - field_bumpers.yaml

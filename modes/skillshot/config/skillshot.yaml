@@ -63,7 +63,7 @@ sound_pools:
   skillshot_sound:
     track: voice
     max_queue_time: 1s
-    type: random_force_all
+    type: random_force_next
     volume: 1
     sounds:
       - squadmate_garrus_nice_shot{current_player.status_garrus==4}

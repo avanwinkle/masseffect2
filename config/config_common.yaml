@@ -12,7 +12,13 @@ mpf:
   default_pulse_ms: 10
 
 mpf-mc:
-  fps: 30
+  fps: 20
+
+kivy_config:
+  graphics:
+    maxfps: 20
+    multisamples: 0
+    allow_screensaver: 0
 
 logging:
   file:

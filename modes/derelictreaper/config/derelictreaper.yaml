@@ -241,8 +241,7 @@ slides:
       style: header_md, row_main, col_left_anchor
     - type: text
       text: (score)
-      style: body_sm, row_sub, row_dmd_top, col_left_anchor, col_dmd_right, num
-      opacity: 0.5
+      style: recruitslide_score, row_top, col_right_anchor, num
     - widget: background_console
   derelictreaper_portrait_core:
     widgets:
@@ -323,6 +322,8 @@ widget_player:
   play_core_widget:
     derelict_core_widget:
       slide: derelictreaper_slide
+    reapertimeout_widget:
+      action: remove
   reapercore_shots_hit_complete:
     reapertimeout_widget:
       action: remove

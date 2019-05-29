@@ -4,12 +4,12 @@ shows:
   corereset_show:
     - time: 0
       lights:
-        l_hitbank_bot: off
+        l_hitbank_bot: color_shields
         l_hitbank_top: color_husk
     - time: '+1'
       lights:
-        l_hitbank_bot: 00FF00
-        l_hitbank_top: color_husk
+        l_hitbank_bot: color_husk
+        l_hitbank_top: color_shields
   overlord_jackpot_show:
     - duration: 500ms
       lights:
