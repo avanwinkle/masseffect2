@@ -9,9 +9,9 @@ modes:
   - airlock
 
 fast:
-  # ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
+  ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
-  ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
+  # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
   # rgb_buffer: 10000
   # debug: true

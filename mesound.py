@@ -622,7 +622,6 @@ class ModeSounds(object):
                 except KeyError:
                     raise AttributeError("Sound pool '{}'' has no track".format(soundname))
 
-
         for soundname, sound in mode_config['sounds'].items():
             self._add_sound(sound, pool_track=self._pool_tracks.get(soundname))
 

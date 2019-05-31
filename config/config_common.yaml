@@ -99,6 +99,19 @@ machine_vars:
     initial_value: " "
     value_type: str
     persist: true
+  current_career_player_1:
+    initial_value: "Player 1"
+    value_type: str
+  current_career_player_2:
+    initial_value: "Player 2"
+    value_type: str
+  current_career_player_3:
+    initial_value: "Player 3"
+    value_type: str
+  current_career_player_4:
+    initial_value: "Player 4"
+    value_type: str
+
   base_points:
     initial_value: 10000
   mission_xp:
