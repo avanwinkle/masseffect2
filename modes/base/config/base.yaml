@@ -316,12 +316,12 @@ shows:
           slide: intro_missions_slide
           transition_type: none
           portrait: squad
-          expire: 8s
+          expire: 5s
         queue_slide{current_player.available_missions==0}:
           slide: intro_no_missions_slide
           transition_type: none
           portrait: squad
-          expire: 8s
+          expire: 5s
     - time: 1
       events:
         - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}

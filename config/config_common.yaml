@@ -43,7 +43,7 @@ settings:
   enable_careers:
     label: "Enable Career Profiles"
     key_type: int
-    default: 1
+    default: 0
     sort: 10
     values:
       0: "NO"
@@ -51,7 +51,7 @@ settings:
   enable_create_profile:
     label: "Allow Profile Creation"
     key_type: int
-    default: 1
+    default: 0
     sort: 20
     values:
       0: "NO"
@@ -315,7 +315,7 @@ player_vars:
   status_garrus:
     initial_value: 0
   status_grunt:
-    initial_value: 0
+    initial_value: 1
   status_jacob:
     initial_value: 4
   status_jack:
@@ -327,7 +327,7 @@ player_vars:
   status_miranda:
     initial_value: 4
   status_mordin:
-    initial_value: 0
+    initial_value: 1
   status_samara:
     initial_value: 0
   status_tali:

@@ -64,7 +64,7 @@ sound_pools:
     track: voice
     max_queue_time: 1s
     type: random_force_next
-    volume: 1
+    volume: 0.6
     sounds:
       - squadmate_garrus_nice_shot{current_player.status_garrus==4}
       - squadmate_grunt_nice_shot{current_player.status_grunt==4}
@@ -88,6 +88,7 @@ sounds:
   squadmate_jacob_nice_shot:
     track: voice
     file: en_us_hench_leading_ss_global_hench_leading_00316637_m.ogg
+    volume: 0.5
   squadmate_kasumi_nice_shot:
     track: voice
     file: DLC_HEN_MT_Int.117.ogg

@@ -258,7 +258,7 @@ slides:
         style: header_md, row_main
         casing: title
       - type: text
-        text: Start Recruitment Mission
+        text: < Both Flippers to Start Mission >
         style: body_sm, row_sub_under, row_dmd_bottom
       - widget: missionselect_count_widget
       - widget: background_console
