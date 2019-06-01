@@ -64,7 +64,6 @@ sound_pools:
     track: voice
     max_queue_time: 1s
     type: random_force_all
-    volume: 1
     sounds:
       - squadmate_garrus_nice_shot{current_player.status_garrus==4}
       - squadmate_grunt_nice_shot{current_player.status_grunt==4}
