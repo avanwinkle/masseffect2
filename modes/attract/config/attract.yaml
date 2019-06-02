@@ -4,10 +4,10 @@ event_player:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
-  s_action_button_active:
-    - cancel_ball_search
-  s_start_button_active:
-    - cancel_ball_search
+  # s_action_button_active:
+  #   - cancel_ball_search
+  # s_start_button_active:
+  #   - cancel_ball_search
 
 show_player:
   start_suicide_intro:
