@@ -154,6 +154,18 @@ shows:
         gi:
           color: 444444
           fade: 1s
+        # l_backwall_ambient_light_2:
+        #   color: white
+        # l_backwall_ambient_light_3:
+        #   color: white
+        # l_backwall_ambient_light_6:
+        #   color: red
+        # l_backwall_ambient_light_7:
+        #   color: red
+        # l_backwall_ambient_light_10:
+          # color: white
+        # l_backwall_amient_light_11:
+        #   color: white
   n7_show:
     - time: 0
       lights:

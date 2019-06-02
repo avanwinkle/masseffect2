@@ -35,9 +35,9 @@ ball_devices:
     eject_coil: c_plunger
     mechanical_eject: true
     ball_missing_timeouts: 10s
-    eject_timeouts: 3s
+    eject_timeouts: 5s
     confirm_eject_type: target # default
-    entrance_count_delay: 500ms
+    entrance_count_delay: 100ms
     player_controlled_eject_event: force_plunger_launch
     debug: true
   bd_trough:
@@ -84,12 +84,12 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 38  # Increased from Spike 35
+    default_pulse_ms: 33  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 38  # Increased from Spike 35
+    default_pulse_ms: 33  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_plunger:
@@ -208,6 +208,7 @@ switches:
   s_start_button:
     number: 1-2
     tags: start
+    ignore_window_ms: 1000
   # s_action_button:
     # number: 1-3 # Not connected
     # TODO: Move the tilt for now?

@@ -18,6 +18,7 @@ slide_player:
   tilt:
     me_tilt:
       force: true
+      priority: 10000
     tilt_portrait:
       force: true
       target: lcd_right
@@ -46,6 +47,7 @@ slides:
       - type: image
         image: portrait_tilt
   me_tilt:
+    expire: 5s
     widgets:
       - type: text
         text: TILT

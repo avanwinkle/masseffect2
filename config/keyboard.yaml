@@ -34,7 +34,7 @@ keyboard:
   o:
     event: disable_gates
   f:
-    event: ball_save_omegarelay_save_saving_ball
+    event: start_mode_n7_assignments
   i:
     event: show_grid
   shift+i:

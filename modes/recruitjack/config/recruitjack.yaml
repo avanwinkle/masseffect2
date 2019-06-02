@@ -121,6 +121,11 @@ shots:
       color: color_jack
     tags: envshot_hitbank, power_target_charge
 
+light_player:
+  mode_recruitgrunt_started:
+    light_backwall_ambient:
+      color: color_jack
+
 sound_player:
   jack_shots_one_hit:
     jack_shot_hit_sound:

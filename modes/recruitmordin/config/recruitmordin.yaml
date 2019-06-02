@@ -105,6 +105,11 @@ shots:
       color: color_door_green
     tags: envshot_right_ramp
 
+light_player:
+  mode_recruitgrunt_started:
+    light_backwall_ambient:
+      color: color_mordin
+
 sound_player:
   mode_recruitmordin_started:
     music_recruit_mordin:
