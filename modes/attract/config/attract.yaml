@@ -4,17 +4,6 @@ event_player:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
-  s_action_button_active:
-    - cancel_ball_search
-  s_start_button_active:
-    - cancel_ball_search
-
-# light_player:
-#   mode_attract_started:
-#     light_backwall_gi:
-#       color: 9999AA
-#     light_backwall_ambient:
-#       color: color_collectors
 
 show_player:
   start_suicide_intro:
@@ -75,6 +64,7 @@ sound_player:
     mus_main_menu:
       action: play
       mode_end_action: stop
+      loops: -1
     # Preload the start sound
     gui_splashstart:
       action: load

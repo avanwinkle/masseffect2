@@ -15,7 +15,7 @@ spike:
   # file_log: full
   nodes: 0, 1, 8, 9, 10
   wait_times:
-    65: 50
+    65: 32
     128: 5
   # use_send_key: true
 
@@ -85,6 +85,7 @@ switches:
   s_start_button:
     number: 1-11
     tags: start
+    ignore_window_ms: 1000
   s_action_button:
     number: 1-2
   s_service_back:

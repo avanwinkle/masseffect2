@@ -133,30 +133,35 @@ sound_player:
       max_queue_time: 1s
       volume: 0.7
       priority: 100
+      volume: 0.6
   jack_shots_two_hit:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       volume: 0.7
       priority: 100
+      volume: 0.6
   jack_shots_three_hit:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       volume: 0.7
       priority: 100
+      volume: 0.6
   logicblock_jack_rounds_counter_hit{count==2}:
     warden_shepard_1:
       action: play
       max_queue_time: 1s
       volume: 0.7
       priority: 100
+      volume: 0.8
   logicblock_jack_rounds_counter_hit{count==1}:
     warden_shepard_2:
       action: play
       max_queue_time: 1s
       volume: 0.7
       priority: 100
+      volume: 0.8
   mode_recruitjack_started:
     music_recruit_jack_1:
       action: play

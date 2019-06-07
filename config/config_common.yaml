@@ -16,7 +16,7 @@ mpf-mc:
 
 kivy_config:
   graphics:
-    maxfps: 20
+    maxfps: 30
     multisamples: 0
     allow_screensaver: 0
 
@@ -111,7 +111,6 @@ machine_vars:
   current_career_player_4:
     initial_value: "Player 4"
     value_type: str
-
   base_points:
     initial_value: 10000
   mission_xp:
