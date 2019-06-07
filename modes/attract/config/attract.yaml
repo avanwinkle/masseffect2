@@ -1,9 +1,38 @@
 #config_version=5
+mode:
+  code: mpf.modes.carousel.code.carousel.Carousel
+
+mode_settings:
+  selectable_items:
+    - title
+    - 1player_score{not machine.player2_score}
+    - 2player_score{machine.player2_score and not machine.player3_score}
+    - 3player_score{machine.player3_score and not machine.player4_score}
+    - 4player_score{machine.player4_score}
+  next_item_events: s_flipper_right_active, timer_attract_timer_complete
+  previous_item_events: s_flipper_left_active
+
 event_player:
   mode_attract_started:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
+
+timers:
+  attract_timer:
+    start_value: 5
+    start_running: true
+    end_value: 0
+    direction: down
+    restart_on_complete: true
+    control_events:
+      - event: s_flipper_left_active
+        action: pause
+        value: 10
+      - event: s_flipper_right_active
+        action: pause
+        value: 10
+
 
 show_player:
   start_suicide_intro:
@@ -40,9 +69,11 @@ slide_player:
   ball_search_stopped:
     ball_search_slide:
       action: remove
-  # cancel_ball_search:
-  #   ball_search_cancel_slide:
-  #     expire: 3s
+  attract_title_highlighted: attract_slide_main
+  attract_1player_score_highlighted: 1player_score_slide
+  attract_2player_score_highlighted: 2player_score_slide
+  attract_3player_score_highlighted: 3player_score_slide
+  attract_4player_score_highlighted: 4player_score_slide
 
 slides:
   ball_search_slide:

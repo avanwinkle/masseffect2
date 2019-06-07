@@ -83,6 +83,117 @@ slides:
   portrait_slide: []
   recruit_portrait_slide: []
   recruit_instructions_portrait_slide: []
+  1player_score_slide:
+    - type: text
+      text: (machine|player1_score)
+      font_size: 20
+      font_name: Quadrit-10
+      style: num
+      anchor_y: bottom
+      adjust_bottom: 6
+      y: 3
+  2player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      color: 888888
+      style: header_sm col_left_anchor
+      anchor_y: top
+      y: top-3
+    - type: text
+      text: (machine|player1_score)
+      style: header_lg col_left_anchor num
+      anchor_y: bottom
+      y: 5
+    - type: text
+      text: (machine|last_career_player_2)
+      color: 888888
+      style: header_sm col_right_anchor
+      anchor_y: top
+      y: top-3
+    - type: text
+      text: (machine|player2_score)
+      style: header_lg col_right_anchor num
+      anchor_y: bottom
+      y: 5
+  3player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      color: 888888
+      style: body_sm col_left_anchor
+      anchor_y: top
+      y: top
+    - type: text
+      text: (machine|player1_score)
+      style: header_sm col_left_anchor num
+      anchor_y: top
+      y: top-7
+    - type: text
+      text: (machine|last_career_player_2)
+      color: 888888
+      style: body_sm col_right_anchor
+      anchor_y: top
+      y: top
+    - type: text
+      text: (machine|player2_score)
+      style: header_sm col_right_anchor num
+      anchor_y: top
+      y: top-7
+    - type: text
+      text: (machine|player3_score)
+      style: body_sm col_left_anchor num
+      anchor_y: bottom
+      y: 9
+    - type: text
+      text: (machine|last_career_player_3)
+      color: 888888
+      style: header_sm col_left_anchor
+      anchor_y: bottom
+      y: 2
+  4player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      color: 888888
+      style: body_sm col_left_anchor
+      anchor_y: top
+      y: top
+    - type: text
+      text: (machine|player1_score)
+      style: header_sm col_left_anchor num
+      anchor_y: top
+      y: top-7
+    - type: text
+      text: (machine|last_career_player_2)
+      color: 888888
+      style: body_sm col_right_anchor
+      anchor_y: top
+      y: top
+    - type: text
+      text: (machine|player2_score)
+      style: header_sm col_right_anchor num
+      anchor_y: top
+      y: top-7
+    - type: text
+      text: (machine|player3_score)
+      style: body_sm col_left_anchor num
+      anchor_y: bottom
+      y: 9
+    - type: text
+      text: (machine|last_career_player_3)
+      color: 888888
+      style: header_sm col_left_anchor
+      anchor_y: bottom
+      y: 2
+    - type: text
+      text: (machine|player4_score)
+      style: body_sm col_right_anchor num
+      anchor_y: bottom
+      y: 9
+    - type: text
+      text: (machine|last_career_player_4)
+      color: 888888
+      style: header_sm col_right_anchor
+      anchor_y: bottom
+      y: 2
 
 widgets:
   background_console:

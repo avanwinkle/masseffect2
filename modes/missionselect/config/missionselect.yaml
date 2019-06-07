@@ -32,7 +32,7 @@ mode_settings:
 
 timers:
   missionselect_timer:
-    start_value: 10
+    start_value: 8
     end_value: 0
     tick_interval: 1s
     direction: down

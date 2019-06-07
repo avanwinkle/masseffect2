@@ -25,7 +25,7 @@ event_player:
     set_mission_shots:
       shots_total: 5  # Will yield base value / 25 = 4,000pts
       shots_remaining: 1
-      ticks: 20
+      ticks: 12
       multiplier:
         value: 1.0 + (0.25 * current_player.assignments_completed)
         type: float
