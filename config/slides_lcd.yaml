@@ -114,6 +114,137 @@ slides:
   recruit_instructions_portrait_slide:
     widgets:
       - widget: portrait_squadmate_(squadmate)_advance
+  # Core slides
+  1player_score_slide:
+    - type: text
+      text: (machine|player1_score)
+      style: header_lg row_main num
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      opacity: 0.5
+      x: 0
+      z: 0
+  2player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      style: header_sm
+      anchor_y: bottom
+      y: middle+35%
+      opacity: 0.8
+    - type: text
+      text: (machine|player1_score)
+      style: header_lg num
+      anchor_y: bottom
+      y: middle+15%
+    - type: text
+      text: (machine|player2_score)
+      style: header_lg num
+      anchor_y: top
+      y: middle-15%
+    - type: text
+      text: (machine|last_career_player_2)
+      style: header_sm
+      anchor_y: top
+      y: middle-35%
+      opacity: 0.8
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      opacity: 0.5
+      x: 0
+      z: 0
+  3player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      opacity: 0.6
+      style: header_sm
+      anchor_y: bottom
+      y: 85%
+    - type: text
+      text: (machine|player1_score)
+      style: header_md num
+      anchor_y: bottom
+      y: 70%
+    - type: text
+      text: (machine|last_career_player_2)
+      opacity: 0.6
+      style: header_sm
+      anchor_y: bottom
+      y: 55%
+    - type: text
+      text: (machine|player2_score)
+      style: header_md num
+      anchor_y: bottom
+      y: 40%
+    - type: text
+      text: (machine|last_career_player_3)
+      opacity: 0.6
+      style: header_sm
+      anchor_y: bottom
+      y: 25%
+    - type: text
+      text: (machine|player3_score)
+      style: header_md num
+      anchor_y: bottom
+      y: 10%
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      opacity: 0.5
+      x: 0
+      z: 0
+  4player_score_slide:
+    - type: text
+      text: (machine|last_career_player_1)
+      opacity: 0.6
+      style: header_xs
+      anchor_y: bottom
+      y: 87%
+    - type: text
+      text: (machine|player1_score)
+      style: header_sm num
+      anchor_y: bottom
+      y: 79%
+    - type: text
+      text: (machine|last_career_player_2)
+      opacity: 0.6
+      style: header_xs
+      anchor_y: bottom
+      y: 64%
+    - type: text
+      text: (machine|player2_score)
+      style: header_sm num
+      anchor_y: bottom
+      y: 56%
+    - type: text
+      text: (machine|last_career_player_3)
+      opacity: 0.6
+      style: header_xs
+      anchor_y: bottom
+      y: 41%
+    - type: text
+      text: (machine|player3_score)
+      style: header_sm num
+      anchor_y: bottom
+      y: 33%
+    - type: text
+      text: (machine|last_career_player_4)
+      opacity: 0.6
+      style: header_xs
+      anchor_y: bottom
+      y: 18%
+    - type: text
+      text: (machine|player4_score)
+      style: header_sm num
+      anchor_y: bottom
+      y: 10%
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      opacity: 0.5
+      x: 0
+      z: 0
 
 widgets:
   grid_widget:
