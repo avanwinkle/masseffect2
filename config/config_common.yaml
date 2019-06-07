@@ -390,7 +390,7 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 2
-      volume: 0.7
+      volume: 0.9
     voice:
       priority: 2
       simultaneous_sounds: 1
@@ -398,7 +398,7 @@ sound_system:
       volume: 0.8
     sfx:
       simultaneous_sounds: 7
-      volume: 0.4
+      volume: 0.5
       preload: true
       priority: 1
     levelup:
