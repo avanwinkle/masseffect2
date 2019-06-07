@@ -190,44 +190,18 @@ slides:
         text: (base_missiontimer_tick)
         style: timer_primary, row_gutter, col_right_indent
       - widget: background_console
-  recruit_advance_slide_1:
+  recruit_advance_slide:
     widgets:
       - type: text
-        text: Recruit Your Squad
+        text: (slide_title)
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
         text: (squadmate)
         style: header_lg, row_main, col_left_anchor
         casing: title
       - type: text
-        text: 2 shots to unlock
+        text: (slide_instruction)
         anchor_y: bottom
-        style: body_md, row_sub, col_left_anchor
-      - widget: background_console
-  recruit_advance_slide_2:
-    widgets:
-      - type: text
-        text: Recruit Your Squad
-        style: header_xs, row_top, col_left_anchor, mission_title
-      - type: text
-        text: (squadmate)
-        style: header_lg, row_main, col_left_anchor
-        casing: title
-      - type: text
-        text: 1 shot to unlock
-        style: body_md, row_sub, col_left_anchor
-      - widget: background_console
-  recruit_advance_slide_3:
-    widgets:
-      - type: text
-        text: Mission Available
-        style: header_xs, row_top, col_left_anchor, mission_title
-      - type: text
-        text: (squadmate)
-        style: header_lg, row_main, col_left_anchor
-        casing: title
-      - type: text
-        text: Left Ramp to Start
         style: body_md, row_sub, col_left_anchor
       - widget: background_console
   recruit_instructions_slide_lcd:

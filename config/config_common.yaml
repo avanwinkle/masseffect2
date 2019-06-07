@@ -134,6 +134,7 @@ machine_vars:
 modes:
   # - colorpicker
   # Core Logic Modes:
+  - attract_carousel
   - base
   - createprofile
   - global

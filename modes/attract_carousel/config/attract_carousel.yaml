@@ -1,0 +1,70 @@
+#config_version=5
+mode:
+  start_events: mode_attract_started
+  stop_events: mode_attract_will_stop
+  game_mode: false
+  code: mpf.modes.carousel.code.carousel.Carousel
+
+mode_settings:
+  selectable_items:
+    - title
+    - 1player_score{not machine.player2_score}
+    - 2player_score{machine.player2_score and not machine.player3_score}
+    - 3player_score{machine.player3_score and not machine.player4_score}
+    - 4player_score{machine.player4_score}
+  next_item_events: s_flipper_right_active, timer_attract_timer_complete
+  previous_item_events: s_flipper_left_active
+
+timers:
+  attract_timer:
+    start_value: 5
+    start_running: true
+    end_value: 0
+    direction: down
+    restart_on_complete: true
+    control_events:
+      - event: s_flipper_left_active
+        action: pause
+        value: 10
+      - event: s_flipper_right_active
+        action: pause
+        value: 10
+
+slide_player:
+  mode_attract_carousel_started:
+    attract_slide_main:
+      target: main
+    attract_slide_right:
+      target: lcd_right
+  ball_search_started: ball_search_slide
+  ball_search_stopped:
+    ball_search_slide:
+      action: remove
+  attract_carousel_title_highlighted: attract_slide_main
+  attract_carousel_1player_score_highlighted: 1player_score_slide
+  attract_carousel_2player_score_highlighted: 2player_score_slide
+  attract_carousel_3player_score_highlighted: 3player_score_slide
+  attract_carousel_4player_score_highlighted: 4player_score_slide
+
+slides:
+  ball_search_slide:
+    widgets:
+      - type: text
+        text: Please Wait
+        style: body_sm, row_top
+      - type: text
+        text: Searching For Balls
+        style: body_md, row_sub
+  ball_search_cancel_slide:
+    widgets:
+      - type: text
+        text: Balls Missing
+        style: header_sm, row_main
+
+widgets:
+  attract_widget_dmd:
+    - type: image
+      image: me2_logo_x128
+  attract_widget_lcd:
+    - type: image
+      image: logo_fullscreen

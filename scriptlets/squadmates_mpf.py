@@ -163,10 +163,21 @@ class MPFSquadmateHandlers(CustomCode):
 
         if 0 < future_mate_status <= 3:
             self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
+
+            if future_mate_status == 3:
+                slide_title = "Mission Available"
+                slide_instruction = "Left Ramp to Start" if mate not in ["garrus", "samara"] else ""
+            else:
+                slide_title = "Recruit Your Squad"
+                slide_instruction = "{} shot{} to unlock".format(
+                    3 - future_mate_status, "s" if future_mate_status == 1 else "")
+
             self.machine.events.post("queue_slide",
-                                     slide="recruit_advance_slide_{}".format(future_mate_status),
+                                     slide="recruit_advance_slide".format(future_mate_status),
                                      squadmate=mate, status=future_mate_status,
-                                     portrait="squadmate_{}_advance".format(mate))
+                                     portrait="squadmate_{}_advance".format(mate),
+                                     slide_title=slide_title,
+                                     slide_instruction=slide_instruction)
 
             if future_mate_status == 3:
                 self.machine.events.post("recruit_lit", squadmate=mate)

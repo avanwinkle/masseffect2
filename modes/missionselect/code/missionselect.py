@@ -1,5 +1,4 @@
 """Custom mode code for mission selection."""
-import copy
 import logging
 from scriptlets.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
@@ -17,19 +16,15 @@ class MissionSelect(Carousel):
         super().mode_init()
         self.log = logging.getLogger("MissionSelect")
         self.log.setLevel(1)
-        self.log.debug("MissionSelect is ready to go!!!")
-        self.log.debug(" - items: {}".format(self._items))
-        self._all_items = copy.copy(self._items)
         self._mates = []
         self._specialist = "jacob"
 
     def mode_start(self, **kwargs):
         """Mode start: build a list of available missions (based on squadmates and achievements)."""
-        self._items = self._build_items_list()
-        self.log.debug("List of missionselect options: {}".format(self._items.__str__()))
+        self._all_items = self._build_items_list()
 
         # If there's only one option and it's a recruit mission, start it immediately without a slide
-        if not SHOW_SELECT_WHEN_FORCED_SINGLE and len(self._items) == 1 and self._items[0] in self._mates:
+        if not SHOW_SELECT_WHEN_FORCED_SINGLE and len(self._all_items) == 1 and self._all_items[0] in self._mates:
             self._select_item()
             # We never technically start the mode, so fake the ending of it
             self.machine.events.post("mode_missionselect_will_stop")
@@ -75,12 +70,9 @@ class MissionSelect(Carousel):
 
         # If more than one option is available, include the intro slide
         if len(items) > 1:
-                items.insert(0, self._intro)
+            items.insert(0, self._intro)
 
         return items
-
-    def _get_available_items(self):
-        return self._items
 
     def _select_item(self, **kwargs):
         # If select was hit while the intro still showed, pick the next one
@@ -91,7 +83,7 @@ class MissionSelect(Carousel):
         super()._select_item()
         selection = self._get_highlighted_item()
         if selection in self._mates:
-                self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
+            self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
         elif selection == "pass":
             # Store the choice to pass so we can skip missionselect until a new mission is available
             # This is only applicable if there are still missions to unlock, otherwise we could get stuck

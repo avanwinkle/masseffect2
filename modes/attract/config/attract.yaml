@@ -1,38 +1,10 @@
 #config_version=5
-mode:
-  code: mpf.modes.carousel.code.carousel.Carousel
-
-mode_settings:
-  selectable_items:
-    - title
-    - 1player_score{not machine.player2_score}
-    - 2player_score{machine.player2_score and not machine.player3_score}
-    - 3player_score{machine.player3_score and not machine.player4_score}
-    - 4player_score{machine.player4_score}
-  next_item_events: s_flipper_right_active, timer_attract_timer_complete
-  previous_item_events: s_flipper_left_active
-
 event_player:
   mode_attract_started:
+    - start_mode_attract_carousel
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
-
-timers:
-  attract_timer:
-    start_value: 5
-    start_running: true
-    end_value: 0
-    direction: down
-    restart_on_complete: true
-    control_events:
-      - event: s_flipper_left_active
-        action: pause
-        value: 10
-      - event: s_flipper_right_active
-        action: pause
-        value: 10
-
 
 show_player:
   start_suicide_intro:
@@ -59,37 +31,6 @@ show_player:
     flash:
       action: stop
 
-slide_player:
-  mode_attract_started:
-    attract_slide_main:
-      target: main
-    attract_slide_right:
-      target: lcd_right
-  ball_search_started: ball_search_slide
-  ball_search_stopped:
-    ball_search_slide:
-      action: remove
-  attract_title_highlighted: attract_slide_main
-  attract_1player_score_highlighted: 1player_score_slide
-  attract_2player_score_highlighted: 2player_score_slide
-  attract_3player_score_highlighted: 3player_score_slide
-  attract_4player_score_highlighted: 4player_score_slide
-
-slides:
-  ball_search_slide:
-    widgets:
-      - type: text
-        text: Please Wait
-        style: body_sm, row_top
-      - type: text
-        text: Searching For Balls
-        style: body_md, row_sub
-  ball_search_cancel_slide:
-    widgets:
-      - type: text
-        text: Balls Missing
-        style: header_sm, row_main
-
 sound_player:
   mode_attract_started:
     mus_main_menu:
@@ -110,11 +51,3 @@ sounds:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx
     volume: 0.5
-
-widgets:
-  attract_widget_dmd:
-    - type: image
-      image: me2_logo_x128
-  attract_widget_lcd:
-    - type: image
-      image: logo_fullscreen
