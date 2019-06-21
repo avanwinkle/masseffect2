@@ -143,6 +143,7 @@ modes:
   - mainmenu
   - missionselect
   - modeanalysis
+  - pinstrat
   - bonus
   - tilt
   - service

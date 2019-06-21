@@ -1,0 +1,27 @@
+#config_version=5
+mode:
+  start_events: reset_complete
+  game_mode: False
+  code: pinstrat.PinStrat
+
+mode_settings:
+  codes:
+    recruitgarrus: ga
+    recruitgrunt: gr
+    recruitjack: ja
+    recruitkasumi: ka
+    recruitmordin: mo
+    overlord: ov
+  events:
+    game_started:
+      recruitgarrus: 0
+    recruit_lit:
+      recruitgarrus{squadmate=="garrus"}: 1
+    mode_recruitgarrus_started:
+      recruitgarrus: 2
+    logicblock_doors_closed_counter_hit:
+      recruitgarrus{count==1}: 3
+      recruitgarrus{count==2}: 4
+      recruitgarrus{count==3}: 5
+    squadmate_recruited:
+      recruitgarrus{squadmate=="garrus"}: 6

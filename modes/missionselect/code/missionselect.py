@@ -24,7 +24,7 @@ class MissionSelect(Carousel):
         self._all_items = self._build_items_list()
 
         # If there's only one option and it's a recruit mission, start it immediately without a slide
-        if not SHOW_SELECT_WHEN_FORCED_SINGLE and len(self._all_items) == 1 and self._all_items[0] in self._mates:
+        if (not SHOW_SELECT_WHEN_FORCED_SINGLE) and len(self._all_items) == 1 and self._all_items[0] in self._mates:
             self._select_item()
             # We never technically start the mode, so fake the ending of it
             self.machine.events.post("mode_missionselect_will_stop")
@@ -71,6 +71,7 @@ class MissionSelect(Carousel):
         # If more than one option is available, include the intro slide
         if len(items) > 1:
             items.insert(0, self._intro)
+        self.log.info("Missionselect missions: {}".format(items))
 
         return items
 
