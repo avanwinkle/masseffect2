@@ -9,6 +9,7 @@ mode_settings:
   selectable_items:
     - title
     - 1player_score{not machine.player2_score}
+    - 1player_pinstrat{not machine.player2_score}
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
     - 4player_score{machine.player4_score}
@@ -17,7 +18,7 @@ mode_settings:
 
 timers:
   attract_timer:
-    start_value: 5
+    start_value: 8
     start_running: true
     end_value: 0
     direction: down
@@ -25,10 +26,10 @@ timers:
     control_events:
       - event: s_flipper_left_active
         action: pause
-        value: 10
+        value: 20
       - event: s_flipper_right_active
         action: pause
-        value: 10
+        value: 20
 
 slide_player:
   mode_attract_carousel_started:
@@ -45,6 +46,7 @@ slide_player:
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide
   attract_carousel_4player_score_highlighted: 4player_score_slide
+  attract_carousel_1player_pinstrat_highlighted: 1player_pinstrat_slide
 
 slides:
   ball_search_slide:

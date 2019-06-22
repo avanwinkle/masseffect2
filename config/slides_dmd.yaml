@@ -92,6 +92,16 @@ slides:
       anchor_y: bottom
       adjust_bottom: 6
       y: 3
+  1player_pinstrat_slide:
+    - type: text
+      text: "Scan code for your\nPinStrat summary!"
+      style: body_sm col_left_anchor row_main
+    - type: image
+      image: pinstrat_player_1
+      anchor_y: bottom
+      y: 0
+      anchor_x: right
+      x: right
   2player_score_slide:
     - type: text
       text: (machine|last_career_player_1)
