@@ -25,7 +25,7 @@ mode_settings:
       priority: 100
     overlord:
       key: 50
-      priority: 200
+      priority: 90
   events:
     game_started:
       recruitgarrus: 0
@@ -34,6 +34,13 @@ mode_settings:
       recruitkasumi: 0
       recruitmordin: 0
       overlord: 0
+    # Don't immediately display new squadmates, get at least one hit
+    recruit_advance:
+      recruitlegion{squadmate=="legion" and status<3}: 0
+      recruitsamara{squadmate=="samara" and status<3}: 0
+      recruittali{squadmate=="tali" and status<3}: 0
+      recruitthane{squadmate=="thane" and status<3}: 0
+      recruitzaeed{squadmate=="zaeed" and status<3}: 0
     recruit_lit:
       recruitgarrus{squadmate=="garrus"}: 1
       recruitgrunt{squadmate=="grunt"}: 1
@@ -45,6 +52,17 @@ mode_settings:
       recruitthane{squadmate=="thane"}: 1
       recruittali{squadmate=="tali"}: 1
       recruitzaeed{squadmate=="zaeed"}: 1
+    missionselect_recruitmission_selected:
+      recruitgarrus{squadmate=="garrus"}: 2
+      recruitgrunt{squadmate=="grunt"}: 2
+      recruitjack{squadmate=="jack"}: 2
+      recruitkasumi{squadmate=="kasumi"}: 2
+      recruitlegion{squadmate=="legion"}: 2
+      recruitmordin{squadmate=="mordin"}: 2
+      recruitsamara{squadmate=="samara"}: 2
+      recruitthane{squadmate=="thane"}: 2
+      recruittali{squadmate=="tali"}: 2
+      recruitzaeed{squadmate=="zaeed"}: 2
     squadmate_recruited:
       recruitgarrus{squadmate=="garrus"}: 9
       recruitgrunt{squadmate=="grunt"}: 9
@@ -57,29 +75,36 @@ mode_settings:
       recruittali{squadmate=="tali"}: 9
       recruitzaeed{squadmate=="zaeed"}: 9
     # GRUNT
-    mode_recruitgrunt_started:
-      recruitgrunt: 2
     logicblock_grunt_shots_counter_hit:
       recruitgrunt: (7 - count)
     # GARRUS
-    mode_recruitgarrus_started:
-      recruitgarrus: 2
     logicblock_doors_closed_counter_hit:
       recruitgarrus: (count + 2)
     # JACK
-    mode_recruitjack_started:
-      recruitjack: 2
     logicblock_jack_rounds_counter_hit:
       recruitjack: (5 - count)
     # KASUMI
-    mode_recruitkasumi_started:
-      recruitkasumi: 2
     logicblock_kasumi_shots_counter_hit:
       recruitkasumi: (6 - count)
+    # LEGION
     # MORDIN
-    mode_recruitmordin_started:
-      recruitmordin: 2
     enable_fans:
       recruitmordin: 3
     logicblock_fans_counter_hit:
       recruitmordin: (5 - count)
+    # SAMARA
+    logicblock_samara_shots_counter_hit:
+      recruitsamara: (7 - count)
+    # TALI
+    logicblock_colossus_maxhits_counter_hit:
+      recruittali: (8 - count)
+    # THANE
+    # ZAEED
+    logicblock_zaeed_orbits_counter_hit:
+      recruitzaeed: (6 - count)
+    # OVERLORD
+    overlord_ball_will_lock:
+      overlord: (total_balls_locked)
+    logicblock_jackpots_hit_counter_hit:
+      overlord{count<4}: (2 + count)
+      overlord{count==4}: 9
