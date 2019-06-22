@@ -231,6 +231,10 @@ player_vars:
     initial_value: 0
   balls_played:
     initial_value: 0
+  ball_time:
+    initial_value: 0
+  total_ball_time:
+    initial_value: 0
   bypass_missionselect:
     initial_value: 0
   assignments_completed:

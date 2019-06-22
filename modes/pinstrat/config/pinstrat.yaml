@@ -5,6 +5,7 @@ mode:
   code: pinstrat.PinStrat
 
 mode_settings:
+  host: "http://192.168.74.103:3000"
   image_folder: "modes/attract_carousel/images"
   modes:
     recruitgarrus:
@@ -44,21 +45,41 @@ mode_settings:
       recruitthane{squadmate=="thane"}: 1
       recruittali{squadmate=="tali"}: 1
       recruitzaeed{squadmate=="zaeed"}: 1
+    squadmate_recruited:
+      recruitgarrus{squadmate=="garrus"}: 9
+      recruitgrunt{squadmate=="grunt"}: 9
+      recruitjack{squadmate=="jack"}: 9
+      recruitkasumi{squadmate=="kasumi"}: 9
+      recruitlegion{squadmate=="legion"}: 9
+      recruitmordin{squadmate=="mordin"}: 9
+      recruitsamara{squadmate=="samara"}: 9
+      recruitthane{squadmate=="thane"}: 9
+      recruittali{squadmate=="tali"}: 9
+      recruitzaeed{squadmate=="zaeed"}: 9
     # GRUNT
     mode_recruitgrunt_started:
       recruitgrunt: 2
-    grunt_shots_counter_hit:
+    logicblock_grunt_shots_counter_hit:
       recruitgrunt: (7 - count)
     # GARRUS
     mode_recruitgarrus_started:
       recruitgarrus: 2
     logicblock_doors_closed_counter_hit:
       recruitgarrus: (count + 2)
-    squadmate_recruited:
-      recruitgarrus{squadmate=="garrus"}: 6
+    # JACK
+    mode_recruitjack_started:
+      recruitjack: 2
+    logicblock_jack_rounds_counter_hit:
+      recruitjack: (5 - count)
     # KASUMI
     mode_recruitkasumi_started:
       recruitkasumi: 2
+    logicblock_kasumi_shots_counter_hit:
+      recruitkasumi: (6 - count)
     # MORDIN
     mode_recruitmordin_started:
       recruitmordin: 2
+    enable_fans:
+      recruitmordin: 3
+    logicblock_fans_counter_hit:
+      recruitmordin: (5 - count)

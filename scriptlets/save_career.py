@@ -10,7 +10,7 @@ PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
     "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
     "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
-    "trophies")
+    "trophies", "total_ball_time")
 
 ACHIEVEMENT_MISSIONS = (
     # These are achievements that qualify as available_missions if enabled/stopped
@@ -75,8 +75,11 @@ class SaveCareer(CustomCode):
         newcareer = {"last_played": datetime.now().timestamp(), "achievements": {}}
 
         for key, value in player.vars.items():
+            # For total ball time, add the new value to the accumulated value
+            if key == "total_ball_time":
+                newcareer[key] = player.total_ball_time + player.ball_time
             # For achievements, prevent "started" values (in case of hard exit)
-            if key == "achievements":
+            elif key == "achievements":
                 for ach, state in value.items():
                     # Don't allow suicide mission states to save selected/completed state, always revert to enabled
                     if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and \
