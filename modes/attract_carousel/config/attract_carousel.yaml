@@ -9,12 +9,33 @@ mode_settings:
   selectable_items:
     - title
     - 1player_score{not machine.player2_score}
-    - 1player_pinstrat{not machine.player2_score}
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
     - 4player_score{machine.player4_score}
+    - 1player_pinstrat
+    - 2player_pinstrat{machine.player2_score}
+    - 3player_pinstrat{machine.player3_score}
+    - 4player_pinstrat{machine.player4_score}
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
+
+event_player:
+  attract_carousel_1player_pinstrat_highlighted:
+    play_pinstrat_slide:
+      player_num: 1
+      player_name: (machine|last_career_player_1)
+  attract_carousel_2player_pinstrat_highlighted:
+    play_pinstrat_slide:
+      player_num: 2
+      player_name: (machine|last_career_player_2)
+  attract_carousel_3player_pinstrat_highlighted:
+    play_pinstrat_slide:
+      player_num: 3
+      player_name: (machine|last_career_player_3)
+  attract_carousel_4player_pinstrat_highlighted:
+    play_pinstrat_slide:
+      player_num: 4
+      player_name: (machine|last_career_player_4)
 
 timers:
   attract_timer:
@@ -41,12 +62,21 @@ slide_player:
   ball_search_stopped:
     ball_search_slide:
       action: remove
-  attract_carousel_title_highlighted: attract_slide_main
+  attract_carousel_title_highlighted:
+    attract_slide_main:
+      target: main
+    attract_slide_right:
+      target: lcd_right
   attract_carousel_1player_score_highlighted: 1player_score_slide
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide
   attract_carousel_4player_score_highlighted: 4player_score_slide
-  attract_carousel_1player_pinstrat_highlighted: 1player_pinstrat_slide
+  play_pinstrat_slide:
+    pinstrat_slide:
+      action: play
+    pinstrat_portrait_slide:
+      action: play
+      target: lcd_right
 
 slides:
   ball_search_slide:
@@ -70,3 +100,29 @@ widgets:
   attract_widget_lcd:
     - type: image
       image: logo_fullscreen
+  pinstrat_player_1:
+    - type: image
+      image: pinstrat_player_1
+      style: pinstrat_image
+  pinstrat_player_2:
+    - type: image
+      image: pinstrat_player_2
+      style: pinstrat_image
+  pinstrat_player_3:
+    - type: image
+      image: pinstrat_player_3
+      style: pinstrat_image
+  pinstrat_player_4:
+    - type: image
+      image: pinstrat_player_4
+      style: pinstrat_image
+
+images:
+  pinstrat_player_1:
+    load: mode_start
+  pinstrat_player_2:
+    load: mode_start
+  pinstrat_player_3:
+    load: mode_start
+  pinstrat_player_4:
+    load: mode_start

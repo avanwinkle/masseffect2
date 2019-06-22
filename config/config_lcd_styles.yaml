@@ -84,6 +84,8 @@ widget_styles:
     opacity: 0
   mission_title:
     opacity: 0.8
+  pinstrat_image:
+    z: 1000000
 
   # GRID POSITIONS
   #----------------------------

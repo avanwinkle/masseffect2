@@ -5,13 +5,26 @@ mode:
   code: pinstrat.PinStrat
 
 mode_settings:
-  codes:
-    recruitgarrus: 12
-    recruitgrunt: 10
-    recruitjack: 11
-    recruitkasumi: 13
-    recruitmordin: 14
-    overlord: 50
+  image_folder: "modes/attract_carousel/images"
+  modes:
+    recruitgarrus:
+      key: 12
+      priority: 100
+    recruitgrunt:
+      key: 10
+      priority: 100
+    recruitjack:
+      key: 11
+      priority: 100
+    recruitkasumi:
+      key: 13
+      priority: 100
+    recruitmordin:
+      key: 14
+      priority: 100
+    overlord:
+      key: 50
+      priority: 200
   events:
     game_started:
       recruitgarrus: 0
@@ -43,3 +56,9 @@ mode_settings:
       recruitgarrus: (count + 2)
     squadmate_recruited:
       recruitgarrus{squadmate=="garrus"}: 6
+    # KASUMI
+    mode_recruitkasumi_started:
+      recruitkasumi: 2
+    # MORDIN
+    mode_recruitmordin_started:
+      recruitmordin: 2

@@ -245,6 +245,18 @@ slides:
       opacity: 0.5
       x: 0
       z: 0
+  pinstrat_slide:
+    - type: text
+      text: "Scan code for your\nPinstrat summary!"
+      style: body_sm col_left_anchor row_main
+    - type: text
+      text: (player_name)
+      style: body_sm col_left_anchor row_bottom
+    - type: image
+      image: texture_console
+      z: 1
+  pinstrat_portrait_slide:
+    - widget: pinstrat_player_(player_num)
 
 widgets:
   grid_widget:

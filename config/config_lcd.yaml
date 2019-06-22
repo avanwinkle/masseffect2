@@ -74,9 +74,9 @@ slides:
         x: right-7
         y: 6
         z: 1
-      # - type: image
-      #   image: dual_lcd_mask_shadow
-      #   z: 4
+      - type: image
+        image: dual_lcd_mask_shadow
+        z: 4
 
 # assets:
 #   images:
