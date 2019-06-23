@@ -25,6 +25,7 @@ class SlideQueuePlayer(CustomCode):
 
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
+        self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
         self.log.info("slide Queue Player Ready!")
 
     def _add_slide_to_queue(self, **kwargs):
@@ -94,6 +95,10 @@ class SlideQueuePlayer(CustomCode):
             },
         }
         return slide_settings
+
+    def _clear_queue(self, **kwargs):
+        self._queue = []
+        self._advance_queue()
 
     def _check_queue_clear(self, **kwargs):
         if not self._current_timeout:

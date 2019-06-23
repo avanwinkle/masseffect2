@@ -24,6 +24,16 @@ slides:
       image: splashscreen
       anchor_x: right
       x: 110%
+  gameover_slide:
+    - type: text
+      text: (machine|gameover_text)
+      style: header_lg
+    - type: image
+      image: splashscreen
+      anchor_x: left
+      x: 0
+      z: 0
+      opacity: 0.5
   singleplayer_slide:
     transition:
       type: fade
@@ -248,13 +258,16 @@ slides:
   pinstrat_slide:
     - type: text
       text: "Scan code for your\nPinstrat summary!"
-      style: body_sm col_left_anchor row_main
+      style: body_md col_left_anchor row_super
     - type: text
       text: (player_name)
-      style: body_sm col_left_anchor row_bottom
+      style: header_sm col_left_anchor row_sub
     - type: image
-      image: texture_console
-      z: 1
+      image: splashscreen
+      anchor_x: left
+      x: 0
+      z: 0
+      opacity: 0.5
   pinstrat_portrait_slide:
     - widget: pinstrat_player_(player_num)
 

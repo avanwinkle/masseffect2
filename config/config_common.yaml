@@ -112,22 +112,33 @@ machine_vars:
   current_career_player_4:
     initial_value: "Player 4"
     value_type: str
+  # These point reference values are here globally, but don't need to be saved
   base_points:
     initial_value: 10000
+    persist: false
   mission_xp:
     initial_value: 1000
+    persist: false
   assignment_xp:
     initial_value: 200
+    persist: false
   unlock_xp:
     initial_value: 125
+    persist: false
   bonus_xp:
     initial_value: 0.25
     value_type: float
+    persist: false
   flipper_cancelling:
     initial_value: 0
     persist: false
   # This needs to be a machine variable so that it can exist outside of game modes (i.e. mainmenu)
   players_widget_text:
+    initial_value: " "
+    value_type: str
+    persist: false
+  # Track games played, for debugging and GAME OVER screen
+  gameover_text:
     initial_value: " "
     value_type: str
     persist: false

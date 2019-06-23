@@ -7,7 +7,8 @@ mode:
 
 mode_settings:
   selectable_items:
-    - title
+    - title{machine.gameover_text==" "}
+    - gameover
     - 1player_score{not machine.player2_score}
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
@@ -16,6 +17,7 @@ mode_settings:
     - 2player_pinstrat{machine.player2_score}
     - 3player_pinstrat{machine.player3_score}
     - 4player_pinstrat{machine.player4_score}
+    - title{machine.gameover_text!=" "}
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
 
@@ -36,6 +38,12 @@ event_player:
     play_pinstrat_slide:
       player_num: 4
       player_name: (machine|last_career_player_4)
+
+variable_player:
+  attract_carousel_title_highlighted{machine.gameover_text!="FREE PLAY"}:
+    gameover_text:
+      action: set_machine
+      string: "FREE PLAY"
 
 timers:
   attract_timer:
@@ -67,6 +75,7 @@ slide_player:
       target: main
     attract_slide_right:
       target: lcd_right
+  attract_carousel_gameover_highlighted: gameover_slide
   attract_carousel_1player_score_highlighted: 1player_score_slide
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide

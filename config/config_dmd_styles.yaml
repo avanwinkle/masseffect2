@@ -4,8 +4,8 @@ widget_styles:
   # TEXT FORMATS
   #----------------------------
   suicide_header:
-    font_size: 14
-    style: quadrit_big
+    font_size: 20
+    font_name: Quadrit-10
     z: 1
   header_lg:
     font_size: 10

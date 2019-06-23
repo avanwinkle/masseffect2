@@ -5,6 +5,10 @@ slides:
     - type: image
       image: me2_logo_x128
   attract_slide_right: []
+  gameover_slide:
+    - type: text
+      text: (machine|gameover_text)
+      style: header_lg, row_main
   singleplayer_slide:
     widgets:
       - type: text

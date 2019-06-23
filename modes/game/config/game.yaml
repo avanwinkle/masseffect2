@@ -26,8 +26,17 @@ event_player:
   # Move these here, to fix flippers not enabling?
   mode_base_will_start: flippers_on
 
-slide_player:
-  queue_slide: {}
+variable_player:
+  game_started{machine.is_lcd}:
+    gameover_text:
+      action: set_machine
+      string: "GAME\nOVER"
+  game_started{not machine.is_lcd}:
+    gameover_text:
+      action: set_machine
+      string: "GAME OVER"
+
+
 
 widget_player:
   # First event, before additional players have a chance to enter
