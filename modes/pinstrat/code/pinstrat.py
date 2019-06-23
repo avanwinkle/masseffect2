@@ -1,0 +1,1 @@
+from mpfpinstrat import PinStrat
