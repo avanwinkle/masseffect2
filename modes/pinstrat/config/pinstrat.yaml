@@ -6,7 +6,7 @@ mode:
 
 mode_settings:
   host: "http://192.168.74.103:3000"
-  image_folder: "modes/attract_carousel/images"
+  host_mode: attract_carousel
   modes:
     recruitgarrus:
       key: 12

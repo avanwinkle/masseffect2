@@ -73,6 +73,14 @@ settings:
       3: 3
       5: 5
       7: 7
+  pinstrat_enabled:
+    label: "PinStrat"
+    sort: 40
+    key_type: int
+    default: 0
+    values:
+      0: "Disabled"
+      1: "Enabled"
 
 slide_player:
   init_done:

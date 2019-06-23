@@ -9,14 +9,14 @@ mode_settings:
   selectable_items:
     - title{machine.gameover_text==" "}
     - gameover
-    - 1player_score{not machine.player2_score}
+    - 1player_score{machine.player1_score and not machine.player2_score}
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
     - 4player_score{machine.player4_score}
-    - 1player_pinstrat
-    - 2player_pinstrat{machine.player2_score}
-    - 3player_pinstrat{machine.player3_score}
-    - 4player_pinstrat{machine.player4_score}
+    - 1player_pinstrat{machine.pinstrat_enabled}
+    - 2player_pinstrat{machine.pinstrat_enabled and machine.player2_score}
+    - 3player_pinstrat{machine.pinstrat_enabled and machine.player3_score}
+    - 4player_pinstrat{machine.pinstrat_enabled and machine.player4_score}
     - title{machine.gameover_text!=" "}
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
