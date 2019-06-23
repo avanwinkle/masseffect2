@@ -29,6 +29,7 @@ slides:
         key: profile_name
         style: header_md, row_main, col_left_anchor
         max_chars: 10
+        char_list: ABCDEFGHIJKLMNOPQRSTUVWXYZ
         shift_left_event: prev_char
         shift_right_event: next_char
         select_event: select_char

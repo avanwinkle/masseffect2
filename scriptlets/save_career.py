@@ -42,22 +42,19 @@ class SaveCareer(CustomCode):
     def _set_career(self, **kwargs):
         if self.machine.game and self.machine.game.player:
             player = self.machine.game.player
-            career_name = kwargs.get("career_name")
-            # Store this career name for this player number
-            self.machine.set_machine_var("last_career_player_{}".format(player.number), career_name)
-            # Store a nice name to display for the player number
-            pretty_name = "Player {}".format(player.number) if career_name == " " else career_name
-            self.machine.set_machine_var("current_career_player_{}".format(player.number), pretty_name)
 
-            if career_name == " ":
+            if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
             else:
-                # Store the career for this player's number
-                self._current_careers[player.number] = kwargs
-                # Attach the career name to the current player
-                player["career_name"] = career_name
+                # Text input char_list prevents spaces in custom profiles, so this should be safe
                 player["casual"] = 0
+                player["career_name"] = kwargs.get("career_name")
+
+            # Store this career name for this player number
+            self.machine.set_machine_var("last_career_player_{}".format(player.number), player["career_name"])
+            self.machine.set_machine_var("current_career_player_{}".format(player.number), player["career_name"])
+
 
         self.log.debug("Set career to '{}', Args={}".format(player.career_name, kwargs))
 

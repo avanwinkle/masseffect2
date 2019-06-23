@@ -211,11 +211,12 @@ class MainMenu(Carousel):
                                          self.machine.game.player.number, kwargs["num"]))
 
     def _post_career_event(self, evt_name, **kwargs):
-        career_data = self._selected_career or {"career_name": " "}
+        career_data = self._selected_career or { "casual": True }
         self.machine.events.post(evt_name,
                                  career_name=career_data.get("career_name"),
                                  career_started=career_data.get("_career_started"),
                                  last_played=career_data.get("_last_played"),
                                  level=career_data.get("level"),
+                                 casual=career_data.get("casual"),
                                  **kwargs
                                  )
