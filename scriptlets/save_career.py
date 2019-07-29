@@ -52,8 +52,8 @@ class SaveCareer(CustomCode):
                 player["career_name"] = kwargs.get("career_name")
 
             # Store this career name for this player number
-            self.machine.set_machine_var("last_career_player_{}".format(player.number), player["career_name"])
-            self.machine.set_machine_var("current_career_player_{}".format(player.number), player["career_name"])
+            self.machine.variables.set_machine_var("last_career_player_{}".format(player.number), player["career_name"])
+            self.machine.variables.set_machine_var("current_career_player_{}".format(player.number), player["career_name"])
 
 
         self.log.debug("Set career to '{}', Args={}".format(player.career_name, kwargs))

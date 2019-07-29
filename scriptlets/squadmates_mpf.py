@@ -183,8 +183,8 @@ class MPFSquadmateHandlers(CustomCode):
                 self.machine.events.post("recruit_lit", squadmate=mate)
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=future_mate_status)
                 # If there were no mates lit before, bonus the xp
-                xp = self.machine.get_machine_var("unlock_xp") * (
-                    1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.get_machine_var("bonus_xp")))
+                xp = self.machine.variables.get_machine_var("unlock_xp") * (
+                    1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.variables.get_machine_var("bonus_xp")))
                 player["xp"] += int(xp)
                 player["available_missions"] += 1
 
@@ -230,8 +230,8 @@ class MPFSquadmateHandlers(CustomCode):
         mate = kwargs["squadmate"]
         player = self.machine.game.player
 
-        self.machine.game.player["xp"] += self.machine.get_machine_var("mission_xp") * (
-            1 + (self.machine.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
+        self.machine.game.player["xp"] += self.machine.variables.get_machine_var("mission_xp") * (
+            1 + (self.machine.variables.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
 
         self.machine.events.post("levelup",
                                  mission_name="{} Recruited".format(mate),

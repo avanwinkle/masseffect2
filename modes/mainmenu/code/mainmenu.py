@@ -38,7 +38,7 @@ class MainMenu(Carousel):
         """Load career data and display the main menu."""
 
         if self.machine.game and self.machine.game.num_players > 1:
-            self.machine.set_machine_var("players_widget_text", "Player {} of {}".format(
+            self.machine.variables.set_machine_var("players_widget_text", "Player {} of {}".format(
                                          self.machine.game.player.number, self.machine.game.num_players))
 
         self._load_careers()
@@ -80,7 +80,7 @@ class MainMenu(Carousel):
         player_num = self.machine.game.player.number if self.machine.game else 1
 
         # Don't include careers chosen by previous players
-        already_chosen = [self.machine.get_machine_var("last_career_player_{}".format(x)) for x in range(1, player_num)]
+        already_chosen = [self.machine.variables.get_machine_var("last_career_player_{}".format(x)) for x in range(1, player_num)]
         self.log.debug("Already chosen careers: {}".format(already_chosen))
 
         for path, dirs, files in os.walk(gamepath):
@@ -101,7 +101,7 @@ class MainMenu(Carousel):
                             self.careers.append(career)
 
                             # Set a default/initial selection if it's the most recently played for player 1
-                            if career["career_name"] == self.machine.get_machine_var("last_career_player_{}"
+                            if career["career_name"] == self.machine.variables.get_machine_var("last_career_player_{}"
                                                                                      .format(player_num)):
                                 self._selected_career = career
                     f.close()
@@ -207,7 +207,7 @@ class MainMenu(Carousel):
 
     def _player_added(self, **kwargs):
         if kwargs.get("num") > 1:
-            self.machine.set_machine_var("players_widget_text", "Player {} of {}".format(
+            self.machine.variables.set_machine_var("players_widget_text", "Player {} of {}".format(
                                          self.machine.game.player.number, kwargs["num"]))
 
     def _post_career_event(self, evt_name, **kwargs):

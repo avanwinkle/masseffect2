@@ -73,13 +73,8 @@ slide_player:
     reset_from_suicide_slide:
       action: play
       expire: 5s
-  show_base_slide:
-    singleplayer_slide{not is_multiplayer}:
-      action: play
-      priority: 1
-    multiplayer_slide{is_multiplayer}:
-      action: play
-      priority: 2
+  show_base_slide.1{not is_multiplayer}: singleplayer_slide
+  show_base_slide.2{is_multiplayer}: multiplayer_slide
   show_multiplayer_slide:
     multiplayer_slide:
       action: play

@@ -61,7 +61,7 @@ class SlideQueuePlayer(CustomCode):
             }
 
             portrait = slide_kwargs.pop("portrait")
-            if portrait and self.machine.machine_vars.get("is_lcd"):
+            if portrait and self.machine.variables.get("is_lcd"):
                 portrait_name = "portrait_{}".format(portrait)
                 settings["portrait_slide"] = self._generate_portrait(expire, slide_kwargs)
                 slide_kwargs["portrait_name"] = portrait_name
