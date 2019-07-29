@@ -5,12 +5,15 @@ mode:
   code: pinstrat.PinStrat
 
 mode_settings:
-  host: "http://192.168.74.103:3000"
-  image_folder: "modes/attract_carousel/images"
+  game_id: 12
+  game_revision: 0
+  url: "http://pinstrat.io"
+  # url_params: "v"
+  host_mode: attract_carousel
   modes:
     recruitgarrus:
       key: 12
-      priority: 100
+      priority: 99
     recruitgrunt:
       key: 10
       priority: 100
