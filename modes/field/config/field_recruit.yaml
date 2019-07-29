@@ -20,17 +20,6 @@ config:
   - field_recruit_sounds.yaml
   - field_recruit_shows.yaml
 
-event_player:
-  play_queued_slide_recruit_advance_slide_1:
-    - play_recruit_advance_(squadmate)|50ms
-    - remove_popup|4s
-  play_queued_slide_recruit_advance_slide_2:
-    - play_recruit_advance_(squadmate)|50ms
-    - remove_popup|4s
-  play_queued_slide_recruit_advance_slide_3:
-    - play_recruit_advance_(squadmate)|50ms
-    - remove_popup|4s
-
 shot_profiles:
   recruit_shot_profile:
     show_when_disabled: false

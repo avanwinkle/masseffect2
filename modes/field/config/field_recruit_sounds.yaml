@@ -1,42 +1,42 @@
 #config_version=5
 sound_player:
-  play_recruit_advance_garrus:
+  play_queued_slide_recruit_advance_slide{squadmate=="garrus"}:
     shot_hit_sounds_garrus:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_grunt:
+  play_queued_slide_recruit_advance_slide{squadmate=="grunt"}:
     shot_hit_sounds_grunt:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_jack:
+  play_queued_slide_recruit_advance_slide{squadmate=="jack"}:
     shot_hit_sounds_jack:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_kasumi:
+  play_queued_slide_recruit_advance_slide{squadmate=="kasumi"}:
     shot_hit_sounds_kasumi:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_legion:
+  play_queued_slide_recruit_advance_slide{squadmate=="legion"}:
     shot_hit_sounds_legion:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_mordin:
+  play_queued_slide_recruit_advance_slide{squadmate=="mordin"}:
     shot_hit_sounds_mordin:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_samara:
+  play_queued_slide_recruit_advance_slide{squadmate=="samara"}:
     shot_hit_sounds_samara:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_tali:
+  play_queued_slide_recruit_advance_slide{squadmate=="tali"}:
     shot_hit_sounds_tali:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_thane:
+  play_queued_slide_recruit_advance_slide{squadmate=="thane"}:
     shot_hit_sounds_thane:
       action: play
       max_queue_time: 1s
-  play_recruit_advance_zaeed:
+  play_queued_slide_recruit_advance_slide{squadmate=="zaeed"}:
     shot_hit_sounds_zaeed:
       action: play
       max_queue_time: 1s
