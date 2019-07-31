@@ -30,10 +30,12 @@ event_player:
   mode_global_started:
     - start_mode_field # Wait for global to start before field
     - enable_lock_lightshot
+    - start_mode_reputation
   mode_global_will_stop:
     - stop_mode_field
     - disable_lock_lightshot
     - stop_missions
+    - stop_mode_reputation
   # If we have two balls locked when field mode stops, don't allow a third lock to light
   mode_field_will_stop{device.ball_devices.bd_lock.balls==2}:
     - disable_lock_lightshot

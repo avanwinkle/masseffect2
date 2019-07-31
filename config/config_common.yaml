@@ -170,6 +170,7 @@ modes:
   # Support Modes
   # - firewalker
   # - powers
+  - reputation
   - skillshot
   # Environments:
   - environment
