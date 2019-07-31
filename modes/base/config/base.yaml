@@ -315,13 +315,11 @@ shows:
           transition_type: none
           portrait: squad
           expire: 5s
-          tokens: no
         queue_slide{current_player.available_missions==0}:
           slide: intro_no_missions_slide
           transition_type: none
           portrait: squad
           expire: 5s
-          tokens: no
     - time: 1
       events:
         - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}

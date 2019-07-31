@@ -49,6 +49,7 @@ class SlideQueuePlayer(CustomCode):
                     "action": "play",
                     "target": slide_kwargs.get("target", None),
                     "priority": 1000 + self._play_count,
+                    "tokens": slide_kwargs.get("tokens", None),
                     'transition': {
                         "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
                         "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
@@ -85,6 +86,7 @@ class SlideQueuePlayer(CustomCode):
             "action": "play",
             "target": "lcd_right",
             "priority": 1000 + self._play_count,
+            "tokens": slide_kwargs.get("tokens", None),
             'transition': {
                 "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
                 "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),

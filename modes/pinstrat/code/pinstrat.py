@@ -8,7 +8,7 @@ except ModuleNotFoundError:
     def __init__(self, machine, config, name, path):
       super().__init__(machine, config, name, path)
       machine.log.warning("MPF-PinStrat is not installed. PinStrat will not be run.")
-      machine.variables.set_machine_var("pinstrat_enabled", 0)
+      machine.settings.set_setting_value("pinstrat_enabled", 0)
 
     def mode_start(self, **kwargs):
       self.stop()

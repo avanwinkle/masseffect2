@@ -36,8 +36,6 @@ variable_player:
       action: set_machine
       string: "GAME OVER"
 
-
-
 widget_player:
   # First event, before additional players have a chance to enter
   game_started:
