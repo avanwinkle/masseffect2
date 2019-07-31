@@ -31,7 +31,6 @@ event_player:
     - bypass_lock_release_pulse|0
     - cancel_lock_release_pulse|700ms
 
-
 ball_devices:
   bd_plunger:
     ball_switches: s_plunger_lane

@@ -17,7 +17,7 @@ ACHIEVEMENT_MISSIONS = (
     "collectorship", "derelictreaper", "suicidemission"
 )
 
-CASUAL_CAREER = {"career_name": " ", "readonly": 1, "status_mordin": 3, "counter_sbdrops_counter": 2}
+CASUAL_CAREER = {"career_name": " ", "readonly": 1}
 
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
 SAVE_SUICIDE_PROGRESS = True  # Should suicide mission progress be saved to the career?

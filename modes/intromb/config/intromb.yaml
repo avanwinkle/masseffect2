@@ -1,0 +1,32 @@
+#config_version=5
+
+#####
+# INTRO MULTIBALL: The Normandy Destroyed
+#
+# This is a quick multiball for hooking players at expos and demos. It plays
+# during the first ball of a career and is a timed, no-lose, 2-ball multiball.
+#####
+
+mode:
+  start_events: start_mode_intromb
+  stop_events: stop_mode_intromb
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
+
+ball_saves:
+  introsave:
+    enable_events: mode_intromb_started
+    disable_events: mode_intromb_will_stop
+    balls_to_save: 1
+    auto_launch: true
+
+timers:
+  introtimer:
+    starting_count: 20
+    ending_count: 0
+    events_when_stopped: stop_mode_intromb
+
+ multiballs:
+  intromb:
+    ball_count: 2
+    shoot_again: 20s

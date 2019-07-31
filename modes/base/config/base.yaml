@@ -24,12 +24,16 @@ event_player:
     - enable_kickback
     - reset_missionselect_bypass
 
+  # Fun Normandy attack multiball shenanigans to start
+  mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
+    - start_mode_intromb
+  mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
+    - start_mode_global{device.achievements.suicidemission.state!="started"}
+    - play_intro_show{device.achievements.collectorship.state=="disabled" and current_player.resume_mission==" "}
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
   #### DISABLE for faster playtesting
-  mode_base_started.3{current_player.squadmates_count==2 and current_player.resume_mission==" " and device.achievements.suicidemission.state!="started"}:
-    - play_intro_show
-  mode_base_started.4{current_player.squadmates_count>2 and device.achievements.suicidemission.state!="started"}:
+  play_intro_show{current_player.squadmates_count>4}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
   mode_base_will_stop:
