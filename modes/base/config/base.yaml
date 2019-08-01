@@ -15,21 +15,24 @@ config:
 event_player:
   mode_base_started:
     - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
-    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
-    - start_mode_global{device.achievements.suicidemission.state!="started"}
     - start_mode_lockhandler
     - start_mode_environment
     - start_mode_firewalker
     - enable_orbitswitches
-    - enable_kickback
     - reset_missionselect_bypass
-
   # Fun Normandy attack multiball shenanigans to start
   mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
     - start_mode_intromb
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
     - play_intro_show{device.achievements.collectorship.state=="disabled" and current_player.resume_mission==" "}
+    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
+  # After the normandy attack multiball, proceed as usual
+  mode_intromb_will_stop:
+    - start_mode_global
+    - play_intro_show
+    - start_mode_skillshot
+    - flippers_on
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
   #### DISABLE for faster playtesting
@@ -549,8 +552,12 @@ slides:
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
-  play_gameintro_norecruits_long_four: illusive_already_compiled_dossiers_four
-  play_gameintro_norecruits_long_five: illusive_already_compiled_dossiers_five
+  play_gameintro_norecruits_long_four:
+    illusive_already_compiled_dossiers_four:
+      events_when_stopped: ball1_gameintro_complete
+  play_gameintro_norecruits_long_five:
+    illusive_already_compiled_dossiers_five:
+      events_when_stopped: ball1_gameintro_complete
   play_gameintro_norecruits_short: gameintro_norecruits_short
   play_gameintro_recruits_long: gameintro_recruits_long
   play_gameintro_recruits_short: gameintro_recruits_short

@@ -31,11 +31,26 @@ event_player:
         value: device.multiball_locks.fmball_lock.locked_balls + 1
         type: int
   # Hold open the gates if no balls are there
+  # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
   s_battering_ram_active{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls==0}:
     - bypass_lock_release_pulse_long
+  s_battering_ram_active{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls>0}:
+    - bypass_lock_release_pulse_short
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
   longwalk_specialist_selected: release_suicide_hold|2s
+
+variable_player:
+  overlord_ball_will_lock:
+    persist_lock:
+      action: set
+      int: 0
+  arrival_ball_will_lock:
+    persist_lock:
+      action: set
+      int: 0
+  enable_fmball_lock:
+    persist_lock: 1
 
 queue_relay_player:
   mode_missionselect_starting:
@@ -82,8 +97,13 @@ multiball_locks:
     balls_to_replace: 2
     lock_devices: bd_lock
     reset_count_for_current_player_events: fmball_stopped, mode_collectorship_base_started
-    enable_events: enable_fmball_lock
-    disable_events: multiball_lock_fmball_lock_locked_ball, mode_collectorship_base_started
+    enable_events:
+      - enable_fmball_lock
+      - mode_field_started{current_player.persist_lock>0}
+    disable_events:
+      - mode_field_will_stop{device.multiball_locks.fmball_lock.locked_balls==2}
+      - multiball_lock_fmball_lock_locked_ball
+      - mode_collectorship_base_started
     debug: true
 
 show_player:

@@ -10,23 +10,52 @@
 mode:
   start_events: start_mode_intromb
   stop_events: stop_mode_intromb
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started, start_mode_frenzy
   events_when_stopped: mode_type_wizard_stopped
+
+event_player:
+  multiball_intromb_ended: flippers_off
+  ball_save_introsave_saving_ball: stop_mode_intromb
 
 ball_saves:
   introsave:
     enable_events: mode_intromb_started
-    disable_events: mode_intromb_will_stop
     balls_to_save: 1
-    auto_launch: true
+    only_last_ball: true
+    auto_launch: false
+    # base.yaml triggers the intro show, when the dialog is done give out the ball
+    delayed_eject_events: ball1_gameintro_complete
 
-timers:
-  introtimer:
-    starting_count: 20
-    ending_count: 0
-    events_when_stopped: stop_mode_intromb
+variable_player:
+  mode_intromb_started:
+    temp_counter:
+      action: set
+      int: 0
+  frenzy_hit:
+    temp_counter: 1
+  mode_intromb_will_stop:
+    score: temp_counter * 100
 
- multiballs:
+multiballs:
   intromb:
     ball_count: 2
     shoot_again: 20s
+
+slide_player:
+  mode_intromb_started:
+    intromb_slide:
+      action: play
+    intromb_portrait:
+      action: play
+      target: lcd_right
+
+slides:
+  intromb_slide:
+    - type: text
+      text: INTRO MULTIBALL
+      style: row_main, header_md
+    - type: text
+      text: (player|temp_counter) Crewmates Saved
+  intromb_portrait:
+    - type: text
+      text: Save the Normandy!
