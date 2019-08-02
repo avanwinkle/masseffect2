@@ -18,7 +18,7 @@ shots:
       - s_left_ramp_entrance
       - s_left_ramp_exit
       - s_right_ramp_entrance
-      - s_right_ramp-exit
+      - s_right_ramp_exit
       - s_battering_ram
       - s_kickback
       - s_tenpoints
@@ -42,5 +42,5 @@ shots:
       - s_return_lane_left
       - s_return_lane_right
       - s_outlane_right
-      - s_slingshot_left
-      - s_slingshot_right
+      - s_left_slingshot
+      - s_right_slingshot

@@ -14,44 +14,44 @@
 # Why? I dunno.
 #####
 
-mode: 
-	start_events: start_mode_reputation
-	stop_events: stop_mode_reputation
-	priority: 600
+mode:
+  start_events: start_mode_reputation
+  stop_events: stop_mode_reputation
+  priority: 600
 
 variable_player:
-	paragon_shot_unlit_hit:
-		paragon: 1
-	renegade_shot_unlit_hit:
-		renegade: 1
-	reputation_build_shots_complete:
-		reputation: 1
+  paragon_shot_unlit_hit:
+    paragon: 1
+  renegade_shot_unlit_hit:
+    renegade: 1
+  reputation_build_shots_complete:
+    reputation: 1
 
 shot_groups:
-	reputation_build_shots:
-		shots: paragon_shot, renegade_shot
-		reset_events: reputation_build_shots_complete
-		rotate_events:
-			- s_flipper_left_active
-			- s_flipper_right_active
+  reputation_build_shots:
+    shots: paragon_shot, renegade_shot
+    reset_events: reputation_build_shots_complete
+    rotate_events:
+      - s_flipper_left_active
+      - s_flipper_right_active
 
 shots:
-	paragon_shot:
-		switch: s_return_lane_left
-		profile: reputation_profile
-		show_tokens:
-			leds: l_left_return_lane
-	renegade_shot:
-		switch: s_return_lane_right
-		profile: reputation_profile
-		show_tokens:
-			leds: l_right_return_lane
+  paragon_shot:
+    switch: s_return_lane_left
+    profile: reputation_profile
+    show_tokens:
+      leds: l_left_return_lane
+  renegade_shot:
+    switch: s_return_lane_right
+    profile: reputation_profile
+    show_tokens:
+      leds: l_right_return_lane
 
 shot_profiles:
-	reputation_profile:
-		show_when_disabled: false
-		states: 
-			- name: unlit
-			  show: off
-			- name: lit
-			  show: on
+  reputation_profile:
+    show_when_disabled: false
+    states:
+      - name: unlit
+        show: off
+      - name: lit
+        show: on
