@@ -17,7 +17,6 @@ ACHIEVEMENT_MISSIONS = (
     "collectorship", "derelictreaper", "suicidemission"
 )
 
-CASUAL_CAREER = {"career_name": " ", "readonly": 1}
 
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
 SAVE_SUICIDE_PROGRESS = True  # Should suicide mission progress be saved to the career?
@@ -52,9 +51,10 @@ class SaveCareer(CustomCode):
                 player["career_name"] = kwargs.get("career_name")
 
             # Store this career name for this player number
-            self.machine.variables.set_machine_var("last_career_player_{}".format(player.number), player["career_name"])
-            self.machine.variables.set_machine_var("current_career_player_{}".format(player.number), player["career_name"])
-
+            self.machine.variables.set_machine_var(
+                "last_career_player_{}".format(player.number), player["career_name"])
+            self.machine.variables.set_machine_var(
+                "current_career_player_{}".format(player.number), player["career_name"])
 
         self.log.debug("Set career to '{}', Args={}".format(player.career_name, kwargs))
 
@@ -123,6 +123,14 @@ class SaveCareer(CustomCode):
             setattr(player, "career_name", career_name)
 
             if career_name == " ":
+                isDemo = self.machine.settings.demo_mode
+                CASUAL_CAREER = {
+                    "career_name": " ",
+                    "readonly": 1,
+                    # Some mods for demo mode
+                    "counter_sbdrops_counter": 2 if isDemo else 0,
+                    "status_grunt": 3 if isDemo else 0,
+                }
                 careerdata = CASUAL_CAREER
                 setattr(player, "casual", 1)
             else:

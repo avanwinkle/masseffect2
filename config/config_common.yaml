@@ -346,7 +346,7 @@ player_vars:
   shot_cooldown_shot_tech:
     initial_value: 1
   counter_sbdrops_counter:
-    initial_value: 2 if settings.demo_mode else 0
+    initial_value: 0
   sbchase_hits_remaining:
     initial_value: 5
   sbhold_enabled:
@@ -359,7 +359,7 @@ player_vars:
   status_garrus:
     initial_value: 0
   status_grunt:
-    initial_value: 3 if settings.demo_mode else 0
+    initial_value: 0
   status_jacob:
     initial_value: 4
   status_jack:
