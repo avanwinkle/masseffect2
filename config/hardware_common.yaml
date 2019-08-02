@@ -73,7 +73,7 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
-    enable_ball_search: true
+    enable_ball_search: false
     ball_search_timeout: 15s
     ball_search_interval: 5s
 

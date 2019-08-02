@@ -467,7 +467,7 @@ lights:
     number: 0-18
     type: grb
     tags: light_missionselect, lane_wedges
-    default_on_color: color_space
+    default_on_color: white
   l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-20  # shadowbroker mission start
     type: grb
