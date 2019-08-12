@@ -384,17 +384,17 @@ lights:
     number: 0-3
     type: grb
     tags: light_dropbank_rgb, l_dropbanks, outer_circles
-    default_on_color: color_shadowbroker
+    default_on_color: ff1f00  # color_shadowbroker
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 0-4
     type: grb
     tags: light_dropbank_rgb, l_dropbanks, outer_circles
-    default_on_color: color_shadowbroker
+    default_on_color: ff1f00  # color_shadowbroker
   l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 0-5
     type: grb
     tags: light_dropbank_rgb, l_dropbanks, outer_circles
-    default_on_color: color_shadowbroker
+    default_on_color: ff1f00  # color_shadowbroker
 
   l_left_outlane: # Left Outlane [#11]
     number: 0-6
@@ -409,7 +409,7 @@ lights:
     number: 0-8
     type: grb
     tags: outer_circles
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
   l_right_return_lane: # Right Return Lane [#33]
     number: 0-9
     type: grb
@@ -422,48 +422,48 @@ lights:
     number: 0-11
     type: grb
     tags: light_hitbank_rgb, l_hitbanks, outer_circles
-    default_on_color: color_overlord
+    default_on_color: 22ff33  # color_overlord
   l_hitbank_top: # Right 2-Bank (Top) [#38]
     number: 0-12
     type: grb
     tags: light_hitbank_rgb, l_hitbanks, outer_circles
-    default_on_color: color_overlord
+    default_on_color: 22ff33  # color_overlord
   l_standup_1: # Standup 1 [#44]
     number: 0-21
     type: grb
     tags: l_targets
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
   l_standup_2: # Standup 2 [#52]
     number: 0-19
     type: grb
     tags: l_targets
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
   l_standup_3: # Standup 3 [#59]
     number: 0-17
     type: grb
     tags: l_targets
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
   l_standup_4: # Standup 4 [#64]
     number: 0-15
     type: grb
     tags: l_targets
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
   l_standup_5: # Standup 5 [#70]
     number: 0-14
     type: grb
     tags: l_targets
-    default_on_color: color_armor
+    default_on_color: ffcc00  # color_armor
 
   l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
     number: 0-13
     type: grb
     tags: lane_wedges, l_upgrade
-    default_on_color: color_kasumi
+    default_on_color: eeff00  # color_kasumi
   l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
     number: 0-16
     type: grb
     tags: batram_multipliers, batram_arrow
-    default_on_color: color_health
+    default_on_color: "990000"  # color_health
   l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
     number: 0-18
     type: grb
@@ -473,7 +473,7 @@ lights:
     number: 0-20  # shadowbroker mission start
     type: grb
     tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
-    default_on_color: color_shadowbroker
+    default_on_color: ff1f00  # color_shadowbroker
 
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------
