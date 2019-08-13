@@ -9,7 +9,7 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-0020121AB, /dev/tty.usbserial-0020121AC
+  ports: /dev/tty.usbserial-0040121AB, /dev/tty.usbserial-0040121AC
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
@@ -84,12 +84,12 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 33  # Increased from Spike 35
+    default_pulse_ms: 25  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 33  # Increased from Spike 35
+    default_pulse_ms: 25  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_plunger:
