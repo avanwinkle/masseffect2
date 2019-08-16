@@ -19,7 +19,7 @@ class MainMenu(Carousel):
         self.careers = []
         self._selected_career = None
         self.log = logging.getLogger("MainMenu")
-        self.log.setLevel(2)
+        self.log.setLevel(20)
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""

@@ -1,6 +1,6 @@
 #config_version=5
 event_player:
-  mode_base_started.10{not machine.is_lcd}: show_debug_widgets
+  mode_base_started.99{not machine.is_lcd}: show_debug_widgets
 
 widget_player:
   show_debug_widgets:
