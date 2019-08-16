@@ -9,7 +9,7 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-0040121AB, /dev/tty.usbserial-0040121AC
+  ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
@@ -81,6 +81,7 @@ named_colors:
   skillshot_color_renegade: "660000"  # color_renegade
   dropbank_color_shadowbroker: ff1f00
   color_kasumi_alarm: aa0000
+  bb_squad_color: FFBB66
 
 coils:
   c_flipper_left_main:
@@ -475,6 +476,56 @@ lights:
     tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
     default_on_color: ff1f00  # color_shadowbroker
 
+  l_bbsquad_garrus:
+    number: 2-5
+    type: grb
+    tags: light_bbsquad_garrus
+  l_bbsquad_grunt:
+    number: 2-7
+    type: grb
+    tags: light_bbsquad_grunt
+  l_bbsquad_jack:
+    number: 2-10
+    type: grb
+    tags: light_bbsquad_jack
+  l_bbsquad_jacob:
+    number: 2-8
+    type: grb
+    tags: light_bbsquad_jacob
+  l_bbsquad_kasumi:
+    number: 2-11
+    type: grb
+    tags: light_bbsquad_kasumi
+  l_bbsquad_legion:
+    number: 2-1
+    type: grb
+    tags: light_bbsquad_legion
+  l_bbsquad_miranda:
+    number: 2-6
+    type: grb
+    tags: light_bbsquad_miranda
+  l_bbsquad_mordin:
+    number: 2-4
+    type: grb
+    tags: light_bbsquad_mordin
+  l_bbsquad_samara:
+    number: 2-2
+    type: grb
+    tags: light_bbsquad_samara
+  l_bbsquad_tali:
+    number: 2-3
+    type: grb
+    tags: light_bbsquad_tali
+  l_bbsquad_thane:
+    number: 2-9
+    type: grb
+    tags: light_bbsquad_thane
+  l_bbsquad_zaeed:
+    number: 2-0
+    type: grb
+    tags: light_bbsquad_zaeed
+
+
   # NeoPixel Jewels (Center Lights)
   #------------------------------------------
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
@@ -517,7 +568,7 @@ lights:
   #   number: 1-13
   #   tags: l_multipliers
   l_battering_ram_arrow: # Battering Ram Arrow [#63]
-    number: 2-22
+    number: 2-28
     tags: lane_arrows
   # l_battering_ram_bot: # Battering Ram 3 (Bot) [#60]
   #   number: 3-19
@@ -530,26 +581,26 @@ lights:
   l_dragon_fire: # Dragon Fire [#51]
     number: 2-29
   l_flash_back_panel_left: # Back Panel Left [#100]
-    number: 2-7
+    number: 2-27
   l_flash_back_panel_right: # Back Panel Right [#101]
-    number: 2-8
-  l_flash_battering_ram: # Battering Ram [#103]
-    number: 2-6
-  l_flash_kickback: # Kickback Lane [#99]
     number: 2-26
+  l_flash_battering_ram: # Battering Ram [#103]
+    number: 2-25
+  l_flash_kickback: # Kickback Lane [#99]
+    number: 2-24
     tags: upfield_flashers
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
     number: 2-60
   l_flash_left_ramp: # Left Ramp [#98]
-    number: 2-27
+    number: 2-20
     tags: upfield_flashers
   l_flash_right_orbit: # Pop Bumpers [#97]
-    number: 2-5
+    number: 2-23
   l_flash_right_ramp: # Right Ramp [#96]
-    number: 2-4
+    number: 2-22
     tags: upfield_flashers
   l_flash_slingshots: # Left/Right Sling [#104]
-    number: 2-2
+    number: 2-21
   l_flash_sword_lock: # Sword Lock [#95]
     number: 2-14
     tags: upfield_flashers

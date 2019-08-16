@@ -79,6 +79,7 @@ named_colors:
   skillshot_color_renegade: ffffff
   dropbank_color_shadowbroker: ffffff
   color_kasumi_alarm: ffffff
+  bb_squad_color: ffffff
 
 switches:
   s_start_button:
@@ -248,6 +249,7 @@ light_stripes:
 lights:
   l_null:
     number: 1-3
+    tags: light_bbsquad_jacob, light_bbsquad_miranda
   l_backbox:
     number: 0-0
     tags: backbox
@@ -333,7 +335,7 @@ lights:
     tags: gi
   l_hand_of_the_king: # Hand of the King [#19]
     number: 9-1
-    tags: outer_circles
+    tags: outer_circles, light_bbsquad_zaeed
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
     number: 9-22
     tags: l_hitbanks, outer_circles
@@ -342,7 +344,7 @@ lights:
     tags: l_hitbanks, outer_circles
   l_iron_throne: # Iron Throne [#21]
     number: 9-3
-    tags: outer_circles
+    tags: outer_circles, light_bbsquad_samara
   l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
     number: 9-40
     tags: lane_wedges
@@ -369,7 +371,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_left_ramp, light_alarm_left_ramp
   l_left_return_lane: # Left Return Lane [#12]
     number: 9-33
-    tags: l_return_lane
+    tags: l_return_lane, light_bbsquad_tali
   l_left_top_lane: # Left Top Lane [#75]
     number: 10-14
   l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
@@ -403,25 +405,25 @@ lights:
     tags: outer_circles
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 9-5
-    tags: color_shields, color_shield_yellow
+    tags: color_shields, color_shield_yellow, light_bbsquad_kasumi
   l_shield_greyjoy: # Sigil Greyjoy [#25]
     number: 9-7
-    tags: color_shields, color_shield_purple
+    tags: color_shields, color_shield_purple, light_bbsquad_jack
   l_shield_lannister: # Sigil Lannister [#24]
     number: 9-6
-    tags: color_shields, color_shield_red
+    tags: color_shields, color_shield_red, light_bbsquad_mordin
   l_shield_martell: # Sigil Martell [#27]
     number: 9-9
-    tags: color_shields, color_shield_orange
+    tags: color_shields, color_shield_orange, light_bbsquad_grunt
   l_shield_stark: # Sigil Stark [#22]
     number: 9-4
-    tags: color_shields, color_shield_white
+    tags: color_shields, color_shield_white, light_bbsquad_legion
   l_shield_targaryen: # Sigil Targaryen [#20]
     number: 9-2
-    tags: color_shields, color_shield_blue
+    tags: color_shields, color_shield_blue, light_bbsquad_garrus
   l_shield_tyrell: # Sigil Tyrell [#26]
     number: 9-8
-    tags: color_shields, color_shield_green
+    tags: color_shields, color_shield_green, light_bbsquad_thane
   l_standup_1: # Standup 1 [#44]
     number: 9-37
     tags: l_targets
