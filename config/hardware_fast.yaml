@@ -9,10 +9,12 @@ modes:
   - airlock
 
 fast:
-  ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
+  # Do not commit changes to this line until we have machine-aware port detection
+  ports: /dev/ttyUSB1, /dev/ttyUSB2
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
+  # ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
   # rgb_buffer: 10000
   # debug: true
   hardware_led_fade_time: 100
