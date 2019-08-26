@@ -27,6 +27,28 @@ logging:
     sounds: full
     sound: full
 
+text_ui:
+  machine_vars:
+    - base_points
+    - current_career_player_1
+    - current_career_player_2
+    - current_career_player_3
+    - current_career_player_4
+    - flipper_cancelling
+  player_vars:
+    - available_missions
+    - assignments_completed
+    - bypass_missionselect
+    - credits
+    - intel
+    - geth_colossus_state
+    - planets
+    - power
+    - reputation
+    - specialist
+    - sbhold_enabled
+    - xp
+
 virtual_platform_start_active_switches:
   s_trough1
   s_trough2
