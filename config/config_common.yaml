@@ -469,7 +469,7 @@ named_colors:
 
 sound_system:
   master_volume: 1.0
-  buffer: 8192  # upped from 2048 on UP Core Plus  # previous value was 512
+  buffer: 4096  # upped from 2048 on UP Core Plus  # previous value was 512
   frequency: 24000
   channels: 1
   enabled: true
