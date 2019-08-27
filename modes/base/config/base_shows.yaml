@@ -177,42 +177,12 @@ shot_profiles:
         show: led_color
       - name: hit
         show: off
-  lane_shot_profile_60:
+  lane_shot_profile:
     show_when_disabled: false
     states:
       - name: lit
         show: led_6_chase
-        speed: 1
-        show_tokens:
-          fade: 20ms
-      - name: hit
-        show: off
-  lane_shot_profile_40:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: led_6_chase
-        speed: 1.5
-        show_tokens:
-          fade: 20ms
-      - name: hit
-        show: off
-  lane_shot_profile_20:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: led_6_chase
-        speed: 3
-        show_tokens:
-          fade: 20ms
-      - name: hit
-        show: off
-  lane_shot_profile_12:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: led_6_chase
-        speed: 5
+        speed: 12
         show_tokens:
           fade: 20ms
       - name: hit
@@ -223,6 +193,6 @@ shot_profiles:
       - name: lit
         show: led_6_chase
         sync_ms: 800
-        speed: 1.5
+        speed: 12
         show_tokens:
           fade: 20ms

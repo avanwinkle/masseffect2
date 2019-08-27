@@ -68,7 +68,7 @@ shots:
   grunt_left_ramp:
     hit_events: sh_left_ramp_hit
     disable_events: grunt_left_ramp_hit
-    profile: lane_shot_profile_12
+    profile: lane_shot_profile
     show_tokens:
       leds: l_left_ramp_ring
       color: color_grunt
@@ -76,7 +76,7 @@ shots:
   grunt_left_orbit:
     hit_events: sh_left_orbit_hit
     disable_events: grunt_left_orbit_hit
-    profile: lane_shot_profile_12
+    profile: lane_shot_profile
     show_tokens:
       leds: l_left_orbit_ring
       color: color_grunt
@@ -84,7 +84,7 @@ shots:
   grunt_right_ramp:
     hit_events: sh_right_ramp_hit
     disable_events: grunt_right_ramp_hit
-    profile: lane_shot_profile_12
+    profile: lane_shot_profile
     show_tokens:
       leds: l_right_ramp_ring
       color: color_grunt
@@ -92,7 +92,7 @@ shots:
   grunt_right_orbit:
     hit_events: sh_right_orbit_hit
     disable_events: grunt_right_orbit_hit
-    profile: lane_shot_profile_12
+    profile: lane_shot_profile
     show_tokens:
       leds: l_right_orbit_ring
       color: color_grunt
@@ -100,7 +100,7 @@ shots:
   grunt_kickback:
     hit_events: sh_kickback_hit
     disable_events: grunt_kickback_hit
-    profile: lane_shot_profile_12
+    profile: lane_shot_profile
     show_tokens:
       leds: l_kickback_ring
       color: color_grunt

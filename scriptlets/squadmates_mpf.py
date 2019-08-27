@@ -74,8 +74,10 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
         # Create a listener for a ball to start
         self.machine.events.add_handler("mode_base_started", self._initialize_icons)
+        self.machine.events.add_handler("mode_base_stopped", self._handle_end)
         # Create a listener for playing a squadmate sound
         self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
+
 
     def _enable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._enable_shothandlers)
@@ -96,6 +98,9 @@ class MPFSquadmateHandlers(CustomCode):
             status = self.machine.game.player["status_{}".format(mate)]
             if status == 3 or status == 4 or status == -1:
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=status)
+
+    def _handle_end(self, **kwargs):
+        self._play_squadmates_show(stop_all=True)
 
     def _handle_squadmate_sound(self, **kwargs):
         squadmate = kwargs.pop("squadmate", "random")
@@ -258,20 +263,23 @@ class MPFSquadmateHandlers(CustomCode):
             if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
                 achs["suicidemission"].enable()
 
-    def _play_squadmates_show(self):
+    def _play_squadmates_show(self, stop_all=False):
         mate_lists = {
             "lit": [],
             "complete": [],
             "dead": [],
+            "off": [],
         }
         for mate in SquadmateStatus.all_mates():
-            status = self.machine.game.player["status_{}".format(mate)]
+            status = 0 if stop_all else self.machine.game.player["status_{}".format(mate)]
             if status == 3:
                 mate_lists["lit"].append(mate)
             elif status == 4:
                 mate_lists["complete"].append(mate)
             elif status == -1:
                 mate_lists["dead"].append(mate)
+            else:
+                mate_lists["off"].append(mate)
 
         for status, mates in mate_lists.items():
             showname = "recruits_{}_show".format(status)
