@@ -571,8 +571,16 @@ sound_player:
       action: stop
       fade_out: 1s
   skillshot_lit_hit: skillshot_sound
-  # It's worth keeping Illusive cached until all players have played ball one
+  # It's worth keeping sounds cached until all players have played ball one
   mode_base_started{current_player.number==1 and current_player.ball==2}:
+    mus_gui_char_create:
+      action: unload
+    gui_splashstart:
+      action: unload
+    galaxy_zoom_in:
+      action: unload
+    galaxy_zoom_out:
+      action: unload
     illusive_already_compiled_dossiers_four:
       action: unload
     illusive_already_compiled_dossiers_five:

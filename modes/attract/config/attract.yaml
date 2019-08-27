@@ -40,6 +40,12 @@ sound_player:
     # Preload the start sound and some first ball sounds
     gui_splashstart:
       action: load
+    mus_gui_char_create:
+      action: load
+    galaxy_zoom_in:
+      action: load
+    galaxy_zoom_out:
+      action: load
     music_normandy_walkin_intro:
       action: load
     illusive_already_compiled_dossiers_four:
