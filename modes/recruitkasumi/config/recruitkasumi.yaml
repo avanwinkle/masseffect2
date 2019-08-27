@@ -89,7 +89,7 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_left_orbit
     show_tokens:
-      arrow_led: light_alarm_left_orbit
+      arrow_led: light_lane_left_orbit
       lane_led: l_left_orbit_shield_rgb
     tags: alarmshot, envshot_left_orbit, power_target, power_target_left_orbit
   kasumi_left_ramp:
@@ -97,7 +97,7 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_left_ramp, mode_recruitkasumi_started  # Starting shot
     show_tokens:
-      arrow_led: light_alarm_left_ramp
+      arrow_led: light_lane_left_ramp
       lane_led: l_left_ramp_shield_rgb
     tags: alarmshot, envshot_left_ramp, power_target, power_target_left_ramp
   kasumi_right_orbit:
@@ -105,7 +105,7 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_orbit
     show_tokens:
-      arrow_led: light_alarm_right_orbit
+      arrow_led: light_lane_right_orbit
       lane_led: l_right_orbit_shield_rgb
     tags: alarmshot, envshot_right_orbit, power_target, power_target_right_orbit
   kasumi_right_ramp:
@@ -113,7 +113,7 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_right_ramp
     show_tokens:
-      arrow_led: light_alarm_right_ramp
+      arrow_led: light_lane_right_ramp
       lane_led: l_right_ramp_shield_rgb
     tags: alarmshot, envshot_right_ramp, power_target, power_target_right_ramp
   kasumi_kickback:
@@ -121,7 +121,7 @@ shots:
     profile: alarmed_shot_profile
     advance_events: set_alarm_kickback
     show_tokens:
-      arrow_led: light_alarm_kickback
+      arrow_led: light_lane_kickback
       lane_led: l_kickback_shield_rgb
     tags: alarmshot, envshot_kickback, power_target, power_target_kickback
 
@@ -198,32 +198,32 @@ shows:
   alarm_sweep_show:
     - time: 0
       lights:
-        light_alarm_left_orbit: color_kasumi_alarm
-        light_alarm_kickback: black
-        light_alarm_left_ramp: black
-        light_alarm_right_ramp: black
-        light_alarm_right_orbit: color_kasumi_alarm
+        light_lane_left_orbit: color_kasumi_alarm
+        light_lane_kickback: black
+        light_lane_left_ramp: black
+        light_lane_right_ramp: black
+        light_lane_right_orbit: color_kasumi_alarm
     - time: '+1'
       lights:
-        light_alarm_left_orbit: black
-        light_alarm_kickback: color_kasumi_alarm
-        light_alarm_left_ramp: black
-        light_alarm_right_ramp: color_kasumi_alarm
-        light_alarm_right_orbit: black
+        light_lane_left_orbit: black
+        light_lane_kickback: color_kasumi_alarm
+        light_lane_left_ramp: black
+        light_lane_right_ramp: color_kasumi_alarm
+        light_lane_right_orbit: black
     - time: '+1'
       lights:
-        light_alarm_left_orbit: color_kasumi_alarm
-        light_alarm_kickback: black
-        light_alarm_left_ramp: black
-        light_alarm_right_ramp: black
-        light_alarm_right_orbit: color_kasumi_alarm
+        light_lane_left_orbit: color_kasumi_alarm
+        light_lane_kickback: black
+        light_lane_left_ramp: black
+        light_lane_right_ramp: black
+        light_lane_right_orbit: color_kasumi_alarm
     - time: '+1'
       lights:
-        light_alarm_left_orbit: black
-        light_alarm_kickback: color_kasumi_alarm
-        light_alarm_left_ramp: black
-        light_alarm_right_ramp: color_kasumi_alarm
-        light_alarm_right_orbit: black
+        light_lane_left_orbit: black
+        light_lane_kickback: color_kasumi_alarm
+        light_lane_left_ramp: black
+        light_lane_right_ramp: color_kasumi_alarm
+        light_lane_right_orbit: black
     - time: '+1'
 
 slide_player:
@@ -454,4 +454,7 @@ sounds:
     file: DLC_HEN_MT_Int.669.ogg
     track: voice
 
-
+light_player:
+  mode_recruitkasumi_started:
+    light_backwall_ambient:
+      color: color_kasumi%30

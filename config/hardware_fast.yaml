@@ -322,35 +322,35 @@ light_rings:
     number_template: 0-{}
     count: 6
     light_template:
-      tags: light_alarm_left_orbit
+      tags: light_lane_left_orbit
       type: grb
   l_kickback_ring:
     number_start: 30
     number_template: 0-{}
     count: 6
     light_template:
-      tags: light_alarm_kickback
+      tags: light_lane_kickback
       type: grb
   l_left_ramp_ring:
     number_start: 37
     number_template: 0-{}
     count: 6
     light_template:
-      tags: light_alarm_left_ramp
+      tags: light_lane_left_ramp
       type: grb
   l_right_ramp_ring:
     number_start: 44
     number_template: 0-{}
     count: 6
     light_template:
-      tags: light_alarm_right_ramp
+      tags: light_lane_right_ramp
       type: grb
   l_right_orbit_ring:
     number_start: 51
     number_template: 0-{}
     count: 6
     light_template:
-      tags: light_alarm_right_orbit
+      tags: light_lane_right_orbit
       type: grb
 
 light_stripes:
