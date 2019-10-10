@@ -26,6 +26,21 @@ mode_settings:
     recruitmordin:
       key: 14
       priority: 100
+    recruitzaeed:
+      key: 15
+      priority: 101
+    recruitlegion:
+      key: 16
+      priority: 101
+    recruittali:
+      key: 17
+      priority: 101
+    recruitsamara:
+      key: 18
+      priority: 102
+    recruitthane:
+      key: 19
+      priority: 102
     overlord:
       key: 50
       priority: 90
@@ -76,7 +91,8 @@ mode_settings:
       recruitsamara{squadmate=="samara"}: 9
       recruitthane{squadmate=="thane"}: 9
       recruittali{squadmate=="tali"}: 9
-      recruitzaeed{squadmate=="zaeed"}: 9
+      recruitzaeed{squadmate=="zaeed" and current_player.zaeed_path_renegade==0}: 8
+      recruitzaeed{squadmate=="zaeed" and current_player.zaeed_path_renegade==1}: 9
     # GRUNT
     logicblock_grunt_shots_counter_hit:
       recruitgrunt: (7 - count)
@@ -90,6 +106,8 @@ mode_settings:
     logicblock_kasumi_shots_counter_hit:
       recruitkasumi: (6 - count)
     # LEGION
+    player_heretic_progress{value>0}:
+      recruitlegion: 3
     # MORDIN
     enable_fans:
       recruitmordin: 3
@@ -102,12 +120,25 @@ mode_settings:
     logicblock_colossus_maxhits_counter_hit:
       recruittali: (8 - count)
     # THANE
+    logicblock_thane_ascent_counter_hit:
+      recruitthane: (6 - count)
     # ZAEED
-    logicblock_zaeed_orbits_counter_hit:
-      recruitzaeed: (6 - count)
+    player_zaeed_path_renegade:
+      recruitzaeed: (3 + value)
     # OVERLORD
     overlord_ball_will_lock:
       overlord: (total_balls_locked)
     logicblock_jackpots_hit_counter_hit:
       overlord{count<4}: (2 + count)
       overlord{count==4}: 9
+    # COLLECTOR SHIP
+    enable_collectorship:
+      collectorship: 0
+    mode_collectorship_ambush_started:
+      collectorship: 1
+    mode_collectorship_husk_started:
+      collectorship: 2
+    mode_collectorship_praetorian_started:
+      collectorship: 3
+    collectorship_praetorian_complete:
+      collectorship: 9
