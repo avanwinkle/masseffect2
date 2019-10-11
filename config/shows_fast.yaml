@@ -10,6 +10,28 @@ shows:
       lights:
         l_hitbank_bot: color_husk
         l_hitbank_top: color_shields
+  # This show assumes 60s for time increments. Play the show faster as needed.
+  lane_shot_hurryup_show:
+    - time: 0
+      shows:
+        led_6_chase:
+          loops: -1
+          speed: 1
+    - time: 20
+      shows:
+        led_6_chase:
+          loops: -1
+          speed: 2
+    - time: 40
+      shows:
+        led_6_chase:
+          loops: -1
+          speed: 3
+    - time: 52
+      shows:
+        led_6_chase:
+          loops: -1
+          speed: 4
   overlord_jackpot_show:
     - duration: 500ms
       lights:

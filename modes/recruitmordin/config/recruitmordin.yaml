@@ -108,7 +108,7 @@ shots:
 light_player:
   mode_recruitgrunt_started:
     light_backwall_ambient:
-      color: color_mordin
+      color: color_grunt
 
 sound_player:
   mode_recruitmordin_started:

@@ -272,6 +272,14 @@ slides:
     - widget: pinstrat_player_(player_num)
 
 widgets:
+  volume_widget:
+    - type: text
+      text: Volume
+      style: header_sm, row_bottom, col_right_inner
+    - type: text
+      text: (value)%
+      style: header_sm, row_bottom, col_right_indent
+      min_digits: 2
   grid_widget:
     - type: image
       image: grid_dual

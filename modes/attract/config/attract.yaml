@@ -32,15 +32,28 @@ show_player:
       action: stop
 
 sound_player:
-  mode_attract_started:
+  mode_attract_started.10:
     mus_main_menu:
       action: play
       mode_end_action: stop
       loops: -1
-    # Preload the start sound
+    # Preload the start sound and some first ball sounds
     gui_splashstart:
       action: load
+    mus_gui_char_create:
+      action: load
+    galaxy_zoom_in:
+      action: load
+    galaxy_zoom_out:
+      action: load
+    music_normandy_walkin_intro:
+      action: load
+    illusive_already_compiled_dossiers_four:
+      action: load
+    illusive_already_compiled_dossiers_five:
+      action: load
   game_start: gui_splashstart
+
 
 sounds:
   mus_main_menu:

@@ -68,41 +68,41 @@ shots:
   grunt_left_ramp:
     hit_events: sh_left_ramp_hit
     disable_events: grunt_left_ramp_hit
-    profile: color_flashing_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       color: color_grunt
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   grunt_left_orbit:
     hit_events: sh_left_orbit_hit
     disable_events: grunt_left_orbit_hit
-    profile: color_flashing_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_grunt
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   grunt_right_ramp:
     hit_events: sh_right_ramp_hit
     disable_events: grunt_right_ramp_hit
-    profile: color_flashing_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       color: color_grunt
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   grunt_right_orbit:
     hit_events: sh_right_orbit_hit
     disable_events: grunt_right_orbit_hit
-    profile: color_flashing_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_grunt
     tags: envshot_right_orbit, power_target, power_target_right_orbit
   grunt_kickback:
     hit_events: sh_kickback_hit
     disable_events: grunt_kickback_hit
-    profile: color_flashing_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_grunt
     tags: envshot_kickback, power_target, power_target_kickback
 

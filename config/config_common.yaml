@@ -16,9 +16,12 @@ mpf-mc:
 
 kivy_config:
   graphics:
+    fbo: hardware
     maxfps: 30
     multisamples: 0
     allow_screensaver: 0
+    show_cursor: false
+    resizable: 0
 
 logging:
   file:
@@ -125,9 +128,26 @@ slide_player:
     window_slide_container:
       target: window
 
+widget_player:
+  update_volume:
+    volume_widget:
+      target: window
+      widget_settings:
+        expire: 2s
+
 event_player:
   game_will_start: gi_on
   game_ended: gi_off
+  master_volume_decrease:
+    update_volume:
+      value:
+        value: ((machine.master_volume - 0.05) if machine.master_volume > 0.05 else 0) * 100
+        type: int
+  master_volume_increase:
+    update_volume:
+      value:
+        value: ((machine.master_volume + 0.05) if machine.master_volume < 0.95 else 1) * 100
+        type: int
 
 machine_vars:
   last_career_player_1:
@@ -448,8 +468,8 @@ named_colors:
   color_shadowbroker: ff1f00
 
 sound_system:
-  master_volume: 1
-  buffer: 2048  # previous value was 512
+  master_volume: 1.0
+  buffer: 4096  # upped from 2048 on UP Core Plus  # previous value was 512
   frequency: 24000
   channels: 1
   enabled: true

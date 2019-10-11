@@ -72,42 +72,42 @@ shot_groups:
 shots:
   jack_left_orbit:
     hit_events: sh_left_orbit_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     start_enabled: false
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_jack
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   jack_kickback:
     hit_events: sh_kickback_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     start_enabled: false
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_jack
     tags: envshot_kickback, power_target, power_target_kickback
   jack_left_ramp:
     hit_events: sh_left_ramp_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     start_enabled: false
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       color: color_jack
     tags: envshot_left_ramp_exit, power_target, power_target_left_ramp
   jack_right_ramp:
     hit_events: sh_right_ramp_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     start_enabled: false
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       color: color_jack
     tags: envshot_right_ramp_exit, power_target, power_target_left_ramp
   jack_right_orbit:
     hit_events: sh_right_orbit_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     start_enabled: false
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_jack
     tags: envshot_right_orbit, power_target, power_target_right_orbit
   jack_hitbank_shot:
@@ -122,7 +122,7 @@ shots:
     tags: envshot_hitbank, power_target_charge
 
 light_player:
-  mode_recruitgrunt_started:
+  mode_recruitjack_started:
     light_backwall_ambient:
       color: color_jack
 

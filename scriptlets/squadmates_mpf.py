@@ -64,6 +64,8 @@ class MPFSquadmateHandlers(CustomCode):
         self._current_recruit = None
         self._just_resumed = False
 
+        self._shows = {}
+
         # Create a listener for a recruitmission to start
         self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
         # Create a listener for a recruitmission to be resumed
@@ -72,8 +74,10 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
         # Create a listener for a ball to start
         self.machine.events.add_handler("mode_base_started", self._initialize_icons)
+        self.machine.events.add_handler("mode_base_stopped", self._handle_end)
         # Create a listener for playing a squadmate sound
         self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
+
 
     def _enable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._enable_shothandlers)
@@ -82,6 +86,7 @@ class MPFSquadmateHandlers(CustomCode):
             if self.machine.game.player["status_{}".format(mate)] < 4:
                 self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
         self.log.debug("Created a bunch of shothandlers! {}".format(self))
+        self._play_squadmates_show()
 
     def _disable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._on_hit)
@@ -94,12 +99,14 @@ class MPFSquadmateHandlers(CustomCode):
             if status == 3 or status == 4 or status == -1:
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=status)
 
+    def _handle_end(self, **kwargs):
+        self._play_squadmates_show(stop_all=True)
+
     def _handle_squadmate_sound(self, **kwargs):
         squadmate = kwargs.pop("squadmate", "random")
         variant = random.randint(1, kwargs["variants"]) if kwargs.get("variants") else None
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
-        self.machine.log.info("Got a squadmate ({}) for playing sound '{}'".format(squadmate, kwargs['sound']))
         sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")
@@ -113,7 +120,6 @@ class MPFSquadmateHandlers(CustomCode):
                 "track": track,
             }
         }
-        self.machine.log.info("SquadmateSounds made an asset to play: '{}' Args={}".format(sound_name, settings))
         # We can pass in playback event handlers too
         for config_name in ["events_when_played", "events_when_stopped"]:
             if kwargs.get(config_name):
@@ -146,7 +152,7 @@ class MPFSquadmateHandlers(CustomCode):
                         "events_when_played": [completed_event] if completed_event else [],
                     }
                 }
-                self.machine.log.info("Squadmates made a callback: '{}' Args={}".format(cb_sound_name, cb_settings))
+
                 self.machine.events.post("sounds_play",
                                          settings=cb_settings,
                                          context=context,
@@ -160,6 +166,7 @@ class MPFSquadmateHandlers(CustomCode):
         self.log.debug("Received recruit HIT event with kwargs: {}".format(kwargs))
         mate = kwargs["squadmate"]
         future_mate_status = player["status_{}".format(mate)] + 1
+        do_update_shows = False
 
         if 0 < future_mate_status <= 3:
             self.machine.events.post("recruit_advance", squadmate=mate, status=future_mate_status)
@@ -187,10 +194,14 @@ class MPFSquadmateHandlers(CustomCode):
                     1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.variables.get_machine_var("bonus_xp")))
                 player["xp"] += int(xp)
                 player["available_missions"] += 1
+                do_update_shows = True
 
             player["status_{}".format(mate)] = future_mate_status
             player["recruits_color"] = COLORS[mate]
             self.machine.events.post("flash_all_shields")
+
+            if do_update_shows:
+                self._play_squadmates_show()
 
     def _on_missionselect(self, **kwargs):
         mate = kwargs["squadmate"]
@@ -241,6 +252,7 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.post("recruit_success_{}".format(mate))
         player["status_{}".format(mate)] = 4
         self._on_stop(success=True, **kwargs)
+        self._play_squadmates_show()
 
         # See if we had previously failed the Suicide Mission, and if so, do we now
         # have enough tech/biotic squadmates to try again?
@@ -250,3 +262,42 @@ class MPFSquadmateHandlers(CustomCode):
                 len(SquadmateStatus.available_techs(player)), len(SquadmateStatus.available_biotics(player))))
             if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
                 achs["suicidemission"].enable()
+
+    def _play_squadmates_show(self, stop_all=False):
+        mate_lists = {
+            "lit": [],
+            "complete": [],
+            "dead": [],
+            "off": [],
+        }
+        for mate in SquadmateStatus.all_mates():
+            status = 0 if stop_all else self.machine.game.player["status_{}".format(mate)]
+            if status == 3:
+                mate_lists["lit"].append(mate)
+            elif status == 4:
+                mate_lists["complete"].append(mate)
+            elif status == -1:
+                mate_lists["dead"].append(mate)
+            else:
+                mate_lists["off"].append(mate)
+
+        for status, mates in mate_lists.items():
+            showname = "recruits_{}_show".format(status)
+            if mates:
+                config = self.machine.show_controller.create_show_config(
+                    name=showname,
+                    show_tokens={
+                        "leds": ", ".join(["light_bbsquad_{}".format(mate) for mate in mates])
+                    }
+                )
+
+                self._shows[showname] = self.machine.show_controller.replace_or_advance_show(
+                    self._shows.get(showname),  # old_instance
+                    config,  # config
+                    0  # start_step
+                )
+
+            # If there are no more mates, stop the show
+            elif self._shows.get(showname):
+                self._shows[showname].stop()
+                self._shows[showname] = None

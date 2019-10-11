@@ -102,7 +102,7 @@ show_player:
       action: play
       priority: 10
       sync_ms: 800
-  mode_field_will_stop:
+  mode_field_will_stop.14:
     shadowbroker_lit_show:
       action: stop
     shadowbroker_hold_show:

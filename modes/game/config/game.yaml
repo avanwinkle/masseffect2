@@ -27,11 +27,11 @@ event_player:
   mode_base_will_start: flippers_on
 
 variable_player:
-  game_started{machine.is_lcd}:
+  game_started.1{machine.is_lcd}:
     gameover_text:
       action: set_machine
       string: "GAME\nOVER"
-  game_started{not machine.is_lcd}:
+  game_started.2{not machine.is_lcd}:
     gameover_text:
       action: set_machine
       string: "GAME OVER"
