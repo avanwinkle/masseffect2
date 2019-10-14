@@ -28,24 +28,43 @@ mode_settings:
       priority: 100
     recruitzaeed:
       key: 15
-      priority: 101
+      priority: 201
     recruitlegion:
       key: 16
-      priority: 101
+      priority: 201
     recruittali:
       key: 17
-      priority: 101
+      priority: 201
     recruitsamara:
       key: 18
-      priority: 102
+      priority: 202
     recruitthane:
       key: 19
-      priority: 102
+      priority: 202
+    sbintel:
+      key: 60
+      priority: 60
+    sbchase:
+      key: 61
+      priority: 161
+    sbvasir:
+      key: 62
+      priority: 162
+    sbprehagalaz:
+      key: 63
+      priority: 163
+    sbhagalaz:
+      key: 64
+      priority: 264
+    sbboss:
+      key: 65
+      priority: 265
     overlord:
       key: 50
       priority: 90
   events:
     game_started:
+      # TODO: Set these values based on the preserved profile state
       recruitgarrus: 0
       recruitgrunt: 0
       recruitjack: 0
@@ -125,6 +144,34 @@ mode_settings:
     # ZAEED
     player_zaeed_path_renegade:
       recruitzaeed: (3 + value)
+    # SHADOWBROKER
+    logicblock_sbdrops_counter_hit:
+      sbintel{current_player.state_machine_shadowbroker=="start"}: (count)
+      sbprehagalaz{current_player.state_machine_shadowbroker=="pre_hagalaz"}: (count)
+    shadowbroker_progression_start_started:
+      sbintel: 0
+    shadowbroker_progression_chase_started:
+      sbchase: 0
+    logicblock_chase_maxhits_counter_hit:
+      sbchase: (5 - count)
+    shadowbroker_progression_vasir_started:
+      sbvasir: 0
+    logicblock_vasir_hits_counter_hit:
+      sbvasir: (count / 2) - 1 # WRONG?
+    shadowbroker_progression_pre_hagalaz_started:
+      sbvasir: 3
+      sbprehagalaz: 0
+    shadowbroker_progression_hagalaz_started:
+      sbhagalaz: 0
+    logicblock_shunt_counter_hit:
+      sbhagalaz{count % 2 == 0}: 5 - (count / 2)
+    logicblock_shunt_counter_complete:
+      sbhagalaz: 5
+    shadowbroker_progression_boss_started:
+      sbhagalaz: 6
+      sbboss: 0
+    sbboss_round_counter_hit:
+      sbboss: (count)
     # OVERLORD
     overlord_ball_will_lock:
       overlord: (total_balls_locked)
