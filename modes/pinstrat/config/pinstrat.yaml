@@ -44,13 +44,16 @@ mode_settings:
     overlord:
       key: 50
       priority: 90
+    collectorship:
+      key: 60
+      priority: 200
   events:
     game_started:
-      recruitgarrus: 0
-      recruitgrunt: 0
-      recruitjack: 0
-      recruitkasumi: 0
-      recruitmordin: 0
+      recruitgarrus{current_player.status_garrus<3}: 0
+      recruitgrunt{current_player.status_grunt<3}: 0
+      recruitjack{current_player.status_jack<3}: 0
+      recruitkasumi{current_player.status_kasumi<3}: 0
+      recruitmordin{current_player.status_mordin<3}: 0
       overlord: 0
     # Don't immediately display new squadmates, get at least one hit
     recruit_advance:
