@@ -318,36 +318,36 @@ switches:
 
 light_rings:
   l_left_orbit_ring:
-    number_start: 23
-    number_template: 0-{}
+    number_start: 1
+    number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_left_orbit
       type: grb
   l_kickback_ring:
-    number_start: 30
-    number_template: 0-{}
+    number_start: 8
+    number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_kickback
       type: grb
   l_left_ramp_ring:
-    number_start: 37
-    number_template: 0-{}
+    number_start: 15
+    number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_left_ramp
       type: grb
   l_right_ramp_ring:
-    number_start: 44
-    number_template: 0-{}
+    number_start: 22
+    number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_right_ramp
       type: grb
   l_right_orbit_ring:
-    number_start: 51
-    number_template: 0-{}
+    number_start: 29
+    number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_right_orbit
@@ -407,73 +407,80 @@ lights:
     number: 0-7
     type: grb
     tags: l_return_lane, outer_circles
-
-  l_ball_save: # Shoot Again [#32]
+  l_left_medigel:
     number: 0-8
+    type: grb
+    tags: light_medigel
+  l_ball_save: # Shoot Again [#32]
+    number: 0-9
     type: grb
     tags: outer_circles
     default_on_color: ffcc00  # color_armor
+  l_right_medigel:
+    number: 0-10
+    type: grb
+    tags: light_medigel
   l_right_return_lane: # Right Return Lane [#33]
-    number: 0-9
+    number: 0-11
     type: grb
     tags: l_return_lane, outer_circles
   l_right_outlane: # Right Outlane [#34]
-    number: 0-10
+    number: 0-12
     type: grb
     tags: l_outlane, outer_circles
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
-    number: 0-11
+    number: 0-13
     type: grb
     tags: light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
   l_hitbank_top: # Right 2-Bank (Top) [#38]
-    number: 0-12
+    number: 0-14
     type: grb
     tags: light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
   l_standup_1: # Standup 1 [#44]
-    number: 0-21
+    number: 0-23
     type: grb
     tags: l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_2: # Standup 2 [#52]
-    number: 0-19
+    number: 0-21
     type: grb
     tags: l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_3: # Standup 3 [#59]
-    number: 0-17
+    number: 0-19
     type: grb
     tags: l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_4: # Standup 4 [#64]
-    number: 0-15
+    number: 0-17
     type: grb
     tags: l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_5: # Standup 5 [#70]
-    number: 0-14
+    number: 0-16
     type: grb
     tags: l_targets
     default_on_color: ffcc00  # color_armor
 
   l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
-    number: 0-13
+    number: 0-15
     type: grb
     tags: lane_wedges, l_upgrade
     default_on_color: eeff00  # color_kasumi
   l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
-    number: 0-16
+    number: 0-18
     type: grb
     tags: batram_multipliers, batram_arrow
     default_on_color: "990000"  # color_health
   l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
-    number: 0-18
+    number: 0-20
     type: grb
     tags: light_missionselect, lane_wedges
     default_on_color: white
   l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
-    number: 0-20  # shadowbroker mission start
+    number: 0-22  # shadowbroker mission start
     type: grb
     tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
     default_on_color: ff1f00  # color_shadowbroker
@@ -532,23 +539,23 @@ lights:
   #------------------------------------------
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: grb
-    number: 0-22
+    number: 1-0
     tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: grb
-    number: 0-29
+    number: 1-7
     tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance
   l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
     type: grb
-    number: 0-36
+    number: 1-14
     tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
   l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
     type: grb
-    number: 0-43
+    number: 1-21
     tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
   l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
     type: grb
-    number: 0-50
+    number: 1-28
     tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
 
 
@@ -558,13 +565,13 @@ lights:
   #   number: 1-63
   #   tags: backbox
   l_2x_multiplier: # 2x Multiplier [#28]
-    number: 1-10
+    number: 2-17
     tags: l_multipliers
   l_3x_multiplier: # 3x Multiplier [#29]
-    number: 1-11
+    number: 2-18
     tags: l_multipliers
   l_4x_multiplier: # 4x Multiplier [#30]
-    number: 1-12
+    number: 2-19
     tags: l_multipliers
   # l_5x_multiplier: # 5x Multiplier [#31]
   #   number: 1-13
@@ -604,7 +611,7 @@ lights:
   l_flash_slingshots: # Left/Right Sling [#104]
     number: 2-21
   l_flash_sword_lock: # Sword Lock [#95]
-    number: 2-14
+    number: 2-16
     tags: upfield_flashers
   l_flash_throne: # Throne [#105]
     number: 2-30
@@ -645,13 +652,13 @@ lights:
   #   number: 3-18
   #   tags: lane_arrows, light_firewalker, light_firewalker_left_ramp
   l_pop_bumper_bottom: # Pop Bumper Bottom [#79]
-    number: 1-1
+    number: 2-12
     tags: l_pop_bumpers
   l_pop_bumper_left: # Pop Bumper Left [#77]
-    number: 1-3
+    number: 2-13
     tags: l_pop_bumpers
   l_pop_bumper_right: # Pop Bumper Right [#78]
-    number: 1-2
+    number: 2-14
     tags: l_pop_bumpers
   # l_right_orbit_arrow_red: # Right Loop Arrow [#74]
   #   number: 1-20
