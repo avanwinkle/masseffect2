@@ -400,11 +400,11 @@ lights:
     default_on_color: ff1f00  # color_shadowbroker
 
   l_left_outlane: # Left Outlane [#11]
-    number: 0-6
+    number: 0-7
     type: grb
     tags: l_outlane, outer_circles
   l_left_return_lane: # Left Return Lane [#12]
-    number: 0-7
+    number: 0-6
     type: grb
     tags: l_return_lane, outer_circles
   l_left_medigel:
@@ -421,11 +421,11 @@ lights:
     type: grb
     tags: light_medigel
   l_right_return_lane: # Right Return Lane [#33]
-    number: 0-11
+    number: 0-12
     type: grb
     tags: l_return_lane, outer_circles
   l_right_outlane: # Right Outlane [#34]
-    number: 0-12
+    number: 0-11
     type: grb
     tags: l_outlane, outer_circles
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]

@@ -28,7 +28,7 @@ keyboard:
   t:
     event: hold_post_disable
   m:
-    event: enable_medigel
+    event: levelup
   a:
     event: enable_gates
   o:

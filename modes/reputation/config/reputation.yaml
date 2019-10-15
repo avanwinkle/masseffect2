@@ -29,13 +29,19 @@ variable_player:
 
 shot_groups:
   reputation_build_shots:
-    shots: paragon_shot, renegade_shot
+    shots: alliance_shot, paragon_shot, renegade_shot, cerberus_shot
     reset_events: reputation_build_shots_complete
-    rotate_events:
+    rotate_left_events:
       - s_flipper_left_active
+    rotate_right_events:
       - s_flipper_right_active
 
 shots:
+  alliance_shot:
+    switch: s_outlane_left
+    profile: reputation_profile
+    show_tokens:
+      leds: l_left_outlane
   paragon_shot:
     switch: s_return_lane_left
     profile: reputation_profile
@@ -46,6 +52,11 @@ shots:
     profile: reputation_profile
     show_tokens:
       leds: l_right_return_lane
+  cerberus_shot:
+    switch: s_outlane_right
+    profile: reputation_profile
+    show_tokens:
+      leds: l_right_outlane
 
 shot_profiles:
   reputation_profile:
@@ -55,3 +66,11 @@ shot_profiles:
         show: off
       - name: lit
         show: on
+
+show_player:
+  reputation_build_shots_lit_complete:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_left_outlane, l_left_return_lane, l_right_return_lane, l_right_outlane
+        color: on
+      loops: 4
