@@ -26,7 +26,11 @@
 mode:
   start_events: start_mode_derelictreaper
   stop_events: stop_mode_derelictreaper, stop_wizards
-  events_when_started: mode_type_wizard_started, enable_reapercore
+  events_when_started:
+    - mode_type_wizard_started
+    - enable_reapercore
+    # TODO: Add an intro slide
+    - mission_intro_complete
   events_when_stopped: mode_type_wizard_stopped
   priority: 500
 

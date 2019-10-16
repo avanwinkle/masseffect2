@@ -78,7 +78,6 @@ class MPFSquadmateHandlers(CustomCode):
         # Create a listener for playing a squadmate sound
         self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
 
-
     def _enable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._enable_shothandlers)
         self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)

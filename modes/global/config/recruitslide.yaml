@@ -1,10 +1,8 @@
 #config_version=5
 
-# event_player:
-#   slide_recruit_mission_slide_active:
-#     # Prepopulate the slide when it comes in
-#     timer_missiontimer_tick:
-#       ticks_remaining: { value: device.timers.missiontimer.ticks }
+event_player:
+  # Delay the release of the ball until after the instructions are shown
+  show_recruit_instructions: mission_intro_complete|3s
 
 #####
 # Use a single slide/widget for all the missions, just update the text

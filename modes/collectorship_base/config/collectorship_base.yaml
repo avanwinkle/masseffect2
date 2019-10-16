@@ -20,7 +20,12 @@
 mode:
   start_events: start_mode_collectorship_base
   stop_events: stop_mode_collectorship_base, stop_wizards
-  events_when_started: mode_type_wizard_started, start_mode_collectorship_ambush, start_mode_harbinger
+  events_when_started:
+    - mode_type_wizard_started
+    - start_mode_collectorship_ambush
+    - start_mode_harbinger
+    # TODO: Add an intro
+    - mission_intro_complete
   events_when_stopped: mode_type_wizard_stopped, stop_mode_harbinger
   priority: 300
 

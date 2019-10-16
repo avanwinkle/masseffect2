@@ -30,6 +30,10 @@ mode_settings:
   next_item_events: s_flipper_right_inactive, missionselect_skip_forwards, mode_missionselect_started, missionselect_specialist_highlighted
   previous_item_events: s_flipper_left_inactive, missionselect_skip_backwards
 
+event_player:
+  # The hold will release when intro is complete
+  missionselect_pass_selected: mission_intro_complete
+
 timers:
   missionselect_timer:
     start_value: 9

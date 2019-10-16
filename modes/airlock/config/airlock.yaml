@@ -79,7 +79,7 @@ ball_holds:
       # Always compare player_num because players can get added during others' turns
       - player_available_missions{player_num==current_player.number and value<=0}
     release_all_events:
-      - mode_missionselect_will_stop
+      - mission_intro_complete
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold

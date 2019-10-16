@@ -10,11 +10,11 @@ modes:
 
 fast:
   # Do not commit changes to this line until we have machine-aware port detection
-  # ports: /dev/ttyUSB1, /dev/ttyUSB2
+  ports: /dev/ttyUSB1, /dev/ttyUSB2
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
-  ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
+  # ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
   # rgb_buffer: 10000
   # debug: true
   hardware_led_fade_time: 100
@@ -39,7 +39,7 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 5s
     confirm_eject_type: target # default
-    entrance_count_delay: 100ms
+    entrance_count_delay: 600ms
     player_controlled_eject_event: force_plunger_launch
     debug: true
   bd_trough:
