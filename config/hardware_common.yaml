@@ -46,14 +46,17 @@ autofire_coils:
     coil: c_bumper_right
     enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
+    timeout_watch_time: 1s
+    timeout_max_hits: 3
+    timeout_disable_time: 4s
   bottom_bumper:
     switch: s_bumper_bottom
     coil: c_bumper_bottom
     enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
-    timeout_watch_time: 600ms
-    timeout_max_hits: 2
-    timeout_disable_time: 3s
+    timeout_watch_time: 2s
+    timeout_max_hits: 3
+    timeout_disable_time: 5s
   right_slingshot:
     switch: s_right_slingshot
     coil: c_slingshot_right

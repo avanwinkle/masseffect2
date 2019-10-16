@@ -67,6 +67,8 @@ keyboard:
     switch: s_top_lane_right
   s:
     switch: s_spinner
+  k:
+    event: pulse_plunger
   space:
     event: flippers_on
   right:

@@ -23,12 +23,14 @@ shots:
     advance_events: player_shot_medigel_left_shot_enabled
     show_tokens:
       leds: l_left_medigel
+      color: a17f37
     tags: envshot_outlane, medigel_shot
   medigel_right_shot:
     switch: s_outlane_right
     profile: medigel_profile
     show_tokens:
       leds: l_right_medigel
+      color: a17f37
     tags: envshot_outlane, medigel_shot
 
 shot_groups:
@@ -68,7 +70,7 @@ shot_profiles:
       - name: unlit
         show: off
       - name: lit
-        show: on
+        show: color_on
 
 ball_saves:
   medigel_save:

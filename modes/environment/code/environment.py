@@ -44,7 +44,9 @@ class Environment(Mode):
                     if isinstance(stop_events, str):
                         stop_events = stop_events.split(r", ?")
                     self._removal_handlers = [
-                        self.add_mode_event_handler(event, self._clear_environment) for event in stop_events
+                        self.add_mode_event_handler(event,
+                                                    self._clear_environment,
+                                                    priority=idx) for idx, event in enumerate(stop_events)
                     ]
 
             self._environment = env
@@ -159,6 +161,9 @@ class OutlaneShot(EnvShot):
         """Get outlane targets based on medigel early-saves."""
         self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
         # Targets include any ball_save being active OR the medigel shot being active
-        outlane_targets = self.machine.device_manager.collections["shots"].items_tagged("medigel_shot")
+        outlane_targets = [
+            self.machine.device_manager.collections["shots"]["medigel_left_shot"],
+            self.machine.device_manager.collections["shots"]["medigel_right_shot"],
+        ]
         outlane_targets.extend(self.machine.device_manager.collections["ball_saves"].values())
         return outlane_targets

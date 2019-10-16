@@ -42,21 +42,25 @@ shots:
     profile: reputation_profile
     show_tokens:
       leds: l_left_outlane
+      color: a17f37
   paragon_shot:
     switch: s_return_lane_left
     profile: reputation_profile
     show_tokens:
       leds: l_left_return_lane
+      color: a17f37
   renegade_shot:
     switch: s_return_lane_right
     profile: reputation_profile
     show_tokens:
       leds: l_right_return_lane
+      color: a17f37
   cerberus_shot:
     switch: s_outlane_right
     profile: reputation_profile
     show_tokens:
       leds: l_right_outlane
+      color: a17f37
 
 shot_profiles:
   reputation_profile:
@@ -65,7 +69,7 @@ shot_profiles:
       - name: unlit
         show: off
       - name: lit
-        show: on
+        show: color_on
 
 show_player:
   reputation_build_shots_lit_complete:
