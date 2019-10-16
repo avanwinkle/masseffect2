@@ -1,0 +1,124 @@
+#show_version=5
+
+# This show expects a token "leds", which corresponds to the "ledring" name
+- time: 0
+  lights:
+    (leds)_light_1:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_2:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_3:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_4:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_5:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_0:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'
+  lights:
+    (leds)_light_0:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_1:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_2:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_3:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_4:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_5:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'
+  lights:
+    (leds)_light_5:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_0:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_1:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_2:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_3:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_4:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'
+  lights:
+    (leds)_light_4:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_5:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_0:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_1:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_2:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_3:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'
+  lights:
+    (leds)_light_3:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_4:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_5:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_0:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_1:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_2:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'
+  lights:
+    (leds)_light_2:
+      color: (color1)%100
+      fade: (fade)
+    (leds)_light_3:
+      color: (color1)%70
+      fade: (fade)
+    (leds)_light_4:
+      color: (color1)%40
+      fade: (fade)
+    (leds)_light_5:
+      color: (color2)%100
+      fade: (fade)
+    (leds)_light_0:
+      color: (color2)%70
+      fade: (fade)
+    (leds)_light_1:
+      color: (color2)%40
+      fade: (fade)
+- time: '+1'

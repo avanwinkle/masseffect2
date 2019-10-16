@@ -185,6 +185,11 @@ shows:
       lights:
         l_targets: black
 
+light_player:
+  mode_recruittali_started:
+    light_backwall_ambient:
+      color: color_tali
+
 sound_player:
   mode_recruittali_started:
     music_recruit_tali:

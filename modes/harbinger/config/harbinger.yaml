@@ -119,9 +119,9 @@ shows:
     - duration: 1s
       lights:
         batram_arrow:
-          color: FFFFFF
+          color: color_collectors
         batram_multipliers:
-          color: FFFFFF
+          color: color_collectors
     - duration: 1s
       lights:
         batram_multipliers: off

@@ -10,11 +10,11 @@ modes:
 
 fast:
   # Do not commit changes to this line until we have machine-aware port detection
-  ports: /dev/ttyUSB1, /dev/ttyUSB2
+  # ports: /dev/ttyUSB1, /dev/ttyUSB2
   # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
   # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
   # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
-  # ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
+  ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
   # rgb_buffer: 10000
   # debug: true
   hardware_led_fade_time: 100
@@ -379,110 +379,112 @@ lights:
   l_left_top_lane: # Left Top Lane [#75]
     number: 0-1
     type: grb
+    tags: light_pf
   l_right_top_lane: # Right Top Lane [#76]
     number: 0-0
     type: grb
+    tags: light_pf
 
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 0-3
     type: grb
-    tags: light_dropbank_rgb, l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, light_pf, l_dropbanks, outer_circles
     default_on_color: ff1f00  # color_shadowbroker
   l_dropbank_middle: # Left 3-Bank (Mid) [#14]
     number: 0-4
     type: grb
-    tags: light_dropbank_rgb, l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, light_pf, l_dropbanks, outer_circles
     default_on_color: ff1f00  # color_shadowbroker
   l_dropbank_bottom: # Left 3-Bank (Bot) [#13] #FF1F00
     number: 0-5
     type: grb
-    tags: light_dropbank_rgb, l_dropbanks, outer_circles
+    tags: light_dropbank_rgb, light_pf, l_dropbanks, outer_circles
     default_on_color: ff1f00  # color_shadowbroker
 
   l_left_outlane: # Left Outlane [#11]
     number: 0-7
     type: grb
-    tags: l_outlane, outer_circles
+    tags: light_pf, l_outlane, outer_circles
   l_left_return_lane: # Left Return Lane [#12]
     number: 0-6
     type: grb
-    tags: l_return_lane, outer_circles
+    tags: light_pf, l_return_lane, outer_circles
   l_left_medigel:
     number: 0-8
     type: grb
-    tags: light_medigel
+    tags: light_pf, light_medigel
   l_ball_save: # Shoot Again [#32]
     number: 0-9
     type: grb
-    tags: outer_circles
+    tags: light_pf, outer_circles
     default_on_color: ffcc00  # color_armor
   l_right_medigel:
     number: 0-10
     type: grb
-    tags: light_medigel
+    tags: light_pf, light_medigel
   l_right_return_lane: # Right Return Lane [#33]
     number: 0-12
     type: grb
-    tags: l_return_lane, outer_circles
+    tags: light_pf, l_return_lane, outer_circles
   l_right_outlane: # Right Outlane [#34]
     number: 0-11
     type: grb
-    tags: l_outlane, outer_circles
+    tags: light_pf, l_outlane, outer_circles
   l_hitbank_bot: # Right 2-Bank (Bot) [#39]
     number: 0-13
     type: grb
-    tags: light_hitbank_rgb, l_hitbanks, outer_circles
+    tags: light_pf, light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
   l_hitbank_top: # Right 2-Bank (Top) [#38]
     number: 0-14
     type: grb
-    tags: light_hitbank_rgb, l_hitbanks, outer_circles
+    tags: light_pf, light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
   l_standup_1: # Standup 1 [#44]
     number: 0-23
     type: grb
-    tags: l_targets
+    tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_2: # Standup 2 [#52]
     number: 0-21
     type: grb
-    tags: l_targets
+    tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_3: # Standup 3 [#59]
     number: 0-19
     type: grb
-    tags: l_targets
+    tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_4: # Standup 4 [#64]
     number: 0-17
     type: grb
-    tags: l_targets
+    tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
   l_standup_5: # Standup 5 [#70]
     number: 0-16
     type: grb
-    tags: l_targets
+    tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
 
   l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
     number: 0-15
     type: grb
-    tags: lane_wedges, l_upgrade
+    tags: light_pf, lane_wedges, l_upgrade
     default_on_color: eeff00  # color_kasumi
   l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
     number: 0-18
     type: grb
-    tags: batram_multipliers, batram_arrow
+    tags: light_pf, batram_multipliers, batram_arrow
     default_on_color: "990000"  # color_health
   l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
     number: 0-20
     type: grb
-    tags: light_missionselect, lane_wedges
+    tags: light_pf, light_missionselect, lane_wedges
     default_on_color: white
   l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-22  # shadowbroker mission start
     type: grb
-    tags: light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
+    tags: light_pf, light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
     default_on_color: ff1f00  # color_shadowbroker
 
   l_bbsquad_garrus:
@@ -540,23 +542,23 @@ lights:
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: grb
     number: 1-0
-    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+    tags: light_pf, shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: grb
     number: 1-7
-    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance
+    tags: light_pf, shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance
   l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
     type: grb
     number: 1-14
-    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
+    tags: light_pf, shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
   l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
     type: grb
     number: 1-21
-    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+    tags: light_pf, shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
   l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
     type: grb
     number: 1-28
-    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
+    tags: light_pf, shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
 
 
   # Unassigned lights carried over from Spike

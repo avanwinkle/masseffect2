@@ -92,9 +92,9 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: reputation
-        show: color_alternating_default
+        show: led_6_dualcolor_chase
       - name: lit
-        show: color_flashing_default
+        show: led_6_chase
 
 shot_groups:
   zaeed_orbitshots:
@@ -149,6 +149,11 @@ shows:
       lights:
         (leds): 000000
         l_null: (color)
+
+light_player:
+  mode_recruitzaeed_started:
+    light_backwall_ambient:
+      color: color_zaeed
 
 sound_player:
   mode_recruitzaeed_started:

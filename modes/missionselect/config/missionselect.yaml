@@ -32,9 +32,9 @@ mode_settings:
 
 timers:
   missionselect_timer:
-    start_value: 8
+    start_value: 9
     end_value: 0
-    tick_interval: 1s
+    tick_interval: 1.2s
     direction: down
     start_running: true
 
@@ -206,7 +206,7 @@ slide_player:
   missionselect_intro_highlighted:
     missionselect_intro_slide:
       target: main
-  missionselect_recruit_highlighted:
+  missionselect_recruit_highlighted{current_player.force_mission==0}:
     missionselect_recruit_slide:
       target: main
     missionselect_portrait_derelictreaper:
@@ -215,6 +215,9 @@ slide_player:
     missionselect_portrait_suicide:
       action: remove
       target: lcd_right
+  missionselect_recruit_highlighted{current_player.force_mission==1}:
+    missionselect_recruit_force_slide:
+      target: main
   missionselect_pass_highlighted:
     missionselect_pass_slide:
       target: main
@@ -254,6 +257,10 @@ slides:
     priority: 1
     widgets:
       - type: text
+        text: Recruit Your Squad
+        style: header_sm, row_top
+        opacity: 0.6
+      - type: text
         text: (squadmate)
         style: header_md, row_main
         casing: title
@@ -261,6 +268,22 @@ slides:
         text: "Press Both Flippers\nTo Start Mission"
         style: body_sm, row_sub_under, row_dmd_bottom
       - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
+      - widget: background_console
+  missionselect_recruit_force_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: Recruit Your Squad
+        style: header_sm, row_top
+        opacity: 0.6
+      - type: text
+        text: (squadmate)
+        style: header_md, row_main
+        casing: title
+      - type: text
+        text: Mission Starting in (missionselect_missionselect_timer_tick)
+        style: header_xs, row_gutter
       - widget: background_console
   missionselect_collectorship_slide:
     priority: 1
@@ -268,13 +291,15 @@ slides:
       - type: text
         text: "Disabled\nCollector Vessel"
         style: header_md, row_main, row_main_dmd_low
+      - widget: missionselect_timer_widget
+      - widget: background_console
   missionselect_derelictreaper_slide:
     priority: 1
     widgets:
       - type: text
         text: "Derelict Reaper"
         style: header_md, row_main
-      - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_suicide_slide:
     priority: 1
@@ -294,6 +319,7 @@ slides:
         text: Pass for Now
         style: header_md, row_main
       - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_portrait_slide: []
   missionselect_portrait_collectorship:
@@ -311,3 +337,4 @@ slides:
 
 sound_player:
   missionselect_pass_selected: shep_i_should_go
+

@@ -139,8 +139,11 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: active
-        show: n7_show
+        show: led_6_dualcolor_chase
         speed: 12
+        show_tokens:
+          color1: red
+          color2: white
 
 show_player:
   mode_n7_assignments_started: n7_lightsdown
@@ -156,33 +159,30 @@ shows:
           fade: 1s
         light_backwall_gi:
           color: 444444
-        light_backwall_ambient:
+        l_backwall_ambient_light_0:
+          color: white
+        l_backwall_ambient_light_1:
+          color: white
+        l_backwall_ambient_light_2:
+          color: white
+        l_backwall_ambient_light_3:
+          color: white
+        l_backwall_ambient_light_5:
           color: red
-        # l_backwall_ambient_light_2:
-        #   color: white
-        # l_backwall_ambient_light_3:
-        #   color: white
-        # l_backwall_ambient_light_6:
-        #   color: red
-        # l_backwall_ambient_light_7:
-        #   color: red
-        # l_backwall_ambient_light_10:
-          # color: white
-        # l_backwall_amient_light_11:
-        #   color: white
-  n7_show:
-    - time: 0
-      lights:
-        (leds): red
-    - time: '+3'
-      lights:
-        (leds): white
-    - time: '+4'
-      lights:
-        (leds): red
-    - time: '+5'
-      lights:
-        (leds): white
+        l_backwall_ambient_light_6:
+          color: red
+        l_backwall_ambient_light_7:
+          color: red
+        l_backwall_ambient_light_8:
+          color: red
+        l_backwall_ambient_light_10:
+          color: white
+        l_backwall_ambient_light_11:
+          color: white
+        l_backwall_ambient_light_12:
+          color: white
+        l_backwall_ambient_light_13:
+          color: white
 
 slide_player:
   set_n7_mission:

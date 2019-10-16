@@ -75,7 +75,7 @@ shots:
   cure_left:
     hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
     enable_events: mode_recruitmordin_started
-    profile: color_flashing_to_solid_profile
+    profile: lane_shot_to_on_profile
     # tags: envshot_right_orbit. # No env tag so we'll get a sound when its hit
     show_tokens:
       leds: l_left_orbit_shield_rgb
@@ -83,7 +83,7 @@ shots:
   cure_right:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
     enable_events: cure_left_hit
-    profile: color_flashing_to_solid_profile
+    profile: lane_shot_to_on_profile
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: color_mordin
@@ -91,7 +91,7 @@ shots:
   fan_left:
     hit_events: sh_left_ramp_hit
     enable_events: enable_fans
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: color_door_green
@@ -99,16 +99,16 @@ shots:
   fan_right:
     hit_events: sh_right_ramp_hit
     enable_events: enable_fans
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: color_door_green
     tags: envshot_right_ramp
 
 light_player:
-  mode_recruitgrunt_started:
+  mode_recruitmordin_started:
     light_backwall_ambient:
-      color: color_grunt
+      color: color_mordin
 
 sound_player:
   mode_recruitmordin_started:

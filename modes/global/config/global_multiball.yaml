@@ -144,6 +144,12 @@ show_player:
       priority: 100
       loops: 6
       speed: 10
+  play_queued_slide_fmball_ball_locked_slide:
+    pulse_playfield:
+      priority: 1000
+      loops: 3
+      show_tokens:
+        color: color_overlord
   multiball_overlord_multiball_started:
     ball_save_show:
       action: play

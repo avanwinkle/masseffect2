@@ -71,6 +71,9 @@ class MissionSelect(Carousel):
         # If more than one option is available, include the intro slide
         if len(items) > 1:
             items.insert(0, self._intro)
+            player["force_mission"] = 0
+        else:
+            player["force_mission"] = 1
         self.log.info("Missionselect missions: {}".format(items))
 
         return items
@@ -104,6 +107,10 @@ class MissionSelect(Carousel):
         if h != self._intro and self._intro in self._items:
             self._items = self._items[1:]
             self._highlighted_item_index -= 1
+
+        # If there is only one item, show the force countdown
+        if len(self._items) == 1:
+            self.machine.events.post("missionselect_force_mission")
 
     def _remove_intro(self):
         self.log.debug("Removing intro slide, highlighted is {} and items are: {}".format(
