@@ -145,7 +145,7 @@ mode_settings:
     logicblock_thane_ascent_counter_hit:
       recruitthane: (6 - count)
     # ZAEED
-    player_zaeed_path_renegade:
+    player_zaeed_path_renegade{change>1}:
       recruitzaeed: (3 + value)
     # SHADOWBROKER
     logicblock_sbdrops_counter_hit:
