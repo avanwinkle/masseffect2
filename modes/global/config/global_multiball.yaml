@@ -146,7 +146,7 @@ show_player:
       speed: 10
   play_queued_slide_fmball_ball_locked_slide:
     pulse_playfield:
-      priority: 1000
+      priority: 10000
       loops: 2
       show_tokens:
         color: color_overlord

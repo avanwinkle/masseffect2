@@ -128,6 +128,7 @@ shows:
         gi:
           color: off
           fade: 2s
+        light_pf: off
         light_missionselect: off
         l_dropbank_bottom: off
         l_dropbank_middle: off

@@ -16,7 +16,10 @@ event_player:
   mode_global_started:
     - enable_planets{not mode.skillshot.active}
     - disable_planets{mode.skillshot.active}
-  planet_shots_hit_complete:
+  planet_shots_hit_complete.1:
+    - bumpers_off|2s
+    - bumpers_on|5s
+  planet_shots_hit_complete.2:
     planet_scanned:
       planets:
         value: current_player.planets + 1

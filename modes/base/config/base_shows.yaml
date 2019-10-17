@@ -96,22 +96,22 @@ shows:
         (flashers): 120ms
     - duration: 10s
   pulse_playfield:
-    - duration: 100ms
+    - duration: 200ms
       lights:
         light_pf:
           color: black
-          fade: 100ms
+          fade: 200ms
         l_null: (color)
     - duration: 400ms
       lights:
         light_pf:
           color: (color)
           fade: 200ms
-    - duration: 100ms
+    - duration: 200ms
       lights:
         light_pf:
           color: black
-          fade: 100ms
+          fade: 200ms
         l_null: (color)
 
 
@@ -215,7 +215,7 @@ shot_profiles:
         show_tokens:
           fade: 20ms
       - name: hit
-        show: on
+        show: led_color
   lane_shot_static:
     show_when_disabled: false
     states:

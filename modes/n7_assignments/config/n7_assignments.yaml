@@ -31,6 +31,8 @@ event_player:
         type: float
   mode_n7_assignments_started.1:
     - missiontimer_start|1s
+    - bumpers_off
+    - bumpers_on|6s
   n7_assignment_shot_hit:
     - mission_shot_hit
     - mission_collect_store
