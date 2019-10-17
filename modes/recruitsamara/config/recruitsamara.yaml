@@ -64,7 +64,7 @@ shots:
     disable_events: samara_left_orbit_hit
     profile: lane_shot_static
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_samara
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   samara_left_ramp:
@@ -73,7 +73,7 @@ shots:
     disable_events: samara_left_ramp_hit
     profile: lane_shot_static
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       color: color_samara
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   samara_right_orbit:
@@ -82,7 +82,7 @@ shots:
     disable_events: samara_right_orbit_hit
     profile: lane_shot_static
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_samara
     tags: envshot_sight_orbit, power_target, power_target_sight_orbit
   samara_right_ramp:
@@ -91,7 +91,7 @@ shots:
     disable_events: samara_right_ramp_hit
     profile: lane_shot_static
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       color: color_samara
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   samara_kickback:
@@ -100,7 +100,7 @@ shots:
     disable_events: samara_kickback_hit
     profile: lane_shot_static
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_samara
     tags: envshoh_kickback, power_target, power_target_kickback
   samara_target1:
