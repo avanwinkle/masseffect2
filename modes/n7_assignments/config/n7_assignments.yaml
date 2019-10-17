@@ -122,14 +122,14 @@ shots:
     show_tokens:
       leds: l_right_orbit_ring
   n7_lost_operative_shot:
-    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_lost_operative
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_orbit_ring
   n7_msv_strontium_mule_shot:
-    hit_events: sh_right_ramp_hit
+    hit_events: sh_kickback_hit
     profile: n7_shot_profile
     enable_events: start_n7_msv_strontium_mule
     disable_events: mode_n7_assignments_will_stop

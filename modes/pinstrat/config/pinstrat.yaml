@@ -66,16 +66,13 @@ mode_settings:
       key: 60
       priority: 200
   events:
-    game_started:
-      # TODO: Set these values based on the preserved profile state
-      recruitgarrus{current_player.status_garrus<3}: 0
-      recruitgrunt{current_player.status_grunt<3}: 0
-      recruitjack{current_player.status_jack<3}: 0
-      recruitkasumi{current_player.status_kasumi<3}: 0
-      recruitmordin{current_player.status_mordin<3}: 0
-      overlord: 0
     # Don't immediately display new squadmates, get at least one hit
     recruit_advance:
+      recruitgarrus{squadmate=="garrus" and status<3}: 0
+      recruitgrunt{squadmate=="grunt" and status<3}: 0
+      recruitjack{squadmate=="jack" and status<3}: 0
+      recruitkasumi{squadmate=="kasumi" and status<3}: 0
+      recruitmordin{squadmate=="mordin" and status<3}: 0
       recruitlegion{squadmate=="legion" and status<3}: 0
       recruitsamara{squadmate=="samara" and status<3}: 0
       recruittali{squadmate=="tali" and status<3}: 0

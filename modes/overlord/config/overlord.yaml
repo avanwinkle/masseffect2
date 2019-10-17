@@ -192,6 +192,13 @@ shots:
     tags: envshot_kickback
 
 show_player:
+  multiball_overlord_multiball_started:
+    ball_save_show:
+      action: play
+      speed: 3
+  multiball_overlord_multiball_shoot_again_ended:
+    ball_save_show:
+      action: stop
   reset_hackshots:
     overlord_hackshots_off_show:
       key: overlord_hackshots_show

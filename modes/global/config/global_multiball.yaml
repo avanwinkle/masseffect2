@@ -150,13 +150,6 @@ show_player:
       loops: 2
       show_tokens:
         color: color_overlord
-  multiball_overlord_multiball_started:
-    ball_save_show:
-      action: play
-      speed: 3
-  multiball_overlord_multiball_shoot_again_ended:
-    ball_save_show:
-      action: stop
   # When in wizard mode, hide the lock light show because we can't lock
   mode_type_wizard_started:
     fmball_disabled_show:
