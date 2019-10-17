@@ -460,12 +460,15 @@ named_colors:
   color_door_green: 55FF00
   color_space: 0044AA
   # Other Modes
+  color_arrival: 24c8ff
   color_collectors: ff2200
   color_husk: 00101E
   color_overlord: 22FF33
   color_overlord_orange: FF4400
   color_praetorian: 2200AA
   color_shadowbroker: ff1f00
+  # Default: mball color is overlord
+  color_mball: 22FF33
 
 sound_system:
   master_volume: 1.0
