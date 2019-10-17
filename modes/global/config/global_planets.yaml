@@ -207,26 +207,26 @@ sounds:
   something_sensors_1:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333682_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
   something_sensors_2:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333683_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
   found_something_1:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333684_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
   found_something_2:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333685_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
   scans_found_something_1:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333686_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
   scans_found_something_2:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333687_m.ogg
     track: voice
-    max_queue_time: 1s
+    max_queue_time: 100ms
 
 

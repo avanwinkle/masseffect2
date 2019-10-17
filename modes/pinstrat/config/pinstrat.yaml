@@ -138,8 +138,8 @@ mode_settings:
     logicblock_samara_shots_counter_hit:
       recruitsamara: (7 - count)
     # TALI
-    logicblock_colossus_maxhits_counter_hit:
-      recruittali: (8 - count)
+    logicblock_colossus_maxhits_counter_updated:
+      recruittali: (8 - value)
     # THANE
     logicblock_thane_ascent_counter_hit:
       recruitthane: (6 - count)

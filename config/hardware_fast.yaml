@@ -83,7 +83,7 @@ named_colors:
   skillshot_color_renegade: "660000"  # color_renegade
   dropbank_color_shadowbroker: ff1f00
   color_kasumi_alarm: aa0000
-  bb_squad_color: FFBB66
+  bb_squad_color: ff6611 # FFBB66 makes as white as possible. But maybe organe is better?
 
 coils:
   c_flipper_left_main:
