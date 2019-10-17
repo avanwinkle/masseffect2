@@ -103,7 +103,7 @@ mode_settings:
       recruitthane{squadmate=="thane"}: 2
       recruittali{squadmate=="tali"}: 2
       recruitzaeed{squadmate=="zaeed"}: 2
-    squadmate_recruited:
+    recruit_success:
       recruitgarrus{squadmate=="garrus"}: 9
       recruitgrunt{squadmate=="grunt"}: 9
       recruitjack{squadmate=="jack"}: 9
@@ -130,6 +130,8 @@ mode_settings:
     # LEGION
     player_heretic_progress{value>0}:
       recruitlegion: 3
+    recruit_legion_precomplete:
+      recruitlegion: 9
     # MORDIN
     enable_fans:
       recruitmordin: 3
@@ -155,10 +157,12 @@ mode_settings:
       sbintel: 0
     shadowbroker_progression_chase_started:
       sbchase: 0
+      sbintel: -1
     logicblock_chase_maxhits_counter_hit:
       sbchase: (5 - count)
     shadowbroker_progression_vasir_started:
       sbvasir: 0
+      sbchase: -1
     logicblock_vasir_hits_counter_hit:
       sbvasir: (count / 2) - 1 # WRONG?
     shadowbroker_progression_pre_hagalaz_started:
@@ -166,12 +170,14 @@ mode_settings:
       sbprehagalaz: 0
     shadowbroker_progression_hagalaz_started:
       sbhagalaz: 0
+      sbprehagalaz: -1
+      sbvasir: -1
     logicblock_shunt_counter_hit:
       sbhagalaz{count % 2 == 0}: 5 - (count / 2)
     logicblock_shunt_counter_complete:
       sbhagalaz: 5
     shadowbroker_progression_boss_started:
-      sbhagalaz: 6
+      sbhagalaz: -1
       sbboss: 0
     sbboss_round_counter_hit:
       sbboss: (count)

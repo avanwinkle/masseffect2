@@ -90,49 +90,49 @@ shots:
     enable_events: start_n7_anomalous_weather
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
   n7_eclipse_smuggling_depot_shot:
     hit_events: sh_left_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_eclipse_smuggling_depot
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
   n7_quarian_crash_site_shot:
     hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_quarian_crash_site
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
   n7_imminent_ship_crash_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_imminent_ship_crash
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
   n7_javelin_missiles_launched_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_javelin_missiles_launched
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
   n7_lost_operative_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     profile: n7_shot_profile
     enable_events: start_n7_lost_operative
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: light_hitbank_rgb
+      leds: l_left_orbit_ring
   n7_msv_strontium_mule_shot:
     hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_msv_strontium_mule
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_kickback_ring
 
 shot_profiles:
   n7_shot_profile:
@@ -144,6 +144,7 @@ shot_profiles:
         show_tokens:
           color1: red
           color2: white
+          fade: 200ms
 
 show_player:
   mode_n7_assignments_started: n7_lightsdown
@@ -165,8 +166,8 @@ shows:
           color: white
         l_backwall_ambient_light_2:
           color: white
-        l_backwall_ambient_light_3:
-          color: white
+        l_backwall_ambient_light_4:
+          color: red
         l_backwall_ambient_light_5:
           color: red
         l_backwall_ambient_light_6:
@@ -175,8 +176,8 @@ shows:
           color: red
         l_backwall_ambient_light_8:
           color: red
-        l_backwall_ambient_light_10:
-          color: white
+        l_backwall_ambient_light_9:
+          color: red
         l_backwall_ambient_light_11:
           color: white
         l_backwall_ambient_light_12:

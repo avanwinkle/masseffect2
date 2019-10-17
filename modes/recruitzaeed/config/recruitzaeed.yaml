@@ -95,6 +95,8 @@ shot_profiles:
         show: led_6_dualcolor_chase
       - name: lit
         show: led_6_chase
+        show_tokens:
+          fade: 200ms
 
 shot_groups:
   zaeed_orbitshots:

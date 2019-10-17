@@ -98,7 +98,7 @@ coils:
     default_hold_power: 0.1
   c_plunger:
     number: 1-1
-    default_pulse_ms: 12  # Increased from Spike 18, bumped from 40
+    default_pulse_ms: 15  # Increased from Spike 18, bumped from 40
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0

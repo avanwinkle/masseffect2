@@ -96,22 +96,22 @@ shows:
         (flashers): 120ms
     - duration: 10s
   pulse_playfield:
-    - duration: 600ms
+    - duration: 100ms
       lights:
         light_pf:
           color: black
-          fade: 600ms
+          fade: 100ms
         l_null: (color)
-    - duration: 1200ms
+    - duration: 400ms
       lights:
         light_pf:
           color: (color)
-          fade: 600ms
-    - duration: 600ms
+          fade: 200ms
+    - duration: 100ms
       lights:
         light_pf:
           color: black
-          fade: 600ms
+          fade: 100ms
         l_null: (color)
 
 
