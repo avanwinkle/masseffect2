@@ -73,13 +73,14 @@ ball_devices:
     debug: true
 
 named_colors:
+  bb_squad_color: ffffff
   backbox_tone: ffffff
   standup_color: ffffff
   skillshot_color_paragon: ffffff
   skillshot_color_renegade: ffffff
   dropbank_color_shadowbroker: ffffff
   color_kasumi_alarm: ffffff
-  bb_squad_color: ffffff
+  color_normandy_attack: "220000"
 
 switches:
   s_start_button:
@@ -336,7 +337,7 @@ lights:
   l_hand_of_the_king: # Hand of the King [#19]
     number: 9-1
     tags: outer_circles, light_bbsquad_zaeed
-  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
+  l_hitbank_bottom: # Right 2-Bank (Bot) [#39]
     number: 9-22
     tags: l_hitbanks, outer_circles
   l_hitbank_top: # Right 2-Bank (Top) [#38]
@@ -359,7 +360,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_left_orbit, light_alarm_left_orbit
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
-    tags: l_outlane
+    tags: l_outlane, light_medigel
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
     tags: lane_wedges, light_missionselect
@@ -388,7 +389,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_right_orbit, light_alarm_right_orbit
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
-    tags: l_outlane, outer_circles
+    tags: l_outlane, outer_circles, light_medigel
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
     tags: lane_arrows, light_firewalker, light_firewalker_right_ramp, light_alarm_right_ramp

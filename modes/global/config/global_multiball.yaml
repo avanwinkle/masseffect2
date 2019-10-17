@@ -135,7 +135,7 @@ shots:
     switch: s_hitbank_bottom
     profile: hit_to_lit_profile
     show_tokens:
-      leds: l_hitbank_bot
+      leds: l_hitbank_bottom
       color:  color_mball
 
 show_player:
@@ -170,11 +170,11 @@ shows:
   fmball_lock_flash:
     - time: 0
       lights:
-        l_hitbank_bot: (color)
+        l_hitbank_bottom: (color)
         l_hitbank_top: (color)
     - time: '+1'
       lights:
-        l_hitbank_bot: black
+        l_hitbank_bottom: black
         l_hitbank_top: black
   fmball_disabled_show:
     - lights:

@@ -83,6 +83,7 @@ light_player:
     gi: off
     light_backwall_gi: off
     light_backwall_ambient: off
+    light_bbsquad: off
   normandy_dropbank_lit_hit:
     gi:
       color: on
@@ -120,13 +121,19 @@ shot_profiles:
     states:
       - name: off
       - name: lit
-        show: normandy_escapelights
-  normandy_bank_profile:
+        show: normandy_escape_lanes
+  normandy_hitbank_profile:
     advance_on_hit: false
     states:
       - name: off
       - name: lit
-        show: normandy_escapebanks
+        show: normandy_escape_hitbank
+  normandy_dropbank_profile:
+    advance_on_hit: false
+    states:
+      - name: off
+      - name: lit
+        show: normandy_escape_dropbank
   normandy_save_profile:
     states:
       - name: lit
@@ -141,47 +148,47 @@ shots:
     advance_events: normandyattack_begin # This is the first shot to be lit
     profile: normandy_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       arrows: l_left_ramp_arrow_red
     tags: envshot_left_ramp
   normandy_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       arrows: l_left_orbit_arrow_red
     tags: envshot_left_orbit
   normandy_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       arrows: l_right_ramp_arrow_red
     tags: envshot_right_ramp
   normandy_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       arrows: l_right_orbit_arrow_red
     tags: envshot_right_orbit
   normandy_kickback:
     hit_events: sh_kickback_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       arrows: l_kickback_arrow_red
     tags: envshot_kickback
   normandy_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_bottom_hit, sh_dropbank_middle_hit
-    profile: normandy_bank_profile
+    profile: normandy_dropbank_profile
     show_tokens:
       leds: light_dropbank_rgb
       flashers: l_flash_slingshots
     tags: envshot_dropbank
   normandy_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    profile: normandy_bank_profile
+    profile: normandy_hitbank_profile
     show_tokens:
       leds: light_hitbank_rgb
       flashers: l_flash_sword_lock
@@ -234,36 +241,9 @@ shows:
       flashers:
         l_flash_slingshots: 120ms
     - time: '+4'
-  normandy_escapelights:
-    - time: 0
-      lights:
-        (leds): 220000
-        (arrows): 00
-    - time: '+1'
-      lights:
-        (leds): 000000
-        (arrows): 44
-    - time: '+1'
-      lights:
-        (leds): 000000
-        (arrows): 00
-  normandy_escapebanks:
-    - time: 0
-      lights:
-        (leds): 220000
-        (flashers): off
-    - time: '+1'
-      lights:
-        (leds): 000000
-      flashers:
-        (flashers): 120ms
-    - time: '+1'
-      lights:
-        (leds): 000000
-        (flashers): off
   normandy_save_show:
     - lights:
-        l_outlane: 99
+        light_medigel: 99
 
 slides:
   blank_slide: []

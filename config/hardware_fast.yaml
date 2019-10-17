@@ -77,13 +77,14 @@ ball_devices:
 
 named_colors:
   # Named colors must be explicit due to race conditions with config_common
+  bb_squad_color: ff6611 # FFBB66 makes as white as possible. But maybe organe is better?
   backbox_tone: ffdf8f
   standup_color: ffcc00  # color_armor
   skillshot_color_paragon: 1166ff  # color_paragon
   skillshot_color_renegade: "660000"  # color_renegade
   dropbank_color_shadowbroker: ff1f00
   color_kasumi_alarm: aa0000
-  bb_squad_color: ff6611 # FFBB66 makes as white as possible. But maybe organe is better?
+  color_normandy_attack: "220000"
 
 coils:
   c_flipper_left_main:
@@ -146,8 +147,8 @@ coils:
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 60
-    default_hold_power: 0.95
+    default_pulse_ms: 70
+    default_hold_power: 0.8
     enable_events: enable_gates
     disable_events: disable_gates
     pulse_events: ball_search_phase_1
@@ -425,7 +426,7 @@ lights:
     number: 0-11
     type: grb
     tags: light_pf, l_outlane, outer_circles
-  l_hitbank_bot: # Right 2-Bank (Bot) [#39]
+  l_hitbank_bottom: # Right 2-Bank (Bot) [#39]
     number: 0-13
     type: grb
     tags: light_pf, light_hitbank_rgb, l_hitbanks, outer_circles
@@ -485,51 +486,51 @@ lights:
   l_bbsquad_garrus:
     number: 2-5
     type: grb
-    tags: light_bbsquad_garrus
+    tags: light_bbsquad_garrus, light_bbsquad
   l_bbsquad_grunt:
     number: 2-7
     type: grb
-    tags: light_bbsquad_grunt
+    tags: light_bbsquad_grunt, light_bbsquad
   l_bbsquad_jack:
     number: 2-10
     type: grb
-    tags: light_bbsquad_jack
+    tags: light_bbsquad_jack, light_bbsquad
   l_bbsquad_jacob:
     number: 2-8
     type: grb
-    tags: light_bbsquad_jacob
+    tags: light_bbsquad_jacob, light_bbsquad
   l_bbsquad_kasumi:
     number: 2-11
     type: grb
-    tags: light_bbsquad_kasumi
+    tags: light_bbsquad_kasumi, light_bbsquad
   l_bbsquad_legion:
     number: 2-1
     type: grb
-    tags: light_bbsquad_legion
+    tags: light_bbsquad_legion, light_bbsquad
   l_bbsquad_miranda:
     number: 2-6
     type: grb
-    tags: light_bbsquad_miranda
+    tags: light_bbsquad_miranda, light_bbsquad
   l_bbsquad_mordin:
     number: 2-4
     type: grb
-    tags: light_bbsquad_mordin
+    tags: light_bbsquad_mordin, light_bbsquad
   l_bbsquad_samara:
     number: 2-2
     type: grb
-    tags: light_bbsquad_samara
+    tags: light_bbsquad_samara, light_bbsquad
   l_bbsquad_tali:
     number: 2-3
     type: grb
-    tags: light_bbsquad_tali
+    tags: light_bbsquad_tali, light_bbsquad
   l_bbsquad_thane:
     number: 2-9
     type: grb
-    tags: light_bbsquad_thane
+    tags: light_bbsquad_thane, light_bbsquad
   l_bbsquad_zaeed:
     number: 2-0
     type: grb
-    tags: light_bbsquad_zaeed
+    tags: light_bbsquad_zaeed, light_bbsquad
 
 
   # NeoPixel Jewels (Center Lights)
@@ -537,23 +538,23 @@ lights:
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: grb
     number: 1-0
-    tags: light_pf, shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+    tags: light_pf, shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed, l_left_orbit_arrow_red
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: grb
     number: 1-7
-    tags: light_pf, shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance
+    tags: light_pf, shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lock_entrance, l_kickback_arrow_red
   l_left_ramp_shield_rgb: # Left Ramp Sigil R [#55]
     type: grb
     number: 1-14
-    tags: light_pf, shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara
+    tags: light_pf, shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, l_left_ramp_arrow_red
   l_right_ramp_shield_rgb: # Right Ramp Sigil R [#66]
     type: grb
     number: 1-21
-    tags: light_pf, shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+    tags: light_pf, shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane, l_right_ramp_arrow_red
   l_right_orbit_shield_rgb: # Right Loop Sigil R [#71]
     type: grb
     number: 1-28
-    tags: light_pf, shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
+    tags: light_pf, shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali, l_right_orbit_arrow_red
 
 
   # Unassigned lights carried over from Spike

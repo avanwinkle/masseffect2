@@ -33,7 +33,7 @@ light:
   l_dropbank_top:
     x: 0.2706579832679539
     y: 0.5478158205430932
-  l_hitbank_bot:
+  l_hitbank_bottom:
     x: 0.7819008405518669
     y: 0.5572609208972845
   l_hitbank_shield_rgb:

@@ -108,7 +108,7 @@ shots:
     profile: zaeed_orbit_profile
     advance_events: zaeed_right_orbit_reputation_hit
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_zaeed
       color1: color_zaeed
       color2: color_paragon
@@ -118,7 +118,7 @@ shots:
     profile: zaeed_orbit_profile
     advance_events: zaeed_left_orbit_reputation_hit
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_zaeed
       color1: color_zaeed
       color2: color_renegade
@@ -129,7 +129,7 @@ shots:
     disable_events: mode_recruitzaeed_started
     profile: color_flashing_fast_static
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_zaeed
     tags: envshot_kickback
 
