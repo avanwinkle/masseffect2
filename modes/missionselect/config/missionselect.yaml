@@ -289,7 +289,7 @@ slides:
       - type: text
         text: Mission Starting in (missionselect_missionselect_timer_tick)
         style: header_xs, row_bottom
-        color: BBBBBB
+        color: DDDDDD
       - widget: background_console
   missionselect_collectorship_slide:
     priority: 1

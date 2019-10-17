@@ -189,7 +189,7 @@ class MainMenu(Carousel):
 
     def _create_profile(self, **kwargs):
         if not kwargs.get('name') or not kwargs['name'].strip():
-            self.log.info("Invalid profile name.")
+            self.log.info("Invalid profile name '{}'.".format(kwargs.get('name')))
             return
 
         self._set_selected_career({"career_name": kwargs['name'], "last_played": -1})

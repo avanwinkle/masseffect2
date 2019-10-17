@@ -64,7 +64,7 @@ slides:
   change_career_slide:
     widgets:
       - type: text
-        text: Switch Profile
+        text: Select Profile
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
