@@ -76,7 +76,7 @@ event_player:
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches
-    - disable_gates|900ms
+    - disable_gates|1500ms
     # TODO: Replace these delay events with a timer that can reset on every entrance event
     - enable_orbitswitches|1200ms  # Tried 900 but got false positives on longwalk, increasing to 1100 (min +40)
                                    # Tried 1100 but came up 2ms shy on Kasumi, increasing to 1200

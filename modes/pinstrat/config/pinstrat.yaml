@@ -63,8 +63,14 @@ mode_settings:
       key: 50
       priority: 90
     collectorship:
-      key: 60
-      priority: 200
+      key: 70
+      priority: 300
+    derelictreaper:
+      key: 71
+      priority: 301
+    normandyattack:
+      key: 72
+      priority: 302
   events:
     # Don't immediately display new squadmates, get at least one hit
     recruit_advance:
@@ -195,3 +201,17 @@ mode_settings:
       collectorship: 3
     collectorship_praetorian_complete:
       collectorship: 9
+    # DERELICT REAPER
+    mode_derelictreaper_started:
+      derelictreaper: 0
+    logicblock_reapercore_counter_hit:
+      derelictreaper: (5 - count)
+    derelictreaper_complete:
+      derelictreaper: 9
+    # NORMANDY ATTACK
+    mode_normandyattack_started:
+      normandyattack: 0
+    logicblock_normandyattack_counter_hit:
+      normandyattack: (count)
+    normandy_dropbank_lit_hit:
+      normandyattack: 9
