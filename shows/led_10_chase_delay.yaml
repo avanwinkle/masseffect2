@@ -184,7 +184,7 @@
     (ledring)_light_0:
       color: (color)%10
       fade: (fade)
-- time: '+6'
+- time: '+10'
 
 
 

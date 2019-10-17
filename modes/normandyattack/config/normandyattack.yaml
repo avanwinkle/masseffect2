@@ -202,16 +202,17 @@ shots:
 
 show_player:
   mode_normandyattack_started: normandyattack_shutdown_show
+  ball_save_normandyattack_openingsave_saving_ball:
+    led_10_chase:
+      action: play
+      speed: 10
+      show_tokens:
+        ledring: l_backwall_gi
+        fade: 100ms
+        color: 990000
   normandyattack_begin:
     normandyattack_show:
       action: play
-    led_10_chase_delay:
-      action: play
-      speed: 0.5
-      show_tokens:
-        ledring: l_backwall_gi
-        fade: 50ms
-        delay: 4s
 
 shows:
   normandyattack_shutdown_show:
@@ -243,7 +244,7 @@ shows:
     - time: '+4'
   normandy_save_show:
     - lights:
-        light_medigel: 99
+        light_medigel: 550000
 
 slides:
   blank_slide: []

@@ -89,17 +89,17 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 22  # Increased from Spike 35
+    default_pulse_ms: 21  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 22  # Increased from Spike 35
+    default_pulse_ms: 21  # Increased from Spike 35
     # default_pulse_power: 0.8
     default_hold_power: 0.1
   c_plunger:
     number: 1-1
-    default_pulse_ms: 15  # Increased from Spike 18, bumped from 40
+    default_pulse_ms: 14  # Increased from Spike 18, bumped from 40
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -147,8 +147,8 @@ coils:
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 70
-    default_hold_power: 0.8
+    default_pulse_ms: 60
+    default_hold_power: 0.75
     enable_events: enable_gates
     disable_events: disable_gates
     pulse_events: ball_search_phase_1

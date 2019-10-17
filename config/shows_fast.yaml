@@ -35,17 +35,17 @@ shows:
   normandy_escape_lanes:
     - time: 0
       lights:
+        (leds)_light_0:
+          color: off
         (leds)_light_1:
-          color: color_normandy_attack
+          color: off
         (leds)_light_2:
           color: off
         (leds)_light_3:
           color: off
         (leds)_light_4:
-          color: off
+          color: color_normandy_attack
         (leds)_light_5:
-          color: off
-        (leds)_light_6:
           color: color_normandy_attack
         (arrows):
           color: off
@@ -53,38 +53,40 @@ shows:
           color: off
     - time: '+1'
       lights:
+        (leds)_light_0:
+          color: color_normandy_attack
         (leds)_light_1:
           color: off
         (leds)_light_2:
-          color: color_normandy_attack
-        (leds)_light_3:
           color: off
+        (leds)_light_3:
+          color: color_normandy_attack
         (leds)_light_4:
           color: off
         (leds)_light_5:
-          color: color_normandy_attack
-        (leds)_light_6:
           color: off
         (arrows):
           color: color_normandy_attack
     - time: '+1'
       lights:
+        (leds)_light_0:
+          color: off
         (leds)_light_1:
-          color: off
+          color: color_normandy_attack
         (leds)_light_2:
-          color: off
+          color: color_normandy_attack
         (leds)_light_3:
-          color: color_normandy_attack
-        (leds)_light_4:
-          color: color_normandy_attack
-        (leds)_light_5:
           color: off
-        (leds)_light_6:
+        (leds)_light_4:
+          color: off
+        (leds)_light_5:
           color: off
         (arrows):
           color: off
     - time: '+1'
       lights:
+        (leds)_light_0:
+          color: off
         (leds)_light_1:
           color: off
         (leds)_light_2:
@@ -94,8 +96,6 @@ shows:
         (leds)_light_4:
           color: off
         (leds)_light_5:
-          color: off
-        (leds)_light_6:
           color: off
         (arrows):
           color: off
