@@ -44,6 +44,13 @@ config:
   - field_shadowbroker.yaml
   - field_shopping.yaml
 
+light_player:
+  mode_field_started:
+    light_backwall_gi:
+      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
+    light_backwall_ambient:
+      color: color_space
+
 sound_player:
   mode_field_started:
     music_normandy_walkin_intro:

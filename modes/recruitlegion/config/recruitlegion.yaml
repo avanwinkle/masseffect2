@@ -76,6 +76,11 @@ random_event_player:
       - enable_heretic_shot_right_ramp
       - enable_heretic_shot_right_orbit
 
+light_player:
+  mode_recruitlegion_started:
+    light_backwall_ambient:
+      color: color_legion
+
 counters:
   hacking_counter:
     starting_count: 0

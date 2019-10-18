@@ -211,7 +211,7 @@ slide_player:
   missionselect_intro_highlighted:
     missionselect_intro_slide:
       target: main
-  missionselect_recruit_highlighted{current_player.force_mission==0}:
+  missionselect_recruit_highlighted.1{current_player.force_mission==0}:
     missionselect_recruit_slide:
       target: main
     missionselect_portrait_derelictreaper:
@@ -220,7 +220,7 @@ slide_player:
     missionselect_portrait_suicide:
       action: remove
       target: lcd_right
-  missionselect_recruit_highlighted{current_player.force_mission==1}:
+  missionselect_recruit_highlighted.2{current_player.force_mission==1}:
     missionselect_recruit_force_slide:
       target: main
   missionselect_pass_highlighted:
@@ -272,6 +272,7 @@ slides:
       - type: text
         text: "Press Both Flippers\nTo Start Mission"
         style: body_sm, row_sub_under, row_dmd_bottom
+        color: EEEEEE
       - widget: missionselect_count_widget
       - widget: missionselect_timer_widget
       - widget: background_console
@@ -286,10 +287,16 @@ slides:
         text: (squadmate)
         style: header_md, row_main
         casing: title
+      # BUG: If there is no garrus/samara holding up the queue and no intro,
+      # the placeholder text will render before the timer starts.
       - type: text
         text: Mission Starting in (missionselect_missionselect_timer_tick)
-        style: header_xs, row_bottom
-        color: DDDDDD
+        style: body_sm, row_sub_under, row_dmd_bottom
+        color: EEEEEE
+      - type: text
+        text: "\n(Press flippers to start immediately)"
+        style: body_xs, row_sub_under
+        color: EEEEEE
       - widget: background_console
   missionselect_collectorship_slide:
     priority: 1

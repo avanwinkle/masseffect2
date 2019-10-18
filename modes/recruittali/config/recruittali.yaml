@@ -27,7 +27,7 @@ event_player:
     show_recruit_instructions:
       squadmate: tali
       portrait: recruittali
-      instructions_main: Attack the Colossus quickly
+      instructions_main: Attack the Colossus
       instructions_sub: before it self-repairs
     set_mission_shots:
       shots_total: 6

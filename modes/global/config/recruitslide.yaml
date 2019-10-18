@@ -80,7 +80,7 @@ variable_player:
       string: "Destroy the Gunship"
       action: set
     mission_secondary:
-      string: "Hit targets to light shots"
+      string: "Hit targets to light lane shots"
       action: set
   start_mode_recruittali:
     missionname:
