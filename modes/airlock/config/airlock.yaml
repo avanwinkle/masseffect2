@@ -19,7 +19,10 @@ mode_settings:
   lock_device: fmball_lock
 
 event_player:
-  ball_hold_missionselect_hold_held_ball: start_mode_missionselect
+  ball_hold_missionselect_hold_held_ball:
+    - start_mode_missionselect
+    # Emergency event to ensure the hold doesn't stay on too long
+    - emergency_disable_hold|15s
   # Relay these events to be agnostic with lockhandler
   sw_lock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
@@ -80,6 +83,7 @@ ball_holds:
       - player_available_missions{player_num==current_player.number and value<=0}
     release_all_events:
       - mission_intro_complete
+      - emergency_disable_hold
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
