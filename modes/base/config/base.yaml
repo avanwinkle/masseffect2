@@ -351,7 +351,7 @@ slide_player:
   player_added:
     player_added_slide:
       action: play
-      priority: 1000
+      priority: 10000
       expire: 3s
 
 slides:
@@ -548,6 +548,14 @@ slides:
       text: "Select a mission\nat the Galaxy Map"
       style: header_xs, row_sub_under
     - widget: background_console
+  intro_missions_slide_mp:
+    - type: text
+      text: Build Your Team
+      style: header_md, row_main, row_main_dmd_high
+    - type: text
+      text: "Select a mission\nat the Galaxy Map"
+      style: header_xs, row_sub_under
+    - widget: background_console
 
 
 sound_player:
@@ -675,3 +683,20 @@ track_player:
     __all__:
       action: stop_all_sounds
       fade: 2s
+
+widget_player:
+  play_queued_slide_intro_missions_slide{game.num_players>1}:
+    intro_slide_mp_name:
+      action: add
+      slide: intro_missions_slide
+  play_queued_slide_intro_no_missions_slide{game.num_players>1}:
+    intro_slide_mp_name:
+      action: add
+      slide: intro_no_missions_slide
+
+widgets:
+  intro_slide_mp_name:
+    - type: text
+      text: Player (player|number)
+      color: DDDDDD
+      style: header_sm, row_top
