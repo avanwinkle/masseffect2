@@ -35,9 +35,9 @@ event_player:
         type: int
   # Hold open the gates if no balls are there
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_battering_ram_active.1{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls==0}:
+  s_battering_ram_active.1{not device.multiball_locks.fmball_lock.enabled and device.ball_devices.bd_lock.balls==0}:
     - bypass_lock_release_pulse_long
-  s_battering_ram_active.2{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls>0}:
+  s_battering_ram_active.2{not device.multiball_locks.fmball_lock.enabled and device.ball_devices.bd_lock.balls>0}:
     - bypass_lock_release_pulse_short
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
@@ -63,7 +63,9 @@ queue_relay_player:
 ball_saves:
   airlock_save:
     balls_to_save: 1
-    enable_events: balldevice_bd_lock_ejecting_ball
+    enable_events:
+      - balldevice_bd_lock_ejecting_ball
+      - bypass_lock_release_pulse_short
     active_time: 3s
     auto_launch: true
 
