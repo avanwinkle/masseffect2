@@ -27,7 +27,6 @@ sound_pools:
     type: random_force_all
     track: sfx
     sounds: broker_attack_1, broker_attack_2, broker_attack_3, broker_attack_4, broker_attack_5, broker_attack_6, broker_attack_7
-    volume: 1
     ducking:
       target: music
       attenuation: 0.6
@@ -38,7 +37,6 @@ sound_pools:
     type: random
     track: sfx
     sounds: broker_hit_1, broker_hit_2, broker_hit_3, broker_hit_4, broker_hit_5, broker_hit_6, broker_hit_7
-    volume: 1
     ducking:
       target: music
       attenuation: 0.6
@@ -50,51 +48,39 @@ sounds:
   broker_attack_1:
     file: DLC_EXP_Part01_Int.1022.ogg
     track: voice
-    volume: 0.9
   broker_attack_2:
     file: DLC_EXP_Part01_Int.1023.ogg
     track: voice
-    volume: 0.9
   broker_attack_3:
     file: DLC_EXP_Part01_Int.1024.ogg
     track: voice
-    volume: 0.9
   broker_attack_4:
     file: DLC_EXP_Part01_Int.1025.ogg
     track: voice
-    volume: 0.9
   broker_attack_5:
     file: DLC_EXP_Part01_Int.1026.ogg
     track: voice
-    volume: 0.9
   broker_attack_6:
     file: DLC_EXP_Part01_Int.1027.ogg
     track: voice
-    volume: 0.9
   broker_attack_7:
     file: DLC_EXP_Part01_Int.1036.ogg
     track: voice
-    volume: 0.9
   broker_hit_1:
     file: DLC_EXP_Part01_Int.1030.ogg
     track: sfx
-    volume: 0.9
   broker_hit_2:
     file: DLC_EXP_Part01_Int.1031.ogg
     track: sfx
-    volume: 0.9
   broker_hit_3:
     file: DLC_EXP_Part01_Int.1040.ogg
     track: sfx
-    volume: 0.9
   broker_hit_4:
     file: DLC_EXP_Part01_Int.1041.ogg
     track: sfx
-    volume: 0.9
   broker_hit_5:
     file: DLC_EXP_Part01_Int.1042.ogg
     track: sfx
-    volume: 0.9
   broker_hit_6:
     file: DLC_EXP_Part01_Int.1044.ogg
     track: sfx

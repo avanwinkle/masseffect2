@@ -135,7 +135,6 @@ sound_player:
       action: play
       fade_in: 1s
       fade_out: 1s
-      volume: 0.8
       mode_end_action: stop
     music_praetorian:
       action: stop
@@ -144,7 +143,6 @@ sound_player:
       action: play
       fade_in: 1s
       fade_out: 1s
-      volume: 0.8
       mode_end_action: stop
     music_ambush:
       action: stop
@@ -156,7 +154,6 @@ sound_player:
     music_praetorian:
       action: play
       fade_in: 1s
-      volume: 0.8
       fade_out: 1s
       mode_end_action: stop
   collectorship_multiball_ball_drain:
@@ -189,7 +186,6 @@ sounds:
     track: music
   music_stinger:
     file: mus_generic_stinger_111.ogg
-    volume: 1
     track: sfx
   collector_noise_1:
     file: sfx_ss_collector_ss_collector_00349721_m.ogg

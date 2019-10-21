@@ -240,7 +240,6 @@ sounds:
   shep_we_dont_sacrifice_lives:
     file: DLC_HEN_VT_Int.377.ogg
     track: voice
-    volume: 0.7
     ducking:
       target: music
       attenuation: 0.5
@@ -262,7 +261,6 @@ sounds:
   shep_you_want_him_dead_then_he_dies:
     file: DLC_HEN_VT_Int.405.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5
@@ -272,7 +270,6 @@ sounds:
   shep_lets_get_moving_before_vido_gets_away:
     file: DLC_HEN_VT_Int.418.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5

@@ -195,7 +195,6 @@ sound_pools:
     sounds: something_sensors_1, something_sensors_2, found_something_1, found_something_2, scans_found_something_1, scans_found_something_2
     type: random_force_all
     track: voice
-    volume: 1
     ducking:
       target: music
       attenuation: 0.5

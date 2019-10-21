@@ -295,12 +295,8 @@ sound_player:
       action: load
     shepard_liara_now:
       action: load
-  sbboss_shot_shields_hit:
-    sbboss_shields_down:
-      volume: 0.9
-  sbboss_shot_armor_hit:
-    sbboss_armor_down:
-      volume: 0.9
+  sbboss_shot_shields_hit: sbboss_shields_down
+  sbboss_shot_armor_hit: sbboss_armor_down
 
 sound_pools:
   sbboss_shields_down:
@@ -333,18 +329,15 @@ sounds:
   shadowbroker_boss_music:
     file: SBK.07.Final_Combat.ogg
     track: music
-    volume: 0.5
     fade_out: 500ms
     mode_end_action: stop
     loops: -1
   boss_enough_talk:
     file: DLC_EXP_Part01_Int.1059.ogg
-    volume: 0.9
     track: voice
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -354,7 +347,6 @@ sounds:
   liara_were_through_his_shields:
     file: DLC_EXP_Part01_Int.1013.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -364,7 +356,6 @@ sounds:
   liara_his_shields_are_down:
     file: DLC_EXP_Part01_Int.1015.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -374,7 +365,6 @@ sounds:
   liara_hit_him_now:
     file: DLC_EXP_Part01_Int.1014.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -384,7 +374,6 @@ sounds:
   liara_quick_while_hes_vulnerable:
     file: DLC_EXP_Part01_Int.1012.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -394,7 +383,6 @@ sounds:
   liara_energy_projectiles_bouncing_off:
     file: DLC_EXP_Part01_Int.1052.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -404,7 +392,6 @@ sounds:
   liara_if_you_can_get_him_to:
     file: DLC_EXP_Part01_Int.1051.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.7
@@ -414,7 +401,6 @@ sounds:
   shepard_then_we_do_this_the_hard_way:
     file: DLC_EXP_Part01_Int.1054.ogg
     track: voice
-    volume: 0.9
     ducking:
       target: music
       attenuation: 0.7
@@ -424,7 +410,6 @@ sounds:
   shepard_liara_now:
     file: DLC_EXP_Part01_Int.1050.ogg
     track: voice
-    volume: 0.9
     ducking:
       target: music
       attenuation: 0.7

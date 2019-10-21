@@ -129,7 +129,6 @@ sound_player:
   logicblock_collector_shots_counter_hit{count==1}:
     squadmate_just_one_left:
       action: play
-      volume: 1
 
 sound_pools:
   squadmate_just_one_left:

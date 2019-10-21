@@ -20,11 +20,9 @@ sound_pools:
   powerdown:
     sounds: powerdown_hard #, powerdown_empty
     track: sfx
-    volume: 0.4
   shuttle_flyby:
     sounds: shuttle_flyby_1, shuttle_flyby_2
     track: sfx
-    volume: 0.3
   bioticcharge_up:
     sounds: bioticcharge_up_1, bioticcharge_up_2
     track: sfx

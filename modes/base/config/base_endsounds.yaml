@@ -58,11 +58,9 @@ sounds:
     file: DLC_EXP_Part01_Int.695.ogg
     track: voice
     max_queue_time: 1s
-    volume: 1
   liara_its_finally_over:
     file: DLC_EXP_Part01_Int.1167.ogg
     track: voice
-    volume: 1
     ducking:
       target: music
       attenuation: 0.6

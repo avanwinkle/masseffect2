@@ -158,7 +158,6 @@ sound_player:
       action: play
     husk_squadmate|1s:
       action: play
-      volume: 1
   husk_collect_shot_hit:
     husk_sound_long:
       action: play

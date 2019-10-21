@@ -215,12 +215,10 @@ shows:
         shuttle_land:
           start_at: 2.4s
           fade_in: 500ms
-          volume: 0.6
     - time: 2.5s
       sounds:
         vasir_start_sound:
           action: play
-          volume: 1
     - time: 3s
       events: start_vasir_combat
   vasir_barrier_show:

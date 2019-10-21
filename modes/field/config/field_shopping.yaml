@@ -147,7 +147,6 @@ sound_player:
   sw_standuptarget_active:
     biotic_hit:
       action: play
-      volume: 0.2
   all_storetargets_hit_complete|500ms:
     biotic_explosion:
       action: play

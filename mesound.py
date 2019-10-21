@@ -206,7 +206,7 @@ class SoundManager():
             sys.exit()
         self.source_path = sourcepath
 
-    def parse_machine_assets(self, write_mode=False):
+    def parse_machine_assets(self, write_mode=False, force_update=False):
         """Main method for mapping assets to config files and updating (if write-mode)."""
         self.log.info("\nMPF Sound Asset Manager [{}]".format("WRITE MODE" if write_mode else "READ-ONLY"))
         self.log.info("----------------------------------------------------")
@@ -266,6 +266,9 @@ class SoundManager():
                     exists = False
                     expectedpath = "{}{}".format(modepath, sound)
                     try:
+                        # To force an update, don't "find" any files
+                        if force_update:
+                            raise FileNotFoundError
                         exists = os.stat(expectedpath)
                         self._analysis['found'].append(sound)
                     except(FileNotFoundError):
@@ -307,10 +310,10 @@ class SoundManager():
             self.log.info("   - {} files missing and unavailable".format(
                           len(self._analysis['unavailable'])))
 
-    def cleanup_machine_assets(self, write_mode=False):
+    def cleanup_machine_assets(self, write_mode=False, force_update=False):
         """Method to actually move/copy/delete asset files from MPF mode folders."""
         if not self._analysis:
-            self.parse_machine_assets(write_mode=write_mode)
+            self.parse_machine_assets(write_mode=write_mode, force_update=force_update)
 
         files_changed = 0
 
@@ -699,6 +702,8 @@ MPF Sound Asset Manager
 
     7. Analyze sample rates (takes time)
 
+    8. Force refresh of all files
+
     0. Exit this program
 """.format(os.getcwd(), manager.source_path))
         selection = input(">> ")
@@ -715,6 +720,8 @@ MPF Sound Asset Manager
             manager.export_machine_assets()
         elif selection == "7":
             manager.analyze_sample_rates()
+        elif selection == "8":
+            manager.cleanup_machine_assets(write_mode=True, force_update=True)
         elif selection == "0" or not selection:
             running = False
 

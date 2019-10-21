@@ -280,7 +280,6 @@ sound_player:
 sound_pools:
   edi_ballsave:
     track: voice
-    volume: 1
     sounds:
       - edi_main_corridors_no_longer_safe
       - edi_hostiles_approaching
@@ -288,7 +287,6 @@ sound_pools:
       - edi_hostiles_closing_in
   normandy_advance:
     track: voice
-    volume: 1
     sounds:
       - edi_instr_maint_shaft_far_end
       - edi_instr_go_through_medical_to_reach_core
@@ -305,7 +303,6 @@ sounds:
   normandyattack_music:
     file: mus_critpath3_tension_1.ogg
     track: music
-    volume: 0.8
     fade_in: 1s
     mode_end_action: stop
     markers:
@@ -322,15 +319,12 @@ sounds:
   edi_propulsion_disabled_virus_detected:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
     track: voice
-    volume: 1
   edi_main_corridors_no_longer_safe:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
     track: voice
-    volume: 1
   edi_emergency_floor_lighting:
     file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
     track: voice
-    volume: 1
   edi_i_have_control:
     file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg
     track: voice

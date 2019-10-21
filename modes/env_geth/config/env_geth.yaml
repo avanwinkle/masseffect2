@@ -9,19 +9,15 @@ mode:
 sound_player:
   envshot_right_orbit_hit:
     geth_killed_short:
-      volume: 0.3
       max_queue_time: 500ms
   envshot_left_orbit_hit:
     geth_killed_short:
-      volume: 0.3
       max_queue_time: 500ms
   envshot_right_ramp_hit:
     geth_killed_short:
-      volume: 0.3
       max_queue_time: 500ms
   envshot_left_ramp_hit:
     geth_killed_short:
-      volume: 0.3
       max_queue_time: 500ms
 
 sound_pools:

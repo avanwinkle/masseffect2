@@ -99,7 +99,6 @@ sounds:
     omegarelay_music:
       file: mus_endgm1_gunsuccess.ogg
       track: music
-      volume: 1
       mode_end_action: stop
   # Infiltration
     infiltration_low:
@@ -107,7 +106,6 @@ sounds:
       track: music
       fade_in: 1s
       fade_out: 2s
-      volume: 0.9
     infiltration_med:
       file: mus_endgm2_combat_1_low.ogg
       track: music
@@ -124,7 +122,6 @@ sounds:
       track: music
       fade_in: 3s
       fade_out: 2s
-      volume: 0.9
     longwalk_med:
       file: mus_endgm2_combat_2_low.ogg
       track: music
@@ -140,7 +137,6 @@ sounds:
       file: mus_endgm2_speech_conv_b.ogg
       track: music
       start_at: 1s
-      volume: 1.2
       fade_in: 200ms
       fade_out: 2s
       # markers:
@@ -152,7 +148,6 @@ sounds:
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
-      volume: 1.0
     platforms_high:
       file: mus_endgm2_combat_3b.ogg
       track: music
@@ -309,7 +304,6 @@ sounds:
     edi_kinetic_barriers_at_forty_percent: #3
       file: en_us_hench_ai_endgm1_debris_field_c_00311434_m.ogg
       track: voice
-      volume: 0.9
     joker_everybody_hold_on: #4
       file: en_us_hench_joker_endgm1_warship_c_00279812_m.ogg
       track: voice
@@ -1196,7 +1190,6 @@ sounds:
     reaper_cannon_fire:
       file: SFXGame.538.ogg
       track: sfx
-      volume: 1
 
 ### HUDDLES
   # Infiltration: Huddle Intro

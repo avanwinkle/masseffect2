@@ -201,7 +201,6 @@ sound_player:
   geth_colossus_shot_hit:
     colossus_hit_sound:
       action: play
-      volume: 0.5
   play_tali_shield:
     tali_attack_shield:
       max_queue_time: 1s

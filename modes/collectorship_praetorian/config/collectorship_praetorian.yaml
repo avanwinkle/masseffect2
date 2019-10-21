@@ -263,10 +263,8 @@ sound_player:
   mode_collectorship_praetorian_started:
     praet_intro:
       action: play
-      volume: 1
     praet_alarm:
       action: play
-      volume: 1
   collectorship_praetorian_complete: praet_death
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
@@ -279,7 +277,6 @@ sound_pools:
     type: random_force_all
     sounds: shep_hit_1, shep_hit_2, shep_hit_3
     track: voice
-    volume: 2
   praet_hit:
     type: random_force_all
     sounds: praet_hit_1, praet_hit_2, praet_hit_3, praet_hit_4, praet_hit_5
@@ -288,7 +285,6 @@ sound_pools:
     type: random_force_all
     sounds: praet_attack_1, praet_attack_2, praet_attack_3
     track: sfx
-    volume: 1.5
 
 sounds:
   shep_hit_1:

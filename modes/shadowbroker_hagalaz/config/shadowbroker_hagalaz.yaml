@@ -372,7 +372,6 @@ sound_pools:
     sounds: capacitor_tech_charge_1, capacitor_tech_charge_2
   capacitor_explode_sound:
     track: sfx
-    volume: 0.9
     sounds: capacitor_tech_expl_1, capacitor_tech_expl_2
 
 sounds:
@@ -414,42 +413,33 @@ sounds:
   liara_now_therell_be_fewer_inside:
     file: DLC_EXP_Part01_Int.902.ogg
     track: voice
-    volume: 0.7
   liara_no_time_to_talk:
     file: DLC_EXP_Part01_Int.912.ogg
     track: voice
-    volume: 0.7
   liara_next_wave_looks_big:
     file: DLC_EXP_Part01_Int.913.ogg
     track: voice
-    volume: 0.7
   liara_more_on_the_way:
     file: DLC_EXP_Part01_Int.922.ogg
     track: voice
-    volume: 0.7
   liara_here_come_more:
     file: DLC_EXP_Part01_Int.925.ogg
     track: voice
-    volume: 0.7
   liara_their_attacks_are_disorganized:
     file: DLC_EXP_Part01_Int.942.ogg
     track: voice
-    volume: 0.7
   liara_that_security_upgrade:
     file: DLC_EXP_Part01_Int.923.ogg
     track: voice
-    volume: 0.7
   liara_it_wont_be_much_longer:
     file: DLC_EXP_Part01_Int.924.ogg
     track: voice
   liara_it_didnt_come_with_a_warranty:
     file: DLC_EXP_Part01_Int.926.ogg
     track: voice
-    volume: 0.7
   liara_hatch_is_open:
     file: DLC_EXP_Part01_Int.935.ogg
     track: voice
-    volume: 0.7
   liara_careful_capacitors:
     file: DLC_EXP_Part01_Int.939.ogg
     track: voice
@@ -459,7 +449,6 @@ sounds:
   liara_ive_never_broken_into_sb_before:
     file: DLC_EXP_Part01_Int.953.ogg
     track: voice
-    volume: 0.7
   liara_its_locked_ive_got_a_shunt_program:
     file: DLC_EXP_Part01_Int.954.ogg
     track: voice

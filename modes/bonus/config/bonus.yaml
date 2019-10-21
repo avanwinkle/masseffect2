@@ -139,7 +139,6 @@ sounds:
     file: mus_death.ogg
     track: music
     loops: 0
-    volume: 1
     fade_in: 500ms
     fade_out: 500ms
     mode_end_action: stop

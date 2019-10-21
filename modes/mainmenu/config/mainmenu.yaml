@@ -173,7 +173,6 @@ sounds:
   mus_gui_char_create:
     file: mus_reconstruction_a.ogg
     track: music
-    volume: 0.5
     start_at: 3s
     fade_in: 500ms
     fade_out: 1s

@@ -21,20 +21,15 @@ sounds:
   shuttle_in_1:
     file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_shuttle_in_01.ogg
     track: sfx
-    volume: 0.1
   shuttle_in_2:
     file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_shuttle_in_02.ogg
     track: sfx
-    volume: 0.1
   shuttle_out_1:
     file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_shuttle_out_01.ogg
     track: sfx
-    volume: 0.1
   shuttle_in_3:
     file: biod_mptowr.Wwise_MPTowr_NonStreaming.env_mptowr_shuttle_in.ogg
     track: sfx
-    volume: 0.1
   shuttle_out_2:
     file: biod_mptowr.Wwise_MPTowr_NonStreaming.env_mptowr_shuttle_out.ogg
     track: sfx
-    volume: 0.1

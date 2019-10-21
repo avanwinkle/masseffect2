@@ -394,7 +394,6 @@ sounds:
   missioncomplete_voice_legion_1:
     file: en_us_hench_geth_norgt_relationship00_h_00275284_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5
@@ -404,7 +403,6 @@ sounds:
   missioncomplete_voice_legion_2:
     file: en_us_hench_geth_norgt_relationship00_h_00275287_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5
@@ -414,7 +412,6 @@ sounds:
   missioncomplete_voice_legion_3:
     file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5

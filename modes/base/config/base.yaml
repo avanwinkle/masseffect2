@@ -638,11 +638,9 @@ sounds:
   illusive_already_compiled_dossiers_four:
     file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
     track: voice
-    volume: 0.9
   illusive_already_compiled_dossiers_five:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
-    volume: 0.9
   illusive_find_mordin:
     file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
     track: voice

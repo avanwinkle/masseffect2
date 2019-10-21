@@ -342,7 +342,6 @@ sounds:
   recruit_music_kasumi_1:
     file: KAS.03.Infiltration.ogg
     track: music
-    volume: 0.6
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:

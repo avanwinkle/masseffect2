@@ -145,9 +145,7 @@ sound_player:
       action: play
     gunship_sound:
       action: play
-  mission_shot_hit:
-    explosion:  # Defined in base_endsounds
-      volume: 0.9
+  mission_shot_hit: explosion  # Defined in base_endsounds
   recruit_samara_complete:
     music_recruit_samara:
       action: stop

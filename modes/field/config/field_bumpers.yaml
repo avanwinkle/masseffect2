@@ -73,7 +73,6 @@ sounds:
   edi_iff_almost_ready:
     file: en_us_hench_ai_norcr3_edi_hints_a_00344755_m.ogg
     track: voice
-    volume: 0.9
   joker_iff_ready_to_go:
     file: en_us_hench_joker_norcr3_joker_shuttle_d_00192591_m.ogg
     track: voice
