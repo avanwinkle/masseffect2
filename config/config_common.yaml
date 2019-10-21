@@ -405,7 +405,7 @@ player_vars:
   status_garrus:
     initial_value: 0
   status_grunt:
-    initial_value: 3
+    initial_value: 0
   status_jacob:
     initial_value: 4
   status_jack:
@@ -417,7 +417,7 @@ player_vars:
   status_miranda:
     initial_value: 4
   status_mordin:
-    initial_value: 1
+    initial_value: 0
   status_samara:
     initial_value: 0
   status_tali:
@@ -483,12 +483,12 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 2
-      volume: 0.9
+      volume: 1.0
     voice:
       priority: 2
       simultaneous_sounds: 1
       preload: true
-      volume: 0.8
+      volume: 0.7
     sfx:
       simultaneous_sounds: 7
       volume: 0.5

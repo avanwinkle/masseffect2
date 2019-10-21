@@ -21,12 +21,12 @@ fast:
 
 machine:
   balls_installed: 6
-  min_balls: 3
+  min_balls: 6
 
 event_player:
   bypass_lock_release_pulse_short:
     - bypass_lock_release_pulse|0
-    - cancel_lock_release_pulse|210ms
+    - cancel_lock_release_pulse|190ms
   bypass_lock_release_pulse_long:
     - bypass_lock_release_pulse|0
     - cancel_lock_release_pulse|700ms
