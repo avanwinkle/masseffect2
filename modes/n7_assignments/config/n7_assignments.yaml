@@ -153,6 +153,13 @@ show_player:
   mode_n7_assignments_will_stop:
     n7_lightsdown:
       action: stop
+  n7_assignment_shot_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: red
 
 shows:
   n7_lightsdown:
