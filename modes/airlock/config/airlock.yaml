@@ -54,6 +54,11 @@ variable_player:
       int: 0
   enable_fmball_lock:
     persist_lock: 1
+  # When switching from Overlord to Arrival, reset the lock state
+  start_mode_collectorship_base:
+    persist_lock:
+      action: set
+      int: 0
 
 queue_relay_player:
   mode_missionselect_starting:
@@ -102,14 +107,16 @@ multiball_locks:
     balls_to_lock: 3
     balls_to_replace: 2
     lock_devices: bd_lock
-    reset_count_for_current_player_events: fmball_stopped, mode_collectorship_base_started
+    reset_count_for_current_player_events:
+      - fmball_stopped
+      - start_mode_collectorship_base
     enable_events:
       - enable_fmball_lock
       - mode_field_started{current_player.persist_lock>0}
     disable_events:
       - mode_field_will_stop{device.multiball_locks.fmball_lock.locked_balls==2}
       - multiball_lock_fmball_lock_locked_ball
-      - mode_collectorship_base_started
+      - start_mode_collectorship_base
     debug: true
 
 show_player:

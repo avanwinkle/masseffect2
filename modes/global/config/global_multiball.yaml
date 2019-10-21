@@ -114,13 +114,19 @@ shot_groups:
     # Since multiballs are wizards, this mode (global) will auto enable/disable the shot with multiballs
     enable_events: enable_lock_lightshot
     disable_events: disable_lock_lightshot
-    reset_events: multiball_lock_fmball_lock_locked_ball
+    reset_events:
+      - multiball_lock_fmball_lock_locked_ball
+      # When we switch from Overlord to Arrival, reset the lock state
+      - start_mode_collectorship_base
 
 shots:
   fmball_lock_shot:
     hit_events: sw_lock_entrance_active
     enable_events: enable_fmball_lock
-    disable_events: multiball_lock_fmball_lock_locked_ball
+    disable_events:
+      - multiball_lock_fmball_lock_locked_ball
+      # When we switch from Overlord to Arrival, reset the lock state
+      - start_mode_collectorship_base
     profile: color_flashing_static
     show_tokens:
       leds: light_lock_lit
