@@ -33,10 +33,15 @@ mode_settings:
 event_player:
   # The hold will release when intro is complete
   missionselect_pass_selected: mission_intro_complete
+  # Fake the timer for the initial slide value
+  mode_missionselect_started:
+    missionselect_missionselect_timer_tick:
+      action: set
+      int: 12 if current_player.available_missions > 1 else 6
 
 timers:
   missionselect_timer:
-    start_value: 9
+    start_value: 12 if current_player.available_missions > 1 else 6
     end_value: 0
     tick_interval: 1.2s
     direction: down
@@ -137,7 +142,8 @@ shows:
         l_pop_bumpers: off
         l_left_top_lane: off
         l_right_top_lane: off
-        l_hitbanks: off
+        l_hitbank_top: off
+        l_hitbank_bottom: off
         l_upgrade: off
         light_lock_lit: off
   missionselect_highlight_show:
@@ -287,8 +293,6 @@ slides:
         text: (squadmate)
         style: header_md, row_main
         casing: title
-      # BUG: If there is no garrus/samara holding up the queue and no intro,
-      # the placeholder text will render before the timer starts.
       - type: text
         text: Mission Starting in (missionselect_missionselect_timer_tick)
         style: body_sm, row_sub_under, row_dmd_bottom
