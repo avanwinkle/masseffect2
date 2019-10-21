@@ -21,8 +21,12 @@ mode_settings:
 event_player:
   ball_hold_missionselect_hold_held_ball:
     - start_mode_missionselect
+    # Missionselect delays for the slide queue, but disable flippers immediately
+    - flippers_off
     # Emergency event to ensure the hold doesn't stay on too long
     - emergency_disable_hold|15s
+  mode_missionselect_will_stop:
+    - flippers_on
   # Relay these events to be agnostic with lockhandler
   sw_lock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
