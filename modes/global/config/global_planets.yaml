@@ -135,7 +135,6 @@ timers:
         action: restart
 
 widgets:
-
   planet_widget_1:
     - type: image
       image: Aequitas

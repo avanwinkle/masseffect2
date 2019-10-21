@@ -20,13 +20,15 @@ event_player:
     - start_mode_firewalker
     - enable_orbitswitches
     - reset_missionselect_bypass
-  # Fun Normandy attack multiball shenanigans to start
-  mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
-    - start_mode_intromb
+  # Give skillshot a higher priority than global, to avoid race condition with planets
+  mode_base_started.20{current_player.balls_played>0 or not settings.intro_mb}:
+    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
     - play_intro_show{device.achievements.collectorship.state=="disabled" and current_player.resume_mission==" "}
-    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
+  # Fun Normandy attack multiball shenanigans to start
+  mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
+    - start_mode_intromb
   # After the normandy attack multiball, proceed as usual
   mode_intromb_will_stop:
     - start_mode_global
@@ -338,7 +340,7 @@ slide_player:
     n7_complete_slide:
       priority: 600
       expire: 3s
-  skillshot_lit_hit:
+  award_skillshot:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
@@ -383,7 +385,7 @@ slides:
       text: SKILLSHOT
       style: header_lg row_main row_main_dmd_high
     - type: text
-      text: (temp_build_value)
+      text: (value)
       style: body_md row_sub_under num
   squadicon_slide:
     - type: image
