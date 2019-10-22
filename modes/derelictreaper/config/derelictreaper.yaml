@@ -3,10 +3,17 @@
 #####
 # DERELICT REAPER
 #
-# This is a multiball mode on a timer. Each lane is lit to damage the Reaper's
-# core, each target is lit (as a husk) to increase the timer. Completing the
-# lanes lights a super jackpot shot on a timer, after which the lanes reset.
-# If the husk timer runs out, a special shot must be hit to re-enable the lanes.
+# This is a multiball mode on a timer, with alternating phases. The first phase
+# is a frenzy mode that accumulates towards a hit threshold to start the second
+# phase. The second phase is a timeout opportunity to strike the captive ball and
+# damage the reaper core.
+
+# It takes 3 hits to the reaper core to complete the mode. A maximum of two hits
+# can be struck on the first attempt. After the timeout ends, play returns to
+# the first phase and the multiball resumes.
+#
+# If there is no ball in the airlock when the second phase starts, loading one
+# into the lock will count as the first hit.
 #
 # This mode is like a recruitment mission in that it can be chosen from mission
 # select and can be replayed until completed--and this mission must be completed
@@ -82,7 +89,7 @@ event_player:
 
 counters:
   reapercore_counter:
-    starting_count: 5
+    starting_count: 3
     count_complete_value: 0
     direction: down
     count_events: reapercore_shots_lit_hit
@@ -139,7 +146,9 @@ shot_profiles:
 
 shots:
   reaperjackpot:
-    hit_events: s_battering_ram_active
+    hit_events:
+      - s_battering_ram_active  # For Spike
+      - captive_ball_hit  # For FAST
     profile: reaperjackpot_profile
     enable_events: reapercore_shots_hit_complete
     disable_events: reaperjackpot_hit

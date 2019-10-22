@@ -209,9 +209,6 @@ switches:
     number: 1-2
     tags: start
     ignore_window_ms: 1000
-  # s_action_button:
-    # number: 1-3 # Not connected
-    # TODO: Move the tilt for now?
   s_tilt:
     number: 1-3
     tags: tilt_warning
@@ -236,6 +233,8 @@ switches:
   s_outlane_right:
     number: 1-28
   # NOT USED: 1-29
+  s_battering_ram:
+    number: 1-29
   s_right_slingshot:
     number: 1-30
   s_return_lane_right:
@@ -280,7 +279,7 @@ switches:
   s_left_ramp_entrance:
     number: 0-4
     ignore_window_ms: 1500
-  s_battering_ram: # rename: s_airlock_entrance
+  s_airlock_entrance:
     number: 0-5
     tags: lock_entrance
     ignore_window_ms: 1100

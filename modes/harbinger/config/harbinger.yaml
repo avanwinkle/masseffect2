@@ -104,7 +104,7 @@ shot_profiles:
 
 shots:
   harbinger_shot:
-    switch: s_battering_ram
+    hit_events: s_battering_ram_active, captive_ball_hit
     profile: harbinger_profile
     enable_events:
       - timer_harbinger_enabled_timer_started

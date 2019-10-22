@@ -20,6 +20,7 @@ shots:
       - s_right_ramp_entrance
       - s_right_ramp_exit
       - s_battering_ram
+      - s_airlock_entrance
       - s_kickback
       - s_tenpoints
       - s_bumper_left

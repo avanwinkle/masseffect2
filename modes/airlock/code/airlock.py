@@ -20,7 +20,7 @@ class Airlock(Mode):
         if not self._lockshot:
             self._find_devices()
         self.add_mode_event_handler("fmball_lightshot_hit", self._debug_lightshot_hit)
-        self.add_mode_event_handler("s_battering_ram_active", self._debug_enter)
+        self.add_mode_event_handler("s_airlock_entrance_active", self._debug_enter)
         self.add_mode_event_handler("mode_collectorship_base_started", self._set_multiball_color)
 
         # On mode start, set the color_mball value based on which multiball is active
