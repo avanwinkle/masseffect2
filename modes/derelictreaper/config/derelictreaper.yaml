@@ -116,6 +116,7 @@ multiballs:
 multiball_locks:
   reaper_captive:
     balls_to_lock: 1
+    locked_ball_counting_strategy: physical_only
     lock_devices: bd_lock
     reset_count_for_current_player_events: stop_mode_derelictreaper
 
