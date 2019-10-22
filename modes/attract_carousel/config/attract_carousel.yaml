@@ -38,6 +38,11 @@ event_player:
     play_pinstrat_slide:
       player_num: 4
       player_name: (machine|last_career_player_4)
+  # Show the player 1 pinstrat on the gameover slide
+  attract_carousel_gameover_highlighted.2{settings.pinstrat_enabled and not machine.player2_score}:
+    play_pinstrat_portrait_slide:
+      player_num: 1
+      player_name: (machine|last_career_player_1)
 
 variable_player:
   attract_carousel_title_highlighted{machine.gameover_text!="FREE PLAY"}:
@@ -75,7 +80,10 @@ slide_player:
       target: main
     attract_slide_right:
       target: lcd_right
-  attract_carousel_gameover_highlighted: gameover_slide
+    pinstrat_portrait_slide:
+      action: remove
+      target: lcd_right
+  attract_carousel_gameover_highlighted.1: gameover_slide
   attract_carousel_1player_score_highlighted: 1player_score_slide
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide
@@ -83,6 +91,10 @@ slide_player:
   play_pinstrat_slide:
     pinstrat_slide:
       action: play
+    pinstrat_portrait_slide:
+      action: play
+      target: lcd_right
+  play_pinstrat_portrait_slide:
     pinstrat_portrait_slide:
       action: play
       target: lcd_right

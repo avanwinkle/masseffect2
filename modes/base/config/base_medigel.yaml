@@ -1,7 +1,7 @@
 #config_version=5
 
 event_player:
-  medigel_shot_hit:
+  medigel_enabled_shot_lit_hit:
     - do_medigel_save
   # Disable medigel during story wizard modes because they have many saves. Completing
   # them will levelup and restore medigel anyway. Suicide also manages its
@@ -17,10 +17,29 @@ event_player:
 
 shots:
   # This shot lights when medigel is available
-  medigel_shot:
-    hit_events:
-      - s_outlane_left_active
-      - s_outlane_right_active
+  medigel_left_shot:
+    switch: s_outlane_left
+    profile: medigel_profile
+    advance_events: player_shot_medigel_left_shot_enabled
+    show_tokens:
+      leds: l_left_medigel
+      color: a17f37
+    tags: envshot_outlane, medigel_shot
+  medigel_right_shot:
+    switch: s_outlane_right
+    profile: medigel_profile
+    show_tokens:
+      leds: l_right_medigel
+      color: a17f37
+    tags: envshot_outlane, medigel_shot
+
+shot_groups:
+  medigel_enabled_shot:
+    shots: medigel_left_shot, medigel_right_shot
+    reset_events: do_medigel_save
+    rotate_events:
+      - s_flipper_left_active
+      - s_flipper_right_active
     enable_events:
       - levelup
       - ball_save_recruitsave_disabled{current_player.medigel>0}
@@ -42,7 +61,16 @@ shots:
       - ball_save_armor_enabled
       - ball_will_end
       - cancel_medigel
-    tags: envshot_outlane
+
+shot_profiles:
+  medigel_profile:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: unlit
+        show: off
+      - name: lit
+        show: color_on
 
 ball_saves:
   medigel_save:
@@ -107,7 +135,6 @@ sound_pools:
     sounds: deploying_medigel_1, deploying_medigel_2, on_your_feet_1, on_your_feet_2, first_aid_1, first_aid_2
     type: random_force_all
     track: voice
-    volume: 0.8
     ducking:
       track: music
       attack: 0.5

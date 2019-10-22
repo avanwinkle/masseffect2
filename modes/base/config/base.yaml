@@ -20,13 +20,15 @@ event_player:
     - start_mode_firewalker
     - enable_orbitswitches
     - reset_missionselect_bypass
-  # Fun Normandy attack multiball shenanigans to start
-  mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
-    - start_mode_intromb
+  # Give skillshot a higher priority than global, to avoid race condition with planets
+  mode_base_started.20{current_player.balls_played>0 or not settings.intro_mb}:
+    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
     - play_intro_show{device.achievements.collectorship.state=="disabled" and current_player.resume_mission==" "}
-    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
+  # Fun Normandy attack multiball shenanigans to start
+  mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
+    - start_mode_intromb
   # After the normandy attack multiball, proceed as usual
   mode_intromb_will_stop:
     - start_mode_global
@@ -54,7 +56,7 @@ event_player:
   player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
-  player_squadmates_count{player_num==current_player.number and value==4}:
+  player_squadmates_count{player_num==current_player.number and value==6}:
     - enable_collectorship
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
@@ -76,7 +78,7 @@ event_player:
   fullorbit_enter_hit:
     - enable_gates
     - disable_orbitswitches
-    - disable_gates|900ms
+    - disable_gates|1500ms
     # TODO: Replace these delay events with a timer that can reset on every entrance event
     - enable_orbitswitches|1200ms  # Tried 900 but got false positives on longwalk, increasing to 1100 (min +40)
                                    # Tried 1100 but came up 2ms shy on Kasumi, increasing to 1200
@@ -338,7 +340,7 @@ slide_player:
     n7_complete_slide:
       priority: 600
       expire: 3s
-  skillshot_lit_hit:
+  award_skillshot:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
@@ -351,7 +353,7 @@ slide_player:
   player_added:
     player_added_slide:
       action: play
-      priority: 1000
+      priority: 10000
       expire: 3s
 
 slides:
@@ -383,7 +385,7 @@ slides:
       text: SKILLSHOT
       style: header_lg row_main row_main_dmd_high
     - type: text
-      text: (temp_build_value)
+      text: (value)
       style: body_md row_sub_under num
   squadicon_slide:
     - type: image
@@ -548,6 +550,14 @@ slides:
       text: "Select a mission\nat the Galaxy Map"
       style: header_xs, row_sub_under
     - widget: background_console
+  intro_missions_slide_mp:
+    - type: text
+      text: Build Your Team
+      style: header_md, row_main, row_main_dmd_high
+    - type: text
+      text: "Select a mission\nat the Galaxy Map"
+      style: header_xs, row_sub_under
+    - widget: background_console
 
 
 sound_player:
@@ -628,11 +638,9 @@ sounds:
   illusive_already_compiled_dossiers_four:
     file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
     track: voice
-    volume: 0.9
   illusive_already_compiled_dossiers_five:
     file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
     track: voice
-    volume: 0.9
   illusive_find_mordin:
     file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
     track: voice
@@ -675,3 +683,20 @@ track_player:
     __all__:
       action: stop_all_sounds
       fade: 2s
+
+widget_player:
+  play_queued_slide_intro_missions_slide{game.num_players>1}:
+    intro_slide_mp_name:
+      action: add
+      slide: intro_missions_slide
+  play_queued_slide_intro_no_missions_slide{game.num_players>1}:
+    intro_slide_mp_name:
+      action: add
+      slide: intro_no_missions_slide
+
+widgets:
+  intro_slide_mp_name:
+    - type: text
+      text: Player (player|number)
+      color: DDDDDD
+      style: header_sm, row_top

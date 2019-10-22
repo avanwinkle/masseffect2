@@ -114,29 +114,35 @@ shot_groups:
     # Since multiballs are wizards, this mode (global) will auto enable/disable the shot with multiballs
     enable_events: enable_lock_lightshot
     disable_events: disable_lock_lightshot
-    reset_events: multiball_lock_fmball_lock_locked_ball
+    reset_events:
+      - multiball_lock_fmball_lock_locked_ball
+      # When we switch from Overlord to Arrival, reset the lock state
+      - start_mode_collectorship_base
 
 shots:
   fmball_lock_shot:
     hit_events: sw_lock_entrance_active
     enable_events: enable_fmball_lock
-    disable_events: multiball_lock_fmball_lock_locked_ball
+    disable_events:
+      - multiball_lock_fmball_lock_locked_ball
+      # When we switch from Overlord to Arrival, reset the lock state
+      - start_mode_collectorship_base
     profile: color_flashing_static
     show_tokens:
       leds: light_lock_lit
-      color: color_overlord
+      color: color_mball
   light_lock_fmball_top:
     switch: s_hitbank_top
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_top
-      color: color_overlord
+      color:  color_mball
   light_lock_fmball_bottom:
     switch: s_hitbank_bottom
     profile: hit_to_lit_profile
     show_tokens:
-      leds: l_hitbank_bot
-      color: color_overlord
+      leds: l_hitbank_bottom
+      color:  color_mball
 
 show_player:
   fmball_light_shot_hit:
@@ -144,13 +150,14 @@ show_player:
       priority: 100
       loops: 6
       speed: 10
-  multiball_overlord_multiball_started:
-    ball_save_show:
-      action: play
-      speed: 3
-  multiball_overlord_multiball_shoot_again_ended:
-    ball_save_show:
-      action: stop
+      show_tokens:
+        color: color_mball
+  play_queued_slide_fmball_ball_locked_slide:
+    pulse_playfield:
+      priority: 10000
+      loops: 2
+      show_tokens:
+        color: color_mball
   # When in wizard mode, hide the lock light show because we can't lock
   mode_type_wizard_started:
     fmball_disabled_show:
@@ -169,11 +176,11 @@ shows:
   fmball_lock_flash:
     - time: 0
       lights:
-        l_hitbank_bot: color_overlord
-        l_hitbank_top: color_overlord
+        l_hitbank_bottom: (color)
+        l_hitbank_top: (color)
     - time: '+1'
       lights:
-        l_hitbank_bot: black
+        l_hitbank_bottom: black
         l_hitbank_top: black
   fmball_disabled_show:
     - lights:

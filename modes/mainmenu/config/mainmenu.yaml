@@ -51,9 +51,10 @@ slide_player:
   # Highlighting options in the main menu
   mainmenu_new_game_highlighted: new_game_slide
   mainmenu_resume_game_highlighted: resume_game_slide
-  mainmenu_change_career_highlighted:
-    change_career_slide{career_name!=" "}: {}
-    select_career_slide{career_name==" "}: {}
+  mainmenu_change_career_highlighted{career_name!=" "}:
+    change_career_slide: {}
+  mainmenu_change_career_highlighted{career_name==" "}:
+    select_career_slide: {}
   mainmenu_casual_highlighted: casual_slide
   mainmenu_create_career_highlighted: career_new_slide
   # Selecting and moving between menus
@@ -63,7 +64,7 @@ slides:
   change_career_slide:
     widgets:
       - type: text
-        text: Switch Profile
+        text: Select Profile
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
@@ -172,7 +173,6 @@ sounds:
   mus_gui_char_create:
     file: mus_reconstruction_a.ogg
     track: music
-    volume: 0.5
     start_at: 3s
     fade_in: 500ms
     fade_out: 1s

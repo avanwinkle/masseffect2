@@ -3,6 +3,7 @@ import logging
 from scriptlets.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
+ALLOW_PASS_WHEN_CASUAL = True
 ALLOW_COLLECTORSHIP_REPLAY = False
 ALLOW_DERELICTREAPER_REPLAY = False
 SHOW_SELECT_WHEN_FORCED_SINGLE = True
@@ -65,12 +66,15 @@ class MissionSelect(Carousel):
             items.append('collectorship')
 
         # "Pass" is the last item in the menu (not available in casual mode except for suicide)
-        if not player["casual"] or (len(items) == 1 and items[0] == "suicide"):
+        if ALLOW_PASS_WHEN_CASUAL == True or not player["casual"] or (len(items) == 1 and items[0] == "suicide"):
             items.append('pass')
 
         # If more than one option is available, include the intro slide
         if len(items) > 1:
             items.insert(0, self._intro)
+            player["force_mission"] = 0
+        else:
+            player["force_mission"] = 1
         self.log.info("Missionselect missions: {}".format(items))
 
         return items
@@ -104,6 +108,10 @@ class MissionSelect(Carousel):
         if h != self._intro and self._intro in self._items:
             self._items = self._items[1:]
             self._highlighted_item_index -= 1
+
+        # If there is only one item, show the force countdown
+        if len(self._items) == 1:
+            self.machine.events.post("missionselect_force_mission")
 
     def _remove_intro(self):
         self.log.debug("Removing intro slide, highlighted is {} and items are: {}".format(

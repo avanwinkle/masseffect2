@@ -57,6 +57,8 @@ light_player:
   mode_shadowbroker_chase_started:
     gi:
       color: 444444
+    l_ball_save:
+      color: 444444
 
 counters:
   # A counter to track the lowest chase score, to only score on NEW hits
@@ -183,16 +185,13 @@ sound_player:
     shadowbroker_vasir_music:
       key: shadowbroker_chase_music
       action: play
-      volume: 0.3
       fade_in: 0
       fade_out: 2s
       mode_end_action: stop
     liara_come_on_shes_getting_away:
       action: play
-      volume: 1
     car_takeoff:
       action: play
-      volume: 0.1
   # Play calls from random event player:
   # --- calls for successful shots
   play_liara_head_on_collision:
@@ -279,7 +278,6 @@ sound_pools:
     sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_2, shepard_i_noticed, shepard_i_know_1,
     track: voice
     type: random_force_all
-    volume: 1
     ducking:
       target: music
       attack: 20ms
@@ -288,7 +286,6 @@ sound_pools:
   shepard_truck_reply:
     sounds: shepard_i_know_1, shepard_i_know_2, shepard_again
     track: voice
-    volume: 1
 
 sounds:
   car_takeoff_1:
@@ -300,7 +297,6 @@ sounds:
   liara_come_on_shes_getting_away:
     file: DLC_EXP_Part01_Int.640.ogg
     track: voice
-    volume: 1
     max_queue_time: 1s
   liara_shes_getting_away_1:
     file: DLC_EXP_Part01_Int.313.ogg
@@ -315,7 +311,6 @@ sounds:
     file: DLC_EXP_Part01_Int.650.ogg
     track: voice
     max_queue_time: 1s
-    volume: 1
   liara_truck_1:
     file: DLC_EXP_Part01_Int.665.ogg
     events_when_stopped: play_shepard_sound_truck
@@ -366,7 +361,6 @@ sounds:
     file: DLC_EXP_Part01_Int.666.ogg
     track: voice
     max_queue_time: 3s
-    volume: 0.8
   liara_its_a_taxi:
     file: DLC_EXP_Part01_Int.667.ogg
     track: voice
@@ -404,7 +398,6 @@ sounds:
     file: DLC_EXP_Part01_Int.662.ogg
     track: voice
     max_queue_time: 1s
-    volume: 1
   shepard_im_on_her:
     file: DLC_EXP_Part01_Int.664.ogg
     track: voice
@@ -429,7 +422,6 @@ sounds:
     file: DLC_EXP_Part01_Int.654.ogg
     track: voice
     max_queue_time: 1s
-    volume: 1
 
 widget_player:
   timer_missiontimer_tick:

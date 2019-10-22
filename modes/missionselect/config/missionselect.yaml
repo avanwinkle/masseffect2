@@ -16,8 +16,6 @@
 mode:
   start_events: start_mode_missionselect
   stop_events: stop_mode_missionselect, missionselect_item_selected, s_return_lane_right_active
-  events_when_started: flippers_off
-  events_when_stopped: left_flipper_on, right_flipper_on
   priority: 3000
   code: missionselect.MissionSelect
   file_log: full
@@ -30,11 +28,21 @@ mode_settings:
   next_item_events: s_flipper_right_inactive, missionselect_skip_forwards, mode_missionselect_started, missionselect_specialist_highlighted
   previous_item_events: s_flipper_left_inactive, missionselect_skip_backwards
 
+event_player:
+  # The hold will release when intro is complete
+  missionselect_pass_selected: mission_intro_complete
+  # Fake the timer for the initial slide value
+  mode_missionselect_started:
+    missionselect_missionselect_timer_tick:
+      action: set
+      # TODO: intelligently track whether "pass" is a valid option
+      int: 12 if current_player.available_missions > 1 and current_player.casual else 6
+
 timers:
   missionselect_timer:
-    start_value: 8
+    start_value: 12 if current_player.available_missions > 1 and current_player.casual else 6
     end_value: 0
-    tick_interval: 1s
+    tick_interval: 1.2s
     direction: down
     start_running: true
 
@@ -124,6 +132,7 @@ shows:
         gi:
           color: off
           fade: 2s
+        light_pf: off
         light_missionselect: off
         l_dropbank_bottom: off
         l_dropbank_middle: off
@@ -132,7 +141,8 @@ shows:
         l_pop_bumpers: off
         l_left_top_lane: off
         l_right_top_lane: off
-        l_hitbanks: off
+        l_hitbank_top: off
+        l_hitbank_bottom: off
         l_upgrade: off
         light_lock_lit: off
   missionselect_highlight_show:
@@ -206,7 +216,7 @@ slide_player:
   missionselect_intro_highlighted:
     missionselect_intro_slide:
       target: main
-  missionselect_recruit_highlighted:
+  missionselect_recruit_highlighted.1{current_player.force_mission==0}:
     missionselect_recruit_slide:
       target: main
     missionselect_portrait_derelictreaper:
@@ -215,6 +225,9 @@ slide_player:
     missionselect_portrait_suicide:
       action: remove
       target: lcd_right
+  missionselect_recruit_highlighted.2{current_player.force_mission==1}:
+    missionselect_recruit_force_slide:
+      target: main
   missionselect_pass_highlighted:
     missionselect_pass_slide:
       target: main
@@ -254,13 +267,39 @@ slides:
     priority: 1
     widgets:
       - type: text
+        text: Recruit Your Squad
+        style: header_sm, row_top
+        opacity: 0.6
+      - type: text
         text: (squadmate)
         style: header_md, row_main
         casing: title
       - type: text
         text: "Press Both Flippers\nTo Start Mission"
         style: body_sm, row_sub_under, row_dmd_bottom
+        color: EEEEEE
       - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
+      - widget: background_console
+  missionselect_recruit_force_slide:
+    priority: 1
+    widgets:
+      - type: text
+        text: Recruit Your Squad
+        style: header_sm, row_top
+        opacity: 0.6
+      - type: text
+        text: (squadmate)
+        style: header_md, row_main
+        casing: title
+      - type: text
+        text: Mission Starting in (missionselect_missionselect_timer_tick)
+        style: body_sm, row_sub_under, row_dmd_bottom
+        color: EEEEEE
+      - type: text
+        text: "\n(Press flippers to start immediately)"
+        style: body_xs, row_sub_under
+        color: EEEEEE
       - widget: background_console
   missionselect_collectorship_slide:
     priority: 1
@@ -268,13 +307,15 @@ slides:
       - type: text
         text: "Disabled\nCollector Vessel"
         style: header_md, row_main, row_main_dmd_low
+      - widget: missionselect_timer_widget
+      - widget: background_console
   missionselect_derelictreaper_slide:
     priority: 1
     widgets:
       - type: text
         text: "Derelict Reaper"
         style: header_md, row_main
-      - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_suicide_slide:
     priority: 1
@@ -294,6 +335,7 @@ slides:
         text: Pass for Now
         style: header_md, row_main
       - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_portrait_slide: []
   missionselect_portrait_collectorship:
@@ -311,3 +353,4 @@ slides:
 
 sound_player:
   missionselect_pass_selected: shep_i_should_go
+

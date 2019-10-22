@@ -125,6 +125,8 @@ sound_player:
     music_recruit_grunt:
       action: play
       mode_end_action: stop
+    grunt_intro:
+      action: play
   logicblock_grunt_shots_counter_hit{count>2}:
     grunt_dialogue:
       max_queue_time: 500ms
@@ -143,6 +145,9 @@ sound_pools:
     type: random
     sounds: music_recruit_grunt_1, music_recruit_grunt_2
     track: music
+  grunt_intro:
+    sounds: intro_shep_1, intro_shep_2
+    track: voice
   grunt_bossdialogue:
     type: random
     sounds: grunt_bossdialogue_1, grunt_bossdialogue_2
@@ -163,6 +168,12 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  intro_shep_1:
+    file: en_us_player_f_jnkkga_arrival_c_00255073_f.ogg
+    track: voice
+  intro_shep_2:
+    file: en_us_player_f_jnkkga_arrival_c_00283297_f.ogg
+    track: voice
   grunt_bossdialogue_1:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
     track: voice

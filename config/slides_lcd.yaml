@@ -325,6 +325,10 @@ widgets:
       style: header_xs, row_gutter, col_right_indent
       # Fix the left caret to avoid digit width shifts
       adjust_right: -156
+  missionselect_timer_widget:
+    - type: text
+      text: (missionselect_missionselect_timer_tick)
+      style: header_xs, row_gutter, col_left_anchor
   n7_logo:
     - type: image
       image: n7_logo

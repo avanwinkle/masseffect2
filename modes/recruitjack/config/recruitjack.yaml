@@ -132,30 +132,25 @@ sound_player:
       action: play
       max_queue_time: 1s
       priority: 100
-      volume: 0.6
   jack_shots_two_hit:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
-      volume: 0.7
       priority: 100
   jack_shots_three_hit:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
-      volume: 0.7
       priority: 100
   logicblock_jack_rounds_counter_hit{count==2}:
     warden_shepard_1:
       action: play
       max_queue_time: 1s
-      volume: 0.7
       priority: 100
   logicblock_jack_rounds_counter_hit{count==1}:
     warden_shepard_2:
       action: play
       max_queue_time: 1s
-      volume: 0.7
       priority: 100
   mode_recruitjack_started:
     music_recruit_jack_1:
@@ -176,7 +171,6 @@ sounds:
   music_recruit_jack_1:
     file: mus_jack_acq_combat_1.ogg
     track: music
-    volume: 0.8
     mode_end_action: stop
     fade_out: 1s
     markers:
@@ -186,7 +180,6 @@ sounds:
     file: mus_jack_acq_combat_2.ogg
     track: music
     fade_out: 1s
-    volume: 0.8
     mode_end_action: stop
   warden_start:
     file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.ogg

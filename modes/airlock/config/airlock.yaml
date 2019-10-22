@@ -19,7 +19,14 @@ mode_settings:
   lock_device: fmball_lock
 
 event_player:
-  ball_hold_missionselect_hold_held_ball: start_mode_missionselect
+  ball_hold_missionselect_hold_held_ball:
+    - start_mode_missionselect
+    # Missionselect delays for the slide queue, but disable flippers immediately
+    - flippers_off
+    # Emergency event to ensure the hold doesn't stay on too long
+    - emergency_disable_hold|15s
+  mode_missionselect_will_stop:
+    - flippers_on
   # Relay these events to be agnostic with lockhandler
   sw_lock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
@@ -32,9 +39,9 @@ event_player:
         type: int
   # Hold open the gates if no balls are there
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_battering_ram_active.1{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls==0}:
+  s_battering_ram_active.1{not device.multiball_locks.fmball_lock.enabled and device.ball_devices.bd_lock.balls==0}:
     - bypass_lock_release_pulse_long
-  s_battering_ram_active.2{not device.multiball_locks.fmball_lock.enabled and device.multiball_locks.fmball_lock.locked_balls>0}:
+  s_battering_ram_active.2{not device.multiball_locks.fmball_lock.enabled and device.ball_devices.bd_lock.balls>0}:
     - bypass_lock_release_pulse_short
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
@@ -51,6 +58,11 @@ variable_player:
       int: 0
   enable_fmball_lock:
     persist_lock: 1
+  # When switching from Overlord to Arrival, reset the lock state
+  start_mode_collectorship_base:
+    persist_lock:
+      action: set
+      int: 0
 
 queue_relay_player:
   mode_missionselect_starting:
@@ -60,7 +72,9 @@ queue_relay_player:
 ball_saves:
   airlock_save:
     balls_to_save: 1
-    enable_events: balldevice_bd_lock_ejecting_ball
+    enable_events:
+      - balldevice_bd_lock_ejecting_ball
+      - bypass_lock_release_pulse_short
     active_time: 3s
     auto_launch: true
 
@@ -79,7 +93,8 @@ ball_holds:
       # Always compare player_num because players can get added during others' turns
       - player_available_missions{player_num==current_player.number and value<=0}
     release_all_events:
-      - mode_missionselect_will_stop
+      - mission_intro_complete
+      - emergency_disable_hold
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
@@ -96,14 +111,16 @@ multiball_locks:
     balls_to_lock: 3
     balls_to_replace: 2
     lock_devices: bd_lock
-    reset_count_for_current_player_events: fmball_stopped, mode_collectorship_base_started
+    reset_count_for_current_player_events:
+      - fmball_stopped
+      - start_mode_collectorship_base
     enable_events:
       - enable_fmball_lock
       - mode_field_started{current_player.persist_lock>0}
     disable_events:
       - mode_field_will_stop{device.multiball_locks.fmball_lock.locked_balls==2}
       - multiball_lock_fmball_lock_locked_ball
-      - mode_collectorship_base_started
+      - start_mode_collectorship_base
     debug: true
 
 show_player:

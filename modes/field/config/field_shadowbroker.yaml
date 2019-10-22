@@ -196,7 +196,6 @@ sound_player:
   play_queued_slide_shadowbroker_ready_slide.1{mname=="vasir"}: vasir_hold_enabled_sounds
   play_queued_slide_shadowbroker_ready_slide.2{mname=="shadowbroker"}:
     boss_intro_cineanim_diag:
-      volume: 0.8
       mode_end_action: stop
 
 sound_pools:

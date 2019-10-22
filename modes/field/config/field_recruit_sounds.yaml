@@ -1,9 +1,6 @@
 #config_version=5
 sound_player:
-  play_queued_slide_recruit_advance_slide.1{squadmate=="garrus"}:
-    shot_hit_sounds_garrus:
-      action: play
-      max_queue_time: 1s
+  # MOVE Garrus and Samara to global_recruit, since field closes
   play_queued_slide_recruit_advance_slide.2{squadmate=="grunt"}:
     shot_hit_sounds_grunt:
       action: play
@@ -24,10 +21,6 @@ sound_player:
     shot_hit_sounds_mordin:
       action: play
       max_queue_time: 1s
-  play_queued_slide_recruit_advance_slide.7{squadmate=="samara"}:
-    shot_hit_sounds_samara:
-      action: play
-      max_queue_time: 1s
   play_queued_slide_recruit_advance_slide.8{squadmate=="tali"}:
     shot_hit_sounds_tali:
       action: play
@@ -42,10 +35,6 @@ sound_player:
       max_queue_time: 1s
 
 sound_pools:
-  shot_hit_sounds_garrus:
-    type: random_force_all
-    sounds: garrus_shot_sound_1, garrus_shot_sound_2, garrus_shot_sound_3, garrus_nice_work, garrus_impressive
-    track: voice
   shot_hit_sounds_grunt:
     type: random_force_all
     sounds: grunt_shot_sound_1, grunt_shot_sound_2, grunt_shot_sound_3, grunt_shot_sound_4, grunt_shot_sound_5
@@ -66,10 +55,6 @@ sound_pools:
     type: random_force_all
     sounds: mordin_shot_sound_1, mordin_shot_sound_2, mordin_shot_sound_3, mordin_shot_sound_4, mordin_shot_sound_5
     track: voice
-  shot_hit_sounds_samara:
-    type: random_force_all
-    sounds: samara_shot_sound_1, samara_shot_sound_2, samara_shot_sound_3, samara_shot_sound_4, samara_shot_sound_5
-    track: voice
   shot_hit_sounds_tali:
     type: random_force_all
     sounds: tali_shot_sound_1, tali_shot_sound_2, tali_shot_sound_3, tali_shot_sound_4
@@ -84,21 +69,6 @@ sound_pools:
     track: voice
 
 sounds:
-  garrus_shot_sound_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
-    track: voice
-  garrus_shot_sound_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00330893_m.ogg
-    track: voice
-  garrus_shot_sound_3:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.ogg
-    track: voice
-  garrus_nice_work:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303089_m.ogg
-    track: voice
-  garrus_impressive:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303126_m.ogg
-    track: voice
   grunt_shot_sound_1:
     file: en_us_hench_grunt_ss_global_hench_grunt_00331030_m.ogg
     track: voice
@@ -179,21 +149,6 @@ sounds:
     track: voice
   mordin_shot_sound_5:
     file: en_us_hench_professor_ss_global_hench_professor_00331211_m.ogg
-    track: voice
-  samara_shot_sound_1:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00316732_m.ogg
-    track: voice
-  samara_shot_sound_2:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331131_m.ogg
-    track: voice
-  samara_shot_sound_3:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331153_m.ogg
-    track: voice
-  samara_shot_sound_4:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331158_m.ogg
-    track: voice
-  samara_shot_sound_5:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331164_m.ogg
     track: voice
   tali_shot_sound_1:
     file: en_us_hench_tali_ss_global_hench_tali_00285102_m.ogg

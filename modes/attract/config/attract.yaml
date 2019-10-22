@@ -63,4 +63,3 @@ sounds:
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx
-    volume: 0.5

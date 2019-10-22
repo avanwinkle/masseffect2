@@ -21,17 +21,14 @@ sound_pools:
     sounds: vorcha_hit_short_1, vorcha_hit_short_2, vorcha_hit_short_3, vorcha_hit_med_1, vorcha_hit_med_2, vorcha_hit_long_1
     track: sfx
     type: random
-    volume: 0.8
   vorcha_talking:
     sounds: vorcha_ill_kill_you, vorcha_youre_gonna_die, vorcha_run_away, vorcha_fire_fire, vorcha_shoot_everything
     track: voice
     type: random_force_all
-    volume: 0.8
   varren_hit:
     sounds: varren_hit_1, varren_hit_2, varren_hit_3, varren_hit_4
     track: sfx
     type: random_force_next
-    volume: 0.5
 
 sounds:
   varren_hit_1:

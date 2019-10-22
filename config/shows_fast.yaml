@@ -4,11 +4,11 @@ shows:
   corereset_show:
     - time: 0
       lights:
-        l_hitbank_bot: color_shields
+        l_hitbank_bottom: color_shields
         l_hitbank_top: color_husk
     - time: '+1'
       lights:
-        l_hitbank_bot: color_husk
+        l_hitbank_bottom: color_husk
         l_hitbank_top: color_shields
   # This show assumes 60s for time increments. Play the show faster as needed.
   lane_shot_hurryup_show:
@@ -32,14 +32,113 @@ shows:
         led_6_chase:
           loops: -1
           speed: 4
+  normandy_escape_lanes:
+    - time: 0
+      lights:
+        (leds)_light_0:
+          color: off
+        (leds)_light_1:
+          color: off
+        (leds)_light_2:
+          color: off
+        (leds)_light_3:
+          color: off
+        (leds)_light_4:
+          color: color_normandy_attack
+        (leds)_light_5:
+          color: color_normandy_attack
+        (arrows):
+          color: off
+        light_backwall_ambient:
+          color: off
+    - time: '+1'
+      lights:
+        (leds)_light_0:
+          color: color_normandy_attack
+        (leds)_light_1:
+          color: off
+        (leds)_light_2:
+          color: off
+        (leds)_light_3:
+          color: color_normandy_attack
+        (leds)_light_4:
+          color: off
+        (leds)_light_5:
+          color: off
+        (arrows):
+          color: color_normandy_attack
+    - time: '+1'
+      lights:
+        (leds)_light_0:
+          color: off
+        (leds)_light_1:
+          color: color_normandy_attack
+        (leds)_light_2:
+          color: color_normandy_attack
+        (leds)_light_3:
+          color: off
+        (leds)_light_4:
+          color: off
+        (leds)_light_5:
+          color: off
+        (arrows):
+          color: off
+    - time: '+1'
+      lights:
+        (leds)_light_0:
+          color: off
+        (leds)_light_1:
+          color: off
+        (leds)_light_2:
+          color: off
+        (leds)_light_3:
+          color: off
+        (leds)_light_4:
+          color: off
+        (leds)_light_5:
+          color: off
+        (arrows):
+          color: off
+        light_backwall_ambient:
+          color: color_normandy_attack
+  normandy_escape_dropbank:
+    - time: 0
+      lights:
+        l_dropbank_top: color_normandy_attack
+        light_backwall_ambient: off
+    - time: '+1'
+      lights:
+        l_dropbank_top: off
+        l_dropbank_middle: color_normandy_attack
+    - time: '+1'
+      lights:
+        l_dropbank_middle: off
+        l_dropbank_bottom: color_normandy_attack
+    - time: '+1'
+      lights:
+        l_dropbank_bottom: off
+        light_backwall_ambient: color_normandy_attack
+  normandy_escape_hitbank:
+    - time: 0
+      lights:
+        l_hitbank_top: color_normandy_attack
+        light_backwall_ambient: off
+    - time: '+1'
+      lights:
+        l_hitbank_top: off
+        l_hitbank_bottom: color_normandy_attack
+    - time: '+1'
+      lights:
+        l_hitbank_bottom: off
+        light_backwall_ambient: color_normandy_attack
   overlord_jackpot_show:
     - duration: 500ms
       lights:
-        l_hitbank_bot: color_overlord_orange
+        l_hitbank_bottom: color_overlord_orange
         l_hitbank_top: color_overlord
     - duration: 500ms
       lights:
-        l_hitbank_bot: color_overlord
+        l_hitbank_bottom: color_overlord
         l_hitbank_top: color_overlord_orange
   sbchase_sequence_off:
     - lights:

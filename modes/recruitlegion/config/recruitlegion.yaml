@@ -76,6 +76,11 @@ random_event_player:
       - enable_heretic_shot_right_ramp
       - enable_heretic_shot_right_orbit
 
+light_player:
+  mode_recruitlegion_started:
+    light_backwall_ambient:
+      color: color_legion
+
 counters:
   hacking_counter:
     starting_count: 0
@@ -300,7 +305,6 @@ sound_player:
     music_legion:
       action: play
       mode_end_action: stop
-      volume: 1
   play_opening_heretic_dialogue: shepard_start_your_upload
   # If the progress goes up, play a shot confirmation sound
   player_heretic_progress{change>0}:
@@ -363,7 +367,6 @@ sounds:
   shepard_start_your_upload:
     file: en_us_player_f_gthgtl_core_h_00183211_f.ogg
     track: voice
-    volume: 0.8
   legion_alert_mobile_platforms:
     file: en_us_hench_geth_gthgtl_towerdef_h_00183217_m.ogg
     track: voice

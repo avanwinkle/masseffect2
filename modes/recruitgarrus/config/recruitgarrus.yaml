@@ -183,4 +183,4 @@ sounds:
 light_player:
   mode_recruitgarrus_started:
     light_backwall_ambient:
-      color: color_grunt
+      color: color_garrus

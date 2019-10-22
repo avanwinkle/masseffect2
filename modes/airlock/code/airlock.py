@@ -1,6 +1,6 @@
 import logging
 from mpf.core.mode import Mode
-
+from mpf.core.rgb_color import RGBColor
 
 class Airlock(Mode):
 
@@ -21,6 +21,10 @@ class Airlock(Mode):
             self._find_devices()
         self.add_mode_event_handler("fmball_lightshot_hit", self._debug_lightshot_hit)
         self.add_mode_event_handler("s_battering_ram_active", self._debug_enter)
+        self.add_mode_event_handler("mode_collectorship_base_started", self._set_multiball_color)
+
+        # On mode start, set the color_mball value based on which multiball is active
+        self._set_multiball_color()
 
         # On mode start, see if the lock shot is enabled and if so, enable the lock itself
         # (copied logic from lockhandler.py)
@@ -47,6 +51,11 @@ class Airlock(Mode):
             self._lockshot = self.machine.shots["{}_shot".format(self._logicallockdevice.name)]
         except KeyError:
             self.log.info("Airlock has no {} lock shot, locking will be disabled")
+
+    def _set_multiball_color(self, **kwargs):
+        # Re-define the named_color according to which multiball it is
+        color = "color_overlord" if self.machine.game.player.achievements["arrival"] == "disabled" else "color_arrival"
+        RGBColor.add_color("color_mball", RGBColor.name_to_rgb(color))
 
     def _post_event(self, event, **kwargs):
         """ Helper method for posting events """

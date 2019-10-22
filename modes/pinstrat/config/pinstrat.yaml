@@ -63,19 +63,22 @@ mode_settings:
       key: 50
       priority: 90
     collectorship:
-      key: 60
-      priority: 200
+      key: 70
+      priority: 300
+    derelictreaper:
+      key: 71
+      priority: 301
+    normandyattack:
+      key: 72
+      priority: 302
   events:
-    game_started:
-      # TODO: Set these values based on the preserved profile state
-      recruitgarrus{current_player.status_garrus<3}: 0
-      recruitgrunt{current_player.status_grunt<3}: 0
-      recruitjack{current_player.status_jack<3}: 0
-      recruitkasumi{current_player.status_kasumi<3}: 0
-      recruitmordin{current_player.status_mordin<3}: 0
-      overlord: 0
     # Don't immediately display new squadmates, get at least one hit
     recruit_advance:
+      recruitgarrus{squadmate=="garrus" and status<3}: 0
+      recruitgrunt{squadmate=="grunt" and status<3}: 0
+      recruitjack{squadmate=="jack" and status<3}: 0
+      recruitkasumi{squadmate=="kasumi" and status<3}: 0
+      recruitmordin{squadmate=="mordin" and status<3}: 0
       recruitlegion{squadmate=="legion" and status<3}: 0
       recruitsamara{squadmate=="samara" and status<3}: 0
       recruittali{squadmate=="tali" and status<3}: 0
@@ -103,7 +106,7 @@ mode_settings:
       recruitthane{squadmate=="thane"}: 2
       recruittali{squadmate=="tali"}: 2
       recruitzaeed{squadmate=="zaeed"}: 2
-    squadmate_recruited:
+    recruit_success:
       recruitgarrus{squadmate=="garrus"}: 9
       recruitgrunt{squadmate=="grunt"}: 9
       recruitjack{squadmate=="jack"}: 9
@@ -130,6 +133,8 @@ mode_settings:
     # LEGION
     player_heretic_progress{value>0}:
       recruitlegion: 3
+    recruit_legion_precomplete:
+      recruitlegion: 9
     # MORDIN
     enable_fans:
       recruitmordin: 3
@@ -139,13 +144,13 @@ mode_settings:
     logicblock_samara_shots_counter_hit:
       recruitsamara: (7 - count)
     # TALI
-    logicblock_colossus_maxhits_counter_hit:
-      recruittali: (8 - count)
+    logicblock_colossus_maxhits_counter_updated:
+      recruittali: (8 - value)
     # THANE
     logicblock_thane_ascent_counter_hit:
       recruitthane: (6 - count)
     # ZAEED
-    player_zaeed_path_renegade:
+    player_zaeed_path_renegade{change>1}:
       recruitzaeed: (3 + value)
     # SHADOWBROKER
     logicblock_sbdrops_counter_hit:
@@ -155,10 +160,12 @@ mode_settings:
       sbintel: 0
     shadowbroker_progression_chase_started:
       sbchase: 0
+      sbintel: -1
     logicblock_chase_maxhits_counter_hit:
       sbchase: (5 - count)
     shadowbroker_progression_vasir_started:
       sbvasir: 0
+      sbchase: -1
     logicblock_vasir_hits_counter_hit:
       sbvasir: (count / 2) - 1 # WRONG?
     shadowbroker_progression_pre_hagalaz_started:
@@ -166,12 +173,14 @@ mode_settings:
       sbprehagalaz: 0
     shadowbroker_progression_hagalaz_started:
       sbhagalaz: 0
+      sbprehagalaz: -1
+      sbvasir: -1
     logicblock_shunt_counter_hit:
       sbhagalaz{count % 2 == 0}: 5 - (count / 2)
     logicblock_shunt_counter_complete:
       sbhagalaz: 5
     shadowbroker_progression_boss_started:
-      sbhagalaz: 6
+      sbhagalaz: -1
       sbboss: 0
     sbboss_round_counter_hit:
       sbboss: (count)
@@ -192,3 +201,17 @@ mode_settings:
       collectorship: 3
     collectorship_praetorian_complete:
       collectorship: 9
+    # DERELICT REAPER
+    mode_derelictreaper_started:
+      derelictreaper: 0
+    logicblock_reapercore_counter_hit:
+      derelictreaper: (5 - count)
+    derelictreaper_complete:
+      derelictreaper: 9
+    # NORMANDY ATTACK
+    mode_normandyattack_started:
+      normandyattack: 0
+    logicblock_normandyattack_counter_hit:
+      normandyattack: (count)
+    normandy_dropbank_lit_hit:
+      normandyattack: 9

@@ -92,9 +92,11 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: reputation
-        show: color_alternating_default
+        show: led_6_dualcolor_chase
       - name: lit
-        show: color_flashing_default
+        show: led_6_chase
+        show_tokens:
+          fade: 200ms
 
 shot_groups:
   zaeed_orbitshots:
@@ -106,7 +108,7 @@ shots:
     profile: zaeed_orbit_profile
     advance_events: zaeed_right_orbit_reputation_hit
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_zaeed
       color1: color_zaeed
       color2: color_paragon
@@ -116,7 +118,7 @@ shots:
     profile: zaeed_orbit_profile
     advance_events: zaeed_left_orbit_reputation_hit
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_zaeed
       color1: color_zaeed
       color2: color_renegade
@@ -127,7 +129,7 @@ shots:
     disable_events: mode_recruitzaeed_started
     profile: color_flashing_fast_static
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_zaeed
     tags: envshot_kickback
 
@@ -149,6 +151,11 @@ shows:
       lights:
         (leds): 000000
         l_null: (color)
+
+light_player:
+  mode_recruitzaeed_started:
+    light_backwall_ambient:
+      color: color_zaeed
 
 sound_player:
   mode_recruitzaeed_started:
@@ -233,7 +240,6 @@ sounds:
   shep_we_dont_sacrifice_lives:
     file: DLC_HEN_VT_Int.377.ogg
     track: voice
-    volume: 0.7
     ducking:
       target: music
       attenuation: 0.5
@@ -255,7 +261,6 @@ sounds:
   shep_you_want_him_dead_then_he_dies:
     file: DLC_HEN_VT_Int.405.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5
@@ -265,7 +270,6 @@ sounds:
   shep_lets_get_moving_before_vido_gets_away:
     file: DLC_HEN_VT_Int.418.ogg
     track: voice
-    volume: 0.8
     ducking:
       target: music
       attenuation: 0.5

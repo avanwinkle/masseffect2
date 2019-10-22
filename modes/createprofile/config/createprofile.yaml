@@ -6,7 +6,7 @@ mode:
 
 event_player:
   s_action_button_active: select_char
-  s_start_button_active: select_char
+  flipper_cancel: select_char
   s_flipper_right_inactive{machine.flipper_cancelling==0}: next_char
   s_flipper_left_inactive{machine.flipper_cancelling==0}: prev_char
   text_input_profile_name_abort: stop_mode_createprofile
@@ -33,8 +33,14 @@ slides:
         shift_left_event: prev_char
         shift_right_event: next_char
         select_event: select_char
+        force_complete_event: s_start_button_active
         abort_event: flipper_cradle
       - type: text
         text: ""
         key: profile_name
         style: header_md, row_main, col_left_anchor
+      - type: text
+        text: "Use flippers to scroll, press both to select.\n\nPress start button to finish."
+        color: BBBBBB
+        style: body_xs, row_bottom, col_left_anchor
+        halign: left

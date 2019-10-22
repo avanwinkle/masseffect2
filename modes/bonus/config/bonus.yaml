@@ -1,7 +1,7 @@
 #config_version=5
 mode_settings:
-  display_delay_ms: 1500ms
-  hurry_up_delay_ms: 500ms
+  display_delay_ms: 800ms
+  hurry_up_delay_ms: 0
   bonus_entries:
     - event: bonus_level
       score: machine.base_points / 20
@@ -139,7 +139,6 @@ sounds:
     file: mus_death.ogg
     track: music
     loops: 0
-    volume: 1
     fade_in: 500ms
     fade_out: 500ms
     mode_end_action: stop

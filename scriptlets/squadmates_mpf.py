@@ -78,7 +78,6 @@ class MPFSquadmateHandlers(CustomCode):
         # Create a listener for playing a squadmate sound
         self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
 
-
     def _enable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._enable_shothandlers)
         self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)
@@ -179,8 +178,17 @@ class MPFSquadmateHandlers(CustomCode):
                 slide_instruction = "{} shot{} to unlock".format(
                     3 - future_mate_status, "s" if future_mate_status == 1 else "")
 
+            # By default, all advance slides get 3s. However, if there are missions available,
+            # Garrus and Samara are quicker to get to the missionselect screen sooner
+            self.log.info("EXPIRE CHECK: mate is {}, future status is {}, available missions is {}".format(
+                mate, future_mate_status, player["available_missions"]))
+            expire = "2s" if (
+                mate in ["garrus", "samara"] and (future_mate_status == 3 or player["available_missions"]>0)
+            ) else "3s"
+
             self.machine.events.post("queue_slide",
                                      slide="recruit_advance_slide".format(future_mate_status),
+                                     expire=expire,
                                      squadmate=mate, status=future_mate_status,
                                      portrait="squadmate_{}_advance".format(mate),
                                      slide_title=slide_title,

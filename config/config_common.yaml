@@ -92,12 +92,13 @@ settings:
   balls_per_game:
     label: "Balls Per Game"
     sort: 1
-    default: 1
+    default: 3
     values:
       1: 1
       3: 3
       5: 5
       7: 7
+      999: "Infinite"
   pinstrat_enabled:
     label: "PinStrat"
     sort: 40
@@ -169,15 +170,19 @@ machine_vars:
   current_career_player_1:
     initial_value: "Player 1"
     value_type: str
+    persist: false
   current_career_player_2:
     initial_value: "Player 2"
     value_type: str
+    persist: false
   current_career_player_3:
     initial_value: "Player 3"
     value_type: str
+    persist: false
   current_career_player_4:
     initial_value: "Player 4"
     value_type: str
+    persist: false
   # These point reference values are here globally, but don't need to be saved
   base_points:
     initial_value: 10000
@@ -413,7 +418,7 @@ player_vars:
   status_miranda:
     initial_value: 4
   status_mordin:
-    initial_value: 1
+    initial_value: 0
   status_samara:
     initial_value: 0
   status_tali:
@@ -460,12 +465,15 @@ named_colors:
   color_door_green: 55FF00
   color_space: 0044AA
   # Other Modes
+  color_arrival: 24c8ff
   color_collectors: ff2200
   color_husk: 00101E
   color_overlord: 22FF33
   color_overlord_orange: FF4400
   color_praetorian: 2200AA
   color_shadowbroker: ff1f00
+  # Default: mball color is overlord
+  color_mball: 22FF33
 
 sound_system:
   master_volume: 1.0
@@ -476,12 +484,12 @@ sound_system:
   tracks:
     music:
       simultaneous_sounds: 2
-      volume: 0.9
+      volume: 1.0
     voice:
       priority: 2
       simultaneous_sounds: 1
       preload: true
-      volume: 0.8
+      volume: 0.7
     sfx:
       simultaneous_sounds: 7
       volume: 0.5

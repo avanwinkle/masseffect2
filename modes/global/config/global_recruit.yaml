@@ -25,7 +25,7 @@
 #####
 config:
   - recruitslide.yaml    # Slides, widgets, and event_player for showing them
-  
+
 event_player:
   # See also: base.yaml for events related to enabling/disabling missionresume
   # Allow the player to resume a mission when launching the ball
@@ -147,6 +147,15 @@ sound_player:
   # recruit_failure_grunt: shep_cant_reach_target
   # recruit_failure_jack: shep_cant_reach_target
 
+  # Garrus and Samara moved from field_recruit_sounds because field stops
+  play_queued_slide_recruit_advance_slide.1{squadmate=="garrus"}:
+    shot_hit_sounds_garrus:
+      action: play
+      max_queue_time: 1s
+  play_queued_slide_recruit_advance_slide.7{squadmate=="samara"}:
+    shot_hit_sounds_samara:
+      action: play
+      max_queue_time: 1s
 
 track_player:
   timer_missiontimer_complete:
@@ -219,6 +228,14 @@ sound_pools:
     type: random_force_all
     track: voice
     sounds: mordin_no_good, mordin_ineffective_attack, mordin_negative_effect
+  shot_hit_sounds_garrus:
+    type: random_force_all
+    sounds: garrus_shot_sound_1, garrus_shot_sound_2, garrus_shot_sound_3, garrus_nice_work, garrus_impressive
+    track: voice
+  shot_hit_sounds_samara:
+    type: random_force_all
+    sounds: samara_shot_sound_1, samara_shot_sound_2, samara_shot_sound_3, samara_shot_sound_4, samara_shot_sound_5
+    track: voice
 
 sounds:
   missioncomplete_voice_garrus_1:
@@ -377,7 +394,6 @@ sounds:
   missioncomplete_voice_legion_1:
     file: en_us_hench_geth_norgt_relationship00_h_00275284_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5
@@ -387,7 +403,6 @@ sounds:
   missioncomplete_voice_legion_2:
     file: en_us_hench_geth_norgt_relationship00_h_00275287_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5
@@ -397,7 +412,6 @@ sounds:
   missioncomplete_voice_legion_3:
     file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
     track: voice
-    volume: 1
     ducking:
       target: levelup
       attenuation: 0.5
@@ -556,4 +570,35 @@ sounds:
     track: voice
   kasumi_damn_it_we_have_to_find_another_way:
     file: DLC_HEN_MT_Int.817.ogg
+    track: voice
+  # From field_recruit_sounds
+  garrus_shot_sound_1:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
+    track: voice
+  garrus_shot_sound_2:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330893_m.ogg
+    track: voice
+  garrus_shot_sound_3:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.ogg
+    track: voice
+  garrus_nice_work:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303089_m.ogg
+    track: voice
+  garrus_impressive:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303126_m.ogg
+    track: voice
+  samara_shot_sound_1:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00316732_m.ogg
+    track: voice
+  samara_shot_sound_2:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331131_m.ogg
+    track: voice
+  samara_shot_sound_3:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331153_m.ogg
+    track: voice
+  samara_shot_sound_4:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331158_m.ogg
+    track: voice
+  samara_shot_sound_5:
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331164_m.ogg
     track: voice

@@ -182,10 +182,18 @@ widgets:
       style: text_player_name, pos_player_4
 
 sound_player:
-  play_squadmate_add_garrus: squadmate_add_garrus
-  play_squadmate_add_grunt: squadmate_add_grunt
-  play_squadmate_add_jack: squadmate_add_jack
-  play_squadmate_add_tali: squadmate_add_tali
+  play_squadmate_add_garrus:
+    squadmate_add_garrus:
+      max_queue_time: 500ms
+  play_squadmate_add_grunt:
+    squadmate_add_grunt:
+      max_queue_time: 500ms
+  play_squadmate_add_jack:
+    squadmate_add_jack:
+      max_queue_time: 500ms
+  play_squadmate_add_tali:
+    squadmate_add_tali:
+      max_queue_time: 500ms
 
 random_event_player:
   player_added{num>1}:
@@ -199,14 +207,14 @@ random_event_player:
 
 sound_pools:
   squadmate_add_garrus:
-    track: sfx
+    track: voice
     type: random
     sounds:
       - garrus_im_with_you
       - garrus_lets_try_this
       - garrus_back_in_the_game
   squadmate_add_grunt:
-    track: sfx
+    track: voice
     type: random
     sounds:
       - grunt_im_here_1
@@ -215,7 +223,7 @@ sound_pools:
       - grunt_one_more
       - grunt_im_back
   squadmate_add_jack:
-    track: sfx
+    track: voice
     type: random
     sounds:
       - jack_want_some_more
@@ -223,7 +231,7 @@ sound_pools:
       - jack_im_back
       - jack_ready_to_roll
   squadmate_add_tali:
-    track: sfx
+    track: voice
     type: random
     sounds:
       - tali_im_here

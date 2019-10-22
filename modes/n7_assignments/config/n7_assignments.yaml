@@ -31,6 +31,8 @@ event_player:
         type: float
   mode_n7_assignments_started.1:
     - missiontimer_start|1s
+    - bumpers_off
+    - bumpers_on|6s
   n7_assignment_shot_hit:
     - mission_shot_hit
     - mission_collect_store
@@ -90,63 +92,74 @@ shots:
     enable_events: start_n7_anomalous_weather
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
   n7_eclipse_smuggling_depot_shot:
     hit_events: sh_left_ramp_hit
     profile: n7_shot_profile
     enable_events: start_n7_eclipse_smuggling_depot
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
   n7_quarian_crash_site_shot:
     hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_quarian_crash_site
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
   n7_imminent_ship_crash_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_imminent_ship_crash
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
   n7_javelin_missiles_launched_shot:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_javelin_missiles_launched
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
   n7_lost_operative_shot:
-    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
     enable_events: start_n7_lost_operative
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: light_hitbank_rgb
+      leds: l_left_orbit_ring
   n7_msv_strontium_mule_shot:
-    hit_events: sh_right_ramp_hit
+    hit_events: sh_kickback_hit
     profile: n7_shot_profile
     enable_events: start_n7_msv_strontium_mule
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_kickback_ring
 
 shot_profiles:
   n7_shot_profile:
     show_when_disabled: false
     states:
       - name: active
-        show: n7_show
+        show: led_6_dualcolor_chase
         speed: 12
+        show_tokens:
+          color1: red
+          color2: white
+          fade: 200ms
 
 show_player:
   mode_n7_assignments_started: n7_lightsdown
   mode_n7_assignments_will_stop:
     n7_lightsdown:
       action: stop
+  n7_assignment_shot_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: red
 
 shows:
   n7_lightsdown:
@@ -156,33 +169,30 @@ shows:
           fade: 1s
         light_backwall_gi:
           color: 444444
-        light_backwall_ambient:
+        l_backwall_ambient_light_0:
+          color: white
+        l_backwall_ambient_light_1:
+          color: white
+        l_backwall_ambient_light_2:
+          color: white
+        l_backwall_ambient_light_4:
           color: red
-        # l_backwall_ambient_light_2:
-        #   color: white
-        # l_backwall_ambient_light_3:
-        #   color: white
-        # l_backwall_ambient_light_6:
-        #   color: red
-        # l_backwall_ambient_light_7:
-        #   color: red
-        # l_backwall_ambient_light_10:
-          # color: white
-        # l_backwall_amient_light_11:
-        #   color: white
-  n7_show:
-    - time: 0
-      lights:
-        (leds): red
-    - time: '+3'
-      lights:
-        (leds): white
-    - time: '+4'
-      lights:
-        (leds): red
-    - time: '+5'
-      lights:
-        (leds): white
+        l_backwall_ambient_light_5:
+          color: red
+        l_backwall_ambient_light_6:
+          color: red
+        l_backwall_ambient_light_7:
+          color: red
+        l_backwall_ambient_light_8:
+          color: red
+        l_backwall_ambient_light_9:
+          color: red
+        l_backwall_ambient_light_11:
+          color: white
+        l_backwall_ambient_light_12:
+          color: white
+        l_backwall_ambient_light_13:
+          color: white
 
 slide_player:
   set_n7_mission:

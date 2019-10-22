@@ -32,8 +32,8 @@ event_player:
     show_recruit_instructions:
       squadmate: samara
       portrait: recruitsamara
-      instructions_main: Targets weaken armor
-      instructions_sub: Shots destroy gunship
+      instructions_main: Destroy the Gunship
+      instructions_sub: Hit targets to weaken armor
     set_mission_shots:
       is_resumable: 1
       shots_total: 5
@@ -62,45 +62,45 @@ shots:
     hit_events: sh_left_orbit_hit
     enable_events: samara_target1_lit_hit
     disable_events: samara_left_orbit_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_samara
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   samara_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
     disable_events: samara_left_ramp_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       color: color_samara
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   samara_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: samara_target5_lit_hit
     disable_events: samara_right_orbit_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_samara
     tags: envshot_sight_orbit, power_target, power_target_sight_orbit
   samara_right_ramp:
     hit_events: sh_right_ramp_hit
     enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
     disable_events: samara_right_ramp_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       color: color_samara
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   samara_kickback:
     hit_events: sh_kickback_hit
     enable_events: samara_target1_lit_hit, samara_target2_lit_hit
     disable_events: samara_kickback_hit
-    profile: color_flashing_static
+    profile: lane_shot_static
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_samara
     tags: envshoh_kickback, power_target, power_target_kickback
   samara_target1:
@@ -134,15 +134,18 @@ shots:
       leds: l_standup_5
       color: standup_color
 
+light_player:
+  mode_recruitsamara_started:
+    light_backwall_ambient:
+      color: color_samara
+
 sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
     gunship_sound:
       action: play
-  mission_shot_hit:
-    explosion:  # Defined in base_endsounds
-      volume: 0.9
+  mission_shot_hit: explosion  # Defined in base_endsounds
   recruit_samara_complete:
     music_recruit_samara:
       action: stop

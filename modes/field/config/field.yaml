@@ -34,7 +34,11 @@ event_player:
         type: bool
   # Add a delay on start, in case we're coming out of a mode with a left ramp shot
   mode_field_started.1:
-    - enable_airlock_missionselect_hold{current_player.available_missions>0 and not current_player.bypass_missionselect}|1s
+    - queue_airlock_missionselect_hold{current_player.available_missions>0 and not current_player.bypass_missionselect}|1s
+  # We run the airlock re-enable through a relay, so that if field is killed within 1s (i.e. a mission starts),
+  # it won't accidentally hold and start mission select in the middle of another mission
+  queue_airlock_missionselect_hold:
+    - enable_airlock_missionselect_hold
   player_available_missions{player_num==current_player.number}:
     - enable_airlock_missionselect_hold
 
@@ -43,6 +47,13 @@ config:
   - field_recruit.yaml
   - field_shadowbroker.yaml
   - field_shopping.yaml
+
+light_player:
+  mode_field_started:
+    light_backwall_gi:
+      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
+    light_backwall_ambient:
+      color: color_space
 
 sound_player:
   mode_field_started:
