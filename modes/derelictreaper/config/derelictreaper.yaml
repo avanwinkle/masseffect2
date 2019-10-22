@@ -35,7 +35,8 @@ mode:
   stop_events: stop_mode_derelictreaper, stop_wizards
   events_when_started:
     - mode_type_wizard_started
-    - enable_reapercore
+    - enable_reaperfrenzy
+    - start_mode_frenzy
     # TODO: Add an intro slide
     - mission_intro_complete
   events_when_stopped: mode_type_wizard_stopped
@@ -47,12 +48,12 @@ event_player:
       env: husks
   timer_missiontimer_complete:
     - disable_reapercore
-    - enable_corereset
-  corereset_hit.2:
+    - enable_corefrenzy
+  enable_reapercore.10:
     - enable_reapercore
     - missiontimer_set_20
     - missiontimer_start|1s
-  corereset_hit.1:
+  enable_reapercore.1:
     play_squadmate_sound:
       sound: destroy_core
       exclude: jacob  # No sound file for jacob, unfortunately
@@ -65,13 +66,12 @@ event_player:
       shots_remaining:
         value: device.counters.reapercore_counter.value
         type: int
-  enable_reapercore.1: missiontimer_start
   disable_reapercore:
     play_core_widget:
-      message: Hit bank to expose core!
+      message: Clear the Husks!
   reapercore_shots_hit_complete:
     play_core_widget:
-      message: Jackpot Lit!
+      message: Destroy the Core!
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
@@ -88,13 +88,20 @@ event_player:
   mode_derelictreaper_will_stop: mission_collect_score
 
 counters:
+  reaperhusk_counter:
+    starting_count: 0
+    count_complete_value: 20
+    direction: up
+    count_events: frenzy_hit
+    disable_on_complete: true
+    reset_on_complete: true
+    events_when_complete: enable_reapercore
   reapercore_counter:
     starting_count: 3
     count_complete_value: 0
     direction: down
-    count_events: reapercore_shots_lit_hit
-    reset_events: reaperjackpot_hit
-    disable_on_complete: true
+    count_events: reaperjackpot_hit
+    disable_on_complete: false
     persist_state: true
 
 multiballs:
@@ -103,7 +110,14 @@ multiballs:
     ball_count_type: total
     # Without ball save the multiball auto stops upon start, so just "start" it
     # every time the reaper core opens and there is only one ball in play
-    start_events: mode_derelictreaper_started, enable_reapercore{game.balls_in_play<2}
+    start_events: mode_derelictreaper_started, disable_reapercore{game.balls_in_play<2}
+
+# Create a lock to ensure we keep a ball captive
+multiball_locks:
+  reaper_captive:
+    balls_to_lock: 1
+    lock_devices: bd_lock
+    reset_count_for_current_player_events: stop_mode_derelictreaper
 
 variable_player:
   reaperjackpot_hit:
@@ -113,14 +127,6 @@ variable_player:
     temp_multiplier:
       action: add
       float: 0.5
-
-shot_groups:
-  reapercore_shots:
-    shots: reapercore_left_orbit, reapercore_kickback, reapercore_left_ramp, reapercore_right_ramp, reapercore_right_orbit
-    enable_events: enable_reapercore
-    reset_events: reaperjackpot_hit
-    disable_events: disable_reapercore, reapercore_shots_hit_complete
-    rotate_right_events: sw_bumper_active # Shake the shots around, why not? It's contextually appropriate :)
 
 shot_profiles:
   corereset_profile:
@@ -150,48 +156,8 @@ shots:
       - s_battering_ram_active  # For Spike
       - captive_ball_hit  # For FAST
     profile: reaperjackpot_profile
-    enable_events: reapercore_shots_hit_complete
-    disable_events: reaperjackpot_hit
-  reaperhusk:
-    hit_events: sw_standuptarget_active
     enable_events: enable_reapercore
-    disable_events: disable_reapercore, reapercore_shots_hit_complete
-  corereset:
-    hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    profile: corereset_profile
-    enable_events: enable_corereset
-    disable_events: corereset_hit, enable_reapercore
-    tags: envshot_hitbank
-  reapercore_left_ramp:
-    hit_events: sh_left_ramp_hit
-    profile: reapercore_profile
-    show_tokens:
-      leds: l_left_ramp_shield_rgb
-    tags: envshot_left_ramp
-  reapercore_left_orbit:
-    hit_events: sh_left_orbit_hit
-    profile: reapercore_profile
-    show_tokens:
-      leds: l_left_orbit_shield_rgb
-    tags: envshot_left_orbit
-  reapercore_right_ramp:
-    hit_events: sh_right_ramp_hit
-    profile: reapercore_profile
-    show_tokens:
-      leds: l_right_ramp_shield_rgb
-    tags: envshot_right_ramp
-  reapercore_right_orbit:
-    hit_events: sh_right_orbit_hit
-    profile: reapercore_profile
-    show_tokens:
-      leds: l_right_orbit_shield_rgb
-    tags: envshot_right_orbit
-  reapercore_kickback:
-    hit_events: sh_kickback_hit
-    profile: reapercore_profile
-    show_tokens:
-      leds: l_kickback_shield_rgb
-    tags: envshot_kickback
+    disable_events: reaperjackpot_hit, disable_reapercore
 
 show_player:
   enable_reapercore:
