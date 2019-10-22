@@ -79,6 +79,13 @@ counters:
     reset_events: mode_suicide_infiltration_started
     persist_state: true
 
+light_player:
+  mode_suicide_infiltration_started:
+    light_backwall_ambient:
+      color: color_collectors
+    light_backwall_gi:
+      color: color_grunt
+
 shot_groups:
   valveshots:
     shots: valve_left_orbit, valve_right_ramp, valve_kickback, valve_right_orbit, valve_left_ramp
@@ -90,13 +97,10 @@ shot_profiles:
     states:
       - name: low
         show: valve_show_low
-        speed: 2
       - name: med
         show: valve_show_med
-        speed: 4
       - name: high
         show: valve_show_high
-        speed: 8
 
 shots:
   valve_right_ramp:
@@ -106,7 +110,7 @@ shots:
     advance_events: increase_infiltration
     profile: valve_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
     tags: envshot_right_ramp
   valve_left_orbit:
     hit_events: sh_left_orbit_hit
@@ -116,7 +120,7 @@ shots:
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
     tags: envshot_left_orbit
   valve_kickback:
     hit_events: sh_kickback_hit
@@ -126,7 +130,7 @@ shots:
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
     tags: envshot_kickback
   valve_right_orbit:
     hit_events: sh_right_orbit_hit
@@ -136,7 +140,7 @@ shots:
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
     tags: envshot_right_orbit
   valve_left_ramp:
     hit_events: sh_left_ramp_hit
@@ -146,7 +150,7 @@ shots:
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
     tags: envshot_left_ramp
 
 variable_player:
@@ -162,29 +166,6 @@ variable_player:
     tension:
       action: set
       int: -1
-
-shows:
-  valve_show_low:
-    - time: 0
-      lights:
-        (leds): 55FF00
-    - time: '+2'
-      lights:
-        (leds): off
-  valve_show_med:
-    - time: 0
-      lights:
-        (leds): FF2200
-    - time: '+2'
-      lights:
-        (leds): off
-  valve_show_high:
-    - time: 0
-      lights:
-        (leds): 660000
-    - time: '+2'
-      lights:
-        (leds): off
 
 sound_player:
   # Only need to reset tension if we were above zero and dropped back down

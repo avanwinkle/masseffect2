@@ -58,6 +58,13 @@ timers:
     direction: down
     start_running: true
 
+light_player:
+  mode_suicide_platforms_started:
+    light_backwall_ambient:
+      color: color_collectors
+    light_backwall_gi:
+      color: color_grunt
+
 shot_groups:
   platform_targets:
     shots: platform_dropbank, platform_hitbank, platform_target1, platform_target2, platform_target3, platform_target4, platform_target5

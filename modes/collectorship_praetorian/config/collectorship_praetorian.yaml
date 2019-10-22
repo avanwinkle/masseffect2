@@ -231,6 +231,10 @@ show_player:
       speed: 7
       show_tokens:
         flashers: l_flash_kickback, l_flash_right_orbit, l_flash_dragon_left
+    pulse_playfield:
+      loops: 5
+      show_tokens:
+        color: color_praetorian
   praetorian_attack_three:
     flash:
       action: play
@@ -239,6 +243,17 @@ show_player:
       priority: 100
       show_tokens:
         leds: l_flash_slingshots
+    color_flashing_fast:
+      loops: 8
+      speed: 4
+      show_tokens:
+        leds: light_backwall_gi, light_backwall_ambient
+        color: color_health
+    pulse_playfield:
+      loops: 6
+      speed: 3
+      show_tokens:
+        color: color_praetorian
 
 shows:
   praet_shot_show:

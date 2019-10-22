@@ -61,6 +61,11 @@ multiballs:
     shoot_again: 10s
     start_events: mode_suicide_omegarelay_started
 
+light_player:
+  mode_suicide_omegarelay_started:
+    light_backwall_ambient:
+      color: color_collectors
+
 shot_groups:
   omegarelay_shots:
     shots: omg_left_orbit, omg_kickback, omg_left_ramp, omg_right_ramp, omg_right_orbit, omg_dropbank, omg_hitbank

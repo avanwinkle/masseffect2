@@ -114,7 +114,6 @@ shows:
           fade: 200ms
         l_null: (color)
 
-
 shot_profiles:
   color_on:
     show_when_disabled: false
