@@ -98,6 +98,7 @@ settings:
       3: 3
       5: 5
       7: 7
+      999: "Infinite"
   pinstrat_enabled:
     label: "PinStrat"
     sort: 40
