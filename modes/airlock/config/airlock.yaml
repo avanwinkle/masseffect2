@@ -20,10 +20,7 @@ mode_settings:
 
 event_player:
   mode_airlock_started:
-    - disable_captive{device.ball_devices.bd_lock.balls==0}
-    - enable_captive_1{device.ball_devices.bd_lock.balls==1}
-    - enable_captive_2{device.ball_devices.bd_lock.balls==2}
-    - enable_captive_3{device.ball_devices.bd_lock.balls==3}
+    - disable_captive
   ball_hold_missionselect_hold_held_ball:
     - start_mode_missionselect
     # Missionselect delays for the slide queue, but disable flippers immediately
@@ -44,19 +41,17 @@ event_player:
         type: int
   # Hold open the gates if no balls are there
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_airlock_entrance_active.1{device.ball_devices.bd_lock.balls==0 and not device.multiball_locks.fmball_lock.enabled and not device.multiball_locks.harbinger_captive.enabled and not device.multiball_locks.reaper_captive.enabled}:
+  s_airlock_entrance_active.1{device.ball_devices.bd_lock.balls==0 and not device.multiball_locks.fmball_lock.enabled and not device.ball_holds.captive_hold.enabled}:
     - bypass_lock_release_pulse_long
-  s_airlock_entrance_active.2{device.ball_devices.bd_lock.balls>0 and not device.multiball_locks.fmball_lock.enabled and not device.multiball_locks.harbinger_captive.enabled and not device.multiball_locks.reaper_captive.enabled}:
+  s_airlock_entrance_active.2{device.ball_devices.bd_lock.balls>0 and not device.multiball_locks.fmball_lock.enabled and not device.ball_holds.captive_hold.enabled}:
     - bypass_lock_release_pulse_short
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
   longwalk_specialist_selected: release_suicide_hold|2s
-  # Post events to enable captive balls
-  balldevice_bd_lock_ball_count_changed:
-    - disable_captive{balls==0}
-    - enable_captive_1{balls==1}
-    - enable_captive_2{balls==2}
-    - enable_captive_3{balls==3}
+  ball_hold_captive_hold_held_ball:
+    - enable_captive_1{device.ball_devices.bd_lock.balls==1}
+    - enable_captive_2{device.ball_devices.bd_lock.balls==2}
+    - enable_captive_3{device.ball_devices.bd_lock.balls==3}
 
 variable_player:
   overlord_ball_will_lock:
@@ -116,6 +111,13 @@ ball_holds:
       - tubes_complete
     disable_events: mode_suicide_huddle_will_stop
     release_all_events: release_suicide_hold
+  captive_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    enable_events: enable_captive
+    disable_events: disable_captive
+    release_all_events: release_captive, disable_captive
 
 multiball_locks:
   fmball_lock:
@@ -138,12 +140,13 @@ counters:
   # We use a counter so we can consolidate multiple events into one "hit"
   captive_ball:
     enable_events:
-      - enable_captive_1
+      - enable_captive
       - cancel_lock_release_pulse{device.ball_devices.bd_lock.balls}
     disable_events:
       - disable_captive
       - bypass_lock_release_pulse_short
       - bypass_lock_release_pulse_long
+      - ball_hold_captive_hold_balls_released
     count_events: captive_ball_1_hit, captive_ball_2_hit, captive_ball_3_hit
     multiple_hit_window: 500ms
     events_when_hit: captive_ball_hit

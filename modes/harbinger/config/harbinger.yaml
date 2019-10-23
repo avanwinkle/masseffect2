@@ -27,17 +27,24 @@
 mode:
   start_events: start_mode_harbinger
   stop_events: stop_mode_harbinger, ball_will_end
-  events_when_stopped: disable_harbinger, lock_eject_all
+  events_when_stopped: disable_harbinger, disable_captive
   priority: 600
 
 event_player:
   # Between Harbingers is 30s, but from the first enabling let's go faster
   enable_harbinger: queue_initial_harbinger|2s
   # The above events have timeouts but harbinger may have been disabled in the meantime
-  queue_initial_harbinger{current_player.harbinger_running==1}: enable_harbinger_lockshot
+  queue_initial_harbinger{current_player.harbinger_running==1}: await_capture
   # Clear the lock when the multiplier expires
-  timer_harbinger_countdown_complete: lock_eject_all
-  disable_harbinger: lock_eject_all
+  timer_harbinger_countdown_complete: await_capture
+  await_capture:
+    - enable_captive
+    - release_captive
+    - enable_harbinger_lockshot
+  disable_harbinger:
+    - release_captive
+    - disable_captive
+  multiball_collectorship_multiball_ended: release_captive
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
@@ -53,13 +60,6 @@ timers:
         action: restart
       - event: disable_harbinger
         action: stop
-
-# Create a lock to ensure we keep a ball captive
-multiball_locks:
-  harbinger_captive:
-    balls_to_lock: 1
-    locked_ball_counting_strategy: physical_only
-    lock_devices: bd_lock
 
 variable_player:
   mode_harbinger_started:
@@ -103,19 +103,19 @@ shot_profiles:
           leds: batram_multipliers
       - name: 2x
         show: color_flashing_fast
-        speed: 2
+        speed: 1.5
         show_tokens:
           color: color_harbinger
           leds: batram_multipliers
       - name: 3x
         show: color_flashing_fast
-        speed: 3
+        speed: 2
         show_tokens:
           color: color_harbinger
           leds: batram_multipliers
       - name: 4x
         show: color_flashing_fast
-        speed: 4
+        speed: 2.5
         show_tokens:
           color: color_harbinger
           leds: batram_multipliers
@@ -129,14 +129,14 @@ shots:
   harbinger_shot:
     hit_events: s_battering_ram_active, captive_ball_hit
     profile: harbinger_profile
-    enable_events: timer_harbinger_countdown_started
-    restart_events: timer_harbinger_countdown_started
+    enable_events: ball_hold_captive_hold_held_ball
+    reset_events: ball_hold_captive_hold_held_ball
     disable_events:
       - timer_harbinger_countdown_complete
       - timer_harbinger_countdown_stopped
       - disable_harbinger
   harbinger_lock_shot:
-    hit_events: multiball_lock_harbinger_captive_locked_ball
+    hit_events: ball_hold_captive_hold_held_ball
     profile: harbinger_lock_profile
     enable_events:
       - enable_harbinger_lockshot
@@ -194,11 +194,11 @@ sound_player:
   timer_harbinger_countdown_complete:
     harbinger_killedsound:   # "This form means nothing..."
       max_queue_time: 1s
-  # If harbinger mode is enabled, give a taunt on outlane drain
-  envshot_outlane_hit:
+  # If harbinger mode is enabled, give a taunt on multiball drain
+  ball_drain:
     harbinger_taunt:
       max_queue_time: 1s
-  ball_drain:
+  ball_will_end:
     harbinger_you_have_failed:
       max_queue_time: 500ms
 

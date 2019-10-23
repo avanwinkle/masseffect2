@@ -69,14 +69,17 @@ widget_player:
   timer_harbinger_countdown_complete.1:
     portrait_harbinger:
       action: remove
+      slide: collectorship_portrait_slide
   # If there's no multiplier when harbinger disables, remove the 1X widget
   timer_harbinger_countdown_complete{current_player.harbinger_multiplier<=1}:
     harbinger_widget:
       action: remove
+      slide: collectorship_baseslide
   # If the multiplier times out and harbinger is disabled, remove the 1X widget
   player_harbinger_multiplier{player_num==current_player.number and value<=1 and not current_player.harbinger_running}:
     harbinger_widget:
       action: remove
+      slide: collectorship_baseslide
   timer_husktimer_started:
     cs_timer_widget:
       slide: collectorship_baseslide
