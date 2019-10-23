@@ -111,6 +111,13 @@ timers:
       - event: reaper_shot_hit
         action: stop
 
+light_player:
+  mode_suicide_humanreaper_started:
+    light_backwall_ambient:
+      color: color_collectors
+    light_backwall_gi:
+      color: color_health
+
 shot_groups:
   reaper_shot:
     shots: reapershot_left_orbit, reapershot_kickback, reapershot_left_ramp, reapershot_right_ramp, reapershot_right_orbit

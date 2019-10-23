@@ -180,3 +180,25 @@ shows:
         l_(shot)_ring_light_4:
           color: AA
         l_(shot)_ring_light_3: off
+  valve_show_low:
+    - time: 0
+      shows:
+        led_6_chase_duo:
+          speed: 1
+          show_tokens:
+            color: color_door_green
+  valve_show_med:
+    - time: 0
+      shows:
+        led_6_chase_duo:
+          speed: 2
+          show_tokens:
+            color: color_door_orange
+  valve_show_high:
+    - time: 0
+      shows:
+        led_6_chase_duo:
+          speed: 3
+          show_tokens:
+            color: color_door_red
+

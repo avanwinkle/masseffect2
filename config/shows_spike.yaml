@@ -90,3 +90,24 @@ shows:
         l_(shot)_arrow_red: off
         l_flash_(shot): on
     - duration: 500ms
+  valve_show_low:
+    - time: 0
+      lights:
+        (leds): color_door_green
+    - time: '+2'
+      lights:
+        (leds): off
+  valve_show_med:
+    - time: 0
+      lights:
+        (leds): color_door_orange
+    - time: '+2'
+      lights:
+        (leds): off
+  valve_show_high:
+    - time: 0
+      lights:
+        (leds): color_door_red
+    - time: '+2'
+      lights:
+        (leds): off

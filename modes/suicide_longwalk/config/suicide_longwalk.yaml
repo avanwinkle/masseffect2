@@ -198,6 +198,24 @@ show_player:
     swarmpath_show:
       action: play
       loops: 1
+    flash_color_show:
+      action: play
+      loops: 3
+      speed: 4
+      show_tokens:
+        leds: l_backwall_gi
+        color: color_collectors
+  logicblock_swarmpaths_hit:
+    pulse_playfield:
+      loops: 2
+      show_tokens:
+        color: color_shields
+  mode_suicide_longwalk_started:
+    led_10_chase:
+      speed: 0.5
+      show_tokens:
+        color: color_shields
+        ledring: l_backwall_gi
 
 shows:
   swarmpath_show:
@@ -228,6 +246,10 @@ light_player:
     l_gi_upper:
       color: 333333
       fade: 1s
+    light_backwall_ambient:
+      color: color_shields%50
+    light_backwall_gi:
+      color: color_shields%20
 
 sound_player:
   play_tension_1:
