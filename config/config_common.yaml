@@ -469,6 +469,7 @@ named_colors:
   # Other Modes
   color_arrival: 24c8ff
   color_collectors: ff2200
+  color_harbinger: FF8811  # F70 was close, but a touch too deep
   color_husk: 00101E
   color_overlord: 22FF33
   color_overlord_orange: FF4400

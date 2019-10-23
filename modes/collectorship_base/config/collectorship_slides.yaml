@@ -59,18 +59,18 @@ widget_player:
       action: remove
     portrait_collectorship_praetorian:
       slide: collectorship_portrait_slide
-  timer_harbinger_enabled_timer_started:
+  timer_harbinger_countdown_started:
     harbinger_widget:
       action: update
       slide: collectorship_baseslide
     portrait_harbinger:
       slide: collectorship_portrait_slide
   # Always remove the portrait when harbinger disables
-  timer_harbinger_enabled_timer_complete.1:
+  timer_harbinger_countdown_complete.1:
     portrait_harbinger:
       action: remove
   # If there's no multiplier when harbinger disables, remove the 1X widget
-  timer_harbinger_enabled_timer_complete{current_player.harbinger_multiplier<=1}:
+  timer_harbinger_countdown_complete{current_player.harbinger_multiplier<=1}:
     harbinger_widget:
       action: remove
   # If the multiplier times out and harbinger is disabled, remove the 1X widget

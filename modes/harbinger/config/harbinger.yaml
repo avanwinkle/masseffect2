@@ -32,14 +32,17 @@ mode:
 
 event_player:
   # Between Harbingers is 30s, but from the first enabling let's go faster
-  enable_harbinger: queue_initial_harbinger|9s
+  enable_harbinger: queue_initial_harbinger|2s
   # The above events have timeouts but harbinger may have been disabled in the meantime
   queue_initial_harbinger{current_player.harbinger_running==1}: enable_harbinger_lockshot
+  # Clear the lock when the multiplier expires
+  timer_harbinger_countdown_complete: lock_eject_all
+  disable_harbinger: lock_eject_all
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
   # When it completes the shot will be disabled
-  harbinger_enabled_timer:
+  harbinger_countdown:
     start_value: 20
     end_value: 0
     tick_interval: 1s
@@ -57,7 +60,6 @@ multiball_locks:
     balls_to_lock: 1
     locked_ball_counting_strategy: physical_only
     lock_devices: bd_lock
-    reset_count_for_current_player_events: stop_mode_harbinger
 
 variable_player:
   mode_harbinger_started:
@@ -67,7 +69,7 @@ variable_player:
     harbinger_running:
       action: set
       int: 1
-  harbinger_shot_hot_hit:
+  harbinger_shot_hit:
     harbinger_multiplier: 1
   harbinger_shot_runout:
     harbinger_multiplier:
@@ -93,11 +95,29 @@ shot_profiles:
   harbinger_profile:
     show_when_disabled: false
     states:
-      - name: hot
+      - name: 1x
+        show: color_flashing_fast
+        speed: 1
+        show_tokens:
+          color: color_harbinger
+          leds: batram_multipliers
+      - name: 2x
         show: color_flashing_fast
         speed: 2
         show_tokens:
-          color: color_collectors
+          color: color_harbinger
+          leds: batram_multipliers
+      - name: 3x
+        show: color_flashing_fast
+        speed: 3
+        show_tokens:
+          color: color_harbinger
+          leds: batram_multipliers
+      - name: 4x
+        show: color_flashing_fast
+        speed: 4
+        show_tokens:
+          color: color_harbinger
           leds: batram_multipliers
   harbinger_lock_profile:
     show_when_disabled: false
@@ -109,19 +129,18 @@ shots:
   harbinger_shot:
     hit_events: s_battering_ram_active, captive_ball_hit
     profile: harbinger_profile
-    enable_events:
-      - timer_harbinger_enabled_timer_started
+    enable_events: timer_harbinger_countdown_started
+    restart_events: timer_harbinger_countdown_started
     disable_events:
-      - timer_harbinger_enabled_timer_complete
-      - timer_harbinger_enabled_timer_stopped
+      - timer_harbinger_countdown_complete
+      - timer_harbinger_countdown_stopped
       - disable_harbinger
-    reset_events: player_shot_harbinger_shot_enabled
   harbinger_lock_shot:
-    hit_events: multiball{balls>0}
+    hit_events: multiball_lock_harbinger_captive_locked_ball
     profile: harbinger_lock_profile
     enable_events:
       - enable_harbinger_lockshot
-      - timer_harbinger_enabled_timer_complete
+      - timer_harbinger_countdown_complete
     disable_events:
       - harbinger_lock_shot_hit
       - disable_harbinger
@@ -131,9 +150,9 @@ shows:
     - duration: 1s
       lights:
         batram_arrow:
-          color: color_collectors
+          color: color_harbinger
         batram_multipliers:
-          color: color_collectors
+          color: color_harbinger
     - duration: 1s
       lights:
         batram_multipliers: off
@@ -141,11 +160,11 @@ shows:
     - time: 0
       lights:
         batram_multipliers:
-          color: color_collectors
+          color: color_harbinger
       shows:
         color_flashing_default:
           show_tokens:
-            color: color_collectors
+            color: color_harbinger
             leds: light_lock_lit
 
 light_player:
@@ -165,14 +184,14 @@ light_player:
 sound_player:
   enable_harbinger_lockshot:
     harbinger_enabledsound:  # "Assuming direct control..."
-      max_queue_time: 500ms
+      max_queue_time: 1s
   harbinger_lockshot_hit:
     harbinger_taunt:
       max_queue_time: 1s
-  harbinger_shot_hot_hit:
+  harbinger_shot_hit:
     harbinger_hitsound:      # "This hurts you..."
       max_queue_time: 1s
-  timer_harbinger_enabled_timer_complete:
+  timer_harbinger_countdown_complete:
     harbinger_killedsound:   # "This form means nothing..."
       max_queue_time: 1s
   # If harbinger mode is enabled, give a taunt on outlane drain
