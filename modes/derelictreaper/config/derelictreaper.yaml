@@ -37,9 +37,10 @@ mode:
     - mode_type_wizard_started
     - enable_reaperfrenzy
     - start_mode_frenzy
+    - enable_capture
     # TODO: Add an intro slide
     - mission_intro_complete
-  events_when_stopped: mode_type_wizard_stopped
+  events_when_stopped: mode_type_wizard_stopped, disable_capture
   priority: 500
 
 event_player:
@@ -60,7 +61,7 @@ event_player:
   # Reset the mission shots on each reapercore, to reduce values on "resume"
   enable_reapercore.2:
     set_mission_shots:
-      shots_total: 5
+      shots_total: 3
       ticks: 20
       is_resumable: 1
       shots_remaining:
@@ -69,9 +70,11 @@ event_player:
   disable_reapercore:
     play_core_widget:
       message: Clear the Husks!
-  reapercore_shots_hit_complete:
+  enable_reapercore:
     play_core_widget:
       message: Destroy the Core!
+  # Frenzy mode must be completed AND a ball must be held in order to enable the core
+  logicblock_reaperhusk_counter_hit{count>=20 and device.ball_holds.captive_hold.balls>0}: enable_reapercore
   # Hitting the jackpot completes the achievement and awards a levelup
   reaperjackpot_hit:
     - derelictreaper_complete
@@ -80,8 +83,10 @@ event_player:
   derelictreaper_complete:
     levelup:
       mission_name: Reaper IFF Acquired
+  # If the multiball ends and a ball is captive, release it
+  multiball_reapercoremb_ended.1: release_captive
   # If the multiball ends and we've already destroyed the core, end the mode
-  multiball_reapercoremb_ended{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
+  multiball_reapercoremb_ended.2{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
   ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
   # Award whatever was accumulated when the mode ends
@@ -93,9 +98,9 @@ counters:
     count_complete_value: 20
     direction: up
     count_events: frenzy_hit
-    disable_on_complete: true
-    reset_on_complete: true
-    events_when_complete: enable_reapercore
+    disable_on_complete: false
+    reset_on_complete: false
+    reset_events: enable_reaperfrenzy
   reapercore_counter:
     starting_count: 3
     count_complete_value: 0
@@ -109,16 +114,9 @@ multiballs:
     ball_count: 2
     ball_count_type: total
     # Without ball save the multiball auto stops upon start, so just "start" it
-    # every time the reaper core opens and there is only one ball in play
-    start_events: mode_derelictreaper_started, disable_reapercore{game.balls_in_play<2}
-
-# Create a lock to ensure we keep a ball captive
-multiball_locks:
-  reaper_captive:
-    balls_to_lock: 1
-    locked_ball_counting_strategy: physical_only
-    lock_devices: bd_lock
-    reset_count_for_current_player_events: stop_mode_derelictreaper
+    # every time the reaper frenzy starts and there is only one ball in play
+    start_events: enable_reaperfrenzy
+    start_or_add_a_ball_events: ball_hold_captive_hold_held_ball{game.balls_in_play<2}
 
 variable_player:
   reaperjackpot_hit:
@@ -150,6 +148,15 @@ shot_profiles:
       - name: lit
         show: reaperjackpot_show
         speed: 6
+  reaper_capture_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: color_flashing_default
+        priority: 100
+        show_tokens:
+          leds: light_lock_lit
+          color: color_husk
 
 shots:
   reaperjackpot:
@@ -157,11 +164,31 @@ shots:
       - s_battering_ram_active  # For Spike
       - captive_ball_hit  # For FAST
     profile: reaperjackpot_profile
-    enable_events: enable_reapercore
-    disable_events: reaperjackpot_hit, disable_reapercore
+    enable_events:
+      - enable_reapercore{device.ball_devices.bd_lock.balls>0}
+      - ball_hold_captive_hold_held_ball
+    disable_events:
+      - reaperjackpot_hit
+      - disable_reapercore
+  reaper_capture_shot:
+    hit_events: ball_hold_captive_hold_held_ball
+    profile: reaper_capture_profile
+    enable_events:
+      - enable_reapercore{device.ball_devices.bd_lock.balls==0}
+    disable_events:
+      - reaper_capture_shot_hit
+      - disable_reopercore
 
 show_player:
+  enable_reaperfrenzy:
+    pulse_playfield:
+      speed: 0.5
+      loops: -1
+      show_tokens:
+        color: color_husk
   enable_reapercore:
+    pulse_playfield:
+      action: stop
     reaperhusk_show:
       priority: 1
   reaperhusk_hit:
@@ -203,16 +230,44 @@ shows:
         l_battering_ram_top: on
 
 slide_player:
-  mode_derelictreaper_started: derelictreaper_slide
   enable_reapercore:
+    derelict_core_slide:
+      target: main
     derelictreaper_portrait_core:
       target: lcd_right
-  disable_reapercore:
+  logicblock_reaperhusk_counter_complete{device.ball_holds.captive_hold.balls_held==0}:
+    derelictreaper_capture_slide:
+      target: main
+  enable_reaperfrenzy:
+    derelictreaper_frenzy_slide:
+      target: main
     derelictreaper_portrait_husks:
       target: lcd_right
 
 slides:
-  derelictreaper_slide:
+  derelictreaper_frenzy_slide:
+    - type: text
+      text: Derelict Reaper
+      style: header_xs, row_top, col_left_anchor, mission_title
+    - type: text
+      text: Eliminate the Husks!
+      style: header_sm, row_main, col_left_anchor
+    - type: text
+      text: (score)
+      style: recruitslide_score, row_top, col_right_anchor, num
+    - widget: background_console
+  derelictreaper_capture_slide:
+    - type: text
+      text: Derelict Reaper
+      style: header_xs, row_top, col_left_anchor, mission_title
+    - type: text
+      text: Expose the Core!
+      style: header_sm, row_main, col_left_anchor
+    - type: text
+      text: (score)
+      style: recruitslide_score, row_top, col_right_anchor, num
+    - widget: background_console
+  derelictreaper_core_slide:
     - type: text
       text: Derelict Reaper
       style: header_xs, row_top, col_left_anchor, mission_title
@@ -301,7 +356,7 @@ widget_player:
       action: remove
   play_core_widget:
     derelict_core_widget:
-      slide: derelictreaper_slide
+      slide: derelictreaper_core_slide
     reapertimeout_widget:
       action: remove
   reapercore_shots_hit_complete:
@@ -312,11 +367,11 @@ widget_player:
   timer_missiontimer_tick:
     reapertimeout_widget:
       action: update
-      slide: derelictreaper_slide
+      slide: derelictreaper_core_slide
   logicblock_reapercore_counter_updated:
     reapershots_widget:
       action: update
-      slide: derelictreaper_slide
+      slide: derelictreaper_core_slide
 
 widgets:
   reapershots_widget:
