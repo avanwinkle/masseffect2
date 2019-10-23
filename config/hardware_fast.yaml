@@ -380,6 +380,11 @@ lights:
     type: grb
     tags: light_pf
 
+  l_flash_left_orbit: # Left Loop (Spinner) [#102]
+    number: 0-2
+    type: grb
+    tags: light_pf
+
   l_dropbank_top: # Left 3-Bank (Top) [#15]
     number: 0-3
     type: grb
@@ -595,8 +600,6 @@ lights:
   l_flash_kickback: # Kickback Lane [#99]
     number: 2-24
     tags: upfield_flashers
-  l_flash_left_orbit: # Left Loop (Spinner) [#102]
-    number: 2-60
   l_flash_left_ramp: # Left Ramp [#98]
     number: 2-20
     tags: upfield_flashers

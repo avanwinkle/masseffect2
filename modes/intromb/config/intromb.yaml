@@ -10,12 +10,14 @@
 mode:
   start_events: start_mode_intromb
   stop_events: stop_mode_intromb
+  priority: 1000
   events_when_started: mode_type_wizard_started, start_mode_frenzy
   events_when_stopped: mode_type_wizard_stopped
 
 event_player:
   multiball_intromb_ended: flippers_off
   ball_save_introsave_saving_ball: stop_mode_intromb
+  timer_intromb_timer_complete: stop_mode_intromb
 
 ball_saves:
   introsave:
@@ -25,6 +27,13 @@ ball_saves:
     auto_launch: false
     # base.yaml triggers the intro show, when the dialog is done give out the ball
     delayed_eject_events: ball1_gameintro_complete
+
+timers:
+  intromb_timer:
+    start_value: 84
+    end_value: 0
+    direction: down
+    start_running: true
 
 variable_player:
   mode_intromb_started:
@@ -52,10 +61,22 @@ slide_player:
 slides:
   intromb_slide:
     - type: text
-      text: INTRO MULTIBALL
+      text: Abandon Ship!
       style: row_main, header_md
     - type: text
       text: (player|temp_counter) Crewmates Saved
+      style: body_sm, row_bottom
   intromb_portrait:
-    - type: text
-      text: Save the Normandy!
+    - type: video
+      video: intro_mb
+
+sound_player:
+  mode_intromb_started:
+    intromb_music:
+      action: play
+
+sounds:
+  intromb_music:
+    file: mus_pro_nor_end_seq.ogg
+    track: music
+    start_at: 20s

@@ -183,5 +183,5 @@ state_machines:
         target: failed
         events: suicidemission_failed
       - source: failed
-        target: omegarelay
+        target: ready
         events: reenable_suicidemission

@@ -507,7 +507,7 @@ class RequiredSounds(object):
             for filename in files:
                 if filename.endswith('.yaml'):
                     configfilename = filename[:-5]
-                    conf = configProcessor.load_config_file('{}/{}'.format(path, filename), "mode")
+                    conf = configProcessor.load_config_files_with_cache(['{}/{}'.format(path, filename)], "mode")
                     sounds = ModeSounds(configfilename)
                     sounds.parse_config(conf)
                     if len(sounds) > 0:
