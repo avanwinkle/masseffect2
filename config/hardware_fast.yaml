@@ -56,7 +56,7 @@ ball_devices:
     ball_switches: s_lock_1, s_lock_2, s_lock_3
     eject_coil: c_lock_release
     eject_events: lock_eject_one_ball
-    eject_all_events: game_ended
+    eject_all_events: game_ended, lock_eject_all
     eject_coil_enable_time: 280ms, 250ms, 235ms
     eject_timeouts: 3s
     exit_count_delay: 2s
