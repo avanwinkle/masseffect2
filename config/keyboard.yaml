@@ -62,9 +62,12 @@ keyboard:
     params:
       balls: 1
   d:
-    switch: s_top_lane_left
+    event: start_mode_collectorship_base
   h:
-    switch: s_top_lane_right
+    switch: s_lock_1
+    toggle: true
+  p:
+    event: start_mode_derelictreaper
   s:
     switch: s_spinner
   k:

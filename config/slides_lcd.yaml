@@ -328,7 +328,7 @@ widgets:
   missionselect_timer_widget:
     - type: text
       text: (missionselect_missionselect_timer_tick)
-      style: header_xs, row_gutter, col_left_anchor
+      style: header_xs, row_gutter, col_left_center
   n7_logo:
     - type: image
       image: n7_logo

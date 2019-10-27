@@ -37,10 +37,10 @@ mode:
     - mode_type_wizard_started
     - enable_reaperfrenzy
     - start_mode_frenzy
-    - enable_capture
+    - enable_captive
     # TODO: Add an intro slide
     - mission_intro_complete
-  events_when_stopped: mode_type_wizard_stopped, disable_capture
+  events_when_stopped: mode_type_wizard_stopped, disable_captive
   priority: 500
 
 event_player:
@@ -148,7 +148,7 @@ shot_profiles:
       - name: lit
         show: reaperjackpot_show
         speed: 6
-  reaper_capture_profile:
+  reaper_captive_profile:
     show_when_disabled: false
     states:
       - name: lit
@@ -170,13 +170,13 @@ shots:
     disable_events:
       - reaperjackpot_hit
       - disable_reapercore
-  reaper_capture_shot:
+  reaper_captive_shot:
     hit_events: ball_hold_captive_hold_held_ball
-    profile: reaper_capture_profile
+    profile: reaper_captive_profile
     enable_events:
       - enable_reapercore{device.ball_devices.bd_lock.balls==0}
     disable_events:
-      - reaper_capture_shot_hit
+      - reaper_captive_shot_hit
       - disable_reopercore
 
 show_player:
@@ -236,7 +236,7 @@ slide_player:
     derelictreaper_portrait_core:
       target: lcd_right
   logicblock_reaperhusk_counter_complete{device.ball_holds.captive_hold.balls_held==0}:
-    derelictreaper_capture_slide:
+    derelictreaper_captive_slide:
       target: main
   enable_reaperfrenzy:
     derelictreaper_frenzy_slide:
@@ -256,7 +256,7 @@ slides:
       text: (score)
       style: recruitslide_score, row_top, col_right_anchor, num
     - widget: background_console
-  derelictreaper_capture_slide:
+  derelictreaper_captive_slide:
     - type: text
       text: Derelict Reaper
       style: header_xs, row_top, col_left_anchor, mission_title

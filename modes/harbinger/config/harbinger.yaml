@@ -34,10 +34,10 @@ event_player:
   # Between Harbingers is 30s, but from the first enabling let's go faster
   enable_harbinger: queue_initial_harbinger|2s
   # The above events have timeouts but harbinger may have been disabled in the meantime
-  queue_initial_harbinger{current_player.harbinger_running==1}: await_capture
+  queue_initial_harbinger{current_player.harbinger_running==1}: await_captive
   # Clear the lock when the multiplier expires
-  timer_harbinger_countdown_complete: await_capture
-  await_capture:
+  timer_harbinger_countdown_complete: await_captive
+  await_captive:
     - enable_captive
     - release_captive
     - enable_harbinger_lockshot
