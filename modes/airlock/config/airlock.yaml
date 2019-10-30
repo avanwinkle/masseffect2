@@ -144,6 +144,7 @@ counters:
     enable_events:
       - enable_captive
       - cancel_lock_release_pulse{device.ball_devices.bd_lock.balls}
+      - ball_hold_captive_hold_held_ball
     disable_events:
       - disable_captive
       - bypass_lock_release_pulse_short

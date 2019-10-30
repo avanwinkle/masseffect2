@@ -50,7 +50,6 @@ event_player:
     set_environment:
       env: husks
   timer_missiontimer_complete:
-    - disable_reapercore
     - enable_reaperfrenzy
   enable_reapercore.10:
     - missiontimer_set_20
@@ -83,6 +82,8 @@ event_player:
     - enable_reapercore
   logicblock_reaperhusk_counter_hit{remaining<=0 and device.ball_holds.captive_hold.balls_held>0}:
     - enable_reapercore
+  logicblock_reapercore_counter_hit{count>0}:
+    - enable_reaperfrenzy
   # Hitting the jackpot completes the achievement and awards a levelup
   logicblock_reapercore_counter_complete:
     - derelictreaper_complete
@@ -114,6 +115,8 @@ counters:
     starting_count: 3
     count_complete_value: 0
     direction: down
+    enable_events: enable_reapercore
+    disable_events: enable_reaperfrenzy
     count_events: reaper_captive_shot_hit
     disable_on_complete: false
     persist_state: true
@@ -125,7 +128,7 @@ multiballs:
     # Without ball save the multiball auto stops upon start, so just "start" it
     # every time the reaper frenzy starts and there is only one ball in play
     start_events: enable_reaperfrenzy
-    start_or_add_a_ball_events: ball_hold_captive_hold_held_ball{game.balls_in_play<2}
+    start_or_add_a_ball_events: ball_hold_captive_hold_held_ball{game.balls_in_play<3}
 
 variable_player:
   logicblock_reapercore_counter_complete:
@@ -148,7 +151,6 @@ shots:
       - enable_reapercore
     disable_events:
       - reaper_captive_shot_hit
-      - disable_reapercore
 
 show_player:
   enable_reaperfrenzy:
