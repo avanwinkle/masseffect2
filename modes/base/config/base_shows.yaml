@@ -113,6 +113,18 @@ shows:
           color: black
           fade: 200ms
         l_null: (color)
+  pulse_playfield_smooth:
+    - duration: 1s
+      lights:
+        light_pf:
+          color: (color)%20
+          fade: 1s
+        l_null: (color)
+    - duration: 2s
+      lights:
+        light_pf:
+          color: (color)
+          fade: 1s
 
 shot_profiles:
   color_on:

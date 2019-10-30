@@ -30,7 +30,7 @@ event_player:
   mode_missionselect_will_stop:
     - flippers_on
   # Relay these events to be agnostic with lockhandler
-  sw_lock_entrance_active{device.multiball_locks.fmball_lock.enabled}:
+  sw_lock_entrance_active{mode["global"].active and mode.device.multiball_locks.fmball_lock.enabled}:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls + 1
@@ -134,6 +134,8 @@ multiball_locks:
       - mode_field_will_stop{device.multiball_locks.fmball_lock.locked_balls==2}
       - multiball_lock_fmball_lock_locked_ball
       - start_mode_collectorship_base
+      - start_mode_derelictreaper
+      - start_mode_suicide_base
     debug: true
 
 counters:

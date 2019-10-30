@@ -35,23 +35,24 @@ mode:
   stop_events: stop_mode_derelictreaper, stop_wizards
   events_when_started:
     - mode_type_wizard_started
-    - enable_reaperfrenzy
-    - start_mode_frenzy
     - enable_captive
     # TODO: Add an intro slide
     - mission_intro_complete
-  events_when_stopped: mode_type_wizard_stopped, disable_captive
+  events_when_stopped:
+    - mode_type_wizard_stopped
+    - disable_captive
   priority: 500
 
 event_player:
-  mode_derelictreaper_started:
+  mode_derelictreaper_started.1:
+    - enable_reaperfrenzy
+  mode_derelictreaper_started.2:
     set_environment:
       env: husks
   timer_missiontimer_complete:
     - disable_reapercore
-    - enable_corefrenzy
+    - enable_reaperfrenzy
   enable_reapercore.10:
-    - enable_reapercore
     - missiontimer_set_20
     - missiontimer_start|1s
   enable_reapercore.1:
@@ -67,17 +68,25 @@ event_player:
       shots_remaining:
         value: device.counters.reapercore_counter.value
         type: int
-  disable_reapercore:
-    play_core_widget:
-      message: Clear the Husks!
-  enable_reapercore:
     play_core_widget:
       message: Destroy the Core!
+  enable_reapercore.3:
+    - stop_mode_frenzy
+  enable_reaperfrenzy.1:
+    - start_mode_frenzy
+    - release_captive
+  enable_reaperfrenzy.2:
+    play_core_widget:
+      message: Clear the Husks!
   # Frenzy mode must be completed AND a ball must be held in order to enable the core
-  logicblock_reaperhusk_counter_hit{count>=20 and device.ball_holds.captive_hold.balls>0}: enable_reapercore
+  reaper_lock_shot_hit{device.counters.reaperhusk_counter.completed}:
+    - enable_reapercore
+  logicblock_reaperhusk_counter_hit{remaining<=0 and device.ball_holds.captive_hold.balls_held>0}:
+    - enable_reapercore
   # Hitting the jackpot completes the achievement and awards a levelup
-  reaperjackpot_hit:
+  logicblock_reapercore_counter_complete:
     - derelictreaper_complete
+    - stop_mode_frenzy
     # If we destroy the core and there's only one ball in play, end the mode
     - stop_mode_derelictreaper{game.balls_in_play==1}
   derelictreaper_complete:
@@ -95,7 +104,7 @@ event_player:
 counters:
   reaperhusk_counter:
     starting_count: 0
-    count_complete_value: 20
+    count_complete_value: 5
     direction: up
     count_events: frenzy_hit
     disable_on_complete: false
@@ -105,7 +114,7 @@ counters:
     starting_count: 3
     count_complete_value: 0
     direction: down
-    count_events: reaperjackpot_hit
+    count_events: reaper_captive_shot_hit
     disable_on_complete: false
     persist_state: true
 
@@ -119,7 +128,7 @@ multiballs:
     start_or_add_a_ball_events: ball_hold_captive_hold_held_ball{game.balls_in_play<2}
 
 variable_player:
-  reaperjackpot_hit:
+  logicblock_reapercore_counter_complete:
     # Jackpot awards the built up value IN ADDITION TO it being awarded at mode end
     score: current_player.temp_build_value
     # Jackpot also increases multiplier for subsequent build values!
@@ -127,81 +136,57 @@ variable_player:
       action: add
       float: 0.5
 
-shot_profiles:
-  corereset_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: corereset_show
-        speed: 4
-  reapercore_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: reapercore_lit_show
-        sync_ms: 1000
-      - name: hit
-        show: off
-  reaperjackpot_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: reaperjackpot_show
-        speed: 6
-  reaper_captive_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: color_flashing_default
-        priority: 100
-        show_tokens:
-          leds: light_lock_lit
-          color: color_husk
-
 shots:
-  reaperjackpot:
+  reaper_lock_shot:
+    enable_events: enable_reaperfrenzy
+    disable_events: ball_hold_captive_hold_held_ball
+  reaper_captive_shot:
     hit_events:
       - s_battering_ram_active  # For Spike
       - captive_ball_hit  # For FAST
-    profile: reaperjackpot_profile
     enable_events:
-      - enable_reapercore{device.ball_devices.bd_lock.balls>0}
-      - ball_hold_captive_hold_held_ball
-    disable_events:
-      - reaperjackpot_hit
-      - disable_reapercore
-  reaper_captive_shot:
-    hit_events: ball_hold_captive_hold_held_ball
-    profile: reaper_captive_profile
-    enable_events:
-      - enable_reapercore{device.ball_devices.bd_lock.balls==0}
+      - enable_reapercore
     disable_events:
       - reaper_captive_shot_hit
-      - disable_reopercore
+      - disable_reapercore
 
 show_player:
   enable_reaperfrenzy:
-    pulse_playfield:
-      speed: 0.5
+    pulse_playfield_smooth:
+      speed: 1
       loops: -1
       show_tokens:
         color: color_husk
-  enable_reapercore:
-    pulse_playfield:
+    # For the lock shot
+    color_flashing_default:
+      priority: 100
+      show_tokens:
+        leds: light_lock_lit
+        color: color_shields
+    color_flashing_fast:
       action: stop
-    reaperhusk_show:
-      priority: 1
+  ball_hold_captive_hold_held_ball:
+    color_flashing_default:
+      action: stop
+  enable_reapercore:
+    pulse_playfield_smooth:
+      action: stop
+    # For the captive ball
+    color_flashing_fast:
+      priority: 101
+      show_tokens:
+        leds: light_reapercore
+        color: color_shields
   reaperhusk_hit:
-    reaperhusk_hit_show:
+    color_flashing_fast:
       priority: 2
-      loops: 4
-      speed: 6
+      loops: 2
+      speed: 4
+      show_tokens:
+        leds: light_pf
+        color: AAAAAA
 
 shows:
-  reaperhusk_show:
-    - time: 0
-      lights:
-        l_targets: on
   reaperhusk_hit_show:
     - time: 0
       lights:
@@ -209,29 +194,10 @@ shows:
     - time: 1
       lights:
         l_targets: on
-  reapercore_lit_show:
-    - time: 0
-      lights:
-        (leds): 333373
-    - time: '+1'
-      lights:
-        (leds): 00101E
-    - time: '+2'
-      lights:
-        (leds): 4444D9
-  reaperjackpot_show:
-    - time: 0
-      lights:
-        l_battering_ram_arrow: on
-        l_battering_ram_top: off
-    - time: '+1'
-      lights:
-        l_battering_ram_arrow: off
-        l_battering_ram_top: on
 
 slide_player:
   enable_reapercore:
-    derelict_core_slide:
+    derelictreaper_core_slide:
       target: main
     derelictreaper_portrait_core:
       target: lcd_right
@@ -288,12 +254,12 @@ slides:
         image: portrait_derelictreaper_husks
 
 sound_player:
-  enable_reapercore:
+  enable_reaperfrenzy:
     derelictreaper_music:
       action: play
     derelictreaper_music_tension:
       action: stop
-  disable_reapercore:
+  enable_reapercore:
     derelictreaper_close_stinger:
       action: play
     derelictreaper_music:

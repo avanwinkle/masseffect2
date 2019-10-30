@@ -474,7 +474,7 @@ lights:
   l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
     number: 0-18
     type: grb
-    tags: light_pf, batram_multipliers, batram_arrow
+    tags: light_pf, batram_multipliers, batram_arrow, light_reapercore
     default_on_color: "990000"  # color_health
   l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
     number: 0-20
