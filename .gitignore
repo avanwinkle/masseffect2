@@ -6,6 +6,7 @@ savegames
 .mesound_path
 *.mp4
 analytics
+mesound_exports
 mesound_conversion
 masseffect2.sublime-workspace
 videos
