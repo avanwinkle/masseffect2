@@ -25,8 +25,8 @@ class MCSquadmateHandlers(Scriptlet):
         self.mc.events.add_handler("slide_huddle_slide_created", self._update_huddle)
         self.mc.events.add_handler("mode_suicide_base_started", self._update_sqicons, is_suicide=True)
         self.mc.events.add_handler("suicide_huddle_specialist_selected", self._update_specialist)
-        self.mc.events.add_handler("recruit_lit", self._update_sqicons)
-        self.mc.events.add_handler("recruit_success", self._update_sqicons)
+        self.mc.events.add_handler("slide_recruit_advance_slide_active", self._update_sqicons)
+        self.mc.events.add_handler("slide_levelup_slide_active", self._update_sqicons)
         self._sqicons = None
 
     def _get_slide(self, slide_name, display):

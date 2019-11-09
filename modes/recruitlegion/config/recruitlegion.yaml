@@ -85,7 +85,8 @@ counters:
   hacking_counter:
     starting_count: 0
     direction: up
-    count_events: heretic_sequence_shots_lit_hit
+    count_events:
+      - heretic_sequence_shots_lit_lane_hit
     events_when_hit: mission_shot_hit
 
 variable_player:
@@ -172,8 +173,9 @@ shots:
     tags: envshot_hitbank, power_target_charge
   # Main shots
   heretic_shot_left_orbit:
-    switches: s_target1
-    hit_events: sh_left_orbit_hit
+    hit_events:
+      - sh_left_orbit_hit{device.shots.heretic_shot_left_orbit.state_name=="lit_lane"}
+      - s_target1_active{device.shots.heretic_shot_left_orbit.state_name=="lit_target"}
     advance_events: heretic_shot_left_orbit_advance
     disable_events:
       - mode_recruitlegion_started
@@ -186,8 +188,9 @@ shots:
       shot: left_orbit
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   heretic_shot_kickback:
-    switches: s_target1
-    hit_events: sh_kickback_hit
+    hit_events:
+      - sh_kickback_hit{device.shots.heretic_shot_kickback.state_name=="lit_lane"}
+      - s_target2_active{device.shots.heretic_shot_kickback.state_name=="lit_target"}
     advance_events: heretic_shot_kickback_advance
     disable_events:
       - mode_recruitlegion_started
@@ -200,8 +203,9 @@ shots:
       shot: kickback
     tags: envshot_kickback, power_target, power_target_kickback
   heretic_shot_left_ramp:
-    switches: s_target1
-    hit_events: sh_left_ramp_hit
+    hit_events:
+      - sh_left_ramp_hit{device.shots.heretic_shot_left_ramp.state_name=="lit_lane"}
+      - s_target3_active{device.shots.heretic_shot_left_ramp.state_name=="lit_target"}
     advance_events: heretic_shot_left_ramp_advance
     disable_events:
       - mode_recruitlegion_started
@@ -214,8 +218,9 @@ shots:
       shot: left_ramp
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   heretic_shot_right_ramp:
-    switches: s_target5
-    hit_events: sh_right_ramp_hit
+    hit_events:
+      - sh_right_ramp_hit{device.shots.heretic_shot_right_ramp.state_name=="lit_lane"}
+      - s_target4_active{device.shots.heretic_shot_right_ramp.state_name=="lit_target"}
     advance_events: heretic_shot_right_ramp_advance
     disable_events:
       - mode_recruitlegion_started
@@ -228,8 +233,9 @@ shots:
       shot: right_ramp
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   heretic_shot_right_orbit:
-    switches: s_target5
-    hit_events: sh_right_orbit_hit
+    hit_events:
+      - sh_right_orbit_hit{device.shots.heretic_shot_right_orbit.state_name=="lit_lane"}
+      - s_target5_active{device.shots.heretic_shot_right_orbit.state_name=="lit_target"}
     advance_events: heretic_shot_right_orbit_advance
     disable_events:
       - mode_recruitlegion_started
@@ -247,10 +253,10 @@ shot_profiles:
     advance_on_hit: false
     show_when_disabled: false
     states:
-      - name: lit
+      - name: lit_lane
         show: heretic_lane_show
         sync_ms: 500
-      - name: lit
+      - name: lit_lane
         show: heretic_lane_show_fast
         sync_ms: 500
       - name: lit_target

@@ -93,6 +93,8 @@ shot_profiles:
     states:
       - name: reputation
         show: led_6_dualcolor_chase
+        show_tokens:
+          fade: 200ms
       - name: lit
         show: led_6_chase
         show_tokens:
@@ -140,17 +142,6 @@ show_player:
       speed: 12
       show_tokens:
         color: color_zaeed
-
-shows:
-  zaeed_show:
-    - time: 0
-      lights:
-        (leds): color_zaeed
-        l_null: (color)
-    - time: '+1'
-      lights:
-        (leds): 000000
-        l_null: (color)
 
 light_player:
   mode_recruitzaeed_started:

@@ -20,14 +20,18 @@ class RecruitLegion(Mode):
         # Track an array of ticks that _might_ need handling, to avoid over-processing
         self._significant_ticks = []
         self._shot_times = {}
+        # Track whether precomplete is achieved, to award levelup if complete fails
+        self._is_precomplete = None
 
     def mode_will_start(self, **kwargs):
         """Watch the timer and bind shot events."""
         self._timer = self.machine.device_manager.collections["timers"]["missiontimer"]
         self._significant_ticks = []
         self._shot_times = {}
+        self._is_precomplete = False
         self.add_mode_event_handler("timer_missiontimer_tick", self._on_tick)
         self.add_mode_event_handler("legion_precomplete", self._on_precomplete)
+        self.add_mode_event_handler("recruit_legion_complete", self._on_complete, priority=1000)
         for shot_name in SHOTS:
             self.add_mode_event_handler("player_shot_heretic_shot_{}_enabled".format(shot_name),
                                         self._start_shot_tracking,
@@ -36,6 +40,11 @@ class RecruitLegion(Mode):
                                         self._on_hit,
                                         shot_name=shot_name)
         self.log.debug("Added mode event handlers for shots: {}".format(SHOTS))
+
+    def mode_will_stop(self, **kwargs):
+        # If the mode stops during precomplete, sneak in a levelup
+        if self._is_precomplete:
+            self.machine.game.player.level += 1
 
     def _start_shot_tracking(self, **kwargs):
         shot_name = kwargs["shot_name"]
@@ -95,6 +104,12 @@ class RecruitLegion(Mode):
     def _on_precomplete(self, **kwargs):
         # Clear out significant ticks to avoid any advancement processing
         self._significant_ticks = []
+        self._on_precomplete = True
+
+    def _on_complete(self, **kwargs):
+        # This event is high enough priority to remove the precomplete before the mode ends
+        self._on_precomplete = False
+
 
     def _get_shot(self, shot_name):
         return self.machine.device_manager.collections["shots"]["heretic_shot_{}".format(shot_name)]

@@ -68,7 +68,7 @@ settings:
   enable_careers:
     label: "Enable Career Profiles"
     key_type: int
-    default: 0
+    default: 1
     sort: 10
     values:
       0: "NO"
