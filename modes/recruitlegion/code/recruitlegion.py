@@ -4,8 +4,9 @@ import logging
 from mpf.core.mode import Mode
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit"]
+BANKS = ["dropbank", "hitbank"]
 TICK_WINDOW = [8, 10, 18, 20]
-BASE_PROGRESS = 20
+TOTAL_PROGRESS = 300
 
 
 class RecruitLegion(Mode):
@@ -39,12 +40,16 @@ class RecruitLegion(Mode):
             self.add_mode_event_handler("heretic_shot_{}_hit".format(shot_name),
                                         self._on_hit,
                                         shot_name=shot_name)
+        for shot_name in BANKS:
+            self.add_mode_event_handler("heretic_shot_{}_hit".format(shot_name),
+                                        self._on_bank,
+                                        shot_name=shot_name)
         self.log.debug("Added mode event handlers for shots: {}".format(SHOTS))
 
     def mode_will_stop(self, **kwargs):
         # If the mode stops during precomplete, sneak in a levelup
         if self._is_precomplete:
-            self.machine.game.player.level += 1
+            self.machine.game.player["level"] += 1
 
     def _start_shot_tracking(self, **kwargs):
         shot_name = kwargs["shot_name"]
@@ -77,11 +82,31 @@ class RecruitLegion(Mode):
                     shot.disable()
                     self.machine.events.post("heretic_shot_{}_timeout".format(shot_name))
 
+    def _on_bank(self, **kwargs):
+        hit_shot_name = kwargs.get("shot_name")
+        # Check if both banks are off. If so, restart the timer/scoring
+        for shot_name in BANKS:
+            shot = self._get_shot(shot_name)
+            # If that's the one that was hit? disable it
+            if shot_name == hit_shot_name:
+                shot.disable()
+            # If it's not the one that was hit, is the other enabled?
+            elif shot.enabled:
+                self.log.debug("Bank {} hit but {} is still enabled, skipping".format(hit_shot_name, shot_name))
+                return
+        # Both banks are disabled? Allow shots again
+        self.machine.events.post("heretic_banks_cleared")
+
+        # If there are no shots, enable one
+        if not self._shot_times:
+            self.machine.events.post("enable_random_heretic")
+
     def _on_hit(self, **kwargs):
         shot_name = kwargs["shot_name"]
         shot = self._get_shot(shot_name)
+        player = self.machine.game.player
 
-        if self.machine.game.player["temp_multiplier"] == 0:
+        if player["temp_multiplier"] == 0:
             self.log.info("Shot {} was hit but banks are enabled. No progress awarded.".format(shot_name))
         else:
             # Award a point of progress for every second left on the shot
@@ -91,13 +116,17 @@ class RecruitLegion(Mode):
             if progress_points < 0:
                 self.log.warn("PROGRESS POINTS LESS THAN ZERO?!")
                 progress_points = 0
-            self.machine.game.player["heretic_progress"] += progress_points
+            player["heretic_progress"] = min(
+                player["heretic_progress"] + (progress_points * int(TOTAL_PROGRESS/60)), TOTAL_PROGRESS)
 
         self._clear_shot(shot_name)
         shot.disable()
 
+        # If we are done?
+        if player["heretic_progress"] == TOTAL_PROGRESS:
+            self.machine.events.post("recruit_legion_precomplete")
         # If there are no shots, enable one
-        if not self._shot_times:
+        elif not self._shot_times:
             self.log.info("All heretic shots have been hit, forcing one to enable.")
             self.machine.events.post("enable_random_heretic")
 
@@ -109,7 +138,6 @@ class RecruitLegion(Mode):
     def _on_complete(self, **kwargs):
         # This event is high enough priority to remove the precomplete before the mode ends
         self._on_precomplete = False
-
 
     def _get_shot(self, shot_name):
         return self.machine.device_manager.collections["shots"]["heretic_shot_{}".format(shot_name)]

@@ -36,11 +36,11 @@ event_player:
     missionselect_missionselect_timer_tick:
       action: set
       # TODO: intelligently track whether "pass" is a valid option
-      int: 12 if current_player.available_missions > 1 and current_player.casual else 6
+      int: 6 if (current_player.available_missions < 2 and current_player.casual) else 12
 
 timers:
   missionselect_timer:
-    start_value: 12 if current_player.available_missions > 1 and current_player.casual else 6
+    start_value: 6 if (current_player.available_missions < 2 and current_player.casual) else 12
     end_value: 0
     tick_interval: 1.2s
     direction: down

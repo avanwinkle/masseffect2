@@ -62,6 +62,18 @@ variable_player:
     mission_secondary:
       string: " "
       action: set
+  enable_heretic_banks:
+    mission_secondary:
+      string: "Hit banks to unblock!"
+      action: set
+  heretic_banks_cleared:
+    mission_secondary:
+      string: " "
+      action: set
+  recruit_legion_precomplete:
+    mission_instructions:
+      string: "Upload the Virus"
+      action: set
   start_mode_recruitmordin:
     missionname:
       string: "Recruit Mordin"

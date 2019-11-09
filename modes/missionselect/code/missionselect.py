@@ -24,15 +24,18 @@ class MissionSelect(Carousel):
         """Mode start: build a list of available missions (based on squadmates and achievements)."""
         self._all_items = self._build_items_list()
 
+        single_recruitment = len(self._all_items) == 1 and self._all_items[0] in self._mates
+
         # If there's only one option and it's a recruit mission, start it immediately without a slide
-        if (not SHOW_SELECT_WHEN_FORCED_SINGLE) and len(self._all_items) == 1 and self._all_items[0] in self._mates:
+        if single_recruitment and not SHOW_SELECT_WHEN_FORCED_SINGLE:
             self._select_item()
             # We never technically start the mode, so fake the ending of it
             self.machine.events.post("mode_missionselect_will_stop")
         else:
             super().mode_start(**kwargs)
+            intro_time = 1200 if single_recruitment else 3000
             # Disable the intro slide after a time
-            self.delay.add(callback=self._remove_intro, ms=3000)
+            self.delay.add(callback=self._remove_intro, ms=intro_time)
 
     def _build_items_list(self):
         player = self.machine.game.player

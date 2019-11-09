@@ -37,9 +37,15 @@ event_player:
       instructions_main: 3 shots to hack heretics
       instructions_sub: Lockout after 10 secs
     set_mission_shots:
-      is_resumable: 0
+      is_resumable: 1
       shots_total: 5
       ticks: 60
+  # Mock an event to set the widget width
+  slide_recruit_mission_slide_created:
+    player_heretic_progress:
+      value:
+        value: current_player.heretic_progress
+        type: int
   mode_recruitlegion_started.1:
     - play_opening_heretic_dialogue
     - enable_random_heretic
@@ -51,13 +57,14 @@ event_player:
     play_squadmate_sound:
       sound: target_left
       variants: 2
+    enable_heretic_banks: {}
   player_shot_heretic_shot_hitbank_enabled{value==True}:
     play_squadmate_sound:
       sound: target_right
       variants: 2
+    enable_heretic_banks: {}
   # Set legion recruited but only "success" on kickback
-  player_heretic_progress{value>=60}:
-    - recruit_legion_precomplete
+  recruit_legion_precomplete:
     - mission_collect_score
     # It's mean to enable the bonus shot with only a few seconds to spare :(
     - missiontimer_set_12{device.timers.missiontimer.ticks<12}
@@ -65,6 +72,9 @@ event_player:
   heretic_jackpot_shot_hit:
     - mission_shot_hit
     - mission_collect_score
+    - recruit_legion_complete
+  # If the mission times out but we are precomplete, count it as complete
+  timer_missiontimer_complete{current_player.status_legion==4}:
     - recruit_legion_complete
 
 random_event_player:
@@ -95,19 +105,18 @@ variable_player:
       action: set
       float: 1.0
   # Disable scoring when a bank shot is enabled
-  player_shot_heretic_shot_dropbank_enabled:
-    temp_multiplier:
-      action: set
-      float: 0.0
-  player_shot_heretic_shot_hitbank_enabled:
+  enable_heretic_banks:
     temp_multiplier:
       action: set
       float: 0.0
   # Re-enable scoring when both banks are off
-  heretic_banks_off_complete:
+  heretic_banks_cleared:
     temp_multiplier:
       action: set
       float: 1.0
+  # Drain after precomplete? Silently award the levelup
+  ball_will_end{current_player.status_legion==4}:
+    level: 1
 
 timers:
   heretic_timer:
@@ -127,7 +136,7 @@ timers:
       - event: enable_heretic_banks
         action: stop
         # Restart the timer when all shots in heretic_banks are off
-      - event: heretic_banks_off_complete
+      - event: heretic_banks_cleared
         action: restart
       - event: recruit_legion_precomplete
         action: stop
@@ -150,7 +159,8 @@ shots:
   # Dropbank and hitbank are "recovery" shots
   heretic_shot_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
-    enable_events:
+    enable_events: []
+    restart_events:
       - heretic_shot_left_orbit_timeout
       - heretic_shot_kickback_timeout
     disable_events: mode_recruitlegion_started, recruit_legion_precomplete
@@ -161,7 +171,8 @@ shots:
     tags: envshot_dropbank, power_target_charge
   heretic_shot_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    enable_events:
+    enable_events: []
+    restart_events:
       - heretic_shot_left_ramp_timeout
       - heretic_shot_right_ramp_timeout
       - heretic_shot_right_orbit_timeout
@@ -328,6 +339,8 @@ sound_player:
     music_legion_low:
       action: play
       mode_end_action: stop
+    music_legion:
+      action: stop
 
 sound_pools:
   legion_warning_left_sound:
@@ -454,26 +467,35 @@ sounds:
     file: en_us_hench_geth_ss_global_hench_geth_00242510_m.ogg
     track: voice
 
-# widget_player:
-#   timer_heretic_timer_tick:
-#     secondary_timer_widget:
-#       action: update
-#       slide: recruit_mission_slide
-#   timer_heretic_timer_complete:
-#     secondary_timer_widget:
-#       action: remove
-#   timer_heretic_timer_stopped:
-#     secondary_timer_widget:
-#       action: remove
-
 widget_player:
   slide_recruit_mission_slide_created:
     heretic_hack_progress_widget:
       action: add
       slide: recruit_mission_slide
+  recruit_legion_precomplete:
+    heretic_hack_progress_widget:
+      action: remove
+      slide: recruit_mission_slide
 
 widgets:
   heretic_hack_progress_widget:
-    - type: text
-      text: "Hack: (player|heretic_progress) / 60"
-      style: header_xs, row_gutter, col_left_center
+    - type: line
+      points: 100, 100, 100, 116, 400, 116, 400, 100, 100, 100
+      color: FFFFFF
+      thickness: 2
+      z: 301
+    - type: rectangle
+      height: 16
+      width: 1
+      opacity: 1
+      x: 100
+      y: 100
+      z: 300
+      anchor_x: left
+      anchor_y: bottom
+      color: DDDDDD
+      animations:
+        add_to_slide: pulse_text_slow
+        player_heretic_progress:
+          - property: width
+            value: (value)
