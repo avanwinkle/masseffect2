@@ -96,11 +96,23 @@ shot_profiles:
     advance_on_hit: false
     states:
       - name: low
-        show: valve_show_low
+        show: led_6_chase_duo
+        speed: 1
+        show_tokens:
+          color: color_door_green
+          fade: 200ms
       - name: med
-        show: valve_show_med
+        show: led_6_chase_duo
+        speed: 2
+        show_tokens:
+          color: color_door_orange
+          fade: 200ms
       - name: high
-        show: valve_show_high
+        show: led_6_chase_duo
+        speed: 4
+        show_tokens:
+          color: color_door_red
+          fade: 200ms
 
 shots:
   valve_right_ramp:

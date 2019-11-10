@@ -1,0 +1,46 @@
+#show_version=5
+
+- time: 0
+  lights:
+    l_dropbank_top:
+      color: (color)%100
+      fade: (fade)
+    l_dropbank_middle:
+      color: (color)%50
+      fade: (fade)
+    l_dropbank_bottom:
+      color: (color)%25
+      fade: (fade)
+- time: '+1'
+  lights:
+    l_dropbank_top:
+      color: (color)%50
+      fade: (fade)
+    l_dropbank_middle:
+      color: (color)%100
+      fade: (fade)
+    l_dropbank_bottom:
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    l_dropbank_top:
+      color: (color)%25
+      fade: (fade)
+    l_dropbank_middle:
+      color: (color)%50
+      fade: (fade)
+    l_dropbank_bottom:
+      color: (color)%100
+      fade: (fade)
+- time: '+1'
+  lights:
+    l_dropbank_top:
+      color: (color)%00
+      fade: (fade)
+    l_dropbank_middle:
+      color: (color)%100
+      fade: (fade)
+    l_dropbank_bottom:
+      color: (color)%50
+      fade: (fade)

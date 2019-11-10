@@ -1,0 +1,26 @@
+#show_version=5
+
+- time: 0
+  lights:
+    l_hitbank_top:
+      color: (color)%100
+      fade: (fade)
+    l_hitbank_bottom:
+      color: (color)%00
+      fade: (fade)
+- time: '+1'
+  lights:
+    l_hitbank_top:
+      color: (color)%50
+      fade: (fade)
+    l_hitbank_bottom:
+      color: (color)%50
+      fade: (fade)
+- time: '+2'
+  lights:
+    l_hitbank_top:
+      color: (color)%00
+      fade: (fade)
+    l_hitbank_bottom:
+      color: (color)%100
+      fade: (fade)

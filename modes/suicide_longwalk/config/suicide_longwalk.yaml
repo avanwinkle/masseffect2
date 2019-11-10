@@ -111,7 +111,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
     tags: envshot_left_ramp
   longwalk_left_orbit:
     hit_events: sh_left_orbit_hit
@@ -121,7 +121,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
     tags: envshot_left_orbit_nofull
   longwalk_right_ramp:
     hit_events: sh_right_ramp_hit
@@ -131,7 +131,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
     tags: envshot_right_ramp
   longwalk_right_orbit:
     hit_events: sh_right_orbit_hit
@@ -141,7 +141,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
     tags: envshot_right_orbit_nofull
   longwalk_kickback:
     hit_events: sh_kickback_hit
@@ -151,7 +151,7 @@ shots:
     reset_events: reset_tension
     profile: longwalk_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
     tags: envshot_kickback
   longwalk_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
@@ -159,9 +159,7 @@ shots:
     disable_events: mode_suicide_longwalk_will_stop, logicblock_swarmpaths_hit
     advance_events: increase_tension
     reset_events: reset_tension
-    profile: longwalk_profile
-    show_tokens:
-      leds: light_dropbank_rgb
+    profile: longwalk_dropbank_profile
     tags: envshot_dropbank
   longwalk_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
@@ -169,35 +167,84 @@ shots:
     disable_events: mode_suicide_longwalk_will_stop, logicblock_swarmpaths_hit
     advance_events: increase_tension
     reset_events: reset_tension
-    profile: longwalk_profile
-    show_tokens:
-      leds: light_hitbank_rgb
+    profile: longwalk_hitbank_profile
     tags: envshot_hitbank
 
 shot_profiles:
   longwalk_profile:
+    show_when_disabled: false
+    advance_on_hit: false
     states:
       - name: low
-        show: swarmpath_show
+        show: led_6_chase_duo
+        speed: 0.5
+        show_tokens:
+          color: color_shields
+          fade: 500ms
+      - name: med
+        show: led_6_chase_duo
         speed: 1
         show_tokens:
-          fadetime: 0
-      - name: med
-        show: swarmpath_show
+          color: color_shields
+          fade: 500ms
+      - name: high
+        show: led_6_chase_duo
         speed: 2
         show_tokens:
-          fadetime: 0
-      - name: high
-        show: swarmpath_show
-        speed: 3
+          color: color_shields
+          fade: 500ms
+  longwalk_hitbank_profile:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: low
+        show: hitbank_chase
+        speed: 0.5
         show_tokens:
-          fadetime: 0
+          color: color_shields
+          fade: 500ms
+      - name: med
+        show: hitbank_chase
+        speed: 1
+        show_tokens:
+          color: color_shields
+          fade: 500ms
+      - name: high
+        show: hitbank_chase
+        speed: 2
+        show_tokens:
+          color: color_shields
+          fade: 500ms
+  longwalk_dropbank_profile:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: low
+        show: dropbank_chase
+        speed: 0.5
+        show_tokens:
+          color: color_shields
+          fade: 500ms
+      - name: med
+        show: dropbank_chase
+        speed: 1
+        show_tokens:
+          color: color_shields
+          fade: 500ms
+      - name: high
+        show: dropbank_chase
+        speed: 2
+        show_tokens:
+          color: color_shields
+          fade: 500ms
 
 show_player:
   swarmfails_hit:
-    swarmpath_show:
+    pulse_playfield:
       action: play
-      loops: 1
+      loops: 2
+      show_tokens:
+        color: color_shields
     flash_color_show:
       action: play
       loops: 3
@@ -216,24 +263,7 @@ show_player:
       show_tokens:
         color: color_shields
         ledring: l_backwall_gi
-
-shows:
-  swarmpath_show:
-    - time: 0
-      lights:
-        (leds):
-          color: color_shields
-          fade: (fadetime)
-    - time: '+1'
-      lights:
-        (leds):
-          color: off
-          fade: (fadetime)
-  swarmfail_show:
-    - time: 0
-      flashers:
-        l_flash_dragon_left: 150ms
-        l_flash_back_panel_left: 150ms
+        fade: 500ms
 
 light_player:
   mode_suicide_longwalk_started:
