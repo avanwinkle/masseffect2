@@ -82,13 +82,13 @@ class SaveCareer(CustomCode):
                     if ach in ("omegarelay", "infiltration", "longwalk", "tubes", "humanreaper", "endrun") and \
                            state not in ("enabled", "disabled") and not SAVE_SUICIDE_PROGRESS:
                         self.log.warn(" - Suicide {} in state '{}', changing to 'enabled'".format(ach, state))
-                        newcareer[key][ach] = "enabled"
+                        newcareer[key][ach][0] = "enabled"
                     # Don't save the started-ness of the suicide mission, revert it to enabled
                     elif ach == "suicidemission" and state != "disabled" and not SAVE_SUICIDE_PROGRESS:
-                        newcareer[key][ach] = "enabled"
+                        newcareer[key][ach][0] = "enabled"
                     # Everything else? Save the existing state
                     else:
-                        newcareer[key][ach] = state
+                        newcareer[key][ach][0] = state
             # Save the state of squadmates, unless they're dead (except if we're saving suicide progress)
             elif key.startswith("status_") and (value >= 0 or (DO_SAVE_DEATHS or SAVE_SUICIDE_PROGRESS)):
                 # Try this: don't save partial progress ever ( formerly: on harder difficulties )
@@ -151,7 +151,7 @@ class SaveCareer(CustomCode):
             elif key in PLAYER_VARS or key.startswith("state_machine"):
                 setattr(player, key, value)  # e.g. player.assignments_completed = 2
             elif key == "achievements":
-                for ach, state in careerdata["achievements"].items():
+                for ach, (state, selected) in careerdata["achievements"].items():
                     handler = None
                     # For achievements without "enable_events" set, listen for MPF to auto-enable the event
                     if ach in ("overlord", "upgrade_armor", "upgrade_cannon", "upgrade_shields"):
@@ -198,7 +198,7 @@ class SaveCareer(CustomCode):
         self.log.info(" - Loading achievement '{achievement}' into state '{state}'".format(**kwargs))
         player_achievements = self.machine.game.player.achievements
         # TDB: This sets the value directly and doesn't post an achievement_(name)_state_(state) event. Do we need one?
-        player_achievements[kwargs["achievement"]] = kwargs["state"]
+        player_achievements[kwargs["achievement"]][0] = kwargs["state"]
 
         self.machine.events.remove_handler_by_key(self._achievement_handlers[kwargs["achievement"]])
         del self._achievement_handlers[kwargs["achievement"]]
