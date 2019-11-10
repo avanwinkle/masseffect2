@@ -39,6 +39,7 @@ class MissionSelect(Carousel):
 
     def _build_items_list(self):
         player = self.machine.game.player
+        achievements = self.machine.device_manager.collections["achievements"]
         self._intro = "intro"
 
         # If Collector Ship is available (for the first time), it is the only option
@@ -48,11 +49,11 @@ class MissionSelect(Carousel):
         items = []
 
         # If Suicide Mission is ready, it goes first
-        if player.achievements['suicidemission'][0] == "enabled":
+        if achievements.suicidemission.state == "enabled":
             items.append('suicide')
         # Or if Derelict Reaper is available and not completed, it goes first
-        elif player.achievements['derelictreaper'][0] == "enabled" or (
-            ALLOW_DERELICTREAPER_REPLAY and player.achievements['derelictreaper'][0] == "started"
+        elif achievements.derelictreaper.state == "enabled" or (
+            ALLOW_DERELICTREAPER_REPLAY and achievements.derelictreaper.state == "started"
         ):
             items.append('derelictreaper')
             # On casual mode, force the player to play derelict reaper
@@ -65,7 +66,7 @@ class MissionSelect(Carousel):
             items.append(mate)
 
         # If allowed, the collectorship can be replayed (pre-derelictreaper)
-        if ALLOW_COLLECTORSHIP_REPLAY and player.achievements['collectorship'][0] == "started":
+        if ALLOW_COLLECTORSHIP_REPLAY and achievements.collectorship.state == "started":
             items.append('collectorship')
 
         # "Pass" is the last item in the menu (not available in casual mode except for suicide)

@@ -17,6 +17,7 @@ class InstantInfo(Carousel):
 
     def _build_items_list(self):
         player = self.machine.game.player
+        achievements = self.machine.device_manager.collections["achievements"]
         items = []
         # If the player is not in field mode, only show the current mode's info
         current_mode = self._find_current_mode()
@@ -29,11 +30,11 @@ class InstantInfo(Carousel):
 
         # MULTIBALL
         if not current_mode or current_mode in ["overlord", "arrival"]:
-            items.append("overlord" if player.achievements["arrival"][0] == "disabled" else "arrival")
+            items.append("overlord" if achievements.arrival.state == "disabled" else "arrival")
 
         # SUICIDE PROGRESS
         if not current_mode or current_mode == "collectorship_base":
-            if player.achievements["collectorship"][0] == "disabled":
+            if achievements["collectorship"].state == "disabled":
                 items.append("collectorship_disabled")
             else:
                 items.append("collectorship_ambush")
@@ -41,13 +42,13 @@ class InstantInfo(Carousel):
                 items.append("collectorship_praetorian")
 
         if not current_mode or current_mode == "derelictreaper":
-            if player.achievements["derelictreaper"][0] == "disabled":
+            if achievements.derelictreaper.state == "disabled":
                 items.append("derelictreaper_disabled")
             else:
                 items.append("derelictreaper_enabled")
 
         for achievement in ["normandyattack", "suicidemission"]:
-            if not current_mode and player.achievements[achievement][0] == "enabled":
+            if not current_mode and achievements[achievement].state == "enabled":
                 items.append(achievement)
 
         if not current_mode:
