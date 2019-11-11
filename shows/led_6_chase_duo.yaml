@@ -7,19 +7,19 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_2:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_3:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_4:
       color: (color)%100
       fade: (fade)
     (leds)_light_5:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_0:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'
   lights:
@@ -27,19 +27,19 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_1:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_2:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_3:
       color: (color)%100
       fade: (fade)
     (leds)_light_4:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_5:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'
   lights:
@@ -47,19 +47,19 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_0:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_1:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_2:
       color: (color)%100
       fade: (fade)
     (leds)_light_3:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_4:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'
   lights:
@@ -67,19 +67,19 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_5:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_0:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_1:
       color: (color)%100
       fade: (fade)
     (leds)_light_2:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_3:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'
   lights:
@@ -87,19 +87,19 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_4:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_5:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_0:
       color: (color)%100
       fade: (fade)
     (leds)_light_1:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_2:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'
   lights:
@@ -107,18 +107,18 @@
       color: (color)%100
       fade: (fade)
     (leds)_light_3:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_4:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
     (leds)_light_5:
       color: (color)%100
       fade: (fade)
     (leds)_light_0:
-      color: (color)%70
+      color: (color)%60
       fade: (fade)
     (leds)_light_1:
-      color: (color)%40
+      color: (color)%20
       fade: (fade)
 - time: '+1'

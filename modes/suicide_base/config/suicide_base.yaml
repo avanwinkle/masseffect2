@@ -10,11 +10,13 @@
 
 mode:
   start_events: start_mode_suicide_base
-  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained, stop_wizards
+  # Don't use stop_wizards for suicide_base, so it can block the ball_ending queue event
+  stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained
   events_when_started: mode_type_wizard_started, enable_fullorbit, start_mode_harbinger
   events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes, stop_mode_harbinger
   code: suicide_base.SuicideBase
   priority: 2000
+  use_wait_queue: true
 
 config:
   - suicide_sounds.yaml
@@ -49,21 +51,21 @@ event_player:
   endrun_complete:
     - levelup
     - suicidemission_complete
-  # Remember the score before starting the suicide mission, in case it fails
-  mode_suicide_base_started.2{current_player.presuicide_score==0}:
-    presuicide_score:
-      action: set
-      int: current_player.score
-  # If the ball drains and we don't need to kill a squadmate, handle that here
-  ball_ending{not mode.suicide_infltration.active and not mode.suicide_longwalk.active}: suicidemission_drained
   # If the ball drains and we DO need to kill a squadmate, wait for the callback to end
-  squadmate_killed{ball_is_ending}: suicidemission_drained
+  squadmate_killed_complete{mode.base.stopping or not mode.base.active}: suicidemission_drained
   # If a squadmate is killed but we didn't drain, go to the "restart" mode (Except during reaper)
-  squadmate_killed{not ball_is_ending and current_player.state_machine_suicide_progress!="final"}: start_mode_suicide_restart
+  squadmate_killed_complete{mode.base.active and not mode.base.stopping and current_player.state_machine_suicide_progress!="final"}:
+    - start_mode_suicide_restart
   # Slide player doesn't like events, so conditionally restore the main slide
   suicidemission_failed:
     - restore_multiplayer_slide{game.num_players>1}
     - restore_singleplayer_slide{game.num_players==1}
+  # Maybe the condition is breaking the ball_ending queue event. Let's try routing it
+  check_kill_squadmate:
+    kill_squadmate{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}:
+      squadmate: specialist
+    # If the ball drains and we don't need to kill a squadmate, handle that here
+    suicide_drained{current_player.state_machine_suicide_progress!="infiltration" and current_player.state_machine_suicide_progress!="longwalk"}: {}
 
 # Always force the ball to eject the plunger lane, ha ha!
 coil_player:
@@ -75,11 +77,10 @@ queue_relay_player:
     post: huddle_waitforit
     wait_for: suicide_huddle_complete
   # If the ball drains during infiltration or longwalk, kill a squadmate before ending
-  ball_ending{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}:
-    post: kill_squadmate
-    args:
-      squadmate: specialist
+  ball_ending.1000:
+    post: check_kill_squadmate
     wait_for: squadmate_killed_complete  # TODO: change this to a post-sound-effect event
+    pass_args: true
 
 ball_saves:
   # This is the save that transitions from omegarelay's forced drain into infiltration
@@ -121,6 +122,11 @@ variable_player:
     reaper_hp{not current_player.reaper_hp}:
       action: set
       int: 10000
+  # Remember the score before starting the suicide mission, in case it fails
+  mode_suicide_base_started.2{current_player.presuicide_score==0}:
+    presuicide_score:
+      action: set
+      int: current_player.score
   # Reset the tension so longwalk doesn't think it dropped
   mode_suicide_infiltration_stopped:
     tension:
@@ -179,11 +185,19 @@ show_player:
     tubes_to_final_show:
       action: play
       loops: 0
+  suicide_huddle_specialist_selected:
+    recruits_specialist_show:
+      priority: 1000
+      show_tokens:
+        leds: l_bbsquad_zaeed
+  mode_type_suicide_stopped:
+    recruits_specialist_show:
+      action: stop
 
 shows:
   infiltration_outro_show:
     - time: 0
-      sounds: 
+      sounds:
         infiltration_low:
           action: play
           track: music

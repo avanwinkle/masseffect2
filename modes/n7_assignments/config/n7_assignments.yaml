@@ -214,6 +214,7 @@ slides:
         text: (title)
         style: header_sm, row_main, col_left_anchor
       - widget: n7_logo
+      - widget: background_console
 
 sound_player:
   mode_n7_assignments_started:

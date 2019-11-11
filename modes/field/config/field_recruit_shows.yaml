@@ -49,6 +49,10 @@ shows:
     - time: 0
       lights:
         (leds): color_health
+  recruits_specialist_show:
+    - time: 0
+      lights:
+        (leds): color_shields
   recruits_off_show:
     - time: 0
       lights:

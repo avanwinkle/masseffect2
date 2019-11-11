@@ -97,22 +97,22 @@ shot_profiles:
     states:
       - name: low
         show: led_6_chase_duo
-        speed: 1
+        speed: 6
         show_tokens:
           color: color_door_green
-          fade: 200ms
+          fade: 160ms
       - name: med
         show: led_6_chase_duo
-        speed: 2
+        speed: 8
         show_tokens:
           color: color_door_orange
-          fade: 200ms
+          fade: 125ms
       - name: high
         show: led_6_chase_duo
-        speed: 4
+        speed: 10
         show_tokens:
           color: color_door_red
-          fade: 200ms
+          fade: 100ms
 
 shots:
   valve_right_ramp:

@@ -177,19 +177,19 @@ shot_profiles:
     states:
       - name: low
         show: led_6_chase_duo
-        speed: 0.5
+        speed: 4
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: med
         show: led_6_chase_duo
-        speed: 1
+        speed: 6
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: high
         show: led_6_chase_duo
-        speed: 2
+        speed: 8
         show_tokens:
           color: color_shields
           fade: 500ms
@@ -199,19 +199,19 @@ shot_profiles:
     states:
       - name: low
         show: hitbank_chase
-        speed: 0.5
+        speed: 2
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: med
         show: hitbank_chase
-        speed: 1
+        speed: 4
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: high
         show: hitbank_chase
-        speed: 2
+        speed: 6
         show_tokens:
           color: color_shields
           fade: 500ms
@@ -221,19 +221,19 @@ shot_profiles:
     states:
       - name: low
         show: dropbank_chase
-        speed: 0.5
+        speed: 2
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: med
         show: dropbank_chase
-        speed: 1
+        speed: 4
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: high
         show: dropbank_chase
-        speed: 2
+        speed: 6
         show_tokens:
           color: color_shields
           fade: 500ms

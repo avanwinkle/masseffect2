@@ -60,6 +60,8 @@ timers:
         action: restart
       - event: disable_harbinger
         action: stop
+      - event: mode_harbinger_will_stop
+        action: stop
 
 variable_player:
   mode_harbinger_started:
