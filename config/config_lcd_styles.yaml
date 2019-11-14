@@ -168,14 +168,14 @@ widget_styles:
   # OTHER STYLES
   #-----------------------------
   mineral_highlight_pos_iridium:
-    x: 5%
-    anchor_x: left
+    x: 115
+    anchor_x: center
   mineral_highlight_pos_palladium:
-    x: 50%
+    x: 379
     anchor_x: center
   mineral_highlight_pos_platinum:
-    x: 95%
-    anchor_x: right
+    x: 643
+    anchor_x: center
   jackpot_x:
     anchor_x: left
     x: 63% # default is 38%, 60% too low, 65% too high

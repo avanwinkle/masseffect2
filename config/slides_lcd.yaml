@@ -74,42 +74,137 @@ slides:
       text: "Medigel\nDeployed"
       style: header_md, row_main
   minerals_slide:
+    # IRIDIUM
+    - type: line
+      points: 20, 190, 20, 380, 210, 380, 210, 190
+      close: true
+      thickness: 2
+      color: fbc795 # color_ui_orange
     - type: text
       text: (player|mineral_iridium)
       min_digits: 1
       number_grouping: true
-      style: body_md, row_main
-      x: 5%
+      style: body_md, row_sub_under
+      x: 115
+      anchor_x: center
+      color: FFFFFF
+    - type: text
+      text: Ir
+      style: header_md
+      x: 115
+      y: 310
+      anchor_x: center
+      color: fbc795 # color_ui_orange
+    - type: text
+      text: 77
+      style: body_xs
       anchor_x: left
+      anchor_y: top
+      x: 30
+      y: 380
+      color: 8f541c # color_ui_orange_dark
+    - type: text
+      text: 197.217000
+      style: body_xs
+      anchor_x: center
+      anchor_y: bottom
+      x: 115
+      y: 255
+      color: 8f541c # color_ui_orange_dark
     - type: text
       text: iridium
-      style: header_xs, row_sub
-      x: 5%
-      anchor_x: left
+      style: header_xs, row_main
+      x: 115
+      anchor_x: center
+      color: fbc795 # color_ui_orange
+    # PALLADIUM (379 is center)
+    - type: line
+      points: 284, 190, 284, 380, 474, 380, 474, 190
+      close: true
+      thickness: 2
+      color: fbc795 # color_ui_orange
     - type: text
       text: (player|mineral_palladium)
       min_digits: 1
       number_grouping: true
-      style: body_md, row_main
-      x: 50%
+      style: body_md, row_sub_under
+      x: 379
       anchor_x: center
+      color: FFFFFF
+    - type: text
+      text: Pd
+      style: header_md
+      x: 379
+      y: 310
+      anchor_x: center
+      color: fbc795 # color_ui_orange
+    - type: text
+      text: 46
+      style: body_xs
+      anchor_x: left
+      anchor_y: top
+      x: 294
+      y: 380
+      color: 8f541c # color_ui_orange_dark
+    - type: text
+      text: 106.420000
+      style: body_xs
+      anchor_x: center
+      anchor_y: bottom
+      x: 379
+      y: 255
+      color: 8f541c # color_ui_orange_dark
     - type: text
       text: palladium
-      style: header_xs, row_sub
-      x: 50%
+      style: header_xs, row_main
+      x: 379
       anchor_x: center
+      color: fbc795 # color_ui_orange
+    # PLATINUM (643 is center)
+    - type: line
+      points: 548, 190, 548, 380, 738, 380, 738, 190
+      close: true
+      thickness: 2
+      color: fbc795 # color_ui_orange
     - type: text
       text: (player|mineral_platinum)
       min_digits: 1
       number_grouping: true
-      style: body_md, row_main
-      x: 95%
-      anchor_x: right
+      style: body_md, row_sub_under
+      x: 643
+      anchor_x: center
+      color: FFFFFF
+    - type: text
+      text: Pt
+      style: header_md
+      x: 643
+      y: 310
+      anchor_x: center
+      color: fbc795 # color_ui_orange
+    - type: text
+      text: 78
+      style: body_xs
+      anchor_x: left
+      anchor_y: top
+      x: 558
+      y: 380
+      color: 8f541c # color_ui_orange_dark
+    - type: text
+      text: 195.084000
+      style: body_xs
+      anchor_x: center
+      anchor_y: bottom
+      x: 643
+      y: 255
+      color: 8f541c # color_ui_orange_dark
     - type: text
       text: platinum
-      style: header_xs, row_sub
-      x: 95%
-      anchor_x: right
+      style: header_xs, row_main
+      x: 643
+      anchor_x: center
+      color: fbc795 # color_ui_orange
+    - type: image
+      image: texture_console
   planet_scanned_slide:
     - type: text
       text: "(planets) Planet(suffix)\n Scanned"
@@ -312,10 +407,12 @@ widgets:
   mineral_highlight:
     - type: rectangle
       z: 2
-      color: FFFFFF
+      color: fbc795
       opacity: 0.2
-      width: 180
-      height: 120
+      width: 190
+      height: 190
+      y: 190
+      anchor_y: bottom
   missionselect_count_widget:
     - type: text
       text: (index) / (items) >

@@ -122,18 +122,20 @@ widgets:
   n7_progress_widget:
     - type: text
       text: "N7 assignment in (count)"
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
+      style: header_sm, row_title, row_dmd_bottom, col_left_indent
       anchor_y: bottom
       anchor_x: left
+      color: c4fe8d # color_ui_green_light
       y: 1
       x: 2
       z: 3
   reaperiff_progress_widget:
     - type: text
       text: "IFF ready in (count)"
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
+      style: header_sm, row_title, row_dmd_bottom, col_left_indent
       anchor_y: bottom
       anchor_x: left
+      color: 5bff63 # color_ui_green
       y: 1
       x: 2
       z: 3

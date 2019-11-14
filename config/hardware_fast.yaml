@@ -77,7 +77,7 @@ ball_devices:
 
 named_colors:
   # Named colors must be explicit due to race conditions with config_common
-  bb_squad_color: ff6611 # FFBB66 makes as white as possible. But maybe organe is better?
+  bb_squad_color: ff6611 # FFBB66 makes as white as possible. But orange is better
   backbox_tone: ffdf8f
   standup_color: ffcc00  # color_armor
   skillshot_color_paragon: 1166ff  # color_paragon
@@ -85,6 +85,12 @@ named_colors:
   dropbank_color_shadowbroker: ff1f00
   color_kasumi_alarm: aa0000
   color_normandy_attack: "220000"
+  color_ui_yellow: f3dc90
+  color_ui_orange_dark: 8f541c
+  color_ui_orange: fbc795
+  color_ui_green_dark: 5b8c55
+  color_ui_green: 5bff63
+  color_ui_green_light: c4fe8d
 
 coils:
   c_flipper_left_main:
