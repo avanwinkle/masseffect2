@@ -3,15 +3,15 @@
 #####
 # UPGRADES MODE
 #
-# ** SQUADMATE UPGRADES **
+# ** WEAPON UPGRADES **
 # These upgrades are acquired via a bonus shot every time a
 # recruitment mission is completed. Hitting the shot awards
 # big points and collects a weapon upgrade, which increases
 # the points earned for all missions (given as a ball-end bonus).
 #
-# ** STORE UPGRADES **
+# ** ARMOR UPGRADES **
 # These upgrades are aquired from the store and provide a
-# passive bonus during gameplay. Only one upgrade can be
+# passive benefit during gameplay. Only one upgrade can be
 # equipped at a time, though previously-purchase upgrades can
 # be re-equipped at no cost. These upgrades provide more powerful
 # bonuses than the weapon upgrades. They do *not* persist
@@ -33,6 +33,17 @@
 #  - Advanced Mineral Scanner
 #     - Argus Scanner Array: accelerate awarding of minerals [IRIDIUM]
 #
+#  Armor slots:
+#    - Stimulator conduits:     increase timer durations      (increase storm speed 10%)
+#    - Capacitor chestplate:    award medigel on lower lanes  (reduce shield delay 10%)
+#    - Life support webbing:    light medigel on both lanes   (increase health 10%)
+#    - N7 shoulder guards:      increase points               (increase damage 3%)
+#    - Recon hood:              increase points               (increase damage 5%)
+#    - N7 greaves:              increase ball save times      (increase shields 3%)
+#    - Heavy damping gauntlets: increase ball save times      (increase shields 5%)
+#    - Archon visor:            accelerate awarding of powers (reduce cooldown 5%)
+#    - Death mask:              accelerate mineral collection (increase negotiation 10%)
+
 # ** SHIP UPGRADES **
 # These mission-critical upgrades are aquired from the bonus
 # shot and are enabled after every 3 levels. They take priority
