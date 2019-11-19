@@ -144,7 +144,7 @@ widgets:
       x: 360
       y: top-124
     - type: text
-      text: "Upgrades: (player|upgrade_researched)"
+      text: "Upgrades: (player|upgrades_completed)"
       style: squad_debug_style
       x: 360
       y: top-144

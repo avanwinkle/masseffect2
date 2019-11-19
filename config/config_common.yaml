@@ -334,13 +334,8 @@ player_vars:
     value_type: str
   available_shipupgrades:
     initial_value: 0
-  available_research:
-    initial_value: 0
   casual:
     initial_value: 1
-  current_research:
-    initial_value: " "
-    value_type: str
   credits:
     initial_value: 0
   # some values are tracked through a career but only get bonus for
@@ -436,7 +431,12 @@ player_vars:
     initial_value: 0
   temp_counter:
     initial_value: 0
-  research_completed:
+  upgrade_available:
+    initial_value: 0
+  upgrade_name:
+    initial_value: " "
+    value_type: str
+  upgrades_completed:
     initial_value: 0
   zaeed_path_renegade:
     initial_value: -1

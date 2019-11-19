@@ -10,7 +10,19 @@
 #
 # At any given time, a bumper can have one of three powers highlighted: its own
 # (pure) power, or either hybrid powers with the other two bumpers. By extension,
-# hybrid powers can appear on 2 bumpers but pure powers only on one.
+# hybrid powers can appear on 2 bumpers but pure powers only on one. To balance
+# this, the powers cycle through the pure power between each hybrid power.
+#
+# Powers are activated by holding both flippers for 2-3 seconds and can be used
+# during any mode except the open field. Powers can NOT be activated when the
+# last/only ball in play hits the outlane.
+
+# ADRENALINE RUSH: Stop all timers for 15 seconds
+# BIOTIC CHARGE: Instantly "hit" a random lit shot
+# SINGULARITY: All lit lanes can be "hit" at standup targets
+# TECH ARMOR: 10 second ball save
+# COMBAT DRONE: Add-a-ball (takes 2s to activate)
+# TACTICAL CLOAK: Holding one flipper, press the other to rotate lit shots
 #####
 
 mode:

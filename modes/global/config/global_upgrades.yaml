@@ -1,20 +1,41 @@
 #config_version=5
 
 #####
-# RESEARCH UPGRADES MODE
+# UPGRADES MODE
 #
-# This is a mostly passive mode that enables a bonus shot every time a mission
-# is completed. Hitting the shot awards big points! That's about all there is
-# to it.
+# ** SQUADMATE UPGRADES **
+# These upgrades are acquired via a bonus shot every time a
+# recruitment mission is completed. Hitting the shot awards
+# big points and collects a weapon upgrade, which increases
+# the points earned for all missions (given as a ball-end bonus).
+#
+# ** STORE UPGRADES **
+# These upgrades are aquired from the store and provide a
+# passive bonus during gameplay. Only one upgrade can be
+# equipped at a time, though previously-purchase upgrades can
+# be re-equipped at no cost. These upgrades provide more powerful
+# bonuses than the weapon upgrades. They do *not* persist
+# across games.
+#
+# ** SHIP UPGRADES **
+# These mission-critical upgrades are aquired from the bonus
+# shot and are enabled after every 3 levels. They take priority
+# over weapon upgrades, but will be lost if another levelup
+# awards a new weapon upgrade. If one is missed, the player
+# can reclaim it after the others. These upgrades provide
+# major bonuses during the Suicide Mission:
+#   - Silaris Armor increases ball save time
+#   - Thanix Cannon increases points collected and Reaper damage
+#   - Multicore shielding increases timers
 #####
 event_player:
-  collect_research_shot_hit:
+  collect_upgrade_shot_hit:
     - shipupgrade_completed{current_player.available_shipupgrades>0}
-    - research_completed{current_player.available_shipupgrades==0}
+    - upgrade_completed{current_player.available_shipupgrades==0}
   capture_shipupgrade_shot_hit: shipupgrade_completed
-  research_completed:
+  upgrade_completed:
     queue_slide:
-      slide: research_slide
+      slide: upgrade_slide
       portrait: upgrades
   achievement_upgrade_armor_state_completed:
     queue_slide:
@@ -36,59 +57,59 @@ variable_player:
   shipupgrade_completed:
     available_shipupgrades: -1
     score: 4000
-    # We can't collect both a ship upgrade _and_ research for a levelup
-    available_research:
+    # We can't collect both a ship upgrade _and_ weapon upgrade for a levelup
+    upgrade_available:
       action: set
       int: 0
-  research_completed:
-    research_completed: 1
-    score: 1000 * (1 + 0.25 * current_player.research_completed)
-    # Research upgrades can't be stacked, collecting one resets to zero
-    available_research:
+  upgrades_completed:
+    upgrades_completed: 1
+    score: 1000 * (1 + 0.5 * current_player.upgrades_completed)
+    # Weapon upgrades can't be stacked, collecting one resets to zero
+    upgrade_available:
       action: set
       int: 0
-  # Completing _any_ recruit mission sets a research project available
+  # Completing _any_ recruit mission sets an upgrade available
   recruit_success.1:
-    available_research: 1
-  # Each squadmate enables a specific research project (meaningless distinctions)
+    upgrade_available: 1
+  # Each squadmate enables a specific upgrade (meaningless distinctions)
   recruit_success_garrus:
-    current_research:
+    upgrade_name:
       action: set
-      string: "Omni-Tool Damage"
+      string: "Sniper Rifle Damage (Scram Pulsar)"
   recruit_success_grunt:
-    current_research:
+    upgrade_name:
       action: set
-      string: "Shotgun Damage"
+      string: "M300 Claymore Shotgun"
   recruit_success_jack:
-    current_research:
+    upgrade_name:
       action: set
-      string: "Bio-Amp Interface"
+      string: "Shotgun Damage (Synchronized Pulsar)"
   recruit_success_kasumi:
-    current_research:
+    upgrade_name:
       action: set
       string: "M22 Locust SMG"
   recruit_success_legion:
-    current_research:
+    upgrade_name:
       action: set
-      string: "M80 Widow Rifle"
+      string: "M98 Widow Rifle"
   recruit_success_mordin:
-    current_research:
+    upgrade_name:
       action: set
       string: "M16 Carnifax Pistol"
   recruit_success_samara:
-    current_research:
+    upgrade_name:
       action: set
-      string: "Assault Rifle Damage"
+      string: "Assault Rifle Damage (Kinetic Pulsar)"
   recruit_success_tali:
-    current_research:
+    upgrade_name:
       action: set
-      string: "Geth Plasma Shotgun"
+      string: "Heavy Pistol Damage (Titan Pulsar)"
   recruit_success_thane:
-    current_research:
+    upgrade_name:
       action: set
-      string: "M17 Viper Rifle"
+      string: "SMG Damage (Microfield Pulsar)"
   recruit_success_zaeed:
-    current_research:
+    upgrade_name:
       action: set
       string: "Heavy Weapon Ammo"
 
@@ -100,14 +121,14 @@ shot_profiles:
         show: flash
 
 shots:
-  collect_research_shot:
+  collect_upgrade_shot:
     hit_events: sh_right_ramp_hit
     enable_events:
-      - mode_global_started{current_player.available_research>0 or current_player.available_shipupgrades>0}
-      - player_available_research{player_num==current_player.number and change>0}
+      - mode_global_started{current_player.upgrade_available>0 or current_player.available_shipupgrades>0}
+      - player_upgrade_available{player_num==current_player.number and change>0}
       - player_available_shipupgrades{player_num==current_player.number and change>0}
     disable_events:
-      - collect_research_shot_hit
+      - collect_upgrade_shot_hit
     profile: color_on
     show_tokens:
       leds: l_right_ramp_arrow_yellow
@@ -120,12 +141,12 @@ slide_player:
 
 
 slides:
-  research_slide:
+  upgrade_slide:
     - type: text
-      text: "Upgrade Researched"
+      text: "Weapon Upgrade"
       style: body_md, row_top, col_left_anchor, num
     - type: text
-      text: (player|current_research)
+      text: (player|upgrade_name)
       style: header_sm, row_main, col_left_anchor
   shipupgrade_ready_slide:
     widgets:
@@ -135,14 +156,14 @@ slides:
   upgrade_complete_slide:
     widgets:
       - type: text
-        text: Ship Upgrade Researched
+        text: Normandy Upgrade
         style: body_md, row_top, col_left_anchor, num
       - type: text
         text: (upgrade_name)
         style: header_sm, row_main, col_left_anchor
 
 sound_player:
-  collect_research_shot_hit: upgrade_collected_sound
+  collect_upgrade_shot_hit: upgrade_collected_sound
   capture_shipupgrade_shot_hit: upgrade_collected_sound
 
 sound_pools:

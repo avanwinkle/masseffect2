@@ -203,7 +203,13 @@ variable_player:
   # For save careers, how many balls has the player played in total?
   mode_base_started:
     balls_played: 1
-    intro_played: 0
+    intro_played:
+      action: set
+      int: 0
+    # To award bonuses based on points earned, track the score when the ball starts
+    ball_starting_score:
+      action: set
+      int: current_player.score
   play_intro_show:
     intro_played: 1
 
@@ -313,7 +319,6 @@ show_player:
   play_intro_show:
     introshow_missions:
       loops: 0
-
 
 shows:
   introshow_missions:
@@ -559,7 +564,6 @@ slides:
       style: header_xs, row_sub_under
     - widget: background_console
 
-
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
   play_gameintro_norecruits_long_four:
@@ -595,7 +599,6 @@ sound_player:
       action: unload
     illusive_already_compiled_dossiers_five:
       action: unload
-
 
 sound_pools:
   gameintro_norecruits_short:

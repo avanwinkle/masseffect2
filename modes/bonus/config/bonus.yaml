@@ -24,8 +24,9 @@ mode_settings:
       score: (machine.base_points / 100 * 5)
       player_score_entry: earned_intel
     - event: bonus_upgrades
-      score: (machine.base_points / 100 * 15)
-      player_score_entry: research_completed
+      # Award and extra 2% score for every weapon upgrade
+      score: (current_player.score - current_player.ball_starting_score) / 100 * 2
+      player_score_entry: upgrades_completed
 
 light_player:
   mode_bonus_started:
