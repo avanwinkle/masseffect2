@@ -127,6 +127,7 @@ multiball_locks:
     reset_count_for_current_player_events:
       - fmball_stopped
       - start_mode_collectorship_base
+      - start_mode_suicide_base
     enable_events:
       - enable_fmball_lock
       - mode_field_started{current_player.persist_lock>0}

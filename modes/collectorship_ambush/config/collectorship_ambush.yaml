@@ -82,7 +82,6 @@ shots:
       leds: l_kickback_shield_rgb
       color: 551100
 
-
 show_player:
   mode_collectorship_ambush_started:
     flasher_show_double|3s:

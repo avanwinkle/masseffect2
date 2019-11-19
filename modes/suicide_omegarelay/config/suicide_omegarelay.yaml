@@ -57,6 +57,7 @@ multiballs:
   omegarelay:
     ball_count: 3
     ball_count_type: total
+    # Use the ball lock as the device to clear any previously-locked balls
     ball_locks: bd_lock
     shoot_again: 10s
     start_events: mode_suicide_omegarelay_started

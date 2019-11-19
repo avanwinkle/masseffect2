@@ -448,8 +448,10 @@ named_colors:
   color_garrus: 0055FF
   color_grunt: FF6611
   color_jack: 4D00CC
+  color_jacob: "663300"
   color_kasumi: eeff00
   color_legion: ffffff
+  color_miranda: fff2e6
   color_mordin: "440000"
   color_samara: 008899
   color_tali: ff11dd
