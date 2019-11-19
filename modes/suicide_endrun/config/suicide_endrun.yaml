@@ -26,12 +26,13 @@
 # recruitment shots or if they have only one squadmate left, they
 # see Shepard’s death ending. Otherwise, they see the escape ending.
 #####
+
 mode:
-  start_events: suicide_progression_endrun
+  start_events: start_mode_suicide_endrun
   stop_events: ball_will_end, endrun_complete
-  events_when_started: start_mode_frenzy
-  events_when_stopped: stop_mode_frenzy
-  priority: 300
+  events_when_started: mode_type_suicide_started, start_mode_frenzy
+  events_when_stopped: mode_type_suicide_stopped, stop_mode_frenzy
+  priority: 2300
 
 event_player:
   # Delay the enabling of the counter so we don't count the initial complete state
@@ -65,13 +66,14 @@ variable_player:
   mode_suicide_endrun_started:
     temp_multiplier:
       action: set
-      float: 1.1 # Include an extra 10% for the initial reset
+      float: 1.0
     temp_build_value:
       action: set
       int: 0
   # Each time the shots are completed, the jackpot grows 10% slower
-  endrun_shots_disabled_complete:
+  endrun_shots_disabled_complete{current_player.temp_build_value>0}:
     temp_multiplier: current_player.temp_multiplier * -0.1
+  # Each frenzy shot builds value at a base times multiplier
   frenzy_shot_hit:
     temp_build_value: (machine.base_points / 100) * current_player.temp_multiplier
   # Use the counter event instead of the shot event, to get the frenzy points too
