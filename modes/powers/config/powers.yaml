@@ -33,17 +33,17 @@ mode:
 
 event_player:
   # Enumerate each profile separately because they pass the state name as an arg
-  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
@@ -64,6 +64,8 @@ event_player:
         value: current_player.shot_cooldown_shot_tech
         type: int
 
+# Looking for variable_player? Probably in the python code
+
 counters:
   powers_cooldown:
     starting_count: 10
@@ -71,7 +73,9 @@ counters:
     direction: down
     count_events: cooldown_shots_hit
     disable_on_complete: true
-    restart_events: award_power
+    restart_events:
+      - award_power
+      - logicblock_powers_cooldown_complete{current_player.power_is_bonus==1}
     persist_state: true
 
 multiballs:

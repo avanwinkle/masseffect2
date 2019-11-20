@@ -1,0 +1,42 @@
+#config_version=5
+
+#####
+# STORE MODE
+#
+# This mode allows the player to purchase upgrades and bonus powers.
+#####
+
+mode:
+  start_events: start_mode_store
+  stop_events: stop_mode_store, ball_will_end
+  events_when_started: mode_type_mission_started, flippers_off
+  events_when_stopped: mode_type_mission_stopped, flippers_on
+  code: store.Store
+  priority: 1100
+
+event_player:
+  # TESTING: we need a way to cancel!
+  flipper_cancel: stop_mode_store
+
+sound_player:
+  mode_store_started: shep_favorite_store
+
+sound_pools:
+  shep_favorite_store:
+    type: random_force_all
+    sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
+    track: voice
+
+sounds:
+  shep_fave_store_1:
+    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
+    track: voice
+  shep_fave_store_2:
+    file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
+    track: voice
+  shep_fave_store_3:
+    file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
+    track: voice
+  shep_fave_store_4:
+    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
+    track: voice

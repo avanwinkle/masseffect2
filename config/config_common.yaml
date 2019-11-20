@@ -236,6 +236,7 @@ modes:
   # - powers
   - reputation
   - skillshot
+  - store
   # Environments:
   - environment
   - env_bloodpack
@@ -363,6 +364,8 @@ player_vars:
   power:
     initial_value: " "
     value_type: str
+  power_is_bonus:
+    initial_value: 0
   medigel:
     initial_value: 0
   minerals_total:
@@ -373,6 +376,22 @@ player_vars:
     initial_value: 0
   mineral_platinum:
     initial_value: 0
+  # These "perks" are for purchased upgrades
+  perk_award_medigel_bool:
+    initial_value: 0
+  perk_double_medigel_bool:
+    initial_value: 0
+  perk_ball_save_period:
+    initial_value: 1
+  perk_cooldown_rate:
+    initial_value: 1
+  perk_mineral_rate:
+    initial_value: 1
+  perk_point_multiplier:
+    initial_value: 1
+  perk_tick_interval:
+    initial_value: 1
+  # Track the score for suicide mission before starting it
   presuicide_score:
     initial_value: 0
   reputation:

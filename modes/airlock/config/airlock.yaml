@@ -42,7 +42,7 @@ event_player:
   # Hold open the gates if no balls are there, or quickly pop the gates
   # if a ball is there that we don't want to lock or hold
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled)}:
+  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled}:
     - bypass_lock_release_pulse_long{device.ball_devices.bd_lock.balls==0}
     - bypass_lock_release_pulse_short{device.ball_devices.bd_lock.balls>0}
   # Delay the release of suicide balls
@@ -118,6 +118,13 @@ ball_holds:
     enable_events: enable_captive
     disable_events: disable_captive
     release_all_events: release_captive, disable_captive
+  store_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    enable_events: enable_store
+    disable_events: store_complete
+    release_all_events: store_complete
 
 multiball_locks:
   fmball_lock:
