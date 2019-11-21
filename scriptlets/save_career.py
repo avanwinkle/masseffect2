@@ -10,6 +10,7 @@ PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
     "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
     "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
+    "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
     "trophies", "total_ball_time")
 
 ACHIEVEMENT_MISSIONS = (

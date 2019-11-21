@@ -1,0 +1,121 @@
+#config_version=5
+
+#####
+# FIREWALKER FIELD MODE
+#
+# This mode establishes the shots that are available during
+# field mode to trigger Firewalker modes. Any lane shot that's
+# not lit with a recruit will be lit for Firewalker progression,
+# starting with red. Hitting a shot turns it orange, then green.
+#
+# When a shot turns green, a Firewalker mode is started. If the
+# player completes the mode, the shot that started it is "complete"
+# permanently, and the remaining shots can be used to trigger the
+# remaining Firewalker modes.
+#
+# Rules to be tested/determined:
+#  - After a FW mode is played, should all lanes reset status? Start with yes
+#  - Should a green hit highlight on a timer to start the mode? No, start immediately
+#####
+event_player:
+  # Any green shot hit will trigger the mode
+  fw_packet_shots_green_hit: start_mode_firewalker
+
+variable_player:
+  # Add one to any shot that's completed, so we know which it is
+  fw_packet_left_orbit_green_hit:
+    fwps_lo: 1
+  fw_packet_kickback_green_hit:
+    fwps_kb: 1
+  fw_packet_left_ramp_green_hit:
+    fwps_lr: 1
+  fw_packet_right_ramp_green_hit:
+    fwps_rr: 1
+  fw_packet_right_orbit_green_hit:
+    fwps_ro: 1
+
+shot_groups:
+  fw_packet_shots:
+    shots: fw_packet_left_orbit, fw_packet_kickback, fw_packet_left_ramp, fw_packet_right_ramp, fw_packet_right_orbit
+    reset_events: start_mode_firewalker
+
+shots:
+  fw_packet_left_orbit:
+    hit_events: sh_left_orbit_hit
+    profile: fw_packet_profile
+    show_tokens:
+      led: l_left_orbit_ring
+    enable_events:
+      - mode_field_started{current_player.fwps_lo==0 and current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3)}
+  fw_packet_kickback:
+    hit_events: sh_kickback_hit
+    profile: fw_packet_profile
+    show_tokens:
+      led: l_kickback_ring
+    enable_events:
+      - mode_field_started{current_player.fwps_kb==0 and current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3)}
+  fw_packet_left_ramp:
+    hit_events: sh_left_ramp_hit
+    profile: fw_packet_profile
+    show_tokens:
+      led: l_left_ramp_ring
+    enable_events:
+      - mode_field_started{current_player.fwps_lr==0 and current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3)}
+  fw_packet_right_ramp:
+    hit_events: sh_right_ramp_hit
+    profile: fw_packet_profile
+    show_tokens:
+      led: l_right_ramp_ring
+    enable_events:
+      - mode_field_started{current_player.fwps_rr==0 and current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3)}
+  fw_packet_right_orbit:
+    hit_events: sh_right_orbit_hit
+    profile: fw_packet_profile
+    show_tokens:
+      led: l_right_orbit_ring
+    enable_events:
+      - mode_field_started{current_player.fwps_ro==0 and current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3)}
+
+shot_profiles:
+  fw_packet_profile:
+    show_when_disabled: false
+    show: fw_packet_show
+    states:
+      - name: red
+      - name: orange
+      - name: green
+
+show_player:
+  mode_field_started:
+    fw_complete_show{current_player.fwps_lo==2 and current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3)}:
+        key: fw_complete_lo
+        show_tokens:
+          led: l_left_orbit_ring
+    fw_complete_show{current_player.fwps_kb==2 and current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3)}:
+        key: fw_complete_kb
+        show_tokens:
+          led: l_kickback_ring
+    fw_complete_show{current_player.fwps_lr==2 and current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3)}:
+        key: fw_complete_lr
+        show_tokens:
+          led: l_left_ramp_ring
+    fw_complete_show{current_player.fwps_rr==2 and current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3)}:
+        key: fw_complete_rr
+        show_tokens:
+          led: l_right_ramp_ring
+    fw_complete_show{current_player.fwps_ro==2 and current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3)}:
+        key: fw_complete_ro
+        show_tokens:
+          led: l_right_orbit_ring
+
+shows:
+  fw_packet_show:
+    - lights:
+        (led): color_door_red%20
+    - lights:
+        (led): color_door_orange%40
+    - lights:
+        (led): color_door_green%60
+  fw_complete_show:
+    - lights:
+        (led): white%20

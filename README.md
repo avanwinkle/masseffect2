@@ -14,12 +14,12 @@ This project requires the Mission Pinball Framework 0.52+ and can be simulated u
 Clone the repo into the folder of your choosing, and install the [Mission Pinball Framework](http://docs.missionpinball.org/en/latest/install/index.html) (MPF).
 
 #### Release Versions
-Mass Effect 2 Pinball maintains "release" versions compatible with the major and minor releases of MPF. The release versions may have 
+Mass Effect 2 Pinball maintains "release" versions compatible with the major and minor releases of MPF. The release versions may have
 placeholders where sigificant changes are being developed, but are fully playable. The newest release will always be the default, but
 you may download any release branch that corresponds to your version of MPF.
 
 #### Developer Version
-Both MPF and Mass Effect 2 Pinball are under constant development, with new features and improvements added every few days. The developer version of Mass Effect 
+Both MPF and Mass Effect 2 Pinball are under constant development, with new features and improvements added every few days. The developer version of Mass Effect
 is considered stable but requires the latest dev release of MPF. You can upgrade your MPF to pre-release versions like so:
 ```
 pip install mpf mpf-mc --pre --upgrade
@@ -152,6 +152,9 @@ Hit the Geth target banks to clear a station on Aite and hit the left ramp to lo
 Hit the Batarian target banks to clear a path through Project Base and hit the left ramp to lock a ball and get the station online. When all three systems are restored the Arrival three-ball multiball begins: hit the lit shots to build value and the pulsing shot for multipliers as the station heads towards Alpha. Watch out for the timer and make sure to hit the escape shot before time runs out!
 
 *This mission is only available after the Collector Ship mission*
+
+### Project Firewalker
+Scan research packets to uncover intel at sites scattered across the galaxy. Collect three packets from any site to unlock increasingly difficult recovery missions in the M-44 Hammerhead vehicle. Complete all the missions to unlock the hidden Prothean site: a fast-paced rocket-drone multiball!
 
 ## Additional Gameplay
 
