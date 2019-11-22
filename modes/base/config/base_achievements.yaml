@@ -93,6 +93,34 @@ achievement_groups:
     debug: true
 
 state_machines:
+  firewalker:
+    persist_state: true
+    starting_state: rosalie
+    states:
+      rosalie: {}
+      volcano_station: {}
+      geth_incursion: {}
+      survey_sites: {}
+      prothean_site: {}
+      completed: {}
+    transitions:
+      # Can we use the same event to trigger _every_ state advancement?
+      - source: rosalie
+        target: volcano_station
+        events: firewalker_mission_complete
+      - source: volcano_station
+        target: geth_incursion
+        events: firewalker_mission_complete
+      - source: geth_incursion
+        target: survey_sites
+        events: firewalker_mission_complete
+      - source: survey_sites
+        target: prothean_site
+        events: firewalker_mission_complete
+      - source: prothean_site
+        target: completed
+        events: firewalker_mission_complete
+
   shadowbroker:
     persist_state: true
     states:
