@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_suicide_platforms
   stop_events: stop_mode_suicide_platforms, stop_suicide_modes
-  events_when_started: enable_harbinger, reset_platforms
+  events_when_started: enable_harbinger, reset_platforms, reset_targets
   events_when_stopped: disable_harbinger
   priority: 2300
 
@@ -30,14 +30,16 @@ event_player:
       shots_total: 1
       is_resumable: 0
       shots_remaining: 1
-      ticks: 60
+      ticks: 30
   platform_shots_lit_hit:
     - mission_shot_hit
     - missiontimer_add_platforms
   # Completing all the platforms resets the shots and adds time
   platform_shots_hit_complete:
     - reset_platforms
-    - missiontimer_add_30
+    - missiontimer_add_10
+  platform_targets_hit_complete:
+    - reset_targets
   # When the hurryup drains, move on to the next mode
   timer_missiontimer_complete: platforms_complete
   # If the player plays the maximum amount of time, move on
@@ -52,7 +54,7 @@ multiballs:
 # There is a maximum amount of time that platforms will play
 timers:
   platformtimer:
-    start_value: 12
+    start_value: 6
     end_value: 0
     tick_interval: 10s
     direction: down
@@ -68,7 +70,7 @@ light_player:
 shot_groups:
   platform_targets:
     shots: platform_dropbank, platform_hitbank, platform_target1, platform_target2, platform_target3, platform_target4, platform_target5
-    reset_events: reset_platforms
+    reset_events: reset_targets
   platform_shots:
     shots: platform_left_orbit, platform_kickback, platform_left_ramp, platform_right_ramp, platform_right_orbit
     reset_events: reset_platforms
@@ -110,43 +112,43 @@ shots:
     profile: color_flashing_fast_profile
     show_tokens:
       leds: light_dropbank_rgb
-      color: color_collectors
+      color: color_collectors%30
   platform_hitbank:
     hit_events: sh_hitbank_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: light_hitbank_rgb
-      color: color_collectors
+      color: color_collectors%30
   platform_target1:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_1
-      color: FFFFFF
+      color: color_collectors%20
   platform_target2:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_2
-      color: FFFFFF
+      color: color_collectors%20
   platform_target3:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_3
-      color: FFFFFF
+      color: color_collectors%20
   platform_target4:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_4
-      color: FFFFFF
+      color: color_collectors%20
   platform_target5:
     hit_events: sw_standuptarget_active
     profile: hit_to_off_profile
     show_tokens:
       leds: l_standup_5
-      color: FFFFFF
+      color: color_collectors%20
 
 show_player:
   platform_targets_hit:

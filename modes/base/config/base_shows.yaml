@@ -125,6 +125,19 @@ shows:
         light_pf:
           color: (color)
           fade: 1s
+  dual_color_pulse:
+    - time: 0
+      lights:
+        (leds):
+          color: (color1)
+          fade: 1s
+        l_null: (color2)
+    - time: '+1'
+      lights:
+        (leds):
+          color: (color2)
+          fade: 1s
+        l_null: (color1)
 
 shot_profiles:
   color_on:

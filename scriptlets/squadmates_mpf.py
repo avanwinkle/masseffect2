@@ -148,7 +148,7 @@ class MPFSquadmateHandlers(CustomCode):
                     cb_sound_name: {
                         "action": action,
                         "track": track,
-                        "events_when_played": [completed_event] if completed_event else [],
+                        "events_when_stopped": [completed_event] if completed_event else [],
                     }
                 }
 

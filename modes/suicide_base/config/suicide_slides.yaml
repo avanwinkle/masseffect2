@@ -379,9 +379,6 @@ widgets:
       - type: text
         text: the End Run
         style: header_md, row_main, col_left_anchor
-      - type: text
-        text: "Doesn't exist. You win!"
-        style: header_sm, row_sub, col_left_anchor
   # Widgets for timers and shot counters
     suicide_time:
       - type: text
@@ -403,7 +400,7 @@ widgets:
     suicide_damage:
       - type: text
         text: "(value)"
-        style: body_sm, row_sub, col_left_anchor
+        style: body_sm, row_sub, col_right_anchor
         number_grouping: true
     suicide_detonate:
       - type: text

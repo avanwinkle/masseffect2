@@ -68,7 +68,8 @@ multiballs:
     shoot_again: 0
     start_or_add_a_ball_events:
       - mode_suicide_infiltration_started{current_player.suicide_continuing>0}
-      - advance_complete{game.balls_in_play==1} # Restore up to 2 balls (after the dialogue finishes)
+      - advance_complete{game.balls_in_play==1 or (game.balls_in_play==2 and device.ball_holds.captive_hold.balls_held>0)} # Restore up to 2 balls (after the dialogue finishes)
+      - ball_hold_captive_hold_held_ball # Replace harbinger balls
 
 counters:
   valves:

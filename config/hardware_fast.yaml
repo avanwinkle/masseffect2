@@ -69,7 +69,7 @@ ball_devices:
     hold_coil_release_time: 1s
     # hold_switches: s_left_ramp_exit
     hold_events:
-      - s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled}
+      - s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled}
       - recruit_lit{squadmate=="garrus" or squadmate=="samara"}
     entrance_switch: s_left_ramp_exit
     debug: true

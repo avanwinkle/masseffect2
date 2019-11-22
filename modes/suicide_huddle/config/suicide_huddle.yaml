@@ -41,6 +41,8 @@ event_player:
       mission:
         value: mission
         type: str
+  # Skip the intro
+  flipper_cancel: specialist_intro_complete
 
 random_event_player:
   ### MOCKUP: Shows don't pass events_when_played, so we have to create different shows for each path
@@ -49,6 +51,13 @@ random_event_player:
     events:
       - play_huddle_intro_show_lw_yes
       - play_huddle_intro_show_lw_no
+
+light_player:
+  mode_suicide_infiltration_started:
+    light_backwall_ambient:
+      color: color_collectors
+    light_backwall_gi:
+      color: off
 
 slide_player:
   play_huddle_slide_infiltration:
@@ -79,6 +88,13 @@ show_player:
     longwalk_intro_show_no:
       action: play
       loops: 0
+  flipper_cancel:
+    infiltration_intro_show:
+      action: stop
+    longwalk_intro_show_yes:
+      action: stop
+    longwalk_intro_show_no:
+      action: stop
 
 shows:
   infiltration_intro_show:

@@ -12,7 +12,7 @@ mpf:
   default_pulse_ms: 10
 
 mpf-mc:
-  fps: 20
+  fps: 60
 
 kivy_config:
   graphics:

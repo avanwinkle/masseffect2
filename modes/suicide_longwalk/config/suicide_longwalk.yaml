@@ -177,19 +177,19 @@ shot_profiles:
     states:
       - name: low
         show: led_6_chase_duo
-        speed: 4
+        speed: 6
         show_tokens:
-          color: color_shields
+          color: color_shields%50
           fade: 500ms
       - name: med
         show: led_6_chase_duo
-        speed: 6
+        speed: 8
         show_tokens:
-          color: color_shields
+          color: color_shields%80
           fade: 500ms
       - name: high
-        show: led_6_chase_duo
-        speed: 8
+        show: led_6_chase
+        speed: 10
         show_tokens:
           color: color_shields
           fade: 500ms
@@ -199,19 +199,19 @@ shot_profiles:
     states:
       - name: low
         show: hitbank_chase
-        speed: 2
+        speed: 6
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: med
         show: hitbank_chase
-        speed: 4
+        speed: 8
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: high
         show: hitbank_chase
-        speed: 6
+        speed: 10
         show_tokens:
           color: color_shields
           fade: 500ms
@@ -221,19 +221,19 @@ shot_profiles:
     states:
       - name: low
         show: dropbank_chase
-        speed: 2
+        speed: 4
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: med
         show: dropbank_chase
-        speed: 4
+        speed: 6
         show_tokens:
           color: color_shields
           fade: 500ms
       - name: high
         show: dropbank_chase
-        speed: 6
+        speed: 8
         show_tokens:
           color: color_shields
           fade: 500ms
@@ -242,28 +242,36 @@ show_player:
   swarmfails_hit:
     pulse_playfield:
       action: play
-      loops: 2
+      loops: 0
       show_tokens:
-        color: color_shields
+        color: color_health%30
     flash_color_show:
       action: play
-      loops: 3
+      loops: 1
       speed: 4
+      priority: 2
       show_tokens:
         leds: l_backwall_gi
-        color: color_collectors
+        color: color_health
   logicblock_swarmpaths_hit:
     pulse_playfield:
-      loops: 2
+      loops: 0
+      speed: 0.5
       show_tokens:
-        color: color_shields
+        color: color_shields%20
   mode_suicide_longwalk_started:
     led_10_chase:
-      speed: 0.5
+      speed: 4
       show_tokens:
         color: color_shields
         ledring: l_backwall_gi
-        fade: 500ms
+        fade: 100ms
+    dual_color_pulse:
+      speed: 0.2
+      show_tokens:
+        color1: color_shields%30
+        color2: color_shields%80
+        leds: light_backwall_ambient
 
 light_player:
   mode_suicide_longwalk_started:
@@ -276,10 +284,6 @@ light_player:
     l_gi_upper:
       color: 333333
       fade: 1s
-    light_backwall_ambient:
-      color: color_shields%50
-    light_backwall_gi:
-      color: color_shields%20
 
 sound_player:
   play_tension_1:

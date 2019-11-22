@@ -15,8 +15,8 @@
 mode:
   start_events: start_mode_suicide_tubes
   stop_events: stop_mode_suicide_tubes, stop_suicide_modes, tubes_complete
-  events_when_started: mode_type_suicide_started, enable_harbinger
-  events_when_stopped: mode_type_suicide_stopped, disable_harbinger
+  events_when_started: mode_type_suicide_started
+  events_when_stopped: mode_type_suicide_stopped
   priority: 2300
 
 event_player:

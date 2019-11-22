@@ -45,6 +45,9 @@ event_player:
   s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled)}:
     - bypass_lock_release_pulse_long{device.ball_devices.bd_lock.balls==0}
     - bypass_lock_release_pulse_short{device.ball_devices.bd_lock.balls>0}
+  # Start suicide huddle when a ball is captured
+  infiltration_complete: start_mode_suicide_huddle
+  longwalk_complete: start_mode_suicide_huddle
   # Delay the release of suicide balls
   infiltration_specialist_selected: release_suicide_hold|2s
   longwalk_specialist_selected: release_suicide_hold|2s
@@ -79,7 +82,7 @@ ball_saves:
   airlock_save:
     balls_to_save: 1
     enable_events:
-      - balldevice_bd_lock_ejecting_ball
+      - balldevice_bd_lock_ejecting_ball{not mode.suicide_huddle.active}
       - bypass_lock_release_pulse_short
     active_time: 3s
     auto_launch: true
@@ -105,10 +108,7 @@ ball_holds:
     balls_to_hold: 1
     hold_devices: bd_hold
     debug: true
-    enable_events:
-      - infiltration_complete
-      - longwalk_complete
-      - tubes_complete
+    enable_events: enable_transition_hold
     disable_events: mode_suicide_huddle_will_stop
     release_all_events: release_suicide_hold
   captive_hold:

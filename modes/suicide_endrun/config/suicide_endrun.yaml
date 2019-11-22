@@ -38,7 +38,8 @@ event_player:
   # Delay the enabling of the counter so we don't count the initial complete state
   mode_suicide_endrun_started:
     - enable_endrun_counter|1s
-  # This event _should_ trigger automatically when the mode starts
+    - reset_endrun_shots
+    - reset_dropbank
   endrun_shots_disabled_complete:
     - reset_endrun_shots
     - reset_dropbank
