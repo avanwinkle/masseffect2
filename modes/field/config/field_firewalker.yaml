@@ -44,35 +44,35 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: fw_packet_profile
     show_tokens:
-      led: l_left_orbit_ring
+      ledring: l_left_orbit_ring
     enable_events:
       - mode_field_started{current_player.fwps_lo==0 and current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3)}
   fw_packet_kickback:
     hit_events: sh_kickback_hit
     profile: fw_packet_profile
     show_tokens:
-      led: l_kickback_ring
+      ledring: l_kickback_ring
     enable_events:
       - mode_field_started{current_player.fwps_kb==0 and current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3)}
   fw_packet_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: fw_packet_profile
     show_tokens:
-      led: l_left_ramp_ring
+      ledring: l_left_ramp_ring
     enable_events:
       - mode_field_started{current_player.fwps_lr==0 and current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3)}
   fw_packet_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: fw_packet_profile
     show_tokens:
-      led: l_right_ramp_ring
+      ledring: l_right_ramp_ring
     enable_events:
       - mode_field_started{current_player.fwps_rr==0 and current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3)}
   fw_packet_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: fw_packet_profile
     show_tokens:
-      led: l_right_orbit_ring
+      ledring: l_right_orbit_ring
     enable_events:
       - mode_field_started{current_player.fwps_ro==0 and current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3)}
 
@@ -87,35 +87,43 @@ shot_profiles:
 
 show_player:
   mode_field_started:
-    fw_complete_show{current_player.fwps_lo==2 and current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3)}:
+    fw_complete_show{current_player.fwps_lo==2 and (current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3))}:
         key: fw_complete_lo
         show_tokens:
-          led: l_left_orbit_ring
-    fw_complete_show{current_player.fwps_kb==2 and current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3)}:
+          ledring: l_left_orbit_ring
+    fw_complete_show{current_player.fwps_kb==2 and (current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3))}:
         key: fw_complete_kb
         show_tokens:
-          led: l_kickback_ring
-    fw_complete_show{current_player.fwps_lr==2 and current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3)}:
+          ledring: l_kickback_ring
+    fw_complete_show{current_player.fwps_lr==2 and (current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3))}:
         key: fw_complete_lr
         show_tokens:
-          led: l_left_ramp_ring
-    fw_complete_show{current_player.fwps_rr==2 and current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3)}:
+          ledring: l_left_ramp_ring
+    fw_complete_show{current_player.fwps_rr==2 and (current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3))}:
         key: fw_complete_rr
         show_tokens:
-          led: l_right_ramp_ring
-    fw_complete_show{current_player.fwps_ro==2 and current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3)}:
+          ledring: l_right_ramp_ring
+    fw_complete_show{current_player.fwps_ro==2 and (current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3))}:
         key: fw_complete_ro
         show_tokens:
-          led: l_right_orbit_ring
+          ledring: l_right_orbit_ring
 
 shows:
   fw_packet_show:
     - lights:
-        (led): color_door_red%20
+        (ledring)_light_1: color_door_red%1
+        (ledring)_light_3: color_door_red%1
+        (ledring)_light_5: color_door_red%1
     - lights:
-        (led): color_door_orange%40
+        (ledring)_light_1: color_door_orange%5
+        (ledring)_light_3: color_door_orange%5
+        (ledring)_light_5: color_door_orange%5
     - lights:
-        (led): color_door_green%60
+        (ledring)_light_1: color_door_green%10
+        (ledring)_light_3: color_door_green%10
+        (ledring)_light_5: color_door_green%10
   fw_complete_show:
     - lights:
-        (led): white%20
+        (ledring)_light_1: white%10
+        (ledring)_light_3: white%10
+        (ledring)_light_5: white%10

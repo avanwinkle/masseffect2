@@ -11,7 +11,7 @@ class FwRulesBase:
     self._name = None
 
   def start(self):
-    self._log("Starting {}".format(self.__class__))
+    self._log.info("Starting {}".format(self.__class__))
     # Enable all shots at the initial state
     for shot in self._shots:
       shot.restart()
@@ -69,7 +69,7 @@ class Firewalker(Mode):
     for shot in SHOTS:
       shotname = "firewalker_{}".format(shot)
       shots.append(self.machine.device_manager.collections["shots"][shotname])
-      self.add_mode_event_handler("{}_hit".format(shotname), self._handle_hit, shot=shotname)
+      self.add_mode_event_handler("{}_hit".format(shotname), self._handle_hit, shotname=shotname)
     self.rules = {
       "rosalie": Rosalie,
       "volcano_station": VolcanoStation,
@@ -80,5 +80,5 @@ class Firewalker(Mode):
 
     self.rules.start()
 
-  def _handle_hit(self, shotname, **kwargs):
-    self.rules.on_hit(shotname)
+  def _handle_hit(self, **kwargs):
+    self.rules.on_hit(kwargs["shotname"])

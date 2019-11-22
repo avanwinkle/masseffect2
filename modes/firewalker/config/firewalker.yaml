@@ -23,8 +23,8 @@
 #####
 
 mode:
-  start_events: start_mode_firewalker_base
-  stop_events: stop_mode_firewalker_base, firewalker_mission_complete, firewalker_mission_failed, stop_wizards
+  start_events: start_mode_firewalker
+  stop_events: stop_mode_firewalker, firewalker_mission_complete, firewalker_mission_failed, stop_wizards
   events_when_started: mode_type_wizard_started
   events_when_stopped: mode_type_wizard_stopped
   code: firewalker.Firewalker
@@ -69,27 +69,27 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: firewalker_profile
     show_tokens:
-      led: l_left_orbit_ring
+      leds: l_left_orbit_ring
   firewalker_kickback:
     hit_events: sh_kickback_hit
     profile: firewalker_profile
     show_tokens:
-      led: l_kickback_ring
+      leds: l_kickback_ring
   firewalker_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: firewalker_profile
     show_tokens:
-      led: l_left_ramp_ring
+      leds: l_left_ramp_ring
   firewalker_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: firewalker_profile
     show_tokens:
-      led: l_right_ramp_ring
+      leds: l_right_ramp_ring
   firewalker_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: firewalker_profile
     show_tokens:
-      led: l_right_orbit_ring
+      leds: l_right_orbit_ring
 
 shot_profiles:
   firewalker_profile:
@@ -99,12 +99,18 @@ shot_profiles:
       - name: red
         show: led_6_chase_duo
         show_tokens:
+          speed: 12
           color: color_door_red
+          fade: 50ms
       - name: orange
         show: led_6_chase_duo
         show_tokens:
+          speed: 12
           color: color_door_orange
+          fade: 50ms
       - name: green
         show: led_6_chase_duo
         show_tokens:
+          speed: 12
           color: color_door_green
+          fade: 50ms
