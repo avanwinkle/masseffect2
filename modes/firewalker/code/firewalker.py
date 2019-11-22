@@ -16,8 +16,18 @@ class FwRulesBase:
     for shot in self._shots:
       shot.restart()
 
+  @property
+  def description(self):
+    return self.__class__.description
+
+  @property
+  def number(self):
+    return self.__clas__.number
+
 
 class Rosalie(FwRulesBase):
+  number = 1
+  description = "Rosalie Lost"
   def on_hit(self, shotname):
     # Advance all shots
     for shot in self._shots:
@@ -25,6 +35,8 @@ class Rosalie(FwRulesBase):
 
 
 class VolcanoStation(FwRulesBase):
+  number = 2
+  description = "Volcano Station"
   def on_hit(self, shotname):
     # Advance all enabled shots, and disable the hit one
     for shot in self._shots:
@@ -35,6 +47,8 @@ class VolcanoStation(FwRulesBase):
 
 
 class GethIncursion(FwRulesBase):
+  number = 3
+  description = "Geth Incursion"
   def on_hit(self, shotname):
     # Advance only the hit shot
     for shot in self._shots:
@@ -43,6 +57,8 @@ class GethIncursion(FwRulesBase):
 
 
 class SurveySites(FwRulesBase):
+  number = 4
+  description = "Survey Sites"
   def on_hit(self, shotname):
     # Advance only the hit shot, reset the rest
     for shot in self._shots:
@@ -53,6 +69,8 @@ class SurveySites(FwRulesBase):
 
 
 class ProtheanSite(FwRulesBase):
+  number = 5
+  description = "Prothean Site"
   def on_hit(self, shotname):
     pass
 
@@ -65,6 +83,7 @@ class Firewalker(Mode):
 
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)
+    mission = self.machine.game.player["state_machine_firewalker"]
     shots = []
     for shot in SHOTS:
       shotname = "firewalker_{}".format(shot)
@@ -76,9 +95,13 @@ class Firewalker(Mode):
       "geth_incursion": GethIncursion,
       "survey_sites": SurveySites,
       "prothean_site": ProtheanSite,
-    }[self.machine.game.player["state_machine_firewalker"]](shots, self.log)
+    }[mission](shots, self.log)
 
     self.rules.start()
+    self.machine.events.post("firewalker_mission_started",
+      description=self.rules.description,
+      portrait_name="firewalker_portrait_{}".format(mission))
+    self.machine.game.player["fw_number"] = self.rules.number
 
   def _handle_hit(self, **kwargs):
     self.rules.on_hit(kwargs["shotname"])

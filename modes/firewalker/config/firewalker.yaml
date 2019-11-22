@@ -33,6 +33,16 @@ mode:
 event_player:
   firewalker_shots_green_hit: firewalker_mission_complete
   timer_fwtimer_complete: firewalker_mission_failed
+  # Mock a tick event on hit, to update the widget
+  firewalker_shots_hit:
+    timer_fwtimer_tick:
+      ticks_remaining: 20
+  firewalker_mission_complete:
+    queue_slide:
+      slide: firewalker_complete_slide
+      transition_type: none
+      portrait: firewalker_complete
+      expire: 5s
 
 variable_player:
   # After a mission, mark the shot as complete or reset it
@@ -56,9 +66,13 @@ timers:
     end_value: 0
     tick_interval: 1s
     direction: down
+    start_running: true
     control_events:
       - event: firewalker_shots_hit
         action: restart
+      - event: firewalker_shots_green_hit
+        action: stop
+
 
 shot_groups:
   firewalker_shots:
@@ -114,3 +128,79 @@ shot_profiles:
           speed: 12
           color: color_door_green
           fade: 50ms
+
+slide_player:
+  firewalker_mission_started:
+    firewalker_slide:
+      target: main
+    portrait_slide:
+      target: lcd_right
+
+slides:
+  firewalker_slide:
+    widgets:
+      - type: text
+        text: Project Firewalker
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (description)
+        style: header_md, row_main, row_main_dmd_high, col_left_anchor
+      - type: text
+        text: (score)
+        style: body_sm, row_sub, col_left_anchor, dmd_hide, num
+        opacity: 0.5
+      - widget: background_console
+
+sound_player:
+  mode_firewalker_started:
+    firewalker_music:
+      action: play
+      loops: -1
+      track: music
+      mode_end_action: stop
+
+sound_pools:
+  firewalker_music:
+    sounds: firewalker_music_1, firewalker_music_2
+    track: music
+
+sounds:
+  firewalker_music_2:
+    file: mus_critpath1_combat_1.ogg
+    track: music
+    start_at: 2s
+    fade_in: 1s
+    fade_out: 2s
+  firewalker_music_1:
+    file: mus_n7_8_combat_2.ogg
+    track: music
+    start_at: 1.5s
+    fade_in: 500ms
+    fade_out: 2s
+
+widget_player:
+  timer_fwtimer_tick:
+    fw_timer_widget:
+      action: update
+      slide: firewalker_slide
+
+widgets:
+  fw_timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: timer_primary, row_gutter, col_right_indent
+  firewalker_portrait_rosalie:
+    - type: image
+      image: portrait_firewalker_rosalie
+  firewalker_portrait_survey_sites:
+    - type: image
+      image: portrait_firewalker_survey_sites
+  firewalker_portrait_geth_incursion:
+    - type: image
+      image: portrait_firewalker_geth_incursion
+  firewalker_portrait_prothean_site:
+    - type: image
+      image: portrait_firewalker_prothean_site
+  firewalker_portrait_volcano_station:
+    - type: image
+      image: portrait_firewalker_volcano_station
