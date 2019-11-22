@@ -44,6 +44,7 @@ event_player:
 
 config:
   - field_bumpers.yaml
+  - field_firewalker.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
   - field_shopping.yaml

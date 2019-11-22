@@ -24,6 +24,19 @@ slides:
       image: splashscreen
       anchor_x: right
       x: 110%
+  firewalker_complete_slide:
+    widgets:
+      - type: text
+        text: Project Firewalker
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: "Research\nCollected!"
+        style: header_md, row_main_under, row_main_dmd_high, col_left_anchor
+      - type: text
+        text: (fw_number) of 5 missions complete
+        style: body_sm, row_bottom, col_left_anchor, dmd_hide, num
+      - type: image
+        image: texture_console
   gameover_slide:
     - type: text
       text: (machine|gameover_text)
@@ -483,6 +496,9 @@ widgets:
   portrait_squad:
     - type: image
       image: portrait_squad
+  portrait_firewalker_complete:
+    - type: image
+      image: portrait_firewalker_complete
   # Squadmates
   portrait_recruitgarrus:
     - type: image

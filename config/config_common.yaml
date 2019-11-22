@@ -231,7 +231,6 @@ modes:
   - tilt
   - service
   # Support Modes
-  # - firewalker
   - frenzy
   # - powers
   - reputation
@@ -287,6 +286,7 @@ modes:
   - shadowbroker_hagalaz
   - shadowbroker_vasir
   # Side Missions:
+  - firewalker
   - harbinger
   - n7_assignments
   # Multiballs:
@@ -348,6 +348,17 @@ player_vars:
   earned_level:
     initial_value: 0
   earned_squadmates_count:
+    initial_value: 0
+  # Track which Firewalker Packet Shots have been completed
+  fwps_lo:
+    initial_value: 0
+  fwps_kb:
+    initial_value: 0
+  fwps_lr:
+    initial_value: 0
+  fwps_rr:
+    initial_value: 0
+  fwps_ro:
     initial_value: 0
   geth_colossus_state:
     initial_value: 6

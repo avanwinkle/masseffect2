@@ -1,50 +1,78 @@
 #config_version=5
 
 #####
-# PROJECT FIREWALKER
+# FIREWALKER MODE
 #
-# This is a universal mode that grants multipliers to every shot lane,
-# irrespective of what modes are running or what shots are enabled on
-# the lane.
+# This mode is the base for the Firewalker missions. All the missions
+# share the same shots with shows and very similar behavior. This base
+# mode defines those shots, and uses custom code for the exact gameplay
+# rules based on the player's progress.
+#
+# Each mode lights shots at red, and uses the red -> orange -> green progression
+# to collect research packets and complete the mode. As the modes advance,
+# the rules change to increase difficulty. Hitting any green shot will complete
+# the mode (except for the final multiball).
+#
+# ROSALIE:          All shots are lit. Hitting any shot advances all shots.
+# VOLCANO STATION:  All shots are lit. Hitting any shot disables _that_ shot
+#                   and advances the rest.
+# GETH INCURSION:   All shots are lit. Hitting any shot advances _that_ shot.
+# SURVEY SITES:     All shots are lit. Hitting any shot advances _that_ shot
+#                   and resets all the rest.
+# PROTHEAN SITE:    A special multiball! Gets its own mode.
 #####
 
 mode:
   start_events: start_mode_firewalker
-  stop_events: stop_mode_firewalker, ball_will_end
-  # code: firewalker.Firewalker
-  priority: 200
+  stop_events: stop_mode_firewalker, firewalker_mission_complete, firewalker_mission_failed, stop_wizards
+  events_when_started: mode_type_wizard_started
+  events_when_stopped: mode_type_wizard_stopped
+  code: firewalker.Firewalker
+  priority: 1000
 
-mode_settings:
-  combo_multipliers:
-    firewalker:
-      switches: s_left_orbit, s_kickback, s_left_ramp, s_right_ramp, s_right_orbit
-      starting_value: 1.0
-      increment_hit: 0.0
-      increment_previous: 0.0
-      increment_others: 1.0
-      timeout: 10s
-      reset_events: mode_base_started
+event_player:
+  firewalker_shots_green_hit: firewalker_mission_complete
+  timer_fwtimer_complete: firewalker_mission_failed
+  # Mock a tick event on hit, to update the widget
+  firewalker_shots_hit:
+    timer_fwtimer_tick:
+      ticks_remaining: 20
+  firewalker_mission_complete:
+    queue_slide:
+      slide: firewalker_complete_slide
+      transition_type: none
+      portrait: firewalker_complete
+      expire: 5s
 
-counters:
-  firewalker:
-    starting_count: 0
-    count_complete_value: 20
-    direction: up
-    count_events: firewalker_shots_4X_hit
-    enable_events: mode_firewalker_started, timer_firewalker_complete
-    disable_events: logicblock_firewalker_hit
+variable_player:
+  # After a mission, mark the shot as complete or reset it
+  firewalker_mission_complete.10:
+    fwps_lo{current_player.fwps_lo==1}: 1
+    fwps_kb{current_player.fwps_kb==1}: 1
+    fwps_lr{current_player.fwps_lr==1}: 1
+    fwps_rr{current_player.fwps_rr==1}: 1
+    fwps_ro{current_player.fwps_ro==1}: 1
+  # If the mission fails, drains, whatever, drop the shot back to zero
+  mode_firewalker_will_stop:
+    fwps_lo{current_player.fwps_lo==1}: -1
+    fwps_kb{current_player.fwps_kb==1}: -1
+    fwps_lr{current_player.fwps_lr==1}: -1
+    fwps_rr{current_player.fwps_rr==1}: -1
+    fwps_ro{current_player.fwps_ro==1}: -1
 
 timers:
-  firewalker:
-    # Reduce log/event clutter by doing a few big ticks instead of 1s ticks
-    start_value: 3
+  fwtimer:
+    start_value: 20
     end_value: 0
+    tick_interval: 1s
     direction: down
-    tick_interval: 5s
+    start_running: true
     control_events:
-      # Hitting an off shot doesn't reset the timer, but a lit shot does
-      - event: firewalker_shots_hit{state!="off"}
+      - event: firewalker_shots_hit
         action: restart
+      - event: firewalker_shots_green_hit
+        action: stop
+
 
 shot_groups:
   firewalker_shots:
@@ -52,111 +80,127 @@ shot_groups:
 
 shots:
   firewalker_left_orbit:
-    switches: s_left_orbit
-    restart_events: s_left_orbit_active, timer_firewalker_complete
-    advance_events: mode_firewalker_started, firewalker_shots_hit
+    hit_events: sh_left_orbit_hit
     profile: firewalker_profile
     show_tokens:
-      led: light_firewalker_left_orbit
+      leds: l_left_orbit_ring
   firewalker_kickback:
-    switches: s_kickback
-    restart_events: s_kickback_active, timer_firewalker_complete
-    advance_events: mode_firewalker_started, firewalker_shots_hit
+    hit_events: sh_kickback_hit
     profile: firewalker_profile
     show_tokens:
-      led: light_firewalker_kickback
+      leds: l_kickback_ring
   firewalker_left_ramp:
-    switches: s_left_ramp_exit
-    restart_events: s_left_ramp_active, timer_firewalker_complete
-    advance_events: mode_firewalker_started, firewalker_shots_hit
+    hit_events: sh_left_ramp_hit
     profile: firewalker_profile
     show_tokens:
-      led: light_firewalker_left_ramp
+      leds: l_left_ramp_ring
   firewalker_right_ramp:
-    switches: s_right_ramp_exit
-    restart_events: s_right_ramp_active, timer_firewalker_complete
-    advance_events: mode_firewalker_started, firewalker_shots_hit
+    hit_events: sh_right_ramp_hit
     profile: firewalker_profile
     show_tokens:
-      led: light_firewalker_right_ramp
+      leds: l_right_ramp_ring
   firewalker_right_orbit:
-    switches: s_right_orbit
-    restart_events: s_right_orbit_active, timer_firewalker_complete
-    advance_events: mode_firewalker_started, firewalker_shots_hit
+    hit_events: sh_right_orbit_hit
     profile: firewalker_profile
     show_tokens:
-      led: light_firewalker_right_orbit
+      leds: l_right_orbit_ring
 
 shot_profiles:
   firewalker_profile:
     advance_on_hit: false
-    show: firewalker_show
+    show_when_disabled: false
     states:
-      - name: "off"
-      - name: "1X"
-      - name: "2X"
-      - name: "3X"
-      - name: "4X"
+      - name: red
+        show: led_6_chase_duo
+        show_tokens:
+          speed: 12
+          color: color_door_red
+          fade: 50ms
+      - name: orange
+        show: led_6_chase_duo
+        show_tokens:
+          speed: 12
+          color: color_door_orange
+          fade: 50ms
+      - name: green
+        show: led_6_chase_duo
+        show_tokens:
+          speed: 12
+          color: color_door_green
+          fade: 50ms
 
-show_player:
-  # The hurryup show plays overtop the lane show to flash any lights that are lit
-  timer_firewalker_tick{value==1}:
-    firewalker_hurryup:
+slide_player:
+  firewalker_mission_started:
+    firewalker_slide:
+      target: main
+    portrait_slide:
+      target: lcd_right
+
+slides:
+  firewalker_slide:
+    widgets:
+      - type: text
+        text: Project Firewalker
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (description)
+        style: header_md, row_main, row_main_dmd_high, col_left_anchor
+      - type: text
+        text: (score)
+        style: body_sm, row_sub, col_left_anchor, dmd_hide, num
+        opacity: 0.5
+      - widget: background_console
+
+sound_player:
+  mode_firewalker_started:
+    firewalker_music:
       action: play
-      priority: 10
-  timer_firewalker_started:
-    firewalker_hurryup:
-      action: stop
-  timer_firewalker_stopped:
-    firewalker_hurryup:
-      action: stop
+      loops: -1
+      track: music
+      mode_end_action: stop
 
-shows:
-  firewalker_hurryup:
-    - time: 0
-      lights:
-        light_firewalker: 000000
-    - time: '+1'
-      lights:
-        light_firewalker: off
-  firewalker_show:
-    - time: '+1'
-      lights:
-        (led): off
-    - time: '+1'
-      lights:
-        (led): red
-    - time: '+1'
-      lights:
-        (led): orange
-    - time: '+1'
-      lights:
-        (led): yellow
-    - time: '+1'
-      lights:
-        (led): green
+sound_pools:
+  firewalker_music:
+    sounds: firewalker_music_1, firewalker_music_2
+    track: music
+
+sounds:
+  firewalker_music_2:
+    file: mus_critpath1_combat_1.ogg
+    track: music
+    start_at: 2s
+    fade_in: 1s
+    fade_out: 2s
+  firewalker_music_1:
+    file: mus_n7_8_combat_2.ogg
+    track: music
+    start_at: 1.5s
+    fade_in: 500ms
+    fade_out: 2s
 
 widget_player:
-  logicblock_firewalker_hit:
-    firewalker_advance_widget:
-      target: main
-      widget_settings:
-        expire: 3s
+  timer_fwtimer_tick:
+    fw_timer_widget:
+      action: update
+      slide: firewalker_slide
 
 widgets:
-  firewalker_advance_widget:
+  fw_timer_widget:
     - type: text
-      text: "Firewalker: (count) Scans"
-      font_name: smallest_pixel-7
-      font_size: 9
-      z: 103
-      anchor_x: left
-      x: 2
-      anchor_y: bottom
-      y: -3
-    - type: rectangle
-      color: 000000
-      height: 6
-      width: 128
-      anchor_y: bottom
-      y: 0
+      text: (ticks_remaining)
+      style: timer_primary, row_gutter, col_right_indent
+  firewalker_portrait_rosalie:
+    - type: image
+      image: portrait_firewalker_rosalie
+  firewalker_portrait_survey_sites:
+    - type: image
+      image: portrait_firewalker_survey_sites
+  firewalker_portrait_geth_incursion:
+    - type: image
+      image: portrait_firewalker_geth_incursion
+  firewalker_portrait_prothean_site:
+    - type: image
+      image: portrait_firewalker_prothean_site
+  firewalker_portrait_volcano_station:
+    - type: image
+      image: portrait_firewalker_volcano_station
