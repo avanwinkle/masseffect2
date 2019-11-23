@@ -49,7 +49,10 @@ event_player:
 multiballs:
   platforms:
     ball_count: 2
+    ball_count_type: total
     shoot_again: -1
+    start_or_add_a_ball_events:
+      - ball_hold_captive_hold_held_ball{game.balls_in_play<3}
 
 # There is a maximum amount of time that platforms will play
 timers:
