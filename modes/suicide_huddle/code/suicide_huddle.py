@@ -40,19 +40,17 @@ class SuicideHuddle(Carousel):
     def _render_specialists(self, **kwargs):
         for mate in self._mates:
             status = self.machine.game.player["status_{}".format(mate)]
+            statusname = None
             if mate == kwargs.get("squadmate", self._specialist):
                 statusname = "highlighted"
-                self.machine.events.post("{}_{}_highlighted".format(self.name, mate))
             # Set available specialists to be specialists
             elif status == 4:
                 statusname = "default"
-                self.machine.events.post("{}_{}_default".format(self.name, mate))
             # Set dead available specialists to be dead specialists
             elif status == -1:
                 statusname = "dead"
-                self.machine.events.post("{}_{}_dead".format(self.name, mate))
-            # Can we use kwargs
-            self.machine.events.post("{}_{}_state".format(self.name, mate), state=statusname)
+            if statusname:
+                self.machine.events.post("{}_{}_{}".format(self.name, mate, statusname))
 
     def _select_item(self, **kwargs):
         # Can't select before we have actual items

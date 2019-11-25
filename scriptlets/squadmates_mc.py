@@ -113,9 +113,9 @@ class MCSquadmateHandlers(Scriptlet):
 
     def filter_specialists(self, widgets, player):
         # Infiltration: use techs
-        if player["state_machine_suicide"] == "infiltration":
+        if player["state_machine_suicide_progress"] == "infiltration":
             mates = SquadmateStatus.all_techs()
-        elif player["state_machine_suicide"] == "longwalk":
+        elif player["state_machine_suicide_progress"] == "longwalk":
             mates = SquadmateStatus.all_biotics()
         else:
             self.log.error("NO MATES for the huddle!")
