@@ -11,10 +11,10 @@
 #####
 
 event_player:
-  all_storetargets_hit_complete:
+  all_storetargets_hit_complete: check_research
     # Only enable if we can by something
-    - enable_store{current_player.mineral_iridium>=30000 or current_player.mineral_platinum>=30000 or current_player.mineral_palladium>=30000 or current_player.mineral_eezo>=4000}
-    - store_unaffordable{current_player.mineral_iridium<30000 and current_player.mineral_platinum<30000 and current_player.mineral_palladium<30000 and current_player.mineral_eezo<4000}
+  research_check_passed: enable_store
+  research_check_failed: store_unaffordable
   ball_hold_store_hold_held_ball: start_mode_store
   # Are we coming back after the store?
   mode_field_started{device.ball_holds.store_hold.balls_held>0}: store_complete
@@ -36,39 +36,48 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: lit
-        show: storelit_show
+        show: color_flashing_static
 
 shots:
-  lock_ball_for_store:
-    switch: s_kickback
+  storeshot:
     profile: storeshot_profile
     enable_events: enable_store
-    disable_events: store_complete
+    disable_events: start_mode_store
   storetarget1:
     switch: s_target1
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_1
+      color: on
   storetarget2:
     switch: s_target2
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_2
+      color: on
   storetarget3:
     switch: s_target3
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_3
+      color: on
   storetarget4:
     switch: s_target4
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_4
+      color: on
   storetarget5:
     switch: s_target5
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_5
+      color: on
 
 show_player:
   all_storetargets_hit:
@@ -78,9 +87,6 @@ show_player:
       speed: 10
 
 shows:
-  storetarget_unhit:
-    - lights:
-        (leds): black
   storetargets_flash:
     - time: 0
       lights:
@@ -88,18 +94,12 @@ shows:
     - time: '+1'
       lights:
         l_targets: black
-  storetarget_hit:
-    - lights:
-        (leds): on
   storelit_show:
     - time: 0
       lights:
         l_store: on
     - time: 1
       lights:
-        l_store: black
-  storeunlit_show:
-    - lights:
         l_store: black
 
 slide_player:
