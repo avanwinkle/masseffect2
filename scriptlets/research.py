@@ -86,6 +86,12 @@ class Research(CustomCode):
         self.machine.events.add_handler("check_research", self._on_check)
         self.machine.events.add_handler("start_mode_store", self._on_store)
         self.machine.events.add_handler("research_purchased", self._on_purchase)
+        # On reputation lane completion, check for a medigel award
+        self.machine.events.add_handler("check_award_medigel", self._check_award_medigel)
+        # On levelup medigel award, check for one to go twice!
+        self.machine.events.add_handler("_check_double_medigel", self._check_double_medigel)
+        # On drain, check for a random save
+        self.machine.events.add_handler("ball_drain", self._check_random_ball_save)
 
     def get_purchaseable_options(self):
         options = []
@@ -98,6 +104,29 @@ class Research(CustomCode):
     def _on_check(self, **kwargs):
         success = len(self.get_purchaseable_options()) > 0
         self.machine.events.post("research_check_{}".format("passed" if success else "failed"))
+
+    def _check_award_medigel(self, **kwargs):
+        chance = self.machine.game.player["research_award_medigel_perk"]
+        if chance > 0 and random() < chance:
+            self.machine.events.post("award_medigel_success")
+
+    def _check_double_medigel(self, **kwargs):
+        chance = self.machine.game.player["research_double_medigel_perk"]
+        if chance > 0 and random() < chance:
+            self.machine.events.post("double_medigel_success")
+
+    def _check_random_ball_save(self, balls: int, **kwargs):
+        chance = self.machine.game.player["research_random_ball_save_perk"]
+        self.log.info("Checking random ball save with {}% chance".format(chance * 100))
+        # Don't save if there are multiple balls in play (or none draining)
+        if balls <= 0 or self.machine.game.balls_in_play > 1:
+            return {}
+
+        if chance > 0 and random() < chance:
+            self.machine.events.post("random_ball_save_success")
+            self.machine.ball_devices["playfield"].add_ball(balls=1, player_controlled=False)
+            # This is a relay event. We can change 'balls' to prevent drain
+            return {"balls": balls - 1}
 
     def _on_purchase(self, **kwargs):
         upgrade = RESEARCH[kwargs["selection"]]

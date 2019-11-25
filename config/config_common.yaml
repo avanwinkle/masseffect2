@@ -380,28 +380,48 @@ player_vars:
   medigel:
     initial_value: 0
   minerals_total:
-    initial_value: 0
+    initial_value: 400000
   mineral_iridium:
-    initial_value: 0
+    initial_value: 100000
   mineral_palladium:
-    initial_value: 0
+    initial_value: 100000
   mineral_platinum:
-    initial_value: 0
+    initial_value: 100000
+  mineral_eezo:
+    initial_value: 100000
   # These "perks" are for purchased upgrades
-  perk_award_medigel_bool:
+  research_tick_interval_perk:
+    # Timer tick value is 1s, increases with each perk
+    initial_value: 1.4
+    value_type: float
+  research_mineral_rate_perk:
+    # Minerals are multiplied by the rate
+    initial_value: 1
+    value_type: float
+  research_ball_save_period_perk:
+    # Ball save grace period is multiplied by the perk
+    initial_value: 1.2
+    value_type: float
+  research_random_ball_save_perk:
+    # Ball save random chance equals the perk as percentage
     initial_value: 0
-  perk_double_medigel_bool:
+    value_type: float
+  research_award_medigel_perk:
+    # Random medigel award chance equals the perk as percentage
     initial_value: 0
-  perk_ball_save_period:
+    value_type: float
+  research_double_medigel_perk:
+    # Random double medigel chance equals the perk as percentage
+    initial_value: 0
+    value_type: float
+  research_power_tick_interval_perk:
+    # Timer tick value is 1s, increases with each perk
     initial_value: 1
-  perk_cooldown_rate:
-    initial_value: 1
-  perk_mineral_rate:
-    initial_value: 1
-  perk_point_multiplier:
-    initial_value: 1
-  perk_tick_interval:
-    initial_value: 1
+    value_type: float
+  research_cooldown_rate_perk:
+    # Cooldown starting value is default value * (1 - perk)
+    initial_value: 0
+    value_type: float
   # Track the score for suicide mission before starting it
   presuicide_score:
     initial_value: 0

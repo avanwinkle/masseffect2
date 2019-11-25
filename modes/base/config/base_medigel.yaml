@@ -14,13 +14,14 @@ event_player:
   ball_save_default_saving_ball: play_medigel_slide
   ball_save_recruitsave_saving_ball: play_medigel_slide
   ball_save_medigel_save_saving_ball{balls>0}: play_medigel_slide
+  levelup: check_double_medigel
 
 shots:
   # This shot lights when medigel is available
   medigel_left_shot:
     switch: s_outlane_left
     profile: medigel_profile
-    advance_events: player_shot_medigel_left_shot_enabled
+    advance_events: player_shot_medigel_left_shot_enabled, double_medigel_success
     show_tokens:
       leds: l_left_medigel
       color: a17f37
@@ -28,6 +29,7 @@ shots:
   medigel_right_shot:
     switch: s_outlane_right
     profile: medigel_profile
+    advance_events: double_medigel_success
     show_tokens:
       leds: l_right_medigel
       color: a17f37
