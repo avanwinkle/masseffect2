@@ -10,6 +10,7 @@ custom_code:
   - scriptlets.squadmates_mpf.MPFSquadmateHandlers
   - scriptlets.save_career.SaveCareer
   - scriptlets.slide_queue_player.SlideQueuePlayer
+  - scriptlets.research.Research
 
 mc_custom_code:
   - squadmates_mc.MCSquadmateHandlers

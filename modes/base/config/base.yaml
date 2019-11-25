@@ -117,7 +117,7 @@ event_player:
 
 ball_saves:
   default:
-    active_time: 20s
+    active_time: 20000 * current_player.research_ball_save_period_perk
     grace_period: 2s
     hurry_up_time: 5s
     enable_events:

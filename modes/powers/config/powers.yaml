@@ -68,7 +68,8 @@ event_player:
 
 counters:
   powers_cooldown:
-    starting_count: 10
+    # Start with a nice low ten for easy debugging. Later, bump up to... 30?
+    starting_count: 10 * (1 - current_player.research_cooldown_rate_perk)
     count_complete_value: 1
     direction: down
     count_events: cooldown_shots_hit
@@ -99,6 +100,7 @@ timers:
         action: stop
   power_active:
     start_value: 10
+    tick_interval: current_player.research_tick_interval_perk
     end_value: 0
     direction: down
     control_events:
