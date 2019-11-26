@@ -49,7 +49,6 @@ class SuicideHuddle(Carousel):
             # Set dead available specialists to be dead specialists
             elif status == -1:
                 statusname = "dead"
-
             if statusname:
                 self.machine.events.post("{}_{}_{}".format(self.name, mate, statusname))
 

@@ -235,6 +235,7 @@ modes:
   # - powers
   - reputation
   - skillshot
+  - store
   # Environments:
   - environment
   - env_bloodpack
@@ -334,13 +335,8 @@ player_vars:
     value_type: str
   available_shipupgrades:
     initial_value: 0
-  available_research:
-    initial_value: 0
   casual:
     initial_value: 1
-  current_research:
-    initial_value: " "
-    value_type: str
   credits:
     initial_value: 0
   # some values are tracked through a career but only get bonus for
@@ -379,16 +375,54 @@ player_vars:
   power:
     initial_value: " "
     value_type: str
+  power_is_bonus:
+    initial_value: 0
   medigel:
     initial_value: 0
   minerals_total:
-    initial_value: 0
+    initial_value: 400000
   mineral_iridium:
-    initial_value: 0
+    initial_value: 100000
   mineral_palladium:
-    initial_value: 0
+    initial_value: 100000
   mineral_platinum:
+    initial_value: 100000
+  mineral_eezo:
+    initial_value: 100000
+  # These "perks" are for purchased upgrades
+  research_tick_interval_perk:
+    # Timer tick value is 1s, increases with each perk
+    initial_value: 1.4
+    value_type: float
+  research_mineral_rate_perk:
+    # Minerals are multiplied by the rate
+    initial_value: 1
+    value_type: float
+  research_ball_save_period_perk:
+    # Ball save grace period is multiplied by the perk
+    initial_value: 1.2
+    value_type: float
+  research_random_ball_save_perk:
+    # Ball save random chance equals the perk as percentage
     initial_value: 0
+    value_type: float
+  research_award_medigel_perk:
+    # Random medigel award chance equals the perk as percentage
+    initial_value: 0
+    value_type: float
+  research_double_medigel_perk:
+    # Random double medigel chance equals the perk as percentage
+    initial_value: 0
+    value_type: float
+  research_power_tick_interval_perk:
+    # Timer tick value is 1s, increases with each perk
+    initial_value: 1
+    value_type: float
+  research_cooldown_rate_perk:
+    # Cooldown starting value is default value * (1 - perk)
+    initial_value: 0
+    value_type: float
+  # Track the score for suicide mission before starting it
   presuicide_score:
     initial_value: 0
   reputation:
@@ -447,7 +481,12 @@ player_vars:
     initial_value: 0
   temp_counter:
     initial_value: 0
-  research_completed:
+  upgrade_available:
+    initial_value: 0
+  upgrade_name:
+    initial_value: " "
+    value_type: str
+  upgrades_completed:
     initial_value: 0
   zaeed_path_renegade:
     initial_value: -1

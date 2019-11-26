@@ -492,6 +492,7 @@ lights:
     type: grb
     tags: light_pf, light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
     default_on_color: ff1f00  # color_shadowbroker
+  # When we get a separate light for the store, move l_store to it
 
   l_bbsquad_garrus:
     number: 2-5

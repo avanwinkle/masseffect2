@@ -1,105 +1,81 @@
 #config_version=5
 
 #####
-# SHOPPING MODE
+# FIELD SHOPPING MODE
 #
-# This mode allows the player to "spend" the money they've earned on upgrades
-# like point multipliers, ball saves, and gameplay items that will aid them
-# on the Suicide Mission.
+# This mode allows the player to unlock the store, where they can purchase
+# armor upgrades, bonus powers, and (occasionally) special rewards.
 #
-# [AVW] It's just stubbed out a bit here, doesn't actually do much yet.
+# This mode is the inclusion in Field to enable the store. There is a separate
+# mode, shopping, that is the actual purchase experienc.
 #####
 
 event_player:
-  all_storetargets_hit_complete: enable_store
-  start_store:
-    - flippers_off
-    # DEBUG: Mock out the store happening by waiting 5s and posting "complete"
-    - post_store_complete|5s
-  store_complete: flippers_on
-
-# When showing the store, block the queue until the store is complete
-queue_relay_player:
-  show_store:
-    post: start_store
-    wait_for: post_store_complete
-
-# Create a queue event when a ball is held and wait for the queue
-queue_event_player:
-  ball_hold_shopping_hold_held_ball:
-    queue_event: show_store
-    events_when_finished: store_complete
-
-# ball_holds:
-#   shopping_hold:
-#     hold_devices: bd_hold
-#     release_one_events: store_complete
-#     enable_events: enable_store
-#     disable_events: ball_hold_shopping_hold_balls_released
+  storetargets_lit_complete: check_research
+    # Only enable if we can by something
+  research_check_passed: enable_store
+  research_check_failed: store_unaffordable
+  ball_hold_store_hold_held_ball: start_mode_store
+  # Are we coming back after the store?
+  mode_field_started{device.ball_holds.store_hold.balls_held>0}: store_complete
 
 shot_groups:
-  all_storetargets:
+  storetargets:
     shots: storetarget1, storetarget2, storetarget3, storetarget4, storetarget5
-    enable_events: enable_storetargets
-    reset_events: reset_storetargets
-
-shot_profiles:
-  storetarget_profile:
-    states:
-      - name: unhit
-        show: storetarget_unhit
-      - name: hit
-        show: storetarget_hit
-  storeshot_profile:
-    advance_on_hit: false
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: storelit_show
+    reset_events: start_mode_store, store_unaffordable
 
 shots:
-  lock_ball_for_store:
-    switch: s_kickback
-    profile: storeshot_profile
+  storeshot:
+    profile: color_flashing_static
     enable_events: enable_store
-    disable_events: store_complete
+    disable_events: start_mode_store
+    show_tokens:
+      leds: l_store
+      color: 666666
   storetarget1:
     switch: s_target1
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_1
+      color: on
   storetarget2:
     switch: s_target2
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_2
+      color: on
   storetarget3:
     switch: s_target3
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_3
+      color: on
   storetarget4:
     switch: s_target4
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_4
+      color: on
   storetarget5:
     switch: s_target5
     tags: storetarget
+    profile: hit_to_lit_profile
     show_tokens:
       leds: l_standup_5
+      color: on
 
 show_player:
-  all_storetargets_hit:
+  storetargets_hit:
     storetargets_flash:
       priority: 100
-      loops: 3
-      speed: 10
+      loops: 2
+      speed: 12
 
 shows:
-  storetarget_unhit:
-    - lights:
-        (leds): black
   storetargets_flash:
     - time: 0
       lights:
@@ -107,18 +83,12 @@ shows:
     - time: '+1'
       lights:
         l_targets: black
-  storetarget_hit:
-    - lights:
-        (leds): on
   storelit_show:
     - time: 0
       lights:
         l_store: on
     - time: 1
       lights:
-        l_store: black
-  storeunlit_show:
-    - lights:
         l_store: black
 
 slide_player:
@@ -130,32 +100,23 @@ slides:
   store_enabled_slide:
     widgets:
       - type: text
-        text: PURCHASE
-        style: dmd_med
-        anchor_y: bottom
-        y: middle+2
+        text: "SHOPPING\nAVAILABLE"
+        style: header_md, row_main
       - type: text
-        text: UPGRADES
-        style: dmd_med
-        anchor_y: top
-        y: middle-2
+        text: Shoot the airlock to purchase upgrades
+        style: header_xs, row_sub
+      - type: widget
+        widget: background_console
 
 sound_player:
-  start_store:
-    shep_fave_store:
-      action: play
   sw_standuptarget_active:
     biotic_hit:
       action: play
-  all_storetargets_hit_complete|500ms:
+  storetargets_hit_complete|500ms:
     biotic_explosion:
       action: play
 
 sound_pools:
-  shep_fave_store:
-    type: random_force_all
-    sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
-    track: voice
   biotic_hit:
     sounds: biotic_hit_1, biotic_hit_2, biotic_hit_3, biotic_hit_4, biotic_hit_5, biotic_hit_6
     type: random_force_all
@@ -166,18 +127,6 @@ sound_pools:
     track: sfx
 
 sounds:
-  shep_fave_store_1:
-    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
-    track: voice
-  shep_fave_store_2:
-    file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
-    track: voice
-  shep_fave_store_3:
-    file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
-    track: voice
-  shep_fave_store_4:
-    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
-    track: voice
   biotic_hit_1:
     file: SFXGame.190.ogg
     track: sfx
@@ -207,5 +156,5 @@ sounds:
     track: sfx
 
 variable_player:
-  all_storetargets_hit:
-    credits: 10
+  storetargets_hit:
+    mineral_eezo: 10

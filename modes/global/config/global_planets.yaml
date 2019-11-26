@@ -37,18 +37,22 @@ variable_player:
     score: 200
   mineral_shots_hit:
     score: 10
+  eezo_shot_hit:
+    mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk
   mineral_shot_palladium_hit:
-    mineral_palladium: 0.0823 * machine.base_points * (1 + current_player.planets * 0.25)
+    mineral_palladium: 0.0823 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
   mineral_shot_platinum_hit:
-    mineral_platinum: 0.0571 * machine.base_points * (1 + current_player.planets * 0.25)
+    mineral_platinum: 0.0571 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
   mineral_shot_iridium_hit:
-    mineral_iridium: 0.1096 * machine.base_points * (1 + current_player.planets * 0.25)
+    mineral_iridium: 0.1096 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
   player_mineral_palladium{player_num==current_player.number}:
     mineral_total: (change)
   player_mineral_platinum{player_num==current_player.number}:
     mineral_total: (change)
   player_mineral_iridium{player_num==current_player.number}:
     mineral_total: (change)
+  player_mineral_eezo{player_num==current_player.number}:
+    mineral_total: (change) * 5
 
 flasher_player:
   sw_bumper_active:
@@ -111,6 +115,8 @@ shots:
     profile: planet_bumper_profile
     show_tokens:
       leds: l_pop_bumper_left
+  eezo_shot:
+    switch: s_target1, s_target2, s_target3, s_target4, s_target5
 
 slide_player:
   planet_scanned.2{machine.is_lcd}:

@@ -19,6 +19,16 @@ keyboard:
     switch: s_bumper_bottom
   8:
     switch: s_bumper_right
+  shift+1:
+    switch: s_target1
+  shift+2:
+    switch: s_target2
+  shift+3:
+    switch: s_target3
+  shift+4:
+    switch: s_target4
+  shift+5:
+    switch: s_target5
   l:
     event: bypass_lock_release_pulse
   n:

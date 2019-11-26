@@ -10,7 +10,19 @@
 #
 # At any given time, a bumper can have one of three powers highlighted: its own
 # (pure) power, or either hybrid powers with the other two bumpers. By extension,
-# hybrid powers can appear on 2 bumpers but pure powers only on one.
+# hybrid powers can appear on 2 bumpers but pure powers only on one. To balance
+# this, the powers cycle through the pure power between each hybrid power.
+#
+# Powers are activated by holding both flippers for 2-3 seconds and can be used
+# during any mode except the open field. Powers can NOT be activated when the
+# last/only ball in play hits the outlane.
+
+# ADRENALINE RUSH: Stop all timers for 15 seconds
+# BIOTIC CHARGE: Instantly "hit" a random lit shot
+# SINGULARITY: All lit lanes can be "hit" at standup targets
+# TECH ARMOR: 10 second ball save
+# COMBAT DRONE: Add-a-ball (takes 2s to activate)
+# TACTICAL CLOAK: Holding one flipper, press the other to rotate lit shots
 #####
 
 mode:
@@ -21,17 +33,17 @@ mode:
 
 event_player:
   # Enumerate each profile separately because they pass the state name as an arg
-  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled and not current_player.power_is_bonus}:
     award_power:
       power:
         value: (state)
@@ -52,14 +64,19 @@ event_player:
         value: current_player.shot_cooldown_shot_tech
         type: int
 
+# Looking for variable_player? Probably in the python code
+
 counters:
   powers_cooldown:
-    starting_count: 10
+    # Start with a nice low ten for easy debugging. Later, bump up to... 30?
+    starting_count: 10 * (1 - current_player.research_cooldown_rate_perk)
     count_complete_value: 1
     direction: down
     count_events: cooldown_shots_hit
     disable_on_complete: true
-    restart_events: award_power
+    restart_events:
+      - award_power
+      - logicblock_powers_cooldown_complete{current_player.power_is_bonus==1}
     persist_state: true
 
 multiballs:
@@ -83,6 +100,7 @@ timers:
         action: stop
   power_active:
     start_value: 10
+    tick_interval: current_player.research_tick_interval_perk
     end_value: 0
     direction: down
     control_events:

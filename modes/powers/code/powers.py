@@ -7,11 +7,14 @@ SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dr
 POWER_NAMES = {"adrenaline": "Adrenaline Rush"}
 TEST_POWER = None
 
+
 def filter_enabled_shots(x):
     return x.enabled
 
+
 def filter_enabled_and_lit_shots(x):
     return x.enabled and x.state_name == "lit"
+
 
 class Powers(Mode):
     def __init__(self, machine, config, name, path):
@@ -39,7 +42,6 @@ class Powers(Mode):
         # If we have a power already available, add it to the slide
         if self.player["power"] in self.power_handlers:
             self._add_power_to_main_slide(self.player["power"])
-
 
     def _activate_power(self, **kwargs):
         power = self.player["power"]
@@ -77,6 +79,7 @@ class Powers(Mode):
 
     def _complete(self, **kwargs):
         self.player["power"] = " "
+        self.player["power_is_bonus"] = 0
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
         self.machine.events.post("power_activation_complete")

@@ -1,0 +1,173 @@
+#config_version=5
+
+#####
+# STORE MODE
+#
+# This mode allows the player to purchase upgrades and bonus powers.
+#####
+
+mode:
+  start_events: start_mode_store
+  stop_events: stop_mode_store, ball_will_end, store_item_selected
+  events_when_started: flippers_off
+  events_when_stopped: flippers_on
+  code: store.Store
+  priority: 1100
+
+mode_settings:
+  selectable_items: cancel
+  select_item_events: flipper_cancel
+  next_item_events: s_flipper_right_inactive
+  previous_item_events: s_flipper_left_inactive
+
+event_player:
+  # TESTING: we need a way to cancel!
+  flipper_cancel: stop_mode_store
+
+slide_player:
+  mode_store_started:
+    store_intro_slide:
+      action: play
+      expire: 3s
+      priority: 2
+
+    store_slide:
+      action: play
+      priority: 1
+
+slides:
+  store_intro_slide:
+    - type: text
+      text: "Research\nUpgrades"
+      style: header_md, row_main
+    - widget: background_console
+  store_slide:
+    - type: text
+      key: purchase_tick_interval
+      text: Heavy Skin Weave
+      style: specialist
+      animations:
+        store_tick_interval_highlighted: specialist_select
+        store_tick_interval_default: specialist_deselect
+    - type: text
+      key: purchase_mineral_rate
+      text: Argus Scanner Array
+      style: specialist
+      animations:
+        store_mineral_rate_highlighted: specialist_select
+        store_mineral_rate_default: specialist_deselect
+    - type: text
+      key: purchase_ball_save_period
+      text: Damage Protection
+      style: specialist
+      animations:
+        store_ball_save_period_highlighted: specialist_select
+        store_ball_save_period_default: specialist_deselect
+    - type: text
+      key: purchase_random_ball_save
+      text: Redundant Field Generator
+      style: specialist
+      animations:
+        store_random_ball_save_highlighted: specialist_select
+        store_random_ball_save_default: specialist_deselect
+    - type: text
+      key: purchase_award_medigel
+      text: Medigel Capacity
+      style: specialist
+      animations:
+        store_award_medigel_highlighted: specialist_select
+        store_award_medigel_default: specialist_deselect
+    - type: text
+      key: purchase_double_medigel
+      text: Trauma Module
+      style: specialist
+      animations:
+        store_double_medigel_highlighted: specialist_select
+        store_double_medigel_default: specialist_deselect
+    - type: text
+      key: purchase_power_tick_interval
+      text: Biotic Duration
+      style: specialist
+      animations:
+        store_power_tick_interval_highlighted: specialist_select
+        store_power_tick_interval_default: specialist_deselect
+    - type: text
+      key: purchase_cooldown_rate
+      text: Biotic Cooldown
+      style: specialist
+      animations:
+        store_cooldown_rate_highlighted: specialist_select
+        store_cooldown_rate_default: specialist_deselect
+    - type: text
+      key: purchase_nothing
+      text: Purchase Nothing
+      style: specialist
+      animations:
+        store_nothing_highlighted: specialist_select
+        store_nothing_default: specialist_deselect
+    - widget: background_console
+
+widget_player:
+  minor_research_available:
+    research_widget:
+      action: add
+      slide: store_slide
+      widget_settings:
+        x: 250
+  minor_research_unavailable:
+    research_widget:
+      action: add
+      slide: store_slide
+      widget_settings:
+        x: 250
+  major_research_available:
+    research_widget:
+      action: add
+      slide: store_slide
+      widget_settings:
+        x: 500
+  major_research_unavailable:
+    research_widget:
+      action: add
+      slide: store_slide
+      widget_settings:
+        x: 500
+
+widgets:
+  research_widget:
+    - type: text
+      text: (title)
+      style: header_xs, row_super
+    - type: text
+      text: (description)
+      style: body_sm, row_main
+    - type: text
+      text: (cost)
+      style: body_xs, row_sub, num
+    - type: text
+      text: (mineral)
+      style: body_xs, row_sub_under
+
+sound_player:
+  # Use the research_options event to ensure MC listens for it?
+  mode_store_started: shep_favorite_store
+
+sound_pools:
+  shep_favorite_store:
+    type: random_force_all
+    sounds: shep_fave_store_1, shep_fave_store_2, shep_fave_store_3, shep_fave_store_4
+    track: voice
+
+sounds:
+  shep_fave_store_1:
+    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
+    track: voice
+  shep_fave_store_2:
+    file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
+    track: voice
+  shep_fave_store_3:
+    file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
+    track: voice
+  shep_fave_store_4:
+    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
+    track: voice
