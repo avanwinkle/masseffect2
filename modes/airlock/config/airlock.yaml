@@ -122,8 +122,13 @@ ball_holds:
     balls_to_hold: 1
     debug: true
     hold_devices: bd_lock
-    enable_events: enable_store
-    disable_events: store_complete
+    # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
+    enable_events:
+      - enable_store
+      - mode_field_started{current_player.store_enabled>0}
+    disable_events:
+      - store_complete
+      - stop_mode_field
     release_all_events: store_complete
 
 multiball_locks:

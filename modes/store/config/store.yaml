@@ -20,17 +20,14 @@ mode_settings:
   next_item_events: s_flipper_right_inactive
   previous_item_events: s_flipper_left_inactive
 
-event_player:
-  # TESTING: we need a way to cancel!
-  flipper_cancel: stop_mode_store
-
 slide_player:
   mode_store_started:
     store_intro_slide:
       action: play
       expire: 3s
       priority: 2
-
+    store_portrait:
+      target: lcd_right
     store_slide:
       action: play
       priority: 1
@@ -41,6 +38,10 @@ slides:
       text: "Research\nUpgrades"
       style: header_md, row_main
     - widget: background_console
+  store_portrait:
+    widgets:
+      - type: image
+        image: portrait_store
   store_slide:
     - type: text
       key: purchase_tick_interval

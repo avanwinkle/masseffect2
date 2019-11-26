@@ -24,6 +24,7 @@ config:
   - global_recruit.yaml
   - global_shadowbroker.yaml
   - global_sounds.yaml
+  - global_shopping.yaml
   - global_upgrades.yaml
 
 event_player:

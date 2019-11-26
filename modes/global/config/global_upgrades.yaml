@@ -131,7 +131,6 @@ slide_player:
     shipupgrade_ready_slide:
       expire: 7s  # Levelup slide is 4s, so this needs to be longer
 
-
 slides:
   upgrade_slide:
     - type: text
@@ -157,6 +156,8 @@ slides:
 sound_player:
   collect_upgrade_shot_hit: upgrade_collected_sound
   capture_shipupgrade_shot_hit: upgrade_collected_sound
+  # This sound is triggered by the store, but same idea
+  research_purchased{selection!="nothing"}: upgrade_collected_sound
 
 sound_pools:
   upgrade_collected_sound:
@@ -193,15 +194,6 @@ sounds:
     file: en_us_player_f_ss_global_player_female_00333999_f.ogg
     track: voice
     max_queue_time: 2s
-  edi_new_upgrades_available_at_research:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00345536_m.ogg
-    track: voice
-  edi_research_station_has_new_information:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00345537_m.ogg
-    track: voice
-  edi_new_upgrades_available_in_cabin:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
-    track: voice
 
 widgets:
   portrait_upgrades:

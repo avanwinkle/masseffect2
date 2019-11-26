@@ -1,23 +1,38 @@
 #config_version=5
 
 #####
-# FIELD SHOPPING MODE
+# GLOBAL SHOPPING MODE
 #
 # This mode allows the player to unlock the store, where they can purchase
 # armor upgrades, bonus powers, and (occasionally) special rewards.
 #
-# This mode is the inclusion in Field to enable the store. There is a separate
-# mode, shopping, that is the actual purchase experienc.
+# This mode is the inclusion in Global to unlock the store, though the store
+# can only be accessed from Field. There is a separate mode, "shopping",
+# that is the actual purchase experience.
 #####
 
 event_player:
   storetargets_lit_complete: check_research
-    # Only enable if we can by something
+  # Only enable if we can by something
   research_check_passed: enable_store
   research_check_failed: store_unaffordable
   ball_hold_store_hold_held_ball: start_mode_store
   # Are we coming back after the store?
   mode_field_started{device.ball_holds.store_hold.balls_held>0}: store_complete
+  enable_store:
+    queue_slide:
+      slide: store_available_slide
+      portrait: upgrades  # TODO: Get a portrait for the store
+
+variable_player:
+  storetargets_hit:
+    mineral_eezo: 10
+  research_check_passed:
+    store_enabled: 1
+  store_complete:
+    store_enabled:
+      action: set
+      int: 0
 
 shot_groups:
   storetargets:
@@ -27,8 +42,13 @@ shot_groups:
 shots:
   storeshot:
     profile: color_flashing_static
-    enable_events: enable_store
-    disable_events: start_mode_store
+    # TODO: Use the store_hold enabled/disabled events to prevent duplication of conditions?
+    enable_events:
+      - enable_store{mode.field.active}
+      - mode_field_started{current_player.store_enabled>0}
+    disable_events:
+      - start_mode_store
+      - stop_mode_field
     show_tokens:
       leds: l_store
       color: 666666
@@ -91,20 +111,15 @@ shows:
       lights:
         l_store: black
 
-slide_player:
-  start_store:
-    store_enabled_slide:
-      expire: 3s
-
 slides:
-  store_enabled_slide:
+  store_available_slide:
     widgets:
       - type: text
-        text: "SHOPPING\nAVAILABLE"
+        text: "RESEARCH\nAVAILABLE"
         style: header_md, row_main
       - type: text
-        text: Shoot the airlock to purchase upgrades
-        style: header_xs, row_sub
+        text: "Shoot the airlock\nto purchase upgrades"
+        style: header_xs, row_sub_under
       - type: widget
         widget: background_console
 
@@ -112,9 +127,10 @@ sound_player:
   sw_standuptarget_active:
     biotic_hit:
       action: play
-  storetargets_hit_complete|500ms:
-    biotic_explosion:
+  play_queued_slide_store_available_slide:
+    edi_upgrade_available:
       action: play
+      max_queue_time: 2s
 
 sound_pools:
   biotic_hit:
@@ -125,6 +141,10 @@ sound_pools:
     sounds: biotic_explosion_1, biotic_explosion_2, biotic_explosion_3
     type: random_force_all
     track: sfx
+  edi_upgrade_available:
+    sounds: edi_new_upgrades_available_at_research, edi_research_station_has_new_information, edi_new_upgrades_available_in_cabin
+    type: random_force_all
+    track: voice
 
 sounds:
   biotic_hit_1:
@@ -154,7 +174,12 @@ sounds:
   biotic_explosion_3:
     file: SFXGame.846.ogg
     track: sfx
-
-variable_player:
-  storetargets_hit:
-    mineral_eezo: 10
+  edi_new_upgrades_available_at_research:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345536_m.ogg
+    track: voice
+  edi_research_station_has_new_information:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345537_m.ogg
+    track: voice
+  edi_new_upgrades_available_in_cabin:
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
+    track: voice

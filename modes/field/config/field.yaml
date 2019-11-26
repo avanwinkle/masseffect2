@@ -47,7 +47,6 @@ config:
   - field_firewalker.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
-  - field_shopping.yaml
 
 light_player:
   mode_field_started:

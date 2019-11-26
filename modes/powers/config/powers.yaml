@@ -28,6 +28,8 @@
 mode:
   start_events: start_mode_powers
   stop_events: stop_mode_powers, stop_missions, mode_type_mission_stopped
+  events_when_started: start_mode_frenzy
+  events_when_stopped: stop_mode_frenzy
   priority: 800
   code: powers.Powers
 
@@ -68,16 +70,20 @@ event_player:
 
 counters:
   powers_cooldown:
-    # Start with a nice low ten for easy debugging. Later, bump up to... 30?
-    starting_count: 10 * (1 - current_player.research_cooldown_rate_perk)
+    # Start with a nice low number for easy debugging. Later, bump up to... 100?
+    starting_count: 50 * (1 - current_player.research_cooldown_rate_perk)
     count_complete_value: 1
     direction: down
-    count_events: cooldown_shots_hit
+    count_events: frenzy_hit
     disable_on_complete: true
     restart_events:
       - award_power
       - logicblock_powers_cooldown_complete{current_player.power_is_bonus==1}
     persist_state: true
+    # Frenzy hits are a single increment. Pop hits are 10x!
+    control_events:
+      - event: cooldown_shots_hit
+        subtract: 10
 
 multiballs:
   combat_drone:
