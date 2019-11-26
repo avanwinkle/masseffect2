@@ -37,7 +37,7 @@ event_player:
   # If we are starting a new game, give some instructional audio
   # If we are starting a game and have recruited, different sounds
   #### DISABLE for faster playtesting
-  play_intro_show{current_player.squadmates_count>4}:
+  play_intro_show{current_player.squadmates_count>4 and device.achievements.collectorship.state=="disabled"}:
     - play_gameintro_recruits_long{current_player.ball==1}
     - play_gameintro_recruits_short{current_player.ball==3}
   mode_base_will_stop:

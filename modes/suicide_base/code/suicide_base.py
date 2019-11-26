@@ -18,15 +18,15 @@ class SuicideBase(Mode):
         self.player["status_{}".format(squadmate)] = status
 
     def _kill_squadmate(self, **kwargs):
-        mate = kwargs["squadmate"]
-        if mate == "specialist":
+        target = kwargs.get("squadmate", "random")
+        if target == "specialist":
             mate = self.player["specialist"]
-        elif mate == "random":
+        elif target == "random":
             avail_mates = SquadmateStatus.available_mates(self.player, include_specialist=False)
             # If the specialist is the only mate left, kill them even if include_specialist is false
             mate = random.choice(avail_mates) if avail_mates else self.player["specialist"]
 
-        self.info_log("Found a {} mate to kill: {}".format(kwargs["squadmate"], mate))
+        self.info_log("Found a {} mate to kill: {}".format(target, mate))
         self._set_status(mate, -1)
         self.player["squadmates_count"] -= 1
         self.player["killed_squadmate"] = mate

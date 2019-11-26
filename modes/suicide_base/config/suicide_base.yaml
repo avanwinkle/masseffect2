@@ -12,8 +12,8 @@ mode:
   start_events: start_mode_suicide_base
   # Don't use stop_wizards for suicide_base, so it can block the ball_ending queue event
   stop_events: suicidemission_complete, suicidemission_failed, suicidemission_drained
-  events_when_started: mode_type_wizard_started, enable_fullorbit, start_mode_harbinger
-  events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes, stop_mode_harbinger
+  events_when_started: mode_type_wizard_started, enable_fullorbit
+  events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes
   code: suicide_base.SuicideBase
   priority: 2000
   use_wait_queue: true
@@ -65,7 +65,7 @@ event_player:
     kill_squadmate{current_player.state_machine_suicide_progress=="infiltration" or current_player.state_machine_suicide_progress=="longwalk"}:
       squadmate: specialist
     # If the ball drains and we don't need to kill a squadmate, handle that here
-    suicide_drained{current_player.state_machine_suicide_progress!="infiltration" and current_player.state_machine_suicide_progress!="longwalk"}: {}
+    squadmate_killed_complete{current_player.state_machine_suicide_progress!="infiltration" and current_player.state_machine_suicide_progress!="longwalk"}: {}
 
 # Always force the ball to eject the plunger lane, ha ha!
 coil_player:
@@ -98,7 +98,7 @@ ball_saves:
       - mode_suicide_tubes_started
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: 1
-    active_time: 8s
+    active_time: 8 if current_player.suicide_continuing else 20
     auto_launch: true
 
 ball_holds:
@@ -185,14 +185,41 @@ show_player:
     tubes_to_final_show:
       action: play
       loops: 0
-  suicide_huddle_specialist_selected:
-    recruits_specialist_show:
-      priority: 1000
-      show_tokens:
-        leds: l_bbsquad_zaeed
   mode_type_suicide_stopped:
     recruits_specialist_show:
       action: stop
+  suicide_huddle_specialist_selected.2{squadmate=="garrus"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_garrus
+  suicide_huddle_specialist_selected.1{squadmate=="jack"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_jack
+  suicide_huddle_specialist_selected.2{squadmate=="jacob"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_jacob
+  suicide_huddle_specialist_selected.2{squadmate=="miranda"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_miranda
+  suicide_huddle_specialist_selected.2{squadmate=="mordin"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_mordin
+  suicide_huddle_specialist_selected.2{squadmate=="samara"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_samara
+  suicide_huddle_specialist_selected.2{squadmate=="tali"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_tali
+  suicide_huddle_specialist_selected.2{squadmate=="thane"}:
+    recruits_specialist_show:
+      show_tokens:
+        leds: l_bbsquad_thane
 
 shows:
   infiltration_outro_show:

@@ -30,6 +30,9 @@ event_player:
   reaper_hp:
     - play_reaper_damage{value>0}
     - play_reaper_destroyed{value<=0}
+  # Kill a squadmate to save the player
+  ball_save_reaper_squadmate_save_saving_ball:
+    - kill_squadmate
 
 # We can be saved by 2 squadmates per ball. We control the save in suicide_final so it doesn't
 # reset itself everytime suicide_reaper starts.

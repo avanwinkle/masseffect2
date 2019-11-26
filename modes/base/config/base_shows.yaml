@@ -138,6 +138,17 @@ shows:
           color: (color2)
           fade: 1s
         l_null: (color1)
+  highlight_specialist:
+    - time: 0
+      lights:
+        (led):
+          color: color_shields
+          fade: 1s
+    - time: '+1'
+      lights:
+        (led):
+          color: color_shields%20
+          fade: 500ms
 
 shot_profiles:
   color_on:

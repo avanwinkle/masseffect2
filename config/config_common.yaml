@@ -509,6 +509,8 @@ named_colors:
   color_zaeed: ff7700
   # ME Palette
   color_shields: 0066FF
+  color_shields_half: 004DC0
+  color_shields_quarter: "003380"
   color_armor: FFCC00
   color_barrier: 5500FF
   color_health: "990000"
@@ -521,6 +523,8 @@ named_colors:
   # Other Modes
   color_arrival: 24c8ff
   color_collectors: ff2200
+  color_collectors_half: C01A00
+  color_collectors_quarter: "801100"
   color_harbinger: FF8811  # F70 was close, but a touch too deep
   color_husk: 00101E
   color_overlord: 22FF33

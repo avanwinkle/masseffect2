@@ -53,11 +53,15 @@ random_event_player:
       - play_huddle_intro_show_lw_no
 
 light_player:
-  mode_suicide_infiltration_started:
+  mode_suicide_huddle_started:
+    light_backwall_gi: off
     light_backwall_ambient:
-      color: color_collectors
-    light_backwall_gi:
+      color: color_collectors_quarter
+      fade: 1s
+  suicide_huddle_specialist_selected:
+    light_backwall_ambient:
       color: off
+      fade: 1s
 
 slide_player:
   play_huddle_slide_infiltration:

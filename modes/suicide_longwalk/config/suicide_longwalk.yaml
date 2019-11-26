@@ -179,13 +179,13 @@ shot_profiles:
         show: led_6_chase_duo
         speed: 6
         show_tokens:
-          color: color_shields%50
+          color: color_shields_half
           fade: 500ms
       - name: med
         show: led_6_chase_duo
         speed: 8
         show_tokens:
-          color: color_shields%80
+          color: color_shields_half
           fade: 500ms
       - name: high
         show: led_6_chase
@@ -253,25 +253,26 @@ show_player:
       show_tokens:
         leds: l_backwall_gi
         color: color_health
-  logicblock_swarmpaths_hit:
-    pulse_playfield:
-      loops: 0
-      speed: 0.5
-      show_tokens:
-        color: color_shields%20
+  # logicblock_swarmpaths_hit:
+  #   pulse_playfield:
+  #     loops: 0
+  #     speed: 0.5
+  #     show_tokens:
+  #       color: color_shields_quarter
   mode_suicide_longwalk_started:
-    led_10_chase:
-      speed: 4
+    led_10_chase_ambient:
+      speed: 2
       show_tokens:
-        color: color_shields
+        color: "001100"
+        ambient: color_shields_half
         ledring: l_backwall_gi
-        fade: 100ms
-    dual_color_pulse:
-      speed: 0.2
+        fade: 1s
+    led_14_curve:
+      priority: 100
       show_tokens:
-        color1: color_shields%30
-        color2: color_shields%80
-        leds: light_backwall_ambient
+        color: color_collectors_half
+        ledring: l_backwall_ambient
+        fade: 2s
 
 light_player:
   mode_suicide_longwalk_started:

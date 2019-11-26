@@ -138,9 +138,10 @@ class MPFSquadmateHandlers(CustomCode):
 
         # If a callback mate is specified, play that too
         if action == "play" and kwargs.get("callback_mate"):
-            # EXCEPT for there's no Shepard callback for Miranda's death
+            # EXCEPT for there's no Shepard callback for Miranda's death...
             if kwargs.get("callback_mate") == "shepard" and squadmate == "miranda":
-                pass
+                # ...so post the same completed_event as if there was no callback
+                self.machine.events.post(completed_event)
             else:
                 cb_sound_name = SOUND_NAME_FORMATS["{}_callback".format(kwargs.get("sound"))].format(
                     squadmate=squadmate, callback_mate=kwargs.get("callback_mate"), variant=variant)
