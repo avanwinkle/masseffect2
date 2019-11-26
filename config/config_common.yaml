@@ -380,27 +380,27 @@ player_vars:
   medigel:
     initial_value: 0
   minerals_total:
-    initial_value: 400000
+    initial_value: 0
   mineral_iridium:
-    initial_value: 100000
+    initial_value: 0
   mineral_palladium:
-    initial_value: 100000
+    initial_value: 0
   mineral_platinum:
-    initial_value: 100000
+    initial_value: 0
   mineral_eezo:
-    initial_value: 100000
+    initial_value: 0
   # These "perks" are for purchased upgrades
   research_tick_interval_perk:
     # Timer tick value is 1s, increases with each perk
-    initial_value: 1.4
+    initial_value: 1.0
     value_type: float
   research_mineral_rate_perk:
     # Minerals are multiplied by the rate
-    initial_value: 1
+    initial_value: 1.0
     value_type: float
   research_ball_save_period_perk:
     # Ball save grace period is multiplied by the perk
-    initial_value: 1.2
+    initial_value: 1.0
     value_type: float
   research_random_ball_save_perk:
     # Ball save random chance equals the perk as percentage
@@ -416,7 +416,7 @@ player_vars:
     value_type: float
   research_power_tick_interval_perk:
     # Timer tick value is 1s, increases with each perk
-    initial_value: 1
+    initial_value: 1.0
     value_type: float
   research_cooldown_rate_perk:
     # Cooldown starting value is default value * (1 - perk)
