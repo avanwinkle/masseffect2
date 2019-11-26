@@ -38,7 +38,7 @@ slide_player:
 slides:
   store_intro_slide:
     - type: text
-      text: Research Projects
+      text: "Research\nUpgrades"
       style: header_md, row_main
     - widget: background_console
   store_slide:
@@ -150,7 +150,7 @@ widgets:
 
 sound_player:
   # Use the research_options event to ensure MC listens for it?
-  research_options: shep_favorite_store
+  mode_store_started: shep_favorite_store
 
 sound_pools:
   shep_favorite_store:

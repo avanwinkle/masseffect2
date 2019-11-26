@@ -19,6 +19,9 @@ mode:
   stop_events: stop_mode_reputation
   priority: 600
 
+event_player:
+  reputation_build_shots_complete: check_award_medigel
+
 variable_player:
   paragon_shot_unlit_hit:
     paragon: 1

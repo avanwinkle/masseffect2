@@ -11,7 +11,7 @@
 #####
 
 event_player:
-  all_storetargets_hit_complete: check_research
+  storetargets_lit_complete: check_research
     # Only enable if we can by something
   research_check_passed: enable_store
   research_check_failed: store_unaffordable
@@ -20,29 +20,18 @@ event_player:
   mode_field_started{device.ball_holds.store_hold.balls_held>0}: store_complete
 
 shot_groups:
-  all_storetargets:
+  storetargets:
     shots: storetarget1, storetarget2, storetarget3, storetarget4, storetarget5
-    reset_events: store_complete, store_unaffordable
-
-shot_profiles:
-  storetarget_profile:
-    # TBD: lit when enabled, off when hit? Or off until hit?
-    states:
-      - name: lit
-        show: storetarget_lit
-      - name: hit
-        show: storetarget_hit
-  storeshot_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: color_flashing_static
+    reset_events: start_mode_store, store_unaffordable
 
 shots:
   storeshot:
-    profile: storeshot_profile
+    profile: color_flashing_static
     enable_events: enable_store
     disable_events: start_mode_store
+    show_tokens:
+      leds: l_store
+      color: 666666
   storetarget1:
     switch: s_target1
     tags: storetarget
@@ -80,11 +69,11 @@ shots:
       color: on
 
 show_player:
-  all_storetargets_hit:
+  storetargets_hit:
     storetargets_flash:
       priority: 100
-      loops: 3
-      speed: 10
+      loops: 2
+      speed: 12
 
 shows:
   storetargets_flash:
@@ -120,13 +109,10 @@ slides:
         widget: background_console
 
 sound_player:
-  start_store:
-    shep_fave_store:
-      action: play
   sw_standuptarget_active:
     biotic_hit:
       action: play
-  all_storetargets_hit_complete|500ms:
+  storetargets_hit_complete|500ms:
     biotic_explosion:
       action: play
 
@@ -170,5 +156,5 @@ sounds:
     track: sfx
 
 variable_player:
-  all_storetargets_hit:
-    credits: 10
+  storetargets_hit:
+    mineral_eezo: 10

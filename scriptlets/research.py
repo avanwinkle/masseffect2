@@ -89,7 +89,7 @@ class Research(CustomCode):
         # On reputation lane completion, check for a medigel award
         self.machine.events.add_handler("check_award_medigel", self._check_award_medigel)
         # On levelup medigel award, check for one to go twice!
-        self.machine.events.add_handler("_check_double_medigel", self._check_double_medigel)
+        self.machine.events.add_handler("check_double_medigel", self._check_double_medigel)
         # On drain, check for a random save
         self.machine.events.add_handler("ball_drain", self._check_random_ball_save)
 
@@ -116,6 +116,9 @@ class Research(CustomCode):
             self.machine.events.post("double_medigel_success")
 
     def _check_random_ball_save(self, balls: int, **kwargs):
+        # If we drain during a ball search or tilt, there may not be a player
+        if not self.machine.game or not self.machine.game.player:
+            return
         chance = self.machine.game.player["research_random_ball_save_perk"]
         self.log.info("Checking random ball save with {}% chance".format(chance * 100))
         # Don't save if there are multiple balls in play (or none draining)
