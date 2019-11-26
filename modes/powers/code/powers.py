@@ -4,7 +4,6 @@ from mpf.core.mode import Mode
 from mpf.devices.shot_group import ShotGroup
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dropbank", "hitbank"]
-POWER_NAMES = {"adrenaline": "Adrenaline Rush"}
 TEST_POWER = None
 
 
@@ -38,13 +37,18 @@ class Powers(Mode):
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
         self.add_mode_event_handler('mode_powers_will_stop', self._complete)
+        player = self.machine.game.player
 
         # If we have a power already available, add it to the slide
-        if self.player["power"] in self.power_handlers:
-            self._add_power_to_main_slide(self.player["power"])
+        if player["power"] in self.power_handlers:
+            # self._add_power_to_main_slide(self.player["power"])
+            self.machine.events.post("power_awarded",
+                                     power=player["power"],
+                                     power_name=self._get_power_name(player["power"]),
+                                     is_restore=True)
 
     def _activate_power(self, **kwargs):
-        power = self.player["power"]
+        power = self.machine.game.player["power"]
         self.log.debug("Activating power {}".format(power))
         try:
             self.power_handlers[power]()
@@ -53,33 +57,18 @@ class Powers(Mode):
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
-    def _add_power_to_main_slide(self, power, style="available"):
-        widget_evt = {
-            "settings": {
-                "power_{}_{}".format(style, power): {
-                    "key": "power_available_widget",
-                    "action": "update",
-                    "slide": "recruit_mission_slide",
-                },
-            },
-            "context": "powers",
-            "calling_context": "power_awarded",
-            "priority": 100,
-        }
-        self.machine.events.post("widgets_play", **widget_evt)
-
     def _award_power(self, **kwargs):
         power = TEST_POWER or kwargs["power"]
         # variable_player can't sub values, so do it manually
-        self.player["power"] = power
+        self.machine.game.player["power"] = power
         self.machine.events.post("power_awarded",
                                  power=power,
-                                 power_name=self.machine.config['text_strings']['power_{}'.format(power)])
-        self._add_power_to_main_slide(power)
+                                 power_name=self._get_power_name(power))
 
     def _complete(self, **kwargs):
-        self.player["power"] = " "
-        self.player["power_is_bonus"] = 0
+        player = self.machine.game.player
+        player["power"] = " "
+        player["power_is_bonus"] = 0
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
         self.machine.events.post("power_activation_complete")
@@ -100,6 +89,9 @@ class Powers(Mode):
         if shots:
             return shots
         raise IndexError
+
+    def _get_power_name(self, power):
+        return self.machine.config['text_strings']['power_{}'.format(power)]
 
     # SPECIFIC POWERS
     def _activate_adrenaline(self):

@@ -52,7 +52,7 @@ event_player:
         type: str
   timer_activate_power_complete: activate_power
   # Coerce initial widgets
-  slide_powers_slide_created:
+  enable_powers:
     player_shot_cooldown_shot_biotic:
       value:
         value: current_player.shot_cooldown_shot_biotic
@@ -65,13 +65,18 @@ event_player:
       value:
         value: current_player.shot_cooldown_shot_tech
         type: int
+  logicblock_powers_cooldown_hit:
+    update_cooldown_progress:
+      complete:
+        type: int
+        value: (1 - count / machine.base_cooldown) * 115 # Multiply by 115, the height
 
 # Looking for variable_player? Probably in the python code
 
 counters:
   powers_cooldown:
     # Start with a nice low number for easy debugging. Later, bump up to... 100?
-    starting_count: 50 * (1 - current_player.research_cooldown_rate_perk)
+    starting_count: machine.base_cooldown * (1 - current_player.research_cooldown_rate_perk)
     count_complete_value: 1
     direction: down
     count_events: frenzy_hit
@@ -83,7 +88,8 @@ counters:
     # Frenzy hits are a single increment. Pop hits are 10x!
     control_events:
       - event: cooldown_shots_hit
-        subtract: 10
+        action: subtract
+        value: 1 # 10
 
 multiballs:
   combat_drone:
@@ -111,13 +117,6 @@ timers:
     direction: down
     control_events:
       - event: power_activation_success{power!="charge"}
-        action: restart
-  powers_slide_timer:
-    start_value: 2
-    end_value: 0
-    direction: down
-    control_events:
-      - event: logicblock_powers_cooldown_hit
         action: restart
 
 ball_saves:
@@ -240,11 +239,7 @@ show_player:
       action: stop
 
 slide_player:
-  timer_powers_slide_timer_started: powers_slide
-  timer_powers_slide_timer_complete:
-    powers_slide:
-      action: remove
-  power_awarded:
+  power_awarded{not is_restore}:
     power_awarded_slide:
       expire: 4s
 
@@ -261,88 +256,77 @@ slides:
       style: header_md, row_main, col_left_indent
 
 widget_player:
+  enable_powers:
+    power_widget_mask:
+      action: add
+    power_cooldown_widget:
+      action: add
   mode_powers_will_stop:
     power_available_widget:
       action: remove
   power_activation_complete:
     power_available_widget:
       action: remove
-  logicblock_powers_cooldown_hit:
-    power_cooldown_widget:
-      action: update
-      slide: powers_slide
   player_shot_cooldown_shot_biotic{value==0 or value==2}:
     power_widget_singularity:
-      key: power_widget_biotic
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 2
-      widget_settings:
-        style: power_biotic, body_sm
   player_shot_cooldown_shot_biotic{value==1}:
     power_widget_charge:
-      key: power_widget_biotic
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 1
-      widget_settings:
-        style: power_biotic, body_sm
   player_shot_cooldown_shot_biotic{value==3}:
     power_widget_armor:
-      key: power_widget_biotic
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 3
-      widget_settings:
-        style: power_biotic, body_sm
   player_shot_cooldown_shot_combat{value==0 or value==2}:
     power_widget_adrenaline:
-      key: power_widget_combat
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 5
-      widget_settings:
-        style: power_combat, body_sm
   player_shot_cooldown_shot_combat{value==1}:
     power_widget_cloak:
-      key: power_widget_combat
+      key: power_widget
       action: update
-      slide: powers_slide
-      priority: 4
       widget_settings:
-        style: power_combat, body_sm
+        image: power_cloak
+      # slide: powers_slide
+      priority: 4
   player_shot_cooldown_shot_combat{value==3}:
     power_widget_charge:
-      key: power_widget_combat
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 6
-      widget_settings:
-        style: power_combat, body_sm
   player_shot_cooldown_shot_tech{value==0 or value==2}:
     power_widget_drone:
-      key: power_widget_tech
+      key: power_widget
       action: update
-      slide: powers_slide
+      # slide: powers_slide
       priority: 8
-      widget_settings:
-        style: power_tech, body_sm
   player_shot_cooldown_shot_tech{value==1}:
     power_widget_armor:
-      key: power_widget_tech
+      key: power_widget
       action: update
-      slide: powers_slide
-      priority: 7
       widget_settings:
-        style: power_tech, body_sm
+        image: power_armor
+      # slide: powers_slide
+      priority: 7
   player_shot_cooldown_shot_tech{value==3}:
     power_widget_cloak:
-      key: power_widget_tech
+      key: power_widget
       action: update
-      slide: powers_slide
-      priority: 9
       widget_settings:
-        style: power_tech, body_sm
+        image: power_cloak
+      # slide: powers_slide
+      priority: 9
   timer_activate_power_started:
     power_activating_countdown_widget:
       action: add
@@ -353,10 +337,80 @@ widget_player:
       target: main
 
 widgets:
+  power_widget_mask:
+    - type: image
+      image: power_mask
+      style: power_mask_badge, col_right_anchor
+  power_widget_highlight:
+    - type: image
+      image: power_mask_highlight
+      style: power_mask_badge, col_right_anchor
+      animations:
+        add_to_slide: pulse_power_cooldown
   power_cooldown_widget:
-    - type: text
-      text: "Power cooldown in (count)"
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
+    - type: rectangle
+      color: ffcfbc
+      style: power_cooldown_badge, col_right_anchor
+      opacity: 0.8
+      width: 153
+      height: 0
+      animations:
+        add_to_slide: pulse_power_cooldown
+        update_cooldown_progress: power_cooldown_complete, pulse_power_cooldown
+  power_widget_adrenaline:
+    - type: image
+      image: power_adrenaline
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="adrenaline"}:
+          - property: opacity
+            value: 1
+  power_widget_cloak:
+    - type: image
+      image: power_cloak
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="cloak"}:
+          - property: opacity
+            value: 1
+  power_widget_drone:
+    - type: image
+      image: power_drone
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="drone"}:
+          - property: opacity
+            value: 1
+  power_widget_charge:
+    - type: image
+      image: power_charge
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="charge"}:
+          - property: opacity
+            value: 1
+  power_widget_armor:
+    - type: image
+      image: power_armor
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="armor"}:
+          - property: opacity
+            value: 1
+  power_widget_singularity:
+    - type: image
+      image: power_singularity
+      style: power_badge, col_right_anchor
+      opacity: 0.5
+      animations:
+        power_awarded{power=="singularity"}:
+          - property: opacity
+            value: 1
 
 sound_player:
   power_activation_failure{power=="charge" or power=="cloak"}: shepard_power_failure_target

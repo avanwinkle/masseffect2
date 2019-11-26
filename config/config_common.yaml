@@ -200,6 +200,10 @@ machine_vars:
     initial_value: 0.25
     value_type: float
     persist: false
+  base_cooldown:
+    initial_value: 30
+    value_type: int
+    persist: false
   flipper_cancelling:
     initial_value: 0
     persist: false
@@ -232,7 +236,7 @@ modes:
   - service
   # Support Modes
   - frenzy
-  # - powers
+  - powers
   - reputation
   - skillshot
   - store
