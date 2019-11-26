@@ -56,6 +56,7 @@ event_player:
   # If a squadmate is killed but we didn't drain, go to the "restart" mode (Except during reaper)
   squadmate_killed_complete{mode.base.active and not mode.base.stopping and current_player.state_machine_suicide_progress!="final"}:
     - start_mode_suicide_restart
+    - enable_transition_hold
   # Slide player doesn't like events, so conditionally restore the main slide
   suicidemission_failed:
     - restore_multiplayer_slide{game.num_players>1}
@@ -98,19 +99,10 @@ ball_saves:
       - mode_suicide_tubes_started
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     balls_to_save: 1
+    hurry_up_time: 4s
+    grace_period: 2s
     active_time: 8 if current_player.suicide_continuing else 20
     auto_launch: true
-
-ball_holds:
-  # This hold keeps the ball in the lock while the huddle plays between phases
-  suicide_transition_hold:
-    # bd_lock for Spike, bd_hold for FAST. A better way to do this?
-    hold_devices: bd_lock, bd_hold
-    enable_events: enable_transition_hold, mode_suicide_restart_started
-    release_one_events: suicide_huddle_complete
-    disable_events:
-      - ball_hold_suicide_transition_hold_balls_released  # this is standard behavior and works well
-      - mode_suicide_huddle_stopped  # this is for virtual mode because the release never happens
 
 variable_player:
   # Track whether we are progressing into a mode or starting a new ball

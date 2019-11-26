@@ -2,6 +2,35 @@
 - time: 0
   lights:
     (ledring)_light_0:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_1:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_2:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_3:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_4:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_5:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_6:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_7:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_8:
+      color: (fade_from)
+      fade: 50ms
+- time: '+1'
+  lights:
+    (ledring)_light_0:
       color: (color)%5
       fade: (fade)
     (ledring)_light_1:
@@ -43,4 +72,3 @@
     (ledring)_light_13:
       color: (color)%5
       fade: (fade)
-

@@ -30,6 +30,7 @@ class SuicideBase(Mode):
         self._set_status(mate, -1)
         self.player["squadmates_count"] -= 1
         self.player["killed_squadmate"] = mate
+        self.player["specialist"] = "none"
         # It's useful to know whether the ball is ending or not
         ball_is_ending = self.machine.modes["base"].stopping or not self.machine.modes["base"].active
         self.machine.events.post("squadmate_killed", squadmate=mate, ball_is_ending=ball_is_ending)

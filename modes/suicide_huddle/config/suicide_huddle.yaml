@@ -99,6 +99,53 @@ show_player:
       action: stop
     longwalk_intro_show_no:
       action: stop
+  suicide_huddle_garrus_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_garrus
+  suicide_huddle_jack_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_jack
+  suicide_huddle_jacob_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      show_tokens:
+        leds: l_bbsquad_jacob
+  suicide_huddle_miranda_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_miranda
+  suicide_huddle_mordin_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_mordin
+  suicide_huddle_samara_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_samara
+  suicide_huddle_tali_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_tali
+  suicide_huddle_thane_highlighted:
+    bbsquad_specialist_show:
+      key: huddle_highlight_show
+      priority: 100
+      show_tokens:
+        leds: l_bbsquad_thane
 
 shows:
   infiltration_intro_show:
@@ -122,6 +169,22 @@ shows:
           action: play
           track: voice
           events_when_stopped: play_specialist_lw_no
+  bbsquad_specialist_show:
+    - time: 0
+      lights:
+        (leds):
+          color: color_shields_quarter
+          fade: 0
+    - duration: 1500ms
+      lights:
+        (leds):
+          color: color_shields
+          fade: 1s
+    - duration: 1s
+      lights:
+        (leds):
+          color: color_shields_quarter
+          fade: 1s
 
 sound_player:
   play_specialist_inf_intro: specialist_inf_intro

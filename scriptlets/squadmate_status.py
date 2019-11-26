@@ -3,10 +3,11 @@
 import random
 from mpf.core.utility_functions import Util
 
-SQUADMATES = ("garrus", "grunt", "jack", "jacob", "kasumi", "legion",
-              "miranda", "mordin", "samara", "tali", "thane", "zaeed")
-BIOTICMATES = ("jack", "jacob", "miranda", "samara", "thane")
-TECHMATES = ("garrus", "jacob", "kasumi", "legion", "mordin", "tali", "thane")
+# Order the squadmates left-to-right on backbax
+SQUADMATES = ("zaeed", "legion", "samara", "tali", "mordin", "garrus", "miranda",
+              "grunt", "jacob", "thane", "jack", "kasumi")
+BIOTICMATES = ("samara", "miranda", "jacob", "thane", "jack")
+TECHMATES = ("legion", "tali", "mordin", "garrus", "jacob", "thane", "kasumi")
 
 
 def _mate_status_is(player, squadmate, status):

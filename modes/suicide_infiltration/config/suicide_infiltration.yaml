@@ -230,3 +230,25 @@ sound_player:
     specialist_inf_close:
       events_when_stopped: advance_complete
       mode_end_action: stop
+
+show_player:
+  ball_save_suicide_save_enabled:
+    color_flashing:
+      action: play
+      key: suicide_save_show
+      show_tokens:
+        leds: l_ball_save
+        color: color_armor
+  ball_save_suicide_save_hurry_up:
+    color_flashing_fast:
+      action: play
+      key: suicide_save_show
+      show_tokens:
+        leds: l_ball_save
+        color: color_armor
+  ball_save_suicide_save_grace_period:
+    suicide_save_show:
+      action: stop
+  ball_save_suicide_save_saving_ball:
+    suicide_save_show:
+      action: stop

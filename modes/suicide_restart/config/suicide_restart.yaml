@@ -6,6 +6,7 @@ mode:
 
 event_player:
   mode_suicide_restart_started: play_suicide_music_base|2s
+  ball_hold_suicide_hold_held_ball: start_mode_suicide_huddle
 
 slide_player:
   mode_suicide_restart_started:

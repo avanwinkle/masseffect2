@@ -19,6 +19,17 @@ shows:
     - lights:
         (leds): black
         l_null: (color)
+  color_flashing:
+    - time: 0
+      lights:
+        (leds):
+          color: (color)
+          fade: (fade)
+    - time: '+1'
+      lights:
+        (leds):
+          color: black
+          fade: (fade)
   color_flashing_default:
     - duration: 400ms
       lights:

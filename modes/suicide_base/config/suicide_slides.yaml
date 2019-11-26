@@ -152,38 +152,6 @@ slides:
         text: "Select a Specialist:"
         style: header_xs, row_top, col_left_anchor
       - type: text
-        key: specialist_garrus
-        text: Garrus
-        style: specialist
-        animations:
-          suicide_huddle_garrus_highlighted: specialist_select
-          suicide_huddle_garrus_default: specialist_deselect
-          suicide_huddle_garrus_dead: specialist_dead
-      - type: text
-        key: specialist_jack
-        text: Jack
-        style: specialist
-        animations:
-          suicide_huddle_jack_highlighted: specialist_select
-          suicide_huddle_jack_default: specialist_deselect
-          suicide_huddle_jack_dead: specialist_dead
-      - type: text
-        key: specialist_jacob
-        text: Jacob
-        style: specialist
-        animations:
-          suicide_huddle_jacob_highlighted: specialist_select
-          suicide_huddle_jacob_default: specialist_deselect
-          suicide_huddle_jacob_dead: specialist_dead
-      - type: text
-        key: specialist_kasumi
-        text: Kasumi
-        style: specialist
-        animations:
-          suicide_huddle_kasumi_highlighted: specialist_select
-          suicide_huddle_kasumi_default: specialist_deselect
-          suicide_huddle_kasumi_dead: specialist_dead
-      - type: text
         key: specialist_legion
         text: Legion
         style: specialist
@@ -191,22 +159,6 @@ slides:
           suicide_huddle_legion_highlighted: specialist_select
           suicide_huddle_legion_default: specialist_deselect
           suicide_huddle_legion_dead: specialist_dead
-      - type: text
-        key: specialist_miranda
-        text: Miranda
-        style: specialist
-        animations:
-          suicide_huddle_miranda_highlighted: specialist_select
-          suicide_huddle_miranda_default: specialist_deselect
-          suicide_huddle_miranda_dead: specialist_dead
-      - type: text
-        key: specialist_mordin
-        text: Mordin
-        style: specialist
-        animations:
-          suicide_huddle_mordin_highlighted: specialist_select
-          suicide_huddle_mordin_default: specialist_deselect
-          suicide_huddle_mordin_dead: specialist_dead
       - type: text
         key: specialist_samara
         text: Samara
@@ -225,6 +177,38 @@ slides:
           suicide_huddle_tali_default: specialist_deselect
           suicide_huddle_tali_dead: specialist_dead
       - type: text
+        key: specialist_mordin
+        text: Mordin
+        style: specialist
+        animations:
+          suicide_huddle_mordin_highlighted: specialist_select
+          suicide_huddle_mordin_default: specialist_deselect
+          suicide_huddle_mordin_dead: specialist_dead
+      - type: text
+        key: specialist_garrus
+        text: Garrus
+        style: specialist
+        animations:
+          suicide_huddle_garrus_highlighted: specialist_select
+          suicide_huddle_garrus_default: specialist_deselect
+          suicide_huddle_garrus_dead: specialist_dead
+      - type: text
+        key: specialist_miranda
+        text: Miranda
+        style: specialist
+        animations:
+          suicide_huddle_miranda_highlighted: specialist_select
+          suicide_huddle_miranda_default: specialist_deselect
+          suicide_huddle_miranda_dead: specialist_dead
+      - type: text
+        key: specialist_jacob
+        text: Jacob
+        style: specialist
+        animations:
+          suicide_huddle_jacob_highlighted: specialist_select
+          suicide_huddle_jacob_default: specialist_deselect
+          suicide_huddle_jacob_dead: specialist_dead
+      - type: text
         key: specialist_thane
         text: Thane
         style: specialist
@@ -233,6 +217,22 @@ slides:
           suicide_huddle_thane_highlighted: specialist_select
           suicide_huddle_thane_default: specialist_deselect
           suicide_huddle_thane_dead: specialist_dead
+      - type: text
+        key: specialist_jack
+        text: Jack
+        style: specialist
+        animations:
+          suicide_huddle_jack_highlighted: specialist_select
+          suicide_huddle_jack_default: specialist_deselect
+          suicide_huddle_jack_dead: specialist_dead
+      - type: text
+        key: specialist_kasumi
+        text: Kasumi
+        style: specialist
+        animations:
+          suicide_huddle_kasumi_highlighted: specialist_select
+          suicide_huddle_kasumi_default: specialist_deselect
+          suicide_huddle_kasumi_dead: specialist_dead
       - widget: background_console
 
   # Basic slide for all uses

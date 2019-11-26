@@ -31,7 +31,7 @@
     (ledring)_light_9:
       color: (ambient)
       fade: (fade)
-- time: '+1'
+- time: '+2'
   lights:
     (ledring)_light_0:
       color: (color)

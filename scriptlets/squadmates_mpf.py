@@ -77,6 +77,9 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("mode_base_stopped", self._handle_end)
         # Create a listener for playing a squadmate sound
         self.machine.events.add_handler("play_squadmate_sound", self._handle_squadmate_sound)
+        # Update the squad icons during suicide
+        self.machine.events.add_handler("mode_suicide_base_started", self._play_squadmates_show)
+        self.machine.events.add_handler("squadmate_killed", self._play_squadmates_show)
 
     def _enable_shothandlers(self, **kwargs):
         self.machine.events.remove_handler(self._enable_shothandlers)
@@ -272,16 +275,19 @@ class MPFSquadmateHandlers(CustomCode):
             if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
                 achs["suicidemission"].enable()
 
-    def _play_squadmates_show(self, stop_all=False):
+    def _play_squadmates_show(self, stop_all=False, **kwargs):
         mate_lists = {
             "lit": [],
             "complete": [],
             "dead": [],
             "off": [],
+            "specialist": []
         }
         for mate in SquadmateStatus.all_mates():
             status = 0 if stop_all else self.machine.game.player["status_{}".format(mate)]
-            if status == 3:
+            if mate == self.machine.game.player["specialist"]:
+                mate_lists["specialist"].append(mate)
+            elif status == 3 and not self.machine.modes.suicide_base.active:
                 mate_lists["lit"].append(mate)
             elif status == 4:
                 mate_lists["complete"].append(mate)

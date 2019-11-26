@@ -38,6 +38,7 @@ class SuicideHuddle(Carousel):
         self._render_specialists()
 
     def _render_specialists(self, **kwargs):
+        specialist = None
         for mate in self._mates:
             status = self.machine.game.player["status_{}".format(mate)]
             statusname = None

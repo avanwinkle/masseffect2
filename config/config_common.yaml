@@ -514,6 +514,8 @@ named_colors:
   color_armor: FFCC00
   color_barrier: 5500FF
   color_health: "990000"
+  color_health_half: "660000"
+  color_health_quarter: "330000"
   color_paragon: 1166FF
   color_renegade: "660000"
   color_door_green: 55FF00

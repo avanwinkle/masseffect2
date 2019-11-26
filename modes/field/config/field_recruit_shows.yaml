@@ -48,7 +48,7 @@ shows:
   recruits_dead_show:
     - time: 0
       lights:
-        (leds): color_health
+        (leds): color_health_half
   recruits_specialist_show:
     - time: 0
       lights:
