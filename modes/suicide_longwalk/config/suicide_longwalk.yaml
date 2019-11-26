@@ -37,6 +37,11 @@ event_player:
       shots_remaining: 7
       ticks: 60
       is_resumable: 0
+    # Mock the event for an initial shot count
+    logicblock_swarmpaths_hit|2s:
+      count:
+        type: int
+        value: device.counters.swarmpaths.value
   player_tension:
     - increase_tension{player_num==current_player.number and change>0}
     - missiontimer_set_longwalk_1{value==1 and current_player.base_missiontimer_tick>41 and player_num==current_player.number}
@@ -73,6 +78,7 @@ counters:
     starting_count: 0
     count_events: swarmfails_hit
     reset_events: mode_suicide_longwalk_started
+    multiple_hit_window: 2s
   swarmpaths:
     starting_count: 6 + current_player.difficulty
     count_complete_value: 0
