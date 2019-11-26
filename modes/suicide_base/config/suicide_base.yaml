@@ -113,7 +113,7 @@ variable_player:
     # For debugging, when we start directly into reaper mode
     reaper_hp{not current_player.reaper_hp}:
       action: set
-      int: 10000
+      int: 50000 + (current_player.difficulty * 20000)
   # Remember the score before starting the suicide mission, in case it fails
   mode_suicide_base_started.2{current_player.presuicide_score==0}:
     presuicide_score:
@@ -136,7 +136,7 @@ variable_player:
     # Human Reaper hit points... 100,000?
     reaper_hp:
       action: set
-      int: 100000
+      int: 50000 + (current_player.difficulty * 20000)
   kill_specialist:
     suicide_continuing:
       action: set

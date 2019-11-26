@@ -2,7 +2,7 @@ import random
 from mpf.core.mode import Mode
 from scriptlets.squadmates_mpf import SquadmateStatus
 
-SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "platforms", "humanreaper", "escape"]
+SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "final", "escape"]
 
 
 class SuicideBase(Mode):

@@ -37,8 +37,8 @@ event_player:
       shots_remaining: 7
       ticks: 60
       is_resumable: 0
-    # Mock the event for an initial shot count
-    logicblock_swarmpaths_hit|2s:
+    # Use this special event for an initial shot count
+    set_initial_suicide_shots|2s:
       count:
         type: int
         value: device.counters.swarmpaths.value
@@ -80,11 +80,12 @@ counters:
     reset_events: mode_suicide_longwalk_started
     multiple_hit_window: 2s
   swarmpaths:
-    starting_count: 6 + current_player.difficulty
+    starting_count: 5 + current_player.difficulty
     count_complete_value: 0
     direction: down
     count_events: swarmpaths_hit
     reset_events: mode_suicide_longwalk_started
+    # To persist state on normal difficulty?
 
 variable_player:
   mode_suicide_longwalk_started:
@@ -318,6 +319,7 @@ sound_player:
       action: play
       track: music
       start_at: 18s
+      loops: -1
     specialist_lw_warning_med:
       action: play
       max_queue_time: 1s
@@ -329,6 +331,7 @@ sound_player:
       action: play
       track: music
       start_at: 34s
+      loops: -1
     specialist_lw_warning_high:
       action: play
       max_queue_time: 1s
@@ -340,6 +343,7 @@ sound_player:
       track: music
       start_at: 10s
       mode_end_action: stop
+      loops: -1
     longwalk_med:
       action: stop
     longwalk_high:

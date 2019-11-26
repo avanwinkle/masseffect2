@@ -75,7 +75,7 @@ variable_player:
       int: current_player.temp_hurryup_value * -1
     score:
       action: add
-      # The score actually has a higher multiplier on earlier rounds!
+      # The score actually has a higher multiplier during earlier rounds!
       int: current_player.temp_hurryup_value * (5 / current_player.reaper_rounds)
 
 # We can take "cover" while the reaper is firing

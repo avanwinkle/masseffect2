@@ -33,7 +33,8 @@ event_player:
       ticks: 30
   platform_shots_lit_hit:
     - mission_shot_hit
-    - missiontimer_add_platforms
+    # Is it too easy to add time for each platform?
+    - missiontimer_add_platforms{current_player.difficulty==0}
   # Completing all the platforms resets the shots and adds time
   platform_shots_hit_complete:
     - reset_platforms
@@ -63,6 +64,13 @@ timers:
     direction: down
     start_running: true
 
+variable_player:
+  # give a few points for every hit
+  frenzy_lit_hit:
+    temp_build_value: 100
+  drop_target_bank_dropbank_down:
+    temp_build_value: 3000
+
 light_player:
   mode_suicide_platforms_started:
     light_backwall_ambient:
@@ -82,43 +90,43 @@ shots:
   # These shots are NOT tagged with environment, so we get collector sounds all the time!
   platform_left_ramp:
     hit_events: sh_left_ramp_hit
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
       color: color_collectors
   platform_left_orbit:
     hit_events: sh_left_orbit_hit
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
       color: color_collectors
   platform_right_ramp:
     hit_events: sh_right_ramp_hit
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
       color: color_collectors
   platform_right_orbit:
     hit_events: sh_right_orbit_hit
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
       color: color_collectors
   platform_kickback:
     hit_events: sh_kickback_hit
-    profile: color_flashing_fast_profile
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
       color: color_collectors
   platform_dropbank:
     hit_events: sh_dropbank_hit
-    profile: color_flashing_fast_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: light_dropbank_rgb
       color: color_collectors%30
   platform_hitbank:
     hit_events: sh_hitbank_hit
-    profile: color_flashing_fast_profile
+    profile: hit_to_off_profile
     show_tokens:
       leds: light_hitbank_rgb
       color: color_collectors%30

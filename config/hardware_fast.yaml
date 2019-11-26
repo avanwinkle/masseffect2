@@ -9,12 +9,7 @@ modes:
   - airlock
 
 fast:
-  # Do not commit changes to this line until we have machine-aware port detection
-  ports: /dev/ttyUSB1, /dev/ttyUSB2
-  # ports: /dev/tty.usbserial-FD1201, /dev/tty.usbserial-FD1202
-  # ports: /dev/tty.usbserial-FA13201, /dev/tty.usbserial-FA13202
-  # ports: /dev/tty.usbserial-00001014B, /dev/tty.usbserial-00001014C
-  # ports: /dev/tty.usbserial-0040111DB, /dev/tty.usbserial-0040111DC
+  ports: autodetect
   # rgb_buffer: 10000
   # debug: true
   hardware_led_fade_time: 100
@@ -95,17 +90,18 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 21  # Increased from Spike 35
-    # default_pulse_power: 0.8
-    default_hold_power: 0.1
+    default_pulse_ms: 80  # Increased from Spike 35
+    default_pulse_power: 0.8
+    default_hold_power: 0.12
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 21  # Increased from Spike 35
-    # default_pulse_power: 0.8
-    default_hold_power: 0.1
+    default_pulse_ms: 80  # Increased from Spike 35
+    default_pulse_power: 0.8
+    default_hold_power: 0.12
   c_plunger:
     number: 1-1
-    default_pulse_ms: 14  # Increased from Spike 18, bumped from 40
+    default_pulse_ms: 100  # Increased from Spike 18, bumped from 40
+    default_pulse_power: 0.9
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -114,13 +110,18 @@ coils:
     # pulse_power: 2
   c_bumper_left:
     number: 2-2
-    default_pulse_ms: 14
+    default_pulse_ms: 60
+    default_pulse_power: 0.8
   c_bumper_right:
     number: 2-1
-    default_pulse_ms: 12
+    default_pulse_ms: 60
+    default_pulse_power: 0.7
   c_bumper_bottom:
     number: 2-0
-    default_pulse_ms: 10
+    default_pulse_ms: 60
+    default_pulse_power: 0.5
+    platform_settings:
+      recycle_ms: 255
   c_slingshot_left:
     number: 1-6
     default_pulse_ms: 12
@@ -138,7 +139,7 @@ coils:
     # number: 1-2
     number: 0-0
     default_pulse_ms: 35
-    default_hold_power: 0.2  # 0.08 buzzes a lot, but less is too weak
+    default_hold_power: 0.182  # 0.08 buzzes a lot, but less is too weak
     enable_events: hold_post_enable
     disable_events: hold_post_disable
     debug: true

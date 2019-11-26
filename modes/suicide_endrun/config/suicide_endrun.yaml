@@ -251,6 +251,7 @@ shots:
     profile: endrun_bank_profile
     show_tokens:
       led: l_hitbank_top
+      color: color_miranda
     advance_events:
       - reset_endrun_shots{current_player.status_miranda==4}
     reset_events:
