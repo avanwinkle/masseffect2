@@ -7,6 +7,7 @@ from datetime import datetime
 from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
 
+DIFFICULTIES = { 0: "Normal", 1: "Hardcore", 2: "Insanity" }
 
 class MainMenu(Carousel):
     """Mode which allows the player to select a profile and start/resume a game."""
@@ -18,6 +19,7 @@ class MainMenu(Carousel):
         self.mainmenu = []
         self.careers = []
         self._selected_career = None
+        self._selected_difficulty = None
         self.log = logging.getLogger("MainMenu")
         self.log.setLevel(20)
 
@@ -27,7 +29,8 @@ class MainMenu(Carousel):
             self.log.info("Casual mode only, skipping menu")
             self.stop()
             return
-
+        # Reset the difficulty selection
+        self._selected_difficulty = -1
         # When the mode starts, create a handler to trigger the Carousel start.
         self.add_mode_event_handler("show_mainmenu", self.show_menu)
         # Watch for adding players, which we prevent during creation.
@@ -156,7 +159,13 @@ class MainMenu(Carousel):
             self._post_career_event("load_career")
         # If new game was chosen, need to set the started time
         elif selection == "new_game":
-            self._post_career_event("new_career")
+            # If we haven't set a difficulty yet, do so before completing
+            if self._selected_difficulty == -1:
+                self._selected_difficulty = 0
+                self.machine.events.post("update_difficulty", detail=DIFFICULTIES[0])
+                self.machine.events.post("update_difficulty_easiest")
+                return
+            self._post_career_event("new_career", difficulty=self._selected_difficulty)
         # If create career was chosen, switch modes
         elif selection == "create_career":
             self.machine.events.post("start_mode_createprofile")
@@ -176,11 +185,41 @@ class MainMenu(Carousel):
         self.log.debug("Highlight selected, look for the next event:")
         # Career menu: select the highlighted career to post the name/level and update the widget
         if self._shown_menu == self.careers:
-            self._set_selected_career(self.careers[self._highlighted_item_index])
-            self._post_career_event("highlight_career".format(self.name))
+            career = self.careers[self._highlighted_item_index]
+            self._set_selected_career(career)
+            self._post_career_event("highlight_career".format(self.name),
+                                    difficulty_name=DIFFICULTIES[career["difficulty"]])
         else:
             self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
                                     direction=direction)
+
+    def _next_item(self, **kwargs):
+        if self._done:
+            return
+        # Are we picking difficulty?
+        if self._selected_difficulty >=0:
+            if self._selected_difficulty < 2:
+                self._selected_difficulty += 1
+                self.machine.events.post("update_difficulty",
+                                         detail=DIFFICULTIES[self._selected_difficulty])
+                if self._selected_difficulty == 2:
+                    self.machine.events.post("update_difficulty_hardest")
+            return
+        super()._next_item(**kwargs)
+
+    def _previous_item(self, **kwargs):
+        if self._done:
+            return
+        # Are we picking difficulty?
+        if self._selected_difficulty >= 0:
+            if self._selected_difficulty > 0:
+                self._selected_difficulty -= 1
+                self.machine.events.post("update_difficulty",
+                                         detail=DIFFICULTIES[self._selected_difficulty])
+                if self._selected_difficulty == 0:
+                    self.machine.events.post("update_difficulty_easiest")
+            return
+        super()._next_item(**kwargs)
 
     def _set_selected_career(self, career):
         self._selected_career = career

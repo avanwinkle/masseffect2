@@ -14,7 +14,6 @@ variable_player:
     mission_shots_remaining:
       action: set
       int: shots_remaining
-    # For normal/hardcore, set the is_resumable
     mission_is_resumable:
       action: set
       # For insanity, never resumable
@@ -88,7 +87,8 @@ timers:
     start_value: 60
     max_value: 60
     end_value: 0
-    tick_interval: current_player.research_tick_interval_perk
+    # Normal difficulty gets 1.25s per tick, hardcore/insanity gets 1s
+    tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
     direction: down
     control_events:
       # Some missions use different timing, so a few handlers to adjust the clock

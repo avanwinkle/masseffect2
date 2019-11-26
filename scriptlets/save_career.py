@@ -184,6 +184,8 @@ class SaveCareer(CustomCode):
 
     def _new_career(self, **kwargs):
         player = self.machine.game.player
+        # Set a difficulty
+        player.difficulty = kwargs.get("difficulty")
         player.career_name = kwargs.get("career_name")
         # All we have to do is set a new career_started time
         player.career_started = datetime.now().timestamp()

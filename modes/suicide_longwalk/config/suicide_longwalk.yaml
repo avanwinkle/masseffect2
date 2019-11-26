@@ -74,11 +74,10 @@ counters:
     count_events: swarmfails_hit
     reset_events: mode_suicide_longwalk_started
   swarmpaths:
-    starting_count: 7
+    starting_count: 6 + current_player.difficulty
     count_complete_value: 0
     direction: down
     count_events: swarmpaths_hit
-    # persist_state: true
     reset_events: mode_suicide_longwalk_started
 
 variable_player:

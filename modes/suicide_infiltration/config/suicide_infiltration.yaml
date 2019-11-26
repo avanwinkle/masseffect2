@@ -73,7 +73,7 @@ multiballs:
 
 counters:
   valves:
-    starting_count: 5
+    starting_count: 5 + current_player.difficulty
     count_complete_value: 0
     direction: down
     count_events: valveshots_hit

@@ -16,7 +16,7 @@ event_player:
   career_loaded: stop_mode_mainmenu
   s_flipper_right_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: next_item
   s_flipper_left_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: prev_item
-  s_action_button_active{not mode.createprofile.active}: select_item
+  s_action_button_active{not mode.createprofile.active and not mode.difficulty.active}: select_item
   flipper_cancel{not mode.createprofile.active}: select_item
 
 variable_player:
@@ -64,7 +64,7 @@ slides:
   change_career_slide:
     widgets:
       - type: text
-        text: Select Profile
+        text: Switch Profiles
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (career_name)
@@ -113,14 +113,15 @@ slides:
         style: body_sm, row_top, col_left_anchor
       - type: text
         text: (career_name)
-        style: body_lg, row_main, row_main_dmd_high, col_left_anchor
+        style: header_md, row_main, row_main_dmd_high, col_left_anchor
       - type: text
-        text: Level (level)
+        text: "Level (level)\n(difficulty_name)"
         style: body_sm, row_sub_under, col_left_anchor
+        halign: left
       - type: text
-        text: "Started: (career_started)\nLast played: (last_played)"
-        halign: right
+        text: "Last played: (last_played)\nStarted: (career_started)"
         style: body_sm, row_sub_under, col_right_anchor
+        halign: right
       - widget: background_console
   career_new_slide:
     widgets:
@@ -183,4 +184,61 @@ sounds:
   galaxy_zoom_out:
     file: SFXGame.587.ogg
     track: sfx
+
+widget_player:
+  update_difficulty:
+    difficulty_parent_widget:
+      action: add
+      slide: new_game_slide
+      priority: 10
+    difficulty_widget:
+      action: update
+      slide: new_game_slide
+      priority: 9
+    difficulty_left_widget:
+      action: update
+      slide: new_game_slide
+      priority: 8
+    difficulty_right_widget:
+      action: update
+      slide: new_game_slide
+      priority: 7
+
+widgets:
+  difficulty_parent_widget:
+    - type: text
+      text: "Difficulty:"
+      style: body_sm, row_sub, col_left_anchor
+  difficulty_widget:
+    - type: text
+      text: (detail)
+      style: body_sm, row_sub
+      x: 400
+      anchor_x: center
+      animations:
+        add_to_slide: pulse_text
+  difficulty_left_widget:
+    - type: text
+      text: "<"
+      style: body_sm, row_sub
+      x: 275
+      anchor_x: right
+      opacity: 1
+      animations:
+        update_difficulty_easiest:
+          - property: opacity
+            value: 0.2
+            duration: 50ms
+  difficulty_right_widget:
+    - type: text
+      text: ">"
+      style: body_sm, row_sub
+      x: 525
+      anchor_x: left
+      opacity: 1
+      animations:
+        update_difficulty_hardest:
+          - property: opacity
+            value: 0.2
+            duration: 50ms
 
