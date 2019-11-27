@@ -29,9 +29,9 @@
 
 mode:
   start_events: start_mode_suicide_endrun
-  stop_events: ball_will_end, endrun_complete
-  events_when_started: mode_type_suicide_started, start_mode_frenzy
-  events_when_stopped: mode_type_suicide_stopped, stop_mode_frenzy
+  stop_events: stop_suicide_modes
+  events_when_started: start_mode_frenzy
+  events_when_stopped: stop_mode_frenzy
   priority: 2300
 
 event_player:
@@ -40,17 +40,32 @@ event_player:
     - enable_endrun_counter|1s
     - reset_endrun_shots
     - reset_dropbank
+    # If this is the players last ball, they have completed the suicide mission
+    - suicidemission_complete{current_player.ball==game.balls_per_game}
   endrun_shots_disabled_complete:
     - reset_endrun_shots
     - reset_dropbank
+  # On the last ball, do something special
+  play_suicide_finale:
+    - query_final_squadmates
+  final_squadmates_count:
+    suicide_mission_survived{count>=2}:
+      count: (count)
+    suicide_mission_died{count<2}: {}
+
+queue_relay_player:
+  # Play a special show on the last ball
+  ball_ending.2000{current_player.state_machine_suicide_progress=="completed"}:
+    post: play_suicide_finale
+    wait_for: suicide_finale_complete
 
 multiballs:
   endrun_multiball:
     ball_count: 2  # Start with 2, add up to 2 more
     ball_count_type: total
+    shoot_again: 1s
     start_events: mode_suicide_endrun_started
     start_or_add_a_ball_events: logicblock_endrun_hits_counter_hit{game.balls_in_play<4}
-    shoot_again: 10s
 
 counters:
   # Know how many shots we've hit, to know if Shepard might survive
@@ -74,12 +89,40 @@ variable_player:
   # Each time the shots are completed, the jackpot grows 10% slower
   endrun_shots_disabled_complete{current_player.temp_build_value>0}:
     temp_multiplier: current_player.temp_multiplier * -0.1
+    score: machine.base_points * current_player.temp_multiplier
   # Each frenzy shot builds value at a base times multiplier
   frenzy_shot_hit:
     temp_build_value: (machine.base_points / 100) * current_player.temp_multiplier
   # Use the counter event instead of the shot event, to get the frenzy points too
   logicblock_endrun_hits_counter_hit:
-    score: current_player.temp_build_value
+    score: current_player.temp_build_value + (machine.base_points / 12 * device.counters.endrun_hits_counter.value)
+  # When a squadmate shot is hit, they survive. Status 5!
+  endrun_garrus_shot_lit_hit{current_player.status_garrus==4}:
+    status_garrus: 1
+  endrun_grunt_shot_lit_hit{current_player.status_grunt==4}:
+    status_grunt: 1
+  endrun_jack_shot_lit_hit{current_player.status_jack==4}:
+    status_jack: 1
+  endrun_kasumi_shot_lit_hit{current_player.status_kasumi==4}:
+    status_kasumi: 1
+  endrun_legion_shot_lit_hit{current_player.status_legion==4}:
+    status_legion: 1
+  endrun_mordin_shot_lit_hit{current_player.status_mordin==4}:
+    status_mordin: 1
+  endrun_samara_shot_lit_hit{current_player.status_samara==4}:
+    status_samara: 1
+  endrun_tali_shot_lit_hit{current_player.status_tali==4}:
+    status_tali: 1
+  endrun_thane_shot_lit_hit{current_player.status_thane==4}:
+    status_thane: 1
+  endrun_zaeed_shot_lit_hit{current_player.status_zaeed==4}:
+    status_zaeed: 1
+  endrun_miranda_disabled_complete{current_player.status_miranda==4}:
+    status_miranda: 1
+  endrun_jacob_disabled_complete{current_player.status_jacob==4}:
+    status_jacob: 1
+  final_squadmates_count:
+    final_squadmates: (count)
 
 shot_groups:
   endrun_shots:
@@ -124,125 +167,125 @@ shots:
     hit_events: sh_left_ramp_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_garrus==4}
+      - reset_endrun_shots{current_player.status_garrus>=4}
     reset_events:
-      - endrun_garrus_shot_hit
+      - endrun_garrus_shot_lit_hit
     show_tokens:
       center_led: shot_shield_garrus
-      ring_led: light_lane_left_ramp
+      ring_led: l_left_ramp_ring
       color: color_garrus
     tags: envshot_left_ramp
   endrun_grunt_shot:
     hit_events: sh_left_orbit_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_grunt==4}
+      - reset_endrun_shots{current_player.status_grunt>=4}
     reset_events:
-      - endrun_grunt_shot_hit
+      - endrun_grunt_shot_lit_hit
     show_tokens:
       center_led: shot_shield_grunt
-      ring_led: light_lane_left_orbit
+      ring_led: l_left_orbit_ring
       color: color_grunt
     tags: envshot_left_orbit
   endrun_jack_shot:
     hit_events: sh_kickback_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_jack==4}
+      - reset_endrun_shots{current_player.status_jack>=4}
     reset_events:
-      - endrun_jack_shot_hit
+      - endrun_jack_shot_lit_hit
     show_tokens:
       center_led: shot_shield_jack
-      ring_led: light_lane_kickback
+      ring_led: l_kickback_ring
       color: color_jack
     tags: envshot_kickback
   endrun_kasumi_shot:
     hit_events: sh_right_ramp_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_kasumi==4}
+      - reset_endrun_shots{current_player.status_kasumi>=4}
     reset_events:
-      - endrun_kasumi_shot_hit
+      - endrun_kasumi_shot_lit_hit
     show_tokens:
       center_led: shot_shield_kasumi
-      ring_led: light_lane_right_ramp
+      ring_led: l_right_ramp_ring
       color: color_kasumi
     tags: envshot_right_ramp
   endrun_legion_shot:
     hit_events: sh_kickback_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_jack<4 and current_player.status_legion==4}
-      - endrun_jack_shot_hit{current_player.status_legion==4}
+      - reset_endrun_shots{current_player.status_jack<4 and current_player.status_legion>=4}
+      - endrun_jack_shot_lit_hit{current_player.status_legion>=4}
     reset_events:
-      - endrun_legion_shot_hit
+      - endrun_legion_shot_lit_hit
     show_tokens:
       center_led: shot_shield_legion
-      ring_led: light_lane_kickback
+      ring_led: l_kickback_ring
       color: color_legion
     tags: envshot_kickback
   endrun_mordin_shot:
     hit_events: sh_right_orbit_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_mordin==4}
+      - reset_endrun_shots{current_player.status_mordin>=4}
     reset_events:
-      - endrun_mordin_shot_hit
+      - endrun_mordin_shot_lit_hit
     show_tokens:
       center_led: shot_shield_mordin
-      ring_led: light_lane_right_orbit
+      ring_led: l_right_orbit_ring
       color: color_mordin
     tags: envshot_right_orbit
   endrun_samara_shot:
     hit_events: sh_left_ramp_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_garrus<4 and current_player.status_samara==4}
-      - endrun_garrus_shot_hit{current_player.status_samara==4}
+      - reset_endrun_shots{current_player.status_garrus<4 and current_player.status_samara>=4}
+      - endrun_garrus_shot_lit_hit{current_player.status_samara>=4}
     reset_events:
-      - endrun_samara_shot_hit
+      - endrun_samara_shot_lit_hit
     show_tokens:
       center_led: shot_shield_samara
-      ring_led: light_lane_left_ramp
+      ring_led: l_left_ramp_ring
       color: color_samara
     tags: envshot_left_ramp
   endrun_tali_shot:
     hit_events: sh_right_orbit_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_mordin<4 and current_player.status_tali==4}
-      - endrun_mordin_shot_hit{current_player.status_tali==4}
+      - reset_endrun_shots{current_player.status_mordin<4 and current_player.status_tali>=4}
+      - endrun_mordin_shot_lit_hit{current_player.status_tali>=4}
     reset_events:
-      - endrun_tali_shot_hit
+      - endrun_tali_shot_lit_hit
     show_tokens:
       center_led: shot_shield_tali
-      ring_led: light_lane_right_orbit
+      ring_led: l_right_orbit_ring
       color: color_tali
     tags: envshot_right_orbit
   endrun_thane_shot:
     hit_events: sh_right_ramp_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_kasumi<4 and current_player.status_thane==4}
-      - endrun_kasumi_shot_hit{current_player.status_thane==4}
+      - reset_endrun_shots{current_player.status_kasumi<4 and current_player.status_thane>=4}
+      - endrun_kasumi_shot_lit_hit{current_player.status_thane>=4}
     reset_events:
-      - endrun_thane_shot_hit
+      - endrun_thane_shot_lit_hit
     show_tokens:
       center_led: shot_shield_thane
-      ring_led: light_lane_right_ramp
+      ring_led: l_right_ramp_ring
       color: color_thane
     tags: envshot_right_ramp
   endrun_zaeed_shot:
     hit_events: sh_left_orbit_hit
     profile: endrun_lane_profile
     advance_events:
-      - reset_endrun_shots{current_player.status_grunt<4 and current_player.status_zaeed==4}
-      - endrun_grunt_shot_hit{current_player.status_zaeed==4}
+      - reset_endrun_shots{current_player.status_grunt<4 and current_player.status_zaeed>=4}
+      - endrun_grunt_shot_lit_hit{current_player.status_zaeed>=4}
     reset_events:
-      - endrun_zaeed_shot_hit
+      - endrun_zaeed_shot_lit_hit
     show_tokens:
       center_led: shot_shield_zaeed
-      ring_led: light_lane_left_orbit
+      ring_led: l_left_orbit_ring
       color: color_zaeed
     tags: envshot_left_orbit
   # JACOB and MIRANDA have multiple shots to hit, oh no!
@@ -253,9 +296,9 @@ shots:
       led: l_hitbank_top
       color: color_miranda
     advance_events:
-      - reset_endrun_shots{current_player.status_miranda==4}
+      - reset_endrun_shots{current_player.status_miranda>=4}
     reset_events:
-      - endrun_miranda_shot_top_hit
+      - endrun_miranda_shot_top_lit_hit
   endrun_miranda_shot_bottom:
     switch: s_hitbank_bottom
     profile: endrun_bank_profile
@@ -263,9 +306,9 @@ shots:
       led: l_hitbank_bottom
       color: color_miranda
     advance_events:
-      - reset_endrun_shots{current_player.status_miranda==4}
+      - reset_endrun_shots{current_player.status_miranda>=4}
     reset_events:
-      - endrun_miranda_shot_bottom_hit
+      - endrun_miranda_shot_bottom_lit_hit
   endrun_jacob_shot_bottom:
     hit_events: drop_target_bottom_down
     profile: endrun_bank_profile
@@ -273,9 +316,9 @@ shots:
       led: l_dropbank_bottom
       color: color_jacob
     advance_events:
-      - reset_endrun_shots{current_player.status_jacob==4}
+      - reset_endrun_shots{current_player.status_jacob>=4}
     reset_events:
-      - endrun_jacob_shot_bottom_hit
+      - endrun_jacob_shot_bottom_lit_hit
   endrun_jacob_shot_middle:
     hit_events: drop_target_middle_down
     profile: endrun_bank_profile
@@ -283,9 +326,9 @@ shots:
       led: l_dropbank_middle
       color: color_jacob
     advance_events:
-      - reset_endrun_shots{current_player.status_jacob==4}
+      - reset_endrun_shots{current_player.status_jacob>=4}
     reset_events:
-      - endrun_jacob_shot_middle_hit
+      - endrun_jacob_shot_middle_lit_hit
   endrun_jacob_shot_top:
     hit_events: drop_target_top_down
     profile: endrun_bank_profile
@@ -293,21 +336,30 @@ shots:
       led: l_dropbank_top
       color: color_jacob
     advance_events:
-      - reset_endrun_shots{current_player.status_jacob==4}
+      - reset_endrun_shots{current_player.status_jacob>=4}
     reset_events:
-      - endrun_jacob_shot_top_hit
+      - endrun_jacob_shot_top_lit_hit
+
+show_player:
+  suicide_mission_survived: suicide_finale_survived
+  suicide_mission_died: suicide_finale_died
 
 shows:
   endrun_lane_show:
     - time: 0
-      lights:
-        (center_led): off
-        (ring_led): color_collectors
-        l_null: (color)
-    - time: '+1'
-      lights:
-        (center_led): (color)
-        (ring_led): off
+      shows:
+        led_6_dualcolor_chase:
+          speed: 6
+          show_tokens:
+            leds: (ring_led)
+            color1: (color)
+            color2: color_collectors_half
+            fade: 200ms
+        # color_flashing:
+        #   show_tokens:
+        #     leds: (center_led)
+        #     color: color_collectors%50
+            # fade: 500ms
   endrun_bank_show:
     - time: 0
       lights:
@@ -315,9 +367,30 @@ shows:
     - time: '+1'
       lights:
         (led): (color)
+  suicide_finale_survived:
+    - time: 0
+      slides:
+        suicide_success_slide:
+          action: play
+    - time: '+5'
+      events:
+        suicide_finale_complete
+  suicide_finale_died:
+    - time: 0
+      slides:
+        suicide_failure_slide:
+          action: play
+    - time: '+5'
+      events:
+        suicide_finale_complete
 
 sound_player:
-  mode_suicide_endrun_started: endrun_music
+  mode_suicide_endrun_started:
+    endrun_music:
+      action: play
+    suicide_music_base:
+      action: stop
+      fade_out: 2s
 
 sounds:
   endrun_music:

@@ -99,6 +99,9 @@ class SaveCareer(CustomCode):
                 # If we aren't saving suicide progress or aren't saving deaths, reset the status
                 elif value == -1 and (not SAVE_SUICIDE_PROGRESS or not DO_SAVE_DEATHS):
                     newcareer[key] = 4
+                # Never save fives
+                elif value == 5:
+                    newcareer[key] = 4
                 else:
                     newcareer[key] = value
             # Everything else we just save as-is

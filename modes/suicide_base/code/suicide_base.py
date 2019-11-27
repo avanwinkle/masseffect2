@@ -13,6 +13,7 @@ class SuicideBase(Mode):
         # Listen for the suicide mission to fail and reset dead squadmates
         self.add_mode_event_handler("suicidemission_failed", self._handle_failure)
         self.add_mode_event_handler("kill_squadmate", self._kill_squadmate)
+        self.add_mode_event_handler("query_final_squadmates", self._final_squadmates)
 
     def _set_status(self, squadmate, status):
         self.player["status_{}".format(squadmate)] = status
@@ -60,6 +61,12 @@ class SuicideBase(Mode):
             "mode": self._get_current_mode(),
             "callback_mate": callback_mate,
         })
+
+    def _final_squadmates(self, **kwargs):
+        final_squadmates = SquadmateStatus.final_mates(self.player)
+        self.machine.events.post("final_squadmates_count",
+                                 count=len(final_squadmates),
+                                 squadmates=final_squadmates)
 
     def _squadmates_can_continue(self):
         # Infiltration requires tech specialists

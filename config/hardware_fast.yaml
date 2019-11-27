@@ -37,8 +37,9 @@ ball_devices:
     entrance_count_delay: 700ms
     player_controlled_eject_event: force_plunger_launch
     debug: true
+    ball_search_order: 1
   bd_trough:
-    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6, s_trough_jam
+    ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6
     eject_coil: c_trough_eject
     tags: trough, home, drain
     jam_switch: s_trough_jam
@@ -46,6 +47,7 @@ ball_devices:
     eject_timeouts: 1500ms
     auto_fire_on_unexpected_ball: False
     confirm_eject_switch: s_plunger_lane
+    ball_search_order: 2
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
     ball_switches: s_lock_1, s_lock_2, s_lock_3
@@ -68,7 +70,7 @@ ball_devices:
       - recruit_lit{squadmate=="garrus" or squadmate=="samara"}
     entrance_switch: s_left_ramp_exit
     debug: true
-    ball_search_order: 50
+    ball_search_order: 10
 
 named_colors:
   # Named colors must be explicit due to race conditions with config_common
@@ -101,7 +103,7 @@ coils:
     default_hold_power: 0.12
   c_plunger:
     number: 1-1
-    default_pulse_ms: 100  # Increased from Spike 18, bumped from 40
+    default_pulse_ms: 120  # Increased from Spike 18, bumped from 40
     default_pulse_power: 0.9
     pulse_events: pulse_plunger
   c_trough_eject:

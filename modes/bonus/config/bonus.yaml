@@ -28,6 +28,17 @@ mode_settings:
       score: (current_player.score - current_player.ball_starting_score) / 100 * 2
       player_score_entry: upgrades_completed
 
+event_player:
+  mode_bonus_started:
+    - play_default_music{current_player.state_machine_suicide_progress!="completed"}
+    - play_happy_music{current_player.state_machine_suicide_progress=="completed" and current_player.final_squadmates>=2}
+    - play_sad_music{current_player.state_machine_suicide_progress=="completed" and current_player.final_squadmates<2}
+
+queue_relay_player:
+  mode_bonus_stopping{current_player.state_machine_suicide_progress=="completed"}:
+    post: start_mode_gameover
+    wait_for: mode_gameover_stopped
+
 light_player:
   mode_bonus_started:
     gi:
@@ -41,7 +52,8 @@ light_player:
       fade: 1s
 
 slide_player:
-  mode_bonus_started: end_slide
+  mode_bonus_started.1{current_player.state_machine_suicide_progress!="completed"}: end_slide
+  mode_bonus_started.2{current_player.state_machine_suicide_progress=="completed"}: end_slide_gameover
   bonus_level: bonus_level_slide
   bonus_squadmates: bonus_squadmates_slide
   bonus_reputation: bonus_reputation_slide
@@ -54,10 +66,13 @@ slide_player:
 
 slides:
   end_slide:
-    widgets:
-      - type: text
-        text: $gameover
-        style: header_lg
+    - type: text
+      text: $gameover
+      style: header_lg
+  end_slide_gameover:
+    - type: text
+      text: Game Over
+      style: header_lg
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
@@ -131,8 +146,14 @@ slides:
       style: header_md, row_main, num
 
 sound_player:
-  mode_bonus_started:
+  play_default_music:
     music_death:
+      priority: 1000
+  play_happy_music:
+    music_gameover_win:
+      priority: 1000
+  play_sad_music:
+    music_gameover_sad:
       priority: 1000
 
 sounds:
@@ -143,3 +164,15 @@ sounds:
     fade_in: 500ms
     fade_out: 500ms
     mode_end_action: stop
+  music_gameover_sad:
+    file: mus_endgm3_cine_2.ogg
+    track: music
+    loops: 0
+    mode_end_action: stop
+    fade_out: 1s
+  music_gamover_win:
+    file: mus_endgm3_cine_1.ogg
+    track: music
+    loops: 0
+    mode_end_action: stop
+    fade_out: 1s

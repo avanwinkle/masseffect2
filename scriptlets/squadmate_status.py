@@ -68,3 +68,8 @@ class SquadmateStatus():
     def dead_mates(player):
         """Return all squadmates who are dead."""
         return _get_available_mates(player, status=-1)
+
+    @staticmethod
+    def final_mates(player):
+        """Return all squadmates who survived the Suicide Mission."""
+        return _get_available_mates(player, status=5)

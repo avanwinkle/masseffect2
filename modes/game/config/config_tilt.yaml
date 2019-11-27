@@ -1,22 +1,23 @@
 #config_version=5
 tilt:
-  warnings_to_tilt: 2
+  warnings_to_tilt: 3
+  multiple_hit_window: 1s
 
 slide_player:
   tilt_warning_1:
-    me_tilt_warning_1:
+    tilt_warning_1:
       force: true
     tilt_portrait:
       force: true
       target: lcd_right
   tilt_warning_2:
-    me_tilt_warning_2:
+    tilt_warning_2:
       force: true
     tilt_portrait:
       force: true
       target: lcd_right
   tilt:
-    me_tilt:
+    tilt:
       force: true
       priority: 10000
     tilt_portrait:
@@ -27,14 +28,14 @@ slide_player:
       action: remove
 
 slides:
-  me_tilt_warning_1:
+  tilt_warning_1:
     expire: 2s
     widgets:
       - type: text
         text: WARNING
         style: header_lg, row_main
       - widget: background_console
-  me_tilt_warning_2:
+  tilt_warning_2:
     expire: 2s
     widgets:
       - type: text
@@ -46,7 +47,7 @@ slides:
     widgets:
       - type: image
         image: portrait_tilt
-  me_tilt:
+  tilt:
     expire: 5s
     widgets:
       - type: text

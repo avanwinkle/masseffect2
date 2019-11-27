@@ -1,0 +1,21 @@
+#config_version=5
+mode:
+  start_events: start_mode_gameover
+  stop_events: stop_mode_gameover
+  priority: 600
+  use_wait_queue: true
+
+event_player:
+  slide_gameover_slide_removed: stop_mode_gameover
+
+slide_player:
+  mode_gameover_started:
+    end_of_game_slide:
+      action: play
+      expire: 10s
+
+slides:
+  end_of_game_slide:
+    - type: text
+      text: The End?
+      style: header_md, row_main

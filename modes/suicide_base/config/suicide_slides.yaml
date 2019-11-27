@@ -304,6 +304,29 @@ slides:
       - type: text
         text: Shoot ramp to try again
         style: body_md, row_sub
+  # Finale!
+  suicide_success_slide:
+    - type: text
+      text: Suicide Mission
+      style: header_sm, row_super, mission_title
+    - type: text
+      text: COMPLETE
+      style: header_lg, row_main
+    - type: text
+      text: "Commander Shepard\nsurvived with (player|final_squadmates) squadmates"
+      style: header_xs, row_sub_under
+    - widget: background_console
+  suicide_failure_slide:
+    - type: text
+      text: Suicide Mission
+      style: header_sm, row_super, mission_title
+    - type: text
+      text: COMPLETE
+      style: header_lg, row_main
+    - type: text
+      text: "Commander Shepard\ndid not survive the mission"
+      style: header_xs, row_sub_under
+    - widget: background_console
   portrait_omegarelay:
     - type: image
       image: portrait_suicide_omegarelay

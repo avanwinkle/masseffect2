@@ -223,7 +223,9 @@ modes:
   # Core Logic Modes:
   - attract_carousel
   - base
+  - bonus
   - createprofile
+  - gameover
   - global
   - field
   - instantinfo
@@ -231,7 +233,6 @@ modes:
   - missionselect
   - modeanalysis
   - pinstrat
-  - bonus
   - tilt
   - service
   # Support Modes
