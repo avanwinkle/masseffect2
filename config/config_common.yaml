@@ -201,7 +201,7 @@ machine_vars:
     value_type: float
     persist: false
   base_cooldown:
-    initial_value: 30
+    initial_value: 50
     value_type: int
     persist: false
   flipper_cancelling:
@@ -379,8 +379,6 @@ player_vars:
   power:
     initial_value: " "
     value_type: str
-  power_is_bonus:
-    initial_value: 0
   medigel:
     initial_value: 0
   minerals_total:

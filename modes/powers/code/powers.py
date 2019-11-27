@@ -5,6 +5,14 @@ from mpf.devices.shot_group import ShotGroup
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dropbank", "hitbank"]
 TEST_POWER = None
+DESCRIPTIONS = {
+    "adrenaline": "Pauses all timers\nfor 20 seconds",
+    "cloak": "Allows flippers to\nrotate lanes",
+    "armor": "Enables a 20s\nball save",
+    "drone": "Instant multiball or\nadd-a-ball",
+    "singularity": "Target hits count\nas lane hits",
+    "charge": "Hits a lit lane\nat random",
+}
 
 
 def filter_enabled_shots(x):
@@ -36,7 +44,6 @@ class Powers(Mode):
         self.add_mode_event_handler('award_power', self._award_power)
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
-        self.add_mode_event_handler('mode_powers_will_stop', self._complete)
 
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
@@ -53,12 +60,12 @@ class Powers(Mode):
         self.machine.game.player["power"] = power
         self.machine.events.post("power_awarded",
                                  power=power,
-                                 power_name=self._get_power_name(power))
+                                 power_name=self._get_power_name(power),
+                                 description=DESCRIPTIONS[power])
 
     def _complete(self, **kwargs):
-        player = self.machine.game.player
-        player["power"] = " "
-        player["power_is_bonus"] = 0
+        self.machine.game.player["power"] = " "
+        # Clear out specific handlers we added to manage the power while it was active
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
         self.machine.events.post("power_activation_complete")

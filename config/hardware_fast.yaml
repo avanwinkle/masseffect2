@@ -86,6 +86,7 @@ named_colors:
   color_ui_green_dark: 5b8c55
   color_ui_green: 5bff63
   color_ui_green_light: c4fe8d
+  color_ui_green_strong: 2adb23
 
 coils:
   c_flipper_left_main:

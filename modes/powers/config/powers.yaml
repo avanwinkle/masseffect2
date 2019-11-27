@@ -35,17 +35,17 @@ mode:
 
 event_player:
   # Enumerate each profile separately because they pass the state name as an arg
-  cooldown_shot_tech_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_tech_hit{current_player.power==" " and not device.counters.powers_cooldown.enabled}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_biotic_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_biotic_hit{current_player.power==" " and not device.counters.powers_cooldown.enabled}:
     award_power:
       power:
         value: (state)
         type: str
-  cooldown_shot_combat_hit{not device.counters.powers_cooldown.enabled}:
+  cooldown_shot_combat_hit{current_player.power==" " and not device.counters.powers_cooldown.enabled}:
     award_power:
       power:
         value: (state)
@@ -53,19 +53,15 @@ event_player:
   timer_activate_power_complete: activate_power
   # Coerce initial widgets
   enable_powers:
-    show_cooldown{current_player.power==" "}:
-      complete:
-        type: int
-        value: (1 - device.counters.powers_cooldown.value / machine.base_cooldown) * 92
     show_awarded_power{current_player.power!=" "}:
       power:
         value: current_player.power
         type: str
-  logicblock_powers_cooldown_hit:
+  logicblock_powers_cooldown_updated:
     update_cooldown_progress:
       complete:
         type: int
-        value: (1 - count / machine.base_cooldown) * 92  # Multiply by the height
+        value: (1 - value / machine.base_cooldown) * 92  # Multiply by the height
   power_awarded: show_awarded_power
   # Placeholders make these events faster
   player_shot_cooldown_shot_biotic:
@@ -95,6 +91,8 @@ counters:
     direction: down
     count_events: frenzy_hit
     disable_on_complete: true
+    enable_events:
+      - mode_powers_started{current_player.power==" "}
     restart_events:
       - power_activation_success
     persist_state: true
@@ -102,7 +100,7 @@ counters:
     control_events:
       - event: cooldown_shots_hit
         action: subtract
-        value: 1 # 10
+        value: 10
 
 multiballs:
   combat_drone:
@@ -268,10 +266,21 @@ slides:
   power_awarded_slide:
     - type: text
       text: Power Available!
-      style: header_sm, row_top, row_dmd_bottom, col_left_indent
+      style: header_xs, row_top, row_dmd_bottom, col_left_anchor
+      color: fbc795  # color_ui_orange
     - type: text
       text: (power_name)
-      style: header_md, row_main, col_left_indent
+      style: header_sm, row_super, col_left_anchor
+      color: 2adb23  # color_ui_green_strong
+    - type: text
+      text: (description)
+      style: header_md, row_main_under
+      color: ffffff
+    - type: text
+      text: "Hold both flippers 2s to activate"
+      style: body_xs, row_bottom, col_left_anchor
+      color: f3dc90  # color_ui_yellow
+    - widget: power_widget_(power)
     - widget: background_console
   power_active_slide:
     - widget: portrait_power_(power)_active
@@ -289,6 +298,7 @@ widget_player:
       action: remove
     power_cooldown_widget:
       action: remove
+  slide_power_awarded_slide_removed:
     power_widget_highlight:
       action: add
   mode_powers_will_stop:
@@ -297,7 +307,10 @@ widget_player:
   power_activation_complete:
     power_available_widget:
       action: remove
-
+    power_widget_highlight:
+      action: remove
+    power_widget:
+      action: remove
   # Widgets per power
   play_power_widget_singularity:
     power_widget_singularity:
