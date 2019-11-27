@@ -99,7 +99,8 @@ widget_styles:
     z: 200
   power_cooldown_badge:
     anchor_y: bottom
-    y: 250
+    # Cooldown starts 15px up from the bottom and is 90px high
+    y: 265
     z: 201
   power_mask_badge:
     anchor_y: bottom
@@ -311,13 +312,23 @@ animations:
       easing: in_sine
   pulse_power_cooldown:
     - property: opacity
-      value: 0.8
+      value: 0.5
       duration: 900ms
       easing: in_sine
       timing: with_previous
     - property: opacity
       value: 0.2
       duration: 900ms
+      easing: in_sine
+      repeat: true
+  pulse_power_highlight:
+    - property: opacity
+      value: 1.0
+      duration: 500ms
+      easing: in_sine
+    - property: opacity
+      value: 0.5
+      duration: 500ms
       easing: in_sine
       repeat: true
   power_cooldown_complete:

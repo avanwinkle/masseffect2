@@ -465,21 +465,32 @@ widgets:
     - type: text
       text: "Activating (player|power)"
       color: FFFFFF
-      style: row_sub_under, col_left_anchor
-      font_name: me123
-      font_size: 36
-      z: 103
+      style: header_xs, col_left_anchor
+      anchor_y: bottom
+      y: 312
+    - type: line
+      thickness: 1
+      points: 25, 302, 25, 308, 545, 308, 545, 302, 25, 302
+      color: "8d5b38"
+      z: 102
     - type: rectangle
-      color: 666666
+      color: "d68d64"
+      opacity: 0.2
       width: 0
       height: 6
-      style: row_sub_under, col_left_anchor
+      anchor_x: left
+      x: 25
+      anchor_y: top
+      y: 308
       z: 101
       animations:
         add_to_slide:
           - property: width
-            value: 448
+            value: 520
             duration: 2s
+          - property: opacity
+            value: 1.0
+            timing: with_previous
   power_widget_adrenaline:
     - type: image
       image: power_adrenaline

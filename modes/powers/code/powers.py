@@ -37,15 +37,6 @@ class Powers(Mode):
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
         self.add_mode_event_handler('mode_powers_will_stop', self._complete)
-        player = self.machine.game.player
-
-        # If we have a power already available, add it to the slide
-        if player["power"] in self.power_handlers:
-            # self._add_power_to_main_slide(self.player["power"])
-            self.machine.events.post("power_awarded",
-                                     power=player["power"],
-                                     power_name=self._get_power_name(player["power"]),
-                                     is_restore=True)
 
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
@@ -53,7 +44,6 @@ class Powers(Mode):
         try:
             self.power_handlers[power]()
             self.machine.events.post("power_activation_success", power=power)
-            self._add_power_to_main_slide(power, style="active")
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
@@ -104,10 +94,10 @@ class Powers(Mode):
         # Get all enabled targets, even those that are not lit, so we can rotate to them
         targets = self._get_power_shots(include_off=True)
         self.shot_group = ShotGroup(self.machine, "{}_group".format(self.name))
-        self.shot_group.rotation_enabled = True
         self.shot_group.config['shots'] = targets
-        self.handlers.append(self.add_mode_event_handler('cloak_rotate_left', self.shot_group.rotate_left))
-        self.handlers.append(self.add_mode_event_handler('cloak_rotate_right', self.shot_group.rotate_right))
+        self.shot_group.rotation_enabled = True
+        self.handlers.append(self.add_mode_event_handler('cloak_rotate_left', self.shot_group.event_rotate_left))
+        self.handlers.append(self.add_mode_event_handler('cloak_rotate_right', self.shot_group.event_rotate_right))
 
     def _activate_charge(self):
         # If there is an explicit charge target, shoot that
@@ -129,4 +119,4 @@ class Powers(Mode):
             # Find the shot that corresponds to this target so we can light the appropriate standup
             shot = next(iter(target.tags), lambda x: x.startswith("power_target_")).replace("power_target_", "")
             self.machine.events.post("enable_singularity_{}".format(shot))
-            self.handlers.append(self.add_mode_event_handler('singularity_{}_hit', target.hit))
+            self.handlers.append(self.add_mode_event_handler('singularity_{}_hit', target.event_hit))
