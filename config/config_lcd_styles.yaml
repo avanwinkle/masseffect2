@@ -4,6 +4,22 @@ text_strings:
 
 
 widget_styles:
+  # COLORS
+  #---------------------------
+  color_ui_yellow:
+    color: f3dc90
+  color_ui_orange_dark:
+    color: 8f541c
+  color_ui_orange:
+    color: fbc795 # 0.984, 0.78, 0.584
+  color_ui_green_dark:
+    color: 5b8c55
+  color_ui_green:
+    color: 5bff63
+  color_ui_green_light:
+    color: c4fe8d
+  color_ui_green_strong:
+    color: 2adb23 # 0.165, 0.859, 0.137
 
   # TEXT FORMATS
   #----------------------------
@@ -137,6 +153,16 @@ widget_styles:
     anchor_x: center
     x: 50%
   col_dmd_right: []
+  # Codex is 360 wide, 40 from right
+  col_codex_center:
+    anchor_x: center
+    x: right-220
+  col_codex_left:
+    anchor_x: left
+    x: right-400
+  col_codex_right:
+    anchor_x: right
+    x: right-40
 
   row_title:
     anchor_y: bottom
@@ -266,6 +292,31 @@ widget_styles:
     x: 50
     z: 120
 
+  # RESEARCH UPGRADES AND STORE
+  #----------------------------
+  research_title:
+    font_size: 16
+    font_name: me123
+    adjust_bottom: 0
+  research_option:
+    font_size: 22
+    color: fbc795
+    anchor_x: left
+    anchor_y: middle
+    x: 20
+    z: 120
+  research_description:
+    font_size: 28
+    halign: left
+  research_image:
+    anchor_x: right
+    x: right-40
+    anchor_y: top
+    y: top-52
+    z: 4
+  research_pricing:
+    font_size: 22
+
   # POWERS POSITIONS
   #---------------------------
   power_combat:
@@ -346,6 +397,14 @@ animations:
       value: 0
       duration: 500ms
       easing: in_sine
+  research_option_select:
+    - property: color, x, font_size
+      value: 0.165, 0.859, 0.137, 1, 35, 24
+      duration: 100ms
+  research_option_deselect:
+    - property: color, x, font_size
+      value: 0.984, 0.78, 0.584, 0.8, 20, 22
+      duration: 100ms
   sqicon_available:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
@@ -370,13 +429,13 @@ animations:
       value: CE0000
   specialist_select:
     - property: color, x, font_size
-      value: 0, 1, 0, 1, 80, 28
+      value: 0.165, 0.859, 0.137, 1, 80, 28
       duration: 200ms
   specialist_deselect:
     - property: color, x, font_size
-      value: 1, 1, 1, 0.6, 50, 24
+      value: 0.984, 0.78, 0.584, 0.8, 50, 24
       duration: 200ms
   specialist_dead:
     - property: color
-      value: 0.8, 0, 0, 1
+      value: 0.6, 0.6, 0.6, 0.8
       duration: 1s

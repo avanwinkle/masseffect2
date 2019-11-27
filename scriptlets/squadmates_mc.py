@@ -21,7 +21,7 @@ class MCSquadmateHandlers(Scriptlet):
     def on_load(self):
         """Initialize module and create event handlers."""
         self.log = logging.getLogger("SquadmatesMC")
-        self.log.setLevel(10)
+        self.log.setLevel(20)
         self.mc.events.add_handler("slide_squadicon_slide_created", self._update_sqicons)
         self.mc.events.add_handler("slide_huddle_slide_created", self._update_huddle)
         self.mc.events.add_handler("mode_suicide_base_started", self._update_sqicons, is_suicide=True)
@@ -34,7 +34,6 @@ class MCSquadmateHandlers(Scriptlet):
     def _get_slide(self, slide_name, display):
         display = self.mc.displays[display]
         for s in display.slides:
-            self.log.info(" - slide: {}".format(s))
             if s.name == slide_name:
                 return s
 
@@ -47,13 +46,12 @@ class MCSquadmateHandlers(Scriptlet):
         if not slide:
             return
 
-        self.log.info("Updating sqicons")
+        self.log.debug("Updating sqicons")
         if not self._sqicons:
             self._sqicons = {}
 
-        self.log.info("Current slide: {}".format(slide))
-        # self.log.info(dir(slide))
-        self.log.info("Current widgets: {}".format(slide.widgets))
+        self.log.debug("Current slide: {}".format(slide))
+        self.log.debug("Current widgets: {}".format(slide.widgets))
         if slide.name == "squadicon_slide":
             for container in slide.widgets:
                 widget = container.widget
@@ -75,12 +73,12 @@ class MCSquadmateHandlers(Scriptlet):
                     widget.color = color
                     widget.config["color"] = color
 
-                    self.log.info("Setting sqicon {} (status {}) to opacity {} color {}".format(
+                    self.log.debug("Setting sqicon {} (status {}) to opacity {} color {}".format(
                                   mate, status, widget.opacity, widget.color))
         else:
             self.log.error("Current slide is NOT squadicon")
 
-    def _update_selection_widgets(self, slide_name, widget_key, filter_fn=None, **kwargs):
+    def _update_selection_widgets(self, slide_name, widget_key, filter_fn=None, offset_last=False, **kwargs):
         parent_slide = self._get_slide(slide_name, "main")
         # Look for lcd_right as a way to determine LCD state, since we don't have access to machine vars
         is_lcd = self.mc.targets["lcd_right"].native_size[0] > 0
@@ -93,10 +91,11 @@ class MCSquadmateHandlers(Scriptlet):
                 if widget in filtered_widgets:
                     # Position the widgets in the order they were filtered
                     widget_idx = filtered_widgets.index(widget)
+                    do_offset = offset_last and (widget_idx == len(filtered_widgets) - 1)
                     if is_lcd:
-                        x, y = self._calculate_widget_pos_lcd(widget_idx, slide_name)
+                        x, y = self._calculate_widget_pos_lcd(widget_idx, slide_name, do_offset)
                     else:
-                        x, y = self._calculate_widget_pos_dmd(widget_idx, slide_name)
+                        x, y = self._calculate_widget_pos_dmd(widget_idx, slide_name, do_offset)
                     widget.x = x
                     widget.y = y
                     widget.opacity = 1
@@ -109,7 +108,7 @@ class MCSquadmateHandlers(Scriptlet):
         self._update_selection_widgets("huddle_slide", "specialist_", self.filter_specialists)
 
     def _update_store(self, **kwargs):
-        self._update_selection_widgets("store_slide", "purchase_", self.filter_store)
+        self._update_selection_widgets("store_slide", "purchase_", self.filter_store, offset_last=True)
 
     def filter_specialists(self, widgets, player):
         # Infiltration: use techs
@@ -132,7 +131,6 @@ class MCSquadmateHandlers(Scriptlet):
         return widgets_to_position
 
     def filter_store(self, widgets, player):
-        self.log.info("Filtering widgets for store: {}".format(widgets))
         current_options = player["store_options"].split("|")
         widgets_to_position = [0] * len(current_options)
         # Store the "nothing" widget so we can append it later
@@ -143,25 +141,31 @@ class MCSquadmateHandlers(Scriptlet):
                 nothing_widget = widget
             elif option in current_options:
                 opt = RESEARCH[option]
-                widget.text = "{} {}".format(opt.name, player["research_{}_level".format(option)] + 1)
+                # widget.text = "{} {}/6".format(opt.name, player["research_{}_level".format(option)] + 1)
+                widget.text = opt.name
                 # Preserve the order of the options
                 widgets_to_position[current_options.index(option)] = widget
         widgets_to_position.append(nothing_widget)
-        self.log.info("Research widgets to position: {}".format(widgets_to_position))
         return widgets_to_position
 
-    def _calculate_widget_pos_lcd(self, widget_idx, slide_name):
-        # Huddle options list from the top
+    def _calculate_widget_pos_lcd(self, widget_idx, slide_name, do_offset=False):
+        spacing = 50
+        # Huddle options list from the middle-top
         if slide_name == "huddle_slide":
             x = 50
-            y = 468 - (130 + widget_idx * 50)
-        # Store options list from the middle
+            y = 468 - (130 + widget_idx * spacing)
+        # Store options list from top, start at x 20
         elif slide_name == "store_slide":
-            x = 50
-            y = 234 - (widget_idx * 50)
+            x = 20
+            y = 468 - (100 + widget_idx * spacing)
+        if do_offset:
+            y -= spacing / 2
         return (x, y)
 
-    def _calculate_widget_pos_dmd(self, widget_idx, slide_name):
+    def _calculate_widget_pos_dmd(self, widget_idx, slide_name, do_offset=False):
+        spacing = 8
         x = 1 if (widget_idx < 3) else 44 if (widget_idx < 6) else 86
-        y = 18 - (8 * (widget_idx % 3))
+        y = 18 - (spacing * (widget_idx % 3))
+        if do_offset:
+            y -= spacing / 2
         return (x, y)

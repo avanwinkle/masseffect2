@@ -44,110 +44,254 @@ slides:
         image: portrait_store
   store_slide:
     - type: text
-      key: purchase_tick_interval
-      text: Heavy Skin Weave
-      style: specialist
-      animations:
-        store_tick_interval_highlighted: specialist_select
-        store_tick_interval_default: specialist_deselect
+      text: Upgrades
+      style: header_xs, row_title, col_left_indent, color_ui_green_light
     - type: text
       key: purchase_mineral_rate
-      text: Argus Scanner Array
-      style: specialist
+      text: Advanced Mineral Scanner
+      style: research_option
       animations:
-        store_mineral_rate_highlighted: specialist_select
-        store_mineral_rate_default: specialist_deselect
-    - type: text
-      key: purchase_ball_save_period
-      text: Damage Protection
-      style: specialist
-      animations:
-        store_ball_save_period_highlighted: specialist_select
-        store_ball_save_period_default: specialist_deselect
-    - type: text
-      key: purchase_random_ball_save
-      text: Redundant Field Generator
-      style: specialist
-      animations:
-        store_random_ball_save_highlighted: specialist_select
-        store_random_ball_save_default: specialist_deselect
-    - type: text
-      key: purchase_award_medigel
-      text: Medigel Capacity
-      style: specialist
-      animations:
-        store_award_medigel_highlighted: specialist_select
-        store_award_medigel_default: specialist_deselect
-    - type: text
-      key: purchase_double_medigel
-      text: Trauma Module
-      style: specialist
-      animations:
-        store_double_medigel_highlighted: specialist_select
-        store_double_medigel_default: specialist_deselect
+        store_mineral_rate_highlighted: research_option_select
+        store_mineral_rate_default: research_option_deselect
     - type: text
       key: purchase_power_tick_interval
       text: Biotic Duration
-      style: specialist
+      style: research_option
       animations:
-        store_power_tick_interval_highlighted: specialist_select
-        store_power_tick_interval_default: specialist_deselect
+        store_power_tick_interval_highlighted: research_option_select
+        store_power_tick_interval_default: research_option_deselect
     - type: text
       key: purchase_cooldown_rate
       text: Biotic Cooldown
-      style: specialist
+      style: research_option
       animations:
-        store_cooldown_rate_highlighted: specialist_select
-        store_cooldown_rate_default: specialist_deselect
+        store_cooldown_rate_highlighted: research_option_select
+        store_cooldown_rate_default: research_option_deselect
+    - type: text
+      key: purchase_ball_save_period
+      text: Damage Protection
+      style: research_option
+      animations:
+        store_ball_save_period_highlighted: research_option_select
+        store_ball_save_period_default: research_option_deselect
+    - type: text
+      key: purchase_tick_interval
+      text: Heavy Skin Weave
+      style: research_option
+      animations:
+        store_tick_interval_highlighted: research_option_select
+        store_tick_interval_default: research_option_deselect
+    - type: text
+      key: purchase_award_medigel
+      text: Medigel Capacity
+      style: research_option
+      animations:
+        store_award_medigel_highlighted: research_option_select
+        store_award_medigel_default: research_option_deselect
+    - type: text
+      key: purchase_random_ball_save
+      text: Redundant Field Generator
+      style: research_option
+      animations:
+        store_random_ball_save_highlighted: research_option_select
+        store_random_ball_save_default: research_option_deselect
+    - type: text
+      key: purchase_double_medigel
+      text: Trauma Module
+      style: research_option
+      animations:
+        store_double_medigel_highlighted: research_option_select
+        store_double_medigel_default: research_option_deselect
     - type: text
       key: purchase_nothing
-      text: Purchase Nothing
-      style: specialist
+      text: Exit
+      style: research_option
       animations:
-        store_nothing_highlighted: specialist_select
-        store_nothing_default: specialist_deselect
+        store_nothing_highlighted: research_option_select
+        store_nothing_default: research_option_deselect
+    # Right section: codex stuff
+    - type: image
+      image: codex_image_overlay
+      style: col_codex_right
+      anchor_y: top
+      y: top-52
+      z: 5
+    - type: image
+      image: codex_text_background
+      style: col_codex_right
+      anchor_y: bottom
+      y: 20
+      z: 2
     - widget: background_console
 
 widget_player:
-  minor_research_available:
-    research_widget:
+  update_store_selection:
+    research_detail_widget:
+      action: update
+      slide: store_slide
+    research_nothing_widget:
+      action: remove
+  clear_store_selection:
+    research_detail_widget:
+      action: remove
+    research_image_widget_credits:
       action: add
       slide: store_slide
-      widget_settings:
-        x: 250
-  minor_research_unavailable:
-    research_widget:
+      key: research_image_widget
+    research_nothing_widget:
+      action: update
+      slide: store_slide
+  store_item_highlighted.1{item=="tick_interval"}:
+    research_image_widget_lattice:
       action: add
       slide: store_slide
-      widget_settings:
-        x: 250
-  major_research_available:
-    research_widget:
+      key: research_image_widget
+  store_item_highlighted.2{item=="mineral_rate"}:
+    research_image_widget_scanner:
       action: add
       slide: store_slide
-      widget_settings:
-        x: 500
-  major_research_unavailable:
-    research_widget:
+      key: research_image_widget
+  store_item_highlighted.3{item=="ball_save_period"}:
+    research_image_widget_armor_ablative:
       action: add
       slide: store_slide
-      widget_settings:
-        x: 500
+      key: research_image_widget
+  store_item_highlighted.4{item=="random_ball_save"}:
+    research_image_widget_armor_burstshield:
+      action: add
+      slide: store_slide
+      key: research_image_widget
+  store_item_highlighted.5{item=="award_medigel"}:
+    research_image_widget_armor_microscanner:
+      action: add
+      slide: store_slide
+      key: research_image_widget
+  store_item_highlighted.6{item=="double_medigel"}:
+    research_image_widget_armor_trauma_module:
+      action: add
+      slide: store_slide
+      key: research_image_widget
+  store_item_highlighted.7{item=="power_tick_interval"}:
+    research_image_widget_biotics_neuralmask:
+      action: add
+      slide: store_slide
+      key: research_image_widget
+  store_item_highlighted.8{item=="cooldown_rate"}:
+    research_image_widget_biotics_hyperamp:
+      action: add
+      slide: store_slide
+      key: research_image_widget
 
 widgets:
-  research_widget:
+  research_detail_widget:
     - type: text
-      text: (title)
-      style: header_xs, row_super
+      text: (product)
+      style: research_title, color_ui_green_light, col_codex_center, row_title
+      z: 5
     - type: text
       text: (description)
-      style: body_sm, row_main
+      style: research_description, color_ui_orange
+      anchor_x: left
+      x: right-380
+      anchor_y: top
+      y: 204
+      z: 3
+      halign: left
     - type: text
-      text: (cost)
-      style: body_xs, row_sub, num
+      text: "(mineral_name):"
+      style: research_pricing, color_ui_yellow
+      number_grouping: true
+      casing: title
+      anchor_x: left
+      x: right-380
+      anchor_y: top
+      y: 86
+      z: 3
+      halign: left
     - type: text
-      text: (mineral)
-      style: body_xs, row_sub_under
+      text: "(cost)"
+      style: research_pricing, color_ui_green_strong
+      number_grouping: true
+      anchor_x: right
+      x: right-60
+      anchor_y: top
+      y: 86
+      z: 3
+    - type: text
+      text: "You have:"
+      style: research_pricing, color_ui_yellow
+      anchor_x: left
+      x: right-380
+      anchor_y: top
+      y: 56
+      z: 3
+    - type: text
+      text: (player_mineral)
+      number_grouping: true
+      style: research_pricing
+      color: DDDDDD
+      anchor_x: right
+      x: right-60
+      anchor_y: top
+      y: 56
+      z: 3
+  research_nothing_widget:
+    - type: text
+      text: "You will keep:"
+      style: research_pricing, color_ui_yellow
+      number_grouping: true
+      anchor_x: left
+      x: right-380
+      anchor_y: top
+      y: 204
+      z: 3
+      halign: left
+    - type: text
+      text: "(player|mineral_iridium) Iridium\n(player|mineral_platinum) Platinum\n(player|mineral_palladium) Palladium\n(player|mineral_eezo) Element Zero"
+      style: research_description, color_ui_orange
+      number_grouping: true
+      anchor_x: left
+      x: right-380
+      anchor_y: top
+      y: 165
+      z: 3
+      halign: left
+  research_image_widget_armor_ablative:
+    - type: image
+      image: codex_armor_ablative
+      style: research_image
+  research_image_widget_scanner:
+    - type: image
+      image: codex_scanner
+      style: research_image
+  research_image_widget_biotics_hyperamp:
+    - type: image
+      image: codex_biotics_hyperamp
+      style: research_image
+  research_image_widget_biotics_neuralmask:
+    - type: image
+      image: codex_biotics_neuralmask
+      style: research_image
+  research_image_widget_lattice:
+    - type: image
+      image: codex_lattice
+      style: research_image
+  research_image_widget_armor_trauma_module:
+    - type: image
+      image: codex_armor_trauma_module
+      style: research_image
+  research_image_widget_armor_microscanner:
+    - type: image
+      image: codex_armor_microscanner
+      style: research_image
+  research_image_widget_armor_burstshield:
+    - type: image
+      image: codex_armor_burstshield
+      style: research_image
+  research_image_widget_credits:
+    - type: image
+      image: codex_credits
+      style: research_image
 
 sound_player:
   # Use the research_options event to ensure MC listens for it?

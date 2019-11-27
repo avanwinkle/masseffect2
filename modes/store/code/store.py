@@ -46,7 +46,7 @@ class Store(Carousel):
     def mode_init(self):
         super().mode_init()
         self.log = logging.getLogger("Store")
-        self.log.setLevel(10)
+        self.log.setLevel(20)
         self.mineral = None
 
     def mode_start(self, **kwargs):
@@ -63,6 +63,7 @@ class Store(Carousel):
         for item in self._all_items:
             if item == h:
                 self.machine.events.post("store_{}_highlighted".format(item))
+                self.machine.events.post("store_item_highlighted", item=item)
             else:
                 self.machine.events.post("store_{}_default".format(item))
 

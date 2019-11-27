@@ -4,6 +4,86 @@ import logging
 import random
 from mpf.core.custom_code import CustomCode
 
+MAX_ITEMS = 4
+UPGRADES = {
+    "tick_interval": {
+        "name": "Heavy Skin Weave",
+        "description": "Extend all mode timers\nby {}%",
+        "amount": 0.05,
+        "mineral": "iridium",
+        "cost": 30000,
+        "product": "Lattice Shunting",
+        "image": "lattice",
+    },
+    "mineral_rate": {
+        "name": "Advanced Mineral Scanner",
+        "description": "Earn {}% more minerals\nwhen scanning",
+        "amount": 0.1,
+        "mineral": "iridium",
+        "cost": 90000,
+        "product": "Argus Scanner Array",
+        "image": "scanner"
+    },
+    "ball_save_period": {
+        "name": "Damage Protection",
+        "description": "Increase all ball save\ndurations by {}%",
+        "amount": 0.1,
+        "mineral": "palladium",
+        "cost": 30000,
+        "product": "Ablative VI",
+        "image": "armor_ablative",
+    },
+    "random_ball_save": {
+        "name": "Redundant Field Generator",
+        "description": "{}% chance of ball save\non drain (once per ball)",
+        "amount": 0.03,
+        "mineral": "palladium",
+        "cost": 60000,
+        "product": "Burst Regeneration",
+        "image": "armor_burstshield",
+    },
+    "award_medigel": {
+        "name": "Medigel Capacity",
+        "description": "Earn medigel {}% faster\nwhen completing\nreputation lanes",
+        "amount": 0.05,
+        "mineral": "platinum",
+        "cost": 25000,
+        "product": "Microscanner",
+        "image": "armor_microscanner",
+    },
+    "double_medigel": {
+        "name": "Trauma Module",
+        "description": "{}% chance that a levelup\nawards double medigel",
+        "amount": 0.1,
+        "mineral": "platinum",
+        "cost": 50000,
+        "product": "Medical VI",
+        "image": "armor_trauma_module",
+    },
+    "power_tick_interval": {
+        "name": "Biotic Duration",
+        "description": "Increase power durations\nby {}%",
+        "amount": 0.1,
+        "mineral": "eezo",
+        "cost": 2500,
+        "product": "Neural Mask",
+        "image": "biotics_neuralmask",
+    },
+    "cooldown_rate": {
+        "name": "Biotic Cooldown",
+        "description": "Accelerate power\ncooldown rate by {}%",
+        "amount": 0.1,
+        "mineral": "eezo",
+        "cost": 7500,
+        "product": "Smart Amplifier",
+        "image": "biotics_hyperamp"
+    },
+}
+
+
+def sort_keys_by_name(key):
+    return UPGRADES[key]["name"]
+
 
 class Upgrade:
     def __init__(self, name, description, mineral, cost):
@@ -17,10 +97,12 @@ class Upgrade:
 
 
 class ResearchUpgrade(Upgrade):
-    def __init__(self, name, description, perk, amount, mineral, cost):
+    def __init__(self, name, description, perk, amount, mineral, cost, product, image):
         super().__init__(name, description, mineral, cost)
         self.perk = perk
         self.amount = amount
+        self.product = product
+        self.image = image
 
     def __repr__(self):
         return "<ArmorUpgrade.{}:{} '{}''>".format(self.perk, self.amount, self.name)
@@ -29,11 +111,15 @@ class ResearchUpgrade(Upgrade):
         level = player["research_{}_level".format(self.perk)] + (1 if next_level else 0)
         return {
             "title": self.name,
+            "image": self.image,
             "full_title": "{} {}".format(self.name, level),
             "description": self.description.format(int(self.amount * 100 * level)),
             "mineral": self.mineral,
+            "mineral_name": "Element Zero" if self.mineral == "eezo" else self.mineral,
+            "player_mineral": player["mineral_{}".format(self.mineral)],
             "cost": self.cost,
-            "level": level
+            "level": level,
+            "product": "{} {}/6".format(self.product, level),
         }
 
     def check(self, player):
@@ -58,24 +144,7 @@ class ResearchUpgrade(Upgrade):
         player["mineral_{}".format(self.mineral)] -= self.cost
 
 
-RESEARCH = {
-    "tick_interval": ResearchUpgrade("Heavy Skin Weave", "Extend timers by {}%",
-                                     "tick_interval", 0.05, "iridium", 30000),
-    "mineral_rate": ResearchUpgrade("Argus Scanner Array", "Earn {}% more minerals",
-                                    "mineral_rate", 0.1, "iridium", 90000),
-    "ball_save_period": ResearchUpgrade("Damage Protection", "Increase ball saves by {}%",
-                                        "ball_save_period", 0.1, "palladium", 30000),
-    "random_ball_save": ResearchUpgrade("Redundant Field Generator", "{}% chance of ball save on drain",
-                                        "random_ball_save", 0.03, "palladium", 60000),
-    "award_medigel": ResearchUpgrade("Medigel Capacity", "Earn medigel {}% faster",
-                                     "award_medigel", 0.05, "platinum", 25000),
-    "double_medigel": ResearchUpgrade("Trauma Module", "{}% chance of double medigel",
-                                      "double_medigel", 0.1, "platinum", 50000),
-    "power_tick_interval": ResearchUpgrade("Biotic Duration", "Increase power duration by {}%",
-                                           "power_tick_interval", 0.1, "eezo", 2500),
-    "cooldown_rate": ResearchUpgrade("Biotic Cooldown", "Accelerate power cooldown by {}%",
-                                     "cooldown_rate", 0.1, "eezo", 7500),
-}
+RESEARCH = {key: ResearchUpgrade(perk=key, **value) for (key, value) in UPGRADES.items()}
 
 
 class Research(CustomCode):
@@ -92,6 +161,9 @@ class Research(CustomCode):
         self.machine.events.add_handler("check_double_medigel", self._check_double_medigel)
         # On drain, check for a random save
         self.machine.events.add_handler("ball_drain", self._check_random_ball_save)
+
+        # Track handlers we create for the store, so we can release them
+        self._store_handlers = []
 
     def get_purchaseable_options(self):
         options = []
@@ -132,6 +204,8 @@ class Research(CustomCode):
             return {"balls": balls - 1}
 
     def _on_purchase(self, **kwargs):
+        if kwargs["selection"] == "nothing":
+            return
         upgrade = RESEARCH[kwargs["selection"]]
         player = self.machine.game.player
         if not upgrade.check(player):
@@ -142,6 +216,21 @@ class Research(CustomCode):
 
     def _on_store(self, **kwargs):
         options = self.get_purchaseable_options()
-        result = random.sample(options, k=min(len(options), 3))
+        result = random.sample(options, k=min(len(options), MAX_ITEMS))
+        # Sort by name
+        result.sort(key=sort_keys_by_name)
         self.machine.game.player["store_options"] = "|".join(result)
         self.machine.events.post("research_options", options=result)
+
+        # Create handlers for store events
+        self._store_handlers.append(
+            self.machine.events.add_handler("store_item_highlighted", self._on_store_item))
+
+    def _on_store_item(self, **kwargs):
+        if kwargs["item"] == "nothing":
+            self.machine.events.post("clear_store_selection")
+        else:
+            upgrade = RESEARCH[kwargs["item"]]
+            # Return all the kwargs we need for that item
+            self.machine.events.post("update_store_selection",
+                                     **upgrade.to_kwargs(self.machine.game.player, next_level=True))

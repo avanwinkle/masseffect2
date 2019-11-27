@@ -1,7 +1,7 @@
 #config_version=5
 keyboard:
   "`":
-    event: start_mode_firewalker
+    event: start_mode_store
   # Advance major shots
   1:
     switch: s_left_orbit
