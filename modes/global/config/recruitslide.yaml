@@ -183,28 +183,28 @@ slides:
     widgets:
       - type: text
         text: (missionname)
-        style: header_xs, row_top, col_left_anchor, mission_title
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
       - type: text
         text: (score)
         style: recruitslide_score, row_top, col_right_anchor, num
         opacity: 0.5
       - type: text
         text: (mission_instructions)
-        style: header_sm, row_main, col_left_anchor
+        style: header_sm, row_main, col_left_anchor, color_ui_orange
       - type: text
         text: (mission_secondary)
-        style: body_sm, row_sub, col_left_anchor, dmd_hide
+        style: body_sm, row_sub, col_left_anchor, dmd_hide, color_ui_orange
         animations:
           show_slide: pulse_text_slow
       - type: text
         text: (base_missiontimer_tick)
-        style: timer_primary, row_gutter, col_right_indent
+        style: timer_primary, row_gutter, col_right_indent, color_ui_yellow
       - widget: background_console
   recruit_advance_slide:
     widgets:
       - type: text
         text: (slide_title)
-        style: header_xs, row_top, col_left_anchor, mission_title
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
       - type: text
         text: (squadmate)
         style: header_lg, row_main, col_left_anchor
@@ -212,19 +212,19 @@ slides:
       - type: text
         text: (slide_instruction)
         anchor_y: bottom
-        style: body_md, row_sub, col_left_anchor
+        style: body_md, row_sub, col_left_anchor, color_ui_orange
       - widget: background_console
   recruit_instructions_slide_lcd:
     widgets:
       - type: text
         text: (missionname)
-        style: header_md, row_top, col_left_anchor, mission_title
+        style: header_md, row_top, col_left_anchor, color_ui_green_light
       - type: text
         text: (instructions_main)
-        style: body_lg, row_main, col_left_anchor
+        style: body_md, row_main, col_left_anchor
       - type: text
         text: (instructions_sub)
-        style: body_md, row_sub_under, col_left_anchor
+        style: body_sm, row_sub_under, col_left_anchor
       - widget: dossier_(portrait)
   recruit_instructions_slide_dmd:
     widgets:
@@ -253,7 +253,7 @@ widgets:
   shots_remaining_widget:
     - type: text
       text: "Shots: (value)"
-      style: header_xs, row_gutter, col_left_center
+      style: header_xs, row_gutter, col_left_center, color_ui_yellow
   # secondary_timer_widget:
   #   - type: text
   #     text: (ticks_remaining)

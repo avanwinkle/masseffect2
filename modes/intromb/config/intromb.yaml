@@ -61,11 +61,11 @@ slide_player:
 slides:
   intromb_slide:
     - type: text
-      text: Abandon Ship!
+      text: "Evacuate the\nNormandy!"
       style: row_main, header_md
     - type: text
       text: (player|temp_counter) Crewmates Saved
-      style: body_sm, row_bottom
+      style: body_sm, row_sub
   intromb_portrait:
     # - type: video
     #   video: intro_mb

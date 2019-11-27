@@ -258,26 +258,24 @@ slides:
     widgets:
       - type: text
         text: Select a Mission
-        style: header_md, row_main
+        style: header_md, row_main, color_ui_green_light
       - type: text
         text: < FLIPPERS TO SELECT >
-        style: body_sm, row_sub_under, row_dmd_bottom
+        style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
       - widget: background_console
   missionselect_recruit_slide:
     priority: 1
     widgets:
       - type: text
         text: Recruit Your Squad
-        style: header_sm, row_top
-        opacity: 0.6
+        style: header_sm, row_top, color_ui_green_light
       - type: text
         text: (squadmate)
         style: header_md, row_main
         casing: title
       - type: text
         text: "Press Both Flippers\nTo Start Mission"
-        style: body_sm, row_sub_under, row_dmd_bottom
-        color: EEEEEE
+        style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
       - widget: missionselect_count_widget
       - widget: missionselect_timer_widget
       - widget: background_console
@@ -286,19 +284,18 @@ slides:
     widgets:
       - type: text
         text: Recruit Your Squad
-        style: header_sm, row_top
-        opacity: 0.6
+        style: header_sm, row_top, color_ui_green_light
       - type: text
         text: (squadmate)
         style: header_md, row_main
         casing: title
       - type: text
         text: Mission Starting in (missionselect_missionselect_timer_tick)
-        style: body_sm, row_sub_under, row_dmd_bottom
+        style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
         color: EEEEEE
       - type: text
         text: "\n(Press flippers to start immediately)"
-        style: body_xs, row_sub_under
+        style: body_xs, row_sub_under, color_ui_orange
         color: EEEEEE
       - widget: background_console
   missionselect_collectorship_slide:
@@ -306,7 +303,7 @@ slides:
     widgets:
       - type: text
         text: "Disabled\nCollector Vessel"
-        style: header_md, row_main, row_main_dmd_low
+        style: header_md, row_main, row_main_dmd_low, color_ui_orange
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_derelictreaper_slide:
@@ -314,7 +311,7 @@ slides:
     widgets:
       - type: text
         text: "Derelict Reaper"
-        style: header_md, row_main
+        style: header_md, row_main, color_ui_orange
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_suicide_slide:
@@ -322,9 +319,9 @@ slides:
     widgets:
       - type: text
         text: LAUNCH THE
-        style: header_sm, row_top
+        style: header_sm, row_top, color_ui_orange
       - type: text
-        text: $suicidemission
+        text: $suicidemission, color_ui_orange
         casing: upper
         style: header_lg
       - widget: background_console
@@ -333,7 +330,7 @@ slides:
     widgets:
       - type: text
         text: Pass for Now
-        style: header_md, row_main
+        style: header_md, row_main, color_ui_orange
       - widget: missionselect_count_widget
       - widget: missionselect_timer_widget
       - widget: background_console
@@ -353,4 +350,3 @@ slides:
 
 sound_player:
   missionselect_pass_selected: shep_i_should_go
-
