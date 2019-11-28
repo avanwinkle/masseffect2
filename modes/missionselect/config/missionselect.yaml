@@ -36,7 +36,7 @@ event_player:
     missionselect_missionselect_timer_tick:
       action: set
       # TODO: intelligently track whether "pass" is a valid option
-      int: 6 if (current_player.available_missions < 2 and current_player.casual) else 12
+      int: 8 if (current_player.available_missions < 2 and current_player.casual) else 18
 
 timers:
   missionselect_timer:
@@ -44,7 +44,7 @@ timers:
     end_value: 0
     tick_interval: 1.2s
     direction: down
-    start_running: false # WHILE TESTING, normally true
+    start_running: true
 
 show_player:
   mode_missionselect_started: missionselect_show
@@ -364,7 +364,7 @@ widgets:
       text: "Dossier: Archangel"
       style: codex_title
     - type: text
-      text: "Every mercenary on Omega is after\nthe rogue Archangel.search of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred bezerkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
+      text: "Every mercenary on Omega is after\nthe rogue Archangel.\n\nDefend his base by sealing off the\ngarage entrances before the mercs\ncan overwhelm your position."
       style: codex_text
     - widget: dossier_recruit_base
   dossier_recruitgrunt:
@@ -378,3 +378,92 @@ widgets:
       text: "Warlord Okeer has cloned Krogan in\nsearch of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred bezerkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
       style: codex_text
     - widget: dossier_recruit_base
+  dossier_recruitjack:
+    - type: image
+      image: codex_recruit_jack_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Convict"
+      style: codex_title
+    - type: text
+      text: "Cerberus has paid for the release\nof the convict Jack, but the Warden\nwould rather take Shepard prisoner.\n\nEscape the prison ship with Jack\nto get her on your squad."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitkasumi:
+    - type: image
+      image: codex_recruit_kasumi_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Thief"
+      style: codex_title
+    - type: text
+      text: "Kasumi must break into a high-\nsecurity vault and recover her\npartners greybox recorder before\nit falls into the wrong hands.\n\nHelp her get past the security\nsystems to gain her on your team."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitlegion:
+    - type: image
+      image: codex_recruit_legion_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Geth"
+      style: codex_title
+    - type: text
+      text: "The geth collective have split on\nwhether to follow the Reapers.\n\nHack the heretic mainframe to\ndisable their errant programming\nand deny the Reapers this ally."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitmordin:
+    - type: image
+      image: codex_recruit_mordin_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Professor"
+      style: codex_title
+    - type: text
+      text: "The professor Mordin Solus is\ntrying to cure the plague on Omega,\nbut the Blood Pack is in the way.\n\nFight your way to the ventilation\nsystem, insert the cure, and turn\nthe fans on to earn Mordin's aid."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitsamara:
+    - type: image
+      image: codex_recruit_samara_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Justicar"
+      style: codex_title
+    - type: text
+      text: "Samara must finish her pursuit of\na dangerous killer before she can\njoin your mission.\n\nBattle your way past the merc's\ngunship to find the evidence she\nneeds and gain her for your team."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruittali:
+    - type: image
+      image: codex_recruit_tali_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: Tali"
+      style: codex_title
+    - type: text
+      text: "The geth have attacked Tali's\nresearch team and pinned her in\nan observatory on Haestrom.\n\nDestroy the geth Colossus to break\nthe siege and recruit Tali for your\nsquad."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitthane:
+    - type: image
+      image: codex_recruit_thane_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Assassin"
+      style: codex_title
+    - type: text
+      text: "The elusive assassin Thane has a\ncontract that will take him to the\ntop of Dantius Towers.\n\nFight your way up and across the\nbridge to intercept him and ask\nfor his aid in your mission."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitzaeed:
+    - type: image
+      image: codex_recruit_zaeed_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: the Veteran"
+      style: codex_title
+    - type: text
+      text: "Twenty years ago Zaeed was\nbetrayed by his partner and left\nfor dead. Now he has a chance for\nrevenge.\n\nStorm the refinery and pursue his\nenemy to earn Zaeed's loyalty."
+      style: codex_text
+    - widget: dossier_recruit_base
+
