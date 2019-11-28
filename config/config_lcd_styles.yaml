@@ -317,6 +317,28 @@ widget_styles:
   research_pricing:
     font_size: 22
 
+  # CODEX ON THE RIGHT SCREEN
+  codex_title:
+    font_size: 16
+    font_name: me123
+    adjust_bottom: 0
+    color: c4fe8d # color_ui_green_light
+    anchor_y: top
+    y: top-20
+  codex_image:
+    anchor_y: top
+    y: top-52
+    z: 4
+  codex_text:
+    font_size: 20
+    halign: left
+    color: fbc795 #color_ui_orange
+    anchor_x: left
+    x: 78
+    anchor_y: top
+    y: 206
+    z: 6
+
   # POWERS POSITIONS
   #---------------------------
   power_combat:

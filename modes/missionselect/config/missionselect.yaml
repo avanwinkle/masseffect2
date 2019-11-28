@@ -44,7 +44,7 @@ timers:
     end_value: 0
     tick_interval: 1.2s
     direction: down
-    start_running: true
+    start_running: false # WHILE TESTING, normally true
 
 show_player:
   mode_missionselect_started: missionselect_show
@@ -219,6 +219,8 @@ slide_player:
   missionselect_recruit_highlighted.1{current_player.force_mission==0}:
     missionselect_recruit_slide:
       target: main
+    mission_dossier_slide:
+      target: lcd_right
     missionselect_portrait_derelictreaper:
       action: remove
       target: lcd_right
@@ -263,6 +265,8 @@ slides:
         text: < FLIPPERS TO SELECT >
         style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
       - widget: background_console
+  mission_dossier_slide:
+    - widget: dossier_recruit(squadmate)
   missionselect_recruit_slide:
     priority: 1
     widgets:
@@ -350,3 +354,27 @@ slides:
 
 sound_player:
   missionselect_pass_selected: shep_i_should_go
+
+widgets:
+  dossier_recruitgarrus:
+    - type: image
+      image: codex_recruit_garrus_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: Archangel"
+      style: codex_title
+    - type: text
+      text: "Every mercenary on Omega is after\nthe rogue Archangel.search of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred bezerkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_recruitgrunt:
+    - type: image
+      image: codex_recruit_grunt_saveload
+      style: codex_image
+    - type: text
+      text: "Dossier: The Warlord"
+      style: codex_title
+    - type: text
+      text: "Warlord Okeer has cloned Krogan in\nsearch of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred bezerkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
+      style: codex_text
+    - widget: dossier_recruit_base
