@@ -130,6 +130,12 @@ ball_holds:
       - store_complete
       - stop_mode_field
     release_all_events: store_complete
+  arrival_hold:
+    balls_to_hold: 3
+    hold_devices: bd_lock
+    enable_events: enable_arrival_hold
+    disable_events: mode_arrival_stopped
+    release_one_events: arrival_release_one
 
 multiball_locks:
   fmball_lock:

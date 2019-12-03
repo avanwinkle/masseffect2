@@ -6,295 +6,172 @@
 # The arrival multiball is available during field play after the Collector Ship
 # mission has been played. Hitting either of the Batarian hitbank targets will
 # light lock up to three balls (for Escaping Med Bay, Activating Cooling Rods,
-# and Powering Engines). On the third ball lock, a three-ball multiball begins.
+# and Powering Engines). On the third ball lock, a four-ball multiball begins.
 #
-# The multiball runs in four phases, each on a timer. The first three phases
-# have multiple lanes/targets lit to build value, and each phase has a ball
-# save that will restore a decreasing number: up to three balls in phase 1, two
-# balls in phase 2, and 1 ball in phase 3. At the end of phase 3, the ball save
-# is disabled and phase 4 begins.
+# The basic run of the multiball lights 3 lanes on a timer. Hitting a shot or
+# a timer runout disables the lit lanes and enables the other two (and the
+# timer restarts). The pattern continues where each hit/timeout swaps the
+# lit and unlit lanes, but hit lanes get "locked". When all five lanes are
+# locked, they all reset and the pattern repeats.
 #
-# Phase 4 features the targets lit to build a multiplier value, while the
-# "escape shot" slowly fades into a lit state (shooting it has no effect). When
-# the escape shot is lit, Phase 5 begins with the multipliers disabled and the
-# entire playfield dark except for the escape shot. Hitting the shot completes
-# the mode and awards a levelup (first time only).
+# At the same time, a frenzy is active and every switch hit brings the player
+# closer to the mass relay. When the hit count is complete, the lane shot
+# pattern stops and a ball hold opens in the kickback lane. For each ball the
+# player locks, they receive the full jackpot value accumulated from the lane
+# shots.
 #
-# The escape shot includes a lock/hold that will retain the active ball during
-# a show. The flippers are disabled during this show, allowing any remaining
-# multiball balls to drain. Play will resume after the trough has five balls.
-#
-# Timings in music: 0:00, 0:53, 1:05, 1:32, 1:46, 2:00, 2:12, 2:27 (ending & expl)
-#                   (53s) (12s) (27s) (14s) (14s) (12s) (15s)
-#                   Intro  Ph1   Ph2   Ph3   Ph3   Ph4   Ph5
+# If the player drains to one ball during the lane shots, the ball hold phase
+# activates immediately. After all the balls are either held or drained, the
+# mode ends with the player escaping (at least one ball held) or failing to
+# escape (no balls held).
 #####
 
 mode:
   start_events: start_mode_arrival
   stop_events: stop_mode_arrival, stop_wizards
-  events_when_started: mode_type_wizard_started, fmball_started, play_arrival
-  events_when_stopped: mode_type_wizard_stopped, fmball_stopped
+  events_when_started: mode_type_wizard_started, fmball_started, start_mode_frenzy
+  events_when_stopped: mode_type_wizard_stopped, fmball_stopped, stop_mode_frenzy
   priority: 1000
 
-counters:
-  arrival_phase:
-    starting_count: 1 # Start at phase one, even though it's zero
-    reset_events: mode_arrival_started
-    count_events: start_arrival_phase2, start_arrival_phase3, start_arrival_phase4, start_arrival_phase5
+event_player:
+  mode_arrival_started:
+    - enable_arrival_orbits
+  reset_arrival:
+    - enable_arrival_orbits
+  timer_arrival_timer_complete:
+    - enable_arrival_orbits{device.counters.arrival_orbits.value<3 and current_player.temp_multiplier==1}
+    - enable_arrival_ramps{device.counters.arrival_ramps.value<2 and current_player.temp_multiplier==0}
+  multiball_arrival_multiball_ended: enable_arrival_hold
+  logicblock_arrival_frenzy_counter_complete: enable_arrival_hold
+  logicblock_arrival_orbits_complete{device.counters.arrival_ramps.complete}:
+    - reset_arrival
+  logicblock_arrival_ramps_complete{device.counters.arrival_orbits.complete}:
+    - reset_arrival
 
 multiballs:
-  arrival_phase1:
-    ball_count: 3
+  arrival_multiball:
+    ball_count: 4
     ball_count_type: total
-    replace_balls_in_play: true
     ball_locks: bd_lock
-    shoot_again: -1
+    shoot_again: 12s
     start_events: mode_arrival_started
-    stop_events: start_arrival_phase2
-  arrival_phase2:
-    ball_count: 2
-    ball_count_type: total
-    shoot_again: -1
-    start_events: start_arrival_phase2
-    stop_events: start_arrival_phase3
 
-ball_saves:
-  arrival_phase3:
-    active_time: 0
-    balls_to_save: -1
-    early_ball_save_events: s_outlane_left_active, s_outlane_right_active
-    grace_period: 1s
-    auto_launch: true
-    enable_events:
-      # An active ball save will save leftover multiballs, so only enable during phase3 with one ball in play
-      - start_arrival_phase3{game.balls_in_play<=1}
-      - playfield_ball_count_change{balls==1 and device.counters.arrival_phase.value==3}
-    disable_events: start_arrival_phase4
+variable_player:
+  # Temp multiplier: 0 == orbits, 1 == ramps
+  mode_arrival_started:
+    temp_multiplier:
+      action: set
+      int: 0
+    temp_build_value:
+      action: set
+      int: machine.base_points
+  enable_arrival_orbits:
+    temp_multiplier:
+      action: set
+      int: 0
+  enable_arrival_ramps:
+    temp_multiplier:
+      action: set
+      int: 1
+  logicblock_arrival_ramps_counter_hit:
+    temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
+  logicblock_arrival_orbits_counter_hit:
+    temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
+  ball_hold_arrival_held_ball:
+    score: current_player.temp_build_value
 
-event_player:
-  start_arrival_phase1:
-    # Phase1 starts at 0
-    - play_arrival_phase1_1
-    # Phase2 starts at ~12s
-    - play_arrival_phase2_1|10s # A bit before the phase starts
-    - play_arrival_phase2_2|19s
-    - play_arrival_phase2_3|26s
-    # Phase3 starts at ~39s
-    - play_arrival_phase3_1|36s # A bit before the phase starts
-    - play_arrival_phase3_2|42s
-    - play_arrival_phase3_3|51s
-    # Phase4 starts at ~67
-    - play_arrival_phase4_1|64s
-    # Phase5 starts at ~79
-    - play_arrival_phase5_1|77s
-  start_arrival_finale:
-    - stop_mode_arrival
-  arrival_escapeshot_hit.1:
-    - stop_mode_arrival
-  arrival_escapeshot_hit.2:
-    levelup:
-      mission_name: Alpha Relay Destroyed
+timers:
+  arrival_timer:
+    start_value: 20
+    end_value: 0
+    direction: down
+    tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
+    restart_on_complete: true
+    start_running: true
 
-shot_profiles:
-  arrival_lane_profile:
-    show_when_disabled: false
-    states:
-      - name: one
-        show: arrival_lane_show_one
-        sync_ms: 1200
-      - name: two
-        show: arrival_lane_show_two
-        sync_ms: 1200
-      - name: three
-        show: arrival_lane_show_three
-        sync_ms: 1200
-      - name: off
-  arrival_target_profile:
-    show_when_disabled: false
-    states:
-      - name: lit
-        show: flash
-      - name: off
-        show: off
-  arrival_escape_profile:
-    advance_on_hit: false
-    show_when_disabled: false
-    states:
-      - name: charging
-        show: arrival_escape_charging_show
-      - name: lit
-        show: arrival_escape_lit_show
+counters:
+  # Count how many shots in each are hit, to avoid toggling to no shots
+  arrival_ramps_counter:
+    starting_count: 0
+    direction: up
+    count_events: arrival_ramps_lit_hit
+    count_complete_value: 2
+    # In theory, counter should reset + disable on complete
+    enable_events: mode_arrival_started, reset_arrival
+  arrival_orbits_counter:
+    starting_count: 0
+    direction: up
+    count_events: arrival_orbits_lit_hit
+    count_complete_value: 3
+    enable_events: mode_arrival_started, reset_arrival
+  arrival_frenzy_counter:
+    starting_count: 0
+    count_complete_value: 50
+    count_events: frenzy_hit
 
 shot_groups:
-  arrival_lane_shots:
-    shots: arrivallane_left_orbit, arrivallane_kickback, arrivallane_left_ramp, arrivallane_right_ramp, arrivallane_right_orbit
-    restart_events: mode_arrival_started, start_arrival_phase3
-    reset_events: start_arrival_phase3, arrival_lane_shots_off_complete
-    disable_events: start_arrival_phase2, start_arrival_phase4
-  arrival_target_shots:
-    shots: arrival_target1, arrival_target2, arrival_target3, arrival_target4, arrival_target5
-    restart_events: start_arrival_phase2, start_arrival_phase4
-    reset_events: arrival_target_shots_off_complete
-    disable_events: play_arrival, start_arrival_phase3, start_arrival_phase5
+  arrival_ramps:
+    shots: arrival_left_ramp, arrival_right_ramp
+    enable_events: enable_arrival_ramps
+    disable_events: enable_arrival_orbits, enable_arrival_hold
+    reset_events: reset_arrival
+  arrival_orbits:
+    shots: arrival_left_orbit, arrival_right_orbit, arrival_kickback
+    enable_events: enable_arrival_orbits
+    disable_events: enable_arrival_ramps, enable_arrival_hold
+    reset_events: reset_arrival
 
 shots:
-  arrivallane_left_orbit:
-    hit_events: sh_left_orbit_hit
-    profile: arrival_lane_profile
+  arrival_hold_shot:
+    enable_events: enable_arrival_hold
+    profile: color_flashing_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
-    tags: envshot_left_orbit
-  arrivallane_right_orbit:
-    hit_events: sh_right_orbit_hit
-    profile: arrival_lane_profile
-    show_tokens:
-      leds: l_right_orbit_shield_rgb
-    tags: envshot_right_orbit
-  arrivallane_left_ramp:
+      leds: light_lock_lit
+      color: color_arrival
+  arrival_left_ramp:
     hit_events: sh_left_ramp_hit
-    profile: arrival_lane_profile
+    disable_events: arrival_left_ramp_hit
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
-    tags: envshot_left_ramp
-  arrivallane_right_ramp:
+      leds: l_left_ramp_ring
+      color: color_arrival
+    tags: envshot_left_ramp, power_target, power_target_left_ramp
+  arrival_left_orbit:
+    hit_events: sh_left_orbit_hit
+    disable_events: arrival_left_orbit_hit
+    profile: lane_shot_profile
+    show_tokens:
+      leds: l_left_orbit_ring
+      color: color_arrival
+    tags: envshot_left_orbit, power_target, power_target_left_orbit
+  arrival_right_ramp:
     hit_events: sh_right_ramp_hit
-    profile: arrival_lane_profile
+    disable_events: arrival_right_ramp_hit
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
-    tags: envshot_right_ramp
-  arrivallane_kickback:
+      leds: l_right_ramp_ring
+      color: color_arrival
+    tags: envshot_right_ramp, power_target, power_target_right_ramp
+  arrival_right_orbit:
+    hit_events: sh_right_orbit_hit
+    disable_events: arrival_right_orbit_hit
+    profile: lane_shot_profile
+    show_tokens:
+      leds: l_right_orbit_ring
+      color: color_arrival
+    tags: envshot_right_orbit, power_target, power_target_right_orbit
+  arrival_kickback:
     hit_events: sh_kickback_hit
-    profile: arrival_lane_profile
+    disable_events: arrival_kickback_hit
+    profile: lane_shot_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
-    tags: envshot_kickback
-  arrival_target1:
-    switch: s_target1
-    profile: arrival_target_profile
-    show_tokens:
-      leds: l_standup_1
-  arrival_target2:
-    switch: s_target2
-    profile: arrival_target_profile
-    show_tokens:
-      leds: l_standup_2
-  arrival_target3:
-    switch: s_target3
-    profile: arrival_target_profile
-    show_tokens:
-      leds: l_standup_3
-  arrival_target4:
-    switch: s_target4
-    profile: arrival_target_profile
-    show_tokens:
-      leds: l_standup_4
-  arrival_target5:
-    switch: s_target5
-    profile: arrival_target_profile
-    show_tokens:
-      leds: l_standup_5
-  arrival_escapeshot:
-    switch: s_left_ramp_exit
-    profile: arrival_escape_profile
-    enable_events: start_arrival_phase4
-    advance_events: start_arrival_phase5
-    disable_events: start_arrival_finale
-    reset_events: mode_arrival_started
-    show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_kickback_ring
+      color: color_arrival
+    tags: envshot_kickback, power_target, power_target_kickback
 
-show_player:
-  play_arrival: ball_save_preshow
-  start_arrival_phase2:
-    ball_save_preshow:
-      action: stop
-    ball_save_show:
-      speed: 1
-  start_arrival_phase3:
-    arrival_relay_show:
-      speed: 0.5
-    ball_save_show:
-      speed: 2
-  start_arrival_phase4:
-    arrival_relay_show:
-      speed: 1
-    ball_save_show:
-      action: stop
-  start_arrival_phase5:
-    arrival_relay_show:
-      speed: 1.5
-
-shows:
-  arrival_lane_show_one:
-    - duration: 600ms
-      lights:
-        (leds): FFFFFF
-    - duration: 600ms
-      lights:
-        (leds): 000000
-  arrival_lane_show_two:
-    - duration: 300ms
-      lights:
-        (leds): 9999FF
-    - duration: 300ms
-      lights:
-        (leds): 000000
-  arrival_lane_show_three:
-    - duration: 150ms
-      lights:
-        (leds): 4444FF
-    - duration: 150ms
-      lights:
-        (leds): 000000
-  arrival_escape_charging_show:
-    - time: 0
-      lights:
-        (leds): 000000
-    - duration: 12s # Duration of phase 4
-      lights:
-        (leds):
-          color: BBBBBB
-          fade: 12s
-        l_gi_left_playfield:
-          color: 000000
-          fade: 12s
-        l_gi_lower_playfield:
-          color: 000000
-          fade: 12s
-  arrival_escape_lit_show:
-    - duration: 750ms
-      lights:
-        (leds):
-          color: FFFFFF
-          fade: 250ms
-    - duration: 500ms
-      lights:
-        (leds):
-          color: 000000
-          fade: 250ms
-  arrival_relay_show:
-    - time: 0
-      lights:
-        l_flash_back_panel_right:
-          color: 000000
-          fade: 2s
-    - time: 1
-      flashers:
-        l_flash_left_orbit: 120ms
-    - time: 2
-      lights:
-        l_flash_back_panel_right:
-          color: FFFFFF
-          fade: 2s
-    - time: 2.5
-      flashers:
-        l_flash_battering_ram: 120ms
-    - time: 3.5
-      flashers:
-        l_flash_right_ramp: 120ms
 
 slide_player:
-  play_arrival:
+  mode_arrival_started:
     arrival_slide:
       action: play
     arrival_portrait_1:
@@ -320,16 +197,16 @@ slides:
         image: portrait_arrival_phase_4
 
 sound_player:
-  play_arrival: arrival_music
+  mode_arrival_started: arrival_music
   play_arrival_phase1_1: arr_ken_i_can_still_override_engines
-  play_arrival_phase2_1: arr_annc_engine_at_25pct
-  play_arrival_phase2_2: arr_annc_engine_at_50pct
-  play_arrival_phase2_3: arr_annc_engine_at_75pct
-  play_arrival_phase3_1: arr_annc_engine_at_100pct
-  play_arrival_phase3_2: arr_annc_warning_collision_imminent
-  play_arrival_phase3_3: arr_annc_get_to_escape_shuttles
-  play_arrival_phase4_1: arr_shep_joker_i_need_a_pickup
-  play_arrival_phase5_1: arr_normandy_inbound
+  logicblock_arrival_frenzy_counter_updated.1{value==8}: arr_annc_engine_at_25pct
+  logicblock_arrival_frenzy_counter_updated.2{value==16}: arr_annc_engine_at_50pct
+  logicblock_arrival_frenzy_counter_updated.3{value==24}: arr_annc_engine_at_75pct
+  logicblock_arrival_frenzy_counter_updated.4{value==32}: arr_annc_engine_at_100pct
+  logicblock_arrival_frenzy_counter_updated.5{value==40}: arr_annc_warning_collision_imminent
+  logicblock_arrival_frenzy_counter_updated.6{value==45}: arr_annc_get_to_escape_shuttles
+  logicblock_arrival_frenzy_counter_complete: arr_shep_joker_i_need_a_pickup
+  ball_hold_arrival_hold_held_ball{balls_held==1}: arr_normandy_inbound
 
 sounds:
   arrival_music:
@@ -385,45 +262,3 @@ sounds:
   arr_harb_prepare_yourself:
     file: DLC_EXP_Part02_Int.716.ogg
     track: voice
-
-timers:
-  arrival_easytimer:
-    start_value: 0
-    direction: up
-    tick_interval: 500ms
-    control_events:
-      - event: play_arrival
-        action: start
-      - event: start_arrival_phase4
-        action: stop
-  arrival_hardtimer:
-    start_value: 0
-    direction: up
-    tick_interval: 500ms
-    control_events:
-      - event: start_arrival_phase4
-        action: start
-      - event: arrival_escapeshot_lit_hit
-        action: stop
-      - event: start_arrival_finale
-        action: stop
-
-widget_player:
-  logicblock_arrival_phase_updated:
-    arr_phase_widget:
-      action: update
-      slide: arrival_slide
-  start_arrival_phase4:
-    arr_multiplier_widget:
-      action: update
-      slide: arrival_slide
-
-widgets:
-  arr_phase_widget:
-    - type: text
-      text: Phase (value)
-      style: header_md, row_sub, col_left_anchor
-  arr_multiplier_widget:
-    - type: text
-      text: (player|temp_multiplier)X
-      style: header_xs, row_gutter, col_left_center
