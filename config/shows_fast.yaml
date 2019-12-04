@@ -10,6 +10,28 @@ shows:
       lights:
         l_hitbank_bottom: color_husk
         l_hitbank_top: color_shields
+  fw_packet_show:
+    - lights:
+        (leds): color_door_red%1
+        # (leds)_light_1: color_door_red%1
+        # (leds)_light_3: color_door_red%1
+        # (leds)_light_5: color_door_red%1
+    - lights:
+        (leds): color_door_orange%5
+        # (leds)_light_1: color_door_orange%5
+        # (leds)_light_3: color_door_orange%5
+        # (leds)_light_5: color_door_orange%5
+    - lights:
+        (leds): color_door_green%10
+        # (leds)_light_1: color_door_green%10
+        # (leds)_light_3: color_door_green%10
+        # (leds)_light_5: color_door_green%10
+  fw_complete_show:
+    - lights:
+        (leds): white%10
+        # (leds)_light_1: white%10
+        # (leds)_light_3: white%10
+        # (leds)_light_5: white%10
   # This show assumes 60s for time increments. Play the show faster as needed.
   lane_shot_hurryup_show:
     - time: 0

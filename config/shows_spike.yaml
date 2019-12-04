@@ -9,6 +9,20 @@ shows:
       lights:
         l_hitbanks: on
         light_hitbank_rgb: 000000
+  fw_packet_show:
+    - lights:
+        (leds): off
+    - shows:
+        color_flashing_default:
+          show_tokens:
+            color: 999999
+    - shows:
+        color_flashing_fast:
+          show_tokens:
+            color: ffffff
+  fw_complete_show:
+    - lights:
+        (leds): 999999
   normandy_escape_lanes:
     - time: 0
       lights:
