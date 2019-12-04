@@ -39,14 +39,27 @@ event_player:
   reset_arrival:
     - enable_arrival_orbits
   timer_arrival_timer_complete:
-    - enable_arrival_orbits{device.counters.arrival_orbits.value<3 and current_player.temp_multiplier==1}
-    - enable_arrival_ramps{device.counters.arrival_ramps.value<2 and current_player.temp_multiplier==0}
-  multiball_arrival_multiball_ended: enable_arrival_hold
+    - enable_arrival_orbits{device.counters.arrival_orbits_counter.value<3 and current_player.temp_multiplier==1}
+    - enable_arrival_ramps{device.counters.arrival_ramps_counter.value<2 and current_player.temp_multiplier==0}
+  multiball_arrival_multiball_ended:
+    # If the multiball ended before the hold is enabled, enable it
+    - enable_arrival_hold{not device.ball_holds.arrival_hold.enabled}
+  # If a ball drains and all the rest are in the hold, that's the end of the mode
+  ball_drain{game.balls_in_play==device.ball_holds.arrival_hold.held_balls}:
+    - stop_mode_arrival
   logicblock_arrival_frenzy_counter_complete: enable_arrival_hold
-  logicblock_arrival_orbits_complete{device.counters.arrival_ramps.complete}:
+  # When one counter is hit, switch to the other (if it has shots to hit)
+  logicblock_arrival_orbits_counter_hit{not device.counters.arrival_ramps_counter.completed}:
+    - enable_arrival_ramps
+  logicblock_arrival_ramps_counter_hit{not device.counters.arrival_orbits_counter.completed}:
+    - enable_arrival_orbits
+  # Reset if both counters are complete
+  logicblock_arrival_orbits_counter_complete{device.counters.arrival_ramps_counter.completed}:
     - reset_arrival
-  logicblock_arrival_ramps_complete{device.counters.arrival_orbits.complete}:
+  logicblock_arrival_ramps_counter_complete{device.counters.arrival_orbits_counter.completed}:
     - reset_arrival
+  # Stop frenzy when hold is enabled
+  enable_arrival_hold: stop_mode_frenzy
 
 multiballs:
   arrival_multiball:
@@ -77,7 +90,7 @@ variable_player:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
   logicblock_arrival_orbits_counter_hit:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
-  ball_hold_arrival_held_ball:
+  ball_hold_arrival_hold_held_ball:
     score: current_player.temp_build_value
 
 timers:
@@ -88,6 +101,9 @@ timers:
     tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
     restart_on_complete: true
     start_running: true
+    control_events:
+      - event: enable_arrival_hold
+        action: stop
 
 counters:
   # Count how many shots in each are hit, to avoid toggling to no shots
@@ -169,7 +185,6 @@ shots:
       color: color_arrival
     tags: envshot_kickback, power_target, power_target_kickback
 
-
 slide_player:
   mode_arrival_started:
     arrival_slide:
@@ -205,7 +220,7 @@ sound_player:
   logicblock_arrival_frenzy_counter_updated.4{value==32}: arr_annc_engine_at_100pct
   logicblock_arrival_frenzy_counter_updated.5{value==40}: arr_annc_warning_collision_imminent
   logicblock_arrival_frenzy_counter_updated.6{value==45}: arr_annc_get_to_escape_shuttles
-  logicblock_arrival_frenzy_counter_complete: arr_shep_joker_i_need_a_pickup
+  logicblock_arrival_frenzy_counter_completed: arr_shep_joker_i_need_a_pickup
   ball_hold_arrival_hold_held_ball{balls_held==1}: arr_normandy_inbound
 
 sounds:

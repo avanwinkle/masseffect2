@@ -117,7 +117,7 @@ event_player:
 
 ball_saves:
   default:
-    active_time: 20000 * current_player.research_ball_save_period_perk
+    active_time: 20 * current_player.research_ball_save_period_perk
     grace_period: 2s
     hurry_up_time: 5s
     enable_events:
@@ -129,6 +129,8 @@ ball_saves:
       - ball_save_recruitsave_enabled # Only allow one active save at a time
       - start_mode_normandyattack # We want the ball to drain when the attack starts
       - start_mode_suicide_base # Suicide mission plays by its own rules
+      - start_mode_overlord # Unlikely that a multiball will start while the save is still active
+      - start_mode_arrival
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
