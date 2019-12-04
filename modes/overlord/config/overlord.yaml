@@ -258,7 +258,7 @@ slides:
     widgets:
       - type: text
         text: OVERLORD
-        style: header_xs, row_top, col_left_anchor, mission_title
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
       - widget: background_console
   overlord_portrait:
     widgets:

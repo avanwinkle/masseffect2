@@ -60,6 +60,14 @@ event_player:
     - reset_arrival
   # Stop frenzy when hold is enabled
   enable_arrival_hold: stop_mode_frenzy
+  # Sound player won't do conditions
+  logicblock_arrival_frenzy_counter_updated:
+    - play_arrival_engine_25{value==60}
+    - play_arrival_engine_50{value==120}
+    - play_arrival_engine_75{value==180}
+    - play_arrival_engine_100{value==240}
+    - play_arrival_collision_imminent{value==255}
+    - play_arrival_get_to_escape_shuttles{value==299}
 
 multiballs:
   arrival_multiball:
@@ -122,8 +130,10 @@ counters:
     enable_events: mode_arrival_started, reset_arrival
   arrival_frenzy_counter:
     starting_count: 0
-    count_complete_value: 50
     count_events: frenzy_hit
+    # We can't math the value for the widget, but it's 300px wide
+    count_complete_value: 300
+    count_interval: 3
 
 shot_groups:
   arrival_ramps:
@@ -191,7 +201,9 @@ slide_player:
       action: play
     arrival_portrait_1:
       target: lcd_right
-  play_arrival_phase3_3:
+  enable_arrival_hold:
+    arrival_escape_slide:
+      action: play
     arrival_portrait_4:
       target: lcd_right
 
@@ -200,7 +212,26 @@ slides:
     widgets:
       - type: text
         text: ARRIVAL
-        style: header_sm, row_main, col_left_anchor
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
+      - type: text
+        text: (player|temp_build_value)
+        style: header_lg, row_main, col_left_anchor, num
+      - type: text
+        text: Jackpot Value
+        style: body_xs, row_sub, col_left_anchor
+        casing: uppercase
+      - widget: background_console
+  arrival_escape_slide:
+    widgets:
+      - type: text
+        text: ARRIVAL
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
+      - type: text
+        text: Escape!
+        style: header_md, row_main, col_left_anchor, num
+      - type: text
+        text: Lock balls for Jackpot
+        style: body_sm, row_sub, col_left_anchor
       - widget: background_console
   arrival_portrait_1:
     widgets:
@@ -211,15 +242,61 @@ slides:
       - type: image
         image: portrait_arrival_phase_4
 
+widget_player:
+  slide_arrival_slide_created:
+    arrival_frenzy_progress_widget:
+      action: add
+      slide: arrival_slide
+  logicblock_arrival_frenzy_counter_complete:
+    arrival_frenzy_progress_widget:
+      action: remove
+      slide: arrival_slide
+
+widgets:
+  arrival_frenzy_progress_widget:
+    - type: text
+      text: Alpha Relay Proximity
+      style: header_xs, row_bottom, col_right_anchor, color_ui_yellow
+      animations:
+        add_to_slide: pulse_text_slow
+    - type: line
+      points: 389, 17, 389, 35, 691, 35, 691, 17, 389, 17
+      thickness: 1
+      color: fbc795  # color_ui_orange
+      z: 101
+    - type: rectangle
+      width: 1
+      height: 16
+      anchor_x: left
+      anchor_y: bottom
+      x: 390
+      y: 18
+      z: 100
+      color: "AA0000"  # color_door_red
+      animations:
+        logicblock_arrival_frenzy_counter_updated:
+          - property: width
+            value: (value)
+    - type: rectangle
+      width: 300
+      height: 16
+      anchor_x: left
+      anchor_y: bottom
+      x: 390
+      y: 18
+      z: 99
+      color: FFFFFF
+      opacity: 0.1
+
 sound_player:
   mode_arrival_started: arrival_music
   play_arrival_phase1_1: arr_ken_i_can_still_override_engines
-  logicblock_arrival_frenzy_counter_updated.1{value==8}: arr_annc_engine_at_25pct
-  logicblock_arrival_frenzy_counter_updated.2{value==16}: arr_annc_engine_at_50pct
-  logicblock_arrival_frenzy_counter_updated.3{value==24}: arr_annc_engine_at_75pct
-  logicblock_arrival_frenzy_counter_updated.4{value==32}: arr_annc_engine_at_100pct
-  logicblock_arrival_frenzy_counter_updated.5{value==40}: arr_annc_warning_collision_imminent
-  logicblock_arrival_frenzy_counter_updated.6{value==45}: arr_annc_get_to_escape_shuttles
+  play_arrival_engine_25: arr_annc_engine_at_25pct
+  play_arrival_engine_50: arr_annc_engine_at_50pct
+  play_arrival_engine_75: arr_annc_engine_at_75pct
+  play_arrival_engine_100: arr_annc_engine_at_100pct
+  play_arrival_collision_imminent: arr_annc_warning_collision_imminent
+  play_arrival_get_to_escape_shuttles: arr_annc_get_to_escape_shuttles
   logicblock_arrival_frenzy_counter_completed: arr_shep_joker_i_need_a_pickup
   ball_hold_arrival_hold_held_ball{balls_held==1}: arr_normandy_inbound
 
