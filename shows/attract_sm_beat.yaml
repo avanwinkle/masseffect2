@@ -1,7 +1,7 @@
 #show_version=5
 - duration: 510ms
   lights:
-    color_shields: on
+    light_pf: on
   flashers:
     l_flash_back_panel_right: 80ms
 - duration: 510ms
@@ -10,7 +10,7 @@
     l_dragon_fire:
       color: black
       fade: 258ms
-    color_shields:
+    light_pf:
       color: black
       fade: 258ms
 - duration: 258ms

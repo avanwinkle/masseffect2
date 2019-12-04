@@ -1,5 +1,4 @@
 #config_version=5
-
 shows:
   corereset_show:
     - time: 0
@@ -111,3 +110,31 @@ shows:
     - time: '+2'
       lights:
         (leds): off
+
+shot_profiles:
+  lane_shot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: color_flashing_default
+        show_tokens:
+          fade: 20ms
+      - name: hit
+        show: off
+  lane_shot_to_on_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: color_flashing_default
+        show_tokens:
+          fade: 20ms
+      - name: hit
+        show: led_color
+  lane_shot_static:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: color_flashing_default
+        show_tokens:
+          fade: 20ms
+

@@ -44,7 +44,7 @@ event_player:
 
 config:
   - field_bumpers.yaml
-  - field_firewalker.yaml
+  # - field_firewalker.yaml # Not ready for Spike
   - field_recruit.yaml
   - field_shadowbroker.yaml
 

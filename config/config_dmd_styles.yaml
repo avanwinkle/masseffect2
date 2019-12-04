@@ -199,6 +199,23 @@ widget_styles:
     valign: bottom
     y: 9
 
+  # COLORS
+  #--------------------------------
+  color_ui_yellow:
+    color: EEEEEE
+  color_ui_orange_dark:
+    color: "444444"
+  color_ui_orange:
+    color: ffffff
+  color_ui_green_dark:
+    color: "555555"
+  color_ui_green:
+    color: dddddd
+  color_ui_green_light:
+    color: bbbbbb
+  color_ui_green_strong:
+    color: ffffff
+
   # SQUAD SPECIALISTS
   #--------------------------------
   specialist:
@@ -307,6 +324,11 @@ widget_styles:
     adjust_top: 1
     adjust_bottom: 4
     z: 1
+
+  # No right screen
+  codex_image: []
+  codex_title: []
+  codex_text: []
 
 animations:
   sqicon_available: []

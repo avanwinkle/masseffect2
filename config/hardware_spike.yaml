@@ -81,6 +81,13 @@ named_colors:
   dropbank_color_shadowbroker: ffffff
   color_kasumi_alarm: ffffff
   color_normandy_attack: "220000"
+  color_ui_yellow: EEEEEE
+  color_ui_orange_dark: "444444"
+  color_ui_orange: ffffff
+  color_ui_green_dark: "555555"
+  color_ui_green: dddddd
+  color_ui_green_light: bbbbbb
+  color_ui_green_strong: ffffff
 
 switches:
   s_start_button:
@@ -250,7 +257,7 @@ light_stripes:
 lights:
   l_null:
     number: 1-3
-    tags: light_bbsquad_jacob, light_bbsquad_miranda
+    tags: light_bbsquad_jacob, light_bbsquad_miranda, light_bbsquad
   l_backbox:
     number: 0-0
     tags: backbox
@@ -360,7 +367,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_left_orbit, light_alarm_left_orbit
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
-    tags: l_outlane, light_medigel
+    tags: l_outlane, light_medigel, l_left_medigel
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
     tags: lane_wedges, light_missionselect
@@ -389,7 +396,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_right_orbit, light_alarm_right_orbit
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
-    tags: l_outlane, outer_circles, light_medigel
+    tags: l_outlane, outer_circles, light_medigel, l_right_medigel
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
     tags: lane_arrows, light_firewalker, light_firewalker_right_ramp, light_alarm_right_ramp
@@ -406,25 +413,25 @@ lights:
     tags: outer_circles
   l_shield_baratheon: # Sigil Baratheon [#23]
     number: 9-5
-    tags: color_shields, color_shield_yellow, light_bbsquad_kasumi
+    tags: light_pf, color_shield_yellow, light_bbsquad_kasumi
   l_shield_greyjoy: # Sigil Greyjoy [#25]
     number: 9-7
-    tags: color_shields, color_shield_purple, light_bbsquad_jack
+    tags: light_pf, color_shield_purple, light_bbsquad_jack
   l_shield_lannister: # Sigil Lannister [#24]
     number: 9-6
-    tags: color_shields, color_shield_red, light_bbsquad_mordin
+    tags: light_pf, color_shield_red, light_bbsquad_mordin
   l_shield_martell: # Sigil Martell [#27]
     number: 9-9
-    tags: color_shields, color_shield_orange, light_bbsquad_grunt
+    tags: light_pf, color_shield_orange, light_bbsquad_grunt
   l_shield_stark: # Sigil Stark [#22]
     number: 9-4
-    tags: color_shields, color_shield_white, light_bbsquad_legion
+    tags: light_pf, color_shield_white, light_bbsquad_legion
   l_shield_targaryen: # Sigil Targaryen [#20]
     number: 9-2
-    tags: color_shields, color_shield_blue, light_bbsquad_garrus
+    tags: light_pf, color_shield_blue, light_bbsquad_garrus
   l_shield_tyrell: # Sigil Tyrell [#26]
     number: 9-8
-    tags: color_shields, color_shield_green, light_bbsquad_thane
+    tags: light_pf, color_shield_green, light_bbsquad_thane
   l_standup_1: # Standup 1 [#44]
     number: 9-37
     tags: l_targets
@@ -463,7 +470,7 @@ lights:
         number: 9-24
       blue:
         number: 9-25
-    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane, light_lane_right_ramp, l_right_ramp_ring
   l_action_button_rgb: # Lockdown R [#4]
     type: rgb
     channels:
@@ -483,7 +490,7 @@ lights:
         number: 10-24
       blue:
         number: 10-25
-    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, light_lock_entrance
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, light_lock_entrance, light_lane_left_ramp, l_left_ramp_ring
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: rgb
     channels:
@@ -493,7 +500,7 @@ lights:
         number: 10-10
       blue:
         number: 10-11
-    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed, light_lane_left_orbit, l_left_orbit_ring
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: rgb
     channels:
@@ -503,7 +510,7 @@ lights:
         number: 9-46
       blue:
         number: 9-47
-    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lane_kickback, l_kickback_ring
   l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
     type: rgb
     channels:
@@ -523,7 +530,7 @@ lights:
         number: 9-27
       blue:
         number: 9-28
-    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
+    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali, light_lane_right_orbit, l_right_orbit_ring
 
 coils:
   c_flipper_left_main:

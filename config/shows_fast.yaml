@@ -180,3 +180,34 @@ shows:
         l_(shot)_ring_light_4:
           color: AA
         l_(shot)_ring_light_3: off
+
+shot_profiles:
+  lane_shot_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_6_chase
+        speed: 12
+        show_tokens:
+          fade: 20ms
+      - name: hit
+        show: off
+  lane_shot_to_on_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_6_chase
+        speed: 12
+        show_tokens:
+          fade: 20ms
+      - name: hit
+        show: led_color
+  lane_shot_static:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_6_chase
+        sync_ms: 800
+        speed: 12
+        show_tokens:
+          fade: 20ms

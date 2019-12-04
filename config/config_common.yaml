@@ -237,10 +237,10 @@ modes:
   - service
   # Support Modes
   - frenzy
-  - powers
+  # - powers # Not ready for Spike
   - reputation
   - skillshot
-  - store
+  # - store # Not ready for spike
   # Environments:
   - environment
   - env_bloodpack
@@ -291,7 +291,7 @@ modes:
   - shadowbroker_hagalaz
   - shadowbroker_vasir
   # Side Missions:
-  - firewalker
+  # - firewalker # Not ready for Spike yet, only in Fast
   - harbinger
   - n7_assignments
   # Multiballs:
@@ -331,7 +331,7 @@ player_vars:
   assignments_completed:
     initial_value: 0
   available_missions:
-    initial_value: 0
+    initial_value: 1
   missionname:
     initial_value: " "
     value_type: str
@@ -458,7 +458,7 @@ player_vars:
   status_jacob:
     initial_value: 4
   status_jack:
-    initial_value: 0
+    initial_value: 3
   status_kasumi:
     initial_value: 0
   status_legion:

@@ -43,6 +43,7 @@ text_strings:
   power_drone: Combat Drone
   power_singularity: Singularity
   suicidemission: "Suicide\nMission"
+  missionselect_flippers: "Press Both Flippers\nTo Start Mission"
 
 widget_player:
   show_grid:

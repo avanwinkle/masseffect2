@@ -278,7 +278,7 @@ slides:
         style: header_md, row_main
         casing: title
       - type: text
-        text: "Press Both Flippers\nTo Start Mission"
+        text: $missionselect_flippers
         style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
       - widget: missionselect_count_widget
       - widget: missionselect_timer_widget

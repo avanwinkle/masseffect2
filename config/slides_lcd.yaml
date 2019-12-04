@@ -658,3 +658,23 @@ widgets:
       y: 20
     - type: image
       image: texture_console
+
+  # Videos
+  video_huddle_infiltration:
+    - type: video
+      video: suicide_huddle_infiltration
+      end_behavior: loop
+      anchor_x: left
+      x: -116
+  video_huddle_longwalk:
+    - type: video
+      video: suicide_huddle_longwalk
+      end_behavior: loop
+      anchor_x: left
+      x: -116
+  video_huddle_platforms:
+    - type: video
+      video: suicide_huddle_platforms
+      end_behavior: loop
+      anchor_x: left
+      x: -116

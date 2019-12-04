@@ -461,3 +461,4 @@ animations:
     - property: color
       value: 0.6, 0.6, 0.6, 0.8
       duration: 1s
+

@@ -348,25 +348,7 @@ slides:
   portrait_endrun:
     - type: image
       image: portrait_suicide_endrun
-  # Videos
-  video_huddle_infiltration:
-    - type: video
-      video: suicide_huddle_infiltration
-      end_behavior: loop
-      anchor_x: left
-      x: -116
-  video_huddle_longwalk:
-    - type: video
-      video: suicide_huddle_longwalk
-      end_behavior: loop
-      anchor_x: left
-      x: -116
-  video_huddle_platforms:
-    - type: video
-      video: suicide_huddle_platforms
-      end_behavior: loop
-      anchor_x: left
-      x: -116
+
 
 widgets:
   # Titles for the different modes

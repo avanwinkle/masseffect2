@@ -37,7 +37,7 @@ dmds:
 
 assets:
   images:
-    default: 
+    default:
       load: on_demand
 
 machine_vars:
@@ -58,6 +58,7 @@ text_strings:
   power_drone: Combat Drone
   power_singularity: Singularity
   suicidemission: "Suicide Mission"
+  missionselect_flippers: "> Flippers to Select <"
 
 slides:
   window_slide_container:

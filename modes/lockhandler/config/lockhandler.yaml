@@ -51,6 +51,58 @@ queue_relay_player:
     post: check_slide_queue
     wait_for: slide_queue_clear
 
+
+ball_holds:
+  missionselect_hold:
+    balls_to_hold: 1
+    hold_devices: bd_lock
+    debug: true
+    enable_events:
+      - enable_airlock_missionselect_hold
+      # Listen directly to this event, for expediency
+      - s_left_ramp_exit_active{mode.field.active and (current_player.status_garrus==2 or current_player.status_samara==2)}
+    disable_events:
+      - mode_field_stopped
+      - mode_missionselect_stopped
+      # Always compare player_num because players can get added during others' turns
+      - player_available_missions{player_num==current_player.number and value<=0}
+    release_all_events:
+      - mission_intro_complete
+      - emergency_disable_hold
+  suicide_hold:
+    balls_to_hold: 1
+    hold_devices: bd_lock
+    debug: true
+    enable_events: enable_transition_hold
+    disable_events: mode_suicide_huddle_will_stop
+    release_all_events: release_suicide_hold
+  captive_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    enable_events: enable_captive
+    disable_events: disable_captive
+    release_all_events: release_captive, disable_captive
+  store_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
+    enable_events:
+      - enable_store
+      - mode_field_started{current_player.store_enabled>0}
+    disable_events:
+      - store_complete
+      - stop_mode_field
+    release_all_events: store_complete
+  arrival_hold:
+    balls_to_hold: 3
+    hold_devices: bd_lock
+    enable_events: enable_arrival_hold
+    disable_events: mode_arrival_stopped
+    release_one_events: arrival_release_one
+
+
 # This lock needs to be here in lockhandler.yaml in order to be found in self.mode_devices
 multiball_locks:
   fmball_lock:
