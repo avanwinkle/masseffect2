@@ -2,7 +2,7 @@
 window:
   title: Mission Pinball Framework - Mass Effect 2
   resizable: false
-  fullscreen: auto
+  fullscreen: true
   exit_on_escape: false
   source_display: window
   left: 1680
