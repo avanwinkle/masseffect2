@@ -179,7 +179,13 @@ class SoundManager():
         print("Set path to your media source folder:")
         rawpath = input(">> ").strip()
         # Store full paths, not relative
-        source_path = rawpath.replace("~", os.environ['HOME'])
+        if "~" in rawpath:
+            root = os.environ.get('HOME') or os.environ.get('USERPROFILE')
+            if not root:
+                raise OSError("Unable to find home path in environment.")
+            source_path = rawpath.replace("~", root)
+        else:
+            source_path = rawpath
         f = open("./.mesound_path", "w")
         f.write(source_path)
         f.close()
