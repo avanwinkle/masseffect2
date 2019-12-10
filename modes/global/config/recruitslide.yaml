@@ -225,7 +225,8 @@ slides:
       - type: text
         text: (instructions_sub)
         style: body_sm, row_sub_under, col_left_anchor
-      - widget: dossier_(portrait)
+      # TODO: Replace old dossier images with intro videos
+      # - widget: dossier_(portrait)
   recruit_instructions_slide_dmd:
     widgets:
       - type: text

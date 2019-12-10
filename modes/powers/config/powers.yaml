@@ -231,7 +231,7 @@ shot_profiles:
   singularity:
     states:
       - name: lit
-        show: color_flashing_static
+        show: color_flashing_default
         priority: 1000
         show_tokens:
           color: color_barrier

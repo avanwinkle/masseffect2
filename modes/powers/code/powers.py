@@ -84,6 +84,7 @@ class Powers(Mode):
         shots = list(filter(filter_fn, self.machine.device_manager.collections["shots"].items_tagged(tag)))
 
         if shots:
+            self.log.debug("Found available shots for powers: {}".format(shots))
             return shots
         raise IndexError
 
@@ -123,7 +124,10 @@ class Powers(Mode):
     def _activate_singularity(self):
         targets = self._get_power_shots()
         for target in targets:
+            self.log.debug("Activating singularity for shot {}, which has tags {}".format(target.name, target.tags))
             # Find the shot that corresponds to this target so we can light the appropriate standup
-            shot = next(iter(target.tags), lambda x: x.startswith("power_target_")).replace("power_target_", "")
+            shot = next(x for x in target.tags if x.startswith("power_target_")).replace("power_target_", "")
+            self.log.debug(" -- found shot to enable: {}".format(shot))
             self.machine.events.post("enable_singularity_{}".format(shot))
-            self.handlers.append(self.add_mode_event_handler('singularity_{}_hit', target.event_hit))
+            self.handlers.append(self.add_mode_event_handler('singularity_{}_hit'.format(shot), target.event_hit))
+
