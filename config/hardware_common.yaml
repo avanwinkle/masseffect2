@@ -64,14 +64,6 @@ autofire_coils:
     disable_events: ball_ending, service_mode_entered, slingshots_off
     debug: true
 
-# kickbacks:
-  # dragon_kickback:
-  #   coil: c_kickback
-  #   switch: s_kickback
-  #   enable_events: enable_kickback
-  #   disable_events: disable_kickback, ball_hold_enable
-  #   debug: true
-
 playfields:
   playfield:
     default_source_device: bd_plunger

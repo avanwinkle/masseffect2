@@ -25,8 +25,6 @@ event_player:
     - start_mode_missionselect
     # Missionselect delays for the slide queue, but disable flippers immediately
     - flippers_off
-    # Emergency event to ensure the hold doesn't stay on too long
-    - emergency_disable_hold|15s
   mode_missionselect_will_stop:
     - flippers_on
   # Relay these events to be agnostic with lockhandler
@@ -55,6 +53,11 @@ event_player:
     - enable_captive_1{device.ball_devices.bd_lock.balls==1}
     - enable_captive_2{device.ball_devices.bd_lock.balls==2}
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
+  # Fire the hold post to capture a ball
+  s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled}:
+    - fire_hold_post
+  recruit_lit{squadmate=="garrus" or squadmate=="samara"}:
+    - fire_hold_post
 
 variable_player:
   overlord_ball_will_lock:
@@ -103,7 +106,6 @@ ball_holds:
       - player_available_missions{player_num==current_player.number and value<=0}
     release_all_events:
       - mission_intro_complete
-      - emergency_disable_hold
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold

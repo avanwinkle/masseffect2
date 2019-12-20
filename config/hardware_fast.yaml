@@ -34,7 +34,7 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 5s
     confirm_eject_type: target # default
-    entrance_count_delay: 700ms
+    entrance_count_delay: 1s
     player_controlled_eject_event: force_plunger_launch
     debug: true
     ball_search_order: 1
@@ -61,14 +61,8 @@ ball_devices:
     debug: true
     ball_search_order: 20
   bd_hold:
-    ball_capacity: 1
-    hold_coil: c_hold_post
-    hold_coil_release_time: 1s
-    # hold_switches: s_left_ramp_exit
-    hold_events:
-      - s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled}
-      - recruit_lit{squadmate=="garrus" or squadmate=="samara"}
-    entrance_switch: s_left_ramp_exit
+    eject_coil: c_hold_post_release
+    ball_switches: s_missionselect
     debug: true
     ball_search_order: 10
 
@@ -104,7 +98,7 @@ coils:
   c_plunger:
     number: 1-1
     default_pulse_ms: 120  # Increased from Spike 18, bumped from 40
-    default_pulse_power: 0.9
+    default_pulse_power: 1.0
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
@@ -137,16 +131,22 @@ coils:
     number: 1-5
     default_pulse_ms: 30  # Bumped up from 25
     pulse_events: ball_search_phase_1
-  c_hold_post:
+  c_hold_post_up:
     # MOVED while the 3208 is burned out
     # number: 1-2
-    number: 0-0
-    default_pulse_ms: 35
-    default_hold_power: 0.182  # 0.08 buzzes a lot, but less is too weak
-    enable_events: hold_post_enable
-    disable_events: hold_post_disable
+    number: 0-1
+    default_pulse_ms: 50
+    pulse_events:
+      - fire_hold_post
+      - enable_transition_hold
     debug: true
     tags: coil_missionselect
+  c_hold_post_release:
+    number: 0-0
+    default_pulse_ms: 40
+    debug: true
+    pulse_events:
+      - release_suicide_hold
   c_lock_release:
     number: 0-2
     default_pulse_ms: 50  # Increase from Spike 32
@@ -162,16 +162,9 @@ coils:
     enable_events: enable_gates
     disable_events: disable_gates
     pulse_events: ball_search_phase_1
-  # UNUSED ADDRESSES
-  c_kickback:
-    number: 0-1
-  # c_dragon:
-  #   number: 0-0
-  c_sword:
-    number: 0-3
 
 switches:
-  # BOARD 0-C (Purple)
+  # BOARD 1-C (Purple)
   s_dropbank_bottom:
     number: 1-16
   s_dropbank_middle:
@@ -188,7 +181,7 @@ switches:
     number: 1-22
   s_target5:
     number: 1-23
-  # BOARD 0-B (Blue)
+  # BOARD 1-B (Blue)
   s_plunger_lane:
     number: 1-8
     debounce: normal  # Let the ball set a moment before auto-kicking
@@ -208,7 +201,7 @@ switches:
     number: 1-14
   s_trough6:
     number: 1-15
-  # BOARD 0-A (Pink)
+  # BOARD 1-A (Pink)
   s_flipper_left:
     number: 1-0
     tags: left_flipper
@@ -231,7 +224,7 @@ switches:
   s_left_ramp_exit:
     number: 1-7
     tags: switch_hold_entrance
-  # BOARD 0-D (Green)
+  # BOARD 1-D (Green)
   s_missionselect:
     number: 1-24
   s_hitbank_top:
@@ -243,14 +236,12 @@ switches:
   s_outlane_right:
     number: 1-28
   # NOT USED: 1-29
-  s_battering_ram:
-    number: 1-29
   s_right_slingshot:
     number: 1-30
   s_return_lane_right:
     number: 1-31
     ignore_window_ms: 1000
-  # BOARD 1
+  # BOARD 2 (UPPER)
   s_bumper_bottom:
     number: 2-0
     tags: bumper
@@ -273,7 +264,7 @@ switches:
   s_right_ramp_exit:
     number: 2-7
     ignore_window_ms: 1100
-  # BOARD 2
+  # BOARD 0
   s_lock_1:
     number: 0-0
     type: NC
