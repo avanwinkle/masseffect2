@@ -36,7 +36,7 @@ shows:
         (leds): (color)
     - duration: 400ms
       lights:
-        (leds): off
+        (leds): black
         l_null: (color)
   color_flashing_fast:
     - duration: 200ms
@@ -44,7 +44,7 @@ shows:
         (leds): (color)
     - duration: 200ms
       lights:
-        (leds): off
+        (leds): black
         l_null: (color)
   color_alternating_default:
     - duration: 400ms

@@ -28,14 +28,14 @@ event_player:
   mode_missionselect_will_stop:
     - flippers_on
   # Relay these events to be agnostic with lockhandler
-  sw_lock_entrance_active{mode["global"].active and mode.device.multiball_locks.fmball_lock.enabled}:
+  advance_fmball_lock:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
       total_balls_locked:
-        value: device.multiball_locks.fmball_lock.locked_balls + 1
+        value: total_balls_locked
         type: int
     arrival_ball_will_lock{device.achievements.arrival.state!="disabled"}:
       total_balls_locked:
-        value: device.multiball_locks.fmball_lock.locked_balls + 1
+        value: total_balls_locked
         type: int
   # Hold open the gates if no balls are there, or quickly pop the gates
   # if a ball is there that we don't want to lock or hold
@@ -59,6 +59,22 @@ event_player:
   recruit_lit{squadmate=="garrus" or squadmate=="samara"}:
     - fire_hold_post
 
+queue_event_player:
+  multiball_lock_fmball_lock_locked_ball:
+    queue_event: fmball_checking_store
+    events_when_finished: advance_fmball_lock
+
+queue_relay_player:
+  mode_missionselect_starting:
+    post: check_slide_queue
+    wait_for: slide_queue_clear
+  mode_store_starting:
+    post: check_slide_queue
+    wait_for: slide_queue_clear
+  fmball_checking_store:
+    post: fmball_check_store
+    wait_for: store_complete
+
 variable_player:
   overlord_ball_will_lock:
     persist_lock:
@@ -75,11 +91,6 @@ variable_player:
     persist_lock:
       action: set
       int: 0
-
-queue_relay_player:
-  mode_missionselect_starting:
-    post: check_slide_queue
-    wait_for: slide_queue_clear
 
 ball_saves:
   airlock_save:
@@ -122,16 +133,18 @@ ball_holds:
     release_all_events: release_captive, disable_captive
   store_hold:
     balls_to_hold: 1
+    priority: 202
     debug: true
     hold_devices: bd_lock
     # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
     enable_events:
-      - enable_store
-      - mode_field_started{current_player.store_enabled>0}
+      - enable_store{current_player.persist_lock==0}
+      - mode_field_started{current_player.store_enabled>0 and current_player.persist_lock==0}
     disable_events:
-      - store_complete
+      - store_item_selected
       - stop_mode_field
-    release_all_events: store_complete
+      - enable_fmball_lock
+    release_all_events: store_item_selected
   arrival_hold:
     balls_to_hold: 3
     hold_devices: bd_lock
@@ -143,6 +156,7 @@ multiball_locks:
   fmball_lock:
     balls_to_lock: 3
     balls_to_replace: 2
+    priority: 101
     lock_devices: bd_lock
     reset_count_for_current_player_events:
       - fmball_stopped

@@ -55,7 +55,8 @@ event_player:
     - start_mode_field
   start_mode_store:
     - stop_mode_field
-  mode_store_will_stop:
+  # Restart field after shopping unless we're going into a multiball
+  mode_store_will_stop{device.multiball_locks.fmball_lock.locked_balls<3}:
     - start_mode_field
 
 flasher_player:

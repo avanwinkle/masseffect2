@@ -10,7 +10,7 @@ mode:
   start_events: start_mode_store
   stop_events: stop_mode_store, ball_will_end, store_item_selected
   events_when_started: flippers_off
-  events_when_stopped: flippers_on
+  events_when_stopped: flippers_on, store_complete
   code: store.Store
   priority: 1100
 
@@ -19,6 +19,11 @@ mode_settings:
   select_item_events: flipper_cancel
   next_item_events: s_flipper_right_inactive
   previous_item_events: s_flipper_left_inactive
+
+queue_relay_player:
+  balldevice_bd_trough_ball_eject_attempt:
+    post: store_blocking_trough_eject
+    wait_for: store_item_selected
 
 slide_player:
   mode_store_started:

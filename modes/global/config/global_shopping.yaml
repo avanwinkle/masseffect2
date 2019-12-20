@@ -17,19 +17,20 @@ event_player:
   research_check_passed: enable_store
   research_check_failed: store_unaffordable
   ball_hold_store_hold_held_ball: start_mode_store
-  # Are we coming back after the store?
-  mode_field_started{device.ball_holds.store_hold.balls_held>0}: store_complete
+  fmball_check_store:
+    - start_mode_store{current_player.store_enabled==1}
+    - store_complete{current_player.store_enabled==0}
   enable_store:
     queue_slide:
       slide: store_available_slide
-      portrait: upgrades  # TODO: Get a portrait for the store
+      portrait: upgrades
 
 variable_player:
   storetargets_hit:
     mineral_eezo: 10
   research_check_passed:
     store_enabled: 1
-  store_complete:
+  start_mode_store:
     store_enabled:
       action: set
       int: 0
