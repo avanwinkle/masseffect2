@@ -100,12 +100,26 @@ class Powers(Mode):
 
     def _activate_cloak(self):
         # Get all enabled targets, even those that are not lit, so we can rotate to them
+        # TODO: Update shots when new ones are lit and the timer is still active?
         targets = self._get_power_shots(include_off=True)
+        self.log.debug("Creating cloak shot group with targets {}".format(targets))
         self.shot_group = ShotGroup(self.machine, "{}_group".format(self.name))
         self.shot_group.config['shots'] = targets
         self.shot_group.rotation_enabled = True
-        self.handlers.append(self.add_mode_event_handler('cloak_rotate_left', self.shot_group.event_rotate_left))
-        self.handlers.append(self.add_mode_event_handler('cloak_rotate_right', self.shot_group.event_rotate_right))
+        self.shot_group._debug_to_file = True
+        # self.handlers.append(self.add_mode_event_handler('logicblock_cloak_rotate_left_complete', self.shot_group.event_rotate_left))
+        # self.handlers.append(self.add_mode_event_handler('logicblock_cloak_rotate_right_complete', self.shot_group.event_rotate_right))
+        self.handlers.append(self.add_mode_event_handler(
+            'flipper_cancel',
+            self._rotate_cloak))
+
+    def _rotate_cloak(self, **kwargs):
+        # TODO: Update MPF with triggering_switch kwarg to allow rotation
+        direction = "right" if kwargs.get("triggering_switch") == 2 else "left"
+        self.log.debug("Rotating cloak in direction {}, kwargs {}".format(direction, kwargs))
+        self.log.debug("Shot group is: {}".format(self.shot_group))
+        self.shot_group.rotate(direction=direction)
+        self.log.debug("Done!")
 
     def _activate_charge(self):
         # If there is an explicit charge target, shoot that

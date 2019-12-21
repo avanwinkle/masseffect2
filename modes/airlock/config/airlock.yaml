@@ -133,7 +133,6 @@ ball_holds:
     release_all_events: release_captive, disable_captive
   store_hold:
     balls_to_hold: 1
-    priority: 202
     debug: true
     hold_devices: bd_lock
     # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
@@ -156,7 +155,6 @@ multiball_locks:
   fmball_lock:
     balls_to_lock: 3
     balls_to_replace: 2
-    priority: 101
     lock_devices: bd_lock
     reset_count_for_current_player_events:
       - fmball_stopped

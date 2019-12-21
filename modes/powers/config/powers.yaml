@@ -140,17 +140,6 @@ ball_saves:
     grace_period: 1s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
 
-sequences:  # No way to enable/disable a sequence_shot, so sequence instead?
-  cloak_rotate_left:
-    enable_events: power_activation_success{power=="cloak"}
-    disable_events: power_activation_complete
-    events:
-      - s_flipper_left_active
-      - flipper_cancel
-    reset_events:
-      - mode_powers_started
-      - s_flipper_left_inactive
-
 shot_groups:
   cooldown_shots:
     shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
