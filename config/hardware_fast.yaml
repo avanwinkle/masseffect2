@@ -102,7 +102,7 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 18
+    default_pulse_ms: 19  # 20 felt much but 18 jams
     debug: true
     # pulse_power: 2
   c_bumper_left:

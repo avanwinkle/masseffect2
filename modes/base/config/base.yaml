@@ -98,7 +98,7 @@ event_player:
   # Mission resume events need to be here because base is how we enable the shot
   player_shot_missionresume_shot_enabled{value==False}:
     - disable_missionresume
-  flipper_cradle:
+  flipper_cradle{not device.timers.activate_power.running}:
     - start_mode_instantinfo
   flipper_cradle_release:
     - stop_mode_instantinfo
