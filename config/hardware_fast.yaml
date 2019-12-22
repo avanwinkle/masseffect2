@@ -46,7 +46,7 @@ ball_devices:
     eject_targets: bd_plunger
     eject_timeouts: 1500ms
     auto_fire_on_unexpected_ball: False
-    eject_coil_jam_pulse: 15ms
+    eject_coil_jam_pulse: 45ms
     confirm_eject_switch: s_plunger_lane
     ball_search_order: 2
   bd_lock:
@@ -89,7 +89,7 @@ coils:
   c_flipper_left_main:
     number: 1-7
     default_pulse_ms: 80  # Increased from Spike 35
-    default_pulse_power: 0.8
+    default_pulse_power: 0.9 # Was 0.8 but can't backhand left ramp. Up to 0.9?
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
@@ -102,7 +102,7 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 19  # 20 felt much but 18 jams
+    default_pulse_ms: 20 # 20 felt much but 19 jams
     debug: true
     # pulse_power: 2
   c_bumper_left:
@@ -143,7 +143,7 @@ coils:
     tags: coil_missionselect
   c_hold_post_release:
     number: 0-0
-    default_pulse_ms: 40
+    default_pulse_ms: 45
     debug: true
     pulse_events:
       - release_suicide_hold

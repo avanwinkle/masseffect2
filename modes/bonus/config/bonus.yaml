@@ -16,7 +16,7 @@ mode_settings:
       player_score_entry: credits
     - event: bonus_minerals
       # Mineral values are already weighted againts base points
-      score: (current_player.planets * current_player.mineral_total) / 150
+      score: (current_player.planets * current_player.mineral_total) / 50
     - event: bonus_assignments
       score: (machine.base_points / 100 * 3)
       player_score_entry: earned_assigments_completed

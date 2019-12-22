@@ -109,8 +109,8 @@ show_player:
 shows:
   medigel_show:
     - lights:
-        l_left_outlane: on
-        l_right_outlane: on
+        l_left_medigel: on
+        l_right_medigel: on
 
 slide_player:
   play_medigel_slide:

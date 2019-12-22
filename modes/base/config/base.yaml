@@ -19,27 +19,24 @@ event_player:
     - start_mode_environment
     - enable_orbitswitches
     - reset_missionselect_bypass
+    # If we are starting a new game, give some instructional audio
+    # If we are starting a game and have recruited, different sounds
+    # Disable this line for debug speed
+    - play_intro_show{not settings.intro_mb}
   # Give skillshot a higher priority than global, to avoid race condition with planets
   mode_base_started.20{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_global{device.achievements.suicidemission.state!="started"}
-    - play_intro_show{device.achievements.collectorship.state=="disabled" and current_player.resume_mission==" "}
   # Fun Normandy attack multiball shenanigans to start
   mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
     - start_mode_intromb
   # After the normandy attack multiball, proceed as usual
   mode_intromb_will_stop:
     - start_mode_global
-    - play_intro_show
     - start_mode_skillshot
     - flippers_on
-  # If we are starting a new game, give some instructional audio
-  # If we are starting a game and have recruited, different sounds
-  #### DISABLE for faster playtesting
-  play_intro_show{current_player.squadmates_count>4 and device.achievements.collectorship.state=="disabled"}:
-    - play_gameintro_recruits_long{current_player.ball==1}
-    - play_gameintro_recruits_short{current_player.ball==3}
+    - play_intro_show
   mode_base_will_stop:
     - stop_mode_global
     - stop_mode_lockhandler
@@ -612,9 +609,9 @@ sound_pools:
     track: voice
     type: random_force_all
     sounds:
-      - illusive_more_dossiers
-      - miranda_more_recruiting_options
-      - shepard_more_people_we_have_the_better
+      - illusive_more_dossiers{device.achievements.collectorship.state=="disabled"}
+      - miranda_more_recruiting_options{device.achievements.collectorship.state!="disabled"}
+      - shepard_more_people_we_have_the_better{device.achievements.collectorship.state!="disabled"}
   gameintro_recruits_short:
     track: voice
     type: random_force_all
