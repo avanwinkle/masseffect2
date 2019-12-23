@@ -34,7 +34,7 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 5s
     confirm_eject_type: target # default
-    entrance_count_delay: 1s
+    entrance_count_delay: 700ms
     player_controlled_eject_event: force_plunger_launch
     debug: true
     ball_search_order: 1
@@ -94,7 +94,7 @@ coils:
   c_flipper_right_main:
     number: 1-4
     default_pulse_ms: 80  # Increased from Spike 35
-    default_pulse_power: 0.8
+    default_pulse_power: 0.9
     default_hold_power: 0.125
   c_plunger:
     number: 1-1
@@ -143,9 +143,10 @@ coils:
     tags: coil_missionselect
   c_hold_post_release:
     number: 0-0
-    default_pulse_ms: 45
+    default_pulse_ms: 50  # Bumped from 45, which sometimes failed to release
     debug: true
     pulse_events:
+      - release_hold_post
       - release_suicide_hold
   c_lock_release:
     number: 0-2
