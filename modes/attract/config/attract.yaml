@@ -52,6 +52,10 @@ sound_player:
       action: load
     illusive_already_compiled_dossiers_five:
       action: load
+    firewalker_music_1:
+      action: load
+    firewalker_music_2:
+      action: load
   game_start: gui_splashstart
 
 

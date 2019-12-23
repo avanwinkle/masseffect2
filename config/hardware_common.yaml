@@ -71,4 +71,6 @@ playfields:
     enable_ball_search: true
     ball_search_timeout: 10s
     ball_search_interval: 1s
+    ball_search_block_events: flipper_cradle, service_mode_entered
+    ball_search_unblock_events: flipper_cradle_release, service_mode_exited
 

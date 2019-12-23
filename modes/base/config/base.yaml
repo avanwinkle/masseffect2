@@ -334,9 +334,9 @@ shows:
           expire: 5s
     - time: 1
       events:
-        - play_gameintro_norecruits_long_four{current_player.ball==1 and current_player.casual}
-        - play_gameintro_norecruits_long_five{current_player.ball==1 and not current_player.casual}
-        - play_gameintro_norecruits_short{current_player.ball==3}
+        - play_gameintro_four_dossiers{current_player.ball==1 and current_player.casual}
+        - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual}
+        - play_gameintro_short{current_player.ball==3}
 
 slide_player:
   n7_assignment_shot_hit:
@@ -564,15 +564,14 @@ slides:
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
-  play_gameintro_norecruits_long_four:
+  play_gameintro_four_dossiers:
     illusive_already_compiled_dossiers_four:
       events_when_stopped: ball1_gameintro_complete
-  play_gameintro_norecruits_long_five:
+  play_gameintro_five_dossiers:
     illusive_already_compiled_dossiers_five:
       events_when_stopped: ball1_gameintro_complete
-  play_gameintro_norecruits_short: gameintro_norecruits_short
-  play_gameintro_recruits_long: gameintro_recruits_long
-  play_gameintro_recruits_short: gameintro_recruits_short
+  play_gameintro_long: gameintro_long
+  play_gameintro_short: gameintro_short
   levelup:
     music_mission_success:
       action: play
@@ -599,26 +598,21 @@ sound_player:
       action: unload
 
 sound_pools:
-  gameintro_norecruits_short:
+  gameintro_long:
     track: voice
-    type: sequence
-    sounds:
-      - shep_ill_need_a_really_good_team
-      - illusive_find_mordin
-  gameintro_recruits_long:
-    track: voice
-    type: random_force_all
+    type: random
     sounds:
       - illusive_more_dossiers{device.achievements.collectorship.state=="disabled"}
       - miranda_more_recruiting_options{device.achievements.collectorship.state!="disabled"}
       - shepard_more_people_we_have_the_better{device.achievements.collectorship.state!="disabled"}
-  gameintro_recruits_short:
+  gameintro_short:
     track: voice
-    type: random_force_all
+    type: random
     sounds:
       - illusive_youll_get_who_you_need
       - illusive_your_team_will_need_to_be_strong
-
+      - shep_ill_need_a_really_good_team
+      - illusive_find_mordin{current_player.status_mordin<4}
 sounds:
   galaxy_whoosh:
     file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
