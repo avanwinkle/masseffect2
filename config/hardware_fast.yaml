@@ -486,9 +486,9 @@ lights:
   l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-22  # shadowbroker mission start
     type: grb
-    tags: light_pf, light_lock_lit, light_shadowbroker_start, l_store, lane_wedges
+    tags: light_pf, light_lock_lit, light_shadowbroker_start, l_store, lane_wedges, light_extraball
     default_on_color: ff1f00  # color_shadowbroker
-  # When we get a separate light for the store, move l_store to it
+  # When we get a separate light for the store, move l_store and light_extraball to it
 
   l_bbsquad_garrus:
     number: 2-5

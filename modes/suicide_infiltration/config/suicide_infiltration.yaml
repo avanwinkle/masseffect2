@@ -233,7 +233,7 @@ sound_player:
 
 show_player:
   ball_save_suicide_save_enabled:
-    color_flashing:
+    color_flashing_default:
       action: play
       key: suicide_save_show
       show_tokens:

@@ -300,7 +300,7 @@ show_player:
     flash:
       key: extraball_lit_show
       show_tokens:
-        leds: l_kickback_arrow_amber
+        leds: light_extraball
   extra_ball_awarded:
     extraball_lit_show:
       action: stop
@@ -335,8 +335,9 @@ shows:
           expire: 5s
     - time: 1
       events:
-        - play_gameintro_four_dossiers{current_player.ball==1 and current_player.casual}
-        - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual}
+        - play_gameintro_four_dossiers{current_player.ball==1 and current_player.casual and device.achievements.collectorship.state=="disabled"}
+        - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual and device.achievements.collectorship.state=="disabled"}
+        - play_gameintro_long{current_player.ball==1 and device.achievements.collectorship.state!="disabled"}
         - play_gameintro_short{current_player.ball==3}
 
 slide_player:
@@ -606,12 +607,12 @@ sound_pools:
       - illusive_more_dossiers{device.achievements.collectorship.state=="disabled"}
       - miranda_more_recruiting_options{device.achievements.collectorship.state!="disabled"}
       - shepard_more_people_we_have_the_better{device.achievements.collectorship.state!="disabled"}
+      - illusive_your_team_will_need_to_be_strong
   gameintro_short:
     track: voice
     type: random
     sounds:
       - illusive_youll_get_who_you_need
-      - illusive_your_team_will_need_to_be_strong
       - shep_ill_need_a_really_good_team
       - illusive_find_mordin{current_player.status_mordin<4}
 sounds:
