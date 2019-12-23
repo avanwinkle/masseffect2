@@ -314,7 +314,8 @@ show_player:
   player_extra_balls{player_num==current_player.number and value==0}:
     extraball_lit_show:
       action: stop
-  play_intro_show:
+  # Don't play an intro show if we have a mission to resume
+  play_intro_show{current_player.resume_mission==" "}:
     introshow_missions:
       loops: 0
 

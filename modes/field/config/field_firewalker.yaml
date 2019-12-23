@@ -48,7 +48,7 @@ shots:
     enable_events:
       - mode_field_started{current_player.fwps_lo==0 and current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3)}
     disable_events:
-      - mode_field_started{current_player.fwps_lo==1 or (current_player.status_grunt==4 and current_player.status_zaeed<3)}
+      - mode_field_started{current_player.fwps_lo==2 or (current_player.status_grunt==4 and current_player.status_zaeed<3)}
   fw_packet_kickback:
     hit_events: sh_kickback_hit
     profile: fw_packet_profile
@@ -57,7 +57,7 @@ shots:
     enable_events:
       - mode_field_started{current_player.fwps_kb==0 and current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3)}
     disable_events:
-      - mode_field_started{current_player.fwps_kb==1 or (current_player.status_jack==4 and current_player.status_legion<3)}
+      - mode_field_started{current_player.fwps_kb==2 or (current_player.status_jack==4 and current_player.status_legion<3)}
   fw_packet_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: fw_packet_profile
@@ -66,7 +66,7 @@ shots:
     enable_events:
       - mode_field_started{current_player.fwps_lr==0 and current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3)}
     disable_events:
-      - mode_field_started{current_player.fwps_lr==1 or (current_player.status_garrus==4 and current_player.status_samara<3)}
+      - mode_field_started{current_player.fwps_lr==2 or (current_player.status_garrus==4 and current_player.status_samara<3)}
   fw_packet_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: fw_packet_profile
@@ -75,7 +75,7 @@ shots:
     enable_events:
       - mode_field_started{current_player.fwps_rr==0 and current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3)}
     disable_events:
-      - mode_field_started{current_player.fwps_rr==1 or (current_player.status_kasumi==4 and current_player.status_thane<3)}
+      - mode_field_started{current_player.fwps_rr==2 or (current_player.status_kasumi==4 and current_player.status_thane<3)}
   fw_packet_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: fw_packet_profile
@@ -84,7 +84,7 @@ shots:
     enable_events:
       - mode_field_started{current_player.fwps_ro==0 and current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3)}
     disable_events:
-      - mode_field_started{current_player.fwps_ro==1 or (current_player.status_mordin==4 and current_player.status_tali<3)}
+      - mode_field_started{current_player.fwps_ro==2 or (current_player.status_mordin==4 and current_player.status_tali<3)}
 
 shot_profiles:
   fw_packet_profile:
@@ -134,6 +134,6 @@ shows:
         (ledring)_light_5: color_door_green%10
   fw_complete_show:
     - lights:
-        (ledring)_light_1: white%10
-        (ledring)_light_3: white%10
-        (ledring)_light_5: white%10
+        (ledring)_light_1: white%5
+        (ledring)_light_3: white%5
+        (ledring)_light_5: white%5

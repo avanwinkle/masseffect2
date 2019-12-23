@@ -47,18 +47,38 @@ event_player:
 variable_player:
   # After a mission, mark the shot as complete or reset it
   firewalker_mission_complete.10:
-    fwps_lo{current_player.fwps_lo==1}: 1
-    fwps_kb{current_player.fwps_kb==1}: 1
-    fwps_lr{current_player.fwps_lr==1}: 1
-    fwps_rr{current_player.fwps_rr==1}: 1
-    fwps_ro{current_player.fwps_ro==1}: 1
+    fwps_lo{current_player.fwps_lo==1}:
+      action: set
+      int: 2
+    fwps_kb{current_player.fwps_kb==1}:
+      action: set
+      int: 2
+    fwps_lr{current_player.fwps_lr==1}:
+      action: set
+      int: 2
+    fwps_rr{current_player.fwps_rr==1}:
+      action: set
+      int: 2
+    fwps_ro{current_player.fwps_ro==1}:
+      action: set
+      int: 2
   # If the mission fails, drains, whatever, drop the shot back to zero
   mode_firewalker_will_stop:
-    fwps_lo{current_player.fwps_lo==1}: -1
-    fwps_kb{current_player.fwps_kb==1}: -1
-    fwps_lr{current_player.fwps_lr==1}: -1
-    fwps_rr{current_player.fwps_rr==1}: -1
-    fwps_ro{current_player.fwps_ro==1}: -1
+    fwps_lo{current_player.fwps_lo==1}:
+      action: set
+      int: 0
+    fwps_kb{current_player.fwps_kb==1}:
+      action: set
+      int: 0
+    fwps_lr{current_player.fwps_lr==1}:
+      action: set
+      int: 0
+    fwps_rr{current_player.fwps_rr==1}:
+      action: set
+      int: 0
+    fwps_ro{current_player.fwps_ro==1}:
+      action: set
+      int: 0
 
 timers:
   fwtimer:
