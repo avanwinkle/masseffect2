@@ -56,9 +56,9 @@ ball_devices:
     eject_events: lock_eject_one_ball
     eject_all_events: game_ended, lock_eject_all
     eject_coil_enable_time: 280ms, 250ms, 235ms
-    eject_timeouts: 3s
-    exit_count_delay: 2s
-    ball_missing_timeouts: 5s
+    eject_timeouts: 1500ms
+    exit_count_delay: 1s
+    ball_missing_timeouts: 2500ms  # In case of balldevice_bd_lock_ball_missing
     debug: true
     ball_search_order: 20
   bd_hold:

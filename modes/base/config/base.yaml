@@ -128,6 +128,7 @@ ball_saves:
       - start_mode_suicide_base # Suicide mission plays by its own rules
       - start_mode_overlord # Unlikely that a multiball will start while the save is still active
       - start_mode_arrival
+      - player_lost_balls{value>0}
     auto_launch: true
     balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

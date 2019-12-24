@@ -40,7 +40,7 @@ event_player:
   # Hold open the gates if no balls are there, or quickly pop the gates
   # if a ball is there that we don't want to lock or hold
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled and not device.ball_holds.arrival_hold.enabled}:
+  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and current_player.lost_balls==0 and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled and not device.ball_holds.arrival_hold.enabled}:
     - bypass_lock_release_pulse_long{device.ball_devices.bd_lock.balls==0}
     - bypass_lock_release_pulse_short{device.ball_devices.bd_lock.balls>0}
   # Start suicide huddle when a ball is captured
@@ -91,13 +91,20 @@ variable_player:
     persist_lock:
       action: set
       int: 0
+  # If we lose a ball, catch the drain relay
+  mode_airlock_started:
+    lost_balls:
+      action: set
+      int: 0
+  balldevice_bd_lock_ball_missing:
+    lost_balls: 1
 
 ball_saves:
   airlock_save:
     balls_to_save: 1
     enable_events:
-      - balldevice_bd_lock_ejecting_ball{not mode.suicide_huddle.active}
-      - bypass_lock_release_pulse_short
+      - balldevice_bd_lock_ejecting_ball{not mode.suicide_huddle.active and current_player.lost_balls==0}
+      - bypass_lock_release_pulse_short{current_player.lost_balls==0}
     active_time: 3s
     auto_launch: true
 

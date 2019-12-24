@@ -22,6 +22,7 @@ class Airlock(Mode):
         self.add_mode_event_handler("fmball_lightshot_hit", self._debug_lightshot_hit)
         self.add_mode_event_handler("s_airlock_entrance_active", self._debug_enter)
         self.add_mode_event_handler("mode_collectorship_base_started", self._set_multiball_color)
+        self.add_mode_event_handler("ball_drain", self._check_drain)
 
         # On mode start, set the color_mball value based on which multiball is active
         self._set_multiball_color()
@@ -30,6 +31,14 @@ class Airlock(Mode):
         # (copied logic from lockhandler.py)
         if self._lockshot.enabled:
             self._post_event('enable_{}'.format(self._logicallockdevice.name))
+
+    def _check_drain(self, balls, **kwargs):
+        # If we've lost a ball from the airlock, claim the relay ball to prevent end of turn
+        if self.player.lost_balls > 0:
+            balls_to_recover = min(balls, self.player.lost_balls)
+            self.player.lost_balls -= balls_to_recover
+            balls -= balls_to_recover
+        return { 'balls': balls }
 
     def _find_devices(self):
         # We need a pointer to the physical ball device to count physically locked balls

@@ -51,6 +51,7 @@ shot_groups:
       - ball_save_sbhagalaz_save_disabled{current_player.medigel>0}
       - ball_save_sbboss_save_disabled{current_player.medigel>0}
       - ball_save_armor_disabled{current_player.medigel>0}
+      - player_lost_balls{value==0 and current_player.medigel>0}
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
       - ball_save_recruitsave_enabled
@@ -63,6 +64,7 @@ shot_groups:
       - ball_save_armor_enabled
       - ball_will_end
       - cancel_medigel
+      - player_lost_balls{value>0}
 
 shot_profiles:
   medigel_profile:
