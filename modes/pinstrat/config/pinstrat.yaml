@@ -8,6 +8,7 @@ mode_settings:
   game_id: 12
   game_revision: 0
   url: "http://pinstrat.io"
+  savepath: "savegames"
   # url_params: "v"
   host_mode: attract_carousel
   modes:

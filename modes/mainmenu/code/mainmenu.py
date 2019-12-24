@@ -7,7 +7,8 @@ from datetime import datetime
 from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
 
-DIFFICULTIES = { 0: "Normal", 1: "Hardcore", 2: "Insanity" }
+DIFFICULTIES = {0: "Normal", 1: "Hardcore", 2: "Insanity"}
+
 
 class MainMenu(Carousel):
     """Mode which allows the player to select a profile and start/resume a game."""
@@ -83,13 +84,14 @@ class MainMenu(Carousel):
         player_num = self.machine.game.player.number if self.machine.game else 1
 
         # Don't include careers chosen by previous players
-        already_chosen = [self.machine.variables.get_machine_var("last_career_player_{}".format(x)) for x in range(1, player_num)]
+        already_chosen = [self.machine.variables.get_machine_var("last_career_player_{}".format(x))
+                          for x in range(1, player_num)]
         self.log.debug("Already chosen careers: {}".format(already_chosen))
 
         for path, dirs, files in os.walk(gamepath):
             self.log.debug("Searching savegame files: {}".format(files))
             for file in files:
-                if file.endswith(".json"):
+                if file.endswith(".json") and not file.endswith(".pinstrat.json"):
                     with open("{}/{}".format(path, file)) as f:
                         career = json.load(f)
                         # Rudimentary validation, at least what we need to get started
@@ -104,8 +106,9 @@ class MainMenu(Carousel):
                             self.careers.append(career)
 
                             # Set a default/initial selection if it's the most recently played for player 1
-                            if career["career_name"] == self.machine.variables.get_machine_var("last_career_player_{}"
-                                                                                     .format(player_num)):
+                            if career["career_name"] == \
+                                self.machine.variables.get_machine_var("last_career_player_{}"
+                                                                       .format(player_num)):
                                 self._selected_career = career
                     f.close()
 
@@ -197,7 +200,7 @@ class MainMenu(Carousel):
         if self._done:
             return
         # Are we picking difficulty?
-        if self._selected_difficulty >=0:
+        if self._selected_difficulty >= 0:
             if self._selected_difficulty < 2:
                 self._selected_difficulty += 1
                 self.machine.events.post("update_difficulty",
@@ -250,7 +253,7 @@ class MainMenu(Carousel):
                                          self.machine.game.player.number, kwargs["num"]))
 
     def _post_career_event(self, evt_name, **kwargs):
-        career_data = self._selected_career or { "casual": True }
+        career_data = self._selected_career or {"casual": True}
         self.machine.events.post(evt_name,
                                  career_name=career_data.get("career_name"),
                                  career_started=career_data.get("_career_started"),
