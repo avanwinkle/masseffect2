@@ -53,12 +53,13 @@ multiballs:
     ball_count_type: total
     shoot_again: -1
     start_or_add_a_ball_events:
+      - mode_suicide_platforms_started
       - ball_hold_captive_hold_held_ball{game.balls_in_play<3}
 
 # There is a maximum amount of time that platforms will play
 timers:
   platformtimer:
-    start_value: 6
+    start_value: 4
     end_value: 0
     tick_interval: 10s
     direction: down

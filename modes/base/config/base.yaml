@@ -315,7 +315,7 @@ show_player:
     extraball_lit_show:
       action: stop
   # Don't play an intro show if we have a mission to resume
-  play_intro_show{current_player.resume_mission==" "}:
+  play_intro_show{current_player.resume_mission==" " and device.achievements.suicidemission.state=="disabled"}:
     introshow_missions:
       loops: 0
 

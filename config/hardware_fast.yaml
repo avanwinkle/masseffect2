@@ -88,13 +88,13 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 80  # Increased from Spike 35
-    default_pulse_power: 0.9 # Was 0.8 but can't backhand left ramp. Up to 0.9?
+    default_pulse_ms: 45  # Increased from Spike 35
+    default_pulse_power: 1.0 # Was 0.8 but can't backhand left ramp. Up to 0.9?
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 80  # Increased from Spike 35
-    default_pulse_power: 0.9
+    default_pulse_ms: 50  # Increased from Spike 35
+    default_pulse_power: 1.0
     default_hold_power: 0.125
   c_plunger:
     number: 1-1

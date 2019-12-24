@@ -47,7 +47,7 @@ event_player:
   infiltration_complete: start_mode_suicide_huddle
   longwalk_complete: start_mode_suicide_huddle
   # Delay the release of suicide balls
-  suicide_huddle_specialist_selected: release_suicide_hold|2s
+  suicide_huddle_complete: release_suicide_hold|2s
   mode_suicide_tubes_started: release_suicide_hold|2s
   ball_hold_captive_hold_held_ball:
     - enable_captive_1{device.ball_devices.bd_lock.balls==1}
