@@ -109,7 +109,7 @@ shot_groups:
     shots: sbchase_left_orbit, sbchase_right_ramp, sbchase_right_orbit, sbchase_left_ramp, sbchase_kickback
     rotate_right_events: sbchase_shots_lit_hit
     # If any progress has been made, step back one shot for the next time
-    rotate_left_events: mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5}
+    rotate_left_events: mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5 and current_player.difficulty>0}
 
 shot_profiles:
   chaseprofile:

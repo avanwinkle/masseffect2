@@ -137,7 +137,7 @@ ball_holds:
     hold_devices: bd_lock
     # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
     enable_events:
-      - enable_store{current_player.persist_lock==0}
+      - enable_store{mode.field.active and current_player.persist_lock==0}
       - mode_field_started{current_player.store_enabled>0 and current_player.persist_lock==0}
     disable_events:
       - store_item_selected

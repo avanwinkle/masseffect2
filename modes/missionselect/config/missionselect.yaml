@@ -325,9 +325,9 @@ slides:
         text: LAUNCH THE
         style: header_sm, row_top, color_ui_orange
       - type: text
-        text: $suicidemission, color_ui_orange
+        text: $suicidemission
         casing: upper
-        style: header_lg
+        style: header_lg, color_ui_orange
       - widget: background_console
   missionselect_pass_slide:
     priority: 10
