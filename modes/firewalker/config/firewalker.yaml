@@ -133,19 +133,19 @@ shot_profiles:
       - name: red
         show: led_6_chase_duo
         show_tokens:
-          speed: 12
+          speed: 4
           color: color_door_red
           fade: 50ms
       - name: orange
         show: led_6_chase_duo
         show_tokens:
-          speed: 12
+          speed: 4
           color: color_door_orange
           fade: 50ms
       - name: green
         show: led_6_chase_duo
         show_tokens:
-          speed: 12
+          speed: 4
           color: color_door_green
           fade: 50ms
 

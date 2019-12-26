@@ -16,10 +16,10 @@ event_player:
   mode_global_started:
     - enable_planets{not mode.skillshot.active}
     - disable_planets{mode.skillshot.active}
-  planet_shots_hit_complete.1:
+  planet_shots_hit_complete:
     - bumpers_off|2s
     - bumpers_on|5s
-  planet_shots_hit_complete.2:
+  award_planet.2:  # Include priority to guarantee correct count
     planet_scanned:
       planets:
         value: current_player.planets + 1
@@ -30,9 +30,17 @@ event_player:
       suffix:
         value: (current_player.planets > 0 and "s") or ""
         type: string
+  logicblock_planets_counter_hit{count>current_player.planets}: award_planet
+
+counters:
+  planets_counter:
+    starting_count: 0
+    direction: up
+    count_events: planet_shots_hit_complete
+    reset_events: award_planet
 
 variable_player:
-  planet_shots_hit_complete:
+  award_planet:
     planets: 1
     score: 200
   mineral_shots_hit:
@@ -40,11 +48,11 @@ variable_player:
   eezo_shot_hit:
     mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk
   mineral_shot_palladium_hit:
-    mineral_palladium: 0.1623 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
+    mineral_palladium: 0.1423 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
   mineral_shot_platinum_hit:
-    mineral_platinum: 0.1071 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
+    mineral_platinum: 0.0871 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
   mineral_shot_iridium_hit:
-    mineral_iridium: 0.2096 * machine.base_points * (1 + current_player.planets * 0.25) * current_player.research_mineral_rate_perk
+    mineral_iridium: 0.2096 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
   player_mineral_palladium{player_num==current_player.number}:
     mineral_total: (change)
   player_mineral_platinum{player_num==current_player.number}:
@@ -173,7 +181,7 @@ widgets:
       image: Watchman
 
 show_player:
-  planet_shots_hit_complete:
+  award_planet:
     planet_complete_show:
       loops: 6
       speed: 12
@@ -191,7 +199,7 @@ shows:
         l_right_top_lane: black
 
 sound_player:
-  planet_shots_hit_complete:
+  award_planet:
     scan_complete_sound:
       action: play
       max_queue_time: 500ms

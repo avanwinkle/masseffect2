@@ -67,7 +67,7 @@ event_player:
   recruit_legion_precomplete:
     - mission_collect_score
     # It's mean to enable the bonus shot with only a few seconds to spare :(
-    - missiontimer_set_12{device.timers.missiontimer.ticks<12}
+    - missiontimer_set_12
   # The bonus shot is worth another shot, collected immediately
   heretic_jackpot_shot_hit:
     - mission_shot_hit

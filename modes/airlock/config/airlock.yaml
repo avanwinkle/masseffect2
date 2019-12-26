@@ -155,8 +155,8 @@ ball_holds:
     balls_to_hold: 3
     hold_devices: bd_lock
     enable_events: enable_arrival_hold
-    disable_events: mode_arrival_stopped
-    release_one_events: arrival_release_one
+    disable_events: stop_mode_arrival
+    release_all_events: arrival_complete
 
 multiball_locks:
   fmball_lock:

@@ -105,7 +105,7 @@ event_player:
 counters:
   reaperhusk_counter:
     starting_count: 0
-    count_complete_value: 5
+    count_complete_value: 25
     direction: up
     count_events: frenzy_hit
     disable_on_complete: false

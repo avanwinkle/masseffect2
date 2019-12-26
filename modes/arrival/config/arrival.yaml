@@ -39,14 +39,21 @@ event_player:
   reset_arrival:
     - enable_arrival_orbits
   timer_arrival_timer_complete:
-    - enable_arrival_orbits{device.counters.arrival_orbits_counter.value<3 and current_player.temp_multiplier==1}
-    - enable_arrival_ramps{device.counters.arrival_ramps_counter.value<2 and current_player.temp_multiplier==0}
+    - enable_arrival_orbits{not device.counters.arrival_orbits_counter.completed and current_player.temp_multiplier==1}
+    - enable_arrival_ramps{not device.counters.arrival_ramps_counter.completed and current_player.temp_multiplier==0}
   multiball_arrival_multiball_ended:
     # If the multiball ended before the hold is enabled, enable it
     - enable_arrival_hold{not device.ball_holds.arrival_hold.enabled}
-  # If a ball drains and all the rest are in the hold, that's the end of the mode
-  ball_drain{game.balls_in_play==device.ball_holds.arrival_hold.held_balls}:
-    - stop_mode_arrival
+  # If a ball drains and none are in the hold, that's the end of the mode
+  balls_in_play:
+    - stop_mode_arrival{balls==0}
+    - arrival_complete{balls==device.ball_holds.arrival_hold.balls_held}
+    # - acknowledge_playfield_empty
+  ball_hold_arrival_hold_held_ball{total_balls_held==game.balls_in_play}:
+    # If any the balls end up in the hold when the playfield empties, success!
+    - arrival_complete
+  # Just in case the player kept FOUR balls in, holding 3 is complete
+  ball_hold_arrival_hold_full: arrival_complete
   logicblock_arrival_frenzy_counter_complete: enable_arrival_hold
   # When one counter is hit, switch to the other (if it has shots to hit)
   logicblock_arrival_orbits_counter_hit{not device.counters.arrival_ramps_counter.completed}:
@@ -68,6 +75,19 @@ event_player:
     - play_arrival_engine_100{value==240}
     - play_arrival_collision_imminent{value==255}
     - play_arrival_get_to_escape_shuttles{value==299}
+  arrival_complete:
+    - flippers_off
+  # The save event posts even when it ignores a not_last_ball. Be explicit.
+  ball_save_arrival_save_saving_ball{balls>0}:
+    - flippers_on
+    - stop_mode_arrival
+    - levelup
+
+ball_saves:
+  arrival_save:
+    enable_events: arrival_complete
+    only_last_ball: true
+    auto_launch: true
 
 multiballs:
   arrival_multiball:
@@ -120,20 +140,26 @@ counters:
     direction: up
     count_events: arrival_ramps_lit_hit
     count_complete_value: 2
+    disable_on_complete: true
+    reset_on_complete: false
     # In theory, counter should reset + disable on complete
-    enable_events: mode_arrival_started, reset_arrival
+    enable_events: mode_arrival_started
+    restart_events: reset_arrival
   arrival_orbits_counter:
     starting_count: 0
     direction: up
     count_events: arrival_orbits_lit_hit
     count_complete_value: 3
-    enable_events: mode_arrival_started, reset_arrival
+    disable_on_complete: true
+    reset_on_complete: false
+    enable_events: mode_arrival_started
+    restart_events: reset_arrival
   arrival_frenzy_counter:
     starting_count: 0
     count_events: frenzy_hit
     # We can't math the value for the widget, but it's 300px wide
     count_complete_value: 300
-    count_interval: 3
+    count_interval: 5
 
 shot_groups:
   arrival_ramps:
@@ -150,6 +176,7 @@ shot_groups:
 shots:
   arrival_hold_shot:
     enable_events: enable_arrival_hold
+    disable_events: arrival_complete, stop_mode_arrival
     profile: color_flashing_profile
     show_tokens:
       leds: light_lock_lit
@@ -206,6 +233,11 @@ slide_player:
       action: play
     arrival_portrait_4:
       target: lcd_right
+  arrival_complete:
+    arrival_complete_slide:
+      action: play
+    arrival_portrait_complete:
+      target: lcd_right
 
 slides:
   arrival_slide:
@@ -233,6 +265,18 @@ slides:
         text: Lock balls for Jackpot
         style: body_sm, row_sub, col_left_anchor
       - widget: background_console
+  arrival_complete_slide:
+    widgets:
+      - type: text
+        text: ARRIVAL
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
+      - type: text
+        text: Mission Complete
+        style: header_md, row_main
+      - type: text
+        text: You escaped the Alpha Relay
+        style: body_sm, row_sub
+      - widget: background_console
   arrival_portrait_1:
     widgets:
       - type: image
@@ -241,6 +285,10 @@ slides:
     widgets:
       - type: image
         image: portrait_arrival_phase_4
+  arrival_portrait_complete:
+    widgets:
+      - type: image
+        image: portrait_arrival_destroyed
 
 widget_player:
   slide_arrival_slide_created:
@@ -308,19 +356,6 @@ sounds:
     fade_out: 1s
     start_at: 45s
     mode_end_action: stop
-    markers:
-      - time: 53s
-        events: start_arrival_phase1
-      - time: 65s
-        events: start_arrival_phase2
-      - time: 92s
-        events: start_arrival_phase3
-      - time: 120s
-        events: start_arrival_phase4
-      - time: 132s
-        events: start_arrival_phase5
-      - time: 147s
-        events: start_arrival_finale
   arr_annc_engine_at_25pct:
     file: DLC_EXP_Part02_Int.026.ogg
     track: voice
