@@ -19,7 +19,8 @@
 # GETH INCURSION:   All shots are lit. Hitting any shot advances _that_ shot.
 # SURVEY SITES:     All shots are lit. Hitting any shot advances _that_ shot
 #                   and resets all the rest.
-# PROTHEAN SITE:    A special multiball! Gets its own mode.
+# PROTHEAN SITE:    A special multiball! Complete all lanes (3x each) for a
+#                   super-dee-duper jackpot.
 #####
 
 mode:
@@ -31,10 +32,22 @@ mode:
   priority: 1000
 
 event_player:
-  firewalker_shots_green_hit: firewalker_mission_complete
+  # Start the timer except on the Prothean Site multiball
+  mode_firewalker_started{device.state_machines.firewalker.state!="prothean_site"}:
+    - start_firewalker_timer
+  # Start the multiball
+  mode_firewalker_started{device.state_machines.firewalker.state=="prothean_site"}:
+    - start_firewalker_multiball
+  firewalker_shots_green_hit{device.state_machines.firewalker.state!="prothean_site"}:
+    - firewalker_mission_complete
+  firewalker_shots_green_complete:
+    - reset_dropbank
+    - enable_firewalker_jackpot
+  # Finishing the multiball counts as "complete", i.e. it's only played once
+  multiball_overlord_multiball_ended: firewalker_mission_complete
   timer_fwtimer_complete: firewalker_mission_failed
   # Mock a tick event on hit, to update the widget
-  firewalker_shots_hit:
+  firewalker_shots_hit{device.state_machines.firewalker.state!="prothean_site"}:
     timer_fwtimer_tick:
       ticks_remaining: 20
   firewalker_mission_complete:
@@ -86,19 +99,34 @@ timers:
     end_value: 0
     tick_interval: 1s
     direction: down
-    start_running: true
+    start_running: false
     control_events:
+      - event: start_firewalker_timer
+        action: start
       - event: firewalker_shots_hit
         action: restart
       - event: firewalker_shots_green_hit
         action: stop
 
+multiballs:
+  firewalker_multiball:
+    ball_count: 3
+    ball_count_type: total
+    shoot_again: 10s
+    start_events: start_firewalker_multiball
+    start_or_add_a_ball_events: firewalker_shots_green_hit{game.balls_in_play<3}
 
 shot_groups:
   firewalker_shots:
     shots: firewalker_left_orbit, firewalker_kickback, firewalker_left_ramp, firewalker_right_ramp, firewalker_right_orbit
+    reset_events: firewalker_jackpot_hit
 
 shots:
+  firewalker_jackpot:
+    hit_events: drop_target_bank_dropbank_down
+    profile: firewalker_bank_profile
+    enable_events: enable_firewalker_jackpot
+    disable_events: firewalker_jackpot_hit
   firewalker_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: firewalker_profile
@@ -132,22 +160,64 @@ shot_profiles:
     states:
       - name: red
         show: led_6_chase_duo
+        speed: 6
         show_tokens:
-          speed: 4
           color: color_door_red
-          fade: 50ms
+          fade: 20ms
       - name: orange
         show: led_6_chase_duo
+        speed: 6
         show_tokens:
-          speed: 4
           color: color_door_orange
-          fade: 50ms
+          fade: 20ms
       - name: green
         show: led_6_chase_duo
+        speed: 6
         show_tokens:
-          speed: 4
           color: color_door_green
-          fade: 50ms
+          fade: 20ms
+  firewalker_bank_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: firewalker_bank_show
+        speed: 3
+
+shows:
+  firewalker_bank_show:
+    - time: 0
+      lights:
+        l_dropbank_bottom:
+          color: color_door_green
+          fade: 100ms
+        l_dropbank_middle:
+          color: color_door_orange
+          fade: 100ms
+        l_dropbank_top:
+          color: color_door_red
+          fade: 100ms
+    - time: '+1'
+      lights:
+        l_dropbank_bottom:
+          color: color_door_red
+          fade: 100ms
+        l_dropbank_middle:
+          color: color_door_green
+          fade: 100ms
+        l_dropbank_top:
+          color: color_door_orange
+          fade: 100ms
+    - time: '+1'
+      lights:
+        l_dropbank_bottom:
+          color: color_door_orange
+          fade: 100ms
+        l_dropbank_middle:
+          color: color_door_red
+          fade: 100ms
+        l_dropbank_top:
+          color: color_door_green
+          fade: 100ms
 
 slide_player:
   firewalker_mission_started:

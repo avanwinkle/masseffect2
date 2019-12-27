@@ -53,6 +53,12 @@ ball_saves:
   normandyattack_openingsave:
     delayed_eject_events: normandyattack_saveball
     auto_launch: false
+  # This ball save is for the opening of the mode
+  normandyattack_gracesave:
+    enable_events: ball_save_normandyattack_openingsave_saving_ball
+    balls_to_save: 1
+    active_time: 10 * current_player.research_ball_save_period_perk
+    auto_launch: true
   # When a shot is hit the normandy_outlane shot is enabled with a medigel-style save.
   # It will save up to three balls but must be re-enabled after each use. There
   # are no saves for the center drain.
