@@ -16,7 +16,7 @@ mode_settings:
       player_score_entry: credits
     - event: bonus_minerals
       # Mineral values are already weighted againts base points
-      score: (current_player.planets * current_player.mineral_total) / 50
+      score: (current_player.planets * current_player.mineral_total) / 500
     - event: bonus_assignments
       score: (machine.base_points / 100 * 3)
       player_score_entry: earned_assigments_completed
@@ -24,7 +24,7 @@ mode_settings:
       score: (machine.base_points / 100 * 5)
       player_score_entry: earned_intel
     - event: bonus_upgrades
-      # Award and extra 2% score for every weapon upgrade
+      # Award an extra 2% score for every weapon upgrade
       score: (current_player.score - current_player.ball_starting_score) / 100 * 2
       player_score_entry: upgrades_completed
 
