@@ -126,6 +126,26 @@ light_player:
     light_backwall_ambient:
       color: color_jack
 
+shows:
+  recruitintro_jack:
+    - time: 2s
+      sounds:
+        warden_start:
+          action: play
+    - time: 7s
+      events: mission_intro_complete
+    - time: 8200ms
+      slides:
+        recruit_instructions_slide:
+          action: remove
+        recruit_intro_portrait:
+          action: remove
+
+show_player:
+  show_recruit_instructions:
+    recruitintro_jack:
+      loops: 0
+
 sound_player:
   jack_shots_one_hit:
     jack_shot_hit_sound:
@@ -152,10 +172,8 @@ sound_player:
       action: play
       max_queue_time: 1s
       priority: 100
-  mode_recruitjack_started:
+  mission_intro_complete:
     music_recruit_jack_1:
-      action: play
-    warden_start:
       action: play
   play_music_recruit_jack_2:
     music_recruit_jack_2:

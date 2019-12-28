@@ -3,7 +3,12 @@
 event_player:
   # Delay the release of the ball until after the instructions are shown
   # TODO: As modes get their intro shows, stop using this hacky release event
-  show_recruit_instructions{not mode.recruitgrunt.active}: mission_intro_complete|3s
+  mode_recruitkasumi_started: mission_intro_complete|3s
+  mode_recruitlegion_started: mission_intro_complete|3s
+  mode_recruitsamara_started: mission_intro_complete|3s
+  mode_recruittali_started: mission_intro_complete|3s
+  mode_recruitthane_started: mission_intro_complete|3s
+  mode_recruitzaeed_started: mission_intro_complete|3s
 
 #####
 # Use a single slide/widget for all the missions, just update the text
@@ -164,6 +169,7 @@ slide_player:
   show_recruit_instructions.3{not machine.is_lcd}:
     recruit_instructions_slide_dmd:
       priority: 21
+  # These are for the non-intro-video modes. Remove when those are done.
   mission_intro_complete.2{machine.is_lcd}:
     recruit_instructions_slide_lcd:
       action: remove

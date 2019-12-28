@@ -648,20 +648,20 @@ widgets:
       image: portrait_recruitzaeed
   # Squadmate intro videos. Will be regular portraits until videos are done
   portrait_recruit_intro_garrus:
-    - type: image
-      image: portrait_recruitgarrus
+    - type: video
+      video: recruitintro_garrus
   portrait_recruit_intro_grunt:
     - type: video
       video: recruitintro_grunt
   portrait_recruit_intro_jack:
-    - type: image
-      image: portrait_recruitjack
+    - type: video
+      video: recruitintro_jack
   portrait_recruit_intro_kasumi:
     - type: image
       image: portrait_recruitkasumi
   portrait_recruit_intro_mordin:
-    - type: image
-      image: portrait_recruitmordin
+    - type: video
+      video: recruitintro_mordin
   portrait_recruit_intro_legion:
     - type: image
       image: portrait_recruitlegion

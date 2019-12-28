@@ -35,9 +35,6 @@ event_player:
       shots_remaining:
         value: device.counters.doors_closed_counter.value
         type: int
-  mode_recruitgarrus_started.2:
-    - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>1}
-    - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==1}
   logicblock_doors_closed_counter_hit.100: mission_shot_hit
   logicblock_doors_closed_counter_hit{count==1}:
     mission_collect_score: {}
@@ -98,6 +95,26 @@ shots:
       leds: l_right_ramp_ring
       color: color_garrus
     tags: envshot_right_ramp, power_target, power_target_right_ramp
+
+shows:
+  recruitintro_garrus:
+    - time: 2s
+      events:
+        - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>1}
+        - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==1}
+    - time: 7s
+      events: mission_intro_complete
+    - time: 8730ms
+      slides:
+        recruit_instructions_slide:
+          action: remove
+        recruit_intro_portrait:
+          action: remove
+
+show_player:
+  show_recruit_instructions:
+    recruitintro_garrus:
+      loops: 0
 
 sound_player:
   mode_recruitgarrus_started:

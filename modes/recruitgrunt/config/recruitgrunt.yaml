@@ -113,7 +113,7 @@ light_player:
 
 shows:
   recruitintro_grunt:
-    - time: 3s
+    - time: 2s
       sounds:
         grunt_intro:
           action: play

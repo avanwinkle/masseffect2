@@ -36,9 +36,6 @@ event_player:
       shots_remaining:
         value: device.counters.cure_counter.value + device.counters.fans_counter.value
         type: int
-  mode_recruitmordin_started.2:
-    - play_intro_sound{not device.counters.cure_counter.completed}
-    - play_cure_sound{device.counters.cure_counter.completed}
   fan_shots_hit_complete: recruit_mordin_complete
 
 counters:
@@ -111,6 +108,26 @@ light_player:
       color: color_mordin
     light_backwall_gi:
       color: color_grunt
+
+show_player:
+  show_recruit_instructions:
+    recruitintro_mordin:
+      loops: 0
+
+shows:
+  recruitintro_mordin:
+    - time: 2s
+      events:
+        - play_intro_sound{not device.counters.cure_counter.completed}
+        - play_cure_sound{device.counters.cure_counter.completed}
+    - time: 8s
+      events: mission_intro_complete
+    - time: 9500ms
+      slides:
+        recruit_instructions_slide:
+          action: remove
+        recruit_intro_portrait:
+          action: remove
 
 sound_player:
   mode_recruitmordin_started:
