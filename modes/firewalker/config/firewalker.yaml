@@ -114,7 +114,7 @@ multiballs:
     ball_count_type: total
     shoot_again: 10s
     start_events: start_firewalker_multiball
-    start_or_add_a_ball_events: firewalker_shots_green_hit{game.balls_in_play<3}
+    start_or_add_a_ball_events: firewalker_shots_green_hit{device.state_machines.firewalker.state=="prothean_site" and game.balls_in_play<3}
 
 shot_groups:
   firewalker_shots:

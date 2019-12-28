@@ -72,7 +72,8 @@ keyboard:
     params:
       balls: 1
   d:
-    event: start_mode_collectorship_base
+    switch: s_missionselect
+    toggle: true
   h:
     switch: s_lock_1
     toggle: true

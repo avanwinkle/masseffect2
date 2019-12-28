@@ -40,7 +40,7 @@ event_player:
 
 timers:
   missionselect_timer:
-    start_value: 6 if (current_player.available_missions < 2 and current_player.casual) else 12
+    start_value: 12 if (current_player.available_missions < 2 and current_player.casual) else 20
     end_value: 0
     tick_interval: 1.2s
     direction: down

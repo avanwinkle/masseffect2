@@ -231,7 +231,7 @@ slides:
       - widget: portrait_recruit(squadmate)
   recruit_instructions_portrait_slide:
     widgets:
-      - widget: portrait_squadmate_(squadmate)_advance
+      - widget: portrait_recruit_intro_(squadmate)
   # Core slides
   1player_score_slide:
     - type: text
@@ -644,6 +644,37 @@ widgets:
     - type: image
       image: portrait_recruitthane
   portrait_recruitzaeed:
+    - type: image
+      image: portrait_recruitzaeed
+  # Squadmate intro videos. Will be regular portraits until videos are done
+  portrait_recruit_intro_garrus:
+    - type: image
+      image: portrait_recruitgarrus
+  portrait_recruit_intro_grunt:
+    - type: video
+      video: recruitintro_grunt
+  portrait_recruit_intro_jack:
+    - type: image
+      image: portrait_recruitjack
+  portrait_recruit_intro_kasumi:
+    - type: image
+      image: portrait_recruitkasumi
+  portrait_recruit_intro_mordin:
+    - type: image
+      image: portrait_recruitmordin
+  portrait_recruit_intro_legion:
+    - type: image
+      image: portrait_recruitlegion
+  portrait_recruit_intro_samara:
+    - type: image
+      image: portrait_recruitsamara
+  portrait_recruit_intro_tali:
+    - type: image
+      image: portrait_recruittali
+  portrait_recruit_intro_thane:
+    - type: image
+      image: portrait_recruitthane
+  portrait_recruit_intro_zaeed:
     - type: image
       image: portrait_recruitzaeed
   dossier_recruit_base:

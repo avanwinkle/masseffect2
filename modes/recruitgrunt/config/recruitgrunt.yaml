@@ -111,7 +111,25 @@ light_player:
     light_backwall_ambient:
       color: color_grunt
 
+shows:
+  recruitintro_grunt:
+    - time: 3s
+      sounds:
+        grunt_intro:
+          action: play
+    - time: 7s
+      events: mission_intro_complete
+    - time: 8620ms  # Length of video: 08;18 = 8.62s
+      slides:
+        recruit_instructions_slide:
+          action: remove
+        recruit_intro_portrait:
+          action: remove
+
 show_player:
+  show_recruit_instructions:
+    recruitintro_grunt:
+      loops: 0
   logicblock_grunt_shots_counter_hit:
     flash_all_shields_show:
       loops: 6
@@ -121,12 +139,10 @@ show_player:
         color: color_grunt
 
 sound_player:
-  mode_recruitgrunt_started:
+  mission_intro_complete:
     music_recruit_grunt:
       action: play
       mode_end_action: stop
-    grunt_intro:
-      action: play
   logicblock_grunt_shots_counter_hit{count>2}:
     grunt_dialogue:
       max_queue_time: 500ms
