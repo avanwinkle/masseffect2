@@ -90,7 +90,7 @@ shots:
       color: on
 
 show_player:
-  storetargets_hit:
+  storetargets_unlit_hit:
     storetargets_flash:
       priority: 100
       loops: 2

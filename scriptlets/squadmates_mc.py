@@ -64,11 +64,11 @@ class MCSquadmateHandlers(Scriptlet):
                     else:
                         if mate == specialist:
                             color = SQICON_STATUSES["specialist"]
-                        elif status == -1:
+                        elif status < 0:
                             color = SQICON_STATUSES["dead"]
                         elif status == 3:
                             color = SQICON_STATUSES["available"]
-                        elif status == 4:
+                        elif status >= 4:
                             color = SQICON_STATUSES["complete"]
                     widget.color = color
                     widget.config["color"] = color

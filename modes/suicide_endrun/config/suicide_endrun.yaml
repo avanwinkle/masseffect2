@@ -146,8 +146,6 @@ shot_profiles:
   endrun_lane_profile:
     # First step is disabled, so any dead squadmates don't get lit
     advance_on_hit: false
-    # Loop is true, so after hit the shot will reset
-    loop: true
     states:
       - name: disabled
         show: off

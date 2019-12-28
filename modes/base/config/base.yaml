@@ -351,11 +351,6 @@ slide_player:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
       expire: 3s
-  mode_base_started{machine.has_secondscreen}:
-    squadicon_slide:
-      action: play
-      target: lcd_right
-      priority: 100
   player_added:
     player_added_slide:
       action: play

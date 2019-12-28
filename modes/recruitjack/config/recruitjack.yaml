@@ -132,7 +132,7 @@ shows:
       sounds:
         warden_start:
           action: play
-    - time: 7s
+    - time: 5s
       events: mission_intro_complete
     - time: 8200ms
       slides:

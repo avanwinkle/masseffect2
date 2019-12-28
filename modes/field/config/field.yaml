@@ -80,6 +80,10 @@ sounds:
     track: music
 
 slide_player:
+  mode_field_started{machine.has_secondscreen}:
+    squadicon_slide:
+      action: play
+      target: lcd_right
   reset_from_suicide:
     reset_from_suicide_slide:
       action: play
@@ -99,6 +103,9 @@ slide_player:
       action: remove
     multiplayer_slide:
       action: remove
+    squadicon_slide:
+      action: remove
+      target: lcd_right
 
 slides:
   reset_from_suicide_slide:
