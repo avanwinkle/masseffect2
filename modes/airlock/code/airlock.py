@@ -21,7 +21,7 @@ class Airlock(Mode):
             self._find_devices()
         self.add_mode_event_handler("fmball_lightshot_hit", self._debug_lightshot_hit)
         self.add_mode_event_handler("s_airlock_entrance_active", self._debug_enter)
-        self.add_mode_event_handler("mode_collectorship_base_started", self._set_multiball_color)
+        self.add_mode_event_handler("achievement_arrival_state_enabled", self._set_multiball_color)
         self.add_mode_event_handler("ball_drain", self._check_drain)
 
         # On mode start, set the color_mball value based on which multiball is active

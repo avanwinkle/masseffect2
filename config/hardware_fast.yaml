@@ -176,14 +176,19 @@ switches:
     number: 1-18
   s_target1:
     number: 1-19
+    tags: standuptarget
   s_target2:
     number: 1-20
+    tags: standuptarget
   s_target3:
     number: 1-21
+    tags: standuptarget
   s_target4:
     number: 1-22
+    tags: standuptarget
   s_target5:
     number: 1-23
+    tags: standuptarget
   # BOARD 1-B (Blue)
   s_plunger_lane:
     number: 1-8

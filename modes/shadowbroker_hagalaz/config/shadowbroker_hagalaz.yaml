@@ -94,7 +94,7 @@ ball_saves:
 
 counters:
   shunt_counter:
-    starting_count: 8  # 6 if current_player.difficulty==0 else 8
+    starting_count: 6 + current_player.difficulty
     count_complete_value: 0
     reset_on_complete: false
     direction: down

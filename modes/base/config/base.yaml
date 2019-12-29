@@ -111,7 +111,7 @@ event_player:
         value: portrait
         type: string
       priority: 1999 # Normandy attack runs at 2000
-  fast_rgb_rebooted: emergency_fast_rgb_lighting|1s
+  fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
 
 ball_saves:
   default:
