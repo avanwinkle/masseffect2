@@ -16,7 +16,7 @@ class RecruitLegion(Mode):
         """Initialize logger and local vars."""
         super().__init__(machine, config, name, path)
         self.log = logging.getLogger("RecruitLegion Heretics")
-        self.log.setLevel("INFO")
+        self.log.setLevel(10)
         self._timer = None
         # Track an array of ticks that _might_ need handling, to avoid over-processing
         self._significant_ticks = []
@@ -85,6 +85,7 @@ class RecruitLegion(Mode):
     def _on_bank(self, **kwargs):
         hit_shot_name = kwargs.get("shot_name")
         # Check if both banks are off. If so, restart the timer/scoring
+        banks_disabled = True
         for shot_name in BANKS:
             shot = self._get_shot(shot_name)
             # If that's the one that was hit? disable it
@@ -93,13 +94,15 @@ class RecruitLegion(Mode):
             # If it's not the one that was hit, is the other enabled?
             elif shot.enabled:
                 self.log.debug("Bank {} hit but {} is still enabled, skipping".format(hit_shot_name, shot_name))
-                return
-        # Both banks are disabled? Allow shots again
-        self.machine.events.post("heretic_banks_cleared")
+                banks_disabled = False
 
-        # If there are no shots, enable one
-        if not self._shot_times:
-            self.machine.events.post("enable_random_heretic")
+        # Both banks are disabled? Allow shots again
+        if banks_disabled:
+            self.machine.events.post("heretic_banks_cleared")
+
+            # If there are no shots, enable one
+            if not self._shot_times:
+                self.machine.events.post("enable_random_heretic")
 
     def _on_hit(self, **kwargs):
         shot_name = kwargs["shot_name"]

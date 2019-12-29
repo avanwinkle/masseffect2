@@ -65,6 +65,11 @@ class Airlock(Mode):
         # Re-define the named_color according to which multiball it is
         color = "color_overlord" if self.machine.device_manager.collections["achievements"].arrival.state == "disabled" else "color_arrival"
         RGBColor.add_color("color_mball", RGBColor.name_to_rgb(color))
+        self.log.debug("Setting multiball color '{}': {}. Resulting constant: {}".format(
+            color,
+            RGBColor.name_to_rgb(color),
+            RGBColor.name_to_rgb("color_mball")
+            ))
 
     def _post_event(self, event, **kwargs):
         """ Helper method for posting events """
@@ -76,7 +81,10 @@ class Airlock(Mode):
 
         self.log.info("FMBALL lock is {}".format(self._logicallockdevice))
         self.log.info(" - enabled? {}".format(self._logicallockdevice.enabled))
+        self.log.debug("At this moment, multiball color is: {}".format(RGBColor.name_to_rgb("color_mball")))
 
     def _debug_enter(self, **kwargs):
         self.log.info("Ball has entered the airlock, lock is enabled? {}".format(self._logicallockdevice.enabled))
-        self.log.info(" - lock has {} balls locked".format(self._logicallockdevice.locked_balls))
+        self.log.info(" - logical lock has {} balls locked, physical device has {} balls".format(
+            self._logicallockdevice.locked_balls,
+            self._bd_physical_lock.balls))

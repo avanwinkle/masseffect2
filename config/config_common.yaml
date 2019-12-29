@@ -316,6 +316,9 @@ player_vars:
   career_started:
     initial_value: 0.0
     value_type: float
+  color_mball:
+    initial_value: "FF0000"
+    value_type: str
   difficulty:
     initial_value: 0
   readonly:

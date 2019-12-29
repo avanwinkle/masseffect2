@@ -93,7 +93,7 @@ variable_player:
 shots:
   geth_colossus_shot:
     hit_events: sh_left_ramp_hit
-    tags: envshot_left_ramp, power_target_charge
+    tags: envshot_left_ramp, power_target_charge, power_target, power_target_left_ramp
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
 

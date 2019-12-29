@@ -93,6 +93,7 @@ multiballs:
   arrival_multiball:
     ball_count: 4
     ball_count_type: total
+    replace_balls_in_play: true
     ball_locks: bd_lock
     shoot_again: 12s
     start_events: mode_arrival_started

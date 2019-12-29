@@ -93,10 +93,12 @@ shot_profiles:
     states:
       - name: reputation
         show: led_6_dualcolor_chase
+        speed: 6
         show_tokens:
           fade: 200ms
       - name: lit
         show: led_6_chase
+        speed: 6
         show_tokens:
           fade: 200ms
 
@@ -114,7 +116,7 @@ shots:
       color: color_zaeed
       color1: color_zaeed
       color2: color_paragon
-    tags: envshot_left_orbit
+    tags: envshot_left_orbit, power_target, power_target_left_orbit
   zaeed_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: zaeed_orbit_profile
@@ -124,7 +126,7 @@ shots:
       color: color_zaeed
       color1: color_zaeed
       color2: color_renegade
-    tags: envshot_right_orbit
+    tags: envshot_right_orbit, power_target, power_target_right_orbit
   zaeed_kickshot:
     hit_events: sh_kickback_hit
     enable_events: mission_shot_hit{count==1}
@@ -133,7 +135,8 @@ shots:
     show_tokens:
       leds: l_kickback_ring
       color: color_zaeed
-    tags: envshot_kickback
+    # If the kickback is enabled, charge will take it
+    tags: envshot_kickback, power_target, power_target_kickback, power_target_charge
 
 show_player:
   zaeed_orbitshots_hit:

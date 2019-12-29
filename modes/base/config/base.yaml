@@ -111,6 +111,7 @@ event_player:
         value: portrait
         type: string
       priority: 1999 # Normandy attack runs at 2000
+  fast_rgb_rebooted: emergency_fast_rgb_lighting|1s
 
 ball_saves:
   default:
@@ -167,7 +168,7 @@ light_player:
     light_backwall_gi:
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
   # If the FAST RGB processor crashes we'll lose our lights. Put some back!
-  fast_rgb_rebooted:
+  emergency_fast_rgb_lighting:
     light_backwall_gi:
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
     light_backwall_ambient:

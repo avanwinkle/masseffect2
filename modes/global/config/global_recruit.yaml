@@ -30,7 +30,11 @@ event_player:
   # See also: base.yaml for events related to enabling/disabling missionresume
   # Allow the player to resume a mission when launching the ball
   missionresume_shot_hit.1:
-    - force_plunger_launch
+    # If the ball is in the plunger lane, plunge it!
+    - force_plunger_launch{device.ball_devices.bd_plunger.balls>0}
+    # If the ball is _not_ in the plunger lane, wait for it
+    - await_plunger_launch{device.ball_devices.bd_plunger.balls==0}
+  balldevice_bd_plunger_ball_count_changed{current_player.pending_plunge==1}: force_plunger_launch
   missionresume_shot_hit.2{current_player.resume_mission!=" "}:
     resume_mission:
       squadmate:
@@ -45,6 +49,14 @@ event_player:
     - stop_recruitmission
 
 variable_player:
+  await_plunger_launch:
+    pending_plunge:
+      action: set
+      int: 1
+  force_plunger_launch:
+    pending_plunge:
+      action: set
+      int: 0
   disable_missionresume:
     resume_mission:
       action: set

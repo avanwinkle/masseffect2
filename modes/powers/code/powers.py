@@ -86,6 +86,10 @@ class Powers(Mode):
         if shots:
             self.log.debug("Found available shots for powers: {}".format(shots))
             return shots
+        # If we were looking for an explicit target but it wasn't enabled, expand to all targets
+        elif explicit_target and not include_off:
+            self.log.debug("Couldn't find a lit shot for target '{}'. Expanding to all shots.".format(explicit_target))
+            return self._get_power_shots(explicit_target=None)
         raise IndexError
 
     def _get_power_name(self, power):

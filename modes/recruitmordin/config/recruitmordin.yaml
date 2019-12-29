@@ -77,6 +77,7 @@ shots:
     show_tokens:
       leds: l_left_orbit_ring
       color: color_mordin
+    tags: power_target, power_target_left_orbit
   cure_right:
     hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
     enable_events: cure_left_hit
@@ -84,7 +85,7 @@ shots:
     show_tokens:
       leds: l_right_orbit_ring
       color: color_mordin
-    tags: envshot_right_orbit
+    tags: envshot_right_orbit, power_target, power_target_right_orbit
   fan_left:
     hit_events: sh_left_ramp_hit
     enable_events: enable_fans
@@ -92,7 +93,7 @@ shots:
     show_tokens:
       leds: l_left_ramp_ring
       color: color_door_green
-    tags: envshot_left_ramp
+    tags: envshot_left_ramp, power_target, power_target_left_ramp
   fan_right:
     hit_events: sh_right_ramp_hit
     enable_events: enable_fans
@@ -100,7 +101,7 @@ shots:
     show_tokens:
       leds: l_right_ramp_ring
       color: color_door_green
-    tags: envshot_right_ramp
+    tags: envshot_right_ramp, power_target, power_target_right_ramp
 
 light_player:
   mode_recruitmordin_started:

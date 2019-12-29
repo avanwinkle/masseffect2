@@ -155,7 +155,7 @@ shots:
     show_tokens:
       leds: l_kickback_shield_rgb
       color: color_legion
-    tags: envshot_kickback
+    tags: envshot_kickback, power_target, power_target_kickback
   # Dropbank and hitbank are "recovery" shots
   heretic_shot_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
@@ -321,6 +321,7 @@ sound_player:
   mode_recruitlegion_started:
     music_legion:
       action: play
+      loops: -1
       mode_end_action: stop
   play_opening_heretic_dialogue: shepard_start_your_upload
   # If the progress goes up, play a shot confirmation sound

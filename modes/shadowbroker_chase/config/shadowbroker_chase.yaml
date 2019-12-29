@@ -55,10 +55,8 @@ ball_saves:
 
 light_player:
   mode_shadowbroker_chase_started:
-    gi:
-      color: 444444
     l_ball_save:
-      color: 444444
+      color: 333333
 
 counters:
   # A counter to track the lowest chase score, to only score on NEW hits
@@ -154,6 +152,16 @@ shots:
     show_tokens:
       shot: kickback
     tags: envshot_kickback
+
+show_player:
+  mode_shadowbroker_chase_started:
+    led_10_chase:
+      action: play
+      speed: 7
+      show_tokens:
+        ledring: l_backwall_gi
+        fade: 100ms
+        color: color_barrier
 
 slide_player:
   mode_shadowbroker_chase_started:
