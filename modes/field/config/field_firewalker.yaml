@@ -134,6 +134,7 @@ shows:
         (ledring)_light_5: color_door_green%10
   fw_complete_show:
     - lights:
-        (ledring)_light_1: white%5
-        (ledring)_light_3: white%5
-        (ledring)_light_5: white%5
+        # ...can't figure out anything that looks good :(
+        (ledring)_light_1: off
+        (ledring)_light_3: off
+        (ledring)_light_5: off

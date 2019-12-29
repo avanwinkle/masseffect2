@@ -45,25 +45,25 @@ shots:
     profile: reputation_profile
     show_tokens:
       leds: l_left_outlane
-      color: color_miranda%50
+      color: color_miranda%40
   paragon_shot:
     switch: s_return_lane_left
     profile: reputation_profile
     show_tokens:
       leds: l_left_return_lane
-      color: color_paragon%50
+      color: color_paragon%40
   renegade_shot:
     switch: s_return_lane_right
     profile: reputation_profile
     show_tokens:
       leds: l_right_return_lane
-      color: color_renegade%50
+      color: color_renegade%40
   cerberus_shot:
     switch: s_outlane_right
     profile: reputation_profile
     show_tokens:
       leds: l_right_outlane
-      color: color_jacob%50
+      color: color_jacob%40
 
 shot_profiles:
   reputation_profile:

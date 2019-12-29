@@ -24,6 +24,7 @@ event_player:
       planets:
         value: current_player.planets + 1
         type: int
+      # We only have ten images, so rotate them forever
       planets_mod:
         value: (current_player.planets + 1) % 10
         type: int
@@ -181,7 +182,8 @@ widgets:
       image: Watchman
 
 show_player:
-  award_planet:
+  # Flash the lights on every completion, even if we don't award a planet
+  planet_shots_hit_complete:
     planet_complete_show:
       loops: 6
       speed: 12
@@ -240,5 +242,3 @@ sounds:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333687_m.ogg
     track: voice
     max_queue_time: 100ms
-
-

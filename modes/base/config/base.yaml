@@ -162,7 +162,12 @@ counters:
       - shadowbroker_progression_hagalaz_started
 
 light_player:
+  # Good to have some GI going at the base level, so the field is never dark
   mode_base_started:
+    light_backwall_gi:
+      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
+  # If the FAST RGB processor crashes we'll lose our lights. Put some back!
+  fast_rgb_rebooted:
     light_backwall_gi:
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
     light_backwall_ambient:

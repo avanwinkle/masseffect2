@@ -10,9 +10,10 @@ modes:
 
 fast:
   ports: autodetect
-  # rgb_buffer: 10000
-  # debug: true
-  hardware_led_fade_time: 100
+  rgb_buffer: 10
+  hardware_led_fade_time: 100ms
+  debug: true
+  ignore_rgb_crash: true
 
 machine:
   balls_installed: 6
