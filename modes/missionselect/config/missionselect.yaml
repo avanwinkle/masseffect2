@@ -31,12 +31,13 @@ mode_settings:
 event_player:
   # The hold will release when intro is complete
   missionselect_pass_selected: mission_intro_complete
-  # Fake the timer for the initial slide value
+
+variable_player:
+  # Fake the player variable for the ticks, for the timer widget's sake
   mode_missionselect_started:
     missionselect_missionselect_timer_tick:
       action: set
-      # TODO: intelligently track whether "pass" is a valid option
-      int: 8 if (current_player.available_missions < 2 and current_player.casual) else 18
+      int: device.timers.missionselect_timer.ticks
 
 timers:
   missionselect_timer:
@@ -316,6 +317,7 @@ slides:
       - type: text
         text: "Derelict Reaper"
         style: header_md, row_main, color_ui_orange
+      - widget: missionselect_count_widget
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_suicide_slide:
@@ -328,6 +330,8 @@ slides:
         text: $suicidemission
         casing: upper
         style: header_lg, color_ui_orange
+      - widget: missionselect_count_widget
+      - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_pass_slide:
     priority: 10

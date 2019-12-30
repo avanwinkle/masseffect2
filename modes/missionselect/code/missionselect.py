@@ -44,7 +44,7 @@ class MissionSelect(Carousel):
 
         # If Collector Ship is available (for the first time), it is the only option
         if player.achievements['collectorship'][0] == "enabled":
-            return ['collectorship']
+            return [self._intro, 'collectorship']
 
         items = []
 
