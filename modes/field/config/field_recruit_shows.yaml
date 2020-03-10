@@ -31,16 +31,17 @@ shows:
       lights:
         light_missionselect: off
   recruits_lit_show:
-    - duration: 700ms
+    - duration: 500ms
       lights:
         (leds):
           color: off
-          fade: 350ms
-    - duration: 700ms
+          fade: 250ms
+    - duration: 500ms
       lights:
         (leds):
           color: bb_squad_color
-          fade: 350ms
+          fade: 250ms
+    - duration: 250ms
   recruits_complete_show:
     - time: 0
       lights:

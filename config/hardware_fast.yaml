@@ -93,20 +93,20 @@ coils:
   c_flipper_left_main:
     number: 1-7
     default_pulse_ms: 45  # Increased from Spike 35
-    default_pulse_power: 1.0 # Was 0.8 but can't backhand left ramp. Up to 0.9?
+    default_pulse_power: 0.8 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
     default_pulse_ms: 50  # Increased from Spike 35
-    default_pulse_power: 1.0
+    default_pulse_power: 0.8
     default_hold_power: 0.125
   c_plunger:
     number: 1-1
-    default_pulse_ms: 14  # Increased from Spike 18, 14 is pretty good. Sometimes 13 doesn't fire, but it seems otherwise best
+    default_pulse_ms: 16  # Increased from Spike 18. Mk2 was 14, upping to 16
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 20 # 20 felt much but 19 jams
+    default_pulse_ms: 22 # Mk2 was 20, upping to 22
     debug: true
     # pulse_power: 2
   c_bumper_left:
@@ -388,6 +388,7 @@ light_stripes:
     light_template:
       tags: light_pf, light_ladder
       type: grb
+      default_on_color: fbc795 # color_ui_orange
   gi_top:
     number_start: 0
     number_template: 1-{}

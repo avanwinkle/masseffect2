@@ -296,6 +296,8 @@ class MPFSquadmateHandlers(CustomCode):
             else:
                 mate_lists["off"].append(mate)
 
+        lit_count = len(mate_lists["lit"])
+        complete_count = len(mate_lists["complete"]) - 2 # Discount Jacob and Miranda
         for status, mates in mate_lists.items():
             showname = "recruits_{}_show".format(status)
             if mates:
@@ -305,6 +307,12 @@ class MPFSquadmateHandlers(CustomCode):
                         "leds": ", ".join(["light_bbsquad_{}".format(mate) for mate in mates])
                     }
                 )
+
+                # Show ladder lights too
+                if status == "lit":
+                    config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count) for i in range(lit_count)])
+                elif status == "complete":
+                    config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i) for i in range(complete_count)])
 
                 self._shows[showname] = self.machine.show_controller.replace_or_advance_show(
                     self._shows.get(showname),  # old_instance
