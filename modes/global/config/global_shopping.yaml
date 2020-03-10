@@ -51,7 +51,7 @@ shots:
       - start_mode_store
       - stop_mode_field
     show_tokens:
-      leds: l_store
+      leds: light_store
       color: 666666
   storetarget1:
     switch: s_target1
@@ -107,10 +107,10 @@ shows:
   storelit_show:
     - time: 0
       lights:
-        l_store: on
+        light_store: on
     - time: 1
       lights:
-        l_store: black
+        light_store: black
 
 slides:
   store_available_slide:
