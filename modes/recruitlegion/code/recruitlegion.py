@@ -12,9 +12,9 @@ TOTAL_PROGRESS = 300
 class RecruitLegion(Mode):
     """Mode code for managing Legion shot progressions, timeouts, and resets."""
 
-    def __init__(self, machine, config, name, path):
+    def __init__(self, *args, **kwargs):
         """Initialize logger and local vars."""
-        super().__init__(machine, config, name, path)
+        super().__init__(*args, **kwargs)
         self.log = logging.getLogger("RecruitLegion Heretics")
         self.log.setLevel(10)
         self._timer = None

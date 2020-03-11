@@ -4,8 +4,8 @@ from mpf.core.rgb_color import RGBColor
 
 class ColorPicker(Mode):
 
-  def __init__(self, machine, config, name, path):
-    super().__init__(machine, config, name, path)
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
     self.log = logging.getLogger("ColorPicker")
     self.log.setLevel("DEBUG")
     self.color = RGBColor((255, 0, 0))

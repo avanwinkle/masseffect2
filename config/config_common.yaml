@@ -53,12 +53,12 @@ text_ui:
     - xp
 
 virtual_platform_start_active_switches:
-  s_trough1
-  s_trough2
-  s_trough3
-  s_trough4
-  s_trough5
-  s_trough6
+  - s_trough1
+  - s_trough2
+  - s_trough3
+  - s_trough4
+  - s_trough5
+  - s_trough6
 
 game:
   balls_per_game: settings.balls_per_game

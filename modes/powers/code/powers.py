@@ -24,8 +24,8 @@ def filter_enabled_and_lit_shots(x):
 
 
 class Powers(Mode):
-    def __init__(self, machine, config, name, path):
-        super().__init__(machine, config, name, path)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Powers")
         self.log.setLevel(1)
         self.shot_group = None

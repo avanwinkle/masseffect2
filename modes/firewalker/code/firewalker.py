@@ -76,8 +76,8 @@ class ProtheanSite(FwRulesBase):
 
 
 class Firewalker(Mode):
-  def __init__(self, machine, config, name, path):
-    super().__init__(machine, config, name, path)
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
     self.log = logging.getLogger("Firewalker")
     self.log.setLevel(10)
 

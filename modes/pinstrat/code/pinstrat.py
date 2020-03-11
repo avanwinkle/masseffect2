@@ -5,8 +5,8 @@ except ImportError:  # ModuleNotFoundError is only Python 3.6+
 
     class PinStrat(Mode):
 
-        def __init__(self, machine, config, name, path):
-            super().__init__(machine, config, name, path)
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
             machine.log.warning("MPF-PinStrat is not installed. PinStrat will not be run.")
             machine.settings.set_setting_value("pinstrat_enabled", 0)
 

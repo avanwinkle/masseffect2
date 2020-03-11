@@ -13,9 +13,9 @@ class ModeAnalysis(Mode):
       play time and scoring.
     """
 
-    def __init__(self, machine, config, name, path):
-        super().__init__(machine, config, name, path)
-        self.settings = config.get("mode_settings")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.settings = self.config.get("mode_settings")
         self.analytics_log = None
         # Default log output goes to the main MPF logger
         self.log = logging.getLogger("ModeAnalysis")

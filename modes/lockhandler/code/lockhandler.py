@@ -29,11 +29,11 @@ class LockHandler(Mode):
                     should be abstracted and/or use events to set the desired mode behavior.
     """
 
-    def __init__(self, machine, config, name, path):
-        super().__init__(machine, config, name, path)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.log = logging.getLogger("LockHandler")
         self.log.setLevel(10)
-        self.settings = config.get("mode_settings")
+        self.settings = self.config.get("mode_settings")
 
         # We want to track whether to lock this ball, so when handling external events we can act accordingly
         self._will_lock_ball = False

@@ -4,11 +4,11 @@ from mpf.core.rgb_color import RGBColor
 
 class Airlock(Mode):
 
-    def __init__(self, machine, config, name, path):
-        super().__init__(machine, config, name, path)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Airlock")
         self.log.setLevel(10)
-        self.settings = config.get("mode_settings")
+        self.settings = self.config.get("mode_settings")
 
         self._bd_physical_lock = None
         self._logicallockdevice = None

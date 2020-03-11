@@ -7,8 +7,8 @@ PATHSHOTS = ["dropbank", "left_orbit", "kickback", "left_ramp", "right_ramp", "r
 
 class LongWalk(Mode):
 
-    def __init__(self, machine, config, name, path):
-        super().__init__(machine, config, name, path)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._debug_to_console = True
         self._debug_to_file = True
         self._shots_to_complete = None

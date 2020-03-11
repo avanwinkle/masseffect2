@@ -11,9 +11,9 @@ SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_
 class Environment(Mode):
     """Mode code for creating handlers to set/unset environment shots."""
 
-    def __init__(self, machine, config, name, path):
+    def __init__(self, *args, **kwargs):
         """Initialize mode, create logger, set environment."""
-        super().__init__(machine, config, name, path)
+        super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Environment")
         self.log.setLevel("DEBUG")
         self._environment = None
