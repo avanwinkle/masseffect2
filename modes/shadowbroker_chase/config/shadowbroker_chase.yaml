@@ -283,7 +283,7 @@ sound_pools:
     sounds: liara_truck_1, liara_truck_3, liara_truck_2
     track: voice
   shepard_generic_reply:
-    sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_2, shepard_i_noticed, shepard_i_know_1,
+    sounds: shepard_im_on_her, shepard_im_working_on_it, shepard_i_know_2, shepard_i_noticed, shepard_i_know_1
     track: voice
     type: random_force_all
     ducking:

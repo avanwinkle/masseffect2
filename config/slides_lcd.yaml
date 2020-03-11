@@ -236,7 +236,7 @@ slides:
   1player_score_slide:
     - type: text
       text: (machine|player1_score)
-      style: header_lg row_main num
+      style: header_lg, row_main, num
     - type: image
       image: splashscreen
       anchor_x: left
@@ -252,12 +252,12 @@ slides:
       opacity: 0.8
     - type: text
       text: (machine|player1_score)
-      style: header_lg num
+      style: header_lg, num
       anchor_y: bottom
       y: middle+15%
     - type: text
       text: (machine|player2_score)
-      style: header_lg num
+      style: header_lg, num
       anchor_y: top
       y: middle-15%
     - type: text
@@ -281,7 +281,7 @@ slides:
       y: 85%
     - type: text
       text: (machine|player1_score)
-      style: header_md num
+      style: header_md, num
       anchor_y: bottom
       y: 70%
     - type: text
@@ -292,7 +292,7 @@ slides:
       y: 55%
     - type: text
       text: (machine|player2_score)
-      style: header_md num
+      style: header_md, num
       anchor_y: bottom
       y: 40%
     - type: text
@@ -303,7 +303,7 @@ slides:
       y: 25%
     - type: text
       text: (machine|player3_score)
-      style: header_md num
+      style: header_md, num
       anchor_y: bottom
       y: 10%
     - type: image
@@ -321,7 +321,7 @@ slides:
       y: 87%
     - type: text
       text: (machine|player1_score)
-      style: header_sm num
+      style: header_sm, num
       anchor_y: bottom
       y: 79%
     - type: text
@@ -332,7 +332,7 @@ slides:
       y: 64%
     - type: text
       text: (machine|player2_score)
-      style: header_sm num
+      style: header_sm, num
       anchor_y: bottom
       y: 56%
     - type: text
@@ -343,7 +343,7 @@ slides:
       y: 41%
     - type: text
       text: (machine|player3_score)
-      style: header_sm num
+      style: header_sm, num
       anchor_y: bottom
       y: 33%
     - type: text
@@ -354,7 +354,7 @@ slides:
       y: 18%
     - type: text
       text: (machine|player4_score)
-      style: header_sm num
+      style: header_sm, num
       anchor_y: bottom
       y: 10%
     - type: image
@@ -366,10 +366,10 @@ slides:
   pinstrat_slide:
     - type: text
       text: "Scan code for your\nPinstrat summary!"
-      style: body_md col_left_anchor row_super
+      style: body_md, col_left_anchor, row_super
     - type: text
       text: (player_name)
-      style: header_sm col_left_anchor row_sub
+      style: header_sm, col_left_anchor, row_sub
     - type: image
       image: splashscreen
       anchor_x: left

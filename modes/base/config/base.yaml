@@ -3,6 +3,7 @@ mode:
   start_events: ball_starting
   stop_events: ball_will_end
   priority: 100
+  load_priority: 1000
 
 config:
   - base_achievements.yaml
@@ -376,24 +377,24 @@ slides:
     widgets:
       - type: text
         text: LEVEL UP!
-        style: header_lg row_main row_main_dmd_high
+        style: header_lg, row_main, row_main_dmd_high
       - type: text
         text: (mission_name)
-        style: body_md row_sub_under
+        style: body_md, row_sub_under
         casing: title
       - widget: levelup_background
   n7_complete_slide:
     widgets:
       - type: text
         text: $assignment_complete
-        style: header_md row_main
+        style: header_md, row_main
   skillshot_slide:
     - type: text
       text: SKILLSHOT
-      style: header_lg row_main row_main_dmd_high
+      style: header_lg, row_main, row_main_dmd_high
     - type: text
       text: (value)
-      style: body_md row_sub_under num
+      style: body_md, row_sub_under, num
   squadicon_slide:
     - type: image
       image: squadmates_grid
