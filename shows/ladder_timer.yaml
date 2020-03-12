@@ -1,0 +1,252 @@
+#show_version=5
+
+# 1-second fades on the ladder = 10s per color group
+# All counts are 1s each, except green/yellow which is 1.9s
+# The last 2 seconds are all flashing red, so the count is
+#  60-42: green -> yellow
+#  42-22: yellow -> orange
+#  22-12: orange -> red
+#  12-02: red -> flashing red
+#  02-00: all flashing red
+
+# Fade always at
+
+# 60-second mark
+- duration: 1.9
+  lights:
+    l_ladder:
+      color: color_timer_green
+      fade: 200ms
+- duration: 1.9
+  lights:
+    l_ladder_light_9:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_8:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_7:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_6:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_5:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_4:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_3:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_2:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_1:
+      color: color_timer_yellow
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_0:
+      color: color_timer_yellow
+      fade: 1900ms
+# 42-second mark
+- duration: 1.9
+  lights:
+    l_ladder_light_9:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_8:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_7:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_6:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_5:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_4:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_3:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_2:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_1:
+      color: color_timer_orange
+      fade: 1900ms
+- duration: 1.9
+  lights:
+    l_ladder_light_0:
+      color: color_timer_orange
+      fade: 1900ms
+# 22 second mark
+- duration: 1
+  lights:
+    l_ladder_light_9:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_8:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_7:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_6:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_5:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_4:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_3:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_2:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_1:
+      color: color_timer_red
+      fade: 1s
+- duration: 1
+  lights:
+    l_ladder_light_0:
+      color: color_timer_red
+      fade: 1
+# 12 second mark
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6, l_ladder_light_5
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6, l_ladder_light_5, l_ladder_light_4
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6, l_ladder_light_5, l_ladder_light_4, l_ladder_light_3
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6, l_ladder_light_5, l_ladder_light_4, l_ladder_light_3, l_ladder_light_2
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 2
+      show_tokens:
+        leds: l_ladder_light_9, l_ladder_light_8, l_ladder_light_7, l_ladder_light_6, l_ladder_light_5, l_ladder_light_4, l_ladder_light_3, l_ladder_light_2, l_ladder_light_1
+        color: color_timer_red
+- duration: 1
+  shows:
+    color_flashing_fast:
+      loops: -1
+      speed: 4
+      show_tokens:
+        leds: l_ladder
+        color: color_timer_red
