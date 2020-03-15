@@ -121,11 +121,6 @@ shots:
       color: color_jack
     tags: envshot_hitbank, power_target_charge
 
-light_player:
-  mode_recruitjack_started:
-    light_backwall_ambient:
-      color: color_jack
-
 shows:
   recruitintro_jack:
     - time: 2s
@@ -142,6 +137,10 @@ shows:
           action: remove
 
 show_player:
+  mode_recruitjack_started:
+    gi_show:
+      start_step: 3
+      manual_advance: True
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0

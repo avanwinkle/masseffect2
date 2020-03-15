@@ -43,6 +43,8 @@ event_player:
   vasir_shot_armor_2_hit: play_vasir_start_sound|2s
   # Reset the dropbank whenever it is lit, to ensure a fair shot
   player_shot_sbvasir_dropbank{value>0}: reset_dropbank
+  # Also reset when completing
+  stop_mode_shadowbroker_vasir: reset_dropbank
 
 #####
 # VASIR COMBAT SCORING:

@@ -112,6 +112,10 @@ shows:
           action: remove
 
 show_player:
+  mode_recruitgarrus_started:
+    gi_show:
+      start_step: 2
+      manual_advance: True
   show_recruit_instructions:
     recruitintro_garrus:
       loops: 0
@@ -196,8 +200,3 @@ sounds:
   boss_i_told_you_id_finish_you:
     file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243158_m.ogg
     track: voice
-
-light_player:
-  mode_recruitgarrus_started:
-    light_backwall_ambient:
-      color: color_garrus

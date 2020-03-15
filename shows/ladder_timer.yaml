@@ -76,7 +76,7 @@
 # Step 11: 42-second mark [ All Yellow] = 42s or preset for 40s
 - duration: 1.9
   lights:
-    l_ladder_light_0:
+    l_ladder:
       color: color_timer_yellow
       fade: 1900ms
 # Step 12: Begin fade to orange = 40.1s
@@ -151,14 +151,13 @@
     l_ladder:
       color: color_timer_orange
       fade: 1s
+    # Priority here persists over the fade. Is this a race condition?
     l_ladder_light_9:
       color: color_timer_red
       fade: 1s
-      priority: 1
     l_ladder_light_8:
       color: color_timer_red
       fade: 1s
-      priority: 1
 # Step 24 =20s
 - duration: 1
   lights:

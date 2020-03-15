@@ -48,12 +48,11 @@ config:
   - field_recruit.yaml
   - field_shadowbroker.yaml
 
-light_player:
+show_player:
   mode_field_started:
-    light_backwall_gi:
-      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
-    light_backwall_ambient:
-      color: color_space
+    gi_show:
+      start_step: 1
+      manual_advance: True
 
 sound_player:
   mode_field_started:
