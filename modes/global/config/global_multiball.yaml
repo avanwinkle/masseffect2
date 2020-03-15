@@ -158,12 +158,16 @@ show_player:
       speed: 10
       show_tokens:
         color: color_mball
-  play_queued_slide_fmball_ball_locked_slide:
-    pulse_playfield:
+  play_queued_slide_fmball_ball_locked_slide{device.achievements.arrival.state=="disabled"}:
+    lock_sweep_overlord:
       priority: 10000
-      loops: 2
-      show_tokens:
-        color: color_mball
+      speed: 20
+      loops: 1
+  play_queued_slide_fmball_ball_locked_slide{device.achievements.arrival.state!="disabled"}:
+    lock_sweep_arrival:
+      priority: 10000
+      speed: 20
+      loops: 1
   # When in wizard mode, hide the lock light show because we can't lock
   mode_type_wizard_started:
     fmball_disabled_show:

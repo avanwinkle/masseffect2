@@ -7,6 +7,13 @@ event_player:
     - start_suicide_main|29245ms
 
 show_player:
+  # mode_attract_started:
+  #   ladder_timer:
+  #     action: play
+  #     loops: -1
+  #     speed: 2
+  #     start_running: False
+  #     start_step: 12
   start_suicide_intro:
     attract_sm_track:
       loops: -1

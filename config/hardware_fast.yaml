@@ -19,8 +19,8 @@ fadecandy:
   gamma: 1
 
 machine:
-  balls_installed: 5
-  min_balls: 5
+  balls_installed: 6
+  min_balls: 6
 
 event_player:
   bypass_lock_release_pulse_short:
@@ -49,9 +49,10 @@ ball_devices:
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
     eject_timeouts: 1500ms
-    auto_fire_on_unexpected_ball: False
-    eject_coil_jam_pulse: 45ms
+    # auto_fire_on_unexpected_ball: True
+    eject_coil_jam_pulse: 85ms
     confirm_eject_switch: s_plunger_lane
+    confirm_eject_type: switch
     ball_search_order: 2
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
@@ -106,7 +107,8 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 22 # Mk2 was 20, upping to 22
+    default_pulse_ms: 80 # Mk2 was 20, upping to 22
+    default_pulse_power: 1.0
     debug: true
     # pulse_power: 2
   c_bumper_left:

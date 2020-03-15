@@ -11,6 +11,24 @@ show_player:
     missions_available_show{current_player.available_missions>0 and current_player.bypass_missionselect==0}:
       action: play
       sync_ms: 800
+    color_flashing{device.achievements.collectorship.state=="enabled"}:
+      speed: 0.5
+      sync_ms: 800
+      show_tokens:
+        leds: l_progress_collectorship
+        fade: 2s
+    color_flashing{device.achievements.derelictreaper.state=="enabled"}:
+      speed: 0.5
+      sync_ms: 800
+      show_tokens:
+        leds: l_progress_derelictreaper
+        fade: 2s
+    color_flashing{device.achievements.normandyattack.state=="enabled"}:
+      speed: 0.5
+      sync_ms: 800
+      show_tokens:
+        leds: l_progress_normandyattack
+        fade: 2s
   # Disable the lights on GoT to reduce noise, leave on for FAST
   mode_field_will_stop{not machine.is_lcd}:
     missions_available_show:
