@@ -516,27 +516,27 @@ lights:
     tags: light_pf, l_targets
     default_on_color: ffcc00  # color_armor
 
-  l_right_ramp_arrow_yellow:  # Right Ramp Arrow (Yellow) [#65]
+  l_right_ramp_arrow:  # Right Ramp Arrow (Yellow) [#65]
     number: 0-3
     type: grb
-    tags: light_pf, lane_wedges, l_upgrade
+    tags: light_pf, lane_wedges, light_upgrades
     default_on_color: eeff00  # color_kasumi
   l_battering_ram_top:  # Battering Ram 1 (Top) [#62]
     number: 0-5
     type: grb
     tags: light_pf, batram_multipliers, batram_arrow, light_reapercore
     default_on_color: "990000"  # color_health
-  l_left_ramp_arrow_green:  # Left Ramp Arrow (Green) [#54]
+  l_left_ramp_arrow:  # Left Ramp Arrow (Green) [#54]
     number: 0-7
     type: grb
     tags: light_pf, light_missionselect, lane_wedges
     default_on_color: white
-  l_kickback_arrow_clear:  # Kickback Lane Arrow (Clear) [#45]
+  l_kickback_arrow:  # Kickback Lane Arrow (Clear) [#45]
     number: 0-9  # shadowbroker mission start
     type: grb
     tags: light_pf, light_lock_lit, light_shadowbroker_start, lane_wedges, light_extraball
     default_on_color: ff1f00  # color_shadowbroker
-  l_kickback_arrow_amber:
+  l_store:
     number: 0-11
     type: grb
     tags: light_pf, light_store

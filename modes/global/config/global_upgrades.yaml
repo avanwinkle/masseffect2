@@ -123,7 +123,7 @@ shots:
       - collect_upgrade_shot_hit
     profile: color_on
     show_tokens:
-      leds: l_right_ramp_arrow_yellow
+      leds: light_upgrades
       color: FFFFFF
 
 slide_player:
