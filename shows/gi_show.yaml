@@ -32,10 +32,10 @@
       color: color_mordin
       fade: 1s
     gi_middle:
-      color: color_grunt
+      color: FF9960 # color_grunt at 25% white
       fade: 1s
     gi_bottom:
-      color: color_grunt
+      color: FFCCB0 # color_grunt at 75% white
       fade: 1s
 
 # Step 3: Purgatory (purples and whites)

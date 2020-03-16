@@ -39,18 +39,6 @@ queue_relay_player:
     post: start_mode_gameover
     wait_for: mode_gameover_stopped
 
-light_player:
-  mode_bonus_started:
-    gi:
-      color: black
-      fade: 1s
-    light_backwall_gi:
-      color: AA0000
-      fade: 3s
-    light_backwall_ambient:
-      color: black
-      fade: 1s
-
 slide_player:
   mode_bonus_started.1{current_player.state_machine_suicide_progress!="completed"}: end_slide
   mode_bonus_started.2{current_player.state_machine_suicide_progress=="completed"}: end_slide_gameover

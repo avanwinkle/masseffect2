@@ -1,0 +1,34 @@
+#show_version=5
+- time: 0
+  lights:
+    gi_top: 
+      color: 999999
+      fade: 1s
+    gi_middle:
+      color: 444444
+      fade: 1s
+    gi_bottom:
+      color: 222222
+      fade: 1s
+    light_backwall_gi:
+      color: AA0000
+      fade: 3s
+    light_backwall_ambient:
+      color: black
+      fade: 1s
+- time: 1
+  lights:
+    gi_top:
+      color: 990000
+      fade: 2s
+- time: 2
+  lights:
+    gi_middle:
+      color: 440000
+      fade: 2s
+- time: 3
+  lights:
+    gi_bottom:
+      color: 220000
+      fade: 2s
+- duration: -1

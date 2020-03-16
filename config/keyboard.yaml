@@ -38,7 +38,7 @@ keyboard:
   t:
     event: hold_post_disable
   m:
-    event: levelup
+    event: start_mode_missionselect
   a:
     event: enable_gates
   o:

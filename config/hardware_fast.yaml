@@ -48,9 +48,9 @@ ball_devices:
     tags: trough, home, drain
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
-    eject_timeouts: 1500ms
+    eject_timeouts: 500ms
     # auto_fire_on_unexpected_ball: True
-    eject_coil_jam_pulse: 45ms
+    eject_coil_jam_pulse: 25ms
     confirm_eject_switch: s_plunger_lane
     confirm_eject_type: switch
     ball_search_order: 2
@@ -107,8 +107,8 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 40 # Mk2 was 20, upping to 22
-    default_pulse_power: 1.0
+    default_pulse_ms: 100 # Mk2 was 20, upping to 22
+    default_pulse_power: 0.9
     debug: true
     # pulse_power: 2
   c_bumper_left:
