@@ -2,6 +2,9 @@ import logging
 import random
 from mpf.core.mode import Mode
 from mpf.devices.shot_group import ShotGroup
+from mpf.core.utility_functions import Util
+from mpf.core.rgb_color import RGBColor
+from mpf.core.placeholder_manager import NativeTypeTemplate
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dropbank", "hitbank"]
 TEST_POWER = None
@@ -28,6 +31,7 @@ class Powers(Mode):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Powers")
         self.log.setLevel(1)
+        self.shots = []
         self.shot_group = None
         self.handlers = []
         self.power_handlers = {
@@ -38,13 +42,16 @@ class Powers(Mode):
             "drone": self._activate_drone,
             "singularity": self._activate_singularity,
         }
+        self.persisted_shots = {}
 
-    def mode_start(self, **kwargs):
-        super().mode_start(**kwargs)
+    def mode_will_start(self, **kwargs):
+        self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
+        self.log.info("Mode started with shots: {}".format(self.shots))
+        self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('award_power', self._award_power)
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
-
+        
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
         self.log.debug("Activating power {}".format(power))
@@ -94,6 +101,28 @@ class Powers(Mode):
 
     def _get_power_name(self, power):
         return self.machine.config['text_strings']['power_{}'.format(power)]
+
+    def _set_mission_shots(self, **kwargs):
+        self.log.info("Setting initial shots from kwargs {}".format(kwargs))
+        name = kwargs.get("persist_name")
+        shots_to_set = self.persisted_shots.get(name)
+        # Sometimes we use resumable for points, but don't persist
+        # If this is persisted and we've done it before?
+        if not shots_to_set:
+            starting_shots = kwargs.get("starting_shots")
+            shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
+            self.log.info("No persisted shots, setting shots {}".format(shots_to_set))
+            # Set these as persisted values, maybe
+            if name and name != True:
+                self.persisted_shots[name] = shots_to_set
+        
+        # Our shot pointers are in the same order
+        for idx, shot in enumerate(self.shots):
+            if shots_to_set[idx]:
+                self.log.info("Shot {} has config {}".format(shot, shot.config))
+                # shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+                shot.enable()
+        self.machine.events.post("set_env", env=kwargs.get("env"))
 
     # SPECIFIC POWERS
     def _activate_adrenaline(self):

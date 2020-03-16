@@ -21,22 +21,25 @@ mode:
 
 event_player:
   mode_recruitgrunt_started:
-    set_environment:
-      env: krogan
     show_recruit_instructions:
       squadmate: grunt
       portrait: recruitgrunt
       instructions_main: "Tank-Bred Krogan"
       instructions_sub: "Hit all shots to defeat"
+  mode_powers_started:
     set_mission_shots:
+      color: color_grunt
+      env: krogan
       is_resumable: 1
       ticks:
         value: 12 if current_player.difficulty else 20
         type: int
+      persist_name: recruitgrunt
       shots_total: 5
       shots_remaining:
         value: device.counters.grunt_shots_counter.value
         type: int
+      starting_shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
   slide_recruit_mission_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:
@@ -51,7 +54,7 @@ counters:
     starting_count: 5
     count_complete_value: 0
     direction: down
-    count_events: grunt_shots_lit_hit
+    count_events: power_shots_lit_hit
     events_when_hit:
       - logicblock_grunt_shots_counter_hit
       - mission_shot_hit
@@ -59,52 +62,6 @@ counters:
     disable_on_complete: true
     reset_on_complete: false
     persist_state: true
-
-shot_groups:
-  grunt_shots:
-    shots: grunt_left_ramp, grunt_left_orbit, grunt_right_ramp, grunt_right_orbit, grunt_kickback
-
-shots:
-  grunt_left_ramp:
-    hit_events: sh_left_ramp_hit
-    disable_events: grunt_left_ramp_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_left_ramp_ring
-      color: color_grunt
-    tags: envshot_left_ramp, power_target, power_target_left_ramp
-  grunt_left_orbit:
-    hit_events: sh_left_orbit_hit
-    disable_events: grunt_left_orbit_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_grunt
-    tags: envshot_left_orbit, power_target, power_target_left_orbit
-  grunt_right_ramp:
-    hit_events: sh_right_ramp_hit
-    disable_events: grunt_right_ramp_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_right_ramp_ring
-      color: color_grunt
-    tags: envshot_right_ramp, power_target, power_target_right_ramp
-  grunt_right_orbit:
-    hit_events: sh_right_orbit_hit
-    disable_events: grunt_right_orbit_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_grunt
-    tags: envshot_right_orbit, power_target, power_target_right_orbit
-  grunt_kickback:
-    hit_events: sh_kickback_hit
-    disable_events: grunt_kickback_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_kickback_ring
-      color: color_grunt
-    tags: envshot_kickback, power_target, power_target_kickback
 
 light_player:
   mode_recruitgrunt_started:
@@ -152,7 +109,7 @@ sound_player:
   logicblock_grunt_shots_counter_hit{count==1}:
     grunt_bossdialogue:
       max_queue_time: 500ms
-  grunt_shots_complete:
+  logicblock_grunt_shots_counter_complete:
     music_recruit_grunt:
       action: stop
 

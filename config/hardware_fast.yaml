@@ -40,7 +40,7 @@ ball_devices:
     confirm_eject_type: target # default
     entrance_count_delay: 700ms
     player_controlled_eject_event: force_plunger_launch
-    debug: true
+    # debug: true
     ball_search_order: 1
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6
@@ -64,12 +64,12 @@ ball_devices:
     eject_timeouts: 1500ms
     exit_count_delay: 1s
     ball_missing_timeouts: 2500ms  # In case of balldevice_bd_lock_ball_missing
-    debug: true
+    # debug: true
     ball_search_order: 20
   bd_hold:
     eject_coil: c_hold_post_release
     ball_switches: s_missionselect
-    debug: true
+    # debug: true
     ball_search_order: 10
 
 named_colors:
@@ -109,7 +109,7 @@ coils:
     number: 1-0
     default_pulse_ms: 100 # Mk2 was 20, upping to 22
     default_pulse_power: 0.9
-    debug: true
+    # debug: true
     # pulse_power: 2
   c_bumper_left:
     number: 2-2
@@ -145,12 +145,12 @@ coils:
     pulse_events:
       - fire_hold_post
       - enable_transition_hold
-    debug: true
+    # debug: true
     tags: coil_missionselect
   c_hold_post_release:
     number: 0-0
     default_pulse_ms: 60  # Bumped from 55, which sometimes failed to release
-    debug: true
+    # debug: true
     pulse_events:
       - release_hold_post
       - release_suicide_hold
@@ -161,7 +161,7 @@ coils:
     default_hold_power: 0.12
     enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse
-    debug: true
+    # debug: true
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3

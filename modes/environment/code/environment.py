@@ -15,7 +15,7 @@ class Environment(Mode):
         """Initialize mode, create logger, set environment."""
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Environment")
-        self.log.setLevel("DEBUG")
+        self.log.setLevel(1)
         self._environment = None
         self._removal_handlers = None
 
