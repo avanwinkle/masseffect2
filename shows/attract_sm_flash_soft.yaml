@@ -1,77 +1,86 @@
 #show_version=5
-- duration: 510ms
+- duration: 528ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 510ms
+    l_backwall_gi: color_collectors
+    gi_top: off
+    l_ladder_light_9: off
+    l_ladder_light_0: on
+- duration: 517ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_right: 80ms
-- duration: 258ms
+    l_backwall_gi: off
+    gi_top: color_collectors
+    l_ladder_light_0: off
+    l_ladder_light_1: on
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi: color_collectors
+    gi_top: off
+    l_ladder_light_1: off
+    l_ladder_light_2: on
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_right_orbit: 80ms
-- duration: 258ms
+    l_backwall_gi: off
+    gi_top: color_collectors
+    l_ladder_light_2: off
+    l_ladder_light_3: on
+- duration: 262ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 510ms
+    l_backwall_gi: color_collectors
+    gi_top: off
+    l_ladder_light_3: off
+    l_ladder_light_4: on
+- duration: 528ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_left: 80ms
-- duration: 510ms
+    l_backwall_gi: off
+    gi_top: color_collectors
+    l_ladder_light_4: off
+    l_ladder_light_5: on
+- duration: 517ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi: color_collectors
+    gi_top: off
+    l_ladder_light_5: off
+    l_ladder_light_6: on
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_slingshots: 80ms
-- duration: 258ms
+    l_backwall_gi: off
+    gi_top: color_collectors
+    l_ladder_light_6: off
+    l_ladder_light_7: on
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi: color_collectors
+    gi_top: off
+    l_ladder_light_7: off
+    l_ladder_light_8: on
+- duration: 262ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-- duration: 510ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_right: 80ms
-- duration: 510ms
-  lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-  flashers:
-    l_flash_left_ramp: 80ms
-    l_flash_right_ramp: 80ms
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
+    l_backwall_gi: off
+    gi_top: color_collectors
+    l_ladder_light_8: off
+    l_ladder_light_9: on
+# - duration: 528ms
+#   lights:
+#     l_backwall_gi: off
+#     gi_top: color_collectors
+#   flashers:
+#     l_flash_dragon_right: 80ms
+# - duration: 528ms
+#   lights:
+#     l_backwall_gi: color_collectors
+#     gi_top: off
+# - duration: 252ms
+#   lights:
+#     l_backwall_gi: off
+#     gi_top: color_collectors
+# - duration: 252ms
+#   lights:
+#     l_backwall_gi: color_collectors
+#     gi_top: off
+# - duration: 252ms
+#   lights:
+#     l_backwall_gi: off
+#     gi_top: color_collectors
 
 
 

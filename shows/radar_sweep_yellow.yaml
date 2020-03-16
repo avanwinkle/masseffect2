@@ -1,0 +1,220 @@
+#show_version=5
+- time: 0
+  lights:
+    l_ball_save: 'E4FD00'
+    l_ladder_light_0: 'E4FD00'
+    l_ladder_light_1: 'E4FD00'
+    l_ladder_light_2: 'E4FD00'
+    l_ladder_light_3: 'E4FD00'
+    l_ladder_light_4: 'E4FD00'
+    l_ladder_light_5: 'A2B400'
+    l_left_medigel: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '869500'
+    l_left_outlane: 'E4FD00'
+    l_left_return_lane: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_4: 'CEE400'
+    l_ladder_light_5: '646F00'
+    
+- time: '+1'
+  lights:
+    l_dropbank_bottom: 'E4FD00'
+    l_dropbank_middle: 'E4FD00'
+    l_ladder_light_0: '090A00'
+    l_ladder_light_1: '252900'
+    l_ladder_light_2: '070800'
+    l_ladder_light_3: '323800'
+    l_ladder_light_4: '444C00'
+    l_ladder_light_5: '393F00'
+    
+- time: '+1'
+  lights:
+    l_ball_save: '000000'
+    l_dropbank_top: 'E4FD00'
+    l_ladder_light_0: '000000'
+    l_ladder_light_1: '000000'
+    l_ladder_light_2: '000000'
+    l_ladder_light_3: '000000'
+    l_ladder_light_4: '000000'
+    l_ladder_light_5: '1A1D00'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '000000'
+    
+#No change this frame - take another step
+#  lights:
+- time: '+1'
+    
+- time: '+1'
+  lights:
+    l_left_medigel: '000000'
+    l_left_orbit_shield_rgb: 'E4FD00'
+    l_standup_1: '171900'
+    
+- time: '+1'
+  lights:
+    l_flash_left_orbit: 'E4FD00'
+    l_kickback_arrow: 'E4FD00'
+    l_standup_1: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_kickback_shield_rgb: 'E4FD00'
+    l_ladder_light_6: '181B00'
+    l_left_outlane: '000000'
+    l_left_return_lane: '000000'
+    l_standup_2: 'E4FD00'
+    l_store: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '0C0E00'
+    l_ladder_light_6: '8C9B00'
+    l_ladder_light_7: '383E00'
+    l_ladder_light_8: '070700'
+    l_left_ramp_arrow: 'E4FD00'
+    l_left_ramp_shield_rgb: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_battering_ram_top: '596300'
+    l_dropbank_bottom: '000000'
+    l_dropbank_middle: '000000'
+    l_ladder_light_6: 'D9F000'
+    l_ladder_light_7: 'E4FD00'
+    l_ladder_light_8: 'E4FD00'
+    l_ladder_light_9: 'E4FD00'
+    l_standup_3: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_battering_ram_top: 'E4FD00'
+    l_dropbank_top: '000000'
+    l_ladder_light_6: 'E4FD00'
+    l_standup_4: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_right_ramp_arrow: 'E4FD00'
+    l_right_ramp_shield_rgb: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_left_orbit_shield_rgb: '111300'
+    l_right_orbit_shield_rgb: 'E4FD00'
+    l_standup_5: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_left_orbit_shield_rgb: '000000'
+    l_standup_1: '000000'
+    
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '000000'
+    l_kickback_arrow: '000000'
+    l_kickback_shield_rgb: '272B00'
+    
+- time: '+1'
+  lights:
+    l_hitbank_top: 'E4FD00'
+    l_kickback_shield_rgb: '000000'
+    l_ladder_light_6: 'BBCF00'
+    l_standup_2: '000000'
+    l_store: '000000'
+    
+- time: '+1'
+  lights:
+    l_hitbank_bottom: '171900'
+    l_ladder_light_6: '414800'
+    l_ladder_light_7: '6F7C00'
+    l_ladder_light_8: 'A0B200'
+    l_ladder_light_9: 'E2FB00'
+    l_left_ramp_arrow: '000000'
+    l_left_ramp_shield_rgb: '000000'
+    
+- time: '+1'
+  lights:
+    l_battering_ram_top: '000000'
+    l_hitbank_bottom: 'E4FD00'
+    l_ladder_light_6: '030300'
+    l_ladder_light_7: '000000'
+    l_ladder_light_8: '000000'
+    l_ladder_light_9: '000000'
+    l_standup_3: '000000'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_6: '000000'
+    l_standup_4: '000000'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '0D0F00'
+    l_right_ramp_arrow: '000000'
+    l_right_ramp_shield_rgb: '000000'
+    l_standup_5: '000000'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '242800'
+    l_right_orbit_shield_rgb: '000000'
+    l_right_outlane: 'E4FD00'
+    l_right_return_lane: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '3A4100'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: '545D00'
+    l_right_medigel: 'E4FD00'
+    
+- time: '+1'
+  lights:
+    l_hitbank_top: '000000'
+    l_ladder_light_5: '748100'
+    
+- time: '+1'
+  lights:
+    l_hitbank_bottom: '000000'
+    l_ladder_light_0: '262B00'
+    l_ladder_light_1: '1E2200'
+    l_ladder_light_2: '535C00'
+    l_ladder_light_3: '5F6A00'
+    l_ladder_light_4: '768300'
+    l_ladder_light_5: '9FB000'
+    
+- time: '+1'
+  lights:
+    l_ball_save: 'E4FD00'
+    l_ladder_light_0: 'E4FD00'
+    l_ladder_light_1: 'E4FD00'
+    l_ladder_light_2: 'E4FD00'
+    l_ladder_light_3: 'E4FD00'
+    l_ladder_light_4: 'DAF200'
+    l_ladder_light_5: 'C0D600'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_4: 'E4FD00'
+    l_ladder_light_5: 'DDF600'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: 'D1E800'
+    l_right_outlane: '9EAF00'
+    
+- time: '+1'
+  lights:
+    l_ladder_light_5: 'BBD000'
+    l_right_outlane: '000000'
+    l_right_return_lane: '000000'
+    
