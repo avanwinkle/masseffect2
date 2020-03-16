@@ -105,23 +105,29 @@ class Powers(Mode):
     def _set_mission_shots(self, **kwargs):
         self.log.info("Setting initial shots from kwargs {}".format(kwargs))
         name = kwargs.get("persist_name")
+        name = name and name != True
         shots_to_set = self.persisted_shots.get(name)
-        # Sometimes we use resumable for points, but don't persist
-        # If this is persisted and we've done it before?
-        if not shots_to_set:
-            starting_shots = kwargs.get("starting_shots")
+        starting_shots = kwargs.get("starting_shots")
+        
+        # If we have starting shots and no persisted shots, set both
+        if starting_shots and not shots_to_set:
             shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
             self.log.info("No persisted shots, setting shots {}".format(shots_to_set))
             # Set these as persisted values, maybe
-            if name and name != True:
+            if name:
                 self.persisted_shots[name] = shots_to_set
         
-        # Our shot pointers are in the same order
-        for idx, shot in enumerate(self.shots):
-            if shots_to_set[idx]:
-                self.log.info("Shot {} has config {}".format(shot, shot.config))
-                # shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
-                shot.enable()
+        if shots_to_set:
+            # Our shot pointers are in the same order
+            for idx, shot in enumerate(self.shots):
+                if shots_to_set[idx]:
+                    self.log.info("Shot {} has config {}".format(shot, shot.config))
+                    # shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+                    shot.restart()
+                else:
+                    shot.disable()
+        else:
+            self.log.info("No shots to set!")
         self.machine.events.post("set_env", env=kwargs.get("env"))
 
     # SPECIFIC POWERS

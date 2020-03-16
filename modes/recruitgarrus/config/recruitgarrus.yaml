@@ -22,86 +22,54 @@ mode:
 
 event_player:
   mode_recruitgarrus_started.1:
-    set_environment:
-      env: bloodpack
     show_recruit_instructions:
       squadmate: garrus
       portrait: recruitgarrus
       instructions_main: Defend Archangel
       instructions_sub: Close the Shutters
+  mode_powers_started:
     set_mission_shots:
+      color: color_garrus
+      env: bloodpack
       shots_total: 4
       is_resumable: 0
       shots_remaining:
         value: device.counters.doors_closed_counter.value
         type: int
-  logicblock_doors_closed_counter_hit.100: mission_shot_hit
-  logicblock_doors_closed_counter_hit{count==1}:
-    mission_collect_score: {}
+      starting_shots: left_orbit, kickback, right_orbit
+  power_shots_lit_hit: mission_shot_hit
+  logicblock_doors_closed_counter_complete:
     show_recruit_instructions:
       squadmate: garrus
       portrait: recruitgarrus
       instructions_main: Shutters Closed
       instructions_sub: Get back upstairs!
-  logicblock_doors_closed_counter_complete: mission_collect_score, recruit_garrus_complete
+  right_ramp_lit_hit: mission_collect_score, recruit_garrus_complete
 
 counters:
   doors_closed_counter:
-    starting_count: 4
+    starting_count: 3
     count_complete_value: 0
     direction: down
     count_events:
-      - close_doors_lit_hit
-      - clear_upstairs_hit
-    reset_events: mode_recruitgarrus_started{device.counters.doors_closed_counter.value>1}
-    persist_state: true
+      - power_shots_lit_hit
+    persist_state: false
 
 shot_groups:
   close_doors:
-    shots: center_door, left_door, right_door
+    shots: left_orbit, kickback, right_orbit
     reset_events: mode_recruitgarrus_started
     disable_events: close_doors_hit_complete
   clear_upstairs:
-    shots: stairs
+    shots: right_ramp
+    enable_events: logicblock_doors_closed_counter_complete
     reset_events: mode_recruitgarrus_started
-
-shots:
-  center_door:
-    hit_events: sh_kickback_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_kickback_ring
-      color: color_garrus
-    tags: envshot_kickback, power_target, power_target_kickback
-  left_door:
-    hit_events: sh_left_orbit_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_garrus
-    tags: envshot_left_orbit, power_target, power_target_left_orbit
-  right_door:
-    hit_events: sh_right_orbit_hit
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_garrus
-    tags: envshot_right_orbit, power_target, power_target_right_orbit
-  stairs:
-    hit_events: sh_right_ramp_hit
-    profile: lane_shot_profile
-    enable_events: close_doors_hit_complete
-    show_tokens:
-      leds: l_right_ramp_ring
-      color: color_garrus
-    tags: envshot_right_ramp, power_target, power_target_right_ramp
 
 shows:
   recruitintro_garrus:
     - time: 2s
       events:
-        - play_garrus_intro_shutters{device.counters.doors_closed_counter.value>1}
-        - play_garrus_intro_upstairs{device.counters.doors_closed_counter.value==1}
+        - play_garrus_intro_shutters
     - time: 7s
       events: mission_intro_complete
     - time: 8730ms
@@ -128,16 +96,13 @@ sound_player:
   play_garrus_intro_shutters:
     garrus_mission_start:
       action: play
-  play_garrus_intro_upstairs:
-    garrus_last_shutter:
-      action: play
-  logicblock_doors_closed_counter_hit{count==3}:
+  logicblock_doors_closed_counter_hit{count==2}:
     garrus_two_more_shutters:
       max_queue_time: 1s
-  logicblock_doors_closed_counter_hit{count==2}:
+  logicblock_doors_closed_counter_hit{count==1}:
     garrus_one_more_shutter:
       max_queue_time: 1s
-  logicblock_doors_closed_counter_hit{count==1}:
+  logicblock_doors_closed_counter_hit{count==0}:
     garrus_last_shutter:
       max_queue_time: 2s
   logicblock_doors_closed_counter_complete:
@@ -147,12 +112,12 @@ sound_player:
 
 sound_pools:
   garrus_mission_start:
-    type: random
+    type: random_force_all
     track: voice
     sounds: garrus_give_these_bastards_everything, garrus_get_those_doors_closed, garrus_you_deal_with_shutters
     max_queue_time: 1s
   garrus_last_shutter:
-    type: random
+    type: random_force_all
     track: voice
     sounds: garrus_final_1, garrus_final_2, garrus_final_3
     max_queue_time: 1s

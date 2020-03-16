@@ -145,8 +145,6 @@ shot_groups:
     shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
   power_shots:
     shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
-    rotate_right_events: s_flipper_right_active
-    rotate_left_events: s_flipper_left_active
 
 shots:
   # All shots for the default modes that support powers
@@ -158,7 +156,7 @@ shots:
     show_tokens:
       leds: l_left_ramp_ring
       color: color_kasumi
-    tags: envshot_left_ramp, power_shot, power_shot_left_ramp
+    tags: envshot_left_ramp
   left_orbit:
     hit_events: sh_left_orbit_hit
     enable_events: enable_left_orbit
@@ -167,7 +165,7 @@ shots:
     show_tokens:
       leds: l_left_orbit_ring
       color: color_kasumi
-    tags: envshot_left_orbit, power_shot, power_shot_left_orbit
+    tags: envshot_left_orbit
   right_ramp:
     hit_events: sh_right_ramp_hit
     enable_events: enable_right_ramp
@@ -176,7 +174,7 @@ shots:
     show_tokens:
       leds: l_right_ramp_ring
       color: color_kasumi
-    tags: envshot_right_ramp, power_shot, power_shot_right_ramp
+    tags: envshot_right_ramp
   right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: enable_right_orbit
@@ -185,7 +183,7 @@ shots:
     show_tokens:
       leds: l_right_orbit_ring
       color: color_kasumi
-    tags: envshot_right_orbit, power_shot, power_shot_right_orbit
+    tags: envshot_right_orbit
   kickback:
     hit_events: sh_kickback_hit
     enable_events: enable_kickback
@@ -194,7 +192,7 @@ shots:
     show_tokens:
       leds: l_kickback_ring
       color: color_kasumi
-    tags: envshot_kickback, power_shot, power_shot_kickback
+    tags: envshot_kickback
   dropbank:
     hit_events: sh_dropbank_hit
     enable_events: enable_dropbank
@@ -203,7 +201,7 @@ shots:
     show_tokens:
       leds: l_dropbank_ring
       color: color_kasumi
-    tags: envshot_dropbank, power_shot, power_shot_dropbank
+    tags: envshot_dropbank
   hitbank:
     hit_events: sh_hitbank_hit
     enable_events: enable_hitbank
@@ -212,7 +210,7 @@ shots:
     show_tokens:
       leds: l_hitbank_ring
       color: color_kasumi
-    tags: envshot_hitbank, power_shot, power_shot_hitbank
+    tags: envshot_hitbank
   # Shots for power behaviors
   activate_power:
     enable_events:
