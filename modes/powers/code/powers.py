@@ -46,6 +46,8 @@ class Powers(Mode):
 
     def mode_will_start(self, **kwargs):
         self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
+        self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
+        self.shot_group.rotation_enabled = False
         self.log.info("Mode started with shots: {}".format(self.shots))
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('award_power', self._award_power)
@@ -57,7 +59,7 @@ class Powers(Mode):
         self.log.debug("Activating power {}".format(power))
         try:
             self.power_handlers[power]()
-            self.machine.events.post("power_activation_success", power=power)
+            self.machine.events.post("power_activation_success", power=power, l_power="l_power_{}".format(power))
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
@@ -66,12 +68,14 @@ class Powers(Mode):
         # variable_player can't sub values, so do it manually
         self.machine.game.player["power"] = power
         self.machine.events.post("power_awarded",
+                                 l_power="l_power_{}".format(power),
                                  power=power,
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
 
     def _complete(self, **kwargs):
         self.machine.game.player["power"] = " "
+        self.shot_group.rotation_enabled = False
         # Clear out specific handlers we added to manage the power while it was active
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
@@ -132,25 +136,29 @@ class Powers(Mode):
 
     # SPECIFIC POWERS
     def _activate_adrenaline(self):
+        self.handlers.append(self.add_mode_event_handler(
+            'timer_missiontimer_started',
+            self._complete
+        ))
         self.machine.events.post("missiontimer_pause_ten")
 
     def _activate_armor(self):
+        self.handlers.append(self.add_mode_event_handler(
+            'ball_save_armor_disabled',
+            self._complete
+        ))
         self.machine.events.post("enable_armor")
 
     def _activate_cloak(self):
-        # Get all enabled targets, even those that are not lit, so we can rotate to them
-        # TODO: Update shots when new ones are lit and the timer is still active?
-        targets = self._get_power_shots(include_off=True)
-        self.log.debug("Creating cloak shot group with targets {}".format(targets))
-        self.shot_group = ShotGroup(self.machine, "{}_group".format(self.name))
-        self.shot_group.config['shots'] = targets
+        self.log.debug("Enabling cloak shot group {}".format(self.shot_group))
         self.shot_group.rotation_enabled = True
-        self.shot_group._debug_to_file = True
-        # self.handlers.append(self.add_mode_event_handler('logicblock_cloak_rotate_left_complete', self.shot_group.event_rotate_left))
-        # self.handlers.append(self.add_mode_event_handler('logicblock_cloak_rotate_right_complete', self.shot_group.event_rotate_right))
         self.handlers.append(self.add_mode_event_handler(
             'flipper_cancel',
             self._rotate_cloak))
+        self.handlers.append(self.add_mode_event_handler(
+            'timer_power_active_complete',
+            self._complete
+        ))
 
     def _rotate_cloak(self, **kwargs):
         # TODO: Update MPF with triggering_switch kwarg to allow rotation
@@ -172,15 +180,13 @@ class Powers(Mode):
         self._complete()
 
     def _activate_drone(self):
+        self.handlers.append(self.add_mode_event_handler(
+            'ball_drain', self._complete
+        ))
         self.machine.events.post("enable_drone")
 
     def _activate_singularity(self):
-        targets = self._get_power_shots()
-        for target in targets:
-            self.log.debug("Activating singularity for shot {}, which has tags {}".format(target.name, target.tags))
-            # Find the shot that corresponds to this target so we can light the appropriate standup
-            shot = next(x for x in target.tags if x.startswith("power_target_")).replace("power_target_", "")
-            self.log.debug(" -- found shot to enable: {}".format(shot))
-            self.machine.events.post("enable_singularity_{}".format(shot))
-            self.handlers.append(self.add_mode_event_handler('singularity_{}_hit'.format(shot), target.event_hit))
-
+        self.handlers.append(self.add_mode_event_handler(
+            'timer_power_active_complete', self._complete
+        ))
+        self.machine.events.post("enable_singularity")

@@ -127,7 +127,10 @@ timers:
     end_value: 0
     direction: down
     control_events:
-      - event: power_activation_success{power!="charge"}
+      - event: award_power
+        action: jump
+        value: 30 if power=="cloak" else 20 if power=="singularity" else 15 if power=="adrenaline" else 10
+      - event: power_activation_success{power!="charge" and power!="drone"}
         action: restart
 
 ball_saves:
@@ -135,7 +138,7 @@ ball_saves:
     enable_events: enable_armor
     auto_launch: true
     balls_to_save: 1
-    active_time: 6s
+    active_time: 8s
     hurry_up_time: 2s
     grace_period: 1s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -145,6 +148,10 @@ shot_groups:
     shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
   power_shots:
     shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
+  singularity_shots:
+    shots: singularity_left_orbit, singularity_kickback, singularity_left_ramp, singularity_right_ramp, singularity_right_orbit
+    enable_events: enable_singularity
+    disable_events: power_activation_complete, mode_powers_will_stop
 
 shots:
   # All shots for the default modes that support powers
@@ -236,28 +243,23 @@ shots:
   singularity_left_orbit:
     switches: s_target1
     profile: singularity
-    enable_events: enable_singularity_left_orbit
-    disable_events: singularity_left_orbit_hit, sw_power_target_left_orbit_active, power_activation_complete
+    enable_events: []
   singularity_kickback:
     switches: s_target2
     profile: singularity
-    enable_events: enable_singularity_kickback
-    disable_events: singularity_kickback_hit, sw_power_target_kickback_active, power_activation_complete
+    enable_events: []
   singularity_left_ramp:
     switches: s_target3
     profile: singularity
-    enable_events: enable_singularity_left_ramp
-    disable_events: singularity_left_ramp_hit, sw_power_target_left_ramp_active, power_activation_complete
+    enable_events: []
   singularity_right_ramp:
     switches: s_target4
     profile: singularity
-    enable_events: enable_singularity_right_ramp
-    disable_events: singularity_right_ramp_hit, sw_power_target_right_ramp_active, power_activation_complete
+    enable_events: []
   singularity_right_orbit:
     switches: s_target5
     profile: singularity
-    enable_events: enable_singularity_right_orbit
-    disable_events: singularity_right_orbit_hit, sw_power_target_right_orbit_active, power_activation_complete
+    enable_events: []
 
 shot_profiles:
   combat_powers:
@@ -304,6 +306,38 @@ show_player:
   ball_save_armor_disabled:
     ball_save_show:
       action: stop
+  power_awarded:
+    color_on:
+      key: current_power_show
+      show_tokens:
+        leds: (l_power)
+        color: BBBBBB
+  power_activation_success:
+    color_flashing_fast:
+      key: current_power_show
+      show_tokens:
+        leds: (l_power)
+        color: BBBBBB
+  power_activation_complete:
+    current_power_show:
+      action: stop
+  mode_powers_will_stop:
+    current_power_show:
+      action: stop
+
+flasher_player:
+  play_power_widget_singularity:
+    l_power_singularity: 250ms
+  play_power_widget_adrenaline:
+    l_power_adrenaline: 250ms
+  play_power_widget_drone:
+    l_power_drone: 250ms
+  play_power_widget_cloak:
+    l_power_cloak: 250ms
+  play_power_widget_charge:
+    l_power_charge: 250ms
+  play_power_widget_armor:
+    l_power_armor: 250ms
 
 slide_player:
   power_awarded:
