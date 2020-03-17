@@ -87,7 +87,7 @@ counters:
   powers_cooldown:
     # Start with a nice low number for easy debugging. Later, bump up to... 100?
     starting_count: machine.base_cooldown * (1 - current_player.research_cooldown_rate_perk)
-    count_complete_value: 1
+    count_complete_value: 100
     direction: down
     count_events: frenzy_hit
     disable_on_complete: true
@@ -96,7 +96,7 @@ counters:
     restart_events:
       - power_activation_success
     persist_state: true
-    # Frenzy hits are a single increment. Pop hits are 10x!
+    # Frenzy hits are a single increment. Pop hits are much more!
     control_events:
       - event: cooldown_shots_hit
         action: subtract

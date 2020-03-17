@@ -60,16 +60,16 @@ shot_groups:
   jack_shots_one:
     shots: kickback, left_orbit, right_orbit
     restart_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==3}
+      - power_shots_started{device.counters.jack_rounds_counter.value==3}
   jack_shots_two:
     shots: left_ramp, right_ramp
     restart_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==2}
+      - power_shots_started{device.counters.jack_rounds_counter.value==2}
       - logicblock_jack_rounds_counter_hit{count==2}
   jack_shots_three:
     shots: left_orbit, right_orbit
     restart_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==1}
+      - power_shots_started{device.counters.jack_rounds_counter.value==1}
       - logicblock_jack_rounds_counter_hit{count==1}
 
 shots:

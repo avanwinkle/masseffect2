@@ -2,12 +2,10 @@ import logging
 import random
 from mpf.core.mode import Mode
 from mpf.devices.shot_group import ShotGroup
-from mpf.core.utility_functions import Util
-from mpf.core.rgb_color import RGBColor
 from mpf.core.placeholder_manager import NativeTypeTemplate
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit"]
-TEST_POWER = "singularity"
+TEST_POWER = None
 DESCRIPTIONS = {
     "adrenaline": "Pauses all timers\nfor 15 seconds",
     "cloak": "Allows flippers to\nrotate lanes",
@@ -51,12 +49,21 @@ class Powers(Mode):
             "drone": self._activate_drone,
             "singularity": self._activate_singularity,
         }
-        self.persisted_shots = {}
-
+        self.persisted_shots = None
+        
     def mode_will_start(self, **kwargs):
         self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
         self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
         self.shot_group.disable_rotation()
+        
+        self.persisted_shots = self.player["persisted_shots"]
+        if not self.persisted_shots:
+            self.persisted_shots = {}
+            self.player["persisted_shots"] = self.persisted_shots
+            self.log.info("Set persisted shots for player {}: {}".format(self.player, self.persisted_shots))
+        else:
+            self.log.info("Rectrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
+        
         self.timer = self.machine.device_manager.collections["timers"]["power_active"]
         self.log.info("Mode started with shots: {}".format(self.shots))
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
@@ -126,7 +133,6 @@ class Powers(Mode):
     def _set_mission_shots(self, **kwargs):
         self.log.info("Setting initial shots from kwargs {}".format(kwargs))
         name = kwargs.get("persist_name")
-        name = name and name != True
         shots_to_set = self.persisted_shots.get(name)
         starting_shots = kwargs.get("starting_shots")
         
@@ -137,15 +143,20 @@ class Powers(Mode):
             # Set these as persisted values, maybe
             if name:
                 self.persisted_shots[name] = shots_to_set
+                # Set up a listener to track hit shots so we know to persist
+                self.add_mode_event_handler('power_shots_lit_hit', self._on_hit, name=name)
         
-        if shots_to_set:
-            # Our shot pointers are in the same order
-            for idx, shot in enumerate(self.shots):
-                shot.config['show_tokens']['color'] = \
-                    NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
-                shot.config['profile'] = \
-                    self.machine.device_manager.collections["shot_profiles"] \
-                        [kwargs.get("shot_profile", "lane_shot_profile")]
+        for idx, shot in enumerate(self.shots):
+            self.log.info("Setting up shot for powers: {} with kwargs {}".format(shot, kwargs))
+            # Set the config and color, even if we're not enabling/disabling shots
+            shot.config['show_tokens']['color'] = \
+                NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+            shot.config['profile'] = \
+                self.machine.device_manager.collections["shot_profiles"] \
+                    [kwargs.get("shot_profile", "lane_shot_profile")]
+            self.log.info("Set shot config: {}".format(shot.config))
+            if shots_to_set:
+                # Our shot pointers are in the same order
                 if shots_to_set[idx]:
                     self.log.info("Shot {} has config {}".format(shot, shot.config))
                     shot.restart()
@@ -153,10 +164,19 @@ class Powers(Mode):
                     # Don't disable, the shot, set it's state to "hit" so we can rotate
                     shot.advance(force=True)
                     shot.enable()
-        else:
-            self.log.info("No shots to set!")
-        self.machine.events.post("set_env", env=kwargs.get("env"))
+            else:
+                self.log.info("No shots to set!")
+        
+        self.machine.events.post("set_environment", env=kwargs.get("env"))
+        self.machine.events.post("power_shots_started")
 
+    def _on_hit(self, name, **kwargs):
+        # A shot was hit, update the persistence
+        self.log.info("Updating persistence state for {}. Current state".format(name, self.persisted_shots[name]))
+        self.persisted_shots[name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
+        self.log.info("New peristed state for {}: {}".format(name, self.persisted_shots[name]))
+        self.log.info("Sanity check: player has {}".format(self.player["persisted_shots"]))
+    
     # SPECIFIC POWERS
     def _activate_adrenaline(self):
         self.handlers.append(self.add_mode_event_handler(
