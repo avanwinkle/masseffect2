@@ -6,15 +6,23 @@ from mpf.core.utility_functions import Util
 from mpf.core.rgb_color import RGBColor
 from mpf.core.placeholder_manager import NativeTypeTemplate
 
-SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "dropbank", "hitbank"]
-TEST_POWER = None
+SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit"]
+TEST_POWER = "singularity"
 DESCRIPTIONS = {
-    "adrenaline": "Pauses all timers\nfor 20 seconds",
+    "adrenaline": "Pauses all timers\nfor 15 seconds",
     "cloak": "Allows flippers to\nrotate lanes",
-    "armor": "Enables a 20s\nball save",
+    "armor": "Enables a 10s\nball save",
     "drone": "Instant multiball or\nadd-a-ball",
     "singularity": "Target hits count\nas lane hits",
     "charge": "Hits a lit lane\nat random",
+}
+TIMES = {
+    "adrenaline": 15,
+    "cloak": 30,
+    "armor": 10,
+    "drone": 0,
+    "singularity": 20,
+    "charge": 0
 }
 
 
@@ -33,6 +41,7 @@ class Powers(Mode):
         self.log.setLevel(1)
         self.shots = []
         self.shot_group = None
+        self.timer = None
         self.handlers = []
         self.power_handlers = {
             "adrenaline": self._activate_adrenaline,
@@ -47,7 +56,8 @@ class Powers(Mode):
     def mode_will_start(self, **kwargs):
         self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
         self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
-        self.shot_group.rotation_enabled = False
+        self.shot_group.disable_rotation()
+        self.timer = self.machine.device_manager.collections["timers"]["power_active"]
         self.log.info("Mode started with shots: {}".format(self.shots))
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('award_power', self._award_power)
@@ -60,6 +70,8 @@ class Powers(Mode):
         try:
             self.power_handlers[power]()
             self.machine.events.post("power_activation_success", power=power, l_power="l_power_{}".format(power))
+            if self.timer.ticks > 0:
+                self.timer.start()
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
@@ -72,10 +84,11 @@ class Powers(Mode):
                                  power=power,
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
+        self.timer.ticks = TIMES[power]
 
     def _complete(self, **kwargs):
         self.machine.game.player["power"] = " "
-        self.shot_group.rotation_enabled = False
+        self.shot_group.disable_rotation()
         # Clear out specific handlers we added to manage the power while it was active
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
@@ -90,9 +103,13 @@ class Powers(Mode):
             # Include any shots tagged with power_target that are enabled AND "lit"
             filter_fn = filter_enabled_and_lit_shots
 
-        # We can search for an explicit target, if desired. Otherwise, any power_target tag
-        tag = "power_target_{}".format(explicit_target) if explicit_target else "power_target"
-        shots = list(filter(filter_fn, self.machine.device_manager.collections["shots"].items_tagged(tag)))
+        # We can search for an explicit target, if desired. Otherwise, the default lane shots
+        if explicit_target:
+            tag = "power_target_{}".format(explicit_target)
+            targets = self.machine.device_manager.collections["shots"].items_tagged(tag) 
+        else:
+            targets = self.shots
+        shots = list(filter(filter_fn, targets))
 
         if shots:
             self.log.debug("Found available shots for powers: {}".format(shots))
@@ -124,12 +141,14 @@ class Powers(Mode):
         if shots_to_set:
             # Our shot pointers are in the same order
             for idx, shot in enumerate(self.shots):
+                shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
                 if shots_to_set[idx]:
                     self.log.info("Shot {} has config {}".format(shot, shot.config))
-                    # shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
                     shot.restart()
                 else:
-                    shot.disable()
+                    # Don't disable, the shot, set it's state to "hit" so we can rotate
+                    shot.advance(force=True)
+                    shot.enable()
         else:
             self.log.info("No shots to set!")
         self.machine.events.post("set_env", env=kwargs.get("env"))
@@ -140,7 +159,7 @@ class Powers(Mode):
             'timer_missiontimer_started',
             self._complete
         ))
-        self.machine.events.post("missiontimer_pause_ten")
+        self.machine.events.post("missiontimer_pause_adrenaline")
 
     def _activate_armor(self):
         self.handlers.append(self.add_mode_event_handler(
@@ -151,7 +170,7 @@ class Powers(Mode):
 
     def _activate_cloak(self):
         self.log.debug("Enabling cloak shot group {}".format(self.shot_group))
-        self.shot_group.rotation_enabled = True
+        self.shot_group.enable_rotation()
         self.handlers.append(self.add_mode_event_handler(
             'flipper_cancel',
             self._rotate_cloak))
@@ -162,7 +181,7 @@ class Powers(Mode):
 
     def _rotate_cloak(self, **kwargs):
         # TODO: Update MPF with triggering_switch kwarg to allow rotation
-        direction = "right" if kwargs.get("triggering_switch") == 2 else "left"
+        direction = "right" if kwargs.get("triggering_group") == 2 else "left"
         self.log.debug("Rotating cloak in direction {}, kwargs {}".format(direction, kwargs))
         self.log.debug("Shot group is: {}".format(self.shot_group))
         self.shot_group.rotate(direction=direction)
@@ -170,11 +189,7 @@ class Powers(Mode):
 
     def _activate_charge(self):
         # If there is an explicit charge target, shoot that
-        try:
-            targets = self._get_power_shots(explicit_target="charge")
-        # If not, go for any shot
-        except IndexError:
-            targets = self._get_power_shots()
+        targets = self._get_power_shots(explicit_target="charge")
         random.choice(targets).hit()
         # Charge is used up immediately
         self._complete()

@@ -106,9 +106,9 @@ multiballs:
   combat_drone:
     ball_count: 1
     ball_count_type: add
-    enable_events: enable_drone
+    enable_events: power_awarded{power=="drone"}
     shoot_again: 1s
-    start_events: multiball_combat_drone_enabled
+    start_events: enable_drone
 
 timers:
   activate_power:
@@ -122,16 +122,11 @@ timers:
       - event: both_flippers_one
         action: stop
   power_active:
-    start_value: 10
+    # Starting value and start() of this timer are in powers.py
+    start_value: 30
     tick_interval: current_player.research_tick_interval_perk
     end_value: 0
     direction: down
-    control_events:
-      - event: award_power
-        action: jump
-        value: 30 if power=="cloak" else 20 if power=="singularity" else 15 if power=="adrenaline" else 10
-      - event: power_activation_success{power!="charge" and power!="drone"}
-        action: restart
 
 ball_saves:
   armor:
@@ -146,6 +141,8 @@ ball_saves:
 shot_groups:
   cooldown_shots:
     shots: cooldown_shot_tech, cooldown_shot_biotic, cooldown_shot_combat
+    enable_events: mode_powers_started, power_activation_complete
+    disable_events: power_awarded
   power_shots:
     shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
   singularity_shots:
@@ -200,24 +197,6 @@ shots:
       leds: l_kickback_ring
       color: color_kasumi
     tags: envshot_kickback
-  dropbank:
-    hit_events: sh_dropbank_hit
-    enable_events: enable_dropbank
-    disable_events: disable_dropbank
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_dropbank_ring
-      color: color_kasumi
-    tags: envshot_dropbank
-  hitbank:
-    hit_events: sh_hitbank_hit
-    enable_events: enable_hitbank
-    disable_events: disable_hitbank
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_hitbank_ring
-      color: color_kasumi
-    tags: envshot_hitbank
   # Shots for power behaviors
   activate_power:
     enable_events:
@@ -307,11 +286,12 @@ show_player:
     ball_save_show:
       action: stop
   power_awarded:
-    color_on:
+    dual_color_pulse:
       key: current_power_show
       show_tokens:
         leds: (l_power)
-        color: BBBBBB
+        color1: BBBBBB
+        color2: BB6600
   power_activation_success:
     color_flashing_fast:
       key: current_power_show

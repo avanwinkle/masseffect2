@@ -20,12 +20,12 @@ shows:
         (leds): black
         l_null: (color)
   color_flashing:
-    - time: 0
+    - duration: 1
       lights:
         (leds):
           color: (color)
           fade: (fade)
-    - time: '+1'
+    - duration: 1
       lights:
         (leds):
           color: black
