@@ -217,31 +217,36 @@ shots:
   singularity_left_orbit:
     switches: s_target1
     profile: singularity
-    enable_events: []
+    start_enabled: false
+    persist_enable: false
     show_tokens:
       leds: l_standup_1
   singularity_kickback:
     switches: s_target2
     profile: singularity
-    enable_events: []
+    start_enabled: false
+    persist_enable: false
     show_tokens:
       leds: l_standup_2
   singularity_left_ramp:
     switches: s_target3
     profile: singularity
-    enable_events: []
+    start_enabled: false
+    persist_enable: false
     show_tokens:
       leds: l_standup_3
   singularity_right_ramp:
     switches: s_target4
     profile: singularity
-    enable_events: []
+    start_enabled: false
+    persist_enable: false
     show_tokens:
       leds: l_standup_4
   singularity_right_orbit:
     switches: s_target5
     profile: singularity
-    enable_events: []
+    start_enabled: false
+    persist_enable: false
     show_tokens:
       leds: l_standup_5
 

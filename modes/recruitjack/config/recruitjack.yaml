@@ -75,8 +75,10 @@ shot_groups:
 shots:
   jack_hitbank_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
+    start_enabled: false
+    persist_enable: false
     restart_events: jack_hurryup_shots_hit
-    disable_events: jack_hitbank_shot_hit, mode_recruitjack_will_stop
+    disable_events: jack_hitbank_shot_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: light_hitbank_rgb

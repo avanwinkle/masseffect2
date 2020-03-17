@@ -119,6 +119,8 @@ light_player:
       color: color_overlord
     light_backwall_ambient:
       color: color_overlord
+    gi:
+      color: color_overlord
 
 shot_profiles:
   overlord_target_profile:

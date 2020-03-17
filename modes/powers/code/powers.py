@@ -66,6 +66,11 @@ class Powers(Mode):
         
         self.timer = self.machine.device_manager.collections["timers"]["power_active"]
         self.log.info("Mode started with shots: {}".format(self.shots))
+
+        # Disable all shots before we get started
+        for shot in self.shots:
+            shot.disable()
+            
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('award_power', self._award_power)
         self.add_mode_event_handler('activate_power', self._activate_power)
@@ -155,6 +160,7 @@ class Powers(Mode):
                 self.machine.device_manager.collections["shot_profiles"] \
                     [kwargs.get("shot_profile", "lane_shot_profile")]
             self.log.info("Set shot config: {}".format(shot.config))
+            
             if shots_to_set:
                 # Our shot pointers are in the same order
                 if shots_to_set[idx]:
@@ -164,8 +170,6 @@ class Powers(Mode):
                     # Don't disable, the shot, set it's state to "hit" so we can rotate
                     shot.advance(force=True)
                     shot.enable()
-            else:
-                self.log.info("No shots to set!")
         
         self.machine.events.post("set_environment", env=kwargs.get("env"))
         self.machine.events.post("power_shots_started")
