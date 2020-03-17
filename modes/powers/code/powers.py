@@ -141,7 +141,11 @@ class Powers(Mode):
         if shots_to_set:
             # Our shot pointers are in the same order
             for idx, shot in enumerate(self.shots):
-                shot.config['show_tokens']['color'] = NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+                shot.config['show_tokens']['color'] = \
+                    NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+                shot.config['profile'] = \
+                    self.machine.device_manager.collections["shot_profiles"] \
+                        [kwargs.get("shot_profile", "lane_shot_profile")]
                 if shots_to_set[idx]:
                     self.log.info("Shot {} has config {}".format(shot, shot.config))
                     shot.restart()
