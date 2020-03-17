@@ -58,12 +58,10 @@ counters:
 shot_groups:
   close_doors:
     shots: left_orbit, kickback, right_orbit
-    reset_events: mode_recruitgarrus_started
     disable_events: close_doors_hit_complete
   clear_upstairs:
     shots: right_ramp
-    enable_events: logicblock_doors_closed_counter_complete
-    reset_events: mode_recruitgarrus_started
+    restart_events: logicblock_doors_closed_counter_complete
 
 shows:
   recruitintro_garrus:

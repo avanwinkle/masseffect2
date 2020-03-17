@@ -153,49 +153,44 @@ shot_groups:
 shots:
   # All shots for the default modes that support powers
   left_ramp:
-    hit_events: sh_left_ramp_hit
+    hit_events: sh_left_ramp_hit, singularity_left_ramp_hit
     enable_events: enable_left_ramp
     disable_events: disable_left_ramp
     profile: lane_shot_profile
     show_tokens:
       leds: l_left_ramp_ring
-      color: color_kasumi
     tags: envshot_left_ramp
   left_orbit:
-    hit_events: sh_left_orbit_hit
+    hit_events: sh_left_orbit_hit, singularity_left_orbit_hit
     enable_events: enable_left_orbit
     disable_events: disable_left_orbit
     profile: lane_shot_profile
     show_tokens:
       leds: l_left_orbit_ring
-      color: color_kasumi
     tags: envshot_left_orbit
   right_ramp:
-    hit_events: sh_right_ramp_hit
+    hit_events: sh_right_ramp_hit, singularity_right_ramp_hit
     enable_events: enable_right_ramp
     disable_events: disable_right_ramp
     profile: lane_shot_profile
     show_tokens:
       leds: l_right_ramp_ring
-      color: color_kasumi
     tags: envshot_right_ramp
   right_orbit:
-    hit_events: sh_right_orbit_hit
+    hit_events: sh_right_orbit_hit, singularity_right_orbit_hit
     enable_events: enable_right_orbit
     disable_events: disable_right_orbit
     profile: lane_shot_profile
     show_tokens:
       leds: l_right_orbit_ring
-      color: color_kasumi
     tags: envshot_right_orbit
   kickback:
-    hit_events: sh_kickback_hit
+    hit_events: sh_kickback_hit, singularity_kickback_hit
     enable_events: enable_kickback
     disable_events: disable_kickback
     profile: lane_shot_profile
     show_tokens:
       leds: l_kickback_ring
-      color: color_kasumi
     tags: envshot_kickback
   # Shots for power behaviors
   activate_power:
@@ -223,22 +218,32 @@ shots:
     switches: s_target1
     profile: singularity
     enable_events: []
+    show_tokens:
+      leds: l_standup_1
   singularity_kickback:
     switches: s_target2
     profile: singularity
     enable_events: []
+    show_tokens:
+      leds: l_standup_2
   singularity_left_ramp:
     switches: s_target3
     profile: singularity
     enable_events: []
+    show_tokens:
+      leds: l_standup_3
   singularity_right_ramp:
     switches: s_target4
     profile: singularity
     enable_events: []
+    show_tokens:
+      leds: l_standup_4
   singularity_right_orbit:
     switches: s_target5
     profile: singularity
     enable_events: []
+    show_tokens:
+      leds: l_standup_5
 
 shot_profiles:
   combat_powers:
