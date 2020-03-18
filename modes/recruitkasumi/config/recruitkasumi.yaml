@@ -22,8 +22,6 @@ mode:
 
 event_player:
   mode_recruitkasumi_started:
-    set_environment:
-      env: kasumi
     show_recruit_instructions:
       squadmate: kasumi
       portrait: recruitkasumi
@@ -81,7 +79,7 @@ shot_profiles:
     states:
       - name: lit
         show: unalarmed_show
-      - name: off
+      - name: hit
         show: alarmed_show
         sync_ms: 2400
 

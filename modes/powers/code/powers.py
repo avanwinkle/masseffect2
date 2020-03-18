@@ -3,6 +3,7 @@ import random
 from mpf.core.mode import Mode
 from mpf.devices.shot_group import ShotGroup
 from mpf.core.placeholder_manager import NativeTypeTemplate
+from mpf.core.utility_functions import Util
 
 SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit"]
 TEST_POWER = None
@@ -27,10 +28,11 @@ TIMES = {
 def filter_enabled_shots(x):
     return x.enabled
 
-
 def filter_enabled_and_lit_shots(x):
     return x.enabled and x.state_name == "lit"
 
+def filter_enabled_and_state_shots(x, state_name):
+    return x.enabled and x.state_name == state_name
 
 class Powers(Mode):
     def __init__(self, *args, **kwargs):
@@ -49,6 +51,7 @@ class Powers(Mode):
             "drone": self._activate_drone,
             "singularity": self._activate_singularity,
         }
+        self.persisted_name = None
         self.persisted_shots = None
         
     def mode_will_start(self, **kwargs):
@@ -72,6 +75,7 @@ class Powers(Mode):
             shot.disable()
             
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
+        self.add_mode_event_handler('advance_mission_shots', self._advance_mission_shots)
         self.add_mode_event_handler('award_power', self._award_power)
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
@@ -106,13 +110,16 @@ class Powers(Mode):
             self.machine.events.remove_handler_by_key(handler)
         self.machine.events.post("power_activation_complete")
 
-    def _get_power_shots(self, include_off=False, explicit_target=None):
+    def _get_power_shots(self, include_off=False, explicit_state=None, explicit_target=None):
         shots = []
         if include_off:
-            # Include any shots tagged with power_target that are enabled
+            # Include any power shots that are enabled
             filter_fn = filter_enabled_shots
+        elif explicit_state and not explicit_target:
+            # Include any power shots in the specified state
+            filter_fn = lambda x: filter_enabled_and_state_shots(x, explicit_state)
         else:
-            # Include any shots tagged with power_target that are enabled AND "lit"
+            # Include any power shots that are enabled and "lit"
             filter_fn = filter_enabled_and_lit_shots
 
         # We can search for an explicit target, if desired. Otherwise, the default lane shots
@@ -126,10 +133,13 @@ class Powers(Mode):
         if shots:
             self.log.debug("Found available shots for powers: {}".format(shots))
             return shots
-        # If we were looking for an explicit target but it wasn't enabled, expand to all targets
+        # If we were looking for an explicit target but it wasn't enabled, expand the search
         elif explicit_target and not include_off:
             self.log.debug("Couldn't find a lit shot for target '{}'. Expanding to all shots.".format(explicit_target))
-            return self._get_power_shots(explicit_target=None)
+            return self._get_power_shots(explicit_target=None, explicit_state=explicit_state)
+        # If we are looking for an explicit state but it wasn't found, expand to all targets
+        elif explicit_state:
+            return self._get_power_shots()
         raise IndexError
 
     def _get_power_name(self, power):
@@ -137,19 +147,28 @@ class Powers(Mode):
 
     def _set_mission_shots(self, **kwargs):
         self.log.info("Setting initial shots from kwargs {}".format(kwargs))
-        name = kwargs.get("persist_name")
-        shots_to_set = self.persisted_shots.get(name)
-        starting_shots = kwargs.get("starting_shots")
+        self.persisted_name = kwargs.get("persist_name")
+        shots_to_set = self.persisted_shots.get(self.persisted_name)
         
+        starting_shots = kwargs.get("starting_shots")
+        # We can explicitly set all shots to "hit" by setting starting shots as "none"
+        # (if starting_shots is not provided, all shots will be in their initial state)
+        if starting_shots == "none":
+            starting_shots = []
+
+        # Accept one profile or a list of profiles per shot
+        profiles = Util.string_to_event_list(kwargs.get("shot_profile", "lane_shot_profile"))
+        if len(profiles) == 1:
+            profiles = [profiles[0] for _ in range(0,5)]
         # If we have starting shots and no persisted shots, set both
-        if starting_shots and not shots_to_set:
+        if starting_shots is not None and not shots_to_set:
             shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
             self.log.info("No persisted shots, setting shots {}".format(shots_to_set))
             # Set these as persisted values, maybe
-            if name:
-                self.persisted_shots[name] = shots_to_set
+            if self.persisted_name:
+                self.persisted_shots[self.persisted_name] = shots_to_set
                 # Set up a listener to track hit shots so we know to persist
-                self.add_mode_event_handler('power_shots_lit_hit', self._on_hit, name=name)
+                self.add_mode_event_handler('power_shots_lit_hit', self._update_persistence)
         
         for idx, shot in enumerate(self.shots):
             self.log.info("Setting up shot for powers: {} with kwargs {}".format(shot, kwargs))
@@ -157,8 +176,7 @@ class Powers(Mode):
             shot.config['show_tokens']['color'] = \
                 NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
             shot.config['profile'] = \
-                self.machine.device_manager.collections["shot_profiles"] \
-                    [kwargs.get("shot_profile", "lane_shot_profile")]
+                self.machine.device_manager.collections["shot_profiles"][profiles[idx]]
             self.log.info("Set shot config: {}".format(shot.config))
             
             if shots_to_set:
@@ -174,13 +192,41 @@ class Powers(Mode):
         self.machine.events.post("set_environment", env=kwargs.get("env"))
         self.machine.events.post("power_shots_started")
 
-    def _on_hit(self, name, **kwargs):
+    def _update_persistence(self, **kwargs):
         # A shot was hit, update the persistence
-        self.log.info("Updating persistence state for {}. Current state".format(name, self.persisted_shots[name]))
-        self.persisted_shots[name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
+        self.log.info("Updating persistence state for {}. Current state".format(self.persisted_name, self.persisted_shots[name]))
+        self.persisted_shots[self.persisted_name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
         self.log.info("New peristed state for {}: {}".format(name, self.persisted_shots[name]))
         self.log.info("Sanity check: player has {}".format(self.player["persisted_shots"]))
     
+    # Certain modes can set shot profiles with manual advance
+    # Can specify one or more shots as a list, or "enabled" for all enabled shots
+    def _advance_mission_shots(self, **kwargs):
+        shot_names = kwargs.get("shots")
+        if shot_names:
+            shots = [self.shots[SHOTS.index(name)] for name in Util.string_to_event_list(shot_names)]
+        else:
+            state = kwargs.get("state")
+            shots = list(filter(lambda x: filter_enabled_and_state_shots(x, state), self.shots))
+        
+        self.log.info("Advancing mission shots {}".format(shots))
+        reset = kwargs.get("reset")
+        shift = kwargs.get("shift")
+        for shot in shots:
+            if reset:
+                self.log.info("Resetting shot {}!".format(shot))
+                shot.reset()
+            elif shift is not None:
+                state = shot._get_state()
+                self.log.info("Shifting shot {} from {} to {}".format(shot, state, state+shift))
+                shot.jump(state + shift)
+            else:
+                shot.advance()
+
+        # If we are persisting these shots, set the new name
+        if self.persisted_name:
+            self._update_persistence()
+
     # SPECIFIC POWERS
     def _activate_adrenaline(self):
         self.handlers.append(self.add_mode_event_handler(
@@ -216,8 +262,8 @@ class Powers(Mode):
         self.log.debug("Done!")
 
     def _activate_charge(self):
-        # If there is an explicit charge target, shoot that
-        targets = self._get_power_shots(explicit_target="charge")
+        # If there is an explicit charge target, shoot that. Or a profile state "final"
+        targets = self._get_power_shots(explicit_target="charge", explicit_state="final")
         random.choice(targets).hit()
         # Charge is used up immediately
         self._complete()

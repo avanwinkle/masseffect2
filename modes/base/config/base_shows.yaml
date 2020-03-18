@@ -271,3 +271,18 @@ shot_profiles:
         speed: 12
         show_tokens:
           fade: 20ms
+  lane_shot_manual_finalshot:
+    show_when_disabled: false
+    advance_on_hit: false
+    states:
+      - name: lit
+        show: led_6_chase
+        speed: 12
+        show_tokens:
+          fade: 20ms
+      - name: hit
+        show: off
+      - name: pending
+        show: off
+      - name: final
+        show: color_flashing_fast
