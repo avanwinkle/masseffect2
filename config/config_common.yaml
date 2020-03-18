@@ -6,7 +6,7 @@ config:
 
 smart_virtual:
   console_log: basic
-  file_log: full
+  file_log: basic
 
 mpf:
   default_pulse_ms: 10
@@ -26,9 +26,9 @@ kivy_config:
 logging:
   file:
     asset_manager: none
-    sound_player: full
-    sounds: full
-    sound: full
+    sound_player: none
+    sounds: none
+    sound: none
 
 text_ui:
   machine_vars:

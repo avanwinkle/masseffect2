@@ -38,7 +38,7 @@ class Powers(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Powers")
-        self.log.setLevel(1)
+        self.log.setLevel(10)
         self.shots = []
         self.shot_group = None
         self.timer = None
@@ -63,12 +63,12 @@ class Powers(Mode):
         if not self.persisted_shots:
             self.persisted_shots = {}
             self.player["persisted_shots"] = self.persisted_shots
-            self.log.info("Set persisted shots for player {}: {}".format(self.player, self.persisted_shots))
+            self.log.debug("Set persisted shots for player {}: {}".format(self.player, self.persisted_shots))
         else:
-            self.log.info("Rectrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
+            self.log.debug("Rectrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
         
         self.timer = self.machine.device_manager.collections["timers"]["power_active"]
-        self.log.info("Mode started with shots: {}".format(self.shots))
+        self.log.debug("Mode started with shots: {}".format(self.shots))
 
         # Disable all shots before we get started
         for shot in self.shots:
@@ -82,7 +82,7 @@ class Powers(Mode):
         
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
-        self.log.debug("Activating power {}".format(power))
+        self.log.info("Activating power {}".format(power))
         try:
             self.power_handlers[power]()
             self.machine.events.post("power_activation_success", power=power, l_power="l_power_{}".format(power))
@@ -146,7 +146,7 @@ class Powers(Mode):
         return self.machine.config['text_strings']['power_{}'.format(power)]
 
     def _set_mission_shots(self, **kwargs):
-        self.log.info("Setting initial shots from kwargs {}".format(kwargs))
+        self.log.debug("Setting initial shots from kwargs {}".format(kwargs))
         self.persisted_name = kwargs.get("persist_name")
         shots_to_set = self.persisted_shots.get(self.persisted_name)
         
@@ -157,13 +157,13 @@ class Powers(Mode):
             starting_shots = []
 
         # Accept one profile or a list of profiles per shot
-        profiles = Util.string_to_event_list(kwargs.get("shot_profile", "lane_shot_profile"))
-        if len(profiles) == 1:
-            profiles = [profiles[0] for _ in range(0,5)]
+        profiles = kwargs.get("shot_profile", "lane_shot_profile")
+        if not isinstance(profiles, list):
+            profiles = [profiles for _ in range(0,5)]
         # If we have starting shots and no persisted shots, set both
         if starting_shots is not None and not shots_to_set:
             shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
-            self.log.info("No persisted shots, setting shots {}".format(shots_to_set))
+            self.log.debug("No persisted shots, setting shots {}".format(shots_to_set))
             # Set these as persisted values, maybe
             if self.persisted_name:
                 self.persisted_shots[self.persisted_name] = shots_to_set
@@ -171,34 +171,29 @@ class Powers(Mode):
                 self.add_mode_event_handler('power_shots_lit_hit', self._update_persistence)
         
         for idx, shot in enumerate(self.shots):
-            self.log.info("Setting up shot for powers: {} with kwargs {}".format(shot, kwargs))
             # Set the config and color, even if we're not enabling/disabling shots
             shot.config['show_tokens']['color'] = \
                 NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
             shot.config['profile'] = \
                 self.machine.device_manager.collections["shot_profiles"][profiles[idx]]
-            self.log.info("Set shot config: {}".format(shot.config))
             
             if shots_to_set:
                 # Our shot pointers are in the same order
                 if shots_to_set[idx]:
-                    self.log.info("Shot {} has config {}".format(shot, shot.config))
                     shot.restart()
                 else:
                     # Don't disable, the shot, set it's state to "hit" so we can rotate
                     shot.advance(force=True)
                     shot.enable()
-        
+                    
         self.machine.events.post("set_environment", env=kwargs.get("env"))
         self.machine.events.post("power_shots_started")
 
     def _update_persistence(self, **kwargs):
         # A shot was hit, update the persistence
-        self.log.info("Updating persistence state for {}. Current state".format(self.persisted_name, self.persisted_shots[name]))
+        self.log.debug("Updating persistence state for {}. Current state".format(self.persisted_name, self.persisted_shots[name]))
         self.persisted_shots[self.persisted_name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
-        self.log.info("New peristed state for {}: {}".format(name, self.persisted_shots[name]))
-        self.log.info("Sanity check: player has {}".format(self.player["persisted_shots"]))
-    
+        
     # Certain modes can set shot profiles with manual advance
     # Can specify one or more shots as a list, or "enabled" for all enabled shots
     def _advance_mission_shots(self, **kwargs):
@@ -209,16 +204,15 @@ class Powers(Mode):
             state = kwargs.get("state")
             shots = list(filter(lambda x: filter_enabled_and_state_shots(x, state), self.shots))
         
-        self.log.info("Advancing mission shots {}".format(shots))
         reset = kwargs.get("reset")
         shift = kwargs.get("shift")
         for shot in shots:
             if reset:
-                self.log.info("Resetting shot {}!".format(shot))
+                self.log.debug("Resetting shot {}!".format(shot))
                 shot.reset()
             elif shift is not None:
                 state = shot._get_state()
-                self.log.info("Shifting shot {} from {} to {}".format(shot, state, state+shift))
+                self.log.debug("Shifting shot {} from {} to {}".format(shot, state, state+shift))
                 shot.jump(state + shift)
             else:
                 shot.advance()

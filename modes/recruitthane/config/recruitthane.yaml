@@ -49,7 +49,8 @@ event_player:
       is_bonus_shot:
         value: 1 if device.counters.thane_ascent_counter.value>3 else 0
         type: int
-    # Find the two "pending" shots, which may have moved via rotation
+  # Find the two "pending" shots, which may have moved via rotation
+  logicblock_thane_ascent_counter_complete:
     advance_mission_shots:
       state: pending
   power_shots_final_hit:
@@ -66,8 +67,9 @@ counters:
   thane_ascent_counter:
     # Initially takes three shots to light, after it's been lit just one
     starting_count: 0 if device.counters.thane_ascent_counter.value<2 else 2
-    count_complete_value: 3
+    count_complete_value: 3 if current_player.difficulty == 0 else 4
     # Have to count UP because the counter always has value 0 when the mode inits
+    # TODO: try and reverse this so we can get a shot widget up
     direction: up
     disable_on_complete: false
     reset_on_complete: false

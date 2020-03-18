@@ -13,9 +13,8 @@
 # chooses the right orbit (renegade, lit red), the timer starts lower and a
 # bonus multiplier increases the captured value when the mode is completed.
 #
-# Progress is not saved and this mode must be restarted if failed.
-#
-# TODO: This mode has only been mocked out, not thoroughly tested
+# Progress is not saved and this mode must be restarted if failed; however
+# the initial paragon/renegade choice is only made on the first attempt.
 #####
 
 mode:
@@ -49,7 +48,7 @@ event_player:
     set_mission_shots:
       env: bluesuns
       color: color_zaeed
-      profiles: lane_shot_manual_finalshot
+      shot_profile: lane_shot_manual_finalshot
       is_resumable: 0
       shots_total: 4
       shots_remaining:
@@ -60,7 +59,7 @@ event_player:
   power_shots_started:
     advance_mission_shots:
       shots: kickback
-  zaeed_orbits_counter_complete:
+  logicblock_zaeed_orbits_counter_complete:
     advance_mission_shots:
       state: pending
   power_shots_final_hit: mission_collect_score, recruit_zaeed_complete
@@ -72,12 +71,12 @@ counters:
     direction: down
     disable_on_complete: false
     reset_on_complete: false
-    count_events: profile_shots_lit_hit
+    count_events: power_shots_lit_hit
     events_when_hit: mission_shot_hit
 
 variable_player:
   # If the right orbit is the first orbit hit, set path to renegade
-  zaeed_right_orbit_hit{current_player.zaeed_path_renegade==-1}:
+  right_orbit_lit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 1
@@ -87,7 +86,7 @@ variable_player:
     mission_secondary:
       string: " "
       action: set
-  zaeed_left_orbit_hit{current_player.zaeed_path_renegade==-1}:
+  left_orbit_lit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 0
@@ -97,7 +96,7 @@ variable_player:
     mission_secondary:
       string: " "
       action: set
-  mission_shot_hit{count==1}:
+  logicblock_zaeed_orbits_counter_complete:
     mission_instructions:
       action: set
       string: "Hit kickback to complete!"
@@ -128,16 +127,16 @@ sound_player:
   mission_shot_hit{count==3 and current_player.zaeed_path_renegade==1}:
     explosionchoice_1_renegade:
       max_queue_time: 1s
-  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==0}:
+  mission_shot_hit{(count==2 or count==1) and current_player.zaeed_path_renegade==0}:
     explosionchoice_2_paragon:
       max_queue_time: 1s
-  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==1}:
+  mission_shot_hit{(count==2 or count==1) and current_player.zaeed_path_renegade==1}:
     explosionchoice_2_renegade:
       max_queue_time: 1s
-  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==0}:
+  mission_shot_hit{count==0 and current_player.zaeed_path_renegade==0}:
     explosionchoice_3_paragon:
       max_queue_time: 2s
-  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==1}:
+  mission_shot_hit{count==0 and current_player.zaeed_path_renegade==1}:
     explosionchoice_3_renegade:
       max_queue_time: 2s
 

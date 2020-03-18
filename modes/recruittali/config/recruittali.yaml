@@ -45,15 +45,15 @@ event_player:
         value: current_player.geth_colossus_state
         type: int
       starting_shots: left_ramp
-  # If the timer expires, we can shift the state of the shot profile back one
-  timer_colossus_repair_timer_complete:
-    advance_power_shots:
-      shots: enabled
-      shift: -1
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s
-  player_geth_colossus_state{player_num==current_player.number}:
+  # If the colossus repairs we can backshift the state of the shot profile
+  player_geth_colossus_state.1{player_num==current_player.number and change>0 and value<=6}:
+    advance_power_shots:
+      state: lit
+      shift: -1
+  player_geth_colossus_state.2{player_num==current_player.number}:
     - play_colossus_show{value>0}
     - play_colossus_repair_reegar{change>0 and value==6}
     - play_colossus_repair_random{change>0 and value!=6}
@@ -97,7 +97,7 @@ variable_player:
     geth_colossus_state{current_player.geth_colossus_state>=6}:
       action: set
       int: 6
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     geth_colossus_state: -1
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
@@ -115,7 +115,7 @@ show_player:
     geth_target_show:
       speed: 12
       loops: 6
-  power_shot_lit_hit:
+  power_shots_lit_hit:
     colossus_hit_show{current_player.geth_colossus_state>3}:
       speed: 12
       loops: 6
@@ -208,7 +208,7 @@ sound_player:
   play_tali_intro:
     reegar_missionstart:
       action: play
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     colossus_hit_sound:
       action: play
   play_tali_shield:
