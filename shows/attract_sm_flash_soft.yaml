@@ -1,7 +1,16 @@
 #show_version=5
 - duration: 528ms
   lights:
-    l_backwall_gi: color_collectors
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
     gi_top: off
     l_ladder_light_9:
       color: black
@@ -11,7 +20,16 @@
       fade: 20ms
 - duration: 517ms
   lights:
-    l_backwall_gi: off
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
     gi_top: color_collectors
     l_ladder_light_0:
       color: black
@@ -21,7 +39,16 @@
       fade: 20ms
 - duration: 251ms
   lights:
-    l_backwall_gi: color_collectors
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
     gi_top: off
     l_ladder_light_1:
       color: black
@@ -31,7 +58,16 @@
       fade: 20ms
 - duration: 251ms
   lights:
-    l_backwall_gi: off
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
     gi_top: color_collectors
     l_ladder_light_2:
       color: black
@@ -41,7 +77,16 @@
       fade: 20ms
 - duration: 262ms
   lights:
-    l_backwall_gi: color_collectors
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
     gi_top: off
     l_ladder_light_3:
       color: black
@@ -51,7 +96,16 @@
       fade: 20ms
 - duration: 528ms
   lights:
-    l_backwall_gi: off
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
     gi_top: color_collectors
     l_ladder_light_4:
       color: black
@@ -61,7 +115,16 @@
       fade: 20ms
 - duration: 517ms
   lights:
-    l_backwall_gi: color_collectors
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
     gi_top: off
     l_ladder_light_5:
       color: black
@@ -71,7 +134,16 @@
       fade: 20ms
 - duration: 251ms
   lights:
-    l_backwall_gi: off
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
     gi_top: color_collectors
     l_ladder_light_6:
       color: black
@@ -81,7 +153,16 @@
       fade: 20ms
 - duration: 251ms
   lights:
-    l_backwall_gi: color_collectors
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
     gi_top: off
     l_ladder_light_7:
       color: black
@@ -91,7 +172,16 @@
       fade: 20ms
 - duration: 262ms
   lights:
-    l_backwall_gi: off
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
     gi_top: color_collectors
     l_ladder_light_8:
       color: black
@@ -99,36 +189,6 @@
     l_ladder_light_9:
       color: color_grunt
       fade: 20ms
-# - duration: 528ms
-#   lights:
-#     l_backwall_gi: off
-#     gi_top: color_collectors
-#   flashers:
-#     l_flash_dragon_right: 80ms
-# - duration: 528ms
-#   lights:
-#     l_backwall_gi: color_collectors
-#     gi_top: off
-# - duration: 252ms
-#   lights:
-#     l_backwall_gi: off
-#     gi_top: color_collectors
-# - duration: 252ms
-#   lights:
-#     l_backwall_gi: color_collectors
-#     gi_top: off
-# - duration: 252ms
-#   lights:
-#     l_backwall_gi: off
-#     gi_top: color_collectors
-
-
-
-
-
-
-
-
 
 
 

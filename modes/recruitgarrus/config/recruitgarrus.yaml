@@ -103,9 +103,6 @@ sound_player:
   logicblock_doors_closed_counter_hit{count==0}:
     garrus_last_shutter:
       max_queue_time: 2s
-  logicblock_doors_closed_counter_complete:
-    music_recruit_garrus:
-      action: stop
   envshot_outlane_hit: boss_sound
 
 sound_pools:

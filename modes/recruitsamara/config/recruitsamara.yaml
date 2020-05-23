@@ -38,6 +38,7 @@ event_player:
     set_mission_shots:
       color: color_samara
       is_resumable: 1
+      persist_name: recruitsamara
       shots_total: 5
       shots_remaining:
         value: device.counters.samara_shots_counter.value

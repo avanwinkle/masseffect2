@@ -530,11 +530,11 @@ named_colors:
   color_door_red: "660000"
   color_space: 0044AA
   # The timer
-  color_timer_green: "224400"
-  color_timer_yellow: "668800"
-  color_timer_orange: "663300"
-  color_timer_red: "660000"
-  color_timer_flashing: "880000"
+  color_timer_green: "112200"
+  color_timer_yellow: "334400"
+  color_timer_orange: "331100"
+  color_timer_red: "330000"
+  color_timer_flashing: "440000"
   # Other Modes
   color_arrival: 24c8ff
   color_collectors: ff2200

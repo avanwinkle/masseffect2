@@ -85,7 +85,7 @@ class Powers(Mode):
         self.log.info("Activating power {}".format(power))
         try:
             self.power_handlers[power]()
-            self.machine.events.post("power_activation_success", power=power, l_power="l_power_{}".format(power))
+            self.machine.events.post("power_activation_success", power=power)
             if self.timer.ticks > 0:
                 self.timer.start()
         except IndexError:
@@ -96,7 +96,6 @@ class Powers(Mode):
         # variable_player can't sub values, so do it manually
         self.machine.game.player["power"] = power
         self.machine.events.post("power_awarded",
-                                 l_power="l_power_{}".format(power),
                                  power=power,
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
@@ -191,8 +190,8 @@ class Powers(Mode):
 
     def _update_persistence(self, **kwargs):
         # A shot was hit, update the persistence
-        self.log.debug("Updating persistence state for {}. Current state".format(self.persisted_name, self.persisted_shots[name]))
         self.persisted_shots[self.persisted_name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
+        self.log.debug("Updated persistence state for {}: {}".format(self.persisted_name, self.persisted_shots[self.persisted_name]))
         
     # Certain modes can set shot profiles with manual advance
     # Can specify one or more shots as a list, or "enabled" for all enabled shots

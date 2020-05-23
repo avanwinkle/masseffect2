@@ -107,22 +107,22 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 120 # Mk2 was 20, upping to 22
-    default_pulse_power: 0.9
+    default_pulse_ms: 24 # Mk2 was 20, upping to 22
+    default_pulse_power: 1.0
     # debug: true
     # pulse_power: 2
   c_bumper_left:
     number: 2-2
     default_pulse_ms: 60
-    default_pulse_power: 0.8
+    default_pulse_power: 0.85
   c_bumper_right:
     number: 2-1
     default_pulse_ms: 60
-    default_pulse_power: 0.7
+    default_pulse_power: 0.75
   c_bumper_bottom:
     number: 2-0
     default_pulse_ms: 60
-    default_pulse_power: 0.5
+    default_pulse_power: 0.55
     platform_settings:
       recycle_ms: 255
   c_slingshot_left:
@@ -545,27 +545,27 @@ lights:
   l_power_charge:
     number: 0-31
     type: grb
-    tags: light_powers
+    tags: light_powers, charge
   l_power_armor:
     number: 0-30
     type: grb
-    tags: light-powers
+    tags: light-powers, armor
   l_power_adrenaline:
     number: 0-29
     type: grb
-    tags: light-powers
+    tags: light-powers, adrenaline
   l_power_cloak:
     number: 0-28
     type: grb
-    tags: light-powers
+    tags: light-powers, cloak
   l_power_drone:
     number: 0-27
     type: grb
-    tags: light-powers
+    tags: light-powers, drone
   l_power_singularity:
     number: 0-26
     type: grb
-    tags: light-powers
+    tags: light-powers, singularity
   # Career ladder
   l_progress_collectorship:
     number: 0-32
