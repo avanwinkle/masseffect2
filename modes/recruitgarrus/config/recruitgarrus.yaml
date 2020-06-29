@@ -54,6 +54,7 @@ counters:
     count_events:
       - power_shots_lit_hit
     persist_state: false
+    reset_on_complete: false
 
 shot_groups:
   close_doors:

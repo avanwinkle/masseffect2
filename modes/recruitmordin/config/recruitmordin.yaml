@@ -38,8 +38,22 @@ event_player:
       shots_remaining:
         value: device.counters.cure_counter.value
         type: int
-      starting_shots: left_orbit
-      shot_profile: lane_shot_to_on_profile
+      # Invert the starting shots per this profile
+      starting_shots: kickback, left_ramp, right_ramp, right_orbit
+      shot_profile: lane_shot_manual_firstshot_inverted
+  # Individual advances
+  left_orbit_lit_hit:
+    advance_mission_shots:
+      shots: left_orbit, right_orbit
+  right_orbit_lit_hit:
+    advance_mission_shots:
+      shots: left_ramp, right_ramp, right_orbit
+  left_ramp_lit_hit:
+    advance_mission_shots:
+      shots: left_ramp
+  right_ramp_lit_hit:
+    advance_mission_shots:
+      shots: right_ramp
   logicblock_cure_counter_hit: 
     - mission_shot_hit
     - play_cure_sound_1{count==3}
@@ -56,17 +70,8 @@ counters:
     count_complete_value: 0
     direction: down
     count_events: power_shots_lit_hit
-    events_when_hit: mission_shot_hit, logicblock_cure_counter_hit
-
-shot_groups:
-  cure_left_shot:
-    shots: left_orbit
-  cure_right_shot:
-    shots: right_orbit
-    restart_events: logicblock_cure_counter_hit{count==3}
-  fan_shots:
-    shots: left_ramp, right_ramp
-    restart_events: logicblock_cure_counter_hit{count==2}
+    # This should be redundant
+    # events_when_hit: mission_shot_hit, logicblock_cure_counter_hit
 
 show_player:
   mode_recruitmordin_started:

@@ -152,7 +152,7 @@ widget_styles:
   col_center:
     anchor_x: center
     x: 50%
-  col_dmd_right: []
+  col_dmd_right: {}
   # Codex is 360 wide, 40 from right
   col_codex_center:
     anchor_x: center
@@ -197,11 +197,11 @@ widget_styles:
   row_middle:
     anchor_y: middle
     y: 50%
-  row_main_dmd_high: []
-  row_main_dmd_low: []
-  row_dmd_top: []
-  row_dmd_bottom: []
-  row_dmd_sub: []
+  row_main_dmd_high: {}
+  row_main_dmd_low: {}
+  row_dmd_top: {}
+  row_dmd_bottom: {}
+  row_dmd_sub: {}
 
 
   # OTHER STYLES

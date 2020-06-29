@@ -149,6 +149,8 @@ class Powers(Mode):
         self.persisted_name = kwargs.get("persist_name")
         shots_to_set = self.persisted_shots.get(self.persisted_name)
         
+        is_resume = True if shots_to_set and self.persisted_name else False
+
         starting_shots = kwargs.get("starting_shots")
         # We can explicitly set all shots to "hit" by setting starting shots as "none"
         # (if starting_shots is not provided, all shots will be in their initial state)
@@ -186,7 +188,7 @@ class Powers(Mode):
                     shot.enable()
                     
         self.machine.events.post("set_environment", env=kwargs.get("env"))
-        self.machine.events.post("power_shots_started")
+        self.machine.events.post("power_shots_started", is_resume=is_resume)
 
     def _update_persistence(self, **kwargs):
         # A shot was hit, update the persistence
