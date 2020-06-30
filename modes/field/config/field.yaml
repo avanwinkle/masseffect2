@@ -55,7 +55,7 @@ show_player:
       manual_advance: True
 
 sound_player:
-  mode_field_started:
+  mode_field_started{current_player.ball==1}:
     music_normandy_walkin_intro:
       action: play
       mode_end_action: stop
@@ -69,6 +69,21 @@ sound_player:
       mode_end_action: stop
       fade_in: 500ms
       fade_out: 2s
+  mode_field_started{current_player.ball>1}:
+    exciting_field_music:
+      action: play
+      loops: -1
+      mode_end_action: stop
+
+sound_pools:
+  exciting_field_music:
+    track: music
+    sounds: 
+      - music_miranda_loyalty_low
+      - music_samara_acq
+      - music_lazerus_1
+      - music_horizon_3_low
+      - music_attackplan_intro
 
 sounds:
   music_normandy_walkin_intro:
@@ -77,6 +92,52 @@ sounds:
   music_galaxy_map:
     file: mus_galaxy_map_loop.ogg
     track: music
+  # Ideas for more exciting field music
+  # Throwback radio
+  music_radio_virmire:
+    file: mus_nor_shepards_radio_01.ogg
+    track: music
+  music_radio_therum:
+    file: mus_nor_shepards_radio_03.ogg
+    track: music
+  music_radio_noveria:
+    file: mus_nor_shepards_radio_06.ogg
+    track: music
+  music_radio_afterlife:
+    file: mus_nor_shepards_radio_09.ogg
+    track: music
+  # Squadmate misc
+  music_miranda_loyalty_low:
+    file: mus_miranda_loy_combat_1_low.ogg
+    track: music
+  music_miranda_loyalty:
+    file: mus_miranda_loy_combat_1.ogg
+    track: music
+  music_samara_acq:
+    file: mus_samara_acq_bossbattle_1_low_a.ogg
+    track: music
+  # Unused modes
+  music_lazerus_1:
+    file: mus_pro_cer_combat_1_low_b.ogg
+    track: music
+  # music_horizon_1:
+  #   file: mus_critpath1_combat_1.ogg
+  #   track: music
+  music_horizon_3_low:
+    file: mus_critpath1_combat_3_low.ogg
+    track: music
+  music_horizon_3:
+    file: mus_critpath1_combat_3.ogg
+    track: music
+  # Suicide mission
+  music_attackplan_intro:
+    file: mus_endgm1_attackplan_intro.ogg
+    track: music
+  # music_attackplan_loop:
+  #   file: mus_endgm1_attackplan.ogg
+  #   track: music
+
+    
 
 slide_player:
   mode_field_started{machine.has_secondscreen}:

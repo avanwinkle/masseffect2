@@ -87,12 +87,14 @@ Interactive mode contains the following features:
 
 """
 
-# MPF <= 0.51 ConfigValidator requires no args. >=0.52 uses args.
-if float(_version.__short_version__) <= 0.51:
+# MPF <= 0.51 ConfigValidator requires no args. >=0.52 uses args, >=0.54 doesn't use validator
+version = float(_version.__short_version__)
+if  version <= 0.51:
     configProcessor = ConfigProcessor(ConfigValidator(None))
-else:
+elif version <= 0.53:
     configProcessor = ConfigProcessor(ConfigValidator(None, False, False))
-
+else:
+    configProcessor = ConfigProcessor(load_cache=True, store_cache=True)
 
 class SoundManager():
     """Master class for managing audio (and video) assets."""

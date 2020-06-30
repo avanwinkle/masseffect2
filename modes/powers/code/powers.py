@@ -178,6 +178,8 @@ class Powers(Mode):
             shot.config['profile'] = \
                 self.machine.device_manager.collections["shot_profiles"][profiles[idx]]
             
+            ## TODO: Provide starting_states to set explicit states for each shot.
+            ##       Also, restore preserved state by .jump(shots_to_set[idx])
             if shots_to_set:
                 # Our shot pointers are in the same order
                 if shots_to_set[idx]:

@@ -8,7 +8,7 @@ SQUADMATES = ("zaeed", "legion", "samara", "tali", "mordin", "garrus", "miranda"
               "grunt", "jacob", "thane", "jack", "kasumi")
 BIOTICMATES = ("samara", "miranda", "jacob", "thane", "jack")
 TECHMATES = ("legion", "tali", "mordin", "garrus", "jacob", "thane", "kasumi")
-
+CASUAL_UNLOCKS = ("grunt", "jack", "garrus", "kasumi", "mordin")
 
 def _mate_status_is(player, squadmate, status):
     return player["status_{}".format(squadmate)] == status
@@ -58,6 +58,11 @@ class SquadmateStatus():
     def random_mate(player, exclude=None):
         """Return a random squadmate who is available."""
         return random.choice(_get_available_mates(player, exclude=exclude))
+
+    @staticmethod
+    def random_recruit():
+        """ Return a random squadmate to start unlocked in casual mode."""
+        return random.choice(CASUAL_UNLOCKS)
 
     @staticmethod
     def recruitable_mates(player):

@@ -76,7 +76,7 @@ counters:
 variable_player:
   # Player var 'sbchase_hits_remaning' has a default value of 5
   # If the mode fails, back up one shot
-  mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5}:
+  mode_shadowbroker_chase_will_stop{current_player.sbchase_hits_remaining<5 and current_player.difficulty>0}:
     sbchase_hits_remaining: 1
   sbchase_shots_lit_hit:
     sbchase_hits_remaining: -1
