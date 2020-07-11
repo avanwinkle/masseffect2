@@ -526,13 +526,6 @@ class RequiredSounds(object):
                 # TODO: Allow the sounds to exist in their child modes and zip up to parents later
                 del self._allconfigs[configfilename]
 
-    @property
-    def source(self):
-        if self._source is None:
-            with io.open(self.path, 'r', encoding='utf-8') as f:
-                return f.read()
-        return self._source
-
     def get_all_configs(self):
         """Return all configs mapped by the MPF machine project."""
         return self._allconfigs
