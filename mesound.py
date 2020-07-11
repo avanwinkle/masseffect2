@@ -1,9 +1,9 @@
 """Sound asset manager for MPF."""
 
-from mpf.core.config_processor import ConfigProcessor
-from mpf.core.config_validator import ConfigValidator
+from mpf.file_interfaces.yaml_roundtrip import YamlRoundtrip
 from mpf.core.utility_functions import Util
 from mpf import _version
+import io
 import logging
 import os
 import pickle
@@ -86,15 +86,6 @@ Interactive mode contains the following features:
                 asset files or building a new cache.
 
 """
-
-# MPF <= 0.51 ConfigValidator requires no args. >=0.52 uses args, >=0.54 doesn't use validator
-version = float(_version.__short_version__)
-if  version <= 0.51:
-    configProcessor = ConfigProcessor(ConfigValidator(None))
-elif version <= 0.53:
-    configProcessor = ConfigProcessor(ConfigValidator(None, False, False))
-else:
-    configProcessor = ConfigProcessor(load_cache=True, store_cache=True)
 
 class SoundManager():
     """Master class for managing audio (and video) assets."""
@@ -239,7 +230,7 @@ class SoundManager():
 
         dupes = self.machine_assets.get_duplicates()
         # First, look through all the files that exist in the mode folders to find orphaned, misplaced, and duplicate
-        for idx, filename in enumerate(self.machine_assets.get_files()):
+        for __idx, filename in enumerate(self.machine_assets.get_files()):
             filepath = self.machine_assets.get_file_path(filename)
             mode = self.machine_configs.find_requiring_mode(filename)
             # If this file is not required by any configs
@@ -507,15 +498,19 @@ class RequiredSounds(object):
         self._allconfigs = {}  # Key: mode/config name, Value: ModeSounds object
         self._childconfigs = {}  # Key: mode/config name, Value: ModeSounds object
         self._sounds_by_filename = {}  # Key: array of filenames, Value: ModeSounds object
+        self._source = None 
         self._allsoundfiles = []
         # Track modes that are imported into parent modes, so we don't scan them twice
         self._configparents = {}  # Key: child config name, Value: parent config
 
-        for path, dirs, files in os.walk('modes'):
+        loader_roundtrip = YamlRoundtrip()
+        for path, __dirs, files in os.walk('modes'):
             for filename in files:
                 if filename.endswith('.yaml'):
                     configfilename = filename[:-5]
-                    conf = configProcessor.load_config_files_with_cache(['{}/{}'.format(path, filename)], "mode")
+                    with io.open('{}/{}'.format(path, filename), 'r', encoding='utf-8') as f:
+                        source = f.read()
+                    conf = loader_roundtrip.process(source)
                     sounds = ModeSounds(configfilename)
                     sounds.parse_config(conf)
                     if len(sounds) > 0:
@@ -530,6 +525,13 @@ class RequiredSounds(object):
                 self._childconfigs[configfilename] = self._allconfigs[configfilename]
                 # TODO: Allow the sounds to exist in their child modes and zip up to parents later
                 del self._allconfigs[configfilename]
+
+    @property
+    def source(self):
+        if self._source is None:
+            with io.open(self.path, 'r', encoding='utf-8') as f:
+                return f.read()
+        return self._source
 
     def get_all_configs(self):
         """Return all configs mapped by the MPF machine project."""
