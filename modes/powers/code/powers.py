@@ -209,6 +209,7 @@ class Powers(Mode):
         
         reset = kwargs.get("reset")
         shift = kwargs.get("shift")
+        jump = kwargs.get("jump")
         for shot in shots:
             if reset:
                 self.log.debug("Resetting shot {}!".format(shot))
@@ -217,6 +218,9 @@ class Powers(Mode):
                 state = shot._get_state()
                 self.log.debug("Shifting shot {} from {} to {}".format(shot, state, state+shift))
                 shot.jump(state + shift)
+            elif jump:
+                self.log.debug("Jumping shot {} to {}".format(shot, jump))
+                shot.jump(int(jump))
             else:
                 shot.advance()
 

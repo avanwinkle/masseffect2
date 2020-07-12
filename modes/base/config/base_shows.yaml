@@ -274,7 +274,8 @@ shot_profiles:
   lane_shot_manual_firstshot_inverted:
     # This profile starts all off and requires manual advance to lit.
     # Lit shots go to solid when hit. Tricky: invert the starting shots
-    # to "disable" them and leave the rest in a lit state. Used for: Mordin
+    # to "disable" them and leave the rest in a lit state.
+    # Used for: Mordin, Jack
     show_when_disabled: false
     advance_on_hit: false
     states:
@@ -282,7 +283,6 @@ shot_profiles:
         show: off
       - name: lit
         show: led_6_chase
-        sync_ms: 800
         speed: 12
         show_tokens:
           fade: 20ms

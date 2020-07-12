@@ -37,9 +37,24 @@ event_player:
       shots_remaining:
         value: device.counters.jack_rounds_counter.value
         type: int
+      # Invert the starting shots per this profile
+      starting_shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
+      shot_profile: lane_shot_manual_firstshot_inverted
+  # Advance different shots based on which round we're on
+  power_shots_started: enable_jack_shots
+  enable_jack_shots:
+    advance_mission_shots{device.counters.jack_rounds_counter.value==3}:
+      shots: left_orbit, kickback, right_orbit
+    advance_mission_shots{device.counters.jack_rounds_counter.value==2}:
+      shots: left_ramp, right_ramp
+    advance_mission_shots{device.counters.jack_rounds_counter.value==1}:
+      shots: left_orbit, right_orbit
   ### SCORING capture the value when the hurryup is hit, collect when the round is hit
   jack_hurryup_shots_hit: mission_shot_hit
-  logicblock_jack_rounds_counter_hit: mission_collect_score
+  logicblock_jack_rounds_counter_hit: 
+    - mission_collect_score
+    # Trigger the enable shots event to light the next round's shots
+    - enable_jack_shots
   logicblock_jack_rounds_counter_complete: recruit_jack_complete
 
 counters:
@@ -56,28 +71,15 @@ counters:
 shot_groups:
   jack_hurryup_shots:
     shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
-    disable_events: jack_hurryup_shots_hit, mode_recruitjack_will_stop
-  jack_shots_one:
-    shots: kickback, left_orbit, right_orbit
-    restart_events:
-      - power_shots_started{device.counters.jack_rounds_counter.value==3}
-  jack_shots_two:
-    shots: left_ramp, right_ramp
-    restart_events:
-      - power_shots_started{device.counters.jack_rounds_counter.value==2}
-      - logicblock_jack_rounds_counter_hit{count==2}
-  jack_shots_three:
-    shots: left_orbit, right_orbit
-    restart_events:
-      - power_shots_started{device.counters.jack_rounds_counter.value==1}
-      - logicblock_jack_rounds_counter_hit{count==1}
+    # Resetting the shots will set them in the powers' unlit state
+    reset_events: power_shots_lit_hit, mode_recruitjack_will_stop
 
 shots:
   jack_hitbank_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
     start_enabled: false
     persist_enable: false
-    restart_events: jack_hurryup_shots_hit
+    restart_events: power_shots_lit_hit
     disable_events: jack_hitbank_shot_hit
     profile: color_flashing_fast_profile
     show_tokens:
@@ -110,17 +112,17 @@ show_player:
       loops: 0
 
 sound_player:
-  jack_shots_one_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       priority: 100
-  jack_shots_two_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       priority: 100
-  jack_shots_three_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==1}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s

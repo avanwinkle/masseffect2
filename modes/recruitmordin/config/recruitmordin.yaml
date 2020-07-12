@@ -41,20 +41,38 @@ event_player:
       # Invert the starting shots per this profile
       starting_shots: kickback, left_ramp, right_ramp, right_orbit
       shot_profile: lane_shot_manual_firstshot_inverted
-  # Individual advances
+  # This is annoying, but the only way to advance lit shots to hit when we
+  # don't know _which_ lit shot was hit.
   left_orbit_lit_hit:
     advance_mission_shots:
-      shots: left_orbit, right_orbit
-  right_orbit_lit_hit:
+      shots: left_orbit
+      priority: 1000
+  kickback_lit_hit: 
     advance_mission_shots:
-      shots: left_ramp, right_ramp, right_orbit
+      shots: kickback
+      priority: 1000
   left_ramp_lit_hit:
     advance_mission_shots:
       shots: left_ramp
+      priority: 1000
   right_ramp_lit_hit:
     advance_mission_shots:
       shots: right_ramp
-  logicblock_cure_counter_hit: 
+      priority: 1000
+  right_orbit_lit_hit:
+    advance_mission_shots:
+      shots: right_orbit
+      priority: 1000
+  # Individual advances force the specific shot to its lit state
+  # If it was disabled, it'll light. If it was lit-to-hit, it'll revert to lit
+  logicblock_cure_counter_hit.20:
+    advance_mission_shots{count==3}:
+      shots: right_orbit
+      jump: 1
+    advance_mission_shots{count==2}:
+      shots: left_ramp, right_ramp
+      jump: 1
+  logicblock_cure_counter_hit.10: 
     - mission_shot_hit
     - play_cure_sound_1{count==3}
     - play_cure_sound_2{count==2}
@@ -64,14 +82,23 @@ event_player:
     - mission_collect_score
 
 counters:
-  # The counter lets us play the correct sound for each fan hit
+  # The counter lets us play the correct sound for each fan hit,
+  # and know which shots to revert/advance
   cure_counter:
+    debug: true
     starting_count: 4
     count_complete_value: 0
     direction: down
-    count_events: power_shots_lit_hit
-    # This should be redundant
-    # events_when_hit: mission_shot_hit, logicblock_cure_counter_hit
+    count_events:
+     # There is an event priority bug where power_shots_lit_hit will propagate
+     # and trigger the counter_hit event *before* the shot_name_lit_hit events
+     # are caught by the event player. This bug advances the shots *before* resetting
+     # them, which is bad. Explicitly use the shot events to ensure priority.
+     - left_orbit_lit_hit
+     - kickback_lit_hit
+     - left_ramp_lit_hit
+     - right_ramp_lit_hit
+     - right_orbit_lit_hit
 
 show_player:
   mode_recruitmordin_started:

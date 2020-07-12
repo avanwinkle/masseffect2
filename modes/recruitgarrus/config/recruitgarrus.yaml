@@ -44,7 +44,7 @@ event_player:
       portrait: recruitgarrus
       instructions_main: Shutters Closed
       instructions_sub: Get back upstairs!
-  right_ramp_lit_hit: mission_collect_score, recruit_garrus_complete
+  logicblock_doors_closed_counter_hit{count<0}: mission_collect_score, recruit_garrus_complete
 
 counters:
   doors_closed_counter:
@@ -55,11 +55,9 @@ counters:
       - power_shots_lit_hit
     persist_state: false
     reset_on_complete: false
+    disable_on_complete: false
 
 shot_groups:
-  close_doors:
-    shots: left_orbit, kickback, right_orbit
-    disable_events: close_doors_hit_complete
   clear_upstairs:
     shots: right_ramp
     restart_events: logicblock_doors_closed_counter_complete
