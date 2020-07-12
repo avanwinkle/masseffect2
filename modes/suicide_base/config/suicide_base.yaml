@@ -16,7 +16,6 @@ mode:
   events_when_stopped: mode_type_wizard_stopped, stop_suicide_modes
   code: suicide_base.SuicideBase
   priority: 2000
-  load_priority: 100
   use_wait_queue: true
 
 config:
