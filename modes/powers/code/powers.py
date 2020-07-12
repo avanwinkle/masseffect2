@@ -157,10 +157,9 @@ class Powers(Mode):
         if starting_shots == "none":
             starting_shots = []
 
-        # Accept one profile or a list of profiles per shot
-        profiles = kwargs.get("shot_profile", "lane_shot_profile")
-        if not isinstance(profiles, list):
-            profiles = [profiles for _ in range(0,5)]
+        # Accept one profile. We can't use per-shot profiles because rotating 
+        # shots updates their state and does NOT move profiles from shot to shot
+        profile = kwargs.get("shot_profile", "lane_shot_profile")
         # If we have starting shots and no persisted shots, set both
         if starting_shots is not None and not shots_to_set:
             shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
@@ -173,10 +172,13 @@ class Powers(Mode):
         
         for idx, shot in enumerate(self.shots):
             # Set the config and color, even if we're not enabling/disabling shots
-            shot.config['show_tokens']['color'] = \
-                NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
+            color = kwargs.get("color","FFFFFF")
+            # If "inherit", use the color from the profile. Otherwise, use the specified color
+            if color != "inherit":
+                shot.config['show_tokens']['color'] = \
+                    NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
             shot.config['profile'] = \
-                self.machine.device_manager.collections["shot_profiles"][profiles[idx]]
+                self.machine.device_manager.collections["shot_profiles"][profile]
             
             ## TODO: Provide starting_states to set explicit states for each shot.
             ##       Also, restore preserved state by .jump(shots_to_set[idx])
@@ -260,6 +262,13 @@ class Powers(Mode):
         self.log.debug("Rotating cloak in direction {}, kwargs {}".format(direction, kwargs))
         self.log.debug("Shot group is: {}".format(self.shot_group))
         self.shot_group.rotate(direction=direction)
+        # SAMARA special case: rotate the target shots as well, so the player
+        # doesn't get stuck with no more shots to light.
+        if self.machine.modes.recruitsamara.active:
+            self.log.debug("Samara is active! Rotating targets!")
+            targets_group = self.machine.device_manager.collections["shot_groups"]["samara_targets"]
+            self.log.debug(" - found targets shot group: {}".format(targets_group))
+            targets_group.rotate(direction=direction)
         self.log.debug("Done!")
 
     def _activate_charge(self):

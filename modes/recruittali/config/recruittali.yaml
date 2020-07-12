@@ -32,19 +32,19 @@ event_player:
   mode_powers_started:
     set_mission_shots:
       env: geth
-      color: color_tali
-      shot_profile:
-        - lane_shot_profile
-        - lane_shot_profile
-        - colossus_profile
-        - lane_shot_profile
-        - lane_shot_profile
+      color: inherit
+      shot_profile: colossus_profile
       shots_total: 6
       is_resumable: 1
       shots_remaining:
         value: current_player.geth_colossus_state
         type: int
       starting_shots: left_ramp
+  power_shots_started:
+    # Immediately advance all shots except the left_ramp to the final off state
+    advance_mission_shots:
+      shots: left_orbit, kickback, right_ramp, right_orbit
+      jump: 6
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s
@@ -132,60 +132,55 @@ show_player:
 shot_profiles:
   colossus_profile:
     states: 
-    - name: off
-      show: off
     # All names are "lit" so powers can find/rotate/charge them
     - name: lit
-      show: geth_colossus_show
-      speed: 1
+      show: led_6_chase
+      speed: 6
       show_tokens:
         color: color_shields
+        fade: 20ms
     - name: lit
-      show: geth_colossus_show
-      speed: 2
+      show: led_6_chase
+      speed: 12
       show_tokens:
         color: color_shields
+        fade: 20ms
     - name: lit
-      show: geth_colossus_show
-      speed: 3
+      show: led_6_chase
+      speed: 18
       show_tokens:
         color: color_shields
+        fade: 20ms
     - name: lit
-      show: geth_colossus_show
-      speed: 1
+      show: led_6_chase
+      speed: 6
       show_tokens:
         color: color_armor
+        fade: 20ms
     - name: lit
-      show: geth_colossus_show
-      speed: 2
+      show: led_6_chase
+      speed: 12
       show_tokens:
         color: color_armor
+        fade: 20ms
     - name: lit
-      show: geth_colossus_show
-      speed: 3
+      show: led_6_chase
+      speed: 18
       show_tokens:
         color: color_armor
-
+        fade: 20ms
+    - name: off
+      show: off
+      
 shows:
-  geth_colossus_show:
-    - duration: 1200ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: (color)
-          fade: 20ms
-    - duration: 400ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: black
-          fade: 20ms
   colossus_hit_show:
     - time: 0
       lights:
-        l_left_ramp_shield_rgb:
+        lane_shields:
           color: 000000
     - time: '+1'
       lights:
-        l_left_ramp_shield_rgb:
+        lane_shields:
           color: (color)
   geth_target_show:
     - time: 0

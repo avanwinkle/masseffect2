@@ -84,53 +84,20 @@ variable_player:
       action: set
 
 show_player:
-  mode_recruitthane_started:
-    tower_shots_show:
-      speed: 2
   tower_ascent_shot_hit:
     tower_flash_show:
       speed: 12
       loops: 4
       priority: 100
-  logicblock_thane_ascent_counter_complete:
-    tower_shots_show:
-      action: stop
-    tower_complete_show:
-      speed: 2
-  stop_mode_recruitthane:
-    tower_shots_show:
-      action: stop
-    tower_complete_show:
-      action: stop
 
 shows:
-  tower_shots_show:
-    - time: 0
-      lights:
-        l_left_ramp_shield_rgb: green
-        l_right_ramp_shield_rgb: green
-    - time: '+1'
-      lights:
-        l_left_ramp_shield_rgb: black
-        l_right_ramp_shield_rgb: black
   tower_flash_show:
     - time: 0
       lights:
-        shot_shields: green
+        shot_shields: color_thane
     - time: '+1'
       lights:
         shot_shields: black
-  tower_complete_show:
-    - time: 0
-      lights:
-        l_left_ramp_shield_rgb: green
-        l_right_ramp_shield_rgb: green
-        l_left_orbit_shield_rgb: green
-        l_right_orbit_shield_rgb: green
-    - time: '+1'
-      lights:
-        l_left_orbit_shield_rgb: black
-        l_right_orbit_shield_rgb: black
 
 sound_player:
   mode_recruitthane_started:

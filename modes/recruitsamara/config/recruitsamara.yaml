@@ -45,7 +45,8 @@ event_player:
         type: int
       starting_shots: none
   logicblock_samara_shots_counter_complete: recruit_samara_complete
-  # Use each target to send a reset advance to powers
+  # Use each target to reset the shot to it "lit" state. Powers.py will
+  # also rotate the targets during cloak, to avoid a stuck state
   samara_target1_lit_hit:
     advance_mission_shots:
         shots: left_orbit, kickback
