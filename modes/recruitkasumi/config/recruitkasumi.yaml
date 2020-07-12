@@ -30,7 +30,7 @@ event_player:
   mode_powers_started:
     set_mission_shots:
       env: kasumi
-      color: color_kasumi
+      color: color_kasumi_dark
       shot_profile: alarmed_shot_profile
       shots_total: 4
       is_resumable: 1
@@ -67,7 +67,7 @@ counters:
   kasumi_alarms_counter:
     starting_count: 3
     count_complete_value: 0
-    count_events: power_shots_off_hit
+    count_events: power_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
     events_when_complete: stop_recruitmission
     persist_state: false
@@ -78,10 +78,13 @@ shot_profiles:
     show_when_disabled: false
     states:
       - name: lit
-        show: unalarmed_show
-      - name: hit
+        show: led_6_chase
+        speed: 4
+        show_tokens:
+          fade: 1s
+      - name: alarmed
         show: alarmed_show
-        sync_ms: 2400
+        speed: 0.5
 
 show_player:
   mode_recruitkasumi_started:
@@ -133,24 +136,46 @@ shows:
         l_gi_lower_playfield:
           color: BBBBBB
           fade: 500ms
-  # Tricky! The shots to hit are the ones that AREN'T lit
-  unalarmed_show:
-    - time: 0
-      lights:
-        (arrow_led): off
-        (lane_led): color_kasumi%30
   # A nice pulse for the red lights, not blinking or ever fully off
   alarmed_show:
     - duration: 1200ms
       lights:
-        (arrow_led):
+        (leds)_light_0:
           color: color_kasumi_alarm
           fade: 800ms
-        (lane_led):
-          color: off
+        (leds)_light_2:
+          color: color_kasumi_alarm
+          fade: 800ms
+        (leds)_light_4:
+          color: color_kasumi_alarm
+          fade: 800ms
+        (leds)_light_1:
+          color: 000000
+          fade: 800ms
+        (leds)_light_3:
+          color: 000000
+          fade: 800ms
+        (leds)_light_5:
+          color: 000000
+          fade: 800ms
     - duration: 1200ms
       lights:
-        (arrow_led):
+        (leds)_light_1:
+          color: color_kasumi_alarm
+          fade: 800ms
+        (leds)_light_3:
+          color: color_kasumi_alarm
+          fade: 800ms
+        (leds)_light_5:
+          color: color_kasumi_alarm
+          fade: 800ms
+        (leds)_light_0:
+          color: 000000
+          fade: 800ms
+        (leds)_light_2:
+          color: 000000
+          fade: 800ms
+        (leds)_light_4:
           color: 000000
           fade: 800ms
   alarm_sweep_show:
