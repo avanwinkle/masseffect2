@@ -150,16 +150,18 @@ show_player:
 
 shows:
   mainmenu_show:
-    - duration: 1s
+    - duration: 3s
       lights:
-        l_action_button_rgb:
+        gi:
+          color: color_shields
+        l_backwall_ambient:
           color: red
-          fade: 100ms
-    - duration: 1s
+          fade: 3s
+    - duration: 3s
       lights:
-        l_action_button_rgb:
+        l_backwall_ambient:
           color: blue
-          fade: 100ms
+          fade: 3s
 
 sound_player:
   show_mainmenu: mus_gui_char_create

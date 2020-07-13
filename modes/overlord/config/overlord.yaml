@@ -90,7 +90,7 @@ multiballs:
     ball_count_type: total
     replace_balls_in_play: true
     ball_locks: bd_lock
-    shoot_again: 12s
+    shoot_again: 20s
     start_events: mode_overlord_started
     debug: true
 
@@ -118,6 +118,8 @@ light_player:
     light_backwall_gi:
       color: color_overlord
     light_backwall_ambient:
+      color: color_overlord
+    gi:
       color: color_overlord
 
 shot_profiles:

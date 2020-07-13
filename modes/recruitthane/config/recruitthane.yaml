@@ -23,26 +23,37 @@ mode:
 
 event_player:
   mode_recruitthane_started:
-    set_environment:
-      env: eclipse
     show_recruit_instructions:
       squadmate: thane
       portrait: recruitthane
       instructions_main: Ramps to ascend
       instructions_sub: Orbits to complete
+  mode_powers_started:
     set_mission_shots:
+      color: color_thane
+      shot_profile: lane_shot_manual_finalshot
+      env: eclipse
       shots_total: 4
       is_resumable: 0
       shots_remaining:
         value: 4 - device.counters.thane_ascent_counter.value
         type: int
+      starting_shots: left_ramp, right_ramp
+  # Immediately advance the orbits to "pending" so we know where they are after rotation
+  power_shots_started:
+    advance_mission_shots:
+      shots: left_orbit, right_orbit
   # After completion more shots will keep adding hurryup, but won't reset
   logicblock_thane_ascent_counter_hit:
     mission_shot_hit:
       is_bonus_shot:
         value: 1 if device.counters.thane_ascent_counter.value>3 else 0
         type: int
-  tower_complete_shot_hit:
+  # Find the two "pending" shots, which may have moved via rotation
+  logicblock_thane_ascent_counter_complete:
+    advance_mission_shots:
+      state: pending
+  power_shots_final_hit:
     - mission_shot_hit
     - mission_collect_score
     - recruit_thane_complete
@@ -56,13 +67,14 @@ counters:
   thane_ascent_counter:
     # Initially takes three shots to light, after it's been lit just one
     starting_count: 0 if device.counters.thane_ascent_counter.value<2 else 2
-    count_complete_value: 3
+    count_complete_value: 3 if current_player.difficulty == 0 else 4
     # Have to count UP because the counter always has value 0 when the mode inits
+    # TODO: try and reverse this so we can get a shot widget up
     direction: up
     disable_on_complete: false
     reset_on_complete: false
     persist_state: true
-    count_events: tower_ascent_shot_hit
+    count_events: power_shots_lit_hit
     reset_events: mode_recruitthane_started
 
 variable_player:
@@ -71,64 +83,21 @@ variable_player:
       string: "Hit orbits to complete!"
       action: set
 
-shots:
-  tower_ascent_shot:
-    hit_events: sh_left_ramp_hit, sh_right_ramp_hit
-    tags: envshot_left_ramp, envshot_right_ramp, power_target, power_target_left_ramp, power_target_right_ramp
-  tower_complete_shot:
-    hit_events: sh_left_orbit_hit, sh_right_orbit_hit
-    enable_events: logicblock_thane_ascent_counter_complete
-    disable_events: mode_recruitthane_started
-    tags: envshot_left_orbit, envshot_right_orbit, power_target, power_target_right_orbit, power_target_left_orbit, power_target_charge
-
 show_player:
-  mode_recruitthane_started:
-    tower_shots_show:
-      speed: 2
   tower_ascent_shot_hit:
     tower_flash_show:
       speed: 12
       loops: 4
       priority: 100
-  logicblock_thane_ascent_counter_complete:
-    tower_shots_show:
-      action: stop
-    tower_complete_show:
-      speed: 2
-  stop_mode_recruitthane:
-    tower_shots_show:
-      action: stop
-    tower_complete_show:
-      action: stop
 
 shows:
-  tower_shots_show:
-    - time: 0
-      lights:
-        l_left_ramp_shield_rgb: green
-        l_right_ramp_shield_rgb: green
-    - time: '+1'
-      lights:
-        l_left_ramp_shield_rgb: black
-        l_right_ramp_shield_rgb: black
   tower_flash_show:
     - time: 0
       lights:
-        shot_shields: green
+        shot_shields: color_thane
     - time: '+1'
       lights:
         shot_shields: black
-  tower_complete_show:
-    - time: 0
-      lights:
-        l_left_ramp_shield_rgb: green
-        l_right_ramp_shield_rgb: green
-        l_left_orbit_shield_rgb: green
-        l_right_orbit_shield_rgb: green
-    - time: '+1'
-      lights:
-        l_left_orbit_shield_rgb: black
-        l_right_orbit_shield_rgb: black
 
 sound_player:
   mode_recruitthane_started:

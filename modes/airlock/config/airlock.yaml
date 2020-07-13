@@ -60,9 +60,14 @@ event_player:
     - fire_hold_post
 
 queue_event_player:
+  # Previously relayed on the locked_ball, but still escaped. Added eject_attempt on the trough,
+  # but that triggers at the start of every ball. Removing again, see what happens.
   multiball_lock_fmball_lock_locked_ball:
     queue_event: fmball_checking_store
     events_when_finished: advance_fmball_lock
+  # balldevice_bd_trough_ball_eject_attempt:
+  #   queue_event: fmball_checking_store
+  #   events_when_finished: advance_fmball_lock
 
 queue_relay_player:
   mode_missionselect_starting:

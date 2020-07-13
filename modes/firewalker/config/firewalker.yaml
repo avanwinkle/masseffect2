@@ -251,7 +251,7 @@ sound_player:
 
 sound_pools:
   firewalker_music:
-    sounds: firewalker_music_1, firewalker_music_2
+    sounds: firewalker_music_1, firewalker_music_2, firewalker_music_3, firewalker_music_4
     track: music
 
 sounds:
@@ -265,6 +265,18 @@ sounds:
     file: mus_n7_8_combat_2.ogg
     track: music
     start_at: 1.5s
+    fade_in: 500ms
+    fade_out: 2s
+  firewalker_music_3:
+    file: mus_tali_acq_combat_2a.ogg
+    track: music
+    start_at: 1.5s
+    fade_in: 500ms
+    fade_out: 2s
+  firewalker_music_4:
+    file: mus_thane_acq_miniboss.ogg
+    track: music
+    start_at: 1s
     fade_in: 500ms
     fade_out: 2s
 

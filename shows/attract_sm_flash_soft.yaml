@@ -1,85 +1,194 @@
 #show_version=5
-- duration: 510ms
+- duration: 528ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 510ms
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
+    gi_top: off
+    l_ladder_light_9:
+      color: black
+      fade: 200ms
+    l_ladder_light_0:
+      color: color_grunt
+      fade: 20ms
+- duration: 517ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_right: 80ms
-- duration: 258ms
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
+    gi_top: color_collectors
+    l_ladder_light_0:
+      color: black
+      fade: 200ms
+    l_ladder_light_1:
+      color: color_grunt
+      fade: 20ms
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
+    gi_top: off
+    l_ladder_light_1:
+      color: black
+      fade: 200ms
+    l_ladder_light_2:
+      color: color_grunt
+      fade: 20ms
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_right_orbit: 80ms
-- duration: 258ms
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
+    gi_top: color_collectors
+    l_ladder_light_2:
+      color: black
+      fade: 200ms
+    l_ladder_light_3:
+      color: color_grunt
+      fade: 20ms
+- duration: 262ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 510ms
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
+    gi_top: off
+    l_ladder_light_3:
+      color: black
+      fade: 200ms
+    l_ladder_light_4:
+      color: color_grunt
+      fade: 20ms
+- duration: 528ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_left: 80ms
-- duration: 510ms
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
+    gi_top: color_collectors
+    l_ladder_light_4:
+      color: black
+      fade: 200ms
+    l_ladder_light_5:
+      color: color_grunt
+      fade: 20ms
+- duration: 517ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
+    gi_top: off
+    l_ladder_light_5:
+      color: black
+      fade: 200ms
+    l_ladder_light_6:
+      color: color_grunt
+      fade: 20ms
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_slingshots: 80ms
-- duration: 258ms
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
+    gi_top: color_collectors
+    l_ladder_light_6:
+      color: black
+      fade: 200ms
+    l_ladder_light_7:
+      color: color_grunt
+      fade: 20ms
+- duration: 251ms
   lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
+    l_backwall_gi_light_0: color_collectors
+    l_backwall_gi_light_2: color_collectors
+    l_backwall_gi_light_4: color_collectors
+    l_backwall_gi_light_6: color_collectors
+    l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_1: off
+    l_backwall_gi_light_3: off
+    l_backwall_gi_light_5: off
+    l_backwall_gi_light_7: off
+    l_backwall_gi_light_9: off
+    gi_top: off
+    l_ladder_light_7:
+      color: black
+      fade: 200ms
+    l_ladder_light_8:
+      color: color_grunt
+      fade: 20ms
+- duration: 262ms
   lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-- duration: 510ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-  flashers:
-    l_flash_dragon_right: 80ms
-- duration: 510ms
-  lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: on
-    l_start_button: on
-  flashers:
-    l_flash_left_ramp: 80ms
-    l_flash_right_ramp: 80ms
-- duration: 258ms
-  lights:
-    l_flash_back_panel_left: off
-    l_start_button: off
-
-
-
-
-
-
-
-
+    l_backwall_gi_light_1: color_collectors
+    l_backwall_gi_light_3: color_collectors
+    l_backwall_gi_light_5: color_collectors
+    l_backwall_gi_light_7: color_collectors
+    l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_0: off
+    l_backwall_gi_light_2: off
+    l_backwall_gi_light_4: off
+    l_backwall_gi_light_6: off
+    l_backwall_gi_light_8: off
+    gi_top: color_collectors
+    l_ladder_light_8:
+      color: black
+      fade: 200ms
+    l_ladder_light_9:
+      color: color_grunt
+      fade: 20ms
 
 
 

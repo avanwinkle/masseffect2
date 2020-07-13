@@ -34,75 +34,54 @@ event_player:
       portrait: recruitsamara
       instructions_main: Destroy the Gunship
       instructions_sub: Hit targets to weaken armor
+  mode_powers_started:
     set_mission_shots:
+      color: color_samara
       is_resumable: 1
+      persist_name: recruitsamara
       shots_total: 5
       shots_remaining:
         value: device.counters.samara_shots_counter.value
         type: int
+      starting_shots: none
   logicblock_samara_shots_counter_complete: recruit_samara_complete
-
+  # Use each target to reset the shot to it "lit" state. Powers.py will
+  # also rotate the targets during cloak, to avoid a stuck state
+  samara_target1_lit_hit:
+    advance_mission_shots:
+        shots: left_orbit, kickback
+        reset: true
+  samara_target2_lit_hit:
+    advance_mission_shots:
+        shots: kickback, left_ramp
+        reset: true
+  samara_target3_lit_hit:
+    advance_mission_shots:
+        shots: left_ramp, right_ramp
+        reset: true
+  samara_target4_lit_hit:
+    advance_mission_shots:
+        shots: left_ramp, right_ramp
+        reset: true
+  samara_target5_lit_hit:
+    advance_mission_shots:
+        shots: right_ramp, right_orbit
+        reset: true
+  
 counters:
   samara_shots_counter:
     starting_count: 5
     count_complete_value: 0
     direction: down
     persist_state: true
-    count_events: samara_shots_hit
+    count_events: power_shots_lit_hit
     events_when_hit: mission_shot_hit, mission_collect_score
 
 shot_groups:
   samara_targets:
     shots: samara_target1, samara_target2, samara_target3, samara_target4, samara_target5
-  samara_shots:
-    shots: samara_left_orbit, samara_left_ramp, samara_right_orbit, samara_right_ramp, samara_kickback
-
+  
 shots:
-  samara_left_orbit:
-    hit_events: sh_left_orbit_hit
-    enable_events: samara_target1_lit_hit
-    disable_events: samara_left_orbit_hit
-    profile: lane_shot_static
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_samara
-    tags: envshot_left_orbit, power_target, power_target_left_orbit
-  samara_left_ramp:
-    hit_events: sh_left_ramp_hit
-    enable_events: samara_target2_lit_hit, samara_target3_lit_hit, samara_target4_lit_hit
-    disable_events: samara_left_ramp_hit
-    profile: lane_shot_static
-    show_tokens:
-      leds: l_left_ramp_ring
-      color: color_samara
-    tags: envshot_left_ramp, power_target, power_target_left_ramp
-  samara_right_orbit:
-    hit_events: sh_right_orbit_hit
-    enable_events: samara_target5_lit_hit
-    disable_events: samara_right_orbit_hit
-    profile: lane_shot_static
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_samara
-    tags: envshot_sight_orbit, power_target, power_target_sight_orbit
-  samara_right_ramp:
-    hit_events: sh_right_ramp_hit
-    enable_events: samara_target3_lit_hit, samara_target4_lit_hit, samara_target5_lit_hit
-    disable_events: samara_right_ramp_hit
-    profile: lane_shot_static
-    show_tokens:
-      leds: l_right_ramp_ring
-      color: color_samara
-    tags: envshot_right_ramp, power_target, power_target_right_ramp
-  samara_kickback:
-    hit_events: sh_kickback_hit
-    enable_events: samara_target1_lit_hit, samara_target2_lit_hit
-    disable_events: samara_kickback_hit
-    profile: lane_shot_static
-    show_tokens:
-      leds: l_kickback_ring
-      color: color_samara
-    tags: envshoh_kickback, power_target, power_target_kickback
   samara_target1:
     switch: s_target1
     profile: color_flashing_profile

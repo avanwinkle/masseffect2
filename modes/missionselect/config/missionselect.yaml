@@ -144,7 +144,7 @@ shows:
         l_right_top_lane: off
         l_hitbank_top: off
         l_hitbank_bottom: off
-        l_upgrade: off
+        light_upgrades: off
         light_lock_lit: off
   missionselect_highlight_show:
     - duration: 500ms

@@ -7,24 +7,40 @@ event_player:
     - start_suicide_main|29245ms
 
 show_player:
-  start_suicide_intro:
-    attract_sm_track:
+  # mode_attract_started:
+  #   ladder_timer:
+  #     action: play
+  #     loops: -1
+  #     speed: 2
+  #     start_running: False
+  #     start_step: 12
+  attract_music_started:
+    # attract_sm_track:
+    #   loops: -1
+    #   speed: 0.278
+    #   action: play
+    led_12_chase_duo:
       loops: -1
-      speed: 0.278
-      action: play
+      speed: 8
+      show_tokens:
+        ledring: l_omega_relay
+        color: 0B0000
+        fade: 125ms
+    explode_center:
+      speed: 20
+      loops: -1
     attract_sm_flash_soft:
       loops: -1
       speed: 1
       action: play
-  start_suicide_main:
-    attract_sm_beat:
+  attract_music_main:
+    attract_sm_full:
       loops: -1
-      speed: 1
       action: play
-    attract_sm_flash:
-      loops: -1
-      speed: 1
-      action: play
+    # attract_sm_beat:
+    #   loops: -1
+    #   speed: 1
+    #   action: play
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop
@@ -64,6 +80,11 @@ sounds:
     file: mus_main_menu.ogg
     track: music
     fade_out: 1s
+    markers:
+      - time: 32ms
+        events: attract_music_started
+      - time: 29245ms
+        events: attract_music_main
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx

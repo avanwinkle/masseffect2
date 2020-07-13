@@ -82,6 +82,37 @@ variable_player:
       action: set
       int: 0
 
+show_player:
+  # TODO: Pass an arg in the missiontimer event to identify recruit missions
+  missiontimer_set_60:
+    ladder_timer:
+      start_step: 1
+      priority: 1000
+      start_running: device.timers.missiontimer.running
+  missiontimer_set_40:
+    ladder_timer:
+      start_step: 11
+      priority: 1000
+      start_running: device.timers.missiontimer.running
+  missiontimer_set_20:
+    ladder_timer:
+      start_step: 23
+      priority: 1000
+      start_running: device.timers.missiontimer.running
+  missiontimer_set_12:
+    ladder_timer:
+      start_step: 31
+      start_running: device.timers.missiontimer.running
+  timer_missiontimer_started:
+    ladder_timer:
+      action: resume
+  timer_missiontimer_paused:
+    ladder_timer:
+      action: pause
+  timer_missiontimer_stopped:
+    ladder_timer:
+      action: stop
+
 timers:
   missiontimer:
     start_value: 60
@@ -142,10 +173,10 @@ timers:
       - event: multiball_lock_fmball_lock_locked_ball{device.timers.missiontimer.running}
         action: pause
         value: 3
-      # Adrenaline rush pauses the timer for 10s
-      - event: missiontimer_pause_ten
+      # Adrenaline rush pauses the timer
+      - event: missiontimer_pause_adrenaline
         action: pause
-        value: 10
+        value: 15
       # The timer starts fresh on every mission and stops on every end
       - event: missiontimer_start
         action: start

@@ -29,16 +29,31 @@ event_player:
       portrait: recruittali
       instructions_main: Attack the Colossus
       instructions_sub: before it self-repairs
+  mode_powers_started:
     set_mission_shots:
+      env: geth
+      color: inherit
+      shot_profile: colossus_profile
       shots_total: 6
       is_resumable: 1
       shots_remaining:
         value: current_player.geth_colossus_state
         type: int
+      starting_shots: left_ramp
+  power_shots_started:
+    # Immediately advance all shots except the left_ramp to the final off state
+    advance_mission_shots:
+      shots: left_orbit, kickback, right_ramp, right_orbit
+      jump: 6
   mode_recruittali_started.2:
     - play_colossus_show
     - play_tali_intro|2s
-  player_geth_colossus_state{player_num==current_player.number}:
+  # If the colossus repairs we can backshift the state of the shot profile
+  player_geth_colossus_state.1{player_num==current_player.number and change>0 and value<=6}:
+    advance_power_shots:
+      state: lit
+      shift: -1
+  player_geth_colossus_state.2{player_num==current_player.number}:
     - play_colossus_show{value>0}
     - play_colossus_repair_reegar{change>0 and value==6}
     - play_colossus_repair_random{change>0 and value!=6}
@@ -50,7 +65,8 @@ event_player:
       ticks_remaining: 10
 
 counters:
-  # A counter to track the lowest colossus state, to only score on NEW hits
+  # A counter to track the lowest colossus state for the player.
+  # The shot resets each time the mode starts, but only scores on NEW hits
   colossus_maxhits_counter:
     starting_count: 6
     count_complete_value: 0
@@ -77,11 +93,11 @@ variable_player:
   mode_recruittali_started:
     # If the colossus ended the last round at less than 6, add one
     geth_colossus_state{current_player.geth_colossus_state<6}: 1
-    # If the colossus ended up over six, drop it down to six
+    # If the colossus somehow ended up over six, drop it down to six
     geth_colossus_state{current_player.geth_colossus_state>=6}:
       action: set
       int: 6
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     geth_colossus_state: -1
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
@@ -91,9 +107,6 @@ variable_player:
       action: set
 
 shots:
-  geth_colossus_shot:
-    hit_events: sh_left_ramp_hit
-    tags: envshot_left_ramp, power_target_charge, power_target, power_target_left_ramp
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
 
@@ -102,7 +115,7 @@ show_player:
     geth_target_show:
       speed: 12
       loops: 6
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     colossus_hit_show{current_player.geth_colossus_state>3}:
       speed: 12
       loops: 6
@@ -115,67 +128,59 @@ show_player:
       priority: 100
       show_tokens:
         color: color_armor
-  mode_recruittali_stopping:
-    geth_colossus_show:
-      action: stop
-  play_colossus_show:
-    geth_colossus_show{current_player.geth_colossus_state>=6}:
-      action: play
-      key: geth_colossus_show
-      speed: 1
-      show_tokens:
-        color: color_shields
-    geth_colossus_show{current_player.geth_colossus_state==5}:
-      action: play
-      key: geth_colossus_show
-      speed: 2
-      show_tokens:
-        color: color_shields
-    geth_colossus_show{current_player.geth_colossus_state==4}:
-      action: play
-      key: geth_colossus_show
-      speed: 3
-      show_tokens:
-        color: color_shields
-    geth_colossus_show{current_player.geth_colossus_state==3}:
-      action: play
-      key: geth_colossus_show
-      speed: 1
-      show_tokens:
-        color: color_armor
-    geth_colossus_show{current_player.geth_colossus_state==2}:
-      action: play
-      key: geth_colossus_show
-      speed: 2
-      show_tokens:
-        color: color_armor
-    geth_colossus_show{current_player.geth_colossus_state==1}:
-      action: play
-      key: geth_colossus_show
-      speed: 3
-      show_tokens:
-        color: color_armor
 
+shot_profiles:
+  colossus_profile:
+    states: 
+    # All names are "lit" so powers can find/rotate/charge them
+    - name: lit
+      show: led_6_chase
+      speed: 6
+      show_tokens:
+        color: color_shields
+        fade: 20ms
+    - name: lit
+      show: led_6_chase
+      speed: 12
+      show_tokens:
+        color: color_shields
+        fade: 20ms
+    - name: lit
+      show: led_6_chase
+      speed: 18
+      show_tokens:
+        color: color_shields
+        fade: 20ms
+    - name: lit
+      show: led_6_chase
+      speed: 6
+      show_tokens:
+        color: color_armor
+        fade: 20ms
+    - name: lit
+      show: led_6_chase
+      speed: 12
+      show_tokens:
+        color: color_armor
+        fade: 20ms
+    - name: lit
+      show: led_6_chase
+      speed: 18
+      show_tokens:
+        color: color_armor
+        fade: 20ms
+    - name: off
+      show: off
+      
 shows:
-  geth_colossus_show:
-    - duration: 1200ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: (color)
-          fade: 20ms
-    - duration: 400ms
-      lights:
-        l_left_ramp_shield_rgb:
-          color: black
-          fade: 20ms
   colossus_hit_show:
     - time: 0
       lights:
-        l_left_ramp_shield_rgb:
+        lane_shields:
           color: 000000
     - time: '+1'
       lights:
-        l_left_ramp_shield_rgb:
+        lane_shields:
           color: (color)
   geth_target_show:
     - time: 0
@@ -198,7 +203,7 @@ sound_player:
   play_tali_intro:
     reegar_missionstart:
       action: play
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     colossus_hit_sound:
       action: play
   play_tali_shield:

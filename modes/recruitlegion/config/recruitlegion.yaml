@@ -48,6 +48,8 @@ event_player:
         type: int
   mode_recruitlegion_started.1:
     - play_opening_heretic_dialogue
+  # Delay the initial heretic shot until after startup resets all shots
+  missiontimer_start:
     - enable_random_heretic
   timer_heretic_timer_complete:
     - enable_random_heretic
@@ -145,7 +147,11 @@ shot_groups:
   heretic_banks:
     shots: heretic_shot_dropbank, heretic_shot_hitbank
     enable_events: []
-    disable_events: mode_recruitlegion_started, heretic_banks_hit
+    disable_events: mode_recruitlegion_started
+  # Define a group so we can rotate them for cloak power
+  heretic_shots:
+    debug: true
+    shots: heretic_shot_left_orbit, heretic_shot_kickback, heretic_shot_left_ramp, heretic_shot_right_ramp, heretic_shot_right_orbit
 
 shots:
   heretic_jackpot_shot:
@@ -155,7 +161,7 @@ shots:
     show_tokens:
       leds: l_kickback_shield_rgb
       color: color_legion
-    tags: envshot_kickback, power_target, power_target_kickback
+    tags: envshot_kickback, power_target_charge, power_target_kickback
   # Dropbank and hitbank are "recovery" shots
   heretic_shot_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
@@ -187,11 +193,13 @@ shots:
     hit_events:
       - sh_left_orbit_hit{device.shots.heretic_shot_left_orbit.state_name=="lit_lane"}
       - s_target1_active{device.shots.heretic_shot_left_orbit.state_name=="lit_target"}
-    advance_events: heretic_shot_left_orbit_advance
-    disable_events:
+    # All shots must be enabled to rotate, so the zero state is off.
+    # Enable event will advance it
+    advance_events: 
+      - enable_heretic_shot_left_orbit
+    restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
-    restart_events: enable_heretic_shot_left_orbit
     profile: heretic_profile
     show_tokens:
       led_lane: l_left_orbit_shield_rgb
@@ -202,11 +210,11 @@ shots:
     hit_events:
       - sh_kickback_hit{device.shots.heretic_shot_kickback.state_name=="lit_lane"}
       - s_target2_active{device.shots.heretic_shot_kickback.state_name=="lit_target"}
-    advance_events: heretic_shot_kickback_advance
-    disable_events:
+    advance_events: 
+      - enable_heretic_shot_kickback
+    restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
-    restart_events: enable_heretic_shot_kickback
     profile: heretic_profile
     show_tokens:
       led_lane: l_kickback_shield_rgb
@@ -217,11 +225,11 @@ shots:
     hit_events:
       - sh_left_ramp_hit{device.shots.heretic_shot_left_ramp.state_name=="lit_lane"}
       - s_target3_active{device.shots.heretic_shot_left_ramp.state_name=="lit_target"}
-    advance_events: heretic_shot_left_ramp_advance
-    disable_events:
+    advance_events: 
+      - enable_heretic_shot_left_ramp
+    restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
-    restart_events: enable_heretic_shot_left_ramp
     profile: heretic_profile
     show_tokens:
       led_lane: l_left_ramp_shield_rgb
@@ -232,11 +240,11 @@ shots:
     hit_events:
       - sh_right_ramp_hit{device.shots.heretic_shot_right_ramp.state_name=="lit_lane"}
       - s_target4_active{device.shots.heretic_shot_right_ramp.state_name=="lit_target"}
-    advance_events: heretic_shot_right_ramp_advance
-    disable_events:
+    advance_events: 
+      - enable_heretic_shot_right_ramp
+    restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
-    restart_events: enable_heretic_shot_right_ramp
     profile: heretic_profile
     show_tokens:
       led_lane: l_right_ramp_shield_rgb
@@ -247,11 +255,11 @@ shots:
     hit_events:
       - sh_right_orbit_hit{device.shots.heretic_shot_right_orbit.state_name=="lit_lane"}
       - s_target5_active{device.shots.heretic_shot_right_orbit.state_name=="lit_target"}
-    advance_events: heretic_shot_right_orbit_advance
-    disable_events:
+    advance_events: 
+      - enable_heretic_shot_right_orbit
+    restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
-    restart_events: enable_heretic_shot_right_orbit
     profile: heretic_profile
     show_tokens:
       led_lane: l_right_orbit_shield_rgb
@@ -264,6 +272,8 @@ shot_profiles:
     advance_on_hit: false
     show_when_disabled: false
     states:
+      - name: off
+        show: off
       - name: lit_lane
         show: heretic_lane_show
         sync_ms: 500

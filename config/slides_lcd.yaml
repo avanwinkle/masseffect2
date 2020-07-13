@@ -611,7 +611,15 @@ widgets:
   #----------------------------------------------------
   portrait_squad:
     - type: image
-      image: portrait_squad
+      image: portrait_squad_widescreen
+      anchor_x: left
+      x: 0
+      animations:
+        add_to_slide:
+          - property: x
+            value: -564
+            duration: 5s
+            easing: in_out_quad
   portrait_firewalker_complete:
     - type: image
       image: portrait_firewalker_complete

@@ -13,9 +13,8 @@
 # chooses the right orbit (renegade, lit red), the timer starts lower and a
 # bonus multiplier increases the captured value when the mode is completed.
 #
-# Progress is not saved and this mode must be restarted if failed.
-#
-# TODO: This mode has only been mocked out, not thoroughly tested
+# Progress is not saved and this mode must be restarted if failed; however
+# the initial paragon/renegade choice is only made on the first attempt.
 #####
 
 mode:
@@ -27,14 +26,17 @@ mode:
 
 event_player:
   mode_recruitzaeed_started:
-    set_environment:
-      env: bluesuns
     show_recruit_instructions{current_player.zaeed_path_renegade==-1}:
       squadmate: zaeed
       portrait: recruitzaeed
-      instructions_main: 3x orbits to catch Vido
+      instructions_main: Choose your Path
       instructions_sub: "< Paragon       Renegade >"
-    show_recruit_instructions{current_player.zaeed_path_renegade!=-1}:
+    show_recruit_instructions{current_player.zaeed_path_renegade==0}:
+      squadmate: zaeed
+      portrait: recruitzaeed
+      instructions_main: 3x orbits to save workers
+      instructions_sub: " "
+    show_recruit_instructions{current_player.zaeed_path_renegade==1}:
       squadmate: zaeed
       portrait: recruitzaeed
       instructions_main: 3x orbits to catch Vido
@@ -42,13 +44,25 @@ event_player:
     # Fake the event update to trigger the widget?
     logicblock_zaeed_orbits_counter_updated:
       value: device.counters.zaeed_orbits_counter.value
+  mode_powers_started:
     set_mission_shots:
+      env: bluesuns
+      color: color_zaeed
+      shot_profile: lane_shot_manual_finalshot
       is_resumable: 0
       shots_total: 4
       shots_remaining:
         value: device.counters.zaeed_orbits_counter.value
         type: int
-  zaeed_kickshot_hit: mission_collect_score, recruit_zaeed_complete
+      starting_shots: left_orbit, right_orbit
+  # Immediately advance the kickback to "pending" so we know where it is after rotation
+  power_shots_started:
+    advance_mission_shots:
+      shots: kickback
+  logicblock_zaeed_orbits_counter_complete:
+    advance_mission_shots:
+      state: pending
+  power_shots_final_hit: mission_collect_score, recruit_zaeed_complete
 
 counters:
   zaeed_orbits_counter:
@@ -57,12 +71,12 @@ counters:
     direction: down
     disable_on_complete: false
     reset_on_complete: false
-    count_events: zaeed_orbitshots_hit
+    count_events: power_shots_lit_hit
     events_when_hit: mission_shot_hit
 
 variable_player:
   # If the right orbit is the first orbit hit, set path to renegade
-  zaeed_right_orbit_hit{current_player.zaeed_path_renegade==-1}:
+  right_orbit_lit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 1
@@ -72,7 +86,7 @@ variable_player:
     mission_secondary:
       string: " "
       action: set
-  zaeed_left_orbit_hit{current_player.zaeed_path_renegade==-1}:
+  left_orbit_lit_hit{current_player.zaeed_path_renegade==-1}:
     zaeed_path_renegade:
       action: set
       int: 0
@@ -82,64 +96,13 @@ variable_player:
     mission_secondary:
       string: " "
       action: set
-  mission_shot_hit{count==1}:
+  logicblock_zaeed_orbits_counter_complete:
     mission_instructions:
       action: set
       string: "Hit kickback to complete!"
 
-shot_profiles:
-  zaeed_orbit_profile:
-    show_when_disabled: false
-    states:
-      - name: reputation
-        show: led_6_dualcolor_chase
-        speed: 6
-        show_tokens:
-          fade: 200ms
-      - name: lit
-        show: led_6_chase
-        speed: 6
-        show_tokens:
-          fade: 200ms
-
-shot_groups:
-  zaeed_orbitshots:
-    shots: zaeed_left_orbit, zaeed_right_orbit
-
-shots:
-  zaeed_left_orbit:
-    hit_events: sh_left_orbit_hit
-    profile: zaeed_orbit_profile
-    advance_events: zaeed_right_orbit_reputation_hit
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_zaeed
-      color1: color_zaeed
-      color2: color_paragon
-    tags: envshot_left_orbit, power_target, power_target_left_orbit
-  zaeed_right_orbit:
-    hit_events: sh_right_orbit_hit
-    profile: zaeed_orbit_profile
-    advance_events: zaeed_left_orbit_reputation_hit
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_zaeed
-      color1: color_zaeed
-      color2: color_renegade
-    tags: envshot_right_orbit, power_target, power_target_right_orbit
-  zaeed_kickshot:
-    hit_events: sh_kickback_hit
-    enable_events: mission_shot_hit{count==1}
-    disable_events: mode_recruitzaeed_started
-    profile: color_flashing_fast_static
-    show_tokens:
-      leds: l_kickback_ring
-      color: color_zaeed
-    # If the kickback is enabled, charge will take it
-    tags: envshot_kickback, power_target, power_target_kickback, power_target_charge
-
 show_player:
-  zaeed_orbitshots_hit:
+  power_shots_lit_hit:
     flash_all_shields_show:
       loops: 6
       speed: 12
@@ -164,16 +127,16 @@ sound_player:
   mission_shot_hit{count==3 and current_player.zaeed_path_renegade==1}:
     explosionchoice_1_renegade:
       max_queue_time: 1s
-  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==0}:
+  mission_shot_hit{(count==2 or count==1) and current_player.zaeed_path_renegade==0}:
     explosionchoice_2_paragon:
       max_queue_time: 1s
-  mission_shot_hit{count==2 and current_player.zaeed_path_renegade==1}:
+  mission_shot_hit{(count==2 or count==1) and current_player.zaeed_path_renegade==1}:
     explosionchoice_2_renegade:
       max_queue_time: 1s
-  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==0}:
+  mission_shot_hit{count==0 and current_player.zaeed_path_renegade==0}:
     explosionchoice_3_paragon:
       max_queue_time: 2s
-  mission_shot_hit{count==1 and current_player.zaeed_path_renegade==1}:
+  mission_shot_hit{count==0 and current_player.zaeed_path_renegade==1}:
     explosionchoice_3_renegade:
       max_queue_time: 2s
 

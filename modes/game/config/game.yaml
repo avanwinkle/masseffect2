@@ -34,6 +34,16 @@ variable_player:
       action: set_machine
       string: "GAME OVER"
 
+# Smoothly transition from base to bonus
+show_player:
+  mode_base_will_stop:
+    end_of_ball:
+      loops: 0
+      priority: 10000 # Higher than any mode's show or lights
+  mode_bonus_will_stop:
+    end_of_ball:
+      action: stop
+
 widget_player:
   # First event, before additional players have a chance to enter
   game_started:
@@ -43,7 +53,6 @@ widget_player:
     base_ball_widget:
       slide: singleplayer_slide
       priority: 9
-
   # Base starts, show a resume mission?
   show_base_slide.1{is_resume and not is_multiplayer}:
     resume_widget:
@@ -136,8 +145,19 @@ widget_player:
       slide: multiplayer_slide
     mp_name_widget_player_4:
       action: remove
+  s_trough_jam_active:
+    jam_widget:
+      action: add
+      target: main
+  s_trough_jam_inactive:
+    jam_widget:
+      action: remove
+      target: main
 
 widgets:
+  jam_widget:
+    - type: text
+      text: JAMMED
   base_level_widget:
     - type: text
       text: LVL (player|level)

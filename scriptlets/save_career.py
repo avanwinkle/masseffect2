@@ -3,8 +3,11 @@
 import json
 import logging
 import os
+import random
 from datetime import datetime
 from mpf.core.custom_code import CustomCode
+
+from scriptlets.squadmate_status import SquadmateStatus
 
 PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
@@ -46,6 +49,20 @@ class SaveCareer(CustomCode):
             if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
+                # Duplicate events, we may have already set this
+                if not player["mineral_iridium"] :
+                    for mineral in ["iridium", "palladium", "platinum"]:
+                        player["mineral_{}".format(mineral)] = 10000
+                    # Some mods for demo mode:
+                    if self.machine.settings.demo_mode:
+                        # Advance shadowbroker faster
+                        player["counter_sbdrops_counter"] = 2
+                        # 25% chance of getting arrival instead of overlord
+                        if random.random() < 0.25:
+                            player["achievements"]["arrival"] = "enabled"
+                            player["achievements"]["overlord"] = "stopped"
+                    starting_recruit = SquadmateStatus.random_recruit()
+                    player["status_{}".format(starting_recruit)] = 3
             else:
                 # Text input char_list prevents spaces in custom profiles, so this should be safe
                 player["casual"] = 0
@@ -130,17 +147,32 @@ class SaveCareer(CustomCode):
         career_name = kwargs.get("career_name")
         setattr(player, "career_name", career_name)
 
+        # Set a casual career
+        # TDB IS any of this needed? IT all lives in set_career
         if career_name == " ":
             isDemo = self.machine.settings.demo_mode
             CASUAL_CAREER = {
                 "career_name": " ",
                 "readonly": 1,
-                # Some mods for demo mode
-                "counter_sbdrops_counter": 2 if isDemo else 0,
-                "status_grunt": 3 if isDemo else 0,
+                "mineral_iridium": 10000,
+                "mineral_palladium": 10000,
+                "mineral_platinum": 10000
             }
+            # Some mods for demo mode:
+            if isDemo:
+                # Advance shadowbroker faster
+                CASUAL_CAREER["counter_sbdrops_counter"] = 2
+                # 20% chance of getting arrival instead of overlord
+                if random.random() < 0.2:
+                    CASUAL_CAREER["achievements"] = {
+                        "arrival": "enabled",
+                        "overlord": "stopped"
+                    }
+            starting_recruit = SquadmateStatus.random_recruit()
+            CASUAL_CAREER["status_{}".format(starting_recruit)] = 3
             careerdata = CASUAL_CAREER
             setattr(player, "casual", 1)
+            self.log.info("Created career data: {}".format(careerdata))
         else:
             careerdata = self._fetch_careerdata(career_name)
             setattr(player, "casual", 0)

@@ -1,0 +1,58 @@
+#show_version=5
+
+# Step 1: General field ambience
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
+      fade: 1s
+    light_backwall_ambient:
+      color: color_space
+      fade: 1s
+    gi_top:
+      color: color_space
+      fade: 1s
+    gi_middle:
+      color: FFb74C
+      fade: 1s
+    gi_bottom:
+      color: FFb74C%50
+      fade: 1s
+
+# Step 2: Omega (reds and oranges)
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: color_grunt
+      fade: 1s
+    light_backwall_ambient:
+      color: color_mordin
+      fade: 1s
+    gi_top:
+      color: color_mordin
+      fade: 1s
+    gi_middle:
+      color: FF9960 # color_grunt at 25% white
+      fade: 1s
+    gi_bottom:
+      color: FFCCB0 # color_grunt at 75% white
+      fade: 1s
+
+# Step 3: Purgatory (purples and whites)
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: FFB74C
+      fade: 1s
+    light_backwall_ambient:
+      color: color_jack
+      fade: 1s
+    gi_top:
+      color: color_space
+      fade: 1s
+    gi_middle:
+      color: FFC58F
+      fade: 1s
+    gi_bottom:
+      color: FFCCCC%30
+      fade: 1s

@@ -23,94 +23,88 @@ mode:
 
 event_player:
   mode_recruitmordin_started.1:
-    set_environment:
-      env: bloodpack
     show_recruit_instructions:
       squadmate: mordin
       portrait: recruitmordin
       instructions_main: Hit orbits to build value
       instructions_sub: 2X Ramps to turn on fans
+  mode_powers_started:
     set_mission_shots:
+      color: color_mordin
+      env: bloodback
+      persist_name: recruitmordin
       shots_total: 4
       is_resumable: 1
       shots_remaining:
-        value: device.counters.cure_counter.value + device.counters.fans_counter.value
+        value: device.counters.cure_counter.value
         type: int
-  fan_shots_hit_complete: recruit_mordin_complete
+      # Invert the starting shots per this profile
+      starting_shots: kickback, left_ramp, right_ramp, right_orbit
+      shot_profile: lane_shot_manual_firstshot_inverted
+  # This is annoying, but the only way to advance lit shots to hit when we
+  # don't know _which_ lit shot was hit.
+  left_orbit_lit_hit:
+    advance_mission_shots:
+      shots: left_orbit
+      priority: 1000
+  kickback_lit_hit: 
+    advance_mission_shots:
+      shots: kickback
+      priority: 1000
+  left_ramp_lit_hit:
+    advance_mission_shots:
+      shots: left_ramp
+      priority: 1000
+  right_ramp_lit_hit:
+    advance_mission_shots:
+      shots: right_ramp
+      priority: 1000
+  right_orbit_lit_hit:
+    advance_mission_shots:
+      shots: right_orbit
+      priority: 1000
+  # Individual advances force the specific shot to its lit state
+  # If it was disabled, it'll light. If it was lit-to-hit, it'll revert to lit
+  logicblock_cure_counter_hit.20:
+    advance_mission_shots{count==3}:
+      shots: right_orbit
+      jump: 1
+    advance_mission_shots{count==2}:
+      shots: left_ramp, right_ramp
+      jump: 1
+  logicblock_cure_counter_hit.10: 
+    - mission_shot_hit
+    - play_cure_sound_1{count==3}
+    - play_cure_sound_2{count==2}
+    - play_fan_sound{count==1}
+  logicblock_cure_counter_complete: 
+    - recruit_mordin_complete
+    - mission_collect_score
 
 counters:
-  # The counter lets us play the correct sound for each fan hit
+  # The counter lets us play the correct sound for each fan hit,
+  # and know which shots to revert/advance
   cure_counter:
-    starting_count: 2
+    debug: true
+    starting_count: 4
     count_complete_value: 0
     direction: down
-    count_events: cure_left_lit_hit, cure_right_lit_hit
-    events_when_hit: mission_shot_hit
-    events_when_complete: enable_fans, play_cure_sound, mission_collect_score
-    disable_on_complete: true
-    reset_on_complete: false
-    persist_state: true
-  fans_counter:
-    starting_count: 2
-    count_complete_value: 0
-    direction: down
-    count_events: fan_left_lit_hit, fan_right_lit_hit
-    events_when_hit: logicblock_fans_counter_hit, mission_shot_hit
-    events_when_complete: mission_collect_score
-    disable_on_complete: true
-    reset_events: mode_recruitmordin_started
-
-shot_groups:
-  fan_shots:
-    shots: fan_left, fan_right
-    reset_events: mode_recruitmordin_started
-
-shots:
-  spinner:
-    hit_events: sh_spinner_hit
-    disable_events: spinner_hit
-  cure_left:
-    hit_events: sh_left_orbit_hit, right_to_left_orbit_hit
-    enable_events: mode_recruitmordin_started
-    profile: lane_shot_to_on_profile
-    # tags: envshot_right_orbit. # No env tag so we'll get a sound when its hit
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_mordin
-    tags: power_target, power_target_left_orbit
-  cure_right:
-    hit_events: sh_right_orbit_hit, left_to_right_orbit_hit
-    enable_events: cure_left_hit
-    profile: lane_shot_to_on_profile
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_mordin
-    tags: envshot_right_orbit, power_target, power_target_right_orbit
-  fan_left:
-    hit_events: sh_left_ramp_hit
-    enable_events: enable_fans
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_left_ramp_ring
-      color: color_door_green
-    tags: envshot_left_ramp, power_target, power_target_left_ramp
-  fan_right:
-    hit_events: sh_right_ramp_hit
-    enable_events: enable_fans
-    profile: lane_shot_profile
-    show_tokens:
-      leds: l_right_ramp_ring
-      color: color_door_green
-    tags: envshot_right_ramp, power_target, power_target_right_ramp
-
-light_player:
-  mode_recruitmordin_started:
-    light_backwall_ambient:
-      color: color_mordin
-    light_backwall_gi:
-      color: color_grunt
+    count_events:
+     # There is an event priority bug where power_shots_lit_hit will propagate
+     # and trigger the counter_hit event *before* the shot_name_lit_hit events
+     # are caught by the event player. This bug advances the shots *before* resetting
+     # them, which is bad. Explicitly use the shot events to ensure priority.
+     - left_orbit_lit_hit
+     - kickback_lit_hit
+     - left_ramp_lit_hit
+     - right_ramp_lit_hit
+     - right_orbit_lit_hit
 
 show_player:
+  mode_recruitmordin_started:
+    gi_show:
+      start_step: 2
+      manual_advance: True
   show_recruit_instructions:
     recruitintro_mordin:
       loops: 0
@@ -119,8 +113,8 @@ shows:
   recruitintro_mordin:
     - time: 2s
       events:
-        - play_intro_sound{not device.counters.cure_counter.completed}
-        - play_cure_sound{device.counters.cure_counter.completed}
+        - play_intro_sound{device.counters.cure_counter.value==4}
+        - play_cure_sound{device.counters.cure_counter.value<4}
     - time: 8s
       events: mission_intro_complete
     - time: 9500ms
@@ -136,14 +130,14 @@ sound_player:
       action: play
       loops: -1
   play_intro_sound: mission_intro
-  player_shot_cure_right_enabled{change==1}:
+  play_cure_sound_1:
     step0_voice:
       max_queue_time: 1s
   # Use a special event so we can re-play the sound on mission resume
-  play_cure_sound:
+  play_cure_sound_2:
     step1_voice:
       max_queue_time: 1s
-  logicblock_fans_counter_hit{count==1}:
+  play_fan_sound:
     step2_voice:
       max_queue_time: 1s
   recruit_mordin_complete:
@@ -154,6 +148,7 @@ sound_player:
       max_queue_time: 500ms
 
 sound_pools:
+  # Step zero: hitting the first orbit to ready the cure
   step0_voice:
     type: random
     track: voice
@@ -165,6 +160,7 @@ sound_pools:
       - step0_voice_zaeed{current_player.status_zaeed>=4}|3
       - step0_voice_tali{current_player.status_tali>=4}|3
       - step0_voice_jack{current_player.status_jack>=4}|2
+  # Step one: cure is in place, now time for the fans
   step1_voice:
     type: random
     track: voice
@@ -177,6 +173,7 @@ sound_pools:
       - step1_voice_zaeed{current_player.status_zaeed>=4}|3
       - step1_voice_tali{current_player.status_tali>=4}|3
       - step1_voice_jack{current_player.status_jack>=4}|2
+  # Step two: one fan down, one to go
   step2_voice:
     type: random
     track: voice

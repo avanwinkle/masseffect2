@@ -6,7 +6,7 @@ config:
 
 smart_virtual:
   console_log: basic
-  file_log: full
+  file_log: basic
 
 mpf:
   default_pulse_ms: 10
@@ -26,9 +26,9 @@ kivy_config:
 logging:
   file:
     asset_manager: none
-    sound_player: full
-    sounds: full
-    sound: full
+    sound_player: none
+    sounds: none
+    sound: none
 
 text_ui:
   machine_vars:
@@ -506,6 +506,7 @@ named_colors:
   color_jack: 4D00CC
   color_jacob: "663300"
   color_kasumi: eeff00
+  color_kasumi_dark: a7b300
   color_legion: ffffff
   color_miranda: fff2e6
   color_mordin: "440000"
@@ -530,11 +531,11 @@ named_colors:
   color_door_red: "660000"
   color_space: 0044AA
   # The timer
-  color_timer_green: "224400"
-  color_timer_yellow: "668800"
-  color_timer_orange: "663300"
-  color_timer_red: "660000"
-  color_timer_flashing: "880000"
+  color_timer_green: "112200"
+  color_timer_yellow: "334400"
+  color_timer_orange: "331100"
+  color_timer_red: "330000"
+  color_timer_flashing: "440000"
   # Other Modes
   color_arrival: 24c8ff
   color_collectors: ff2200

@@ -22,21 +22,39 @@ mode:
 event_player:
   mode_recruitjack_started:
     set_environment:
-      env: bluesuns
     show_recruit_instructions:
       squadmate: jack
       portrait: recruitjack
       instructions_main: Hit Shots to Light Bank
       instructions_sub: 3x Banks to Defeat Warden
+  mode_powers_started:
+    # For jack, we don't persist shots through Powers because we reset on rounds
     set_mission_shots:
+      color: color_jack
+      env: bluesuns
       is_resumable: 1
       shots_total: 3  # Each round counts as a shot
       shots_remaining:
         value: device.counters.jack_rounds_counter.value
         type: int
+      # Invert the starting shots per this profile
+      starting_shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
+      shot_profile: lane_shot_manual_firstshot_inverted
+  # Advance different shots based on which round we're on
+  power_shots_started: enable_jack_shots
+  enable_jack_shots:
+    advance_mission_shots{device.counters.jack_rounds_counter.value==3}:
+      shots: left_orbit, kickback, right_orbit
+    advance_mission_shots{device.counters.jack_rounds_counter.value==2}:
+      shots: left_ramp, right_ramp
+    advance_mission_shots{device.counters.jack_rounds_counter.value==1}:
+      shots: left_orbit, right_orbit
   ### SCORING capture the value when the hurryup is hit, collect when the round is hit
   jack_hurryup_shots_hit: mission_shot_hit
-  logicblock_jack_rounds_counter_hit: mission_collect_score
+  logicblock_jack_rounds_counter_hit: 
+    - mission_collect_score
+    # Trigger the enable shots event to light the next round's shots
+    - enable_jack_shots
   logicblock_jack_rounds_counter_complete: recruit_jack_complete
 
 counters:
@@ -52,79 +70,22 @@ counters:
 
 shot_groups:
   jack_hurryup_shots:
-    shots: jack_left_orbit, jack_kickback, jack_left_ramp, jack_right_ramp, jack_right_orbit
-    disable_events: jack_hurryup_shots_hit, mode_recruitjack_will_stop
-  jack_shots_one:
-    shots: jack_kickback, jack_left_orbit, jack_right_orbit
-    enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==3}
-  jack_shots_two:
-    shots: jack_left_ramp, jack_right_ramp
-    enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==2}
-      - logicblock_jack_rounds_counter_hit{count==2}
-  jack_shots_three:
-    shots: jack_left_orbit, jack_right_orbit
-    enable_events:
-      - mode_recruitjack_started{device.counters.jack_rounds_counter.value==1}
-      - logicblock_jack_rounds_counter_hit{count==1}
+    shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
+    # Resetting the shots will set them in the powers' unlit state
+    reset_events: power_shots_lit_hit, mode_recruitjack_will_stop
 
 shots:
-  jack_left_orbit:
-    hit_events: sh_left_orbit_hit
-    profile: lane_shot_static
-    start_enabled: false
-    show_tokens:
-      leds: l_left_orbit_ring
-      color: color_jack
-    tags: envshot_left_orbit, power_target, power_target_left_orbit
-  jack_kickback:
-    hit_events: sh_kickback_hit
-    profile: lane_shot_static
-    start_enabled: false
-    show_tokens:
-      leds: l_kickback_ring
-      color: color_jack
-    tags: envshot_kickback, power_target, power_target_kickback
-  jack_left_ramp:
-    hit_events: sh_left_ramp_hit
-    profile: lane_shot_static
-    start_enabled: false
-    show_tokens:
-      leds: l_left_ramp_ring
-      color: color_jack
-    tags: envshot_left_ramp_exit, power_target, power_target_left_ramp
-  jack_right_ramp:
-    hit_events: sh_right_ramp_hit
-    profile: lane_shot_static
-    start_enabled: false
-    show_tokens:
-      leds: l_right_ramp_ring
-      color: color_jack
-    tags: envshot_right_ramp_exit, power_target, power_target_left_ramp
-  jack_right_orbit:
-    hit_events: sh_right_orbit_hit
-    profile: lane_shot_static
-    start_enabled: false
-    show_tokens:
-      leds: l_right_orbit_ring
-      color: color_jack
-    tags: envshot_right_orbit, power_target, power_target_right_orbit
   jack_hitbank_shot:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    enable_events: jack_hurryup_shots_hit
-    disable_events: jack_hitbank_shot_hit, mode_recruitjack_will_stop
-    reset_events: jack_hurryup_shots_hit
+    start_enabled: false
+    persist_enable: false
+    restart_events: power_shots_lit_hit
+    disable_events: jack_hitbank_shot_hit
     profile: color_flashing_fast_profile
     show_tokens:
       leds: light_hitbank_rgb
       color: color_jack
     tags: envshot_hitbank, power_target_charge
-
-light_player:
-  mode_recruitjack_started:
-    light_backwall_ambient:
-      color: color_jack
 
 shows:
   recruitintro_jack:
@@ -142,22 +103,26 @@ shows:
           action: remove
 
 show_player:
+  mode_recruitjack_started:
+    gi_show:
+      start_step: 3
+      manual_advance: True
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0
 
 sound_player:
-  jack_shots_one_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       priority: 100
-  jack_shots_two_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s
       priority: 100
-  jack_shots_three_hit:
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==1}:
     jack_shot_hit_sound:
       action: play
       max_queue_time: 1s

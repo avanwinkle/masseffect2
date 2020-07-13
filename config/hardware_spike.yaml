@@ -395,7 +395,7 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_right_ramp, light_alarm_right_ramp
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
-    tags: lane_wedges, l_upgrade
+    tags: lane_wedges, light_upgrades
   l_right_return_lane: # Right Return Lane [#33]
     number: 8-0
     tags: l_return_lane, outer_circles
