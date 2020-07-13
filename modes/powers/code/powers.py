@@ -55,6 +55,20 @@ class Powers(Mode):
         self.persisted_shots = None
         
     def mode_will_start(self, **kwargs):
+        # These four steps are needed before the legion bailout
+        self.timer = self.machine.device_manager.collections["timers"]["power_active"]
+        self.add_mode_event_handler('award_power', self._award_power)
+        self.add_mode_event_handler('activate_power', self._activate_power)
+        self.add_mode_event_handler('timer_power_active_complete', self._complete)
+        
+        # LEGION special case: don't deal with shots
+        if self.machine.modes.recruitlegion.active:
+            self.shot_group = self.machine.device_manager.collections["shot_groups"]["heretic_shots"]
+            self.shot_group.disable_rotation()
+            self.shots = self.shot_group.config["shots"]
+            self.log.debug("Powers sees LEGION, aborting all shot management. {}".format(self.shots))
+            return
+            
         self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
         self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
         self.shot_group.disable_rotation()
@@ -65,9 +79,8 @@ class Powers(Mode):
             self.player["persisted_shots"] = self.persisted_shots
             self.log.debug("Set persisted shots for player {}: {}".format(self.player, self.persisted_shots))
         else:
-            self.log.debug("Rectrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
+            self.log.debug("Retrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
         
-        self.timer = self.machine.device_manager.collections["timers"]["power_active"]
         self.log.debug("Mode started with shots: {}".format(self.shots))
 
         # Disable all shots before we get started
@@ -269,6 +282,9 @@ class Powers(Mode):
             targets_group = self.machine.device_manager.collections["shot_groups"]["samara_targets"]
             self.log.debug(" - found targets shot group: {}".format(targets_group))
             targets_group.rotate(direction=direction)
+        # LEGION special case: post an event so the mode can rotate the _significant_ticks
+        elif self.machine.modes.recruitlegion.active:
+            self.machine.events.post("powers_cloak_rotation", direction=direction)
         self.log.debug("Done!")
 
     def _activate_charge(self):

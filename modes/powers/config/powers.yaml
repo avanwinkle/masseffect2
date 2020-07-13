@@ -296,18 +296,17 @@ show_player:
     ball_save_show:
       action: stop
   show_awarded_power:
-    dual_color_pulse:
+    led_color:
       key: current_power_show
       show_tokens:
         leds: (power)
-        color1: BBBBBB
-        color2: BB6600
+        color: BBBBBB
   power_activation_success:
     color_flashing_fast:
       key: current_power_show
       show_tokens:
         leds: (power)
-        color: BBBBBB
+        color: DDDDDD
   power_activation_complete:
     current_power_show:
       action: stop
