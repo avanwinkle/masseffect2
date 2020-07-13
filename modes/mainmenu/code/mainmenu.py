@@ -8,6 +8,7 @@ from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
 
 DIFFICULTIES = {0: "Normal", 1: "Hardcore", 2: "Insanity"}
+FLOWS = { 0: "Normal", 1: "High Flow" }
 
 
 class MainMenu(Carousel):
@@ -21,6 +22,7 @@ class MainMenu(Carousel):
         self.careers = []
         self._selected_career = None
         self._selected_difficulty = None
+        self._selected_flow = None
         self.log = logging.getLogger("MainMenu")
         self.log.setLevel(20)
 
@@ -30,8 +32,9 @@ class MainMenu(Carousel):
             self.log.info("Casual mode only, skipping menu")
             self.stop()
             return
-        # Reset the difficulty selection
+        # Reset the difficulty and flow selections
         self._selected_difficulty = -1
+        self._selected_flow = -1
         # When the mode starts, create a handler to trigger the Carousel start.
         self.add_mode_event_handler("show_mainmenu", self.show_menu)
         # Watch for adding players, which we prevent during creation.
@@ -168,7 +171,15 @@ class MainMenu(Carousel):
                 self.machine.events.post("update_difficulty", detail=DIFFICULTIES[0])
                 self.machine.events.post("update_difficulty_easiest")
                 return
-            self._post_career_event("new_career", difficulty=self._selected_difficulty)
+            # If we haven't set a flow yet, do so too
+            elif self._selected_flow == -1:
+                self._selected_flow = 0
+                self.machine.events.post("update_flow", detail=FLOWS[0])
+                self.machine.events.post("update_flow_easiest")
+                return
+            self._post_career_event("new_career", 
+                                    difficulty=self._selected_difficulty,
+                                    high_flow=self._selected_flow)
         # If create career was chosen, switch modes
         elif selection == "create_career":
             self.machine.events.post("start_mode_createprofile")
@@ -191,7 +202,8 @@ class MainMenu(Carousel):
             career = self.careers[self._highlighted_item_index]
             self._set_selected_career(career)
             self._post_career_event("highlight_career".format(self.name),
-                                    difficulty_name=DIFFICULTIES[career["difficulty"]])
+                                    difficulty_name=DIFFICULTIES[career["difficulty"]],
+                                    flow_name=FLOWS[career["high_flow"]])
         else:
             self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
                                     direction=direction)
@@ -200,7 +212,7 @@ class MainMenu(Carousel):
         if self._done:
             return
         # Are we picking difficulty?
-        if self._selected_difficulty >= 0:
+        if self._selected_difficulty >= 0 and self._selected_flow == -1:
             if self._selected_difficulty < 2:
                 self._selected_difficulty += 1
                 self.machine.events.post("update_difficulty",
@@ -208,19 +220,33 @@ class MainMenu(Carousel):
                 if self._selected_difficulty == 2:
                     self.machine.events.post("update_difficulty_hardest")
             return
+        elif self._selected_flow >= 0:
+            if self._selected_flow < 1:
+                self._selected_flow += 1
+                self.machine.events.post("update_flow", 
+                                         detail=FLOWS[self._selected_flow])
+                self.machine.events.post("update_flow_hardest")
+            return
         super()._next_item(**kwargs)
 
     def _previous_item(self, **kwargs):
         if self._done:
             return
         # Are we picking difficulty?
-        if self._selected_difficulty >= 0:
+        if self._selected_difficulty >= 0 and self._selected_flow == -1:
             if self._selected_difficulty > 0:
                 self._selected_difficulty -= 1
                 self.machine.events.post("update_difficulty",
                                          detail=DIFFICULTIES[self._selected_difficulty])
                 if self._selected_difficulty == 0:
                     self.machine.events.post("update_difficulty_easiest")
+            return
+        elif self._selected_flow >= 0:
+            if self._selected_flow > 0:
+                self._selected_flow -= 1
+                self.machine.events.post("update_flow", 
+                                         detail=FLOWS[self._selected_flow])
+                self.machine.events.post("update_flow_easiest")
             return
         super()._next_item(**kwargs)
 

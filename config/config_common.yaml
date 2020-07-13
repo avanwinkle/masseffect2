@@ -615,3 +615,7 @@ animations:
       value: 0.5
       duration: .75s
       repeat: true
+  solid_text:
+    - property: opacity
+      value: 1
+      duration: 0.25s

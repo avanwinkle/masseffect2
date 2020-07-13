@@ -205,6 +205,27 @@ widget_player:
       action: update
       slide: new_game_slide
       priority: 7
+  update_flow:
+    difficulty_left_widget:
+      action: remove
+    difficulty_right_widget:
+      action: remove
+    flow_parent_widget:
+      action: add
+      slide: new_game_slide
+      priority: 10
+    flow_widget:
+      action: update
+      slide: new_game_slide
+      priority: 9
+    flow_left_widget:
+      action: update
+      slide: new_game_slide
+      priority: 8
+    flow_right_widget:
+      action: update
+      slide: new_game_slide
+      priority: 7
 
 widgets:
   difficulty_parent_widget:
@@ -219,6 +240,7 @@ widgets:
       anchor_x: center
       animations:
         add_to_slide: pulse_text
+        update_flow: solid_text
   difficulty_left_widget:
     - type: text
       text: "<"
@@ -240,6 +262,42 @@ widgets:
       opacity: 1
       animations:
         update_difficulty_hardest:
+          - property: opacity
+            value: 0.2
+            duration: 50ms
+  flow_parent_widget:
+    - type: text
+      text: "Flow:"
+      style: body_sm, row_sub_under, col_left_anchor
+  flow_widget:
+    - type: text
+      text: (detail)
+      style: body_sm, row_sub_under
+      x: 400
+      anchor_x: center
+      animations:
+        add_to_slide: pulse_text
+  flow_left_widget:
+    - type: text
+      text: "<"
+      style: body_sm, row_sub_under
+      x: 275
+      anchor_x: right
+      opacity: 1
+      animations:
+        update_flow_easiest:
+          - property: opacity
+            value: 0.2
+            duration: 50ms
+  flow_right_widget:
+    - type: text
+      text: ">"
+      style: body_sm, row_sub_under
+      x: 525
+      anchor_x: left
+      opacity: 1
+      animations:
+        update_flow_hardest:
           - property: opacity
             value: 0.2
             duration: 50ms
