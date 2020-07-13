@@ -301,6 +301,8 @@ widgets:
 sound_player:
   # Use the research_options event to ensure MC listens for it?
   mode_store_started: shep_favorite_store
+  # In high-flow mode, play the sound so the player knows an upgrade was got
+  store_high_flow_skip: shep_favorite_store
 
 sound_pools:
   shep_favorite_store:
