@@ -374,6 +374,11 @@ player_vars:
     initial_value: 1
   heretic_progress:
     initial_value: 0
+  high_flow:
+    initial_value: 0
+  high_flow_resume:
+    initial_value: " "
+    value_type: str
   intel:
     initial_value: 0
   level:

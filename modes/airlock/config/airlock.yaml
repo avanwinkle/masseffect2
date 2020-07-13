@@ -70,7 +70,7 @@ queue_event_player:
   #   events_when_finished: advance_fmball_lock
 
 queue_relay_player:
-  mode_missionselect_starting:
+  mode_missionselect_starting{not current_player.high_flow}:
     post: check_slide_queue
     wait_for: slide_queue_clear
   mode_store_starting:

@@ -49,6 +49,8 @@ class SaveCareer(CustomCode):
             if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
+                # Until we have a menu option, always set high-flow
+                player["high_flow"] = 1
                 # Duplicate events, we may have already set this
                 if not player["mineral_iridium"] :
                     for mineral in ["iridium", "palladium", "platinum"]:
