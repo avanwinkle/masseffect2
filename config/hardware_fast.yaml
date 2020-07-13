@@ -47,7 +47,7 @@ ball_devices:
     tags: trough, home, drain
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
-    eject_timeouts: 500ms
+    eject_timeouts: 3s
     eject_coil_jam_pulse: 25ms
     # Commenting below to resolve jam switch not triggering
     # confirm_eject_switch: s_plunger_lane
