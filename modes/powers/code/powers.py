@@ -89,9 +89,6 @@ class Powers(Mode):
             
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('advance_mission_shots', self._advance_mission_shots)
-        self.add_mode_event_handler('award_power', self._award_power)
-        self.add_mode_event_handler('activate_power', self._activate_power)
-        self.add_mode_event_handler('timer_power_active_complete', self._complete)
         
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
@@ -193,7 +190,8 @@ class Powers(Mode):
             shot.config['profile'] = \
                 self.machine.device_manager.collections["shot_profiles"][profile]
             
-            ## TODO: Provide starting_states to set explicit states for each shot.
+            ## TODO: Provide starting_states to set explicit states for each shot
+            ##       instead of relying on lots of advance_mission_shots events.
             ##       Also, restore preserved state by .jump(shots_to_set[idx])
             if shots_to_set:
                 # Our shot pointers are in the same order
@@ -272,19 +270,17 @@ class Powers(Mode):
     def _rotate_cloak(self, **kwargs):
         # TODO: Update MPF with triggering_switch kwarg to allow rotation
         direction = "right" if kwargs.get("triggering_group") == 2 else "left"
-        self.log.debug("Rotating cloak in direction {}, kwargs {}".format(direction, kwargs))
-        self.log.debug("Shot group is: {}".format(self.shot_group))
-        self.shot_group.rotate(direction=direction)
         # SAMARA special case: rotate the target shots as well, so the player
         # doesn't get stuck with no more shots to light.
         if self.machine.modes.recruitsamara.active:
-            self.log.debug("Samara is active! Rotating targets!")
             targets_group = self.machine.device_manager.collections["shot_groups"]["samara_targets"]
-            self.log.debug(" - found targets shot group: {}".format(targets_group))
             targets_group.rotate(direction=direction)
         # LEGION special case: post an event so the mode can rotate the _significant_ticks
         elif self.machine.modes.recruitlegion.active:
             self.machine.events.post("powers_cloak_rotation", direction=direction)
+        # ALL OTHER CASES rotate
+        else:
+            self.shot_group.rotate(direction=direction)
         self.log.debug("Done!")
 
     def _activate_charge(self):

@@ -193,9 +193,10 @@ shots:
     hit_events:
       - sh_left_orbit_hit{device.shots.heretic_shot_left_orbit.state_name=="lit_lane"}
       - s_target1_active{device.shots.heretic_shot_left_orbit.state_name=="lit_target"}
+    # All shots must be enabled to rotate, so the zero state is off.
+    # Enable event will advance it
     advance_events: 
       - enable_heretic_shot_left_orbit
-      - heretic_shot_left_orbit_advance
     restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
@@ -211,7 +212,6 @@ shots:
       - s_target2_active{device.shots.heretic_shot_kickback.state_name=="lit_target"}
     advance_events: 
       - enable_heretic_shot_kickback
-      - heretic_shot_kickback_advance
     restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
@@ -227,7 +227,6 @@ shots:
       - s_target3_active{device.shots.heretic_shot_left_ramp.state_name=="lit_target"}
     advance_events: 
       - enable_heretic_shot_left_ramp
-      - heretic_shot_left_ramp_advance
     restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
@@ -243,7 +242,6 @@ shots:
       - s_target4_active{device.shots.heretic_shot_right_ramp.state_name=="lit_target"}
     advance_events: 
       - enable_heretic_shot_right_ramp
-      - heretic_shot_right_ramp_advance
     restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete
@@ -259,7 +257,6 @@ shots:
       - s_target5_active{device.shots.heretic_shot_right_orbit.state_name=="lit_target"}
     advance_events: 
       - enable_heretic_shot_right_orbit
-      - heretic_shot_right_orbit_advance
     restart_events:
       - mode_recruitlegion_started
       - recruit_legion_precomplete

@@ -1,5 +1,5 @@
 """Custom logic for handling Legion's advancing shots."""
-
+import time
 import logging
 from mpf.core.mode import Mode
 
@@ -21,12 +21,17 @@ class RecruitLegion(Mode):
         # Track an array of ticks that _might_ need handling, to avoid over-processing
         self._significant_ticks = []
         self._shot_times = {}
+        self._shot_group = None
         # Track whether precomplete is achieved, to award levelup if complete fails
         self._is_precomplete = None
+        # Track whether we are processing a tick, to avoid collissions
+        self._block_on_tick = False
+        self._block_on_rotate = False
 
     def mode_will_start(self, **kwargs):
         """Watch the timer and bind shot events."""
         self._timer = self.machine.device_manager.collections["timers"]["missiontimer"]
+        self._shot_group = self.machine.device_manager.collections["shot_groups"]["heretic_shots"]
         self._significant_ticks = []
         self._shot_times = {}
         self._is_precomplete = False
@@ -54,9 +59,8 @@ class RecruitLegion(Mode):
 
     def _start_shot_tracking(self, **kwargs):
         shot_name = kwargs["shot_name"]
-        # If the shot was disabled, reset and quit (or if the mode hasn't started yet)
+        # If the mode hasn't started yet, don't count a lagging hit event
         if not self.active:
-            self.log.debug("Shot tracking for {} is going to abort and clear. Active? {}, kwargs {}".format(shot_name, self.active, kwargs))
             self._clear_shot(shot_name)
             return
 
@@ -74,30 +78,33 @@ class RecruitLegion(Mode):
         if not tick in self._significant_ticks:
             return
 
+        while self._block_on_rotate is True:
+            time.sleep(0.02)  # 2ms wait
+        self._block_on_tick = True
         for shot_name, times in self._shot_times.items():
             # The rotation creates a None value for 'times', so check its truthiness first
             if times and tick in times:
                 shot = self._get_shot(shot_name)
-                self.log.info("Found a significant event at tick {} for shot {}".format(tick, shot_name))
-                # The shot's advance method will handle if it's disabled
+                self.log.debug("Found a significant event at tick {} for shot {}".format(tick, shot_name))
                 shot.advance()
                 # If that's the last tick? Restart to set to the "off" state
                 if tick == times[3]:
                     shot.restart()
                     self._clear_shot(shot_name)
                     self.machine.events.post("heretic_shot_{}_timeout".format(shot_name))
-
+        self._block_on_tick = False
+        
     def _on_bank(self, **kwargs):
         hit_shot_name = kwargs.get("shot_name")
         # Check if both banks are off. If so, restart the timer/scoring
         banks_disabled = True
         for shot_name in BANKS:
-            shot = self._get_shot(shot_name)
+            bankshot = self._get_shot(shot_name)
             # If that's the one that was hit? disable it
             if shot_name == hit_shot_name:
-                shot.disable()
+                bankshot.disable()
             # If it's not the one that was hit, is the other enabled?
-            elif shot.enabled:
+            elif bankshot.enabled:
                 self.log.debug("Bank {} hit but {} is still enabled, skipping".format(hit_shot_name, shot_name))
                 banks_disabled = False
 
@@ -115,7 +122,9 @@ class RecruitLegion(Mode):
         player = self.machine.game.player
 
         if player["temp_multiplier"] == 0:
-            self.log.info("Shot {} was hit but banks are enabled. No progress awarded.".format(shot_name))
+            self.log.debug("Shot {} was hit but banks are enabled. No progress awarded.".format(shot_name))
+        elif not self._shot_times[shot_name]:
+            self.log.debug("Shot {} was hit but it's been rotated away. No action.".format(shot_name))
         else:
             self.log.debug("Shot {} was hit, shot times are {}".format(shot_name, self._shot_times))
             # Award a point of progress for every second left on the shot
@@ -129,8 +138,8 @@ class RecruitLegion(Mode):
                 player["heretic_progress"] + (progress_points * int(TOTAL_PROGRESS/60)), TOTAL_PROGRESS)
         self.log.debug("Shot {} was hit, clearing it.".format(shot_name))
         self._clear_shot(shot_name)
-        shot.disable()
-
+        shot.restart()
+        
         # If we are done?
         if player["heretic_progress"] == TOTAL_PROGRESS:
             self.machine.events.post("recruit_legion_precomplete")
@@ -152,14 +161,15 @@ class RecruitLegion(Mode):
         return self.machine.device_manager.collections["shots"]["heretic_shot_{}".format(shot_name)]
 
     def _clear_shot(self, shot_name):
-        self.log.debug("Clearing shot {} from shot_times".format(shot_name))
         self._shot_times.pop(shot_name, None)
 
     def _on_cloak_rotate(self, **kwargs):
         direction = kwargs["direction"]
-        self.log.debug("Cloak rotation {} for significant ticks. BEFORE: {}".format(direction, self._shot_times))
+        while self._block_on_tick is True:
+            time.sleep(0.02)  # 2ms wait
+        self._block_on_rotate = True
         if direction == "left":
-            self._shot_times = {
+            new_shot_times = {
                 "left_orbit": self._shot_times.get("kickback"),
                 "kickback": self._shot_times.get("left_ramp"),
                 "left_ramp": self._shot_times.get("right_ramp"),
@@ -167,11 +177,16 @@ class RecruitLegion(Mode):
                 "right_orbit": self._shot_times.get("left_orbit")
             }
         else:
-            self._shot_times = {
+            new_shot_times = {
                 "left_orbit": self._shot_times.get("right_orbit"),
                 "kickback": self._shot_times.get("left_orbit"),
                 "left_ramp": self._shot_times.get("kickback"),
                 "right_ramp": self._shot_times.get("left_ramp"),
                 "right_orbit": self._shot_times.get("right_ramp")
             }
-        self.log.debug("AFTER: {}".format(self._shot_times))
+        # Don't preserve None values, so we can easily identify when there are no shot times
+        self._shot_times = {k: v for k, v in new_shot_times.items() if v is not None}
+        # And do the rotation as well
+        self._shot_group.rotate(direction=direction)
+        self._block_on_rotate = False
+        
