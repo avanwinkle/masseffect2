@@ -40,7 +40,6 @@ ball_devices:
     confirm_eject_type: target # default
     entrance_count_delay: 700ms
     player_controlled_eject_event: force_plunger_launch
-    # debug: true
     ball_search_order: 1
   bd_trough:
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6
@@ -49,10 +48,10 @@ ball_devices:
     jam_switch: s_trough_jam
     eject_targets: bd_plunger
     eject_timeouts: 500ms
-    # auto_fire_on_unexpected_ball: True
     eject_coil_jam_pulse: 25ms
-    confirm_eject_switch: s_plunger_lane
-    confirm_eject_type: switch
+    # Commenting below to resolve jam switch not triggering
+    # confirm_eject_switch: s_plunger_lane
+    # confirm_eject_type: switch
     ball_search_order: 2
   bd_lock:
     entrance_count_delay: 500ms # Default: 500ms
@@ -64,12 +63,10 @@ ball_devices:
     eject_timeouts: 1500ms
     exit_count_delay: 1s
     ball_missing_timeouts: 2500ms  # In case of balldevice_bd_lock_ball_missing
-    # debug: true
     ball_search_order: 20
   bd_hold:
     eject_coil: c_hold_post_release
     ball_switches: s_missionselect
-    # debug: true
     ball_search_order: 10
 
 named_colors:
