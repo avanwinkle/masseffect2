@@ -521,7 +521,6 @@ class RequiredSounds(object):
 
         # Wait until all configs have been imported, because load order is unpredictable
         for configfilename in self._configparents:
-            print("Configfilename {} is a parent? {}".format(configfilename, self._configparents[configfilename]))
             if configfilename in self._allconfigs:
                 self._childconfigs[configfilename] = self._allconfigs[configfilename]
                 # TODO: Allow the sounds to exist in their child modes and zip up to parents later
@@ -534,7 +533,10 @@ class RequiredSounds(object):
 
     def get_mode_parent(self, modename):
         """If the mode is a child mode, return the parents path."""
-        return self._configparents.get(modename, modename)
+        name = modename
+        while name in self._configparents:
+            name = self._configparents[name]
+        return name
 
     def find_requiring_mode(self, filename):
         """For a given asset filename, find the mode that includes that filename in its config file."""
