@@ -55,7 +55,7 @@ show_player:
       manual_advance: True
 
 sound_player:
-  mode_field_started{current_player.ball==1}:
+  mode_field_started{current_player.high_flow==0}:
     music_normandy_walkin_intro:
       action: play
       mode_end_action: stop
@@ -69,21 +69,23 @@ sound_player:
       mode_end_action: stop
       fade_in: 500ms
       fade_out: 2s
-  mode_field_started{current_player.ball>1}:
-    exciting_field_music:
+  mode_field_started{current_player.high_flow==1}:
+    high_flow_field_music:
       action: play
       loops: -1
       mode_end_action: stop
 
 sound_pools:
-  exciting_field_music:
+  high_flow_field_music:
     track: music
+    type: random_force_all
     sounds: 
       - music_miranda_loyalty_low
       - music_samara_acq
       - music_lazerus_1
+      - music_horizon_3
       - music_horizon_3_low
-      - music_attackplan_intro
+      # - music_attackplan_intro
 
 sounds:
   music_normandy_walkin_intro:

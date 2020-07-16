@@ -1,5 +1,6 @@
 """Custom mode code for mission selection."""
 import logging
+import random
 from scriptlets.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
@@ -23,17 +24,32 @@ class MissionSelect(Carousel):
     def mode_start(self, **kwargs):
         """Mode start: build a list of available missions (based on squadmates and achievements)."""
         self._all_items = self._build_items_list()
+        player = self.machine.game.player
 
-        single_recruitment = len(self._all_items) == 1 and self._all_items[0] in self._mates
-
+        # For high-flow players, reduce the options to one
+        if player["high_flow"]:
+            self.machine.log.info("High flow player has items: {}".format(self._all_items))
+            # If no mission to resume, pick at random
+            if player["high_flow_resume"] == " " or not player["high_flow_resume"] in self._all_items:
+                choice = random.choice(self._all_items)
+                player["high_flow_resume"] = choice
+            # Reduce the items to just the single option
+            self._all_items = [player["high_flow_resume"]]
+            self.machine.log.info("high flow setting choce to {}".format(self._all_items))
+            
+        # Normal flow players can't skip a single recruit but can skip other missions.
+        # High flow players will *always* 
+        single_choice = len(self._all_items) == 1 and (self._all_items[0] in self._mates or player["high_flow"])
+        
         # If there's only one option and it's a recruit mission, start it immediately without a slide
-        if single_recruitment and not SHOW_SELECT_WHEN_FORCED_SINGLE:
+        if single_choice and (player["high_flow"] or not SHOW_SELECT_WHEN_FORCED_SINGLE):
+            self._items = self._all_items
             self._select_item()
             # We never technically start the mode, so fake the ending of it
             self.machine.events.post("mode_missionselect_will_stop")
         else:
             super().mode_start(**kwargs)
-            intro_time = 1200 if single_recruitment else 3000
+            intro_time = 1200 if single_choice else 3000
             # Disable the intro slide after a time
             self.delay.add(callback=self._remove_intro, ms=intro_time)
 
@@ -44,26 +60,35 @@ class MissionSelect(Carousel):
 
         # If Collector Ship is available (for the first time), it is the only option
         if player.achievements['collectorship'][0] == "enabled":
+            if player["high_flow"]:
+                return ['collectorship']
             return [self._intro, 'collectorship']
 
         items = []
 
         # If Suicide Mission is ready, it goes first
         if achievements.suicidemission.state == "enabled":
+            # On high flow, go to suicide mission immediately
+            if player["high_flow"]:
+                return ['suicide']
             items.append('suicide')
         # Or if Derelict Reaper is available and not completed, it goes first
         elif achievements.derelictreaper.state == "enabled" or (
             ALLOW_DERELICTREAPER_REPLAY and achievements.derelictreaper.state == "started"
         ):
             items.append('derelictreaper')
-            # On casual mode, force the player to play derelict reaper
-            if player["casual"]:
+            # On casual mode or high_flow, force the player to play derelict reaper
+            if player["casual"] or player["high_flow"]:
                 return items
 
         # Then any squadmates who are of the "available" status
         self._mates = SquadmateStatus.recruitable_mates(player)
         for mate in self._mates:
             items.append(mate)
+
+        # If high-flow, nothing else
+        if player["high_flow"]:
+            return items
 
         # If allowed, the collectorship can be replayed (pre-derelictreaper)
         if ALLOW_COLLECTORSHIP_REPLAY and achievements.collectorship.state == "started":

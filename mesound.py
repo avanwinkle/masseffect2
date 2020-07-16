@@ -238,7 +238,7 @@ class SoundManager():
                 self._analysis['orphaned'].append(filepath)
             else:
                 expectedpath = "./modes/{}/sounds/{}/{}".format(
-                    mode.name, mode.find_track_for_sound(filename), filename)
+                    self.machine_configs.get_mode_parent(mode.name), mode.find_track_for_sound(filename), filename)
                 if filepath != expectedpath:
                     self.log.info("{} is in the wrong place. Expected {}".format(filepath, expectedpath))
                     self._analysis['misplaced'][expectedpath] = filepath
@@ -521,10 +521,12 @@ class RequiredSounds(object):
 
         # Wait until all configs have been imported, because load order is unpredictable
         for configfilename in self._configparents:
+            print("Configfilename {} is a parent? {}".format(configfilename, self._configparents[configfilename]))
             if configfilename in self._allconfigs:
                 self._childconfigs[configfilename] = self._allconfigs[configfilename]
                 # TODO: Allow the sounds to exist in their child modes and zip up to parents later
-                del self._allconfigs[configfilename]
+                # Commenting this line after the YamlParser change stopped importing child yaml sounds
+                # del self._allconfigs[configfilename]
 
     def get_all_configs(self):
         """Return all configs mapped by the MPF machine project."""

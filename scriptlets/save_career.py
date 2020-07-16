@@ -13,7 +13,7 @@ PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
     "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
     "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
-    "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
+    "high_flow", "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
     "trophies", "total_ball_time")
 
 ACHIEVEMENT_MISSIONS = (
@@ -49,6 +49,8 @@ class SaveCareer(CustomCode):
             if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
+                # Until we have a menu option, always set high-flow
+                player["high_flow"] = 1
                 # Duplicate events, we may have already set this
                 if not player["mineral_iridium"] :
                     for mineral in ["iridium", "palladium", "platinum"]:
@@ -224,6 +226,7 @@ class SaveCareer(CustomCode):
         player = self.machine.game.player
         # Set a difficulty
         player.difficulty = kwargs.get("difficulty")
+        player.high_flow = kwargs.get("high_flow")
         player.career_name = kwargs.get("career_name")
         # All we have to do is set a new career_started time
         player.career_started = datetime.now().timestamp()

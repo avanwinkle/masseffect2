@@ -35,6 +35,7 @@
 #      - Tech cooldown: accelerate awarding of powers [EEZO]
 
 import logging
+import random
 from mpf.modes.carousel.code.carousel import Carousel
 
 PERKS = ["award_medigel_bool", "double_medigel_bool", "ball_save_period",
@@ -51,8 +52,21 @@ class Store(Carousel):
 
     def mode_start(self, **kwargs):
         self._all_items = self.machine.game.player["store_options"].split("|")
-        self._all_items.append("nothing")
 
+        # For high-flow mode, pick an item at random and purchase it
+        if self.machine.game.player["high_flow"]:
+            self.log.debug("Store is in high-flow, randomly selecting an item")
+            self._items = [random.choice(self._all_items)]
+            self._select_item()
+            # Play an event for the sound
+            # TODO: Create slides that show what item was purchased, using
+            # this event and the existing codex images. Put it in global so
+            # it can display after store closes.
+            self.machine.events.post("store_high_flow_skip", purchase=self._items[0])
+            self.machine.events.post("mode_store_will_stop")
+            return
+        
+        self._all_items.append("nothing")
         super().mode_start(**kwargs)
         self.log.debug("Store is starting")
         self.machine.events.post("store_{}_highlighted".format(self._all_items[0]))

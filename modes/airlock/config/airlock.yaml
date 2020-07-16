@@ -55,9 +55,11 @@ event_player:
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
   # Fire the hold post to capture a ball
   s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled}:
-    - fire_hold_post
+    - fire_hold_post{current_player.high_flow==0}
+    - start_mode_missionselect{current_player.high_flow==1}
   recruit_lit{squadmate=="garrus" or squadmate=="samara"}:
-    - fire_hold_post
+    - fire_hold_post{current_player.high_flow==0}
+    - start_mode_missionselect{current_player.high_flow==1}
 
 queue_event_player:
   # Previously relayed on the locked_ball, but still escaped. Added eject_attempt on the trough,
@@ -70,13 +72,13 @@ queue_event_player:
   #   events_when_finished: advance_fmball_lock
 
 queue_relay_player:
-  mode_missionselect_starting:
+  mode_missionselect_starting{not current_player.high_flow}:
     post: check_slide_queue
     wait_for: slide_queue_clear
-  mode_store_starting:
+  mode_store_starting{not current_player.high_flow}:
     post: check_slide_queue
     wait_for: slide_queue_clear
-  fmball_checking_store:
+  fmball_checking_store{not current_player.high_flow}:
     post: fmball_check_store
     wait_for: store_complete
 
