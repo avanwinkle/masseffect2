@@ -4,6 +4,9 @@ config:
 - keyboard.yaml
 # - keyboard_colorpicker.yaml
 
+auditor: 
+  disable: true
+
 smart_virtual:
   console_log: basic
   file_log: basic
@@ -25,7 +28,7 @@ kivy_config:
 
 logging:
   file:
-    asset_manager: none
+    # asset_manager: full
     sound_player: none
     sounds: none
     sound: none
@@ -568,18 +571,21 @@ sound_system:
     voice:
       priority: 2
       simultaneous_sounds: 1
-      preload: true
+      #preload: true
       volume: 0.7
     sfx:
       simultaneous_sounds: 7
       volume: 0.5
-      preload: true
+      #preload: true
       priority: 1
     levelup:
       simultaneous_sounds: 1
       volume: 0.5
 
 assets:
+  images:
+    default:
+      load: on_demand
   sounds:
     default:
       track: sfx
@@ -596,6 +602,9 @@ assets:
       # load: mode_start
     levelup:
       track: levelup
+      load: on_demand
+  videos:
+    default:
       load: on_demand
 
 animations:

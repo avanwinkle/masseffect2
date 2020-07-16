@@ -1125,6 +1125,7 @@ sounds:
       track: voice
     miranda_watch_out:
       file: en_us_hench_vixen_ss_global_hench_vixen_00310094_m.ogg
+      track: voice
   # Hit a ball lock/hold, squadmates confirm cover
     garrus_grabbing_cover:
       file: en_us_hench_garrus_ss_global_hench_garrus_00303052_m.ogg
