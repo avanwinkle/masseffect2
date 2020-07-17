@@ -126,6 +126,14 @@ settings:
     values:
       0: "Disabled"
       1: "Enabled"
+  casual_flow:
+    label: "Casual Play Style"
+    sort: 70
+    key_type: int
+    default: 0
+    values:
+      0: "Normal"
+      1: "High-Flow"
 
 slide_player:
   init_done:
