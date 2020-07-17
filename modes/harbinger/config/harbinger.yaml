@@ -281,5 +281,5 @@ sounds:
     file: en_us_global_collector_general_endgm2_collector_reaper_c_00346713_m.ogg # "You are no longer relevant"
   harbinger_you_have_failed:
     file: en_us_global_collector_general_endgm2_collector_reaper_c_00349248_m.ogg # You have failed
-
+    track: voice
 
