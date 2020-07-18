@@ -1,13 +1,13 @@
 data/
 *.ogg
 _*
+.*
 logs
 savegames
-.mesound_path
 *.mp4
 analytics
-mesound_exports
-mesound_conversion
+mpfam_exports/
+mpfam_exports.zip
+mpfam_resample/
 masseffect2.sublime-workspace
 videos
-.vscode
