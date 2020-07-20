@@ -1,2 +1,3 @@
 #!/bin/bash
-qterminal -w /home/shepard/masseffect2 -e "mpf both -t -c config,fullscreen"
+# Script for running a dev build (VIRTUAL platform) on an embedded machine
+python -m mpf both ~/masseffect2 -x -t -c config,production

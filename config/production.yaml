@@ -1,0 +1,17 @@
+#config_version=5
+
+# Production configuration for Mass Effect pinball machines.
+# Don't use fullscreen: true because Arch+FluxBox SDL will
+# glitch on the custom resolution. Instead, use explicit
+# height and width to match the native display.
+
+window:
+    title: Mass Effect 2
+    resizable: false
+    width: 1280
+    height: 480
+    left: 0
+    right: 0
+    borderless: yes
+    source_display: window
+    exit_on_escape: false
