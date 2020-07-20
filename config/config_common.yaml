@@ -2,10 +2,6 @@
 config:
 - hardware_common.yaml
 - keyboard.yaml
-# - keyboard_colorpicker.yaml
-
-auditor: 
-  disable: true
 
 smart_virtual:
   console_log: basic
@@ -28,7 +24,6 @@ kivy_config:
 
 logging:
   file:
-    # asset_manager: full
     sound_player: none
     sounds: none
     sound: none
