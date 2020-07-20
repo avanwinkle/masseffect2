@@ -49,7 +49,7 @@ class SaveCareer(CustomCode):
             if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
-                player["high_flow"] = self.machine.settings.get_setting_value("casual_flow", 0)
+                player["high_flow"] = self.machine.settings.get_setting_value("casual_flow")
                 # Duplicate events, we may have already set this
                 if not player["mineral_iridium"] :
                     for mineral in ["iridium", "palladium", "platinum"]:
