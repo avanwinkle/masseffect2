@@ -213,7 +213,7 @@ switches:
   s_kickback:
     number: 10-14 # Restored 8-7 # 10-14 Moved
     ignore_window_ms: 400
-    tags: switch_hold_en
+    tags: switch_hold_en, s_airlock_entrance
   s_tenpoints:
     number: 9-12
   s_lock_1:
@@ -246,11 +246,83 @@ light_stripes:
     count: 14
     light_template:
       tags: light_backwall_ambient
+  gi_top:
+    number_start: 130
+    number_template: 1-{}
+    count: 4
+    light_template:
+      tags: gi
+      type: rgb
+  gi_middle:
+    number_start: 134
+    number_template: 1-{}
+    count: 5
+    light_template:
+      tags: gi
+      type: rgb
+  gi_bottom:
+    number_start: 140
+    number_template: 1-{}
+    count: 9
+    light_template:
+      tags: gi
+      type: rgb
+  l_ladder:
+    number_start: 150
+    number_template: 0-{}
+    count: 10
+    light_template:
+      tags: light_pf, light_ladder
+      type: grb
+      default_on_color: fbc795 # color_ui_orange
+
+light_rings:
+  l_left_orbit_ring:
+    number_start: 205
+    number_template: 1-{}
+    count: 6
+    light_template:
+      tags: light_lane_left_orbit
+      type: grb
+  l_kickback_ring:
+    number_start: 212
+    number_template: 1-{}
+    count: 6
+    light_template:
+      tags: light_lane_kickback
+      type: grb
+  l_left_ramp_ring:
+    number_start: 219
+    number_template: 1-{}
+    count: 6
+    light_template:
+      tags: light_lane_left_ramp
+      type: grb
+  l_right_ramp_ring:
+    number_start: 226
+    number_template: 1-{}
+    count: 6
+    light_template:
+      tags: light_lane_right_ramp
+      type: grb
+  l_right_orbit_ring:
+    number_start: 233
+    number_template: 1-{}
+    count: 6
+    light_template:
+      tags: light_lane_right_orbit
+      type: grb
+  l_omega_relay:
+    number_start: 234
+    number_template: 0-{}
+    count: 12
+    light_template:
+      type: grb
 
 lights:
   l_null:
     number: 1-3
-    tags: light_bbsquad_jacob, light_bbsquad_miranda
+    tags: light_bbsquad_jacob, light_bbsquad_miranda, light_bbsquad, l_progress_collectorship, l_progress_normandy, l_progress_derelictreaper
   l_backbox:
     number: 0-0
     tags: backbox
@@ -348,10 +420,10 @@ lights:
     tags: outer_circles, light_bbsquad_samara
   l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
     number: 9-40
-    tags: lane_wedges, light_extraball
+    tags: lane_wedges, light_extraball, l_store
   l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
     number: 9-39
-    tags: light_shadowbroker_start, light_store, lane_wedges
+    tags: light_shadowbroker_start, light_store, lane_wedges, l_kickback_arrow
   l_kickback_arrow_red: # Kickback Lane Arrow (Red) [#50]
     number: 9-41
     tags: lane_arrows, light_firewalker, light_firewalker_kickback, light_alarm_kickback
@@ -360,10 +432,10 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_left_orbit, light_alarm_left_orbit
   l_left_outlane: # Left Outlane [#11]
     number: 9-32
-    tags: l_outlane, light_medigel
+    tags: l_outlane, light_medigel, l_left_medigel
   l_left_ramp_arrow_clear: # Left Ramp Arrow (Clear) [#53]
     number: 10-16
-    tags: lane_wedges, light_missionselect
+    tags: lane_wedges, light_missionselect, l_left_ramp_arrow
   l_left_ramp_arrow_green: # Left Ramp Arrow (Green) [#54]
     number: 10-17
     tags: light_lock_lit, lane_wedges
@@ -389,13 +461,13 @@ lights:
     tags: lane_arrows, light_firewalker, light_firewalker_right_orbit, light_alarm_right_orbit
   l_right_outlane: # Right Outlane [#34]
     number: 8-1
-    tags: l_outlane, outer_circles, light_medigel
+    tags: l_outlane, outer_circles, light_medigel, l_right_medigel
   l_right_ramp_arrow_red: # Right Ramp Arrow (Red) [#69]
     number: 9-18
     tags: lane_arrows, light_firewalker, light_firewalker_right_ramp, light_alarm_right_ramp
   l_right_ramp_arrow_yellow: # Right Ramp Arrow (Yellow) [#65]
     number: 9-17
-    tags: lane_wedges, light_upgrades
+    tags: lane_wedges, light_upgrades, l_right_ramp_arrow
   l_right_return_lane: # Right Return Lane [#33]
     number: 8-0
     tags: l_return_lane, outer_circles
@@ -463,7 +535,7 @@ lights:
         number: 9-24
       blue:
         number: 9-25
-    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane
+    tags: shot_shields, lane_shields, shot_shield_kasumi, shot_shield_thane, light_lane_right_ramp
   l_action_button_rgb: # Lockdown R [#4]
     type: rgb
     channels:
@@ -483,7 +555,7 @@ lights:
         number: 10-24
       blue:
         number: 10-25
-    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, light_lock_entrance
+    tags: shot_shields, lane_shields, shot_shield_garrus, shot_shield_samara, light_lock_entrance, light_lane_left_ramp
   l_left_orbit_shield_rgb: # Left Loop Sigil R [#40]
     type: rgb
     channels:
@@ -493,7 +565,7 @@ lights:
         number: 10-10
       blue:
         number: 10-11
-    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed
+    tags: shot_shields, lane_shields, shot_shield_grunt, shot_shield_zaeed, light_lane_left_orbit
   l_kickback_shield_rgb: # Kickback Sigil R [#47]
     type: rgb
     channels:
@@ -503,7 +575,7 @@ lights:
         number: 9-46
       blue:
         number: 9-47
-    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion
+    tags: shot_shields, lane_shields, shot_shield_jack, shot_shield_legion, light_lane_kickback
   l_dropbank_shield_rgb: # Left Bank Sigil R [#16]
     type: rgb
     channels:
@@ -523,7 +595,7 @@ lights:
         number: 9-27
       blue:
         number: 9-28
-    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali
+    tags: shot_shields, lane_shields, shot_shield_mordin, shot_shield_tali, light_lane_right_orbit
 
 coils:
   c_flipper_left_main:

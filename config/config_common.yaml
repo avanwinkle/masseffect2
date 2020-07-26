@@ -24,6 +24,7 @@ kivy_config:
 
 logging:
   file:
+    asset_manager: none
     sound_player: none
     sounds: none
     sound: none

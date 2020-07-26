@@ -435,3 +435,5 @@ widgets:
       y: 8
       color: 000000
       z: 9
+  # UNTESTED Widgets for Spike compliance
+  volume_widget: []
