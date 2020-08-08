@@ -64,6 +64,7 @@ class SaveCareer(CustomCode):
                             player["achievements"]["overlord"] = "stopped"
                     starting_recruit = SquadmateStatus.random_recruit()
                     player["status_{}".format(starting_recruit)] = 3
+                    player["available_missions"] = 1
             else:
                 # Text input char_list prevents spaces in custom profiles, so this should be safe
                 player["casual"] = 0

@@ -318,6 +318,13 @@ light_rings:
     count: 12
     light_template:
       type: grb
+  l_mass_relay:
+    number_start: 149
+    number_template: 1-{}
+    count: 12
+    light_template:
+      tags: light_mass_relay
+      type: grb
 
 lights:
   l_null:

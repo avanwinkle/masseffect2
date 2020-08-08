@@ -48,11 +48,20 @@ timers:
     start_running: true
 
 show_player:
-  mode_missionselect_started: missionselect_show
+  mode_missionselect_started:  
+    missionselect_show: {}
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: 1166FF  # color_paragon
+        fade: 250ms
   mode_missionselect_will_stop:
     missionselect_show:
       action: stop
     missionselect_highlight_show:
+      action: stop
+    led_12_chase_pulse:
       action: stop
   missionselect_recruitmission_selected:
     led_10_chase_delay:
@@ -126,6 +135,13 @@ show_player:
       show_tokens:
         color: FF0000
         fadetime: 20ms
+    # Turn the mass relay red
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: 090000  # color_paragon
+        fade: 250ms
 
 shows:
   missionselect_show:

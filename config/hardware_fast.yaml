@@ -364,6 +364,13 @@ light_rings:
     count: 12
     light_template:
       type: grb
+  l_mass_relay:
+    number_start: 46
+    number_template: 0-{}
+    count: 12
+    light_template:
+      tags: light_mass_relay
+      type: grb
 
 light_stripes:
   l_backwall_gi:
@@ -381,8 +388,8 @@ light_stripes:
       tags: light_backwall_ambient
       type: grb
   l_ladder:
-    number_start: 46
-    number_template: 0-{}
+    number_start: 53
+    number_template: 1-{}
     count: 10
     light_template:
       tags: light_pf, light_ladder

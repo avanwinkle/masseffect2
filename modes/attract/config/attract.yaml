@@ -7,6 +7,14 @@ event_player:
     - start_suicide_main|29245ms
 
 show_player:
+  mode_attract_started:
+    led_12_chase_pulse:
+      key: mass_relay
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: 0B0000  # color_paragon
+        fade: 250ms
   # mode_attract_started:
   #   ladder_timer:
   #     action: play
