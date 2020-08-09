@@ -663,7 +663,11 @@ widgets:
       video: recruitintro_grunt
   portrait_recruit_intro_jack:
     - type: video
-      video: recruitintro_jack
+      video: recruitjack_warden_sniping
+  portrait_recruit_jack_findjack:
+    - type: video
+      video : recruitjack_jackattack
+      z: 100
   portrait_recruit_intro_kasumi:
     - type: image
       image: portrait_recruitkasumi

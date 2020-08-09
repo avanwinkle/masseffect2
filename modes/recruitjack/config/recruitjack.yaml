@@ -93,14 +93,26 @@ shows:
       sounds:
         warden_start:
           action: play
-    - time: 5s
+    - time: 6s
       events: mission_intro_complete
-    - time: 8200ms
+    - time: 7300ms
       slides:
         recruit_instructions_slide:
           action: remove
-        recruit_intro_portrait:
+      widgets:
+        portrait_recruit_intro_jack:
           action: remove
+  show_find_jack:
+    - time: 0
+      sounds:
+        warden_find_jack:
+          action: play
+          max_queue_time: 3s
+          priority: 100
+      widgets:
+        portrait_recruit_jack_findjack:
+          slide: recruit_portrait_slide
+    - time: 4440ms
 
 show_player:
   mode_recruitjack_started:
@@ -110,13 +122,12 @@ show_player:
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
+    show_find_jack:
+      loops: 0
+  
 
 sound_player:
-  power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
-    jack_shot_hit_sound:
-      action: play
-      max_queue_time: 1s
-      priority: 100
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
     jack_shot_hit_sound:
       action: play
@@ -137,9 +148,10 @@ sound_player:
       action: play
       max_queue_time: 1s
       priority: 100
-  mission_intro_complete:
+  mode_recruitjack_started:
     music_recruit_jack_1:
       action: play
+      fade_in: 4s
   play_music_recruit_jack_2:
     music_recruit_jack_2:
       action: play
@@ -166,6 +178,9 @@ sounds:
     mode_end_action: stop
   warden_start:
     file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.ogg
+    track: voice
+  warden_find_jack:
+    file: en_us_prscva_warden_prscva_warden_pa_a_00254122_m.ogg
     track: voice
   warden_guards_1:
     file: en_us_prscva_warden_prscva_warden_pa_a_00254121_m.ogg
