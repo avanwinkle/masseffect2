@@ -232,6 +232,13 @@ slides:
   recruit_instructions_portrait_slide:
     widgets:
       - widget: portrait_recruit_intro_(squadmate)
+  # Recruit completes require their own slides, since they use shows for video duration
+  recruit_complete_portrait_slide_jack:
+    - type: video
+      video: recruitjack_complete
+    # Include the image underneath, which is already cached, to prevent black during asset loading
+    - type: image
+      image: portrait_recruitjack
   # Core slides
   1player_score_slide:
     - type: text
@@ -671,19 +678,19 @@ widgets:
   portrait_recruit_jack_jackattack:
     - type: video
       video: recruitjack_jackattack
-      z: 100
+      z: 101
   portrait_recruit_jack_approach:
     - type: video
       video: recruitjack_approach
-      z: 100
+      z: 102
   portrait_recruit_jack_valuable_shepard:
     - type: video
       video: recruitjack_valuable_shepard
-      z: 100
+      z: 103
   portrait_recruit_jack_not_happening:
     - type: video
       video: recruitjack_not_happening
-      z: 100
+      z: 104
   portrait_recruit_intro_kasumi:
     - type: image
       image: portrait_recruitkasumi

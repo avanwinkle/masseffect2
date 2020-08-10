@@ -584,7 +584,7 @@ sound_system:
       priority: 1
     levelup:
       simultaneous_sounds: 1
-      volume: 0.5
+      volume: 1.0
 
 assets:
   images:

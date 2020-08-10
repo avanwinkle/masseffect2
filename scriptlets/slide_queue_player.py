@@ -26,7 +26,7 @@ class SlideQueuePlayer(CustomCode):
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
         self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
-        self.log.info("slide Queue Player Ready!")
+        self.log.info("Slide Queue Player Ready!")
 
     def _add_slide_to_queue(self, **kwargs):
         slide_name = kwargs.pop("slide")
@@ -48,7 +48,7 @@ class SlideQueuePlayer(CustomCode):
                     "expire": expire,
                     "action": "play",
                     "target": slide_kwargs.get("target", None),
-                    "priority": 1000 + self._play_count,
+                    "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
                     "tokens": slide_kwargs.get("tokens", None),
                     'transition': {
                         "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
@@ -85,7 +85,7 @@ class SlideQueuePlayer(CustomCode):
             "expire": expire,
             "action": "play",
             "target": "lcd_right",
-            "priority": 1000 + self._play_count,
+            "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
             "tokens": slide_kwargs.get("tokens", None),
             'transition': {
                 "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),

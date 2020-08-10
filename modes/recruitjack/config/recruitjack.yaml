@@ -106,7 +106,7 @@ shows:
           action: play
     - time: 6s
       events: mission_intro_complete
-    - time: 7300ms
+    - time: 6170ms
       slides:
         recruit_instructions_slide:
           action: remove
@@ -123,7 +123,10 @@ shows:
       widgets:
         portrait_recruit_jack_awakening:
           slide: recruit_portrait_slide
-    - time: 7230ms
+      # Just in case the intro show is still playing
+        portrait_recruit_intro_jack:
+          action: remove
+    - time: 7600ms
   show_jackattack:
     - time: 0
       sounds:
@@ -145,7 +148,7 @@ shows:
       widgets:
         portrait_recruit_jack_approach:
           slide: recruit_portrait_slide
-    - time: 6333ms
+    - time: 6400ms
   show_valuable_shepard:
     - time: 0
       sounds:
@@ -156,7 +159,7 @@ shows:
       widgets:
         portrait_recruit_jack_valuable_shepard:
           slide: recruit_portrait_slide
-    - time: 6370ms
+    - time: 5440ms
   show_not_happening:
     - time: 0
       widgets:
@@ -168,7 +171,7 @@ shows:
           action: play
           max_queue_time: 2s
           priority: 100
-    - time: 5100ms
+    - time: 5140ms
 
 show_player:
   mode_recruitjack_started:
@@ -177,30 +180,29 @@ show_player:
       manual_advance: True
   show_recruit_instructions:
     recruitintro_jack:
-      key: jack_show
       loops: 0
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
     show_find_jack:
-      key: jack_show
       loops: 0
   logicblock_jack_rounds_counter_hit{count==2}:
     show_jackattack:
-      key: jack_show
       loops: 0
+    show_find_jack:
+      action: stop
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
     show_approach:
-      key: jack_show
       loops: 0
+    show_jackattack:
+      action: stop
   logicblock_jack_rounds_counter_hit{count==1}:
     show_valuable_shepard:
-      key: jack_show
       loops: 0
+    show_approach:
+      action: stop
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==1}:
     show_not_happening:
-      key: jack_show
       loops: 0
-  mode_recruitjack_will_stop:
-    jack_show:
+    show_valuable_shepard:
       action: stop
 
 sound_player:

@@ -257,8 +257,10 @@ class MPFSquadmateHandlers(CustomCode):
             1 + (self.machine.variables.get_machine_var("bonus_xp") if kwargs.get("under_par") else 0))
 
         self.machine.events.post("levelup",
-                                 mission_name="{} Recruited".format(mate),
-                                 portrait="squadmate_{}_complete".format(mate))
+                                 mission_name="{} Recruited".format(mate)
+                                # Disabling portrait so global can play shows with video
+                                #  portrait="squadmate_{}_complete".format(mate))
+                                )
         self.machine.events.post("recruit_success", squadmate=mate, status=4)
         self.machine.events.post("set_recruiticon_complete", squadmate=mate)
         self.machine.events.post("recruit_success_{}".format(mate))

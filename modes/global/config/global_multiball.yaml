@@ -259,7 +259,7 @@ sound_player:
     archer_start:
       action: play
   #### ARRIVAL ####
-  play_arrival_hit_sound:
+  play_arrival_hit_sound{not current_player.disable_mball_light_sounds}:
     batarian_hit_sfx:
       action: play
       max_queue_time: 200ms

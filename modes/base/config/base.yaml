@@ -101,8 +101,7 @@ event_player:
     - stop_mode_instantinfo
   # Defer the awarding of points to avoid a blip in the slide.
   # Do this in base so starting missionselect won't miss it
-  recruit_advance: defer_recruit_advance_score|1s
-  levelup:
+  levelup.1:
     queue_slide:
       slide: levelup_slide
       mission_name:
@@ -111,6 +110,8 @@ event_player:
         value: portrait
         type: string
       priority: 1999 # Normandy attack runs at 2000
+      expire: 10s
+  recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
 
 ball_saves:
@@ -172,6 +173,8 @@ variable_player:
     shipupgrade_available:
       action: set
       int: 0
+    # Block the playback of field music
+    levelup_pending: 1
   # Use a variable to know whether a ship upgrade is available
   shipupgrade_available:
     available_shipupgrades: 1
@@ -203,6 +206,14 @@ variable_player:
     ball_starting_score:
       action: set
       int: current_player.score
+    # In case we drained before the last levelup finished, always reset
+    levelup_pending:
+      action: set
+      int: 0
+  levelup_complete:
+    levelup_pending:
+      action: set
+      int: 0
   play_intro_show:
     intro_played: 1
 
@@ -567,7 +578,10 @@ sound_player:
   levelup:
     music_mission_success:
       action: play
-      priority: 2 # Field music is 1, so this trumps only that
+      priority: 2 # Field music is 1, so this supercedes only that
+  levelup_complete:
+    music_mission_success:
+      action: stop
   # Whether starting a mission or game over, kill the "levelup" music if field stops
   mode_field_will_stop:
     music_mission_success:
@@ -613,8 +627,10 @@ sounds:
     file: mus_gui_mission_completion.ogg
     track: levelup # Use a special track to avoid music fadeout conflicts
     loop: 0
+    volume: 1.0
+    start_at: 1500ms
     fade_in: 500ms
-    fade_out: 10s
+    fade_out: 2s
     ducking:
       target: music
       delay: 1500ms
@@ -622,6 +638,10 @@ sounds:
       attenuation: 0
       release_point: 18s
       release: 4s
+    # As the song is finishing, bring in the field music
+    markers:
+      - time: 8s
+        events: levelup_complete
   illusive_already_compiled_dossiers_four:
     file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
     track: voice
