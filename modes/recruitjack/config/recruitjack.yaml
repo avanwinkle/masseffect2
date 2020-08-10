@@ -57,6 +57,17 @@ event_player:
     - enable_jack_shots
   logicblock_jack_rounds_counter_complete: recruit_jack_complete
 
+variable_player:
+  # Disable the multiball sounds when hitting the hitbank lit for this mode
+  power_shots_lit_hit:
+    disable_mball_light_sounds:
+      action: set
+      int: 1
+  jack_hitbank_shot_hit:
+    disable_mball_light_sounds:
+      action: set
+      int: 0
+
 counters:
   jack_rounds_counter:
     starting_count: 3
@@ -110,9 +121,54 @@ shows:
           max_queue_time: 3s
           priority: 100
       widgets:
-        portrait_recruit_jack_findjack:
+        portrait_recruit_jack_awakening:
           slide: recruit_portrait_slide
-    - time: 4440ms
+    - time: 7230ms
+  show_jackattack:
+    - time: 0
+      sounds:
+        jack_shot_hit_sound:
+          action: play
+          max_queue_time: 1s
+          priority: 100
+      widgets:
+        portrait_recruit_jack_jackattack:
+          slide: recruit_portrait_slide
+    - time: 4466ms
+  show_approach:
+    - time: 0
+      sounds:
+        warden_guards_find_shepard:
+          action: play
+          max_queue_time: 1s
+          priority: 100
+      widgets:
+        portrait_recruit_jack_approach:
+          slide: recruit_portrait_slide
+    - time: 6333ms
+  show_valuable_shepard:
+    - time: 0
+      sounds:
+        warden_shepard_1:
+          action: play
+          max_queue_time: 2s
+          priority: 100
+      widgets:
+        portrait_recruit_jack_valuable_shepard:
+          slide: recruit_portrait_slide
+    - time: 6370ms
+  show_not_happening:
+    - time: 0
+      widgets:
+        portrait_recruit_jack_not_happening:
+          slide: recruit_portrait_slide
+    - time: 1270ms
+      sounds:
+        warden_shepard_2:
+          action: play
+          max_queue_time: 2s
+          priority: 100
+    - time: 5100ms
 
 show_player:
   mode_recruitjack_started:
@@ -121,33 +177,33 @@ show_player:
       manual_advance: True
   show_recruit_instructions:
     recruitintro_jack:
+      key: jack_show
       loops: 0
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
     show_find_jack:
+      key: jack_show
       loops: 0
-  
+  logicblock_jack_rounds_counter_hit{count==2}:
+    show_jackattack:
+      key: jack_show
+      loops: 0
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
+    show_approach:
+      key: jack_show
+      loops: 0
+  logicblock_jack_rounds_counter_hit{count==1}:
+    show_valuable_shepard:
+      key: jack_show
+      loops: 0
+  power_shots_lit_hit{device.counters.jack_rounds_counter.value==1}:
+    show_not_happening:
+      key: jack_show
+      loops: 0
+  mode_recruitjack_will_stop:
+    jack_show:
+      action: stop
 
 sound_player:
-  power_shots_lit_hit{device.counters.jack_rounds_counter.value==2}:
-    jack_shot_hit_sound:
-      action: play
-      max_queue_time: 1s
-      priority: 100
-  power_shots_lit_hit{device.counters.jack_rounds_counter.value==1}:
-    jack_shot_hit_sound:
-      action: play
-      max_queue_time: 1s
-      priority: 100
-  logicblock_jack_rounds_counter_hit{count==2}:
-    warden_shepard_1:
-      action: play
-      max_queue_time: 1s
-      priority: 100
-  logicblock_jack_rounds_counter_hit{count==1}:
-    warden_shepard_2:
-      action: play
-      max_queue_time: 1s
-      priority: 100
   mode_recruitjack_started:
     music_recruit_jack_1:
       action: play
@@ -158,8 +214,8 @@ sound_player:
 
 sound_pools:
   jack_shot_hit_sound:
-    sounds: warden_guards_1, warden_guards_2, warden_guards_3
-    type: random_force_all
+    sounds: warden_guards_1, warden_guards_2
+    type: random
     track: voice
 
 sounds:
@@ -188,7 +244,7 @@ sounds:
   warden_guards_2:
     file: en_us_prscva_warden_prscva_warden_pa_a_00254124_m.ogg
     track: voice
-  warden_guards_3:
+  warden_guards_find_shepard:
     file: en_us_prscva_warden_prscva_warden_pa_a_00271737_m.ogg
     track: voice
   warden_shepard_1:

@@ -664,9 +664,25 @@ widgets:
   portrait_recruit_intro_jack:
     - type: video
       video: recruitjack_warden_sniping
-  portrait_recruit_jack_findjack:
+  portrait_recruit_jack_awakening:
     - type: video
-      video : recruitjack_jackattack
+      video : recruitjack_awakening
+      z: 100
+  portrait_recruit_jack_jackattack:
+    - type: video
+      video: recruitjack_jackattack
+      z: 100
+  portrait_recruit_jack_approach:
+    - type: video
+      video: recruitjack_approach
+      z: 100
+  portrait_recruit_jack_valuable_shepard:
+    - type: video
+      video: recruitjack_valuable_shepard
+      z: 100
+  portrait_recruit_jack_not_happening:
+    - type: video
+      video: recruitjack_not_happening
       z: 100
   portrait_recruit_intro_kasumi:
     - type: image

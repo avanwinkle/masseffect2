@@ -227,7 +227,7 @@ slides:
 
 sound_player:
   #### OVERLORD ####
-  play_overlord_hit_sound:
+  play_overlord_hit_sound{not current_player.disable_mball_light_sounds}:
     geth_hit_sfx:
       action: play
       max_queue_time: 200ms
