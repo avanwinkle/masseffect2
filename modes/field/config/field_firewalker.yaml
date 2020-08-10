@@ -117,24 +117,3 @@ show_player:
         key: fw_complete_ro
         show_tokens:
           ledring: l_right_orbit_ring
-
-shows:
-  fw_packet_show:
-    - lights:
-        (ledring)_light_1: color_door_red%1
-        (ledring)_light_3: color_door_red%1
-        (ledring)_light_5: color_door_red%1
-    - lights:
-        (ledring)_light_1: color_door_orange%5
-        (ledring)_light_3: color_door_orange%5
-        (ledring)_light_5: color_door_orange%5
-    - lights:
-        (ledring)_light_1: color_door_green%10
-        (ledring)_light_3: color_door_green%10
-        (ledring)_light_5: color_door_green%10
-  fw_complete_show:
-    - lights:
-        # ...can't figure out anything that looks good :(
-        (ledring)_light_1: off
-        (ledring)_light_3: off
-        (ledring)_light_5: off

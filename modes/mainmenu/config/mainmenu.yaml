@@ -154,12 +154,12 @@ shows:
       lights:
         gi:
           color: color_shields
-        l_backwall_ambient:
+        light_backwall_ambient:
           color: red
           fade: 3s
     - duration: 3s
       lights:
-        l_backwall_ambient:
+        light_backwall_ambient:
           color: blue
           fade: 3s
 

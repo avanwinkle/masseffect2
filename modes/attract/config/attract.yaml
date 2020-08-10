@@ -7,14 +7,14 @@ event_player:
     - start_suicide_main|29245ms
 
 show_player:
-  # mode_attract_started:
-  #   led_12_chase_pulse:
-  #     key: mass_relay
-  #     speed: 4
-  #     show_tokens:
-  #       ledring: l_mass_relay
-  #       color: 0B0000  # color_paragon
-  #       fade: 250ms
+  mode_attract_started:
+    led_12_chase_pulse:
+      key: mass_relay
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: 0B0000  # color_paragon
+        fade: 250ms
   # mode_attract_started:
   #   ladder_timer:
   #     action: play
@@ -22,25 +22,25 @@ show_player:
   #     speed: 2
   #     start_running: False
   #     start_step: 12
-  # attract_music_started:
-  #   # attract_sm_track:
-  #   #   loops: -1
-  #   #   speed: 0.278
-  #   #   action: play
-  #   # led_12_chase_duo:
-  #   #   loops: -1
-  #   #   speed: 8
-  #   #   show_tokens:
-  #   #     ledring: l_omega_relay
-  #   #     color: 0B0000
-  #   #     fade: 125ms
-  #   explode_center:
-  #     speed: 20
-  #     loops: -1
-  #   attract_sm_flash_soft:
-  #     loops: -1
-  #     speed: 1
-  #     action: play
+  attract_music_started:
+    # attract_sm_track:
+    #   loops: -1
+    #   speed: 0.278
+    #   action: play
+    led_12_chase_duo:
+      loops: -1
+      speed: 8
+      show_tokens:
+        ledring: l_omega_relay
+        color: 0B0000
+        fade: 125ms
+    explode_center:
+      speed: 20
+      loops: -1
+    attract_sm_flash_soft:
+      loops: -1
+      speed: 1
+      action: play
   attract_music_main:
     attract_sm_full:
       loops: -1

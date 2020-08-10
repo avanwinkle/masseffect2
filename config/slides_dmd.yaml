@@ -259,6 +259,10 @@ widgets:
       width: 42
       height: 24
   missionselect_count_widget: []
+  missionselect_timer_widget:
+    - type: text
+      text: (missionselect_missionselect_timer_tick)
+      style: header_xs, row_top, col_right_anchor, color_ui_yellow
   n7_logo:
     - type: image
       image: n7_logo_33x11
