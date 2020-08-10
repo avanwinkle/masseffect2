@@ -7,12 +7,12 @@ modes:
   - lockhandler
 
 spike:
-  port: /dev/tty.usbserial-FTA6MU05
+  port: /dev/cu.usbserial-FTA6MU05
   flow_control: true
   baud: 115200
-  runtime_baud: 2500000
+  runtime_baud: 115200 # 2500000
   debug: true
-  # file_log: full
+  file_log: full
   nodes: 0, 1, 8, 9, 10
   wait_times:
     65: 32
@@ -252,28 +252,28 @@ light_stripes:
     count: 4
     light_template:
       tags: gi
-      type: rgb
+      # type: rgb
   gi_middle:
     number_start: 134
     number_template: 1-{}
     count: 5
     light_template:
       tags: gi
-      type: rgb
+      # type: rgb
   gi_bottom:
     number_start: 140
     number_template: 1-{}
     count: 9
     light_template:
       tags: gi
-      type: rgb
+      # type: rgb
   l_ladder:
     number_start: 150
     number_template: 0-{}
     count: 10
     light_template:
       tags: light_pf, light_ladder
-      type: grb
+      # type: grb
       default_on_color: fbc795 # color_ui_orange
 
 light_rings:
@@ -283,48 +283,49 @@ light_rings:
     count: 6
     light_template:
       tags: light_lane_left_orbit
-      type: grb
+      # type: grb
   l_kickback_ring:
     number_start: 212
     number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_kickback
-      type: grb
+      # type: grb
   l_left_ramp_ring:
     number_start: 219
     number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_left_ramp
-      type: grb
+      # type: grb
   l_right_ramp_ring:
     number_start: 226
     number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_right_ramp
-      type: grb
+      # type: grb
   l_right_orbit_ring:
     number_start: 233
     number_template: 1-{}
     count: 6
     light_template:
       tags: light_lane_right_orbit
-      type: grb
+      # type: grb
   l_omega_relay:
     number_start: 234
     number_template: 0-{}
     count: 12
     light_template:
-      type: grb
+      tags: light_omega_relay
+      # type: grb
   l_mass_relay:
     number_start: 149
     number_template: 1-{}
     count: 12
     light_template:
       tags: light_mass_relay
-      type: grb
+      # type: grb
 
 lights:
   l_null:

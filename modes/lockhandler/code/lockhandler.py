@@ -70,7 +70,7 @@ class LockHandler(Mode):
 
         # We need a pointer to the suicide transition ball hold to avoid bypassing during phase transitions
         ball_holds = self.machine.device_manager.get_monitorable_devices().get("ball_holds")
-        self._transition_hold = ball_holds["suicide_transition_hold"]
+        self._transition_hold = ball_holds["suicide_hold"]
 
         self._register_handlers()
 

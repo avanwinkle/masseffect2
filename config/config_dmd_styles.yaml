@@ -1,5 +1,21 @@
 #config_version=5
 widget_styles:
+  # COLORS
+  #---------------------------
+  color_ui_yellow:
+    color: f3dc90
+  color_ui_orange_dark:
+    color: 8f541c
+  color_ui_orange:
+    color: fbc795 # 0.984, 0.78, 0.584
+  color_ui_green_dark:
+    color: 5b8c55
+  color_ui_green:
+    color: 5bff63
+  color_ui_green_light:
+    color: c4fe8d
+  color_ui_green_strong:
+    color: 2adb23 # 0.165, 0.859, 0.137
 
   # TEXT FORMATS
   #----------------------------
