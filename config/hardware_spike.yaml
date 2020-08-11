@@ -81,6 +81,13 @@ named_colors:
   dropbank_color_shadowbroker: ffffff
   color_kasumi_alarm: ffffff
   color_normandy_attack: "220000"
+  color_ui_yellow: f3dc90
+  color_ui_orange_dark: 8f541c
+  color_ui_orange: fbc795
+  color_ui_green_dark: 5b8c55
+  color_ui_green: 5bff63
+  color_ui_green_light: c4fe8d
+  color_ui_green_strong: 2adb23
 
 switches:
   s_start_button:

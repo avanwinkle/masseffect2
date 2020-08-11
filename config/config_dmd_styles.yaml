@@ -295,6 +295,14 @@ widget_styles:
     anchor_x: left
     x: 46
 
+  # CODEX ON THE RIGHT SCREEN
+  codex_title:
+    opacity: 0
+  codex_image:
+    opacity: 0
+  codex_text:
+    opacity: 0
+
   # POWERS POSITIONS
   #---------------------------
   power_combat:
