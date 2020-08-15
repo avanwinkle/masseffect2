@@ -28,6 +28,7 @@ logging:
     sound_player: none
     sounds: none
     sound: none
+  console: {}
 
 text_ui:
   machine_vars:
