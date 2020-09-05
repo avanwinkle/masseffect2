@@ -113,7 +113,7 @@ At various points in the game, special missions will become available which pres
 
 * The Collector Attack
 
-  Follow the emergency lighting and avoid Collector forces as you make your way towards an escape in this dark survival mission.
+  Follow the Normandy's emergency lighting and avoid Collector forces as you make your way towards an escape in this dark survival mission.
 
 ### The Suicide Mission
 Advance far enough in ME2 Pinball to unlock the Suicide Mission, a multi-part wizard mode that pits you and your squad against the toughest challenges ever faced.

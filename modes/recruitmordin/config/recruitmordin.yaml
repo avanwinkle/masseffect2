@@ -3,8 +3,8 @@
 #####
 # MORDIN RECRUITMENT MISSION
 #
-# This mode begins with the spinner lit to build value. The first hit to the
-# spinner lights the right orbit, hitting the orbit lights both ramps to
+# This mode begins with the spinner/left orbit lit to build value. The first hit
+# to the spinner lights the right orbit, hitting the orbit lights both ramps to
 # activate the two ventilation fans. Additional spinner hits will continue to
 # build value, each additional hit to the orbit increases the built value
 # multiplier 1x.  Once both ramps are hit the mission is completed and the score
@@ -34,7 +34,7 @@ event_player:
       env: bloodback
       persist_name: recruitmordin
       shots_total: 4
-      is_resumable: 1
+      is_resumable: 0
       shots_remaining:
         value: device.counters.cure_counter.value
         type: int

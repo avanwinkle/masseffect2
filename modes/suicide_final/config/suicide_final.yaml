@@ -4,7 +4,9 @@
 # SUICIDE MISSION Pt. V: THE FINAL BATTLE
 #
 # This mode is a parent mode that handles the cycling between Platforms and
-# the Human Reaper.
+# the Human Reaper. Having a parent mode allows the music to seamlessly 
+# transition and the squadmate ballsaves to persist their counts through
+# repeated attempts at the reaper.
 #####
 
 mode:

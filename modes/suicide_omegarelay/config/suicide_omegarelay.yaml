@@ -4,11 +4,13 @@
 # SUICIDE MISSION Pt. I: THE OMEGA 4 RELAY
 #
 # This mode is the first sub-mode of the Suicide Mission and is a fixed-time
-# multiball with all shots lit.
+# multiball with all shots lit. Each shot hit has a voice callout from the
+# cutscene events, and completing all of the shots before the timeout will
+# award the player an EXTRA BALL.
 #
 # There are three conditions to end the mode: all lit shots are hit, the timer
 # runs out, or all the balls drain. In all cases, this mode moves directly into
-# Infiltration mode (i.e. it cannot be failed).
+# Infiltration mode (i.e. this mode cannot be failed).
 #####
 
 mode:

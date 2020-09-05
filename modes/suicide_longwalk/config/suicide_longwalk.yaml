@@ -14,6 +14,10 @@
 # barrier and killed, and the player must re-start the mode by hitting the left-
 # lane lock.
 #
+# Excluding the first and last shots, for each biotic squadmate recruited (and
+# still alive) one shot will have a random chance of lighting two lanes instead
+# of just one. 
+#
 # If the ball drains during this mode, the biotic specialist is killed
 # and the player must select a new one at the beginning of their next ball. If
 # all biotic specialists die, the Suicide Mission fails and the player is

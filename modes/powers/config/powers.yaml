@@ -3,7 +3,7 @@
 #####
 # Powers: Global (Non-Field)
 #
-# This mode enables during recruitment missions as a "Super Jets" counter to
+# This mode enables (during recruitment missions) a "Super Jets" counter to
 # replace the N7/IFF counter that's disabled during missions. Each bumper hit
 # randomizes the powers on it or the other bumpers, and completing the count
 # awards the active power on the bumper that completes.
@@ -23,6 +23,12 @@
 # TECH ARMOR: 10 second ball save
 # COMBAT DRONE: Add-a-ball (takes 2s to activate)
 # TACTICAL CLOAK: Holding one flipper, press the other to rotate lit shots
+#
+# In order to support the specialized shot behavior of singularity, biotic
+# charge, and tactical cloak, this mode defines the core lane shots of the
+# game. Every mode that allows powers must defer to these shots in order
+# to function properly. The 'set_mission_shots' event on mode start is used
+# to configure the shot behavior.
 #####
 
 mode:

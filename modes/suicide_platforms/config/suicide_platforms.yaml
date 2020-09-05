@@ -6,7 +6,12 @@
 # This mode is the first phase of the Suicide Mission penultimate mode, which runs
 # a four-ball multiball with unlimited saves and all shots lit to build value.
 # The value built is not awarded as points, but saved as a "damage" hurryup for
-# the next phase.
+# the next phase. 
+#
+# Each hit shot will boost the timer 10s, but the mode has a maximum total duration
+# of 40s. When the timer runs out, it will switch to Phase 2 (Human Reaper) for
+# the chance to damage/kill the reaper. After that Phase times out, the game returns
+# to this phase for another chance to build up the "damage" value.
 #
 # Hurryups start at 10,000 points and reset each time a shot is hit. The Reaper
 # has 100,000 HP, so ~10 perfect hits to kill. Is that too many? Only playtesting

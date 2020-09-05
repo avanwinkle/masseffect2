@@ -3,7 +3,7 @@
 #####
 # SAMARA RECRUITMENT MISSION
 #
-# This mode begins with all standup targets lit on a hurryup, hitting a lit
+# This mode begins with all standup targets lit on a hurryup; hitting a lit
 # standup collects “intel” and builds value. After each lit standup hit, two random
 # shots are lit to pursue Morinth; each subsequent lit standup target hit lights
 # (up to) two more shots. Unlit standups continue to build value but don’t light
