@@ -30,7 +30,7 @@ More details on installing MPF are available [in the MPF Documentation](http://d
 ### Running with Config Options
 
 * **-x for virtual** The default configuration for ME2 Pinball is a homebrew FAST machine, which can be virtualized with the `-x` parameter.
-* **--no-sound for audio-free** The audio files for ME2 Pinball are extracted from Mass Effect 2 directly and are not included in the repo. To avoid missing file errors, audio can be disabled with the `--no-sound` parameter.
+* **--no-sound** The audio files for ME2 Pinball are extracted from Mass Effect 2 directly and are not included in the repo. To avoid missing file errors, audio can be disabled with the `--no-sound` parameter.
 
 Therefore, the simplest way to see ME2 in action is to run the following command from the repo folder:
 

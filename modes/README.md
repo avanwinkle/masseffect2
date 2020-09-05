@@ -270,16 +270,14 @@ is available after.
   * Collect 3 jackpots to complete the mode and the achievement
   * If the timer runs out, all lane shots "freeze" and must be reset
   * The mode ends when the balls drain down to one
-* **[Arrival](arrival/config/arrival.yaml)** is a timed multiball that runs in phases, synchronized with music.
-  * Start a music track and synchronize the start/stop of phases to markers in the music
-  * Maintain multiple multiballs with decreasing ball counts and save times
-  * Phase 1 (save 3 balls): light all lanes with compound scoring to build value
-  * Phase 2 (save 2 balls): light all targets for points to add value
-  * Phase 3 (save 1 ball): light all lanes for increasing the multiplier
-  * Phase 4 (no ball save): light the escape shot and start the hurryup
-  * If the escape shot is hit, award the complete built value, times the built multipliers
-  * If the escape shot is not hit, award a portion of the built value
-  * If the ball drains, award a smaller portion of the built value
+* **[Arrival](arrival/config/arrival.yaml)** is a frenzy multiball that runs in phases.
+  * Light a group of lanes and start a frenzy counter
+  * Hitting any lit lane switches to a different group of lanes
+  * Each hit switches between the two groups until all lanes are hit; then it all resets
+  * Throughout this, every switch hit counts towards the frenzy
+  * When the frenzy limit is completed, the lanes turn off and the ball lock enables
+  * Each ball locked awards the jackpot of the value built from lanes
+  * If the multiball drains to one ball, the jackpot lock is lit immediately
 
 * **[N7 Assignments](n7_assignments/config/n7_assignments.yaml)** are single-shot modes that
 are started automatically each time the pop bumper count is completed.
@@ -288,6 +286,12 @@ are started automatically each time the pop bumper count is completed.
   * Set a hurryup value on a timer and make a text widget show it ticking down
   * Award the hurryup value if the lit shot is hit
   * End the mode if the timer runs out
+
+  * **[Firewalker](firewalker/config/firewalker.yaml)** is a series of modes that are lit from lanes on the field. Any lane not lit with a squadmate will progress with three hits (red, orange, green) to start the next Firewalker level
+   * Each Firewalker level is a mode that runs on a timer and requires three lane shots to complete
+   * Finishing a Firewalker level "completes" the lane that started it
+   * The rules for which lanes are lit increase the difficulty for each level that has been completed
+   * Completing all five Firewalker levels (i.e. from all five lanes) lights the Prothean Base multiball
 
 ### Supplemental Modes
 These modes can be triggered throughout the game and offer bonuses, multipliers, extra points, and
