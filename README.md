@@ -4,7 +4,9 @@
 
 Recruit a squad from the most skilled soldiers, biotics, and technicians across dozens of worlds. Survive the journey through the Omega 4 Relay and lead a suicide mission to the enemy's front door. Sacrifice everything, stand your ground, and save the galaxy.
 
-The **Mass Effect 2 Pinball Game** brings the challenge and excitement of BioWare's sci-fi epic to the arcade table so you can re-live the most exciting missions of Commander Shepard's quest as a brand-new pinball experience. From the slums of Omega to the towers of Illium and from the decks of the Normandy to the heart of the Collector base, the Mass Effect 2 Pinball Game is the ultimate challenge for Spectres of the steel ball.
+**[Mass Effect 2: the Pinball Game](https://masseffectpinball.com)** brings the challenge and excitement of BioWare's sci-fi epic to the arcade table so you can re-live the most exciting missions of Commander Shepard's quest as a brand-new pinball experience. From the slums of Omega to the towers of Illium and from the decks of the Normandy to the heart of the Collector base, the Mass Effect 2 Pinball Game is the ultimate challenge for Spectres of the steel ball.
+
+See the completed machine at https://masseffectpinball.com.
 
 ## Requirements
 
