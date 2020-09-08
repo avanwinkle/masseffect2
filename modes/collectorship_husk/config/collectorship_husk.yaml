@@ -134,7 +134,8 @@ shows:
   husk_standup_show:
     - time: 0
       lights:
-        l_targets: on
+        l_targets:
+          color: color_husk
         l_flash_slingshots:
           color: 999999
   husk_standup_flash_show:
@@ -143,7 +144,7 @@ shows:
         l_targets: off
     - time: '+1'
       lights:
-        l_targets: on
+        l_targets: color_husk
   husk_shot_show:
     - time: 0
       lights:
