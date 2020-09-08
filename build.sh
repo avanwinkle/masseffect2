@@ -3,4 +3,4 @@
 # config file for embedded machines (production builds don't accept command-line
 # config arguments)
 echo "Building production bundle for Mass Effect 2 Pinball..."
-mpf build production_bundle -c config,production
+python -m mpf build production_bundle -c config,production

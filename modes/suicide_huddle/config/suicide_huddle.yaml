@@ -1,5 +1,17 @@
 #config_version=5
 
+#####
+# SUICIDE MISSION: Huddle
+#
+# The huddle mode is used before the Infiltration and Long Walk modes
+# and provides the interface for selecting a specialist.
+#
+# The custom python code handles the business of finding which mates
+# are recruited and still alive, populating the list widgets, and 
+# handling the flipper events to select the mate. Once selected,
+# this mode hands off to the next playable mode.
+#####
+
 mode:
   start_events: start_mode_suicide_huddle
   stop_events: stop_mode_suicide_huddle, suicide_huddle_complete

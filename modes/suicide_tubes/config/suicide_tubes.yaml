@@ -1,7 +1,7 @@
 #config_version=5
 
 #####
-# SUICIDE MISSION Pt IV: TUBES
+# SUICIDE MISSION Pt. IV: TUBES
 #
 # This mode lights the outer four shots as the support tubes for the reaper, and
 # the player must hit all of them to light the center shot to set the bomb and
@@ -9,7 +9,9 @@
 #
 # This features a 2-ball multiball with an add/save every time a tube is hit.
 #
-# Progress is saved for this mode.
+# This mode is only played once after the Long Walk is completed, and has a
+# maximum timer of 23 seconds (to match the musical cues). After completion
+# or timeout, the game advances to the final platforms/reaper phase.
 #####
 
 mode:
@@ -26,7 +28,7 @@ event_player:
     set_mission_shots:
       shots_total: 5
       is_resumable: 1
-      ticks: 23  # No actual timer, but still need to depreciate the value
+      ticks: 23
       shots_remaining:
         value: device.counters.tubes_counter.value
         type: int

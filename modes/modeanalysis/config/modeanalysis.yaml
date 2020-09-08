@@ -1,4 +1,18 @@
 #config_version=5
+
+#####
+# MODE ANALYSIS
+#
+# This universal mode can be run in the background of an MPF game to track
+# and analyse mode statistics. For every mode designated in 'analyze_modes',
+# the play time, repeat count, and aggregate scores will be recorded.
+#
+# The log dump can then be parsed to compare average times and scores across
+# modes to help ensure that scoring is fair for comparable modes. It also
+# allows the awarding of trophies/achievements and "personal best" records
+# for each player.
+#####
+
 mode:
   start_events: game_start{settings.enable_analytics}
   stop_events: game_ended

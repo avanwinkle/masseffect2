@@ -8,9 +8,9 @@
 # frenzy shots build value.
 #
 # Like the Collector Ship: Ambush, this mode starts as a 2-ball
-# multiball and goes up to 4 as shots are completed.
+# multiball and goes up to 4 by add-a-ball for each shots completed.
 #
-# For each surviving squadmate their
+# For each surviving squadmate, the lane corresponding to their
 # original recruitment shot is lit and hitting a lit recruitment
 # shot awards the built value (but does not reset it!). If both
 # squadmates from the same shot survived, the shot can be hit
@@ -19,11 +19,12 @@
 #
 # When all lit shots have been completed, they all re-light.
 # The rate at which frenzy hits increase the jackpot does slow
-# over time to prevent obscene scores… but still, this is worth a bunch.
+# over time to prevent obscene scores… but still, this mode is 
+# worth a bunch of points (like all good victory laps).
 #
-# When the player drains from this mode, Shepard leaps to the
-# Normandy. If the player was unable to hit at least two of the
-# recruitment shots or if they have only one squadmate left, they
+# When the player drains from this mode on their last ball, Shepard 
+# leaps to the Normandy. If the player was unable to hit at least two
+# of the recruitment shots, or if they have only one squadmate left, they
 # see Shepard’s death ending. Otherwise, they see the escape ending.
 #####
 
