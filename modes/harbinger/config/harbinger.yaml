@@ -32,7 +32,7 @@ mode:
 
 event_player:
   # Between Harbingers is 30s, but from the first enabling let's go faster
-  enable_harbinger: queue_initial_harbinger|2s
+  enable_harbinger: queue_initial_harbinger|6s
   # The above events have timeouts but harbinger may have been disabled in the meantime
   queue_initial_harbinger{current_player.harbinger_running==1}: await_captive
   # Clear the lock when the multiplier expires
@@ -197,12 +197,12 @@ sound_player:
     harbinger_killedsound:   # "This form means nothing..."
       max_queue_time: 1s
   # If harbinger mode is enabled, give a taunt on multiball drain
-  ball_drain{not mode.suicide_base.active}:
+  ball_drain{not mode.suicide_base.active and game.balls_in_play>1}:
     harbinger_taunt:
-      max_queue_time: 1s
+      max_queue_time: 0
   ball_will_end{not mode.suicide_base.active}:
     harbinger_you_have_failed:
-      max_queue_time: 500ms
+      max_queue_time: 1s
 
 sound_pools:
   harbinger_enabledsound:
@@ -270,7 +270,7 @@ sounds:
   harbinger_killedsound_5:
     file: en_us_global_collector_general_ss_collector_general_00332603_m.ogg # "This changes nothing, Shepard"
   harbinger_taunt_1:
-    file: en_us_global_collector_general_ss_collector_general_00332540_m.ogg # "Shepard, your interefence has ended"
+    file: en_us_global_collector_general_ss_collector_general_00332540_m.ogg # "Shepard, your interference has ended"
   harbinger_taunt_2:
     file: en_us_global_collector_general_ss_collector_general_00332559_m.ogg # "You will not stop me"
   harbinger_taunt_3:
