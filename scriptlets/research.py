@@ -179,12 +179,12 @@ class Research(CustomCode):
 
     def _check_award_medigel(self, **kwargs):
         chance = self.machine.game.player["research_award_medigel_perk"]
-        if chance > 0 and random() < chance:
+        if chance > 0 and random.random() < chance:
             self.machine.events.post("award_medigel_success")
 
     def _check_double_medigel(self, **kwargs):
         chance = self.machine.game.player["research_double_medigel_perk"]
-        if chance > 0 and random() < chance:
+        if chance > 0 and random.random() < chance:
             self.machine.events.post("double_medigel_success")
 
     def _check_random_ball_save(self, balls: int, **kwargs):
@@ -197,7 +197,7 @@ class Research(CustomCode):
         if balls <= 0 or self.machine.game.balls_in_play > 1:
             return {}
 
-        if chance > 0 and random() < chance:
+        if chance > 0 and random.random() < chance:
             self.machine.events.post("random_ball_save_success")
             self.machine.ball_devices["playfield"].add_ball(balls=1, player_controlled=False)
             # This is a relay event. We can change 'balls' to prevent drain

@@ -34,7 +34,7 @@ event_player:
       env: bloodback
       persist_name: recruitmordin
       shots_total: 4
-      is_resumable: 0
+      is_resumable: 1
       shots_remaining:
         value: device.counters.cure_counter.value
         type: int
@@ -89,6 +89,7 @@ counters:
     starting_count: 4
     count_complete_value: 0
     direction: down
+    persist_state: true
     count_events:
      # There is an event priority bug where power_shots_lit_hit will propagate
      # and trigger the counter_hit event *before* the shot_name_lit_hit events

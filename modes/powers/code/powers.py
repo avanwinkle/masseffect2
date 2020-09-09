@@ -66,6 +66,8 @@ class Powers(Mode):
             self.shot_group = self.machine.device_manager.collections["shot_groups"]["heretic_shots"]
             self.shot_group.disable_rotation()
             self.shots = self.shot_group.config["shots"]
+            for shot in self.shots:
+                shot.disable()
             self.log.debug("Powers sees LEGION, aborting all shot management. {}".format(self.shots))
             return
             
@@ -170,16 +172,22 @@ class Powers(Mode):
         # Accept one profile. We can't use per-shot profiles because rotating 
         # shots updates their state and does NOT move profiles from shot to shot
         profile = kwargs.get("shot_profile", "lane_shot_profile")
+        if shots_to_set:
+            self.log.debug("Found persisted shots: {}".format(shots_to_set))
         # If we have starting shots and no persisted shots, set both
         if starting_shots is not None and not shots_to_set:
-            shots_to_set = [1 if shot in starting_shots else 0 for shot in SHOTS]
+            # The default profile is lit at zero and hit at 1, so the starting_shots
+            # states are 0 for enabled and 1 for disabled
+            shots_to_set = [0 if shot in starting_shots else 1 for shot in SHOTS]
             self.log.debug("No persisted shots, setting shots {}".format(shots_to_set))
             # Set these as persisted values, maybe
             if self.persisted_name:
                 self.persisted_shots[self.persisted_name] = shots_to_set
-                # Set up a listener to track hit shots so we know to persist
-                self.add_mode_event_handler('power_shots_lit_hit', self._update_persistence)
-        
+                
+        if shots_to_set:
+            # Set up a listener to track hit shots so we know to persist
+            self.add_mode_event_handler('power_shots_lit_hit', self._update_persistence)
+
         for idx, shot in enumerate(self.shots):
             # Set the config and color, even if we're not enabling/disabling shots
             color = kwargs.get("color","FFFFFF")
@@ -194,20 +202,17 @@ class Powers(Mode):
             ##       instead of relying on lots of advance_mission_shots events.
             ##       Also, restore preserved state by .jump(shots_to_set[idx])
             if shots_to_set:
-                # Our shot pointers are in the same order
-                if shots_to_set[idx]:
-                    shot.restart()
-                else:
-                    # Don't disable, the shot, set it's state to "hit" so we can rotate
-                    shot.advance(force=True)
-                    shot.enable()
+                # Our shot pointers are in the same order as shots_to_set
+                self.log.debug(" - Jumping shot idx {} to state {}".format(idx, shots_to_set[idx]))
+                shot.jump(shots_to_set[idx])
+                shot.enable()
                     
         self.machine.events.post("set_environment", env=kwargs.get("env"))
         self.machine.events.post("power_shots_started", is_resume=is_resume)
 
     def _update_persistence(self, **kwargs):
         # A shot was hit, update the persistence
-        self.persisted_shots[self.persisted_name] = [1 if filter_enabled_and_lit_shots(shot) else 0 for shot in self.shots]
+        self.persisted_shots[self.persisted_name] = [shot.state for shot in self.shots]
         self.log.debug("Updated persistence state for {}: {}".format(self.persisted_name, self.persisted_shots[self.persisted_name]))
         
     # Certain modes can set shot profiles with manual advance

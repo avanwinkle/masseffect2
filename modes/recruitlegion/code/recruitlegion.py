@@ -81,7 +81,9 @@ class RecruitLegion(Mode):
         while self._block_on_rotate is True:
             time.sleep(0.02)  # 2ms wait
         self._block_on_tick = True
-        for shot_name, times in self._shot_times.items():
+        # Copy the items to avoid collisions if the dict changes
+        d = {k: v for k,v in self._shot_times.items() if v}
+        for shot_name, times in d.items():
             # The rotation creates a None value for 'times', so check its truthiness first
             if times and tick in times:
                 shot = self._get_shot(shot_name)

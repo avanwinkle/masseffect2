@@ -100,11 +100,11 @@ coils:
     default_hold_power: 0.125
   c_plunger:
     number: 1-1
-    default_pulse_ms: 16  # Increased from Spike 18. Mk2 was 14, upping to 16
+    default_pulse_ms: 20  # Increased from Spike 18. Mk2 was 14, upping to 16 and then 20
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 28 # Mk2 was 20, upping to 22
+    default_pulse_ms: 24 # Mk2 was 20, upping to 22. 28 was too much.
     default_pulse_power: 1.0
     # debug: true
     # pulse_power: 2
@@ -146,7 +146,7 @@ coils:
     tags: coil_missionselect
   c_hold_post_release:
     number: 0-0
-    default_pulse_ms: 60  # Bumped from 55, which sometimes failed to release
+    default_pulse_ms: 65  # Bumped from 55 and 60 which sometimes failed to release
     # debug: true
     pulse_events:
       - release_hold_post
