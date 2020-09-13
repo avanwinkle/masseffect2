@@ -146,6 +146,7 @@ coils:
     tags: coil_missionselect
   c_hold_post_release:
     number: 0-0
+    debug: true
     default_pulse_ms: 65  # Bumped from 55 and 60 which sometimes failed to release
     # debug: true
     pulse_events:

@@ -190,7 +190,7 @@ variable_player:
     available_missions: 1
   achievement_derelictreaper_state_started:
     available_missions: -1
-  suicide_progression_omegarelay:
+  achievement_suicidemission_state_enabled:
     available_missions: 1
   reset_missionselect_bypass:
     bypass_missionselect:
