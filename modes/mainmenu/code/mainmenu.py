@@ -177,7 +177,7 @@ class MainMenu(Carousel):
                 self.machine.events.post("update_flow", detail=FLOWS[0])
                 self.machine.events.post("update_flow_easiest")
                 return
-            self._post_career_event("new_career", 
+            self._post_career_event("new_career",
                                     difficulty=self._selected_difficulty,
                                     high_flow=self._selected_flow)
         # If create career was chosen, switch modes
@@ -202,8 +202,8 @@ class MainMenu(Carousel):
             career = self.careers[self._highlighted_item_index]
             self._set_selected_career(career)
             self._post_career_event("highlight_career".format(self.name),
-                                    difficulty_name=DIFFICULTIES[career["difficulty"]],
-                                    flow_name=FLOWS[career["high_flow"]])
+                                    difficulty_name=DIFFICULTIES[career.get("difficulty",0)],
+                                    flow_name=FLOWS[career.get("high_flow", 0)])
         else:
             self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
                                     direction=direction)
@@ -223,7 +223,7 @@ class MainMenu(Carousel):
         elif self._selected_flow >= 0:
             if self._selected_flow < 1:
                 self._selected_flow += 1
-                self.machine.events.post("update_flow", 
+                self.machine.events.post("update_flow",
                                          detail=FLOWS[self._selected_flow])
                 self.machine.events.post("update_flow_hardest")
             return
@@ -244,7 +244,7 @@ class MainMenu(Carousel):
         elif self._selected_flow >= 0:
             if self._selected_flow > 0:
                 self._selected_flow -= 1
-                self.machine.events.post("update_flow", 
+                self.machine.events.post("update_flow",
                                          detail=FLOWS[self._selected_flow])
                 self.machine.events.post("update_flow_easiest")
             return
