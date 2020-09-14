@@ -35,14 +35,15 @@ event_player:
       env: eclipse
       shots_total: 4
       is_resumable: 0
+      persist_name: recruitthane
       shots_remaining:
         value: 4 - device.counters.thane_ascent_counter.value
         type: int
-      starting_shots: left_ramp, right_ramp
+      starting_shots: 2, 1, 0, 0, 2
   # Immediately advance the orbits to "pending" so we know where they are after rotation
-  power_shots_started:
-    advance_mission_shots:
-      shots: left_orbit, right_orbit
+  # power_shots_started:
+  #   advance_mission_shots:
+  #     shots: left_orbit, right_orbit
   # After completion more shots will keep adding hurryup, but won't reset
   logicblock_thane_ascent_counter_hit:
     mission_shot_hit:

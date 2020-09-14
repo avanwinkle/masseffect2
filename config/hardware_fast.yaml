@@ -1,7 +1,8 @@
 #config_version=5
 hardware:
-  platform: fast
-  driverboards: fast
+  # platform: fast
+  # driverboards: fast
+  platform: smart_virtual
   # net_buffer: 10
   lights: fadecandy
 

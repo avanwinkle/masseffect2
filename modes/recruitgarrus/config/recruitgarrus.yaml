@@ -33,6 +33,7 @@ event_player:
       env: bloodpack
       shots_total: 4
       is_resumable: 0
+      persist_name: recruitgarrus
       shots_remaining:
         value: device.counters.doors_closed_counter.value
         type: int

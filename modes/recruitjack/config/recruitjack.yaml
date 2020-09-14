@@ -37,6 +37,7 @@ event_player:
       shots_remaining:
         value: device.counters.jack_rounds_counter.value
         type: int
+      persist_name: recruitjack
       # Invert the starting shots per this profile
       starting_shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
       shot_profile: lane_shot_manual_firstshot_inverted
@@ -51,7 +52,7 @@ event_player:
       shots: left_orbit, right_orbit
   ### SCORING capture the value when the hurryup is hit, collect when the round is hit
   jack_hurryup_shots_hit: mission_shot_hit
-  logicblock_jack_rounds_counter_hit: 
+  logicblock_jack_rounds_counter_hit:
     - mission_collect_score
     # Trigger the enable shots event to light the next round's shots
     - enable_jack_shots

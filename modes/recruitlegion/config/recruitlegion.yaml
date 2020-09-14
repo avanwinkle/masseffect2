@@ -40,6 +40,7 @@ event_player:
       is_resumable: 1
       shots_total: 5
       ticks: 60
+      persist_name: recruitlegion
   # Mock an event to set the widget width
   slide_recruit_mission_slide_created:
     player_heretic_progress:
@@ -195,7 +196,7 @@ shots:
       - s_target1_active{device.shots.heretic_shot_left_orbit.state_name=="lit_target"}
     # All shots must be enabled to rotate, so the zero state is off.
     # Enable event will advance it
-    advance_events: 
+    advance_events:
       - enable_heretic_shot_left_orbit
     restart_events:
       - mode_recruitlegion_started
@@ -210,7 +211,7 @@ shots:
     hit_events:
       - sh_kickback_hit{device.shots.heretic_shot_kickback.state_name=="lit_lane"}
       - s_target2_active{device.shots.heretic_shot_kickback.state_name=="lit_target"}
-    advance_events: 
+    advance_events:
       - enable_heretic_shot_kickback
     restart_events:
       - mode_recruitlegion_started
@@ -225,7 +226,7 @@ shots:
     hit_events:
       - sh_left_ramp_hit{device.shots.heretic_shot_left_ramp.state_name=="lit_lane"}
       - s_target3_active{device.shots.heretic_shot_left_ramp.state_name=="lit_target"}
-    advance_events: 
+    advance_events:
       - enable_heretic_shot_left_ramp
     restart_events:
       - mode_recruitlegion_started
@@ -240,7 +241,7 @@ shots:
     hit_events:
       - sh_right_ramp_hit{device.shots.heretic_shot_right_ramp.state_name=="lit_lane"}
       - s_target4_active{device.shots.heretic_shot_right_ramp.state_name=="lit_target"}
-    advance_events: 
+    advance_events:
       - enable_heretic_shot_right_ramp
     restart_events:
       - mode_recruitlegion_started
@@ -255,7 +256,7 @@ shots:
     hit_events:
       - sh_right_orbit_hit{device.shots.heretic_shot_right_orbit.state_name=="lit_lane"}
       - s_target5_active{device.shots.heretic_shot_right_orbit.state_name=="lit_target"}
-    advance_events: 
+    advance_events:
       - enable_heretic_shot_right_orbit
     restart_events:
       - mode_recruitlegion_started

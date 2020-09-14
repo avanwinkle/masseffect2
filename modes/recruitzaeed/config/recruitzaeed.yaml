@@ -50,6 +50,7 @@ event_player:
       color: color_zaeed
       shot_profile: lane_shot_manual_finalshot
       is_resumable: 0
+      persist_name: recruitzaeed
       shots_total: 4
       shots_remaining:
         value: device.counters.zaeed_orbits_counter.value
