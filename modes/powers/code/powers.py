@@ -164,9 +164,11 @@ class Powers(Mode):
     def _set_mission_shots(self, **kwargs):
         self.log.debug("Setting initial shots from kwargs {}".format(kwargs))
         self.persisted_name = kwargs.get("persist_name")
-        if not self.persisted_name:
-            self.log.warning("Mission shots set without a persist_name, may bleed to other modes")
-        shots_to_set = self.persisted_shots.get(self.persisted_name)
+        if self.persisted_name:
+            shots_to_set = self.persisted_shots.get(self.persisted_name)
+            self.log.debug("Found persisted shots: {}".format(shots_to_set))
+        else:
+            shots_to_set = []
 
         is_resume = True if shots_to_set and self.persisted_name else False
 
@@ -182,8 +184,6 @@ class Powers(Mode):
         # Accept one profile. We can't use per-shot profiles because rotating
         # shots updates their state and does NOT move profiles from shot to shot
         profile = kwargs.get("shot_profile", "lane_shot_profile")
-        if shots_to_set:
-            self.log.debug("Found persisted shots: {}".format(shots_to_set))
         # If we have starting shots and no persisted shots, set both
         if starting_shots is not None and not shots_to_set:
             # The default profile is lit at zero and hit at 1, so the starting_shots
@@ -194,7 +194,7 @@ class Powers(Mode):
             if self.persisted_name:
                 self.persisted_shots[self.persisted_name] = shots_to_set
 
-        if shots_to_set:
+        if kwargs.get("is_resumable"):
             # Set up a listener to track hit shots so we know to persist
             self.add_mode_event_handler('power_shots_lit_hit', self._update_persistence)
 
@@ -223,8 +223,9 @@ class Powers(Mode):
                 self.log.debug("    - profile is: {}".format(shot.config['profile']))
                 self.log.debug("    - show_tokens are: {}".format(shot.config['show_tokens']))
                 self.log.debug("    - state is {}, name is: {}".format(shot.state, shot.state_name))
-                shot.jump(shots_to_set[idx], True)
-                # shot.enable()
+                # Force the shot to an invalid state to ensure the jump triggers the new show
+                shot.jump(shots_to_set[idx], True, True)
+                shot.enable()
 
         self.machine.events.post("set_environment", env=kwargs.get("env"))
         self.machine.events.post("power_shots_started", is_resume=is_resume)

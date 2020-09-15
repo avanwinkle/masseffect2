@@ -85,11 +85,13 @@ variable_player:
       action: set
 
 show_player:
-  tower_ascent_shot_hit:
-    tower_flash_show:
+  logicblock_thane_ascent_counter_hit:
+    flash_all_shields_show:
       speed: 12
       loops: 4
       priority: 100
+      show_tokens:
+        color: color_thane
 
 shows:
   tower_flash_show:
