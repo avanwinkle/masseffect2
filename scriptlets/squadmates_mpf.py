@@ -310,12 +310,13 @@ class MPFSquadmateHandlers(CustomCode):
                     }
                 )
 
-                # Show ladder lights too
-                if status == "lit":
-                    config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count) for i in range(lit_count)])
-                # Miranda and Jacob start complete but no ladder lights, so watch out for trailing comma!
-                elif status == "complete" and complete_count > 0:
-                    config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i) for i in range(complete_count)])
+                # Show ladder lights too, if we're not in suicide
+                if not self.machine.modes["suicide_base"].active:
+                    if status == "lit":
+                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count) for i in range(lit_count)])
+                    # Miranda and Jacob start complete but no ladder lights, so watch out for trailing comma!
+                    elif status == "complete" and complete_count > 0:
+                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i) for i in range(complete_count)])
 
                 self._shows[showname] = self.machine.show_controller.replace_or_advance_show(
                     self._shows.get(showname),  # old_instance

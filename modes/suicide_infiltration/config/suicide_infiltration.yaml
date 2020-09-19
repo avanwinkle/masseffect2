@@ -51,13 +51,15 @@ event_player:
       squadmate: specialist
   logicblock_valves_hit:
     - mission_shot_hit
-    - play_specialist_inf_advance{count>1}
-    - play_specialist_inf_close{count==1}
-    # Enable the hold for the final shot
-    - enable_transition_hold{count==1}
+    - play_specialist_inf_advance{count>0}
     # Only reset tension if count is high, to avoid restarting music
-    - reset_tension{count>0}
+    - reset_tension
   logicblock_valves_complete:
+      - play_specialist_inf_close
+      # Enable the hold for the final shot
+      - enable_transition_hold
+      - reset_tension
+  valve_final_shot_hit:
     - mission_collect_score
     - infiltration_complete
   squadmate_killed: infiltration_failed
@@ -73,7 +75,8 @@ multiballs:
 
 counters:
   valves:
-    starting_count: 5 + current_player.difficulty
+    # There is a final shot, so the valve count is 1 - number of shots desired
+    starting_count: 4 + current_player.difficulty
     count_complete_value: 0
     direction: down
     count_events: valveshots_hit
@@ -84,8 +87,10 @@ light_player:
   mode_suicide_infiltration_started:
     light_backwall_ambient:
       color: color_collectors
+      fade: 1s
     light_backwall_gi:
       color: color_grunt
+      fade: 1s
 
 shot_groups:
   valveshots:
@@ -116,10 +121,24 @@ shot_profiles:
           fade: 100ms
 
 shots:
+  # This special shot unlocks when the counter is complete, to ensure we always end on the ramp
+  valve_final_shot:
+    hit_events: sh_left_ramp_hit
+    enable_events: logicblock_valves_complete
+    reset_events: mode_suicide_infiltration_started
+    disable_events: mode_suicide_infiltration_started
+    advance_events: increase_infiltration
+    profile: valve_profile
+    show_tokens:
+      leds: l_left_ramp_ring
+    tags: envshot_right_ramp
+  # TODO: Change to use shot rotation instead of explicit enable/disable events
   valve_right_ramp:
     hit_events: sh_right_ramp_hit
+    # Expecting this hit before the counter updates, don't light right ramp if the left ramp shot is going to complete it
+    enable_events: valve_left_ramp_hit{device.counters.valves.value>1}
     restart_events: mode_suicide_infiltration_started
-    disable_events: valve_right_ramp_hit
+    disable_events: valve_right_ramp_hit, mode_suicide_infiltration_will_stop, logicblock_valves_complete
     advance_events: increase_infiltration
     profile: valve_profile
     show_tokens:
@@ -128,7 +147,7 @@ shots:
   valve_left_orbit:
     hit_events: sh_left_orbit_hit
     enable_events: valve_right_ramp_hit
-    disable_events: valve_left_orbit_hit, mode_suicide_infiltration_will_stop
+    disable_events: valve_left_orbit_hit, mode_suicide_infiltration_will_stop, logicblock_valves_complete
     advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -138,7 +157,7 @@ shots:
   valve_kickback:
     hit_events: sh_kickback_hit
     enable_events: valve_left_orbit_hit
-    disable_events: valve_kickback_hit, mode_suicide_infiltration_will_stop
+    disable_events: valve_kickback_hit, mode_suicide_infiltration_will_stop, logicblock_valves_complete
     advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -148,7 +167,7 @@ shots:
   valve_right_orbit:
     hit_events: sh_right_orbit_hit
     enable_events: valve_kickback_hit
-    disable_events: valve_right_orbit_hit, mode_suicide_infiltration_will_stop
+    disable_events: valve_right_orbit_hit, mode_suicide_infiltration_will_stop, logicblock_valves_complete
     advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile
@@ -158,7 +177,7 @@ shots:
   valve_left_ramp:
     hit_events: sh_left_ramp_hit
     enable_events: valve_right_orbit_hit
-    disable_events: valve_left_ramp_hit, mode_suicide_infiltration_will_stop
+    disable_events: valve_left_ramp_hit, mode_suicide_infiltration_will_stop, logicblock_valves_complete
     advance_events: increase_infiltration
     reset_events: mode_suicide_infiltration_started
     profile: valve_profile

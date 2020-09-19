@@ -66,11 +66,17 @@ multiballs:
 
 light_player:
   mode_suicide_omegarelay_started:
+    light_backwall_gi:
+      color: color_grunt
+      fade: 1s
     light_backwall_ambient:
       color: color_collectors
+      fade: 1s
   force_omega_end:
-    light_ladder: off
-    
+    light_ladder:
+      color: off
+      fade: 1s
+
 shot_groups:
   omegarelay_shots:
     shots: omg_left_orbit, omg_kickback, omg_left_ramp, omg_right_ramp, omg_right_orbit, omg_dropbank, omg_hitbank

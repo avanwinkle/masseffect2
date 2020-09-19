@@ -66,11 +66,15 @@ random_event_player:
 
 light_player:
   mode_suicide_huddle_started:
-    light_backwall_gi: off
+    light_backwall_gi: 
+      color: off
+      fade: 1s
     light_backwall_ambient:
       color: color_collectors_quarter
       fade: 1s
-    light_ladder: off
+    light_ladder: 
+      color: off
+      fade: 1s
   suicide_huddle_specialist_selected:
     light_backwall_ambient:
       color: off
