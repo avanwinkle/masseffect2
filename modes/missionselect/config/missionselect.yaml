@@ -170,6 +170,7 @@ shows:
       lights:
         (leds): black
         (l_null): (color)
+  # TODO: Replace with suicide colored sweep
   missionselect_suicide_show:
     - time: 0
       lights:

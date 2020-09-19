@@ -249,6 +249,12 @@ shot_profiles:
           fade: 500ms
 
 show_player:
+  mission_shot_hit:
+    pulse_playfield_smooth:
+      loops: 2
+      speed: 1
+      show_tokens:
+        color: color_shields
   swarmfails_hit:
     pulse_playfield:
       action: play

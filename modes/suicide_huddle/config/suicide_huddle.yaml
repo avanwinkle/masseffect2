@@ -70,6 +70,7 @@ light_player:
     light_backwall_ambient:
       color: color_collectors_quarter
       fade: 1s
+    light_ladder: off
   suicide_huddle_specialist_selected:
     light_backwall_ambient:
       color: off

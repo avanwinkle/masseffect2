@@ -252,3 +252,10 @@ show_player:
   ball_save_suicide_save_saving_ball:
     suicide_save_show:
       action: stop
+  omegarelay_shots_lit_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_collectors

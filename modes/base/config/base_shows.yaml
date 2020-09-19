@@ -252,6 +252,16 @@ shot_profiles:
           fade: 20ms
       - name: hit
         show: off
+  lane_shot_duo_profile:
+    show_when_disabled: false
+    states:
+      - name: lit
+        show: led_6_chase_duo
+        speed: 6
+        show_tokens:
+          fade: 200ms
+      - name: hit
+        show: off
   lane_shot_to_on_profile:
     show_when_disabled: false
     states:

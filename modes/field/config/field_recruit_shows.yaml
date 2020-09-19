@@ -33,12 +33,12 @@ show_player:
         color: color_legion
         fade: 2s
     led_12_chase_duo{device.achievements.suicidemission.state=="enabled"}:
-      speed: 4
+      speed: 6
       sync_ms: 800
       show_tokens:
         ledring: l_omega_relay
         color: color_health
-        fade: 2s
+        fade: 250ms
       
   # Disable the lights on GoT to reduce noise, leave on for FAST
   mode_field_will_stop{not machine.is_lcd}:
