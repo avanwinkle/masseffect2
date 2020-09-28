@@ -187,22 +187,22 @@ shot_profiles:
     states:
       - name: low
         show: led_6_chase_duo
-        speed: 6
+        speed: 4
         show_tokens:
           color: color_shields_half
-          fade: 500ms
+          fade: 150ms
       - name: med
         show: led_6_chase_duo
         speed: 8
         show_tokens:
           color: color_shields_half
-          fade: 500ms
+          fade: 150ms
       - name: high
         show: led_6_chase
-        speed: 10
+        speed: 12
         show_tokens:
           color: color_shields
-          fade: 500ms
+          fade: 150ms
   longwalk_hitbank_profile:
     show_when_disabled: false
     advance_on_hit: false
@@ -252,7 +252,7 @@ show_player:
   mission_shot_hit:
     pulse_playfield_smooth:
       loops: 2
-      speed: 1
+      speed: 4
       show_tokens:
         color: color_shields
   swarmfails_hit:
@@ -311,13 +311,13 @@ show_player:
 
 light_player:
   mode_suicide_longwalk_started:
-    l_gi_left_playfield:
+    gi_middle:
       color: off
       fade: 1s
-    l_gi_lower_playfield:
+    gi_bottom:
       color: off
       fade: 1s
-    l_gi_upper:
+    gi_top:
       color: 333333
       fade: 1s
 

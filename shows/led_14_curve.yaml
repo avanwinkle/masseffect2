@@ -28,6 +28,21 @@
     (ledring)_light_8:
       color: (fade_from)
       fade: 50ms
+    (ledring)_light_9:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_10:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_11:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_12:
+      color: (fade_from)
+      fade: 50ms
+    (ledring)_light_13:
+      color: (fade_from)
+      fade: 50ms
 - time: '+1'
   lights:
     (ledring)_light_0:

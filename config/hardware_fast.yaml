@@ -1,21 +1,4 @@
 #config_version=5
-hardware:
-  # platform: fast
-  # driverboards: fast
-  platform: smart_virtual
-  # net_buffer: 10
-  lights: fadecandy
-
-modes:
-  - airlock
-
-fast:
-  ports: autodetect
-  rgb_buffer: 10
-  hardware_led_fade_time: 100ms
-  debug: true
-  ignore_rgb_crash: true
-
 fadecandy:
   gamma: 1
 

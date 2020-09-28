@@ -223,7 +223,7 @@ class Powers(Mode):
                 self.log.debug("    - profile is: {}".format(shot.config['profile']))
                 self.log.debug("    - show_tokens are: {}".format(shot.config['show_tokens']))
                 self.log.debug("    - state is {}, name is: {}".format(shot.state, shot.state_name))
-                # Force the shot to an invalid state to ensure the jump triggers the new show
+                # Force jump to trigger the new show
                 shot.jump(shots_to_set[idx], True, True)
                 shot.enable()
 

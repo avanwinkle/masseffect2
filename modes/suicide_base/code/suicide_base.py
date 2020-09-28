@@ -2,7 +2,8 @@ import random
 from mpf.core.mode import Mode
 from scriptlets.squadmates_mpf import SquadmateStatus
 
-SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "final", "escape"]
+# The order of this array must be the order in which modes are completed
+SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "final", "endrun"]
 
 
 class SuicideBase(Mode):

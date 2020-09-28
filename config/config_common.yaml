@@ -1,5 +1,6 @@
 #config_version=5
 config:
+- config_colors.yaml
 - hardware_common.yaml
 - keyboard.yaml
 
@@ -511,57 +512,6 @@ player_vars:
     initial_value: -1
   xp:
     initial_value: 0
-
-named_colors:
-  # Squadmates
-  color_garrus: 0055FF
-  color_grunt: FF6611
-  color_jack: 4D00CC
-  color_jacob: "663300"
-  color_kasumi: eeff00
-  color_kasumi_dark: a7b300
-  color_legion: ffffff
-  color_miranda: fff2e6
-  color_mordin: "440000"
-  color_samara: 008899
-  color_tali: ff11dd
-  color_thane: 00ff11
-  color_zaeed: ff7700
-  # ME Palette
-  color_shields: 0066FF
-  color_shields_half: 004DC0
-  color_shields_quarter: "003380"
-  color_armor: FFCC00
-  color_barrier: 5500FF
-  color_health: "990000"
-  color_health_half: "660000"
-  color_health_quarter: "330000"
-  color_paragon: 1166FF
-  color_renegade: "660000"
-  color_door_green: 55FF00
-  color_door_yellow: eeff00
-  color_door_orange: FF2200
-  color_door_red: "660000"
-  color_space: 0044AA
-  # The timer
-  color_timer_green: "112200"
-  color_timer_yellow: "334400"
-  color_timer_orange: "331100"
-  color_timer_red: "330000"
-  color_timer_flashing: "440000"
-  # Other Modes
-  color_arrival: 24c8ff
-  color_collectors: ff2200
-  color_collectors_half: C01A00
-  color_collectors_quarter: "801100"
-  color_harbinger: FF8811  # F70 was close, but a touch too deep
-  color_husk: 00101E
-  color_overlord: 22FF33
-  color_overlord_orange: FF4400
-  color_praetorian: 2200AA
-  color_shadowbroker: ff1f00
-  # Default: mball color is overlord
-  color_mball: 22FF33
 
 sound_system:
   master_volume: 1.0

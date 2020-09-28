@@ -254,11 +254,11 @@ slides:
       - type: text
         text: (player|temp_build_value) x (player|temp_multiplier)
         number_grouping: true
-        style: header_sm, row_sub, col_left_anchor
+        style: body_sm, row_sub_under, col_left_anchor
       - type: text
         text: (player|reaper_hp) HP
         number_grouping: true
-        style: header_sm, row_sub, col_right_anchor
+        style: header_sm, row_sub, col_left_anchor
       - widget: background_console
   # Fancy flashing to show the reaper is firing
   reaper_firing_slide:

@@ -5,6 +5,23 @@ config:
   - hardware_fast.yaml
   - shows_fast.yaml
 
+hardware:
+  platform: fast
+  driverboards: fast
+  # platform: smart_virtual
+  # net_buffer: 10
+  lights: fadecandy
+
+modes:
+  - airlock
+
+fast:
+  ports: autodetect
+  rgb_buffer: 10
+  hardware_led_fade_time: 100ms
+  debug: true
+  ignore_rgb_crash: true
+
 # Custom code can't be included, or it will get double-inits
 custom_code:
   - scriptlets.squadmates_mpf.MPFSquadmateHandlers
