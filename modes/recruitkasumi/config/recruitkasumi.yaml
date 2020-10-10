@@ -38,7 +38,7 @@ event_player:
       shots_remaining:
         value: device.counters.kasumi_shots_counter.value
         type: int
-      starting_shots: left_orbit, kickback, right_ramp, right_orbit
+      starting_shots: 0, 0, 1, 0, 0 # left_orbit, kickback, right_ramp, right_orbit
   slide_recruit_mission_slide_active:
     logicblock_kasumi_shots_counter_updated:
       value:

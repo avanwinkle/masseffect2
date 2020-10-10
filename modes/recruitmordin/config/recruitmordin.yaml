@@ -38,8 +38,8 @@ event_player:
       shots_remaining:
         value: device.counters.cure_counter.value
         type: int
-      # Invert the starting shots per this profile
-      starting_shots: kickback, left_ramp, right_ramp, right_orbit
+      # Invert the starting shots per this profile, so 1 is lit and 0 is off
+      starting_shots: 1, 0, 0, 0, 0 # kickback, left_ramp, right_ramp, right_orbit
       shot_profile: lane_shot_manual_firstshot_inverted
   # This is annoying, but the only way to advance lit shots to hit when we
   # don't know _which_ lit shot was hit.

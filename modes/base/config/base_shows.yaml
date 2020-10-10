@@ -285,6 +285,7 @@ shot_profiles:
     # This profile starts all off and requires manual advance to lit.
     # Lit shots go to solid when hit. Tricky: invert the starting shots
     # to "disable" them and leave the rest in a lit state.
+    # 0 is off, 1 is lit, 2 is hit (solid)
     # Used for: Mordin, Jack
     show_when_disabled: false
     advance_on_hit: false
@@ -300,7 +301,7 @@ shot_profiles:
         show: led_color
   lane_shot_manual_finalshot:
     # This profile starts lit and requires manual advance for all modes.
-    # Second step is off, third step is pending and final is jackpot.
+    # 0 is lit, 1 is off, 2 is pending and 3 is jackpot lit.
     # Used for Thane and Zaeed to light jackpot shots after repeat shots.
     show_when_disabled: false
     advance_on_hit: false

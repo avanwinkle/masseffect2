@@ -55,11 +55,8 @@ event_player:
       shots_remaining:
         value: device.counters.zaeed_orbits_counter.value
         type: int
-      starting_shots: left_orbit, right_orbit
-  # Immediately advance the kickback to "pending" so we know where it is after rotation
-  power_shots_started:
-    advance_mission_shots:
-      shots: kickback
+      # The kickback starts "pending" so we know where it is after rotation
+      starting_shots: 0, 2, 1, 1, 0 # left_orbit, right_orbit
   logicblock_zaeed_orbits_counter_complete:
     advance_mission_shots:
       state: pending

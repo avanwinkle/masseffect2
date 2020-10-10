@@ -39,7 +39,7 @@ event_player:
         type: int
       persist_name: recruitjack
       # Invert the starting shots per this profile
-      starting_shots: left_orbit, kickback, left_ramp, right_ramp, right_orbit
+      starting_shots: 0, 0, 0, 0, 0
       shot_profile: lane_shot_manual_firstshot_inverted
   # Advance different shots based on which round we're on
   power_shots_started: enable_jack_shots

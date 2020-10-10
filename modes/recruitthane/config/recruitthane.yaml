@@ -39,11 +39,8 @@ event_player:
       shots_remaining:
         value: 4 - device.counters.thane_ascent_counter.value
         type: int
+      # Start the orbits at "pending" so we know where they are after rotation
       starting_shots: 2, 1, 0, 0, 2
-  # Immediately advance the orbits to "pending" so we know where they are after rotation
-  # power_shots_started:
-  #   advance_mission_shots:
-  #     shots: left_orbit, right_orbit
   # After completion more shots will keep adding hurryup, but won't reset
   logicblock_thane_ascent_counter_hit:
     mission_shot_hit:
