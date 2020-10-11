@@ -27,7 +27,7 @@ mode_settings:
   select_item_events: s_action_button_active, s_plunger_lane_inactive, flipper_cancel, timer_missionselect_timer_complete
   next_item_events: s_flipper_right_inactive, missionselect_skip_forwards, mode_missionselect_started, missionselect_specialist_highlighted
   previous_item_events: s_flipper_left_inactive, missionselect_skip_backwards
-  block_on_flipper_cancel: true
+  block_events: flipper_cancel
 
 event_player:
   # The hold will release when intro is complete

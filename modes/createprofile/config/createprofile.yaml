@@ -31,7 +31,8 @@ slides:
         select_event: flipper_cancel
         force_complete_event: s_start_button_active
         abort_event: flipper_cradle
-        block_on_flipper_cancel: true
+        block_events: flipper_cancel
+        release_events: both_flippers_inactive
       - type: text
         text: ""
         key: profile_name

@@ -25,7 +25,7 @@ mode_settings:
   select_item_events: flipper_cancel
   next_item_events: s_flipper_right_inactive
   previous_item_events: s_flipper_left_inactive
-  block_on_flipper_cancel: true
+  block_events: flipper_cancel
 
 queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt:

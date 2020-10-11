@@ -209,7 +209,7 @@ class MainMenu(Carousel):
                                     direction=direction)
 
     def _next_item(self, **kwargs):
-        if self._done or self._is_flipper_cancelling:
+        if self._done or self._is_blocking:
             return
         # Are we picking difficulty?
         if self._selected_difficulty >= 0 and self._selected_flow == -1:
@@ -230,7 +230,7 @@ class MainMenu(Carousel):
         super()._next_item(**kwargs)
 
     def _previous_item(self, **kwargs):
-        if self._done or self._is_flipper_cancelling:
+        if self._done or self._is_blocking:
             return
         # Are we picking difficulty?
         if self._selected_difficulty >= 0 and self._selected_flow == -1:

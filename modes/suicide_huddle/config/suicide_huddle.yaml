@@ -26,7 +26,7 @@ mode_settings:
   select_item_events: s_action_button_active, flipper_cancel
   next_item_events: s_flipper_right_inactive
   previous_item_events: s_flipper_left_inactive
-  block_on_flipper_cancel: true
+  block_events: flipper_cancel
 
 event_player:
   specialist_lw_callback_miranda:
