@@ -11,35 +11,14 @@ mode_settings:
   next_item_events: next_item
   previous_item_events: prev_item
   selectable_items: casual
+  block_on_flipper_cancel: true
 
 event_player:
   career_loaded: stop_mode_mainmenu
-  s_flipper_right_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: next_item
-  s_flipper_left_inactive{machine.flipper_cancelling==0 and not mode.createprofile.active}: prev_item
+  s_flipper_right_inactive{not mode.createprofile.active}: next_item
+  s_flipper_left_inactive{not mode.createprofile.active}: prev_item
   s_action_button_active{not mode.createprofile.active and not mode.difficulty.active}: select_item
   flipper_cancel{not mode.createprofile.active}: select_item
-
-variable_player:
-  mode_mainmenu_started:
-    flipper_cancelling:
-      int: 0
-      action: set_machine
-  flipper_cradle:
-    flipper_cancelling:
-      int: 1
-      action: set_machine
-  flipper_cancel:
-    flipper_cancelling:
-      int: 1
-      action: set_machine
-  both_flippers_inactive:
-    flipper_cancelling:
-      int: 0
-      action: set_machine
-  flipper_cradle_release:
-    flipper_cancelling:
-      int: 0
-      action: set_machine
 
 queue_relay_player:
   # For the first ball, allow the player to pick a profile

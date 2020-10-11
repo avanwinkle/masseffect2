@@ -5,10 +5,6 @@ mode:
   game_mode: false
 
 event_player:
-  s_action_button_active: select_char
-  flipper_cancel: select_char
-  s_flipper_right_inactive{machine.flipper_cancelling==0}: next_char
-  s_flipper_left_inactive{machine.flipper_cancelling==0}: prev_char
   text_input_profile_name_abort: stop_mode_createprofile
   text_input_profile_name_complete:
     createprofile_complete:
@@ -30,11 +26,12 @@ slides:
         style: header_md, row_main, col_left_anchor
         max_chars: 10
         char_list: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-        shift_left_event: prev_char
-        shift_right_event: next_char
-        select_event: select_char
+        shift_left_event: s_flipper_left_inactive
+        shift_right_event: s_flipper_right_inactive
+        select_event: flipper_cancel
         force_complete_event: s_start_button_active
         abort_event: flipper_cradle
+        block_on_flipper_cancel: true
       - type: text
         text: ""
         key: profile_name

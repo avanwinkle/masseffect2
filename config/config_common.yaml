@@ -38,7 +38,6 @@ text_ui:
     - current_career_player_2
     - current_career_player_3
     - current_career_player_4
-    - flipper_cancelling
   player_vars:
     - available_missions
     - assignments_completed
@@ -212,9 +211,6 @@ machine_vars:
   base_cooldown:
     initial_value: 50
     value_type: int
-    persist: false
-  flipper_cancelling:
-    initial_value: 0
     persist: false
   # This needs to be a machine variable so that it can exist outside of game modes (i.e. mainmenu)
   players_widget_text:

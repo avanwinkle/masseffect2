@@ -97,8 +97,6 @@ event_player:
     - disable_missionresume
   flipper_cradle{not device.timers.activate_power.running}:
     - start_mode_instantinfo
-  flipper_cradle_release:
-    - stop_mode_instantinfo
   # Defer the awarding of points to avoid a blip in the slide.
   # Do this in base so starting missionselect won't miss it
   levelup.1:

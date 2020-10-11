@@ -12,7 +12,7 @@ class InstantInfo(Carousel):
         # No info during normandy attack
         if self.machine.modes.normandyattack.active:
             return
-        self._items = self._build_items_list()
+        self._all_items = self._build_items_list()
         super().mode_start(**kwargs)
 
     def _build_items_list(self):

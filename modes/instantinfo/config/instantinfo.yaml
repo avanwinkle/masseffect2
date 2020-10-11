@@ -22,7 +22,7 @@ event_player:
   flipper_cancel:
     - instantinfo_next{not current_player.introslide}
     - remove_instantinfo_intro{current_player.introslide}
-
+  flipper_cradle_release: stop_mode_instantinfo
   instantinfo_player_highlighted:
     play_instantinfo_mission_slide{current_player.casual}:
       mission_title: "Casual Play"

@@ -209,7 +209,7 @@ class MainMenu(Carousel):
                                     direction=direction)
 
     def _next_item(self, **kwargs):
-        if self._done:
+        if self._done or self._is_flipper_cancelling:
             return
         # Are we picking difficulty?
         if self._selected_difficulty >= 0 and self._selected_flow == -1:
@@ -230,7 +230,7 @@ class MainMenu(Carousel):
         super()._next_item(**kwargs)
 
     def _previous_item(self, **kwargs):
-        if self._done:
+        if self._done or self._is_flipper_cancelling:
             return
         # Are we picking difficulty?
         if self._selected_difficulty >= 0 and self._selected_flow == -1:
@@ -248,7 +248,7 @@ class MainMenu(Carousel):
                                          detail=FLOWS[self._selected_flow])
                 self.machine.events.post("update_flow_easiest")
             return
-        super()._next_item(**kwargs)
+        super()._previous_item(**kwargs)
 
     def _set_selected_career(self, career):
         self._selected_career = career
