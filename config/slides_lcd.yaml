@@ -84,10 +84,10 @@ slides:
   medigel_slide:
     transition: 
       type: move_in
-      direction: up
+      direction: bottom
     transition_out:
       type: move_in
-      direction: up
+      direction: top
     widgets:
       - type: image
         image: medigel
@@ -237,17 +237,20 @@ slides:
         style: header_md, row_main
       - widget: planet_widget_(planets_mod)
   portrait_slide:
+    transition: fade
     transition_out: 
       type: fade
     widgets:
       - widget: (portrait_name)
   portrait_slide_QUEUE_A:
+    transition: fade
     transition_out: 
       type: fade
       duration: 150ms
     widgets:
       - widget: (portrait_name)
   portrait_slide_QUEUE_B:
+    transition: fade
     transition_out: 
       type: fade
       duration: 150ms

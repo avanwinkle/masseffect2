@@ -24,7 +24,7 @@ class MainMenu(Carousel):
         self._selected_difficulty = None
         self._selected_flow = None
         self.log = logging.getLogger("MainMenu")
-        self.log.setLevel(20)
+        self.log.setLevel(10)
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""
@@ -53,7 +53,7 @@ class MainMenu(Carousel):
 
         self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))
         self._shown_menu = self.mainmenu
-        super().mode_start()
+        
         if self._selected_career:
             if "achievements" in self._selected_career:
                 starting_item = "resume_game"
@@ -62,14 +62,15 @@ class MainMenu(Carousel):
         else:
             starting_item = "casual"
         self._highlighted_item_index = self.mainmenu.index(starting_item)
-        self._update_highlighted_item(None)
+        # self._update_highlighted_item(None)
         # We've already set the selected career, but want the event to be posted
         self._set_selected_career(self._selected_career)
+        super().mode_start()
 
     def _load_mainmenu(self):
         menu = ["casual", "create_career"]
         if len(self.careers) > (0 if not self._selected_career else 1):
-            menu = ["change_career"] + menu
+            menu.insert(1, "change_career")
         if self._selected_career:
             menu = ["new_game"] + menu
             if "achievements" in self._selected_career:

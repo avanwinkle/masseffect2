@@ -39,11 +39,18 @@ slide_player:
   mainmenu_create_career_highlighted: career_new_slide
   # Selecting and moving between menus
   highlight_career: career_select_slide
+  mode_mainmenu_started:
+    portrait_createprofile:
+      target: lcd_right
 
 slides:
   change_career_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Switch Profiles
@@ -56,8 +63,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   select_career_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Select a Profile
@@ -67,8 +78,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   resume_game_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Continue Game
@@ -81,8 +96,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   new_game_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: New Game
@@ -95,8 +114,10 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   career_select_slide:
-    transition: fade
-    transition_out: fade
+
+    # No transitions on this slide because the same slide is used
+    # for all careers. Transitions create a blip of the underlying
+    # slide!
     widgets:
       - type: text
         text: "Load Profile:"
@@ -114,8 +135,12 @@ slides:
         halign: right
       - widget: background_console
   career_new_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Create Profile
@@ -125,8 +150,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   casual_slide:
-    transition: fade
-    transition_out: fade
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Casual Play
@@ -135,6 +164,13 @@ slides:
         text: "(machine|players_widget_text)"
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
+  portrait_createprofile:
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: video
+        video: createprofile_01
+        end_behavior: loop
 
 show_player:
   show_mainmenu: mainmenu_show
