@@ -38,18 +38,21 @@ slides:
       - type: image
         image: texture_console
   gameover_slide:
-    - type: text
-      text: (machine|gameover_text)
-      style: header_lg
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      x: 0
-      z: 0
-      opacity: 0.5
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: (machine|gameover_text)
+        style: header_lg
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
   singleplayer_slide:
-    transition:
-      type: fade
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (score)
@@ -79,13 +82,20 @@ slides:
               duration: 2000s
   # Miscellaneous slides
   medigel_slide:
-    - type: image
-      image: medigel
-      style: row_sub_under
-      z: 2
-    - type: text
-      text: "Medigel\nDeployed"
-      style: header_md, row_main
+    transition: 
+      type: move_in
+      direction: up
+    transition_out:
+      type: move_in
+      direction: up
+    widgets:
+      - type: image
+        image: medigel
+        style: row_sub_under
+        z: 2
+      - type: text
+        text: "Medigel\nDeployed"
+        style: header_md, row_main
   minerals_slide:
     # IRIDIUM
     - type: line
@@ -219,17 +229,38 @@ slides:
     - type: image
       image: texture_console
   planet_scanned_slide:
-    - type: text
-      text: "(planets) Planet(suffix)\n Scanned"
-      style: header_md, row_main
-    - widget: planet_widget_(planets_mod)
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: "(planets) Planet(suffix)\n Scanned"
+        style: header_md, row_main
+      - widget: planet_widget_(planets_mod)
   portrait_slide:
+    transition_out: 
+      type: fade
+    widgets:
+      - widget: (portrait_name)
+  portrait_slide_QUEUE_A:
+    transition_out: 
+      type: fade
+      duration: 150ms
+    widgets:
+      - widget: (portrait_name)
+  portrait_slide_QUEUE_B:
+    transition_out: 
+      type: fade
+      duration: 150ms
     widgets:
       - widget: (portrait_name)
   recruit_portrait_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - widget: portrait_recruit(squadmate)
   recruit_instructions_portrait_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - widget: portrait_recruit_intro_(squadmate)
   # Recruit completes require their own slides, since they use shows for video duration
@@ -241,15 +272,18 @@ slides:
       image: portrait_recruitjack
   # Core slides
   1player_score_slide:
-    - type: text
-      text: (machine|player1_score)
-      style: header_lg, row_main, num
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      opacity: 0.5
-      x: 0
-      z: 0
+    transition: fade
+    transition_out: fade
+    widget:
+      - type: text
+        text: (machine|player1_score)
+        style: header_lg, row_main, num
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        opacity: 0.5
+        x: 0
+        z: 0
   2player_score_slide:
     - type: text
       text: (machine|last_career_player_1)

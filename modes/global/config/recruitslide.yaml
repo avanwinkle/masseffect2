@@ -193,6 +193,8 @@ slide_player:
 
 slides:
   recruit_mission_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (missionname)
@@ -213,7 +215,27 @@ slides:
         text: (base_missiontimer_tick)
         style: timer_primary, row_gutter, col_right_indent, color_ui_yellow
       - widget: background_console
-  recruit_advance_slide:
+  recruit_advance_slide_QUEUE_A:
+    transition_out: 
+      type: fade
+      duration: 150ms
+    widgets:
+      - type: text
+        text: (slide_title)
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
+        casing: title
+      - type: text
+        text: (slide_instruction)
+        anchor_y: bottom
+        style: body_md, row_sub, col_left_anchor, color_ui_orange
+      - widget: background_console
+  recruit_advance_slide_QUEUE_B:
+    transition_out:
+      type: fade
+      duration: 150ms
     widgets:
       - type: text
         text: (slide_title)
@@ -228,6 +250,8 @@ slides:
         style: body_md, row_sub, col_left_anchor, color_ui_orange
       - widget: background_console
   recruit_instructions_slide_lcd:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (missionname)

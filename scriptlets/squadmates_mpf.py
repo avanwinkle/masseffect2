@@ -191,7 +191,7 @@ class MPFSquadmateHandlers(CustomCode):
             ) else "3s"
 
             self.machine.events.post("queue_slide",
-                                     slide="recruit_advance_slide".format(future_mate_status),
+                                     slide="recruit_advance_slide_QUEUE_A",
                                      expire=expire,
                                      squadmate=mate, status=future_mate_status,
                                      portrait="squadmate_{}_advance".format(mate),

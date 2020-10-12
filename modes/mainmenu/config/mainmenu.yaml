@@ -42,6 +42,8 @@ slide_player:
 
 slides:
   change_career_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: Switch Profiles
@@ -54,6 +56,8 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   select_career_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: Select a Profile
@@ -63,6 +67,8 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   resume_game_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: Continue Game
@@ -75,6 +81,8 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   new_game_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: New Game
@@ -87,6 +95,8 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   career_select_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: "Load Profile:"
@@ -104,6 +114,8 @@ slides:
         halign: right
       - widget: background_console
   career_new_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: Create Profile
@@ -113,6 +125,8 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   casual_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: Casual Play

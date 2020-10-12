@@ -539,29 +539,36 @@ slides:
       image: squadmates_grid_overlay
       z: 100
   intro_no_missions_slide:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Hit any lane 3x\nto unlock missions"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Hit any lane 3x\nto unlock missions"
+        style: header_xs, row_sub_under
+      - widget: background_console
   intro_missions_slide:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Select a mission\nat the Galaxy Map"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Select a mission\nat the Galaxy Map"
+        style: header_xs, row_sub_under
+      - widget: background_console
   intro_missions_slide_mp:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Select a mission\nat the Galaxy Map"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Select a mission\nat the Galaxy Map"
+        style: header_xs, row_sub_under
+      - widget: background_console
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh
