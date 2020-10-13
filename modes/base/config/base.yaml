@@ -408,7 +408,7 @@ slides:
       anchor_x: left
       anchor_y: bottom
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 0
       y: 0
       z: 2
@@ -419,7 +419,7 @@ slides:
       anchor_x: left
       anchor_y: bottom
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 121
       y: 0
       z: 2
@@ -430,7 +430,7 @@ slides:
       anchor_x: left
       anchor_y: bottom
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 242
       y: 0
       z: 2
@@ -441,7 +441,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 363
       y: 0
       z: 2
@@ -452,9 +452,9 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       # animations:
-      #   show_slide: sqicon_available
+      #   add_to_slide: sqicon_available
       x: 0
       y: 158
       z: 2
@@ -465,7 +465,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 121
       y: 158
       z: 2
@@ -476,7 +476,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 242
       y: 158
       z: 2
@@ -487,7 +487,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 363
       y: 158
       z: 2
@@ -498,7 +498,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 0
       y: 316
       z: 2
@@ -509,7 +509,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 121
       y: 316
       z: 2
@@ -520,7 +520,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 242
       y: 316
       z: 2
@@ -531,7 +531,7 @@ slides:
       anchor_y: bottom
       anchor_x: left
       animations:
-        show_slide: sqicon_available
+        add_to_slide: sqicon_available
       x: 363
       y: 316
       z: 2

@@ -20,6 +20,7 @@ class MainMenu(Carousel):
         # Set initial values
         self.mainmenu = []
         self.careers = []
+        self._current_avatar = None
         self._selected_career = None
         self._selected_difficulty = None
         self._selected_flow = None
@@ -35,6 +36,8 @@ class MainMenu(Carousel):
         # Reset the difficulty and flow selections
         self._selected_difficulty = -1
         self._selected_flow = -1
+        # Track the avatar to avoid re-playing the same slide
+        self._current_avatar = -1
         # When the mode starts, create a handler to trigger the Carousel start.
         self.add_mode_event_handler("show_mainmenu", self.show_menu)
         # Watch for adding players, which we prevent during creation.
@@ -202,7 +205,7 @@ class MainMenu(Carousel):
         if self._shown_menu == self.careers:
             career = self.careers[self._highlighted_item_index]
             self._set_selected_career(career)
-            self._post_career_event("highlight_career".format(self.name),
+            self._post_career_event("highlight_career",
                                     difficulty_name=DIFFICULTIES[career.get("difficulty",0)],
                                     flow_name=FLOWS[career.get("high_flow", 0)])
         else:
@@ -281,11 +284,18 @@ class MainMenu(Carousel):
 
     def _post_career_event(self, evt_name, **kwargs):
         career_data = self._selected_career or {"casual": True}
+        new_avatar = career_data.get("avatar", 0)
+        if new_avatar != self._current_avatar:
+            self._current_avatar = new_avatar
+            avatargs = { "avatar": new_avatar }
+        else:
+            avatargs = {}
         self.machine.events.post(evt_name,
                                  career_name=career_data.get("career_name"),
                                  career_started=career_data.get("_career_started"),
                                  last_played=career_data.get("_last_played"),
                                  level=career_data.get("level"),
                                  casual=career_data.get("casual"),
+                                 **avatargs,
                                  **kwargs
                                  )

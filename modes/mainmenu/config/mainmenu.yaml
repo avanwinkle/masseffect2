@@ -39,8 +39,17 @@ slide_player:
   mainmenu_create_career_highlighted: career_new_slide
   # Selecting and moving between menus
   highlight_career: career_select_slide
-  mode_mainmenu_started:
-    portrait_createprofile:
+  set_career{avatar==0}:
+    portrait_createprofile_0:
+      target: lcd_right
+  set_career{avatar==1}:
+    portrait_createprofile_1:
+      target: lcd_right
+  set_career{avatar==2}:
+    portrait_createprofile_2:
+      target: lcd_right
+  set_career{avatar==3}:
+    portrait_createprofile_3:
       target: lcd_right
 
 slides:
@@ -164,13 +173,47 @@ slides:
         text: "(machine|players_widget_text)"
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
-  portrait_createprofile:
-    transition: fade
-    transition_out: fade
-    widgets:
+  portrait_createprofile_0:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
       - type: video
-        video: createprofile_01
+        video: createprofile_0
         end_behavior: loop
+      - type: image
+        image: portrait_avatar_0
+  portrait_createprofile_1:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
+      - type: video
+        video: createprofile_1
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_1
+  portrait_createprofile_2:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
+      - type: video
+        video: createprofile_2
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_2
+  portrait_createprofile_3:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
+      - type: video
+        video: createprofile_3
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_3
+  
 
 show_player:
   show_mainmenu: mainmenu_show
@@ -331,4 +374,3 @@ widgets:
           - property: opacity
             value: 0.2
             duration: 50ms
-

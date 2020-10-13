@@ -430,10 +430,10 @@ animations:
   sqicon_available:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
-      duration: 0.75s          # duration for this step (how long it takes to get there)
+      duration: 1500ms          # duration for this step (how long it takes to get there)
     - property: opacity      # second step in the animation (starts with a hyphen)
       value: 0.25
-      duration: 0.75s
+      duration: 1500ms
       repeat: true
   sqicon_complete:
     - property: color
