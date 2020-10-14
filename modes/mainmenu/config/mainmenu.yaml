@@ -36,7 +36,8 @@ slide_player:
   mainmenu_change_career_highlighted{career_name==" "}:
     select_career_slide: {}
   mainmenu_casual_highlighted: casual_slide
-  mainmenu_create_career_highlighted: career_new_slide
+  mainmenu_create_career_highlighted: 
+    career_new_slide: {}
   # Selecting and moving between menus
   highlight_career: career_select_slide
   set_career{avatar==0}:
@@ -51,6 +52,7 @@ slide_player:
   set_career{avatar==3}:
     portrait_createprofile_3:
       target: lcd_right
+  
 
 slides:
   change_career_slide:
@@ -213,6 +215,26 @@ slides:
         end_behavior: loop
       - type: image
         image: portrait_avatar_3
+  portrait_createprofile_4:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
+      - type: video
+        video: createprofile_4
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_4
+  portrait_createprofile_5:
+    transition:
+      type: fade
+      duration: 200ms
+    widgets: 
+      - type: video
+        video: createprofile_5
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_5
   
 
 show_player:
