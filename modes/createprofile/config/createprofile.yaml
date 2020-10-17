@@ -46,3 +46,4 @@ slides:
         color: BBBBBB
         style: body_xs, row_bottom, col_left_anchor
         halign: left
+      - widget: background_console

@@ -10,7 +10,7 @@ spike:
   port: /dev/tty.usbserial-FTA6MU05
   flow_control: true
   baud: 115200
-  runtime_baud: 2500000
+  # runtime_baud: 2500000
   debug: true
   # file_log: full
   nodes: 0, 1, 8, 9, 10

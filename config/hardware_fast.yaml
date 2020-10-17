@@ -534,26 +534,32 @@ lights:
   l_power_charge:
     number: 0-31
     type: grb
+    default_on_color: color_grunt
     tags: light_powers, charge
   l_power_armor:
     number: 0-30
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, armor
   l_power_adrenaline:
     number: 0-29
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, adrenaline
   l_power_cloak:
     number: 0-28
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, cloak
   l_power_drone:
     number: 0-27
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, drone
   l_power_singularity:
     number: 0-26
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, singularity
   # Career ladder
   l_progress_collectorship:
