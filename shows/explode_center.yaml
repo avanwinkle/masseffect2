@@ -1338,8 +1338,12 @@
     l_progress_collectorship: '653607'
     l_progress_derelictreaper: '6D3A07'
     l_progress_normandy: '5C3106'
-    l_right_ramp_arrow: '000000'
-    l_right_return_lane: '000000'
+    l_right_ramp_arrow: 
+      color: stop
+      fade: 30ms
+    l_right_return_lane: 
+      color: stop
+      fade: 30ms
     
 - time: '+1'
   lights:
@@ -1637,7 +1641,9 @@
     
 - time: '+1'
   lights:
-    l_dropbank_top: '000000'
+    l_dropbank_top: 
+      color: stop
+      fade: 30ms
     l_hitbank_top: '020100'
     l_ladder_light_0: '100901'
     l_ladder_light_1: '120A01'
@@ -1689,7 +1695,9 @@
     
 - time: '+1'
   lights:
-    l_hitbank_bottom: '000000'
+    l_hitbank_bottom: 
+      color: stop
+      fade: 30ms
     l_hitbank_top: '010000'
     l_ladder_light_0: '040200'
     l_ladder_light_1: '040300'
@@ -1707,18 +1715,46 @@
     
 - time: '+1'
   lights:
-    l_hitbank_top: '000000'
-    l_ladder_light_0: '000000'
-    l_ladder_light_1: '000000'
-    l_ladder_light_2: '000000'
-    l_ladder_light_3: '000000'
-    l_ladder_light_4: '000000'
-    l_ladder_light_5: '000000'
-    l_ladder_light_6: '000000'
-    l_ladder_light_7: '000000'
-    l_ladder_light_8: '000000'
-    l_ladder_light_9: '000000'
-    l_progress_collectorship: '000000'
-    l_progress_derelictreaper: '000000'
-    l_progress_normandy: '000000'
+    l_hitbank_top: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_0: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_1: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_2: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_3: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_4: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_5: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_6: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_7: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_8: 
+      color: stop
+      fade: 30ms
+    l_ladder_light_9: 
+      color: stop
+      fade: 30ms
+    l_progress_collectorship: 
+      color: stop
+      fade: 30ms
+    l_progress_derelictreaper: 
+      color: stop
+      fade: 30ms
+    l_progress_normandy: 
+      color: stop
+      fade: 30ms
     
