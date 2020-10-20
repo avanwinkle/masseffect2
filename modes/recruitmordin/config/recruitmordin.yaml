@@ -106,19 +106,21 @@ show_player:
     gi_show:
       start_step: 2
       manual_advance: True
+      show_tokens:
+        backwall_color: color_mordin
   show_recruit_instructions:
     recruitintro_mordin:
       loops: 0
 
 shows:
   recruitintro_mordin:
-    - time: 2s
+    - time: 1900ms
       events:
         - play_intro_sound{device.counters.cure_counter.value==4}
         - play_cure_sound{device.counters.cure_counter.value<4}
-    - time: 8s
+    - time: 6s
       events: mission_intro_complete
-    - time: 9500ms
+    - time: 108300ms
       slides:
         recruit_instructions_slide:
           action: remove

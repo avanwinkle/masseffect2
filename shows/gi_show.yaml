@@ -7,7 +7,7 @@
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
       fade: 1s
     light_backwall_ambient:
-      color: color_space
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_space
@@ -26,7 +26,7 @@
       color: color_grunt
       fade: 1s
     light_backwall_ambient:
-      color: color_mordin
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_mordin
@@ -45,7 +45,7 @@
       color: FFB74C
       fade: 1s
     light_backwall_ambient:
-      color: color_jack
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_space

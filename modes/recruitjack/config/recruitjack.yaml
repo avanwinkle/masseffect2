@@ -179,6 +179,8 @@ show_player:
     gi_show:
       start_step: 3
       manual_advance: True
+      show_tokens:
+        backwall_color: color_jack
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0

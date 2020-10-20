@@ -69,6 +69,8 @@ show_player:
     gi_show:
       start_step: 2
       manual_advance: True
+      show_tokens:
+        backwall_color: color_garrus
     recruitintro_garrus:
       loops: 0
   logicblock_doors_closed_counter_hit{count==0}: 

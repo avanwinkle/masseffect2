@@ -57,6 +57,8 @@ show_player:
     gi_show:
       start_step: 1
       manual_advance: True
+      show_tokens:
+        backwall_color: color_space
 
 sound_player:
   play_field_music{current_player.high_flow==1}:

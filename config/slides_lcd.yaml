@@ -279,6 +279,18 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitjack
+  recruit_complete_portrait_slide_kasumi:
+    - type: video
+      video: recruitkasumi_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitkasumi
+  recruit_complete_portrait_slide_mordin:
+    - type: video
+      video: recruitmordin_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitmordin
   # Core slides
   1player_score_slide:
     transition: fade
@@ -704,7 +716,7 @@ widgets:
   portrait_recruitzaeed:
     - type: image
       image: portrait_recruitzaeed
-  # Squadmate intro videos. Will be regular portraits until videos are done
+  # Squadmate intro videos. 
   portrait_recruit_intro_garrus:
     - type: video
       video: recruitgarrus_intro
@@ -743,11 +755,14 @@ widgets:
       end_behavior: pause
       z: 104
   portrait_recruit_intro_kasumi:
-    - type: image
-      image: portrait_recruitkasumi
+    - type: video
+      video: recruitintro_kasumi
+      end_behavior: pause
+      z: 105
   portrait_recruit_intro_mordin:
     - type: video
       video: recruitintro_mordin
+      end_behavior: pause
   portrait_recruit_intro_legion:
     - type: image
       image: portrait_recruitlegion
@@ -763,6 +778,7 @@ widgets:
   portrait_recruit_intro_zaeed:
     - type: image
       image: portrait_recruitzaeed
+  # This underlays the right lcd during mission select
   dossier_recruit_base:
     - type: image
       image: codex_image_overlay

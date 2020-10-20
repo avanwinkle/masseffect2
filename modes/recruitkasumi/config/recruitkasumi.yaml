@@ -65,7 +65,7 @@ counters:
     direction: down
   # This counter tracks how many alarmed shots are hit before failure
   kasumi_alarms_counter:
-    starting_count: 3
+    starting_count: 3 - current_player.difficulty
     count_complete_value: 0
     count_events: power_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
@@ -91,6 +91,8 @@ show_player:
     kasumi_gi_show:
       action: play
       loops: -1
+    recruitintro_kasumi:
+      loops: 0
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -118,6 +120,19 @@ show_player:
       speed: 60
 
 shows:
+  recruitintro_kasumi:
+    - time: 500ms
+      sounds: 
+        kasumi_list_of_items:
+          action: play
+    - time: 10s
+      events: mission_intro_complete
+    - time: 11460ms
+      slides:
+        recruit_instructions_slide:
+          action: remove
+        recruit_intro_portrait:
+          action: remove
   # Dim the general illumination to make it feel more heist-y
   kasumi_gi_show:
     - duration: 1s
@@ -237,26 +252,60 @@ slide_player:
 
 slides:
   kasumi_slide_1:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
         text: Password Obtained
         style: body_lg
+      - widget: background_console
   kasumi_slide_2:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
         text: Voiceprint Recorded
         style: body_lg
+      - widget: background_console
   kasumi_slide_3:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
         text: DNA Sample Obtained
         style: body_lg
+      - widget: background_console
   kasumi_slide_4:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
         text: Barrier Deactivated
         style: body_lg
+      - widget: background_console
   kasumi_alarm_slide:
+    transition:
+      type: fade 
+      duration: 200ms
+    transition_out:
+      type: fade
+      duration: 200ms
     widgets:
       - type: text
         text: "Alarm Tripped!"
@@ -264,11 +313,29 @@ slides:
       - type: text
         text: "(count) until failure"
         style: body_md, row_sub
+      - type: rectangle
+        width: 758
+        height: 468
+        z: 4
+        color: FF000050
+      - widget: background_console
   kasumi_failed_slide:
+    transition:
+      type: fade 
+      duration: 200ms
+    transition_out:
+      type: fade
+      duration: 200ms
     widgets:
       - type: text
         text: FAILED!
         style: body_lg
+      - type: rectangle
+        width: 758
+        height: 468
+        z: 4
+        color: FF000050
+      - widget: background_console
 
 sound_player:
   mode_recruitkasumi_started:
@@ -276,8 +343,6 @@ sound_player:
       action: play
       loops: -1
       fade_in: 1s
-    kasumi_need_password_and_voice:
-      action: play
   # Alarm hit
   logicblock_kasumi_alarms_counter_hit:
     kasumi_careful:
@@ -295,9 +360,9 @@ sound_player:
     kasumi_not_great_saliva_sample:
       max_queue_time: 2s
   # Fourth shot hit, get the barrier down
-  logicblock_kasumi_shots_counter_hit{count==0}:
-    kasumi_barrier_is_down:
-      max_queue_time: 2s
+  # logicblock_kasumi_shots_counter_hit{count==0}:
+  #   kasumi_barrier_is_down:
+  #     max_queue_time: 2s
 
 sound_pools:
   kasumi_careful:
@@ -313,7 +378,7 @@ sound_pools:
     type: random
     sounds:
       - kasumi_weve_got_the_password_need_voice
-      - kasumi_still_need_password_and_voice
+      # - kasumi_still_need_password_and_voice
       - shepard_password_is_perrugia
     track: voice
   kasumi_voice_complete:

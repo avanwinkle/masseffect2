@@ -110,6 +110,12 @@ show_player:
   recruit_jack_complete:
     recruit_success_jack:
       loops: 0
+  recruit_kasumi_complete:
+    recruit_success_kasumi:
+      loops: 0
+  recruit_mordin_complete:
+    recruit_success_mordin:
+      loops: 0
 
 shows:
   recruit_success_garrus:
@@ -130,26 +136,35 @@ shows:
     - time: 1500ms
       sounds: missioncomplete_voice_jack
     - time: 9700ms
+  recruit_success_kasumi:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_kasumi:
+          target: lcd_right
+          priority: 1000
+    - time: 800ms
+      sounds: missioncomplete_voice_kasumi
+    - time: 6160ms
+  recruit_success_mordin:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_mordin:
+          target: lcd_right
+          priority: 1000
+    - time: 500ms
+      sounds: missioncomplete_voice_mordin
+    - time: 7630ms
 
 widgets:
-  portrait_squadmate_garrus_complete:
-    - type: image
-      image: portrait_squadmate_garrus_complete
   portrait_squadmate_grunt_complete:
     - type: image
       image: portrait_squadmate_grunt_complete
-  portrait_squadmate_jack_complete:
-    - type: video
-      video: recruitjack_complete
   portrait_squadmate_kasumi_complete:
     - type: image
       image: portrait_squadmate_kasumi_complete
   portrait_squadmate_legion_complete:
     - type: image
       image: portrait_squadmate_legion_complete
-  portrait_squadmate_mordin_complete:
-    - type: image
-      image: portrait_squadmate_mordin_complete
   portrait_squadmate_samara_complete:
     - type: image
       image: portrait_squadmate_samara_complete
@@ -170,21 +185,17 @@ widgets:
 #####
 sound_player:
   recruit_success_grunt: missioncomplete_voice_grunt
-  recruit_success_kasumi: missioncomplete_voice_kasumi
   recruit_success_legion: missioncomplete_voice_legion
-  recruit_success_mordin: missioncomplete_voice_mordin
   recruit_success_samara: missioncomplete_voice_samara
   recruit_success_tali: missioncomplete_voice_tali
   recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
-  # TODO: Find better sounds, or learn to share with powers
-  #  timer_missiontimer_complete: shep_cant_reach_target
+  recruit_failure_garrus: garrus_failed
   recruit_failure_kasumi: kasumi_failed
   recruit_failure_tali: tali_failed
   recruit_failure_mordin: mordin_failed
   # TODO: replace these with squadmate dialogue
-  recruit_failure_garrus: garrus_failed
   # recruit_failure_grunt: shep_cant_reach_target
   # recruit_failure_jack: shep_cant_reach_target
 
@@ -409,6 +420,7 @@ sounds:
   missioncomplete_voice_kasumi_3:
     file: DLC_HEN_MT_Int.061.ogg
     track: voice
+    # end_at: 3230ms
     ducking:
       target: levelup
       attenuation: 0.5
@@ -418,6 +430,7 @@ sounds:
   missioncomplete_voice_kasumi_4:
     file: DLC_HEN_MT_Int.067.ogg
     track: voice
+    start_at: 1500ms
     ducking:
       target: levelup
       attenuation: 0.5

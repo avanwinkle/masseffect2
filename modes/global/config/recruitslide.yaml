@@ -3,7 +3,6 @@
 event_player:
   # Delay the release of the ball until after the instructions are shown
   # TODO: As modes get their intro shows, stop using this hacky release event
-  mode_recruitkasumi_started: mission_intro_complete|3s
   mode_recruitlegion_started: mission_intro_complete|3s
   mode_recruitsamara_started: mission_intro_complete|3s
   mode_recruittali_started: mission_intro_complete|3s
