@@ -88,6 +88,13 @@ event_player:
     - play_power_widget_(power)
 
 # Looking for variable_player? Probably in the python code
+variable_player:
+  power_shots_lit_hit: 
+    score: 100
+  power_shots_off_hit:
+    score: 20
+  frenzy_hit:
+    score: 10
 
 counters:
   powers_cooldown:

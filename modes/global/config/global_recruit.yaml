@@ -103,11 +103,24 @@ show_player:
   ball_save_recruitsave_disabled:
     ball_save_show:
       action: stop
+  # When ALL squadmates have been converted to video, parameterize this
+  recruit_garrus_complete:
+    recruit_success_garrus:
+      loops: 0
   recruit_jack_complete:
     recruit_success_jack:
       loops: 0
 
 shows:
+  recruit_success_garrus:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_garrus:
+          target: lcd_right
+          priority: 1000
+    - time: 1000ms
+      sounds: missioncomplete_voice_garrus
+    - time: 5670ms
   recruit_success_jack:
     - time: 0
       slides:
@@ -153,9 +166,9 @@ widgets:
 #####
 # Play the 'mission complete' sounds in recruitbase, because the actual mission
 # that's been completed will have its mode stopped before the sound finishes
+# TODO: Migrate these sounds to the end-of-mission show
 #####
 sound_player:
-  recruit_success_garrus: missioncomplete_voice_garrus
   recruit_success_grunt: missioncomplete_voice_grunt
   recruit_success_kasumi: missioncomplete_voice_kasumi
   recruit_success_legion: missioncomplete_voice_legion
@@ -171,7 +184,7 @@ sound_player:
   recruit_failure_tali: tali_failed
   recruit_failure_mordin: mordin_failed
   # TODO: replace these with squadmate dialogue
-  # recruit_failure_garrus: shep_cant_reach_target
+  recruit_failure_garrus: garrus_failed
   # recruit_failure_grunt: shep_cant_reach_target
   # recruit_failure_jack: shep_cant_reach_target
 
@@ -241,6 +254,10 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
     max_queue_time: 1s
+  garrus_failed:
+    type: random
+    track: voice
+    sounds: garrus_hold_fire, garrus_that_did_nothing
   kasumi_failed:
     type: random_force_all
     track: voice
@@ -289,10 +306,16 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
+      attenuation: 0.8
       attack: 100ms
       release: 300ms
       release_point: 500ms
+  garrus_hold_fire:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+    track: voice
+  garrus_that_did_nothing:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303091_m.ogg
+    track: voice
   missioncomplete_voice_grunt_1:
     file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.ogg
     track: voice

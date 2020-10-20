@@ -267,10 +267,16 @@ slides:
     widgets:
       - widget: portrait_recruit_intro_(squadmate)
   # Recruit completes require their own slides, since they use shows for video duration
+  recruit_complete_portrait_slide_garrus:
+    - type: video
+      video: recruitgarrus_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitgarrus
   recruit_complete_portrait_slide_jack:
     - type: video
       video: recruitjack_complete
-    # Include the image underneath, which is already cached, to prevent black during asset loading
+      end_behavior: pause
     - type: image
       image: portrait_recruitjack
   # Core slides
@@ -701,32 +707,40 @@ widgets:
   # Squadmate intro videos. Will be regular portraits until videos are done
   portrait_recruit_intro_garrus:
     - type: video
-      video: recruitintro_garrus
+      video: recruitgarrus_intro
+      end_behavior: pause
   portrait_recruit_intro_grunt:
     - type: video
       video: recruitintro_grunt
+      end_behavior: pause
   portrait_recruit_intro_jack:
     - type: video
       video: recruitjack_warden_sniping
+      end_behavior: pause
   portrait_recruit_jack_awakening:
     - type: video
       video : recruitjack_awakening
+      end_behavior: pause
       z: 100
   portrait_recruit_jack_jackattack:
     - type: video
       video: recruitjack_jackattack
+      end_behavior: pause
       z: 101
   portrait_recruit_jack_approach:
     - type: video
       video: recruitjack_approach
+      end_behavior: pause
       z: 102
   portrait_recruit_jack_valuable_shepard:
     - type: video
       video: recruitjack_valuable_shepard
+      end_behavior: pause
       z: 103
   portrait_recruit_jack_not_happening:
     - type: video
       video: recruitjack_not_happening
+      end_behavior: pause
       z: 104
   portrait_recruit_intro_kasumi:
     - type: image

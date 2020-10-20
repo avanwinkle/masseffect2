@@ -245,6 +245,9 @@ class Powers(Mode):
             state = kwargs.get("state")
             shots = list(filter(lambda x: filter_enabled_and_state_shots(x, state), self.shots))
 
+        if not shots:
+            self.log.warning("Advance mission shots found no shots by kwarg 'shots' or 'state'.")
+
         reset = kwargs.get("reset")
         shift = kwargs.get("shift")
         jump = kwargs.get("jump")
@@ -256,14 +259,16 @@ class Powers(Mode):
                 state = shot._get_state()
                 self.log.debug("Shifting shot {} from {} to {}".format(shot, state, state+shift))
                 shot.jump(state + shift, True)
-            elif jump:
+            elif jump is not None:
                 self.log.debug("Jumping shot {} to {}".format(shot, jump))
                 shot.jump(int(jump), True)
             else:
+                self.log.debug("Advancing shot {} (no action kwarg provided)")
                 shot.advance()
 
         # If we are persisting these shots, set the new name
         if self.persisted_name:
+            self.log.debug("Updating persistence as the result of shot advancement")
             self._update_persistence()
 
     # SPECIFIC POWERS

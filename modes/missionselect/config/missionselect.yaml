@@ -235,6 +235,10 @@ slide_player:
   missionselect_intro_highlighted:
     missionselect_intro_slide:
       target: main
+      transition: fade
+    missionselect_empty_slide:
+      target: lcd_right
+      transition: fade
   missionselect_recruit_highlighted.1{current_player.force_mission==0}:
     missionselect_recruit_slide:
       target: main
@@ -284,6 +288,8 @@ slides:
         text: < FLIPPERS TO SELECT >
         style: body_sm, row_sub_under, row_dmd_bottom, color_ui_orange
       - widget: background_console
+  missionselect_empty_slide:
+    - widget: background_console
   mission_dossier_slide:
     - widget: dossier_recruit(squadmate)
   missionselect_recruit_slide:

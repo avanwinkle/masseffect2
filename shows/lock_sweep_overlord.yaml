@@ -167,7 +167,9 @@
     
 - time: '+1'
   lights:
-    l_ball_save: '000000'
+    l_ball_save: 
+      color:  stop
+      fade: 30ms
     l_dropbank_bottom: '1BCC29'
     l_dropbank_middle: '1DDA2C'
     l_dropbank_top: '1FEB2F'
@@ -292,14 +294,18 @@
     l_ladder_light_7: '17AE23'
     l_ladder_light_8: '18B725'
     l_ladder_light_9: '1AC127'
-    l_left_medigel: '000000'
+    l_left_medigel: 
+      color:  stop
+      fade: 30ms
     l_left_orbit_shield_rgb: '20F230'
     l_left_outlane: '0A480E'
     l_left_return_lane: '0A480E'
     l_progress_collectorship: '138B1C'
     l_progress_derelictreaper: '16A621'
     l_progress_normandy: '1AC327'
-    l_right_medigel: '000000'
+    l_right_medigel: 
+      color:  stop
+      fade: 30ms
     l_right_outlane: '09450E'
     l_right_return_lane: '09470E'
     l_standup_1: '21F932'
@@ -499,18 +505,26 @@
     l_ladder_light_8: '0A4D0F'
     l_ladder_light_9: '0C5912'
     l_left_orbit_shield_rgb: '159A1F'
-    l_left_outlane: '000000'
+    l_left_outlane: 
+      color:  stop
+      fade: 30ms
     l_left_ramp_arrow: '19B825'
     l_left_ramp_shield_rgb: '1EE12D'
-    l_left_return_lane: '000000'
+    l_left_return_lane: 
+      color:  stop
+      fade: 30ms
     l_progress_collectorship: '052708'
     l_progress_derelictreaper: '083F0D'
     l_progress_normandy: '0C5A12'
     l_right_orbit_shield_rgb: '1AC427'
-    l_right_outlane: '000000'
+    l_right_outlane: 
+      color:  stop
+      fade: 30ms
     l_right_ramp_arrow: '17AF23'
     l_right_ramp_shield_rgb: '1CD32A'
-    l_right_return_lane: '000000'
+    l_right_return_lane: 
+      color:  stop
+      fade: 30ms
     l_standup_1: '16A621'
     l_standup_2: '1AC127'
     l_standup_3: '1FE62E'
@@ -566,8 +580,12 @@
     l_hitbank_top: '07320A'
     l_kickback_arrow: '138B1C'
     l_kickback_shield_rgb: '18B324'
-    l_ladder_light_0: '000000'
-    l_ladder_light_1: '000000'
+    l_ladder_light_0: 
+      color:  stop
+      fade: 30ms
+    l_ladder_light_1: 
+      color:  stop
+      fade: 30ms
     l_ladder_light_2: '010601'
     l_ladder_light_3: '020C02'
     l_ladder_light_4: '021103'
@@ -595,7 +613,9 @@
 - time: '+1'
   lights:
     l_battering_ram_top: '1CD42A'
-    l_dropbank_bottom: '000000'
+    l_dropbank_bottom: 
+      color:  stop
+      fade: 30ms
     l_dropbank_middle: '020C02'
     l_dropbank_top: '031A05'
     l_flash_left_orbit: '1CD02A'
@@ -603,8 +623,12 @@
     l_hitbank_top: '052307'
     l_kickback_arrow: '107A18'
     l_kickback_shield_rgb: '15A120'
-    l_ladder_light_2: '000000'
-    l_ladder_light_3: '000000'
+    l_ladder_light_2: 
+      color:  stop
+      fade: 30ms
+    l_ladder_light_3: 
+      color:  stop
+      fade: 30ms
     l_ladder_light_4: '010701'
     l_ladder_light_5: '020C02'
     l_ladder_light_6: '021204'
@@ -630,15 +654,21 @@
 - time: '+1'
   lights:
     l_battering_ram_top: '1AC527'
-    l_dropbank_middle: '000000'
+    l_dropbank_middle: 
+      color:  stop
+      fade: 30ms
     l_dropbank_top: '020F03'
     l_flash_left_orbit: '1AC127'
     l_hitbank_bottom: '010701'
     l_hitbank_top: '031705'
     l_kickback_arrow: '0E6815'
     l_kickback_shield_rgb: '13901D'
-    l_ladder_light_4: '000000'
-    l_ladder_light_5: '000000'
+    l_ladder_light_4: 
+      color:  stop
+      fade: 30ms
+    l_ladder_light_5: 
+      color:  stop
+      fade: 30ms
     l_ladder_light_6: '010802'
     l_ladder_light_7: '020E03'
     l_ladder_light_8: '031404'
@@ -646,7 +676,9 @@
     l_left_orbit_shield_rgb: '0B5311'
     l_left_ramp_arrow: '0F7317'
     l_left_ramp_shield_rgb: '16A220'
-    l_progress_collectorship: '000000'
+    l_progress_collectorship: 
+      color:  stop
+      fade: 30ms
     l_progress_derelictreaper: '010A02'
     l_progress_normandy: '041D06'
     l_right_orbit_shield_rgb: '11801A'
@@ -664,18 +696,24 @@
     l_battering_ram_top: '18B624'
     l_dropbank_top: '010601'
     l_flash_left_orbit: '17B023'
-    l_hitbank_bottom: '000000'
+    l_hitbank_bottom: 
+      color:  stop
+      fade: 30ms
     l_hitbank_top: '010B02'
     l_kickback_arrow: '0B5611'
     l_kickback_shield_rgb: '117F19'
-    l_ladder_light_6: '000000'
+    l_ladder_light_6: 
+      color:  stop
+      fade: 30ms
     l_ladder_light_7: '010401'
     l_ladder_light_8: '010A02'
     l_ladder_light_9: '021003'
     l_left_orbit_shield_rgb: '09430D'
     l_left_ramp_arrow: '0D6214'
     l_left_ramp_shield_rgb: '13911D'
-    l_progress_derelictreaper: '000000'
+    l_progress_derelictreaper: 
+      color:  stop
+      fade: 30ms
     l_progress_normandy: '021003'
     l_right_orbit_shield_rgb: '0F6F16'
     l_right_ramp_arrow: '0C5812'
@@ -700,13 +738,21 @@
     l_backwall_gi_light_8: '22FC32'
     l_backwall_gi_light_9: '22FC32'
     l_battering_ram_top: '16A421'
-    l_dropbank_top: '000000'
+    l_dropbank_top: 
+      color:  stop
+      fade: 30ms
     l_flash_left_orbit: '159E20'
-    l_hitbank_top: '000000'
+    l_hitbank_top: 
+      color:  stop
+      fade: 30ms
     l_kickback_arrow: '09450E'
     l_kickback_shield_rgb: '0F6D16'
-    l_ladder_light_7: '000000'
-    l_ladder_light_8: '000000'
+    l_ladder_light_7: 
+      color:  stop
+      fade: 30ms
+    l_ladder_light_8: 
+      color:  stop
+      fade: 30ms
     l_ladder_light_9: '010601'
     l_left_orbit_shield_rgb: '07340A'
     l_left_ramp_arrow: '0B5110'
@@ -738,11 +784,15 @@
     l_flash_left_orbit: '138E1C'
     l_kickback_arrow: '07360B'
     l_kickback_shield_rgb: '0C5B12'
-    l_ladder_light_9: '000000'
+    l_ladder_light_9: 
+      color:  stop
+      fade: 30ms
     l_left_orbit_shield_rgb: '052407'
     l_left_ramp_arrow: '09400D'
     l_left_ramp_shield_rgb: '0F6D16'
-    l_progress_normandy: '000000'
+    l_progress_normandy: 
+      color:  stop
+      fade: 30ms
     l_right_orbit_shield_rgb: '0A4B0F'
     l_right_ramp_arrow: '07360B'
     l_right_ramp_shield_rgb: '0C5A12'
@@ -827,7 +877,9 @@
     l_flash_left_orbit: '0C5812'
     l_kickback_arrow: '020F03'
     l_kickback_shield_rgb: '062B09'
-    l_left_orbit_shield_rgb: '000000'
+    l_left_orbit_shield_rgb: 
+      color:  stop
+      fade: 30ms
     l_left_ramp_arrow: '031604'
     l_left_ramp_shield_rgb: '083B0C'
     l_right_orbit_shield_rgb: '041F06'
@@ -861,7 +913,9 @@
     l_right_orbit_shield_rgb: '021204'
     l_right_ramp_arrow: '010501'
     l_right_ramp_shield_rgb: '041D06'
-    l_standup_1: '000000'
+    l_standup_1: 
+      color:  stop
+      fade: 30ms
     l_standup_2: '021003'
     l_standup_3: '07320A'
     l_standup_4: '07320A'
@@ -882,12 +936,18 @@
     l_backwall_gi_light_9: '17AB22'
     l_battering_ram_top: '083C0C'
     l_flash_left_orbit: '07380B'
-    l_kickback_arrow: '000000'
+    l_kickback_arrow: 
+      color:  stop
+      fade: 30ms
     l_kickback_shield_rgb: '021204'
-    l_left_ramp_arrow: '000000'
+    l_left_ramp_arrow: 
+      color:  stop
+      fade: 30ms
     l_left_ramp_shield_rgb: '041D06'
     l_right_orbit_shield_rgb: '010802'
-    l_right_ramp_arrow: '000000'
+    l_right_ramp_arrow: 
+      color:  stop
+      fade: 30ms
     l_right_ramp_shield_rgb: '021103'
     l_standup_2: '010701'
     l_standup_3: '052307'
@@ -911,9 +971,13 @@
     l_flash_left_orbit: '052808'
     l_kickback_shield_rgb: '010701'
     l_left_ramp_shield_rgb: '021003'
-    l_right_orbit_shield_rgb: '000000'
+    l_right_orbit_shield_rgb: 
+      color:  stop
+      fade: 30ms
     l_right_ramp_shield_rgb: '010601'
-    l_standup_2: '000000'
+    l_standup_2: 
+      color:  stop
+      fade: 30ms
     l_standup_3: '031504'
     l_standup_4: '031604'
     l_standup_5: '020C02'
@@ -933,9 +997,13 @@
     l_backwall_gi_light_9: '12861B'
     l_battering_ram_top: '041E06'
     l_flash_left_orbit: '031A05'
-    l_kickback_shield_rgb: '000000'
+    l_kickback_shield_rgb: 
+      color:  stop
+      fade: 30ms
     l_left_ramp_shield_rgb: '010701'
-    l_right_ramp_shield_rgb: '000000'
+    l_right_ramp_shield_rgb: 
+      color:  stop
+      fade: 30ms
     l_standup_3: '010B02'
     l_standup_4: '010B02'
     l_standup_5: '010401'
@@ -955,12 +1023,20 @@
     l_backwall_gi_light_9: '0F7417'
     l_battering_ram_top: '021204'
     l_flash_left_orbit: '020E03'
-    l_left_ramp_shield_rgb: '000000'
+    l_left_ramp_shield_rgb: 
+      color:  stop
+      fade: 30ms
     l_left_top_lane: '21F731'
     l_right_top_lane: '21F731'
-    l_standup_3: '000000'
-    l_standup_4: '000000'
-    l_standup_5: '000000'
+    l_standup_3: 
+      color:  stop
+      fade: 30ms
+    l_standup_4: 
+      color:  stop
+      fade: 30ms
+    l_standup_5: 
+      color:  stop
+      fade: 30ms
     l_store: '010401'
     
 - time: '+1'
@@ -993,7 +1069,9 @@
     l_flash_left_orbit: '010501'
     l_left_top_lane: '20ED2F'
     l_right_top_lane: '20ED2F'
-    l_store: '000000'
+    l_store: 
+      color:  stop
+      fade: 30ms
     
 - time: '+1'
   lights:
@@ -1021,8 +1099,12 @@
     l_backwall_gi_light_7: '0B5110'
     l_backwall_gi_light_8: '0B5210'
     l_backwall_gi_light_9: '0B5210'
-    l_battering_ram_top: '000000'
-    l_flash_left_orbit: '000000'
+    l_battering_ram_top: 
+      color:  stop
+      fade: 30ms
+    l_flash_left_orbit: 
+      color:  stop
+      fade: 30ms
     l_left_top_lane: '1EE12D'
     l_right_top_lane: '1EE02D'
     
@@ -1187,16 +1269,36 @@
     l_backwall_ambient_light_7: '14971E'
     l_backwall_ambient_light_8: '14971E'
     l_backwall_ambient_light_9: '14971E'
-    l_backwall_gi_light_0: '000000'
-    l_backwall_gi_light_1: '000000'
-    l_backwall_gi_light_2: '000000'
-    l_backwall_gi_light_3: '000000'
-    l_backwall_gi_light_4: '000000'
-    l_backwall_gi_light_5: '000000'
-    l_backwall_gi_light_6: '000000'
-    l_backwall_gi_light_7: '000000'
-    l_backwall_gi_light_8: '000000'
-    l_backwall_gi_light_9: '000000'
+    l_backwall_gi_light_0: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_1: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_2: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_3: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_4: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_5: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_6: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_7: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_8: 
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_9: 
+      color:  stop
+      fade: 30ms
     l_left_top_lane: '117F19'
     l_right_top_lane: '117F19'
     
@@ -1368,6 +1470,10 @@
     l_backwall_ambient_light_7: '020C02'
     l_backwall_ambient_light_8: '020C02'
     l_backwall_ambient_light_9: '010B02'
-    l_left_top_lane: '000000'
-    l_right_top_lane: '000000'
+    l_left_top_lane: 
+      color:  stop
+      fade: 30ms
+    l_right_top_lane: 
+      color:  stop
+      fade: 30ms
     
