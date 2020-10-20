@@ -109,11 +109,11 @@ shows:
       events: mission_intro_complete
     - time: 6170ms
       slides:
-        recruit_instructions_slide:
+        recruit_instructions_slide_lcd:
           action: remove
-      widgets:
-        portrait_recruit_intro_jack:
+        recruit_instructions_portrait_slide:
           action: remove
+          target: lcd_right
   show_find_jack:
     - time: 0
       sounds:

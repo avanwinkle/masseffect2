@@ -273,6 +273,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitgarrus
+  recruit_complete_portrait_slide_grunt:
+    - type: video
+      video: recruitgrunt_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitgrunt
   recruit_complete_portrait_slide_jack:
     - type: video
       video: recruitjack_complete

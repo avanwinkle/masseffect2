@@ -122,10 +122,11 @@ shows:
       events: mission_intro_complete
     - time: 108300ms
       slides:
-        recruit_instructions_slide:
+        recruit_instructions_slide_lcd:
           action: remove
-        recruit_intro_portrait:
+        recruit_instructions_portrait_slide:
           action: remove
+          target: lcd_right
 
 sound_player:
   mode_recruitmordin_started:

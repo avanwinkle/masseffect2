@@ -70,18 +70,19 @@ light_player:
 
 shows:
   recruitintro_grunt:
-    - time: 2s
+    - time: 2200ms
       sounds:
         grunt_intro:
           action: play
-    - time: 7s
+    - time: 6s
       events: mission_intro_complete
-    - time: 8620ms  # Length of video: 08;18 = 8.62s
+    - time: 9166ms
       slides:
-        recruit_instructions_slide:
+        recruit_instructions_slide_lcd:
           action: remove
-        recruit_intro_portrait:
+        recruit_instructions_portrait_slide:
           action: remove
+          target: lcd_right
 
 show_player:
   show_recruit_instructions:
@@ -96,10 +97,10 @@ show_player:
         color: color_grunt
 
 sound_player:
-  mission_intro_complete:
+  mode_recruitgrunt_started:
     music_recruit_grunt:
-      action: play
-      mode_end_action: stop
+      fade_in: 1s
+      loops: -1
   logicblock_grunt_shots_counter_hit{count>2}:
     grunt_dialogue:
       max_queue_time: 500ms
@@ -109,9 +110,6 @@ sound_player:
   logicblock_grunt_shots_counter_hit{count==1}:
     grunt_bossdialogue:
       max_queue_time: 500ms
-  logicblock_grunt_shots_counter_complete:
-    music_recruit_grunt:
-      action: stop
 
 sound_pools:
   music_recruit_grunt:
@@ -144,9 +142,21 @@ sounds:
   intro_shep_1:
     file: en_us_player_f_jnkkga_arrival_c_00255073_f.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   intro_shep_2:
     file: en_us_player_f_jnkkga_arrival_c_00283297_f.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_bossdialogue_1:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
     track: voice

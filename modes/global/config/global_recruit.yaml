@@ -107,6 +107,9 @@ show_player:
   recruit_garrus_complete:
     recruit_success_garrus:
       loops: 0
+  recruit_grunt_complete:
+    recruit_success_grunt:
+      loops: 0
   recruit_jack_complete:
     recruit_success_jack:
       loops: 0
@@ -127,6 +130,15 @@ shows:
     - time: 1000ms
       sounds: missioncomplete_voice_garrus
     - time: 5670ms
+  recruit_success_grunt:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_grunt:
+          target: lcd_right
+          priority: 1000
+    - time: 500ms
+      sounds: missioncomplete_voice_grunt
+    - time: 10600ms
   recruit_success_jack:
     - time: 0
       slides:
@@ -156,12 +168,6 @@ shows:
     - time: 7630ms
 
 widgets:
-  portrait_squadmate_grunt_complete:
-    - type: image
-      image: portrait_squadmate_grunt_complete
-  portrait_squadmate_kasumi_complete:
-    - type: image
-      image: portrait_squadmate_kasumi_complete
   portrait_squadmate_legion_complete:
     - type: image
       image: portrait_squadmate_legion_complete
@@ -184,7 +190,6 @@ widgets:
 # TODO: Migrate these sounds to the end-of-mission show
 #####
 sound_player:
-  recruit_success_grunt: missioncomplete_voice_grunt
   recruit_success_legion: missioncomplete_voice_legion
   recruit_success_samara: missioncomplete_voice_samara
   recruit_success_tali: missioncomplete_voice_tali
@@ -223,7 +228,7 @@ sound_pools:
   missioncomplete_voice_grunt:
     type: random
     track: voice
-    sounds: missioncomplete_voice_grunt_1, missioncomplete_voice_grunt_2, missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_4, missioncomplete_voice_grunt_5
+    sounds: missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_5
     max_queue_time: 1s
   missioncomplete_voice_jack:
     type: random
@@ -350,10 +355,10 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
+      attenuation: 0.8
+      attack: 10ms
+      release: 30ms
+      release_point: 50ms
   missioncomplete_voice_grunt_4:
     file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.ogg
     track: voice
@@ -368,10 +373,10 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
+      attenuation: 0.8
+      attack: 10ms
+      release: 30ms
+      release_point: 50ms
   missioncomplete_voice_jack_1:
     file: en_us_hench_convict_prscva_cv_join_d_00198389_m.ogg
     track: voice
