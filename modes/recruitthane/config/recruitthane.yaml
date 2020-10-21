@@ -17,7 +17,7 @@
 mode:
   start_events: start_mode_recruitthane
   stop_events: stop_mode_recruitthane, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -82,6 +82,9 @@ variable_player:
       action: set
 
 show_player:
+  mode_recruitthane_started:
+    recruitintro_thane:
+      loops: 0
   logicblock_thane_ascent_counter_hit:
     flash_all_shields_show:
       speed: 12
@@ -91,6 +94,14 @@ show_player:
         color: color_thane
 
 shows:
+  recruitintro_thane:
+    # Temporary show until videos are done
+    - time: 500ms
+      sounds:
+        asari_youll_have_to_get_up_to_the_bridge:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
   tower_flash_show:
     - time: 0
       lights:
@@ -105,7 +116,6 @@ sound_player:
       action: play
       fade_out: 2s
       mode_end_action: stop
-    asari_youll_have_to_get_up_to_the_bridge: {}
   logicblock_thane_ascent_counter_hit{count!=3}:
     nas_misc_sounds:
       max_queue_time: 2s

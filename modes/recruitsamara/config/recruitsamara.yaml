@@ -23,7 +23,7 @@
 mode:
   start_events: start_mode_recruitsamara
   stop_events: stop_mode_recruitsamara, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -113,6 +113,21 @@ shots:
       leds: l_standup_5
       color: standup_color
 
+show_player:
+  mode_recruitsamara_started:
+    recruitintro_samara:
+      loops: 0
+
+shows:
+  recruitintro_samara:
+    # Temporary show until videos are done
+    - time: 500ms
+      sounds:
+        gunship_sound:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
+
 light_player:
   mode_recruitsamara_started:
     light_backwall_ambient:
@@ -121,8 +136,6 @@ light_player:
 sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
-      action: play
-    gunship_sound:
       action: play
   mission_shot_hit: explosion  # Defined in base_endsounds
   recruit_samara_complete:

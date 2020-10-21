@@ -22,7 +22,7 @@ mode:
   start_events: start_mode_recruitlegion
   stop_events: stop_mode_recruitlegion, stop_recruitmission, stop_missions
   # We use the banks as a shot target, so disable the drops and lock hits
-  events_when_started: mode_type_mission_started, disable_sbdrops_counter, disable_lock_lightshot
+  events_when_started: mode_type_mission_started, mode_intro_started, disable_sbdrops_counter, disable_lock_lightshot
   events_when_stopped: mode_type_mission_stopped, enable_sbdrops_counter, enable_lock_lightshot
   code: recruitlegion.RecruitLegion
   priority: 500
@@ -47,11 +47,8 @@ event_player:
       value:
         value: current_player.heretic_progress
         type: int
-  mode_recruitlegion_started.1:
-    - play_opening_heretic_dialogue
   # Delay the initial heretic shot until after startup resets all shots
-  # TODO: Remove when intro plays mode_intro_complete
-  missiontimer_start:
+  mode_intro_complete:
     - enable_random_heretic
   timer_heretic_timer_complete:
     - enable_random_heretic
@@ -291,7 +288,20 @@ shot_profiles:
       - name: timeout
         show: off
 
+show_player:
+  mode_recruitlegion_started:
+    recruitintro_legion:
+      loops: 0
+
 shows:
+  recruitlegion_intro:
+    # Temporary show until videos are done
+    - time: 500ms
+      sounds:
+        shepard_start_your_upload:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
   heretic_lane_show:
     - duration: 500ms
       lights:
@@ -335,7 +345,6 @@ sound_player:
       action: play
       loops: -1
       mode_end_action: stop
-  play_opening_heretic_dialogue: shepard_start_your_upload
   # If the progress goes up, play a shot confirmation sound
   player_heretic_progress{change>0}:
     legion_shot_sound:
