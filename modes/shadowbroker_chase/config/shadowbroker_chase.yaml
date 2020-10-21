@@ -26,7 +26,7 @@ event_player:
       shots_remaining:
         value: current_player.sbchase_hits_remaining
         type: int
-  mode_shadowbroker_chase_started: missiontimer_start
+  mode_shadowbroker_chase_started: missiontimer_start  # TODO: Remove when intro plays mode_intro_complete
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete:
     - mission_collect_score

@@ -39,8 +39,6 @@ event_player:
     resume_mission:
       squadmate:
         value: current_player.resume_mission
-  mode_type_mission_started:
-    - missiontimer_start|3s     # It's nice to give a little delay
   slide_recruit_mission_slide_active:
     - enable_powers
   timer_missiontimer_complete:

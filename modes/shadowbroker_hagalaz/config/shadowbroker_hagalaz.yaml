@@ -284,7 +284,7 @@ sound_player:
       mode_end_action: stop
     liara_its_locked_ive_got_a_shunt_program:
       action: play
-      events_when_stopped: missiontimer_start
+      events_when_stopped: mode_intro_complete
   enable_hatch:
     liara_hatch_is_open:
       action: play
@@ -494,7 +494,7 @@ slides:
         text: Infiltrate the Ship
         style: header_md, row_main, col_left_anchor
         animations:
-          missiontimer_start: pulse_text
+          mode_intro_complete: pulse_text
       - widget: background_console
   hagalaz_portrait:
     widgets:

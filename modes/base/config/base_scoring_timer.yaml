@@ -177,7 +177,11 @@ timers:
       - event: missiontimer_pause_adrenaline
         action: pause
         value: 15
-      # The timer starts fresh on every mission and stops on every end
+      # By default, the timer starts when the intro completes
+      - event: mode_intro_complete
+        action: start
+      # Modes that don't have intro shows can explicitly start.
+      # Also, modes that pause/reset and resume the timer will use this
       - event: missiontimer_start
         action: start
       - event: missiontimer_stop

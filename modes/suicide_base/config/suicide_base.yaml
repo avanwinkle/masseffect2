@@ -31,7 +31,7 @@ event_player:
     - start_mode_suicide_endrun{current_player.state_machine_suicide_progress=="endrun"}
   mode_type_suicide_started:
     # Give 2s for the opening, then start the timer
-    - missiontimer_start|2s
+    - missiontimer_start|2s  # TODO: Remove when intro plays mode_intro_complete
   # If another mode ends, clear its environment
   mode_type_suicide_stopped:
     - set_environment

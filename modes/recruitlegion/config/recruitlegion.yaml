@@ -50,6 +50,7 @@ event_player:
   mode_recruitlegion_started.1:
     - play_opening_heretic_dialogue
   # Delay the initial heretic shot until after startup resets all shots
+  # TODO: Remove when intro plays mode_intro_complete
   missiontimer_start:
     - enable_random_heretic
   timer_heretic_timer_complete:

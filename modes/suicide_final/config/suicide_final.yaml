@@ -28,7 +28,8 @@ event_player:
     # We play the reaper -> platforms sound here so we can control it for hit-based changes only
     - play_enemies_incoming{current_player.reaper_rounds > 0 and current_player.reaper_rounds % 2 == 0}
     - play_enemies_reinforcements{current_player.reaper_rounds % 2 == 1}
-    # suicide_final is the mode_type_suicide, so manually restart for platforms
+    # suicide_final is the mode_type_suicide, so the suicide_base event that starts timer
+    # won't be triggered here. Manually restart the timer when we return to platforms
     - missiontimer_start|2s
   # Play a sound for damaging the reaper
   reaper_hp:
