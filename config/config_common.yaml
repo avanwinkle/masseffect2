@@ -388,6 +388,8 @@ player_vars:
     initial_value: 0
   level:
     initial_value: 1
+  mode_intro_running:
+    initial_value: 0
   planets:
     initial_value: 0
   power:

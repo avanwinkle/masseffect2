@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_recruitgarrus
   stop_events: stop_mode_recruitgarrus, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -84,7 +84,7 @@ shows:
         garrus_mission_start_callout:
           action: play
     - time: 5s
-      events: mission_intro_complete
+      events: mode_intro_complete
     - time: 5900ms
       slides:
         recruit_instructions_slide_lcd:

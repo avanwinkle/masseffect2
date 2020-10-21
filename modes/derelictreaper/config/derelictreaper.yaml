@@ -35,9 +35,10 @@ mode:
   stop_events: stop_mode_derelictreaper, stop_wizards
   events_when_started:
     - mode_type_wizard_started
+    - mode_intro_started
     - enable_captive
     # TODO: Add an intro slide
-    - mission_intro_complete
+    - mode_intro_complete
   events_when_stopped:
     - mode_type_wizard_stopped
     - disable_captive

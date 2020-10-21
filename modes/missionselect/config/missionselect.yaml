@@ -31,7 +31,7 @@ mode_settings:
 
 event_player:
   # The hold will release when intro is complete
-  missionselect_pass_selected: mission_intro_complete
+  missionselect_pass_selected: mode_intro_complete
 
 variable_player:
   # Fake the player variable for the ticks, for the timer widget's sake

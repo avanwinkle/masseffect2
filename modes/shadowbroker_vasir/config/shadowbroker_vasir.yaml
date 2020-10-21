@@ -21,7 +21,7 @@
 mode:
   start_events: start_mode_shadowbroker_vasir
   stop_events: stop_mode_shadowbroker_vasir, stop_wizards
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started, mode_intro_started
   events_when_stopped: mode_type_wizard_stopped
   priority: 850
 

@@ -13,7 +13,7 @@
 mode:
   start_events: start_mode_shadowbroker_chase
   stop_events: stop_mode_shadowbroker_chase, stop_wizards
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started, mode_intro_started
   priority: 800
 
 event_player:

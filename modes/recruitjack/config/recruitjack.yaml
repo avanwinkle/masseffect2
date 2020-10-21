@@ -106,7 +106,7 @@ shows:
         warden_start:
           action: play
     - time: 6s
-      events: mission_intro_complete
+      events: mode_intro_complete
     - time: 6170ms
       slides:
         recruit_instructions_slide_lcd:

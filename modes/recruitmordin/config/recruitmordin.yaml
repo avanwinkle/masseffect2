@@ -119,7 +119,7 @@ shows:
         - play_intro_sound{device.counters.cure_counter.value==4}
         - play_cure_sound{device.counters.cure_counter.value<4}
     - time: 6s
-      events: mission_intro_complete
+      events: mode_intro_complete
     - time: 108300ms
       slides:
         recruit_instructions_slide_lcd:

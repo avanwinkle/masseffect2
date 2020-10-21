@@ -126,7 +126,7 @@ shows:
         kasumi_list_of_items:
           action: play
     - time: 10s
-      events: mission_intro_complete
+      events: mode_intro_complete
     - time: 11460ms
       slides:
         recruit_instructions_slide_lcd:
