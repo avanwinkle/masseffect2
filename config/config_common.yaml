@@ -388,6 +388,9 @@ player_vars:
     initial_value: 0
   level:
     initial_value: 1
+  last_mission:
+    initial_value: " "
+    value_type: str
   mode_intro_running:
     initial_value: 0
   planets:

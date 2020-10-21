@@ -40,11 +40,6 @@ event_player:
       starting_shots: 0, 0, 1, 1, 0  # left_orbit, kickback, right_orbit
   power_shots_lit_hit: mission_shot_hit
   logicblock_doors_closed_counter_complete:
-    show_recruit_instructions:
-      squadmate: garrus
-      portrait: recruitgarrus
-      instructions_main: Shutters Closed
-      instructions_sub: Get back upstairs!
     # Reset the right ramp to enable the final shot
     advance_mission_shots:
       shots: right_ramp

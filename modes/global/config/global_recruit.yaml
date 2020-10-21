@@ -271,7 +271,7 @@ sound_pools:
   garrus_failed:
     type: random
     track: voice
-    sounds: garrus_hold_fire, garrus_that_did_nothing
+    sounds: garrus_that_did_nothing
   kasumi_failed:
     type: random_force_all
     track: voice
@@ -324,9 +324,9 @@ sounds:
       attack: 100ms
       release: 300ms
       release_point: 500ms
-  garrus_hold_fire:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
-    track: voice
+  # garrus_hold_fire:
+  #   file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+  #   track: voice
   garrus_that_did_nothing:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303091_m.ogg
     track: voice
