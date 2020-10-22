@@ -26,6 +26,8 @@ event_player:
       shots_remaining:
         value: current_player.sbchase_hits_remaining
         type: int
+  # Left ramp is before kickback, so enable the hold
+  sbchase_left_ramp_chaseprofile_lit_hit: enable_sb_hold
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete:
     - mission_collect_score
@@ -34,10 +36,12 @@ event_player:
     - stop_mode_shadowbroker_chase
   timer_missiontimer_complete: 
     - stop_mode_shadowbroker_chase
+    - disable_sb_hold
   # If the ball is saved, the mode is ended
   ball_save_sbchase_save_saving_ball:
     - stop_mode_shadowbroker_chase
     - reset_dropbank
+    - disable_sb_hold
   # Can't use events_when_stopped because they don't understand conditionals
   mode_shadowbroker_chase_will_stop:
     # If we failed the chase, end of wizard time
@@ -148,7 +152,8 @@ shots:
       shot: right_orbit
     tags: envshot_right_orbit
   sbchase_kickback:
-    hit_events: sh_kickback_hit
+    # Airlock entrance to start the mode, *not* kickback
+    switch: s_airlock_entrance
     profile: chaseprofile
     show_tokens:
       shot: kickback
@@ -156,6 +161,11 @@ shots:
 
 show_player:
   mode_shadowbroker_chase_started:
+    gi_show:
+      start_step: 4
+      manual_advance: True
+      show_tokens: 
+        backwall_color: color_barrier
     led_10_chase:
       action: play
       speed: 7
@@ -176,6 +186,7 @@ shows:
       sounds: 
         liara_come_on_shes_getting_away:
           action: play
+      events: play_shadowbroker_chase_music
     - time: 12500ms
       events: mode_intro_complete
     - time: 55s  # Length of the video
@@ -204,7 +215,7 @@ slides:
         video: shadowbroker_chase
 
 sound_player:
-  mode_shadowbroker_chase_started:
+  play_shadowbroker_chase_music:
     shadowbroker_vasir_music:
       key: shadowbroker_chase_music
       action: play

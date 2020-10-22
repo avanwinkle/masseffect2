@@ -228,18 +228,40 @@ shows:
       sounds:
         vasir_start_sound:
           action: play
+    - time: 3s
+      shows:
+        color_flashing_fast:
+          key: vasir_lock_warning_show
+          speed: 5
+          show_tokens:
+            leds: batram_multipliers
+            color: color_barrier
     - time: 5s
       events: mode_intro_complete
+      shows:
+        vasir_lock_warning_show:
+          action: stop
   vasir_cineanim_show:
     - time: 0
       slides:
         sbvasir_cineanim:
           priority: 100
       events: shadowbroker_vasir_cineanim_started
-    - time: 20s
+    - time: 23s
       events: start_vasir_music
+    - time: 23500ms
+      shows:
+        color_flashing_fast:
+          key: vasir_lock_warning_show
+          speed: 5
+          show_tokens:
+            leds: batram_multipliers
+            color: color_barrier
     - time: 25500ms
       events: mode_intro_complete
+      shows: 
+        vasir_lock_warning_show:
+          action: stop
   vasir_barrier_show:
     - duration: 2
       lights:
@@ -336,6 +358,18 @@ sounds:
   shuttle_land:
     file: biod_krogar_100landing.Wwise_KroGar_Streaming.env_krogar_shuttle_land.ogg
     track: sfx
+  shepard_smart_move_taking_a_hostage:
+    file: DLC_EXP_Part01_Int.741.ogg
+    track: voice
+  vasir_drop_the_clips:
+    file: DLC_EXP_Part01_Int.749.ogg
+    track: voice
+  vasir_hrrg:
+    file: DLC_EXP_Part01_Int.754.ogg
+    track: voice
+  vasir_damn_it:
+    file: DLC_EXP_Part01_Int.755.ogg
+    track: voice
   vasir_this_will_be_fun:
     vasir_:
     file: DLC_EXP_Part01_Int.282.ogg
@@ -396,9 +430,6 @@ sounds:
     track: voice
   vasir_hit_damn_it:
     file: DLC_EXP_Part01_Int.809.ogg
-    track: voice
-  vasir_damn_it:
-    file: DLC_EXP_Part01_Int.755.ogg
     track: voice
 
 timers:

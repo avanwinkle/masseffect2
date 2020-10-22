@@ -27,7 +27,7 @@ event_player:
     - play_shadowbroker_hold_show
     # If the hold was already enabled before we left field mode, re-enable it too
     - enable_sb_hold{current_player.sbhold_enabled==1}
-  ball_hold_sbhold_held_ball:
+  ball_hold_sb_hold_held_ball:
     # Get a ball in the ball hold to begin Vasir
     - start_mode_shadowbroker_vasir{current_player.state_machine_shadowbroker=="vasir"}
     # Get a ball in the ball hold to begin Boss Combat

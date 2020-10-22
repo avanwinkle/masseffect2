@@ -45,7 +45,6 @@ event_player:
   shadowbroker_boss_complete.1:
     - mission_collect_score
     - stop_mode_shadowbroker_boss
-    - exit_shadowbroker_modes
   shadowbroker_boss_complete.2:
     levelup:
       mission_name: "Greetings, Shadow Broker"

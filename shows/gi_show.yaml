@@ -56,3 +56,16 @@
     gi_bottom:
       color: FFCCCC%30
       fade: 1s
+
+# Step 4: Illium
+- duration: 1
+  lights:
+    gi_bottom:
+      color: color_jack
+      fade: 1s
+    gi_middle:
+      color: color_space
+      fade: 1s
+    gi_top:
+      color: color_barrier
+      fade: 1s
