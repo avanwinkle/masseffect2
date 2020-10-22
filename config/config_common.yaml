@@ -451,6 +451,12 @@ player_vars:
   resume_mission:
     initial_value: " "
     value_type: str
+  selected_mate_one:
+    initial_value: "jacob"
+    value_type: str
+  selected_mate_two:
+    initial_value: "miranda"
+    value_type: str
   # Set initial values for cooldown shots
   shot_cooldown_shot_biotic:
     initial_value: 1
