@@ -278,6 +278,9 @@ class MPFSquadmateHandlers(CustomCode):
                 achs["suicidemission"].enable()
 
     def _play_squadmates_show(self, stop_all=False, **kwargs):
+        """ Creates the necessary show files for squadmates, namely lighting the backbox with the
+            appropriate light colors and filling the career ladder with solids and blinkings.
+        """
         mate_lists = {
             "lit": [],
             "complete": [],
@@ -328,3 +331,6 @@ class MPFSquadmateHandlers(CustomCode):
             elif self._shows.get(showname):
                 self._shows[showname].stop()
                 self._shows[showname] = None
+        
+        # Post an event to squadmates_mc to update the squad slide
+        self.machine.events.post("sqicon_update")

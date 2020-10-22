@@ -274,23 +274,85 @@ widget_styles:
 
   # SQUAD ICON POSITIONS
   #----------------------------
-  sqicon_color_available:
-    color: FFFFFF
-  sqicon_color_recruited:
-    color: CCCCCC
-  sqicon_color_dead:
-    color: CE0000
-  sqicon_color_specialist:
-    color: 0059ce
-  sqicon_color_none:
-    color: 000000
-  specialist:
-    font_size: 24
-    font_name: me123
-    color: 999999
+  sqicon_style_mate_zaeed:
+    anchor_y: top
     anchor_x: left
-    x: 50
-    z: 120
+    y: 100%
+    x: 0%
+  sqicon_style_mate_legion:
+    anchor_y: top
+    anchor_x: left
+    y: 100%
+    x: 25%
+  sqicon_style_mate_samara:
+    anchor_y: top
+    anchor_x: left
+    y: 100%
+    x: 50%
+  sqicon_style_mate_tali:
+    anchor_y: top
+    anchor_x: left
+    y: 100%
+    x: 75%
+  sqicon_style_mate_mordin:
+    anchor_y: middle
+    anchor_x: left
+    y: 50%
+    x: 0%
+  sqicon_style_mate_garrus:
+    anchor_y: middle
+    anchor_x: left
+    y: 50%
+    x: 25%
+  sqicon_style_mate_miranda:
+    anchor_y: middle
+    anchor_x: left
+    y: 50%
+    x: 50%
+  sqicon_style_mate_grunt:
+    anchor_y: middle
+    anchor_x: left
+    y: 50%
+    x: 75%
+  sqicon_style_mate_jacob:
+    anchor_y: bottom
+    anchor_x: left
+    y: 0%
+    x: 0%
+  sqicon_style_mate_thane:
+    anchor_y: bottom
+    anchor_x: left
+    y: 0%
+    x: 25%
+  sqicon_style_mate_jack:
+    anchor_y: bottom
+    anchor_x: left
+    y: 0%
+    x: 50%
+  sqicon_style_mate_kasumi:
+    anchor_y: bottom
+    anchor_x: left
+    y: 0%
+    x: 75%
+  sqicon_style_status_default:
+    z: 5
+  sqicon_style_status_na:
+    z: 6
+  sqicon_style_status_dead:
+    z: 7
+  # SQUAD ICON COLORS
+  sqicon_style_rectangle:
+    width: 121
+    height: 154
+  sqicon_style_background_specialist:
+    color: 007eff
+    opacity: 0.8
+  sqicon_style_background_available:
+    color: FFFFFF
+    opacity: 0.8
+  sqicon_style_background_selected:
+    color: ffa022
+    opacity: 0.8
 
   # RESEARCH UPGRADES AND STORE
   #----------------------------
@@ -427,28 +489,6 @@ animations:
     - property: color, x, font_size
       value: 0.984, 0.78, 0.584, 0.8, 20, 22
       duration: 100ms
-  sqicon_available:
-    - property: opacity      # name of the widget property we're animating
-      value: 1               # target value of that property for this step
-      duration: 1500ms          # duration for this step (how long it takes to get there)
-    - property: opacity      # second step in the animation (starts with a hyphen)
-      value: 0.25
-      duration: 1500ms
-      repeat: true
-  sqicon_complete:
-    - property: color
-      value: 000000
-      duration: 1s
-    - property: color
-      value: CCCCCC
-      duration: 1s
-  sqicon_dead:
-    - property: color
-      value: 000000
-      duration: 1s
-    - property: color
-      duration: 1s
-      value: CE0000
   specialist_select:
     - property: color, x, font_size
       value: 0.165, 0.859, 0.137, 1, 80, 28

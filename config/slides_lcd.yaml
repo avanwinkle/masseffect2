@@ -674,6 +674,219 @@ widgets:
       animations:
         add_to_slide: pulse_text
 
+  # SQUADMATE ICONS
+  squadmates_grid_overlay:
+    - type: image
+      image: squadmates_grid_overlay
+      anchor_x: bottom
+      anchor_y: bottom
+      x: 0
+      y: 0
+      z: 10
+  sqicon_mate_garrus_default:
+    - type: image
+      image: sqicon_default_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_default:
+    - type: image
+      image: sqicon_default_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_default:
+    - type: image
+      image: sqicon_default_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_default:
+    - type: image
+      image: sqicon_default_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_default:
+    - type: image
+      image: sqicon_default_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_default:
+    - type: image
+      image: sqicon_default_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_default:
+    - type: image
+      image: sqicon_default_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_default:
+    - type: image
+      image: sqicon_default_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_default:
+    - type: image
+      image: sqicon_default_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_default:
+    - type: image
+      image: sqicon_default_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_default:
+    - type: image
+      image: sqicon_default_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_default:
+    - type: image
+      image: sqicon_default_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_mate_garrus_dead:
+    - type: image
+      image: sqicon_dead_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_dead:
+    - type: image
+      image: sqicon_dead_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_dead:
+    - type: image
+      image: sqicon_dead_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_dead:
+    - type: image
+      image: sqicon_dead_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_dead:
+    - type: image
+      image: sqicon_dead_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_dead:
+    - type: image
+      image: sqicon_dead_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_dead:
+    - type: image
+      image: sqicon_dead_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_dead:
+    - type: image
+      image: sqicon_dead_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_dead:
+    - type: image
+      image: sqicon_dead_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_dead:
+    - type: image
+      image: sqicon_dead_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_dead:
+    - type: image
+      image: sqicon_dead_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_dead:
+    - type: image
+      image: sqicon_dead_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_mate_garrus_na:
+    - type: image
+      image: sqicon_na_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_na:
+    - type: image
+      image: sqicon_na_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_na:
+    - type: image
+      image: sqicon_na_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_na:
+    - type: image
+      image: sqicon_na_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_na:
+    - type: image
+      image: sqicon_na_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_na:
+    - type: image
+      image: sqicon_na_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_na:
+    - type: image
+      image: sqicon_na_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_na:
+    - type: image
+      image: sqicon_na_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_na:
+    - type: image
+      image: sqicon_na_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_na:
+    - type: image
+      image: sqicon_na_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_na:
+    - type: image
+      image: sqicon_na_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_na:
+    - type: image
+      image: sqicon_na_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_background_available:
+    - type: image
+      image: sqicon_background_available
+      z: 4
+      animations:
+        add_to_slide: pulse_text_slow
+  sqicon_background_selected:
+    - type: image
+      image: sqicon_background_selected
+      z: 4
+  sqicon_background_specialist:
+    - type: image
+      image: sqicon_background_specialist
+      z: 4
+  sqicon_background_default:
+    - type: image
+      image: sqicon_background_default
+      z: 4
+  sqicon_console:
+    - type: image
+      image: background_sqicon
+      z: 1
+  
+
   # PORTRAITS
   # Here to avoid loading assets into memory for dmd
   #----------------------------------------------------
