@@ -161,11 +161,9 @@ shots:
 
 show_player:
   mode_shadowbroker_chase_started:
-    gi_show:
-      start_step: 4
-      manual_advance: True
-      show_tokens: 
-        backwall_color: color_barrier
+    sbchase_gi:
+      speed: 1
+      loops: -1
     led_10_chase:
       action: play
       speed: 7
@@ -173,11 +171,11 @@ show_player:
         ledring: l_backwall_gi
         fade: 100ms
         color: color_barrier
-    sbchase_show:
+    sbchase_intro:
       loops: 0
 
 shows:
-  sbchase_show:
+  sbchase_intro:
     - time: 0
       slides:
         sbchase_portrait:
@@ -190,6 +188,63 @@ shows:
     - time: 12500ms
       events: mode_intro_complete
     - time: 55s  # Length of the video
+  sbchase_gi:
+    - time: 0
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: white
+          fade: 500ms
+        gi_middle:
+          color: color_jack
+          fade: 500ms
+        gi_top:
+          color: color_space
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_barrier
+          fade: 500ms
+        gi_middle:
+          color: white
+          fade: 500ms
+        gi_top:
+          color: color_jack
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_space
+          fade: 500ms
+        gi_middle:
+          color: color_barrier
+          fade: 500ms
+        gi_top:
+          color: white
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
+    
 
 slide_player:
   mode_shadowbroker_chase_started:

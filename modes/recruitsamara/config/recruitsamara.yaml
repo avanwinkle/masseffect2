@@ -117,6 +117,11 @@ show_player:
   mode_recruitsamara_started:
     recruitintro_samara:
       loops: 0
+    gi_show:
+      start_step: 4  # Illium
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_samara
 
 shows:
   recruitintro_samara:
@@ -127,11 +132,6 @@ shows:
           action: play
     - time: 3s
       events: mode_intro_complete
-
-light_player:
-  mode_recruitsamara_started:
-    light_backwall_ambient:
-      color: color_samara
 
 sound_player:
   mode_recruitsamara_started:

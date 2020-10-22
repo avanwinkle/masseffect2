@@ -1,5 +1,16 @@
 #config_version=5
 shows:
+  airlock_release_warning:
+    - duration: 200ms
+      lights:
+        batram_multipliers: 
+          color: (color)
+          fade: 30ms
+    - duration: 200ms
+      lights:
+        batram_multipliers: 
+          color: black
+          fade: 30ms
   ball_save_preshow:
     - lights:
         l_ball_save: on

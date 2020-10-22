@@ -413,11 +413,11 @@ lights:
   l_left_top_lane: # Left Top Lane [#75]
     number: 0-0
     type: grb
-    tags: light_pf
+    tags: light_pf, light_top_lane
   l_right_top_lane: # Right Top Lane [#76]
     number: 0-1
     type: grb
-    tags: light_pf
+    tags: light_pf, light_top_lane
 
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
     number: 0-12

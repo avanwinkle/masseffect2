@@ -56,11 +56,6 @@ event_player:
     - mission_collect_score
     - recruit_thane_complete
 
-light_player:
-  mode_recruitthane_started:
-    light_backwall_ambient:
-      color: color_thane
-
 counters:
   thane_ascent_counter:
     # Initially takes three shots to light, after it's been lit just one
@@ -85,6 +80,11 @@ show_player:
   mode_recruitthane_started:
     recruitintro_thane:
       loops: 0
+    gi_show:
+      start_step: 4  # Illium
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_thane
   logicblock_thane_ascent_counter_hit:
     flash_all_shields_show:
       speed: 12

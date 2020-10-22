@@ -160,7 +160,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_left_orbit_shield_rgb
-      color: blue
+      color: color_shields
   shunt_kickback:
     hit_events: sh_kickback_hit, hagalaz_target1_charged_hit, hagalaz_target2_charged_hit
     enable_events: enable_shunt_kickback
@@ -168,7 +168,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_kickback_shield_rgb
-      color: blue
+      color: color_shields
   shunt_left_ramp:
     hit_events: sh_left_ramp_hit, hagalaz_target2_charged_hit, hagalaz_target3_charged_hit
     enable_events: enable_shunt_left_ramp
@@ -176,7 +176,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_left_ramp_shield_rgb
-      color: blue
+      color: color_shields
   shunt_right_ramp:
     hit_events: sh_right_ramp_hit, hagalaz_target4_charged_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_ramp
@@ -184,7 +184,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_right_ramp_shield_rgb
-      color: blue
+      color: color_shields
   shunt_right_orbit:
     hit_events: sh_right_orbit_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_orbit
@@ -192,7 +192,7 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: l_right_orbit_shield_rgb
-      color: blue
+      color: color_shields
   hagalaz_target1:
     switch: s_target1
     advance_events: capacitors_charged_ready
@@ -232,15 +232,25 @@ show_player:
   capacitors_charged_ready:
     lightning_show:
       loops: 2
+    pulse_playfield_smooth:
+      loops: 0
+      show_tokens:
+        color: color_lightning
+  capacitor_shot_charged_hit:
+    pulse_playfield:
+      loops: 4
+      speed: 2
+      show_tokens:
+        color: color_lightning
 
 shows:
   hatch_show:
     - time: 0
       lights:
-        (leds): green
+        (leds): color_door_green
     - time: '+1'
       lights:
-        (leds): blue
+        (leds): color_shields
   capacitor_charging_show:
     - time: 0
       lights:
@@ -250,31 +260,41 @@ shows:
     - duration: 10s
       lights:
         (leds):
-          color: FFFFFF
+          color: color_lightning
           fade: 10s
   capacitor_charged_show:
     - duration: 250ms
       lights:
         (leds):
-          color: FFFFFF
+          color: color_lightning
           fade: 250ms
     - duration: 250ms
       lights:
         (leds):
-          color: BBBBBB
+          color: color_shields
           fade: 250ms
   lightning_show:
     - time: 0
       flashers:
-        l_flash_throne: 120ms
+        # l_flash_throne: 120ms
+        light_top_lane: 120ms
+        l_flash_left_orbit: 120ms
     - time: 400ms
       flashers:
-        l_flash_kickback: 200ms
-        l_flash_right_ramp: 200ms
+        # l_flash_kickback: 200ms
+        # l_flash_right_ramp: 200ms
+        l_mass_relay: 200ms
+    - time: 500ms
+      flashers:
+        l_targets: 120ms
     - time: 700ms
       flashers:
-        l_flash_dragon_right: 120ms
-        l_flash_slingshots: 200ms
+        # l_flash_dragon_right: 120ms
+        # l_flash_slingshots: 200ms
+        l_backwall_gi: 200ms
+    - time: 800ms
+      flashers:
+        l_gi_bottom: 200ms
     - time: 2s
 
 sound_player:

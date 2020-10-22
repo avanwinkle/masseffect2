@@ -106,41 +106,41 @@ shot_profiles:
         show: off
         priority: 100
       - name: barrier_1
-        show: vasir_barrier_show
+        show: lane_shot_profile
         speed: 2
         priority: 10
         show_tokens:
-          color: purple
+          color: color_barrier
       - name: barrier_2
-        show: vasir_barrier_show
+        show: lane_shot_profile
         speed: 4
         priority: 10
         show_tokens:
-          color: purple
+          color: color_barrier
       - name: armor_1
-        show: vasir_armor_show
+        show: lane_shot_profile
         speed: 3
         priority: 10
         show_tokens:
-          color: yellow
+          color: color_armor
       - name: armor_2
-        show: vasir_armor_show
+        show: lane_shot_profile
         speed: 6
         priority: 10
         show_tokens:
-          color: yellow
+          color: color_armor
       - name: health_1
-        show: vasir_health_show
+        show: lane_shot_profile
         speed: 4
         priority: 10
         show_tokens:
-          color: red
+          color: color_health
       - name: health_2
-        show: vasir_health_show
+        show: lane_shot_profile
         speed: 8
         priority: 10
         show_tokens:
-          color: red
+          color: color_health
 
 shots:
   sbvasir_left_ramp:
@@ -230,16 +230,13 @@ shows:
           action: play
     - time: 3s
       shows:
-        color_flashing_fast:
-          key: vasir_lock_warning_show
-          speed: 5
+        airlock_release_warning:
           show_tokens:
-            leds: batram_multipliers
             color: color_barrier
     - time: 5s
       events: mode_intro_complete
       shows:
-        vasir_lock_warning_show:
+        airlock_release_warning:
           action: stop
   vasir_cineanim_show:
     - time: 0
@@ -251,38 +248,14 @@ shows:
       events: start_vasir_music
     - time: 23500ms
       shows:
-        color_flashing_fast:
-          key: vasir_lock_warning_show
-          speed: 5
+        airlock_release_warning:
           show_tokens:
-            leds: batram_multipliers
             color: color_barrier
     - time: 25500ms
       events: mode_intro_complete
       shows: 
-        vasir_lock_warning_show:
+        airlock_release_warning:
           action: stop
-  vasir_barrier_show:
-    - duration: 2
-      lights:
-        (leds): purple
-    - duration: 1
-      lights:
-        (leds): black
-  vasir_armor_show:
-    - duration: 2
-      lights:
-        (leds): yellow
-    - duration: 1
-      lights:
-        (leds): black
-  vasir_health_show:
-    - duration: 2
-      lights:
-        (leds): red
-    - duration: 1
-      lights:
-        (leds): black
 
 slide_player:
   mode_shadowbroker_vasir_started:
