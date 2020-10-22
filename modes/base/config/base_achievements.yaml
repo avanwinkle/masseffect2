@@ -9,7 +9,7 @@ achievements:
     restart_on_next_ball_when_started: false
   vasir:
     enable_events: shadowbroker_chase_complete
-    start_events: mode_shadowbroker_vasir_started
+    start_events: shadowbroker_vasir_cineanim_started
     stop_events: mode_shadowbroker_vasir_will_stop
     complete_events: shadowbroker_vasir_complete
     restart_on_next_ball_when_started: false

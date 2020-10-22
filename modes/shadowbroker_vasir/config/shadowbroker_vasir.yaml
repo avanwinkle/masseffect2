@@ -26,7 +26,7 @@ mode:
   priority: 850
 
 event_player:
-  start_vasir_combat:
+  mode_shadowbroker_vasir_started:
     set_environment:
       env: field
     set_mission_shots:
@@ -38,6 +38,9 @@ event_player:
     levelup:
       mission_name: "Suket's Datapad Recovered"
       portrait: shadowbroker_vasir_complete
+  # Wait for the show to complete before releasing the ball
+  mode_intro_complete: release_sb_hold
+  release_sb_hold: disable_sb_hold|1s
   # Relay some sounds to delay
   vasir_shot_barrier_2_hit: play_vasir_start_sound|2s
   vasir_shot_armor_2_hit: play_vasir_start_sound|2s
@@ -149,7 +152,7 @@ shots:
       leds: l_left_ramp_shield_rgb
   sbvasir_left_orbit:
     advance_events:
-      - start_vasir_combat  # Start with this shot enabled
+      - mode_intro_complete  # Start with this shot enabled
       - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_orbit_hit
     profile: vasirprofile
@@ -193,7 +196,9 @@ shots:
 
 show_player:
   mode_shadowbroker_vasir_started:
-    vasir_intro_show:
+    vasir_cineanim_show{device.achievements.vasir.state=="enabled"}:
+      loops: 0
+    vasir_intro_show{device.achievements.vasir.state=="started"}:
       loops: 0
   ball_save_vasirsave_timer_start:
     ball_save_show:
@@ -213,16 +218,28 @@ show_player:
 shows:
   vasir_intro_show:
     - time: 0
-      sounds:
-        shuttle_land:
-          start_at: 2.4s
-          fade_in: 500ms
+      slides:
+        sbvasir_intro:
+          target: lcd_right
+          priority: 100
+    - time: 1s
+      events: start_vasir_music
     - time: 2.5s
       sounds:
         vasir_start_sound:
           action: play
-    - time: 3s
-      events: start_vasir_combat
+    - time: 5s
+      events: mode_intro_complete
+  vasir_cineanim_show:
+    - time: 0
+      slides:
+        sbvasir_cineanim:
+          priority: 100
+      events: shadowbroker_vasir_cineanim_started
+    - time: 20s
+      events: start_vasir_music
+    - time: 25500ms
+      events: mode_intro_complete
   vasir_barrier_show:
     - duration: 2
       lights:
@@ -257,19 +274,34 @@ slides:
       - type: text
         text: Lair of the Shadow Broker
         style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: DEFEAT VASIR
+        style: header_md, row_main
+        animations:
+          add_to_slide: pulse_text
       - widget: background_console
   sbvasir_portrait:
     widgets:
       - type: image
         image: portrait_shadowbroker_vasir
+  sbvasir_cineanim:
+    transition_out:
+      type: fade
+    widgets:
+      - type: video
+        video: shadowbroker_vasir_cineanim
+  sbvasir_intro:
+    widgets:
+      - type: video
+        video: shadowbroker_vasir_intro
 
 sound_player:
-  start_vasir_combat:
+  start_vasir_music:
     shadowbroker_vasir_music:
       action: play
-      start_at: 100s
+      start_at: 98s
       fade_out: 2s
-      fade_in: 100ms
+      fade_in: 2ms
       mode_end_action: stop
   timer_vasir_timer_complete: vasir_move_sound
   logicblock_vasir_hits_counter_hit:
@@ -383,18 +415,7 @@ timers:
       - event: logicblock_vasir_hits_counter_hit
         action: restart
 
-widget_player:
-  start_vasir_combat:
-    vasir_widget:
-      slide: sbvasir_slide
-
 widgets:
-  vasir_widget:
-    - type: text
-      text: DEFEAT VASIR
-      style: header_md, row_main
-      animations:
-        add_to_slide: pulse_text
   timer_widget:
     - type: text
       text: (ticks_remaining)

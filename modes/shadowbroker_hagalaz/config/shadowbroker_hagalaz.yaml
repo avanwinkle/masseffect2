@@ -46,19 +46,19 @@ event_player:
     - capacitors_charged_ready|10s
   logicblock_shunt_counter_complete:
     - enable_hatch
+    - enable_sb_hold
     - missiontimer_stop
     - mission_collect_score
   shadowbroker_hagalaz_complete:
     - stop_mode_shadowbroker_hagalaz
     - start_mode_shadowbroker_boss
   timer_missiontimer_tick{ticks % 8 == 0}: enable_random_shuntshot
-  timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz, exit_shadowbroker_modes
+  timer_missiontimer_complete: stop_mode_shadowbroker_hagalaz
   # If the only lit shot is hit, light another one so we don't idle
   # This also triggers our initial shuntshot when the variable_player resets the value
   player_temp_counter{player_num==current_player.number and value==0}: enable_random_shuntshot|1s
-  # DEBUG until we have an actual hold
-  hatch_shot_hit: shadowbroker_hagalaz_complete
-  ball_hold_hagalaz_hold_held_ball: shadowbroker_hagalaz_complete
+  # hatch_shot_hit: shadowbroker_hagalaz_complete
+  ball_hold_sb_hold_held_ball: shadowbroker_hagalaz_complete
 
 random_event_player:
   enable_random_shuntshot{device.counters.shunt_counter.value>0}:

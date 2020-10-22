@@ -145,6 +145,13 @@ ball_holds:
     enable_events: enable_captive
     disable_events: disable_captive
     release_all_events: release_captive, disable_captive
+  sb_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    enable_events: enable_sb_hold, mode_field_started{current_player.sbhold_enabled}
+    disable_events: disable_sb_hold, mode_field_will_stop, ball_will_end
+    release_all_events: release_sb_hold
   store_hold:
     balls_to_hold: 1
     debug: true
