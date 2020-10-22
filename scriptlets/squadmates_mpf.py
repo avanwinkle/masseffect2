@@ -288,12 +288,15 @@ class MPFSquadmateHandlers(CustomCode):
             "off": [],
             "specialist": []
         }
+        update_sqicons = False
         for mate in SquadmateStatus.all_mates():
             status = 0 if stop_all else self.machine.game.player["status_{}".format(mate)]
             if mate == self.machine.game.player["specialist"]:
                 mate_lists["specialist"].append(mate)
+                update_sqicons = True
             elif status == 3 and not self.machine.modes.suicide_base.active:
                 mate_lists["lit"].append(mate)
+                update_sqicons = True
             elif status == 4:
                 mate_lists["complete"].append(mate)
             elif status == -1:
@@ -333,4 +336,9 @@ class MPFSquadmateHandlers(CustomCode):
                 self._shows[showname] = None
         
         # Post an event to squadmates_mc to update the squad slide
+        if update_sqicons:
+            # Delay by 1s to allow the slide queue to appear
+            self.machine.clock.schedule_once(self._sqicon_update, 1)
+    
+    def _sqicon_update(self):
         self.machine.events.post("sqicon_update")

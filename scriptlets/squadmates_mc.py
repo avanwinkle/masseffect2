@@ -63,7 +63,7 @@ class MCSquadmateHandlers(McCustomCode):
                         background = "available"
                 elif status == -1:
                     style = "dead"
-                elif mate == specialist or mate == "miranda":
+                elif mate == specialist:
                     background = "specialist"
                 elif mate == player["selected_mate_one"] or mate == player["selected_mate_two"]:
                     background = "selected"
