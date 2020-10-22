@@ -48,6 +48,25 @@ event_player:
     - sweep_alarms
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
+  # Queue slides for each hit shot
+  logicblock_kasumi_shots_counter_hit{count==3}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_password
+      slide_text: "Password Obtained"
+      sound: password
+  logicblock_kasumi_shots_counter_hit{count==2}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_voiceprint
+      slide_text: "Voiceprint Recorded"
+      sound: voiceprint
+  logicblock_kasumi_shots_counter_hit{count==1}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_dna
+      slide_text: "DNA Sample Obtained"
+      sound: dna
 
 counters:
   # This counter tracks how many unalarmed shots must be hit to succeed
@@ -85,6 +104,11 @@ shot_profiles:
       - name: alarmed
         show: alarmed_show
         speed: 0.5
+
+light_player:
+  mode_recruitkasumi_started:
+    light_backwall_ambient:
+      color: color_kasumi%30
 
 show_player:
   mode_recruitkasumi_started:
@@ -229,30 +253,19 @@ slide_player:
   recruit_kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
-  # Until MC supports priority and condition, deal with duplicate warnings
-  logicblock_kasumi_shots_counter_hit{count==3}:
-    kasumi_slide_1:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==2}:
-    kasumi_slide_2:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==1}:
-    kasumi_slide_3:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==0}:
-    kasumi_slide_4:
-      expire: 3s
   logicblock_kasumi_alarms_counter_hit{count>0}:
     kasumi_alarm_slide:
       action: play
+      priority: 100
       expire: 3s
   logicblock_kasumi_alarms_counter_hit{count==0}:
     kasumi_failed_slide:
       action: play
+      priority: 100
       expire: 3s
 
 slides:
-  kasumi_slide_1:
+  kasumi_slide:
     transition:
       type: fade
       duration: 500ms
@@ -261,43 +274,7 @@ slides:
       duration: 500ms
     widgets:
       - type: text
-        text: Password Obtained
-        style: body_lg
-      - widget: background_console
-  kasumi_slide_2:
-    transition:
-      type: fade
-      duration: 500ms
-    transition_out:
-      type: fade
-      duration: 500ms
-    widgets:
-      - type: text
-        text: Voiceprint Recorded
-        style: body_lg
-      - widget: background_console
-  kasumi_slide_3:
-    transition:
-      type: fade
-      duration: 500ms
-    transition_out:
-      type: fade
-      duration: 500ms
-    widgets:
-      - type: text
-        text: DNA Sample Obtained
-        style: body_lg
-      - widget: background_console
-  kasumi_slide_4:
-    transition:
-      type: fade
-      duration: 500ms
-    transition_out:
-      type: fade
-      duration: 500ms
-    widgets:
-      - type: text
-        text: Barrier Deactivated
+        text: (slide_text)
         style: body_lg
       - widget: background_console
   kasumi_alarm_slide:
@@ -329,7 +306,7 @@ slides:
       duration: 200ms
     widgets:
       - type: text
-        text: FAILED!
+        text: HEIST FAILED!
         style: body_lg
       - type: rectangle
         width: 758
@@ -349,21 +326,17 @@ sound_player:
     kasumi_careful:
       max_queue_time: 2s
   # First shot hit, got the password
-  logicblock_kasumi_shots_counter_hit{count==3}:
+  play_queued_slide_kasumi_slide.1{sound=="password"}:
     kasumi_password_complete:
       max_queue_time: 2s
   # Second shot hit, got the voice print
-  logicblock_kasumi_shots_counter_hit{count==2}:
+  play_queued_slide_kasumi_slide.2{sound=="voiceprint"}:
     kasumi_voice_complete:
       max_queue_time: 2s
   # Third shot hit, got the DNA sample
-  logicblock_kasumi_shots_counter_hit{count==1}:
+  play_queued_slide_kasumi_slide.3{sound=="dna"}:
     kasumi_not_great_saliva_sample:
       max_queue_time: 2s
-  # Fourth shot hit, get the barrier down
-  # logicblock_kasumi_shots_counter_hit{count==0}:
-  #   kasumi_barrier_is_down:
-  #     max_queue_time: 2s
 
 sound_pools:
   kasumi_careful:
@@ -502,7 +475,14 @@ sounds:
     file: DLC_HEN_MT_Int.669.ogg
     track: voice
 
-light_player:
-  mode_recruitkasumi_started:
-    light_backwall_ambient:
-      color: color_kasumi%30
+widgets:
+  portrait_kasumi_password:
+    - type: image
+      image: portrait_kasumi_password
+  portrait_kasumi_dna:
+    - type: image
+      image: portrait_kasumi_dna
+  portrait_kasumi_voiceprint:
+    - type: image
+      image: portrait_kasumi_voiceprint
+  
