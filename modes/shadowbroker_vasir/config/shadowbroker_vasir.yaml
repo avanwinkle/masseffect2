@@ -200,6 +200,11 @@ show_player:
       loops: 0
     vasir_intro_show{device.achievements.vasir.state=="started"}:
       loops: 0
+  mode_intro_skipped:
+    # We don't want voice callouts in the show to override the mode effects.
+    # If the animation is skipped, stop the show immediately.
+    vasir_cineanim_show:
+      action: stop
   ball_save_vasirsave_timer_start:
     ball_save_show:
       action: play
@@ -298,6 +303,8 @@ sound_player:
       fade_out: 2s
       fade_in: 2ms
       mode_end_action: stop
+  # The music starts as a step in a show. If the show is skipped, start the music.
+  mode_intro_skipped: start_vasir_music
   timer_vasir_timer_complete: vasir_move_sound
   logicblock_vasir_hits_counter_hit:
     vasir_hit_sound:

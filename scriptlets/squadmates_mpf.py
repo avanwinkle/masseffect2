@@ -33,6 +33,7 @@ COLORS = {
 
 SOUND_NAME_FORMATS = {
     "destroy_core": "squadmate_{squadmate}_destroy_core",
+    "husks": "squadmate_{squadmate}_husks",
     "killed": "squadmate_{squadmate}_killed",
     "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}",
     "skillshot": "squadmate_{squadmate}_nice_shot",
@@ -109,6 +110,8 @@ class MPFSquadmateHandlers(CustomCode):
         variant = random.randint(1, kwargs["variants"]) if kwargs.get("variants") else None
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
+        elif squadmate == "selected":
+            squadmate = SquadmateStatus.random_selected(self.machine.game.player)
         sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")

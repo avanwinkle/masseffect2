@@ -65,6 +65,11 @@ class SquadmateStatus():
         return random.choice(CASUAL_UNLOCKS)
 
     @staticmethod
+    def random_selected(player):
+        """ Return at random one of the two mates currently selected."""
+        return random.choice([player["selected_mate_one"], player["selected_mate_two"]])
+
+    @staticmethod
     def recruitable_mates(player):
         """Return all squadmates who have available recruitment missions."""
         return _get_available_mates(player, status=3)

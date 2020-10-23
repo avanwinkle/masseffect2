@@ -50,7 +50,8 @@ event_player:
     - start_mode_global
   # We can cancel an intro show with the flippers
   flipper_cancel{current_player.mode_intro_running}:
-    mode_intro_complete
+    - mode_intro_complete
+    - mode_intro_skipped
   # If a new mission becomes available, remove the player-selected bypass
   player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
@@ -225,7 +226,7 @@ variable_player:
   mode_intro_started:
     mode_intro_running:
       action: set
-      int: 0
+      int: 1
   mode_intro_complete:
     mode_intro_running:
       action: set
