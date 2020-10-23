@@ -22,6 +22,9 @@ event_player:
       shots_total: 10
       is_resumable: 1
       ticks: 20
+    play_squadmate_sound|2s:
+      sound: husks
+      squadmate: selected
   mode_collectorship_husk_started: missiontimer_start
   husk_collect_shot_hit: mission_shot_hit
   timer_missiontimer_complete:
@@ -157,67 +160,73 @@ sound_player:
   husk_build_shot_hit:
     husk_sound_short:
       action: play
-    husk_squadmate|1s:
-      action: play
   husk_collect_shot_hit:
     husk_sound_long:
       action: play
+  timer_missiontimer_tick{ticks_remaining==7}: joker_you_need_to_get_out_of_there
+  timer_missiontimer_tick{ticks_remaining==14}: joker_collector_ship_is_powering_up
 
-sound_pools:
-  # TODO: Add more squadmate sounds for husks!
-  husk_squadmate:
-    track: voice
-    type: random
-    sounds:
-      - husk_garrus_1{current_player.status_garrus==4}
-      - husk_garrus_2{current_player.status_garrus==4}
-      - husk_grunt_1{current_player.status_grunt==4}
-      - husk_grunt_2{current_player.status_grunt==4}
-      - husk_jack_1{current_player.status_jack==4}
-      - husk_jack_2{current_player.status_jack==4}
-      - husk_kasumi_1{current_player.status_kasumi==4}
-      - husk_jacob_1
-      - husk_jacob_2
-      - husk_miranda_1
-      - husk_miranda_2
-      - husk_miranda_3
 
 sounds:
-  husk_garrus_1:
+  joker_collector_ship_is_powering_up:
+    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253364_m.ogg
+    track: voice
+  joker_you_need_to_get_out_of_there:
+    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253365_m.ogg
+    track: voice
+  # Squadmate-based husk callouts played at random via play_squadmate_sound
+  squadmate_garrus_husks:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303132_m.ogg
     track: voice
-  husk_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303133_m.ogg
-    track: voice
-  husk_grunt_1:
+  squadmate_grunt_husks:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295838_m.ogg
     track: voice
-  husk_grunt_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.ogg
-    track: voice
-  husk_jack_1:
+  squadmate_jack_husks:
     file: en_us_hench_convict_ss_global_hench_convict_00296157_m.ogg
     track: voice
-  husk_jack_2:
-    file: en_us_hench_convict_ss_global_hench_convict_00296158_m.ogg
-    track: voice
-  husk_jacob_1:
+  squadmate_jacob_husks:
     file: en_us_hench_leading_ss_global_hench_leading_00299273_m.ogg
     track: voice
-  husk_jacob_2:
-    file: en_us_hench_leading_ss_global_hench_leading_00299274_m.ogg
-    track: voice
-  husk_kasumi_1:
+  squadmate_kasumi_husks:
     file: DLC_HEN_MT_Int.101.ogg
     track: voice
-  husk_miranda_1:
+  squadmate_legion_husks:
+    file: en_us_hench_geth_ss_global_hench_geth_00315415_m.ogg
+    track: voice
+  squadmate_miranda_husks:
     file: en_us_hench_vixen_ss_global_hench_vixen_00310134_m.ogg
     track: voice
-  husk_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310135_m.ogg
+  squadmate_mordin_husks:
+    file: en_us_hench_professor_ss_global_hench_professor_00316915_m.ogg
     track: voice
-  husk_miranda_3:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.ogg
+  squadmate_thane_husks:
+    file: en_us_hench_assassin_ss_global_hench_assassin_00297541_m.ogg
     track: voice
+  squadmate_tali_husks:
+    file: en_us_hench_tali_ss_global_hench_tali_00289253_m.ogg
+    track: voice
+  squadmate_zaeed_husks:
+    file: DLC_HEN_VT_Int.012.ogg
+    track: voice
+  
+  # Unused sounds, saved here so I don't have to dig them up again
+  # husk_garrus_2:
+  #   file: en_us_hench_garrus_ss_global_hench_garrus_00303133_m.ogg
+  #   track: voice
+  # husk_grunt_2:
+  #   file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.ogg
+  #   track: voice
+  # husk_jack_2:
+  #   file: en_us_hench_convict_ss_global_hench_convict_00296158_m.ogg
+  #   track: voice
+  # husk_jacob_2:
+  #   file: en_us_hench_leading_ss_global_hench_leading_00299274_m.ogg
+  #   track: voice
+  # husk_miranda_2:
+  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310135_m.ogg
+  #   track: voice
+  # husk_miranda_3:
+  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.ogg
+  #   track: voice
 
 

@@ -13,6 +13,7 @@ sound_player:
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
   shadowbroker_progression_pre_hagalaz_started: liara_its_finally_over
   mode_overlord_stopped: david_ending
+  stop_mode_collectorship_base{device.achievements.collectorship.state=="completed"}: shepard_everyone_on_to_the_normandy
 
 sound_pools:
   # N7 Assignments
@@ -64,6 +65,9 @@ sounds:
       attack: 1s
       release_point: 1s
       release: 1s
+  shepard_everyone_on_to_the_normandy:
+    file: en_us_player_f_cspcr2_normandy_escape_c_00189682_f.ogg
+    track: voice
   explosion_long_one:
     file: SFXGame.213.ogg
     track: sfx

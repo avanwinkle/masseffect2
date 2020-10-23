@@ -39,14 +39,15 @@ event_player:
     - enable_praet_side_shot|500ms
     - mission_shot_hit
     - missiontimer_set_20
-  # Enable the disabled flipper after 5s
-  timer_missiontimer_tick{ticks==15 and current_player.temp_counter>0}:
+  # Enable the disabled flipper after 3s
+  timer_missiontimer_tick{ticks==18 and current_player.temp_counter>0}:
     - flippers_on
   timer_missiontimer_complete{current_player.temp_counter==0}:
     - stop_base_praetorian_show
     - praetorian_attack_one
     - praetorian_attack_two|800ms
     - praetorian_attack_three|1600ms
+    - praetorian_attack_hit|2200ms
     - start_base_praetorian_show|2400ms
     - missiontimer_set_20|2400ms
     - missiontimer_start|2800ms
@@ -280,17 +281,25 @@ sound_player:
       action: play
     praet_alarm:
       action: play
+    sqmate_praetorian_enter:
+      action: play
   collectorship_praetorian_complete: praet_death
   collectorship_praetorian_failed: praet_kill
   praetorian_shot_hit: praet_hit
   praetorian_attack_one: praet_attack
   praetorian_attack_two: reaper_cannon_fire # defined in suicide_sounds.yaml
   praetorian_attack_three: shep_hit
+  praetorian_attack_hit: shep_hit_callout
+  timer_missiontimer_tick{ticks==10}: praet_warning_callout
 
 sound_pools:
   shep_hit:
     type: random_force_all
     sounds: shep_hit_1, shep_hit_2, shep_hit_3
+    track: voice
+  shep_hit_callout:
+    type: random_force_all
+    sounds: shepard_taking_heavy_fire, shepard_ive_got_no_shields, shepard_my_shields_are_down
     track: voice
   praet_hit:
     type: random_force_all
@@ -300,6 +309,24 @@ sound_pools:
     type: random_force_all
     sounds: praet_attack_1, praet_attack_2, praet_attack_3
     track: sfx
+  praet_warning_callout:
+    type: random_force_all
+    track: voice
+    sounds:
+      - shepard_come_on_lets_move
+
+  sqmate_praetorian_enter:
+    type: random
+    track: voice
+    sounds:
+      - sqmate_praetorian_enter_miranda
+      - sqmate_praetorian_enter_jacob
+      - sqmate_praetorian_enter_jack{current_player.status_jack>=4}
+      - sqmate_praetorian_enter_garrus{current_player.status_garrus>=4}
+      - sqmate_praetorian_enter_mordin{current_player.status_mordin>=4}
+      - sqmate_praetorian_enter_tali{current_player.status_tali>=4}
+      - sqmate_praetorian_enter_kasumi{current_player.status_kasumi>=4}
+      - sqmate_praetorian_enter_zaeed{current_player.status_zaeed>=4}
 
 sounds:
   shep_hit_1:
@@ -310,6 +337,18 @@ sounds:
     track: voice
   shep_hit_3:
     file: en_us_player_f_ss_global_player_female_00288340_f.ogg
+    track: voice
+  shepard_come_on_lets_move:
+    file: en_us_player_f_cspcr2_bridge_trap_d_00269440_f.ogg
+    track: voice
+  shepard_taking_heavy_fire:
+    file: en_us_player_f_ss_global_player_female_00331516_f.ogg
+    track: voice
+  shepard_ive_got_no_shields:
+    file: en_us_player_f_ss_global_player_female_00331518_f.ogg
+    track: voice
+  shepard_my_shields_are_down:
+    file: en_us_player_f_ss_global_player_female_00331511_f.ogg
     track: voice
   praet_hit_1:
     max_queue_time: 1s
@@ -351,6 +390,30 @@ sounds:
   praet_alarm:
     track: sfx
     file: mus_generic_stinger_053.ogg
+  sqmate_praetorian_enter_jack:  
+    file: en_us_hench_convict_horcr1_spaceport_fight02_a_00318563_m.ogg
+    track: voice
+  sqmate_praetorian_enter_garrus:  
+    file: en_us_hench_garrus_horcr1_spaceport_fight02_a_00318567_m.ogg
+    track: voice
+  sqmate_praetorian_enter_jacob:  
+    file: en_us_hench_leading_horcr1_spaceport_fight02_a_00318565_m.ogg
+    track: voice
+  sqmate_praetorian_enter_mordin:  
+    file: en_us_hench_professor_horcr1_spaceport_fight02_a_00318569_m.ogg
+    track: voice
+  sqmate_praetorian_enter_tali:  
+    file: en_us_hench_tali_horcr1_spaceport_fight02_a_00318566_m.ogg
+    track: voice
+  sqmate_praetorian_enter_kasumi:  
+    file: en_us_hench_thief_horcr1_spaceport_fight02_a_00318568_m.ogg
+    track: voice
+  sqmate_praetorian_enter_zaeed:  
+    file: en_us_hench_veteran_horcr1_spaceport_fight02_a_00318562_m.ogg
+    track: voice
+  sqmate_praetorian_enter_miranda:  
+    file: en_us_hench_vixen_horcr1_spaceport_fight02_a_00318564_m.ogg
+    track: voice
 
 widget_player:
   mode_collectorship_praetorian_started:

@@ -407,7 +407,10 @@ slides:
     - type: text
       text: (value)
       style: body_md, row_sub_under, num
-  squadicon_slide: []
+  squadicon_slide:
+    transition: fade
+    transtion_out: fade
+    widgets: []  # Will be dynamically populated by squadmates_mc.py
   intro_no_missions_slide:
     transition: fade
     transition_out: fade

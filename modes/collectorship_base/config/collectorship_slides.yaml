@@ -15,10 +15,15 @@ variable_player:
 
 slide_player:
   mode_collectorship_base_started:
+    collectorship_cineanim:
+      action: play
+  mode_intro_complete:
     collectorship_baseslide:
       target: main
     collectorship_portrait_slide:
       target: lcd_right
+    collectorship_cineanim:
+      action: remove
   stop_mode_collectorship_base:
     collectorship_baseslide:
       action: remove
@@ -26,7 +31,20 @@ slide_player:
       action: remove
 
 slides:
+  collectorship_cineanim:
+    widgets:
+      - type: video
+        video: collectorship_cineanim
+        end_behavior: pause
+  collectorship_started_slide:
+    widgets:
+      - type: text
+        text: "Disabled\nCollector Ship"
+        style: header_md, row_main, row_main_dmd_low
   collectorship_baseslide:
+    transition:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
         text: Disabled Collector Ship
@@ -41,7 +59,11 @@ slides:
         style: body_sm, row_sub, col_left_anchor, dmd_hide, num
         opacity: 0.5
       - widget: background_console
-  collectorship_portrait_slide: []
+  collectorship_portrait_slide: 
+    transition:
+      type: fade
+      duration: 250ms
+    widgets: []
 
 widget_player:
   mode_collectorship_ambush_started:

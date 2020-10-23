@@ -133,7 +133,7 @@ sound_player:
     music_recruit_mordin:
       action: play
       loops: -1
-  play_intro_sound: mission_intro
+  play_intro_sound: mordin_intro_sound
   play_cure_sound_1:
     step0_voice:
       max_queue_time: 1s
@@ -205,7 +205,7 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
-  mission_intro:
+  mordin_intro_sound:
     track: voice
     file: en_us_hench_professor_omgpra_mordin_d_00210618_m.ogg
   step0_voice_jack:

@@ -280,6 +280,9 @@ slide_player:
 
 slides:
   missionselect_intro_slide:
+    transition:
+      type: fade
+      duration: 250ms
     widgets:
       - type: text
         text: Select a Mission
@@ -328,6 +331,10 @@ slides:
         color: EEEEEE
       - widget: background_console
   missionselect_collectorship_slide:
+    # This slide needs its own transition because the intro slide is skipped
+    transition:
+      type: fade
+      duration: 250ms
     priority: 1
     widgets:
       - type: text
@@ -366,8 +373,15 @@ slides:
       - widget: missionselect_count_widget
       - widget: missionselect_timer_widget
       - widget: background_console
-  missionselect_portrait_slide: []
+  missionselect_portrait_slide:
+    transition:
+      type: fade
+      duration: 250ms
+    widgets: []
   missionselect_portrait_collectorship:
+    transition:
+      type: fade
+      duration: 250ms
     widgets:
       - type: image
         image: portrait_collectorship_intro
