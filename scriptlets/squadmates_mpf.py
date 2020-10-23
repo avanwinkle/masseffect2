@@ -111,7 +111,7 @@ class MPFSquadmateHandlers(CustomCode):
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
         elif squadmate == "selected":
-            squadmate = SquadmateStatus.random_selected(self.machine.game.player)
+            squadmate = SquadmateStatus.random_selected(self.machine.game.player, exclude=kwargs.get("exclude"))
         sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")

@@ -256,6 +256,9 @@ slide_player:
   missionselect_pass_highlighted:
     missionselect_pass_slide:
       target: main
+    mission_dossier_slide:
+      action: remove
+      target: lcd_right
     missionselect_portrait_derelictreaper:
       action: remove
       target: lcd_right
@@ -294,8 +297,15 @@ slides:
   missionselect_empty_slide:
     - widget: background_console
   mission_dossier_slide:
-    - widget: dossier_recruit(squadmate)
+    transition:
+      type: fade
+      duration: 250ms
+    widgets:
+      - widget: dossier_recruit(squadmate)
   missionselect_recruit_slide:
+    transition:
+      type: fade
+      duration: 250ms
     priority: 1
     widgets:
       - type: text
@@ -312,6 +322,9 @@ slides:
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_recruit_force_slide:
+    transition:
+      type: fade
+      duration: 250ms
     priority: 1
     widgets:
       - type: text
@@ -343,6 +356,9 @@ slides:
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_derelictreaper_slide:
+    transition:
+      type: fade
+      duration: 250ms
     priority: 1
     widgets:
       - type: text
@@ -352,6 +368,9 @@ slides:
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_suicide_slide:
+    transition:
+      type: fade
+      duration: 250ms
     priority: 1
     widgets:
       - type: text
@@ -365,6 +384,9 @@ slides:
       - widget: missionselect_timer_widget
       - widget: background_console
   missionselect_pass_slide:
+    transition:
+      type: fade
+      duration: 250ms
     priority: 10
     widgets:
       - type: text
@@ -386,10 +408,16 @@ slides:
       - type: image
         image: portrait_collectorship_intro
   missionselect_portrait_derelictreaper:
+    transition:
+      type: fade
+      duration: 250ms
     widgets:
       - type: image
         image: portrait_derelictreaper_intro
   missionselect_portrait_suicide:
+    transition:
+      type: fade
+      duration: 250ms
     widgets:
       - type: image
         image: portrait_suicide_intro

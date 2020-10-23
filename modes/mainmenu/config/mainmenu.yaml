@@ -178,7 +178,10 @@ slides:
   portrait_createprofile_0:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_0
@@ -188,7 +191,10 @@ slides:
   portrait_createprofile_1:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_1
@@ -198,7 +204,10 @@ slides:
   portrait_createprofile_2:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_2
@@ -208,7 +217,10 @@ slides:
   portrait_createprofile_3:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_3
@@ -218,7 +230,10 @@ slides:
   portrait_createprofile_4:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_4
@@ -228,7 +243,10 @@ slides:
   portrait_createprofile_5:
     transition:
       type: fade
-      duration: 200ms
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets: 
       - type: video
         video: createprofile_5

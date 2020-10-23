@@ -387,6 +387,8 @@ slides:
         text: Player (num)
         style: header_md, row_main
   levelup_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: LEVEL UP!
@@ -410,7 +412,7 @@ slides:
       style: body_md, row_sub_under, num
   squadicon_slide:
     transition: fade
-    transtion_out: fade
+    transition_out: fade
     widgets: []  # Will be dynamically populated by squadmates_mc.py
   intro_no_missions_slide:
     transition: fade

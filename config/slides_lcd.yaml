@@ -2,28 +2,42 @@
 slides:
   # Core slides
   attract_slide_main:
-    - type: image
-      image: logo_fullscreen
-      style: row_main
-      anchor_y: top
-      scale: 0.5
-      z: 2
-    - type: text
-      text: Press Start
-      color: 990000
-      style: header_sm, row_sub
-      animations:
-        show_slide: pulse_text_slow
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      x: 0
-      z: 0
+    transition: 
+      type: fade
+      duration: 200ms
+    transition_out: 
+      type: fade
+      duration: 200ms
+    widgets:
+      - type: image
+        image: logo_fullscreen
+        style: row_main
+        anchor_y: top
+        scale: 0.5
+        z: 2
+      - type: text
+        text: Press Start
+        color: 990000
+        style: header_sm, row_sub
+        animations:
+          show_slide: pulse_text_slow
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
   attract_slide_right:
-    - type: image
-      image: splashscreen
-      anchor_x: right
-      x: 110%
+    transition: 
+      type: fade
+      duration: 200ms
+    transition_out: 
+      type: fade
+      duration: 200ms
+    widgets:
+      - type: image
+        image: splashscreen
+        anchor_x: right
+        x: 110%
   firewalker_complete_slide:
     widgets:
       - type: text
@@ -97,137 +111,144 @@ slides:
         text: "Medigel\nDeployed"
         style: header_md, row_main
   minerals_slide:
-    # IRIDIUM
-    - type: line
-      points: 20, 190, 20, 380, 210, 380, 210, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_iridium)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 115
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Ir
-      style: header_md
-      x: 115
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 77
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 30
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 197.217000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 115
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: iridium
-      style: header_xs, row_main
-      x: 115
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    # PALLADIUM (379 is center)
-    - type: line
-      points: 284, 190, 284, 380, 474, 380, 474, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_palladium)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 379
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Pd
-      style: header_md
-      x: 379
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 46
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 294
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 106.420000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 379
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: palladium
-      style: header_xs, row_main
-      x: 379
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    # PLATINUM (643 is center)
-    - type: line
-      points: 548, 190, 548, 380, 738, 380, 738, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_platinum)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 643
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Pt
-      style: header_md
-      x: 643
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 78
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 558
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 195.084000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 643
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: platinum
-      style: header_xs, row_main
-      x: 643
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: image
-      image: texture_console
+    transition: 
+      type: fade
+      duration: 250ms
+    transition_out: 
+      type: fade
+      duration: 250ms
+    widgets:
+      # IRIDIUM
+      - type: line
+        points: 20, 190, 20, 380, 210, 380, 210, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_iridium)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 115
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Ir
+        style: header_md
+        x: 115
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 77
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 30
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 197.217000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 115
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: iridium
+        style: header_xs, row_main
+        x: 115
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      # PALLADIUM (379 is center)
+      - type: line
+        points: 284, 190, 284, 380, 474, 380, 474, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_palladium)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 379
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Pd
+        style: header_md
+        x: 379
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 46
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 294
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 106.420000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 379
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: palladium
+        style: header_xs, row_main
+        x: 379
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      # PLATINUM (643 is center)
+      - type: line
+        points: 548, 190, 548, 380, 738, 380, 738, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_platinum)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 643
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Pt
+        style: header_md
+        x: 643
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 78
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 558
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 195.084000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 643
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: platinum
+        style: header_xs, row_main
+        x: 643
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: image
+        image: texture_console
   planet_scanned_slide:
     transition: fade
     transition_out: fade
@@ -301,7 +322,7 @@ slides:
   1player_score_slide:
     transition: fade
     transition_out: fade
-    widget:
+    widgets:
       - type: text
         text: (machine|player1_score)
         style: header_lg, row_main, num
@@ -312,34 +333,37 @@ slides:
         x: 0
         z: 0
   2player_score_slide:
-    - type: text
-      text: (machine|last_career_player_1)
-      style: header_sm
-      anchor_y: bottom
-      y: middle+35%
-      opacity: 0.8
-    - type: text
-      text: (machine|player1_score)
-      style: header_lg, num
-      anchor_y: bottom
-      y: middle+15%
-    - type: text
-      text: (machine|player2_score)
-      style: header_lg, num
-      anchor_y: top
-      y: middle-15%
-    - type: text
-      text: (machine|last_career_player_2)
-      style: header_sm
-      anchor_y: top
-      y: middle-35%
-      opacity: 0.8
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      opacity: 0.5
-      x: 0
-      z: 0
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: (machine|last_career_player_1)
+        style: header_sm
+        anchor_y: bottom
+        y: middle+35%
+        opacity: 0.8
+      - type: text
+        text: (machine|player1_score)
+        style: header_lg, num
+        anchor_y: bottom
+        y: middle+15%
+      - type: text
+        text: (machine|player2_score)
+        style: header_lg, num
+        anchor_y: top
+        y: middle-15%
+      - type: text
+        text: (machine|last_career_player_2)
+        style: header_sm
+        anchor_y: top
+        y: middle-35%
+        opacity: 0.8
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        opacity: 0.5
+        x: 0
+        z: 0
   3player_score_slide:
     - type: text
       text: (machine|last_career_player_1)
