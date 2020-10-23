@@ -130,7 +130,7 @@ shots:
     disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
     tags: envshot_left_ramp
   sbboss_kickback:
     hit_events: sh_kickback_hit
@@ -138,7 +138,7 @@ shots:
     disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
     tags: envshot_kickback
   # Right ramp and orbits have armor/shield shots and therefore need to reset
   # Cannot use restart_events because we need enable_events to prevent default enabling
@@ -148,7 +148,7 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
     tags: envshot_left_orbit
   sbboss_right_ramp:
     restart_events: enable_sbboss_right_ramp
@@ -156,7 +156,7 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
     tags: envshot_right_ramp
   sbboss_right_orbit:
     restart_events: enable_sbboss_right_orbit
@@ -164,7 +164,7 @@ shots:
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
     tags: envshot_right_orbit
 
 show_player:

@@ -105,7 +105,12 @@ show_player:
 shows:
   collectorship_cineanim:
     - time: 0
-      slides: collectorship_cineanim
+      slides: 
+        collectorship_cineanim:
+          action: play
+        collectorship_dossier:
+          action: play
+          target: lcd_right
     - time: 29s
       events: play_ambush_music_longfadein
     - time: 33s

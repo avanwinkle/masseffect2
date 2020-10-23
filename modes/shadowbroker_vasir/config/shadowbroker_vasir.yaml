@@ -36,7 +36,7 @@ event_player:
   vasir_shot_health_2_hit:
     shadowbroker_vasir_complete: {}
     levelup:
-      mission_name: "Suket's Datapad Recovered"
+      mission_name: "Datapad Recovered"
       portrait: shadowbroker_vasir_complete
   # Wait for the show to complete before releasing the ball
   mode_intro_complete: release_sb_hold
@@ -48,6 +48,8 @@ event_player:
   player_shot_sbvasir_dropbank{value>0}: reset_dropbank
   # Also reset when completing
   stop_mode_shadowbroker_vasir: reset_dropbank
+  # The music starts as a step in a show. If the show is skipped, start the music.
+  mode_intro_skipped: start_vasir_music
 
 #####
 # VASIR COMBAT SCORING:
@@ -99,98 +101,153 @@ shot_groups:
       - sbvasir_right_orbit
 
 shot_profiles:
-  vasirprofile:
+  vasirprofile_ledring:
     advance_on_hit: false
     states:
       - name: off
         show: off
         priority: 100
       - name: barrier_1
-        show: lane_shot_profile
-        speed: 2
-        priority: 10
-        show_tokens:
-          color: color_barrier
-      - name: barrier_2
-        show: lane_shot_profile
-        speed: 4
-        priority: 10
-        show_tokens:
-          color: color_barrier
-      - name: armor_1
-        show: lane_shot_profile
-        speed: 3
-        priority: 10
-        show_tokens:
-          color: color_armor
-      - name: armor_2
-        show: lane_shot_profile
+        show: led_6_chase
         speed: 6
         priority: 10
         show_tokens:
-          color: color_armor
-      - name: health_1
-        show: lane_shot_profile
-        speed: 4
+          color: color_barrier
+          fade: 20ms
+      - name: barrier_2
+        show: led_6_chase
+        speed: 12
         priority: 10
         show_tokens:
-          color: color_health
-      - name: health_2
-        show: lane_shot_profile
+          color: color_barrier
+          fade: 20ms
+      - name: armor_1
+        show: led_6_chase
         speed: 8
         priority: 10
         show_tokens:
+          color: color_armor
+          fade: 20ms
+      - name: armor_2
+        show: led_6_chase
+        speed: 16
+        priority: 10
+        show_tokens:
+          color: color_armor
+          fade: 20ms
+      - name: health_1
+        show: led_6_chase
+        speed: 10
+        priority: 10
+        show_tokens:
           color: color_health
+          fade: 20ms
+      - name: health_2
+        show: led_6_chase
+        speed: 20
+        priority: 10
+        show_tokens:
+          color: color_health
+          fade: 20ms
+  vasirprofile_bank:
+    advance_on_hit: false
+    states:
+      - name: off
+        show: off
+        priority: 100
+      - name: barrier_1
+        # TODO: Replace with light-sequence-rotating show
+        show: color_flashing_fast_profile
+        speed: 6
+        priority: 10
+        show_tokens:
+          color: color_barrier
+          fade: 20ms
+      - name: barrier_2
+        show: color_flashing_fast_profile
+        speed: 12
+        priority: 10
+        show_tokens:
+          color: color_barrier
+          fade: 20ms
+      - name: armor_1
+        show: color_flashing_fast_profile
+        speed: 8
+        priority: 10
+        show_tokens:
+          color: color_armor
+          fade: 20ms
+      - name: armor_2
+        show: color_flashing_fast_profile
+        speed: 16
+        priority: 10
+        show_tokens:
+          color: color_armor
+          fade: 20ms
+      - name: health_1
+        show: color_flashing_fast_profile
+        speed: 10
+        priority: 10
+        show_tokens:
+          color: color_health
+          fade: 20ms
+      - name: health_2
+        show: color_flashing_fast_profile
+        speed: 20
+        priority: 10
+        show_tokens:
+          color: color_health
+          fade: 20ms
 
 shots:
   sbvasir_left_ramp:
     advance_events:
       - player_shot_sbvasir_left_ramp{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_ramp_hit
-    profile: vasirprofile
+    profile: vasirprofile_ledring
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
   sbvasir_left_orbit:
     advance_events:
       - mode_intro_complete  # Start with this shot enabled
       - player_shot_sbvasir_left_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_left_orbit_hit
-    profile: vasirprofile
+    profile: vasirprofile_ledring
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
   sbvasir_right_ramp:
     advance_events:
       - player_shot_sbvasir_right_ramp{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_right_ramp_hit
-    profile: vasirprofile
+    profile: vasirprofile_ledring
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
   sbvasir_right_orbit:
     advance_events:
       - player_shot_sbvasir_right_orbit{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_right_orbit_hit
-    profile: vasirprofile
+    profile: vasirprofile_ledring
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
   sbvasir_kickback:
     advance_events:
       - player_shot_sbvasir_kickback{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_kickback_hit
-    profile: vasirprofile
+    profile: vasirprofile_ledring
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
   sbvasir_dropbank:
     advance_events:
       - player_shot_sbvasir_dropbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_dropbank_top_hit, sh_dropbank_middle_hit, sh_dropbank_bottom_hit
-    profile: vasirprofile
+    profile: vasirprofile_bank
     show_tokens:
       leds: light_dropbank_rgb
   sbvasir_hitbank:
     advance_events:
       - player_shot_sbvasir_hitbank{change>=1 and value<device.counters.vasir_hits_counter.value}
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    profile: vasirprofile
+    profile: vasirprofile_bank
     show_tokens:
       leds: light_hitbank_rgb
 
@@ -248,10 +305,11 @@ shows:
       slides:
         sbvasir_cineanim:
           priority: 100
+        sbvasir_dossier:
+          target: lcd_right
       events: shadowbroker_vasir_cineanim_started
-    - time: 23s
-      events: start_vasir_music
     - time: 23500ms
+      events: start_vasir_music
       shows:
         airlock_release_warning:
           show_tokens:
@@ -263,7 +321,7 @@ shows:
           action: stop
 
 slide_player:
-  mode_shadowbroker_vasir_started:
+  mode_intro_complete:
     sbvasir_slide: {}
     sbvasir_portrait:
       target: lcd_right
@@ -294,6 +352,22 @@ slides:
     widgets:
       - type: video
         video: shadowbroker_vasir_intro
+  sbvasir_dossier:
+    transition: 
+      type: fade
+      duration: 2s
+    transition_out: fade
+    widgets:
+    - type: image
+      image: codex_azure
+      style: codex_image
+    - type: text
+      text: "Lair of the Shadow Broker"
+      style: codex_title
+    - type: text
+      text: "Vasir has escaped with the datapad\nthat reveals the location of the\nShadow Broker's secret base.\n\nFind her, stop her, and recover that\ndatapad!"
+      style: codex_text
+    - widget: dossier_recruit_base
 
 sound_player:
   start_vasir_music:
@@ -301,10 +375,8 @@ sound_player:
       action: play
       start_at: 98s
       fade_out: 2s
-      fade_in: 2ms
+      fade_in: 2s
       mode_end_action: stop
-  # The music starts as a step in a show. If the show is skipped, start the music.
-  mode_intro_skipped: start_vasir_music
   timer_vasir_timer_complete: vasir_move_sound
   logicblock_vasir_hits_counter_hit:
     vasir_hit_sound:
@@ -419,8 +491,10 @@ timers:
     tick_interval: 1s
     direction: down
     restart_on_complete: true
-    start_running: true
+    start_running: false
     control_events:
+      - event: mode_intro_complete
+        action: start
       - event: mode_shadowbroker_vasir_will_stop
         action: stop
       - event: logicblock_vasir_hits_counter_hit
