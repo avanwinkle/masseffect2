@@ -449,7 +449,7 @@ widget_player:
 widgets:
   power_widget_mask:
     - type: image
-      image: power_mask
+      image: power_mask_nostroke
       style: power_mask_badge, col_right_anchor
   power_widget_highlight:
     - type: image
