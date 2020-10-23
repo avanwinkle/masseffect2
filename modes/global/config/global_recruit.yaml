@@ -39,8 +39,6 @@ event_player:
     resume_mission:
       squadmate:
         value: current_player.resume_mission
-  slide_recruit_mission_slide_active:
-    - enable_powers
   timer_missiontimer_complete:
     - stop_recruitmission
   recruit_success:

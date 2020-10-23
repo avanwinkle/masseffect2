@@ -23,6 +23,7 @@ TIMES = {
     "singularity": 20,
     "charge": 0
 }
+POWER_WIDGET_HEIGHT = 92  # Height of the widget in pixels, to calculate cooldown mask height
 
 
 def filter_enabled_shots(x):
@@ -57,9 +58,13 @@ class Powers(Mode):
     def mode_will_start(self, **kwargs):
         # These four steps are needed before the legion bailout
         self.timer = self.machine.device_manager.collections["timers"]["power_active"]
+        self._base_cooldown = self.machine.variables.get("base_cooldown")
+
         self.add_mode_event_handler('award_power', self._award_power)
         self.add_mode_event_handler('activate_power', self._activate_power)
         self.add_mode_event_handler('timer_power_active_complete', self._complete)
+        self.add_mode_event_handler('mode_intro_complete', self._mode_intro_complete)
+        self.add_mode_event_handler('logicblock_powers_cooldown_updated', self._update_cooldown_progress)
 
         # LEGION special case: don't deal with shots
         if self.machine.modes.recruitlegion.active:
@@ -75,10 +80,10 @@ class Powers(Mode):
         self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
         self.shot_group.disable_rotation()
 
-        self.persisted_shots = self.player["persisted_shots"]
+        self.persisted_shots = self.machine.game.player["persisted_shots"]
         if not self.persisted_shots:
             self.persisted_shots = {}
-            self.player["persisted_shots"] = self.persisted_shots
+            self.machine.game.player["persisted_shots"] = self.persisted_shots
             self.log.debug("Set persisted shots for player {}: {}".format(self.player, self.persisted_shots))
         else:
             self.log.debug("Retrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
@@ -96,6 +101,14 @@ class Powers(Mode):
         self.log.debug("Powers mode stopping, disabling all shots")
         for shot in self.shots:
             shot.disable()
+
+    def _mode_intro_complete(self, **kwargs):
+        # On mode intro complete, if there's a power the player has then enable it immediately
+        power = self.machine.game.player["power"]
+        if power != " ":
+            self._award_power(power=power)
+        else:
+            self.machine.events.post("show_cooldown")
 
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
@@ -117,6 +130,12 @@ class Powers(Mode):
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
         self.timer.ticks = TIMES[power]
+
+    def _update_cooldown_progress(self, **kwargs):
+        value = kwargs["value"]
+        complete_pct = (1 - value / self._base_cooldown)
+        complete_height = complete_pct * POWER_WIDGET_HEIGHT
+        self.machine.events.post("update_cooldown_progress", complete_pct=complete_pct, complete_height=complete_height)
 
     def _complete(self, **kwargs):
         self.machine.game.player["power"] = " "
@@ -317,8 +336,8 @@ class Powers(Mode):
         # If there is an explicit charge target, shoot that. Or a profile state "final"
         targets = self._get_power_shots(explicit_target="charge", explicit_state="final")
         random.choice(targets).hit()
-        # Charge is used up immediately
-        self._complete()
+        # Charge is used up immediately, but leave the slide up for 5 seconds
+        self.machine.clock.schedule_once(self._complete, 5)
 
     def _activate_drone(self):
         self.handlers.append(self.add_mode_event_handler(

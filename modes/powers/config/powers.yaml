@@ -57,19 +57,14 @@ event_player:
         value: (state)
         type: str
   timer_activate_power_complete: activate_power
-  # Coerce initial widgets
-  enable_powers:
-    show_awarded_power{current_player.power!=" "}:
+  power_awarded: 
+    show_awarded_power:
       power:
         value: current_player.power
         type: str
-  logicblock_powers_cooldown_updated:
-    update_cooldown_progress:
-      complete:
-        type: int
-        value: (1 - value / machine.base_cooldown) * 92  # Multiply by the height
-  power_awarded: show_awarded_power
   # Placeholders make these events faster
+  # TODO: Refactor into powers.py and dynamically update a single widget rather
+  # than dropping in a new widget every hit. That leads to animation/opacity glitches.
   player_shot_cooldown_shot_biotic:
     - play_power_widget_singularity{value==0 or value==2}
     - play_power_widget_charge{value==1}
@@ -79,7 +74,7 @@ event_player:
     - play_power_widget_cloak{value==1}
     - play_power_widget_charge{value==3}
   player_shot_cooldown_shot_tech:
-    - play_power_widget_drone{value==0 or value==1}
+    - play_power_widget_drone{value==0 or value==2}
     - play_power_widget_armor{value==1}
     - play_power_widget_cloak{value==3}
   show_awarded_power:
@@ -98,9 +93,8 @@ variable_player:
 
 counters:
   powers_cooldown:
-    # Start with a nice low number for easy debugging. Later, bump up to... 100?
     starting_count: machine.base_cooldown * (1 - current_player.research_cooldown_rate_perk)
-    count_complete_value: 100
+    count_complete_value: 0
     direction: down
     count_events: frenzy_hit
     disable_on_complete: true
@@ -113,7 +107,7 @@ counters:
     control_events:
       - event: cooldown_shots_hit
         action: subtract
-        value: 10
+        value: 5
 
 multiballs:
   combat_drone:
@@ -381,8 +375,10 @@ widget_player:
   show_cooldown:
     power_widget_mask:
       action: add
+      slide: recruit_mission_slide
     power_cooldown_widget:
       action: add
+      slide: recruit_mission_slide
     power_widget_highlight:
       action: remove
   show_awarded_power:
@@ -393,6 +389,7 @@ widget_player:
   slide_power_awarded_slide_removed:
     power_widget_highlight:
       action: add
+      slide: recruit_mission_slide
   mode_powers_will_stop:
     power_available_widget:
       action: remove
@@ -409,39 +406,45 @@ widget_player:
       key: power_widget
       action: update
       priority: 2
+      slide: recruit_mission_slide
   play_power_widget_charge:
     power_widget_charge:
       key: power_widget
       action: update
       priority: 1
+      slide: recruit_mission_slide
   play_power_widget_armor:
     power_widget_armor:
       key: power_widget
       action: update
       priority: 3
+      slide: recruit_mission_slide
   play_power_widget_adrenaline:
     power_widget_adrenaline:
       key: power_widget
       action: update
       priority: 5
+      slide: recruit_mission_slide
   play_power_widget_cloak:
     power_widget_cloak:
       key: power_widget
       action: update
       priority: 4
+      slide: recruit_mission_slide
   play_power_widget_drone:
     power_widget_drone:
       key: power_widget
       action: update
       priority: 8
+      slide: recruit_mission_slide
   timer_activate_power_started:
     power_activating_countdown_widget:
       action: add
-      target: main
+      slide: recruit_mission_slide
   timer_activate_power_stopped:
     power_activating_countdown_widget:
       action: remove
-      target: main
+      slide: recruit_mission_slide
 
 widgets:
   power_widget_mask:
@@ -459,7 +462,7 @@ widgets:
       color: d1c1bb
       style: power_cooldown_badge, col_right_anchor
       opacity: 0.8
-      width: 153
+      width: 162
       height: 0
       animations:
         add_to_slide: pulse_power_cooldown
@@ -468,56 +471,50 @@ widgets:
     - type: image
       image: power_adrenaline
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   power_widget_cloak:
     - type: image
       image: power_cloak
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   power_widget_drone:
     - type: image
       image: power_drone
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   power_widget_charge:
     - type: image
       image: power_charge
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   power_widget_armor:
     - type: image
       image: power_armor
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   power_widget_singularity:
     - type: image
       image: power_singularity
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0
       animations:
-        power_awarded:
-          - property: opacity
-            value: 1
+        update_cooldown_progress: power_widget_cooldown_opacity
+        power_awarded: power_widget_cooldown_complete
   portrait_power_adrenaline_active:
     - type: text
       text: Power Active

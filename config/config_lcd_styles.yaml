@@ -115,6 +115,9 @@ widget_styles:
     z: 200
   power_cooldown_badge:
     anchor_y: bottom
+    # Badges are 170, so 162 gives us 4px either side
+    width: 162
+    x: 4
     # Cooldown starts 15px up from the bottom and is 90px high
     y: 265
     z: 201
@@ -466,9 +469,18 @@ animations:
       duration: 500ms
       easing: in_sine
       repeat: true
+  power_widget_cooldown_complete:
+    - property: opacity
+      value: 1
+      repeat: false
+  power_widget_cooldown_opacity:
+    - property: opacity
+      value: (complete_pct)
+      duration: 0
+      repeat: false
   power_cooldown_complete:
     - property: height
-      value: (complete)
+      value: (complete_height)
       duration: 50ms
       repeat: false
   portrait_enter_animation:
