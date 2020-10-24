@@ -19,6 +19,7 @@ mode:
   events_when_started: mode_type_wizard_started
   events_when_stopped: mode_type_wizard_stopped
   priority: 500
+  code: n7_assignments.N7Assignments
 
 event_player:
   mode_n7_assignments_started.2:
@@ -31,6 +32,7 @@ event_player:
         type: float
   mode_n7_assignments_started.1:
     - missiontimer_start|1s
+    # Turn off the bumpers to get the ball out fast
     - bumpers_off
     - bumpers_on|6s
   n7_assignment_shot_hit:
@@ -40,98 +42,59 @@ event_player:
   timer_missiontimer_complete: n7_assignment_ended
   n7_assignment_ended:
     - stop_mode_n7_assignments
-  player_shot_n7_anomalous_weather_shot_enabled:
-    set_n7_mission:
-      title: "Anomalous Weather Detected"
-  player_shot_n7_eclipse_smuggling_depot_shot_enabled:
-    set_n7_mission:
-      title: "Eclipse Smuggling Depot"
-  player_shot_n7_quarian_crash_site_shot_enabled:
-    set_n7_mission:
-      title: "Quarian Crash Site"
-  player_shot_n7_imminent_ship_crash_shot_enabled:
-    set_n7_mission:
-      title: "Imminent Ship Crash"
-  player_shot_n7_javelin_missiles_launched_shot_enabled:
-    set_n7_mission:
-      title: "Javelin Missiles Launched"
-  player_shot_n7_lost_operative_shot_enabled:
-    set_n7_mission:
-      title: "Lost Operative"
-  player_shot_n7_msv_strontium_mule_shot_enabled:
-    set_n7_mission:
-      title: "MSV Strontium Mule"
-
+  
 random_event_player:
   mode_n7_assignments_started:
     force_all: true
     events:
-      - start_n7_anomalous_weather
-      - start_n7_eclipse_smuggling_depot
-      - start_n7_quarian_crash_site
-      - start_n7_imminent_ship_crash
-      - start_n7_javelin_missiles_launched
-      - start_n7_lost_operative
-      - start_n7_msv_strontium_mule
+      - enable_n7_right_ramp
+      - enable_n7_left_ramp
+      - enable_n7_right_orbit
+      - enable_n7_left_orbit
+      - enable_n7_kickback
 
 variable_player:
   n7_assignment_shot_hit:
+    # In addition to the shot amount, multiply by the number of missions completed
+    score: 
+      int: current_player.mission_shot_value * current_player.assignments_completed
     assignments_completed: 1
     earned_assignments_completed: 1
     xp: machine.assignment_xp
 
-shot_groups:
-  n7_assignment_shot:
-    shots: n7_anomalous_weather_shot, n7_eclipse_smuggling_depot_shot, n7_quarian_crash_site_shot, n7_imminent_ship_crash_shot, n7_javelin_missiles_launched_shot, n7_lost_operative_shot, n7_msv_strontium_mule_shot
-    rotate_right_events: sw_bumper_active  # Bumper hits determine randomness
-
 shots:
-  n7_anomalous_weather_shot:
+  n7_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: n7_shot_profile
-    enable_events: start_n7_anomalous_weather
+    enable_events: enable_n7_right_ramp
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_ramp_ring
-  n7_eclipse_smuggling_depot_shot:
+  n7_left_ramp:
     hit_events: sh_left_ramp_hit
     profile: n7_shot_profile
-    enable_events: start_n7_eclipse_smuggling_depot
+    enable_events: enable_n7_left_ramp
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_ramp_ring
-  n7_quarian_crash_site_shot:
-    hit_events: sh_left_orbit_hit
-    profile: n7_shot_profile
-    enable_events: start_n7_quarian_crash_site
-    disable_events: mode_n7_assignments_will_stop
-    show_tokens:
-      leds: l_left_orbit_ring
-  n7_imminent_ship_crash_shot:
+  n7_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: n7_shot_profile
-    enable_events: start_n7_imminent_ship_crash
+    enable_events: enable_n7_right_orbit
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_right_orbit_ring
-  n7_javelin_missiles_launched_shot:
-    hit_events: sh_right_orbit_hit
-    profile: n7_shot_profile
-    enable_events: start_n7_javelin_missiles_launched
-    disable_events: mode_n7_assignments_will_stop
-    show_tokens:
-      leds: l_right_orbit_ring
-  n7_lost_operative_shot:
+  n7_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: n7_shot_profile
-    enable_events: start_n7_lost_operative
+    enable_events: enable_n7_left_orbit
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_left_orbit_ring
-  n7_msv_strontium_mule_shot:
+  n7_kickback:
     hit_events: sh_kickback_hit
     profile: n7_shot_profile
-    enable_events: start_n7_msv_strontium_mule
+    enable_events: enable_n7_kickback
     disable_events: mode_n7_assignments_will_stop
     show_tokens:
       leds: l_kickback_ring
@@ -245,7 +208,6 @@ sound_pools:
     sounds: edi_distress_signal_1, edi_distress_signal_2, edi_distress_signal_3, edi_distress_signal_4
     track: voice
     type: random
-
 
 sounds:
   music_n7_stationalert:

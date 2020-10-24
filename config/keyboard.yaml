@@ -1,8 +1,8 @@
 #config_version=5
 keyboard:
   "`":
-    # event: start_mode_overlord
-    switch: s_dropbank_top
+    event: start_mode_n7_assignments
+    # switch: s_dropbank_top
   # Advance major shots
   1:
     switch: s_left_orbit
