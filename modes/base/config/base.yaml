@@ -345,7 +345,7 @@ shows:
         - play_gameintro_short{current_player.ball==3}
 
 slide_player:
-  n7_assignment_shot_hit:
+  n7_assignment_hit:
     n7_complete_slide:
       priority: 600
       expire: 3s

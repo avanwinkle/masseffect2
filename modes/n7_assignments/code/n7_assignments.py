@@ -1,11 +1,15 @@
 import logging
+import math
 import random
 from mpf.core.mode import Mode
 
 class Mission():
     def __init__(self, name, description):
-        self.id = name.replace(" ","_").lower()
+        self.id = name.replace(" ","_").replace("\n","_").lower()
+        # There are linefeeds in the name for the main slide
         self.name = name
+        # Remove linefeeds for the dossier slide
+        self.long_name = name.replace("\n", " ")
         self.description = description
         self._completed_by_player = [False, False, False, False]
     
@@ -14,8 +18,8 @@ class Mission():
 
 STANDARD_MISSIONS = [
     Mission("Abandoned Mine", "It's an abandoned mine! Oh no scary!"),
-    Mission("Captured Mining Facility", "Who took it?"),
-    Mission("Endangered Research Station", "Save it from the sun!"),
+    Mission("Captured\nMining Facility", "Who took it?"),
+    Mission("Endangered\nResearch Station", "Save it from the sun!"),
     Mission("Imminent Ship Crash", "WE'RE CRASHING"),
     Mission("Lost Operative", "Where'd ya go, buddy?"),
     Mission("Mining the Canyon", "Mine, boys, mine every mountain and dig, boys, dig every stream"),
@@ -28,15 +32,15 @@ MERC_MISSIONS = [
     Mission("Archeological Dig Site", "Dr. Grant? Dr. Sattler?"),
     Mission("MSV Strontium Mule", "Nice ship. Where all the crew?"),
     Mission("Blue Suns Base", "AVEEENNNGGGGEeEE"),
-    Mission("Javelin Missiles Launched", "It's a real Sophie's choice, isn't it?"),
+    Mission("Javelin Missiles\nLaunched", "It's a real Sophie's choice, isn't it?"),
     # Blood Pack Missions
     Mission("Communications Relay", "what are those silly blood pack up to?"),
     Mission("Blood Pack Base", "Get 'em, boys!")
 ]
 
 VI_MISSIONS = [
-    Mission("Wrecked Merchant Freighter", "183 murderous robots, oh my!"),
-    Mission("Abandoned Research Station", "Robot lady wanna kill me!"),
+    Mission("Wrecked\nMerchant Freighter", "183 murderous robots, oh my!"),
+    Mission("Abandoned\nResearch Station", "Robot lady wanna kill me!"),
     Mission("Hahne-Kedar Facility", "Stop the bots!"),
 ]
 
@@ -79,9 +83,13 @@ class N7Assignments(Mode):
         self.player["assignments_played"] += 1
 
     def mode_start(self, **kwargs):
+        rating = math.ceil(100 * (self.player["earned_assignments_completed"] + 1) / self.player["assignments_played"])
         self.machine.events.post("set_n7_mission", 
             title=self._mission.name,
-            id=self._mission.id)
+            long_title=self._mission.long_name,
+            description=self._mission.description,
+            id=self._mission.id,
+            rating=rating)
 
     def _find_next_mission(self, mission_set):
         for mission in mission_set:

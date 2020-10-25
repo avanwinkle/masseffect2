@@ -35,9 +35,9 @@ event_player:
     # Turn off the bumpers to get the ball out fast
     - bumpers_off
     - bumpers_on|6s
-  n7_assignment_shot_hit:
+  n7_assignment_hit:
     - mission_shot_hit
-    - mission_collect_store
+    - mission_collect_score
     - n7_assignment_ended
   timer_missiontimer_complete: n7_assignment_ended
   n7_assignment_ended:
@@ -54,13 +54,17 @@ random_event_player:
       - enable_n7_kickback
 
 variable_player:
-  n7_assignment_shot_hit:
+  n7_assignment_hit:
     # In addition to the shot amount, multiply by the number of missions completed
     score: 
       int: current_player.mission_shot_value * current_player.assignments_completed
     assignments_completed: 1
     earned_assignments_completed: 1
     xp: machine.assignment_xp
+
+shot_groups:
+  n7_assignment:
+    shots: n7_left_orbit, n7_kickback, n7_left_ramp, n7_right_ramp, n7_right_orbit
 
 shots:
   n7_right_ramp:
@@ -103,7 +107,7 @@ shot_profiles:
   n7_shot_profile:
     show_when_disabled: false
     states:
-      - name: active
+      - name: lit
         show: led_6_dualcolor_chase
         speed: 12
         show_tokens:
@@ -116,7 +120,7 @@ show_player:
   mode_n7_assignments_will_stop:
     n7_lightsdown:
       action: stop
-  n7_assignment_shot_hit:
+  n7_assignment_hit:
     flash_all_shields_show:
       loops: 6
       speed: 12
@@ -127,8 +131,14 @@ show_player:
 shows:
   n7_lightsdown:
     - lights:
-        gi:
-          color: 444444
+        gi_bottom:
+          color: red
+          fade: 1s
+        gi_middle:
+          color: white
+          fade: 1s
+        gi_top:
+          color: red
           fade: 1s
         light_backwall_gi:
           color: 444444
@@ -162,22 +172,53 @@ slide_player:
     n7_hurryupslide:
       action: play
       priority: 100
+    n7_dossier:
+      priority: 100
+      target: lcd_right
   n7_assignment_ended:
     n7_hurryupslide:
+      action: remove
+    n7_dossier:
       action: remove
 
 slides:
   n7_hurryupslide:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
-      - type: text
-        text: N7 Assignment
-        style: header_xs, row_top, col_left_anchor
-        opacity: 0.5
+      - type: image
+        image: n7_logo_200
+        z: 10
+        style: row_super, col_left_anchor
       - type: text
         text: (title)
-        style: header_sm, row_main, col_left_anchor
+        halign: left
+        style: header_sm, row_main_under, col_left_anchor
+      - type: text
+        text: "N7 Rating: (rating) %"
+        style: header_xs, row_bottom, col_left_anchor
       - widget: n7_logo
       - widget: background_console
+  n7_dossier:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - widget: dossier_n7_codex_(id)
+      - type: text
+        text: (long_title)
+        style: codex_title
+      - type: text
+        text: (description)
+        style: codex_text
+      - widget: dossier_recruit_base
 
 sound_player:
   mode_n7_assignments_started:
@@ -360,3 +401,76 @@ widgets:
     - type: text
       text: (ticks_remaining)
       style: timer_primary, row_gutter, col_right_indent
+  # Standard Missions
+  dossier_n7_codex_abandoned_mine:
+    - type: image
+      image: codex_n7_abandoned_mine
+      style: codex_image
+  dossier_n7_codex_captured_mining_facility:
+    - type: image
+      image: codex_n7_captured_mining_facility
+      style: codex_image
+  dossier_n7_codex_endangered_research_station:
+    - type: image
+      image: codex_n7_endangered_research_station
+      style: codex_image
+  dossier_n7_codex_imminent_ship_crash:
+    - type: image
+      image: codex_n7_imminent_ship_crash
+      style: codex_image
+  dossier_n7_codex_lost_operative:
+    - type: image
+      image: codex_n7_lost_operative
+      style: codex_image
+  dossier_n7_codex_mining_the_canyon:
+    - type: image
+      image: codex_n7_mining_the_canyon
+      style: codex_image
+  dossier_n7_codex_msv_estevanico:
+    - type: image
+      image: codex_n7_msv_estevanico
+      style: codex_image
+  dossier_n7_codex_quarian_crash_site:
+    - type: image
+      image: codex_n7_quarian_crash_site
+      style: codex_image
+  # Merc Missions
+  dossier_n7_codex_archeological_dig_site:
+    - type: image
+      image: codex_n7_archeological_dig_site
+      style: codex_image
+  dossier_n7_codex_msv_strontium_mule:
+    - type: image
+      image: codex_n7_msv_strontium_mule
+      style: codex_image
+  dossier_n7_codex_blue_suns_base:
+    - type: image
+      image: codex_n7_blue_suns_base
+      style: codex_image
+  dossier_n7_codex_javelin_missiles_launched:
+    - type: image
+      image: codex_n7_javelin_missiles_launched
+      style: codex_image
+  dossier_n7_codex_communications_relay:
+    - type: image
+      image: codex_n7_communications_relay
+      style: codex_image
+  dossier_n7_codex_blood_pack_base:
+    - type: image
+      image: codex_n7_blood_pack_base
+      style: codex_image
+  # VI Missions
+  dossier_n7_codex_wrecked_merchant_freighter:
+    - type: image
+      image: codex_n7_wrecked_merchant_freighter
+      style: codex_image
+  dossier_n7_codex_abandoned_research_station:
+    - type: image
+      image: codex_n7_abandoned_research_station
+      style: codex_image
+  dossier_n7_codex_hahne-kedar_facility:
+    - type: image
+      image: codex_n7_hahne-kedar_facility
+      style: codex_image
+  
+  
