@@ -10,7 +10,7 @@ variable_player:
   set_mission_shots.3:
     mission_shot_value:
       action: set
-      int: machine.base_points / (shots_total * shots_total)
+      int: machine.base_points / (shots_total * shots_total) * (value_multiplier or 1)
     mission_shots_remaining:
       action: set
       int: shots_remaining
@@ -70,6 +70,8 @@ variable_player:
     mission_starting_ticks{not current_player.mission_is_resumable and not is_bonus_shot}:
       action: set
       int: device.timers.missiontimer.ticks
+    # Also for charity, include a bit of score even if the ultimate score doesn't get collected
+    score: current_player.mission_shot_value / 10
   mission_shot_hit.90:
     # Track the total value accumulated via build_value, which will cash out when collected
     temp_build_value:
@@ -177,7 +179,11 @@ timers:
       - event: missiontimer_pause_adrenaline
         action: pause
         value: 15
-      # The timer starts fresh on every mission and stops on every end
+      # By default, the timer starts when the intro completes
+      - event: mode_intro_complete
+        action: start
+      # Modes that don't have intro shows can explicitly start.
+      # Also, modes that pause/reset and resume the timer will use this
       - event: missiontimer_start
         action: start
       - event: missiontimer_stop

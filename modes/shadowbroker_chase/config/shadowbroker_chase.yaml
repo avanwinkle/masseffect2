@@ -13,7 +13,7 @@
 mode:
   start_events: start_mode_shadowbroker_chase
   stop_events: stop_mode_shadowbroker_chase, stop_wizards
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started  # No mode_intro_started because there's no hold
   priority: 800
 
 event_player:
@@ -26,17 +26,22 @@ event_player:
       shots_remaining:
         value: current_player.sbchase_hits_remaining
         type: int
-  mode_shadowbroker_chase_started: missiontimer_start
+  # Left ramp is before kickback, so enable the hold
+  sbchase_left_ramp_chaseprofile_lit_hit: enable_sb_hold
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete:
     - mission_collect_score
-    - stop_mode_shadowbroker_chase
     - missiontimer_stop
-  timer_missiontimer_complete: stop_mode_shadowbroker_chase, exit_shadowbroker_modes
+    - start_mode_shadowbroker_vasir
+    - stop_mode_shadowbroker_chase
+  timer_missiontimer_complete: 
+    - stop_mode_shadowbroker_chase
+    - disable_sb_hold
   # If the ball is saved, the mode is ended
   ball_save_sbchase_save_saving_ball:
     - stop_mode_shadowbroker_chase
     - reset_dropbank
+    - disable_sb_hold
   # Can't use events_when_stopped because they don't understand conditionals
   mode_shadowbroker_chase_will_stop:
     # If we failed the chase, end of wizard time
@@ -147,7 +152,8 @@ shots:
       shot: right_orbit
     tags: envshot_right_orbit
   sbchase_kickback:
-    hit_events: sh_kickback_hit
+    # Airlock entrance to start the mode, *not* kickback
+    switch: s_airlock_entrance
     profile: chaseprofile
     show_tokens:
       shot: kickback
@@ -155,6 +161,9 @@ shots:
 
 show_player:
   mode_shadowbroker_chase_started:
+    sbchase_gi:
+      speed: 1
+      loops: -1
     led_10_chase:
       action: play
       speed: 7
@@ -162,12 +171,84 @@ show_player:
         ledring: l_backwall_gi
         fade: 100ms
         color: color_barrier
+    sbchase_intro:
+      loops: 0
+
+shows:
+  sbchase_intro:
+    - time: 0
+      slides:
+        sbchase_portrait:
+          target: lcd_right
+    - time: 2s
+      sounds: 
+        liara_come_on_shes_getting_away:
+          action: play
+      events: play_shadowbroker_chase_music
+    - time: 12500ms
+      events: mode_intro_complete
+    - time: 55s  # Length of the video
+  sbchase_gi:
+    - time: 0
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: white
+          fade: 500ms
+        gi_middle:
+          color: color_jack
+          fade: 500ms
+        gi_top:
+          color: color_space
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_barrier
+          fade: 500ms
+        gi_middle:
+          color: white
+          fade: 500ms
+        gi_top:
+          color: color_jack
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_space
+          fade: 500ms
+        gi_middle:
+          color: color_barrier
+          fade: 500ms
+        gi_top:
+          color: white
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
+    
 
 slide_player:
   mode_shadowbroker_chase_started:
     sbchase_slide: {}
-    sbchase_portrait:
-      target: lcd_right
 slides:
   sbchase_slide:
     widgets:
@@ -185,21 +266,17 @@ slides:
       - widget: background_console
   sbchase_portrait:
     widgets:
-      - type: image
-        image: portrait_shadowbroker_chase
+      - type: video
+        video: shadowbroker_chase
 
 sound_player:
-  mode_shadowbroker_chase_started:
+  play_shadowbroker_chase_music:
     shadowbroker_vasir_music:
       key: shadowbroker_chase_music
       action: play
       fade_in: 0
       fade_out: 2s
       mode_end_action: stop
-    liara_come_on_shes_getting_away:
-      action: play
-    car_takeoff:
-      action: play
   # Play calls from random event player:
   # --- calls for successful shots
   play_liara_head_on_collision:

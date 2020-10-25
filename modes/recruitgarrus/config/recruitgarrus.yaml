@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_recruitgarrus
   stop_events: stop_mode_recruitgarrus, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -40,12 +40,12 @@ event_player:
       starting_shots: 0, 0, 1, 1, 0  # left_orbit, kickback, right_orbit
   power_shots_lit_hit: mission_shot_hit
   logicblock_doors_closed_counter_complete:
-    show_recruit_instructions:
-      squadmate: garrus
-      portrait: recruitgarrus
-      instructions_main: Shutters Closed
-      instructions_sub: Get back upstairs!
-  logicblock_doors_closed_counter_hit{count<0}: mission_collect_score, recruit_garrus_complete
+    # Reset the right ramp to enable the final shot
+    advance_mission_shots:
+      shots: right_ramp
+      jump: 0
+  # Any lit shot will win, in case the playfield rotated
+  power_shots_lit_hit{device.counters.doors_closed_counter.completed}: mission_collect_score, recruit_garrus_complete
 
 counters:
   doors_closed_counter:
@@ -58,63 +58,86 @@ counters:
     reset_on_complete: false
     disable_on_complete: false
 
-shot_groups:
-  clear_upstairs:
-    shots: right_ramp
-    restart_events: logicblock_doors_closed_counter_complete
-
-shows:
-  recruitintro_garrus:
-    - time: 2s
-      events:
-        - play_garrus_intro_shutters
-    - time: 7s
-      events: mission_intro_complete
-    - time: 8730ms
-      slides:
-        recruit_instructions_slide:
-          action: remove
-        recruit_intro_portrait:
-          action: remove
 
 show_player:
   mode_recruitgarrus_started:
     gi_show:
       start_step: 2
       manual_advance: True
-  show_recruit_instructions:
+      show_tokens:
+        backwall_color: color_garrus
     recruitintro_garrus:
       loops: 0
+  logicblock_doors_closed_counter_hit{count==0}: 
+    garrus_garm:
+      loops: 0
+
+shows:
+  recruitintro_garrus:
+    - time: 2500ms
+      sounds:
+        garrus_mission_start_callout:
+          action: play
+    - time: 5s
+      events: mode_intro_complete
+    - time: 5900ms
+      slides:
+        recruit_instructions_slide_lcd:
+          action: remove
+        recruit_instructions_portrait_slide:
+          action: remove
+          target: lcd_right
+  garrus_garm:
+    - time: 0
+      slides:
+        recruit_garrus_garm:
+          priority: 1000
+          target: lcd_right
+    - time: 1s
+      sounds:
+        garrus_theyre_coming_in:
+          action: play
+    - time: 8400ms
+      slides:
+        recruit_garrus_garm:
+          action: remove
+
+slides:
+  recruit_garrus_garm:
+    widgets: 
+      - type: video
+        video: recruitgarrus_garm
+        end_behavior: pause
+      - type: image
+        image: portrait_recruitgarrus
 
 sound_player:
   mode_recruitgarrus_started:
     music_recruit_garrus:
       action: play
+      start_at: 1s
       loops: -1
-  play_garrus_intro_shutters:
-    garrus_mission_start:
-      action: play
   logicblock_doors_closed_counter_hit{count==2}:
     garrus_two_more_shutters:
       max_queue_time: 1s
   logicblock_doors_closed_counter_hit{count==1}:
     garrus_one_more_shutter:
       max_queue_time: 1s
-  logicblock_doors_closed_counter_hit{count==0}:
-    garrus_last_shutter:
-      max_queue_time: 2s
   envshot_outlane_hit: boss_sound
+  timer_missiontimer_tick{ticks%10==0}:
+    garrus_taking_damage:
+      max_queue_time: 200ms
 
 sound_pools:
-  garrus_mission_start:
+  garrus_mission_start_callout:
     type: random_force_all
     track: voice
     sounds: garrus_give_these_bastards_everything, garrus_get_those_doors_closed, garrus_you_deal_with_shutters
     max_queue_time: 1s
-  garrus_last_shutter:
+  garrus_taking_damage:
     type: random_force_all
     track: voice
-    sounds: garrus_final_1, garrus_final_2, garrus_final_3
+    sounds: garrus_taking_too_much_damage, garrus_i_need_help_with_this_guy, garrus_theyve_gotten_through, garrus_taking_damage_1, garrus_taking_damage_2, garrus_taking_damage_3
     max_queue_time: 1s
   boss_sound:
     sounds: boss_finish_her, boss_now_youre_mine_archangel, boss_i_told_you_id_finish_you
@@ -142,14 +165,26 @@ sounds:
   garrus_one_more_shutter:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00205200_m.ogg
     track: voice
-  garrus_final_1:
+  garrus_taking_too_much_damage:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00206067_m.ogg
     track: voice
-  garrus_final_2:
+  garrus_i_need_help_with_this_guy:
     file: en_us_hench_garrus_omggra_garrus_wave2_a_00206056_m.ogg
     track: voice
-  garrus_final_3:
+  garrus_theyve_gotten_through:
     file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.ogg
+    track: voice
+  garrus_theyre_coming_in:
+    file: en_us_hench_garrus_omggra_second_boss_c_00228863_m.ogg
+    track: voice
+  garrus_taking_damage_1:
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206041_m.ogg
+    track: voice
+  garrus_taking_damage_2:
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206042_m.ogg
+    track: voice
+  garrus_taking_damage_3:
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206043_m.ogg
     track: voice
   boss_finish_her:
     file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243130_m.ogg

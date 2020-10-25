@@ -36,12 +36,32 @@ slide_player:
   mainmenu_change_career_highlighted{career_name==" "}:
     select_career_slide: {}
   mainmenu_casual_highlighted: casual_slide
-  mainmenu_create_career_highlighted: career_new_slide
+  mainmenu_create_career_highlighted: 
+    career_new_slide: {}
   # Selecting and moving between menus
   highlight_career: career_select_slide
+  set_career{avatar==0}:
+    portrait_createprofile_0:
+      target: lcd_right
+  set_career{avatar==1}:
+    portrait_createprofile_1:
+      target: lcd_right
+  set_career{avatar==2}:
+    portrait_createprofile_2:
+      target: lcd_right
+  set_career{avatar==3}:
+    portrait_createprofile_3:
+      target: lcd_right
+  
 
 slides:
   change_career_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Switch Profiles
@@ -54,6 +74,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   select_career_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Select a Profile
@@ -63,6 +89,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   resume_game_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Continue Game
@@ -75,6 +107,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   new_game_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: New Game
@@ -87,6 +125,10 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   career_select_slide:
+
+    # No transitions on this slide because the same slide is used
+    # for all careers. Transitions create a blip of the underlying
+    # slide!
     widgets:
       - type: text
         text: "Load Profile:"
@@ -104,6 +146,12 @@ slides:
         halign: right
       - widget: background_console
   career_new_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Create Profile
@@ -113,6 +161,12 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   casual_slide:
+    transition: 
+      type: wipe
+      duration: 150ms
+    transition_out: 
+      type: wipe
+      duration: 150ms
     widgets:
       - type: text
         text: Casual Play
@@ -121,6 +175,85 @@ slides:
         text: "(machine|players_widget_text)"
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
+  portrait_createprofile_0:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_0
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_0
+  portrait_createprofile_1:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_1
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_1
+  portrait_createprofile_2:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_2
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_2
+  portrait_createprofile_3:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_3
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_3
+  portrait_createprofile_4:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_4
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_4
+  portrait_createprofile_5:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets: 
+      - type: video
+        video: createprofile_5
+        end_behavior: loop
+      - type: image
+        image: portrait_avatar_5
+  
 
 show_player:
   show_mainmenu: mainmenu_show
@@ -281,4 +414,3 @@ widgets:
           - property: opacity
             value: 0.2
             duration: 50ms
-

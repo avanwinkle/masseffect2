@@ -1,21 +1,11 @@
 """MC Handlers for Squadmate batching."""
 
 import logging
-from mpfmc.core.scriptlet import Scriptlet
-from mpf.core.rgba_color import RGBAColor
+from mpfmc.core.mc_custom_code import McCustomCode
 from .squadmate_status import SquadmateStatus
 from .research import RESEARCH
 
-SQICON_STATUSES = {
-    "none": RGBAColor([0, 0, 0]),
-    "dead": RGBAColor([0.8, 0, 0]),
-    "available": RGBAColor([1.0, 1.0, 1.0]),
-    "complete": RGBAColor([0.78, 0.26, 0.07]),
-    "specialist": RGBAColor([0, 0.35, 0.8]),
-}
-
-
-class MCSquadmateHandlers(Scriptlet):
+class MCSquadmateHandlers(McCustomCode):
     """Custom module for MC squadmate stuff, like playing sounds."""
 
     def on_load(self):
@@ -29,7 +19,13 @@ class MCSquadmateHandlers(Scriptlet):
         self.mc.events.add_handler("slide_recruit_advance_slide_active", self._update_sqicons)
         self.mc.events.add_handler("slide_levelup_slide_active", self._update_sqicons)
         self.mc.events.add_handler("slide_store_intro_slide_active", self._update_store)
-        self._sqicons = None
+        # Track which squadmate selection changes
+        self._squadmate_select_target = None
+    
+    def on_connect(self, **kwargs):
+        self.add_mpf_event_handler("squadmate_select", self._select_squadmate)
+        self.add_mpf_event_handler("squadmate_select_clear", self._select_squadmate_clear)
+        self.add_mpf_event_handler("sqicon_update", self._update_sqicons)
 
     def _get_slide(self, slide_name, display):
         display = self.mc.displays[display]
@@ -41,40 +37,46 @@ class MCSquadmateHandlers(Scriptlet):
         self._update_sqicons(is_suicide=True, specialist=kwargs["squadmate"])
 
     def _update_sqicons(self, is_suicide=False, specialist=None, **kwargs):
+        player = self.mc.player
         slide = self._get_slide("squadicon_slide", "lcd_right")
         # In DMD mode (for example) there is no squadicon slide, so ignore it
         if not slide:
             return
 
-        self.log.debug("Updating sqicons")
-        if not self._sqicons:
-            self._sqicons = {}
-
-        self.log.debug("Current slide: {}".format(slide))
-        self.log.debug("Current widgets: {}".format(slide.widgets))
         if slide.name == "squadicon_slide":
-            for container in slide.widgets:
-                widget = container.widget
-                if widget.key and widget.key.startswith("sqicon_"):
-                    mate = widget.key.replace("sqicon_", "")
-                    status = self.mc.player["status_{}".format(mate)]
-
-                    if 0 <= status < 3 or (status == 3 and is_suicide):
-                        color = SQICON_STATUSES["none"]
+            # I couldn't get widget.remove() or slide.remove_widget() to work, so brute force it is
+            # Hopefully this doesn't make a memory leak?
+            slide.children = []
+            self.log.debug("Creating new widgets, all should be removed? {}".format(slide.widgets))
+            
+            slide.add_widgets_from_library("sqicon_console")
+            for mate in SquadmateStatus.all_mates():
+                status = player["status_{}".format(mate)]
+                style = "default"
+                background = "default"
+                if 0 <= status < 3:
+                    style = "na"
+                elif status == 3:
+                    if is_suicide:
+                         style = "na"
                     else:
-                        if mate == specialist:
-                            color = SQICON_STATUSES["specialist"]
-                        elif status < 0:
-                            color = SQICON_STATUSES["dead"]
-                        elif status == 3:
-                            color = SQICON_STATUSES["available"]
-                        elif status >= 4:
-                            color = SQICON_STATUSES["complete"]
-                    widget.color = color
-                    widget.config["color"] = color
+                        background = "available"
+                elif status == -1:
+                    style = "dead"
+                elif mate == specialist:
+                    background = "specialist"
+                elif mate == player["selected_mate_one"] or mate == player["selected_mate_two"]:
+                    background = "selected"
+                
+                slide.add_widgets_from_library("sqicon_background_{}".format(background), 
+                    key="sqicon_background_{}".format(mate),
+                    widget_settings={"style": "sqicon_style_mate_{}".format(mate)}
+                    )
+                slide.add_widgets_from_library("sqicon_mate_{}_{}".format(mate, style))
 
-                    self.log.debug("Setting sqicon {} (status {}) to opacity {} color {}".format(
-                                  mate, status, widget.opacity, widget.color))
+                
+            slide.add_widgets_from_library("squadmates_grid_overlay")
+            
         else:
             self.log.error("Current slide is NOT squadicon")
 
@@ -109,6 +111,46 @@ class MCSquadmateHandlers(Scriptlet):
 
     def _update_store(self, **kwargs):
         self._update_selection_widgets("store_slide", "purchase_", self.filter_store, offset_last=True)
+
+    def _select_squadmate(self, **kwargs):
+        player = self.mc.player
+        # Find the current target
+        available_mates = SquadmateStatus.available_mates(player)
+        
+
+        first_mate = player["selected_mate_one"]
+        second_mate = player["selected_mate_two"]
+        idx_one = available_mates.index(first_mate)
+        idx_two = available_mates.index(second_mate)
+        if not self._squadmate_select_target:
+            # Left flipper moves the first selection, right flipper moves the second
+            idx = min(idx_one, idx_two) if kwargs["switch"] == "s_flipper_left" else max(idx_one, idx_two)
+            self._squadmate_select_target = "one" if idx == idx_one else "two"
+        else:
+            idx = idx_one if self._squadmate_select_target == "one" else idx_two
+        avoid_idx = idx_one + idx_two - idx
+        
+        idx += 1
+        if idx == avoid_idx:
+            idx += 1
+        if idx >= len(available_mates):
+            idx = 0
+        # In case the rollover caused collision
+        if idx == avoid_idx:
+            idx += 1
+        player["selected_mate_{}".format(self._squadmate_select_target)] = available_mates[idx]
+        # Now that the selection has been made and saved to the player, update the sqicon widgets
+        self._update_sqicons()
+
+    def _select_squadmate_clear(self, **kwargs):
+        self._squadmate_select_target = None
+
+    def create_widget(self, config):
+        config["_default_settings"] = []
+        widget_settings = self.mc.config_validator.validate_config(
+            'widgets:{}'.format(config['type']), config,
+            base_spec='widgets:common', add_missing_keys=True)
+        return widget_settings
 
     def filter_specialists(self, widgets, player):
         # Infiltration: use techs
@@ -169,3 +211,4 @@ class MCSquadmateHandlers(Scriptlet):
         if do_offset:
             y -= spacing / 2
         return (x, y)
+

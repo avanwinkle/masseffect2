@@ -33,6 +33,7 @@ COLORS = {
 
 SOUND_NAME_FORMATS = {
     "destroy_core": "squadmate_{squadmate}_destroy_core",
+    "husks": "squadmate_{squadmate}_husks",
     "killed": "squadmate_{squadmate}_killed",
     "killed_callback": "squadmate_{squadmate}_killed_callback_{callback_mate}",
     "skillshot": "squadmate_{squadmate}_nice_shot",
@@ -109,6 +110,8 @@ class MPFSquadmateHandlers(CustomCode):
         variant = random.randint(1, kwargs["variants"]) if kwargs.get("variants") else None
         if squadmate == "random":
             squadmate = SquadmateStatus.random_mate(self.machine.game.player, exclude=kwargs.get("exclude"))
+        elif squadmate == "selected":
+            squadmate = SquadmateStatus.random_selected(self.machine.game.player, exclude=kwargs.get("exclude"))
         sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")
@@ -191,7 +194,7 @@ class MPFSquadmateHandlers(CustomCode):
             ) else "3s"
 
             self.machine.events.post("queue_slide",
-                                     slide="recruit_advance_slide".format(future_mate_status),
+                                     slide="recruit_advance_slide_QUEUE_A",
                                      expire=expire,
                                      squadmate=mate, status=future_mate_status,
                                      portrait="squadmate_{}_advance".format(mate),
@@ -278,6 +281,9 @@ class MPFSquadmateHandlers(CustomCode):
                 achs["suicidemission"].enable()
 
     def _play_squadmates_show(self, stop_all=False, **kwargs):
+        """ Creates the necessary show files for squadmates, namely lighting the backbox with the
+            appropriate light colors and filling the career ladder with solids and blinkings.
+        """
         mate_lists = {
             "lit": [],
             "complete": [],
@@ -285,12 +291,15 @@ class MPFSquadmateHandlers(CustomCode):
             "off": [],
             "specialist": []
         }
+        update_sqicons = False
         for mate in SquadmateStatus.all_mates():
             status = 0 if stop_all else self.machine.game.player["status_{}".format(mate)]
             if mate == self.machine.game.player["specialist"]:
                 mate_lists["specialist"].append(mate)
+                update_sqicons = True
             elif status == 3 and not self.machine.modes.suicide_base.active:
                 mate_lists["lit"].append(mate)
+                update_sqicons = True
             elif status == 4:
                 mate_lists["complete"].append(mate)
             elif status == -1:
@@ -328,3 +337,11 @@ class MPFSquadmateHandlers(CustomCode):
             elif self._shows.get(showname):
                 self._shows[showname].stop()
                 self._shows[showname] = None
+        
+        # Post an event to squadmates_mc to update the squad slide
+        if update_sqicons:
+            # Delay by 1s to allow the slide queue to appear
+            self.machine.clock.schedule_once(self._sqicon_update, 1)
+    
+    def _sqicon_update(self):
+        self.machine.events.post("sqicon_update")

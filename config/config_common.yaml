@@ -209,7 +209,8 @@ machine_vars:
     value_type: float
     persist: false
   base_cooldown:
-    initial_value: 50
+    # Start with a nice low number for easy debugging. Later, bump up to... 100?
+    initial_value: 100
     value_type: int
     persist: false
   # This needs to be a machine variable so that it can exist outside of game modes (i.e. mainmenu)
@@ -388,6 +389,11 @@ player_vars:
     initial_value: 0
   level:
     initial_value: 1
+  last_mission:
+    initial_value: " "
+    value_type: str
+  mode_intro_running:
+    initial_value: 0
   planets:
     initial_value: 0
   power:
@@ -445,6 +451,12 @@ player_vars:
     initial_value: 0
   resume_mission:
     initial_value: " "
+    value_type: str
+  selected_mate_one:
+    initial_value: "jacob"
+    value_type: str
+  selected_mate_two:
+    initial_value: "miranda"
     value_type: str
   # Set initial values for cooldown shots
   shot_cooldown_shot_biotic:

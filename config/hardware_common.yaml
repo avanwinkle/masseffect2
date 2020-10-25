@@ -24,11 +24,10 @@ drop_targets:
 drop_target_banks:
   dropbank:
     drop_targets: bottom, middle, top
-    ignore_switch_ms: 280ms # Prevent reset-triggered switch changes from causing playfield_active
     reset_coils: c_dropbank_reset
     reset_on_complete: 1s
     reset_events: machine_reset_phase_3, ball_starting, reset_dropbank
-
+    
 autofire_coils:
   left_slingshot:
     switch: s_left_slingshot

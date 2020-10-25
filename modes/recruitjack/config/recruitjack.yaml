@@ -106,14 +106,14 @@ shows:
         warden_start:
           action: play
     - time: 6s
-      events: mission_intro_complete
+      events: mode_intro_complete
     - time: 6170ms
       slides:
-        recruit_instructions_slide:
+        recruit_instructions_slide_lcd:
           action: remove
-      widgets:
-        portrait_recruit_intro_jack:
+        recruit_instructions_portrait_slide:
           action: remove
+          target: lcd_right
   show_find_jack:
     - time: 0
       sounds:
@@ -179,6 +179,8 @@ show_player:
     gi_show:
       start_step: 3
       manual_advance: True
+      show_tokens:
+        backwall_color: color_jack
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0

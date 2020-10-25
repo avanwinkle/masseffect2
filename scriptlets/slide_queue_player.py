@@ -22,14 +22,30 @@ class SlideQueuePlayer(CustomCode):
         self._queue = []
         self._play_count = 0
         self._current_timeout = None
+        self._last_slide_name = None
+        self._last_portrait_name = None
 
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
         self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
         self.log.info("Slide Queue Player Ready!")
+        self.log.setLevel("DEBUG")
 
     def _add_slide_to_queue(self, **kwargs):
         slide_name = kwargs.pop("slide")
+
+         # Check to see if the last item in the queue matches this one
+        # If so, select an alternate version of the slide to avoid a
+        # name-conflict and remove(). Match on '_QUEUE_A'
+        if "_QUEUE_" in slide_name:
+            preceding_name = self._queue[-1][0] if self._queue else self._last_slide_name
+            self.log.info("Adding new slide {} to queue. Preceding name is {}".format(slide_name,preceding_name))
+            if slide_name == preceding_name:
+                slide_name = slide_name.replace("_QUEUE_A", "_QUEUE_B") if slide_name[-1] == "A" else slide_name.replace("_QUEUE_B","_QUEUE_A")
+                self.log.info(" - Updated slide name to be {}".format(slide_name))
+            else:
+                self.log.info("Not doing funny queue stuff. Match is {} and preceding is {}".format("_QUEUE_" in slide_name, preceding_name))
+        self.log.info("QUeue is appending name {}".format(slide_name))
         self._queue.append((slide_name, kwargs))
 
         if not self._current_timeout:
@@ -37,52 +53,90 @@ class SlideQueuePlayer(CustomCode):
 
     def _advance_queue(self, dt=None, **kwargs):
         del kwargs
+        slide_name = None
+        context = "global"
+        calling_context = "queue_slide"
+        target = None
+        portrait_slide_name = None
         if self._queue:
             slide_name, slide_kwargs = self._queue.pop(0)
             expire = Util.string_to_secs(slide_kwargs.pop("expire", EXPIRE_SECS))
             timeout = expire - Util.string_to_secs(slide_kwargs.pop("expire_overlap", EXPIRE_OVERLAP_SECS))
-            context = "global"
-            calling_context = "queue_slide"
+            target = slide_kwargs.get("target", None)
+            # context = "slide_queue_player_{}_{}".format(slide_name, self._play_count)
+            # calling_context = "queue_slide_{}".format(self._play_count)
             settings = {
                 slide_name: {
-                    "expire": expire,
+                    # "expire": expire,
                     "action": "play",
-                    "target": slide_kwargs.get("target", None),
+                    "target": target,
                     "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
                     "tokens": slide_kwargs.get("tokens", None),
-                    'transition': {
-                        "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
-                        "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
-                    },
-                    'transition_out': {
-                        "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
-                        "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
-                    },
+                    # 'transition': {
+                    #     "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
+                    #     "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
+                    # },
                 }
             }
 
+            # Only transition out if the queue is empty
+            # if not self._queue:
+            #     settings[slide_name]["transition_out"] = {
+            #         "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
+            #         "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
+            #     }
+
             portrait = slide_kwargs.pop("portrait")
             if portrait and self.machine.variables.get("is_lcd"):
-                portrait_name = "portrait_{}".format(portrait)
-                settings["portrait_slide"] = self._generate_portrait(expire, slide_kwargs)
-                slide_kwargs["portrait_name"] = portrait_name
-
+                portrait_widget_name = "portrait_{}".format(portrait)
+                if self._last_portrait_name:
+                    portrait_slide_name = self._last_portrait_name.replace("_QUEUE_A", "_QUEUE_B") if self._last_portrait_name[-1] == "A" else self._last_portrait_name.replace("_QUEUE_B","_QUEUE_A")
+                else:
+                    portrait_slide_name = "portrait_slide_QUEUE_A"
+                settings[portrait_slide_name] = self._generate_portrait(expire, slide_kwargs)
+                slide_kwargs["portrait_name"] = portrait_widget_name
+            self.machine.log.info("Playing slide {} (count {}) with expire {} and timeout {}".format(slide_name, self._play_count, expire, timeout))
+            self.machine.log.info("slide kwargs are {}".format(slide_kwargs))
+            # slide_kwargs["key"] = "{}-{}".format(slide_name, self._play_count)
             self.machine.slide_player.play(settings=settings,
                                            context=context,
                                            calling_context=calling_context,
                                            **slide_kwargs)
-            self.machine.events.post("play_queued_slide_{}".format(slide_name), **slide_kwargs)
-            self._current_timeout = self.machine.clock.schedule_once(self._advance_queue, timeout)
+            event_name = slide_name[:-8] if "_QUEUE_" in slide_name else slide_name
+            self.machine.events.post("play_queued_slide_{}".format(event_name), **slide_kwargs)
+            self._current_timeout = self.machine.clock.schedule_once(self._advance_queue, expire)
             self._play_count += 1
-
         else:
             self._current_timeout = None
             self._play_count = 0
             self._check_queue_clear()
 
+        # Remove an old slide if we have one
+        if self._last_slide_name:
+            self.log.info("Removing queued slide {}".format(self._last_slide_name))
+            settings = {
+                self._last_slide_name: {
+                    "action": "remove",
+                    "target": target
+                }
+            }
+            self.machine.slide_player.play(settings=settings, context=context, calling_context=calling_context)
+        if self._last_portrait_name:
+            self.log.info("Removing queued portrait {}".format(self._last_portrait_name))
+            settings = {
+                self._last_portrait_name: {
+                    "action": "remove",
+                    "target": "lcd_right"
+                }
+            }
+            self.machine.slide_player.play(settings=settings, context=context, calling_context=calling_context)
+        
+        
+        self._last_slide_name = slide_name
+        self._last_portrait_name = portrait_slide_name
+
     def _generate_portrait(self, expire, slide_kwargs):
         slide_settings = {
-            "expire": expire,
             "action": "play",
             "target": "lcd_right",
             "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
@@ -90,12 +144,13 @@ class SlideQueuePlayer(CustomCode):
             'transition': {
                 "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
                 "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
-            },
-            'transition_out': {
+            }
+        }
+        if not self._queue:
+            slide_settings["transition_out"] = {
                 "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
                 "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
-            },
-        }
+            }
         return slide_settings
 
     def _clear_queue(self, **kwargs):

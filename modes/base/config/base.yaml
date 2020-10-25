@@ -48,6 +48,10 @@ event_player:
     - stop_mode_global
   mode_type_wizard_stopped{not mode.base.stopping}:
     - start_mode_global
+  # We can cancel an intro show with the flippers
+  flipper_cancel{current_player.mode_intro_running}:
+    - mode_intro_complete
+    - mode_intro_skipped
   # If a new mission becomes available, remove the player-selected bypass
   player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
@@ -208,12 +212,25 @@ variable_player:
     levelup_pending:
       action: set
       int: 0
+    # In case we drained during a mode intro ??, reset it
+    mode_intro_running:
+      action: set
+      int: 0
   levelup_complete:
     levelup_pending:
       action: set
       int: 0
   play_intro_show:
     intro_played: 1
+  # Store a variable that is true while a mode intro is running, so that we can cancel shows
+  mode_intro_started:
+    mode_intro_running:
+      action: set
+      int: 1
+  mode_intro_complete:
+    mode_intro_running:
+      action: set
+      int: 0
 
 shots:
   # These "core" shots for the main shots
@@ -370,6 +387,8 @@ slides:
         text: Player (num)
         style: header_md, row_main
   levelup_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: LEVEL UP!
@@ -392,176 +411,40 @@ slides:
       text: (value)
       style: body_md, row_sub_under, num
   squadicon_slide:
-    - type: image
-      image: squadmates_grid
-      z: 10
-    - type: rectangle
-      color: 000000
-      width: 500
-      height: 500
-      z: 0
-    # SQUADMATES
-    - type: rectangle
-      key: sqicon_garrus
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      animations:
-        show_slide: sqicon_available
-      x: 0
-      y: 0
-      z: 2
-    - type: rectangle
-      key: sqicon_grunt
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      animations:
-        show_slide: sqicon_available
-      x: 121
-      y: 0
-      z: 2
-    - type: rectangle
-      key: sqicon_jack
-      width: 121
-      height: 158
-      anchor_x: left
-      anchor_y: bottom
-      animations:
-        show_slide: sqicon_available
-      x: 242
-      y: 0
-      z: 2
-    - type: rectangle
-      key: sqicon_jacob
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 363
-      y: 0
-      z: 2
-    - type: rectangle
-      key: sqicon_kasumi
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      # animations:
-      #   show_slide: sqicon_available
-      x: 0
-      y: 158
-      z: 2
-    - type: rectangle
-      key: sqicon_legion
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 121
-      y: 158
-      z: 2
-    - type: rectangle
-      key: sqicon_miranda
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 242
-      y: 158
-      z: 2
-    - type: rectangle
-      key: sqicon_mordin
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 363
-      y: 158
-      z: 2
-    - type: rectangle
-      key: sqicon_samara
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 0
-      y: 316
-      z: 2
-    - type: rectangle
-      key: sqicon_tali
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 121
-      y: 316
-      z: 2
-    - type: rectangle
-      key: sqicon_thane
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 242
-      y: 316
-      z: 2
-    - type: rectangle
-      key: sqicon_zaeed
-      width: 121
-      height: 158
-      anchor_y: bottom
-      anchor_x: left
-      animations:
-        show_slide: sqicon_available
-      x: 363
-      y: 316
-      z: 2
-    - type: image
-      image: squadmates_grid_overlay
-      z: 100
+    transition: fade
+    transition_out: fade
+    widgets: []  # Will be dynamically populated by squadmates_mc.py
   intro_no_missions_slide:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Hit any lane 3x\nto unlock missions"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Hit any lane 3x\nto unlock missions"
+        style: header_xs, row_sub_under
+      - widget: background_console
   intro_missions_slide:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Select a mission\nat the Galaxy Map"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Select a mission\nat the Galaxy Map"
+        style: header_xs, row_sub_under
+      - widget: background_console
   intro_missions_slide_mp:
-    - type: text
-      text: Build Your Team
-      style: header_md, row_main, row_main_dmd_high
-    - type: text
-      text: "Select a mission\nat the Galaxy Map"
-      style: header_xs, row_sub_under
-    - widget: background_console
+    widgets:
+      - type: text
+        text: Build Your Team
+        style: header_md, row_main, row_main_dmd_high
+      - type: text
+        text: "Select a mission\nat the Galaxy Map"
+        style: header_xs, row_sub_under
+      - widget: background_console
 
 sound_player:
   s_plunger_lane_inactive: galaxy_whoosh

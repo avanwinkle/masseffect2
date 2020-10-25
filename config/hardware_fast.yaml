@@ -413,11 +413,11 @@ lights:
   l_left_top_lane: # Left Top Lane [#75]
     number: 0-0
     type: grb
-    tags: light_pf
+    tags: light_pf, light_top_lane
   l_right_top_lane: # Right Top Lane [#76]
     number: 0-1
     type: grb
-    tags: light_pf
+    tags: light_pf, light_top_lane
 
   l_flash_left_orbit: # Left Loop (Spinner) [#102]
     number: 0-12
@@ -534,26 +534,32 @@ lights:
   l_power_charge:
     number: 0-31
     type: grb
+    default_on_color: color_grunt
     tags: light_powers, charge
   l_power_armor:
     number: 0-30
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, armor
   l_power_adrenaline:
     number: 0-29
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, adrenaline
   l_power_cloak:
     number: 0-28
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, cloak
   l_power_drone:
     number: 0-27
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, drone
   l_power_singularity:
     number: 0-26
     type: grb
+    default_on_color: color_grunt
     tags: light-powers, singularity
   # Career ladder
   l_progress_collectorship:

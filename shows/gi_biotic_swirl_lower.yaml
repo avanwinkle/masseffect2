@@ -17,7 +17,9 @@
 - time: '+1'
   lights:
     gi_bottom_light_1: '006BE2'
-    gi_bottom_light_2: '000000'
+    gi_bottom_light_2: 
+      color: stop
+      fade: 30ms
     
 - time: '+1'
   lights:
@@ -61,7 +63,9 @@
     
 - time: '+1'
   lights:
-    gi_bottom_light_7: '000000'
+    gi_bottom_light_7: 
+      color: stop
+      fade: 30ms
     
 #No change this frame - take another step
 #  lights:
@@ -120,8 +124,12 @@
     
 - time: '+1'
   lights:
-    gi_bottom_light_3: '000000'
-    gi_bottom_light_5: '000000'
+    gi_bottom_light_3: 
+      color: stop
+      fade: 30ms
+    gi_bottom_light_5: 
+      color: stop
+      fade: 30ms
     
 #No change this frame - take another step
 #  lights:
@@ -168,7 +176,9 @@
     
 - time: '+1'
   lights:
-    gi_bottom_light_1: '000000'
+    gi_bottom_light_1: 
+      color: stop
+      fade: 30ms
     gi_bottom_light_4: '006EE8'
     
 - time: '+1'
@@ -211,7 +221,9 @@
 - time: '+1'
   lights:
     gi_bottom_light_6: '003D81'
-    gi_bottom_light_8: '000000'
+    gi_bottom_light_8: 
+      color: stop
+      fade: 30ms
     
 - time: '+1'
   lights:
@@ -219,7 +231,9 @@
     
 - time: '+1'
   lights:
-    gi_bottom_light_6: '000000'
+    gi_bottom_light_6: 
+      color: stop
+      fade: 30ms
     
 #No change this frame - take another step
 #  lights:
@@ -403,7 +417,9 @@
   lights:
     gi_bottom_light_1: '0068DC'
     gi_bottom_light_2: '006AE0'
-    gi_bottom_light_4: '000000'
+    gi_bottom_light_4: 
+      color: stop
+      fade: 30ms
     gi_bottom_light_6: '0079FF'
     
 - time: '+1'

@@ -22,10 +22,7 @@ mode:
   stop_events: stop_mode_collectorship_base, stop_wizards
   events_when_started:
     - mode_type_wizard_started
-    - start_mode_collectorship_ambush
-    - start_mode_harbinger
-    # TODO: Add an intro
-    - mission_intro_complete
+    - mode_intro_started
   events_when_stopped: mode_type_wizard_stopped, stop_mode_harbinger
   priority: 300
 
@@ -36,6 +33,9 @@ event_player:
   mode_collectorship_base_started:
     set_environment:
       env: collectors
+  mode_intro_complete:
+    - start_mode_collectorship_ambush
+    - start_mode_harbinger|7s
   collectorship_ambush_complete:
     - start_mode_collectorship_husk
   collectorship_husk_complete:
@@ -74,20 +74,22 @@ multiballs:
     # accidentally slip out and mess up the playfield count, which causes a premature ball_will_end
     ball_locks: bd_lock
 
-slide_player:
-  mode_collectorship_base_started:
-    collectorship_started_slide:
-      expire: 5s
 
-slides:
-  collectorship_started_slide:
-    widgets:
-      - type: text
-        text: "Disabled\nCollector Ship"
-        style: header_md, row_main, row_main_dmd_low
+light_player:
+  mode_collectorship_ambush_started:
+    gi: off
+    light_backwall_ambient: color_collectors
+    l_gi_left_playfield: 444444
+    l_gi_lower_playfield: 444444
+  mode_collectorship_base_will_stop:
+    gi: on
+    light_backwall_ambient: off
 
 show_player:
   mode_collectorship_base_started:
+    collectorship_cineanim:
+      action: play
+      loops: 0
     flasher_show_triple|6s:
       speed: 6
       show_tokens:
@@ -96,11 +98,23 @@ show_player:
       speed: 2
       show_tokens:
         flashers: l_gi_upper
-    # collectorship_flash_show:
-    #   action: play
-    #   sync_ms: 1000
+  mode_intro_skipped:
+    collectorship_cineanim:
+      action: stop
 
 shows:
+  collectorship_cineanim:
+    - time: 0
+      slides: 
+        collectorship_cineanim:
+          action: play
+        collectorship_dossier:
+          action: play
+          target: lcd_right
+    - time: 29s
+      events: play_ambush_music_longfadein
+    - time: 33s
+      events: mode_intro_complete
   collectorship_flash_show:
     - duration: 3s
     - duration: 200ms
@@ -121,30 +135,37 @@ shows:
     - lights:
         l_flash_dragon_left: off
 
-light_player:
-  mode_collectorship_ambush_started:
-    gi: off
-    light_backwall_ambient: color_collectors
-    l_gi_left_playfield: 444444
-    l_gi_lower_playfield: 444444
-  mode_collectorship_base_will_stop:
-    gi: on
-    light_backwall_ambient: off
-
 sound_player:
-  mode_collectorship_ambush_started:
+  play_ambush_music_longfadein:
+    music_ambush:
+      action: play
+      fade_in: 3s
+      fade_out: 1s
+      mode_end_action: stop
+  mode_intro_skipped:
     music_ambush:
       action: play
       fade_in: 1s
       fade_out: 1s
+      start_at: 1s
+      mode_end_action: stop
+  collectorship_praetorian_complete:
+    music_ambush:
+      action: play
+      fade_in: 1s
+      fade_out: 1s
+      start_at: 1s
       mode_end_action: stop
     music_praetorian:
       action: stop
+    joker_were_out_of_time_we_have_to_go:
+      action: play
   mode_collectorship_husk_started:
     music_husk:
       action: play
       fade_in: 1s
       fade_out: 1s
+      start_at: 1s
       mode_end_action: stop
     music_ambush:
       action: stop
@@ -189,6 +210,25 @@ sounds:
   music_stinger:
     file: mus_generic_stinger_111.ogg
     track: sfx
+  edi_sending_coordinates_for_shuttle_extraction:
+    file: en_us_hench_ai_cspcr2_bridge_trap_d_00253366_m.ogg
+    track: voice
+    start_at: 2800ms
+  edi_not_a_malfunction_this_was_a_trap:
+    file: en_us_hench_ai_cspcr2_bridge_console_d_00269362_m.ogg
+    track: voice
+  joker_were_out_of_time_we_have_to_go:
+    file: en_us_hench_joker_cspcr2_normandy_escape_c_00189679_m.ogg
+    track: voice
+  shepard_we_need_a_little_help_here_edi:
+    file: en_us_player_f_cspcr2_bridge_console_d_00307216_f.ogg
+    track: voice
+  shepard_edi_we_got_a_problem_here:
+    file: en_us_player_f_cspcr2_edi_door2_a_00252669_f.ogg
+    track: voice
+  shepard_what_the_hell_just_happened:
+    file: en_us_player_f_cspcr2_bridge_console_d_00253279_f.ogg
+    track: voice
   collector_noise_1:
     file: sfx_ss_collector_ss_collector_00349721_m.ogg
     track: sfx

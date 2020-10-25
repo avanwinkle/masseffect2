@@ -133,7 +133,7 @@ sound_player:
       fade_out: 2s
     joker_i_have_to_try_and_lose_them:
       action: play
-      events_when_stopped: missiontimer_set_omegarelay, mission_intro_complete
+      events_when_stopped: missiontimer_set_omegarelay, mode_intro_complete
   # We have a shot sequence to play the right sound per hit
   omegarelay_shots_lit_hit:
     omega_callout_sequence:

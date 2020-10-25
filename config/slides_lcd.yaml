@@ -2,28 +2,42 @@
 slides:
   # Core slides
   attract_slide_main:
-    - type: image
-      image: logo_fullscreen
-      style: row_main
-      anchor_y: top
-      scale: 0.5
-      z: 2
-    - type: text
-      text: Press Start
-      color: 990000
-      style: header_sm, row_sub
-      animations:
-        show_slide: pulse_text_slow
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      x: 0
-      z: 0
+    transition: 
+      type: fade
+      duration: 200ms
+    transition_out: 
+      type: fade
+      duration: 200ms
+    widgets:
+      - type: image
+        image: logo_fullscreen
+        style: row_main
+        anchor_y: top
+        scale: 0.5
+        z: 2
+      - type: text
+        text: Press Start
+        color: 990000
+        style: header_sm, row_sub
+        animations:
+          show_slide: pulse_text_slow
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
   attract_slide_right:
-    - type: image
-      image: splashscreen
-      anchor_x: right
-      x: 110%
+    transition: 
+      type: fade
+      duration: 200ms
+    transition_out: 
+      type: fade
+      duration: 200ms
+    widgets:
+      - type: image
+        image: splashscreen
+        anchor_x: right
+        x: 110%
   firewalker_complete_slide:
     widgets:
       - type: text
@@ -38,18 +52,21 @@ slides:
       - type: image
         image: texture_console
   gameover_slide:
-    - type: text
-      text: (machine|gameover_text)
-      style: header_lg
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      x: 0
-      z: 0
-      opacity: 0.5
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: (machine|gameover_text)
+        style: header_lg
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
   singleplayer_slide:
-    transition:
-      type: fade
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (score)
@@ -79,206 +96,274 @@ slides:
               duration: 2000s
   # Miscellaneous slides
   medigel_slide:
-    - type: image
-      image: medigel
-      style: row_sub_under
-      z: 2
-    - type: text
-      text: "Medigel\nDeployed"
-      style: header_md, row_main
+    transition: 
+      type: move_in
+      direction: bottom
+    transition_out:
+      type: move_in
+      direction: top
+    widgets:
+      - type: image
+        image: medigel
+        style: row_sub_under
+        z: 2
+      - type: text
+        text: "Medigel\nDeployed"
+        style: header_md, row_main
   minerals_slide:
-    # IRIDIUM
-    - type: line
-      points: 20, 190, 20, 380, 210, 380, 210, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_iridium)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 115
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Ir
-      style: header_md
-      x: 115
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 77
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 30
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 197.217000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 115
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: iridium
-      style: header_xs, row_main
-      x: 115
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    # PALLADIUM (379 is center)
-    - type: line
-      points: 284, 190, 284, 380, 474, 380, 474, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_palladium)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 379
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Pd
-      style: header_md
-      x: 379
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 46
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 294
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 106.420000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 379
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: palladium
-      style: header_xs, row_main
-      x: 379
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    # PLATINUM (643 is center)
-    - type: line
-      points: 548, 190, 548, 380, 738, 380, 738, 190
-      close: true
-      thickness: 2
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: (player|mineral_platinum)
-      min_digits: 1
-      number_grouping: true
-      style: body_md, row_sub_under
-      x: 643
-      anchor_x: center
-      color: FFFFFF
-    - type: text
-      text: Pt
-      style: header_md
-      x: 643
-      y: 310
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: text
-      text: 78
-      style: body_xs
-      anchor_x: left
-      anchor_y: top
-      x: 558
-      y: 380
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: 195.084000
-      style: body_xs
-      anchor_x: center
-      anchor_y: bottom
-      x: 643
-      y: 255
-      color: 8f541c # color_ui_orange_dark
-    - type: text
-      text: platinum
-      style: header_xs, row_main
-      x: 643
-      anchor_x: center
-      color: fbc795 # color_ui_orange
-    - type: image
-      image: texture_console
+    transition: 
+      type: fade
+      duration: 250ms
+    transition_out: 
+      type: fade
+      duration: 250ms
+    widgets:
+      # IRIDIUM
+      - type: line
+        points: 20, 190, 20, 380, 210, 380, 210, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_iridium)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 115
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Ir
+        style: header_md
+        x: 115
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 77
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 30
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 197.217000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 115
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: iridium
+        style: header_xs, row_main
+        x: 115
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      # PALLADIUM (379 is center)
+      - type: line
+        points: 284, 190, 284, 380, 474, 380, 474, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_palladium)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 379
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Pd
+        style: header_md
+        x: 379
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 46
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 294
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 106.420000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 379
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: palladium
+        style: header_xs, row_main
+        x: 379
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      # PLATINUM (643 is center)
+      - type: line
+        points: 548, 190, 548, 380, 738, 380, 738, 190
+        close: true
+        thickness: 2
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: (player|mineral_platinum)
+        min_digits: 1
+        number_grouping: true
+        style: body_md, row_sub_under
+        x: 643
+        anchor_x: center
+        color: FFFFFF
+      - type: text
+        text: Pt
+        style: header_md
+        x: 643
+        y: 310
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: text
+        text: 78
+        style: body_xs
+        anchor_x: left
+        anchor_y: top
+        x: 558
+        y: 380
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: 195.084000
+        style: body_xs
+        anchor_x: center
+        anchor_y: bottom
+        x: 643
+        y: 255
+        color: 8f541c # color_ui_orange_dark
+      - type: text
+        text: platinum
+        style: header_xs, row_main
+        x: 643
+        anchor_x: center
+        color: fbc795 # color_ui_orange
+      - type: image
+        image: texture_console
   planet_scanned_slide:
-    - type: text
-      text: "(planets) Planet(suffix)\n Scanned"
-      style: header_md, row_main
-    - widget: planet_widget_(planets_mod)
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: "(planets) Planet(suffix)\n Scanned"
+        style: header_md, row_main
+      - widget: planet_widget_(planets_mod)
   portrait_slide:
+    transition: fade
+    transition_out: 
+      type: fade
+    widgets:
+      - widget: (portrait_name)
+  portrait_slide_QUEUE_A:
+    transition: fade
+    transition_out: 
+      type: fade
+      duration: 150ms
+    widgets:
+      - widget: (portrait_name)
+  portrait_slide_QUEUE_B:
+    transition: fade
+    transition_out: 
+      type: fade
+      duration: 150ms
     widgets:
       - widget: (portrait_name)
   recruit_portrait_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - widget: portrait_recruit(squadmate)
   recruit_instructions_portrait_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - widget: portrait_recruit_intro_(squadmate)
   # Recruit completes require their own slides, since they use shows for video duration
+  recruit_complete_portrait_slide_garrus:
+    - type: video
+      video: recruitgarrus_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitgarrus
+  recruit_complete_portrait_slide_grunt:
+    - type: video
+      video: recruitgrunt_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitgrunt
   recruit_complete_portrait_slide_jack:
     - type: video
       video: recruitjack_complete
-    # Include the image underneath, which is already cached, to prevent black during asset loading
+      end_behavior: pause
     - type: image
       image: portrait_recruitjack
+  recruit_complete_portrait_slide_kasumi:
+    - type: video
+      video: recruitkasumi_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitkasumi
+  recruit_complete_portrait_slide_mordin:
+    - type: video
+      video: recruitmordin_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitmordin
   # Core slides
   1player_score_slide:
-    - type: text
-      text: (machine|player1_score)
-      style: header_lg, row_main, num
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      opacity: 0.5
-      x: 0
-      z: 0
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: (machine|player1_score)
+        style: header_lg, row_main, num
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        opacity: 0.5
+        x: 0
+        z: 0
   2player_score_slide:
-    - type: text
-      text: (machine|last_career_player_1)
-      style: header_sm
-      anchor_y: bottom
-      y: middle+35%
-      opacity: 0.8
-    - type: text
-      text: (machine|player1_score)
-      style: header_lg, num
-      anchor_y: bottom
-      y: middle+15%
-    - type: text
-      text: (machine|player2_score)
-      style: header_lg, num
-      anchor_y: top
-      y: middle-15%
-    - type: text
-      text: (machine|last_career_player_2)
-      style: header_sm
-      anchor_y: top
-      y: middle-35%
-      opacity: 0.8
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      opacity: 0.5
-      x: 0
-      z: 0
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: (machine|last_career_player_1)
+        style: header_sm
+        anchor_y: bottom
+        y: middle+35%
+        opacity: 0.8
+      - type: text
+        text: (machine|player1_score)
+        style: header_lg, num
+        anchor_y: bottom
+        y: middle+15%
+      - type: text
+        text: (machine|player2_score)
+        style: header_lg, num
+        anchor_y: top
+        y: middle-15%
+      - type: text
+        text: (machine|last_career_player_2)
+        style: header_sm
+        anchor_y: top
+        y: middle-35%
+        opacity: 0.8
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        opacity: 0.5
+        x: 0
+        z: 0
   3player_score_slide:
     - type: text
       text: (machine|last_career_player_1)
@@ -613,6 +698,219 @@ widgets:
       animations:
         add_to_slide: pulse_text
 
+  # SQUADMATE ICONS
+  squadmates_grid_overlay:
+    - type: image
+      image: squadmates_grid_overlay
+      anchor_x: bottom
+      anchor_y: bottom
+      x: 0
+      y: 0
+      z: 10
+  sqicon_mate_garrus_default:
+    - type: image
+      image: sqicon_default_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_default:
+    - type: image
+      image: sqicon_default_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_default:
+    - type: image
+      image: sqicon_default_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_default:
+    - type: image
+      image: sqicon_default_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_default:
+    - type: image
+      image: sqicon_default_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_default:
+    - type: image
+      image: sqicon_default_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_default:
+    - type: image
+      image: sqicon_default_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_default:
+    - type: image
+      image: sqicon_default_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_default:
+    - type: image
+      image: sqicon_default_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_default:
+    - type: image
+      image: sqicon_default_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_default:
+    - type: image
+      image: sqicon_default_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_default:
+    - type: image
+      image: sqicon_default_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_mate_garrus_dead:
+    - type: image
+      image: sqicon_dead_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_dead:
+    - type: image
+      image: sqicon_dead_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_dead:
+    - type: image
+      image: sqicon_dead_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_dead:
+    - type: image
+      image: sqicon_dead_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_dead:
+    - type: image
+      image: sqicon_dead_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_dead:
+    - type: image
+      image: sqicon_dead_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_dead:
+    - type: image
+      image: sqicon_dead_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_dead:
+    - type: image
+      image: sqicon_dead_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_dead:
+    - type: image
+      image: sqicon_dead_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_dead:
+    - type: image
+      image: sqicon_dead_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_dead:
+    - type: image
+      image: sqicon_dead_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_dead:
+    - type: image
+      image: sqicon_dead_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_mate_garrus_na:
+    - type: image
+      image: sqicon_na_garrus
+      style: sqicon_style_mate_garrus
+      z: 5
+  sqicon_mate_grunt_na:
+    - type: image
+      image: sqicon_na_grunt
+      style: sqicon_style_mate_grunt
+      z: 5
+  sqicon_mate_jack_na:
+    - type: image
+      image: sqicon_na_jack
+      style: sqicon_style_mate_jack
+      z: 5
+  sqicon_mate_jacob_na:
+    - type: image
+      image: sqicon_na_jacob
+      style: sqicon_style_mate_jacob
+      z: 5
+  sqicon_mate_kasumi_na:
+    - type: image
+      image: sqicon_na_kasumi
+      style: sqicon_style_mate_kasumi
+      z: 5
+  sqicon_mate_legion_na:
+    - type: image
+      image: sqicon_na_legion
+      style: sqicon_style_mate_legion
+      z: 5
+  sqicon_mate_miranda_na:
+    - type: image
+      image: sqicon_na_miranda
+      style: sqicon_style_mate_miranda
+      z: 5
+  sqicon_mate_mordin_na:
+    - type: image
+      image: sqicon_na_mordin
+      style: sqicon_style_mate_mordin
+      z: 5
+  sqicon_mate_samara_na:
+    - type: image
+      image: sqicon_na_samara
+      style: sqicon_style_mate_samara
+      z: 5
+  sqicon_mate_tali_na:
+    - type: image
+      image: sqicon_na_tali
+      style: sqicon_style_mate_tali
+      z: 5
+  sqicon_mate_thane_na:
+    - type: image
+      image: sqicon_na_thane
+      style: sqicon_style_mate_thane
+      z: 5
+  sqicon_mate_zaeed_na:
+    - type: image
+      image: sqicon_na_zaeed
+      style: sqicon_style_mate_zaeed
+      z: 5
+  sqicon_background_available:
+    - type: image
+      image: sqicon_background_available
+      z: 4
+      animations:
+        add_to_slide: pulse_text_slow
+  sqicon_background_selected:
+    - type: image
+      image: sqicon_background_selected
+      z: 4
+  sqicon_background_specialist:
+    - type: image
+      image: sqicon_background_specialist
+      z: 4
+  sqicon_background_default:
+    - type: image
+      image: sqicon_background_default
+      z: 4
+  sqicon_console:
+    - type: image
+      image: background_sqicon
+      z: 1
+  
+
   # PORTRAITS
   # Here to avoid loading assets into memory for dmd
   #----------------------------------------------------
@@ -661,42 +959,53 @@ widgets:
   portrait_recruitzaeed:
     - type: image
       image: portrait_recruitzaeed
-  # Squadmate intro videos. Will be regular portraits until videos are done
+  # Squadmate intro videos. 
   portrait_recruit_intro_garrus:
     - type: video
-      video: recruitintro_garrus
+      video: recruitgarrus_intro
+      end_behavior: pause
   portrait_recruit_intro_grunt:
     - type: video
       video: recruitintro_grunt
+      end_behavior: pause
   portrait_recruit_intro_jack:
     - type: video
       video: recruitjack_warden_sniping
+      end_behavior: pause
   portrait_recruit_jack_awakening:
     - type: video
       video : recruitjack_awakening
+      end_behavior: pause
       z: 100
   portrait_recruit_jack_jackattack:
     - type: video
       video: recruitjack_jackattack
+      end_behavior: pause
       z: 101
   portrait_recruit_jack_approach:
     - type: video
       video: recruitjack_approach
+      end_behavior: pause
       z: 102
   portrait_recruit_jack_valuable_shepard:
     - type: video
       video: recruitjack_valuable_shepard
+      end_behavior: pause
       z: 103
   portrait_recruit_jack_not_happening:
     - type: video
       video: recruitjack_not_happening
+      end_behavior: pause
       z: 104
   portrait_recruit_intro_kasumi:
-    - type: image
-      image: portrait_recruitkasumi
+    - type: video
+      video: recruitintro_kasumi
+      end_behavior: pause
+      z: 105
   portrait_recruit_intro_mordin:
     - type: video
       video: recruitintro_mordin
+      end_behavior: pause
   portrait_recruit_intro_legion:
     - type: image
       image: portrait_recruitlegion
@@ -712,6 +1021,7 @@ widgets:
   portrait_recruit_intro_zaeed:
     - type: image
       image: portrait_recruitzaeed
+  # This underlays the right lcd during mission select
   dossier_recruit_base:
     - type: image
       image: codex_image_overlay

@@ -7,7 +7,7 @@
       color: FFB74C # FF9329 is a bit too warm, FFC58F a bit too cool
       fade: 1s
     light_backwall_ambient:
-      color: color_space
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_space
@@ -26,7 +26,7 @@
       color: color_grunt
       fade: 1s
     light_backwall_ambient:
-      color: color_mordin
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_mordin
@@ -38,14 +38,14 @@
       color: FFCCB0 # color_grunt at 75% white
       fade: 1s
 
-# Step 3: Purgatory (purples and whites)
+# Step 3: Purgatory (purples and whites with red)
 - duration: 1
   lights:
     light_backwall_gi:
-      color: FFB74C
+      color: color_health
       fade: 1s
     light_backwall_ambient:
-      color: color_jack
+      color: (backwall_color)
       fade: 1s
     gi_top:
       color: color_space
@@ -54,5 +54,24 @@
       color: FFC58F
       fade: 1s
     gi_bottom:
-      color: FFCCCC%30
+      color: color_jack
+      fade: 1s
+
+# Step 4: Illium
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: color_samara
+      fade: 1s
+    light_backwall_ambient:
+      color: (backwall_color)
+      fade: 1s
+    gi_bottom:
+      color: color_jack
+      fade: 1s
+    gi_middle:
+      color: color_space
+      fade: 1s
+    gi_top:
+      color: color_barrier
       fade: 1s

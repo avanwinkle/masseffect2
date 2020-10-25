@@ -11,11 +11,9 @@ sound_player:
   # Shadowbroker Chase
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her
-  shadowbroker_chase_complete:
-    car_crash:
-      events_when_stopped: start_mode_shadowbroker_vasir
   shadowbroker_progression_pre_hagalaz_started: liara_its_finally_over
   mode_overlord_stopped: david_ending
+  stop_mode_collectorship_base{device.achievements.collectorship.state=="completed"}: shepard_everyone_on_to_the_normandy
 
 sound_pools:
   # N7 Assignments
@@ -42,9 +40,9 @@ sounds:
   asscompl_3:
     file: SFXGame.751.ogg
     track: sfx
-  car_crash:
-    file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
-    track: sfx
+  # car_crash:
+  #   file: biod_cat003_550balconycombat.wwise_cat003_nonstreaming.env_cat003_car_crash_window.ogg
+  #   track: sfx
   david_sqrt_seemed_harmless:
     file: DLC_UNC_Pack01_Int.438.ogg
     track: voice
@@ -67,6 +65,9 @@ sounds:
       attack: 1s
       release_point: 1s
       release: 1s
+  shepard_everyone_on_to_the_normandy:
+    file: en_us_player_f_cspcr2_normandy_escape_c_00189682_f.ogg
+    track: voice
   explosion_long_one:
     file: SFXGame.213.ogg
     track: sfx

@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_recruittali
   stop_events: stop_mode_recruittali, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -44,7 +44,6 @@ event_player:
       starting_shots: 6, 6, 0, 6, 6
   mode_recruittali_started.2:
     - play_colossus_show
-    - play_tali_intro|2s
   # If the colossus repairs we can backshift the state of the shot profile
   player_geth_colossus_state.1{player_num==current_player.number and change>0 and value<=6}:
     advance_power_shots:
@@ -107,25 +106,6 @@ shots:
   geth_target_shot:
     switches: s_target1, s_target2, s_target3, s_target4, s_target5
 
-show_player:
-  geth_target_shot_hit:
-    geth_target_show:
-      speed: 12
-      loops: 6
-  power_shots_lit_hit:
-    colossus_hit_show{current_player.geth_colossus_state>3}:
-      speed: 12
-      loops: 6
-      priority: 100
-      show_tokens:
-        color: color_shields
-    colossus_hit_show{current_player.geth_colossus_state<=3}:
-      speed: 12
-      loops: 6
-      priority: 100
-      show_tokens:
-        color: color_armor
-
 shot_profiles:
   colossus_profile:
     states:
@@ -169,7 +149,37 @@ shot_profiles:
     - name: off
       show: off
 
+show_player:
+  mode_recruittali_started:
+    recruitintro_tali:
+      loops: 0
+  geth_target_shot_hit:
+    geth_target_show:
+      speed: 12
+      loops: 6
+  power_shots_lit_hit:
+    colossus_hit_show{current_player.geth_colossus_state>3}:
+      speed: 12
+      loops: 6
+      priority: 100
+      show_tokens:
+        color: color_shields
+    colossus_hit_show{current_player.geth_colossus_state<=3}:
+      speed: 12
+      loops: 6
+      priority: 100
+      show_tokens:
+        color: color_armor
+
 shows:
+  recruitintro_tali:
+    # Temporary show until videos are done
+    - time: 1s
+      sounds:
+        reegar_missionstart:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
   colossus_hit_show:
     - time: 0
       lights:
@@ -197,9 +207,6 @@ sound_player:
     music_recruit_tali:
       action: play
       loops: -1
-  play_tali_intro:
-    reegar_missionstart:
-      action: play
   power_shots_lit_hit:
     colossus_hit_sound:
       action: play

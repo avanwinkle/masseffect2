@@ -16,7 +16,7 @@ event_player:
     - start_mode_shadowbroker_hagalaz{current_player.state_machine_shadowbroker=="hagalaz"}
     # Complete the dropbank after chase to re-enable vasir combat
     # Complete the dropbank after hagalaz to re-enable boss combat
-    - enable_shadowbroker_hold{current_player.state_machine_shadowbroker=="vasir" or current_player.state_machine_shadowbroker=="boss"}
+    - enable_sb_hold{current_player.state_machine_shadowbroker=="vasir" or current_player.state_machine_shadowbroker=="boss"}
     # Complete the dropbank after boss is defeated for extra prizes!
     - award_shadowbroker_prize{current_player.state_machine_shadowbroker=="completed"}
   # If the mode is restarted and the flashing shield show was lit before, re-light
@@ -26,17 +26,13 @@ event_player:
   mode_field_started.14{current_player.state_machine_shadowbroker=="vasir" or current_player.state_machine_shadowbroker=="boss"}:
     - play_shadowbroker_hold_show
     # If the hold was already enabled before we left field mode, re-enable it too
-    - enable_shadowbroker_hold{current_player.sbhold_enabled==1}
-  # ERROR: Hold doesn't work, so use the hold event to fake it holding a ball
-  #ball_hold_shadowbroker_hold_held_ball:
-  sh_kickback_hit{current_player.sbhold_enabled==1}:
-    - enter_shadowbroker_modes
+    - enable_sb_hold{current_player.sbhold_enabled==1}
+  ball_hold_sb_hold_held_ball:
     # Get a ball in the ball hold to begin Vasir
     - start_mode_shadowbroker_vasir{current_player.state_machine_shadowbroker=="vasir"}
     # Get a ball in the ball hold to begin Boss Combat
     - start_mode_shadowbroker_boss{current_player.state_machine_shadowbroker=="boss"}
-    - disable_shadowbroker_hold
-  enable_shadowbroker_hold:
+  enable_sb_hold:
     queue_slide{current_player.sbhold_enabled==0 and current_player.state_machine_shadowbroker=="vasir"}:
       slide: shadowbroker_ready_slide
       mission: Capture Vasir
@@ -52,11 +48,11 @@ event_player:
 
 # Use a player variable to mock the hold state of the ball hold
 variable_player:
-  enable_shadowbroker_hold:
+  enable_sb_hold:
     sbhold_enabled:
       action: set
       int: 1
-  disable_shadowbroker_hold:
+  disable_sb_hold:
     sbhold_enabled:
       action: set
       int: 0
@@ -83,19 +79,11 @@ show_player:
       action: play
       priority: 10
       sync_ms: 800
-  enable_shadowbroker_hold:
+  enable_sb_hold:
     shadowbroker_hold_enabled_show:
       action: play
       sync_ms: 800
     shadowbroker_hold_show:
-      action: stop
-  enter_shadowbroker_modes:
-    # TODO: Track whether this is the first attempt, to only show cinema intro once per game
-    vasir_intro_cineanim{device.achievements.vasir.state=="enabled"}:
-      action: play
-    boss_intro_cineanim{device.achievements.shadowbroker.state=="enabled"}:
-      action: play
-    shadowbroker_hold_enabled_show:
       action: stop
   shadowbroker_progression_hagalaz_started:
     shadowbroker_lit_show:
@@ -158,14 +146,6 @@ shows:
         light_shadowbroker_start:
           color: off
           fade: 1200ms
-  vasir_intro_cineanim:
-    - sounds:
-        liara_vasir_its_over:
-          action: play
-          events_when_stopped: release_shadowbroker_hold, start_mode_shadowbroker_vasir
-      lights:
-        gi: off
-        l_flash_throne: on
   boss_intro_cineanim:
     - sounds:
         boss_intro_cineanim_diag:

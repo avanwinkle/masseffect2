@@ -40,7 +40,7 @@ event_player:
   # Hold open the gates if no balls are there, or quickly pop the gates
   # if a ball is there that we don't want to lock or hold
   # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and current_player.lost_balls==0 and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled and not device.ball_holds.arrival_hold.enabled}:
+  s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and current_player.lost_balls==0 and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled and not device.ball_holds.arrival_hold.enabled and not device.ball_holds.sb_hold.enabled}:
     - bypass_lock_release_pulse_long{device.ball_devices.bd_lock.balls==0}
     - bypass_lock_release_pulse_short{device.ball_devices.bd_lock.balls>0}
   # Start suicide huddle when a ball is captured
@@ -130,7 +130,7 @@ ball_holds:
       # Always compare player_num because players can get added during others' turns
       - player_available_missions{player_num==current_player.number and value<=0}
     release_all_events:
-      - mission_intro_complete
+      - mode_intro_complete
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
@@ -145,6 +145,13 @@ ball_holds:
     enable_events: enable_captive
     disable_events: disable_captive
     release_all_events: release_captive, disable_captive
+  sb_hold:
+    balls_to_hold: 1
+    debug: true
+    hold_devices: bd_lock
+    enable_events: enable_sb_hold, mode_field_started{current_player.sbhold_enabled}
+    disable_events: disable_sb_hold, mode_field_will_stop, ball_will_end
+    release_one_events: release_sb_hold
   store_hold:
     balls_to_hold: 1
     debug: true

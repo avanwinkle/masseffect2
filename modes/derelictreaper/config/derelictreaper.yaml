@@ -35,20 +35,19 @@ mode:
   stop_events: stop_mode_derelictreaper, stop_wizards
   events_when_started:
     - mode_type_wizard_started
+    - mode_intro_started
     - enable_captive
-    # TODO: Add an intro slide
-    - mission_intro_complete
   events_when_stopped:
     - mode_type_wizard_stopped
     - disable_captive
   priority: 500
 
 event_player:
-  mode_derelictreaper_started.1:
-    - enable_reaperfrenzy
-  mode_derelictreaper_started.2:
+  mode_derelictreaper_started:
     set_environment:
       env: husks
+  mode_intro_complete:
+    - enable_reaperfrenzy
   timer_missiontimer_complete:
     - enable_reaperfrenzy
   enable_reapercore.10:
@@ -58,6 +57,7 @@ event_player:
     play_squadmate_sound:
       sound: destroy_core
       exclude: jacob  # No sound file for jacob, unfortunately
+      squadmate: selected
   # Reset the mission shots on each reapercore, to reduce values on "resume"
   enable_reapercore.2:
     set_mission_shots:
@@ -153,6 +153,12 @@ shots:
       - reaper_captive_shot_hit
 
 show_player:
+  mode_derelictreaper_started:
+    derelictreaper_cineanim:
+      loops: 0
+  mode_intro_skipped:
+    derelictreaper_cineanim:
+      action: stop
   enable_reaperfrenzy:
     pulse_playfield_smooth:
       speed: 1
@@ -189,6 +195,27 @@ show_player:
         color: AAAAAA
 
 shows:
+  derelictreaper_cineanim:
+    - time: 0
+      slides:
+        derelictreaper_cineanim:
+          action: play
+          priority: 100
+        derelictreaper_dossier:
+          target: lcd_right
+          priority: 100
+    - time: 2s
+      sounds:
+        derelictreaper_intro:
+          action: play
+    - time: 19s
+      events: mode_intro_complete
+    # Remove the dossier slide 500ms early so the fade effects during the black of the video
+    - time: 20s
+      slides:
+        derelictreaper_dossier:
+          action: remove
+    - time: 21080ms
   reaperhusk_hit_show:
     - time: 0
       lights:
@@ -209,53 +236,104 @@ slide_player:
   enable_reaperfrenzy:
     derelictreaper_frenzy_slide:
       target: main
+      priority: 1
     derelictreaper_portrait_husks:
       target: lcd_right
+      priority: 1
 
 slides:
+  derelictreaper_cineanim:
+    transition_out: 
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: video
+        video: derelictreaper_cineanim
+  derelictreaper_dossier:
+    transition: 
+      type: fade
+      duration: 2s
+    transition_out: 
+      type: fade
+      duration: 500ms
+    widgets:
+    - type: image
+      image: codex_derelictreaper
+      style: codex_image
+    - type: text
+      text: "Derelict Reaper"
+      style: codex_title
+    - type: text
+      text: "Shepard has boarded the remains of\nan ancient Reaper and recovered its\nIFF device so the Normandy can\ntravel through the Omega 4 Relay.\nDestroy the Reaper's mass effect\ncore to disable its shields and escape!"
+      style: codex_text
+    - widget: dossier_recruit_base
   derelictreaper_frenzy_slide:
-    - type: text
-      text: Derelict Reaper
-      style: header_xs, row_top, col_left_anchor, mission_title
-    - type: text
-      text: Eliminate the Husks!
-      style: header_sm, row_main, col_left_anchor
-    - type: text
-      text: (score)
-      style: recruitslide_score, row_top, col_right_anchor, num
-    - widget: background_console
+    transition: 
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 1s
+    widgets:
+      - type: text
+        text: Derelict Reaper
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: Eliminate the Husks!
+        style: header_sm, row_main, col_left_anchor
+      - type: text
+        text: (score)
+        style: recruitslide_score, row_top, col_right_anchor, num
+      - widget: background_console
   derelictreaper_captive_slide:
-    - type: text
-      text: Derelict Reaper
-      style: header_xs, row_top, col_left_anchor, mission_title
-    - type: text
-      text: Expose the Core!
-      style: header_sm, row_main, col_left_anchor
-    - type: text
-      text: (score)
-      style: recruitslide_score, row_top, col_right_anchor, num
-    - widget: background_console
+    transition: 
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: text
+        text: Derelict Reaper
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: Expose the Core!
+        style: header_sm, row_main, col_left_anchor
+      - type: text
+        text: (score)
+        style: recruitslide_score, row_top, col_right_anchor, num
+      - widget: background_console
   derelictreaper_core_slide:
-    - type: text
-      text: Derelict Reaper
-      style: header_xs, row_top, col_left_anchor, mission_title
-    - type: text
-      text: Destroy the Core
-      style: header_md, row_main, col_left_anchor
-    - type: text
-      text: (score)
-      style: recruitslide_score, row_top, col_right_anchor, num
-    - widget: background_console
+    transition: 
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: text
+        text: Derelict Reaper
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: Destroy the Core
+        style: header_md, row_main, col_left_anchor
+      - type: text
+        text: (score)
+        style: recruitslide_score, row_top, col_right_anchor, num
+      - widget: background_console
   derelictreaper_portrait_core:
+    transition: 
+      type: fade
+      duration: 500ms
     widgets:
       - type: image
         image: portrait_derelictreaper_core
   derelictreaper_portrait_husks:
+    transition: 
+      type: fade
+      duration: 500ms
     widgets:
       - type: image
         image: portrait_derelictreaper_husks
 
 sound_player:
+  mode_intro_skipped:
+    derelictreaper_intro:
+      action: stop
   enable_reaperfrenzy:
     derelictreaper_music:
       action: play
@@ -287,6 +365,9 @@ sounds:
   derelictreaper_close_stinger:
     file: mus_legion_acq_sting_2.ogg
     track: sfx
+  derelictreaper_intro:
+    file: mus_legion_acq_combat_2_low_b.ogg
+    track: music
   squadmate_garrus_destroy_core:
     file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.ogg
     track: voice

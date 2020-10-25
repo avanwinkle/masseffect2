@@ -106,31 +106,34 @@ show_player:
     gi_show:
       start_step: 2
       manual_advance: True
+      show_tokens:
+        backwall_color: color_mordin
   show_recruit_instructions:
     recruitintro_mordin:
       loops: 0
 
 shows:
   recruitintro_mordin:
-    - time: 2s
+    - time: 1900ms
       events:
         - play_intro_sound{device.counters.cure_counter.value==4}
         - play_cure_sound{device.counters.cure_counter.value<4}
-    - time: 8s
-      events: mission_intro_complete
-    - time: 9500ms
+    - time: 6s
+      events: mode_intro_complete
+    - time: 108300ms
       slides:
-        recruit_instructions_slide:
+        recruit_instructions_slide_lcd:
           action: remove
-        recruit_intro_portrait:
+        recruit_instructions_portrait_slide:
           action: remove
+          target: lcd_right
 
 sound_player:
   mode_recruitmordin_started:
     music_recruit_mordin:
       action: play
       loops: -1
-  play_intro_sound: mission_intro
+  play_intro_sound: mordin_intro_sound
   play_cure_sound_1:
     step0_voice:
       max_queue_time: 1s
@@ -202,7 +205,7 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
-  mission_intro:
+  mordin_intro_sound:
     track: voice
     file: en_us_hench_professor_omgpra_mordin_d_00210618_m.ogg
   step0_voice_jack:

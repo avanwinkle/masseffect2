@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_shadowbroker_boss
   stop_events: stop_mode_shadowbroker_boss, stop_wizards
-  events_when_started: mode_type_wizard_started
+  events_when_started: mode_type_wizard_started, mode_intro_started
   events_when_stopped: mode_type_wizard_stopped
   priority: 800
 
@@ -28,7 +28,7 @@ event_player:
       shots_remaining: 2
       ticks: 30
       is_resumable: 0
-  start_boss_combat:
+  mode_intro_complete:
     - sbboss_round_show_complete  # Mock a complete event to reset the round
     - enable_random_sbboss_shot|1s  # Delay to give the shots time to reset
   sbboss_shot_hit:
@@ -45,7 +45,6 @@ event_player:
   shadowbroker_boss_complete.1:
     - mission_collect_score
     - stop_mode_shadowbroker_boss
-    - exit_shadowbroker_modes
   shadowbroker_boss_complete.2:
     levelup:
       mission_name: "Greetings, Shadow Broker"
@@ -74,7 +73,7 @@ ball_saves:
     active_time: 10s
     hurry_up_time: 4s
     grace_period: 2s
-    enable_events: start_boss_combat, shadowbroker_round_start
+    enable_events: mode_intro_complete, shadowbroker_round_start
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     auto_launch: true
     balls_to_save: 1
@@ -102,13 +101,22 @@ shot_profiles:
   sbboss_shot_profile:
     states:
       - name: shields
-        show: sbboss_shields_show
+        show: lane_shot_profile
+        speed: 1
+        show_tokens:
+          color: color_shields
       - name: armor
-        show: sbboss_armor_show
+        show: lane_shot_profile
+        speed: 2
+        show_tokens:
+          color: color_armor
   sbboss_health_profile:
     states:
       - name: health
-        show: sbboss_health_show
+        show: lane_shot_profile
+        speed: 3
+        show_tokens:
+          color: color_health
 
 shot_groups:
   sbboss_shot:
@@ -122,7 +130,7 @@ shots:
     disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
-      leds: l_left_ramp_shield_rgb
+      leds: l_left_ramp_ring
     tags: envshot_left_ramp
   sbboss_kickback:
     hit_events: sh_kickback_hit
@@ -130,7 +138,7 @@ shots:
     disable_events: mode_shadowbroker_boss_started, logicblock_sbboss_round_counter_hit
     profile: sbboss_health_profile
     show_tokens:
-      leds: l_kickback_shield_rgb
+      leds: l_kickback_ring
     tags: envshot_kickback
   # Right ramp and orbits have armor/shield shots and therefore need to reset
   # Cannot use restart_events because we need enable_events to prevent default enabling
@@ -140,7 +148,7 @@ shots:
     hit_events: sh_left_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_left_orbit_shield_rgb
+      leds: l_left_orbit_ring
     tags: envshot_left_orbit
   sbboss_right_ramp:
     restart_events: enable_sbboss_right_ramp
@@ -148,7 +156,7 @@ shots:
     hit_events: sh_right_ramp_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_right_ramp_shield_rgb
+      leds: l_right_ramp_ring
     tags: envshot_right_ramp
   sbboss_right_orbit:
     restart_events: enable_sbboss_right_orbit
@@ -156,7 +164,7 @@ shots:
     hit_events: sh_right_orbit_hit
     profile: sbboss_shot_profile
     show_tokens:
-      leds: l_right_orbit_shield_rgb
+      leds: l_right_orbit_ring
     tags: envshot_right_orbit
 
 show_player:
@@ -185,9 +193,16 @@ shows:
       sounds:
         boss_enough_talk:
           action: play
+    - time: 3s
+      shows:
+        airlock_release_warning:
+          show_tokens:
+            color: color_health
     - time: 5s
-      events:
-        - start_boss_combat
+      events: mode_intro_complete
+      shows:
+        airlock_release_warning:
+          action: stop
   sbboss_round_show_1:
     - time: 0
       sounds:
@@ -230,27 +245,6 @@ shows:
           target: lcd_right
     - time: 1500ms
       events: shadowbroker_boss_complete
-  sbboss_shields_show:
-    - time: 0
-      lights:
-        (leds): blue
-    - time: '+1'
-      lights:
-        (leds): black
-  sbboss_armor_show:
-    - time: 0
-      lights:
-        (leds): yellow
-    - time: '+1'
-      lights:
-        (leds): black
-  sbboss_health_show:
-    - time: 0
-      lights:
-        (leds): red
-    - time: '+1'
-      lights:
-        (leds): black
 
 slide_player:
   mode_shadowbroker_boss_started:
@@ -283,7 +277,7 @@ slides:
       - widget: background_console
 
 sound_player:
-  start_boss_combat:
+  mode_intro_complete:
     shadowbroker_boss_music:
       action: play
     # Preload the sound assets for the show
@@ -418,7 +412,7 @@ sounds:
       release: 1200ms
 
 widget_player:
-  start_boss_combat:
+  mode_intro_complete:
     boss_widget:
       slide: shadowbroker_boss_slide
 

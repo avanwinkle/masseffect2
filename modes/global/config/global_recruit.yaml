@@ -39,10 +39,6 @@ event_player:
     resume_mission:
       squadmate:
         value: current_player.resume_mission
-  mode_type_mission_started:
-    - missiontimer_start|3s     # It's nice to give a little delay
-  slide_recruit_mission_slide_active:
-    - enable_powers
   timer_missiontimer_complete:
     - stop_recruitmission
   recruit_success:
@@ -103,11 +99,42 @@ show_player:
   ball_save_recruitsave_disabled:
     ball_save_show:
       action: stop
+  # When ALL squadmates have been converted to video, parameterize this
+  recruit_garrus_complete:
+    recruit_success_garrus:
+      loops: 0
+  recruit_grunt_complete:
+    recruit_success_grunt:
+      loops: 0
   recruit_jack_complete:
     recruit_success_jack:
       loops: 0
+  recruit_kasumi_complete:
+    recruit_success_kasumi:
+      loops: 0
+  recruit_mordin_complete:
+    recruit_success_mordin:
+      loops: 0
 
 shows:
+  recruit_success_garrus:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_garrus:
+          target: lcd_right
+          priority: 1000
+    - time: 1000ms
+      sounds: missioncomplete_voice_garrus
+    - time: 5670ms
+  recruit_success_grunt:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_grunt:
+          target: lcd_right
+          priority: 1000
+    - time: 500ms
+      sounds: missioncomplete_voice_grunt
+    - time: 10600ms
   recruit_success_jack:
     - time: 0
       slides:
@@ -117,26 +144,29 @@ shows:
     - time: 1500ms
       sounds: missioncomplete_voice_jack
     - time: 9700ms
+  recruit_success_kasumi:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_kasumi:
+          target: lcd_right
+          priority: 1000
+    - time: 800ms
+      sounds: missioncomplete_voice_kasumi
+    - time: 6160ms
+  recruit_success_mordin:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_mordin:
+          target: lcd_right
+          priority: 1000
+    - time: 500ms
+      sounds: missioncomplete_voice_mordin
+    - time: 7630ms
 
 widgets:
-  portrait_squadmate_garrus_complete:
-    - type: image
-      image: portrait_squadmate_garrus_complete
-  portrait_squadmate_grunt_complete:
-    - type: image
-      image: portrait_squadmate_grunt_complete
-  portrait_squadmate_jack_complete:
-    - type: video
-      video: recruitjack_complete
-  portrait_squadmate_kasumi_complete:
-    - type: image
-      image: portrait_squadmate_kasumi_complete
   portrait_squadmate_legion_complete:
     - type: image
       image: portrait_squadmate_legion_complete
-  portrait_squadmate_mordin_complete:
-    - type: image
-      image: portrait_squadmate_mordin_complete
   portrait_squadmate_samara_complete:
     - type: image
       image: portrait_squadmate_samara_complete
@@ -153,25 +183,20 @@ widgets:
 #####
 # Play the 'mission complete' sounds in recruitbase, because the actual mission
 # that's been completed will have its mode stopped before the sound finishes
+# TODO: Migrate these sounds to the end-of-mission show
 #####
 sound_player:
-  recruit_success_garrus: missioncomplete_voice_garrus
-  recruit_success_grunt: missioncomplete_voice_grunt
-  recruit_success_kasumi: missioncomplete_voice_kasumi
   recruit_success_legion: missioncomplete_voice_legion
-  recruit_success_mordin: missioncomplete_voice_mordin
   recruit_success_samara: missioncomplete_voice_samara
   recruit_success_tali: missioncomplete_voice_tali
   recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
-  # TODO: Find better sounds, or learn to share with powers
-  #  timer_missiontimer_complete: shep_cant_reach_target
+  recruit_failure_garrus: garrus_failed
   recruit_failure_kasumi: kasumi_failed
   recruit_failure_tali: tali_failed
   recruit_failure_mordin: mordin_failed
   # TODO: replace these with squadmate dialogue
-  # recruit_failure_garrus: shep_cant_reach_target
   # recruit_failure_grunt: shep_cant_reach_target
   # recruit_failure_jack: shep_cant_reach_target
 
@@ -199,7 +224,7 @@ sound_pools:
   missioncomplete_voice_grunt:
     type: random
     track: voice
-    sounds: missioncomplete_voice_grunt_1, missioncomplete_voice_grunt_2, missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_4, missioncomplete_voice_grunt_5
+    sounds: missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_5
     max_queue_time: 1s
   missioncomplete_voice_jack:
     type: random
@@ -241,6 +266,10 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
     max_queue_time: 1s
+  garrus_failed:
+    type: random
+    track: voice
+    sounds: garrus_that_did_nothing
   kasumi_failed:
     type: random_force_all
     track: voice
@@ -289,10 +318,16 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
+      attenuation: 0.8
       attack: 100ms
       release: 300ms
       release_point: 500ms
+  # garrus_hold_fire:
+  #   file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+  #   track: voice
+  garrus_that_did_nothing:
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303091_m.ogg
+    track: voice
   missioncomplete_voice_grunt_1:
     file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.ogg
     track: voice
@@ -316,10 +351,10 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
+      attenuation: 0.8
+      attack: 10ms
+      release: 30ms
+      release_point: 50ms
   missioncomplete_voice_grunt_4:
     file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.ogg
     track: voice
@@ -334,10 +369,10 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
+      attenuation: 0.8
+      attack: 10ms
+      release: 30ms
+      release_point: 50ms
   missioncomplete_voice_jack_1:
     file: en_us_hench_convict_prscva_cv_join_d_00198389_m.ogg
     track: voice
@@ -386,6 +421,7 @@ sounds:
   missioncomplete_voice_kasumi_3:
     file: DLC_HEN_MT_Int.061.ogg
     track: voice
+    # end_at: 3230ms
     ducking:
       target: levelup
       attenuation: 0.5
@@ -395,6 +431,7 @@ sounds:
   missioncomplete_voice_kasumi_4:
     file: DLC_HEN_MT_Int.067.ogg
     track: voice
+    start_at: 1500ms
     ducking:
       target: levelup
       attenuation: 0.5

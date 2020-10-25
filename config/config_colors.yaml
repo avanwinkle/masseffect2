@@ -48,5 +48,6 @@ named_colors:
   color_overlord_orange: FF4400
   color_praetorian: 2200AA
   color_shadowbroker: ff1f00
+  color_lightning: c5d4e8
   # Default: mball color is overlord
   color_mball: 22FF33

@@ -20,7 +20,7 @@
 mode:
   start_events: start_mode_recruitzaeed
   stop_events: stop_mode_recruitzaeed, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -100,12 +100,25 @@ variable_player:
       string: "Hit kickback to complete!"
 
 show_player:
+  mode_recruitzaeed_started:
+    recruitintro_zaeed:
+      loops: 0
   power_shots_lit_hit:
     flash_all_shields_show:
       loops: 6
       speed: 12
       show_tokens:
         color: color_zaeed
+
+shows:
+  recruitintro_zaeed:
+    # Temporary show until videos are done
+    - time: 500ms
+      sounds:
+        zaeed_missionstart:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
 
 light_player:
   mode_recruitzaeed_started:
@@ -117,8 +130,6 @@ sound_player:
     music_recruit_zaeed:
       action: play
       mode_end_action: stop
-    zaeed_missionstart:
-      action: play
   mission_shot_hit{count==3 and current_player.zaeed_path_renegade==0}:
     explosionchoice_1_paragon:
       max_queue_time: 1s

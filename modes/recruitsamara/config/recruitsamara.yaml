@@ -23,7 +23,7 @@
 mode:
   start_events: start_mode_recruitsamara
   stop_events: stop_mode_recruitsamara, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -113,16 +113,29 @@ shots:
       leds: l_standup_5
       color: standup_color
 
-light_player:
+show_player:
   mode_recruitsamara_started:
-    light_backwall_ambient:
-      color: color_samara
+    recruitintro_samara:
+      loops: 0
+    gi_show:
+      start_step: 4  # Illium
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_samara
+
+shows:
+  recruitintro_samara:
+    # Temporary show until videos are done
+    - time: 500ms
+      sounds:
+        gunship_sound:
+          action: play
+    - time: 3s
+      events: mode_intro_complete
 
 sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
-      action: play
-    gunship_sound:
       action: play
   mission_shot_hit: explosion  # Defined in base_endsounds
   recruit_samara_complete:

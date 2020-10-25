@@ -13,7 +13,11 @@ event_player:
         type: str
 
 slide_player:
-  mode_createprofile_started: profile_creation_slide
+  mode_createprofile_started: 
+    profile_creation_slide: {}
+    # Hack to show a new avatar on creation
+    portrait_createprofile_4:
+      target: lcd_right
 
 slides:
   profile_creation_slide:
@@ -42,3 +46,4 @@ slides:
         color: BBBBBB
         style: body_xs, row_bottom, col_left_anchor
         halign: left
+      - widget: background_console

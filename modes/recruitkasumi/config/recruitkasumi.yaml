@@ -16,7 +16,7 @@
 mode:
   start_events: start_mode_recruitkasumi
   stop_events: stop_mode_recruitkasumi, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -48,6 +48,25 @@ event_player:
     - sweep_alarms
   logicblock_kasumi_shots_counter_complete:
     - recruit_kasumi_complete
+  # Queue slides for each hit shot
+  logicblock_kasumi_shots_counter_hit{count==3}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_password
+      slide_text: "Password Obtained"
+      sound: password
+  logicblock_kasumi_shots_counter_hit{count==2}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_voiceprint
+      slide_text: "Voiceprint Recorded"
+      sound: voiceprint
+  logicblock_kasumi_shots_counter_hit{count==1}:
+    queue_slide:
+      slide: kasumi_slide
+      portrait: kasumi_dna
+      slide_text: "DNA Sample Obtained"
+      sound: dna
 
 counters:
   # This counter tracks how many unalarmed shots must be hit to succeed
@@ -65,7 +84,7 @@ counters:
     direction: down
   # This counter tracks how many alarmed shots are hit before failure
   kasumi_alarms_counter:
-    starting_count: 3
+    starting_count: 3 - current_player.difficulty
     count_complete_value: 0
     count_events: power_shots_alarmed_hit
     reset_events: mode_recruitkasumi_started
@@ -86,11 +105,18 @@ shot_profiles:
         show: alarmed_show
         speed: 0.5
 
+light_player:
+  mode_recruitkasumi_started:
+    light_backwall_ambient:
+      color: color_kasumi%30
+
 show_player:
   mode_recruitkasumi_started:
     kasumi_gi_show:
       action: play
       loops: -1
+    recruitintro_kasumi:
+      loops: 0
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -118,6 +144,20 @@ show_player:
       speed: 60
 
 shows:
+  recruitintro_kasumi:
+    - time: 500ms
+      sounds: 
+        kasumi_list_of_items:
+          action: play
+    - time: 10s
+      events: mode_intro_complete
+    - time: 11460ms
+      slides:
+        recruit_instructions_slide_lcd:
+          action: remove
+        recruit_instructions_portrait_slide:
+          action: remove
+          target: lcd_right
   # Dim the general illumination to make it feel more heist-y
   kasumi_gi_show:
     - duration: 1s
@@ -213,50 +253,37 @@ slide_player:
   recruit_kasumi_failed:
     kasumi_failed_slide:
       expire: 5s
-  # Until MC supports priority and condition, deal with duplicate warnings
-  logicblock_kasumi_shots_counter_hit{count==3}:
-    kasumi_slide_1:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==2}:
-    kasumi_slide_2:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==1}:
-    kasumi_slide_3:
-      expire: 3s
-  logicblock_kasumi_shots_counter_hit{count==0}:
-    kasumi_slide_4:
-      expire: 3s
   logicblock_kasumi_alarms_counter_hit{count>0}:
     kasumi_alarm_slide:
       action: play
+      priority: 100
       expire: 3s
   logicblock_kasumi_alarms_counter_hit{count==0}:
     kasumi_failed_slide:
       action: play
+      priority: 100
       expire: 3s
 
 slides:
-  kasumi_slide_1:
+  kasumi_slide:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: text
-        text: Password Obtained
+        text: (slide_text)
         style: body_lg
-  kasumi_slide_2:
-    widgets:
-      - type: text
-        text: Voiceprint Recorded
-        style: body_lg
-  kasumi_slide_3:
-    widgets:
-      - type: text
-        text: DNA Sample Obtained
-        style: body_lg
-  kasumi_slide_4:
-    widgets:
-      - type: text
-        text: Barrier Deactivated
-        style: body_lg
+      - widget: background_console
   kasumi_alarm_slide:
+    transition:
+      type: fade 
+      duration: 200ms
+    transition_out:
+      type: fade
+      duration: 200ms
     widgets:
       - type: text
         text: "Alarm Tripped!"
@@ -264,11 +291,29 @@ slides:
       - type: text
         text: "(count) until failure"
         style: body_md, row_sub
+      - type: rectangle
+        width: 758
+        height: 468
+        z: 4
+        color: FF000050
+      - widget: background_console
   kasumi_failed_slide:
+    transition:
+      type: fade 
+      duration: 200ms
+    transition_out:
+      type: fade
+      duration: 200ms
     widgets:
       - type: text
-        text: FAILED!
+        text: HEIST FAILED!
         style: body_lg
+      - type: rectangle
+        width: 758
+        height: 468
+        z: 4
+        color: FF000050
+      - widget: background_console
 
 sound_player:
   mode_recruitkasumi_started:
@@ -276,27 +321,21 @@ sound_player:
       action: play
       loops: -1
       fade_in: 1s
-    kasumi_need_password_and_voice:
-      action: play
   # Alarm hit
   logicblock_kasumi_alarms_counter_hit:
     kasumi_careful:
       max_queue_time: 2s
   # First shot hit, got the password
-  logicblock_kasumi_shots_counter_hit{count==3}:
+  play_queued_slide_kasumi_slide.1{sound=="password"}:
     kasumi_password_complete:
       max_queue_time: 2s
   # Second shot hit, got the voice print
-  logicblock_kasumi_shots_counter_hit{count==2}:
+  play_queued_slide_kasumi_slide.2{sound=="voiceprint"}:
     kasumi_voice_complete:
       max_queue_time: 2s
   # Third shot hit, got the DNA sample
-  logicblock_kasumi_shots_counter_hit{count==1}:
+  play_queued_slide_kasumi_slide.3{sound=="dna"}:
     kasumi_not_great_saliva_sample:
-      max_queue_time: 2s
-  # Fourth shot hit, get the barrier down
-  logicblock_kasumi_shots_counter_hit{count==0}:
-    kasumi_barrier_is_down:
       max_queue_time: 2s
 
 sound_pools:
@@ -313,7 +352,7 @@ sound_pools:
     type: random
     sounds:
       - kasumi_weve_got_the_password_need_voice
-      - kasumi_still_need_password_and_voice
+      # - kasumi_still_need_password_and_voice
       - shepard_password_is_perrugia
     track: voice
   kasumi_voice_complete:
@@ -436,7 +475,14 @@ sounds:
     file: DLC_HEN_MT_Int.669.ogg
     track: voice
 
-light_player:
-  mode_recruitkasumi_started:
-    light_backwall_ambient:
-      color: color_kasumi%30
+widgets:
+  portrait_kasumi_password:
+    - type: image
+      image: portrait_kasumi_password
+  portrait_kasumi_dna:
+    - type: image
+      image: portrait_kasumi_dna
+  portrait_kasumi_voiceprint:
+    - type: image
+      image: portrait_kasumi_voiceprint
+  

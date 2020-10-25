@@ -60,9 +60,7 @@ class MissionSelect(Carousel):
 
         # If Collector Ship is available (for the first time), it is the only option
         if player.achievements['collectorship'][0] == "enabled":
-            if player["high_flow"]:
-                return ['collectorship']
-            return [self._intro, 'collectorship']
+            return ['collectorship']
 
         items = []
 
@@ -85,6 +83,16 @@ class MissionSelect(Carousel):
         self._mates = SquadmateStatus.recruitable_mates(player)
         for mate in self._mates:
             items.append(mate)
+        # If the last mission was one of the available mates, make it first
+        # The "last_mission" variable may be redundant against high_flow_resume, but
+        # currently last_mission is *only* for recruitment missions. Will there
+        # be non-recruitments that are resumed by high-flow? If no, consolidate.
+        last_mission = player["last_mission"]
+        if last_mission in items:
+            self.machine.log.info("MissionSelect found last_mission {} in items {}".format(last_mission, items))
+            items.remove(last_mission)
+            items.insert(0, last_mission)
+            self.machine.log.info("  - missionselect moved last_mission {} to the front: {}".format(last_mission, items))
 
         # If high-flow, nothing else
         if player["high_flow"]:
@@ -104,7 +112,6 @@ class MissionSelect(Carousel):
             player["force_mission"] = 0
         else:
             player["force_mission"] = 1
-        self.log.info("Missionselect missions: {}".format(items))
 
         return items
 
@@ -117,6 +124,8 @@ class MissionSelect(Carousel):
         super()._select_item()
         selection = self._get_highlighted_item()
         if selection in self._mates:
+            # Store the last selected mate so we can put it first next time
+            self.machine.game.player["last_mission"] = selection
             self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
         elif selection == "pass":
             # Store the choice to pass so we can skip missionselect until a new mission is available
@@ -135,7 +144,7 @@ class MissionSelect(Carousel):
                                      squadmate=h, index=idx, items=total)
         # If we moved away from the intro, remove it
         if h != self._intro and self._intro in self._items:
-            self._items = self._items[1:]
+            self._items.remove(self._intro)
             self._highlighted_item_index -= 1
 
         # If there is only one item, show the force countdown

@@ -24,6 +24,8 @@ event_player:
       shots_total: 5
       is_resumable: 0
       ticks: 20
+      # Ambush worth 2x a standard mission
+      value_multiplier: 2
   mode_collectorship_ambush_started: missiontimer_start
   ship_shots_lit_hit:
     - mission_shot_hit
@@ -31,6 +33,7 @@ event_player:
     - collectorship_add_ball{game.balls_in_play<4}
   ship_shots_complete: collectorship_ambush_complete
   collectorship_ambush_complete: stop_mode_collectorship_ambush
+  logicblock_collector_shots_counter_hit: play_callout_(count)|1500ms
 
 counters:
   collector_shots_counter:
@@ -125,7 +128,13 @@ shows:
           fade: 300ms
 
 sound_player:
-  logicblock_collector_shots_counter_hit{count==1}:
+  play_callout_4:
+    shepard_edi_get_us_out_of_here:
+      action: play
+  play_callout_2:
+    shepard_come_on_edi_speed_it_up:
+      action: play
+  play_callout_1:
     squadmate_just_one_left:
       action: play
 
@@ -150,6 +159,12 @@ sound_pools:
       - jol_miranda_3
 
 sounds:
+  shepard_edi_get_us_out_of_here:
+    file: en_us_player_f_cspcr2_platform_approach_h_00269530_f.ogg
+    track: voice
+  shepard_come_on_edi_speed_it_up:
+    file: en_us_player_f_cspcr2_platform_approach_h_00253358_f.ogg
+    track: voice
   jol_garrus_1:
     file: en_us_hench_garrus_ss_global_hench_garrus_00303076_m.ogg
     track: voice
@@ -174,6 +189,23 @@ sounds:
   jol_miranda_3:
     file: en_us_hench_vixen_ss_global_hench_vixen_00257404_m.ogg
     track: voice
+  # To be used?
+  squadmate_legion_enemyseen:  # contact
+    file: en_us_hench_geth_ss_global_hench_geth_00240735_m.ogg
+    track: voice
+  squadmate_mordin_enemyseen:  # enemies inbound
+    file: en_us_hench_professor_ss_global_hench_professor_00241374_m.ogg
+    track: voice
+  squadmate_tali_enemyseen:  # hostiles spotted
+    file: en_us_hench_tali_ss_global_hench_tali_00285164_m.ogg
+    track: voice
+  squadmate_thane_enemyseen:  # get_ready
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286497_m.ogg
+    track: voice
+  squadmate_zaeed_enemyseen: # here they come
+    file: DLC_HEN_VT_Int.056.ogg
+    track: voice
+  
 
 widget_player:
   logicblock_collector_shots_counter_updated:

@@ -3,12 +3,11 @@
 event_player:
   # Delay the release of the ball until after the instructions are shown
   # TODO: As modes get their intro shows, stop using this hacky release event
-  mode_recruitkasumi_started: mission_intro_complete|3s
-  mode_recruitlegion_started: mission_intro_complete|3s
-  mode_recruitsamara_started: mission_intro_complete|3s
-  mode_recruittali_started: mission_intro_complete|3s
-  mode_recruitthane_started: mission_intro_complete|3s
-  mode_recruitzaeed_started: mission_intro_complete|3s
+  mode_recruitlegion_started: mode_intro_complete|3s
+  mode_recruitsamara_started: mode_intro_complete|3s
+  mode_recruittali_started: mode_intro_complete|3s
+  mode_recruitthane_started: mode_intro_complete|3s
+  mode_recruitzaeed_started: mode_intro_complete|3s
 
 #####
 # Use a single slide/widget for all the missions, just update the text
@@ -170,13 +169,13 @@ slide_player:
     recruit_instructions_slide_dmd:
       priority: 21
   # These are for the non-intro-video modes. Remove when those are done.
-  mission_intro_complete.2{machine.is_lcd}:
+  mode_intro_complete.2{machine.is_lcd}:
     recruit_instructions_slide_lcd:
       action: remove
     recruit_instructions_portrait_slide:
       action: remove
       target: lcd_right
-  mission_intro_complete.3{not machine.is_lcd}:
+  mode_intro_complete.3{not machine.is_lcd}:
     recruit_instructions_slide_dmd:
       action: remove
   # This mode runs globally, so explicitly remove slides
@@ -193,6 +192,8 @@ slide_player:
 
 slides:
   recruit_mission_slide:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (missionname)
@@ -213,7 +214,27 @@ slides:
         text: (base_missiontimer_tick)
         style: timer_primary, row_gutter, col_right_indent, color_ui_yellow
       - widget: background_console
-  recruit_advance_slide:
+  recruit_advance_slide_QUEUE_A:
+    transition_out: 
+      type: fade
+      duration: 150ms
+    widgets:
+      - type: text
+        text: (slide_title)
+        style: header_xs, row_top, col_left_anchor, color_ui_green_light
+      - type: text
+        text: (squadmate)
+        style: header_lg, row_main, col_left_anchor
+        casing: title
+      - type: text
+        text: (slide_instruction)
+        anchor_y: bottom
+        style: body_md, row_sub, col_left_anchor, color_ui_orange
+      - widget: background_console
+  recruit_advance_slide_QUEUE_B:
+    transition_out:
+      type: fade
+      duration: 150ms
     widgets:
       - type: text
         text: (slide_title)
@@ -228,6 +249,8 @@ slides:
         style: body_md, row_sub, col_left_anchor, color_ui_orange
       - widget: background_console
   recruit_instructions_slide_lcd:
+    transition: fade
+    transition_out: fade
     widgets:
       - type: text
         text: (missionname)
