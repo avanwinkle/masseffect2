@@ -337,6 +337,8 @@ player_vars:
     initial_value: 0
   bypass_missionselect:
     initial_value: 0
+  assignments_played:
+    initial_value: 0
   assignments_completed:
     initial_value: 0
   available_missions:
