@@ -69,7 +69,7 @@ playfields:
   playfield:
     default_source_device: bd_plunger
     tags: default
-    enable_ball_search: true
+    enable_ball_search: false # true
     ball_search_timeout: 10s
     ball_search_interval: 1s
     ball_search_block_events: flipper_cradle, service_mode_entered
