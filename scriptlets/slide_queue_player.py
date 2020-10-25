@@ -88,6 +88,11 @@ class SlideQueuePlayer(CustomCode):
 
             portrait = slide_kwargs.pop("portrait")
             if portrait and self.machine.variables.get("is_lcd"):
+                # HACK: I'm too lazy to add placeholder evaluation to the portrait name.
+                # Hard-code support for multiball
+                if portrait.endswith("(locked_balls)"):
+                    portrait = portrait.replace("(locked_balls)", 
+                        "{}".format(self.machine.multiball_locks["fmball_lock"].locked_balls))
                 portrait_widget_name = "portrait_{}".format(portrait)
                 if self._last_portrait_name:
                     portrait_slide_name = self._last_portrait_name.replace("_QUEUE_A", "_QUEUE_B") if self._last_portrait_name[-1] == "A" else self._last_portrait_name.replace("_QUEUE_B","_QUEUE_A")
