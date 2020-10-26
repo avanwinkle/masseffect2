@@ -26,6 +26,12 @@ slide_player:
     meservice_menu:
       action: remove
 
+  # New system
+  service_menu_selected:
+    meservice_menu:
+      action: play
+
+
   # switch test
   service_switch_test_start:
     meservice_switch_test:
@@ -136,6 +142,9 @@ slides:
   - type: text
     text: Service Menu
     style: header_sm, row_title, col_center
+  - type: text
+    text: (label)
+    style: header_md, row_main, col_center
   # switch test
   meservice_switch_test:
   - type: text

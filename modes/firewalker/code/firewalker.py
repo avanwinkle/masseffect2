@@ -22,21 +22,21 @@ class FwRulesBase:
 
   @property
   def number(self):
-    return self.__clas__.number
+    return self.__class__.number
 
 
 class Rosalie(FwRulesBase):
   number = 1
-  description = "Rosalie Lost"
+  title = "Rosalie Lost"
   def on_hit(self, shotname):
     # Advance all shots
     for shot in self._shots:
       shot.advance()
 
 
-class VolcanoStation(FwRulesBase):
+class SurveySites(FwRulesBase):
   number = 2
-  description = "Volcano Station"
+  title = "Survey Sites"
   def on_hit(self, shotname):
     # Advance all enabled shots, and disable the hit one
     for shot in self._shots:
@@ -48,7 +48,7 @@ class VolcanoStation(FwRulesBase):
 
 class GethIncursion(FwRulesBase):
   number = 3
-  description = "Geth Incursion"
+  title = "Geth Incursion"
   def on_hit(self, shotname):
     # Advance only the hit shot
     for shot in self._shots:
@@ -56,9 +56,9 @@ class GethIncursion(FwRulesBase):
         shot.advance()
 
 
-class SurveySites(FwRulesBase):
+class VolcanoStation(FwRulesBase):
   number = 4
-  description = "Survey Sites"
+  title = "Volcano Station"
   def on_hit(self, shotname):
     # Advance only the hit shot, reset the rest
     for shot in self._shots:
@@ -70,7 +70,7 @@ class SurveySites(FwRulesBase):
 
 class ProtheanSite(FwRulesBase):
   number = 5
-  description = "Prothean Site"
+  title = "Prothean Site"
   def on_hit(self, shotname):
     pass
 
@@ -99,8 +99,9 @@ class Firewalker(Mode):
 
     self.rules.start()
     self.machine.events.post("firewalker_mission_started",
-      description=self.rules.description,
-      portrait_name="firewalker_portrait_{}".format(mission))
+      title=self.rules.title,
+      mission=mission,
+      )
     self.machine.game.player["fw_number"] = self.rules.number
 
   def _handle_hit(self, **kwargs):
