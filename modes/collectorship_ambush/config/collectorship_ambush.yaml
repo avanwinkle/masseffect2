@@ -25,7 +25,7 @@ event_player:
       is_resumable: 0
       ticks: 20
       # Ambush worth 2x a standard mission
-      value_multiplier: 2
+      multiplier: 2
   mode_collectorship_ambush_started: missiontimer_start
   ship_shots_lit_hit:
     - mission_shot_hit

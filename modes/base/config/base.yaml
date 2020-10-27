@@ -399,17 +399,26 @@ slides:
         casing: title
       - widget: levelup_background
   n7_complete_slide:
+    transition: 
+      type: fade
+      duration: 500ms
+    transition_out: fade
     widgets:
       - type: text
         text: $assignment_complete
         style: header_md, row_main
   skillshot_slide:
-    - type: text
-      text: SKILLSHOT
-      style: header_lg, row_main, row_main_dmd_high
-    - type: text
-      text: (value)
-      style: body_md, row_sub_under, num
+    transition: 
+      type: fade
+      duration: 500ms
+    transition_out: fade
+    widgets:
+      - type: text
+        text: SKILLSHOT
+        style: header_lg, row_main, row_main_dmd_high
+      - type: text
+        text: (value)
+        style: body_md, row_sub_under, num
   squadicon_slide:
     transition: fade
     transition_out: fade

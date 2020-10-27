@@ -10,7 +10,7 @@ variable_player:
   set_mission_shots.3:
     mission_shot_value:
       action: set
-      int: machine.base_points / (shots_total * shots_total) * (value_multiplier or 1)
+      int: machine.base_points / (shots_total * shots_total)
     mission_shots_remaining:
       action: set
       int: shots_remaining

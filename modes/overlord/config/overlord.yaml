@@ -29,16 +29,12 @@
 mode:
   start_events: start_mode_overlord
   stop_events: stop_mode_overlord, stop_wizards
-  events_when_started: mode_type_wizard_started, fmball_started
+  events_when_started: mode_type_wizard_started, fmball_started, mode_intro_started
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped
   priority: 1000
 
 event_player:
-  mode_overlord_started.1:
-    - reset_hackshots
-    - play_music_1
-    - show_overlord_slide
-  mode_overlord_started.2:
+  mode_overlord_started:
     set_environment:
       env: geth
     set_mission_shots:
@@ -46,6 +42,11 @@ event_player:
       shots_remaining: 5
       is_resumable: 0
       ticks: 30
+  mode_intro_complete:
+    - reset_hackshots
+  mode_intro_skipped:
+    - play_music_1
+    - show_overlord_slide
   # To light the jackpot, you have to hit n hackshots where n = 1 + jackpots already hit
   logicblock_hackshots_hit_counter_hit.1:
     - missiontimer_add_10
@@ -60,11 +61,16 @@ event_player:
     - mission_collect_score
     - missiontimer_set_30
     - missiontimer_start|1s
-  timer_missiontimer_complete: disable_hackshots
+  # If the timer runs out, reset everything
+  timer_missiontimer_complete:
+    - reset_hackshots
+    - mission_collect_score
+    - missiontimer_set_30
+    - missiontimer_start|1s
   # If the player collects three jackpots, this achievement is "complete"!
   logicblock_jackpots_hit_counter_hit{count==4}: overlord_complete
   # Grant a levelup for completing the achievement
-  achievement_overlord_state_completed:
+  multiball_overlord_multiball_ended.2{current_player.levelup_pending==1}:
     levelup:
       mission_name: "Rogue VI Contained"
   multiball_overlord_multiball_ended: stop_mode_overlord
@@ -91,7 +97,7 @@ multiballs:
     replace_balls_in_play: true
     ball_locks: bd_lock
     shoot_again: 20s
-    start_events: mode_overlord_started
+    start_events: mode_intro_complete
     debug: true
 
 counters:
@@ -107,20 +113,30 @@ counters:
     count_events: jackpotshot_hit
 
 variable_player:
+  hackshots_lit_hit:
+    score: 500
+  hackshots_frozen_hit:
+    score: 100
   jackpotshot_hit:
     # Every jackpot doubles the value of the next round's shots
     temp_multiplier:
       action: add
       float: 1.0
+  # Queue the levelup for after the mode ends
+  achievement_overlord_state_completed:
+    levelup_pending: 1
 
 light_player:
-  mode_overlord_started:
+  mode_intro_complete:
     light_backwall_gi:
       color: color_overlord
+      fade: 3s
     light_backwall_ambient:
       color: color_overlord
+      fade: 3s
     gi:
       color: color_overlord
+      fade: 3s
 
 shot_profiles:
   overlord_target_profile:
@@ -194,7 +210,10 @@ shots:
     tags: envshot_kickback
 
 show_player:
-  multiball_overlord_multiball_started:
+  mode_overlord_started:
+    overlord_cineanim:
+      loops: 0
+  mode_intro_complete:
     ball_save_show:
       action: play
       speed: 3
@@ -226,6 +245,20 @@ show_player:
       action: stop
 
 shows:
+  overlord_cineanim:
+    - time: 0
+      slides:
+        overlord_cineanim:
+          action: play
+    - time: 200ms
+      sounds:
+        archer_get_to_server_room:
+          action: play
+    - time: 7s
+      events: play_music_1
+    - time: 14s
+      events: show_overlord_slide, mode_intro_complete
+    - time: 15s
   # Shows for ALL of the lane shots
   overlord_hackshots_off_show:
     - lights:
@@ -256,12 +289,25 @@ slide_player:
       target: lcd_right
 
 slides:
+  overlord_cineanim:
+    widgets:
+      - type: video
+        video: overlord_lock_atlas
+        end_behavior: pause
+      - type: image
+        image: bg_overlord
   overlord_slide:
+    transition_out: fade
     widgets:
       - type: text
         text: OVERLORD
         style: header_xs, row_top, col_left_anchor, color_ui_green_light
-      - widget: background_console
+      - type: text
+        text: (score)
+        style: recruitslide_score, row_top, col_right_anchor, num
+        opacity: 0.5
+      - type: image
+        image: bg_overlord
   overlord_portrait:
     widgets:
       - type: image
@@ -319,6 +365,12 @@ sounds:
     markers:
       - time: 96s
         events: play_music_1
+  archer_get_to_server_room:
+    file: DLC_UNC_Pack01_Int.291.ogg
+    track: voice
+  archer_you_have_to_hurry:
+    file: DLC_UNC_Pack01_Int.012.ogg
+    track: voice
   upload_1:
     file: DLC_UNC_Pack01_Int.475.ogg
     track: voice
@@ -366,20 +418,21 @@ sounds:
     track: sfx
 
 widget_player:
-  logicblock_jackpots_hit_counter_updated:
-    jackpots_needed_widget:
-      slide: overlord_slide
-      action: update
-  logicblock_hackshots_hit_counter_updated:
-    hackshots_widget:
-      slide: overlord_slide
-      action: update
+  # The targets and jackpot counters don't feel like they're adding much.
+  # logicblock_jackpots_hit_counter_updated:
+  #   jackpots_needed_widget:
+  #     slide: overlord_slide
+  #     action: update
+  # logicblock_hackshots_hit_counter_updated:
+  #   hackshots_widget:
+  #     slide: overlord_slide
+  #     action: update
   enable_jackpotshot:
     jackpot_widget:
       slide: overlord_slide
       action: add
-    jackpots_needed_widget:
-      action: remove
+    # jackpots_needed_widget:
+    #   action: remove
   jackpotshot_hit:
     jackpot_widget:
       action: remove
@@ -396,6 +449,6 @@ widgets:
   jackpot_widget:
     - type: text
       text: "JACKPOT LIT"
-      style: header_md, row_main, col_left_anchor
+      style: header_md, row_main, col_center
       animations:
         add_to_slide: pulse_text

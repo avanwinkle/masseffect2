@@ -60,6 +60,7 @@ variable_player:
       int: current_player.mission_shot_value * current_player.assignments_completed
     assignments_completed: 1
     earned_assignments_completed: 1
+    reputation: 3
     xp: machine.assignment_xp
 
 shot_groups:

@@ -31,9 +31,9 @@ event_player:
   mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
   # ... or if ball 2 is locked during a mission
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
-  # Wait for the queued slide to play
-  play_queued_slide_fmball_full_slide:
-    # TODO: Use a queue slide to trigger the start of the multiballs
+  # Start the mode immediately on final lock. Airlock will delay for queued slides
+  # and the mode will play the cineanim to overlay music into gameplay
+  advance_fmball_lock{total_balls_locked==3}:
     - start_mode_overlord{device.achievements.arrival.state=="disabled"}
     - start_mode_arrival{device.achievements.arrival.state!="disabled"}
 
@@ -42,6 +42,7 @@ event_player:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: overlord_light_(locked_balls)
+      expire: 8s
       mball_name: overlord
       ball:
         # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?
@@ -55,35 +56,15 @@ event_player:
       ball:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-  overlord_ball_will_lock.100:
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==1}:
-      priority: 1
-      slide: fmball_ball_locked_slide
-      portrait: overlord_lock_1
-      mball_name: overlord
-      description: Vulcan Station Cleared
-      ball: 1
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==2}:
-      priority: 2
-      slide: fmball_ball_locked_slide
-      portrait: overlord_lock_2
-      mball_name: overlord
-      description: Prometheus Station Cleared
-      ball: 2
-    # On full, queue both slides!
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==3}:
+  overlord_ball_will_lock{device.multiball_locks.fmball_lock.locked_balls<3}:
+    queue_slide:
       priority: 7
       slide: fmball_ball_locked_slide
-      portrait: overlord_lock_3
+      # slide_queue_player doesn't support substitutions, 'locked_balls' is an exception
+      portrait: overlord_lock_(locked_balls)
+      expire: 8s
       mball_name: overlord
-      description: Atlas Station Cleared
-      ball: 3
-  overlord_ball_will_lock.1:
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==3}:
-      priority: 6
-      slide: fmball_full_slide
-      portrait: overlord_lock_3
-      mball_name: overlord
+      ball: 1
   arrival_ball_will_lock.100:
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==1}:
       priority: 4
@@ -211,7 +192,7 @@ slides:
       - type: text
         text: Lock is Lit
         style: header_md, row_main, col_left_anchor
-      - widget: bg_(mball_name)
+      - widget: bg_(mball_name)_light_(ball)
   fmball_ball_locked_slide:
     transition:
         type: fade
@@ -228,10 +209,8 @@ slides:
       - type: text
         text: Ball (ball) Locked!
         style: header_md, row_main, col_left_anchor
-      - type: text
-        text: (description)
-        style: header_sm, row_sub, col_left_anchor
-      - widget: bg_(mball_name)
+      - widget: lock_description_(mball_name)_(ball)
+      - widget: bg_(mball_name)_lock_(ball)
   fmball_full_slide:
     transition:
         type: fade
@@ -257,6 +236,7 @@ sound_player:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
+      delay: 1500ms
   play_queued_slide_fmball_lock_lit_slide.2{ball==1 and mball_name=="overlord"}:
     archer_still_need_to_go_to_prometheus:
       action: play
@@ -276,9 +256,6 @@ sound_player:
     archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 2s
-  play_queued_slide_fmball_ball_locked_slide.3{ball==3 and mball_name=="overlord"}:
-    archer_start:
-      action: play
   #### ARRIVAL ####
   play_arrival_hit_sound{not current_player.disable_mball_light_sounds}:
     batarian_hit_sfx:
@@ -336,10 +313,6 @@ sound_pools:
     type: random
     track: voice
     max_queue_time: 1s
-  archer_start:
-    sounds: archer_get_to_server_room, archer_you_have_to_hurry
-    type: random_force_all
-    track: voice
 
 sounds:
   archer_lockdown_cancelled_1:
@@ -377,12 +350,6 @@ sounds:
     track: voice
   archer_vulcan_success:
     file: DLC_UNC_Pack01_Int.488.ogg
-    track: voice
-  archer_get_to_server_room:
-    file: DLC_UNC_Pack01_Int.291.ogg
-    track: voice
-  archer_you_have_to_hurry:
-    file: DLC_UNC_Pack01_Int.012.ogg
     track: voice
   shepard_hit_override_vulcan:
     file: DLC_UNC_Pack01_Int.219.ogg
@@ -443,7 +410,7 @@ sounds:
     track: voice
 
 widgets:
-  portrait_overlord_light_3:
+  portrait_overlord_light_0:
     - type: image
       image: codex_ovr_vulcan
       style: codex_image
@@ -575,9 +542,40 @@ widgets:
       text: "The Alpha Relay is minutes from\ndestruction. Fight you way to the\nshuttle pad and call the Normandy\nfor extraction before the entire\nstar system is destroyed."
       style: codex_text
     - widget: dossier_recruit_base
-  bg_overlord:
-    - type: image
-      image: bg_overlord
+  bg_overlord_light_0:
+    - type: video
+      video: overlord_light_vulcan
+      # end_behavior: pause
+  bg_overlord_lock_1:
+    - type: video
+      video: overlord_lock_vulcan
+      # end_behavior: pause
+  bg_overlord_light_1:
+    - type: video
+      video: overlord_light_prometheus
+      # end_behavior: pause
+  bg_overlord_lock_2:
+    - type: video
+      video: overlord_lock_prometheus
+  bg_overlord_light_2:
+    - type: video
+      video: overlord_light_atlas
+  bg_overlord_lock_3:
+    - type: video
+      video: overlord_lock_atlas
+      end_behavior: pause
   bg_arrival:
     - type: image
       image: bg_arrival
+  lock_description_overlord_1:
+    - type: text
+      text: "Vulcan Station Cleared"
+      style: header_sm, row_sub, col_left_anchor
+  lock_description_overlord_2:
+    - type: text
+      text: "Prometheus Station Cleared"
+      style: header_sm, row_sub, col_left_anchor
+  lock_description_overlord_3:
+    - type: text
+      text: "Atlas Station Cleared"
+      style: header_sm, row_sub, col_left_anchor
