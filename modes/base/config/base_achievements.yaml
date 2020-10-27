@@ -106,15 +106,15 @@ state_machines:
     transitions:
       # Can we use the same event to trigger _every_ state advancement?
       - source: rosalie
-        target: volcano_station
-        events: firewalker_mission_complete
-      - source: volcano_station
-        target: geth_incursion
-        events: firewalker_mission_complete
-      - source: geth_incursion
         target: survey_sites
         events: firewalker_mission_complete
       - source: survey_sites
+        target: geth_incursion
+        events: firewalker_mission_complete
+      - source: geth_incursion
+        target: volcano_station
+        events: firewalker_mission_complete
+      - source: volcano_station
         target: prothean_site
         events: firewalker_mission_complete
       - source: prothean_site

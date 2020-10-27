@@ -281,7 +281,7 @@ switches:
     ignore_window_ms: 1100
   s_kickback:
     number: 0-6
-    ignore_window_ms: 600
+    ignore_window_ms: 1200  # 600 wasn't enough to prevent rollbacks, bumping to 1200
   s_spinner:
     number: 0-7
   # BOARD 3 ?

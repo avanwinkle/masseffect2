@@ -70,7 +70,7 @@ light_player:
 
 shows:
   recruitintro_grunt:
-    - time: 2200ms
+    - time: 3200ms
       sounds:
         grunt_intro:
           action: play
@@ -88,6 +88,10 @@ show_player:
   show_recruit_instructions:
     recruitintro_grunt:
       loops: 0
+    gi_half_color:
+      show_tokens:
+        color: color_grunt
+        brightness: 50
   logicblock_grunt_shots_counter_hit:
     flash_all_shields_show:
       loops: 6

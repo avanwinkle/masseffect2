@@ -90,8 +90,10 @@ class SlideQueuePlayer(CustomCode):
                 # HACK: I'm too lazy to add placeholder evaluation to the portrait name.
                 # Hard-code support for multiball
                 if portrait.endswith("(locked_balls)"):
-                    portrait = portrait.replace("(locked_balls)",
-                                                "{}".format(self.machine.multiball_locks["fmball_lock"].locked_balls))
+                    portrait = portrait.replace(
+                        "(locked_balls)",
+                        "{}".format(self.machine.multiball_locks["fmball_lock"].locked_balls)
+                    )
                 portrait_widget_name = "portrait_{}".format(portrait)
                 if self._last_portrait_name:
                     portrait_slide_name = (

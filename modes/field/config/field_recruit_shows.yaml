@@ -37,7 +37,7 @@ show_player:
       sync_ms: 800
       show_tokens:
         ledring: l_omega_relay
-        color: color_health
+        color: "440000"
         fade: 250ms
       
   # Disable the lights on GoT to reduce noise, leave on for FAST

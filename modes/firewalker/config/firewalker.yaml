@@ -223,7 +223,7 @@ slide_player:
   firewalker_mission_started:
     firewalker_slide:
       target: main
-    portrait_slide:
+    portrait_firewalker:
       target: lcd_right
 
 slides:
@@ -233,13 +233,16 @@ slides:
         text: Project Firewalker
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
-        text: (description)
+        text: (title)
         style: header_md, row_main, row_main_dmd_high, col_left_anchor
       - type: text
         text: (score)
         style: body_sm, row_sub, col_left_anchor, dmd_hide, num
         opacity: 0.5
-      - widget: background_console
+      - widget: bg_firewalker_(mission)
+  portrait_firewalker:
+    widgets:
+      - widget: dossier_firewalker_(mission)
 
 sound_player:
   mode_firewalker_started:
@@ -291,18 +294,73 @@ widgets:
     - type: text
       text: (ticks_remaining)
       style: timer_primary, row_gutter, col_right_indent
-  firewalker_portrait_rosalie:
+  bg_firewalker_rosalie:
     - type: image
-      image: portrait_firewalker_rosalie
-  firewalker_portrait_survey_sites:
+      image: bg_firewalker_rosalie
+  bg_firewalker_geth_incursion:
     - type: image
-      image: portrait_firewalker_survey_sites
-  firewalker_portrait_geth_incursion:
+      image: bg_firewalker_geth_incursion
+  bg_firewalker_survey_sites:
     - type: image
-      image: portrait_firewalker_geth_incursion
-  firewalker_portrait_prothean_site:
+      image: bg_firewalker_survey_sites
+  bg_firewalker_volcano_station:
     - type: image
-      image: portrait_firewalker_prothean_site
-  firewalker_portrait_volcano_station:
+      image: bg_firewalker_volcano_station
+  bg_firewalker_prothean_site:
     - type: image
-      image: portrait_firewalker_volcano_station
+      image: bg_firewalker_prothean_site
+  dossier_firewalker_rosalie:
+    - type: image
+      image: codex_fw_rosalie
+      style: codex_image
+    - type: text
+      text: "Firewalker: Rosalie Lost"
+      style: codex_title
+    - type: text
+      text: "The MSV Rosalie, a survey ship\nwith Cerberus connections, has gone\nmissing. The survey team was field-\ntesting a new prototype: the\nHammerhead planet-side\nexploration rover."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_firewalker_survey_sites:
+    - type: image
+      image: codex_fw_survey_sites
+      style: codex_image
+    - type: text
+      text: "Firewalker: Survey Sites"
+      style: codex_title
+    - type: text
+      text: "Scans have found locations\nmatching the descriptions of\nDr. Cayce's survey sites. Exploring\nthe sites could reveal valuable\nmission data. Warning: Geth\npresence detected on planet's\nsurface. Use extreme caution."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_firewalker_geth_incursion:
+    - type: image
+      image: codex_fw_geth_incursion
+      style: codex_image
+    - type: text
+      text: "Firewalker: Geth Incursion"
+      style: codex_title
+    - type: text
+      text: "Planetary scans detect signals\nfrom sensor pods left on the planet's\nsurface. These pods may contain\nvaluable data. Warning: Surface\ntemperatures are extremely low.\nAdvise keeping exposure to the cold\nat an absolute minimum."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_firewalker_volcano_station:
+    - type: image
+      image: codex_fw_volcano_station
+      style: codex_image
+    - type: text
+      text: "Firewalker: Volcano Station"
+      style: codex_title
+    - type: text
+      text: "Research station detected within\nvolcano on planet's surface. The\nresearch station's data storage\nsystems are still active and may\ncontain valuable information.\nWarning: Volcano is unstable.\nAdvise extreme caution."
+      style: codex_text
+    - widget: dossier_recruit_base
+  dossier_firewalker_prothean_site:
+    - type: image
+      image: codex_fw_prothean_site
+      style: codex_image
+    - type: text
+      text: "Firewalker: Prothean Site"
+      style: codex_title
+    - type: text
+      text: "Prothean artifacts detected on\nplanet's surface. Artifact site is\nprotected by a powerful energy\nbarrier. Scans detected muted\nmechanical signatures consistent\nwith hidden automated defenses."
+      style: codex_text
+    - widget: dossier_recruit_base

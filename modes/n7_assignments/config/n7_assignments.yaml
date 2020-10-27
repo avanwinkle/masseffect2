@@ -42,7 +42,7 @@ event_player:
   timer_missiontimer_complete: n7_assignment_ended
   n7_assignment_ended:
     - stop_mode_n7_assignments
-  
+
 random_event_player:
   mode_n7_assignments_started:
     force_all: true
@@ -56,10 +56,11 @@ random_event_player:
 variable_player:
   n7_assignment_hit:
     # In addition to the shot amount, multiply by the number of missions completed
-    score: 
+    score:
       int: current_player.mission_shot_value * current_player.assignments_completed
     assignments_completed: 1
     earned_assignments_completed: 1
+    reputation: 3
     xp: machine.assignment_xp
 
 shot_groups:
@@ -132,13 +133,13 @@ shows:
   n7_lightsdown:
     - lights:
         gi_bottom:
-          color: red
-          fade: 1s
-        gi_middle:
           color: white
           fade: 1s
-        gi_top:
+        gi_middle:
           color: red
+          fade: 1s
+        gi_top:
+          color: white
           fade: 1s
         light_backwall_gi:
           color: 444444
@@ -472,5 +473,5 @@ widgets:
     - type: image
       image: codex_n7_hahne-kedar_facility
       style: codex_image
-  
-  
+
+

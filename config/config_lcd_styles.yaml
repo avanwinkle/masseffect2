@@ -220,7 +220,7 @@ widget_styles:
     anchor_x: center
   jackpot_x:
     anchor_x: left
-    x: 63% # default is 38%, 60% too low, 65% too high
+    x: 64% # default is 38%, 60% too low, 65% too high
 
   # SQUAD SPECIALISTS
   #----------------------------
@@ -475,7 +475,7 @@ animations:
       repeat: false
   power_widget_cooldown_opacity:
     - property: opacity
-      value: (complete_pct)
+      value: (opacity)
       duration: 0
       repeat: false
   power_cooldown_complete:

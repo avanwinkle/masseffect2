@@ -178,7 +178,8 @@ class Research(CustomCode):
         self.machine.events.post("research_check_{}".format("passed" if success else "failed"))
 
     def _check_award_medigel(self, **kwargs):
-        chance = self.machine.game.player["research_award_medigel_perk"]
+        chance = self.machine.game.player["research_award_medigel_perk"] + \
+            self.machine.game.player["reputation"]
         if chance > 0 and random.random() < chance:
             self.machine.events.post("award_medigel_success")
 

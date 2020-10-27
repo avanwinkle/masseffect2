@@ -57,7 +57,7 @@ event_player:
         value: (state)
         type: str
   timer_activate_power_complete: activate_power
-  power_awarded: 
+  power_awarded:
     show_awarded_power:
       power:
         value: current_player.power
@@ -84,7 +84,7 @@ event_player:
 
 # Looking for variable_player? Probably in the python code
 variable_player:
-  power_shots_lit_hit: 
+  power_shots_lit_hit:
     score: 100
   power_shots_off_hit:
     score: 20
@@ -471,49 +471,49 @@ widgets:
     - type: image
       image: power_adrenaline
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   power_widget_cloak:
     - type: image
       image: power_cloak
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   power_widget_drone:
     - type: image
       image: power_drone
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   power_widget_charge:
     - type: image
       image: power_charge
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   power_widget_armor:
     - type: image
       image: power_armor
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   power_widget_singularity:
     - type: image
       image: power_singularity
       style: power_badge, col_right_anchor
-      opacity: 0
+      opacity: 0.25
       animations:
-        update_cooldown_progress: power_widget_cooldown_opacity
+        # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
   portrait_power_adrenaline_active:
     - type: text

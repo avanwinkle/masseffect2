@@ -154,8 +154,7 @@ slides:
         style: header_sm, row_main, col_left_anchor
 
 sound_player:
-  collect_upgrade_shot_hit: upgrade_collected_sound
-  capture_shipupgrade_shot_hit: upgrade_collected_sound
+  play_queued_slide_upgrade_slide: upgrade_collected_sound
   # This sound is triggered by the store, but same idea
   research_purchased{selection!="nothing"}: upgrade_collected_sound
 

@@ -128,19 +128,7 @@ shot_profiles:
     states:
       - name: off
       - name: lit
-        show: normandy_escape_lanes
-  normandy_hitbank_profile:
-    advance_on_hit: false
-    states:
-      - name: off
-      - name: lit
-        show: normandy_escape_hitbank
-  normandy_dropbank_profile:
-    advance_on_hit: false
-    states:
-      - name: off
-      - name: lit
-        show: normandy_escape_dropbank
+        show: normandy_light_chase
   normandy_save_profile:
     states:
       - name: lit
@@ -155,50 +143,57 @@ shots:
     advance_events: normandyattack_begin # This is the first shot to be lit
     profile: normandy_profile
     show_tokens:
-      leds: l_left_ramp_ring
-      arrows: l_left_ramp_arrow_red
+      led_1: l_left_ramp_arrow
+      led_2: l_left_ramp_shield_rgb
+      led_3: gi_middle_light_2  # Between left ramp and kickback entrances
     tags: envshot_left_ramp
   normandy_left_orbit:
     hit_events: sh_left_orbit_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_left_orbit_ring
-      arrows: l_left_orbit_arrow_red
+      led_1: l_left_orbit_shield_rgb
+      led_2: l_flash_left_orbit
+      led_3: gi_top_light_3  # upfield by left orbit rollover switch
     tags: envshot_left_orbit
   normandy_right_ramp:
     hit_events: sh_right_ramp_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_right_ramp_ring
-      arrows: l_right_ramp_arrow_red
+      led_1: l_right_ramp_arrow
+      led_2: l_right_ramp_shield_rgb
+      led_3: gi_middle_light_0  # beneath citadel plastic between right ramp and orbit
     tags: envshot_right_ramp
   normandy_right_orbit:
     hit_events: sh_right_orbit_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_right_orbit_ring
-      arrows: l_right_orbit_arrow_red
+      led_1: l_right_orbit_shield_rgb
+      led_2: gi_middle_light_1  #  under bottom bumper
+      led_3: gi_top_light_2  #  top lane right
     tags: envshot_right_orbit
   normandy_kickback:
     hit_events: sh_kickback_hit
     profile: normandy_profile
     show_tokens:
-      leds: l_kickback_ring
-      arrows: l_kickback_arrow_red
+      led_1: l_kickback_arrow
+      led_2: l_kickback_shield_rgb
+      led_3: l_store
     tags: envshot_kickback
   normandy_dropbank:
     hit_events: sh_dropbank_top_hit, sh_dropbank_bottom_hit, sh_dropbank_middle_hit
-    profile: normandy_dropbank_profile
+    profile: normandy_profile
     show_tokens:
-      leds: light_dropbank_rgb
-      flashers: l_flash_slingshots
+      led_1: l_dropbank_top, l_dropbank_bottom
+      led_2: l_dropbank_middle
+      led_3: gi_bottom_light_0  # behind lower dropbank
     tags: envshot_dropbank
   normandy_hitbank:
     hit_events: sh_hitbank_top_hit, sh_hitbank_bottom_hit
-    profile: normandy_hitbank_profile
+    profile: normandy_profile
     show_tokens:
-      leds: light_hitbank_rgb
-      flashers: l_flash_sword_lock
+      led_1: l_hitbank_bottom
+      led_2: l_hitbank_top
+      led_3: l_mass_relay_light_1  # lowest on relay ring
     tags: envshot_hitbank
   normandy_outlane:
     switch: s_outlane_left, s_outlane_right
@@ -232,16 +227,46 @@ shows:
         __all__:
           action: stop_all_sounds
           fade: 0
+  normandy_light_chase:
+    - time: 0
+      lights:
+        (led_3):
+          color: black
+          fade: 1s
+        (led_1):
+          color: color_health
+          fade: 1s
+    - time: 1s
+      lights:
+        (led_1):
+          color: black
+          fade: 1s
+        (led_2):
+          color: color_health
+          fade: 1s
+    - time: 2s
+      lights:
+        (led_2):
+          color: black
+          fade: 1s
+        (led_3):
+          color: color_health
+          fade: 1s
+    - time: 3s
   normandyattack_show:
     - time: 0
       flashers:
         l_flash_dragon_left: 80ms
     - time: '+1'
       flashers:
-        l_flash_slingshots: 120ms
+        l_flash_slingshots: 
+          color: green
+          ms: 120ms
     - time: '+3'
       flashers:
-        l_flash_back_panel_left: 80ms
+        l_flash_back_panel_left: 
+          color: color_health
+          ms: 80ms
     - time: '+2'
       flashers:
         l_flash_sword_lock: 80ms
@@ -251,7 +276,7 @@ shows:
     - time: '+4'
   normandy_save_show:
     - lights:
-        light_medigel: 550000
+        light_medigel: color_health%50
 
 slides:
   blank_slide: []

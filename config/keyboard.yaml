@@ -34,6 +34,15 @@ keyboard:
     switch: s_target4
   shift+5:
     switch: s_target5
+  shift+8:
+    switch: s_lock_1
+    toggle: true
+  shift+9:
+    switch: s_lock_2
+    toggle: true
+  shift+0:
+    switch: s_lock_3
+    toggle: true
   l:
     event: bypass_lock_release_pulse
   n:
