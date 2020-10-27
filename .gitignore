@@ -1,10 +1,12 @@
-data/
+*.bundle
+*.mp4
 *.ogg
 _*
-.*
+.mpfam_checksum
+.vscode
+data
 logs
 savegames
-*.mp4
 analytics
 mpfam_exports/
 mpfam_exports.zip

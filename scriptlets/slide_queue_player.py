@@ -1,5 +1,4 @@
 """Slide Queue Player is a mechanism for stacking up a queue of slide/widget plays."""
-import logging
 from mpf.core.custom_code import CustomCode
 from mpf.core.utility_functions import Util
 
@@ -9,49 +8,57 @@ DEFAULT_TRANS = {"type": "fade", "duration": 0.15}
 
 
 class SlideQueuePlayer(CustomCode):
-    """
-    SlideQueuePlayer: a queue player for slides.
+
+    """SlideQueuePlayer: a queue player for slides.
 
     This scriptlet creates a queue player for slides, allowing a series of slide
     play calls to be stacked and played sequentially with a given timeout.
     """
 
-    def on_load(self):
-        """Initialize: create a queue and create event handlers for adding slides."""
-        self.log = logging.getLogger("slideQueuePlayer")
+    def __init__(self, machine, name):
+        """Initialize CustomCode."""
+        super().__init__(machine, name)
         self._queue = []
         self._play_count = 0
         self._current_timeout = None
         self._last_slide_name = None
         self._last_portrait_name = None
 
+    def on_load(self):
+        """Load: create a queue and create event handlers for adding slides."""
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
         self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
-        self.log.info("Slide Queue Player Ready!")
-        self.log.setLevel("DEBUG")
+        self.info_log("Slide Queue Player Ready!")
 
     def _add_slide_to_queue(self, **kwargs):
         slide_name = kwargs.pop("slide")
 
-         # Check to see if the last item in the queue matches this one
+        # Check to see if the last item in the queue matches this one
         # If so, select an alternate version of the slide to avoid a
         # name-conflict and remove(). Match on '_QUEUE_A'
         if "_QUEUE_" in slide_name:
-            preceding_name = self._queue[-1][0] if self._queue else self._last_slide_name
-            self.log.info("Adding new slide {} to queue. Preceding name is {}".format(slide_name,preceding_name))
+            preceding_name = (
+                self._queue[-1][0] if self._queue else self._last_slide_name
+            )
+            self.debug_log("Adding new slide %s to queue. Preceding name is %s", slide_name, preceding_name)
             if slide_name == preceding_name:
-                slide_name = slide_name.replace("_QUEUE_A", "_QUEUE_B") if slide_name[-1] == "A" else slide_name.replace("_QUEUE_B","_QUEUE_A")
-                self.log.info(" - Updated slide name to be {}".format(slide_name))
+                slide_name = (
+                    slide_name.replace("_QUEUE_A", "_QUEUE_B")
+                    if slide_name[-1] == "A"
+                    else slide_name.replace("_QUEUE_B", "_QUEUE_A")
+                )
+                self.debug_log(" - Updated slide name to be %s", slide_name)
             else:
-                self.log.info("Not doing funny queue stuff. Match is {} and preceding is {}".format("_QUEUE_" in slide_name, preceding_name))
-        self.log.info("QUeue is appending name {}".format(slide_name))
+                self.debug_log(
+                    "Not doing funny queue stuff. Match is %s and preceding is %s",
+                    "_QUEUE_" in slide_name, preceding_name)
         self._queue.append((slide_name, kwargs))
 
         if not self._current_timeout:
             self._advance_queue()
 
-    def _advance_queue(self, dt=None, **kwargs):
+    def _advance_queue(self, _dt=None, **kwargs):
         del kwargs
         slide_name = None
         context = "global"
@@ -61,50 +68,59 @@ class SlideQueuePlayer(CustomCode):
         if self._queue:
             slide_name, slide_kwargs = self._queue.pop(0)
             expire = Util.string_to_secs(slide_kwargs.pop("expire", EXPIRE_SECS))
-            timeout = expire - Util.string_to_secs(slide_kwargs.pop("expire_overlap", EXPIRE_OVERLAP_SECS))
+            timeout = expire - Util.string_to_secs(
+                slide_kwargs.pop("expire_overlap", EXPIRE_OVERLAP_SECS)
+            )
             target = slide_kwargs.get("target", None)
             # context = "slide_queue_player_{}_{}".format(slide_name, self._play_count)
             # calling_context = "queue_slide_{}".format(self._play_count)
             settings = {
                 slide_name: {
-                    # "expire": expire,
                     "action": "play",
                     "target": target,
-                    "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
+                    "priority": 1000
+                    + self._play_count
+                    + slide_kwargs.get("priority", 0),
                     "tokens": slide_kwargs.get("tokens", None),
-                    # 'transition': {
-                    #     "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
-                    #     "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
-                    # },
                 }
             }
 
-            # Only transition out if the queue is empty
-            # if not self._queue:
-            #     settings[slide_name]["transition_out"] = {
-            #         "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
-            #         "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
-            #     }
-
             portrait = slide_kwargs.pop("portrait")
             if portrait and self.machine.variables.get("is_lcd"):
+                # HACK: I'm too lazy to add placeholder evaluation to the portrait name.
+                # Hard-code support for multiball
+                if portrait.endswith("(locked_balls)"):
+                    portrait = portrait.replace("(locked_balls)",
+                                                "{}".format(self.machine.multiball_locks["fmball_lock"].locked_balls))
                 portrait_widget_name = "portrait_{}".format(portrait)
                 if self._last_portrait_name:
-                    portrait_slide_name = self._last_portrait_name.replace("_QUEUE_A", "_QUEUE_B") if self._last_portrait_name[-1] == "A" else self._last_portrait_name.replace("_QUEUE_B","_QUEUE_A")
+                    portrait_slide_name = (
+                        self._last_portrait_name.replace("_QUEUE_A", "_QUEUE_B")
+                        if self._last_portrait_name[-1] == "A"
+                        else self._last_portrait_name.replace("_QUEUE_B", "_QUEUE_A")
+                    )
                 else:
                     portrait_slide_name = "portrait_slide_QUEUE_A"
-                settings[portrait_slide_name] = self._generate_portrait(expire, slide_kwargs)
+                settings[portrait_slide_name] = self._generate_portrait(slide_kwargs)
                 slide_kwargs["portrait_name"] = portrait_widget_name
-            self.machine.log.info("Playing slide {} (count {}) with expire {} and timeout {}".format(slide_name, self._play_count, expire, timeout))
-            self.machine.log.info("slide kwargs are {}".format(slide_kwargs))
-            # slide_kwargs["key"] = "{}-{}".format(slide_name, self._play_count)
-            self.machine.slide_player.play(settings=settings,
-                                           context=context,
-                                           calling_context=calling_context,
-                                           **slide_kwargs)
+            self.machine.log.debug(
+                "Playing slide %s (count %s) with expire %s and timeout %s",
+                (slide_name, self._play_count, expire, timeout)
+            )
+
+            self.machine.slide_player.play(
+                settings=settings,
+                context=context,
+                calling_context=calling_context,
+                **slide_kwargs
+            )
             event_name = slide_name[:-8] if "_QUEUE_" in slide_name else slide_name
-            self.machine.events.post("play_queued_slide_{}".format(event_name), **slide_kwargs)
-            self._current_timeout = self.machine.clock.schedule_once(self._advance_queue, expire)
+            self.machine.events.post(
+                "play_queued_slide_{}".format(event_name), **slide_kwargs
+            )
+            self._current_timeout = self.machine.clock.schedule_once(
+                self._advance_queue, expire
+            )
             self._play_count += 1
         else:
             self._current_timeout = None
@@ -113,50 +129,51 @@ class SlideQueuePlayer(CustomCode):
 
         # Remove an old slide if we have one
         if self._last_slide_name:
-            self.log.info("Removing queued slide {}".format(self._last_slide_name))
-            settings = {
-                self._last_slide_name: {
-                    "action": "remove",
-                    "target": target
-                }
-            }
-            self.machine.slide_player.play(settings=settings, context=context, calling_context=calling_context)
+            self.debug_log("Removing expiring queued slide %s", self._last_slide_name)
+            settings = {self._last_slide_name: {"action": "remove", "target": target}}
+            self.machine.slide_player.play(
+                settings=settings, context=context, calling_context=calling_context
+            )
         if self._last_portrait_name:
-            self.log.info("Removing queued portrait {}".format(self._last_portrait_name))
+            self.debug_log("Removing expiring queued portrait %s", self._last_portrait_name)
             settings = {
-                self._last_portrait_name: {
-                    "action": "remove",
-                    "target": "lcd_right"
-                }
+                self._last_portrait_name: {"action": "remove", "target": "lcd_right"}
             }
-            self.machine.slide_player.play(settings=settings, context=context, calling_context=calling_context)
-        
-        
+            self.machine.slide_player.play(
+                settings=settings, context=context, calling_context=calling_context
+            )
+
         self._last_slide_name = slide_name
         self._last_portrait_name = portrait_slide_name
 
-    def _generate_portrait(self, expire, slide_kwargs):
+    def _generate_portrait(self, slide_kwargs):
         slide_settings = {
             "action": "play",
             "target": "lcd_right",
             "priority": 1000 + self._play_count + slide_kwargs.get("priority", 0),
             "tokens": slide_kwargs.get("tokens", None),
-            'transition': {
+            "transition": {
                 "type": slide_kwargs.get("transition_type", DEFAULT_TRANS["type"]),
-                "duration": slide_kwargs.get("transition_duration", DEFAULT_TRANS["duration"]),
-            }
+                "duration": slide_kwargs.get(
+                    "transition_duration", DEFAULT_TRANS["duration"]
+                ),
+            },
         }
         if not self._queue:
             slide_settings["transition_out"] = {
                 "type": slide_kwargs.get("transition_out_type", DEFAULT_TRANS["type"]),
-                "duration": slide_kwargs.get("transition_out_duration", DEFAULT_TRANS["duration"]),
+                "duration": slide_kwargs.get(
+                    "transition_out_duration", DEFAULT_TRANS["duration"]
+                ),
             }
         return slide_settings
 
     def _clear_queue(self, **kwargs):
+        del kwargs
         self._queue = []
         self._advance_queue()
 
     def _check_queue_clear(self, **kwargs):
+        del kwargs
         if not self._current_timeout:
             self.machine.events.post("slide_queue_clear")
