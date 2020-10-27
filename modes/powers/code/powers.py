@@ -133,9 +133,24 @@ class Powers(Mode):
 
     def _update_cooldown_progress(self, **kwargs):
         value = kwargs["value"]
-        complete_pct = (1 - value / self._base_cooldown)
-        complete_height = complete_pct * POWER_WIDGET_HEIGHT
-        self.machine.events.post("update_cooldown_progress", complete_pct=complete_pct, complete_height=complete_height)
+        enabled = kwargs["enabled"]
+        if not enabled:
+            opacity = 1.0
+            complete_height = POWER_WIDGET_HEIGHT
+        elif value == 100:
+            opacity = 0
+            complete_height = 0
+        else:
+            # Opacity == complete_pct starts at 0%, so the bottom looks real bad.
+            complete_pct = (1 - value / self._base_cooldown)
+            # Instead, start at 50% and go up 0.5% for each 1% complete
+            opacity = 0.5 + (complete_pct / 2)
+            complete_height = complete_pct * POWER_WIDGET_HEIGHT
+        self.machine.events.post("update_cooldown_progress",
+            # complete_pct=complete_pct,
+            complete_height=complete_height,
+            opacity=opacity
+            )
 
     def _complete(self, **kwargs):
         self.machine.game.player["power"] = " "

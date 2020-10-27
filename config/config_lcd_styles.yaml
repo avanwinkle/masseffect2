@@ -475,7 +475,7 @@ animations:
       repeat: false
   power_widget_cooldown_opacity:
     - property: opacity
-      value: (complete_pct)
+      value: (opacity)
       duration: 0
       repeat: false
   power_cooldown_complete:

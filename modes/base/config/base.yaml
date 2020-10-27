@@ -399,7 +399,7 @@ slides:
         casing: title
       - widget: levelup_background
   n7_complete_slide:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     transition_out: fade
@@ -407,8 +407,9 @@ slides:
       - type: text
         text: $assignment_complete
         style: header_md, row_main
+      - widget: background_console
   skillshot_slide:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     transition_out: fade

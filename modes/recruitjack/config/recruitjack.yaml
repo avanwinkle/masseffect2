@@ -181,6 +181,10 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_jack
+    gi_half_color:
+      show_tokens:
+        color: color_jack
+        brightness: 50
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0

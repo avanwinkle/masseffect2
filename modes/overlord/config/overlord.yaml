@@ -37,12 +37,13 @@ event_player:
   mode_overlord_started:
     set_environment:
       env: geth
+  mode_intro_complete.2:
     set_mission_shots:
       shots_total: 5
       shots_remaining: 5
       is_resumable: 0
       ticks: 30
-  mode_intro_complete:
+  mode_intro_complete.1:
     - reset_hackshots
   mode_intro_skipped:
     - play_music_1
@@ -127,6 +128,8 @@ variable_player:
     levelup_pending: 1
 
 light_player:
+  mode_overlord_started:
+    l_ladder: black
   mode_intro_complete:
     light_backwall_gi:
       color: color_overlord

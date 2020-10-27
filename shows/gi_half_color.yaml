@@ -1,0 +1,12 @@
+#show_version=5
+- lights:
+    l_backwall_gi_light_0: (color)
+    l_backwall_gi_light_2: (color)
+    l_backwall_gi_light_4: (color)
+    l_backwall_gi_light_6: (color)
+    l_backwall_gi_light_8: (color)
+    l_backwall_gi_light_1: white%(brightness)
+    l_backwall_gi_light_3: white%(brightness)
+    l_backwall_gi_light_5: white%(brightness)
+    l_backwall_gi_light_7: white%(brightness)
+    l_backwall_gi_light_9: white%(brightness)
