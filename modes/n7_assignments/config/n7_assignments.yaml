@@ -407,9 +407,17 @@ widgets:
     - type: image
       image: codex_n7_abandoned_mine
       style: codex_image
+  dossier_n7_codex_anomalous_weather_detected:
+    - type: image
+      image: codex_n7_anomalous_weather_detected
+      style: codex_image
   dossier_n7_codex_captured_mining_facility:
     - type: image
       image: codex_n7_captured_mining_facility
+      style: codex_image
+  dossier_n7_codex_eclipse_smuggling_depot:
+    - type: image
+      image: codex_n7_eclipse_smuggling_depot
       style: codex_image
   dossier_n7_codex_endangered_research_station:
     - type: image
