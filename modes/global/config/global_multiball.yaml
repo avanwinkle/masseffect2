@@ -42,7 +42,7 @@ event_player:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: overlord_light_(locked_balls)
-      expire: 8s
+      expire: 6s
       mball_name: overlord
       ball:
         # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?

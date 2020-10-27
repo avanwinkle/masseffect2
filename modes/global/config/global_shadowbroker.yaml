@@ -19,10 +19,19 @@ event_player:
 
   # QUEUE SLIDE
   logicblock_sbdrops_counter_hit:
-    queue_slide{current_player.state_machine_shadowbroker=="start"}:
+    queue_slide{current_player.state_machine_shadowbroker=="start" and count<3}:
       priority: 2
       slide: shadowbroker_advance_slide
-      portrait: shadowbroker_advance_1
+      portrait: shadowbroker_dossier_start
+      expire: 5s
+      count:
+        value: device.counters.sbdrops_counter.value
+        type: int
+    queue_slide{current_player.state_machine_shadowbroker=="start" and count==3}:
+      priority: 2
+      slide: shadowbroker_advance_slide
+      portrait: shadowbroker_dossier_start
+      expire: 6600ms # Make them all 5s?
       count:
         value: device.counters.sbdrops_counter.value
         type: int
@@ -106,25 +115,35 @@ shows:
 
 slides:
   shadowbroker_advance_slide:
-    - type: text
-      text: Lair of the Shadow Broker
-      style: header_xs, row_top, col_left_anchor, mission_title
-    - type: text
-      text: Intel Collected
-      style: header_md, row_main, col_left_anchor
-    - widget: background_console
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: text
+        text: Lair of the Shadow Broker
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: Intel Collected
+        style: header_md, row_bottom, col_left_anchor
+      - widget: shadowbroker_drops_(count)
 
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions
   play_queued_slide_shadowbroker_advance_slide.1{count==1}:
     shepard_sounds_like_liara_found_something_big:
       max_queue_time: 2s
+      delay: 750ms
   play_queued_slide_shadowbroker_advance_slide.2{count==2}:
-    vasir_i_know_where_the_trade_center_is:
+    shepard_liaras_in_there:
       max_queue_time: 2s
+      delay: 3s
   play_queued_slide_shadowbroker_advance_slide.3{count==3}:
-    vasir_they_took_out_three_floors:
-      max_queue_time: 2s
+    liara_she_found_suket_and_stole_the_datapad:
+      max_queue_time: 1s
+      delay: 366ms
   play_queued_slide_shadowbroker_advance_slide.4{count==4}:
     liara_shepard_im_glad_youre_here:
       max_queue_time: 2s
@@ -183,7 +202,9 @@ sounds:
     track: voice
   vasir_they_took_out_three_floors:
     file: DLC_EXP_Part01_Int.634.ogg
-    events_when_stopped: play_shepard_ill_start_down_here
+    track: voice
+  liara_she_found_suket_and_stole_the_datapad:
+    file: DLC_EXP_Part01_Int.616.ogg
     track: voice
   # After Vasir
   liara_shepard_im_glad_youre_here:
@@ -225,12 +246,29 @@ sounds:
     track: voice
 
 widgets:
-  portrait_shadowbroker_advance_1:
-    - type: image
-      image: portrait_shadowbroker_advance_1
+  shadowbroker_drops_1:
+    - type: video
+      video: shadowbroker_drops_1
+  shadowbroker_drops_2:
+    - type: video
+      video: shadowbroker_drops_2
+  shadowbroker_drops_3:
+    - type: video
+      video: shadowbroker_drops_3
   portrait_shadowbroker_advance_2:
     - type: image
       image: portrait_shadowbroker_advance_2
   portrait_shadowbroker_advance_3:
     - type: image
       image: portrait_shadowbroker_advance_3
+  portrait_shadowbroker_dossier_start:
+    - type: image
+      image: codex_shadowbroker_liara
+      style: codex_image
+    - type: text
+      text: "Lair of the Shadow Broker"
+      style: codex_title
+    - type: text
+      text: "Liara has information that may\nlead to the hideout of the mysterious\nShadow Broker, a deadly adversary\nwho aims to have her and Shepard\nkilled."
+      style: codex_text
+    - widget: dossier_recruit_base
