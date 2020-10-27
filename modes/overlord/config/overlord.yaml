@@ -256,8 +256,10 @@ shows:
           action: play
     - time: 7s
       events: play_music_1
-    - time: 14s
-      events: show_overlord_slide, mode_intro_complete
+    - time: 13s
+      events: mode_intro_complete
+    - time: 13930ms
+      events: show_overlord_slide
     - time: 15s
   # Shows for ALL of the lane shots
   overlord_hackshots_off_show:
@@ -284,20 +286,22 @@ shows:
 
 slide_player:
   show_overlord_slide:
-    overlord_slide: {}
+    overlord_slide:
+      action: play
     overlord_portrait:
       target: lcd_right
 
 slides:
   overlord_cineanim:
+    priority: 100
     widgets:
       - type: video
         video: overlord_lock_atlas
         end_behavior: pause
-      - type: image
-        image: bg_overlord
   overlord_slide:
+    transition: fade
     transition_out: fade
+    priority: 1
     widgets:
       - type: text
         text: OVERLORD
@@ -309,9 +313,19 @@ slides:
       - type: image
         image: bg_overlord
   overlord_portrait:
+    transition: fade
+    transition_out: fade
     widgets:
-      - type: image
-        image: portrait_overlord
+    - type: image
+      image: codex_ovr_atlas
+      style: codex_image
+    - type: text
+      text: "Project Overlord: Atlas Station"
+      style: codex_title
+    - type: text
+      text: "The rogue VI is attempting to upload\nitself to the Normandy's systems\nand spread across the galaxy.\n\nStop the upload and shut down\nthe VI before it's too late!"
+      style: codex_text
+    - widget: dossier_recruit_base
 
 sound_player:
   play_music_1:

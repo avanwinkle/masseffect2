@@ -31,11 +31,11 @@ event_player:
   advance_fmball_lock:
     overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
       total_balls_locked:
-        value: total_balls_locked
+        value: device.multiball_locks.fmball_lock.locked_balls
         type: int
     arrival_ball_will_lock{device.achievements.arrival.state!="disabled"}:
       total_balls_locked:
-        value: total_balls_locked
+        value: device.multiball_locks.fmball_lock.locked_balls
         type: int
   # Hold open the gates if no balls are there, or quickly pop the gates
   # if a ball is there that we don't want to lock or hold

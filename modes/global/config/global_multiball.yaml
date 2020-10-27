@@ -33,7 +33,7 @@ event_player:
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
   # Start the mode immediately on final lock. Airlock will delay for queued slides
   # and the mode will play the cineanim to overlay music into gameplay
-  advance_fmball_lock{total_balls_locked==3}:
+  multiball_lock_fmball_lock_full:
     - start_mode_overlord{device.achievements.arrival.state=="disabled"}
     - start_mode_arrival{device.achievements.arrival.state!="disabled"}
 
@@ -64,7 +64,10 @@ event_player:
       portrait: overlord_lock_(locked_balls)
       expire: 8s
       mball_name: overlord
-      ball: 1
+      ball:
+        value: device.multiball_locks.fmball_lock.locked_balls
+        type: int
+  # Arrival
   arrival_ball_will_lock.100:
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==1}:
       priority: 4
@@ -242,20 +245,24 @@ sound_player:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
+      delay: 1500ms
   play_queued_slide_fmball_lock_lit_slide.3{ball==2 and mball_name=="overlord"}:
     archer_lockdown_cancelled:
       action: play
       max_queue_time: 1s
       mode_end_action: stop
+      delay: 800ms
   # Sound player doesn't accept conditions in sound names, so conditional events only
   play_queued_slide_fmball_ball_locked_slide.1{ball==1 and mball_name=="overlord"}:
     vulcan_success:
       action: play
       max_queue_time: 2s
+      delay: 2s
   play_queued_slide_fmball_ball_locked_slide.2{ball==2 and mball_name=="overlord"}:
     archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 2s
+      delay: 2s
   #### ARRIVAL ####
   play_arrival_hit_sound{not current_player.disable_mball_light_sounds}:
     batarian_hit_sfx:
@@ -465,17 +472,7 @@ widgets:
       text: "\"Unless he sees results, the Illusive\nMan is shutting us down next week.\nI have no choice. I am going to tap\nDavid directly into the geth neural\nnetwork and see if he can influence\nthem. Danger should be negligible.\""
       style: codex_text
     - widget: dossier_recruit_base
-  portrait_overlord_lock_3:
-    - type: image
-      image: codex_ovr_atlas
-      style: codex_image
-    - type: text
-      text: "Project Overlord: Atlas Station"
-      style: codex_title
-    - type: text
-      text: "The rogue VI is attempting to upload\nitself to the Normandy's systems\nand spread across the galaxy.\n\nStop the upload and shut down\nthe VI before it's too late!"
-      style: codex_text
-    - widget: dossier_recruit_base
+
   portrait_arrival_light_0:
     - type: image
       image: codex_arrival_projectbase
