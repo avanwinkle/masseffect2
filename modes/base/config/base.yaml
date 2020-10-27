@@ -370,7 +370,7 @@ slide_player:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
-      expire: 3s
+      expire: 2s
   player_added:
     player_added_slide:
       action: play
@@ -420,6 +420,9 @@ slides:
       - type: text
         text: (value)
         style: body_md, row_sub_under, num
+      - type: video
+        video: skillshot
+        end_behavior: pause
   squadicon_slide:
     transition: fade
     transition_out: fade

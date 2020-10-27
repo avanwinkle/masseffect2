@@ -2,10 +2,10 @@
 slides:
   # Core slides
   attract_slide_main:
-    transition: 
+    transition:
       type: fade
       duration: 200ms
-    transition_out: 
+    transition_out:
       type: fade
       duration: 200ms
     widgets:
@@ -27,10 +27,10 @@ slides:
         x: 0
         z: 0
   attract_slide_right:
-    transition: 
+    transition:
       type: fade
       duration: 200ms
-    transition_out: 
+    transition_out:
       type: fade
       duration: 200ms
     widgets:
@@ -96,25 +96,41 @@ slides:
               duration: 2000s
   # Miscellaneous slides
   medigel_slide:
-    transition: 
-      type: move_in
-      direction: bottom
+    transition:
+      type: fade
+      duration: 500ms
     transition_out:
-      type: move_in
-      direction: top
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: text
+        text: "Medigel Deployed"
+        style: header_md, row_main
+      - type: image
+        image: bg_medigel
+  dossier_medigel:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
     widgets:
       - type: image
-        image: medigel
-        style: row_sub_under
-        z: 2
+        image: codex_medigel
+        style: codex_image
       - type: text
-        text: "Medigel\nDeployed"
-        style: header_md, row_main
+        text: "Medigel"
+        style: codex_title
+      - type: text
+        text: "Medigel can be earned by completing\nmissions and purchasing upgrades.\n\nOutlane medigels can be awarded\nrandomly. Build up reputation to\nincrease the chances!"
+        style: codex_text
+      - widget: dossier_recruit_base
   minerals_slide:
-    transition: 
+    transition:
       type: fade
       duration: 250ms
-    transition_out: 
+    transition_out:
       type: fade
       duration: 250ms
     widgets:
@@ -259,20 +275,20 @@ slides:
       - widget: planet_widget_(planets_mod)
   portrait_slide:
     transition: fade
-    transition_out: 
+    transition_out:
       type: fade
     widgets:
       - widget: (portrait_name)
   portrait_slide_QUEUE_A:
     transition: fade
-    transition_out: 
+    transition_out:
       type: fade
       duration: 150ms
     widgets:
       - widget: (portrait_name)
   portrait_slide_QUEUE_B:
     transition: fade
-    transition_out: 
+    transition_out:
       type: fade
       duration: 150ms
     widgets:
@@ -909,7 +925,7 @@ widgets:
     - type: image
       image: background_sqicon
       z: 1
-  
+
 
   # PORTRAITS
   # Here to avoid loading assets into memory for dmd
@@ -959,7 +975,7 @@ widgets:
   portrait_recruitzaeed:
     - type: image
       image: portrait_recruitzaeed
-  # Squadmate intro videos. 
+  # Squadmate intro videos.
   portrait_recruit_intro_garrus:
     - type: video
       video: recruitgarrus_intro
