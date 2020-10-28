@@ -118,6 +118,9 @@ event_player:
       slide: n7_complete_slide
       portrait: n7_complete
       expire: 5s
+      achievement:
+        value: achievement
+        type: str
       rating:
         value: rating
         type: int
@@ -374,7 +377,11 @@ slide_player:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
       priority: 920
-      expire: 2s
+      expire: 5s
+    dossier_skillshot:
+      priority: 920
+      expire: 5s
+      target: lcd_right
   player_added:
     player_added_slide:
       action: play
@@ -415,7 +422,7 @@ slides:
   skillshot_slide:
     transition:
       type: fade
-      duration: 500ms
+      duration: 250ms
     transition_out: fade
     widgets:
       - type: text
@@ -423,10 +430,21 @@ slides:
         style: header_lg, row_main, row_main_dmd_high
       - type: text
         text: (value)
-        style: body_md, row_sub_under, num
-      - type: video
-        video: skillshot
-        end_behavior: pause
+        style: body_md, row_bottom_margin, num
+      - widget: skillshot_bg_(morality)
+  dossier_skillshot:
+    transition:
+      type: fade
+      duration: 250ms
+    transition_out: fade
+    widgets:
+      - type: image
+        image: codex_morality
+        style: codex_image
+      - type: text
+        text: "Skillshots and return lanes score\nparagon and renegade points, which\nextend mode timers and accelerate\npower cooldowns. Complete the \nlower lanes to build reputation, which\nmultiplies bonuses and increases the\nchance of random medigel awards."
+        style: codex_text
+      - widget: dossier_recruit_base
   squadicon_slide:
     transition: fade
     transition_out: fade
@@ -606,13 +624,29 @@ widgets:
       color: DDDDDD
       style: header_sm, row_top
   portrait_n7_complete:
-    - type: image
-      image: codex_n7
-      style: codex_image
-    - type: text
-      text: N7 Assignments
-      style: codex_title
+    - widget: n7_achievement_(achievement)
     - type: text
       text: "\nAssignments Attempted: (player|assignments_played)\nAssignments Completed: (player|earned_assignments_completed)\n\nN7 Rating: (rating)%\nReputation: (player|reputation)"
       style: codex_text
-    - widget: dossier_recruit_base
+    - widget: dossier_achievement_base
+  n7_achievement_platinum:
+    - type: image
+      image: n7_platinum
+      style: codex_achievement
+  n7_achievement_gold:
+    - type: image
+      image: n7_gold
+      style: codex_achievement
+  n7_achievement_silver:
+    - type: image
+      image: n7_silver
+      style: codex_achievement
+  n7_achievement_bronze:
+    - type: image
+      image: n7_bronze
+      style: codex_achievement
+  n7_achievement_default:
+    - type: image
+      image: n7_default
+      style: codex_achievement
+

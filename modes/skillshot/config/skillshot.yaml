@@ -11,11 +11,18 @@ event_player:
   # If a mission is resumed, no skill shot
   mode_type_mission_started: stop_mode_skillshot
   # Pass the build value as an event value, because N7 assignments will reset it
-  skillshot_lit_hit:
+  skillshot_paragon_lit_hit:
     award_skillshot:
       value:
         value: current_player.temp_build_value
         type: int
+      morality: paragon
+  skillshot_renegade_lit_hit:
+    award_skillshot:
+      value:
+        value: current_player.temp_build_value
+        type: int
+      morality: renegade
 
 variable_player:
   mode_skillshot_started:
@@ -41,21 +48,21 @@ random_event_player:
 
 shot_groups:
   skillshot:
-    shots: skillshot_left, skillshot_right
+    shots: skillshot_paragon, skillshot_renegade
     reset_events: mode_skillshot_will_stop
     rotate_events:
       - s_flipper_left_active{device.timers.skillshot_timer.running==False}
       - s_flipper_right_active{device.timers.skillshot_timer.running==False}
 
 shots:
-  skillshot_left:
+  skillshot_paragon:
     switch: s_top_lane_left
     advance_events: enable_skillshot_left
     profile: hit_to_flash_fast_profile_noadvance
     show_tokens:
       leds: l_left_top_lane
       color: skillshot_color_paragon
-  skillshot_right:
+  skillshot_renegade:
     switch: s_top_lane_right
     advance_events: enable_skillshot_right
     profile: hit_to_flash_fast_profile_noadvance

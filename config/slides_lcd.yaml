@@ -714,6 +714,14 @@ widgets:
       animations:
         add_to_slide: pulse_text
 
+  # SKILLSHOT
+  skillshot_bg_paragon:
+    - type: image
+      image: bg_skillshot_paragon
+  skillshot_bg_renegade:
+    - type: image
+      image: bg_skillshot_renegade
+
   # SQUADMATE ICONS
   squadmates_grid_overlay:
     - type: image
@@ -1044,6 +1052,14 @@ widgets:
       anchor_y: top
       y: top-52
       z: 5
+    - type: image
+      image: codex_text_background
+      anchor_y: bottom
+      y: 20
+    - type: image
+      image: texture_console
+  # This underlays the right lcd when there's no codex image (e.g. achievements)
+  dossier_achievement_base:
     - type: image
       image: codex_text_background
       anchor_y: bottom

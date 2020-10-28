@@ -43,6 +43,10 @@ keyboard:
   shift+0:
     switch: s_lock_3
     toggle: true
+  "/":
+    switch: s_top_lane_left
+  "=":
+    switch: s_top_lane_right
   l:
     event: bypass_lock_release_pulse
   n:

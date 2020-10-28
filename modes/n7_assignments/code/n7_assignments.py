@@ -119,6 +119,18 @@ class N7Assignments(Mode):
 
         self.machine.clock.schedule_once(self._play_callout, 1)
 
+    def _check_achievement(self, rating):
+        if rating == 100:
+            return "platinum"
+        elif rating >= 75:
+            return "gold"
+        elif rating >= 50:
+            return "silver"
+        elif rating >= 25:
+            return "bronze"
+        else:
+            return "default"
+
     def _find_next_mission(self, mission_set):
         for mission in mission_set:
             if mission.is_available(self.player):
@@ -138,4 +150,5 @@ class N7Assignments(Mode):
         del kwargs
         rating = math.ceil(100 *
             self.player["earned_assignments_completed"] / self.player["assignments_played"])
-        self.machine.events.post("n7_assignment_success", rating=rating)
+        achievement = self._check_achievement(rating)
+        self.machine.events.post("n7_assignment_success", rating=rating, achievement=achievement)

@@ -203,7 +203,8 @@ slides:
         style: header_sm, row_main_under, col_left_anchor
       - type: text
         text: "N7 Rating: (rating) %"
-        style: header_xs, row_bottom, col_left_anchor
+        style: header_xs, row_bottom_margin, col_left_anchor
+        opacity: 0.6
       - widget: n7_logo
       - widget: background_console
   n7_dossier:
@@ -380,7 +381,7 @@ sounds:
       attack: 300ms
       release: 500ms
       release_point: 200ms
-  edi_distress_signal_4:pr
+  edi_distress_signal_4:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333704_m.ogg
     track: voice
     ducking:
