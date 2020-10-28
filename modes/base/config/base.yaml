@@ -126,6 +126,9 @@ event_player:
         type: int
   recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
+  mode_overlord_stopped:
+    - play_overlord_outro_complete{device.achievements.overlord.state=="completed"}
+    - play_overlord_outro_incomplete{device.achievements.overlord.state!="completed"}
 
 ball_saves:
   default:
@@ -387,6 +390,18 @@ slide_player:
       action: play
       priority: 10000
       expire: 3s
+  play_overlord_outro_complete:
+    portrait_overlord_outro_complete:
+      action: play
+      priority: 1000  # Higher priority than the sqicon slide
+      expire: 12500ms
+      target: lcd_right
+  play_overlord_outro_incomplete:
+    portrait_overlord_outro_incomplete:
+      action: play
+      priority: 1000  # Higher priority than the sqicon slide
+      expire: 5726ms
+      target: lcd_right
 
 slides:
   player_added_slide:

@@ -293,6 +293,28 @@ slides:
       duration: 150ms
     widgets:
       - widget: (portrait_name)
+  portrait_overlord_outro_complete:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: video
+        video: ovr_outro_complete
+        end_behavior: pause
+  portrait_overlord_outro_incomplete:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: video
+        video: ovr_outro_incomplete
+        end_behavior: pause
   recruit_portrait_slide:
     transition: fade
     transition_out: fade
