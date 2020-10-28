@@ -35,7 +35,8 @@ event_player:
     # Turn off the bumpers to get the ball out fast
     - bumpers_off
     - bumpers_on|6s
-  n7_assignment_hit:
+  n7_callout: play_n7_callout_(callout)
+  n7_assignment_success: # This event is triggered in the python file
     - mission_shot_hit
     - mission_collect_score
     - n7_assignment_ended
@@ -54,7 +55,8 @@ random_event_player:
       - enable_n7_kickback
 
 variable_player:
-  n7_assignment_hit:
+  # Assign a priority so the new values are available in the dossier slied
+  n7_assignment_hit.10:
     # In addition to the shot amount, multiply by the number of missions completed
     score:
       int: current_player.mission_shot_value * current_player.assignments_completed
@@ -229,13 +231,13 @@ sound_player:
       fade_in: 3s
       fade_out: 1s
       mode_end_action: stop
-  start_n7_anomalous_weather: intro_anomalous_weather
-  start_n7_eclipse_smuggling_depot: aria_sending_you_cache_coordinates
-  start_n7_imminent_ship_crash: intro_imminent_ship_crash
-  start_n7_quarian_crash_site: intro_quarian_crash_site
-  start_n7_javelin_missiles_launched: intro_javelin_missiles
-  start_n7_lost_operative: edi_anomaly_detected
-  start_n7_msv_strontium_mule: edi_distress_signal
+  play_n7_callout_anomalous_weather: intro_anomalous_weather
+  play_n7_callout_eclipse_smuggling_depot: aria_sending_you_cache_coordinates
+  play_n7_callout_imminent_ship_crash: intro_imminent_ship_crash
+  play_n7_callout_quarian_crash_site: intro_quarian_crash_site
+  play_n7_callout_javelin_missiles_launched: intro_javelin_missiles
+  play_n7_callout_anomaly: edi_anomaly_detected
+  play_n7_callout_distress: edi_distress_signal
 
 sound_pools:
   music_n7:
@@ -275,118 +277,118 @@ sounds:
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   intro_javelin_missiles:
     file: en_us_hench_ai_n7mmnt7_warning_00344483_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   intro_anomalous_weather:
     file: en_us_hench_ai_n7bldinv1_fog_00344671_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   intro_quarian_crash_site:
     file: en_us_hench_ai_n7mmnt2_biosign_detected_00344662_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   aria_sending_you_cache_coordinates:
     file: en_us_omghub_asari_ruler_omghub_asari_ruler_d_00284069_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_anomaly_detected_1:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333696_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_anomaly_detected_2:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333697_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_anomaly_detected_3:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333698_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_anomaly_detected_4:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333699_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_distress_signal_1:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_distress_signal_2:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333702_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
   edi_distress_signal_3:
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333703_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
-  edi_distress_signal_4:
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
+  edi_distress_signal_4:pr
     file: en_us_hench_ai_nor_ai_edi_hint_h_00333704_m.ogg
     track: voice
     ducking:
       target: music
-      attenuation: 0.3
-      attack: 200ms
-      release: 200ms
-      release_point: 100ms
+      attenuation: 0.5
+      attack: 300ms
+      release: 500ms
+      release_point: 200ms
 
 widget_player:
   timer_missiontimer_started: timer_widget

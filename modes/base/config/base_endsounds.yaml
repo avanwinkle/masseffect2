@@ -7,7 +7,7 @@
 #####
 
 sound_player:
-  n7_assignment_hit: assignment_complete
+  n7_assignment_success: assignment_complete
   # Shadowbroker Chase
   timer_sbchase_timer_complete: liara_we_lost_her
   ball_save_sbchase_save_saving_ball: liara_we_lost_her

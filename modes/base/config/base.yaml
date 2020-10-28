@@ -113,6 +113,14 @@ event_player:
         type: string
       priority: 1999 # Normandy attack runs at 2000
       expire: 10s
+  n7_assignment_success:
+    queue_slide:
+      slide: n7_complete_slide
+      portrait: n7_complete
+      expire: 5s
+      rating:
+        value: rating
+        type: int
   recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
 
@@ -362,10 +370,6 @@ shows:
         - play_gameintro_short{current_player.ball==3}
 
 slide_player:
-  n7_assignment_hit:
-    n7_complete_slide:
-      priority: 600
-      expire: 3s
   award_skillshot:
     skillshot_slide:
       # Higher priority than the instructions slide (at 200) and planets (610+300)
@@ -601,3 +605,14 @@ widgets:
       text: Player (player|number)
       color: DDDDDD
       style: header_sm, row_top
+  portrait_n7_complete:
+    - type: image
+      image: codex_n7
+      style: codex_image
+    - type: text
+      text: N7 Assignments
+      style: codex_title
+    - type: text
+      text: "\nAssignments Attempted: (player|assignments_played)\nAssignments Completed: (player|earned_assignments_completed)\n\nN7 Rating: (rating)%\nReputation: (player|reputation)"
+      style: codex_text
+    - widget: dossier_recruit_base
