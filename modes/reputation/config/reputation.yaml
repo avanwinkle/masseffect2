@@ -80,33 +80,68 @@ show_player:
         color: on
       loops: 4
 
+slide_player:
+  reputation_build_shots_lit_complete:
+    reputation_portrait_slide:
+      target: lcd_right
+      expire: 5s
+
+slides:
+  reputation_portrait_slide:
+    transition:
+      type: fade
+      duration: 500ms
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - widget: portrait_reputation
+
 widgets:
   reputation_slide:
       - type: text
         text: "  +1 Reputation"
-        style: header_xs, row_title, col_left_anchor, color_ui_green_light
+        style: reputation_title, col_left_anchor, color_ui_green_light
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out
       - type: text
         text: Paragon
         font_size: 18
         z: 3
         style: reputation_label, col_left_anchor, color_ui_green_light
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out
       - type: text
         text: Renegade
         font_size: 18
         z: 3
         style: reputation_label, col_right_anchor, color_ui_green_light
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out
       - type: image
         image: reputation_underlay
         anchor_y: top
-        y: top
+        y: top+140
         z: 2
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out
   reputation_paragon:
       - type: image
         image: reputation_paragon
         style: reputation_paragon
         auto_play: false
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out
   reputation_renegade:
       - type: image
         image: reputation_renegade
         style: reputation_renegade
         auto_play: false
+        animations:
+          add_to_slide: reputation_slide_in
+          reputation_fadeout: reputation_slide_out

@@ -20,7 +20,12 @@ class Reputation(Mode):
             'reputation_renegade': {'action': 'add', 'key': None, 'slide': slide,
                                     'widget_settings': {'start_frame': renegade}}
         }, context='reputation', calling_context='play_reputation_widget', priority=600)
-        self.machine.clock.schedule_once(self._remove_reputation, 315)
+
+        self.machine.clock.schedule_once(self._post_reputation_removal, 5)
+        self.machine.clock.schedule_once(self._remove_reputation, 6)
+
+    def _post_reputation_removal(self):
+        self.machine.events.post("reputation_fadeout")
 
     def _remove_reputation(self):
         self.machine.events.post("widgets_play", settings={

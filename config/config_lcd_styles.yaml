@@ -221,21 +221,31 @@ widget_styles:
   jackpot_x:
     anchor_x: left
     x: 64% # default is 38%, 60% too low, 65% too high
+  reputation_title:
+    font_name: me123
+    font_size: 28
+    anchor_y: bottom
+    y: 568
+    opacity: 0
+    z: 6
   reputation_paragon:
     anchor_x: right
     anchor_y: top
-    y: top-60
+    y: 548
     x: center-2
     z: 5
+    opacity: 0
   reputation_renegade:
     anchor_x: left
     anchor_y: top
-    y: top-60
+    y: 548
     x: center+2
     z: 5
+    opacity: 0
   reputation_label:
     anchor_y: top
-    y: top-94
+    y: 510
+    opacity: 0
 
   # SQUAD SPECIALISTS
   #----------------------------
@@ -512,6 +522,18 @@ animations:
       value: 0
       duration: 500ms
       easing: in_sine
+  reputation_slide_in:
+    - property: y, opacity
+      value: -140, 1
+      duration: 500ms
+      relative: true
+      easing: in_out_quad
+  reputation_slide_out:
+    - property: y, opacity
+      value: 140, -1
+      duration: 500ms
+      relative: true
+      easing: in_out_quad
   research_option_select:
     - property: color, x, font_size
       value: 0.165, 0.859, 0.137, 1, 35, 24
