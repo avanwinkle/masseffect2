@@ -115,6 +115,7 @@ class MPFSquadmateHandlers(CustomCode):
         sound_name = SOUND_NAME_FORMATS[kwargs["sound"]].format(squadmate=squadmate, variant=variant)
         action = kwargs.get("action", "play")
         track = kwargs.get("track", "voice")
+        delay = kwargs.get("delay", 0)
         # If a mode is supplied, append it to the sound name
         if kwargs.get("mode") == "infiltration":
             sound_name = "{}_{}".format(sound_name, kwargs["mode"])
@@ -122,6 +123,7 @@ class MPFSquadmateHandlers(CustomCode):
         settings = {
             sound_name: {
                 "action": action,
+                "delay": delay,
                 "track": track,
             }
         }
@@ -337,11 +339,11 @@ class MPFSquadmateHandlers(CustomCode):
             elif self._shows.get(showname):
                 self._shows[showname].stop()
                 self._shows[showname] = None
-        
+
         # Post an event to squadmates_mc to update the squad slide
         if update_sqicons:
             # Delay by 1s to allow the slide queue to appear
             self.machine.clock.schedule_once(self._sqicon_update, 1)
-    
+
     def _sqicon_update(self):
         self.machine.events.post("sqicon_update")

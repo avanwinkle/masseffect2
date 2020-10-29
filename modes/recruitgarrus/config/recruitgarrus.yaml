@@ -68,7 +68,7 @@ show_player:
         backwall_color: color_garrus
     recruitintro_garrus:
       loops: 0
-  logicblock_doors_closed_counter_hit{count==0}: 
+  logicblock_doors_closed_counter_hit{count==0}:
     garrus_garm:
       loops: 0
 
@@ -104,7 +104,7 @@ shows:
 
 slides:
   recruit_garrus_garm:
-    widgets: 
+    widgets:
       - type: video
         video: recruitgarrus_garm
         end_behavior: pause
@@ -124,7 +124,7 @@ sound_player:
     garrus_one_more_shutter:
       max_queue_time: 1s
   envshot_outlane_hit: boss_sound
-  timer_missiontimer_tick{ticks%10==0}:
+  timer_missiontimer_tick{ticks%10==0 and ticks < 45}:
     garrus_taking_damage:
       max_queue_time: 200ms
 
@@ -138,7 +138,7 @@ sound_pools:
     type: random_force_all
     track: voice
     sounds: garrus_taking_too_much_damage, garrus_i_need_help_with_this_guy, garrus_theyve_gotten_through, garrus_taking_damage_1, garrus_taking_damage_2, garrus_taking_damage_3
-    max_queue_time: 1s
+    max_queue_time: 0
   boss_sound:
     sounds: boss_finish_her, boss_now_youre_mine_archangel, boss_i_told_you_id_finish_you
     track: voice

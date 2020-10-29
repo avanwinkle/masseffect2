@@ -36,11 +36,11 @@ class MissionSelect(Carousel):
             # Reduce the items to just the single option
             self._all_items = [player["high_flow_resume"]]
             self.machine.log.info("high flow setting choce to {}".format(self._all_items))
-            
+
         # Normal flow players can't skip a single recruit but can skip other missions.
-        # High flow players will *always* 
+        # High flow players will *always*
         single_choice = len(self._all_items) == 1 and (self._all_items[0] in self._mates or player["high_flow"])
-        
+
         # If there's only one option and it's a recruit mission, start it immediately without a slide
         if single_choice and (player["high_flow"] or not SHOW_SELECT_WHEN_FORCED_SINGLE):
             self._items = self._all_items
@@ -135,6 +135,12 @@ class MissionSelect(Carousel):
 
     def _update_highlighted_item(self, direction):
         h = self._get_highlighted_item()
+
+        # If we moved away from the intro, remove it
+        if h != self._intro and self._intro in self._items:
+            self._items.remove(self._intro)
+            self._highlighted_item_index -= 1
+
         idx = self._items.index(h) + (0 if self._items[0] == self._intro else 1)
         total = len(self._items) - (1 if self._items[0] == self._intro else 0)
         self.machine.events.post("{}_{}_highlighted".format(self.name, h),
@@ -142,10 +148,6 @@ class MissionSelect(Carousel):
         if h in self._mates:
             self.machine.events.post("{}_recruit_highlighted".format(self.name),
                                      squadmate=h, index=idx, items=total)
-        # If we moved away from the intro, remove it
-        if h != self._intro and self._intro in self._items:
-            self._items.remove(self._intro)
-            self._highlighted_item_index -= 1
 
         # If there is only one item, show the force countdown
         if len(self._items) == 1:

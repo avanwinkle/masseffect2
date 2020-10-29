@@ -109,6 +109,10 @@ class Powers(Mode):
             self._award_power(power=power)
         else:
             self.machine.events.post("show_cooldown")
+            # Pick a random power to highlight, doesn't matter what
+            self.machine.events.post("player_shot_cooldown_shot_{}".format(
+                random.choice(["biotic", "combat", "tech"])
+            ), value=random.randint(0,3))
 
     def _activate_power(self, **kwargs):
         power = self.machine.game.player["power"]
@@ -147,10 +151,10 @@ class Powers(Mode):
             opacity = 0.5 + (complete_pct / 2)
             complete_height = complete_pct * POWER_WIDGET_HEIGHT
         self.machine.events.post("update_cooldown_progress",
-            # complete_pct=complete_pct,
-            complete_height=complete_height,
-            opacity=opacity
-            )
+                                 # complete_pct=complete_pct,
+                                 complete_height=complete_height,
+                                 opacity=opacity
+                                 )
 
     def _complete(self, **kwargs):
         self.machine.game.player["power"] = " "
@@ -181,14 +185,14 @@ class Powers(Mode):
         shots = list(filter(filter_fn, targets))
 
         if shots:
-            self.log.debug("Found available shots for powers: {}".format(shots))
+            self.log.debug("Found available shots for powers: %", shots)
             return shots
         # If we were looking for an explicit target but it wasn't enabled, expand the search
-        elif explicit_target and not include_off:
-            self.log.debug("Couldn't find a lit shot for target '{}'. Expanding to all shots.".format(explicit_target))
+        if explicit_target and not include_off:
+            self.log.debug("Couldn't find a lit shot for target '%'. Expanding to all shots.", explicit_target)
             return self._get_power_shots(explicit_target=None, explicit_state=explicit_state)
         # If we are looking for an explicit state but it wasn't found, expand to all targets
-        elif explicit_state:
+        if explicit_state:
             return self._get_power_shots()
         raise IndexError
 
@@ -204,7 +208,7 @@ class Powers(Mode):
         else:
             shots_to_set = []
 
-        is_resume = True if shots_to_set and self.persisted_name else False
+        is_resume = bool(shots_to_set and self.persisted_name)
 
         starting_shots = kwargs.get("starting_shots")
         # We can explicitly set all shots to "hit" by setting starting shots as "none"
@@ -213,17 +217,17 @@ class Powers(Mode):
             starting_shots = [0, 0, 0, 0, 0]
         else:
             starting_shots = [int(idx) for idx in Util.string_to_list(starting_shots)]
-        self.log.debug("Starting shots: {}".format(starting_shots))
+        self.log.debug("Starting shots: %s", starting_shots)
 
         # Accept one profile. We can't use per-shot profiles because rotating
         # shots updates their state and does NOT move profiles from shot to shot
         profile = kwargs.get("shot_profile", "lane_shot_profile")
-        # If we have starting shots and no persisted shots, set both
-        if starting_shots is not None and not shots_to_set:
+        # If we have no persisted shots, set them to be the starting shots
+        if not shots_to_set:
             # The default profile is lit at zero and hit at 1, so the starting_shots
             # states are 0 for enabled and 1 for disabled
             shots_to_set = starting_shots
-            self.log.debug("No persisted shots, setting shots {}".format(shots_to_set))
+            self.log.debug("No persisted shots, setting shots %s", shots_to_set)
             # Set these as persisted values, maybe
             if self.persisted_name:
                 self.persisted_shots[self.persisted_name] = shots_to_set

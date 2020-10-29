@@ -39,6 +39,8 @@ event_player:
     resume_mission:
       squadmate:
         value: current_player.resume_mission
+  # Skip the mode intro so shots are lit when the mission resumes
+  resume_mission: mode_intro_complete|500ms
   timer_missiontimer_complete:
     - stop_recruitmission
   recruit_success:

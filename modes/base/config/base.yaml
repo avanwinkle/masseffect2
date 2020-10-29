@@ -118,11 +118,23 @@ event_player:
       slide: n7_complete_slide
       portrait: n7_complete
       expire: 5s
+      # TODO: Investigate using a relay player to avoid re-passing args
       achievement:
         value: achievement
         type: str
       rating:
         value: rating
+        type: int
+  award_skillshot:
+    queue_slide:
+      slide: skillshot_slide
+      portrait: skillshot
+      expire: 4s
+      morality:
+        value: morality
+        type: str
+      value:
+        value: value
         type: int
   recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
@@ -148,7 +160,6 @@ ball_saves:
       - start_mode_arrival
       - player_lost_balls{value>0}
     auto_launch: true
-    balls_to_save: 1
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
     only_last_ball: true
 
@@ -376,15 +387,6 @@ shows:
         - play_gameintro_short{current_player.ball==3}
 
 slide_player:
-  award_skillshot:
-    skillshot_slide:
-      # Higher priority than the instructions slide (at 200) and planets (610+300)
-      priority: 920
-      expire: 5s
-    dossier_skillshot:
-      priority: 920
-      expire: 5s
-      target: lcd_right
   player_added:
     player_added_slide:
       action: play
@@ -447,19 +449,6 @@ slides:
         text: (value)
         style: body_md, row_bottom_margin, num
       - widget: skillshot_bg_(morality)
-  dossier_skillshot:
-    transition:
-      type: fade
-      duration: 250ms
-    transition_out: fade
-    widgets:
-      - type: image
-        image: codex_morality
-        style: codex_image
-      - type: text
-        text: "Skillshots and return lanes score\nparagon and renegade points, which\nextend mode timers and accelerate\npower cooldowns. Complete the \nlower lanes to build reputation, which\nmultiplies bonuses and increases the\nchance of random medigel awards."
-        style: codex_text
-      - widget: dossier_recruit_base
   squadicon_slide:
     transition: fade
     transition_out: fade
@@ -557,7 +546,6 @@ sounds:
   music_mission_success:
     file: mus_gui_mission_completion.ogg
     track: levelup # Use a special track to avoid music fadeout conflicts
-    loop: 0
     volume: 1.0
     start_at: 1500ms
     fade_in: 500ms

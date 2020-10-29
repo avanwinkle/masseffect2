@@ -41,6 +41,7 @@ mode:
 
 event_player:
   # Enumerate each profile separately because they pass the state name as an arg
+  # TODO: Refactor to allow any frenzy complete shot to awarad the power
   cooldown_shot_tech_hit{current_player.power==" " and not device.counters.powers_cooldown.enabled}:
     award_power:
       power:
@@ -461,7 +462,7 @@ widgets:
     - type: rectangle
       color: d1c1bb
       style: power_cooldown_badge, col_right_anchor
-      opacity: 0.8
+      opacity: 0.2
       width: 162
       height: 0
       animations:
@@ -471,7 +472,7 @@ widgets:
     - type: image
       image: power_adrenaline
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -479,7 +480,7 @@ widgets:
     - type: image
       image: power_cloak
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -487,7 +488,7 @@ widgets:
     - type: image
       image: power_drone
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -495,7 +496,7 @@ widgets:
     - type: image
       image: power_charge
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -503,7 +504,7 @@ widgets:
     - type: image
       image: power_armor
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -511,7 +512,7 @@ widgets:
     - type: image
       image: power_singularity
       style: power_badge, col_right_anchor
-      opacity: 0.25
+      opacity: 0.5
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete

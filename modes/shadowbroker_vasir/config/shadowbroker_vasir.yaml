@@ -157,43 +157,43 @@ shot_profiles:
         priority: 100
       - name: barrier_1
         # TODO: Replace with light-sequence-rotating show
-        show: color_flashing_fast_profile
-        speed: 6
+        show: color_flashing_default
+        speed: 2
         priority: 10
         show_tokens:
           color: color_barrier
           fade: 20ms
       - name: barrier_2
-        show: color_flashing_fast_profile
-        speed: 12
+        show: color_flashing_default
+        speed: 8
         priority: 10
         show_tokens:
           color: color_barrier
           fade: 20ms
       - name: armor_1
-        show: color_flashing_fast_profile
-        speed: 8
+        show: color_flashing_default
+        speed: 4
         priority: 10
         show_tokens:
           color: color_armor
           fade: 20ms
       - name: armor_2
-        show: color_flashing_fast_profile
-        speed: 16
+        show: color_flashing_default
+        speed: 10
         priority: 10
         show_tokens:
           color: color_armor
           fade: 20ms
       - name: health_1
-        show: color_flashing_fast_profile
-        speed: 10
+        show: color_flashing_default
+        speed: 6
         priority: 10
         show_tokens:
           color: color_health
           fade: 20ms
       - name: health_2
-        show: color_flashing_fast_profile
-        speed: 20
+        show: color_flashing_default
+        speed: 12
         priority: 10
         show_tokens:
           color: color_health
@@ -255,8 +255,14 @@ show_player:
   mode_shadowbroker_vasir_started:
     vasir_cineanim_show{device.achievements.vasir.state=="enabled"}:
       loops: 0
-    vasir_intro_show{device.achievements.vasir.state=="started"}:
+    vasir_intro_show{device.achievements.vasir.state=="stopped"}:
       loops: 0
+    vasir_gi:
+      loops: -1
+    gi_half_color:
+      show_tokens:
+        color: color_barrier
+        brightness: 70
   mode_intro_skipped:
     # We don't want voice callouts in the show to override the mode effects.
     # If the animation is skipped, stop the show immediately.
@@ -316,9 +322,65 @@ shows:
             color: color_barrier
     - time: 25500ms
       events: mode_intro_complete
-      shows: 
+      shows:
         airlock_release_warning:
           action: stop
+  vasir_gi:
+    - time: 0
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_samara
+          fade: 500ms
+        gi_middle:
+          color: color_jack
+          fade: 500ms
+        gi_top:
+          color: color_space
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_barrier
+          fade: 500ms
+        gi_middle:
+          color: color_samara
+          fade: 500ms
+        gi_top:
+          color: color_jack
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_space
+          fade: 500ms
+        gi_middle:
+          color: color_barrier
+          fade: 500ms
+        gi_top:
+          color: color_samara
+          fade: 500ms
+    - time: '+1'
+      lights:
+        gi_bottom:
+          color: color_jack
+          fade: 500ms
+        gi_middle:
+          color: color_space
+          fade: 500ms
+        gi_top:
+          color: color_barrier
+          fade: 500ms
 
 slide_player:
   mode_intro_complete:
@@ -353,7 +415,7 @@ slides:
       - type: video
         video: shadowbroker_vasir_intro
   sbvasir_dossier:
-    transition: 
+    transition:
       type: fade
       duration: 2s
     transition_out: fade
@@ -377,12 +439,17 @@ sound_player:
       fade_out: 2s
       fade_in: 2s
       mode_end_action: stop
-  timer_vasir_timer_complete: vasir_move_sound
+  timer_vasir_timer_complete:
+    vasir_move_sound:
+      volume: 1.0
   logicblock_vasir_hits_counter_hit:
     vasir_hit_sound:
       max_queue_time: 1s
+      volume: 1.0
   # Relays
-  play_vasir_start_sound: vasir_start_sound
+  play_vasir_start_sound:
+    vasir_start_sound:
+      volume: 1.0
 
 sound_pools:
   vasir_start_sound:
@@ -423,7 +490,6 @@ sounds:
     file: DLC_EXP_Part01_Int.755.ogg
     track: voice
   vasir_this_will_be_fun:
-    vasir_:
     file: DLC_EXP_Part01_Int.282.ogg
     track: voice
   vasir_ill_finish_you_myself:

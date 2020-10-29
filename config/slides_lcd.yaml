@@ -743,6 +743,17 @@ widgets:
   skillshot_bg_renegade:
     - type: image
       image: bg_skillshot_renegade
+  portrait_skillshot:
+    - type: text
+      text: Reputation
+      style: codex_title
+    - type: image
+      image: codex_morality
+      style: codex_image
+    - type: text
+      text: "Skillshots and return lanes score\nparagon and renegade points, which\nextend mode timers and accelerate\npower cooldowns. Complete the \nlower lanes to build reputation, which\nmultiplies bonuses and increases the\nchance of random medigel awards."
+      style: codex_text
+    - widget: dossier_recruit_base
 
   # SQUADMATE ICONS
   squadmates_grid_overlay:

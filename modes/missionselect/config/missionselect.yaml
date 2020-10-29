@@ -49,7 +49,7 @@ timers:
     start_running: true
 
 show_player:
-  mode_missionselect_started:  
+  mode_missionselect_started:
     missionselect_show: {}
     led_12_chase_pulse:
       speed: 4
@@ -303,9 +303,7 @@ slides:
     widgets:
       - widget: dossier_recruit(squadmate)
   missionselect_recruit_slide:
-    transition:
-      type: fade
-      duration: 250ms
+    # No fade on these because the update will reveal the intro slide underneath!
     priority: 1
     widgets:
       - type: text

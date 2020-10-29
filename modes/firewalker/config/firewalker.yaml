@@ -183,6 +183,14 @@ shot_profiles:
         show: firewalker_bank_show
         speed: 3
 
+show_player:
+  mode_firewalker_started:
+    gi_half_color:
+      action: play
+      show_tokens:
+        color: color_shadowbroker
+        brightness: 100
+
 shows:
   firewalker_bank_show:
     - time: 0

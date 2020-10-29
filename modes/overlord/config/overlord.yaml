@@ -130,7 +130,17 @@ variable_player:
 light_player:
   mode_overlord_started:
     l_ladder: black
-  mode_intro_complete:
+  play_music_1:
+    light_backwall_gi:
+      color: color_overlord
+      fade: 3s
+    light_backwall_ambient:
+      color: color_overlord
+      fade: 3s
+    gi:
+      color: color_overlord
+      fade: 3s
+  mode_intro_skipped:
     light_backwall_gi:
       color: color_overlord
       fade: 3s
@@ -167,6 +177,7 @@ shot_groups:
   hackshots:
     shots: hackshot_left_orbit, hackshot_left_ramp, hackshot_right_orbit, hackshot_right_ramp, hackshot_kickback
     restart_events: reset_hackshots
+    enable_events: mode_intro_complete
 
 shots:
   jackpotshot:
