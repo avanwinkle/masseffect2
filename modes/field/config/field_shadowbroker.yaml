@@ -56,6 +56,11 @@ variable_player:
     sbhold_enabled:
       action: set
       int: 0
+  # Once a ball is held for sb, reset the value so it'll have to be re-lit
+  ball_hold_sb_hold_held_ball:
+    sbhold_enabled:
+      action: set
+      int: 0
 
 show_player:
   mode_field_started:

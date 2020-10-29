@@ -65,7 +65,7 @@ multiballs:
   collectorship_multiball:
     ball_count: 2 # Start with 2, add up to 2 more in ambush phase
     ball_count_type: total
-    start_events: mode_collectorship_base_started
+    start_events: mode_intro_complete
     start_or_add_a_ball_events:
       - collectorship_add_ball
       - ball_hold_captive_hold_held_ball{game.balls_in_play<4}
@@ -73,7 +73,6 @@ multiballs:
     # We have to use the ball lock as the device, in case there are balls stacked. They might
     # accidentally slip out and mess up the playfield count, which causes a premature ball_will_end
     ball_locks: bd_lock
-
 
 light_player:
   mode_collectorship_ambush_started:
@@ -105,7 +104,7 @@ show_player:
 shows:
   collectorship_cineanim:
     - time: 0
-      slides: 
+      slides:
         collectorship_cineanim:
           action: play
         collectorship_dossier:

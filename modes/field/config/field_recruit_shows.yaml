@@ -16,14 +16,14 @@ show_player:
       sync_ms: 800
       show_tokens:
         leds: l_progress_collectorship
-        color: color_collectors
+        color: color_grunt
         fade: 2s
     color_flashing{device.achievements.derelictreaper.state=="enabled"}:
       speed: 0.5
       sync_ms: 800
       show_tokens:
         leds: l_progress_derelictreaper
-        color: color_barrier
+        color: color_grunt
         fade: 2s
     color_flashing{device.achievements.normandyattack.state=="enabled"}:
       speed: 0.5
@@ -39,7 +39,7 @@ show_player:
         ledring: l_omega_relay
         color: "440000"
         fade: 250ms
-      
+
   # Disable the lights on GoT to reduce noise, leave on for FAST
   mode_field_will_stop{not machine.is_lcd}:
     missions_available_show:

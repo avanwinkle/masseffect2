@@ -268,6 +268,13 @@ show_player:
     # If the animation is skipped, stop the show immediately.
     vasir_cineanim_show:
       action: stop
+  counter_vasir_hits_counter_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_samara
   ball_save_vasirsave_timer_start:
     ball_save_show:
       action: play
