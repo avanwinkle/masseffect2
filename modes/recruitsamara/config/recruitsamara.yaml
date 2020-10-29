@@ -43,7 +43,7 @@ event_player:
       shots_remaining:
         value: device.counters.samara_shots_counter.value
         type: int
-      starting_shots: none
+      starting_shots: 1, 1, 1, 1, 1
   logicblock_samara_shots_counter_complete: recruit_samara_complete
   # Use each target to reset the shot to it "lit" state. Powers.py will
   # also rotate the targets during cloak, to avoid a stuck state
@@ -67,7 +67,7 @@ event_player:
     advance_mission_shots:
         shots: right_ramp, right_orbit
         reset: true
-  
+
 counters:
   samara_shots_counter:
     starting_count: 5
@@ -80,7 +80,7 @@ counters:
 shot_groups:
   samara_targets:
     shots: samara_target1, samara_target2, samara_target3, samara_target4, samara_target5
-  
+
 shots:
   samara_target1:
     switch: s_target1

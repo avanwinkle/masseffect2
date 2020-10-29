@@ -454,7 +454,7 @@ animations:
       easing: in_sine
   pulse_power_cooldown:
     - property: opacity
-      value: 0.5
+      value: 0.4
       duration: 900ms
       easing: in_sine
       timing: with_previous

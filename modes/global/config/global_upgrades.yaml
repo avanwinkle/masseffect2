@@ -121,7 +121,7 @@ shots:
       - player_available_shipupgrades{player_num==current_player.number and change>0}
     disable_events:
       - collect_upgrade_shot_hit
-    profile: color_on
+    profile: upgrade_shot_profile
     show_tokens:
       leds: light_upgrades
       color: FFFFFF

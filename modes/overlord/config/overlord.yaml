@@ -128,9 +128,6 @@ variable_player:
     levelup_pending: 1
 
 light_player:
-  mode_overlord_started:
-    l_ladder: black
-    light_upgrades: black
   play_music_1:
     light_backwall_gi:
       color: color_overlord

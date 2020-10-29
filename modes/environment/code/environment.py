@@ -9,13 +9,15 @@ SHOTS = ["left_orbit", "left_orbit_nofull", "kickback", "left_ramp", "left_ramp_
 
 
 class Environment(Mode):
+
     """Mode code for creating handlers to set/unset environment shots."""
 
     def __init__(self, *args, **kwargs):
         """Initialize mode, create logger, set environment."""
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Environment")
-        self.log.setLevel(1)
+        self.log.setLevel(20)
+        self.shots = []
         self._environment = None
         self._removal_handlers = None
 
@@ -27,7 +29,7 @@ class Environment(Mode):
         self._register_handlers()
 
     def _set_environment(self, **kwargs):
-        self.log.debug("Setting environment with kwargs: {}".format(kwargs))
+        self.log.debug("Setting environment with kwargs: %s", kwargs)
         for shot in self.shots:
             shot.reset()
 
@@ -50,7 +52,7 @@ class Environment(Mode):
                     ]
 
             self._environment = env
-            self.log.debug("Environment is now {}".format(self._environment))
+            self.log.debug("Environment is now %s", self._environment)
 
     def _register_handlers(self):
         self.add_mode_event_handler('set_environment', self._set_environment)
@@ -65,7 +67,8 @@ class Environment(Mode):
         self.log.debug("Environment cleared and removal handlers removed.")
 
 
-class EnvShot(object):
+class EnvShot():
+
     """Object wrapper for a shot in the current mode defined as an environment shot."""
 
     # Two events: a change in the enabled state and a change in the profile state
@@ -111,26 +114,27 @@ class EnvShot(object):
             self._disable()
 
     def _check_shot(self, **kwargs):
+        del kwargs
         """Check if any shots tagged 'envshot_(name)' are enabled; disable this envshot if true, enable if false."""
         if bool(self.enabled_count):
             self._disable()
         else:
             self._enable()
-        self.log.debug("Just checked {}, {} targets are enabled so this is now {}".format(
-            self.name, self.enabled_count, self._shot.enabled))
+        self.log.debug("Just checked %s, %s targets are enabled so this is now {}",
+                       self.name, self.enabled_count, self._shot.enabled)
 
     def _enable(self):
         if self._shot.enabled:
-            self.log.debug("Envshot {} is already enabled!".format(self.name))
+            self.log.debug("Envshot %s is already enabled!", self.name)
             return
-        self.log.debug("Enabling envshot {}".format(self.name))
+        self.log.debug("Enabling envshot %s", self.name)
         self._shot.enable()
 
     def _disable(self):
         if not self._shot.enabled:
-            self.log.debug("Envshot {} is already disabled!".format(self.name))
+            self.log.debug("Envshot %s is already disabled!", self.name)
             return
-        self.log.debug("Disabling envshot {}".format(self.name))
+        self.log.debug("Disabling envshot %s", self.name)
         self._shot.disable()
 
     def get_enabled_shots(self):
@@ -139,7 +143,7 @@ class EnvShot(object):
 
     def get_targets(self):
         """Return all shots tagged as environment shots for this EnvShot."""
-        self.machine.log.info("Getting shots for EnvShot '{}'".format(self.name))
+        self.machine.log.info("Getting shots for EnvShot '%s'", self.name)
         return self.machine.device_manager.collections["shots"].items_tagged("envshot_{}".format(self.name))
 
     @property
@@ -149,6 +153,7 @@ class EnvShot(object):
 
 
 class OutlaneShot(EnvShot):
+
     """Specific EnvShot class for an outlane, with ball-save behavior."""
 
     target_statechange_events = ["ball_save_{}_enabled", "ball_save_{}_disabled"]
@@ -159,7 +164,7 @@ class OutlaneShot(EnvShot):
 
     def get_targets(self):
         """Get outlane targets based on medigel early-saves."""
-        self.machine.log.info("Getting ball saves for OutlaneShot '{}'".format(self.name))
+        self.machine.log.info("Getting ball saves for OutlaneShot '%s'", self.name)
         # Targets include any ball_save being active OR the medigel shot being active
         outlane_targets = [
             self.machine.device_manager.collections["shots"]["medigel_left_shot"],

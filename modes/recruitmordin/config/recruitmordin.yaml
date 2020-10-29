@@ -17,7 +17,7 @@
 mode:
   start_events: start_mode_recruitmordin
   stop_events: stop_mode_recruitmordin, stop_recruitmission, stop_missions
-  events_when_started: mode_type_mission_started
+  events_when_started: mode_type_mission_started, mode_intro_started
   events_when_stopped: mode_type_mission_stopped
   priority: 500
 
@@ -47,7 +47,7 @@ event_player:
     advance_mission_shots:
       shots: left_orbit
       priority: 1000
-  kickback_lit_hit: 
+  kickback_lit_hit:
     advance_mission_shots:
       shots: kickback
       priority: 1000
@@ -72,12 +72,12 @@ event_player:
     advance_mission_shots{count==2}:
       shots: left_ramp, right_ramp
       jump: 1
-  logicblock_cure_counter_hit.10: 
+  logicblock_cure_counter_hit.10:
     - mission_shot_hit
     - play_cure_sound_1{count==3}
     - play_cure_sound_2{count==2}
     - play_fan_sound{count==1}
-  logicblock_cure_counter_complete: 
+  logicblock_cure_counter_complete:
     - recruit_mordin_complete
     - mission_collect_score
 
@@ -111,6 +111,9 @@ show_player:
   show_recruit_instructions:
     recruitintro_mordin:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_mordin:
+      action: stop
 
 shows:
   recruitintro_mordin:

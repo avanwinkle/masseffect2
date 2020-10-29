@@ -28,13 +28,12 @@ shot_profiles:
       - name: active
 
 shots:
+  # All squadmate shot enable and disable are handled by squadmates_mpf, so that
+  # one event handler can manage all the business inline.
   recruit_garrus_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_garrus<3}
-    disable_events:
-      - recruit_lit{squadmate=="garrus"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_garrus
       color: color_garrus
@@ -42,10 +41,7 @@ shots:
   recruit_grunt_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_grunt<3}
-    disable_events:
-      - recruit_lit{squadmate=="grunt"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_grunt
       color: color_grunt
@@ -53,10 +49,7 @@ shots:
   recruit_jack_shot:
     hit_events: sh_kickback_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_jack<3}
-    disable_events:
-      - recruit_lit{squadmate=="jack"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_jack
       color: color_jack
@@ -64,10 +57,7 @@ shots:
   recruit_kasumi_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_kasumi<3}
-    disable_events:
-      - recruit_lit{squadmate=="kasumi"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_kasumi
       color: color_kasumi
@@ -75,10 +65,7 @@ shots:
   recruit_legion_shot:
     hit_events: sh_kickback_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_jack>3 and current_player.status_legion<3}
-    disable_events:
-      - recruit_lit{squadmate=="legion"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_legion
       color: color_legion
@@ -86,10 +73,7 @@ shots:
   recruit_mordin_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_mordin<3}
-    disable_events:
-      - recruit_lit{squadmate=="mordin"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_mordin
       color: color_mordin
@@ -97,10 +81,7 @@ shots:
   recruit_samara_shot:
     hit_events: sh_left_ramp_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_garrus>3 and current_player.status_samara<3}
-    disable_events:
-      - recruit_lit{squadmate=="samara"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_samara
       color: color_samara
@@ -108,10 +89,7 @@ shots:
   recruit_tali_shot:
     hit_events: sh_right_orbit_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_mordin>3 and current_player.status_tali<3}
-    disable_events:
-      - recruit_lit{squadmate=="tali"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_tali
       color: color_tali
@@ -119,10 +97,7 @@ shots:
   recruit_thane_shot:
     hit_events: sh_right_ramp_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_kasumi>3 and current_player.status_thane<3}
-    disable_events:
-      - recruit_lit{squadmate=="thane"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_thane
       color: color_thane
@@ -130,10 +105,7 @@ shots:
   recruit_zaeed_shot:
     hit_events: sh_left_orbit_hit
     profile: recruit_shot_profile
-    enable_events:
-      - mode_field_started{current_player.status_grunt>3 and current_player.status_zaeed<3}
-    disable_events:
-      - recruit_lit{squadmate=="zaeed"}
+    start_enabled: False
     show_tokens:
       leds: shot_shield_zaeed
       color: color_zaeed

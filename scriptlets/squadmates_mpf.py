@@ -31,6 +31,14 @@ COLORS = {
     "zaeed": "FF0000",
 }
 
+MATE_PAIRS = (
+    ("grunt", "zaeed"),
+    ("jack", "legion"),
+    ("garrus", "samara"),
+    ("kasumi", "thane"),
+    ("mordin", "tali")
+)
+
 SOUND_NAME_FORMATS = {
     "destroy_core": "squadmate_{squadmate}_destroy_core",
     "husks": "squadmate_{squadmate}_husks",
@@ -71,9 +79,10 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("missionselect_recruitmission_selected", self._on_missionselect)
         # Create a listener for a recruitmission to be resumed
         self.machine.events.add_handler("resume_mission", self._on_missionselect)
-        # Create a listener for the field mode to start
-        self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
-        # Create a listener for a ball to start
+        # Create a listener for the field mode to start and stop
+        self.machine.events.add_handler("mode_field_started", self._handle_field_started)
+        self.machine.events.add_handler("mode_field_stopped", self._handle_field_stopped)
+        # Create a listener for a ball to start and end
         self.machine.events.add_handler("mode_base_started", self._initialize_icons)
         self.machine.events.add_handler("mode_base_stopped", self._handle_end)
         # Create a listener for playing a squadmate sound
@@ -82,27 +91,38 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("mode_suicide_base_started", self._play_squadmates_show)
         self.machine.events.add_handler("squadmate_killed", self._play_squadmates_show)
 
-    def _enable_shothandlers(self, **kwargs):
-        self.machine.events.remove_handler(self._enable_shothandlers)
-        self.machine.events.add_handler("mode_field_stopped", self._disable_shothandlers)
-        for mate in SquadmateStatus.all_mates():
-            if self.machine.game.player["status_{}".format(mate)] < 4:
-                self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
-        self.log.debug("Created a bunch of shothandlers! {}".format(self))
-        self._play_squadmates_show()
-
-    def _disable_shothandlers(self, **kwargs):
-        self.machine.events.remove_handler(self._on_hit)
-        self.machine.events.remove_handler(self._disable_shothandlers)
-        self.machine.events.add_handler("mode_field_started", self._enable_shothandlers)
-
     def _initialize_icons(self, **kwargs):
+        del kwargs
         for mate in SquadmateStatus.all_mates():
             status = self.machine.game.player["status_{}".format(mate)]
-            if status == 3 or status == 4 or status == -1:
+            if status in (3, 4, -1):
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=status)
 
+    def _handle_field_started(self, **kwargs):
+        del kwargs
+        self._play_squadmates_show()
+        player = self.machine.game.player
+        is_post_collectorship = self.machine.device_manager.collections["achievements"] \
+            .collectorship.state not in ("disabled", "enabled")
+        # Enable the shots we need
+        for mate1, mate2 in MATE_PAIRS:
+            mate = None
+            if player["status_{}".format(mate1)] < 3:
+                mate = mate1
+            elif is_post_collectorship and player["status_{}".format(mate2)] < 3 < player["status_{}".format(mate1)]:
+                mate = mate2
+            if mate:
+                self.machine.shots["recruit_{}_shot".format(mate)].enable()
+                self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+
+    def _handle_field_stopped(self, **kwargs):
+        del kwargs
+        self._play_squadmates_show(disable_ladder=True)
+        # In theory this should delete *all* the handlers for this event
+        self.machine.events.remove_handler(self._on_hit)
+
     def _handle_end(self, **kwargs):
+        del kwargs
         self._play_squadmates_show(stop_all=True)
 
     def _handle_squadmate_sound(self, **kwargs):
@@ -189,8 +209,8 @@ class MPFSquadmateHandlers(CustomCode):
 
             # By default, all advance slides get 3s. However, if there are missions available,
             # Garrus and Samara are quicker to get to the missionselect screen sooner
-            self.log.info("EXPIRE CHECK: mate is {}, future status is {}, available missions is {}".format(
-                mate, future_mate_status, player["available_missions"]))
+            self.log.info("EXPIRE CHECK: mate is %s, future status is %s, available missions is %s",
+                          mate, future_mate_status, player["available_missions"])
             expire = "2s" if (
                 mate in ["garrus", "samara"] and (future_mate_status == 3 or player["available_missions"]>0)
             ) else "3s"
@@ -204,6 +224,7 @@ class MPFSquadmateHandlers(CustomCode):
                                      slide_instruction=slide_instruction)
 
             if future_mate_status == 3:
+                self.machine.shots["recruit_{}_shot".format(mate)].disable()
                 self.machine.events.post("recruit_lit", squadmate=mate)
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=future_mate_status)
                 # If there were no mates lit before, bonus the xp
@@ -282,7 +303,7 @@ class MPFSquadmateHandlers(CustomCode):
             if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
                 achs["suicidemission"].enable()
 
-    def _play_squadmates_show(self, stop_all=False, **kwargs):
+    def _play_squadmates_show(self, stop_all=False, disable_ladder=False, **kwargs):
         """ Creates the necessary show files for squadmates, namely lighting the backbox with the
             appropriate light colors and filling the career ladder with solids and blinkings.
         """
@@ -322,7 +343,7 @@ class MPFSquadmateHandlers(CustomCode):
                 )
 
                 # Show ladder lights too, if we're not in suicide
-                if not self.machine.modes["suicide_base"].active:
+                if not self.machine.modes["suicide_base"].active and not disable_ladder:
                     if status == "lit":
                         config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count) for i in range(lit_count)])
                     # Miranda and Jacob start complete but no ladder lights, so watch out for trailing comma!

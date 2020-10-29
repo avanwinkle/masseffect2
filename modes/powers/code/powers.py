@@ -257,10 +257,16 @@ class Powers(Mode):
 
             if shots_to_set:
                 # Our shot pointers are in the same order as shots_to_set
-                self.log.debug(" - Jumping shot idx {} to state {}".format(idx, shots_to_set[idx]))
-                self.log.debug("    - profile is: {}".format(shot.config['profile']))
-                self.log.debug("    - show_tokens are: {}".format(shot.config['show_tokens']))
-                self.log.debug("    - state is {}, name is: {}".format(shot.state, shot.state_name))
+                try:
+                    self.log.debug(" - Jumping shot idx %s to state %s", idx, shots_to_set[idx])
+                    self.log.debug("    - profile is: %s", shot.config['profile'])
+                    self.log.debug("    - show_tokens are: %s", shot.config['show_tokens'])
+                    self.log.debug("    - state is %s, name is: %s", shot.state, shot.state_name)
+                except IndexError:
+                    # If we previously had a profile with more states than this one, that's okay.
+                    # The jump will move us to the right place
+                    self.log.debug("    - shot %s is in state %s, which profile %s doesn't have",
+                                   shot.name, shot.state, shot.config['profile'].name)
                 # Force jump to trigger the new show
                 shot.jump(shots_to_set[idx], True, True)
                 shot.enable()

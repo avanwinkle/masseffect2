@@ -472,7 +472,7 @@ widgets:
     - type: image
       image: power_adrenaline
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -480,7 +480,7 @@ widgets:
     - type: image
       image: power_cloak
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -488,7 +488,7 @@ widgets:
     - type: image
       image: power_drone
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -496,7 +496,7 @@ widgets:
     - type: image
       image: power_charge
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -504,7 +504,7 @@ widgets:
     - type: image
       image: power_armor
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
@@ -512,7 +512,7 @@ widgets:
     - type: image
       image: power_singularity
       style: power_badge, col_right_anchor
-      opacity: 0.5
+      opacity: 0.25
       animations:
         # update_cooldown_progress: power_widget_cooldown_opacity
         power_awarded: power_widget_cooldown_complete
