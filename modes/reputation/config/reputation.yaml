@@ -18,9 +18,7 @@ mode:
   start_events: start_mode_reputation
   stop_events: stop_mode_reputation
   priority: 600
-
-event_player:
-  reputation_build_shots_complete: check_award_medigel
+  code: reputation.Reputation
 
 variable_player:
   paragon_shot_unlit_hit:
@@ -81,3 +79,34 @@ show_player:
         leds: l_left_outlane, l_left_return_lane, l_right_return_lane, l_right_outlane
         color: on
       loops: 4
+
+widgets:
+  reputation_slide:
+      - type: text
+        text: "  +1 Reputation"
+        style: header_xs, row_title, col_left_anchor, color_ui_green_light
+      - type: text
+        text: Paragon
+        font_size: 18
+        z: 3
+        style: reputation_label, col_left_anchor, color_ui_green_light
+      - type: text
+        text: Renegade
+        font_size: 18
+        z: 3
+        style: reputation_label, col_right_anchor, color_ui_green_light
+      - type: image
+        image: reputation_underlay
+        anchor_y: top
+        y: top
+        z: 2
+  reputation_paragon:
+      - type: image
+        image: reputation_paragon
+        style: reputation_paragon
+        auto_play: false
+  reputation_renegade:
+      - type: image
+        image: reputation_renegade
+        style: reputation_renegade
+        auto_play: false

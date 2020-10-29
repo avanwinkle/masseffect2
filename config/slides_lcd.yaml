@@ -743,7 +743,7 @@ widgets:
   skillshot_bg_renegade:
     - type: image
       image: bg_skillshot_renegade
-  portrait_skillshot:
+  portrait_reputation:
     - type: text
       text: Reputation
       style: codex_title

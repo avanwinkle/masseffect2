@@ -135,10 +135,11 @@ slides:
   upgrade_slide:
     - type: text
       text: "Weapon Upgrade"
-      style: body_md, row_top, col_left_anchor, num
+      style: header_xs, row_top, col_left_anchor, color_ui_green_light
     - type: text
       text: (player|upgrade_name)
       style: header_sm, row_main, col_left_anchor
+    - widget: background_console
   shipupgrade_ready_slide:
     widgets:
       - type: text
@@ -154,7 +155,9 @@ slides:
         style: header_sm, row_main, col_left_anchor
 
 sound_player:
-  play_queued_slide_upgrade_slide: upgrade_collected_sound
+  play_queued_slide_upgrade_slide:
+    upgrade_collected_sound:
+      delay: 500ms
   # This sound is triggered by the store, but same idea
   research_purchased{selection!="nothing"}: upgrade_collected_sound
 

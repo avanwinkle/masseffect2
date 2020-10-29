@@ -128,7 +128,7 @@ event_player:
   award_skillshot:
     queue_slide:
       slide: skillshot_slide
-      portrait: skillshot
+      portrait: reputation
       expire: 4s
       morality:
         value: morality
