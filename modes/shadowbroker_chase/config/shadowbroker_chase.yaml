@@ -34,7 +34,7 @@ event_player:
     - missiontimer_stop
     - start_mode_shadowbroker_vasir
     - stop_mode_shadowbroker_chase
-  timer_missiontimer_complete: 
+  timer_missiontimer_complete:
     - stop_mode_shadowbroker_chase
     - disable_sb_hold
   # If the ball is saved, the mode is ended
@@ -153,7 +153,10 @@ shots:
     tags: envshot_right_orbit
   sbchase_kickback:
     # Airlock entrance to start the mode, *not* kickback
-    switch: s_airlock_entrance
+    # NOPE! Airlock entrance switch sometimes gets skipped.
+    # Use the ball hold event instead
+    # switch: s_airlock_entrance
+    hit_events: ball_hold_sb_hold_full
     profile: chaseprofile
     show_tokens:
       shot: kickback
@@ -173,6 +176,9 @@ show_player:
         color: color_barrier
     sbchase_intro:
       loops: 0
+    gi_massrelay:
+      show_tokens:
+        color: "666666"
 
 shows:
   sbchase_intro:
@@ -181,7 +187,7 @@ shows:
         sbchase_portrait:
           target: lcd_right
     - time: 2s
-      sounds: 
+      sounds:
         liara_come_on_shes_getting_away:
           action: play
       events: play_shadowbroker_chase_music
@@ -244,7 +250,7 @@ shows:
         gi_top:
           color: color_barrier
           fade: 500ms
-    
+
 
 slide_player:
   mode_shadowbroker_chase_started:
@@ -268,6 +274,7 @@ slides:
     widgets:
       - type: video
         video: shadowbroker_chase
+        volume: 0.5
 
 sound_player:
   play_shadowbroker_chase_music:

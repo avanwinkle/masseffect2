@@ -188,6 +188,10 @@ show_player:
   show_recruit_instructions:
     recruitintro_jack:
       loops: 0
+  mode_intro_complete:
+    gi_massrelay:
+      show_tokens:
+        color: 8833FF
   mode_intro_skipped:
     recruitintro_jack:
       action: stop

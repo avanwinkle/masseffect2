@@ -31,9 +31,9 @@ event_player:
   mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
   # ... or if ball 2 is locked during a mission
   multiball_lock_fmball_lock_locked_ball{total_balls_locked==2 and not mode.field.active}: hide_fmball_lock_show
-  # Start the mode immediately on final lock. Airlock will delay for queued slides
-  # and the mode will play the cineanim to overlay music into gameplay
-  multiball_lock_fmball_lock_full:
+  # Start the mode on final lock, using a deferred relay event to check for store.
+  # Airlock will delay for queued slides and the mode will play the cineanim to overlay music into gameplay
+  advance_fmball_lock{device.multiball_locks.fmball_lock.locked_balls==3}:
     - start_mode_overlord{device.achievements.arrival.state=="disabled"}
     - start_mode_arrival{device.achievements.arrival.state!="disabled"}
 

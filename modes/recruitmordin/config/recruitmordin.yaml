@@ -114,6 +114,10 @@ show_player:
   mode_intro_skipped:
     recruitintro_mordin:
       action: stop
+  mode_intro_complete:
+    gi_massrelay:
+      show_tokens:
+        color: "996666"
 
 shows:
   recruitintro_mordin:

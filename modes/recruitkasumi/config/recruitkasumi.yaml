@@ -117,6 +117,13 @@ show_player:
       loops: -1
     recruitintro_kasumi:
       loops: 0
+    gi_half_color:
+      show_tokens:
+        color: color_kasumi
+        brightness: 20
+    gi_massrelay:
+      show_tokens:
+        color: color_kasumi_alarm
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -146,7 +153,7 @@ show_player:
 shows:
   recruitintro_kasumi:
     - time: 500ms
-      sounds: 
+      sounds:
         kasumi_list_of_items:
           action: play
     - time: 10s
@@ -279,7 +286,7 @@ slides:
       - widget: background_console
   kasumi_alarm_slide:
     transition:
-      type: fade 
+      type: fade
       duration: 200ms
     transition_out:
       type: fade
@@ -299,7 +306,7 @@ slides:
       - widget: background_console
   kasumi_failed_slide:
     transition:
-      type: fade 
+      type: fade
       duration: 200ms
     transition_out:
       type: fade
@@ -485,4 +492,4 @@ widgets:
   portrait_kasumi_voiceprint:
     - type: image
       image: portrait_kasumi_voiceprint
-  
+

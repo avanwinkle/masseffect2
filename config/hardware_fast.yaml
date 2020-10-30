@@ -20,9 +20,9 @@ ball_devices:
     eject_coil: c_plunger
     mechanical_eject: true
     ball_missing_timeouts: 10s
-    eject_timeouts: 5s
+    eject_timeouts: 3s
     confirm_eject_type: target # default
-    entrance_count_delay: 700ms
+    entrance_count_delay: 900ms
     player_controlled_eject_event: force_plunger_launch
     ball_search_order: 1
   bd_trough:
