@@ -67,7 +67,7 @@ variable_player:
   recruit_success_garrus:
     upgrade_name:
       action: set
-      string: "Sniper Rifle Damage (Scram Pulsar)"
+      string: "Sniper Rifle Damage\n(Scram Pulsar)"
   recruit_success_grunt:
     upgrade_name:
       action: set
@@ -75,7 +75,7 @@ variable_player:
   recruit_success_jack:
     upgrade_name:
       action: set
-      string: "Shotgun Damage (Synchronized Pulsar)"
+      string: "Shotgun Damage\n(Synchronized Pulsar)"
   recruit_success_kasumi:
     upgrade_name:
       action: set
@@ -91,15 +91,15 @@ variable_player:
   recruit_success_samara:
     upgrade_name:
       action: set
-      string: "Assault Rifle Damage (Kinetic Pulsar)"
+      string: "Assault Rifle Damage\n(Kinetic Pulsar)"
   recruit_success_tali:
     upgrade_name:
       action: set
-      string: "Heavy Pistol Damage (Titan Pulsar)"
+      string: "Heavy Pistol Damage\n(Titan Pulsar)"
   recruit_success_thane:
     upgrade_name:
       action: set
-      string: "SMG Damage (Microfield Pulsar)"
+      string: "SMG Damage\n(Microfield Pulsar)"
   recruit_success_zaeed:
     upgrade_name:
       action: set
@@ -145,6 +145,7 @@ slides:
       - type: text
         text: Ship Upgrade Available!
         style: header_sm, row_main, col_left_anchor
+      - widget: background_console
   upgrade_complete_slide:
     widgets:
       - type: text
@@ -153,6 +154,7 @@ slides:
       - type: text
         text: (upgrade_name)
         style: header_sm, row_main, col_left_anchor
+      - widget: background_console
 
 sound_player:
   play_queued_slide_upgrade_slide:

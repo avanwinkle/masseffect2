@@ -1,0 +1,8 @@
+#show_version=5
+- lights:
+    l_mass_relay_light_5: (color)
+    l_mass_relay_light_6: (color)
+    l_mass_relay_light_7: (color)
+    l_mass_relay_light_8: (color)
+    l_mass_relay_light_9: (color)
+    l_mass_relay_light_10: (color)

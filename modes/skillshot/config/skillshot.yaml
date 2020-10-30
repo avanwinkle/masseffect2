@@ -39,6 +39,10 @@ variable_player:
       int: machine.base_points / 20 * current_player.ball
   award_skillshot:
     score: value
+  skillshot_paragon_lit_hit:
+    paragon: 3
+  skillshot_renegade_lit_hit:
+    renegade: 3
 
 random_event_player:
   mode_skillshot_started:

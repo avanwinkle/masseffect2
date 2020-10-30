@@ -447,7 +447,13 @@ slides:
         style: header_lg, row_main, row_main_dmd_high
       - type: text
         text: (value)
-        style: body_md, row_bottom_margin, num
+        style: body_md, row_sub_under, num
+      - type: text
+        text: "+ 3 (morality)"
+        style: row_bottom
+        font_size: 28
+        casing: title
+        z: 10
       - widget: skillshot_bg_(morality)
   squadicon_slide:
     transition: fade

@@ -32,11 +32,11 @@ COLORS = {
 }
 
 MATE_PAIRS = (
-    ("grunt", "zaeed"),
-    ("jack", "legion"),
-    ("garrus", "samara"),
-    ("kasumi", "thane"),
-    ("mordin", "tali")
+    ("grunt", "zaeed", "lo", "left_orbit"),
+    ("jack", "legion", "kb", "kickback"),
+    ("garrus", "samara", "lr", "left_ramp"),
+    ("kasumi", "thane", "rr", "right_ramp"),
+    ("mordin", "tali", "ro", "right_orbit")
 )
 
 SOUND_NAME_FORMATS = {
@@ -105,15 +105,25 @@ class MPFSquadmateHandlers(CustomCode):
         is_post_collectorship = self.machine.device_manager.collections["achievements"] \
             .collectorship.state not in ("disabled", "enabled")
         # Enable the shots we need
-        for mate1, mate2 in MATE_PAIRS:
+        for mate1, mate2, fw, shot in MATE_PAIRS:
             mate = None
-            if player["status_{}".format(mate1)] < 3:
+            status1 = player["status_{}".format(mate1)]
+            status2 = player["status_{}".format(mate2)]
+            if status1 < 3:
                 mate = mate1
-            elif is_post_collectorship and player["status_{}".format(mate2)] < 3 < player["status_{}".format(mate1)]:
+            elif is_post_collectorship and status2 < 3 < status1:
                 mate = mate2
+            # If there's a squadmate to light, light them
             if mate:
                 self.machine.shots["recruit_{}_shot".format(mate)].enable()
                 self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+            # If the shot is firewalker-eligible, light it. This means the mate from it is recruited
+            # (mate1 before CS and mate2 after) and this fw shot has not been completed yet.
+            elif (status1 == 4 and not is_post_collectorship) or status2 == 4 and player["fwps_{}".format(fw)] == 0:
+                self.machine.shots["fw_packet_{}".format(shot)].enable()
+            # Otherwise make sure the fw shot is disabled
+            else:
+                self.machine.shots["fw_packet_{}".format(shot)].disable()
 
     def _handle_field_stopped(self, **kwargs):
         del kwargs
