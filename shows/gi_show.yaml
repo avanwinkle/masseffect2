@@ -16,7 +16,7 @@
       color: FFb74C
       fade: 1s
     gi_bottom:
-      color: FFb74C%50
+      color: FFb74C%20
       fade: 1s
 
 # Step 2: Omega (reds and oranges)
@@ -35,7 +35,7 @@
       color: FF9960 # color_grunt at 25% white
       fade: 1s
     gi_bottom:
-      color: FFCCB0 # color_grunt at 75% white
+      color: FFCCB0%20 # color_grunt at 75% white
       fade: 1s
 
 # Step 3: Purgatory (purples and whites with red)
@@ -54,7 +54,7 @@
       color: FFC58F
       fade: 1s
     gi_bottom:
-      color: color_jack
+      color: color_jack%30
       fade: 1s
 
 # Step 4: Illium
@@ -67,11 +67,30 @@
       color: (backwall_color)
       fade: 1s
     gi_bottom:
-      color: color_jack
+      color: color_jack%30
       fade: 1s
     gi_middle:
       color: color_space
       fade: 1s
     gi_top:
       color: color_barrier
+      fade: 1s
+
+# Step 5: Grunt Planet
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: color_grunt
+      fade: 1s
+    light_backwall_ambient:
+      color: (backwall_color)
+      fade: 1s
+    gi_top:
+      color: color_grunt
+      fade: 1s
+    gi_middle:
+      color: FF9960 # color_grunt at 25% white
+      fade: 1s
+    gi_bottom:
+      color: FFCCB0%20 # color_grunt at 75% white
       fade: 1s

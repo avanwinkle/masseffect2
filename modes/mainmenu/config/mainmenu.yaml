@@ -36,7 +36,7 @@ slide_player:
   mainmenu_change_career_highlighted{career_name==" "}:
     select_career_slide: {}
   mainmenu_casual_highlighted: casual_slide
-  mainmenu_create_career_highlighted: 
+  mainmenu_create_career_highlighted:
     career_new_slide: {}
   # Selecting and moving between menus
   highlight_career: career_select_slide
@@ -52,14 +52,14 @@ slide_player:
   set_career{avatar==3}:
     portrait_createprofile_3:
       target: lcd_right
-  
+
 
 slides:
   change_career_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
@@ -74,10 +74,10 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   select_career_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
@@ -89,10 +89,10 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   resume_game_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
@@ -107,10 +107,10 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   new_game_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
@@ -146,10 +146,10 @@ slides:
         halign: right
       - widget: background_console
   career_new_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
@@ -161,15 +161,15 @@ slides:
         style: body_sm, row_gutter, col_left_center
       - widget: background_console
   casual_slide:
-    transition: 
+    transition:
       type: wipe
       duration: 150ms
-    transition_out: 
+    transition_out:
       type: wipe
       duration: 150ms
     widgets:
       - type: text
-        text: Casual Play
+        text: Arcade Mode
         style: header_md, row_main, col_left_anchor
       - type: text
         text: "(machine|players_widget_text)"
@@ -182,7 +182,7 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_0
         end_behavior: loop
@@ -195,7 +195,7 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_1
         end_behavior: loop
@@ -208,7 +208,7 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_2
         end_behavior: loop
@@ -221,7 +221,7 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_3
         end_behavior: loop
@@ -234,7 +234,7 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_4
         end_behavior: loop
@@ -247,13 +247,13 @@ slides:
     transition_out:
       type: fade
       duration: 500ms
-    widgets: 
+    widgets:
       - type: video
         video: createprofile_5
         end_behavior: loop
       - type: image
         image: portrait_avatar_5
-  
+
 
 show_player:
   show_mainmenu: mainmenu_show

@@ -2,8 +2,8 @@
 
 import logging
 import random
-from .squadmate_status import SquadmateStatus
 from mpf.core.custom_code import CustomCode
+from .squadmate_status import SquadmateStatus
 
 LEDS = {
     "garrus": "color_shield_blue",
@@ -55,8 +55,8 @@ COMPLETED_EVENT_NAME = {
 
 
 class MPFSquadmateHandlers(CustomCode):
-    """
-    This scriptlet handles the recruit_advance and recruit_lit events for squadmate progression tracking.
+
+    """Scriptlet to handles the recruit_advance and recruit_lit events for squadmate progression tracking.
 
     It's a convenient way to automate the event postings over all squadmates without a bunch of copy+paste
     in the yaml files.
@@ -66,6 +66,13 @@ class MPFSquadmateHandlers(CustomCode):
      - Creating, enabling, disabling recruit lane shots
      - Creating, playing, stopping recruit lit/complete shows
     """
+
+    def __init__(self, machine, name):
+        """Create custom code to manage squadmate-specific events, handlers, and shows."""
+        super().__init__(machine, name)
+        self._just_resumed = None
+        self._current_mate = None
+        self._current_recruit = None
 
     def on_load(self):
         """Instantiate the module by creating listeners for squadmate-related events."""
@@ -201,7 +208,7 @@ class MPFSquadmateHandlers(CustomCode):
 
     def _on_hit(self, **kwargs):
         player = self.machine.game.player
-        self.log.debug("Received recruit HIT event with kwargs: {}".format(kwargs))
+        self.log.debug("Received recruit HIT event with kwargs: %s", kwargs)
         mate = kwargs["squadmate"]
         future_mate_status = player["status_{}".format(mate)] + 1
         do_update_shows = False
@@ -222,7 +229,7 @@ class MPFSquadmateHandlers(CustomCode):
             self.log.info("EXPIRE CHECK: mate is %s, future status is %s, available missions is %s",
                           mate, future_mate_status, player["available_missions"])
             expire = "2s" if (
-                mate in ["garrus", "samara"] and (future_mate_status == 3 or player["available_missions"]>0)
+                mate in ["garrus", "samara"] and (future_mate_status == 3 or player["available_missions"] > 0)
             ) else "3s"
 
             self.machine.events.post("queue_slide",
@@ -239,7 +246,8 @@ class MPFSquadmateHandlers(CustomCode):
                 self.machine.events.post("set_recruiticon", squadmate=mate, status=future_mate_status)
                 # If there were no mates lit before, bonus the xp
                 xp = self.machine.variables.get_machine_var("unlock_xp") * (
-                    1 + (0 if SquadmateStatus.recruitable_mates(player) else self.machine.variables.get_machine_var("bonus_xp")))
+                    1 + (0 if SquadmateStatus.recruitable_mates(player) else
+                         self.machine.variables.get_machine_var("bonus_xp")))
                 player["xp"] += int(xp)
                 player["available_missions"] += 1
                 do_update_shows = True
@@ -265,8 +273,22 @@ class MPFSquadmateHandlers(CustomCode):
         # Clear the resume mission
         self.machine.game.player["resume_mission"] = " "
 
+        # Set a listener for the mode starting so we can play the intro show if not-resume
+        self.machine.events.add_handler("mode_recruit{}_started", self._on_mission_started)
+
+    def _on_mission_started(self, **kwargs):
+        del kwargs
+        # If we aren't resuming a mission, play an intro show
+        if not self._just_resumed:
+            self.machine.events.post("play_mode_intro")
+        else:
+            self.machine.events.post("mode_intro_complete")
+
+        self.machine.events.remove_handler(self._on_mission_started)
+        self._just_resumed = False
+
     def _on_stop(self, **kwargs):
-        self.log.info("on_stop called for recruit mission, kwargs are {}".format(kwargs))
+        self.log.info("on_stop called for recruit mission, kwargs are %s", kwargs)
         self.machine.events.remove_handler(self._on_stop)
         self.machine.events.remove_handler(self._on_complete)
 
@@ -282,10 +304,8 @@ class MPFSquadmateHandlers(CustomCode):
             elif not self._just_resumed:
                 self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
 
-        self._just_resumed = False
-
     def _on_complete(self, **kwargs):
-        self.log.debug("Received COMPLETE event with kwargs: {}".format(kwargs))
+        self.log.debug("Received COMPLETE event with kwargs: %s", kwargs)
         mate = kwargs["squadmate"]
         player = self.machine.game.player
 
@@ -294,9 +314,9 @@ class MPFSquadmateHandlers(CustomCode):
 
         self.machine.events.post("levelup",
                                  mission_name="{} Recruited".format(mate)
-                                # Disabling portrait so global can play shows with video
-                                #  portrait="squadmate_{}_complete".format(mate))
-                                )
+                                 # Disabling portrait so global can play shows with video
+                                 # portrait="squadmate_{}_complete".format(mate))
+                                 )
         self.machine.events.post("recruit_success", squadmate=mate, status=4)
         self.machine.events.post("set_recruiticon_complete", squadmate=mate)
         self.machine.events.post("recruit_success_{}".format(mate))
@@ -308,15 +328,19 @@ class MPFSquadmateHandlers(CustomCode):
         # have enough tech/biotic squadmates to try again?
         achs = self.machine.device_manager.collections["achievements"]
         if (achs.normandyattack.state == "completed" and achs.suicidemission.state == "disabled"):
-            self.log.debug("Recruit successful, should we re-enable the suicide mission? {} techs, {} biotics".format(
-                len(SquadmateStatus.available_techs(player)), len(SquadmateStatus.available_biotics(player))))
+            self.log.debug("Recruit successful, should we re-enable the suicide mission? %s techs, %s biotics",
+                           len(SquadmateStatus.available_techs(player)),
+                           len(SquadmateStatus.available_biotics(player)))
             if len(SquadmateStatus.available_techs(player)) > 1 and len(SquadmateStatus.available_biotics(player)) > 1:
                 achs["suicidemission"].enable()
 
     def _play_squadmates_show(self, stop_all=False, disable_ladder=False, **kwargs):
-        """ Creates the necessary show files for squadmates, namely lighting the backbox with the
-            appropriate light colors and filling the career ladder with solids and blinkings.
+        """Trigger squadmate-dependent lights on the ladder and backbox.
+
+        Creates the necessary show files for squadmates, namely lighting the backbox with the
+        appropriate light colors and filling the career ladder with solids and blinkings.
         """
+        del kwargs
         mate_lists = {
             "lit": [],
             "complete": [],
@@ -341,7 +365,7 @@ class MPFSquadmateHandlers(CustomCode):
                 mate_lists["off"].append(mate)
 
         lit_count = len(mate_lists["lit"])
-        complete_count = len(mate_lists["complete"]) - 2 # Discount Jacob and Miranda
+        complete_count = len(mate_lists["complete"]) - 2  # Discount Jacob and Miranda
         for status, mates in mate_lists.items():
             showname = "recruits_{}_show".format(status)
             if mates:
@@ -355,10 +379,12 @@ class MPFSquadmateHandlers(CustomCode):
                 # Show ladder lights too, if we're not in suicide
                 if not self.machine.modes["suicide_base"].active and not disable_ladder:
                     if status == "lit":
-                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count) for i in range(lit_count)])
+                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i + complete_count)
+                                                                       for i in range(lit_count)])
                     # Miranda and Jacob start complete but no ladder lights, so watch out for trailing comma!
                     elif status == "complete" and complete_count > 0:
-                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i) for i in range(complete_count)])
+                        config.show_tokens["leds"] += ", " + ", ".join(["l_ladder_light_{}".format(i)
+                                                                       for i in range(complete_count)])
 
                 self._shows[showname] = self.machine.show_controller.replace_or_advance_show(
                     self._shows.get(showname),  # old_instance

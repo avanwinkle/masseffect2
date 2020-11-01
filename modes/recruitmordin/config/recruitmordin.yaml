@@ -108,7 +108,7 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_mordin
-  show_recruit_instructions:
+  play_recruit_intro:
     recruitintro_mordin:
       loops: 0
   mode_intro_skipped:

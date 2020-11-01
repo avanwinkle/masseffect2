@@ -56,7 +56,7 @@ class MainMenu(Carousel):
 
         self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))
         self._shown_menu = self.mainmenu
-        
+
         if self._selected_career:
             if "achievements" in self._selected_career:
                 starting_item = "resume_game"
@@ -71,9 +71,9 @@ class MainMenu(Carousel):
         super().mode_start()
 
     def _load_mainmenu(self):
-        menu = ["casual", "create_career"]
+        menu = ["create_career", "casual"]
         if len(self.careers) > (0 if not self._selected_career else 1):
-            menu.insert(1, "change_career")
+            menu.insert(0, "change_career")
         if self._selected_career:
             menu = ["new_game"] + menu
             if "achievements" in self._selected_career:

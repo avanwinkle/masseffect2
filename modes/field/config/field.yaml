@@ -47,7 +47,7 @@ event_player:
     - enable_airlock_missionselect_hold
   flipper_cancel:
     squadmate_select:
-      switch: 
+      switch:
         value: triggering_switch
         type: str
   both_flippers_inactive: squadmate_select_clear
@@ -65,6 +65,7 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_space
+
 
 sound_player:
   play_field_music{current_player.high_flow==1}:
@@ -86,13 +87,13 @@ sound_player:
       mode_end_action: stop
       fade_in: 500ms
       fade_out: 2s
-  
+
 
 sound_pools:
   high_flow_field_music:
     track: music
     type: random_force_all
-    sounds: 
+    sounds:
       - music_miranda_loyalty_low
       - music_samara_acq
       - music_lazerus_1
@@ -152,7 +153,7 @@ sounds:
   #   file: mus_endgm1_attackplan.ogg
   #   track: music
 
-    
+
 
 slide_player:
   mode_field_started{machine.has_secondscreen}:

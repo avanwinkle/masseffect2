@@ -118,11 +118,11 @@ slide_player:
   play_medigel_slide:
     medigel_slide:
       action: play
-      expire: 5s
+      expire: 3s
       priority: 2000
     dossier_medigel:
       action: play
-      expire: 5s
+      expire: 3s
       target: lcd_right
       priority: 2000
 

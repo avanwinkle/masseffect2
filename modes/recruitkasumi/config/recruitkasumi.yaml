@@ -115,8 +115,13 @@ show_player:
     kasumi_gi_show:
       action: play
       loops: -1
+  play_mode_intro:
     recruitintro_kasumi:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_kasumi:
+      action: stop
+  mode_intro_complete:
     gi_half_color:
       show_tokens:
         color: color_kasumi

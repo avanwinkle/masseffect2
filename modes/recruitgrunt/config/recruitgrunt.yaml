@@ -40,6 +40,7 @@ event_player:
         value: device.counters.grunt_shots_counter.value
         type: int
       starting_shots: 0, 0, 0, 0, 0
+  # Fake an event when the slide shows to populate the shot widget
   slide_recruit_mission_slide_active:
     logicblock_grunt_shots_counter_updated:
       value:
@@ -85,9 +86,19 @@ shows:
           target: lcd_right
 
 show_player:
-  show_recruit_instructions:
+  mode_recruitgrunt_started:
+    gi_show:
+      start_step: 5
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_grunt
+  play_mode_intro:
     recruitintro_grunt:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_grunt:
+      action: stop
+  mode_intro_complete:
     gi_half_color:
       show_tokens:
         color: color_grunt

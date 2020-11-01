@@ -450,7 +450,7 @@ slides:
         style: body_md, row_sub_under, num
       - type: text
         text: "+ 3 (morality)"
-        style: row_bottom
+        style: row_gutter
         font_size: 28
         casing: title
         z: 10

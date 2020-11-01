@@ -185,16 +185,16 @@ show_player:
       show_tokens:
         color: color_jack
         brightness: 80
-  show_recruit_instructions:
+  play_recruit_intro:
     recruitintro_jack:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_jack:
+      action: stop
   mode_intro_complete:
     gi_massrelay:
       show_tokens:
         color: 8833FF
-  mode_intro_skipped:
-    recruitintro_jack:
-      action: stop
   power_shots_lit_hit{device.counters.jack_rounds_counter.value==3}:
     show_find_jack:
       loops: 0
