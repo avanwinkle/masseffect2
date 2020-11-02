@@ -301,24 +301,29 @@ sounds:
     track: sfx
 
 widget_player:
-  update_difficulty:
+  show_difficulty:
     difficulty_parent_widget:
       action: add
       slide: new_game_slide
       priority: 10
     difficulty_widget:
-      action: update
+      action: add
       slide: new_game_slide
       priority: 9
     difficulty_left_widget:
-      action: update
-      slide: new_game_slide
-      priority: 8
-    difficulty_right_widget:
-      action: update
+      action: add
       slide: new_game_slide
       priority: 7
-  update_flow:
+    difficulty_right_widget:
+      action: add
+      slide: new_game_slide
+      priority: 7
+  update_difficulty:
+    difficulty_widget:
+      action: update
+      slide: new_game_slide
+      priority: 9
+  show_flow:
     difficulty_left_widget:
       action: remove
     difficulty_right_widget:
@@ -328,17 +333,22 @@ widget_player:
       slide: new_game_slide
       priority: 10
     flow_widget:
-      action: update
+      action: add
       slide: new_game_slide
       priority: 9
     flow_left_widget:
-      action: update
+      action: add
       slide: new_game_slide
       priority: 8
     flow_right_widget:
-      action: update
+      action: add
       slide: new_game_slide
       priority: 7
+  update_flow:
+    flow_widget:
+      action: update
+      slide: new_game_slide
+      priority: 9
 
 widgets:
   difficulty_parent_widget:
@@ -360,11 +370,17 @@ widgets:
       style: body_sm, row_sub
       x: 275
       anchor_x: right
-      opacity: 1
+      opacity: 0.2
       animations:
+        # On every update this widget resets to default opacity
+        # The specific events occur immediately after
         update_difficulty_easiest:
           - property: opacity
             value: 0.2
+            duration: 50ms
+        update_difficulty_middle:
+          - property: opacity
+            value: 1.0
             duration: 50ms
   difficulty_right_widget:
     - type: text
@@ -374,6 +390,10 @@ widgets:
       anchor_x: left
       opacity: 1
       animations:
+        update_difficulty_middle:
+          - property: opacity
+            value: 1.0
+            duration: 50ms
         update_difficulty_hardest:
           - property: opacity
             value: 0.2
@@ -396,11 +416,15 @@ widgets:
       style: body_sm, row_sub_under
       x: 275
       anchor_x: right
-      opacity: 1
+      opacity: 0.2
       animations:
         update_flow_easiest:
           - property: opacity
             value: 0.2
+            duration: 50ms
+        update_flow_hardest:
+          - property: opacity
+            value: 1.0
             duration: 50ms
   flow_right_widget:
     - type: text
@@ -410,6 +434,10 @@ widgets:
       anchor_x: left
       opacity: 1
       animations:
+        update_flow_easiest:
+          - property: opacity
+            value: 1.0
+            duration: 50ms
         update_flow_hardest:
           - property: opacity
             value: 0.2

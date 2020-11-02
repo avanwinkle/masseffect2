@@ -274,7 +274,7 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.game.player["resume_mission"] = " "
 
         # Set a listener for the mode starting so we can play the intro show if not-resume
-        self.machine.events.add_handler("mode_recruit{}_started", self._on_mission_started)
+        self.machine.events.add_handler("mode_recruit{}_started".format(mate), self._on_mission_started)
 
     def _on_mission_started(self, **kwargs):
         del kwargs

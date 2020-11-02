@@ -1,4 +1,4 @@
- #config_version=5
+#config_version=5
 
 #####
 # LAIR OF THE SHADOW BROKER: VASIR CHASE
@@ -23,6 +23,7 @@ event_player:
     set_mission_shots:
       shots_total: 5
       is_resumable: 1
+      persist_name: sbchase
       shots_remaining:
         value: current_player.sbchase_hits_remaining
         type: int

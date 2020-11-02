@@ -172,14 +172,14 @@ class MainMenu(Carousel):
             # If we haven't set a difficulty yet, do so before completing
             if self._selected_difficulty == -1:
                 self._selected_difficulty = 0
+                self.machine.events.post("show_difficulty")
                 self.machine.events.post("update_difficulty", detail=DIFFICULTIES[0])
-                self.machine.events.post("update_difficulty_easiest")
                 return
             # If we haven't set a flow yet, do so too
             elif self._selected_flow == -1:
                 self._selected_flow = 0
+                self.machine.events.post("show_flow")
                 self.machine.events.post("update_flow", detail=FLOWS[0])
-                self.machine.events.post("update_flow_easiest")
                 return
             self._post_career_event("new_career",
                                     difficulty=self._selected_difficulty,
@@ -220,9 +220,12 @@ class MainMenu(Carousel):
             if self._selected_difficulty < 2:
                 self._selected_difficulty += 1
                 self.machine.events.post("update_difficulty",
-                                         detail=DIFFICULTIES[self._selected_difficulty])
+                                         detail=DIFFICULTIES[self._selected_difficulty],
+                                         change=1)
                 if self._selected_difficulty == 2:
                     self.machine.events.post("update_difficulty_hardest")
+                elif self._selected_difficulty == 1:
+                    self.machine.events.post("update_difficulty_middle")
             return
         elif self._selected_flow >= 0:
             if self._selected_flow < 1:
@@ -241,9 +244,12 @@ class MainMenu(Carousel):
             if self._selected_difficulty > 0:
                 self._selected_difficulty -= 1
                 self.machine.events.post("update_difficulty",
-                                         detail=DIFFICULTIES[self._selected_difficulty])
+                                         detail=DIFFICULTIES[self._selected_difficulty],
+                                         change=-1)
                 if self._selected_difficulty == 0:
                     self.machine.events.post("update_difficulty_easiest")
+                elif self._selected_difficulty == 1:
+                    self.machine.events.post("update_difficulty_middle")
             return
         elif self._selected_flow >= 0:
             if self._selected_flow > 0:
