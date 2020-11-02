@@ -185,7 +185,7 @@ show_player:
       show_tokens:
         color: color_jack
         brightness: 80
-  play_recruit_intro:
+  play_mode_intro:
     recruitintro_jack:
       loops: 0
   mode_intro_skipped:
