@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"mpfls.executable": "/Users/Anthony/mpf5/bin/mpfls"
+	}
+}

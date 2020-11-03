@@ -98,12 +98,12 @@ shot_profiles:
     states:
       - name: lit
         show: led_6_chase
-        speed: 4
+        speed: 6
         show_tokens:
-          fade: 1s
+          fade: 40ms
       - name: alarmed
         show: alarmed_show
-        speed: 0.5
+        speed: 1
 
 light_player:
   mode_recruitkasumi_started:
@@ -128,7 +128,7 @@ show_player:
         brightness: 20
     gi_massrelay:
       show_tokens:
-        color: color_kasumi_alarm
+        color: color_kasumi
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
@@ -138,7 +138,7 @@ show_player:
       speed: 9
       loops: 3
       show_tokens:
-        leds: light_flash_alarm
+        leds: light_flash_alarm, l_mass_relay
         color: color_kasumi_alarm
     color_flashing_fast:
       action: play
