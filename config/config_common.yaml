@@ -14,6 +14,16 @@ mpf:
 mpf-mc:
   fps: 60
 
+bcp:
+  connections:
+    local_display:
+      host: 127.0.0.1
+      port: 5052
+      type: mpf.core.bcp.bcp_socket_client.BCPClientSocket
+  debug: true
+  console_log: full
+
+
 kivy_config:
   graphics:
     fbo: hardware
@@ -29,7 +39,9 @@ logging:
     sound_player: none
     sounds: none
     sound: none
-  console: {}
+  console:
+    bcp_interface: full
+    event_manager: none
 
 text_ui:
   machine_vars:

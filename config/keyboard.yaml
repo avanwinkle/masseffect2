@@ -1,8 +1,14 @@
 #config_version=5
 keyboard:
-  "`":
-    event: start_mode_n7_assignments
-    # switch: s_dropbank_top
+  # "`":
+  #   event: reputation_build_shots_lit_complete
+  # shift+/:
+  #   event: paragon_shot_unlit_hit
+  # shift+=:
+  #   event: renegade_shot_unlit_hit
+  #   # switch: s_dropbank_top
+  # shift+`:
+  #   event: stop_mode_overlord
   # Advance major shots
   1:
     switch: s_left_orbit
@@ -24,25 +30,25 @@ keyboard:
     switch: s_hitbank_top
   0:
     switch: s_hitbank_bottom
-  shift+1:
-    switch: s_target1
-  shift+2:
-    switch: s_target2
-  shift+3:
-    switch: s_target3
-  shift+4:
-    switch: s_target4
-  shift+5:
-    switch: s_target5
-  shift+8:
-    switch: s_lock_1
-    toggle: true
-  shift+9:
-    switch: s_lock_2
-    toggle: true
-  shift+0:
-    switch: s_lock_3
-    toggle: true
+  # shift+1:
+  #   switch: s_target1
+  # shift+2:
+  #   switch: s_target2
+  # shift+3:
+  #   switch: s_target3
+  # shift+4:
+  #   switch: s_target4
+  # shift+5:
+  #   switch: s_target5
+  # shift+8:
+  #   switch: s_lock_1
+  #   toggle: true
+  # shift+9:
+  #   switch: s_lock_2
+  #   toggle: true
+  # shift+0:
+  #   switch: s_lock_3
+  #   toggle: true
   "/":
     switch: s_top_lane_left
   "=":
@@ -65,12 +71,14 @@ keyboard:
     event: start_mode_n7_assignments
   i:
     event: show_grid
-  shift+i:
-    event: remove_grid
+  # shift+i:
+  #   event: remove_grid
   enter:
     switch: s_start_button
-  shift+enter:
-    switch: s_action_button
+  return:
+    switch: s_start_button
+  # shift+enter:
+  #   switch: s_action_button
   e:
     event: drop_target_bank_dropbank_down
   w:
