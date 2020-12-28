@@ -4,18 +4,11 @@
 # SAMARA RECRUITMENT MISSION
 #
 # This mode begins with all standup targets lit on a hurryup; hitting a lit
-# standup collects “intel” and builds value. After each lit standup hit, two random
-# shots are lit to pursue Morinth; each subsequent lit standup target hit lights
-# (up to) two more shots. Unlit standups continue to build value but don’t light
-# any more shots. Hitting a lit shot collects all standup target values built to
-# that point. Hitting five lit shots completes the mission. The mode ends if the
-# timer runs out.
-#
-# TODO: If the final shot is hit against the ball hold or ball lock, the player
-# is given the option to recruit Morinth instead of Samara. They are
-# functionally identical except that in the Suicide Mission, Samara provides the
-# additional shot option bonus (like other biotics) while Morinth provides a
-# damage multiplier bonus.
+# standup destroys a red sands canister and builds value. Hitting a lit standup
+# lights the lane shots on either side. Unlit standups continue to build value
+# but don’t light any more shots. Hitting a lit shot collects all standup target
+# values built to that point. Hitting five lit shots completes the mission. The
+# mode ends if the timer runs out.
 #
 # Progress is saved after every shot, but the multiplier resets on restart
 #####
@@ -32,8 +25,8 @@ event_player:
     show_recruit_instructions:
       squadmate: samara
       portrait: recruitsamara
-      instructions_main: Destroy the Gunship
-      instructions_sub: Hit targets to weaken armor
+      instructions_main: Defeat Captain Wasea
+      instructions_sub: " "
   mode_powers_started:
     set_mission_shots:
       color: color_samara
@@ -44,6 +37,7 @@ event_player:
         value: device.counters.samara_shots_counter.value
         type: int
       starting_shots: 1, 1, 1, 1, 1
+  mission_shot_hit: play_wasea_callout|800ms
   logicblock_samara_shots_counter_complete: recruit_samara_complete
   # Use each target to reset the shot to it "lit" state. Powers.py will
   # also rotate the targets during cloak, to avoid a stuck state
@@ -125,24 +119,37 @@ show_player:
 
 shows:
   recruitintro_samara:
-    # Temporary show until videos are done
     - time: 500ms
       sounds:
-        gunship_sound:
+        wasea_intro:
           action: play
-    - time: 3s
+    - time: 6s
       events: mode_intro_complete
 
 sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
-  mission_shot_hit: explosion  # Defined in base_endsounds
+  samara_targets_hit: explosion  # Defined in base_endsounds
+  mission_shot_hit:
+    wasea_hit:
+      volume: 1.0
+  play_wasea_callout: wasea_callout
   recruit_samara_complete:
     music_recruit_samara:
       action: stop
 
 sound_pools:
+  wasea_intro:
+    track: voice
+    sounds: wasea_everythings_gone_to_hell, wasea_first_justicar_now_you, wasea_pulpy_mass
+  wasea_hit:
+    track: sfx
+    sounds: ws_hit_one, ws_hit_two, ws_hit_three, ws_hit_four
+  wasea_callout:
+    track: voice
+    type: random_force_all
+    sounds: ws_payback_human, ws_i_like_killing_humans, ws_kill_them_all, ws_this_ends_now, ws_you_wont_get_away
   gunship_sound:
     track: voice
     type: random_force_all
@@ -162,6 +169,42 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+  wasea_everythings_gone_to_hell:
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00197753_m.ogg
+    track: voice
+  wasea_pulpy_mass:
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00197755_m.ogg
+    track: voice
+  wasea_first_justicar_now_you:
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00301600_m.ogg
+    track: voice
+  ws_payback_human:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244270_m.ogg
+    track: voice
+  ws_i_like_killing_humans:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244276_m.ogg
+    track: voice
+  ws_kill_them_all:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244290_m.ogg
+    track: voice
+  ws_this_ends_now:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244278_m.ogg
+    track: voice
+  ws_you_wont_get_away:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244288_m.ogg
+    track: voice
+  ws_hit_four:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244300_m.ogg
+    track: voice
+  ws_hit_two:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244237_m.ogg
+    track: voice
+  ws_hit_three:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244238_m.ogg
+    track: voice
+  ws_hit_one:
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244239_m.ogg
+    track: voice
   gunship_thane:
     file: en_us_hench_assassin_twrmwa_gun_ship_amb_h_00212350_m.ogg
     track: voice

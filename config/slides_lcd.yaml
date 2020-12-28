@@ -356,6 +356,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitmordin
+  recruit_complete_portrait_slide_samara:
+    - type: video
+      video: recruitsamara_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitsamara
   recruit_complete_portrait_slide_tali:
     - type: video
       video: recruittali_complete
@@ -1089,8 +1095,10 @@ widgets:
     - type: image
       image: portrait_recruitlegion
   portrait_recruit_intro_samara:
-    - type: image
-      image: portrait_recruitsamara
+    - type: video
+      video: recruitintro_samara
+      end_behavior: pause
+      z: 106
   portrait_recruit_intro_tali:
     - type: video
       video: recruitintro_tali
