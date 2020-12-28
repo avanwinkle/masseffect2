@@ -10,8 +10,6 @@
 # The mode will end if the timer expires.
 #
 # Progress is not saved and this mode must be restarted if failed.
-#
-# TODO: This mode has only been mocked out, not tested or debugged
 #####
 
 mode:
@@ -78,13 +76,17 @@ variable_player:
 
 show_player:
   mode_recruitthane_started:
-    recruitintro_thane:
-      loops: 0
     gi_show:
       start_step: 4  # Illium
       manual_advance: True
       show_tokens:
         backwall_color: color_thane
+  mode_intro_started:
+    recruitintro_thane:
+      loops: 0
+  mode_intro_skipped:
+    recruitintro_thane:
+      action: stop
   logicblock_thane_ascent_counter_hit:
     flash_all_shields_show:
       speed: 12
@@ -95,12 +97,11 @@ show_player:
 
 shows:
   recruitintro_thane:
-    # Temporary show until videos are done
-    - time: 500ms
+    - time: 4s
       sounds:
         asari_youll_have_to_get_up_to_the_bridge:
           action: play
-    - time: 3s
+    - time: 7s
       events: mode_intro_complete
   tower_flash_show:
     - time: 0
@@ -116,6 +117,11 @@ sound_player:
       action: play
       fade_out: 2s
       mode_end_action: stop
+  mode_recruitthane_complete:
+    nas_misc_sounds:
+      action: stop
+    nas_no_one_gets_across_bridge:
+      action: stop
   logicblock_thane_ascent_counter_hit{count!=3}:
     nas_misc_sounds:
       max_queue_time: 2s

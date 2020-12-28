@@ -98,9 +98,6 @@ variable_player:
   # Add a state back if the countdown timer expires
   timer_colossus_repair_timer_complete:
     geth_colossus_state: 1
-    mission_instructions:
-      string: " "
-      action: set
 
 shots:
   geth_target_shot:

@@ -362,6 +362,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruittali
+  recruit_complete_portrait_slide_thane:
+    - type: video
+      video: recruitthane_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitthane
   # Core slides
   1player_score_slide:
     transition: fade
@@ -1096,8 +1102,10 @@ widgets:
       end_behavior: pause
       z: 106
   portrait_recruit_intro_thane:
-    - type: image
-      image: portrait_recruitthane
+    - type: video
+      video: recruitintro_thane
+      end_behavior: pause
+      z: 107
   portrait_recruit_intro_zaeed:
     - type: image
       image: portrait_recruitzaeed

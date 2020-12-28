@@ -120,6 +120,9 @@ show_player:
   recruit_tali_complete:
     recruit_success_tali:
       loops: 0
+  recruit_thane_complete:
+    recruit_success_thane:
+      loops: 0
 
 shows:
   recruit_success_garrus:
@@ -176,6 +179,15 @@ shows:
     - time: 800ms
       sounds: missioncomplete_voice_tali
     - time: 9s
+  recruit_success_thane:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_thane:
+          target: lcd_right
+          priority: 1000
+    - time: 1s
+      sounds: missioncomplete_voice_thane
+    - time: 7s
 
 widgets:
   portrait_squadmate_legion_complete:
@@ -184,12 +196,6 @@ widgets:
   portrait_squadmate_samara_complete:
     - type: image
       image: portrait_squadmate_samara_complete
-  portrait_squadmate_tali_complete:
-    - type: image
-      image: portrait_squadmate_tali_complete
-  portrait_squadmate_thane_complete:
-    - type: image
-      image: portrait_squadmate_thane_complete
   portrait_squadmate_zaeed_complete:
     - type: image
       image: portrait_squadmate_zaeed_complete
@@ -202,7 +208,6 @@ widgets:
 sound_player:
   recruit_success_legion: missioncomplete_voice_legion
   recruit_success_samara: missioncomplete_voice_samara
-  recruit_success_thane: missioncomplete_voice_thane
   recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
   recruit_failure_garrus: garrus_failed
