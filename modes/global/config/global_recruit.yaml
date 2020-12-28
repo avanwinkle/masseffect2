@@ -114,6 +114,9 @@ show_player:
   recruit_kasumi_complete:
     recruit_success_kasumi:
       loops: 0
+  recruit_legion_complete:
+    recruit_success_legion:
+      loops: 0
   recruit_mordin_complete:
     recruit_success_mordin:
       loops: 0
@@ -164,6 +167,15 @@ shows:
     - time: 800ms
       sounds: missioncomplete_voice_kasumi
     - time: 6160ms
+  recruit_success_legion:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_legion:
+          target: lcd_right
+          priority: 1000
+    - time: 1s
+      sounds: missioncomplete_voice_legion
+    - time: 8130ms
   recruit_success_mordin:
     - time: 0
       slides:
@@ -215,7 +227,6 @@ widgets:
 # TODO: Migrate these sounds to the end-of-mission show
 #####
 sound_player:
-  recruit_success_legion: missioncomplete_voice_legion
   recruit_success_zaeed.1{current_player.zaeed_path_renegade==1}: missioncomplete_voice_zaeed_renegade
   recruit_success_zaeed.2{current_player.zaeed_path_renegade!=1}: missioncomplete_voice_zaeed_paragon
   recruit_failure_garrus: garrus_failed
@@ -268,6 +279,12 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_legion_1, missioncomplete_voice_legion_2, missioncomplete_voice_legion_3
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release_point: 100ms
+      release: 500ms
   missioncomplete_voice_mordin:
     type: random
     track: voice
@@ -278,6 +295,12 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_samara_1, missioncomplete_voice_samara_2, missioncomplete_voice_samara_3
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release_point: 100ms
+      release: 500ms
   missioncomplete_voice_thane:
     type: random
     track: voice

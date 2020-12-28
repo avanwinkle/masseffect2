@@ -350,6 +350,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitkasumi
+  recruit_complete_portrait_slide_legion:
+    - type: video
+      video: recruitlegion_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitlegion
   recruit_complete_portrait_slide_mordin:
     - type: video
       video: recruitmordin_complete
@@ -1087,13 +1093,22 @@ widgets:
       video: recruitintro_kasumi
       end_behavior: pause
       z: 105
+  portrait_recruit_intro_legion:
+    - type: video
+      video: recruitintro_legion
+      end_behavior: pause
+      z: 105
+  portrait_recruit_legion_hackcomplete:
+    - type: video
+      video: recruitlegion_hacked
+      end_behavior: pause
+      z: 107
+    - type: image
+      image: portrait_recruitlegion
   portrait_recruit_intro_mordin:
     - type: video
       video: recruitintro_mordin
       end_behavior: pause
-  portrait_recruit_intro_legion:
-    - type: image
-      image: portrait_recruitlegion
   portrait_recruit_intro_samara:
     - type: video
       video: recruitintro_samara

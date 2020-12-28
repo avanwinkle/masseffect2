@@ -289,19 +289,37 @@ shot_profiles:
         show: off
 
 show_player:
-  mode_recruitlegion_started:
+  mode_intro_started:
     recruitintro_legion:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_legion:
+      action: stop
+  recruit_legion_precomplete:
+    legion_hack_complete:
+      loops: 0
+  recruit_legion_complete:
+    legion_hack_complete:
+      action: stop
 
 shows:
-  recruitlegion_intro:
-    # Temporary show until videos are done
-    - time: 500ms
+  recruitintro_legion:
+    - time: 1500ms
       sounds:
         shepard_start_your_upload:
           action: play
-    - time: 3s
+    - time: 7s
       events: mode_intro_complete
+  legion_hack_complete:
+    - time: 0
+      widgets:
+        portrait_recruit_legion_hackcomplete:
+          slide: recruit_portrait_slide
+    - time: 1s
+      sounds:
+        legion_hack_complete:
+          max_queue_time: 3s
+    - time: 11230ms
   heretic_lane_show:
     - duration: 500ms
       lights:
@@ -356,8 +374,6 @@ sound_player:
     legion_warning_right_sound:
       max_queue_time: 1s
   recruit_legion_precomplete:
-    legion_hack_complete:
-      max_queue_time: 3s
     music_legion_low:
       action: play
       mode_end_action: stop
