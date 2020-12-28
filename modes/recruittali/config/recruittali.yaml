@@ -46,7 +46,7 @@ event_player:
     - play_colossus_show
   # If the colossus repairs we can backshift the state of the shot profile
   player_geth_colossus_state.1{player_num==current_player.number and change>0 and value<=6}:
-    advance_power_shots:
+    advance_mission_shots:
       state: lit
       shift: -1
   player_geth_colossus_state.2{player_num==current_player.number}:
@@ -56,7 +56,7 @@ event_player:
   timer_missiontimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state>3}: play_tali_shield
   timer_missiontimer_tick{ticks<60 and ticks%15==0 and current_player.geth_colossus_state<=3}: play_tali_armor
   # Force the timer widget to show the full value, so we don't wait for another tick
-  geth_colossus_shot_hit:
+  power_shots_lit_hit:
     timer_colossus_repair_timer_tick:
       ticks_remaining: 10
 
@@ -80,7 +80,7 @@ timers:
     direction: down
     start_running: false
     control_events:
-      - event: geth_colossus_shot_hit
+      - event: power_shots_lit_hit
         action: restart
       - event: recruit_tali_complete
         action: stop
@@ -150,9 +150,12 @@ shot_profiles:
       show: off
 
 show_player:
-  mode_recruittali_started:
+  play_mode_intro:
     recruitintro_tali:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_tali:
+      action: stop
   geth_target_shot_hit:
     geth_target_show:
       speed: 12
@@ -173,12 +176,11 @@ show_player:
 
 shows:
   recruitintro_tali:
-    # Temporary show until videos are done
-    - time: 1s
+    - time: 500ms
       sounds:
         reegar_missionstart:
           action: play
-    - time: 3s
+    - time: 8s
       events: mode_intro_complete
   colossus_hit_show:
     - time: 0

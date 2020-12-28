@@ -5,7 +5,6 @@ event_player:
   # TODO: As modes get their intro shows, stop using this hacky release event
   mode_recruitlegion_started: mode_intro_complete|3s
   mode_recruitsamara_started: mode_intro_complete|3s
-  mode_recruittali_started: mode_intro_complete|3s
   mode_recruitthane_started: mode_intro_complete|3s
   mode_recruitzaeed_started: mode_intro_complete|3s
 
@@ -215,7 +214,7 @@ slides:
         style: timer_primary, row_gutter, col_right_indent, color_ui_yellow
       - widget: background_console
   recruit_advance_slide_QUEUE_A:
-    transition_out: 
+    transition_out:
       type: fade
       duration: 150ms
     widgets:

@@ -7,6 +7,70 @@ show_player:
   player_bypass_missionselect{value>0}:
     missions_available_show:
       action: stop
+  # TODO: Abstract these to be programmatic
+  recruit_garrus_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_garrus
+  recruit_grunt_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_grunt
+  recruit_jack_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_jack
+  recruit_kasumi_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_kasumi
+  recruit_legion_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_legion
+  recruit_mordin_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_mordin
+  recruit_tali_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_tali
+  recruit_thane_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_thane
+  recruit_zaeed_shot_active_hit:
+    flash_all_shields_show:
+      loops: 4
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_zaeed
   mode_field_started.1:
     missions_available_show{current_player.available_missions>0 and current_player.bypass_missionselect==0}:
       action: play

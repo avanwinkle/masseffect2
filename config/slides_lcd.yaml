@@ -356,6 +356,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitmordin
+  recruit_complete_portrait_slide_tali:
+    - type: video
+      video: recruittali_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruittali
   # Core slides
   1player_score_slide:
     transition: fade
@@ -494,20 +500,30 @@ slides:
       x: 0
       z: 0
   pinstrat_slide:
-    - type: text
-      text: "Scan code for your\nPinstrat summary!"
-      style: body_md, col_left_anchor, row_super
-    - type: text
-      text: (player_name)
-      style: header_sm, col_left_anchor, row_sub
-    - type: image
-      image: splashscreen
-      anchor_x: left
-      x: 0
-      z: 0
-      opacity: 0.5
+    transition: fade
+    widgets:
+      - type: text
+        text: "Scan code for your\nPinstrat summary!"
+        style: body_md, col_left_anchor, row_super
+      - type: text
+        text: (player_name)
+        style: header_sm, col_left_anchor, row_sub
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
   pinstrat_portrait_slide:
-    - widget: pinstrat_player_(player_num)
+    transition: fade
+    widgets:
+      - type: image
+        image: splashscreen
+        anchor_x: right
+        x: right
+        z: 0
+        opacity: 0.5
+      - widget: pinstrat_player_(player_num)
 
 widgets:
   volume_widget:
@@ -1070,8 +1086,15 @@ widgets:
     - type: image
       image: portrait_recruitsamara
   portrait_recruit_intro_tali:
-    - type: image
-      image: portrait_recruittali
+    - type: video
+      video: recruitintro_tali
+      end_behavior: pause
+      z: 105
+  portrait_recruit_tali_repair:
+    - type: video
+      video: recruittali_repair
+      end_behavior: pause
+      z: 106
   portrait_recruit_intro_thane:
     - type: image
       image: portrait_recruitthane
