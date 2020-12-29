@@ -101,8 +101,17 @@ variable_player:
 
 show_player:
   mode_recruitzaeed_started:
+    gi_show:
+      start_step: 5
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_zaeed
+  mode_intro_started:
     recruitintro_zaeed:
       loops: 0
+  mode_intro_skipped:
+    recruitintro_zaeed:
+      action: stop
   power_shots_lit_hit:
     flash_all_shields_show:
       loops: 6
@@ -112,21 +121,15 @@ show_player:
 
 shows:
   recruitintro_zaeed:
-    # Temporary show until videos are done
     - time: 500ms
       sounds:
         zaeed_missionstart:
           action: play
-    - time: 3s
+    - time: 8500ms
       events: mode_intro_complete
 
-light_player:
-  mode_recruitzaeed_started:
-    light_backwall_ambient:
-      color: color_zaeed
-
 sound_player:
-  mode_recruitzaeed_started:
+  mode_intro_complete:
     music_recruit_zaeed:
       action: play
       mode_end_action: stop

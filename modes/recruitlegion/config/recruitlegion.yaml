@@ -295,6 +295,12 @@ show_player:
   mode_intro_skipped:
     recruitintro_legion:
       action: stop
+  mode_recruitlegion_started:
+    gi_show:
+      start_step: 6
+      manual_advance: True
+      show_tokens:
+        backwall_color: 6a6a6a
   recruit_legion_precomplete:
     legion_hack_complete:
       loops: 0

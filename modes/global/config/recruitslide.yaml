@@ -1,10 +1,5 @@
 #config_version=5
 
-event_player:
-  # Delay the release of the ball until after the instructions are shown
-  # TODO: As modes get their intro shows, stop using this hacky release event
-  mode_recruitzaeed_started: mode_intro_complete|3s
-
 #####
 # Use a single slide/widget for all the missions, just update the text
 #####

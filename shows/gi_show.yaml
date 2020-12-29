@@ -94,3 +94,41 @@
     gi_bottom:
       color: FFCCB0%20 # color_grunt at 75% white
       fade: 1s
+
+# Step 6: Heretic Station
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: 539bc2
+      fade: 1s
+    light_backwall_ambient:
+      color: (backwall_color)
+      fade: 1s
+    gi_top:
+      color: 537fc2
+      fade: 1s
+    gi_middle:
+      color: 86a4d1
+      fade: 1s
+    gi_bottom:
+      color: 97adba
+      fade: 1s
+
+# Step 7: Haestrom
+- duration: 1
+  lights:
+    light_backwall_gi:
+      color: e6d495
+      fade: 1s
+    light_backwall_ambient:
+      color: (backwall_color)
+      fade: 1s
+    gi_top:
+      color: e6d495
+      fade: 1s
+    gi_middle:
+      color: c5edec
+      fade: 1s
+    gi_bottom:
+      color: 95b7e6
+      fade: 1s

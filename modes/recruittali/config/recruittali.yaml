@@ -147,6 +147,12 @@ shot_profiles:
       show: off
 
 show_player:
+  mode_recruittali_started:
+    gi_show:
+      start_step: 7
+      manual_advance: True
+      show_tokens:
+        backwall_color: color_tali
   play_mode_intro:
     recruitintro_tali:
       loops: 0

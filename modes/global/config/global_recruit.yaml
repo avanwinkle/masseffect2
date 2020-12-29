@@ -129,6 +129,9 @@ show_player:
   recruit_thane_complete:
     recruit_success_thane:
       loops: 0
+  recruit_zaeed_complete:
+    recruit_success_zaeed:
+      loops: 0
 
 shows:
   recruit_success_garrus:
@@ -212,6 +215,15 @@ shows:
     - time: 1s
       sounds: missioncomplete_voice_thane
     - time: 7s
+  recruit_success_zaeed:
+    - time: 0
+      slides:
+        recruit_complete_portrait_slide_zaeed:
+          target: lcd_right
+          priority: 1000
+    - time: 1s
+      sounds: missioncomplete_voice_zaeed
+    - time: 9730ms
 
 widgets:
   portrait_squadmate_legion_complete:

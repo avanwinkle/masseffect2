@@ -380,6 +380,12 @@ slides:
       end_behavior: pause
     - type: image
       image: portrait_recruitthane
+  recruit_complete_portrait_slide_zaeed:
+    - type: video
+      video: recruitzaeed_complete
+      end_behavior: pause
+    - type: image
+      image: portrait_recruitzaeed
   # Core slides
   1player_score_slide:
     transition: fade
@@ -1130,8 +1136,10 @@ widgets:
       end_behavior: pause
       z: 107
   portrait_recruit_intro_zaeed:
-    - type: image
-      image: portrait_recruitzaeed
+    - type: video
+      video: recruitintro_zaeed
+      end_behavior: pause
+      z: 108
   # This underlays the right lcd during mission select
   dossier_recruit_base:
     - type: image
