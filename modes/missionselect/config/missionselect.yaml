@@ -443,7 +443,7 @@ widgets:
       text: "Dossier: The Warlord"
       style: codex_title
     - type: text
-      text: "Warlord Okeer has cloned Krogan in\nsearch of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred bezerkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
+      text: "Warlord Okeer has cloned Krogan in\nsearch of a cure, but the rejected\nspecimens have escaped.\n\nDefeat the tank-bred berserkers and\nrecover Dr. Okeer's \"pure\" Krogan\nsoldier for your squad."
       style: codex_text
     - widget: dossier_recruit_base
   dossier_recruitjack:

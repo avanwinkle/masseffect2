@@ -53,6 +53,7 @@ event_player:
       slide: fmball_lock_lit_slide
       portrait: arrival_light_(locked_balls)
       mball_name: arrival
+      expire: 6633ms
       ball:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
@@ -75,12 +76,14 @@ event_player:
       portrait: arrival_lock_1
       mball_name: arrival
       description: Med Bay Escaped
+      expire: 5600ms
       ball: 1
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==2}:
       priority: 5
       slide: fmball_ball_locked_slide
       portrait: arrival_lock_2
       mball_name: arrival
+      expire: 10s
       description: Reactor Online
       ball: 2
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==3}:
@@ -88,6 +91,7 @@ event_player:
       slide: fmball_ball_locked_slide
       portrait: arrival_lock_3
       mball_name: arrival
+      expire: 8200ms
       description: Project Activated
       ball: 3
   arrival_ball_will_lock.1:
@@ -96,6 +100,7 @@ event_player:
       slide: fmball_full_slide
       portrait: arrival_lock_3
       mball_name: arrival
+      expire: 6900ms
 
 shot_groups:
   fmball_lightshot:
@@ -561,6 +566,28 @@ widgets:
     - type: video
       video: overlord_lock_atlas
       end_behavior: pause
+  bg_arrival_light_0:
+    - type: video
+      video: arrival_light_medbay
+      # end_behavior: pause
+  bg_arrival_lock_1:
+    - type: video
+      video: arrival_lock_medbay
+      # end_behavior: pause
+  bg_arrival_light_1:
+    - type: video
+      video: arrival_light_coolingrod
+      # end_behavior: pause
+  bg_arrival_lock_2:
+    - type: video
+      video: arrival_lock_coolingrod
+  bg_arrival_light_2:
+    - type: video
+      video: arrival_light_activate
+  bg_arrival_lock_3:
+    - type: video
+      video: arrival_lock_activate
+      end_behavior: pause
   bg_arrival:
     - type: image
       image: bg_arrival
@@ -576,3 +603,16 @@ widgets:
     - type: text
       text: "Atlas Station Cleared"
       style: header_sm, row_sub, col_left_anchor
+  lock_description_arrival_1:
+    - type: text
+      text: "Escaped from Med Bay"
+      style: header_sm, row_sub, col_left_anchor
+  lock_description_arrival_2:
+    - type: text
+      text: "Engines at Full Speed"
+      style: header_sm, row_sub, col_left_anchor
+  lock_description_arrival_3:
+    - type: text
+      text: "Relay Collision Imminent"
+      style: header_sm, row_sub, col_left_anchor
+

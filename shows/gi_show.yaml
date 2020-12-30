@@ -61,16 +61,16 @@
 - duration: 1
   lights:
     light_backwall_gi:
-      color: color_samara
+      color: c8aff0
       fade: 1s
     light_backwall_ambient:
       color: (backwall_color)
       fade: 1s
     gi_bottom:
-      color: color_jack%30
+      color: c8aff0
       fade: 1s
     gi_middle:
-      color: color_space
+      color: 78c5f5
       fade: 1s
     gi_top:
       color: color_barrier
