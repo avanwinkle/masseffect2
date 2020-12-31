@@ -44,13 +44,14 @@ event_player:
   multiball_arrival_multiball_ended:
     # If the multiball ended before the hold is enabled, enable it
     - enable_arrival_hold{not device.ball_holds.arrival_hold.enabled}
-  # If a ball drains and none are in the hold, that's the end of the mode
   balls_in_play:
-    - stop_mode_arrival{balls==0}
+    # If all balls drains and none are in the hold, that's the end of the mode
+    - stop_mode_arrival{balls==0 and device.ball_holds.arrival_hold.balls_held==0}
+    # If a ball drains and all the other "in play" balls are held, that's a success!
     - arrival_complete{balls==device.ball_holds.arrival_hold.balls_held}
     # - acknowledge_playfield_empty
   ball_hold_arrival_hold_held_ball{total_balls_held==game.balls_in_play}:
-    # If any the balls end up in the hold when the playfield empties, success!
+    # If the last ball in play is held, success!
     - arrival_complete
   # Just in case the player kept FOUR balls in, holding 3 is complete
   ball_hold_arrival_hold_full: arrival_complete
@@ -73,19 +74,27 @@ event_player:
     - play_arrival_engine_50{value==120}
     - play_arrival_engine_75{value==180}
     - play_arrival_engine_100{value==240}
-    - play_arrival_collision_imminent{value==255}
-    - play_arrival_get_to_escape_shuttles{value==299}
+    # - play_arrival_collision_imminent{value==255}
+    - play_arrival_get_to_escape_shuttles{value==255}
   arrival_complete:
     - flippers_off
-  # The save event posts even when it ignores a not_last_ball. Be explicit.
-  ball_save_arrival_save_saving_ball{balls>0}:
+  # The save event posts even when it ignores a not_last_ball.
+  # Be explicit and wait for the last ball to be saved
+  # ball_save_arrival_save_saving_ball{balls>0}:
+  arrival_explosion_complete.2:
+    # Use the second event so we only award levelup the first time it's completed
+    - award_arrival_levelup{device.achievements.arrival.state!="completed"}
     - flippers_on
+  arrival_explosion_complete.1:
     - stop_mode_arrival
-    - levelup
+  award_arrival_levelup:
+    levelup:
+      mission_name: "Alpha Relay Destroyed"
 
 ball_saves:
   arrival_save:
     enable_events: arrival_complete
+    delayed_eject_events: arrival_explosion_complete
     only_last_ball: true
     auto_launch: true
 
@@ -229,6 +238,17 @@ show_player:
   mode_arrival_started:
     arrival_cineanim:
       loops: 0
+  enable_arrival_hold:
+    arrival_escape:
+      loops: 0
+  force_arrival_end:
+    arrival_cineanim:
+      action: stop
+    arrival_final:
+      loops: 0
+  play_arrival_final:
+    arrival_final:
+      loops: 0
 
 shows:
   arrival_cineanim:
@@ -238,17 +258,45 @@ shows:
           action: play
         portrait_arrival_intro:
           target: lcd_right
-    - time: 200ms
+    - time: 3s
+      events: play_music_1
+    - time: 5s
       sounds:
         arr_annc_project_activated_collision_imminent:
           action: play
-    - time: 5s
-      events: play_music_1
     - time: 8s
       events: mode_intro_complete
     - time: 9s
       events: show_arrival_slide
     - time: 9233ms
+  arrival_escape:
+    - time: 0
+      events: play_music_2
+      slides:
+        portrait_arrival_normandy:
+          target: lcd_right
+        arrival_portrait_1:
+          target: lcd_right
+          action: remove
+    - time: 500ms
+      events: play_arrival_collision_imminent
+    # - time: 3s
+    #   sounds: arr_shep_joker_do_you_read
+    - time: 5s
+      sounds: arr_shep_joker_i_need_a_pickup
+    - time: 69s
+      events: play_arrival_final
+  arrival_final:
+    - time: 0
+      slides:
+        arrival_explosion_slide:
+          action: play
+    - time: 5s
+      events: flippers_off
+    - time: 6s
+      events: play_arrival_complete_text
+    - time: 20s
+      events: arrival_explosion_complete
 
 light_player:
   play_music_1:
@@ -281,13 +329,6 @@ slide_player:
   enable_arrival_hold:
     arrival_escape_slide:
       action: play
-    arrival_portrait_4:
-      target: lcd_right
-  arrival_complete:
-    arrival_complete_slide:
-      action: play
-    arrival_portrait_complete:
-      target: lcd_right
 
 slides:
   arrival_cineanim:
@@ -321,18 +362,10 @@ slides:
         text: Lock balls for Jackpot
         style: body_sm, row_sub, col_left_anchor
       - widget: background_console
-  arrival_complete_slide:
+  arrival_explosion_slide:
     widgets:
-      - type: text
-        text: ARRIVAL
-        style: header_xs, row_top, col_left_anchor, color_ui_green_light
-      - type: text
-        text: Mission Complete
-        style: header_md, row_main
-      - type: text
-        text: You escaped the Alpha Relay
-        style: body_sm, row_sub
-      - widget: background_console
+      - type: video
+        video: arrival_explosion
   portrait_arrival_intro:
     - type: image
       image: codex_arrival_escape
@@ -349,14 +382,11 @@ slides:
       - type: video
         video: arrival_portrait
         end_behavior: loop
-  arrival_portrait_4:
+  portrait_arrival_normandy:
     widgets:
-      - type: image
-        image: portrait_arrival_phase_4
-  arrival_portrait_complete:
-    widgets:
-      - type: image
-        image: portrait_arrival_destroyed
+      - type: video
+        video: arrival_portrait_normandy
+        end_behavior: stop
 
 widget_player:
   slide_arrival_slide_created:
@@ -367,6 +397,10 @@ widget_player:
     arrival_frenzy_progress_widget:
       action: remove
       slide: arrival_slide
+  play_arrival_complete_text:
+    arrival_complete_text:
+      action: add
+      slide: arrival_explosion_slide
 
 widgets:
   arrival_frenzy_progress_widget:
@@ -403,9 +437,24 @@ widgets:
       z: 99
       color: FFFFFF
       opacity: 0.1
+  arrival_complete_text:
+    - type: text
+      text: ARRIVAL
+      style: header_xs, row_top, col_left_anchor, color_ui_green_light
+    - type: text
+      text: Mission Complete
+      style: header_md, row_main
+    - type: text
+      text: You escaped the Alpha Relay
+      style: body_sm, row_sub
 
 sound_player:
-  play_music_1: arrival_music
+  play_music_1: arrival_music_1
+  play_music_2:
+    arrival_music_2:
+      action: play
+    arrival_music_1:
+      action: stop
   play_arrival_phase1_1: arr_ken_i_can_still_override_engines
   play_arrival_engine_25: arr_annc_engine_at_25pct
   play_arrival_engine_50: arr_annc_engine_at_50pct
@@ -413,16 +462,27 @@ sound_player:
   play_arrival_engine_100: arr_annc_engine_at_100pct
   play_arrival_collision_imminent: arr_annc_warning_collision_imminent
   play_arrival_get_to_escape_shuttles: arr_annc_get_to_escape_shuttles
-  logicblock_arrival_frenzy_counter_completed: arr_shep_joker_i_need_a_pickup
-  ball_hold_arrival_hold_held_ball{balls_held==1}: arr_normandy_inbound
+  ball_hold_arrival_hold_held_ball{balls_held==1}:
+    arr_normandy_inbound:
+      action: play
 
 sounds:
-  arrival_music:
+  arrival_music_1:
+    file: ARR.06.Object_Rho.ogg
+    track: music
+    fade_in: 1s
+    fade_out: 1s
+    start_at: 17s
+    loop_start_at: 17858ms
+    loop_end_at: 91787ms # 92s
+    loops: -1
+    mode_end_action: stop
+  arrival_music_2:
     file: ARR.09.Escaping_The_Station.ogg
     track: music
-    fade_in: 2s
-    fade_out: 1s
-    start_at: 45s
+    fade_in: 3s
+    fade_out: 4s
+    start_at: 65s
     mode_end_action: stop
   arr_annc_engine_at_25pct:
     file: DLC_EXP_Part02_Int.026.ogg

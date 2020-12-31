@@ -35,7 +35,7 @@ achievements:
     enable_events: mode_collectorship_base_started
     start_events: mode_arrival_started
     stop_events: mode_arrival_stopped
-    complete_events: arrival_escapeshot_hit
+    complete_events: award_arrival_levelup
     restart_on_next_ball_when_started: false
   # MAIN STORY MISSIONS
   collectorship:
