@@ -29,12 +29,12 @@
 mode:
   start_events: start_mode_arrival
   stop_events: stop_mode_arrival, stop_wizards
-  events_when_started: mode_type_wizard_started, fmball_started, start_mode_frenzy
+  events_when_started: mode_type_wizard_started, fmball_started, start_mode_frenzy, mode_intro_started
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped, stop_mode_frenzy
   priority: 1000
 
 event_player:
-  mode_arrival_started:
+  mode_intro_complete:
     - enable_arrival_orbits
   reset_arrival:
     - enable_arrival_orbits
@@ -96,7 +96,7 @@ multiballs:
     replace_balls_in_play: true
     ball_locks: bd_lock
     shoot_again: 12s
-    start_events: mode_arrival_started
+    start_events: mode_intro_complete
 
 variable_player:
   # Temp multiplier: 0 == orbits, 1 == ramps
@@ -129,8 +129,10 @@ timers:
     direction: down
     tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
     restart_on_complete: true
-    start_running: true
+    start_running: false
     control_events:
+      - event: mode_intro_complete
+        action: start
       - event: enable_arrival_hold
         action: stop
 
@@ -223,8 +225,55 @@ shots:
       color: color_arrival
     tags: envshot_kickback, power_target, power_target_kickback
 
-slide_player:
+show_player:
   mode_arrival_started:
+    arrival_cineanim:
+      loops: 0
+
+shows:
+  arrival_cineanim:
+    - time: 0
+      slides:
+        arrival_cineanim:
+          action: play
+        portrait_arrival_intro:
+          target: lcd_right
+    - time: 200ms
+      sounds:
+        arr_annc_project_activated_collision_imminent:
+          action: play
+    - time: 5s
+      events: play_music_1
+    - time: 8s
+      events: mode_intro_complete
+    - time: 9s
+      events: show_arrival_slide
+    - time: 9233ms
+
+light_player:
+  play_music_1:
+    light_backwall_gi:
+      color: color_arrival
+      fade: 3s
+    light_backwall_ambient:
+      color: color_arrival
+      fade: 3s
+    gi:
+      color: color_arrival
+      fade: 3s
+  mode_intro_skipped:
+    light_backwall_gi:
+      color: color_arrival
+      fade: 3s
+    light_backwall_ambient:
+      color: color_arrival
+      fade: 3s
+    gi:
+      color: color_arrival
+      fade: 3s
+
+slide_player:
+  show_arrival_slide:
     arrival_slide:
       action: play
     arrival_portrait_1:
@@ -241,6 +290,12 @@ slide_player:
       target: lcd_right
 
 slides:
+  arrival_cineanim:
+    priority: 100
+    widgets:
+      - type: video
+        video: arrival_lock_activate
+        end_behavior: pause
   arrival_slide:
     widgets:
       - type: text
@@ -278,10 +333,22 @@ slides:
         text: You escaped the Alpha Relay
         style: body_sm, row_sub
       - widget: background_console
+  portrait_arrival_intro:
+    - type: image
+      image: codex_arrival_escape
+      style: codex_image
+    - type: text
+      text: "Arrival: Escape"
+      style: codex_title
+    - type: text
+      text: "The Alpha Relay is minutes from\ndestruction. Fight you way to the\nshuttle pad and call the Normandy\nfor extraction before the entire\nstar system is destroyed."
+      style: codex_text
+    - widget: dossier_recruit_base
   arrival_portrait_1:
     widgets:
-      - type: image
-        image: portrait_arrival_phase_1
+      - type: video
+        video: arrival_portrait
+        end_behavior: loop
   arrival_portrait_4:
     widgets:
       - type: image
@@ -338,7 +405,7 @@ widgets:
       opacity: 0.1
 
 sound_player:
-  mode_arrival_started: arrival_music
+  play_music_1: arrival_music
   play_arrival_phase1_1: arr_ken_i_can_still_override_engines
   play_arrival_engine_25: arr_annc_engine_at_25pct
   play_arrival_engine_50: arr_annc_engine_at_50pct
@@ -389,4 +456,7 @@ sounds:
     track: voice
   arr_harb_prepare_yourself:
     file: DLC_EXP_Part02_Int.716.ogg
+    track: voice
+  arr_annc_project_activated_collision_imminent:
+    file: DLC_EXP_Part02_Int.676.ogg
     track: voice

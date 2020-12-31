@@ -75,7 +75,6 @@ event_player:
       slide: fmball_ball_locked_slide
       portrait: arrival_lock_1
       mball_name: arrival
-      description: Med Bay Escaped
       expire: 5600ms
       ball: 1
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==2}:
@@ -84,23 +83,7 @@ event_player:
       portrait: arrival_lock_2
       mball_name: arrival
       expire: 10s
-      description: Reactor Online
       ball: 2
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==3}:
-      priority: 7
-      slide: fmball_ball_locked_slide
-      portrait: arrival_lock_3
-      mball_name: arrival
-      expire: 8200ms
-      description: Project Activated
-      ball: 3
-  arrival_ball_will_lock.1:
-    queue_slide{device.multiball_locks.fmball_lock.locked_balls==3}:
-      priority: 6
-      slide: fmball_full_slide
-      portrait: arrival_lock_3
-      mball_name: arrival
-      expire: 6900ms
 
 shot_groups:
   fmball_lightshot:
@@ -297,9 +280,6 @@ sound_player:
     arr_annc_cooling_rod_b_inserted:
       action: play
       max_queue_time: 2s
-  play_queued_slide_fmball_ball_locked_slide.6{ball==3 and mball_name=="arrival"}:
-    arr_annc_project_activated_collision_imminent:
-      action: play
 
 sound_pools:
   geth_hit_sfx:
@@ -417,9 +397,6 @@ sounds:
   arr_shep_i_wanna_activate_the_project:
     file: DLC_EXP_Part02_Int.674.ogg
     track: voice
-  arr_annc_project_activated_collision_imminent:
-    file: DLC_EXP_Part02_Int.676.ogg
-    track: voice
 
 widgets:
   portrait_overlord_light_0:
@@ -533,17 +510,7 @@ widgets:
       text: "The Project has been activated and\nthe asteroid is now on a collision\ncourse with the Alpha Relay. Escape\nthe base and use the relay to jump\nbefore the relay is destroyed!"
       style: codex_text
     - widget: dossier_recruit_base
-  portrait_arrival_lock_3:
-    - type: image
-      image: codex_arrival_escape
-      style: codex_image
-    - type: text
-      text: "Arrival: Escape"
-      style: codex_title
-    - type: text
-      text: "The Alpha Relay is minutes from\ndestruction. Fight you way to the\nshuttle pad and call the Normandy\nfor extraction before the entire\nstar system is destroyed."
-      style: codex_text
-    - widget: dossier_recruit_base
+
   bg_overlord_light_0:
     - type: video
       video: overlord_light_vulcan
@@ -562,10 +529,6 @@ widgets:
   bg_overlord_light_2:
     - type: video
       video: overlord_light_atlas
-  bg_overlord_lock_3:
-    - type: video
-      video: overlord_lock_atlas
-      end_behavior: pause
   bg_arrival_light_0:
     - type: video
       video: arrival_light_medbay
@@ -584,10 +547,6 @@ widgets:
   bg_arrival_light_2:
     - type: video
       video: arrival_light_activate
-  bg_arrival_lock_3:
-    - type: video
-      video: arrival_lock_activate
-      end_behavior: pause
   bg_arrival:
     - type: image
       image: bg_arrival
