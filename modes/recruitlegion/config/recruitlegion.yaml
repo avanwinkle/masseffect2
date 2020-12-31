@@ -41,8 +41,10 @@ event_player:
       shots_total: 5
       ticks: 60
       persist_name: recruitlegion
+      # Disable all shots in case a previous mode had some left over
+      starting_shots: none
   # Mock an event to set the widget width
-  slide_recruit_mission_slide_created:
+  slide_recruit_mission_slide_active|100ms:
     player_heretic_progress:
       value:
         value: current_player.heretic_progress
@@ -516,6 +518,7 @@ widget_player:
     heretic_hack_progress_widget:
       action: add
       slide: recruit_mission_slide
+      priority: 100
   recruit_legion_precomplete:
     heretic_hack_progress_widget:
       action: remove

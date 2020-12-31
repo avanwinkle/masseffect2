@@ -1,0 +1,183 @@
+#show_version=5
+- time: 0
+#No change this frame - take another step
+#  lights:
+- time: '+1'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '4DC9FD'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '53CBFD'
+    l_store: '53CBFD'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '59CCFD'
+    l_kickback_shield_rgb: '010303'
+    l_store: '59CCFD'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '5FCEFD'
+    l_kickback_shield_rgb: '5FCEFD'
+    l_left_ramp_shield_rgb: '5FCEFD'
+    l_store: '5FCEFD'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '65CFFD'
+    l_kickback_arrow: '030608'
+    l_kickback_shield_rgb: '65CFFD'
+    l_left_ramp_shield_rgb: '000000'
+    l_standup_2: '65CFFD'
+    l_store: '65CFFD'
+
+- time: '+1'
+  lights:
+    l_flash_left_orbit: '000000'
+    l_kickback_arrow: '6BD1FD'
+    l_kickback_shield_rgb: '6BD1FD'
+    l_left_orbit_shield_rgb: '6BD1FD'
+    l_left_ramp_arrow: '6BD1FD'
+    l_standup_1: '6BD1FD'
+    l_standup_2: '6BD1FD'
+    l_store: '6BD1FD'
+
+- time: '+1'
+  lights:
+    l_kickback_arrow: '70D2FD'
+    l_kickback_shield_rgb: '70D2FD'
+    l_left_orbit_shield_rgb: '70D2FD'
+    l_left_ramp_arrow: '000000'
+    l_standup_1: '70D2FD'
+    l_standup_2: '70D2FD'
+    l_store: '000000'
+
+- time: '+1'
+  lights:
+    l_kickback_arrow: '76D4FD'
+    l_kickback_shield_rgb: '000000'
+    l_left_orbit_shield_rgb: '76D4FD'
+    l_standup_1: '76D4FD'
+    l_standup_2: '000000'
+
+- time: '+1'
+  lights:
+    l_kickback_arrow: '000101'
+    l_left_orbit_shield_rgb: '7CD5FD'
+    l_standup_1: '7CD5FD'
+
+- time: '+1'
+  lights:
+    l_dropbank_top: '82D7FD'
+    l_kickback_arrow: '000000'
+    l_left_orbit_shield_rgb: '82D7FD'
+    l_progress_normandy: '82D7FD'
+    l_standup_1: '82D7FD'
+
+- time: '+1'
+  lights:
+    l_dropbank_middle: '88D8FD'
+    l_dropbank_top: '88D8FD'
+    l_left_orbit_shield_rgb: '88D8FD'
+    l_progress_normandy: '6AA9C5'
+    l_standup_1: '000000'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '8EDAFD'
+    l_dropbank_middle: '8EDAFD'
+    l_dropbank_top: '8EDAFD'
+    l_left_orbit_shield_rgb: '000000'
+    l_progress_collectorship: '030506'
+    l_progress_normandy: '000000'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '93DBFD'
+    l_dropbank_middle: '93DBFD'
+    l_dropbank_top: '93DBFD'
+    l_progress_collectorship: '93DBFD'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '99DDFD'
+    l_dropbank_middle: '99DDFD'
+    l_dropbank_top: '99DDFD'
+    l_progress_collectorship: '000000'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '9FDEFD'
+    l_dropbank_middle: '9FDEFD'
+    l_dropbank_top: '9FDEFD'
+    l_left_outlane: '040606'
+    l_left_return_lane: '9FDEFD'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: 'A5E0FD'
+    l_dropbank_middle: '080B0C'
+    l_dropbank_top: '000000'
+    l_left_outlane: 'A5E0FD'
+    l_left_return_lane: 'A5E0FD'
+    l_power_charge: 'A5E0FD'
+
+- time: '+1'
+  lights:
+    l_dropbank_bottom: '000000'
+    l_dropbank_middle: '000000'
+    l_left_outlane: 'A8DEF9'
+    l_left_return_lane: 'ABE1FD'
+    l_power_armor: 'ABE1FD'
+    l_power_charge: 'ABE1FD'
+
+- time: '+1'
+  lights:
+    l_left_outlane: '000000'
+    l_left_return_lane: 'B1E3FD'
+    l_power_adrenaline: 'B1E3FD'
+    l_power_armor: 'B1E3FD'
+    l_power_charge: 'B1E3FD'
+
+- time: '+1'
+  lights:
+    l_left_return_lane: '000000'
+    l_power_adrenaline: 'B6E4FD'
+    l_power_armor: 'B6E4FD'
+    l_power_charge: 'B6E4FD'
+
+- time: '+1'
+  lights:
+    l_left_medigel: 'BCE6FD'
+    l_power_adrenaline: 'BCE6FD'
+    l_power_armor: 'BCE6FD'
+    l_power_charge: '000000'
+
+- time: '+1'
+  lights:
+    l_left_medigel: 'C2E7FD'
+    l_power_adrenaline: 'C2E7FD'
+    l_power_armor: 'BFE4F9'
+
+- time: '+1'
+  lights:
+    l_left_medigel: '000000'
+    l_power_adrenaline: 'C8E9FD'
+    l_power_armor: '000000'
+
+- time: '+1'
+  lights:
+    l_power_adrenaline: '000000'
+
+#No change this frame - take another step
+#  lights:
+- time: '+1'
+
+#No change this frame - take another step
+#  lights:
+- time: '+19'
+

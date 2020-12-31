@@ -1,0 +1,240 @@
+#show_version=5
+- time: 0
+- time: '+1'
+  lights:
+    l_battering_ram_top: '48C8FD'
+
+- time: '+1'
+  lights:
+    l_battering_ram_top: '4DC9FD'
+    l_left_ramp_shield_rgb: '000101'
+    l_standup_3: '4DC9FD'
+    l_standup_4: '4DC9FD'
+
+- time: '+1'
+  lights:
+    l_battering_ram_top: '53CBFD'
+    l_left_ramp_shield_rgb: '53CBFD'
+    l_standup_3: '53CBFD'
+    l_standup_4: '53CBFD'
+    l_store: '53CBFD'
+
+- time: '+1'
+  lights:
+    l_battering_ram_top: '59CCFD'
+    l_kickback_shield_rgb: '59CCFD'
+    l_left_ramp_arrow: '57C8F8'
+    l_left_ramp_shield_rgb: '59CCFD'
+    l_right_ramp_shield_rgb: '59CCFD'
+    l_standup_2: '59CCFC'
+    l_standup_3: '59CCFD'
+    l_standup_4: '59CCFD'
+    l_store: '000000'
+
+- time: '+1'
+  lights:
+    l_battering_ram_top: '5FCEFD'
+    l_kickback_shield_rgb: '000000'
+    l_left_ramp_arrow: '5FCEFD'
+    l_left_ramp_shield_rgb: '5FCEFD'
+    l_right_ramp_arrow: '5FCEFD'
+    l_right_ramp_shield_rgb: '5FCEFD'
+    l_standup_2: '5FCEFD'
+    l_standup_3: '5FCEFD'
+    l_standup_4: '5FCEFD'
+
+- time: '+1'
+  lights:
+    l_battering_ram_top: '000000'
+    l_kickback_arrow: '65CFFD'
+    l_left_ramp_arrow: '65CFFD'
+    l_left_ramp_shield_rgb: '64CEFB'
+    l_right_ramp_arrow: '65CFFD'
+    l_right_ramp_shield_rgb: '000000'
+    l_standup_2: '65CFFD'
+    l_standup_3: '65CFFD'
+    l_standup_4: '000000'
+
+- time: '+1'
+  lights:
+    l_kickback_arrow: '0A1317'
+    l_left_ramp_arrow: '6BD1FD'
+    l_left_ramp_shield_rgb: '000000'
+    l_right_ramp_arrow: '6BD1FD'
+    l_standup_2: '000000'
+    l_standup_3: '6ACFFA'
+
+- time: '+1'
+  lights:
+    l_kickback_arrow: '000000'
+    l_ladder_light_9: '70D2FD'
+    l_left_ramp_arrow: '70D2FD'
+    l_progress_normandy: '14272E'
+    l_right_ramp_arrow: '000000'
+    l_standup_3: '000000'
+
+- time: '+1'
+  lights:
+    l_ladder_light_7: '76D4FD'
+    l_ladder_light_8: '76D4FD'
+    l_ladder_light_9: '76D4FD'
+    l_left_ramp_arrow: '000000'
+    l_progress_normandy: '76D4FD'
+
+- time: '+1'
+  lights:
+    l_ladder_light_4: '7CD5FD'
+    l_ladder_light_5: '7CD5FD'
+    l_ladder_light_6: '7CD5FD'
+    l_ladder_light_7: '7CD5FD'
+    l_ladder_light_8: '7CD5FD'
+    l_ladder_light_9: '7CD5FD'
+    l_progress_derelictreaper: '7CD5FD'
+    l_progress_normandy: '7CD5FD'
+
+- time: '+1'
+  lights:
+    l_ladder_light_2: '82D7FD'
+    l_ladder_light_3: '82D7FD'
+    l_ladder_light_4: '82D7FD'
+    l_ladder_light_5: '82D7FD'
+    l_ladder_light_6: '82D7FD'
+    l_ladder_light_7: '82D7FD'
+    l_ladder_light_8: '82D7FD'
+    l_ladder_light_9: '82D7FD'
+    l_progress_collectorship: '82D7FD'
+    l_progress_derelictreaper: '82D7FD'
+    l_progress_normandy: '82D7FD'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '88D8FD'
+    l_ladder_light_1: '88D8FD'
+    l_ladder_light_2: '88D8FD'
+    l_ladder_light_3: '88D8FD'
+    l_ladder_light_4: '88D8FD'
+    l_ladder_light_5: '88D8FD'
+    l_ladder_light_6: '88D8FD'
+    l_ladder_light_7: '88D8FD'
+    l_ladder_light_8: '88D8FD'
+    l_ladder_light_9: '88D8FD'
+    l_progress_collectorship: '88D8FD'
+    l_progress_derelictreaper: '88D8FD'
+    l_progress_normandy: '000000'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '8EDAFD'
+    l_ladder_light_1: '8EDAFD'
+    l_ladder_light_2: '8EDAFD'
+    l_ladder_light_3: '8EDAFD'
+    l_ladder_light_4: '8EDAFD'
+    l_ladder_light_5: '8EDAFD'
+    l_ladder_light_6: '8EDAFD'
+    l_ladder_light_7: '8EDAFD'
+    l_ladder_light_8: '8EDAFD'
+    l_ladder_light_9: '8EDAFD'
+    l_progress_collectorship: '8EDAFD'
+    l_progress_derelictreaper: '020304'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '93DBFD'
+    l_ladder_light_1: '93DBFD'
+    l_ladder_light_2: '93DBFD'
+    l_ladder_light_3: '93DBFD'
+    l_ladder_light_4: '93DBFD'
+    l_ladder_light_5: '93DBFD'
+    l_ladder_light_6: '93DBFD'
+    l_ladder_light_7: '93DBFD'
+    l_ladder_light_8: '020304'
+    l_ladder_light_9: '000000'
+    l_power_singularity: '50778A'
+    l_progress_collectorship: '92DAFC'
+    l_progress_derelictreaper: '000000'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '99DDFD'
+    l_ladder_light_1: '99DDFD'
+    l_ladder_light_2: '99DDFD'
+    l_ladder_light_3: '99DDFD'
+    l_ladder_light_4: '99DDFD'
+    l_ladder_light_5: '99DDFD'
+    l_ladder_light_6: '000000'
+    l_ladder_light_7: '000000'
+    l_ladder_light_8: '000000'
+    l_power_drone: '496978'
+    l_power_singularity: '99DDFD'
+    l_progress_collectorship: '000000'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '9FDEFD'
+    l_ladder_light_1: '9FDEFD'
+    l_ladder_light_2: '9FDEFD'
+    l_ladder_light_3: '020304'
+    l_ladder_light_4: '000000'
+    l_ladder_light_5: '000000'
+    l_power_charge: '9EDDFC'
+    l_power_drone: '9FDEFD'
+    l_power_singularity: '9FDEFD'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: 'A4E0FC'
+    l_ladder_light_1: '000000'
+    l_ladder_light_2: '000000'
+    l_ladder_light_3: '000000'
+    l_power_armor: '020304'
+    l_power_charge: '000000'
+    l_power_cloak: 'A5E0FD'
+    l_power_drone: 'A5E0FD'
+    l_power_singularity: 'A5E0FD'
+
+- time: '+1'
+  lights:
+    l_ladder_light_0: '000000'
+    l_power_adrenaline: 'AAE0FC'
+    l_power_armor: '000000'
+    l_power_cloak: 'ABE1FD'
+    l_power_drone: 'ABE1FD'
+    l_power_singularity: 'ABE1FD'
+
+- time: '+1'
+  lights:
+    l_power_adrenaline: '000000'
+    l_power_cloak: 'B1E3FD'
+    l_power_drone: 'B1E3FD'
+    l_power_singularity: '000000'
+
+- time: '+1'
+  lights:
+    l_power_cloak: 'B6E4FD'
+    l_power_drone: '000000'
+
+- time: '+1'
+  lights:
+    l_ball_save: 'BCE6FD'
+    l_power_cloak: '000000'
+
+- time: '+1'
+  lights:
+    l_ball_save: 'C2E7FD'
+
+- time: '+1'
+  lights:
+    l_ball_save: 'C8E9FD'
+
+- time: '+1'
+  lights:
+    l_ball_save: 'CEEAFD'
+
+- time: '+1'
+  lights:
+    l_ball_save: '000000'
+
+#No change this frame - take another step
+#  lights:
+- time: '+31'
+

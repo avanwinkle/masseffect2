@@ -68,7 +68,7 @@ variable_player:
 ball_saves:
   # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
   sbvasir_save:
-    active_time: 10s
+    active_time: 10 * current_player.research_ball_save_period_perk
     hurry_up_time: 4s
     grace_period: 2s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active

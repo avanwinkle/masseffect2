@@ -70,7 +70,7 @@ ball_holds:
 
 ball_saves:
   sbboss_save:
-    active_time: 10s
+    active_time: 10 * current_player.research_ball_save_period_perk
     hurry_up_time: 4s
     grace_period: 2s
     enable_events: mode_intro_complete, shadowbroker_round_start

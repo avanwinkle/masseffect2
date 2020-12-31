@@ -50,7 +50,6 @@ event_player:
       color: color_zaeed
       shot_profile: lane_shot_manual_finalshot
       is_resumable: 0
-      persist_name: recruitzaeed
       shots_total: 4
       shots_remaining:
         value: device.counters.zaeed_orbits_counter.value
@@ -359,6 +358,7 @@ widget_player:
     shots_remaining_widget:
       action: update
       slide: recruit_mission_slide
+      priority: 30
   logicblock_zaeed_orbits_counter_updated.2{value<=0}:
     shots_remaining_widget:
       action: remove

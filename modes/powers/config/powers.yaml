@@ -141,7 +141,7 @@ ball_saves:
     enable_events: enable_armor
     auto_launch: true
     balls_to_save: 1
-    active_time: 8s
+    active_time: 8 * current_player.research_ball_save_period_perk
     hurry_up_time: 2s
     grace_period: 1s
     early_ball_save_events: s_outlane_left_active, s_outlane_right_active
@@ -377,9 +377,11 @@ widget_player:
     power_widget_mask:
       action: add
       slide: recruit_mission_slide
+      priority: 20
     power_cooldown_widget:
       action: add
       slide: recruit_mission_slide
+      priority: 10
     power_widget_highlight:
       action: remove
   show_awarded_power:
@@ -391,6 +393,7 @@ widget_player:
     power_widget_highlight:
       action: add
       slide: recruit_mission_slide
+      priority: 11
   mode_powers_will_stop:
     power_available_widget:
       action: remove
@@ -442,6 +445,7 @@ widget_player:
     power_activating_countdown_widget:
       action: add
       slide: recruit_mission_slide
+      priority: 9
   timer_activate_power_stopped:
     power_activating_countdown_widget:
       action: remove

@@ -101,7 +101,7 @@ ball_saves:
     balls_to_save: 1
     hurry_up_time: 4s
     grace_period: 2s
-    active_time: 8 if current_player.suicide_continuing else 20
+    active_time: (8 if current_player.suicide_continuing else 20) * current_player.research_ball_save_period_perk
     auto_launch: true
 
 variable_player:
