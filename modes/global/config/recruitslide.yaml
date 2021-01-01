@@ -175,6 +175,9 @@ slide_player:
       action: remove
     recruit_instructions_slide_dmd:
       action: remove
+    recruit_instructions_portrait_slide:
+      action: remove
+      target: lcd_right
     recruit_mission_slide:
       action: remove
     recruit_portrait_slide:

@@ -96,7 +96,7 @@ variable_player:
   logicblock_zaeed_orbits_counter_complete:
     mission_instructions:
       action: set
-      string: "Hit kickback to complete!"
+      string: "Hit airlock to complete!"
 
 show_player:
   mode_recruitzaeed_started:
@@ -128,10 +128,16 @@ shows:
       events: mode_intro_complete
 
 sound_player:
-  mode_intro_complete:
+  mode_recruitzaeed_started:
     music_recruit_zaeed:
       action: play
       mode_end_action: stop
+  player_zaeed_path_renegade{change>0 and value==0}:
+    shep_we_dont_sacrifice_lives:
+      max_queue_time: 1s
+  player_zaeed_path_renegade{change>0 and value==1}:
+    shep_you_want_him_dead_then_he_dies:
+      max_queue_time: 1s
   mission_shot_hit{count==3 and current_player.zaeed_path_renegade==0}:
     explosionchoice_1_paragon:
       max_queue_time: 1s
@@ -155,19 +161,17 @@ sound_pools:
   zaeed_missionstart:
     sounds: vido_all_squads_sweep_jungle, zaeed_here_we_go, zaeed_bring_it_on
     track: voice
-    type: random_force_all
   explosionchoice_1_paragon:
     sounds: zaeed_you_wanna_waste_time, zaeed_let_these_people_burn
     track: voice
     type: random_force_all
+  # Next two: Not random because choices are shared with initial reputation selection
   explosionchoice_1_renegade:
-    sounds: shep_you_want_him_dead_then_he_dies, shep_lets_get_moving_before_vido_gets_away
+    sounds: shep_lets_get_moving_before_vido_gets_away, shep_you_want_him_dead_then_he_dies
     track: voice
-    type: random_force_all
   explosionchoice_2_paragon:
-    sounds: shep_we_dont_sacrifice_lives, shep_the_mission_is_to_save_these_workers
+    sounds: shep_the_mission_is_to_save_these_workers, shep_we_dont_sacrifice_lives
     track: voice
-    type: random_force_all
   explosionchoice_2_renegade:
     sounds: zaeed_if_we_keep_up_the_pressure, zaeed_glad_you_see_it_my_way
     track: voice
@@ -186,6 +190,7 @@ sounds:
     file: mus_jacob_loy_combat_1.ogg
     track: music
     mode_end_action: stop
+    fade_in: 5s
     fade_out: 1s
   zaeed_here_we_go:
     file: DLC_HEN_VT_Int.334.ogg

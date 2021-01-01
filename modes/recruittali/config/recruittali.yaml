@@ -176,6 +176,10 @@ show_player:
       priority: 100
       show_tokens:
         color: color_armor
+    pulse_playfield_transparent:
+      loops: 0
+      show_tokens:
+        color: color_tali
 
 shows:
   recruitintro_tali:

@@ -29,6 +29,7 @@ event_player:
         type: int
   # Left ramp is before kickback, so enable the hold
   sbchase_left_ramp_chaseprofile_lit_hit: enable_sb_hold
+  mode_shadowbroker_chase_started{current_player.sbchase_hits_remaining==1}: enable_sb_hold
   sbchase_kickback_chaseprofile_lit_hit: shadowbroker_chase_complete
   shadowbroker_chase_complete:
     - mission_collect_score

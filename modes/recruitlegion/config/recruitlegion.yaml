@@ -306,6 +306,11 @@ show_player:
   recruit_legion_complete:
     legion_hack_complete:
       action: stop
+  heretic_shots_lit_hit:
+    pulse_playfield_transparent:
+      loops: 0
+      show_tokens:
+        color: color_legion
 
 shows:
   recruitintro_legion:

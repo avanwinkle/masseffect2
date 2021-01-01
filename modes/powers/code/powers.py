@@ -66,19 +66,18 @@ class Powers(Mode):
         self.add_mode_event_handler('mode_intro_complete', self._mode_intro_complete)
         self.add_mode_event_handler('logicblock_powers_cooldown_updated', self._update_cooldown_progress)
 
-        # LEGION special case: don't deal with shots
-        if self.machine.modes.recruitlegion.active:
-            self.shot_group = self.machine.device_manager.collections["shot_groups"]["heretic_shots"]
-            self.shot_group.disable_rotation()
-            self.shots = self.shot_group.config["shots"]
-            for shot in self.shots:
-                shot.disable()
-            self.log.debug("Powers sees LEGION, aborting all shot management. {}".format(self.shots))
-            return
-
         self.shots = [self.machine.device_manager.collections["shots"][shot] for shot in SHOTS]
         self.shot_group = self.machine.device_manager.collections["shot_groups"]["power_shots"]
         self.shot_group.disable_rotation()
+
+        # Disable all power shots before we get started, to ensure a clean slate
+        for shot in self.shots:
+            shot.disable()
+
+        # LEGION special case: don't deal with shots
+        if self.machine.modes.recruitlegion.active:
+            self.log.debug("Powers sees LEGION, aborting all shot management. {}".format(self.shots))
+            return
 
         self.persisted_shots = self.machine.game.player["persisted_shots"]
         if not self.persisted_shots:
@@ -89,10 +88,6 @@ class Powers(Mode):
             self.log.debug("Retrieved persisted shots from player {}: {}".format(self.player, self.persisted_shots))
 
         self.log.debug("Mode started with shots: {}".format(self.shots))
-
-        # Disable all shots before we get started
-        for shot in self.shots:
-            shot.disable()
 
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('advance_mission_shots', self._advance_mission_shots)
