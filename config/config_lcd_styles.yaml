@@ -249,6 +249,12 @@ widget_styles:
 
   # SQUAD SPECIALISTS
   #----------------------------
+  specialist:
+    font_size: 24
+    color: fbc795
+    anchor_x: left
+    anchor_y: middle
+    z: 100
   spec_default:
     anchor_x: left
     anchor_y: bottom

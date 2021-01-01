@@ -1,30 +1,5 @@
 #config_version=5
 achievements:
-  # SHADOW BROKER
-  chase:
-    enable_events: logicblock_sbdrops_counter_hit{count==3}
-    start_events: mode_shadowbroker_chase_started
-    stop_events: mode_shadowbroker_chase_will_stop
-    complete_events: shadowbroker_chase_complete
-    restart_on_next_ball_when_started: false
-  vasir:
-    enable_events: shadowbroker_chase_complete
-    start_events: shadowbroker_vasir_cineanim_started
-    stop_events: mode_shadowbroker_vasir_will_stop
-    complete_events: shadowbroker_vasir_complete
-    restart_on_next_ball_when_started: false
-  hagalaz:
-    enable_events: logicblock_sbdrops_counter_complete
-    start_events: mode_shadowbroker_hagalaz_started
-    stop_events: mode_shadowbroker_hagalaz_will_stop
-    complete_events: enable_hatch # We don't have to hit the hatch, just opening it is enough
-    restart_on_next_ball_when_started: false
-  shadowbroker:
-    enable_events: enable_hatch
-    start_events: mode_shadowbroker_boss_started
-    stop_events: mode_shadowbroker_boss_will_stop
-    complete_events: shadowbroker_boss_complete
-    restart_on_next_ball_when_started: false
   # MULTIBALLS
   overlord:
     start_events: mode_overlord_started

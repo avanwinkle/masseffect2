@@ -94,9 +94,9 @@ event_player:
     levelup:
       mission_name: Reaper IFF Acquired
   # If the multiball ends and a ball is captive, release it
-  multiball_reapercoremb_ended.1: release_captive
-  # If the multiball ends and we've already destroyed the core, end the mode
-  multiball_reapercoremb_ended.2{device.achievements.derelictreaper.state=="completed"}: stop_mode_derelictreaper
+  multiball_reapercoremb_ended.1{device.ball_holds.captive_hold.balls_held>0}: release_captive
+  # If the multiball ends with no captive ball and we've already destroyed the core, end the mode
+  multiball_reapercoremb_ended.2{device.achievements.derelictreaper.state=="completed" and device.ball_holds.captive_hold.balls_held==0}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
   ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
   # Award whatever was accumulated when the mode ends
@@ -243,17 +243,17 @@ slide_player:
 
 slides:
   derelictreaper_cineanim:
-    transition_out: 
+    transition_out:
       type: fade
       duration: 500ms
     widgets:
       - type: video
         video: derelictreaper_cineanim
   derelictreaper_dossier:
-    transition: 
+    transition:
       type: fade
       duration: 2s
-    transition_out: 
+    transition_out:
       type: fade
       duration: 500ms
     widgets:
@@ -268,7 +268,7 @@ slides:
       style: codex_text
     - widget: dossier_recruit_base
   derelictreaper_frenzy_slide:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     transition_out:
@@ -286,7 +286,7 @@ slides:
         style: recruitslide_score, row_top, col_right_anchor, num
       - widget: background_console
   derelictreaper_captive_slide:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     widgets:
@@ -301,7 +301,7 @@ slides:
         style: recruitslide_score, row_top, col_right_anchor, num
       - widget: background_console
   derelictreaper_core_slide:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     widgets:
@@ -316,14 +316,14 @@ slides:
         style: recruitslide_score, row_top, col_right_anchor, num
       - widget: background_console
   derelictreaper_portrait_core:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     widgets:
       - type: image
         image: portrait_derelictreaper_core
   derelictreaper_portrait_husks:
-    transition: 
+    transition:
       type: fade
       duration: 500ms
     widgets:
@@ -332,6 +332,9 @@ slides:
 
 sound_player:
   mode_intro_skipped:
+    derelictreaper_intro:
+      action: stop
+  mode_intro_complete:
     derelictreaper_intro:
       action: stop
   enable_reaperfrenzy:

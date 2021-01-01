@@ -188,27 +188,27 @@ show_player:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_jack
-  suicide_huddle_specialist_selected.2{squadmate=="jacob"}:
+  suicide_huddle_specialist_selected.3{squadmate=="jacob"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_jacob
-  suicide_huddle_specialist_selected.2{squadmate=="miranda"}:
+  suicide_huddle_specialist_selected.4{squadmate=="miranda"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_miranda
-  suicide_huddle_specialist_selected.2{squadmate=="mordin"}:
+  suicide_huddle_specialist_selected.5{squadmate=="mordin"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_mordin
-  suicide_huddle_specialist_selected.2{squadmate=="samara"}:
+  suicide_huddle_specialist_selected.6{squadmate=="samara"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_samara
-  suicide_huddle_specialist_selected.2{squadmate=="tali"}:
+  suicide_huddle_specialist_selected.7{squadmate=="tali"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_tali
-  suicide_huddle_specialist_selected.2{squadmate=="thane"}:
+  suicide_huddle_specialist_selected.8{squadmate=="thane"}:
     recruits_specialist_show:
       show_tokens:
         leds: l_bbsquad_thane

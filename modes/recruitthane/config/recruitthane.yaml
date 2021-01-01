@@ -24,8 +24,8 @@ event_player:
     show_recruit_instructions:
       squadmate: thane
       portrait: recruitthane
-      instructions_main: Ramps to ascend
-      instructions_sub: Orbits to complete
+      instructions_main: Ramps to ascend the tower
+      instructions_sub: Orbits to cross the bridge
   mode_powers_started:
     set_mission_shots:
       color: color_thane
