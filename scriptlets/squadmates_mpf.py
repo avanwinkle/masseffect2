@@ -280,9 +280,13 @@ class MPFSquadmateHandlers(CustomCode):
         if not self._just_resumed:
             self.machine.events.post("play_mode_intro")
         else:
-            self.machine.events.post("mode_intro_complete")
-
+            # Wait for the mission shots to update the timer before skipping intro
+            self.machine.events.add_handler("set_mission_shots", self._on_mission_resumed, priority=1)
         self.machine.events.remove_handler(self._on_mission_started)
+
+    def _on_mission_resumed(self, **kwargs):
+        self.machine.events.post("mode_intro_complete")
+        self.machine.events.remove_handler(self._on_mission_resumed)
 
     def _on_stop(self, **kwargs):
         self.log.info("on_stop called for recruit mission, kwargs are %s", kwargs)

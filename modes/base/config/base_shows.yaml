@@ -3,12 +3,12 @@ shows:
   airlock_release_warning:
     - duration: 200ms
       lights:
-        batram_multipliers: 
+        batram_multipliers:
           color: (color)
           fade: 30ms
     - duration: 200ms
       lights:
-        batram_multipliers: 
+        batram_multipliers:
           color: black
           fade: 30ms
   ball_save_preshow:
@@ -44,10 +44,14 @@ shows:
   color_flashing_default:
     - duration: 400ms
       lights:
-        (leds): (color)
+        (leds):
+          color: (color)
+          fade: 100ms
     - duration: 400ms
       lights:
-        (leds): black
+        (leds):
+          color: black
+          fade: 100ms
         l_null: (color)
   color_flashing_fast:
     - duration: 200ms
@@ -57,6 +61,17 @@ shows:
       lights:
         (leds): black
         l_null: (color)
+  color_alternating:
+    - time: 0
+      lights:
+        (leds):
+          color: (color1)
+          fade: (fade)
+    - time: '+1'
+      lights:
+        (leds):
+          color: (color2)
+          fade: (fade)
   color_alternating_default:
     - duration: 400ms
       lights:
@@ -135,6 +150,18 @@ shows:
           color: black
           fade: 200ms
         l_null: (color)
+  pulse_playfield_transparent:
+    - duration: 400ms
+      lights:
+        light_pf:
+          color: (color)
+          fade: 400ms
+    - duration: 200ms
+      lights:
+        light_pf:
+          color: stop
+          fade: 400ms
+        l_null: (color)
   pulse_playfield_smooth:
     - duration: 1s
       lights:
@@ -171,6 +198,127 @@ shows:
         (led):
           color: color_shields%20
           fade: 500ms
+  pulse_color_to_transparent:
+    - time: 0
+      lights:
+        (ledring):
+          color: (color)
+          fade: (fade)
+    - duration: 2s
+    - duration: 500ms
+      lights:
+        (ledring)_light_0:
+          color: stop
+          fade: (fade)
+    - duration: 500ms
+      lights:
+        (ledring)_light_2:
+          color: stop
+          fade: (fade)
+    - duration: 500ms
+      lights:
+        (ledring)_light_4:
+          color: stop
+          fade: (fade)
+    - duration: 500ms
+      lights:
+        (ledring)_light_1:
+          color: stop
+          fade: (fade)
+    - duration: 500ms
+      lights:
+        (ledring)_light_3:
+          color: stop
+          fade: (fade)
+    - duration: 500ms
+      lights:
+        (ledring)_light_5:
+          color: stop
+          fade: (fade)
+  pulse_color_to_transparent_dual:
+    - time: 0
+      lights:
+        (ledring1):
+          color: (color)
+          fade: 1s
+        (ledring2):
+          color: (color)
+          fade: 1s
+    - duration: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_0:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_4:
+          color: stop
+          fade: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_2:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_1:
+          color: stop
+          fade: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_4:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_3:
+          color: stop
+          fade: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_1:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_5:
+          color: stop
+          fade: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_3:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_0:
+          color: stop
+          fade: 500ms
+    - duration: 500ms
+      lights:
+        (ledring1)_light_5:
+          color: stop
+          fade: 500ms
+        (ledring2)_light_2:
+          color: stop
+          fade: 500ms
+  pulse_color_to_chase_6:
+    - time: 0
+      lights:
+        (leds):
+          color: (color1)
+          fade: (fade)
+    - time: '+1'
+      lights:
+        (leds)_light_0:
+          color: (color2)%100
+          fade: (fade)
+        (leds)_light_5:
+          color: (color2)%80
+          fade: (fade)
+        (leds)_light_4:
+          color: (color2)%60
+          fade: (fade)
+        (leds)_light_3:
+          color: (color2)%40
+          fade: (fade)
+        (leds)_light_2:
+          color: (color2)%20
+          fade: (fade)
+        (leds)_light_1:
+          color: (color2)%10
+          fade: (fade)
 
 shot_profiles:
   color_on:

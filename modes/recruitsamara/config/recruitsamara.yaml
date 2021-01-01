@@ -81,31 +81,31 @@ shots:
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_1
-      color: color_health
+      color: color_redsand
   samara_target2:
     switch: s_target2
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_2
-      color: color_health
+      color: color_redsand
   samara_target3:
     switch: s_target3
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_3
-      color: color_health
+      color: color_redsand
   samara_target4:
     switch: s_target4
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_4
-      color: color_health
+      color: color_redsand
   samara_target5:
     switch: s_target5
     profile: color_flashing_profile
     show_tokens:
       leds: l_standup_5
-      color: color_health
+      color: color_redsand
 
 show_player:
   mode_recruitsamara_started:
@@ -116,6 +116,57 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_samara
+  power_shots_lit_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      show_tokens:
+        color: color_samara
+  samara_targets_lit_hit:
+    pulse_playfield_transparent:
+      loops: 0
+      show_tokens:
+        color: color_redsand
+  samara_target1_lit_hit:
+    pulse_color_to_transparent_dual:
+      priority: 1000
+      loops: 0
+      show_tokens:
+        color: color_redsand
+        ledring1: l_left_orbit_ring
+        ledring2: l_kickback_ring
+  samara_target2_lit_hit:
+    pulse_color_to_transparent_dual:
+      priority: 1000
+      loops: 0
+      show_tokens:
+        color: color_redsand
+        ledring1: l_kickback_ring
+        ledring2: l_left_ramp_ring
+  samara_target3_lit_hit:
+    pulse_color_to_transparent_dual:
+      priority: 1000
+      loops: 0
+      show_tokens:
+        color: color_redsand
+        ledring1: l_left_ramp_ring
+        ledring2: l_right_ramp_ring
+  samara_target4_lit_hit:
+    pulse_color_to_transparent_dual:
+      priority: 1000
+      loops: 0
+      show_tokens:
+        color: color_redsand
+        ledring1: l_left_ramp_ring
+        ledring2: l_right_ramp_ring
+  samara_target5_lit_hit:
+    pulse_color_to_transparent_dual:
+      priority: 1000
+      loops: 0
+      show_tokens:
+        color: color_redsand
+        ledring1: l_right_ramp_ring
+        ledring2: l_right_orbit_ring
 
 shows:
   recruitintro_samara:
@@ -130,7 +181,7 @@ sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
-  samara_targets_hit: explosion  # Defined in base_endsounds
+  samara_targets_lit_hit: explosion  # Defined in base_endsounds
   mission_shot_hit:
     wasea_hit:
       volume: 1.0

@@ -1,13 +1,13 @@
 #config_version=5
 event_player:
-  set_mission_shots:
+  set_mission_shots.2:
     - missiontimer_set_(current_player.mission_starting_ticks)
 
 variable_player:
   #### FIXED SCORING ####
   #---------------------#
   # Set the initial values necessary
-  set_mission_shots.3:
+  set_mission_shots.30:
     mission_shot_value:
       action: set
       int: machine.base_points / (shots_total * shots_total)
@@ -32,7 +32,7 @@ variable_player:
       action: set
       float: multiplier
   # Make some adjustments for default values
-  set_mission_shots.2:
+  set_mission_shots.20:
     # Default ticks: 60 for non-resumable, 40 for resumable
     mission_starting_ticks{not current_player.mission_starting_ticks}:
       action: set
@@ -47,7 +47,7 @@ variable_player:
       action: set
       float: 1.0
   # Use the values set above to calculate the starting value for _this_ attempt
-  set_mission_shots.1:
+  set_mission_shots.10:
     mission_starting_value:
       action: set
       int: current_player.mission_shot_value * current_player.mission_shots_remaining

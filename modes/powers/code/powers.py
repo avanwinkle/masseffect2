@@ -253,8 +253,6 @@ class Powers(Mode):
                 shot.config['show_tokens']['color'] = \
                     NativeTypeTemplate(kwargs.get("color","FFFFFF"), self.machine)
 
-            self.log.debug("INheret color, what does the profile have? {}".format(shot.config['profile'].config))
-
             if shots_to_set:
                 # Our shot pointers are in the same order as shots_to_set
                 try:

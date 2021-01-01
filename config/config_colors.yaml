@@ -49,5 +49,6 @@ named_colors:
   color_praetorian: 2200AA
   color_shadowbroker: ff1f00
   color_lightning: c5d4e8
+  color_redsand: 92280f
   # Default: mball color is overlord
   color_mball: 22FF33
