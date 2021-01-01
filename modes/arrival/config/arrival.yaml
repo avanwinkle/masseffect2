@@ -198,7 +198,8 @@ shots:
       color: color_arrival
   arrival_left_ramp:
     hit_events: sh_left_ramp_hit
-    disable_events: mode_arrival_started, arrival_left_ramp_hit
+    enable_events: []
+    disable_events: arrival_left_ramp_hit
     profile: lane_shot_duo_profile
     show_tokens:
       leds: l_left_ramp_ring
@@ -206,7 +207,8 @@ shots:
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   arrival_left_orbit:
     hit_events: sh_left_orbit_hit
-    disable_events: mode_arrival_started, arrival_left_orbit_hit
+    enable_events: []
+    disable_events: arrival_left_orbit_hit
     profile: lane_shot_duo_profile
     show_tokens:
       leds: l_left_orbit_ring
@@ -214,7 +216,8 @@ shots:
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   arrival_right_ramp:
     hit_events: sh_right_ramp_hit
-    disable_events: mode_arrival_started, arrival_right_ramp_hit
+    enable_events: []
+    disable_events: arrival_right_ramp_hit
     profile: lane_shot_duo_profile
     show_tokens:
       leds: l_right_ramp_ring
@@ -222,7 +225,8 @@ shots:
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   arrival_right_orbit:
     hit_events: sh_right_orbit_hit
-    disable_events: mode_arrival_started, arrival_right_orbit_hit
+    enable_events: []
+    disable_events: arrival_right_orbit_hit
     profile: lane_shot_duo_profile
     show_tokens:
       leds: l_right_orbit_ring
@@ -230,7 +234,8 @@ shots:
     tags: envshot_right_orbit, power_target, power_target_right_orbit
   arrival_kickback:
     hit_events: sh_kickback_hit
-    disable_events: mode_arrival_started, arrival_kickback_hit
+    enable_events: []
+    disable_events: arrival_kickback_hit
     profile: lane_shot_duo_profile
     show_tokens:
       leds: l_kickback_ring

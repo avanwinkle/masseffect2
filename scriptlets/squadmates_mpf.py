@@ -270,8 +270,6 @@ class MPFSquadmateHandlers(CustomCode):
         # If we selected the mission via resume, note it
         if mate == self.machine.game.player["resume_mission"]:
             self._just_resumed = True
-        # Clear the resume mission
-        self.machine.game.player["resume_mission"] = " "
 
         # Set a listener for the mode starting so we can play the intro show if not-resume
         self.machine.events.add_handler("mode_recruit{}_started".format(mate), self._on_mission_started)
@@ -285,7 +283,6 @@ class MPFSquadmateHandlers(CustomCode):
             self.machine.events.post("mode_intro_complete")
 
         self.machine.events.remove_handler(self._on_mission_started)
-        self._just_resumed = False
 
     def _on_stop(self, **kwargs):
         self.log.info("on_stop called for recruit mission, kwargs are %s", kwargs)
@@ -300,9 +297,14 @@ class MPFSquadmateHandlers(CustomCode):
             # If we failed or timed out, post an event (no resuming because we didn't drain)
             if self.machine.modes["global"].active and not self.machine.modes["global"].stopping:
                 self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
+                self.machine.game.player["resume_mission"] = " "
             # If we drained, store this mission so we can resume if it fails
             elif not self._just_resumed:
                 self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
+            else:
+                # Clear the resume mission
+                self.machine.game.player["resume_mission"] = " "
+                self._just_resumed = False
 
     def _on_complete(self, **kwargs):
         self.log.debug("Received COMPLETE event with kwargs: %s", kwargs)

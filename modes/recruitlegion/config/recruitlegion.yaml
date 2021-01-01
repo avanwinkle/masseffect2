@@ -43,12 +43,6 @@ event_player:
       persist_name: recruitlegion
       # Disable all shots in case a previous mode had some left over
       starting_shots: none
-  # Mock an event to set the widget width
-  slide_recruit_mission_slide_active|100ms:
-    player_heretic_progress:
-      value:
-        value: current_player.heretic_progress
-        type: int
   # Delay the initial heretic shot until after startup resets all shots
   mode_intro_complete:
     - enable_random_heretic
@@ -120,6 +114,9 @@ variable_player:
   # Drain after precomplete? Silently award the levelup
   ball_will_end{current_player.status_legion==4}:
     level: 1
+  # Mock an event to set the widget width
+  slide_recruit_mission_slide_active:
+    heretic_progress: 1
 
 timers:
   heretic_timer:
@@ -372,7 +369,7 @@ sound_player:
       loops: -1
       mode_end_action: stop
   # If the progress goes up, play a shot confirmation sound
-  player_heretic_progress{change>0}:
+  player_heretic_progress{change>1}:
     legion_shot_sound:
       max_queue_time: 500ms
   heretic_shot_dropbank_enabled{value==True}:
