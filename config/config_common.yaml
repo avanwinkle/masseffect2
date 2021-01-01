@@ -406,13 +406,13 @@ player_vars:
   minerals_total:
     initial_value: 0
   mineral_iridium:
-    initial_value: 0
+    initial_value: 30000
   mineral_palladium:
-    initial_value: 0
+    initial_value: 30000
   mineral_platinum:
-    initial_value: 0
+    initial_value: 30000
   mineral_eezo:
-    initial_value: 0
+    initial_value: 2500
   # These "perks" are for purchased upgrades
   research_tick_interval_perk:
     # Timer tick value is 1s, increases with each perk

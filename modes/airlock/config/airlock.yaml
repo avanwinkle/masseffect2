@@ -81,6 +81,10 @@ queue_relay_player:
   fmball_checking_store{not current_player.high_flow}:
     post: fmball_check_store
     wait_for: store_complete
+  # When a ball is locked the trough will attempt to replace it
+  balldevice_bd_trough_ball_eject_attempt{mode.store.active or mode.store._starting}:
+    post: trough_eject_blocked_by_store
+    wait_for: store_complete
 
 variable_player:
   overlord_ball_will_lock:
