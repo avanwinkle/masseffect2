@@ -56,10 +56,14 @@ shows:
   color_flashing_fast:
     - duration: 200ms
       lights:
-        (leds): (color)
+        (leds):
+          color: (color)
+          fade: 50ms
     - duration: 200ms
       lights:
-        (leds): black
+        (leds):
+          color: black
+          fade: 50ms
         l_null: (color)
   color_alternating:
     - time: 0

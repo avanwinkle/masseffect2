@@ -29,7 +29,6 @@
 - time: '+1'
   lights:
     l_flash_left_orbit: '65CFFD'
-    l_kickback_arrow: '030608'
     l_kickback_shield_rgb: '65CFFD'
     l_left_ramp_shield_rgb: '000000'
     l_standup_2: '65CFFD'
@@ -38,7 +37,6 @@
 - time: '+1'
   lights:
     l_flash_left_orbit: '000000'
-    l_kickback_arrow: '6BD1FD'
     l_kickback_shield_rgb: '6BD1FD'
     l_left_orbit_shield_rgb: '6BD1FD'
     l_left_ramp_arrow: '6BD1FD'
@@ -48,7 +46,6 @@
 
 - time: '+1'
   lights:
-    l_kickback_arrow: '70D2FD'
     l_kickback_shield_rgb: '70D2FD'
     l_left_orbit_shield_rgb: '70D2FD'
     l_left_ramp_arrow: '000000'
@@ -58,7 +55,6 @@
 
 - time: '+1'
   lights:
-    l_kickback_arrow: '76D4FD'
     l_kickback_shield_rgb: '000000'
     l_left_orbit_shield_rgb: '76D4FD'
     l_standup_1: '76D4FD'
@@ -66,14 +62,12 @@
 
 - time: '+1'
   lights:
-    l_kickback_arrow: '000101'
     l_left_orbit_shield_rgb: '7CD5FD'
     l_standup_1: '7CD5FD'
 
 - time: '+1'
   lights:
     l_dropbank_top: '82D7FD'
-    l_kickback_arrow: '000000'
     l_left_orbit_shield_rgb: '82D7FD'
     l_progress_normandy: '82D7FD'
     l_standup_1: '82D7FD'

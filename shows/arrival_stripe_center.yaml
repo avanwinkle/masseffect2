@@ -46,7 +46,6 @@
 - time: '+1'
   lights:
     l_battering_ram_top: '000000'
-    l_kickback_arrow: '65CFFD'
     l_left_ramp_arrow: '65CFFD'
     l_left_ramp_shield_rgb: '64CEFB'
     l_right_ramp_arrow: '65CFFD'
@@ -57,7 +56,6 @@
 
 - time: '+1'
   lights:
-    l_kickback_arrow: '0A1317'
     l_left_ramp_arrow: '6BD1FD'
     l_left_ramp_shield_rgb: '000000'
     l_right_ramp_arrow: '6BD1FD'
@@ -66,7 +64,6 @@
 
 - time: '+1'
   lights:
-    l_kickback_arrow: '000000'
     l_ladder_light_9: '70D2FD'
     l_left_ramp_arrow: '70D2FD'
     l_progress_normandy: '14272E'

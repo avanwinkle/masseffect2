@@ -15,7 +15,7 @@
 - time: '+1'
   lights:
     (ledring)_light_0:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_1:
       color: (color)%30
@@ -26,7 +26,7 @@
 - time: '+1'
   lights:
     (ledring)_light_1:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_2:
       color: (color)%30
@@ -37,7 +37,7 @@
 - time: '+1'
   lights:
     (ledring)_light_2:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_3:
       color: (color)%30
@@ -48,7 +48,7 @@
 - time: '+1'
   lights:
     (ledring)_light_3:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_4:
       color: (color)%30
@@ -59,7 +59,7 @@
 - time: '+1'
   lights:
     (ledring)_light_4:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_5:
       color: (color)%30
@@ -70,7 +70,7 @@
 - time: '+1'
   lights:
     (ledring)_light_5:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_6:
       color: (color)%30
@@ -81,7 +81,7 @@
 - time: '+1'
   lights:
     (ledring)_light_6:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_7:
       color: (color)%30
@@ -92,7 +92,7 @@
 - time: '+1'
   lights:
     (ledring)_light_7:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_8:
       color: (color)%30
@@ -103,7 +103,7 @@
 - time: '+1'
   lights:
     (ledring)_light_8:
-      color: off
+      color: stop
       fade: (fade)
     (ledring)_light_9:
       color: (color)%30
@@ -111,6 +111,6 @@
 - time: '+1'
   lights:
     (ledring)_light_9:
-      color: off
+      color: stop
       fade: (fade)
 - time: '+8'

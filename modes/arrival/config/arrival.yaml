@@ -36,9 +36,6 @@ mode:
 event_player:
   mode_intro_complete:
     - enable_arrival_orbits
-    - trigger_left_stripe|5s
-    - trigger_right_stripe|9s
-    - trigger_center_stripe|13s
   reset_arrival:
     - enable_arrival_orbits
   timer_arrival_timer_complete:
@@ -70,7 +67,11 @@ event_player:
   logicblock_arrival_ramps_counter_complete{device.counters.arrival_orbits_counter.completed}:
     - reset_arrival
   # Stop frenzy when hold is enabled
-  enable_arrival_hold: stop_mode_frenzy
+  enable_arrival_hold:
+    - stop_mode_frenzy
+    - trigger_left_stripe
+    - trigger_right_stripe|7s
+    - trigger_center_stripe|11s
   # Sound player won't do conditions
   logicblock_arrival_frenzy_counter_updated:
     - play_arrival_engine_25{value==60}
@@ -191,14 +192,14 @@ shot_groups:
 shots:
   arrival_hold_shot:
     enable_events: enable_arrival_hold
-    disable_events: arrival_complete, stop_mode_arrival
+    disable_events: arrival_complete, play_arrival_final, stop_mode_arrival
     profile: color_flashing_profile
     show_tokens:
       leds: light_lock_lit
       color: color_arrival
   arrival_left_ramp:
     hit_events: sh_left_ramp_hit
-    enable_events: []
+    start_enabled: false
     disable_events: arrival_left_ramp_hit
     profile: lane_shot_duo_profile
     show_tokens:
@@ -207,7 +208,7 @@ shots:
     tags: envshot_left_ramp, power_target, power_target_left_ramp
   arrival_left_orbit:
     hit_events: sh_left_orbit_hit
-    enable_events: []
+    start_enabled: false
     disable_events: arrival_left_orbit_hit
     profile: lane_shot_duo_profile
     show_tokens:
@@ -216,7 +217,7 @@ shots:
     tags: envshot_left_orbit, power_target, power_target_left_orbit
   arrival_right_ramp:
     hit_events: sh_right_ramp_hit
-    enable_events: []
+    start_enabled: false
     disable_events: arrival_right_ramp_hit
     profile: lane_shot_duo_profile
     show_tokens:
@@ -225,7 +226,7 @@ shots:
     tags: envshot_right_ramp, power_target, power_target_right_ramp
   arrival_right_orbit:
     hit_events: sh_right_orbit_hit
-    enable_events: []
+    start_enabled: false
     disable_events: arrival_right_orbit_hit
     profile: lane_shot_duo_profile
     show_tokens:
@@ -234,7 +235,7 @@ shots:
     tags: envshot_right_orbit, power_target, power_target_right_orbit
   arrival_kickback:
     hit_events: sh_kickback_hit
-    enable_events: []
+    start_enabled: false
     disable_events: arrival_kickback_hit
     profile: lane_shot_duo_profile
     show_tokens:
@@ -250,12 +251,26 @@ show_player:
     arrival_gi:
       loops: -1
       speed: 0.5
-    led_12_chase_pulse:
-      speed: 4
+    arrival_gradient_sweep:
+      speed: 20
+    led_10_chase:
+      speed: 10
       show_tokens:
-        ledring: l_mass_relay
-        color: color_shields # 1166FF  # color_paragon
-        fade: 250ms
+        ledring: l_backwall_gi
+        fade: 100ms
+        color: color_arrival
+  play_arrival_engine_25:
+    arrival_gradient_sweep:
+      speed: 25
+  play_arrival_engine_50:
+    arrival_gradient_sweep:
+      speed: 30
+  play_arrival_engine_75:
+    arrival_gradient_sweep:
+      speed: 35
+  play_arrival_engine_100:
+    arrival_gradient_sweep:
+      speed: 40
   trigger_left_stripe:
     arrival_stripe_left:
       loops: -1
@@ -274,14 +289,51 @@ show_player:
     arrival_gi:
       speed: 3
       loops: -1
+    arrival_gradient_sweep:
+      speed: 60
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_shields # 1166FF  # color_paragon
+        fade: 250ms
   force_arrival_end:
     arrival_cineanim:
       action: stop
     arrival_final:
       loops: 0
+  play_arrival_explosion:
+    led_12_chase_pulse:
+      action: stop
+    color_flashing_fast:
+      show_tokens:
+        leds: light_mass_relay
+        color: color_shields
   play_arrival_final:
     arrival_final:
       loops: 0
+    color_flashing_fast:
+      loops: 10
+      speed: 4
+      show_tokens:
+        leds: light_mass_relay
+        color: color_shields
+    arrival_gradient_sweep:
+      action: stop
+    arrival_stripe_center:
+      action: stop
+    arrival_stripe_left:
+      action: stop
+    arrival_stripe_right:
+      action: stop
+    arrival_gi:
+      action: stop
+    led_12_chase:
+      action: stop
+  play_arrival_complete_text:
+    color_flashing_fast:
+      action: stop
+
 
 shows:
   arrival_cineanim:
@@ -305,18 +357,14 @@ shows:
   arrival_escape:
     - time: 0
       events: play_music_2
-      slides:
-        portrait_arrival_normandy:
-          target: lcd_right
-        arrival_portrait_1:
-          target: lcd_right
-          action: remove
     - time: 500ms
       events: play_arrival_collision_imminent
     # - time: 3s
     #   sounds: arr_shep_joker_do_you_read
     - time: 5s
       sounds: arr_shep_joker_i_need_a_pickup
+    - time: 58s
+      events: play_arrival_explosion
     - time: 69s
       events: play_arrival_final
   arrival_final:
@@ -324,6 +372,9 @@ shows:
       slides:
         arrival_explosion_slide:
           action: play
+        portrait_arrival_normandy:
+          action: remove
+          target: lcd_right
     - time: 5s
       events: flippers_off
     - time: 6s
@@ -340,7 +391,7 @@ shows:
           color: color_space
           fade: 500ms
         gi_bottom:
-          color: color_shields
+          color: FF9960
           fade: 500ms
     - time: '+1'
       lights:
@@ -356,7 +407,7 @@ shows:
     - time: '+1'
       lights:
         gi_top:
-          color: color_shields
+          color: FF9960
           fade: 500ms
         gi_middle:
           color: color_lightning
@@ -370,7 +421,7 @@ shows:
           color: color_space
           fade: 500ms
         gi_middle:
-          color: color_shields
+          color: FF9960
           fade: 500ms
         gi_bottom:
           color: color_lightning
@@ -384,18 +435,23 @@ shows:
           color: color_space
           fade: 500ms
         gi_bottom:
-          color: color_shields
+          color: FF9960
           fade: 500ms
 
 
 light_player:
+  mode_arrival_started:
+    gi:
+      color: black
+      fade: 300ms
   play_music_1:
     light_backwall_gi:
-      color: color_arrival
+      color: color_grunt
       fade: 3s
     light_backwall_ambient:
-      color: color_arrival
+      color: color_grunt
       fade: 3s
+  mode_intro_complete:
     gi_top:
       color: color_arrival
       fade: 5s
@@ -407,14 +463,18 @@ light_player:
       fade: 5s
   enable_arrival_hold:
     light_backwall_gi:
-      color: color_arrival
+      color: color_arrival%25
       fade: 3s
     light_backwall_ambient:
       color: color_arrival
       fade: 3s
-    # gi:
-    #   color: color_arrival
-    #   fade: 3s
+  play_arrival_final:
+    gi:
+      color: black
+      fade: 3s
+    light_backwall_ambient:
+      color: black
+      fade: 3s
 
 slide_player:
   show_arrival_slide:
@@ -425,6 +485,11 @@ slide_player:
   enable_arrival_hold:
     arrival_escape_slide:
       action: play
+    portrait_arrival_normandy:
+      target: lcd_right
+    arrival_portrait_1:
+      target: lcd_right
+      action: remove
 
 slides:
   arrival_cineanim:
@@ -482,7 +547,7 @@ slides:
     widgets:
       - type: video
         video: arrival_portrait_normandy
-        end_behavior: stop
+        end_behavior: pause
 
 widget_player:
   slide_arrival_slide_created:
