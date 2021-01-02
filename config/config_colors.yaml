@@ -19,6 +19,7 @@ named_colors:
   color_shields: 0066FF
   color_shields_half: 004DC0
   color_shields_quarter: "003380"
+  color_shields_eighth: 001B43
   color_armor: FFCC00
   color_barrier: 5500FF
   color_health: "990000"
@@ -50,5 +51,7 @@ named_colors:
   color_shadowbroker: ff1f00
   color_lightning: c5d4e8
   color_redsand: 92280f
+  color_dirt_25: ff9960
+  color_dirt_75: ffccb0
   # Default: mball color is overlord
   color_mball: 22FF33

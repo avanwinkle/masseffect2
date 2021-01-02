@@ -1,0 +1,108 @@
+#show_version=5
+# Stage 0: opening
+- time: 0
+# Stage 1: Play start
+- time: '+10'
+  shows:
+    random_flash:
+      key: rflash_1
+      show_tokens:
+        leds: l_backwall_gi_light_4, l_backwall_gi_light_5
+        duration: 200ms
+        color: color_arrival
+    led_12_chase_pulse:
+      speed: 1
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_shields_eighth
+        fade: 250ms
+    arrival_gradient_sweep:
+      speed: 20
+# Stage 2: 25%
+- time: '+10'
+  events: arrival_stage_2
+  sounds:
+    arr_annc_engine_at_25pct:
+      track: voice
+  shows:
+    random_flash:
+      key: rflash_2
+      show_tokens:
+        leds: l_backwall_gi_light_3, l_backwall_gi_light_6
+        duration: 200ms
+        color: color_arrival
+    arrival_gradient_sweep:
+      speed: 25
+      action: update
+# Stage 3: 50%
+- time: '+10'
+  events: arrival_stage_3
+  sounds:
+    arr_annc_engine_at_50pct:
+      track: voice
+  shows:
+    random_flash:
+      key: rflash_3
+      show_tokens:
+        leds: l_backwall_gi_light_2, l_backwall_gi_light_7
+        duration: 200ms
+        color: color_arrival
+    led_12_chase_pulse:
+      speed: 2
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_shields_eighth
+        fade: 250ms
+    arrival_gradient_sweep:
+      speed: 30
+      action: update
+# Stage 4: 75%
+- time: '+10'
+  events: arrival_stage_4
+  sounds:
+    arr_annc_engine_at_75pct:
+      track: voice
+  shows:
+    arrival_gradient_sweep:
+      speed: 35
+      action: update
+# Stage 5: 100%
+- time: '+10'
+  events: arrival_stage_5
+  sounds:
+    arr_annc_engine_at_100pct:
+      track: voice
+  shows:
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_shields_quarter
+        fade: 250ms
+    arrival_gradient_sweep:
+      speed: 40
+      action: update
+# Stage 6: Escape
+- time: '+10'
+  shows:
+    led_12_chase_pulse:
+      speed: 5
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_shields
+        fade: 250ms
+    arrival_gradient_sweep:
+      speed: 60
+      action: update
+# Stage 7: Explosion
+- time: '+10'
+  shows:
+    arrival_gradient_sweep:
+      action: stop
+    led_12_chase_pulse:
+      action: stop
+    led_10_chase:
+      show_tokens:
+        ledring: l_backwall_gi
+        color: color_arrival
+        fade: 50ms

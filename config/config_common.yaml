@@ -145,8 +145,8 @@ widget_player:
         expire: 2s
 
 event_player:
-  game_will_start: gi_on
-  game_ended: gi_off
+  # game_will_start: gi_on
+  # game_ended: gi_off
   master_volume_decrease:
     update_volume:
       value:

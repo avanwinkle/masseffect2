@@ -121,6 +121,12 @@ shots:
       leds: l_hitbank_bottom
       color:  color_mball
 
+light_player:
+  start_mode_arrival:
+    gi:
+      color: color_dirt_75
+      fade: 5s
+
 show_player:
   fmball_light_shot_hit:
     fmball_lock_flash:

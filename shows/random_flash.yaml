@@ -1,0 +1,22 @@
+#show_version=5
+- duration: 1721ms
+- duration: 2663ms
+  flashers:
+    (leds):
+      color: (color)
+      ms: (duration)
+- duration: 3373ms
+  flashers:
+    (leds):
+      color: (color)
+      ms: (duration)
+- duration: 2801ms
+  flashers:
+    (leds):
+      color: (color)
+      ms: (duration)
+- duration: 1931ms
+  flashers:
+    (leds):
+      color: (color)
+      ms: (duration)
