@@ -92,11 +92,6 @@ class Powers(Mode):
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('advance_mission_shots', self._advance_mission_shots)
 
-    def mode_stop(self, **kwargs):
-        self.log.debug("Powers mode stopping, disabling all shots")
-        for shot in self.shots:
-            shot.disable()
-
     def _mode_intro_complete(self, **kwargs):
         # On mode intro complete, if there's a power the player has then enable it immediately
         power = self.machine.game.player["power"]

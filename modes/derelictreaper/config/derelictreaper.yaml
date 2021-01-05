@@ -54,10 +54,10 @@ event_player:
     - missiontimer_set_20
     - missiontimer_start|1s
   enable_reapercore.1:
-    play_squadmate_sound:
+    play_squadmate_sound|2s:
       sound: destroy_core
       exclude: jacob  # No sound file for jacob, unfortunately
-      squadmate: selected
+      # squadmate: selected
   # Reset the mission shots on each reapercore, to reduce values on "resume"
   enable_reapercore.2:
     set_mission_shots:
@@ -67,20 +67,25 @@ event_player:
       shots_remaining:
         value: device.counters.reapercore_counter.value
         type: int
-    play_core_widget:
-      message: Destroy the Core!
+    set_reaper_instructions:
+      instructions_main: Destroy the Core!
   enable_reapercore.3:
     - stop_mode_frenzy
   enable_reaperfrenzy.1:
     - start_mode_frenzy
     - release_captive
   enable_reaperfrenzy.2:
-    play_core_widget:
-      message: Clear the Husks!
+    set_reaper_instructions:
+      instructions_main: Eliminate the Husks
   # Frenzy mode must be completed AND a ball must be held in order to enable the core
   reaper_lock_shot_hit{device.counters.reaperhusk_counter.completed}:
     - enable_reapercore
+  logicblock_reaperhusk_counter_complete{device.ball_holds.captive_hold.balls_held==0}:
+    set_reaper_instructions:
+      instructions_main: Expose the Core
   logicblock_reaperhusk_counter_hit{remaining<=0 and device.ball_holds.captive_hold.balls_held>0}:
+    - enable_reapercore
+  ball_hold_captive_hold_full{device.counters.reaperhusk_counter.value<=0}:
     - enable_reapercore
   logicblock_reapercore_counter_hit{count>0}:
     - enable_reaperfrenzy
@@ -104,9 +109,9 @@ event_player:
 
 counters:
   reaperhusk_counter:
-    starting_count: 0
-    count_complete_value: 25
-    direction: up
+    starting_count: 25
+    count_complete_value: 0
+    direction: down
     count_events: frenzy_hit
     disable_on_complete: false
     reset_on_complete: false
@@ -225,21 +230,21 @@ shows:
         l_targets: on
 
 slide_player:
-  enable_reapercore:
-    derelictreaper_core_slide:
+  mode_derelictreaper_started:
+    derelictreaper_slide:
       target: main
+  enable_reapercore:
     derelictreaper_portrait_core:
       target: lcd_right
-  logicblock_reaperhusk_counter_complete{device.ball_holds.captive_hold.balls_held==0}:
-    derelictreaper_captive_slide:
-      target: main
-  enable_reaperfrenzy:
-    derelictreaper_frenzy_slide:
-      target: main
-      priority: 1
     derelictreaper_portrait_husks:
       target: lcd_right
-      priority: 1
+      action: remove
+  enable_reaperfrenzy:
+    derelictreaper_portrait_husks:
+      target: lcd_right
+    derelictreaper_portrait_core:
+      target: lcd_right
+      action: remove
 
 slides:
   derelictreaper_cineanim:
@@ -264,10 +269,10 @@ slides:
       text: "Derelict Reaper"
       style: codex_title
     - type: text
-      text: "Shepard has boarded the remains of\nan ancient Reaper and recovered its\nIFF device so the Normandy can\ntravel through the Omega 4 Relay.\nDestroy the Reaper's mass effect\ncore to disable its shields and escape!"
+      text: "Shepard has boarded the remains\nof an ancient Reaper and recovered\nits IFF device so the Normandy\ncan travel through the Omega 4\nRelay. Destroy the Reaper's mass\neffect core to disable the shields\nand escape!"
       style: codex_text
     - widget: dossier_recruit_base
-  derelictreaper_frenzy_slide:
+  derelictreaper_slide:
     transition:
       type: fade
       duration: 500ms
@@ -278,39 +283,6 @@ slides:
       - type: text
         text: Derelict Reaper
         style: header_xs, row_top, col_left_anchor, mission_title
-      - type: text
-        text: Eliminate the Husks!
-        style: header_sm, row_main, col_left_anchor
-      - type: text
-        text: (score)
-        style: recruitslide_score, row_top, col_right_anchor, num
-      - widget: background_console
-  derelictreaper_captive_slide:
-    transition:
-      type: fade
-      duration: 500ms
-    widgets:
-      - type: text
-        text: Derelict Reaper
-        style: header_xs, row_top, col_left_anchor, mission_title
-      - type: text
-        text: Expose the Core!
-        style: header_sm, row_main, col_left_anchor
-      - type: text
-        text: (score)
-        style: recruitslide_score, row_top, col_right_anchor, num
-      - widget: background_console
-  derelictreaper_core_slide:
-    transition:
-      type: fade
-      duration: 500ms
-    widgets:
-      - type: text
-        text: Derelict Reaper
-        style: header_xs, row_top, col_left_anchor, mission_title
-      - type: text
-        text: Destroy the Core
-        style: header_md, row_main, col_left_anchor
       - type: text
         text: (score)
         style: recruitslide_score, row_top, col_right_anchor, num
@@ -355,15 +327,15 @@ sounds:
     file: mus_legion_acq_bossbattle.ogg
     track: music
     mode_end_action: stop
-    start_at: 1s
-    fade_in: 1s
+    start_at: 3s
+    fade_in: 500ms
     fade_out: 1.5s
   derelictreaper_music_tension:
     file: mus_legion_acq_bossbattle_low.ogg
     track: music
-    start_at: 2s
-    fade_in: 1s
-    fade_out: 1.5s
+    start_at: 3s
+    fade_in: 500ms
+    fade_out: 500ms
     mode_end_action: stop
   derelictreaper_close_stinger:
     file: mus_legion_acq_sting_2.ogg
@@ -403,34 +375,42 @@ sounds:
     track: voice
 
 widget_player:
-  enable_reapercore:
-    derelict_core_widget:
-      action: remove
-  play_core_widget:
-    derelict_core_widget:
-      slide: derelictreaper_core_slide
-    reapertimeout_widget:
-      action: remove
-  reapercore_shots_hit_complete:
-    reapertimeout_widget:
-      action: remove
+  set_reaper_instructions:
+    reaperinstructions_widget:
+      action: update
+      slide: derelictreaper_slide
+  enable_reaperfrenzy:
     reapershots_widget:
       action: remove
-  timer_missiontimer_tick:
-    reapertimeout_widget:
+  logicblock_reaperhusk_counter_updated{value>0}:
+    reaperhusks_widget:
       action: update
-      slide: derelictreaper_core_slide
-  logicblock_reapercore_counter_updated:
+      slide: derelictreaper_slide
+  logicblock_reaperhusk_counter_updated{value<=0}:
+    reaperhusks_widget:
+      action: remove
+      slide: derelictreaper_slide
+  logicblock_reapercore_counter_updated{enabled==True and value>0}:
     reapershots_widget:
       action: update
-      slide: derelictreaper_core_slide
+      slide: derelictreaper_slide
+  logicblock_reapercore_counter_complete:
+    reapershots_widget:
+      action: remove
 
 widgets:
+  reaperinstructions_widget:
+    - type: text
+      text: (instructions_main)
+      style: header_sm, row_main, col_left_anchor
+      animations:
+        enable_reapercore: pulse_text
+        enable_reaperfrenzy: solid_text
+  reaperhusks_widget:
+    - type: text
+      text: "Husks: (value)"
+      style: header_xs, row_gutter, col_left_center
   reapershots_widget:
     - type: text
-      text: "Shots: (value)"
+      text: "Hits: (value)"
       style: header_xs, row_gutter, col_left_center
-  reapertimeout_widget:
-    - type: text
-      text: (ticks)
-      style: timer_primary, row_gutter, col_right_indent

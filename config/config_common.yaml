@@ -538,6 +538,12 @@ sound_system:
       simultaneous_sounds: 1
       #preload: true
       volume: 0.7
+      ducking:
+        target: music
+        attenuation: 0.8
+        attack: 100ms
+        release: 100ms
+        release_point: 100ms
     sfx:
       simultaneous_sounds: 7
       volume: 0.5
