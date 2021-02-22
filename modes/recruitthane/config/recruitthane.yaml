@@ -45,6 +45,23 @@ event_player:
       is_bonus_shot:
         value: 1 if device.counters.thane_ascent_counter.value>3 else 0
         type: int
+  # When one shot is hit, switch it
+  left_ramp_lit_hit.1:
+    advance_mission_shots:
+      shots: left_ramp
+      jump: 1
+  left_ramp_lit_hit.2:
+    advance_mission_shots:
+      shots: right_ramp
+      jump: 0
+  right_ramp_lit_hit.1:
+    advance_mission_shots:
+      shots: left_ramp
+      jump: 0
+  right_ramp_lit_hit.2:
+    advance_mission_shots:
+      shots: right_ramp
+      jump: 1
   # Find the two "pending" shots, which may have moved via rotation
   logicblock_thane_ascent_counter_complete:
     advance_mission_shots:

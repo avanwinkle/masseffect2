@@ -255,6 +255,21 @@ widgets:
   shadowbroker_drops_3:
     - type: video
       video: shadowbroker_drops_3
+  shadowbroker_drops_4:
+    - type: video
+      video: shadowbroker_drops_4
+  shadowbroker_drops_5:
+    - type: video
+      video: shadowbroker_drops_5
+  shadowbroker_drops_6:
+    - type: video
+      video: shadowbroker_drops_6
+  shadowbroker_drops_7:
+    - type: video
+      video: shadowbroker_drops_7
+  shadowbroker_drops_8:
+    - type: video
+      video: shadowbroker_drops_8
   portrait_shadowbroker_advance_2:
     - type: image
       image: portrait_shadowbroker_advance_2

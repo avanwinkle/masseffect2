@@ -498,7 +498,7 @@ widgets:
       text: "Dossier: the Justicar"
       style: codex_title
     - type: text
-      text: "Samara must finish her pursuit of\na dangerous killer before she can\njoin your mission.\n\nBattle your way past the merc's\ngunship to find the evidence she\nneeds and gain her for your team."
+      text: "Samara must finish her pursuit of\na dangerous killer before she can\njoin your mission.\n\nBattle your way past the Eclipse\ncaptain to find the evidence she\nneeds and gain her for your team."
       style: codex_text
     - widget: dossier_recruit_base
   dossier_recruittali:

@@ -41,7 +41,7 @@ event_player:
         value: current_player.geth_colossus_state
         type: int
       # Immediately advance all shots except the left_ramp to the final off state
-      starting_shots: 6, 6, 0, 6, 6
+      starting_shots: 6, 0, 0, 0, 6
   mode_recruittali_started.2:
     - play_colossus_show
   # If the colossus repairs we can backshift the state of the shot profile
@@ -59,6 +59,19 @@ event_player:
   power_shots_lit_hit:
     timer_colossus_repair_timer_tick:
       ticks_remaining: 10
+  # When one shot is hit, immediately disable the others by advancing them to the end
+  kickback_lit_hit:
+    advance_mission_shots:
+      shots: left_ramp, right_ramp
+      jump: 6
+  left_ramp_lit_hit:
+    advance_mission_shots:
+      shots: kickback, right_ramp
+      jump: 6
+  right_ramp_lit_hit:
+    advance_mission_shots:
+      shots: kickback, left_ramp
+      jump: 6
 
 counters:
   # A counter to track the lowest colossus state for the player.

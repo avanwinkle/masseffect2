@@ -35,7 +35,7 @@ event_player:
       squadmate: legion
       portrait: recruitlegion
       instructions_main: Fill meter to hack heretics
-      instructions_sub: Lockout after if geth reach your position
+      instructions_sub: "Meter locked when geth\nreach your position"
     set_mission_shots:
       is_resumable: 1
       shots_total: 5
