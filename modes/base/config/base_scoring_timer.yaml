@@ -2,6 +2,8 @@
 event_player:
   set_mission_shots.2:
     - missiontimer_set_(current_player.mission_starting_ticks)
+  # Timers don't currently support dynamic values for speed, but they do support update
+  timer_missiontimer_start{current_player.difficulty>0}: increase_ladder_speed
 
 variable_player:
   #### FIXED SCORING ####
@@ -90,22 +92,30 @@ show_player:
     ladder_timer:
       start_step: 1
       priority: 1000
+      speed: 0.8
       start_running: device.timers.missiontimer.running
   missiontimer_set_40:
     ladder_timer:
       start_step: 11
       priority: 1000
+      speed: 0.8
       start_running: device.timers.missiontimer.running
   missiontimer_set_20:
     ladder_timer:
       start_step: 23
       priority: 1000
+      speed: 0.8
       start_running: device.timers.missiontimer.running
   missiontimer_set_12:
     ladder_timer:
       start_step: 31
+      speed: 0.8
       start_running: device.timers.missiontimer.running
-  timer_missiontimer_started:
+  increase_ladder_speed:
+    ladder_timer:
+      action: update
+      speed: 1.0
+  timer_missiontimer_started.1:
     ladder_timer:
       action: resume
   timer_missiontimer_paused:
@@ -121,7 +131,7 @@ timers:
     max_value: 60
     end_value: 0
     # Normal difficulty gets 1.25s per tick, hardcore/insanity gets 1s
-    tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
+    tick_interval: current_player.research_tick_interval_perk * (1.25 if current_player.difficulty==0 else 1)
     direction: down
     control_events:
       # Some missions use different timing, so a few handlers to adjust the clock

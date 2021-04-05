@@ -94,8 +94,11 @@ class RecruitLegion(Mode):
                     shot.restart()
                     self._clear_shot(shot_name)
                     self.machine.events.post("heretic_shot_{}_timeout".format(shot_name))
+                    # The left orbit and kickback trigger the banks
+                    if shot_name in ["left_orbit", "kickback"]:
+                        self.machine.events.post("reset_dropbank")
         self._block_on_tick = False
-        
+
     def _on_bank(self, **kwargs):
         hit_shot_name = kwargs.get("shot_name")
         # Check if both banks are off. If so, restart the timer/scoring

@@ -129,6 +129,10 @@ variable_player:
     temp_multiplier:
       action: set
       int: 1
+  play_arrival_final:
+    temp_multiplier:
+      action: set
+      int: -1
   logicblock_arrival_ramps_counter_hit:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
   logicblock_arrival_orbits_counter_hit:

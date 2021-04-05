@@ -203,7 +203,7 @@ shows:
           priority: 1000
     - time: 800ms
       sounds: missioncomplete_voice_tali
-    - time: 9s
+    - time: 8700ms
   recruit_success_thane:
     - time: 0
       slides:
