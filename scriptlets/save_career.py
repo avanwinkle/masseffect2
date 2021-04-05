@@ -13,7 +13,7 @@ PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
     "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
     "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
-    "high_flow", "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
+    "avatar", "high_flow", "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
     "trophies", "total_ball_time")
 
 ACHIEVEMENT_MISSIONS = (
@@ -40,7 +40,7 @@ class SaveCareer(CustomCode):
         self.machine.events.add_handler("new_career", self._new_career)
         self.machine.events.add_handler("set_career", self._set_career)
         self.machine.events.add_handler("player_turn_will_end", self._save_career)
-        self.log.info("SaveCarrer loaded")
+        self.log.info("SaveCareer loaded")
 
     def _set_career(self, **kwargs):
         if self.machine.game and self.machine.game.player:
@@ -69,6 +69,7 @@ class SaveCareer(CustomCode):
                 # Text input char_list prevents spaces in custom profiles, so this should be safe
                 player["casual"] = 0
                 player["career_name"] = kwargs.get("career_name")
+                player["avatar"] = kwargs.get("avatar", 1)
 
             # Store this career name for this player number
             self.machine.variables.set_machine_var(

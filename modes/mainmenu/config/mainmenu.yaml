@@ -40,17 +40,41 @@ slide_player:
     career_new_slide: {}
   # Selecting and moving between menus
   highlight_career: career_select_slide
-  set_career{avatar==0}:
+  set_career.1{avatar==0}:
     portrait_createprofile_0:
       target: lcd_right
-  set_career{avatar==1}:
+  set_career.2{avatar==1}:
     portrait_createprofile_1:
       target: lcd_right
-  set_career{avatar==2}:
+  set_career.3{avatar==2}:
     portrait_createprofile_2:
       target: lcd_right
-  set_career{avatar==3}:
+  set_career.4{avatar==3}:
     portrait_createprofile_3:
+      target: lcd_right
+  set_career.5{avatar==4}:
+    portrait_createprofile_4:
+      target: lcd_right
+  set_career.6{avatar==5}:
+    portrait_createprofile_5:
+      target: lcd_right
+  set_avatar.10{avatar==0}:
+    portrait_createprofile_0:
+      target: lcd_right
+  set_avatar.11{avatar==1}:
+    portrait_createprofile_1:
+      target: lcd_right
+  set_avatar.12{avatar==2}:
+    portrait_createprofile_2:
+      target: lcd_right
+  set_avatar.13{avatar==3}:
+    portrait_createprofile_3:
+      target: lcd_right
+  set_avatar.14{avatar==4}:
+    portrait_createprofile_4:
+      target: lcd_right
+  set_avatar.15{avatar==5}:
+    portrait_createprofile_5:
       target: lcd_right
 
 

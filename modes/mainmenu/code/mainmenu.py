@@ -3,13 +3,14 @@
 import json
 import logging
 import os
+from random import randint
 from datetime import datetime
 from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
 
 DIFFICULTIES = {0: "Normal", 1: "Hardcore", 2: "Insanity"}
-FLOWS = { 0: "Normal", 1: "High Flow" }
-
+FLOWS = {0: "Normal", 1: "High Flow"}
+NUM_AVATARS = 5
 
 class MainMenu(Carousel):
     """Mode which allows the player to select a profile and start/resume a game."""
@@ -25,7 +26,7 @@ class MainMenu(Carousel):
         self._selected_difficulty = None
         self._selected_flow = None
         self.log = logging.getLogger("MainMenu")
-        self.log.setLevel(10)
+        self.log.setLevel(20)
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""
@@ -37,7 +38,7 @@ class MainMenu(Carousel):
         self._selected_difficulty = -1
         self._selected_flow = -1
         # Track the avatar to avoid re-playing the same slide
-        self._current_avatar = -1
+        self._current_avatar = randint(1, NUM_AVATARS)
         # When the mode starts, create a handler to trigger the Carousel start.
         self.add_mode_event_handler("show_mainmenu", self.show_menu)
         # Watch for adding players, which we prevent during creation.
@@ -186,8 +187,9 @@ class MainMenu(Carousel):
                                     high_flow=self._selected_flow)
         # If create career was chosen, switch modes
         elif selection == "create_career":
-            self.machine.events.post("start_mode_createprofile")
             self.add_mode_event_handler("createprofile_complete", self._create_profile)
+            self.add_mode_event_handler("createprofile_started", self._on_create_started)
+            self.machine.events.post("start_mode_createprofile")
             # Prevent the super from calling select, which closes the carousel mode
             return
         else:
@@ -195,7 +197,7 @@ class MainMenu(Carousel):
         self.log.debug("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
         super()._select_item()
 
-    def _update_highlighted_item(self, direction):
+    def _update_highlighted_item(self, direction=None):
         # If create mode is open, don't highlight anything
         if self.machine.modes.createprofile.active:
             self.log.debug("Highlight selected but Create Profile active, so aborting")
@@ -206,7 +208,7 @@ class MainMenu(Carousel):
             career = self.careers[self._highlighted_item_index]
             self._set_selected_career(career)
             self._post_career_event("highlight_career",
-                                    difficulty_name=DIFFICULTIES[career.get("difficulty",0)],
+                                    difficulty_name=DIFFICULTIES[career.get("difficulty", 0)],
                                     flow_name=FLOWS[career.get("high_flow", 0)])
         else:
             self._post_career_event("{}_{}_highlighted".format(self.name, self._get_highlighted_item()),
@@ -270,15 +272,37 @@ class MainMenu(Carousel):
             self.log.info("Invalid profile name '{}'.".format(kwargs.get('name')))
             return
 
-        self._set_selected_career({"career_name": kwargs['name'], "last_played": -1})
+        name = kwargs['name']
+        # Anthony is special
+        if name == "ANTHONY":
+            self._current_avatar = 0
+        self._set_selected_career({
+            "career_name": kwargs['name'],
+            "last_played": -1,
+            "avatar": self._current_avatar
+        })
+        # Post an event to trigger the new game slide, since it may not exist yet
+        self._load_mainmenu()
+        self._shown_menu = self.mainmenu
+        # self.machine.events.post("mainmenu_new_game_highlighted")
+        # self._update_highlighted_item()
+        self._post_career_event("mainmenu_new_game_highlighted")
         # Jump immediately into a new game
         self._select_item("new_game")
+
+    def _on_create_started(self, **kwargs):
+        del kwargs
+        # Show the avatar for whatever we randomly chose
+        # self.machine.events.post("set_avatar", avatar=self._current_avatar)
 
     def _player_add_request(self, **kwargs):
         del kwargs
 
         # Don't add players during profile creation, to free up the start button
         if self.machine.modes.createprofile.active:
+            # Instead, change the avatar!
+            self._current_avatar = max((self._current_avatar % NUM_AVATARS) + 1, 1)
+            self.machine.events.post("set_avatar", avatar=self._current_avatar)
             return False
 
         return True
@@ -290,18 +314,13 @@ class MainMenu(Carousel):
 
     def _post_career_event(self, evt_name, **kwargs):
         career_data = self._selected_career or {"casual": True}
-        new_avatar = career_data.get("avatar", 0)
-        if new_avatar != self._current_avatar:
-            self._current_avatar = new_avatar
-            avatargs = { "avatar": new_avatar }
-        else:
-            avatargs = {}
+
         self.machine.events.post(evt_name,
                                  career_name=career_data.get("career_name"),
                                  career_started=career_data.get("_career_started"),
                                  last_played=career_data.get("_last_played"),
                                  level=career_data.get("level"),
                                  casual=career_data.get("casual"),
-                                 **avatargs,
+                                 avatar=career_data.get("avatar", self._current_avatar),
                                  **kwargs
                                  )

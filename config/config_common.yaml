@@ -322,6 +322,9 @@ player_vars:
   career_started:
     initial_value: 0.0
     value_type: float
+  avatar:
+    initial_value: 1
+    value_type: int
   color_mball:
     initial_value: "FF0000"
     value_type: str

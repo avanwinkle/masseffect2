@@ -13,11 +13,8 @@ event_player:
         type: str
 
 slide_player:
-  mode_createprofile_started: 
+  mode_createprofile_started:
     profile_creation_slide: {}
-    # Hack to show a new avatar on creation
-    portrait_createprofile_4:
-      target: lcd_right
 
 slides:
   profile_creation_slide:
@@ -33,7 +30,6 @@ slides:
         shift_left_event: s_flipper_left_inactive
         shift_right_event: s_flipper_right_inactive
         select_event: flipper_cancel
-        force_complete_event: s_start_button_active
         abort_event: flipper_cradle
         block_events: flipper_cancel
         release_events: both_flippers_inactive
@@ -42,7 +38,7 @@ slides:
         key: profile_name
         style: header_md, row_main, col_left_anchor
       - type: text
-        text: "Use flippers to scroll, press both to select.\n\nPress start button to finish."
+        text: "Use flippers to scroll, press both to select.\n\nPress start button to change appearance."
         color: BBBBBB
         style: body_xs, row_bottom, col_left_anchor
         halign: left
