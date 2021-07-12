@@ -387,26 +387,70 @@ light_stripes:
     light_template:
       tags: gi
       type: rgb
-  gi_middle:
-    number_start: 0
-    number_template: 7-{}
-    count: 4
-    light_template:
-      tags: gi
-      type: rgb
-  gi_bottom:
-    number_start: 0
-    number_template: 5-{}
-    count: 8
-    light_template:
-      tags: gi
-      type: rgb
-
 
 lights:
   l_null:
     number: 0-63
     tags: gi, backbox
+
+  # The chains got broken, so manually code the gi
+  gi_middle_light_0:
+    type: rgb
+    tags: gi, gi_middle
+    number: 1-39
+  gi_middle_light_1:
+    type: rgb
+    tags: gi, gi_middle
+    number: 1-40
+  gi_middle_light_2:
+    type: rgb
+    tags: gi, gi_middle
+    number: 7-0
+  gi_middle_light_3:
+    type: rgb
+    tags: gi, gi_middle
+    number: 7-1
+  gi_middle_light_4:
+    type: rgb
+    tags: gi, gi_middle
+    number: 7-2
+  gi_bottom_light_0:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 7-3
+  gi_bottom_light_1:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-0
+  gi_bottom_light_2:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-1
+  gi_bottom_light_3:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-2
+  gi_bottom_light_4:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-3
+  gi_bottom_light_5:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-4
+  gi_bottom_light_6:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-5
+  gi_bottom_light_7:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-6
+  gi_bottom_light_8:
+    type: rgb
+    tags: gi, gi_bottom
+    number: 5-7
+
 
   # Upper & Mid Playfield Chain
   #------------------------------------------
@@ -651,7 +695,7 @@ lights:
   # Unassigned lights carried over from Spike
   #------------------------------------------
   l_2x_multiplier: # 2x Multiplier [#28]
-    number: 0-63
+    number: 0-29
     tags: l_multipliers
   l_3x_multiplier: # 3x Multiplier [#29]
     number: 0-62
