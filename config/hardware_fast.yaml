@@ -518,7 +518,7 @@ lights:
     type: grb
     tags: light_pf, l_return_lane, outer_circles
   l_right_outlane: # Right Outlane [#34]
-    previous: l_right_return_lane
+    previous: l_right_medigel
     type: grb
     tags: light_pf, l_outlane, outer_circles
   l_hitbank_bottom: # Right 2-Bank (Bot) [#39]
@@ -527,7 +527,7 @@ lights:
     tags: light_pf, light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
   l_hitbank_top: # Right 2-Bank (Top) [#38]
-    previous: l_hitbank_top
+    previous: l_hitbank_bottom
     type: grb
     tags: light_pf, light_hitbank_rgb, l_hitbanks, outer_circles
     default_on_color: 22ff33  # color_overlord
