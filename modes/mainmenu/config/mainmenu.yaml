@@ -77,7 +77,6 @@ slide_player:
     portrait_createprofile_5:
       target: lcd_right
 
-
 slides:
   change_career_slide:
     transition:
@@ -278,7 +277,6 @@ slides:
       - type: image
         image: portrait_avatar_5
 
-
 show_player:
   show_mainmenu: mainmenu_show
   mainmenu_item_selected:
@@ -301,7 +299,9 @@ shows:
           fade: 3s
 
 sound_player:
-  show_mainmenu: mus_gui_char_create
+  show_mainmenu:
+    mus_gui_char_create:
+      loops: -1
   mainmenu_change_career_selected: galaxy_zoom_in
   mainmenu_career_selected: galaxy_zoom_out
   mainmenu_item_selected:
