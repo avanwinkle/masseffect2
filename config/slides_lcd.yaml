@@ -541,13 +541,12 @@ slides:
   pinstrat_portrait_slide:
     transition: fade
     widgets:
-      - type: image
-        image: splashscreen
-        anchor_x: right
-        x: right
-        z: 0
-        opacity: 0.5
       - widget: pinstrat_player_(player_num)
+      - type: rectangle
+        color: black
+        width: 484
+        height: 468
+        z: 0
 
 widgets:
   volume_widget:
@@ -1021,7 +1020,7 @@ widgets:
           - property: x
             value: -564
             duration: 5s
-            easing: in_out_quad
+            easing: linear
   portrait_firewalker_complete:
     - type: image
       image: portrait_firewalker_complete

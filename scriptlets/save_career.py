@@ -113,8 +113,8 @@ class SaveCareer(CustomCode):
                         newcareer[key][ach] = state
             # Save the state of squadmates, unless they're dead (except if we're saving suicide progress)
             elif key.startswith("status_"):
-                # Don't save partial progress ever ( formerly: on harder difficulties )
-                if 0 < value < 3:  # and player.vars.get("difficulty") > 0:
+                # Don't save partial progress, only completed recruits are saved
+                if 0 < value < 4:
                     newcareer[key] = 0
                 # If we aren't saving suicide progress or aren't saving deaths, reset the status
                 elif value == -1 and (not SAVE_SUICIDE_PROGRESS or not DO_SAVE_DEATHS):
