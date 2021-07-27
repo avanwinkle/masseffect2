@@ -121,6 +121,10 @@ variable_player:
     temp_build_value:
       action: set
       int: machine.base_points
+    # Use the "hurryup" value to track total score, for reference
+    temp_hurryup_value:
+      action: set
+      int: 0
   enable_arrival_orbits:
     temp_multiplier:
       action: set
@@ -139,6 +143,7 @@ variable_player:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
   ball_hold_arrival_hold_held_ball:
     score: current_player.temp_build_value
+    temp_hurryup_value: current_player.temp_build_value
 
 timers:
   arrival_timer:
@@ -322,8 +327,6 @@ show_player:
       show_tokens:
         color: color_arrival
 
-
-
 shows:
   arrival_cineanim:
     - time: 0
@@ -367,6 +370,9 @@ shows:
           action: play
         portrait_arrival_normandy:
           action: remove
+          target: lcd_right
+        portrait_arrival_summary:
+          action: play
           target: lcd_right
     - time: 5s
       events: flippers_off
@@ -528,6 +534,17 @@ slides:
       - type: video
         video: arrival_portrait_normandy
         end_behavior: pause
+  portrait_arrival_summary:
+    - type: image
+      image: codex_arrival_collision
+      style: codex_image
+    - type: text
+      text: "Arrival"
+      style: codex_title
+    - type: text
+      text: "Shepard escaped and activated the\nProject, destroying the Alpha Relay\nand preventing the Reaper invasion.\n\nTotal jackpot award: (player|temp_hurryup_value)"
+      style: codex_text
+    - widget: dossier_recruit_base
 
 widget_player:
   slide_arrival_slide_created:
@@ -623,15 +640,19 @@ sounds:
   arr_annc_engine_at_25pct:
     file: DLC_EXP_Part02_Int.026.ogg
     track: voice
+    max_queue_time: 5s
   arr_annc_engine_at_50pct:
     file: DLC_EXP_Part02_Int.027.ogg
     track: voice
+    max_queue_time: 5s
   arr_annc_engine_at_75pct:
     file: DLC_EXP_Part02_Int.028.ogg
     track: voice
+    max_queue_time: 5s
   arr_annc_engine_at_100pct:
     file: DLC_EXP_Part02_Int.029.ogg
     track: voice
+    max_queue_time: 5s
   arr_annc_get_to_escape_shuttles:
     file: DLC_EXP_Part02_Int.620.ogg
     track: voice
