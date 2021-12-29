@@ -18,8 +18,8 @@ event_player:
   research_check_failed: store_unaffordable
   ball_hold_store_hold_held_ball: start_mode_store
   fmball_check_store:
-    - start_mode_store{current_player.store_enabled==1}
-    - store_complete{current_player.store_enabled==0}
+    - start_mode_store{current_player.store_enabled==1 and mode.field.active}
+    - store_complete{current_player.store_enabled==0 or not mode.field.active}
   enable_store:
     queue_slide:
       slide: store_available_slide
