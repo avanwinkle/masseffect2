@@ -10,6 +10,7 @@ smart_virtual:
 
 mpf:
   default_pulse_ms: 10
+  report_crashes: never
 
 mpf-mc:
   fps: 60
@@ -99,7 +100,7 @@ settings:
       5: 5
       7: 7
       999: "Infinite"
-  pinstrat_enabled:
+  enable_pinstrat:
     label: "PinStrat"
     sort: 40
     key_type: int

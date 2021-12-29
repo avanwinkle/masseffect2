@@ -13,10 +13,10 @@ mode_settings:
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
     - 4player_score{machine.player4_score}
-    - 1player_pinstrat{settings.pinstrat_enabled}
-    - 2player_pinstrat{settings.pinstrat_enabled and machine.player2_score}
-    - 3player_pinstrat{settings.pinstrat_enabled and machine.player3_score}
-    - 4player_pinstrat{settings.pinstrat_enabled and machine.player4_score}
+    - 1player_pinstrat{settings.enable_pinstrat}
+    - 2player_pinstrat{settings.enable_pinstrat and machine.player2_score}
+    - 3player_pinstrat{settings.enable_pinstrat and machine.player3_score}
+    - 4player_pinstrat{settings.enable_pinstrat and machine.player4_score}
     - title{machine.gameover_text!=" "}
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
@@ -39,7 +39,7 @@ event_player:
       player_num: 4
       player_name: (machine|last_career_player_4)
   # Show the player 1 pinstrat on the gameover slide
-  attract_carousel_gameover_highlighted.2{settings.pinstrat_enabled and not machine.player2_score}:
+  attract_carousel_gameover_highlighted.2{settings.enable_pinstrat and not machine.player2_score}:
     play_pinstrat_portrait_slide:
       player_num: 1
       player_name: (machine|last_career_player_1)
