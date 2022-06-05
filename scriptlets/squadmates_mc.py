@@ -21,7 +21,7 @@ class MCSquadmateHandlers(McCustomCode):
         self.mc.events.add_handler("slide_store_intro_slide_active", self._update_store)
         # Track which squadmate selection changes
         self._squadmate_select_target = None
-    
+
     def on_connect(self, **kwargs):
         self.add_mpf_event_handler("squadmate_select", self._select_squadmate)
         self.add_mpf_event_handler("squadmate_select_clear", self._select_squadmate_clear)
@@ -48,7 +48,7 @@ class MCSquadmateHandlers(McCustomCode):
             # Hopefully this doesn't make a memory leak?
             slide.children = []
             self.log.debug("Creating new widgets, all should be removed? {}".format(slide.widgets))
-            
+
             slide.add_widgets_from_library("sqicon_console")
             for mate in SquadmateStatus.all_mates():
                 status = player["status_{}".format(mate)]
@@ -67,16 +67,16 @@ class MCSquadmateHandlers(McCustomCode):
                     background = "specialist"
                 elif mate == player["selected_mate_one"] or mate == player["selected_mate_two"]:
                     background = "selected"
-                
-                slide.add_widgets_from_library("sqicon_background_{}".format(background), 
+
+                slide.add_widgets_from_library("sqicon_background_{}".format(background),
                     key="sqicon_background_{}".format(mate),
                     widget_settings={"style": "sqicon_style_mate_{}".format(mate)}
                     )
                 slide.add_widgets_from_library("sqicon_mate_{}_{}".format(mate, style))
 
-                
+
             slide.add_widgets_from_library("squadmates_grid_overlay")
-            
+
         else:
             self.log.error("Current slide is NOT squadicon")
 
@@ -104,7 +104,7 @@ class MCSquadmateHandlers(McCustomCode):
                 else:
                     widget.opacity = 0
 
-        return (parent_slide, [container.widget for container in parent_slide.widgets])
+            return (parent_slide, [container.widget for container in parent_slide.widgets if container])
 
     def _update_huddle(self, **kwargs):
         self._update_selection_widgets("huddle_slide", "specialist_", self.filter_specialists)
@@ -116,7 +116,7 @@ class MCSquadmateHandlers(McCustomCode):
         player = self.mc.player
         # Find the current target
         available_mates = SquadmateStatus.available_mates(player)
-        
+
 
         first_mate = player["selected_mate_one"]
         second_mate = player["selected_mate_two"]
@@ -129,7 +129,7 @@ class MCSquadmateHandlers(McCustomCode):
         else:
             idx = idx_one if self._squadmate_select_target == "one" else idx_two
         avoid_idx = idx_one + idx_two - idx
-        
+
         idx += 1
         if idx == avoid_idx:
             idx += 1
