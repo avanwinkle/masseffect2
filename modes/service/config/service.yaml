@@ -95,10 +95,10 @@ widget_player:
   service_menu_deselected:
     meservice_menu_item_switch:
       action: remove
-      slide: service_menu
+      slide: meservice_menu
     meservice_menu_item_coil:
       action: remove
-      slide: service_menu
+      slide: meservice_menu
     meservice_menu_item_light:
       action: remove
       slide: meservice_menu
