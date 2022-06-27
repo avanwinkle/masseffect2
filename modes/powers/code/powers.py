@@ -39,7 +39,6 @@ class Powers(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Powers")
-        self.log.setLevel(10)
         self.shots = []
         self.shot_group = None
         self.timer = None
