@@ -189,6 +189,7 @@ shots:
     hit_events: sh_left_orbit_hit
     disable_events: disable_hackshots
     profile: overlord_target_profile
+    start_enabled: false
     show_tokens:
       leds: l_left_orbit_shield_rgb
     tags: envshot_left_orbit
@@ -196,6 +197,7 @@ shots:
     hit_events: sh_right_orbit_hit
     disable_events: disable_hackshots
     profile: overlord_target_profile
+    start_enabled: false
     show_tokens:
       leds: l_right_orbit_shield_rgb
     tags: envshot_right_orbit
@@ -203,6 +205,7 @@ shots:
     hit_events: sh_left_ramp_hit
     disable_events: disable_hackshots
     profile: overlord_target_profile
+    start_enabled: false
     show_tokens:
       leds: l_left_ramp_shield_rgb
     tags: envshot_left_ramp
@@ -210,6 +213,7 @@ shots:
     hit_events: sh_right_ramp_hit
     disable_events: disable_hackshots
     profile: overlord_target_profile
+    start_enabled: false
     show_tokens:
       leds: l_right_ramp_shield_rgb
     tags: envshot_right_ramp
@@ -217,6 +221,7 @@ shots:
     hit_events: sh_kickback_hit
     disable_events: disable_hackshots
     profile: overlord_target_profile
+    start_enabled: false
     show_tokens:
       leds: l_kickback_shield_rgb
     tags: envshot_kickback

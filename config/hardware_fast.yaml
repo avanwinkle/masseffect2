@@ -50,7 +50,11 @@ ball_devices:
     ball_search_order: 20
   bd_hold:
     eject_coil: c_hold_post_release
+    eject_coil_retry_pulse: 120ms
+    retries_before_increasing_pulse: 2
+    max_eject_attempts: 5
     ball_switches: s_missionselect
+    eject_timeouts: 2s
     ball_search_order: 10
 
 named_colors:
@@ -131,7 +135,7 @@ coils:
   c_hold_post_release:
     number: 0-0
     debug: true
-    default_pulse_ms: 68  # Bumped from 55 and 60 which sometimes failed to release
+    default_pulse_ms: 80  # Bumped from 55 and 60 which sometimes failed to release
     # debug: true
     pulse_events:
       - release_hold_post
