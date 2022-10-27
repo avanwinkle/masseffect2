@@ -4,3 +4,6 @@
 # config arguments)
 echo "Building production bundle for Mass Effect 2 Pinball..."
 python -m mpf build production_bundle -c config,production
+
+# When running in a pipx environment, use the following:
+# /Users/anthony/.local/pipx/venvs/mpf/bin/python3 -m mpf build production_bundle -c config,production
