@@ -71,6 +71,13 @@ show_player:
   mode_intro_skipped:
     recruitintro_garrus:
       action: stop
+  logicblock_doors_closed_counter_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_garrus
   logicblock_doors_closed_counter_hit{count==0}:
     garrus_garm:
       loops: 0

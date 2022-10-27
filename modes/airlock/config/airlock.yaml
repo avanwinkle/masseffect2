@@ -238,3 +238,12 @@ show_player:
   ball_save_airlock_save_disabled:
     airlock_save_show:
       action: stop
+  ball_hold_missionselect_hold_balls_released:
+    color_flashing_fast:
+      action: play
+      loops: 6
+      speed: 4
+      priority: 1000
+      show_tokens:
+        leds: light_mass_relay
+        color: color_paragon

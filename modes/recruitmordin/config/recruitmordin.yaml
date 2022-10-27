@@ -118,6 +118,13 @@ show_player:
     gi_massrelay:
       show_tokens:
         color: "996666"
+  logicblock_cure_counter_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_mordin
 
 shows:
   recruitintro_mordin:

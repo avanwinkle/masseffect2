@@ -132,6 +132,13 @@ show_player:
   mode_recruitkasumi_will_stop:
     kasumi_gi_show:
       action: stop
+  logicblock_kasumi_shots_counter_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_kasumi
   logicblock_kasumi_alarms_counter_hit:
     flash_color_show:
       action: play

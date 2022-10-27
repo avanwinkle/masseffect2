@@ -218,6 +218,19 @@ show_player:
       loops: 0
     show_valuable_shepard:
       action: stop
+  jack_hurryup_shots_lit_hit:
+    flash_all_shields_show:
+      loops: 6
+      speed: 12
+      priority: 100
+      show_tokens:
+        color: color_jack
+  logicblock_jack_rounds_counter_hit:
+    pulse_playfield_transparent:
+      loops: 0
+      speed: 2
+      show_tokens:
+        color: color_jack
 
 sound_player:
   mode_recruitjack_started:
