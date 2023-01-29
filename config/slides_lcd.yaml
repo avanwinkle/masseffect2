@@ -1067,6 +1067,7 @@ widgets:
   portrait_recruit_intro_jack:
     - type: video
       video: recruitjack_warden_sniping
+      volume: 0.4
       end_behavior: pause
   portrait_recruit_jack_awakening:
     - type: video

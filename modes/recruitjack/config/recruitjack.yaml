@@ -264,21 +264,28 @@ sounds:
   warden_start:
     file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.ogg
     track: voice
+    volume: 0.5
   warden_find_jack:
     file: en_us_prscva_warden_prscva_warden_pa_a_00254122_m.ogg
     track: voice
+    volume: 0.5
   warden_guards_1:
     file: en_us_prscva_warden_prscva_warden_pa_a_00254121_m.ogg
     track: voice
+    volume: 0.5
   warden_guards_2:
     file: en_us_prscva_warden_prscva_warden_pa_a_00254124_m.ogg
     track: voice
+    volume: 0.5
   warden_guards_find_shepard:
     file: en_us_prscva_warden_prscva_warden_pa_a_00271737_m.ogg
     track: voice
+    volume: 0.5
   warden_shepard_1:
     file: en_us_prscva_warden_prscva_boss_c_00198326_m.ogg
     track: voice
+    volume: 0.5
   warden_shepard_2:
     file: en_us_player_f_prscva_boss_c_00198332_f.ogg
     track: voice
+    volume: 0.5
