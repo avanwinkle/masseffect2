@@ -48,7 +48,7 @@ sounds:
     track: voice
     volume: 1.0
     ducking:
-      target: music
+      target: music, levelup
       attenuation: 0.5
       attack: 200ms
       release_point: 200ms
@@ -58,7 +58,7 @@ sounds:
     track: voice
     volume: 1.0
     ducking:
-      target: music
+      target: music, levelup
       attenuation: 0.5
       attack: 200ms
       release_point: 200ms
@@ -71,7 +71,7 @@ sounds:
     file: DLC_EXP_Part01_Int.1167.ogg
     track: voice
     ducking:
-      target: music
+      target: music, levelup
       attenuation: 0.6
       attack: 1s
       release_point: 1s

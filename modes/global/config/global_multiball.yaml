@@ -520,21 +520,26 @@ widgets:
   bg_overlord_light_0:
     - type: video
       video: overlord_light_vulcan
+      volume: 0.5
       # end_behavior: pause
   bg_overlord_lock_1:
     - type: video
       video: overlord_lock_vulcan
+      volume: 0.5
       # end_behavior: pause
   bg_overlord_light_1:
     - type: video
       video: overlord_light_prometheus
+      volume: 0.5
       # end_behavior: pause
   bg_overlord_lock_2:
     - type: video
       video: overlord_lock_prometheus
+      volume: 0.5
   bg_overlord_light_2:
     - type: video
       video: overlord_light_atlas
+      volume: 0.5
   bg_arrival_light_0:
     - type: video
       video: arrival_light_medbay
@@ -580,4 +585,3 @@ widgets:
     - type: text
       text: "Relay Collision Imminent"
       style: header_sm, row_sub, col_left_anchor
-

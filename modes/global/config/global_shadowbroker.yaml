@@ -185,15 +185,39 @@ sounds:
   shepard_sounds_like_liara_found_something_big:
     file: DLC_EXP_Part01_Int.143.ogg
     track: voice
+    ducking:
+      target: music, levelup
+      attenuation: 0.6
+      attack: 200ms
+      release_point: 500ms
+      release: 500ms
   shepard_ive_got_something_here:
     file: DLC_EXP_Part01_Int.146.ogg
     track: voice
+    ducking:
+      target: music, levelup
+      attenuation: 0.6
+      attack: 200ms
+      release_point: 500ms
+      release: 500ms
   shepard_liara_knew_i_was_coming:
     file: DLC_EXP_Part01_Int.179.ogg
     track: voice
+    ducking:
+      target: music, levelup
+      attenuation: 0.6
+      attack: 200ms
+      release_point: 500ms
+      release: 500ms
   shepard_liaras_in_there:
     file: DLC_EXP_Part01_Int.636.ogg
     track: voice
+    ducking:
+      target: music, levelup
+      attenuation: 0.6
+      attack: 200ms
+      release_point: 500ms
+      release: 500ms
   shepard_ill_start_down_here:
     file: DLC_EXP_Part01_Int.628.ogg
     track: voice

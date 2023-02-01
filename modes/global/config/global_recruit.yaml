@@ -289,12 +289,6 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_legion_1, missioncomplete_voice_legion_2, missioncomplete_voice_legion_3
     max_queue_time: 1s
-    ducking:
-      target: levelup
-      attenuation: 0.3
-      attack: 200ms
-      release_point: 100ms
-      release: 500ms
   missioncomplete_voice_mordin:
     type: random
     track: voice
@@ -397,7 +391,7 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
+      attenuation: 0.8
       attack: 100ms
       release: 300ms
       release_point: 500ms
@@ -406,7 +400,7 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
+      attenuation: 0.8
       attack: 100ms
       release: 300ms
       release_point: 500ms
@@ -424,7 +418,7 @@ sounds:
     track: voice
     ducking:
       target: levelup
-      attenuation: 0.5
+      attenuation: 0.8
       attack: 100ms
       release: 300ms
       release_point: 500ms

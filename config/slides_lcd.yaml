@@ -304,6 +304,7 @@ slides:
       - type: video
         video: ovr_outro_complete
         end_behavior: pause
+        volume: 0.5
   portrait_overlord_outro_incomplete:
     transition:
       type: fade
@@ -315,6 +316,7 @@ slides:
       - type: video
         video: ovr_outro_incomplete
         end_behavior: pause
+        volume: 0.5
   recruit_portrait_slide:
     transition: fade
     transition_out: fade
@@ -1063,6 +1065,7 @@ widgets:
   portrait_recruit_intro_grunt:
     - type: video
       video: recruitintro_grunt
+      volume: 0.5
       end_behavior: pause
   portrait_recruit_intro_jack:
     - type: video
@@ -1073,26 +1076,31 @@ widgets:
     - type: video
       video : recruitjack_awakening
       end_behavior: pause
+      volume: 0.5
       z: 100
   portrait_recruit_jack_jackattack:
     - type: video
       video: recruitjack_jackattack
       end_behavior: pause
+      volume: 0.5
       z: 101
   portrait_recruit_jack_approach:
     - type: video
       video: recruitjack_approach
       end_behavior: pause
+      volume: 0.5
       z: 102
   portrait_recruit_jack_valuable_shepard:
     - type: video
       video: recruitjack_valuable_shepard
       end_behavior: pause
+      volume: 0.5
       z: 103
   portrait_recruit_jack_not_happening:
     - type: video
       video: recruitjack_not_happening
       end_behavior: pause
+      volume: 0.5
       z: 104
   portrait_recruit_intro_kasumi:
     - type: video
