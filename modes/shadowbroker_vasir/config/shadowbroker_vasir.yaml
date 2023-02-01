@@ -417,10 +417,12 @@ slides:
     widgets:
       - type: video
         video: shadowbroker_vasir_cineanim
+        volume: 0.5
   sbvasir_intro:
     widgets:
       - type: video
         video: shadowbroker_vasir_intro
+        volume: 0.5
   sbvasir_dossier:
     transition:
       type: fade

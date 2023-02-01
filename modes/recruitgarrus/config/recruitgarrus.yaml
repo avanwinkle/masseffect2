@@ -118,6 +118,7 @@ slides:
       - type: video
         video: recruitgarrus_garm
         end_behavior: pause
+        volume: 0.4
       - type: image
         image: portrait_recruitgarrus
 

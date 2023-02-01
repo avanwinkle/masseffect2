@@ -273,27 +273,35 @@ widgets:
   shadowbroker_drops_1:
     - type: video
       video: shadowbroker_drops_1
+      volume: 0.5
   shadowbroker_drops_2:
     - type: video
       video: shadowbroker_drops_2
+      volume: 0.5
   shadowbroker_drops_3:
     - type: video
       video: shadowbroker_drops_3
+      volume: 0.5
   shadowbroker_drops_4:
     - type: video
       video: shadowbroker_drops_4
+      volume: 0.5
   shadowbroker_drops_5:
     - type: video
       video: shadowbroker_drops_5
+      volume: 0.5
   shadowbroker_drops_6:
     - type: video
       video: shadowbroker_drops_6
+      volume: 0.5
   shadowbroker_drops_7:
     - type: video
       video: shadowbroker_drops_7
+      volume: 0.5
   shadowbroker_drops_8:
     - type: video
       video: shadowbroker_drops_8
+      volume: 0.5
   portrait_shadowbroker_advance_2:
     - type: image
       image: portrait_shadowbroker_advance_2
