@@ -64,11 +64,11 @@ variable_player:
     # (this is just for display, it's calculated separately in temp_hurryup_value below)
     temp_multiplier:
       action: set
-      float: 1 + 0.25 * current_player.reaper_rounds
+      float: 1 + (0.25 * (current_player.reaper_rounds - 1))
     # Store the "damage" built from the last round times the new multiplier
     temp_hurryup_value:
       action: set
-      int: current_player.temp_build_value * (1 + 0.25 * current_player.reaper_rounds)
+      int: (current_player.temp_build_value * (1 + 0.25 * (current_player.reaper_rounds - 1))) // 100 * 100
   reaper_shot_hit:
     reaper_hp:
       action: add
@@ -76,7 +76,7 @@ variable_player:
     score:
       action: add
       # The score actually has a higher multiplier during earlier rounds!
-      int: current_player.temp_hurryup_value * (5 / current_player.reaper_rounds)
+      int: (current_player.temp_hurryup_value * (5 / current_player.reaper_rounds)) // 100 * 100
 
 # We can take "cover" while the reaper is firing
 ball_holds:
@@ -178,16 +178,33 @@ slide_player:
   timer_reaper_firing_complete:
     reaper_firing_slide:
       expire: 4s
+    reaper_firing_slide_right:
+      target: lcd_right
+      expire: 4s
   reset_reaper:
     reaper_firing_slide:
       action: remove
+    reaper_firing_slide_right:
+      action: remove
+      target: lcd_right
   mode_suicide_humanreaper_will_stop:
     reaper_slide:
       action: remove
     reaper_firing_slide:
       action: remove
+    reaper_firing_slide_right:
+      action: remove
+      target: lcd_right
 
 widget_player:
+  timer_reaper_charging_tick:
+    suicide_time:
+      action: update
+      slide: reaper_slide
+  timer_reaper_charging_complete:
+    suicide_time:
+      action: remove
+      slide: reaper_slide
   timer_reaper_firing_tick:
     reaper_charging_widget:
       action: update

@@ -1,7 +1,7 @@
 #config_version=5
 keyboard:
   "`":
-    event: start_mode_arrival
+    event: start_mode_suicide_base
     # switch: s_dropbank_top
   # Advance major shots
   1:

@@ -6,7 +6,7 @@
 # This mode is the first phase of the Suicide Mission penultimate mode, which runs
 # a four-ball multiball with unlimited saves and all shots lit to build value.
 # The value built is not awarded as points, but saved as a "damage" hurryup for
-# the next phase. 
+# the next phase.
 #
 # Each hit shot will boost the timer 10s, but the mode has a maximum total duration
 # of 40s. When the timer runs out, it will switch to Phase 2 (Human Reaper) for
@@ -21,8 +21,8 @@
 mode:
   start_events: start_mode_suicide_platforms
   stop_events: stop_mode_suicide_platforms, stop_suicide_modes
-  events_when_started: enable_harbinger, reset_platforms, reset_targets
-  events_when_stopped: disable_harbinger
+  events_when_started: start_mode_frenzy, enable_harbinger, reset_platforms, reset_targets
+  events_when_stopped: stop_mode_frenzy, disable_harbinger
   priority: 2300
 
 event_player:
@@ -43,13 +43,13 @@ event_player:
   # Completing all the platforms resets the shots and adds time
   platform_shots_hit_complete:
     - reset_platforms
-    - missiontimer_add_10
+    # - missiontimer_add_10
   platform_targets_hit_complete:
     - reset_targets
   # When the hurryup drains, move on to the next mode
   timer_missiontimer_complete: platforms_complete
   # If the player plays the maximum amount of time, move on
-  timer_platformtimer_complete: platforms_complete
+  #timer_platformtimer_complete: platforms_complete
 
 # Unlimited balls during platforms
 multiballs:
@@ -62,20 +62,13 @@ multiballs:
       - ball_hold_captive_hold_held_ball{game.balls_in_play<3}
 
 # There is a maximum amount of time that platforms will play
-timers:
-  platformtimer:
-    start_value: 4
-    end_value: 0
-    tick_interval: 10s
-    direction: down
-    start_running: true
-
-variable_player:
-  # give a few points for every hit
-  frenzy_lit_hit:
-    temp_build_value: 100
-  drop_target_bank_dropbank_down:
-    temp_build_value: 3000
+# timers:
+#   platformtimer:
+#     start_value: 4
+#     end_value: 0
+#     tick_interval: 10s
+#     direction: down
+#     start_running: true
 
 light_player:
   mode_suicide_platforms_started:
@@ -185,11 +178,22 @@ sound_player:
       action: stop
 
 widget_player:
-  player_temp_hurryup_value:
-    suicide_hurryup:
-      action: update
-      slide: suicide_slide
   player_temp_build_value:
     suicide_damage:
       action: update
       slide: suicide_slide
+
+variable_player:
+  # Hurryup value is points awarded during the mode, which are also added to build value
+  # Build value is the damage that will be done to the reaper
+  mode_suicide_platforms_started:
+    temp_build_value:
+      action: set
+      int: 0
+  # give a few points for every hit
+  platform_targets_hit_complete:
+    temp_build_value: 1000
+  frenzy_lit_hit:
+    temp_build_value: 100
+  drop_target_bank_dropbank_down:
+    temp_build_value: 3000

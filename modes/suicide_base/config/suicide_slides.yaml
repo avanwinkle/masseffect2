@@ -241,6 +241,9 @@ slides:
       - type: text
         text: the Suicide Mission
         style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: (score)
+        style: header_xs, row_top, col_right_anchor, mission_title, num
       - widget: background_console
   # Identical to suicide_slide but separate because of all the widgets
   reaper_slide:
@@ -249,16 +252,18 @@ slides:
         text: the Suicide Mission
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
-        text: Destroy the Reaper
+        text: (score)
+        style: header_xs, row_top, col_right_anchor, mission_title, num
+      - type: text
+        text: "Human Reaper"
         style: header_md, row_main, col_left_anchor
       - type: text
-        text: (player|temp_build_value) x (player|temp_multiplier)
+        text: "Reaper HP: (player|reaper_hp)"
         number_grouping: true
-        style: body_sm, row_sub_under, col_left_anchor
+        style: header_sm, row_sub_under, col_left_anchor
       - type: text
-        text: (player|reaper_hp) HP
-        number_grouping: true
-        style: header_sm, row_sub, col_left_anchor
+        text: "Heavy Weapon: (player|temp_build_value) x (player|temp_multiplier)"
+        style: body_sm, row_bottom_margin, col_left_anchor, num
       - widget: background_console
   # Fancy flashing to show the reaper is firing
   reaper_firing_slide:
@@ -282,18 +287,39 @@ slides:
               value: 0
               duration: .15s
               repeat: true
+  reaper_firing_slide_right:
+    widgets:
+      - type: rectangle
+        width: 484
+        height: 468
+        z: 0
+        color: 000000
+      - type: rectangle
+        width: 484
+        height: 468
+        z: 1
+        color: FFFFFF
+        animations:
+          show_slide:
+            - property: opacity
+              value: 1
+              duration: .15s
+            - property: opacity
+              value: 0
+              duration: .15s
+              repeat: true
   # For debugging mostly, lots of numbers about the hit
   reaper_hitdamage_slide:
     widgets:
       - type: text
-        text: KAPOW!
+        text: REAPER HIT!
         style: header_md, row_main, col_left_anchor
       - type: text
         text: (change) damage dealt!
-        style: header_sm, row_sub, col_left_anchor
+        style: header_sm, row_sub, col_left_anchor, num
       - type: text
-        text: (value) remaining
-        style: header_sm, row_sub_under, col_left_anchor
+        text: (value) HP remaining
+        style: body_sm, row_bottom_margin, col_left_anchor, num
   # Shown when a squadmate is killed, during restart mode
   squadmate_killed_slide:
     widgets:
@@ -392,7 +418,7 @@ widgets:
         style: header_md, row_main, col_left_anchor
     platforms_title:
       - type: text
-        text: Defeat the Collectors
+        text: "Defeat the\nCollectors"
         style: header_md, row_main, col_left_anchor
     humanreaper_title:
       - type: text
@@ -415,15 +441,10 @@ widgets:
       - type: text
         text: "Tubes: (value)"
         style: header_xs, row_gutter, col_left_anchor
-    suicide_hurryup:
-      - type: text
-        text: (value)
-        number_grouping: true
-        style: body_sm, row_sub, col_left_anchor
     suicide_damage:
       - type: text
-        text: "(value)"
-        style: body_sm, row_sub, col_right_anchor
+        text: "Heavy Weapon Strength: (value)"
+        style: body_sm, row_sub_under, col_left_anchor, num
         number_grouping: true
     suicide_detonate:
       - type: text
@@ -440,8 +461,8 @@ widgets:
               repeat: true
     reaper_charging_widget:
       - type: text
-        text: Firing in (ticks)s
-        style: header_md, row_sub_under, col_left_anchor
+        text: Take Cover!!
+        style: header_md, row_super, col_left_anchor
         animations:
           add_to_slide:
             - property: opacity
