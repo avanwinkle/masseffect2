@@ -56,12 +56,13 @@ show_player:
       action: stop
 
 sound_player:
-  mode_attract_started.10:
+  mode_attract_started.10{not settings.demo_mode}:
     mus_main_menu:
       action: play
       mode_end_action: stop
       loops: 0
     # Preload the start sound and some first ball sounds
+  mode_attract_started.9:
     gui_splashstart:
       action: load
     mus_gui_char_create:
