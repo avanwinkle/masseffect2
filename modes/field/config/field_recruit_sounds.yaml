@@ -72,23 +72,23 @@ sounds:
   grunt_shot_sound_1:
     file: en_us_hench_grunt_ss_global_hench_grunt_00331030_m.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   grunt_shot_sound_2:
     file: en_us_hench_grunt_ss_global_hench_grunt_00317212_m.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   grunt_shot_sound_3:
     file: en_us_hench_grunt_ss_global_hench_grunt_00331036_m.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   grunt_shot_sound_4:
     file: en_us_hench_grunt_ss_global_hench_grunt_00331040_m.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   grunt_shot_sound_5:
     file: en_us_hench_grunt_ss_global_hench_grunt_00295739_m.ogg
     track: voice
-    volume: 0.8
+    volume: 0.7
   jack_shot_sound_1:
     file: en_us_hench_convict_ss_global_hench_convict_00286790_m.ogg
     track: voice
