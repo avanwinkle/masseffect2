@@ -60,7 +60,7 @@ sound_player:
     mus_main_menu:
       action: play
       mode_end_action: stop
-      loops: -1
+      loops: 0
     # Preload the start sound and some first ball sounds
     gui_splashstart:
       action: load
