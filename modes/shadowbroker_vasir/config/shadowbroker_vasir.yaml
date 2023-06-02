@@ -64,6 +64,9 @@ variable_player:
   vasir_shot_armor_2_hit:
     temp_multiplier:
       float: 0.25
+  mode_shadowbroker_vasir_will_stop:
+    vasir_attempted:
+      int: 1
 
 ball_saves:
   # Hitting the kickback without a kickback can cause the ball to drain, so give us a save
@@ -253,9 +256,9 @@ shots:
 
 show_player:
   mode_shadowbroker_vasir_started:
-    vasir_cineanim_show{device.achievements.vasir.state=="enabled"}:
+    vasir_cineanim_show{current_player.vasir_attempted==0}:
       loops: 0
-    vasir_intro_show{device.achievements.vasir.state=="stopped"}:
+    vasir_intro_show{current_player.vasir_attempted>0}:
       loops: 0
     vasir_gi:
       loops: -1

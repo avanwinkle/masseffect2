@@ -121,7 +121,7 @@ class MissionSelect(Carousel):
             self.log.debug("Intro was picked as mission, advancing to next item")
             self._highlighted_item_index += 1
         # If we are in high-flow mode, there is only one item
-        elif player["high_flow"]:
+        elif self.machine.game.player["high_flow"]:
             self._highlighted_item_index = 0
 
         super()._select_item()
