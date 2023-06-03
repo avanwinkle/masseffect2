@@ -69,7 +69,7 @@ settings:
   enable_careers:
     label: "Enable Career Profiles"
     key_type: int
-    default: 1
+    default: 0
     sort: 10
     values:
       0: "NO"
@@ -120,7 +120,7 @@ settings:
     label: "Expo Demo Mode"
     sort: 60
     key_type: int
-    default: 0
+    default: 1
     values:
       0: "Disabled"
       1: "Enabled"

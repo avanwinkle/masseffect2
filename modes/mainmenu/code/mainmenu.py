@@ -3,10 +3,11 @@
 import json
 import logging
 import os
-from random import randint
+from random import randint, random
 from datetime import datetime
 from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
+from scriptlets.squadmate_status import SquadmateStatus
 
 DIFFICULTIES = {0: "Normal", 1: "Hardcore", 2: "Insanity"}
 FLOWS = {0: "Normal", 1: "High Flow"}
@@ -30,10 +31,6 @@ class MainMenu(Carousel):
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""
-        if not self.machine.settings.enable_careers:
-            self.log.info("Casual mode only, skipping menu")
-            self.stop()
-            return
         # Reset the difficulty and flow selections
         self._selected_difficulty = -1
         self._selected_flow = -1
@@ -47,6 +44,24 @@ class MainMenu(Carousel):
 
     def show_menu(self, **kwargs):
         """Load career data and display the main menu."""
+
+        if not self.machine.settings.enable_careers:
+            self.log.info("Casual mode only, skipping menu")
+            if self.machine.settings.demo_mode:
+                player = self.machine.game.player
+                self.log.info(" - Expo demo mode, juicing the player start conditions for player %d", player.number)
+                # Advance shadowbroker faster
+                player["counter_sbdrops_counter"] = 2
+                # 25% chance of getting arrival instead of overlord
+                if random() < 0.25:
+                    player["achievements"]["arrival"] = "enabled"
+                    player["achievements"]["overlord"] = "stopped"
+                starting_recruit = SquadmateStatus.random_recruit()
+                self.machine.log.info("Found a random recruit: %s", starting_recruit)
+                player["status_{}".format(starting_recruit)] = 3
+                player["available_missions"] = 1
+            self.machine.events.post("mainmenu_item_selected")
+            return
 
         if self.machine.game and self.machine.game.num_players > 1:
             self.machine.variables.set_machine_var("players_widget_text", "Player {} of {}".format(

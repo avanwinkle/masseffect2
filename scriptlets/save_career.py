@@ -51,18 +51,9 @@ class SaveCareer(CustomCode):
                 player["career_name"] = "Player {}".format(player.number)
                 player["high_flow"] = self.machine.settings.get_setting_value("casual_flow")
                 # Duplicate events, we may have already set this
-                if not player["mineral_iridium"] :
-                    for mineral in ["iridium", "palladium", "platinum"]:
-                        player["mineral_{}".format(mineral)] = 10000
-                    # Some mods for demo mode:
-                    if self.machine.settings.demo_mode:
-                        # Advance shadowbroker faster
-                        player["counter_sbdrops_counter"] = 2
-                        # 25% chance of getting arrival instead of overlord
-                        if random.random() < 0.25:
-                            player["achievements"]["arrival"] = "enabled"
-                            player["achievements"]["overlord"] = "stopped"
+                if not player["available_missions"] :
                     starting_recruit = SquadmateStatus.random_recruit()
+                    self.machine.log.info("Found a random recruit: %s", starting_recruit)
                     player["status_{}".format(starting_recruit)] = 3
                     player["available_missions"] = 1
             else:
