@@ -52,10 +52,7 @@ class MainMenu(Carousel):
                 self.log.info(" - Expo demo mode, juicing the player start conditions for player %d", player.number)
                 # Advance shadowbroker faster
                 player["counter_sbdrops_counter"] = 2
-                # 25% chance of getting arrival instead of overlord
-                if random() < 0.25:
-                    player["achievements"]["arrival"] = "enabled"
-                    player["achievements"]["overlord"] = "stopped"
+                # Start with one recruit lit
                 starting_recruit = SquadmateStatus.random_recruit()
                 self.machine.log.info("Found a random recruit: %s", starting_recruit)
                 player["status_{}".format(starting_recruit)] = 3

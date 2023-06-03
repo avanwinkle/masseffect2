@@ -56,8 +56,12 @@ event_player:
   player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
-  player_squadmates_count{player_num==current_player.number and value==6}:
+  player_squadmates_count{player_num==current_player.number and value==6 and not settings.demo_mode}:
     - enable_collectorship
+  # In expo demo mode, 3 recruits is enough for collector ship
+  player_squadmates_count{player_num==current_player.number and value==5 and settings.demo_mode}:
+    - enable_collectorship
+
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
   # When we have reached level 8, go to derelict reaper. This can be from

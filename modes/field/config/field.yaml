@@ -73,6 +73,7 @@ sound_player:
       action: play
       loops: -1
       mode_end_action: stop
+      fade_out: 2s
   play_field_music{current_player.high_flow==0}:
     music_normandy_walkin_intro:
       action: play
@@ -80,8 +81,15 @@ sound_player:
       events_when_about_to_finish: play_galaxy_map
       about_to_finish_time: 4s
       fade_out: 2s
-  play_galaxy_map:
+  play_galaxy_map{not settings.demo_mode}:
     music_galaxy_map:
+      action: play
+      loops: -1
+      mode_end_action: stop
+      fade_in: 500ms
+      fade_out: 2s
+  play_galaxy_map{settings.demo_mode}:
+    high_flow_field_music:
       action: play
       loops: -1
       mode_end_action: stop
