@@ -206,6 +206,7 @@ modes:
   - field
   - instantinfo
   - mainmenu
+  - match
   - missionselect
   - modeanalysis
   - pinstrat

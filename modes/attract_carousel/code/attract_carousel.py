@@ -14,6 +14,7 @@ class AttractCarousel(Carousel):
         self.add_mode_event_handler("not_enough_credits", self._on_credits)
 
     def _on_credits(self, **kwargs):
+        del kwargs
         # Don't jump slide on game start
         if self.stopping or not self.active:
             return
