@@ -38,6 +38,49 @@ slides:
         image: splashscreen
         anchor_x: right
         x: 110%
+  credits_slide_free_play:
+    transition: fade
+    transition_out: fade
+    widgets:
+      - type: text
+        text: FREE PLAY
+        style: header_lg
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
+  credits_slide_not_enough:
+    transition_out: fade
+    widgets:
+      - type: text
+        text: "INSERT\nCOINS"
+        style: header_lg, row_main
+      - type: text
+        text: (machine|credits_string)
+        style: body_md, row_sub_under
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
+  credits_slide_press_start:
+    transition_out: fade
+    widgets:
+      - type: text
+        text: "PRESS\nSTART"
+        style: header_lg, row_main
+      - type: text
+        text: (machine|credits_string)
+        style: body_md, row_sub_under
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
   firewalker_complete_slide:
     widgets:
       - type: text

@@ -3,12 +3,12 @@ mode:
   start_events: mode_attract_started
   stop_events: mode_attract_will_stop
   game_mode: false
-  code: mpf.modes.carousel.code.carousel.Carousel
+  code: attract_carousel.AttractCarousel
 
 mode_settings:
   selectable_items:
-    - title{machine.gameover_text==" "}
-    - gameover
+    - title
+    - credits
     - 1player_score{machine.player1_score and not machine.player2_score}
     - 2player_score{machine.player2_score and not machine.player3_score}
     - 3player_score{machine.player3_score and not machine.player4_score}
@@ -17,7 +17,6 @@ mode_settings:
     - 2player_pinstrat{settings.enable_pinstrat and machine.player2_score}
     - 3player_pinstrat{settings.enable_pinstrat and machine.player3_score}
     - 4player_pinstrat{settings.enable_pinstrat and machine.player4_score}
-    - title{machine.gameover_text!=" "}
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
 
@@ -45,10 +44,10 @@ event_player:
       player_name: (machine|last_career_player_1)
 
 variable_player:
-  attract_carousel_title_highlighted{machine.gameover_text!="FREE PLAY"}:
+  attract_carousel_title_highlighted{machine.gameover_text!=" "}:
     gameover_text:
       action: set_machine
-      string: "FREE PLAY"
+      string: " "
 
 timers:
   attract_timer:
@@ -84,6 +83,9 @@ slide_player:
       action: remove
       target: lcd_right
   attract_carousel_gameover_highlighted.1: gameover_slide
+  attract_carousel_credits_highlighted{machine.free_play}: credits_slide_free_play
+  attract_carousel_credits_highlighted{not machine.free_play and machine.credits_whole_num==0}: credits_slide_not_enough
+  attract_carousel_credits_highlighted{not machine.free_play and machine.credits_whole_num>0}: credits_slide_press_start
   attract_carousel_1player_score_highlighted: 1player_score_slide
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide

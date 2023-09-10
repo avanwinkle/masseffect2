@@ -2,6 +2,8 @@
 keyboard:
   "`":
     event: start_mode_suicide_base
+  "'":
+    switch: s_coin_chute_left
     # switch: s_dropbank_top
   # Advance major shots
   1:
