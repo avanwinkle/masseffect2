@@ -1,0 +1,136 @@
+#config_version=5
+
+settings:
+  enable_careers:
+    label: "Enable Career Profiles"
+    key_type: int
+    default: 0
+    sort: 10
+    values:
+      0: "NO"
+      1: "YES"
+  enable_create_profile:
+    label: "Allow Profile Creation"
+    key_type: int
+    default: 0
+    sort: 20
+    values:
+      0: "NO"
+      1: "YES"
+  enable_analytics:
+    label: "Mode Analytics"
+    sort: 30
+    key_type: int
+    default: 0
+    values:
+      0: "OFF"
+      1: "ON"
+  balls_per_game:
+    label: "Balls Per Game"
+    sort: 1
+    default: 3
+    values:
+      1: 1
+      3: 3
+      5: 5
+      7: 7
+      999: "Infinite"
+  enable_pinstrat:
+    label: "PinStrat"
+    sort: 40
+    key_type: int
+    default: 1
+    values:
+      0: "Disabled"
+      1: "Enabled"
+  intro_mb:
+    label: "Intro Multiball"
+    sort: 50
+    key_type: int
+    default: 0
+    values:
+      0: "Disabled"
+      1: "Enabled"
+  demo_mode:
+    label: "Expo Demo Mode"
+    sort: 60
+    key_type: int
+    default: 0
+    values:
+      0: "Disabled"
+      1: "Enabled"
+  casual_flow:
+    label: "Casual Play Style"
+    sort: 70
+    key_type: int
+    default: 0
+    values:
+      0: "Normal"
+      1: "High-Flow"
+  # Coin Settings
+  enable_match:
+    label: "Match"
+    settingType: coin
+    sort: 510
+    key_type: int
+    default: 1
+    values:
+      0: "Disabled"
+      1: "Enabled"
+  standard_price:
+    label: "Single Credit Price"
+    settingType: coin
+    sort: 550
+    key_type: float
+    default: 0.75
+    values:
+      0.25: "$ 0.25"
+      0.5: "$ 0.50"
+      0.75: "$ 0.75"
+      1.0: "$ 1.00"
+  discount_price:
+    label: "Bulk Credit Price"
+    settingType: coin
+    sort: 560
+    key_type: float
+    default: 2.0
+    values:
+      1.0: "$ 1.00"
+      1.5: "$ 1.50"
+      2.0: "$ 2.00"
+      2.5: "$ 2.50"
+      3.0: "$ 3.00"
+  discount_credits:
+    label: "Credits at Bulk Price"
+    settingType: coin
+    sort: 565
+    key_type: int
+    default: 3
+    values:
+      2: "2"
+      3: "3"
+      4: "4"
+      5: "5"
+  replay_score:
+    label: "Replay Score"
+    settingType: coin
+    sort: 580
+    key_type: int
+    default: 10_000_000
+    values:
+      0: "Disabled"
+      8_000_000: "8,000,000"
+      10_000_000: "10,000,000"
+      20_000_000: "20,000,000"
+  replay_growth:
+    label: "Replay Growth"
+    settingType: coin
+    key_type: float
+    sort: 581
+    default: 1.5
+    values:
+      1.0: "Fixed"
+      1.25: "125%"
+      1.5: "150%"
+      1.75: "175%"
+      2.0: "200%"

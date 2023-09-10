@@ -1,6 +1,7 @@
 #config_version=5
 config:
 - config_colors.yaml
+- config_settings.yaml
 - hardware_common.yaml
 - keyboard.yaml
 
@@ -65,74 +66,6 @@ game:
   balls_per_game: settings.balls_per_game
   max_players: 4
 
-settings:
-  enable_careers:
-    label: "Enable Career Profiles"
-    key_type: int
-    default: 0
-    sort: 10
-    values:
-      0: "NO"
-      1: "YES"
-  enable_create_profile:
-    label: "Allow Profile Creation"
-    key_type: int
-    default: 0
-    sort: 20
-    values:
-      0: "NO"
-      1: "YES"
-  enable_analytics:
-    label: "Mode Analytics"
-    sort: 30
-    key_type: int
-    default: 0
-    values:
-      0: "OFF"
-      1: "ON"
-  balls_per_game:
-    label: "Balls Per Game"
-    sort: 1
-    default: 3
-    values:
-      1: 1
-      3: 3
-      5: 5
-      7: 7
-      999: "Infinite"
-  enable_pinstrat:
-    label: "PinStrat"
-    sort: 40
-    key_type: int
-    default: 1
-    values:
-      0: "Disabled"
-      1: "Enabled"
-  intro_mb:
-    label: "Intro Multiball"
-    sort: 50
-    key_type: int
-    default: 0
-    values:
-      0: "Disabled"
-      1: "Enabled"
-  demo_mode:
-    label: "Expo Demo Mode"
-    sort: 60
-    key_type: int
-    default: 1
-    values:
-      0: "Disabled"
-      1: "Enabled"
-  casual_flow:
-    label: "Casual Play Style"
-    sort: 70
-    key_type: int
-    default: 0
-    values:
-      0: "Normal"
-      1: "High-Flow"
-
 slide_player:
   init_done:
     window_slide_container:
@@ -158,6 +91,41 @@ event_player:
       value:
         value: ((machine.master_volume + 0.05) if machine.master_volume < 0.95 else 1) * 100
         type: int
+
+credits:
+  max_credits: 12
+  free_play: true
+  price_tier_template: "${price:1.2f} / {credits} CREDITS"
+  switches:
+    - switch: s_coin_chute_right
+      type: Dollars
+      value: .25
+    - switch: s_coin_chute_left
+      type: Dollars
+      value: .25
+  pricing_tiers:
+    - price: settings.standard_price
+      credits: 1
+    - price: settings.discount_price
+      credits: settings.discount_credits
+  events:
+    - event: special
+      type: special
+      credits: 1
+    - event: replay
+      type: replay
+      credits: 1
+    - event: high_score_credit
+      type: high_score
+      credits: 1
+    - event: match
+      type: match
+      credits: 1
+  fractional_credit_expiration_time: 15m
+  credit_expiration_time: 2h
+  persist_credits_while_off_time: 1h
+  free_play_string: FREE PLAY
+  credits_string: CREDITS
 
 machine_vars:
   last_career_player_1:
@@ -232,6 +200,7 @@ modes:
   - base
   - bonus
   - createprofile
+  - credits
   - gameover
   - global
   - field
