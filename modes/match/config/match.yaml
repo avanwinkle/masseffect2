@@ -33,8 +33,14 @@ slides:
       - type: text
         text: (scores)
         style: header_lg, row_main
+      - type: image
+        image: background_cic
+        z: 0
   match_slide_right:
-    widgets: []
+    widgets:
+      - type: image
+        image: background_datapad_right
+        z: 0
 
 widget_player:
   show_match_num:
@@ -45,7 +51,7 @@ widgets:
   match_number:
     - type: text
       text: (num)
-      style: header_lg, row_main
+      style: header_lg, row_main, color_ui_orange
 
 timers:
   match_timer:
