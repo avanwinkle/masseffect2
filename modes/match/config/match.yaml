@@ -1,0 +1,60 @@
+#config_version=5
+mode:
+  priority: 1000
+  start_events: game_ending
+  code: match.Match
+  game_mode: False
+  use_wait_queue: true
+
+mode_settings:
+  non_match_number_step: 10
+
+queue_relay_player:
+  match_no_match:
+    post: awaiting_match
+    wait_for: match_finished
+  match_has_match:
+    post: awaiting_match
+    wait_for: match_finished
+
+slide_player:
+  show_match_slide:
+    match_slide_main:
+      target: main
+    match_slide_right:
+      target: lcd_right
+
+slides:
+  match_slide_main:
+    widgets:
+      - type: text
+        text: MATCH
+        style: header_md, row_top
+      - type: text
+        text: (scores)
+        style: header_lg, row_main
+  match_slide_right:
+    widgets: []
+
+widget_player:
+  show_match_num:
+    match_number:
+      slide: match_slide_right
+
+widgets:
+  match_number:
+    - type: text
+      text: (num)
+      style: header_lg, row_main
+
+timers:
+  match_timer:
+    tick_interval: 200ms
+    start_running: true
+    end_value: 10
+    start_value: 0
+    restart_on_complete: true
+    control_events:
+      - event: match_complete
+        action: pause
+        value: 5
