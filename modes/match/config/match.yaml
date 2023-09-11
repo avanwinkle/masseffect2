@@ -29,10 +29,10 @@ slides:
     widgets:
       - type: text
         text: MATCH
-        style: header_md, row_top
+        style: header_md, row_super
       - type: text
         text: (scores)
-        style: header_lg, row_main
+        style: header_lg, row_sub
       - type: image
         image: background_cic
         z: 0
@@ -46,12 +46,33 @@ widget_player:
   show_match_num:
     match_number:
       slide: match_slide_right
+  show_match_success:
+    match_number:
+      action: remove
+      slide: match_slide_right
+    match_success:
+      slide: match_slide_right
+  show_match_failure:
+    match_number:
+      action: remove
+      slide: match_slide_right
+    match_failure:
+      slide: match_slide_right
 
 widgets:
   match_number:
     - type: text
       text: (num)
-      style: header_lg, row_main, color_ui_orange
+      style: header_lg, row_super, color_ui_orange
+  match_success:
+    - type: text
+      text: (num)
+      style: header_lg, row_super, color_ui_green
+  match_failure:
+    - type: text
+      text: (num)
+      style: header_lg, row_super
+      color: CC0000
 
 timers:
   match_timer:
