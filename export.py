@@ -9,6 +9,7 @@ import logging
 import py_compile
 from datetime import datetime
 
+import mpf
 from mpf.commands import build
 
 DEST_PATH = "dist"
@@ -67,9 +68,12 @@ def make_zip():
 
 
 def main():
-    #generate_tree()
-    #log.info("Generating production bundle at path %s", os.getcwd())
-    #build.Command(['/Users/anthony/git/mpf/mpf/__main__.py', 'production_bundle', '-c', 'config,production'], os.getcwd())
+    generate_tree()
+    mpf_path = os.path.dirname(mpf.__file__)
+    log.info("Generating production bundle at path %s", os.getcwd())
+    build.Command([os.path.join(mpf_path, '__main__.py'),
+                                'production_bundle',
+                                '-c', 'config,production'], os.getcwd())
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
 
@@ -82,7 +86,6 @@ def main():
     elif "-z" in sys.argv:
         log.info("Compressing dist folder")
         make_zip()
-
 
 
 if __name__ == "__main__":
