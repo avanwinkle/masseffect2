@@ -14,6 +14,7 @@ from mpf.commands import build
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
+machine_path = "/home/pi/me2"
 
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -63,8 +64,9 @@ def generate_tree():
 
 def make_zip():
     now = datetime.now()
-    timestamp = now.strftime("%y%m_%d_%H%M")
-    shutil.make_archive("ME2UPDATE-%s" % timestamp, 'zip', DEST_PATH)
+    filename = "ME2UPDATE-%s" % now.strftime("%y%m_%d_%H%M")
+    shutil.make_archive(filename, 'zip', DEST_PATH)
+    return os.path.join(f"{filename}.zip")
 
 
 def main():
@@ -73,20 +75,28 @@ def main():
     log.info("Generating production bundle at path %s", os.getcwd())
     build.Command([os.path.join(mpf_path, '__main__.py'),
                                 'production_bundle',
-                                '-c', 'config,production'], os.getcwd())
+                                '-c', 'config,production',
+                                '--dest-path=%s' % machine_path], os.getcwd())
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
+    log.info("Successfully built production bundles with machine path %s" % machine_path)
 
     # Check for a copy path
     if "-c" in sys.argv:
         copy_idx = sys.argv.index("-c")
         copy_path = sys.argv[copy_idx + 1]
         log.info("Compressing and copying to path %s", copy_path)
-        make_zip()
+        z = make_zip()
+        shutil.copyfile(z, os.path.join(copy_path, z))
+        log.info("Copy complete!")
     elif "-z" in sys.argv:
         log.info("Compressing dist folder")
-        make_zip()
+        z = make_zip()
+        log.info("Successfully build %s" % z)
 
 
 if __name__ == "__main__":
+    if "-d" in sys.argv:
+        d_idx = sys.argv.index("-d")
+        machine_path = sys.argv[d_idx + 1]
     main()
