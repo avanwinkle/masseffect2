@@ -33,16 +33,23 @@ sound_pools:
 sounds:
   geth_killed_short_1:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307874_m.ogg
+    track: sfx
   geth_killed_short_2:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307875_m.ogg
+    track: sfx
   geth_killed_short_3:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307878_m.ogg
+    track: sfx
   geth_killed_short_4:
     file: sfx_ss_geth_sniper_ss_geth_sniper_00309331_m.ogg
+    track: sfx
   geth_killed_long_1:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307876_m.ogg
+    track: sfx
   geth_killed_long_2:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307877_m.ogg
+    track: sfx
   geth_killed_long_3:
     file: sfx_ss_geth_sniper_ss_geth_sniper_00309330_m.ogg
+    track: sfx
 

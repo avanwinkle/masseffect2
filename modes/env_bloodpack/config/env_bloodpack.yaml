@@ -33,32 +33,47 @@ sound_pools:
 sounds:
   varren_hit_1:
     file: sfx_ss_varren_ss_new_varrens_00295077_m.ogg
+    track: sfx
   varren_hit_2:
     file: sfx_ss_varren_ss_new_varrens_00295078_m.ogg
+    track: sfx
   varren_hit_3:
     file: sfx_ss_varren_ss_new_varrens_00295079_m.ogg
+    track: sfx
   varren_hit_4:
     file: sfx_ss_varren_ss_new_varrens_00295080_m.ogg
+    track: sfx
   vorcha_hit_short_1:
     file: en_us_ss_vorcha_ss_vorcha_00243613_m.ogg
+    track: sfx
   vorcha_hit_short_2:
     file: en_us_ss_vorcha_ss_vorcha_00243631_m.ogg
+    track: sfx
   vorcha_hit_short_3:
     file: en_us_ss_vorcha_ss_vorcha_00243632_m.ogg
+    track: sfx
   vorcha_hit_med_1:
     file: en_us_ss_vorcha_ss_vorcha_00243633_m.ogg
+    track: sfx
   vorcha_hit_med_2:
     file: en_us_ss_vorcha_ss_vorcha_00243634_m.ogg
+    track: sfx
   vorcha_hit_long_1:
     file: en_us_ss_vorcha_ss_vorcha_00243614_m.ogg
+    track: sfx
   vorcha_ill_kill_you:
     file: en_us_ss_vorcha_ss_vorcha_00243681_m.ogg
+    track: voice
   vorcha_youre_gonna_die:
     file: en_us_ss_vorcha_ss_vorcha_00243684_m.ogg
+    track: voice
   vorcha_run_away:
     file: en_us_ss_vorcha_ss_vorcha_00312956_m.ogg
+    track: voice
   vorcha_fire_fire:
     file: en_us_ss_vorcha_ss_vorcha_00312964_m.ogg
+    track: voice
   vorcha_shoot_everything:
     file: en_us_ss_vorcha_ss_vorcha_00312977_m.ogg
+    track: voice
 
