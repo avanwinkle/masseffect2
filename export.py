@@ -8,18 +8,24 @@ import shutil
 import logging
 import py_compile
 from datetime import datetime
+import hashlib
+from functools import partial
+
 
 import mpf
 from mpf.commands import build
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
-machine_path = "/home/pi/me2"
 
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 log = logging.getLogger("GenerateCodeTree")
 log.setLevel(1)
+
+
+now = datetime.now()
+timestamp = now.strftime("%y%m_%d_%H%M")
 
 def generate_tree():
 
@@ -62,12 +68,30 @@ def generate_tree():
     log.info("Code tree generation complete")
 
 
-def make_zip():
-    now = datetime.now()
-    filename = "ME2UPDATE-%s" % now.strftime("%y%m_%d_%H%M")
-    shutil.make_archive(filename, 'zip', DEST_PATH)
-    return os.path.join(f"{filename}.zip")
+def generate_hash(path):
+    sha256_hash = hashlib.sha256()
+    with open(path, "rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+    checksum = sha256_hash.hexdigest()
+    log.debug("Checksum %s: %s", path, checksum)
+    return checksum
 
+
+def generate_update_file():
+    with open(os.path.join(DEST_PATH, "UPDATE"), "w") as f:
+        f.writelines([
+            f"timestamp={now.strftime('%a %b %d %H:%M:S %Z %Y')}\n",
+            f"version={timestamp.replace('_', '.')}\n",
+            f"mpf_config.bundle={generate_hash(os.path.join(DEST_PATH, 'mpf_config.bundle'))}\n"
+        ])
+
+
+def make_zip():
+    filename = "ME2UPDATE-%s" % timestamp
+    shutil.make_archive(filename, 'zip', DEST_PATH)
+    return f"{filename}.zip"
 
 def main():
     generate_tree()
@@ -75,28 +99,23 @@ def main():
     log.info("Generating production bundle at path %s", os.getcwd())
     build.Command([os.path.join(mpf_path, '__main__.py'),
                                 'production_bundle',
-                                '-c', 'config,production',
-                                '--dest-path=%s' % machine_path], os.getcwd())
+                                '-c', 'config,production'], os.getcwd())
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
-    log.info("Successfully built production bundles with machine path %s" % machine_path)
+
+    generate_update_file()
 
     # Check for a copy path
     if "-c" in sys.argv:
         copy_idx = sys.argv.index("-c")
         copy_path = sys.argv[copy_idx + 1]
         log.info("Compressing and copying to path %s", copy_path)
-        z = make_zip()
-        shutil.copyfile(z, os.path.join(copy_path, z))
-        log.info("Copy complete!")
+        filename = make_zip()
+        shutil.copyfile(filename, os.path.join(copy_path, filename))
     elif "-z" in sys.argv:
         log.info("Compressing dist folder")
-        z = make_zip()
-        log.info("Successfully build %s" % z)
+        make_zip()
 
 
 if __name__ == "__main__":
-    if "-d" in sys.argv:
-        d_idx = sys.argv.index("-d")
-        machine_path = sys.argv[d_idx + 1]
     main()
