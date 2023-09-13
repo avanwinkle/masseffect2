@@ -17,6 +17,7 @@ from mpf.commands import build
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
+machine_path = "/home/pi/me2"
 
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -99,7 +100,9 @@ def main():
     log.info("Generating production bundle at path %s", os.getcwd())
     build.Command([os.path.join(mpf_path, '__main__.py'),
                                 'production_bundle',
-                                '-c', 'config,production'], os.getcwd())
+                                '-c', 'config,production',
+                                '--dest-path=%s' % machine_path], os.getcwd())
+
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
 
@@ -118,4 +121,7 @@ def main():
 
 
 if __name__ == "__main__":
+    if "-d" in sys.argv:
+        d_idx = sys.argv.index("-d")
+        machine_path = sys.argv[d_idx + 1]
     main()
