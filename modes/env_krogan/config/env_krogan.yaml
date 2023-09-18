@@ -28,17 +28,25 @@ sound_pools:
 sounds:
   krogan_hit_short_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303497_m.ogg
+    track: sfx
   krogan_hit_short_2:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303521_m.ogg
+    track: sfx
   krogan_hit_short_3:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303569_m.ogg
+    track: sfx
   krogan_hit_med_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303502_m.ogg
+    track: sfx
   krogan_hit_long_1:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303498_m.ogg
+    track: sfx
   krogan_youll_pay_for_that:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303621_m.ogg
+    track: voice
   krogan_i_will_crush_you:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00303623_m.ogg
+    track: voice
   krogan_youll_need_more_than_that:
     file: en_us_ss_elite_krogan_ss_elite_krogan_00307750_m.ogg
+    track: voice

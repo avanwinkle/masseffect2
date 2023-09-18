@@ -17,3 +17,6 @@ mpf*.bundle
 .env
 modes/attract_carousel/images/pinstrat_player*.png
 
+*.zip
+dist
+*.pyc

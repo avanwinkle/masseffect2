@@ -32,19 +32,28 @@ sound_pools:
 sounds:
   human_keep_it_up_blue_suns:
     file: en_us_ss_bluesun_boss_female_ss_bluesun_boss_female_00308126_m.ogg
+    track: voice
   human_blue_suns_protocol:
     file: en_us_ss_bluesun_boss_female_ss_bluesun_boss_female_00308115_m.ogg
+    track: voice
   turian_suppressive_fire:
     file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_tur_male_x_00305472_m.ogg
+    track: voice
   turian_rockets_away:
     file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_tur_male_x_00305529_m.ogg
+    track: voice
   turian_show_what_blue_suns:
     file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_tur_male_x_00305549_m.ogg
+    track: voice
   turian_hit_short_1:
     file: en_us_ss_bluesun_elite_male_ss_bluesun_elite_tur_male_x_00298090_m.ogg
+    track: sfx
   turian_hit_short_2:
     file: en_us_ss_bluesun_elite_male_ss_bluesun_elite_tur_male_x_00298088_m.ogg
+    track: sfx
   batarian_hit_short_1:
     file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_bat_male_x_00305728_m.ogg
+    track: sfx
   batarian_hit_short_2:
     file: en_us_ss_bluesun_sub_male_ss_bluesun_sub_bat_male_x_00305712_m.ogg
+    track: sfx
