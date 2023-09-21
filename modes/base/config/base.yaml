@@ -464,7 +464,6 @@ slides:
     transition_out: fade
     widgets: []  # Will be dynamically populated by squadmates_mc.py
   intro_no_missions_slide:
-    transition: fade
     transition_out: fade
     widgets:
       - type: text
@@ -475,7 +474,6 @@ slides:
         style: header_xs, row_sub_under
       - widget: background_console
   intro_missions_slide:
-    transition: fade
     transition_out: fade
     widgets:
       - type: text
