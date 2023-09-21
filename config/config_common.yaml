@@ -200,7 +200,7 @@ modes:
   - base
   - bonus
   - createprofile
-  - credits
+  # - credits
   - gameover
   - global
   - field
