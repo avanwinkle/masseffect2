@@ -234,7 +234,7 @@ slides:
   meservice_audit_info:
   - type: text
     text: (audits_label)
-    style: header_xs, row_super, col_right_anchor
+    style: body_xs, row_super, col_right_anchor
   - type: text
     text: (value_label)
     style: body_md, row_main, col_right_anchor

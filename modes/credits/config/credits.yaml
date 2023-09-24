@@ -1,0 +1,7 @@
+#config_version=5
+mode:
+  code: credits.Credits
+  priority: 1000010
+  start_events: reset_complete
+  game_mode: False
+  stop_on_ball_end: False
