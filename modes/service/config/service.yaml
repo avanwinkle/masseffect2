@@ -31,7 +31,6 @@ slide_player:
     meservice_menu:
       action: play
 
-
   # switch test
   service_switch_test_start:
     meservice_switch_test:
@@ -73,6 +72,16 @@ slide_player:
   service_settings_stop:
     meservice_settings:
       action: remove
+
+  # audits:
+  service_audits_menu_show:
+    meservice_audit_info:
+      action: play
+      target: lcd_right
+  service_audits_menu_hide:
+    meservice_audit_info:
+      action: remove
+      target: lcd_right
 
 widget_player:
   # power off
@@ -222,6 +231,13 @@ slides:
   - type: text
     text: "(value_label)"
     style: body_md, row_sub, col_right_anchor
+  meservice_audit_info:
+  - type: text
+    text: (audits_label)
+    style: header_xs, row_super, col_right_anchor
+  - type: text
+    text: (value_label)
+    style: body_md, row_main, col_right_anchor
 
 widgets:
   # power off on door open slide
