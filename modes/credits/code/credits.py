@@ -24,7 +24,7 @@ class Credits(CreditsBase):
         """Override Reset earnings to preserve lifetime values."""
         del kwargs
         # Guarantee a log regardless of configured log level
-        self.log.log(10000, "Resetting all earnings.", **self.earnings)
+        self.log.log(10000, "Resetting all earnings. Snapshot=%s" % self.earnings)
         # Persist lifetime earnings even after a reset
         self.earnings = {k: self.earnings[k] for k in self.earnings.keys() if "Lifetime" in k}
         self.data_manager.save_all(data=self.earnings)

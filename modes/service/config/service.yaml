@@ -82,6 +82,12 @@ slide_player:
     meservice_audit_info:
       action: remove
       target: lcd_right
+  service_options_slide_start:
+    meservice_options:
+      action: play
+  service_options_slide_stop:
+    meservice_options:
+      action: remove
 
 widget_player:
   # power off
@@ -238,6 +244,19 @@ slides:
   - type: text
     text: (value_label)
     style: body_md, row_main, col_right_anchor
+  meservice_options:
+  - type: text
+    text: (title)
+    style: header_xs, row_title, col_left_anchor
+  - type: text
+    text: (question)
+    style: body_md, row_main, col_left_anchor
+  - type: text
+    text: (option)
+    style: body_md, row_sub, col_right_anchor
+  - type: text
+    text: (warning)
+    style: body_sm, row_gutter, col_left_anchor
 
 widgets:
   # power off on door open slide
