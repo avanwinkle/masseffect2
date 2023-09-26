@@ -26,6 +26,7 @@ custom_code:
   - scriptlets.save_career.SaveCareer
   - scriptlets.slide_queue_player.SlideQueuePlayer
   - scriptlets.research.Research
+  - scriptlets.version_checker.VersionChecker
 
 mc_custom_code:
   - squadmates_mc.MCSquadmateHandlers
