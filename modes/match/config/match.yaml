@@ -1,0 +1,87 @@
+#config_version=5
+mode:
+  priority: 1000
+  start_events: game_ending
+  code: match.Match
+  game_mode: False
+  use_wait_queue: true
+
+mode_settings:
+  non_match_number_step: 10
+
+queue_relay_player:
+  match_no_match:
+    post: awaiting_match
+    wait_for: match_finished
+  match_has_match:
+    post: awaiting_match
+    wait_for: match_finished
+
+slide_player:
+  show_match_slide:
+    match_slide_main:
+      target: main
+    match_slide_right:
+      target: lcd_right
+
+slides:
+  match_slide_main:
+    widgets:
+      - type: text
+        text: MATCH
+        style: header_md, row_super
+      - type: text
+        text: (scores)
+        style: header_lg, row_sub
+      - type: image
+        image: background_cic
+        z: 0
+  match_slide_right:
+    widgets:
+      - type: image
+        image: background_datapad_right
+        z: 0
+
+widget_player:
+  show_match_num:
+    match_number:
+      slide: match_slide_right
+  show_match_success:
+    match_number:
+      action: remove
+      slide: match_slide_right
+    match_success:
+      slide: match_slide_right
+  show_match_failure:
+    match_number:
+      action: remove
+      slide: match_slide_right
+    match_failure:
+      slide: match_slide_right
+
+widgets:
+  match_number:
+    - type: text
+      text: (num)
+      style: header_lg, row_super, color_ui_orange
+  match_success:
+    - type: text
+      text: (num)
+      style: header_lg, row_super, color_ui_green
+  match_failure:
+    - type: text
+      text: (num)
+      style: header_lg, row_super
+      color: CC0000
+
+timers:
+  match_timer:
+    tick_interval: 200ms
+    start_running: true
+    end_value: 10
+    start_value: 0
+    restart_on_complete: true
+    control_events:
+      - event: match_complete
+        action: pause
+        value: 5

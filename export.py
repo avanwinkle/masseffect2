@@ -62,10 +62,13 @@ def generate_tree():
                     dest_path = os.path.join(DEST_PATH, source_path)
                     shutil.copytree(source_path, dest_path)
     # Make sure we have logs and data folders
-    for folder in ["logs", "data"]:
+    for folder in ["logs", "data", "config"]:
         path = os.path.join(DEST_PATH, folder)
         if not os.path.isdir(path):
             os.makedirs(path)
+    # Special case: copy the FadeCandy config
+    fcpath = "config/fadecandy.json"
+    shutil.copyfile(fcpath, os.path.join(DEST_PATH, fcpath))
     log.info("Code tree generation complete")
 
 

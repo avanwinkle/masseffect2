@@ -63,7 +63,11 @@ ball_saves:
 light_player:
   mode_shadowbroker_chase_started:
     l_ball_save:
-      color: 333333
+      color: color_jack
+    l_left_medigel:
+      color: color_jack
+    l_right_medigel:
+      color: color_jack
 
 counters:
   # A counter to track the lowest chase score, to only score on NEW hits
@@ -253,10 +257,10 @@ shows:
           color: color_barrier
           fade: 500ms
 
-
 slide_player:
   mode_shadowbroker_chase_started:
     sbchase_slide: {}
+
 slides:
   sbchase_slide:
     widgets:

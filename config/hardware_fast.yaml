@@ -304,9 +304,9 @@ switches:
   # s_service_down:
   #   number: 3-4
   #   tags: service_down
-  # s_credit:
+  # s_coin_chute_left:
   #   number: 3-5
-  # s_tilt:
+  # s_coin_chute_right:
   #   number: 3-6
   # s_slam_tilt:
   #   number: 3-7
