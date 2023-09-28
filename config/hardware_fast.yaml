@@ -389,7 +389,7 @@ light_stripes:
     number_template: 1-{}
     count: 4
     light_template:
-      tags: gi
+      tags: gi, gi_top
       type: rgb
 
 lights:

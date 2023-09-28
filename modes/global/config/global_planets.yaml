@@ -195,10 +195,12 @@ shows:
       lights:
         l_left_top_lane: white
         l_right_top_lane: white
+        gi_top: black
     - time: '+1'
       lights:
         l_left_top_lane: black
         l_right_top_lane: black
+        gi_top: white
 
 sound_player:
   award_planet:
