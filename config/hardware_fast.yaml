@@ -365,12 +365,12 @@ light_stripes:
   l_backwall_gi:
     number_start: 0
     number_template: 4-{}
-    count: 10
+    count: 14
     light_template:
       tags: light_backwall_gi, light_flash_alarm
       type: rgb
   l_backwall_ambient:
-    number_start: 10
+    number_start: 14
     number_template: 4-{}
     count: 14
     light_template:
@@ -623,52 +623,64 @@ lights:
     type: grb
 
   l_bbsquad_garrus:
-    number: 3-5
+    number: 0-5
     type: grb
+    platform: fast
     tags: light_bbsquad_garrus, light_bbsquad
   l_bbsquad_grunt:
-    number: 3-7
+    number: 0-7
     type: grb
+    platform: fast
     tags: light_bbsquad_grunt, light_bbsquad
   l_bbsquad_jack:
-    number: 3-10
+    number: 0-10
     type: grb
+    platform: fast
     tags: light_bbsquad_jack, light_bbsquad
   l_bbsquad_jacob:
-    number: 3-8
+    number: 0-8
     type: grb
+    platform: fast
     tags: light_bbsquad_jacob, light_bbsquad
   l_bbsquad_kasumi:
-    number: 3-11
+    number: 0-11
     type: grb
+    platform: fast
     tags: light_bbsquad_kasumi, light_bbsquad
   l_bbsquad_legion:
-    number: 3-1
+    number: 0-1
     type: grb
+    platform: fast
     tags: light_bbsquad_legion, light_bbsquad
   l_bbsquad_miranda:
-    number: 3-6
+    number: 0-6
     type: grb
+    platform: fast
     tags: light_bbsquad_miranda, light_bbsquad
   l_bbsquad_mordin:
-    number: 3-4
+    number: 0-4
     type: grb
+    platform: fast
     tags: light_bbsquad_mordin, light_bbsquad
   l_bbsquad_samara:
-    number: 3-2
+    number: 0-2
     type: grb
+    platform: fast
     tags: light_bbsquad_samara, light_bbsquad
   l_bbsquad_tali:
-    number: 3-3
+    number: 0-3
     type: grb
+    platform: fast
     tags: light_bbsquad_tali, light_bbsquad
   l_bbsquad_thane:
-    number: 3-9
+    number: 0-9
     type: grb
+    platform: fast
     tags: light_bbsquad_thane, light_bbsquad
   l_bbsquad_zaeed:
-    number: 3-0
+    number: 0-0
     type: grb
+    platform: fast
     tags: light_bbsquad_zaeed, light_bbsquad
 
 

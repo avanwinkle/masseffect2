@@ -6,11 +6,15 @@
     l_backwall_gi_light_4: color_collectors
     l_backwall_gi_light_6: color_collectors
     l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_10: color_collectors
+    l_backwall_gi_light_12: color_collectors
     l_backwall_gi_light_1: off
     l_backwall_gi_light_3: off
     l_backwall_gi_light_5: off
     l_backwall_gi_light_7: off
     l_backwall_gi_light_9: off
+    l_backwall_gi_light_11: off
+    l_backwall_gi_light_13: off
     gi_top: off
     l_ladder_light_9:
       color: black
@@ -25,11 +29,15 @@
     l_backwall_gi_light_5: color_collectors
     l_backwall_gi_light_7: color_collectors
     l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_11: color_collectors
+    l_backwall_gi_light_13: color_collectors
     l_backwall_gi_light_0: off
     l_backwall_gi_light_2: off
     l_backwall_gi_light_4: off
     l_backwall_gi_light_6: off
     l_backwall_gi_light_8: off
+    l_backwall_gi_light_10: off
+    l_backwall_gi_light_12: off
     gi_top: color_collectors
     l_ladder_light_0:
       color: black
@@ -44,11 +52,15 @@
     l_backwall_gi_light_4: color_collectors
     l_backwall_gi_light_6: color_collectors
     l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_10: color_collectors
+    l_backwall_gi_light_12: color_collectors
     l_backwall_gi_light_1: off
     l_backwall_gi_light_3: off
     l_backwall_gi_light_5: off
     l_backwall_gi_light_7: off
     l_backwall_gi_light_9: off
+    l_backwall_gi_light_11: off
+    l_backwall_gi_light_13: off
     gi_top: off
     l_ladder_light_1:
       color: black
@@ -63,11 +75,15 @@
     l_backwall_gi_light_5: color_collectors
     l_backwall_gi_light_7: color_collectors
     l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_11: color_collectors
+    l_backwall_gi_light_13: color_collectors
     l_backwall_gi_light_0: off
     l_backwall_gi_light_2: off
     l_backwall_gi_light_4: off
     l_backwall_gi_light_6: off
     l_backwall_gi_light_8: off
+    l_backwall_gi_light_10: off
+    l_backwall_gi_light_12: off
     gi_top: color_collectors
     l_ladder_light_2:
       color: black
@@ -82,11 +98,15 @@
     l_backwall_gi_light_4: color_collectors
     l_backwall_gi_light_6: color_collectors
     l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_10: color_collectors
+    l_backwall_gi_light_12: color_collectors
     l_backwall_gi_light_1: off
     l_backwall_gi_light_3: off
     l_backwall_gi_light_5: off
     l_backwall_gi_light_7: off
     l_backwall_gi_light_9: off
+    l_backwall_gi_light_11: off
+    l_backwall_gi_light_13: off
     gi_top: off
     l_ladder_light_3:
       color: black
@@ -101,11 +121,15 @@
     l_backwall_gi_light_5: color_collectors
     l_backwall_gi_light_7: color_collectors
     l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_11: color_collectors
+    l_backwall_gi_light_13: color_collectors
     l_backwall_gi_light_0: off
     l_backwall_gi_light_2: off
     l_backwall_gi_light_4: off
     l_backwall_gi_light_6: off
     l_backwall_gi_light_8: off
+    l_backwall_gi_light_10: off
+    l_backwall_gi_light_12: off
     gi_top: color_collectors
     l_ladder_light_4:
       color: black
@@ -120,11 +144,15 @@
     l_backwall_gi_light_4: color_collectors
     l_backwall_gi_light_6: color_collectors
     l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_10: color_collectors
+    l_backwall_gi_light_12: color_collectors
     l_backwall_gi_light_1: off
     l_backwall_gi_light_3: off
     l_backwall_gi_light_5: off
     l_backwall_gi_light_7: off
     l_backwall_gi_light_9: off
+    l_backwall_gi_light_11: off
+    l_backwall_gi_light_13: off
     gi_top: off
     l_ladder_light_5:
       color: black
@@ -139,11 +167,15 @@
     l_backwall_gi_light_5: color_collectors
     l_backwall_gi_light_7: color_collectors
     l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_11: color_collectors
+    l_backwall_gi_light_13: color_collectors
     l_backwall_gi_light_0: off
     l_backwall_gi_light_2: off
     l_backwall_gi_light_4: off
     l_backwall_gi_light_6: off
     l_backwall_gi_light_8: off
+    l_backwall_gi_light_10: off
+    l_backwall_gi_light_12: off
     gi_top: color_collectors
     l_ladder_light_6:
       color: black
@@ -158,11 +190,15 @@
     l_backwall_gi_light_4: color_collectors
     l_backwall_gi_light_6: color_collectors
     l_backwall_gi_light_8: color_collectors
+    l_backwall_gi_light_10: color_collectors
+    l_backwall_gi_light_12: color_collectors
     l_backwall_gi_light_1: off
     l_backwall_gi_light_3: off
     l_backwall_gi_light_5: off
     l_backwall_gi_light_7: off
     l_backwall_gi_light_9: off
+    l_backwall_gi_light_11: off
+    l_backwall_gi_light_13: off
     gi_top: off
     l_ladder_light_7:
       color: black
@@ -177,11 +213,15 @@
     l_backwall_gi_light_5: color_collectors
     l_backwall_gi_light_7: color_collectors
     l_backwall_gi_light_9: color_collectors
+    l_backwall_gi_light_11: color_collectors
+    l_backwall_gi_light_13: color_collectors
     l_backwall_gi_light_0: off
     l_backwall_gi_light_2: off
     l_backwall_gi_light_4: off
     l_backwall_gi_light_6: off
     l_backwall_gi_light_8: off
+    l_backwall_gi_light_10: off
+    l_backwall_gi_light_12: off
     gi_top: color_collectors
     l_ladder_light_8:
       color: black

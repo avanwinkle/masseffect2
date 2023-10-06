@@ -2,55 +2,55 @@
 - time: 0
   lights:
     l_ball_save: '21F832'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '20EE30'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '1EE22D'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '1CD42A'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '1AC427'
     l_left_medigel: '21F531'
     l_right_medigel: '21F431'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '18B424'
     l_left_medigel: '1FEB2F'
     l_right_medigel: '1FE92F'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '16A421'
     l_left_medigel: '1EDE2C'
     l_right_medigel: '1DDB2C'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '13921D'
     l_left_medigel: '1CD12A'
     l_right_medigel: '1BCE29'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '11801A'
     l_left_medigel: '1AC127'
     l_right_medigel: '19BE26'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '0F6E16'
     l_left_medigel: '17B023'
     l_right_medigel: '17AD23'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '0C5D13'
@@ -60,7 +60,7 @@
     l_right_medigel: '159C1F'
     l_right_outlane: '21F431'
     l_right_return_lane: '21F631'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '0A4C0F'
@@ -70,7 +70,7 @@
     l_right_medigel: '138B1C'
     l_right_outlane: '1FEA2F'
     l_right_return_lane: '1FEA2F'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '083B0C'
@@ -82,7 +82,7 @@
     l_right_medigel: '107918'
     l_right_outlane: '1DDD2C'
     l_right_return_lane: '1EDE2C'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '062C09'
@@ -97,7 +97,7 @@
     l_right_medigel: '0E6715'
     l_right_outlane: '1CCF29'
     l_right_return_lane: '1CCF29'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '041F06'
@@ -116,7 +116,7 @@
     l_right_medigel: '0B5511'
     l_right_outlane: '19BF26'
     l_right_return_lane: '1AC026'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '021204'
@@ -138,7 +138,7 @@
     l_right_medigel: '09450E'
     l_right_outlane: '17AE23'
     l_right_return_lane: '18B123'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '010802'
@@ -164,10 +164,10 @@
     l_right_medigel: '07360B'
     l_right_outlane: '159E20'
     l_right_return_lane: '159F20'
-    
+
 - time: '+1'
   lights:
-    l_ball_save: 
+    l_ball_save:
       color:  stop
       fade: 30ms
     l_dropbank_bottom: '1BCC29'
@@ -194,7 +194,7 @@
     l_right_medigel: '052608'
     l_right_outlane: '138C1C'
     l_right_return_lane: '138D1C'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '19BC26'
@@ -221,7 +221,7 @@
     l_right_medigel: '031A05'
     l_right_outlane: '107A18'
     l_right_return_lane: '107B19'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '17AB22'
@@ -248,7 +248,7 @@
     l_right_medigel: '020D03'
     l_right_outlane: '0E6815'
     l_right_return_lane: '0E6A15'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '14991F'
@@ -276,7 +276,7 @@
     l_right_medigel: '010401'
     l_right_outlane: '0B5511'
     l_right_return_lane: '0C5812'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '12871B'
@@ -294,7 +294,7 @@
     l_ladder_light_7: '17AE23'
     l_ladder_light_8: '18B725'
     l_ladder_light_9: '1AC127'
-    l_left_medigel: 
+    l_left_medigel:
       color:  stop
       fade: 30ms
     l_left_orbit_shield_rgb: '20F230'
@@ -303,13 +303,13 @@
     l_progress_collectorship: '138B1C'
     l_progress_derelictreaper: '16A621'
     l_progress_normandy: '1AC327'
-    l_right_medigel: 
+    l_right_medigel:
       color:  stop
       fade: 30ms
     l_right_outlane: '09450E'
     l_right_return_lane: '09470E'
     l_standup_1: '21F932'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '107618'
@@ -339,7 +339,7 @@
     l_right_ramp_arrow: '21F531'
     l_right_return_lane: '07360B'
     l_standup_1: '20EE30'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '0D6414'
@@ -371,7 +371,7 @@
     l_right_return_lane: '052708'
     l_standup_1: '1EE32D'
     l_standup_2: '21F631'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '0B5210'
@@ -405,7 +405,7 @@
     l_right_return_lane: '031A05'
     l_standup_1: '1CD52B'
     l_standup_2: '1FEB2F'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '09420D'
@@ -443,7 +443,7 @@
     l_standup_3: '21FB32'
     l_standup_4: '21FB32'
     l_standup_5: '20F331'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '07330A'
@@ -482,7 +482,7 @@
     l_standup_4: '20F130'
     l_standup_5: '1FE72E'
     l_store: '21F431'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '21F832'
@@ -505,24 +505,24 @@
     l_ladder_light_8: '0A4D0F'
     l_ladder_light_9: '0C5912'
     l_left_orbit_shield_rgb: '159A1F'
-    l_left_outlane: 
+    l_left_outlane:
       color:  stop
       fade: 30ms
     l_left_ramp_arrow: '19B825'
     l_left_ramp_shield_rgb: '1EE12D'
-    l_left_return_lane: 
+    l_left_return_lane:
       color:  stop
       fade: 30ms
     l_progress_collectorship: '052708'
     l_progress_derelictreaper: '083F0D'
     l_progress_normandy: '0C5A12'
     l_right_orbit_shield_rgb: '1AC427'
-    l_right_outlane: 
+    l_right_outlane:
       color:  stop
       fade: 30ms
     l_right_ramp_arrow: '17AF23'
     l_right_ramp_shield_rgb: '1CD32A'
-    l_right_return_lane: 
+    l_right_return_lane:
       color:  stop
       fade: 30ms
     l_standup_1: '16A621'
@@ -531,7 +531,7 @@
     l_standup_4: '1FE62E'
     l_standup_5: '1DDB2C'
     l_store: '1FE82E'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '20EF30'
@@ -568,7 +568,7 @@
     l_standup_4: '1DD82B'
     l_standup_5: '1BCB29'
     l_store: '1DDC2C'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '1EE22D'
@@ -580,10 +580,10 @@
     l_hitbank_top: '07320A'
     l_kickback_arrow: '138B1C'
     l_kickback_shield_rgb: '18B324'
-    l_ladder_light_0: 
+    l_ladder_light_0:
       color:  stop
       fade: 30ms
-    l_ladder_light_1: 
+    l_ladder_light_1:
       color:  stop
       fade: 30ms
     l_ladder_light_2: '010601'
@@ -609,11 +609,11 @@
     l_standup_4: '1BCB29'
     l_standup_5: '19BC26'
     l_store: '1BCD29'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '1CD42A'
-    l_dropbank_bottom: 
+    l_dropbank_bottom:
       color:  stop
       fade: 30ms
     l_dropbank_middle: '020C02'
@@ -623,10 +623,10 @@
     l_hitbank_top: '052307'
     l_kickback_arrow: '107A18'
     l_kickback_shield_rgb: '15A120'
-    l_ladder_light_2: 
+    l_ladder_light_2:
       color:  stop
       fade: 30ms
-    l_ladder_light_3: 
+    l_ladder_light_3:
       color:  stop
       fade: 30ms
     l_ladder_light_4: '010701'
@@ -650,11 +650,11 @@
     l_standup_4: '19BB25'
     l_standup_5: '17AC22'
     l_store: '19BD26'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '1AC527'
-    l_dropbank_middle: 
+    l_dropbank_middle:
       color:  stop
       fade: 30ms
     l_dropbank_top: '020F03'
@@ -663,10 +663,10 @@
     l_hitbank_top: '031705'
     l_kickback_arrow: '0E6815'
     l_kickback_shield_rgb: '13901D'
-    l_ladder_light_4: 
+    l_ladder_light_4:
       color:  stop
       fade: 30ms
-    l_ladder_light_5: 
+    l_ladder_light_5:
       color:  stop
       fade: 30ms
     l_ladder_light_6: '010802'
@@ -676,7 +676,7 @@
     l_left_orbit_shield_rgb: '0B5311'
     l_left_ramp_arrow: '0F7317'
     l_left_ramp_shield_rgb: '16A220'
-    l_progress_collectorship: 
+    l_progress_collectorship:
       color:  stop
       fade: 30ms
     l_progress_derelictreaper: '010A02'
@@ -690,19 +690,19 @@
     l_standup_4: '17A922'
     l_standup_5: '159B1F'
     l_store: '17AE23'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '18B624'
     l_dropbank_top: '010601'
     l_flash_left_orbit: '17B023'
-    l_hitbank_bottom: 
+    l_hitbank_bottom:
       color:  stop
       fade: 30ms
     l_hitbank_top: '010B02'
     l_kickback_arrow: '0B5611'
     l_kickback_shield_rgb: '117F19'
-    l_ladder_light_6: 
+    l_ladder_light_6:
       color:  stop
       fade: 30ms
     l_ladder_light_7: '010401'
@@ -711,7 +711,7 @@
     l_left_orbit_shield_rgb: '09430D'
     l_left_ramp_arrow: '0D6214'
     l_left_ramp_shield_rgb: '13911D'
-    l_progress_derelictreaper: 
+    l_progress_derelictreaper:
       color:  stop
       fade: 30ms
     l_progress_normandy: '021003'
@@ -724,33 +724,37 @@
     l_standup_4: '14981E'
     l_standup_5: '12881B'
     l_store: '159C1F'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '21FA32'
     l_backwall_gi_light_1: '21FA32'
     l_backwall_gi_light_2: '21FA32'
-    l_backwall_gi_light_3: '21FB32'
+    l_backwall_gi_light_3: '21FA32'
     l_backwall_gi_light_4: '21FB32'
     l_backwall_gi_light_5: '21FB32'
     l_backwall_gi_light_6: '21FB32'
     l_backwall_gi_light_7: '21FB32'
-    l_backwall_gi_light_8: '22FC32'
-    l_backwall_gi_light_9: '22FC32'
+    l_backwall_gi_light_8: '22FB32'
+    l_backwall_gi_light_9: '22FB32'
+    l_backwall_gi_light_10: '22FC32'
+    l_backwall_gi_light_11: '22FC32'
+    l_backwall_gi_light_12: '22FC32'
+    l_backwall_gi_light_13: '22FC32'
     l_battering_ram_top: '16A421'
-    l_dropbank_top: 
+    l_dropbank_top:
       color:  stop
       fade: 30ms
     l_flash_left_orbit: '159E20'
-    l_hitbank_top: 
+    l_hitbank_top:
       color:  stop
       fade: 30ms
     l_kickback_arrow: '09450E'
     l_kickback_shield_rgb: '0F6D16'
-    l_ladder_light_7: 
+    l_ladder_light_7:
       color:  stop
       fade: 30ms
-    l_ladder_light_8: 
+    l_ladder_light_8:
       color:  stop
       fade: 30ms
     l_ladder_light_9: '010601'
@@ -767,30 +771,34 @@
     l_standup_4: '12871B'
     l_standup_5: '107618'
     l_store: '128A1C'
-    
+
 - time: '+1'
   lights:
-    l_backwall_gi_light_0: '20F130'
-    l_backwall_gi_light_1: '20F130'
+    l_backwall_gi_light_0: '20F030'
+    l_backwall_gi_light_1: '20F030'
     l_backwall_gi_light_2: '20F030'
     l_backwall_gi_light_3: '20F030'
     l_backwall_gi_light_4: '20F130'
-    l_backwall_gi_light_5: '20F230'
-    l_backwall_gi_light_6: '20F230'
+    l_backwall_gi_light_5: '20F130'
+    l_backwall_gi_light_6: '20F130'
     l_backwall_gi_light_7: '20F130'
-    l_backwall_gi_light_8: '20F230'
-    l_backwall_gi_light_9: '20F230'
+    l_backwall_gi_light_8: '20F130'
+    l_backwall_gi_light_9: '20F130'
+    l_backwall_gi_light_10: '20F230'
+    l_backwall_gi_light_11: '20F230'
+    l_backwall_gi_light_12: '20F230'
+    l_backwall_gi_light_13: '20F230'
     l_battering_ram_top: '14931D'
     l_flash_left_orbit: '138E1C'
     l_kickback_arrow: '07360B'
     l_kickback_shield_rgb: '0C5B12'
-    l_ladder_light_9: 
+    l_ladder_light_9:
       color:  stop
       fade: 30ms
     l_left_orbit_shield_rgb: '052407'
     l_left_ramp_arrow: '09400D'
     l_left_ramp_shield_rgb: '0F6D16'
-    l_progress_normandy: 
+    l_progress_normandy:
       color:  stop
       fade: 30ms
     l_right_orbit_shield_rgb: '0A4B0F'
@@ -802,19 +810,23 @@
     l_standup_4: '107517'
     l_standup_5: '0D6514'
     l_store: '107818'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '1EE42E'
-    l_backwall_gi_light_1: '1FE52E'
-    l_backwall_gi_light_2: '1FE52E'
-    l_backwall_gi_light_3: '1FE52E'
-    l_backwall_gi_light_4: '1FE52E'
+    l_backwall_gi_light_1: '1EE42E'
+    l_backwall_gi_light_2: '1EE42E'
+    l_backwall_gi_light_3: '1EE42E'
+    l_backwall_gi_light_4: '1FE62E'
     l_backwall_gi_light_5: '1FE62E'
     l_backwall_gi_light_6: '1FE62E'
     l_backwall_gi_light_7: '1FE62E'
-    l_backwall_gi_light_8: '1FE72E'
-    l_backwall_gi_light_9: '1FE72E'
+    l_backwall_gi_light_8: '1FE62E'
+    l_backwall_gi_light_9: '1FE62E'
+    l_backwall_gi_light_10: '1FE72E'
+    l_backwall_gi_light_11: '1FE72E'
+    l_backwall_gi_light_12: '1FE72E'
+    l_backwall_gi_light_13: '1FE72E'
     l_battering_ram_top: '11811A'
     l_flash_left_orbit: '117C19'
     l_kickback_arrow: '052808'
@@ -831,19 +843,23 @@
     l_standup_4: '0D6314'
     l_standup_5: '0B5411'
     l_store: '0E6715'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '1DD72B'
     l_backwall_gi_light_1: '1DD72B'
     l_backwall_gi_light_2: '1DD72B'
-    l_backwall_gi_light_3: '1DD82B'
+    l_backwall_gi_light_3: '1DD72B'
     l_backwall_gi_light_4: '1DD82B'
     l_backwall_gi_light_5: '1DD82B'
-    l_backwall_gi_light_6: '1DD92B'
-    l_backwall_gi_light_7: '1DD92B'
-    l_backwall_gi_light_8: '1DD92B'
-    l_backwall_gi_light_9: '1DD92B'
+    l_backwall_gi_light_6: '1DD82B'
+    l_backwall_gi_light_7: '1DD82B'
+    l_backwall_gi_light_8: '1DD82B'
+    l_backwall_gi_light_9: '1DD82B'
+    l_backwall_gi_light_10: '1DD92B'
+    l_backwall_gi_light_11: '1DD92B'
+    l_backwall_gi_light_12: '1DD92B'
+    l_backwall_gi_light_13: '1DD92B'
     l_battering_ram_top: '0F7016'
     l_flash_left_orbit: '0E6915'
     l_kickback_arrow: '031A05'
@@ -860,24 +876,28 @@
     l_standup_4: '0B5210'
     l_standup_5: '09430D'
     l_store: '0B5611'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '1BC828'
     l_backwall_gi_light_1: '1BC828'
     l_backwall_gi_light_2: '1BC828'
-    l_backwall_gi_light_3: '1BC928'
+    l_backwall_gi_light_3: '1BC828'
     l_backwall_gi_light_4: '1BC928'
     l_backwall_gi_light_5: '1BC928'
-    l_backwall_gi_light_6: '1BCA28'
-    l_backwall_gi_light_7: '1BCA28'
-    l_backwall_gi_light_8: '1BCA28'
-    l_backwall_gi_light_9: '1BCB29'
+    l_backwall_gi_light_6: '1BC928'
+    l_backwall_gi_light_7: '1BC928'
+    l_backwall_gi_light_8: '1BC928'
+    l_backwall_gi_light_9: '1BC928'
+    l_backwall_gi_light_10: '1BCB29'
+    l_backwall_gi_light_11: '1BCB29'
+    l_backwall_gi_light_12: '1BCB29'
+    l_backwall_gi_light_13: '1BCB29'
     l_battering_ram_top: '0D5E13'
     l_flash_left_orbit: '0C5812'
     l_kickback_arrow: '020F03'
     l_kickback_shield_rgb: '062B09'
-    l_left_orbit_shield_rgb: 
+    l_left_orbit_shield_rgb:
       color:  stop
       fade: 30ms
     l_left_ramp_arrow: '031604'
@@ -891,19 +911,23 @@
     l_standup_4: '09420D'
     l_standup_5: '07330A'
     l_store: '09440E'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '19B925'
     l_backwall_gi_light_1: '19B925'
     l_backwall_gi_light_2: '19B925'
-    l_backwall_gi_light_3: '19BA25'
+    l_backwall_gi_light_3: '19B925'
     l_backwall_gi_light_4: '19BA25'
-    l_backwall_gi_light_5: '19BB25'
-    l_backwall_gi_light_6: '19BB25'
-    l_backwall_gi_light_7: '19BB25'
-    l_backwall_gi_light_8: '19BC26'
-    l_backwall_gi_light_9: '19BC26'
+    l_backwall_gi_light_5: '19BA25'
+    l_backwall_gi_light_6: '19BA25'
+    l_backwall_gi_light_7: '19BA25'
+    l_backwall_gi_light_8: '19BA25'
+    l_backwall_gi_light_9: '19BA25'
+    l_backwall_gi_light_10: '19BC26'
+    l_backwall_gi_light_11: '19BC26'
+    l_backwall_gi_light_12: '19BC26'
+    l_backwall_gi_light_13: '19BC26'
     l_battering_ram_top: '0A4C0F'
     l_flash_left_orbit: '0A480E'
     l_kickback_arrow: '010401'
@@ -913,7 +937,7 @@
     l_right_orbit_shield_rgb: '021204'
     l_right_ramp_arrow: '010501'
     l_right_ramp_shield_rgb: '041D06'
-    l_standup_1: 
+    l_standup_1:
       color:  stop
       fade: 30ms
     l_standup_2: '021003'
@@ -921,31 +945,35 @@
     l_standup_4: '07320A'
     l_standup_5: '052608'
     l_store: '07340B'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '16A822'
     l_backwall_gi_light_1: '16A822'
     l_backwall_gi_light_2: '16A822'
-    l_backwall_gi_light_3: '17A922'
+    l_backwall_gi_light_3: '16A822'
     l_backwall_gi_light_4: '17A922'
-    l_backwall_gi_light_5: '17AA22'
-    l_backwall_gi_light_6: '17AA22'
-    l_backwall_gi_light_7: '17AA22'
-    l_backwall_gi_light_8: '17AB22'
-    l_backwall_gi_light_9: '17AB22'
+    l_backwall_gi_light_5: '17A922'
+    l_backwall_gi_light_6: '17A922'
+    l_backwall_gi_light_7: '17A922'
+    l_backwall_gi_light_8: '17A922'
+    l_backwall_gi_light_9: '17A922'
+    l_backwall_gi_light_10: '17AB22'
+    l_backwall_gi_light_11: '17AB22'
+    l_backwall_gi_light_12: '17AB22'
+    l_backwall_gi_light_13: '17AB22'
     l_battering_ram_top: '083C0C'
     l_flash_left_orbit: '07380B'
-    l_kickback_arrow: 
+    l_kickback_arrow:
       color:  stop
       fade: 30ms
     l_kickback_shield_rgb: '021204'
-    l_left_ramp_arrow: 
+    l_left_ramp_arrow:
       color:  stop
       fade: 30ms
     l_left_ramp_shield_rgb: '041D06'
     l_right_orbit_shield_rgb: '010802'
-    l_right_ramp_arrow: 
+    l_right_ramp_arrow:
       color:  stop
       fade: 30ms
     l_right_ramp_shield_rgb: '021103'
@@ -954,35 +982,39 @@
     l_standup_4: '052307'
     l_standup_5: '031805'
     l_store: '052708'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '14951E'
-    l_backwall_gi_light_1: '14961E'
-    l_backwall_gi_light_2: '14961E'
-    l_backwall_gi_light_3: '14961E'
+    l_backwall_gi_light_1: '14951E'
+    l_backwall_gi_light_2: '14951E'
+    l_backwall_gi_light_3: '14951E'
     l_backwall_gi_light_4: '14971E'
     l_backwall_gi_light_5: '14971E'
-    l_backwall_gi_light_6: '14981E'
-    l_backwall_gi_light_7: '14981E'
-    l_backwall_gi_light_8: '14981E'
-    l_backwall_gi_light_9: '14991F'
+    l_backwall_gi_light_6: '14971E'
+    l_backwall_gi_light_7: '14971E'
+    l_backwall_gi_light_8: '14971E'
+    l_backwall_gi_light_9: '14971E'
+    l_backwall_gi_light_10: '14991F'
+    l_backwall_gi_light_11: '14991F'
+    l_backwall_gi_light_12: '14991F'
+    l_backwall_gi_light_13: '14991F'
     l_battering_ram_top: '062C09'
     l_flash_left_orbit: '052808'
     l_kickback_shield_rgb: '010701'
     l_left_ramp_shield_rgb: '021003'
-    l_right_orbit_shield_rgb: 
+    l_right_orbit_shield_rgb:
       color:  stop
       fade: 30ms
     l_right_ramp_shield_rgb: '010601'
-    l_standup_2: 
+    l_standup_2:
       color:  stop
       fade: 30ms
     l_standup_3: '031504'
     l_standup_4: '031604'
     l_standup_5: '020C02'
     l_store: '031805'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '11831A'
@@ -992,53 +1024,61 @@
     l_backwall_gi_light_4: '12851B'
     l_backwall_gi_light_5: '12851B'
     l_backwall_gi_light_6: '12851B'
-    l_backwall_gi_light_7: '12861B'
-    l_backwall_gi_light_8: '12861B'
-    l_backwall_gi_light_9: '12861B'
+    l_backwall_gi_light_7: '12851B'
+    l_backwall_gi_light_8: '12851B'
+    l_backwall_gi_light_9: '12851B'
+    l_backwall_gi_light_10: '12861B'
+    l_backwall_gi_light_11: '12861B'
+    l_backwall_gi_light_12: '12861B'
+    l_backwall_gi_light_13: '12861B'
     l_battering_ram_top: '041E06'
     l_flash_left_orbit: '031A05'
-    l_kickback_shield_rgb: 
+    l_kickback_shield_rgb:
       color:  stop
       fade: 30ms
     l_left_ramp_shield_rgb: '010701'
-    l_right_ramp_shield_rgb: 
+    l_right_ramp_shield_rgb:
       color:  stop
       fade: 30ms
     l_standup_3: '010B02'
     l_standup_4: '010B02'
     l_standup_5: '010401'
     l_store: '020D03'
-    
+
 - time: '+1'
   lights:
     l_backwall_gi_light_0: '0F7117'
     l_backwall_gi_light_1: '0F7117'
-    l_backwall_gi_light_2: '0F7217'
-    l_backwall_gi_light_3: '0F7217'
+    l_backwall_gi_light_2: '0F7117'
+    l_backwall_gi_light_3: '0F7117'
     l_backwall_gi_light_4: '0F7317'
     l_backwall_gi_light_5: '0F7317'
     l_backwall_gi_light_6: '0F7317'
-    l_backwall_gi_light_7: '0F7417'
-    l_backwall_gi_light_8: '0F7417'
-    l_backwall_gi_light_9: '0F7417'
+    l_backwall_gi_light_7: '0F7317'
+    l_backwall_gi_light_8: '0F7317'
+    l_backwall_gi_light_9: '0F7317'
+    l_backwall_gi_light_10: '0F7417'
+    l_backwall_gi_light_11: '0F7417'
+    l_backwall_gi_light_12: '0F7417'
+    l_backwall_gi_light_13: '0F7417'
     l_battering_ram_top: '021204'
     l_flash_left_orbit: '020E03'
-    l_left_ramp_shield_rgb: 
+    l_left_ramp_shield_rgb:
       color:  stop
       fade: 30ms
     l_left_top_lane: '21F731'
     l_right_top_lane: '21F731'
-    l_standup_3: 
+    l_standup_3:
       color:  stop
       fade: 30ms
-    l_standup_4: 
+    l_standup_4:
       color:  stop
       fade: 30ms
-    l_standup_5: 
+    l_standup_5:
       color:  stop
       fade: 30ms
     l_store: '010401'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '21F932'
@@ -1056,23 +1096,27 @@
     l_backwall_ambient_light_8: '21FA32'
     l_backwall_ambient_light_9: '21FA32'
     l_backwall_gi_light_0: '0D6013'
-    l_backwall_gi_light_1: '0D6113'
-    l_backwall_gi_light_2: '0D6113'
-    l_backwall_gi_light_3: '0D6113'
+    l_backwall_gi_light_1: '0D6013'
+    l_backwall_gi_light_2: '0D6013'
+    l_backwall_gi_light_3: '0D6013'
     l_backwall_gi_light_4: '0D6214'
     l_backwall_gi_light_5: '0D6214'
     l_backwall_gi_light_6: '0D6214'
-    l_backwall_gi_light_7: '0D6314'
-    l_backwall_gi_light_8: '0D6314'
-    l_backwall_gi_light_9: '0D6414'
+    l_backwall_gi_light_7: '0D6214'
+    l_backwall_gi_light_8: '0D6214'
+    l_backwall_gi_light_9: '0D6214'
+    l_backwall_gi_light_10: '0D6414'
+    l_backwall_gi_light_11: '0D6414'
+    l_backwall_gi_light_12: '0D6414'
+    l_backwall_gi_light_13: '0D6414'
     l_battering_ram_top: '010802'
     l_flash_left_orbit: '010501'
     l_left_top_lane: '20ED2F'
     l_right_top_lane: '20ED2F'
-    l_store: 
+    l_store:
       color:  stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '20F030'
@@ -1091,23 +1135,27 @@
     l_backwall_ambient_light_9: '20F130'
     l_backwall_gi_light_0: '0B4F10'
     l_backwall_gi_light_1: '0B4F10'
-    l_backwall_gi_light_2: '0B5010'
-    l_backwall_gi_light_3: '0B5010'
+    l_backwall_gi_light_2: '0B4F10'
+    l_backwall_gi_light_3: '0B4F10'
     l_backwall_gi_light_4: '0B5010'
     l_backwall_gi_light_5: '0B5110'
     l_backwall_gi_light_6: '0B5110'
     l_backwall_gi_light_7: '0B5110'
-    l_backwall_gi_light_8: '0B5210'
-    l_backwall_gi_light_9: '0B5210'
-    l_battering_ram_top: 
+    l_backwall_gi_light_8: '0B5110'
+    l_backwall_gi_light_9: '0B5110'
+    l_backwall_gi_light_10: '0B5210'
+    l_backwall_gi_light_11: '0B5210'
+    l_backwall_gi_light_12: '0B5210'
+    l_backwall_gi_light_13: '0B5210'
+    l_battering_ram_top:
       color:  stop
       fade: 30ms
-    l_flash_left_orbit: 
+    l_flash_left_orbit:
       color:  stop
       fade: 30ms
     l_left_top_lane: '1EE12D'
     l_right_top_lane: '1EE02D'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '1EE42E'
@@ -1126,17 +1174,21 @@
     l_backwall_ambient_light_9: '1FE62E'
     l_backwall_gi_light_0: '083E0C'
     l_backwall_gi_light_1: '083E0C'
-    l_backwall_gi_light_2: '083F0D'
-    l_backwall_gi_light_3: '083F0D'
+    l_backwall_gi_light_2: '083E0C'
+    l_backwall_gi_light_3: '083E0C'
     l_backwall_gi_light_4: '083F0D'
-    l_backwall_gi_light_5: '09400D'
+    l_backwall_gi_light_5: '083F0D'
     l_backwall_gi_light_6: '09400D'
     l_backwall_gi_light_7: '09400D'
-    l_backwall_gi_light_8: '09410D'
-    l_backwall_gi_light_9: '09410D'
+    l_backwall_gi_light_8: '09400D'
+    l_backwall_gi_light_9: '09400D'
+    l_backwall_gi_light_10: '09410D'
+    l_backwall_gi_light_11: '09410D'
+    l_backwall_gi_light_12: '09410D'
+    l_backwall_gi_light_13: '09410D'
     l_left_top_lane: '1CD32A'
     l_right_top_lane: '1CD32A'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '1DD62B'
@@ -1154,18 +1206,22 @@
     l_backwall_ambient_light_8: '1DD82B'
     l_backwall_ambient_light_9: '1DD82B'
     l_backwall_gi_light_0: '062E09'
-    l_backwall_gi_light_1: '062F09'
-    l_backwall_gi_light_2: '062F09'
+    l_backwall_gi_light_1: '062E09'
+    l_backwall_gi_light_2: '062E09'
     l_backwall_gi_light_3: '062F09'
-    l_backwall_gi_light_4: '06300A'
-    l_backwall_gi_light_5: '06300A'
+    l_backwall_gi_light_4: '062F09'
+    l_backwall_gi_light_5: '062F09'
     l_backwall_gi_light_6: '06300A'
-    l_backwall_gi_light_7: '07310A'
-    l_backwall_gi_light_8: '07310A'
-    l_backwall_gi_light_9: '07310A'
+    l_backwall_gi_light_7: '06300A'
+    l_backwall_gi_light_8: '06300A'
+    l_backwall_gi_light_9: '06300A'
+    l_backwall_gi_light_10: '07310A'
+    l_backwall_gi_light_11: '07310A'
+    l_backwall_gi_light_12: '07310A'
+    l_backwall_gi_light_13: '07310A'
     l_left_top_lane: '1AC327'
     l_right_top_lane: '1AC327'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '1BC728'
@@ -1183,18 +1239,22 @@
     l_backwall_ambient_light_8: '1BC828'
     l_backwall_ambient_light_9: '1BC928'
     l_backwall_gi_light_0: '042107'
-    l_backwall_gi_light_1: '052207'
+    l_backwall_gi_light_1: '042107'
     l_backwall_gi_light_2: '052207'
     l_backwall_gi_light_3: '052207'
-    l_backwall_gi_light_4: '052307'
-    l_backwall_gi_light_5: '052307'
-    l_backwall_gi_light_6: '052307'
+    l_backwall_gi_light_4: '052207'
+    l_backwall_gi_light_5: '052207'
+    l_backwall_gi_light_6: '052207'
     l_backwall_gi_light_7: '052307'
-    l_backwall_gi_light_8: '052407'
-    l_backwall_gi_light_9: '052407'
+    l_backwall_gi_light_8: '052307'
+    l_backwall_gi_light_9: '052307'
+    l_backwall_gi_light_10: '052307'
+    l_backwall_gi_light_11: '052407'
+    l_backwall_gi_light_12: '052407'
+    l_backwall_gi_light_13: '052407'
     l_left_top_lane: '18B324'
     l_right_top_lane: '18B324'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '18B725'
@@ -1212,18 +1272,22 @@
     l_backwall_ambient_light_8: '19B925'
     l_backwall_ambient_light_9: '19B925'
     l_backwall_gi_light_0: '031404'
-    l_backwall_gi_light_1: '031504'
-    l_backwall_gi_light_2: '031504'
+    l_backwall_gi_light_1: '031404'
+    l_backwall_gi_light_2: '031404'
     l_backwall_gi_light_3: '031504'
     l_backwall_gi_light_4: '031504'
-    l_backwall_gi_light_5: '031604'
-    l_backwall_gi_light_6: '031604'
+    l_backwall_gi_light_5: '031504'
+    l_backwall_gi_light_6: '031504'
     l_backwall_gi_light_7: '031604'
     l_backwall_gi_light_8: '031604'
-    l_backwall_gi_light_9: '031705'
+    l_backwall_gi_light_9: '031604'
+    l_backwall_gi_light_10: '031604'
+    l_backwall_gi_light_11: '031705'
+    l_backwall_gi_light_12: '031705'
+    l_backwall_gi_light_13: '031705'
     l_left_top_lane: '16A321'
     l_right_top_lane: '16A321'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '16A721'
@@ -1249,10 +1313,14 @@
     l_backwall_gi_light_6: '010B02'
     l_backwall_gi_light_7: '010B02'
     l_backwall_gi_light_8: '010B02'
-    l_backwall_gi_light_9: '020C02'
+    l_backwall_gi_light_9: '010B02'
+    l_backwall_gi_light_10: '020C02'
+    l_backwall_gi_light_11: '020C02'
+    l_backwall_gi_light_12: '020C02'
+    l_backwall_gi_light_13: '020C02'
     l_left_top_lane: '13911D'
     l_right_top_lane: '13911D'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '14951E'
@@ -1269,39 +1337,51 @@
     l_backwall_ambient_light_7: '14971E'
     l_backwall_ambient_light_8: '14971E'
     l_backwall_ambient_light_9: '14971E'
-    l_backwall_gi_light_0: 
+    l_backwall_gi_light_0:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_1: 
+    l_backwall_gi_light_1:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_2: 
+    l_backwall_gi_light_2:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_3: 
+    l_backwall_gi_light_3:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_4: 
+    l_backwall_gi_light_4:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_5: 
+    l_backwall_gi_light_5:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_6: 
+    l_backwall_gi_light_6:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_7: 
+    l_backwall_gi_light_7:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_8: 
+    l_backwall_gi_light_8:
       color:  stop
       fade: 30ms
-    l_backwall_gi_light_9: 
+    l_backwall_gi_light_9:
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_10:
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_11:
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_12:
+      color:  stop
+      fade: 30ms
+    l_backwall_gi_light_13:
       color:  stop
       fade: 30ms
     l_left_top_lane: '117F19'
     l_right_top_lane: '117F19'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '11831A'
@@ -1320,7 +1400,7 @@
     l_backwall_ambient_light_9: '12851B'
     l_left_top_lane: '0F6D16'
     l_right_top_lane: '0F6D16'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '0F7117'
@@ -1339,7 +1419,7 @@
     l_backwall_ambient_light_9: '0F7317'
     l_left_top_lane: '0C5C12'
     l_right_top_lane: '0C5C12'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '0D6013'
@@ -1358,7 +1438,7 @@
     l_backwall_ambient_light_9: '0D6214'
     l_left_top_lane: '0A4B0F'
     l_right_top_lane: '0A4B0F'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '0B4F10'
@@ -1377,7 +1457,7 @@
     l_backwall_ambient_light_9: '0B5110'
     l_left_top_lane: '083A0C'
     l_right_top_lane: '083A0C'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '083F0D'
@@ -1396,7 +1476,7 @@
     l_backwall_ambient_light_9: '09410D'
     l_left_top_lane: '062D09'
     l_right_top_lane: '062D09'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '06300A'
@@ -1415,7 +1495,7 @@
     l_backwall_ambient_light_9: '07320A'
     l_left_top_lane: '041F06'
     l_right_top_lane: '041F06'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '052207'
@@ -1434,7 +1514,7 @@
     l_backwall_ambient_light_9: '052407'
     l_left_top_lane: '031304'
     l_right_top_lane: '031304'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '031504'
@@ -1453,7 +1533,7 @@
     l_backwall_ambient_light_9: '031705'
     l_left_top_lane: '010802'
     l_right_top_lane: '010802'
-    
+
 - time: '+1'
   lights:
     l_backwall_ambient_light_0: '010B02'
@@ -1470,10 +1550,10 @@
     l_backwall_ambient_light_7: '020C02'
     l_backwall_ambient_light_8: '020C02'
     l_backwall_ambient_light_9: '010B02'
-    l_left_top_lane: 
+    l_left_top_lane:
       color:  stop
       fade: 30ms
-    l_right_top_lane: 
+    l_right_top_lane:
       color:  stop
       fade: 30ms
-    
+

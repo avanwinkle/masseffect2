@@ -205,7 +205,7 @@ shots:
 show_player:
   mode_normandyattack_started: normandyattack_shutdown_show
   ball_save_normandyattack_openingsave_saving_ball:
-    led_10_chase:
+    led_14_chase:
       action: play
       speed: 10
       show_tokens:
@@ -259,12 +259,12 @@ shows:
         l_flash_dragon_left: 80ms
     - time: '+1'
       flashers:
-        l_flash_slingshots: 
+        l_flash_slingshots:
           color: green
           ms: 120ms
     - time: '+3'
       flashers:
-        l_flash_back_panel_left: 
+        l_flash_back_panel_left:
           color: color_health
           ms: 80ms
     - time: '+2'

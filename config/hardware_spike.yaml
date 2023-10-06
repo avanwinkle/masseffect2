@@ -237,11 +237,11 @@ light_stripes:
   l_backwall_gi:
     number_start: 100
     number_template: 1-{}
-    count: 10
+    count: 14
     light_template:
       tags: light_backwall_gi
   l_backwall_ambient:
-    number_start: 110
+    number_start: 114
     number_template: 1-{}
     count: 14
     light_template:

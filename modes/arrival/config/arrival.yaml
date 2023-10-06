@@ -307,7 +307,7 @@ show_player:
       action: advance
     arrival_final:
       loops: 0
-    led_10_chase:
+    led_14_chase:
       action: stop
     color_flashing_fast:
       action: stop

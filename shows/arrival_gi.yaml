@@ -7,7 +7,7 @@
     random_flash:
       key: rflash_1
       show_tokens:
-        leds: l_backwall_gi_light_4, l_backwall_gi_light_5
+        leds: l_backwall_gi_light_5, l_backwall_gi_light_6, l_backwall_gi_light_7, l_backwall_gi_light_8
         duration: 200ms
         color: color_arrival
     led_12_chase_pulse:
@@ -28,7 +28,7 @@
     random_flash:
       key: rflash_2
       show_tokens:
-        leds: l_backwall_gi_light_3, l_backwall_gi_light_6
+        leds: l_backwall_gi_light_3, l_backwall_gi_light_4, l_backwall_gi_light_9, l_backwall_gi_light_10
         duration: 200ms
         color: color_arrival
     arrival_gradient_sweep:
@@ -44,7 +44,7 @@
     random_flash:
       key: rflash_3
       show_tokens:
-        leds: l_backwall_gi_light_2, l_backwall_gi_light_7
+        leds: l_backwall_gi_light_1, l_backwall_gi_light_2, l_backwall_gi_light_11, l_backwall_gi_light_12
         duration: 200ms
         color: color_arrival
     led_12_chase_pulse:
@@ -101,7 +101,7 @@
       action: stop
     led_12_chase_pulse:
       action: stop
-    led_10_chase:
+    led_14_chase:
       show_tokens:
         ledring: l_backwall_gi
         color: color_arrival

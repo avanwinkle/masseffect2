@@ -173,7 +173,7 @@ show_player:
     sbchase_gi:
       speed: 1
       loops: -1
-    led_10_chase:
+    led_14_chase:
       action: play
       speed: 7
       show_tokens:
