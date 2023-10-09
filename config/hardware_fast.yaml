@@ -368,7 +368,7 @@ light_stripes:
     count: 14
     light_template:
       tags: light_backwall_gi, light_flash_alarm
-      type: rgb
+      type: grb
   l_backwall_ambient:
     number_start: 14
     number_template: 4-{}

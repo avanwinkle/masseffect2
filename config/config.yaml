@@ -16,7 +16,7 @@ modes:
   - airlock
 
 fast:
-  ports: autodetect
+  ports: autodetect, rgb
   # debug: true
   ignore_rgb_crash: true
 
