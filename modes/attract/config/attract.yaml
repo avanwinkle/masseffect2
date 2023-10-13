@@ -61,7 +61,7 @@ sound_player:
       action: play
       mode_end_action: stop
       loops: 0
-      volume: 0.1
+      volume: 0.25
     # Preload the start sound and some first ball sounds
   mode_attract_started.9:
     gui_splashstart:
@@ -83,7 +83,6 @@ sound_player:
     firewalker_music_2:
       action: load
   game_start: gui_splashstart
-
 
 sounds:
   mus_main_menu:
