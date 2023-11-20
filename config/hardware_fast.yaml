@@ -156,6 +156,11 @@ coils:
     enable_events: enable_gates
     disable_events: disable_gates
     pulse_events: ball_search_phase_1
+  # Cabinet board
+  c_start_button_light:
+    number: 3-0
+    allow_enable: true
+    default_hold_power: 0.5
 
 switches:
   # BOARD 1-C (Purple)
@@ -288,28 +293,28 @@ switches:
     ignore_window_ms: 1200  # 600 wasn't enough to prevent rollbacks, bumping to 1200
   s_spinner:
     number: 0-7
-  # BOARD 3 ?
-  # s_door_open:
-  #   number: 3-0
-  #   tags: service_door_open, power_off
-  # s_service_enter:
-  #   number: 3-1
-  #   tags: service_enter
-  # s_service_esc:
-  #   number: 3-2
-  #   tags: service_esc
-  # s_service_up:
-  #   number: 3-3
-  #   tags: service_up
-  # s_service_down:
-  #   number: 3-4
-  #   tags: service_down
-  # s_coin_chute_left:
-  #   number: 3-5
-  # s_coin_chute_right:
-  #   number: 3-6
-  # s_slam_tilt:
-  #   number: 3-7
+  # BOARD 3 (Bottom Cabinet 0804)
+  s_service_enter:
+    number: 3-0
+    tags: service_enter
+  s_service_esc:
+    number: 3-1
+    tags: service_esc
+  s_service_up:
+    number: 3-2
+    tags: service_up
+  s_service_down:
+    number: 3-3
+    tags: service_down
+  s_coin_chute_left:
+    number: 3-4
+  s_coin_chute_right:
+    number: 3-5
+  s_door_open:
+    number: 3-6
+    tags: service_door_open, power_off
+  s_slam_tilt:
+    number: 3-7
 
 light_rings:
   l_left_orbit_ring:
