@@ -5,6 +5,15 @@ event_player:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
+    - start_button_solid{machine.free_play}
+    - start_button_flash{machine.credits_whole_num>0 and not machine.free_play}
+  machine_var_credits_whole_num:
+    - start_button_flash{value>0}
+
+coil_player:
+  start_button_solid:
+    c_start_button_light:
+      action: enable
 
 show_player:
   mode_attract_started:
@@ -15,6 +24,9 @@ show_player:
         ledring: l_mass_relay
         color: 0B0000  # color_paragon
         fade: 250ms
+  start_button_flash:
+    attract_start_button_flash:
+      loops: -1
   # mode_attract_started:
   #   ladder_timer:
   #     action: play
@@ -97,3 +109,14 @@ sounds:
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.ogg
     track: sfx
+
+shows:
+  attract_start_button_flash:
+    - duration: 250ms
+      coils:
+        c_start_button_light:
+          action: enable
+    - duration: 250ms
+      coils:
+        c_start_button_light:
+          action: disable

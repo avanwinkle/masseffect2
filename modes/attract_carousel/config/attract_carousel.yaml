@@ -129,8 +129,8 @@ sounds:
 
 sound_player:
   not_enough_credits: credits_needed
-  machine_var_credits_numerator.1{value>0}: credits_incomplete
-  machine_var_credits_numerator.2{value==0}: credits_complete
+  machine_var_credits_numerator{value>0}: credits_incomplete
+  machine_var_credits_whole_num{value>0}: credits_complete
 
 widgets:
   attract_widget_dmd:
