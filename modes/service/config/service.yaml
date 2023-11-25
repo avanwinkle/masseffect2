@@ -1,4 +1,12 @@
 #config_version=5
+mode:
+  code: service.Service
+  priority: 100000
+  game_mode: False
+  start_events: reset_complete
+  stop_events: shutdown
+  stop_on_ball_end: False
+
 sounds:
   power_off:
     file: SFXGame.649.ogg
