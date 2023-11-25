@@ -295,10 +295,10 @@ switches:
     number: 0-7
   # BOARD 3 (Bottom Cabinet 0804)
   s_service_enter:
-    number: 3-0
+    number: 3-1
     tags: service_enter
   s_service_esc:
-    number: 3-1
+    number: 3-0
     tags: service_esc
   s_service_up:
     number: 3-2
@@ -627,6 +627,14 @@ lights:
     previous: l_hitbank_top
     type: grb
 
+  l_coindoor_left:
+    type: grb
+    number: 3-0
+  l_coindoor_right:
+    type: grb
+    number: 3-1
+
+  # Backbox lighting (FAST RGB)
   l_bbsquad_garrus:
     number: 0-5
     type: grb
