@@ -15,6 +15,11 @@ coil_player:
     c_start_button_light:
       action: enable
 
+light_player:
+  mode_attract_started:
+    l_coindoor_left: on
+    l_coindoor_right: on
+
 show_player:
   mode_attract_started:
     led_12_chase_pulse:
@@ -27,18 +32,7 @@ show_player:
   start_button_flash:
     attract_start_button_flash:
       loops: -1
-  # mode_attract_started:
-  #   ladder_timer:
-  #     action: play
-  #     loops: -1
-  #     speed: 2
-  #     start_running: False
-  #     start_step: 12
   attract_music_started:
-    # attract_sm_track:
-    #   loops: -1
-    #   speed: 0.278
-    #   action: play
     led_12_chase_duo:
       loops: -1
       speed: 8
@@ -57,10 +51,24 @@ show_player:
     attract_sm_full:
       loops: -1
       action: play
-    # attract_sm_beat:
-    #   loops: -1
-    #   speed: 1
-    #   action: play
+  s_coin_chute_left_active:
+    color_flashing_fast:
+      action: play
+      key: coindoor_left
+      loops: 4
+      speed: 4
+      show_tokens:
+        leds: l_coindoor_left
+        color: color_renegade
+  s_coin_chute_right_active:
+    color_flashing_fast:
+      action: play
+      key: coindoor_right
+      loops: 4
+      speed: 4
+      show_tokens:
+        leds: l_coindoor_right
+        color: color_renegade
   mode_attract_will_stop:
     middle_circle_sweep:
       action: stop
