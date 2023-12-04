@@ -13,6 +13,11 @@ class AttractCarousel(Carousel):
         self.add_mode_event_handler("machine_var_credit_units", self._on_credits)
         self.add_mode_event_handler("not_enough_credits", self._on_credits)
 
+        # Check the auditor
+        missing_switches = self.machine.auditor.report_missing_switches()
+        if missing_switches:
+            self.warning_log("Missing switches detected: %s", missing_switches)
+
     def _on_credits(self, **kwargs):
         del kwargs
         # Don't jump slide on game start

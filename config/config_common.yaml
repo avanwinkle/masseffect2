@@ -5,6 +5,9 @@ config:
 - hardware_common.yaml
 - keyboard.yaml
 
+auditor:
+  missing_switch_min_games: 10
+
 smart_virtual:
   console_log: basic
   file_log: basic
