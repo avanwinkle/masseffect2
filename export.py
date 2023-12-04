@@ -12,8 +12,13 @@ import hashlib
 from functools import partial
 
 
-import mpf
-from mpf.commands import build
+try:
+    import mpf
+    from mpf.commands import build
+    from mpf._version import __version__ as mpfversion
+except ModuleNotFoundError as e:
+    raise ModuleNotFoundError("Unable to find MPF. Please verify pypy or virtual environment.")
+from scriptlets.version_checker import REQUIRED_MPF_VERSION as me2version
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
@@ -98,6 +103,9 @@ def make_zip():
     return f"{filename}.zip"
 
 def main():
+    print(f'Found MPF version {mpfversion} and ME2 version {me2version}')
+    if mpfversion != me2version:
+        raise ValueError(f"Version mismatch! MPF {mpfversion} vs ME2 {me2version}")
     generate_tree()
     mpf_path = os.path.dirname(mpf.__file__)
     log.info("Generating production bundle at path %s", os.getcwd())
