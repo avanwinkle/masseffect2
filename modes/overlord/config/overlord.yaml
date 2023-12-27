@@ -115,11 +115,15 @@ counters:
 
 variable_player:
   hackshots_lit_hit:
-    score: 500
+    score:
+      action: add
+      int: 500 * current_player.temp_multiplier
   hackshots_frozen_hit:
-    score: 100
+    score:
+      action: add
+      int: 100 * current_player.temp_multiplier
   jackpotshot_hit:
-    # Every jackpot doubles the value of the next round's shots
+    # Every jackpot adds 1X the value of the next round's shots
     temp_multiplier:
       action: add
       float: 1.0

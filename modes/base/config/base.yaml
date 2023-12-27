@@ -260,6 +260,9 @@ variable_player:
     mode_intro_running:
       action: set
       int: 0
+  # At the end of each ball, round up to the nearest 10 points
+  mode_base_will_stop:
+    score: 10 + current_player.score % 10
 
 shots:
   # These "core" shots for the main shots
@@ -368,6 +371,26 @@ show_player:
   play_intro_show{current_player.resume_mission==" " and device.achievements.suicidemission.state=="disabled"}:
     introshow_missions:
       loops: 0
+  # Bumpers!
+  s_bumper_bottom_active:
+    single_flash:
+      show_tokens:
+        leds: gi_middle_light_1, l_backwall_gi_light_11, l_backwall_gi_light_10
+      loops: 0
+      priority: 10000
+  s_bumper_right_active:
+    single_flash:
+      show_tokens:
+        leds: gi_top_light_2, l_backwall_gi_light_13, l_backwall_gi_light_12
+      loops: 0
+      priority: 10000
+  s_bumper_left_active:
+    single_flash:
+      show_tokens:
+        leds: gi_top_light_0, l_backwall_gi_light_10, l_backwall_gi_light_9
+      loops: 0
+      priority: 10000
+
 
 shows:
   introshow_missions:
@@ -660,4 +683,3 @@ widgets:
     - type: image
       image: n7_default
       style: codex_achievement
-

@@ -47,13 +47,13 @@ variable_player:
   mineral_shots_hit:
     score: 10
   eezo_shot_hit:
-    mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk
+    mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_palladium_hit:
-    mineral_palladium: 0.1423 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
+    mineral_palladium: 0.1423 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_platinum_hit:
-    mineral_platinum: 0.0871 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
+    mineral_platinum: 0.0871 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_iridium_hit:
-    mineral_iridium: 0.2096 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk
+    mineral_iridium: 0.2096 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
   player_mineral_palladium{player_num==current_player.number}:
     mineral_total: (change)
   player_mineral_platinum{player_num==current_player.number}:

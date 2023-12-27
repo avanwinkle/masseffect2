@@ -83,6 +83,10 @@ shows:
     - duration: 400ms
       lights:
         (leds): (color2)
+  single_flash:
+    - duration: 120ms
+      lights:
+        (leds): on
   flash_all_shields_show:
     - time: 0
       lights:
