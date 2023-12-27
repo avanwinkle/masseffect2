@@ -3,6 +3,7 @@
 settings:
   enable_careers:
     label: "Enable Career Profiles"
+    settingType: feature
     key_type: int
     default: 0
     sort: 10
@@ -11,6 +12,7 @@ settings:
       1: "YES"
   enable_create_profile:
     label: "Allow Profile Creation"
+    settingType: feature
     key_type: int
     default: 0
     sort: 20
@@ -19,6 +21,7 @@ settings:
       1: "YES"
   enable_analytics:
     label: "Mode Analytics"
+    settingType: feature
     sort: 30
     key_type: int
     default: 0
@@ -27,6 +30,7 @@ settings:
       1: "ON"
   balls_per_game:
     label: "Balls Per Game"
+    settingType: standard
     sort: 1
     default: 3
     values:
@@ -37,14 +41,17 @@ settings:
       999: "Infinite"
   enable_pinstrat:
     label: "PinStrat"
+    settingType: standard
     sort: 40
     key_type: int
     default: 1
     values:
       0: "Disabled"
       1: "Enabled"
+  # Game Settings
   intro_mb:
     label: "Intro Multiball"
+    settingType: game
     sort: 50
     key_type: int
     default: 0
@@ -53,6 +60,7 @@ settings:
       1: "Enabled"
   demo_mode:
     label: "Expo Demo Mode"
+    settingType: game
     sort: 60
     key_type: int
     default: 0
@@ -61,6 +69,7 @@ settings:
       1: "Enabled"
   casual_flow:
     label: "Casual Play Style"
+    settingType: game
     sort: 70
     key_type: int
     default: 0
