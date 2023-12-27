@@ -76,6 +76,25 @@ settings:
     values:
       0: "Normal"
       1: "High-Flow"
+  casual_no_bypass:
+    label: "Casual Mission Select"
+    settingType: game
+    sort: 80
+    key_type: int
+    default: 0
+    values:
+      0: "Persist Bypass"
+      1: "Always Ask"
+      2: "Force Selection"
+  free_starting_mission:
+    label: "Initial Mission Lit"
+    settingType: game
+    sort: 90
+    default: 0
+    values:
+      0: "Never"
+      1: "Casual Only"
+      2: "Always"
   # Coin Settings
   enable_match:
     label: "Match"

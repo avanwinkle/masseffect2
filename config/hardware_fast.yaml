@@ -22,7 +22,7 @@ ball_devices:
     ball_missing_timeouts: 10s
     eject_timeouts: 3s
     confirm_eject_type: target # default
-    entrance_count_delay: 900ms
+    entrance_count_delay: 600ms # down from 900ms
     player_controlled_eject_event: force_plunger_launch
     ball_search_order: 1
   bd_trough:
@@ -50,8 +50,8 @@ ball_devices:
     ball_search_order: 20
   bd_hold:
     eject_coil: c_hold_post_release
-    eject_coil_retry_pulse: 120ms
-    retries_before_increasing_pulse: 2
+    eject_coil_retry_pulse: 160ms
+    retries_before_increasing_pulse: 1
     max_eject_attempts: 5
     ball_switches: s_missionselect
     eject_timeouts: 2s

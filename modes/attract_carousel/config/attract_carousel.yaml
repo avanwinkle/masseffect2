@@ -63,6 +63,9 @@ timers:
       - event: s_flipper_right_active
         action: pause
         value: 20
+      - event: pause_attract_rotation_credits
+        action: pause
+        value: 20
 
 slide_player:
   mode_attract_carousel_started:

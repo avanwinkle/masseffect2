@@ -26,3 +26,5 @@ class AttractCarousel(Carousel):
         # Assume credits slide is index 1
         self._highlighted_item_index = 1
         self._update_highlighted_item(None)
+        # Pause the timer
+        self.machine.events.post("pause_attract_rotation_credits")
