@@ -46,21 +46,26 @@ class SaveCareer(CustomCode):
         if self.machine.game and self.machine.game.player:
             player = self.machine.game.player
 
+            # Set an initial state for casual and profile games
             if kwargs.get("casual"):
                 player["casual"] = 1
                 player["career_name"] = "Player {}".format(player.number)
                 player["high_flow"] = self.machine.settings.get_setting_value("casual_flow")
-                # Duplicate events, we may have already set this
-                if not player["available_missions"] :
-                    starting_recruit = SquadmateStatus.random_recruit()
-                    self.machine.log.info("Found a random recruit: %s", starting_recruit)
-                    player["status_{}".format(starting_recruit)] = 3
-                    player["available_missions"] = 1
             else:
                 # Text input char_list prevents spaces in custom profiles, so this should be safe
                 player["casual"] = 0
                 player["career_name"] = kwargs.get("career_name")
                 player["avatar"] = kwargs.get("avatar", 1)
+
+            # It's okay to set initial-only status_** here, resumed games will overwrite
+            # these properties in _load_career() (only status and available_missions)
+            if self.machine.settings.free_starting_mission == 0 or (
+                self.machine.settings.free_starting_mission == 1 and player["casual"]
+            ):
+                starting_recruit = SquadmateStatus.random_recruit()
+                self.machine.log.info("Found a random recruit: %s", starting_recruit)
+                player["status_{}".format(starting_recruit)] = 3
+                player["available_missions"] = 1
 
             # Store this career name for this player number
             self.machine.variables.set_machine_var(
@@ -141,35 +146,11 @@ class SaveCareer(CustomCode):
         career_name = kwargs.get("career_name")
         setattr(player, "career_name", career_name)
 
-        # Set a casual career
-        # TDB IS any of this needed? IT all lives in set_career
+        # This method should only be used for resuming games, and not casual
         if career_name == " ":
-            isDemo = self.machine.settings.demo_mode
-            CASUAL_CAREER = {
-                "career_name": " ",
-                "readonly": 1,
-                "mineral_iridium": 10000,
-                "mineral_palladium": 10000,
-                "mineral_platinum": 10000
-            }
-            # Some mods for demo mode:
-            if isDemo:
-                # Advance shadowbroker faster
-                CASUAL_CAREER["counter_sbdrops_counter"] = 2
-                # 20% chance of getting arrival instead of overlord
-                if random.random() < 0.2:
-                    CASUAL_CAREER["achievements"] = {
-                        "arrival": "enabled",
-                        "overlord": "stopped"
-                    }
-            starting_recruit = SquadmateStatus.random_recruit()
-            CASUAL_CAREER["status_{}".format(starting_recruit)] = 3
-            careerdata = CASUAL_CAREER
-            setattr(player, "casual", 1)
-            self.log.info("Created career data: {}".format(careerdata))
+            self.log.warning("_load_career() called with casual career. This should not happen. %s", careerdata)
         else:
             careerdata = self._fetch_careerdata(career_name)
-            setattr(player, "casual", 0)
 
         self._achievement_handlers = {}
         available_missions = 0

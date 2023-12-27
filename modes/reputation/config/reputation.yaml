@@ -79,6 +79,34 @@ show_player:
         leds: l_left_outlane, l_left_return_lane, l_right_return_lane, l_right_outlane
         color: on
       loops: 4
+  alliance_shot_unlit_hit:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_left_outlane
+        color: color_miranda
+      loops: 3
+      speed: 2
+  paragon_shot_unlit_hit:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_left_return_lane
+        color: color_paragon
+      loops: 3
+      speed: 2
+  renegade_shot_unlit_hit:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_right_return_lane
+        color: color_renegade
+      loops: 3
+      speed: 2
+  cerberus_shot_unlit_hit:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_right_outlane
+        color: color_jacob
+      loops: 3
+      speed: 2
 
 slide_player:
   reputation_build_shots_lit_complete:

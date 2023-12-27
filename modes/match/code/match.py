@@ -17,13 +17,12 @@ class Match(MatchBase):
         super().mode_start(**kwargs)
         self.total_ticks = 0
 
-        player_vars = []
-        for i in range(1, 5):
-            score = self.machine.variables.get_machine_var(f"player{i}_score")
-            if score is not None:
-                player_vars.append(("%s" % score)[-2:])
-        spacer = " " * (5 - len(player_vars))
-        self.machine.events.post("show_match_slide", scores=spacer.join(player_vars))
+        player_score_tens = []
+        # Assemble a space-separated list of players' tens scores
+        for player in self.machine.game.player_list:
+            player_score_tens.append(str(player.score)[-2:])
+        spacer = " " * (5 - len(player_score_tens))
+        self.machine.events.post("show_match_slide", scores=spacer.join(player_score_tens))
 
         self.add_mode_event_handler("match_no_match", self._set_match, is_match=False, priority=9000)
         self.add_mode_event_handler("match_has_match", self._set_match, is_match=True, priority=9000)

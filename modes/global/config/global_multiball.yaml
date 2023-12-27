@@ -18,11 +18,12 @@ event_player:
   fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
+  fmball_lightshot_lit_hit{not device.multiball_locks.fmball_lock.enabled}:
     # If overlord has not been played, a single hit will light. (Arrival always takes both)
     # We know a mode has been played if it is "stopped" rather than "enabled"
-    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled" and not device.multiball_locks.fmball_lock.enabled}
+    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled"}
     # Try this: on normal difficulty, arrival takes one bank to light the first time
-    - enable_fmball_lock{device.achievements.arrival.state=="enabled" and current_player.difficulty==0 and not device.multiball_locks.fmball_lock.enabled}
+    - enable_fmball_lock{device.achievements.arrival.state=="enabled" and current_player.difficulty==0}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{state=='lit' and not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
@@ -128,10 +129,17 @@ light_player:
       fade: 5s
 
 show_player:
-  fmball_light_shot_hit:
+  fmball_light_shot_lit_hit:
     fmball_lock_flash:
       priority: 100
       loops: 6
+      speed: 10
+      show_tokens:
+        color: color_mball
+  fmball_light_shot_hit_hit:
+    fmball_lock_flash:
+      priority: 100
+      loops: 2
       speed: 10
       show_tokens:
         color: color_mball

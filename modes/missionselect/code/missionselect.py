@@ -4,7 +4,6 @@ import random
 from scriptlets.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
-ALLOW_PASS_WHEN_CASUAL = True
 ALLOW_COLLECTORSHIP_REPLAY = False
 ALLOW_DERELICTREAPER_REPLAY = False
 SHOW_SELECT_WHEN_FORCED_SINGLE = True
@@ -103,7 +102,7 @@ class MissionSelect(Carousel):
             items.append('collectorship')
 
         # "Pass" is the last item in the menu (not available in casual mode except for suicide)
-        if ALLOW_PASS_WHEN_CASUAL == True or not player["casual"] or (len(items) == 1 and items[0] == "suicide"):
+        if (not player["casual"] or self.machine.settings.get_setting_value("casual_no_bypass") != 2) or (len(items) == 1 and items[0] == "suicide"):
             items.append('pass')
 
         # If more than one option is available, include the intro slide
@@ -133,7 +132,8 @@ class MissionSelect(Carousel):
         elif selection == "pass":
             # Store the choice to pass so we can skip missionselect until a new mission is available
             # This is only applicable if there are still missions to unlock, otherwise we could get stuck
-            if self.machine.game.player["squadmates_count"] < 12 and not self.machine.game.player["casual"]:
+            if self.machine.game.player["squadmates_count"] < 12 and \
+                (not self.machine.game.player["casual"] or self.machine.settings.get_setting_value("casual_no_bypass")==0):
                 self.machine.game.player['bypass_missionselect'] = 1
 
     def _update_highlighted_item(self, direction):
