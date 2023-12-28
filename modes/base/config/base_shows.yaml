@@ -329,6 +329,17 @@ shows:
         (leds)_light_1:
           color: (color2)%10
           fade: (fade)
+  top_lane_flash_show:
+    - duration: 80ms
+      lights:
+        l_left_top_lane: (color)
+        l_right_top_lane: (color)
+        gi_top: black
+    - duration: 80ms
+      lights:
+        l_left_top_lane: black
+        l_right_top_lane: black
+        gi_top: (color)
 
 shot_profiles:
   color_on:

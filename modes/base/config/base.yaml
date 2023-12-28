@@ -397,24 +397,38 @@ show_player:
   # Slingshots
   s_left_slingshot_active:
     single_flash:
+      priority: 10000
       show_tokens:
         leds: gi_bottom_light_1, gi_bottom_light_2
   s_right_slingshot_active:
     single_flash:
+      priority: 10000
       show_tokens:
         leds: gi_bottom_light_7, gi_bottom_light_8
   # Dropbank
   s_dropbank_bottom_active:
-    single_flash:
+    color_flashing_fast:
+      priority: 10000
+      loops: 2
+      speed: 2
       show_tokens:
+        color: white
         leds: gi_bottom_light_0
   s_dropbank_middle_active:
-    single_flash:
+    color_flashing_fast:
+      priority: 10000
+      loops: 2
+      speed: 2
       show_tokens:
+        color: white
         leds: gi_bottom_light_0, gi_middle_light_4
   s_dropbank_top_active:
-    single_flash:
+    color_flashing_fast:
+      priority: 10000
+      loops: 2
+      speed: 2
       show_tokens:
+        color: white
         leds: gi_middle_light_4
 
 shows:

@@ -86,6 +86,7 @@ show_player:
         color: color_miranda
       loops: 3
       speed: 2
+      priority: 100
   paragon_shot_unlit_hit:
     color_flashing_fast:
       show_tokens:
@@ -93,6 +94,7 @@ show_player:
         color: color_paragon
       loops: 3
       speed: 2
+      priority: 100
   renegade_shot_unlit_hit:
     color_flashing_fast:
       show_tokens:
@@ -100,6 +102,7 @@ show_player:
         color: color_renegade
       loops: 3
       speed: 2
+      priority: 100
   cerberus_shot_unlit_hit:
     color_flashing_fast:
       show_tokens:
@@ -107,6 +110,7 @@ show_player:
         color: color_jacob
       loops: 3
       speed: 2
+      priority: 100
 
 slide_player:
   reputation_build_shots_lit_complete:

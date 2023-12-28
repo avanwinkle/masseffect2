@@ -184,23 +184,24 @@ widgets:
 show_player:
   # Flash the lights on every completion, even if we don't award a planet
   planet_shots_hit_complete:
-    planet_complete_show:
+    top_lane_flash_show:
       loops: 6
-      speed: 12
       priority: 100
-
-shows:
-  planet_complete_show:
-    - time: 0
-      lights:
-        l_left_top_lane: white
-        l_right_top_lane: white
-        gi_top: black
-    - time: '+1'
-      lights:
-        l_left_top_lane: black
-        l_right_top_lane: black
-        gi_top: white
+      show_tokens:
+        color: white
+  # Skillshots are lit in this mode because skillshot mode will end
+  skillshot_paragon_lit_hit:
+    top_lane_flash_show:
+      loops: 6
+      priority: 200
+      show_tokens:
+        color: color_paragon
+  skillshot_renegade_lit_hit:
+    top_lane_flash_show:
+      loops: 6
+      priority: 200
+      show_tokens:
+        color: color_renegade
 
 sound_player:
   award_planet:

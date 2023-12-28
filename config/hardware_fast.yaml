@@ -641,62 +641,50 @@ lights:
   # Backbox lighting (FAST RGB)
   l_bbsquad_garrus:
     number: 5
-    type: grb
     platform: fast
     tags: light_bbsquad_garrus, light_bbsquad
   l_bbsquad_grunt:
     number: 7
-    type: grb
     platform: fast
     tags: light_bbsquad_grunt, light_bbsquad
   l_bbsquad_jack:
     number: 10
-    type: grb
     platform: fast
     tags: light_bbsquad_jack, light_bbsquad
   l_bbsquad_jacob:
     number: 8
-    type: grb
     platform: fast
     tags: light_bbsquad_jacob, light_bbsquad
   l_bbsquad_kasumi:
     number: 11
-    type: grb
     platform: fast
     tags: light_bbsquad_kasumi, light_bbsquad
   l_bbsquad_legion:
     number: 1
-    type: grb
     platform: fast
     tags: light_bbsquad_legion, light_bbsquad
   l_bbsquad_miranda:
     number: 6
-    type: grb
     platform: fast
     tags: light_bbsquad_miranda, light_bbsquad
   l_bbsquad_mordin:
     number: 4
-    type: grb
     platform: fast
     tags: light_bbsquad_mordin, light_bbsquad
   l_bbsquad_samara:
     number: 2
-    type: grb
     platform: fast
     tags: light_bbsquad_samara, light_bbsquad
   l_bbsquad_tali:
     number: 3
-    type: grb
     platform: fast
     tags: light_bbsquad_tali, light_bbsquad
   l_bbsquad_thane:
     number: 9
-    type: grb
     platform: fast
     tags: light_bbsquad_thane, light_bbsquad
   l_bbsquad_zaeed:
     number: 0
-    type: grb
     platform: fast
     tags: light_bbsquad_zaeed, light_bbsquad
 
