@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 mode:
   start_events: start_mode_env_bloodpack
   stop_events: stop_mode_env_bloodpack, stop_mode_environment
@@ -76,4 +76,3 @@ sounds:
   vorcha_shoot_everything:
     file: en_us_ss_vorcha_ss_vorcha_00312977_m.ogg
     track: voice
-

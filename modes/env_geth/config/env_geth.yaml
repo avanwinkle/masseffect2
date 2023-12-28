@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 mode:
   start_events: start_mode_env_geth
   stop_events: stop_mode_env_geth, stop_mode_environment
@@ -52,4 +52,3 @@ sounds:
   geth_killed_long_3:
     file: sfx_ss_geth_sniper_ss_geth_sniper_00309330_m.ogg
     track: sfx
-

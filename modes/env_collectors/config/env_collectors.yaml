@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 mode:
   start_events: start_mode_env_collectors
   stop_events: stop_mode_env_collectors, stop_mode_environment
@@ -50,4 +50,3 @@ sounds:
   collector_passing_5:
     file: sfx_ss_collector_ss_collector_00315585_m.ogg
     track: sfx
-

@@ -7,7 +7,7 @@ import random
 from datetime import datetime
 from mpf.core.custom_code import CustomCode
 
-from scriptlets.squadmate_status import SquadmateStatus
+from custom_code.squadmate_status import SquadmateStatus
 
 PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.

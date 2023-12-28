@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # COLLECTOR SHIP: AMBUSH PHASE
@@ -205,7 +205,7 @@ sounds:
   squadmate_zaeed_enemyseen: # here they come
     file: DLC_HEN_VT_Int.056.ogg
     track: voice
-  
+
 
 widget_player:
   logicblock_collector_shots_counter_updated:
@@ -217,4 +217,3 @@ widgets:
     - type: text
       text: "Shots: (value)"
       style: header_xs, row_gutter, col_left_center
-

@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 # Production configuration for Mass Effect pinball machines.
 # Don't use fullscreen: true because Arch+FluxBox SDL will

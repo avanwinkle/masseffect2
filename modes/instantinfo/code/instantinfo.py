@@ -1,6 +1,6 @@
 """Instant Info: Script to manage player state and show slides accordingly."""
 
-from scriptlets.squadmate_status import SquadmateStatus
+from custom_code.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
 

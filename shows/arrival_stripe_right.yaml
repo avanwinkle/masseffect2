@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     l_left_top_lane: '2AC0FD'
@@ -156,4 +156,3 @@
 #No change this frame - take another step
 #  lights:
 - time: '+23'
-

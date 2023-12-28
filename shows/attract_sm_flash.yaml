@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - duration: 510ms
   flashers:
     l_flash_slingshots: 80ms
@@ -37,33 +37,3 @@
 - duration: 258ms
   flashers:
     l_flash_kickback: 80ms
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

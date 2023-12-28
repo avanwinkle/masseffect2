@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # SUICIDE MISSION Pt. VII: THE END RUN
@@ -19,10 +19,10 @@
 #
 # When all lit shots have been completed, they all re-light.
 # The rate at which frenzy hits increase the jackpot does slow
-# over time to prevent obscene scores… but still, this mode is 
+# over time to prevent obscene scores… but still, this mode is
 # worth a bunch of points (like all good victory laps).
 #
-# When the player drains from this mode on their last ball, Shepard 
+# When the player drains from this mode on their last ball, Shepard
 # leaps to the Normandy. If the player was unable to hit at least two
 # of the recruitment shots, or if they have only one squadmate left, they
 # see Shepard’s death ending. Otherwise, they see the escape ending.

@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 sound_player:
   # MOVE Garrus and Samara to global_recruit, since field closes
   play_queued_slide_recruit_advance_slide.2{squadmate=="grunt"}:

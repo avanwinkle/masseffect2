@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # N7 ASSIGNMENTS MODE
@@ -484,5 +484,3 @@ widgets:
     - type: image
       image: codex_n7_hahne-kedar_facility
       style: codex_image
-
-

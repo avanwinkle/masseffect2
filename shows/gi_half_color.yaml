@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - lights:
     l_backwall_gi_light_0: (color)
     l_backwall_gi_light_2: (color)

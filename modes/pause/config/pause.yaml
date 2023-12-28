@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # PAUSE MODE
@@ -79,4 +79,3 @@ shows:
         l_action_button_rgb:
           color: black
           fade: 1s
-

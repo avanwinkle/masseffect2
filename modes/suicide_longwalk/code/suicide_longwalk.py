@@ -1,6 +1,6 @@
 import random
 from mpf.core.mode import Mode
-from scriptlets.squadmate_status import SquadmateStatus
+from custom_code.squadmate_status import SquadmateStatus
 
 PATHSHOTS = ["dropbank", "left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit", "hitbank"]
 

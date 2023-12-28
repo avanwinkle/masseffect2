@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 slide_player:
   mode_suicide_base_started:
     singleplayer_slide:
@@ -543,4 +543,3 @@ widgets:
         y: 24
         x: 86
         z: 2
-

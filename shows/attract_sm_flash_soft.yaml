@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - duration: 528ms
   lights:
     l_backwall_gi_light_0: color_collectors
@@ -229,24 +229,3 @@
     l_ladder_light_9:
       color: color_grunt
       fade: 20ms
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

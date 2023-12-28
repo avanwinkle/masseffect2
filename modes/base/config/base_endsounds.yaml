@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # Modes can't play sounds when they end because the mode stops before the sound

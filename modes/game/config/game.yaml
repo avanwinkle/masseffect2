@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 # Relay through event_player because widget_player doesn't like conditions/priorities
 event_player:

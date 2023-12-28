@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 mode:
   start_events: start_mode_env_gunfight
   stop_events: stop_mode_env_gunfight, stop_mode_environment
@@ -172,6 +172,3 @@ sounds:
   shepdead_miranda_4:
     file: en_us_hench_vixen_ss_global_hench_vixen_00310107_m.ogg
     track: voice
-
-
-

@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     l_ball_save: 'E4FD00'
@@ -9,18 +9,18 @@
     l_ladder_light_4: 'E4FD00'
     l_ladder_light_5: 'A2B400'
     l_left_medigel: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: '869500'
     l_left_outlane: 'E4FD00'
     l_left_return_lane: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_4: 'CEE400'
     l_ladder_light_5: '646F00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: 'E4FD00'
@@ -31,67 +31,67 @@
     l_ladder_light_3: '323800'
     l_ladder_light_4: '444C00'
     l_ladder_light_5: '393F00'
-    
+
 - time: '+1'
   lights:
-    l_ball_save: 
+    l_ball_save:
       color: stop
       fade: 30ms
     l_dropbank_top: 'E4FD00'
-    l_ladder_light_0: 
+    l_ladder_light_0:
       color: stop
       fade: 30ms
-    l_ladder_light_1: 
+    l_ladder_light_1:
       color: stop
       fade: 30ms
-    l_ladder_light_2: 
+    l_ladder_light_2:
       color: stop
       fade: 30ms
-    l_ladder_light_3: 
+    l_ladder_light_3:
       color: stop
       fade: 30ms
-    l_ladder_light_4: 
+    l_ladder_light_4:
       color: stop
       fade: 30ms
     l_ladder_light_5: '1A1D00'
-    
+
 - time: '+1'
   lights:
-    l_ladder_light_5: 
+    l_ladder_light_5:
       color: stop
       fade: 30ms
-    
+
 #No change this frame - take another step
 #  lights:
 - time: '+1'
-    
+
 - time: '+1'
   lights:
-    l_left_medigel: 
+    l_left_medigel:
       color: stop
       fade: 30ms
     l_left_orbit_shield_rgb: 'E4FD00'
     l_standup_1: '171900'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: 'E4FD00'
     l_kickback_arrow: 'E4FD00'
     l_standup_1: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_kickback_shield_rgb: 'E4FD00'
     l_ladder_light_6: '181B00'
-    l_left_outlane: 
+    l_left_outlane:
       color: stop
       fade: 30ms
-    l_left_return_lane: 
+    l_left_return_lane:
       color: stop
       fade: 30ms
     l_standup_2: 'E4FD00'
     l_store: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '0C0E00'
@@ -100,14 +100,14 @@
     l_ladder_light_8: '070700'
     l_left_ramp_arrow: 'E4FD00'
     l_left_ramp_shield_rgb: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '596300'
-    l_dropbank_bottom: 
+    l_dropbank_bottom:
       color: stop
       fade: 30ms
-    l_dropbank_middle: 
+    l_dropbank_middle:
       color: stop
       fade: 30ms
     l_ladder_light_6: 'D9F000'
@@ -115,60 +115,60 @@
     l_ladder_light_8: 'E4FD00'
     l_ladder_light_9: 'E4FD00'
     l_standup_3: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: 'E4FD00'
-    l_dropbank_top: 
+    l_dropbank_top:
       color: stop
       fade: 30ms
     l_ladder_light_6: 'E4FD00'
     l_standup_4: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_right_ramp_arrow: 'E4FD00'
     l_right_ramp_shield_rgb: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_left_orbit_shield_rgb: '111300'
     l_right_orbit_shield_rgb: 'E4FD00'
     l_standup_5: 'E4FD00'
-    
+
 - time: '+1'
   lights:
-    l_left_orbit_shield_rgb: 
+    l_left_orbit_shield_rgb:
       color: stop
       fade: 30ms
-    l_standup_1: 
+    l_standup_1:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
-    l_flash_left_orbit: 
+    l_flash_left_orbit:
       color: stop
       fade: 30ms
-    l_kickback_arrow: 
+    l_kickback_arrow:
       color: stop
       fade: 30ms
     l_kickback_shield_rgb: '272B00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: 'E4FD00'
-    l_kickback_shield_rgb: 
+    l_kickback_shield_rgb:
       color: stop
       fade: 30ms
     l_ladder_light_6: 'BBCF00'
-    l_standup_2: 
+    l_standup_2:
       color: stop
       fade: 30ms
-    l_store: 
+    l_store:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '171900'
@@ -176,83 +176,83 @@
     l_ladder_light_7: '6F7C00'
     l_ladder_light_8: 'A0B200'
     l_ladder_light_9: 'E2FB00'
-    l_left_ramp_arrow: 
+    l_left_ramp_arrow:
       color: stop
       fade: 30ms
-    l_left_ramp_shield_rgb: 
+    l_left_ramp_shield_rgb:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
-    l_battering_ram_top: 
+    l_battering_ram_top:
       color: stop
       fade: 30ms
     l_hitbank_bottom: 'E4FD00'
     l_ladder_light_6: '030300'
-    l_ladder_light_7: 
+    l_ladder_light_7:
       color: stop
       fade: 30ms
-    l_ladder_light_8: 
+    l_ladder_light_8:
       color: stop
       fade: 30ms
-    l_ladder_light_9: 
+    l_ladder_light_9:
       color: stop
       fade: 30ms
-    l_standup_3: 
+    l_standup_3:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
-    l_ladder_light_6: 
+    l_ladder_light_6:
       color: stop
       fade: 30ms
-    l_standup_4: 
+    l_standup_4:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: '0D0F00'
-    l_right_ramp_arrow: 
+    l_right_ramp_arrow:
       color: stop
       fade: 30ms
-    l_right_ramp_shield_rgb: 
+    l_right_ramp_shield_rgb:
       color: stop
       fade: 30ms
-    l_standup_5: 
+    l_standup_5:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: '242800'
-    l_right_orbit_shield_rgb: 
+    l_right_orbit_shield_rgb:
       color: stop
       fade: 30ms
     l_right_outlane: 'E4FD00'
     l_right_return_lane: 'E4FD00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: '3A4100'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: '545D00'
     l_right_medigel: 'E4FD00'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_top: 
+    l_hitbank_top:
       color: stop
       fade: 30ms
     l_ladder_light_5: '748100'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_bottom: 
+    l_hitbank_bottom:
       color: stop
       fade: 30ms
     l_ladder_light_0: '262B00'
@@ -261,7 +261,7 @@
     l_ladder_light_3: '5F6A00'
     l_ladder_light_4: '768300'
     l_ladder_light_5: '9FB000'
-    
+
 - time: '+1'
   lights:
     l_ball_save: 'E4FD00'
@@ -271,24 +271,23 @@
     l_ladder_light_3: 'E4FD00'
     l_ladder_light_4: 'DAF200'
     l_ladder_light_5: 'C0D600'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_4: 'E4FD00'
     l_ladder_light_5: 'DDF600'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: 'D1E800'
     l_right_outlane: '9EAF00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_5: 'BBD000'
-    l_right_outlane: 
+    l_right_outlane:
       color: stop
       fade: 30ms
-    l_right_return_lane: 
+    l_right_return_lane:
       color: stop
       fade: 30ms
-    

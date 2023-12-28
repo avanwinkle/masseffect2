@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 show_player:
   player_available_missions{value>0}:
     missions_available_show:

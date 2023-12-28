@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 
 # 1-second fades on the ladder = 10s per color group
 # All counts are 1s each, except green/yellow which is 1.9s

@@ -1,7 +1,7 @@
 """Custom mode code for mission selection."""
 import logging
 import random
-from scriptlets.squadmate_status import SquadmateStatus
+from custom_code.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
 
 ALLOW_COLLECTORSHIP_REPLAY = False

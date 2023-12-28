@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     l_ball_save: '21F832'
@@ -1556,4 +1556,3 @@
     l_right_top_lane:
       color:  stop
       fade: 30ms
-

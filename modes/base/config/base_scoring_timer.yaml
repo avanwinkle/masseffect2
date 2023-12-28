@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 event_player:
   set_mission_shots.2:
     - missiontimer_set_(current_player.mission_starting_ticks)

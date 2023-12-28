@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 variable_player:
   mode_collectorship_ambush_will_start:
     last_mission:
@@ -40,7 +40,7 @@ slides:
         video: collectorship_cineanim
         end_behavior: pause
   collectorship_dossier:
-    transition: 
+    transition:
       type: fade
       duration: 2s
     transition_out: fade
@@ -78,7 +78,7 @@ slides:
         style: body_sm, row_sub, col_left_anchor, dmd_hide, num
         opacity: 0.5
       - widget: background_console
-  collectorship_portrait_slide: 
+  collectorship_portrait_slide:
     transition:
       type: fade
       duration: 250ms

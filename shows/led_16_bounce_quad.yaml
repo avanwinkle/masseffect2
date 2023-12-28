@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     (ledring)_light_0:
@@ -49,7 +49,7 @@
     (ledring)_light_15:
       color: black
       fade: (fade)
-      
+
 - time: '+1'
   lights:
     (ledring)_light_0:
@@ -100,7 +100,7 @@
     (ledring)_light_15:
       color: (color)
       fade: (fade)
-      
+
 - time: '+1'
   lights:
     (ledring)_light_0:
@@ -151,7 +151,7 @@
     (ledring)_light_15:
       color: black
       fade: (fade)
-       
+
 - time: '+1'
   lights:
     (ledring)_light_0:

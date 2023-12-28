@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 config:
   - config_dmd_styles.yaml
   - slides_dmd.yaml
@@ -37,7 +37,7 @@ dmds:
 
 assets:
   images:
-    default: 
+    default:
       load: on_demand
 
 machine_vars:

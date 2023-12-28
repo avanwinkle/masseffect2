@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # MISSION SELECT MODE
@@ -534,4 +534,3 @@ widgets:
       text: "Twenty years ago Zaeed was\nbetrayed by his partner and left\nfor dead. Now he has a chance for\nrevenge.\n\nStorm the refinery and pursue his\nenemy to earn Zaeed's loyalty."
       style: codex_text
     - widget: dossier_recruit_base
-

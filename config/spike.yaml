@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 config:
   - config_common.yaml
   - config_dmd.yaml
@@ -7,9 +7,9 @@ config:
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
-  - scriptlets.squadmates_mpf.MPFSquadmateHandlers
-  - scriptlets.save_career.SaveCareer
-  - scriptlets.slide_queue_player.SlideQueuePlayer
+  - custom_code.squadmates_mpf.MPFSquadmateHandlers
+  - custom_code.save_career.SaveCareer
+  - custom_code.slide_queue_player.SlideQueuePlayer
 
 mc_custom_code:
-  - squadmates_mc.MCSquadmateHandlers
+  - custom_code.squadmates_mc.MCSquadmateHandlers

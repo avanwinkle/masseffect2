@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 mode:
   start_events: start_mode_env_husks_lower
   stop_events: stop_mode_env_husks_lower, stop_mode_environment
@@ -50,4 +50,3 @@ sounds:
   scion_hit_4:
     file: sfx_ss_scion_ss_scion_00293521_m.ogg
     track: sfx
-

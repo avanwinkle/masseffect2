@@ -1,6 +1,6 @@
 import random
 from mpf.core.mode import Mode
-from scriptlets.squadmates_mpf import SquadmateStatus
+from custom_code.squadmates_mpf import SquadmateStatus
 
 # The order of this array must be the order in which modes are completed
 SUICIDE_MODES = ["omegarelay", "infiltration", "longwalk", "tubes", "final", "endrun"]

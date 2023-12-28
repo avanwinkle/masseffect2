@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 mode:
   start_events: start_mode_environment
@@ -57,4 +57,3 @@ flasher_player:
     l_flash_right_orbit: 50ms
   bypass_lock_release_pulse:
     l_flash_sword_lock: 150ms
-

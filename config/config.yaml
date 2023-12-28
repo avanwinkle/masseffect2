@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 config:
   - config_common.yaml
   - config_lcd.yaml
@@ -22,11 +22,11 @@ fast:
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
-  - scriptlets.squadmates_mpf.MPFSquadmateHandlers
-  - scriptlets.save_career.SaveCareer
-  - scriptlets.slide_queue_player.SlideQueuePlayer
-  - scriptlets.research.Research
-  - scriptlets.version_checker.VersionChecker
+  - custom_code.squadmates_mpf.MPFSquadmateHandlers
+  - custom_code.save_career.SaveCareer
+  - custom_code.slide_queue_player.SlideQueuePlayer
+  - custom_code.research.Research
+  - custom_code.version_checker.VersionChecker
 
 mc_custom_code:
-  - squadmates_mc.MCSquadmateHandlers
+  - custom_code.squadmates_mc.MCSquadmateHandlers

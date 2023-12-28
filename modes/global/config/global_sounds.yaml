@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # Global Sounds
@@ -405,5 +405,3 @@ sounds:
 # en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.ogg "Research projects: Palladium"
 #
 #####
-
-

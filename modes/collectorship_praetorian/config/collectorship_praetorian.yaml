@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # COLLECTOR SHIP: PRAETORIAN PHASE
@@ -390,28 +390,28 @@ sounds:
   praet_alarm:
     track: sfx
     file: mus_generic_stinger_053.ogg
-  sqmate_praetorian_enter_jack:  
+  sqmate_praetorian_enter_jack:
     file: en_us_hench_convict_horcr1_spaceport_fight02_a_00318563_m.ogg
     track: voice
-  sqmate_praetorian_enter_garrus:  
+  sqmate_praetorian_enter_garrus:
     file: en_us_hench_garrus_horcr1_spaceport_fight02_a_00318567_m.ogg
     track: voice
-  sqmate_praetorian_enter_jacob:  
+  sqmate_praetorian_enter_jacob:
     file: en_us_hench_leading_horcr1_spaceport_fight02_a_00318565_m.ogg
     track: voice
-  sqmate_praetorian_enter_mordin:  
+  sqmate_praetorian_enter_mordin:
     file: en_us_hench_professor_horcr1_spaceport_fight02_a_00318569_m.ogg
     track: voice
-  sqmate_praetorian_enter_tali:  
+  sqmate_praetorian_enter_tali:
     file: en_us_hench_tali_horcr1_spaceport_fight02_a_00318566_m.ogg
     track: voice
-  sqmate_praetorian_enter_kasumi:  
+  sqmate_praetorian_enter_kasumi:
     file: en_us_hench_thief_horcr1_spaceport_fight02_a_00318568_m.ogg
     track: voice
-  sqmate_praetorian_enter_zaeed:  
+  sqmate_praetorian_enter_zaeed:
     file: en_us_hench_veteran_horcr1_spaceport_fight02_a_00318562_m.ogg
     track: voice
-  sqmate_praetorian_enter_miranda:  
+  sqmate_praetorian_enter_miranda:
     file: en_us_hench_vixen_horcr1_spaceport_fight02_a_00318564_m.ogg
     track: voice
 

@@ -1,60 +1,60 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     l_left_medigel: '0F0C00'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: '2D2400'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: '504000'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: '776000'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: '9F7F00'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: 'C49D00'
-    
+
 - time: '+1'
   lights:
     l_left_medigel: 'E4B700'
     l_left_outlane: '181300'
     l_left_return_lane: '191400'
-    
+
 - time: '+1'
   lights:
-    l_left_medigel: 
+    l_left_medigel:
       color: stop
       fade: 30ms
     l_left_outlane: '372C00'
     l_left_return_lane: '382D00'
-    
+
 - time: '+1'
   lights:
     l_left_outlane: '5C4A00'
     l_left_return_lane: '5D4B00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '0D0B00'
     l_left_outlane: '836900'
     l_left_return_lane: '846A00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '2A2200'
     l_dropbank_middle: '100C00'
     l_left_outlane: 'AC8900'
     l_left_return_lane: 'AD8A00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '4D3D00'
@@ -62,7 +62,7 @@
     l_dropbank_top: '090700'
     l_left_outlane: 'CFA500'
     l_left_return_lane: 'D0A600'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '745D00'
@@ -70,31 +70,31 @@
     l_dropbank_top: '241D00'
     l_left_outlane: 'EDBD00'
     l_left_return_lane: 'EEBF00'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: '9C7C00'
     l_dropbank_middle: '775F00'
     l_dropbank_top: '473900'
-    l_left_outlane: 
+    l_left_outlane:
       color: stop
       fade: 30ms
-    l_left_return_lane: 
+    l_left_return_lane:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: 'C19B00'
     l_dropbank_middle: '9F7F00'
     l_dropbank_top: '6D5700'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: 'E2B500'
     l_dropbank_middle: 'C39C00'
     l_dropbank_top: '957700'
-    
+
 - time: '+1'
   lights:
     l_dropbank_bottom: 'FAC800'
@@ -102,42 +102,42 @@
     l_dropbank_top: 'BB9600'
     l_left_orbit_shield_rgb: '171300'
     l_standup_1: '090700'
-    
+
 - time: '+1'
   lights:
-    l_dropbank_bottom: 
+    l_dropbank_bottom:
       color: stop
       fade: 30ms
     l_dropbank_middle: 'FBC900'
     l_dropbank_top: 'DCB000'
     l_left_orbit_shield_rgb: '372C00'
     l_standup_1: '231C00'
-    
+
 - time: '+1'
   lights:
-    l_dropbank_middle: 
+    l_dropbank_middle:
       color: stop
       fade: 30ms
     l_dropbank_top: 'F7C500'
     l_left_orbit_shield_rgb: '5C4900'
     l_standup_1: '453700'
-    
+
 - time: '+1'
   lights:
-    l_dropbank_top: 
+    l_dropbank_top:
       color: stop
       fade: 30ms
     l_kickback_shield_rgb: '120F00'
     l_left_orbit_shield_rgb: '846A00'
     l_standup_1: '6C5600'
-    
+
 - time: '+1'
   lights:
     l_kickback_shield_rgb: '302600'
     l_left_orbit_shield_rgb: 'AB8900'
     l_standup_1: '947600'
     l_store: '050400'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: '040300'
@@ -145,7 +145,7 @@
     l_left_orbit_shield_rgb: 'CFA600'
     l_standup_1: 'BA9500'
     l_store: '1E1800'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: '1B1500'
@@ -153,105 +153,105 @@
     l_left_orbit_shield_rgb: 'ECBD00'
     l_standup_1: 'DCB000'
     l_store: '3F3200'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: '3A2F00'
     l_kickback_shield_rgb: 'A28200'
-    l_left_orbit_shield_rgb: 
+    l_left_orbit_shield_rgb:
       color: stop
       fade: 30ms
     l_standup_1: 'F6C400'
     l_store: '645000'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: '604D00'
     l_kickback_shield_rgb: 'C8A000'
-    l_standup_1: 
+    l_standup_1:
       color: stop
       fade: 30ms
     l_store: '8C7000'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: '886D00'
     l_kickback_shield_rgb: 'E7B900'
     l_store: 'B38F00'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: 'AE8B00'
-    l_kickback_shield_rgb: 
+    l_kickback_shield_rgb:
       color: stop
       fade: 30ms
     l_store: 'D6AB00'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: 'D2A800'
     l_store: 'F2C200'
-    
+
 - time: '+1'
   lights:
     l_flash_left_orbit: 'F0C000'
-    l_store: 
+    l_store:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
-    l_flash_left_orbit: 
+    l_flash_left_orbit:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_ball_save: '100D00'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '312700'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '5B4800'
-    
+
 - time: '+1'
   lights:
     l_ball_save: '876C00'
-    
+
 - time: '+1'
   lights:
     l_ball_save: 'B28F00'
-    
+
 - time: '+1'
   lights:
     l_ball_save: 'DAAE00'
-    
+
 - time: '+1'
   lights:
     l_ball_save: 'F7C500'
-    
+
 - time: '+1'
   lights:
-    l_ball_save: 
+    l_ball_save:
       color: stop
       fade: 30ms
-    
+
 #No change this frame - take another step
 #  lights:
 - time: '+1'
-    
+
 #No change this frame - take another step
 #  lights:
 - time: '+1'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '181300'
     l_ladder_light_1: '0D0A00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '3A2F00'
@@ -259,7 +259,7 @@
     l_ladder_light_2: '1B1500'
     l_ladder_light_3: '0D0A00'
     l_progress_collectorship: '070600'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '655100'
@@ -270,7 +270,7 @@
     l_ladder_light_5: '120E00'
     l_ladder_light_6: '040300'
     l_progress_collectorship: '251E00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '927500'
@@ -284,7 +284,7 @@
     l_ladder_light_8: '060500'
     l_progress_collectorship: '4B3C00'
     l_progress_derelictreaper: '1C1600'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF9900'
@@ -300,7 +300,7 @@
     l_progress_collectorship: '7A6100'
     l_progress_derelictreaper: '433500'
     l_progress_normandy: '100D00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'E4B600'
@@ -316,10 +316,10 @@
     l_progress_collectorship: 'A68500'
     l_progress_derelictreaper: '6E5800'
     l_progress_normandy: '312700'
-    
+
 - time: '+1'
   lights:
-    l_ladder_light_0: 
+    l_ladder_light_0:
       color: stop
       fade: 30ms
     l_ladder_light_1: 'F5C400'
@@ -334,13 +334,13 @@
     l_progress_collectorship: 'CFA500'
     l_progress_derelictreaper: '9B7C00'
     l_progress_normandy: '5A4800'
-    
+
 - time: '+1'
   lights:
-    l_ladder_light_1: 
+    l_ladder_light_1:
       color: stop
       fade: 30ms
-    l_ladder_light_2: 
+    l_ladder_light_2:
       color: stop
       fade: 30ms
     l_ladder_light_3: 'F5C400'
@@ -353,14 +353,14 @@
     l_progress_collectorship: 'F0C000'
     l_progress_derelictreaper: 'C59E00'
     l_progress_normandy: '876C00'
-    
+
 - time: '+1'
   lights:
     l_kickback_arrow: '110D00'
-    l_ladder_light_3: 
+    l_ladder_light_3:
       color: stop
       fade: 30ms
-    l_ladder_light_4: 
+    l_ladder_light_4:
       color: stop
       fade: 30ms
     l_ladder_light_5: 'FAC800'
@@ -369,40 +369,40 @@
     l_ladder_light_8: 'CDA400'
     l_ladder_light_9: 'B69200'
     l_left_ramp_arrow: '040300'
-    l_progress_collectorship: 
+    l_progress_collectorship:
       color: stop
       fade: 30ms
     l_progress_derelictreaper: 'E8BA00'
     l_progress_normandy: 'B28F00'
     l_right_ramp_arrow: '110D00'
-    
+
 - time: '+1'
   lights:
     l_kickback_arrow: '322800'
-    l_ladder_light_5: 
+    l_ladder_light_5:
       color: stop
       fade: 30ms
-    l_ladder_light_6: 
+    l_ladder_light_6:
       color: stop
       fade: 30ms
     l_ladder_light_7: 'F9C700'
     l_ladder_light_8: 'EEBE00'
     l_ladder_light_9: 'DCB000'
     l_left_ramp_arrow: '201900'
-    l_progress_derelictreaper: 
+    l_progress_derelictreaper:
       color: stop
       fade: 30ms
     l_progress_normandy: 'DAAE00'
     l_right_ramp_arrow: '322800'
     l_standup_2: '110D00'
-    
+
 - time: '+1'
   lights:
     l_kickback_arrow: '5B4900'
-    l_ladder_light_7: 
+    l_ladder_light_7:
       color: stop
       fade: 30ms
-    l_ladder_light_8: 
+    l_ladder_light_8:
       color: stop
       fade: 30ms
     l_ladder_light_9: 'F9C700'
@@ -410,23 +410,23 @@
     l_progress_normandy: 'F7C500'
     l_right_ramp_arrow: '5B4900'
     l_standup_2: '322800'
-    
+
 - time: '+1'
   lights:
     l_kickback_arrow: '886D00'
-    l_ladder_light_9: 
+    l_ladder_light_9:
       color: stop
       fade: 30ms
     l_left_ramp_arrow: '705A00'
     l_left_ramp_shield_rgb: '181300'
-    l_progress_normandy: 
+    l_progress_normandy:
       color: stop
       fade: 30ms
     l_right_ramp_arrow: '876C00'
     l_standup_2: '5C4A00'
     l_standup_3: '0F0C00'
     l_standup_4: '0E0B00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '060500'
@@ -437,7 +437,7 @@
     l_standup_2: '8B6F00'
     l_standup_3: '322800'
     l_standup_4: '312700'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '231C00'
@@ -448,7 +448,7 @@
     l_standup_2: 'B79200'
     l_standup_3: '5B4900'
     l_standup_4: '5A4800'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '493A00'
@@ -459,234 +459,233 @@
     l_standup_2: 'DDB100'
     l_standup_3: '886D00'
     l_standup_4: '866C00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: '755E00'
-    l_kickback_arrow: 
+    l_kickback_arrow:
       color: stop
       fade: 30ms
-    l_left_ramp_arrow: 
+    l_left_ramp_arrow:
       color: stop
       fade: 30ms
     l_left_ramp_shield_rgb: 'C09A00'
-    l_right_ramp_arrow: 
+    l_right_ramp_arrow:
       color: stop
       fade: 30ms
     l_standup_2: 'F9C700'
     l_standup_3: 'B38F00'
     l_standup_4: 'B38F00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: 'A18100'
     l_left_ramp_shield_rgb: 'E5B700'
-    l_standup_2: 
+    l_standup_2:
       color: stop
       fade: 30ms
     l_standup_3: 'DBAF00'
     l_standup_4: 'D9AE00'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: 'CBA200'
-    l_left_ramp_shield_rgb: 
+    l_left_ramp_shield_rgb:
       color: stop
       fade: 30ms
     l_standup_3: 'F8C600'
     l_standup_4: 'F7C500'
-    
+
 - time: '+1'
   lights:
     l_battering_ram_top: 'ECBD00'
-    l_standup_3: 
+    l_standup_3:
       color: stop
       fade: 30ms
-    l_standup_4: 
+    l_standup_4:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
-    l_battering_ram_top: 
+    l_battering_ram_top:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_right_medigel: '0B0900'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: '241D00'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: '443600'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: '675300'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: '8D7100'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: 'B28E00'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: 'D2A800'
     l_right_outlane: '090700'
     l_right_return_lane: '070600'
-    
+
 - time: '+1'
   lights:
     l_right_medigel: 'EFBF00'
     l_right_outlane: '241D00'
     l_right_return_lane: '211B00'
-    
+
 - time: '+1'
   lights:
-    l_right_medigel: 
+    l_right_medigel:
       color: stop
       fade: 30ms
     l_right_outlane: '443600'
     l_right_return_lane: '413400'
-    
+
 - time: '+1'
   lights:
     l_right_outlane: '675300'
     l_right_return_lane: '645000'
-    
+
 - time: '+1'
   lights:
     l_right_outlane: '8D7100'
     l_right_return_lane: '896D00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '050400'
     l_right_outlane: 'B28E00'
     l_right_return_lane: 'AE8B00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '1C1600'
     l_right_outlane: 'D2A800'
     l_right_return_lane: 'CFA500'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '3A2F00'
     l_hitbank_top: '100D00'
     l_right_outlane: 'EEBE00'
     l_right_return_lane: 'EBBC00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '5F4C00'
     l_hitbank_top: '2D2400'
-    l_right_outlane: 
+    l_right_outlane:
       color: stop
       fade: 30ms
-    l_right_return_lane: 
+    l_right_return_lane:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '846A00'
     l_hitbank_top: '4F3F00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: 'AA8800'
     l_hitbank_top: '735C00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: 'CCA300'
     l_hitbank_top: '997A00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: 'E8BA00'
     l_hitbank_top: 'BC9600'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_bottom: 
+    l_hitbank_bottom:
       color: stop
       fade: 30ms
     l_hitbank_top: 'DBAF00'
     l_right_orbit_shield_rgb: '040300'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: 'F5C400'
     l_right_orbit_shield_rgb: '1A1500'
     l_right_ramp_shield_rgb: '050400'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_top: 
+    l_hitbank_top:
       color: stop
       fade: 30ms
     l_right_orbit_shield_rgb: '382D00'
     l_right_ramp_shield_rgb: '1D1700'
     l_standup_5: '0F0C00'
-    
+
 - time: '+1'
   lights:
     l_right_orbit_shield_rgb: '5D4B00'
     l_right_ramp_shield_rgb: '3D3000'
     l_standup_5: '2A2200'
-    
+
 - time: '+1'
   lights:
     l_right_orbit_shield_rgb: '826800'
     l_right_ramp_shield_rgb: '604D00'
     l_standup_5: '4C3D00'
-    
+
 - time: '+1'
   lights:
     l_right_orbit_shield_rgb: 'A78600'
     l_right_ramp_shield_rgb: '866B00'
     l_standup_5: '705A00'
-    
+
 - time: '+1'
   lights:
     l_right_orbit_shield_rgb: 'CAA100'
     l_right_ramp_shield_rgb: 'AB8900'
     l_standup_5: '967800'
-    
+
 - time: '+1'
   lights:
     l_right_orbit_shield_rgb: 'E6B800'
     l_right_ramp_shield_rgb: 'CCA300'
     l_standup_5: 'B99400'
-    
+
 - time: '+1'
   lights:
-    l_right_orbit_shield_rgb: 
+    l_right_orbit_shield_rgb:
       color: stop
       fade: 30ms
     l_right_ramp_shield_rgb: 'E8BA00'
     l_standup_5: 'DAAE00'
-    
+
 - time: '+1'
   lights:
-    l_right_ramp_shield_rgb: 
+    l_right_ramp_shield_rgb:
       color: stop
       fade: 30ms
     l_standup_5: 'F4C300'
-    
+
 - time: '+1'
   lights:
-    l_standup_5: 
+    l_standup_5:
       color: stop
       fade: 30ms
-    

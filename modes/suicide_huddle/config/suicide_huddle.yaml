@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # SUICIDE MISSION: Huddle
@@ -7,7 +7,7 @@
 # and provides the interface for selecting a specialist.
 #
 # The custom python code handles the business of finding which mates
-# are recruited and still alive, populating the list widgets, and 
+# are recruited and still alive, populating the list widgets, and
 # handling the flipper events to select the mate. Once selected,
 # this mode hands off to the next playable mode.
 #####
@@ -67,13 +67,13 @@ random_event_player:
 
 light_player:
   mode_suicide_huddle_started:
-    light_backwall_gi: 
+    light_backwall_gi:
       color: off
       fade: 1s
     light_backwall_ambient:
       color: color_collectors_quarter
       fade: 1s
-    light_ladder: 
+    light_ladder:
       color: off
       fade: 1s
   suicide_huddle_specialist_selected:

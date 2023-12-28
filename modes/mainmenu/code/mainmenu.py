@@ -7,7 +7,7 @@ from random import randint, random
 from datetime import datetime
 from operator import itemgetter
 from mpf.modes.carousel.code.carousel import Carousel
-from scriptlets.squadmate_status import SquadmateStatus
+from custom_code.squadmate_status import SquadmateStatus
 
 DIFFICULTIES = {0: "Normal", 1: "Hardcore", 2: "Insanity"}
 FLOWS = {0: "Normal", 1: "High Flow"}

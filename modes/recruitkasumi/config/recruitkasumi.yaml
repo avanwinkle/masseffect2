@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # KASUMI RECRUITMENT MISSION
@@ -504,4 +504,3 @@ widgets:
   portrait_kasumi_voiceprint:
     - type: image
       image: portrait_kasumi_voiceprint
-

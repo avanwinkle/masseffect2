@@ -1,10 +1,10 @@
-#config_version=5
+#config_version=6
 
 #####
 # STORE MODE
 #
 # This mode allows the player to purchase upgrades and bonus powers.
-# Purchasing power is determined by the amount of minerals collected 
+# Purchasing power is determined by the amount of minerals collected
 # (platinum, palladium, and iridium from the bumpers, eezo from the
 # standups), and the store is unlocked when the standup group is
 # completed.

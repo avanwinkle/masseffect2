@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 shows:
   airlock_release_warning:
     - duration: 200ms

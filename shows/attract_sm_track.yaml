@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     shot_shields: ff1f00  # color_shadowbroker
@@ -17,8 +17,8 @@
     light_backwall_ambient: 0055ff  # color_garrus
 - time: '+1'
   lights:
-    shot_shields: 008899  # color_samara
-    light_backwall_ambient: 008899  # color_samara
+    shot_shields: "008899"  # color_samara
+    light_backwall_ambient: "008899"  # color_samara
   flashers:
     l_flash_dragon_right: 100ms
 - time: '+1'

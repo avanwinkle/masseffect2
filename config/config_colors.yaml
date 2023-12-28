@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 named_colors:
   # Squadmates
@@ -11,7 +11,7 @@ named_colors:
   color_legion: ffffff
   color_miranda: fff2e6
   color_mordin: "440000"
-  color_samara: 008899
+  color_samara: "008899"
   color_tali: ff11dd
   color_thane: 00ff11
   color_zaeed: ff7700

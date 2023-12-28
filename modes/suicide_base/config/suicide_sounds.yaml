@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 sound_player:
   # This is a hacky way to get MCP to listen to 'play_squadmate_sound' events :/
   play_squadmate_sound{hack==true}: squadmate_thane_killed_infiltration

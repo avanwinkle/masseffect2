@@ -1,12 +1,12 @@
-#config_version=5
+#config_version=6
 config:
 - config_colors.yaml
 - config_settings.yaml
 - hardware_common.yaml
 - keyboard.yaml
 
-auditor:
-  missing_switch_min_games: 10
+# auditor:
+#   missing_switch_min_games: 10
 
 smart_virtual:
   console_log: basic
@@ -163,6 +163,9 @@ machine_vars:
     initial_value: "Player 4"
     value_type: str
     persist: false
+  master_volume:
+    initial_value: 1.0
+    persist: true
   # These point reference values are here globally, but don't need to be saved
   base_points:
     initial_value: 10000
@@ -501,7 +504,6 @@ player_vars:
     initial_value: 0
 
 sound_system:
-  master_volume: 1.0
   buffer: 4096  # upped from 2048 on UP Core Plus  # previous value was 512
   frequency: 24000
   channels: 1

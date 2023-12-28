@@ -18,7 +18,7 @@ try:
     from mpf._version import __version__ as mpfversion
 except ModuleNotFoundError as e:
     raise ModuleNotFoundError("Unable to find MPF. Please verify pypy or virtual environment.")
-from scriptlets.version_checker import REQUIRED_MPF_VERSION as me2version
+from custom_code.version_checker import REQUIRED_MPF_VERSION as me2version
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
@@ -46,7 +46,7 @@ def generate_tree():
             shutil.copytree(folder, os.path.join(DEST_PATH, folder))
 
     log.info("Generating code tree from project root %s...", os.getcwd())
-    for folder in ["scriptlets", "modes"]:
+    for folder in ["custom_code", "modes"]:
         if os.path.isdir(os.path.join(DEST_PATH, folder)):
             shutil.rmtree(os.path.join(DEST_PATH, folder))
         base_path = folder

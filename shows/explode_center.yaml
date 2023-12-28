@@ -1,16 +1,16 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     l_ladder_light_5: '380700'
     l_ladder_light_6: '1E0400'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_4: '2A0600'
     l_ladder_light_5: 'D21C00'
     l_ladder_light_6: 'C91B00'
     l_ladder_light_7: '030000'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_3: '100200'
@@ -19,7 +19,7 @@
     l_ladder_light_6: 'EC2000'
     l_ladder_light_7: '4E0A00'
     l_ladder_light_8: '010000'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_2: '050100'
@@ -29,7 +29,7 @@
     l_ladder_light_6: 'F52100'
     l_ladder_light_7: 'A31600'
     l_ladder_light_8: '290500'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_2: '240500'
@@ -42,7 +42,7 @@
     l_ladder_light_9: '0F0200'
     l_progress_collectorship: '010000'
     l_progress_derelictreaper: '010000'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '010000'
@@ -57,7 +57,7 @@
     l_ladder_light_9: '330700'
     l_progress_collectorship: '0D0200'
     l_progress_derelictreaper: '160300'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '100200'
@@ -73,7 +73,7 @@
     l_progress_collectorship: '270500'
     l_progress_derelictreaper: '380700'
     l_progress_normandy: '080100'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '270500'
@@ -88,7 +88,7 @@
     l_progress_collectorship: '460900'
     l_progress_derelictreaper: '5C0C00'
     l_progress_normandy: '1A0300'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '430900'
@@ -103,7 +103,7 @@
     l_progress_collectorship: '670E00'
     l_progress_derelictreaper: '831100'
     l_progress_normandy: '340700'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '600D00'
@@ -118,7 +118,7 @@
     l_progress_collectorship: '851200'
     l_progress_derelictreaper: '9F1500'
     l_progress_normandy: '4F0B00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '7B1000'
@@ -133,7 +133,7 @@
     l_progress_collectorship: '9D1500'
     l_progress_derelictreaper: 'B61800'
     l_progress_normandy: '6B0E00'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '010000'
@@ -148,7 +148,7 @@
     l_progress_collectorship: 'B01700'
     l_progress_derelictreaper: 'C61A00'
     l_progress_normandy: '871200'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '070100'
@@ -162,7 +162,7 @@
     l_progress_collectorship: 'BF1900'
     l_progress_derelictreaper: 'D01C00'
     l_progress_normandy: '9B1500'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '010000'
@@ -179,7 +179,7 @@
     l_progress_collectorship: 'CA1B00'
     l_progress_derelictreaper: 'D81D00'
     l_progress_normandy: 'AC1700'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '050100'
@@ -197,7 +197,7 @@
     l_progress_normandy: 'BD1900'
     l_right_ramp_arrow: '010000'
     l_right_return_lane: '010000'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF1B00'
@@ -213,7 +213,7 @@
     l_progress_collectorship: 'D01D00'
     l_progress_derelictreaper: 'E02000'
     l_progress_normandy: 'BD1B00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF1C00'
@@ -229,7 +229,7 @@
     l_progress_collectorship: 'D01F00'
     l_progress_derelictreaper: 'E02100'
     l_progress_normandy: 'BD1C00'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF1E01'
@@ -245,7 +245,7 @@
     l_progress_collectorship: 'D02101'
     l_progress_derelictreaper: 'E02301'
     l_progress_normandy: 'BD1E01'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0500'
@@ -262,7 +262,7 @@
     l_progress_collectorship: 'D02301'
     l_progress_derelictreaper: 'E02601'
     l_progress_normandy: 'BD2001'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2201'
@@ -278,7 +278,7 @@
     l_progress_collectorship: 'D02501'
     l_progress_derelictreaper: 'E02801'
     l_progress_normandy: 'BD2101'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2301'
@@ -294,7 +294,7 @@
     l_progress_collectorship: 'D02602'
     l_progress_derelictreaper: 'E02902'
     l_progress_normandy: 'BD2301'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2501'
@@ -310,7 +310,7 @@
     l_progress_collectorship: 'D02802'
     l_progress_derelictreaper: 'E02B02'
     l_progress_normandy: 'BD2401'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0600'
@@ -327,7 +327,7 @@
     l_progress_collectorship: 'D02A02'
     l_progress_derelictreaper: 'E02E03'
     l_progress_normandy: 'BD2702'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0C0300'
@@ -344,7 +344,7 @@
     l_progress_collectorship: 'D02C02'
     l_progress_derelictreaper: 'E02F03'
     l_progress_normandy: 'BD2802'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2A02'
@@ -360,7 +360,7 @@
     l_progress_collectorship: 'D02E02'
     l_progress_derelictreaper: 'E03103'
     l_progress_normandy: 'BD2902'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2B03'
@@ -376,7 +376,7 @@
     l_progress_collectorship: 'D02F03'
     l_progress_derelictreaper: 'E03304'
     l_progress_normandy: 'BD2B03'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF2E03'
@@ -392,7 +392,7 @@
     l_progress_collectorship: 'D03203'
     l_progress_derelictreaper: 'E03604'
     l_progress_normandy: 'BD2D03'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0700'
@@ -409,7 +409,7 @@
     l_progress_collectorship: 'D03303'
     l_progress_derelictreaper: 'E03704'
     l_progress_normandy: 'BD2F03'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0701'
@@ -426,7 +426,7 @@
     l_progress_collectorship: 'D03504'
     l_progress_derelictreaper: 'E03904'
     l_progress_normandy: 'BD3004'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF3304'
@@ -442,7 +442,7 @@
     l_progress_collectorship: 'D03704'
     l_progress_derelictreaper: 'E03C04'
     l_progress_normandy: 'BD3204'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF3404'
@@ -458,7 +458,7 @@
     l_progress_collectorship: 'D03905'
     l_progress_derelictreaper: 'E03D05'
     l_progress_normandy: 'BD3404'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0801'
@@ -475,7 +475,7 @@
     l_progress_collectorship: 'D03B05'
     l_progress_derelictreaper: 'E03F05'
     l_progress_normandy: 'BD3504'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF3704'
@@ -491,7 +491,7 @@
     l_progress_collectorship: 'D03C05'
     l_progress_derelictreaper: 'E04105'
     l_progress_normandy: 'BD3704'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '050200'
@@ -509,7 +509,7 @@
     l_progress_collectorship: 'D03F06'
     l_progress_derelictreaper: 'E04406'
     l_progress_normandy: 'BD3905'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF3B05'
@@ -525,7 +525,7 @@
     l_progress_collectorship: 'D04006'
     l_progress_derelictreaper: 'E04506'
     l_progress_normandy: 'BD3B05'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0901'
@@ -542,7 +542,7 @@
     l_progress_collectorship: 'D04206'
     l_progress_derelictreaper: 'E04706'
     l_progress_normandy: 'BD3C05'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF3E06'
@@ -558,7 +558,7 @@
     l_progress_collectorship: 'D04407'
     l_progress_derelictreaper: 'E04907'
     l_progress_normandy: 'BD3E06'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4006'
@@ -574,7 +574,7 @@
     l_progress_collectorship: 'D04607'
     l_progress_derelictreaper: 'E04C07'
     l_progress_normandy: 'BD4006'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4207'
@@ -590,7 +590,7 @@
     l_progress_collectorship: 'D04807'
     l_progress_derelictreaper: 'E04D08'
     l_progress_normandy: 'BD4107'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0A01'
@@ -607,7 +607,7 @@
     l_progress_collectorship: 'D04907'
     l_progress_derelictreaper: 'E04F08'
     l_progress_normandy: 'BD4307'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4507'
@@ -623,7 +623,7 @@
     l_progress_collectorship: 'D04B07'
     l_progress_derelictreaper: 'E05108'
     l_progress_normandy: 'BD4407'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4707'
@@ -639,7 +639,7 @@
     l_progress_collectorship: 'D04D08'
     l_progress_derelictreaper: 'E05309'
     l_progress_normandy: 'BD4607'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0C0500'
@@ -656,7 +656,7 @@
     l_progress_collectorship: 'D04F08'
     l_progress_derelictreaper: 'E05509'
     l_progress_normandy: 'BD4807'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4A07'
@@ -672,7 +672,7 @@
     l_progress_collectorship: 'D05108'
     l_progress_derelictreaper: 'E05709'
     l_progress_normandy: 'BD4907'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0C0501'
@@ -690,7 +690,7 @@
     l_progress_collectorship: 'D05309'
     l_progress_derelictreaper: 'E05A0A'
     l_progress_normandy: 'BD4C08'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4E08'
@@ -706,7 +706,7 @@
     l_progress_collectorship: 'D05509'
     l_progress_derelictreaper: 'E05B0A'
     l_progress_normandy: 'BD4D08'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF4F09'
@@ -722,7 +722,7 @@
     l_progress_collectorship: 'D0560A'
     l_progress_derelictreaper: 'E05D0B'
     l_progress_normandy: 'BD4F09'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF5109'
@@ -738,7 +738,7 @@
     l_progress_collectorship: 'D0580A'
     l_progress_derelictreaper: 'E05F0B'
     l_progress_normandy: 'BD5009'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0C01'
@@ -755,7 +755,7 @@
     l_progress_collectorship: 'D05B0A'
     l_progress_derelictreaper: 'E0610B'
     l_progress_normandy: 'BD5209'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF550A'
@@ -771,7 +771,7 @@
     l_progress_collectorship: 'D05C0B'
     l_progress_derelictreaper: 'E0630B'
     l_progress_normandy: 'BD540A'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF560A'
@@ -787,7 +787,7 @@
     l_progress_collectorship: 'D05E0B'
     l_progress_derelictreaper: 'E0650B'
     l_progress_normandy: 'BD550A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0C0601'
@@ -804,7 +804,7 @@
     l_progress_collectorship: 'D05F0B'
     l_progress_derelictreaper: 'E0670B'
     l_progress_normandy: 'BD570A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0D01'
@@ -821,7 +821,7 @@
     l_progress_collectorship: 'D0620B'
     l_progress_derelictreaper: 'E0690C'
     l_progress_normandy: 'BD590A'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF5B0A'
@@ -837,7 +837,7 @@
     l_progress_collectorship: 'D0630B'
     l_progress_derelictreaper: 'E06B0C'
     l_progress_normandy: 'BD5A0A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1B0D02'
@@ -854,7 +854,7 @@
     l_progress_collectorship: 'D0650C'
     l_progress_derelictreaper: 'E06D0D'
     l_progress_normandy: 'BD5C0B'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF5E0B'
@@ -870,7 +870,7 @@
     l_progress_collectorship: 'D0670C'
     l_progress_derelictreaper: 'E06F0D'
     l_progress_normandy: 'BD5D0B'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '050300'
@@ -890,7 +890,7 @@
     l_progress_normandy: 'BD600B'
     l_right_ramp_arrow: '010100'
     l_right_return_lane: '010100'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF620C'
@@ -906,7 +906,7 @@
     l_progress_collectorship: 'D06B0D'
     l_progress_derelictreaper: 'E0730E'
     l_progress_normandy: 'BD610C'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF640C'
@@ -922,7 +922,7 @@
     l_progress_collectorship: 'D06C0D'
     l_progress_derelictreaper: 'E0750E'
     l_progress_normandy: 'BD630C'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'BF660D'
@@ -938,7 +938,7 @@
     l_progress_collectorship: 'D06F0E'
     l_progress_derelictreaper: 'E0770F'
     l_progress_normandy: 'BD650D'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '1A0E02'
@@ -955,7 +955,7 @@
     l_progress_collectorship: 'CB6C0D'
     l_progress_derelictreaper: 'DB740E'
     l_progress_normandy: 'B9620C'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0B0601'
@@ -972,7 +972,7 @@
     l_progress_collectorship: 'C6690D'
     l_progress_derelictreaper: 'D5710E'
     l_progress_normandy: 'B4600C'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '050200'
@@ -992,7 +992,7 @@
     l_progress_normandy: 'B05D0B'
     l_right_ramp_arrow: '010000'
     l_right_return_lane: '010000'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: 'AE5C0B'
@@ -1008,7 +1008,7 @@
     l_progress_collectorship: 'BD640C'
     l_progress_derelictreaper: 'CC6C0D'
     l_progress_normandy: 'AC5B0B'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '040200'
@@ -1026,7 +1026,7 @@
     l_progress_collectorship: 'B8620C'
     l_progress_derelictreaper: 'C6690D'
     l_progress_normandy: 'A7590B'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0A0601'
@@ -1044,7 +1044,7 @@
     l_progress_collectorship: 'B35F0B'
     l_progress_derelictreaper: 'C1670C'
     l_progress_normandy: 'A3570A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '0A0501'
@@ -1061,7 +1061,7 @@
     l_progress_collectorship: 'AF5D0B'
     l_progress_derelictreaper: 'BD640C'
     l_progress_normandy: '9F540A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '160C01'
@@ -1078,7 +1078,7 @@
     l_progress_collectorship: 'AA5B0B'
     l_progress_derelictreaper: 'B8610B'
     l_progress_normandy: '9B520A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '150B01'
@@ -1095,7 +1095,7 @@
     l_progress_collectorship: 'A5580B'
     l_progress_derelictreaper: 'B25F0B'
     l_progress_normandy: '96500A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '090501'
@@ -1112,7 +1112,7 @@
     l_progress_collectorship: 'A1560B'
     l_progress_derelictreaper: 'AE5C0B'
     l_progress_normandy: '934E0A'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '140B01'
@@ -1129,7 +1129,7 @@
     l_progress_collectorship: '9D530A'
     l_progress_derelictreaper: 'A95A0B'
     l_progress_normandy: '8E4C09'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '140A01'
@@ -1146,7 +1146,7 @@
     l_progress_collectorship: '98510A'
     l_progress_derelictreaper: 'A3570B'
     l_progress_normandy: '8A4909'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '130A01'
@@ -1163,7 +1163,7 @@
     l_progress_collectorship: '944E0A'
     l_progress_derelictreaper: '9F540B'
     l_progress_normandy: '864709'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '030200'
@@ -1181,7 +1181,7 @@
     l_progress_collectorship: '8F4C09'
     l_progress_derelictreaper: '9A520A'
     l_progress_normandy: '824508'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '120A01'
@@ -1198,7 +1198,7 @@
     l_progress_collectorship: '8A4909'
     l_progress_derelictreaper: '944F0A'
     l_progress_normandy: '7D4308'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '080400'
@@ -1216,7 +1216,7 @@
     l_progress_collectorship: '864708'
     l_progress_derelictreaper: '904C09'
     l_progress_normandy: '7A4007'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '070400'
@@ -1233,7 +1233,7 @@
     l_progress_collectorship: '814408'
     l_progress_derelictreaper: '8B4A09'
     l_progress_normandy: '753E07'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '100901'
@@ -1250,7 +1250,7 @@
     l_progress_collectorship: '7C4208'
     l_progress_derelictreaper: '854709'
     l_progress_normandy: '713C07'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '100801'
@@ -1267,7 +1267,7 @@
     l_progress_collectorship: '784007'
     l_progress_derelictreaper: '814408'
     l_progress_normandy: '6D3A07'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '030100'
@@ -1285,7 +1285,7 @@
     l_progress_collectorship: '733D07'
     l_progress_derelictreaper: '7C4208'
     l_progress_normandy: '683807'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '060300'
@@ -1303,7 +1303,7 @@
     l_progress_collectorship: '6E3B07'
     l_progress_derelictreaper: '773F08'
     l_progress_normandy: '643507'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '0E0701'
@@ -1320,7 +1320,7 @@
     l_progress_collectorship: '6A3807'
     l_progress_derelictreaper: '723D07'
     l_progress_normandy: '603306'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '020100'
@@ -1338,13 +1338,13 @@
     l_progress_collectorship: '653607'
     l_progress_derelictreaper: '6D3A07'
     l_progress_normandy: '5C3106'
-    l_right_ramp_arrow: 
+    l_right_ramp_arrow:
       color: stop
       fade: 30ms
-    l_right_return_lane: 
+    l_right_return_lane:
       color: stop
       fade: 30ms
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '0C0701'
@@ -1361,7 +1361,7 @@
     l_progress_collectorship: '603306'
     l_progress_derelictreaper: '683706'
     l_progress_normandy: '572F05'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '050300'
@@ -1379,7 +1379,7 @@
     l_progress_collectorship: '5C3106'
     l_progress_derelictreaper: '633506'
     l_progress_normandy: '542C05'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '0B0601'
@@ -1396,7 +1396,7 @@
     l_progress_collectorship: '572E06'
     l_progress_derelictreaper: '5E3206'
     l_progress_normandy: '4F2A05'
-    
+
 - time: '+1'
   lights:
     l_ladder_light_0: '4C2804'
@@ -1412,7 +1412,7 @@
     l_progress_collectorship: '522C05'
     l_progress_derelictreaper: '592F05'
     l_progress_normandy: '4B2804'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '050200'
@@ -1430,7 +1430,7 @@
     l_progress_collectorship: '4E2A05'
     l_progress_derelictreaper: '542D05'
     l_progress_normandy: '472604'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '040200'
@@ -1447,7 +1447,7 @@
     l_progress_collectorship: '492705'
     l_progress_derelictreaper: '4F2A05'
     l_progress_normandy: '432404'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '090501'
@@ -1464,7 +1464,7 @@
     l_progress_collectorship: '442504'
     l_progress_derelictreaper: '4A2804'
     l_progress_normandy: '3E2104'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '080401'
@@ -1481,7 +1481,7 @@
     l_progress_collectorship: '402204'
     l_progress_derelictreaper: '452504'
     l_progress_normandy: '3B1F04'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '010100'
@@ -1500,7 +1500,7 @@
     l_progress_collectorship: '3C2003'
     l_progress_derelictreaper: '402204'
     l_progress_normandy: '361D03'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '070400'
@@ -1517,7 +1517,7 @@
     l_progress_collectorship: '371D03'
     l_progress_derelictreaper: '3B2004'
     l_progress_normandy: '321B03'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '070300'
@@ -1534,7 +1534,7 @@
     l_progress_collectorship: '331B03'
     l_progress_derelictreaper: '361D04'
     l_progress_normandy: '2E1803'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '030100'
@@ -1552,7 +1552,7 @@
     l_progress_collectorship: '2E1802'
     l_progress_derelictreaper: '311A03'
     l_progress_normandy: '291602'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '020100'
@@ -1570,7 +1570,7 @@
     l_progress_collectorship: '291602'
     l_progress_derelictreaper: '2C1803'
     l_progress_normandy: '251402'
-    
+
 - time: '+1'
   lights:
     l_dropbank_top: '010000'
@@ -1587,7 +1587,7 @@
     l_progress_collectorship: '251402'
     l_progress_derelictreaper: '281503'
     l_progress_normandy: '211202'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '040200'
@@ -1604,7 +1604,7 @@
     l_progress_collectorship: '201102'
     l_progress_derelictreaper: '221202'
     l_progress_normandy: '1D1001'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '030200'
@@ -1621,7 +1621,7 @@
     l_progress_collectorship: '1B0F02'
     l_progress_derelictreaper: '1D1002'
     l_progress_normandy: '180D01'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '010100'
@@ -1638,10 +1638,10 @@
     l_progress_collectorship: '170C01'
     l_progress_derelictreaper: '190D01'
     l_progress_normandy: '150B01'
-    
+
 - time: '+1'
   lights:
-    l_dropbank_top: 
+    l_dropbank_top:
       color: stop
       fade: 30ms
     l_hitbank_top: '020100'
@@ -1658,7 +1658,7 @@
     l_progress_collectorship: '120A01'
     l_progress_derelictreaper: '130B01'
     l_progress_normandy: '100901'
-    
+
 - time: '+1'
   lights:
     l_hitbank_bottom: '010000'
@@ -1675,7 +1675,7 @@
     l_progress_collectorship: '0D0701'
     l_progress_derelictreaper: '0E0801'
     l_progress_normandy: '0C0701'
-    
+
 - time: '+1'
   lights:
     l_hitbank_top: '010100'
@@ -1692,10 +1692,10 @@
     l_progress_collectorship: '090500'
     l_progress_derelictreaper: '0A0500'
     l_progress_normandy: '080400'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_bottom: 
+    l_hitbank_bottom:
       color: stop
       fade: 30ms
     l_hitbank_top: '010000'
@@ -1712,49 +1712,48 @@
     l_progress_collectorship: '040200'
     l_progress_derelictreaper: '040300'
     l_progress_normandy: '040200'
-    
+
 - time: '+1'
   lights:
-    l_hitbank_top: 
+    l_hitbank_top:
       color: stop
       fade: 30ms
-    l_ladder_light_0: 
+    l_ladder_light_0:
       color: stop
       fade: 30ms
-    l_ladder_light_1: 
+    l_ladder_light_1:
       color: stop
       fade: 30ms
-    l_ladder_light_2: 
+    l_ladder_light_2:
       color: stop
       fade: 30ms
-    l_ladder_light_3: 
+    l_ladder_light_3:
       color: stop
       fade: 30ms
-    l_ladder_light_4: 
+    l_ladder_light_4:
       color: stop
       fade: 30ms
-    l_ladder_light_5: 
+    l_ladder_light_5:
       color: stop
       fade: 30ms
-    l_ladder_light_6: 
+    l_ladder_light_6:
       color: stop
       fade: 30ms
-    l_ladder_light_7: 
+    l_ladder_light_7:
       color: stop
       fade: 30ms
-    l_ladder_light_8: 
+    l_ladder_light_8:
       color: stop
       fade: 30ms
-    l_ladder_light_9: 
+    l_ladder_light_9:
       color: stop
       fade: 30ms
-    l_progress_collectorship: 
+    l_progress_collectorship:
       color: stop
       fade: 30ms
-    l_progress_derelictreaper: 
+    l_progress_derelictreaper:
       color: stop
       fade: 30ms
-    l_progress_normandy: 
+    l_progress_normandy:
       color: stop
       fade: 30ms
-    

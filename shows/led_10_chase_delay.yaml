@@ -1,4 +1,4 @@
-#show_version=5
+#show_version=6
 - time: 0
   lights:
     (ledring)_light_0:
@@ -185,8 +185,3 @@
       color: (color)%10
       fade: (fade)
 - time: '+10'
-
-
-
-
-

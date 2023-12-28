@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 event_player:
   mode_attract_started:
     - start_mode_attract_carousel

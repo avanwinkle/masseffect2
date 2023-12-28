@@ -1,4 +1,4 @@
-#config_version=5
+#config_version=6
 
 #####
 # COLLECTOR SHIP: BASE MODE
@@ -298,4 +298,3 @@ sounds:
     max_queue_time: 1s
     track: sfx
     file: sfx_ss_husk_ss_husk_00300986_m.ogg
-
