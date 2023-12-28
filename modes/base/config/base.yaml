@@ -394,7 +394,15 @@ show_player:
         leds: gi_top_light_0, l_backwall_gi_light_10, l_backwall_gi_light_9
       loops: 0
       priority: 10000
-
+  # Slingshots
+  s_left_slingshot_active:
+    single_flash:
+      show_tokens:
+        leds: gi_bottom_light_1, gi_bottom_light_2
+  s_right_slingshot_active:
+    single_flash:
+      show_tokens:
+        leds: gi_bottom_light_7, gi_bottom_light_8
 
 shows:
   introshow_missions:

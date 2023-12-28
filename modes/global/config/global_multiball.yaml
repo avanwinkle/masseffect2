@@ -166,6 +166,23 @@ show_player:
   mode_type_mission_stopped:
     fmball_disabled_show:
       action: stop
+  # General nice flashers to brighten things up
+  s_hitbank_top_active:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_mass_relay_light_1, l_mass_relay_light_3, l_mass_relay_light_5, l_mass_relay_light_7
+        color: color_mball
+      loops: 3
+      speed: 2
+  s_hitbank_bottom_active:
+    color_flashing_fast:
+      show_tokens:
+        leds: l_mass_relay_light_4, l_mass_relay_light_6, l_mass_relay_light_8, l_mass_relay_light_10
+        color: color_mball
+      loops: 3
+      speed: 2
+      start_step: 2
+
 
 shows:
   fmball_lock_flash:

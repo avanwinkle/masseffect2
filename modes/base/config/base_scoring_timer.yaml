@@ -192,6 +192,10 @@ timers:
       # By default, the timer starts when the intro completes
       - event: mode_intro_complete
         action: start
+      # Delay the timer if the hold eject fails
+      - event: balldevice_bd_hold_ball_eject_failed
+        action: pause
+        value: 2
       # Modes that don't have intro shows can explicitly start.
       # Also, modes that pause/reset and resume the timer will use this
       - event: missiontimer_start

@@ -97,6 +97,7 @@ shows:
         l_right_orbit_shield_rgb: (color)
         light_dropbank_rgb: (color)
         light_hitbank_rgb: (color)
+        light_backwall_gi: (color)
     - time: '+1'
       lights:
         l_left_orbit_shield_rgb: black
@@ -106,6 +107,7 @@ shows:
         l_right_orbit_shield_rgb: black
         light_dropbank_rgb: black
         light_hitbank_rgb: black
+        light_backwall_gi: (color)
         l_null: (color)
     - time: '+1'
   flash_color_show:
