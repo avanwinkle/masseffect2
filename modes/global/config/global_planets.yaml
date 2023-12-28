@@ -48,6 +48,8 @@ variable_player:
     score: 10
   eezo_shot_hit:
     mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk // 10 * 10
+  captive_ball_hit:
+    mineral_eezo: 0.1 * machine.base_points * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_palladium_hit:
     mineral_palladium: 0.1423 * machine.base_points * (1 - current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_platinum_hit:

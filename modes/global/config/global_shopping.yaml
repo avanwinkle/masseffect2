@@ -12,6 +12,14 @@
 #####
 
 event_player:
+  # Captive ball for store advance + eezo
+  mode_global_started:
+    - enable_captive{device.ball_devices.bd_lock.balls}
+  mode_global_will_stop:
+    - disable_captive
+  balldevice_bd_lock_ball_count_changed:
+    - enable_captive{balls>0}
+    - disable_captive{balls==0}
   storetargets_lit_complete: check_research
   # Only enable if we can by something
   research_check_passed: enable_store
@@ -96,6 +104,53 @@ show_player:
       priority: 100
       loops: 2
       speed: 12
+  captive_ball_hit:
+    color_flashing_fast:
+      loops: 4
+      speed: 4
+      show_tokens:
+        leds: l_battering_ram_top
+        color: color_armor
+  storetarget1_lit_hit:
+    single_flash_color:
+      priority: 100
+      loops: 1
+      speed: 2
+      show_tokens:
+        leds: l_standup_1
+        color: white
+  storetarget2_lit_hit:
+    single_flash_color:
+      priority: 100
+      loops: 1
+      speed: 2
+      show_tokens:
+        leds: l_standup_2
+        color: white
+  storetarget3_lit_hit:
+    single_flash_color:
+      priority: 100
+      loops: 1
+      speed: 2
+      show_tokens:
+        leds: l_standup_3
+        color: white
+  storetarget4_lit_hit:
+    single_flash_color:
+      priority: 100
+      loops: 1
+      speed: 2
+      show_tokens:
+        leds: l_standup_4
+        color: white
+  storetarget5_lit_hit:
+    single_flash_color:
+      priority: 100
+      loops: 1
+      speed: 2
+      show_tokens:
+        leds: l_standup_5
+        color: white
 
 shows:
   storetargets_flash:

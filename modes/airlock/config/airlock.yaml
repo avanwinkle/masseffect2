@@ -19,8 +19,6 @@ mode_settings:
   lock_device: fmball_lock
 
 event_player:
-  mode_airlock_started:
-    - disable_captive
   ball_hold_missionselect_hold_held_ball:
     - start_mode_missionselect
     # Missionselect delays for the slide queue, but disable flippers immediately
@@ -49,7 +47,8 @@ event_player:
   # Delay the release of suicide balls
   suicide_huddle_complete: release_suicide_hold|2s
   mode_suicide_tubes_started: release_suicide_hold|2s
-  ball_hold_captive_hold_held_ball:
+  ball_hold_captive_hold_held_ball: enable_captive
+  enable_captive:
     - enable_captive_1{device.ball_devices.bd_lock.balls==1}
     - enable_captive_2{device.ball_devices.bd_lock.balls==2}
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
@@ -60,6 +59,9 @@ event_player:
   recruit_lit{squadmate=="garrus" or squadmate=="samara"}:
     - fire_hold_post{current_player.high_flow==0}
     - start_mode_missionselect{current_player.high_flow==1}
+  # Clear extraneous recruit slides from the queue
+  mode_missionselect_will_start: clear_recruit_slide_queue
+  mode_store_will_start: clear_recruit_slide_queue
 
 queue_event_player:
   # Previously relayed on the locked_ball, but still escaped. Added eject_attempt on the trough,

@@ -13,7 +13,7 @@ config:
   - base_scoring_timer.yaml
 
 event_player:
-  mode_base_started:
+  mode_base_started.20:
     - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
     - start_mode_lockhandler
     - start_mode_environment
@@ -24,7 +24,7 @@ event_player:
     # Disable this line for debug speed
     - play_intro_show{not settings.intro_mb}
   # Give skillshot a higher priority than global, to avoid race condition with planets
-  mode_base_started.20{current_player.balls_played>0 or not settings.intro_mb}:
+  mode_base_started.10{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_global{device.achievements.suicidemission.state!="started"}

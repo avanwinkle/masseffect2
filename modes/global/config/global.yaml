@@ -15,6 +15,7 @@ mode:
   start_events: start_mode_global
   stop_events: stop_mode_global, ball_will_end
   priority: 300
+  code: global.Global
 
 ##
 # These are the various modes that run as part of Global

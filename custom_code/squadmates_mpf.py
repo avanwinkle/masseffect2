@@ -226,12 +226,17 @@ class MPFSquadmateHandlers(CustomCode):
                     3 - future_mate_status, "s" if future_mate_status == 1 else "")
 
             # By default, all advance slides get 3s. However, if there are missions available,
-            # Garrus and Samara are quicker to get to the missionselect screen sooner
+            # Garrus and Samara are quicker to get to the missionselect screen sooner, and if
+            # lock or store is available, Jack and Legion are quicker.
             self.log.info("EXPIRE CHECK: mate is %s, future status is %s, available missions is %s",
                           mate, future_mate_status, player["available_missions"])
-            expire = "2s" if (
-                mate in ["garrus", "samara"] and (future_mate_status == 3 or player["available_missions"] > 0)
-            ) else "3s"
+            expire = "3s"
+            if (
+                mate in ("garrus", "samara") and (future_mate_status == 3 or player["available_missions"] > 0)
+            ) or (
+                mate in ("jack", "legion") and (self.machine.multiball_locks["fmball_lock"].enabled or self.machine.ball_holds["store_hold"].enabled)
+            ):
+                expire = "2s"
 
             self.machine.events.post("queue_slide",
                                      slide="recruit_advance_slide_QUEUE_A",
