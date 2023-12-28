@@ -42,6 +42,22 @@ slides:
         image: background_datapad_right
         z: 0
 
+sounds:
+  match_calculating:
+    file: SFXGame.584.ogg
+    track: sfx
+  match_success:
+    file: SFXGame.576.ogg
+    track: sfx
+  match_failure:
+    file: SFXGame.574.ogg
+    track: sfx
+
+sound_player:
+  mode_match_started: match_calculating
+  show_match_success: match_success
+  show_match_failure: match_failure
+
 widget_player:
   show_match_num:
     match_number:
@@ -78,13 +94,15 @@ timers:
   match_timer:
     tick_interval: 500ms
     start_running: true
-    end_value: 20
+    end_value: 9
     start_value: 0
     restart_on_complete: true
     control_events:
       - event: match_complete
         action: pause
-        value: 5
+        value: 5  # This is 5s regardless of tick interval
       - event: timer_match_timer_tick
         action: change_tick_interval
         value: 0.85
+      - event: match_finished
+        action: stop

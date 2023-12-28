@@ -29,7 +29,7 @@ class Match(MatchBase):
         self.add_mode_event_handler("timer_match_timer_tick", self._on_tick)
 
     def _on_tick(self, **kwargs):
-        if self.total_ticks == 20:
+        if self.total_ticks == 30:
             self.machine.events.post("show_match_%s" % ("success" if self.is_match else "failure"),
                                      num=self.match_number)
             self.machine.events.post("match_complete")
@@ -39,7 +39,7 @@ class Match(MatchBase):
             self.machine.events.post("match_finished")
             return
 
-        self.machine.events.post("show_match_num", num="%d0" % ((kwargs.get("ticks") or 0) % 10))
+        self.machine.events.post("show_match_num", num="%s0" % (kwargs.get("ticks") or "0"))
         self.total_ticks += 1
 
     def _set_match(self, **kwargs):
