@@ -135,7 +135,7 @@ coils:
   c_hold_post_release:
     number: 0-0
     debug: true
-    default_pulse_ms: 80  # Bumped from 55 and 60 which sometimes failed to release
+    default_pulse_ms: 95  # Bumped from 80 after building 3d sheath
     # debug: true
     pulse_events:
       - release_hold_post

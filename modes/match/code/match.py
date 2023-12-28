@@ -39,7 +39,7 @@ class Match(MatchBase):
             self.machine.events.post("match_finished")
             return
 
-        self.machine.events.post("show_match_num", num="%d0" % kwargs.get("ticks"))
+        self.machine.events.post("show_match_num", num="%d0" % ((kwargs.get("ticks") or 0) % 10))
         self.total_ticks += 1
 
     def _set_match(self, **kwargs):

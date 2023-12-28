@@ -5,8 +5,9 @@ event_player:
     - start_mode_mainmenu
     - start_suicide_intro|320ms
     - start_suicide_main|29245ms
-    - start_button_solid{machine.free_play}
-    - start_button_flash{machine.credits_whole_num>0 and not machine.free_play}
+    # Add a delay on the start button
+    - start_button_solid{machine.free_play}|1s
+    - start_button_flash{machine.credits_whole_num>0 and not machine.free_play}|1s
   machine_var_credits_whole_num:
     - start_button_flash{value>0}
 

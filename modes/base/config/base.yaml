@@ -403,6 +403,19 @@ show_player:
     single_flash:
       show_tokens:
         leds: gi_bottom_light_7, gi_bottom_light_8
+  # Dropbank
+  s_dropbank_bottom_active:
+    single_flash:
+      show_tokens:
+        leds: gi_bottom_light_0
+  s_dropbank_middle_active:
+    single_flash:
+      show_tokens:
+        leds: gi_bottom_light_0, gi_middle_light_4
+  s_dropbank_top_active:
+    single_flash:
+      show_tokens:
+        leds: gi_middle_light_4
 
 shows:
   introshow_missions:

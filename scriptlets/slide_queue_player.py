@@ -107,7 +107,7 @@ class SlideQueuePlayer(CustomCode):
                 slide_kwargs["portrait_name"] = portrait_widget_name
             self.machine.log.debug(
                 "Playing slide %s (count %s) with expire %s and timeout %s",
-                (slide_name, self._play_count, expire, timeout)
+                slide_name, self._play_count, expire, timeout
             )
 
             self.machine.slide_player.play(

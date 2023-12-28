@@ -76,12 +76,15 @@ widgets:
 
 timers:
   match_timer:
-    tick_interval: 200ms
+    tick_interval: 500ms
     start_running: true
-    end_value: 10
+    end_value: 20
     start_value: 0
     restart_on_complete: true
     control_events:
       - event: match_complete
         action: pause
         value: 5
+      - event: timer_match_timer_tick
+        action: change_tick_interval
+        value: 0.85
