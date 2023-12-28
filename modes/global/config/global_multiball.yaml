@@ -18,7 +18,7 @@ event_player:
   fmball_lightshot_hit:
     - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
     - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
-  fmball_lightshot_lit_hit{not device.multiball_locks.fmball_lock.enabled}:
+  fmball_lightshot_unlit_hit{not device.multiball_locks.fmball_lock.enabled}:
     # If overlord has not been played, a single hit will light. (Arrival always takes both)
     # We know a mode has been played if it is "stopped" rather than "enabled"
     - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled"}
@@ -44,6 +44,7 @@ event_player:
       slide: fmball_lock_lit_slide
       portrait: overlord_light_(locked_balls)
       expire: 6s
+      clear_recruits: true
       mball_name: overlord
       ball:
         # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?
@@ -55,6 +56,7 @@ event_player:
       portrait: arrival_light_(locked_balls)
       mball_name: arrival
       expire: 6633ms
+      clear_recruits: true
       ball:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
@@ -65,6 +67,7 @@ event_player:
       # slide_queue_player doesn't support substitutions, 'locked_balls' is an exception
       portrait: overlord_lock_(locked_balls)
       expire: 8s
+      clear_recruits: true
       mball_name: overlord
       ball:
         value: device.multiball_locks.fmball_lock.locked_balls
@@ -77,6 +80,7 @@ event_player:
       portrait: arrival_lock_1
       mball_name: arrival
       expire: 5600ms
+      clear_recruits: true
       ball: 1
     queue_slide{device.multiball_locks.fmball_lock.locked_balls==2}:
       priority: 5
@@ -84,6 +88,7 @@ event_player:
       portrait: arrival_lock_2
       mball_name: arrival
       expire: 10s
+      clear_recruits: true
       ball: 2
 
 shot_groups:
@@ -182,7 +187,6 @@ show_player:
       loops: 3
       speed: 2
       start_step: 2
-
 
 shows:
   fmball_lock_flash:

@@ -27,12 +27,23 @@ class SlideQueuePlayer(CustomCode):
     def on_load(self):
         """Load: create a queue and create event handlers for adding slides."""
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
+        self.machine.events.add_handler("clear_recruit_slide_queue", self._clear_recruit_queue)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
         self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
         self.info_log("Slide Queue Player Ready!")
 
+    def _clear_recruit_queue(self, **kwargs):
+        del kwargs
+        self.info_log("Clearing recruit slides from queue: %s", self._queue)
+        self._queue[:] = [s for s in self._queue if not s[0].startswith("recruit_advance")]
+        self.info_log("All recruit slides cleared from queue? %s", self._queue)
+
     def _add_slide_to_queue(self, **kwargs):
         slide_name = kwargs.pop("slide")
+
+        # Some slides may want to accelerate themselves by removing queued recruits
+        if kwargs.get("clear_recruits"):
+            self._clear_recruit_queue()
 
         # Check to see if the last item in the queue matches this one
         # If so, select an alternate version of the slide to avoid a

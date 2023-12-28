@@ -27,6 +27,10 @@ mode_settings:
   previous_item_events: s_flipper_left_inactive
   block_events: flipper_cancel
 
+event_player:
+  # Speed things up by removing recruit slides
+  mode_store_started: clear_recruit_slide_queue
+
 queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt:
     post: store_blocking_trough_eject

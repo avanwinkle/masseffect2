@@ -38,12 +38,14 @@ event_player:
       mission: Capture Vasir
       mname: vasir
       expire: 5s
+      clear_recruits: true
       portrait: shadowbroker_vasir_light
     queue_slide{current_player.sbhold_enabled==0 and current_player.state_machine_shadowbroker=="boss"}:
       slide: shadowbroker_ready_slide
       mission: Final Confrontation
       mname: shadowbroker
       expire: 5s
+      clear_recruits: true
       portrait: shadowbroker_boss_light
 
 # Use a player variable to mock the hold state of the ball hold

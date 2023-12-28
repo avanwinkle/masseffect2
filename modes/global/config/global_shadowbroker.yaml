@@ -24,6 +24,7 @@ event_player:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_dossier_start
       expire: 5s
+      clear_recruits: true
       count:
         value: device.counters.sbdrops_counter.value
         type: int
@@ -32,6 +33,7 @@ event_player:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_dossier_start
       expire: 6600ms # Make them all 5s?
+      clear_recruits: true
       count:
         value: device.counters.sbdrops_counter.value
         type: int
@@ -39,6 +41,7 @@ event_player:
       priority: 1
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_2
+      clear_recruits: true
       count:
         value: device.counters.sbdrops_counter.value
         type: int
@@ -47,6 +50,7 @@ event_player:
       priority: 3
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_3
+      clear_recruits: true
       count: 8
 
 variable_player:

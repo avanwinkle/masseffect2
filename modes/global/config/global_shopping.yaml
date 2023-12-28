@@ -24,6 +24,7 @@ event_player:
     queue_slide:
       slide: store_available_slide
       portrait: upgrades
+      clear_recruits: true
 
 variable_player:
   storetargets_hit:
