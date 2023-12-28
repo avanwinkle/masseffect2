@@ -29,7 +29,7 @@
 mode:
   start_events: start_mode_overlord
   stop_events: stop_mode_overlord, stop_wizards
-  events_when_started: mode_type_wizard_started, fmball_started, mode_intro_started
+  events_when_started: mode_type_wizard_started, fmball_started, mode_intro_started, start_mode_frenzy
   events_when_stopped: mode_type_wizard_stopped, fmball_stopped
   priority: 1000
 
@@ -117,11 +117,11 @@ variable_player:
   hackshots_lit_hit:
     score:
       action: add
-      int: 500 * current_player.temp_multiplier
+      int: 1000 * current_player.temp_multiplier
   hackshots_frozen_hit:
     score:
       action: add
-      int: 100 * current_player.temp_multiplier
+      int: 500 * current_player.temp_multiplier
   jackpotshot_hit:
     # Every jackpot adds 1X the value of the next round's shots
     temp_multiplier:
@@ -130,6 +130,11 @@ variable_player:
   # Queue the levelup for after the mode ends
   achievement_overlord_state_completed:
     levelup_pending: 1
+  # Every hit is worth something
+  frenzy_hit:
+    score:
+      action: add
+      int: 50 * current_player.temp_multiplier
 
 light_player:
   play_music_1:
@@ -238,6 +243,13 @@ show_player:
     ball_save_show:
       action: play
       speed: 3
+    led_14_chase:
+      action: play
+      speed: 10
+      show_tokens:
+        ledring: l_backwall_gi
+        color: color_overlord_orange
+        fade: 100ms
   multiball_overlord_multiball_shoot_again_ended:
     ball_save_show:
       action: stop
@@ -264,6 +276,55 @@ show_player:
   mode_overlord_will_stop:
     overlord_hackshots_show:
       action: stop
+  # Basic flashes to keep things interesting
+  s_target1_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_standup_1
+        color: color_overlord
+  s_target2_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_standup_2
+        color: color_overlord
+  s_target3_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_standup_3
+        color: color_overlord
+  s_target4_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_standup_4
+        color: color_overlord
+  s_target5_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_standup_5
+        color: color_overlord
+  s_dropbank_bottom_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_dropbank_bottom
+        color: color_overlord
+  s_dropbank_middle_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_dropbank_middle
+        color: color_overlord
+  s_dropbank_top_active:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: l_dropbank_top
+        color: color_overlord
 
 shows:
   overlord_cineanim:
