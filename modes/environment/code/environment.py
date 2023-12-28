@@ -143,7 +143,7 @@ class EnvShot():
 
     def get_targets(self):
         """Return all shots tagged as environment shots for this EnvShot."""
-        self.machine.log.info("Getting shots for EnvShot '%s'", self.name)
+        self.log.debug("Getting shots for EnvShot '%s'", self.name)
         return self.machine.device_manager.collections["shots"].items_tagged("envshot_{}".format(self.name))
 
     @property
@@ -164,7 +164,7 @@ class OutlaneShot(EnvShot):
 
     def get_targets(self):
         """Get outlane targets based on medigel early-saves."""
-        self.machine.log.info("Getting ball saves for OutlaneShot '%s'", self.name)
+        self.log.debug("Getting ball saves for OutlaneShot '%s'", self.name)
         # Targets include any ball_save being active OR the medigel shot being active
         outlane_targets = [
             self.machine.device_manager.collections["shots"]["medigel_left_shot"],

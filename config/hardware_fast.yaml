@@ -54,7 +54,7 @@ ball_devices:
     retries_before_increasing_pulse: 1
     max_eject_attempts: 5
     ball_switches: s_missionselect
-    eject_timeouts: 2s
+    eject_timeouts: 1s  # dropped from 2s
     ball_search_order: 10
 
 named_colors:

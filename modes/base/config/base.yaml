@@ -249,6 +249,10 @@ variable_player:
     levelup_pending:
       action: set
       int: 0
+  levelup_complete_stopped:
+    levelup_pending:
+      action: set
+      int: 0
   play_intro_show:
     intro_played: 1
   # Store a variable that is true while a mode intro is running, so that we can cancel shows
@@ -592,6 +596,8 @@ sounds:
     markers:
       - time: 8s
         events: levelup_complete
+    # In case some other mode (e.g. research) stops the music, also mark levelup complete
+    events_when_stopped: levelup_complete_stopped
   illusive_already_compiled_dossiers_four:
     file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
     track: voice

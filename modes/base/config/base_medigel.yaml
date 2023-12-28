@@ -14,13 +14,16 @@ event_player:
   ball_save_default_saving_ball: play_medigel_slide
   ball_save_recruitsave_saving_ball: play_medigel_slide
   ball_save_medigel_save_saving_ball{balls>0}: play_medigel_slide
-  levelup: check_double_medigel
+  # Levelup awards a medigel if the player doesn't already have one.
+  # Research upgrades are the only way to get double medigel.
+  levelup: check_double_medigel{not current_player.medigel}
 
 shots:
   # This shot lights when medigel is available
   medigel_left_shot:
     switch: s_outlane_left
     profile: medigel_profile
+    # Enabling the shot group will auto-advance the left shot to be lit
     advance_events: player_shot_medigel_left_shot_enabled, double_medigel_success
     show_tokens:
       leds: l_left_medigel
@@ -95,24 +98,6 @@ variable_player:
     medigel:
       action: set
       int: 0
-
-show_player:
-  player_medigel.1{value>0}: medigel_show
-  player_medigel.2{value==0}:
-    medigel_show:
-      action: stop
-  ball_will_end:
-    medigel_show:
-      action: stop
-  cancel_medigel:
-    medigel_show:
-      action: stop
-
-shows:
-  medigel_show:
-    - lights:
-        l_left_medigel: on
-        l_right_medigel: on
 
 slide_player:
   play_medigel_slide:
