@@ -16,9 +16,24 @@ modes:
   - airlock
 
 fast:
-  ports: autodetect, rgb
   # debug: true
-  ignore_rgb_crash: true
+  net:
+    controller: nano
+    io_loop:
+      "0":
+        model: FP-I/O-0804
+        order: 1
+      "1":
+        model: FP-I/O-3208
+        order: 2
+      "2":
+        model: FP-I/O-0804
+        order: 3
+      "3":
+        model: FP-I/O-0804
+        order: 4
+  rgb:
+    ignore_reboot: true
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
