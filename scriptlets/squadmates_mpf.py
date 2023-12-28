@@ -88,7 +88,8 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.add_handler("resume_mission", self._on_missionselect)
         # Create a listener for the field mode to start and stop
         self.machine.events.add_handler("mode_field_started", self._handle_field_started)
-        self.machine.events.add_handler("mode_field_stopped", self._handle_field_stopped)
+        # Base mode stopped event happens before field stopped, so use field *will* stop
+        self.machine.events.add_handler("mode_field_will_stop", self._handle_field_stopped)
         # Create a listener for a ball to start and end
         self.machine.events.add_handler("mode_base_started", self._initialize_icons)
         self.machine.events.add_handler("mode_base_stopped", self._handle_end)
@@ -372,9 +373,12 @@ class MPFSquadmateHandlers(CustomCode):
 
         lit_count = len(mate_lists["lit"])
         complete_count = len(mate_lists["complete"]) - 2  # Discount Jacob and Miranda
+        self.log.debug("Generated squadmate shows: %s", mate_lists)
+
         for status, mates in mate_lists.items():
             showname = "recruits_{}_show".format(status)
             if mates:
+                self.log.debug("Found mates for show %s: %s", showname, mates)
                 config = self.machine.show_controller.create_show_config(
                     name=showname,
                     show_tokens={
@@ -400,6 +404,7 @@ class MPFSquadmateHandlers(CustomCode):
 
             # If there are no more mates, stop the show
             elif self._shows.get(showname):
+                self.log.debug("No mates found for show %s, stopping existing show.", showname)
                 self._shows[showname].stop()
                 self._shows[showname] = None
 
