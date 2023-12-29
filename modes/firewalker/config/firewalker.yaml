@@ -190,6 +190,27 @@ show_player:
       show_tokens:
         color: color_shadowbroker
         brightness: 100
+  firewalker_shots_red_hit:
+    single_flash_color:
+      loops: 0
+      priority: 100
+      show_tokens:
+        leds: light_backwall_gi
+        color: color_door_red
+  firewalker_shots_orange_hit:
+    single_flash_color:
+      loops: 0
+      priority: 100
+      show_tokens:
+        leds: light_backwall_gi
+        color: color_door_orange
+  firewalker_shots_green_hit:
+    single_flash_color:
+      loops: 0
+      priority: 100
+      show_tokens:
+        leds: light_backwall_gi
+        color: color_door_green
 
 shows:
   firewalker_bank_show:
@@ -290,6 +311,70 @@ sounds:
     start_at: 1s
     fade_in: 500ms
     fade_out: 2s
+  # Hammerhead callouts
+  hmd_intro_location_unstable:
+    file: DLC_UNC_Pack01_Int.181.ogg
+    track: voice
+  hmd_intro_find_safer_ground:
+    file: DLC_UNC_Pack01_Int.182.ogg
+    track: voice
+  hmd_intro_initiating_emergency_reset:
+    file: DLC_UNC_Pack01_Int.183.ogg
+    track: voice
+  hmd_intro_temperatures_not_recommended:
+    file: DLC_UNC_Pack01_Int.184.ogg
+    track: voice
+  hmd_warning_temperatures_degrees:
+    file: DLC_UNC_Pack01_Int.185.ogg
+    track: voice
+  hmd_warning_hull_integrity:
+    file: DLC_UNC_Pack01_Int.186.ogg
+    track: voice
+  hmd_warning_lava:
+    file: DLC_UNC_Pack01_Int.187.ogg
+    track: voice
+  hmd_warning_hull_temperature:
+    file: DLC_UNC_Pack01_Int.188.ogg
+    track: voice
+  hmd_warning_conditions_deteriorating:
+    file: DLC_UNC_Pack01_Int.189.ogg
+    track: voice
+  hmd_warning_hull_damage:
+    file: DLC_UNC_Pack01_Int.520.ogg
+    track: voice
+  hmd_that_direction_is_not_advisable:
+    file: DLC_UNC_Pack01_Int.515.ogg
+    track: voice
+  hmd_proximity_alert_hostiles_detected:
+    file: DLC_UNC_Pack01_Int.516.ogg
+    track: voice
+  hmd_threat_detection:
+    file: DLC_UNC_Pack01_Int.517.ogg
+    track: voice
+  hmd_hostile_activity_detected:
+    file: DLC_UNC_Pack01_Int.519.ogg
+    track: voice
+  hmd_1_remains:
+    file: DLC_UNC_Pack01_Int.503.ogg
+    track: voice
+  hmd_2_remains:
+    file: DLC_UNC_Pack01_Int.492.ogg
+    track: voice
+  hmd_3_remains:
+    file: DLC_UNC_Pack01_Int.504.ogg
+    track: voice
+  hmd_4_remains:
+    file: DLC_UNC_Pack01_Int.505.ogg
+    track: voice
+  hmd_5_remains:
+    file: DLC_UNC_Pack01_Int.506.ogg
+    track: voice
+  hmd_all_data_packets_recovered:
+    file: DLC_UNC_Pack01_Int.502.ogg
+    track: voice
+  hmd_humanity_one_wildlife_zero:
+    file: DLC_UNC_Pack01_Int.495.ogg
+    track: voice
 
 widget_player:
   timer_fwtimer_tick:

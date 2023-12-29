@@ -318,7 +318,7 @@ sounds:
     fade_out: 1s
     mode_end_action: stop
   galaxy_zoom_in:
-    file: SFXGame.586.ogg
+    file: SFXGame.566.ogg
     track: sfx
   galaxy_zoom_out:
     file: SFXGame.587.ogg
