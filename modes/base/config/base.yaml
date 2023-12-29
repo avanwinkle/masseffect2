@@ -286,10 +286,6 @@ shots:
     switch: s_right_orbit
     enable_events: enable_orbitswitches, enable_rightorbit
     disable_events: disable_orbitswitches
-  sh_spinner:
-    switch: s_spinner
-    enable_events: enable_orbitswitches
-    disable_events: disable_orbitswitches
   sh_kickback:
     switch: s_kickback
   sh_hitbank_top:
@@ -326,7 +322,7 @@ shots:
 
 sequence_shots:
   left_to_right_orbit:
-    switch_sequence: s_spinner, s_left_orbit, s_right_orbit
+    switch_sequence: s_left_orbit, s_right_orbit
     sequence_timeout: 800ms # How long to finish the orbit?
                             # How fast to fall down left orbit and get shot up?
 

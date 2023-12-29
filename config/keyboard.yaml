@@ -95,8 +95,6 @@ keyboard:
     toggle: true
   p:
     event: start_mode_derelictreaper
-  s:
-    switch: s_spinner
   k:
     event: pulse_plunger
   space:

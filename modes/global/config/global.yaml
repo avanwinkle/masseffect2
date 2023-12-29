@@ -59,7 +59,3 @@ event_player:
   # Restart field after shopping unless we're going into a multiball
   mode_store_will_stop{device.multiball_locks.fmball_lock.locked_balls<3}:
     - start_mode_field
-
-flasher_player:
-  s_spinner_active:
-    l_flash_left_orbit: 50ms

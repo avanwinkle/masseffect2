@@ -151,8 +151,8 @@ switches:
     number: 8-7 # Restored 10-14 # 8-7 Moved
   s_battering_ram:
     number: 10-4
-  s_spinner:
-    number: 10-7
+  # s_spinner:
+  #   number: 10-7
   s_left_orbit:
     number: 10-10
     ignore_window_ms: 1100
