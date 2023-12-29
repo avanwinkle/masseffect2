@@ -57,7 +57,6 @@ counters:
     reset_on_complete: false
     disable_on_complete: false
 
-
 show_player:
   mode_recruitgarrus_started:
     gi_show:
@@ -145,15 +144,33 @@ sound_pools:
     track: voice
     sounds: garrus_give_these_bastards_everything, garrus_get_those_doors_closed, garrus_you_deal_with_shutters
     max_queue_time: 1s
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   garrus_taking_damage:
     type: random_force_all
     track: voice
     sounds: garrus_taking_too_much_damage, garrus_i_need_help_with_this_guy, garrus_theyve_gotten_through, garrus_taking_damage_1, garrus_taking_damage_2, garrus_taking_damage_3
     max_queue_time: 0
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   boss_sound:
     sounds: boss_finish_her, boss_now_youre_mine_archangel, boss_i_told_you_id_finish_you
     track: voice
     max_queue_time: 500ms
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 10ms
+      release: 10ms
+      release_point: 0
 
 sounds:
   music_recruit_garrus:

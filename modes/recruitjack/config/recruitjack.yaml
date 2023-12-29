@@ -22,6 +22,7 @@ mode:
 event_player:
   mode_recruitjack_started:
     set_environment:
+    enable_jack_shots:
     show_recruit_instructions:
       squadmate: jack
       portrait: recruitjack
@@ -42,7 +43,6 @@ event_player:
       starting_shots: none
       shot_profile: lane_shot_manual_firstshot_inverted
   # Advance different shots based on which round we're on
-  mode_intro_complete: enable_jack_shots
   enable_jack_shots:
     advance_mission_shots{device.counters.jack_rounds_counter.value==3}:
       shots: left_orbit, kickback, right_orbit
