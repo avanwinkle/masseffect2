@@ -67,6 +67,11 @@ timers:
         action: pause
         value: 20
 
+light_player:
+  missing_switch_warning:
+    l_bbsquad_kasumi:
+      color: bb_squad_color
+
 slide_player:
   mode_attract_carousel_started:
     attract_slide_main:
