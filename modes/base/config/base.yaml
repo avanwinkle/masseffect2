@@ -245,6 +245,10 @@ variable_player:
     mode_intro_running:
       action: set
       int: 0
+    # Reset the random ball save perk each ball
+    random_ball_saved:
+      action: set
+      int: 0
   levelup_complete:
     levelup_pending:
       action: set

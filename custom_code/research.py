@@ -33,15 +33,16 @@ UPGRADES = {
         "product": "Ablative VI",
         "image": "armor_ablative",
     },
-    "random_ball_save": {
-        "name": "Redundant Field Generator",
-        "description": "{}% chance of ball save\non drain (once per ball)",
-        "amount": 0.05,
-        "mineral": "palladium",
-        "cost": 60000,
-        "product": "Burst Regeneration",
-        "image": "armor_burstshield",
-    },
+    # TODO: Disabled until I figure out how to manage a ball save after drain
+    # "random_ball_save": {
+    #     "name": "Redundant Field Generator",
+    #     "description": "{}% chance of ball save\non drain (once per ball)",
+    #     "amount": 0.05,
+    #     "mineral": "palladium",
+    #     "cost": 60000,
+    #     "product": "Burst Regeneration",
+    #     "image": "armor_burstshield",
+    # },
     "award_medigel": {
         "name": "Medigel Capacity",
         "description": "Earn medigel {}% faster\nwhen completing\nreputation lanes",
@@ -198,7 +199,12 @@ class Research(CustomCode):
         # If we drain during a ball search or tilt, there may not be a player
         if not self.machine.game or not self.machine.game.player:
             return
-        chance = self.machine.game.player["research_random_ball_save_perk"]
+        player = self.machine.game.player
+        # If the player already has a random ball save, or does not have the perk, do nothing
+        if player["random_ball_saved"] or not player["research_random_ball_save_perk"]:
+            return
+
+        chance = player["research_random_ball_save_perk"]
         self.log.info("Checking random ball save with {}% chance".format(chance * 100))
         # Don't save if there are multiple balls in play (or none draining)
         if balls <= 0 or self.machine.game.balls_in_play > 1:
@@ -209,6 +215,8 @@ class Research(CustomCode):
             self.machine.ball_devices["playfield"].add_ball(balls=1, player_controlled=False)
             # This is a relay event. We can change 'balls' to prevent drain
             return {"balls": balls - 1}
+            # Store that we've saved on this ball
+            player["random_ball_saved"] = 1
 
     def _on_purchase(self, **kwargs):
         if kwargs["selection"] == "nothing":
