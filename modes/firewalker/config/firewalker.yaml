@@ -58,6 +58,14 @@ event_player:
       expire: 5s
 
 variable_player:
+  # Score some points
+  # TODO: Use a sequence logic block to limit each hit to one score
+  firewalker_shots_red_hit:
+    score: 500
+  firewalker_shots_orange_hit:
+    score: 2000
+  firewalker_shots_green_hit:
+    score: 5000
   # After a mission, mark the shot as complete or reset it
   firewalker_mission_complete.10:
     fwps_lo{current_player.fwps_lo==1}:

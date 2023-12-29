@@ -57,3 +57,22 @@ flasher_player:
     l_flash_right_orbit: 50ms
   bypass_lock_release_pulse:
     l_flash_sword_lock: 150ms
+
+# Generic points
+variable_player:
+  envshot_standuptarget_hit:
+    score: 20
+  envshot_dropbank_hit:
+    score: 50
+  envshot_hitbank_hit:
+    score: 50
+  envshot_left_orbit_hit:
+    score: 100
+  envshot_right_orbit_hit:
+    score: 100
+  envshot_left_ramp_hit:
+    score: 100
+  envshot_kickback_hit:
+    score: 100
+  envshot_tenpoints_hit:
+    score: 10
