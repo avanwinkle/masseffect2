@@ -37,9 +37,11 @@ mode:
     - mode_type_wizard_started
     - mode_intro_started
     - enable_captive
+    - enable_captive_hold
   events_when_stopped:
     - mode_type_wizard_stopped
     - disable_captive
+    - disable_captive_hold
   priority: 500
 
 event_player:
@@ -73,7 +75,7 @@ event_player:
     - stop_mode_frenzy
   enable_reaperfrenzy.1:
     - start_mode_frenzy
-    - release_captive
+    - release_captive_hold
   enable_reaperfrenzy.2:
     set_reaper_instructions:
       instructions_main: Eliminate the Husks

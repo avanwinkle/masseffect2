@@ -148,9 +148,9 @@ ball_holds:
     balls_to_hold: 1
     debug: true
     hold_devices: bd_lock
-    enable_events: enable_captive
-    disable_events: disable_captive
-    release_all_events: release_captive, disable_captive
+    enable_events: enable_captive_hold
+    disable_events: disable_captive_hold
+    release_all_events: release_captive_hold, disable_captive_hold
   sb_hold:
     balls_to_hold: 1
     debug: true

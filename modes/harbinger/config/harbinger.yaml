@@ -39,12 +39,14 @@ event_player:
   timer_harbinger_countdown_complete: await_captive
   await_captive:
     - enable_captive
-    - release_captive
+    - enable_captive_hold
+    - release_captive_hold
     - enable_harbinger_lockshot
   disable_harbinger:
-    - release_captive
     - disable_captive
-  multiball_collectorship_multiball_ended: release_captive
+    - disable_captive_hold
+    - release_captive_hold
+  multiball_collectorship_multiball_ended: release_captive_hold
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
