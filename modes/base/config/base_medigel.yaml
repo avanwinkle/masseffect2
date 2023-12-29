@@ -47,6 +47,7 @@ shot_groups:
       - s_flipper_right_active
     enable_events:
       - levelup
+      - award_medigel_success
       - ball_save_recruitsave_disabled{current_player.medigel>0}
       - ball_save_default_disabled{current_player.medigel>0}
       - ball_save_sbchase_save_disabled{current_player.medigel>0}
@@ -98,6 +99,8 @@ variable_player:
     medigel:
       action: set
       int: 0
+  award_medigel_success:
+    medigel: 1
 
 slide_player:
   play_medigel_slide:

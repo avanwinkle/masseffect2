@@ -350,13 +350,13 @@ sounds:
     track: music
     mode_end_action: stop
     start_at: 3s
-    fade_in: 500ms
+    fade_in: 200ms
     fade_out: 1.5s
   derelictreaper_music_tension:
     file: mus_legion_acq_bossbattle_low.ogg
     track: music
     start_at: 3s
-    fade_in: 500ms
+    fade_in: 200ms
     fade_out: 500ms
     mode_end_action: stop
   derelictreaper_close_stinger:

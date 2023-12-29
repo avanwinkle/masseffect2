@@ -36,7 +36,7 @@ UPGRADES = {
     "random_ball_save": {
         "name": "Redundant Field Generator",
         "description": "{}% chance of ball save\non drain (once per ball)",
-        "amount": 0.03,
+        "amount": 0.05,
         "mineral": "palladium",
         "cost": 60000,
         "product": "Burst Regeneration",
@@ -45,7 +45,7 @@ UPGRADES = {
     "award_medigel": {
         "name": "Medigel Capacity",
         "description": "Earn medigel {}% faster\nwhen completing\nreputation lanes",
-        "amount": 0.05,
+        "amount": 0.1,
         "mineral": "platinum",
         "cost": 25000,
         "product": "Microscanner",
@@ -178,8 +178,14 @@ class Research(CustomCode):
         self.machine.events.post("research_check_{}".format("passed" if success else "failed"))
 
     def _check_award_medigel(self, **kwargs):
-        chance = self.machine.game.player["research_award_medigel_perk"] + \
-            self.machine.game.player["reputation"]
+        # Player's "reputation" is an int grown by lane completions and N7 assignments.
+        # Reputation is a 1% chance for award medigel, multiplied by the perk
+        chance = (self.machine.game.player["reputation"] *
+            (1 + self.machine.game.player["research_award_medigel_perk"])) / 100
+        self.info_log("Checking award medigel with %s reputation and %s perk, total chance is %s",
+                      self.machine.game.player["reputation"],
+                      self.machine.game.player["research_award_medigel_perk"],
+                      chance)
         if chance > 0 and random.random() < chance:
             self.machine.events.post("award_medigel_success")
 

@@ -36,6 +36,12 @@ queue_relay_player:
     post: store_blocking_trough_eject
     wait_for: store_item_selected
 
+light_player:
+  # Upgrades are in global and need to be overridden
+  mode_store_started:
+    light_upgrades:
+      color: black
+
 slide_player:
   mode_store_started:
     store_intro_slide:

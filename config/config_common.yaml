@@ -408,15 +408,15 @@ player_vars:
     value_type: float
   research_random_ball_save_perk:
     # Ball save random chance equals the perk as percentage
-    initial_value: 0
+    initial_value: 0.0
     value_type: float
   research_award_medigel_perk:
     # Random medigel award chance equals the perk as percentage
-    initial_value: 0
+    initial_value: 0.0
     value_type: float
   research_double_medigel_perk:
     # Random double medigel chance equals the perk as percentage
-    initial_value: 0
+    initial_value: 0.0
     value_type: float
   research_power_tick_interval_perk:
     # Timer tick value is 1s, increases with each perk
