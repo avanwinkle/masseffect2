@@ -436,9 +436,6 @@ class MPFSquadmateHandlers(CustomCode):
         if player.achievements["collectorship"][0] == "enabled":
             blinken.add_color("color_collectors", key="color_collectors", priority=0)
             return
-        if player.achievements["normandyattack"][0] == "enabled":
-            blinken.add_color("white", key="white", priority=0)
-            return
         # Skippable wizard modes
         if player.achievements["derelictreaper"][0] == "enabled":
             blinken.add_color("color_husk", key="color_husk", priority=0)

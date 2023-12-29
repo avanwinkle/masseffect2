@@ -91,6 +91,7 @@ event_player:
     - enable_reapercore
   logicblock_reapercore_counter_hit{count>0}:
     - enable_reaperfrenzy
+    - missiontimer_stop
   # Hitting the jackpot completes the achievement and awards a levelup
   logicblock_reapercore_counter_complete:
     - derelictreaper_complete
@@ -100,8 +101,8 @@ event_player:
   derelictreaper_complete:
     levelup:
       mission_name: Reaper IFF Acquired
-  # If the multiball ends and a ball is captive, release it
-  multiball_reapercoremb_ended.1{device.ball_holds.captive_hold.balls_held>0}: release_captive
+  # If the multiball ends and a ball is captive, release it and continue the mode
+  multiball_reapercoremb_ended.1{device.ball_holds.captive_hold.balls_held>0}: release_captive_hold
   # If the multiball ends with no captive ball and we've already destroyed the core, end the mode
   multiball_reapercoremb_ended.2{device.achievements.derelictreaper.state=="completed" and device.ball_holds.captive_hold.balls_held==0}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
@@ -145,6 +146,10 @@ variable_player:
     temp_multiplier:
       action: add
       float: 0.5
+  frenzy_hit:
+    score:
+      action: add
+      int: 100 * current_player.temp_multiplier
 
 shots:
   reaper_lock_shot:
@@ -158,6 +163,15 @@ shots:
       - enable_reapercore
     disable_events:
       - reaper_captive_shot_hit
+
+light_player:
+  mode_derelictreaper_started:
+    light_backwall_ambient: color_husk
+  enable_reaperfrenzy:
+    gi: color_husk
+  mode_derelictreaper_will_stop:
+    light_backwall_ambient: off
+    gi: off
 
 show_player:
   mode_derelictreaper_started:
@@ -183,7 +197,7 @@ show_player:
   ball_hold_captive_hold_held_ball:
     color_flashing_default:
       action: stop
-  enable_reapercore:
+  logicblock_reaperhusk_counter_complete:
     pulse_playfield_smooth:
       action: stop
     # For the captive ball
@@ -200,6 +214,12 @@ show_player:
       show_tokens:
         leds: light_pf
         color: AAAAAA
+  frenzy_hit:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: light_backwall_gi
+        color: color_husk
 
 shows:
   derelictreaper_cineanim:
@@ -348,33 +368,93 @@ sounds:
   squadmate_garrus_destroy_core:
     file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_grunt_destroy_core:
     file: en_us_hench_grunt_rprgta_reminder_h_00185233_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_jack_destroy_core:
     file: en_us_hench_convict_rprgta_reminder_h_00185232_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_kasumi_destroy_core:
     file: en_us_hench_thief_rprgta_reminder_h_00185230_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_miranda_destroy_core:
     file: en_us_hench_vixen_rprgta_reminder_h_00185234_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_mordin_destroy_core:
     file: en_us_hench_professor_rprgta_reminder_h_00185228_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_samara_destroy_core:
     file: en_us_hench_mystic_rprgta_reminder_h_00185235_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_tali_destroy_core:
     file: en_us_hench_tali_rprgta_reminder_h_00185229_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_thane_destroy_core:
     file: en_us_hench_assassin_rprgta_reminder_h_00185231_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   squadmate_zaeed_destroy_core:
     file: en_us_hench_veteran_rprgta_reminder_h_00185237_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
 
 widget_player:
   set_reaper_instructions:

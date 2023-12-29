@@ -91,6 +91,11 @@ light_player:
     light_backwall_ambient: off
     light_bbsquad: off
     light_pf: off
+  normandyattack_begin:
+    gi:
+      color: color_health%50
+      fade: 3s
+  # Hitting the dropbank is the end of the mode
   normandy_dropbank_lit_hit:
     gi:
       color: on
