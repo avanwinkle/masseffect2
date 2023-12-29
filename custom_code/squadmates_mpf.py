@@ -98,6 +98,8 @@ class MPFSquadmateHandlers(CustomCode):
         # Update the squad icons during suicide
         self.machine.events.add_handler("mode_suicide_base_started", self._play_squadmates_show)
         self.machine.events.add_handler("squadmate_killed", self._play_squadmates_show)
+        # Create a listener for the mission select blinkenlights
+        self.machine.events.add_handler("update_mission_blinken", self._update_blinken)
 
     def _initialize_icons(self, **kwargs):
         del kwargs
@@ -163,6 +165,7 @@ class MPFSquadmateHandlers(CustomCode):
                 "action": action,
                 "delay": delay,
                 "track": track,
+                "block": False,
             }
         }
         # We can pass in playback event handlers too
@@ -420,3 +423,28 @@ class MPFSquadmateHandlers(CustomCode):
 
     def _sqicon_update(self):
         self.machine.events.post("sqicon_update")
+
+    def _update_blinken(self, **kwargs):
+        blinken = self.machine.blinkenlights["missions_available_blinken"]
+        if kwargs.get("action") == "stop":
+            blinken.remove_all_colors()
+            return
+        player = self.machine.game.player
+        self.log.info("Achievements: %s", player.achievements)
+
+        # Non-skippable wizard modes
+        if player.achievements["collectorship"][0] == "enabled":
+            blinken.add_color("color_collectors", key="color_collectors", priority=0)
+            return
+        if player.achievements["normandyattack"][0] == "enabled":
+            blinken.add_color("white", key="white", priority=0)
+            return
+        # Skippable wizard modes
+        if player.achievements["derelictreaper"][0] == "enabled":
+            blinken.add_color("color_husk", key="color_husk", priority=0)
+        elif player.achievements["suicidemission"][0] == "enabled":
+            blinken.add_color("color_health", key="color_health", priority=0)
+
+        # Squadmates available
+        for mate in SquadmateStatus.recruitable_mates(player):
+            blinken.add_color(f"color_{mate}", key=f"color_{mate}", priority=0)

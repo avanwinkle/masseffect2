@@ -17,11 +17,9 @@ slide_player:
       action: remove
 
 show_player:
-  mode_suicide_restart_started:
-    missions_available_show:
-      action: play
+  mode_suicide_restart_started: update_mission_blinken
   mode_suicide_restart_will_stop:
-    missions_available_show:
+    update_mission_blinken:
       action: stop
 
 sound_player:

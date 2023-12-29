@@ -57,6 +57,12 @@ ball_devices:
     eject_timeouts: 1s  # dropped from 2s
     ball_search_order: 10
 
+blinkenlights:
+  missions_available_blinken:
+    color_duration: 400ms
+    light: l_left_ramp_arrow
+    off_when_multiple: false
+
 named_colors:
   # Named colors must be explicit due to race conditions with config_common
   bb_squad_color: ff6611 # FFBB66 makes as white as possible. But orange is better

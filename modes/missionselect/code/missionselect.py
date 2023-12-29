@@ -131,9 +131,18 @@ class MissionSelect(Carousel):
             self.machine.events.post("{}_recruitmission_selected".format(self.name), squadmate=selection)
         elif selection == "pass":
             # Store the choice to pass so we can skip missionselect until a new mission is available
+            can_bypass = True
             # This is only applicable if there are still missions to unlock, otherwise we could get stuck
-            if self.machine.game.player["squadmates_count"] < 12 and \
-                (not self.machine.game.player["casual"] or self.machine.settings.get_setting_value("casual_no_bypass")==0):
+            if self.machine.game.player["squadmates_count"] == 12:
+                can_bypass = False
+            # If game settings prevent bypass, disallow it
+            elif (not self.machine.game.player["casual"] or self.machine.settings.get_setting_value("casual_no_bypass")==0):
+                can_bypass = False
+            # If a critical non-mandatory mission is available, cannot bypass
+            for m in ("derelictreaper", "suicidemission"):
+                if self.player.achievements[m][0] == "enabled":
+                    can_bypass = False
+            if can_bypass:
                 self.machine.game.player['bypass_missionselect'] = 1
 
     def _update_highlighted_item(self, direction):

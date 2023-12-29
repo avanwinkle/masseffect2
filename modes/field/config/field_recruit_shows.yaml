@@ -1,12 +1,13 @@
 #config_version=6
-show_player:
-  player_available_missions{value>0}:
-    missions_available_show:
-      action: play
-      sync_ms: 800
-  player_bypass_missionselect{value>0}:
-    missions_available_show:
+event_player:
+  mode_field_started: update_mission_blinken
+  mode_field_will_stop:
+    update_mission_blinken:
       action: stop
+  player_available_missions{value>0}: update_mission_blinken
+  player_bypass_missionselect{value>0}: update_mission_blinken
+
+show_player:
   # TODO: Abstract these to be programmatic
   recruit_garrus_shot_active_hit:
     flash_all_shields_show:
@@ -72,9 +73,6 @@ show_player:
       show_tokens:
         color: color_zaeed
   mode_field_started.1:
-    missions_available_show{current_player.available_missions>0 and current_player.bypass_missionselect==0}:
-      action: play
-      sync_ms: 800
     # TODO: Write a show with steps for each progress phase of miniwizards
     color_alternating_default{device.achievements.collectorship.state=="enabled"}:
       speed: 0.5
@@ -106,25 +104,7 @@ show_player:
         color: "440000"
         fade: 250ms
 
-  # Disable the lights on GoT to reduce noise, leave on for FAST
-  mode_field_will_stop{not machine.is_lcd}:
-    missions_available_show:
-      action: stop
-    recruits_lit_show:
-      action: stop
-    recruits_complete_show:
-      action: stop
-    recruits_dead_show:
-      action: stop
-
 shows:
-  missions_available_show:
-    - duration: 400ms
-      lights:
-        light_missionselect: on
-    - duration: 400ms
-      lights:
-        light_missionselect: off
   recruits_lit_show:
     - duration: 500ms
       lights:
