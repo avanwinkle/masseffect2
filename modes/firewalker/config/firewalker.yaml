@@ -61,45 +61,11 @@ variable_player:
   # Score some points
   # TODO: Use a sequence logic block to limit each hit to one score
   firewalker_shots_red_hit:
-    score: 500
+    score: machine.base_points // 200 * 10
   firewalker_shots_orange_hit:
-    score: 2000
+    score: machine.base_points // 50 * 10
   firewalker_shots_green_hit:
-    score: 5000
-  # After a mission, mark the shot as complete or reset it
-  firewalker_mission_complete.10:
-    fwps_lo{current_player.fwps_lo==1}:
-      action: set
-      int: 2
-    fwps_kb{current_player.fwps_kb==1}:
-      action: set
-      int: 2
-    fwps_lr{current_player.fwps_lr==1}:
-      action: set
-      int: 2
-    fwps_rr{current_player.fwps_rr==1}:
-      action: set
-      int: 2
-    fwps_ro{current_player.fwps_ro==1}:
-      action: set
-      int: 2
-  # If the mission fails, drains, whatever, drop the shot back to zero
-  mode_firewalker_will_stop:
-    fwps_lo{current_player.fwps_lo==1}:
-      action: set
-      int: 0
-    fwps_kb{current_player.fwps_kb==1}:
-      action: set
-      int: 0
-    fwps_lr{current_player.fwps_lr==1}:
-      action: set
-      int: 0
-    fwps_rr{current_player.fwps_rr==1}:
-      action: set
-      int: 0
-    fwps_ro{current_player.fwps_ro==1}:
-      action: set
-      int: 0
+    score: machine.base_points // 20 * 10
 
 timers:
   fwtimer:
@@ -123,6 +89,36 @@ multiballs:
     shoot_again: 10s
     start_events: start_firewalker_multiball
     start_or_add_a_ball_events: firewalker_shots_green_hit{device.state_machines.firewalker.state=="prothean_site" and game.balls_in_play<3}
+
+light_player:
+  mode_firewalker_started:
+    gi_top:
+      color: color_collectors
+      fade: 500ms
+    gi_middle:
+      color: color_grunt
+      fade: 500ms
+    gi_bottom:
+      color: 444444
+      fade: 500ms
+    light_backwall_ambient:
+      color: color_door_red
+      fade: 500ms
+  firewalker_shots_red_hit:
+    light_backwall_ambient:
+      color: color_door_orange
+      fade: 1s
+  firewalker_shots_orange_hit:
+    light_backwall_ambient:
+      color: color_door_green
+      fade: 1s
+  mode_firewalker_will_stop:
+    gi:
+      color: on
+      fade: 500ms
+    light_backwall_ambient:
+      color: off
+      fade: 500ms
 
 shot_groups:
   firewalker_shots:
@@ -192,12 +188,6 @@ shot_profiles:
         speed: 3
 
 show_player:
-  mode_firewalker_started:
-    gi_half_color:
-      action: play
-      show_tokens:
-        color: color_shadowbroker
-        brightness: 100
   firewalker_shots_red_hit:
     single_flash_color:
       loops: 0

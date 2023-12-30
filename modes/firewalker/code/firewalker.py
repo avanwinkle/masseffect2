@@ -1,8 +1,8 @@
 import logging
 from mpf.core.mode import Mode
 
-SHOTS = ["left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit"]
-
+SHOTS = ("left_orbit", "kickback", "left_ramp", "right_ramp", "right_orbit")
+SHOT_KEYS = ("lo", "kb", "lr", "rr", "ro")
 
 class FwRulesBase:
   def __init__(self, shots, log):
@@ -145,16 +145,27 @@ class Firewalker(Mode):
     del kwargs
     # Pass a different context so the end of the mode doesn't kill the sound
     self._play_sound(self.rules.failure_sound, context="firewalker_ended")
+    # Reset all the FW lane progresses
+    self._reset_fwps_shots(success=False)
 
   def _on_success(self, **kwargs):
     del kwargs
     self._play_sound("hmd_all_data_packets_recovered", context="firewalker_ended")
+    self._reset_fwps_shots(success=True)
 
   def _handle_hit(self, **kwargs):
     shots_remaining = self.rules.on_hit(kwargs["shotname"])
 
     if shots_remaining > 0:
       self._play_sound(f"hmd_{shots_remaining}_remains")
+
+  def _reset_fwps_shots(self, success):
+    player = self.machine.game.player
+    for shot in SHOT_KEYS:
+      if player[f"fwps_{shot}"] == 1:
+        player[f"fwps_{shot}"] = 2 if success else 0
+        # Only one shot can be state 1 at a time, so no need to keep iterating
+        break
 
   def _play_sound(self, sound_name, context="firewalker"):
       settings = {
