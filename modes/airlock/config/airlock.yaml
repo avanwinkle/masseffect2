@@ -88,8 +88,8 @@ queue_relay_player:
   balldevice_bd_trough_ball_eject_attempt.10{mode.store.active or mode.store._starting}:
     post: trough_eject_blocked_by_store
     wait_for: store_complete
-  # Check for ShadowBroker hold second
-  balldevice_bd_trough_ball_eject_attempt.1{current_player.sbhold_enabled and mode.field.active}:
+  # Check for ShadowBroker hold second, using the Lock slide to determine if it should start
+  balldevice_bd_trough_ball_eject_attempt.1{current_player.sbhold_enabled and mode.field.active and mode["global"].is_lock_slide_active}:
     post: trough_eject_blocked_by_sbhold
     wait_for: release_sb_hold
 
