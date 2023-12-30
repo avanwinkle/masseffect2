@@ -303,7 +303,7 @@ player_vars:
     initial_value: 1
     value_type: int
   color_mball:
-    initial_value: "FF0000"
+    initial_value: "22FF33"  # color_overlord
     value_type: str
   difficulty:
     initial_value: 0

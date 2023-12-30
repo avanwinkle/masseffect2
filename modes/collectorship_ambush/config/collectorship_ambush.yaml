@@ -31,6 +31,7 @@ event_player:
     - mission_shot_hit
     - mission_collect_score
     - collectorship_add_ball{game.balls_in_play<4}
+    - missiontimer_set_20
   ship_shots_complete: collectorship_ambush_complete
   collectorship_ambush_complete: stop_mode_collectorship_ambush
   logicblock_collector_shots_counter_hit: play_callout_(count)|1500ms

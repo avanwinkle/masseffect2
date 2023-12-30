@@ -53,5 +53,3 @@ named_colors:
   color_redsand: 92280f
   color_dirt_25: ff9960
   color_dirt_75: ffccb0
-  # Default: mball color is overlord
-  color_mball: 22FF33

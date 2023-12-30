@@ -113,19 +113,19 @@ shots:
     profile: color_flashing_static
     show_tokens:
       leds: light_lock_lit
-      color: color_mball
+      color: (current_player.color_mball)
   light_lock_fmball_top:
     switch: s_hitbank_top
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_top
-      color:  color_mball
+      color:  (current_player.color_mball)
   light_lock_fmball_bottom:
     switch: s_hitbank_bottom
     profile: hit_to_lit_profile
     show_tokens:
       leds: l_hitbank_bottom
-      color:  color_mball
+      color:  (current_player.color_mball)
 
 light_player:
   start_mode_arrival:
@@ -140,14 +140,14 @@ show_player:
       loops: 6
       speed: 10
       show_tokens:
-        color: color_mball
+        color: (current_player.color_mball)
   fmball_light_shot_hit_hit:
     fmball_lock_flash:
       priority: 100
       loops: 2
       speed: 10
       show_tokens:
-        color: color_mball
+        color: (current_player.color_mball)
   play_queued_slide_fmball_ball_locked_slide{device.achievements.arrival.state=="disabled"}:
     lock_sweep_overlord:
       priority: 10000
@@ -176,14 +176,14 @@ show_player:
     color_flashing_fast:
       show_tokens:
         leds: l_mass_relay_light_1, l_mass_relay_light_3, l_mass_relay_light_5, l_mass_relay_light_7
-        color: color_mball
+        color: (current_player.color_mball)
       loops: 3
       speed: 2
   s_hitbank_bottom_active:
     color_flashing_fast:
       show_tokens:
         leds: l_mass_relay_light_4, l_mass_relay_light_6, l_mass_relay_light_8, l_mass_relay_light_10
-        color: color_mball
+        color: (current_player.color_mball)
       loops: 3
       speed: 2
       start_step: 2

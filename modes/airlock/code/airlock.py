@@ -64,12 +64,7 @@ class Airlock(Mode):
     def _set_multiball_color(self, **kwargs):
         # Re-define the named_color according to which multiball it is
         color = "color_overlord" if self.machine.device_manager.collections["achievements"].arrival.state == "disabled" else "color_arrival"
-        RGBColor.add_color("color_mball", RGBColor.name_to_rgb(color))
-        self.log.debug("Setting multiball color '{}': {}. Resulting constant: {}".format(
-            color,
-            RGBColor.name_to_rgb(color),
-            RGBColor.name_to_rgb("color_mball")
-            ))
+        self.machine.game.player["color_mball"] = color
 
     def _post_event(self, event, **kwargs):
         """ Helper method for posting events """

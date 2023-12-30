@@ -126,10 +126,10 @@ class MPFSquadmateHandlers(CustomCode):
             # If there's a squadmate to light, light them
             if mate:
                 self.machine.shots["recruit_{}_shot".format(mate)].enable()
-                self.machine.events.add_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+                self.machine.modes.field.add_mode_event_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
             # If the shot is firewalker-eligible, light it. This means the mate from it is recruited
             # (mate1 before CS and mate2 after) and this fw shot has not been completed yet.
-            elif (status1 == 4 and not is_post_collectorship) or status2 == 4 and player["fwps_{}".format(fw)] == 0:
+            elif ((status1 == 4 and not is_post_collectorship) or status2 == 4) and player["fwps_{}".format(fw)] == 0:
                 self.machine.shots["fw_packet_{}".format(shot)].enable()
             # Otherwise make sure the fw shot is disabled
             else:
