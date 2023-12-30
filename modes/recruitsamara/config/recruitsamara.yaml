@@ -30,6 +30,7 @@ event_player:
   mode_powers_started:
     set_mission_shots:
       color: color_samara
+      env: eclipse
       is_resumable: 1
       persist_name: recruitsamara
       shots_total: 5
@@ -116,6 +117,12 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_samara
+  power_shots_hit:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: light_backwall_gi
+        color: color_samara
   power_shots_lit_hit:
     flash_all_shields_show:
       loops: 6
@@ -197,10 +204,23 @@ sound_pools:
   wasea_hit:
     track: sfx
     sounds: ws_hit_one, ws_hit_two, ws_hit_three, ws_hit_four
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 60ms
+      release: 40ms
+      release_point: 0
   wasea_callout:
     track: voice
     type: random_force_all
     sounds: ws_payback_human, ws_i_like_killing_humans, ws_kill_them_all, ws_this_ends_now, ws_you_wont_get_away
+    max_queue_time: 1s
+    ducking:
+      target: music
+      attenuation: 0.5
+      attack: 60ms
+      release: 40ms
+      release_point: 0
   gunship_sound:
     track: voice
     type: random_force_all
