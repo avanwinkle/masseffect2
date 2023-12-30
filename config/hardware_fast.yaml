@@ -62,6 +62,10 @@ blinkenlights:
     color_duration: 400ms
     light: l_left_ramp_arrow
     off_when_multiple: false
+  airlock_blinken:
+    color_duration: 400ms
+    light: l_kickback_arrow
+    off_when_multiple: false
 
 named_colors:
   # Named colors must be explicit due to race conditions with config_common
@@ -84,13 +88,13 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 50  # Increased from Spike 35
-    default_pulse_power: 0.8 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
+    default_pulse_ms: 55  # Increased from Spike 35
+    default_pulse_power: 0.85 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 50  # Increased from Spike 35
-    default_pulse_power: 0.8
+    default_pulse_ms: 55  # Increased from Spike 35
+    default_pulse_power: 0.85
     default_hold_power: 0.125
   c_plunger:
     number: 1-1

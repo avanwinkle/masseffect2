@@ -44,17 +44,19 @@ event_player:
   multiball_arrival_multiball_ended:
     # If the multiball ended before the hold is enabled, enable it
     - arrival_stage_escape{not device.ball_holds.arrival_hold.enabled}
-  balls_in_play:
-    # If all balls drains and none are in the hold, that's the end of the mode
-    - stop_mode_arrival{balls==0 and device.ball_holds.arrival_hold.balls_held==0}
-    # If a ball drains and all the other "in play" balls are held, that's a success!
-    - arrival_complete{balls==device.ball_holds.arrival_hold.balls_held}
-    # - acknowledge_playfield_empty
+  # If all balls drains and none are in the hold, that's the end of the mode
+  balls_in_play{balls==0}:
+    - stop_mode_arrival
+  # If a ball drains and all the other "in play" balls are held, that's a success!
+  balls_in_play{balls>0 and balls==device.ball_holds.arrival_hold.balls_held}:
+    - arrival_complete
+    - arrival_complete_needs_save
   ball_hold_arrival_hold_held_ball{total_balls_held==game.balls_in_play}:
     # If the last ball in play is held, success!
     - arrival_complete
-  # Just in case the player kept FOUR balls in, holding 3 is complete
-  ball_hold_arrival_hold_full: arrival_complete
+    - arrival_complete_needs_save
+  # At any time hitting the escape wins the mode
+  ball_hold_arrival_escape_hold_held_ball: arrival_complete
   logicblock_arrival_frenzy_counter_complete: arrival_stage_escape
   # When one counter is hit, switch to the other (if it has shots to hit)
   logicblock_arrival_orbits_counter_hit{not device.counters.arrival_ramps_counter.completed}:
@@ -97,8 +99,10 @@ event_player:
       mission_name: "Alpha Relay Destroyed"
 
 ball_saves:
+  # If the mode completes with all balls locked, a save is needed to return after the
+  # lock is cleared. If the mode completes from the relay hold, not necessary.
   arrival_save:
-    enable_events: arrival_complete
+    enable_events: arrival_complete_needs_save
     delayed_eject_events: arrival_explosion_complete
     only_last_ball: true
     auto_launch: true
@@ -141,9 +145,14 @@ variable_player:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
   logicblock_arrival_orbits_counter_hit:
     temp_build_value: machine.base_points / 10 * (device.counters.arrival_ramps_counter.value + device.counters.arrival_orbits_counter.value)
-  ball_hold_arrival_hold_held_ball:
+  # Completing the mode awards the jackpot
+  arrival_complete:
     score: current_player.temp_build_value
     temp_hurryup_value: current_player.temp_build_value
+  # Completing the mode by hitting the escape shot *also* scores for the number of balls held
+  ball_hold_arrival_escape_hold_held_ball:
+    score: current_player.temp_build_value * device.ball_holds.arrival_hold.balls_held
+    temp_hurryup_value: current_player.temp_build_value * device.ball_holds.arrival_hold.balls_held
   # Base scoring per frenzy hit, doubles with each phase
   frenzy_hit:
     score: 100 * (2^device.counters.arrival_stage_counter.value)
@@ -213,7 +222,7 @@ shots:
     disable_events: arrival_complete, play_arrival_final, stop_mode_arrival
     profile: color_flashing_fast_profile
     show_tokens:
-      leds: light_lock_lit
+      leds: light_lock_lit, light_missionselect
       color: white
   arrival_left_ramp:
     hit_events: sh_left_ramp_hit
@@ -515,10 +524,10 @@ slides:
         text: ARRIVAL
         style: header_xs, row_top, col_left_anchor, color_ui_green_light
       - type: text
-        text: Escape!
+        text: Escape at the Mass Relay!
         style: header_md, row_main, col_left_anchor, num
       - type: text
-        text: Lock balls for Jackpot
+        text: Lock Balls for Jackpot Multiplier
         style: body_sm, row_sub, col_left_anchor
       - type: text
         text: (score)

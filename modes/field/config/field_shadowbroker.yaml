@@ -27,7 +27,9 @@ event_player:
     - play_shadowbroker_hold_show
     # If the hold was already enabled before we left field mode, re-enable it too
     - enable_sb_hold{current_player.sbhold_enabled==1}
-  ball_hold_sb_hold_held_ball:
+  ball_hold_sb_hold_held_ball: start_shadowbroker_from_hold
+  trough_eject_blocked_by_sbhold: start_shadowbroker_from_hold
+  start_shadowbroker_from_hold:
     # Get a ball in the ball hold to begin Vasir
     - start_mode_shadowbroker_vasir{current_player.state_machine_shadowbroker=="vasir"}
     # Get a ball in the ball hold to begin Boss Combat
@@ -59,10 +61,21 @@ variable_player:
       action: set
       int: 0
   # Once a ball is held for sb, reset the value so it'll have to be re-lit
-  ball_hold_sb_hold_held_ball:
+  start_shadowbroker_from_hold:
     sbhold_enabled:
       action: set
       int: 0
+
+blinkenlight_player:
+  enable_sb_hold:
+    airlock_blinken:
+      action: add
+      color: color_shadowbroker
+      key: color_shadowbroker
+  mode_field_will_stop:
+    airlock_blinken:
+      action: remove
+      key: color_shadowbroker
 
 show_player:
   mode_field_started:
@@ -87,9 +100,9 @@ show_player:
       priority: 10
       sync_ms: 800
   enable_sb_hold:
-    shadowbroker_hold_enabled_show:
-      action: play
-      sync_ms: 800
+    # shadowbroker_hold_enabled_show:
+    #   action: play
+    #   sync_ms: 800
     shadowbroker_hold_show:
       action: stop
   shadowbroker_progression_hagalaz_started:
@@ -102,8 +115,8 @@ show_player:
       action: stop
     shadowbroker_hold_show:
       action: stop
-    shadowbroker_hold_enabled_show:
-      action: stop
+    # shadowbroker_hold_enabled_show:
+    #   action: stop
     sbdrops_show:
       action: stop
 
@@ -142,17 +155,17 @@ shows:
   shadowbroker_hold_show:
     - lights:
         light_dropbank_rgb: color_shadowbroker
-  shadowbroker_hold_enabled_show:
-    - duration: 1500ms
-      lights:
-        light_shadowbroker_start:
-          color: on
-          fade: 1200ms
-    - duration: 1500ms
-      lights:
-        light_shadowbroker_start:
-          color: off
-          fade: 1200ms
+  # shadowbroker_hold_enabled_show:
+  #   - duration: 1500ms
+  #     lights:
+  #       light_shadowbroker_start:
+  #         color: on
+  #         fade: 1200ms
+  #   - duration: 1500ms
+  #     lights:
+  #       light_shadowbroker_start:
+  #         color: off
+  #         fade: 1200ms
   boss_intro_cineanim:
     - sounds:
         boss_intro_cineanim_diag:

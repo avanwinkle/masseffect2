@@ -84,9 +84,14 @@ queue_relay_player:
     post: fmball_check_store
     wait_for: store_complete
   # When a ball is locked the trough will attempt to replace it
-  balldevice_bd_trough_ball_eject_attempt{mode.store.active or mode.store._starting}:
+  # Check for the store first
+  balldevice_bd_trough_ball_eject_attempt.10{mode.store.active or mode.store._starting}:
     post: trough_eject_blocked_by_store
     wait_for: store_complete
+  # Check for ShadowBroker hold second
+  balldevice_bd_trough_ball_eject_attempt.1{current_player.sbhold_enabled and mode.field.active}:
+    post: trough_eject_blocked_by_sbhold
+    wait_for: release_sb_hold
 
 variable_player:
   overlord_ball_will_lock:
@@ -155,7 +160,7 @@ ball_holds:
     balls_to_hold: 1
     debug: true
     hold_devices: bd_lock
-    enable_events: enable_sb_hold, mode_field_started{current_player.sbhold_enabled}
+    enable_events: enable_sb_hold
     disable_events: disable_sb_hold, mode_field_will_stop, ball_will_end
     release_one_events: release_sb_hold
   store_hold:
@@ -175,8 +180,14 @@ ball_holds:
     balls_to_hold: 3
     hold_devices: bd_lock
     enable_events: enable_arrival_hold
-    disable_events: stop_mode_arrival
-    release_all_events: arrival_complete
+    disable_events: mode_arrival_will_stop
+    release_all_events: arrival_complete, mode_arrival_will_stop
+  arrival_escape_hold:
+    balls_to_hold: 1
+    hold_devices: bd_hold
+    enable_events: enable_arrival_hold
+    release_all_events: mode_arrival_will_stop
+    disable_events: mode_arrival_will_stop
 
 multiball_locks:
   fmball_lock:
@@ -240,7 +251,7 @@ show_player:
   ball_save_airlock_save_disabled:
     airlock_save_show:
       action: stop
-  ball_hold_missionselect_hold_balls_released:
+  balldevice_bd_hold_ball_eject_attempt:
     color_flashing_fast:
       action: play
       loops: 6
@@ -249,3 +260,12 @@ show_player:
       show_tokens:
         leds: light_mass_relay
         color: color_paragon
+  balldevice_bd_lock_ball_eject_attempt:
+    color_flashing_fast:
+      action: play
+      loops: 6
+      speed: 4
+      priority: 1000
+      show_tokens:
+        leds: l_battering_ram_top
+        color: color_shields

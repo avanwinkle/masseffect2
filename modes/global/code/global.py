@@ -5,11 +5,12 @@ from custom_code.squadmates_mpf import SquadmateStatus
 
 class Global(Mode):
 
-    __slots__ = ("standups",)
+    __slots__ = ("standups", "is_lock_slide_active")
 
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
         shots = self.machine.device_manager.collections["shots"]
+        self.is_lock_slide_active = False
         self.standups = (
             shots["storetarget1"],
             shots["storetarget2"],
@@ -18,6 +19,12 @@ class Global(Mode):
             shots["storetarget5"]
         )
         self.add_mode_event_handler("captive_ball_hit", self._on_captive_ball)
+        self.add_mode_event_handler("overlord_ball_will_lock",
+                                    self._set_slide, active=True)
+        self.add_mode_event_handler("arrival_ball_will_lock",
+                                    self._set_slide, active=True)
+        self.add_mode_event_handler("slide_fmball_ball_locked_slide_removed",
+                                    self._set_slide, active=False)
 
     def _on_captive_ball(self, **kwargs):
         """On captive ball hit, spot the next standup target for shopping."""
@@ -26,3 +33,7 @@ class Global(Mode):
             if shot.state == 0:
                 shot.hit()
                 break
+
+    def _set_slide(self, active, **kwargs):
+        del kwargs
+        self.is_lock_slide_active = active

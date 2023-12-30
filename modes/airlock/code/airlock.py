@@ -76,7 +76,7 @@ class Airlock(Mode):
 
         self.log.info("FMBALL lock is {}".format(self._logicallockdevice))
         self.log.info(" - enabled? {}".format(self._logicallockdevice.enabled))
-        self.log.debug("At this moment, multiball color is: {}".format(RGBColor.name_to_rgb("color_mball")))
+        self.log.debug("At this moment, multiball color is: {}".format(self.player["color_mball"]))
 
     def _debug_enter(self, **kwargs):
         self.log.info("Ball has entered the airlock, lock is enabled? {}".format(self._logicallockdevice.enabled))

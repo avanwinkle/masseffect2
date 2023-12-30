@@ -91,6 +91,15 @@ event_player:
       clear_recruits: true
       ball: 2
 
+queue_relay_player:
+  # Prevent the start of shadowbroker vasir and boss modes until the slide is done
+  mode_shadowbroker_vasir_starting{mode["global"].is_lock_slide_active}:
+    post: shadowbroker_vasir_blocked_by_lock_slide
+    wait_for: slide_fmball_ball_locked_slide_removed
+  mode_shadowbroker_boss_starting{mode["global"].is_lock_slide_active}:
+    post: shadowbroker_boss_blocked_by_lock_slide
+    wait_for: slide_fmball_ball_locked_slide_removed
+
 shot_groups:
   fmball_lightshot:
     shots: light_lock_fmball_top, light_lock_fmball_bottom
@@ -110,10 +119,10 @@ shots:
       - multiball_lock_fmball_lock_locked_ball
       # When we switch from Overlord to Arrival, reset the lock state
       - start_mode_collectorship_base
-    profile: color_flashing_static
-    show_tokens:
-      leds: light_lock_lit
-      color: (current_player.color_mball)
+    # profile: color_flashing_static
+    # show_tokens:
+    #   leds: light_lock_lit
+    #   color: (current_player.color_mball)
   light_lock_fmball_top:
     switch: s_hitbank_top
     profile: hit_to_lit_profile
@@ -132,6 +141,22 @@ light_player:
     gi:
       color: color_dirt_75
       fade: 5s
+
+blinkenlight_player:
+  player_shot_fmball_lock_shot_enabled{value==True and device.achievements.arrival.state=="disabled"}:
+    airlock_blinken:
+      action: add
+      color: color_overlord
+      key: color_mball
+  player_shot_fmball_lock_shot_enabled{value==True and device.achievements.arrival.state!="disabled"}:
+    airlock_blinken:
+      action: add
+      color: color_arrival
+      key: color_mball
+  player_shot_fmball_lock_shot_enabled{value==False}:
+    airlock_blinken:
+      action: remove
+      key: color_mball
 
 show_player:
   fmball_light_shot_lit_hit:
