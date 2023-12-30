@@ -27,7 +27,6 @@
 mode:
   start_events: start_mode_harbinger
   stop_events: stop_mode_harbinger, ball_will_end
-  events_when_stopped: disable_harbinger, disable_captive
   priority: 600
 
 event_player:
@@ -47,6 +46,7 @@ event_player:
     - disable_captive_hold
     - release_captive_hold
   multiball_collectorship_multiball_ended: release_captive_hold
+  mode_harbinger_will_stop: disable_harbinger
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
