@@ -85,6 +85,8 @@ event_player:
     - play_arrival_get_to_escape_shuttles{value==255}
   arrival_complete:
     - flippers_off
+    # Don't make the player wait for the rest of the show
+    - force_arrival_end
   # The save event posts even when it ignores a not_last_ball.
   # Be explicit and wait for the last ball to be saved
   # ball_save_arrival_save_saving_ball{balls>0}:
@@ -222,7 +224,7 @@ shots:
     disable_events: arrival_complete, play_arrival_final, stop_mode_arrival
     profile: color_flashing_fast_profile
     show_tokens:
-      leds: light_lock_lit, light_missionselect
+      leds: light_lock_lit, l_left_ramp_arrow
       color: white
   arrival_left_ramp:
     hit_events: sh_left_ramp_hit
