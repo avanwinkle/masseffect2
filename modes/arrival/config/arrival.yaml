@@ -144,6 +144,11 @@ variable_player:
   ball_hold_arrival_hold_held_ball:
     score: current_player.temp_build_value
     temp_hurryup_value: current_player.temp_build_value
+  # Base scoring per frenzy hit, doubles with each phase
+  frenzy_hit:
+    score: 100 * (2^device.counters.arrival_stage_counter.value)
+    # Also track this scoring for the final/total score awarded
+    temp_hurryup_value:  100 * (2^device.counters.arrival_stage_counter.value)
 
 timers:
   arrival_timer:
@@ -186,6 +191,9 @@ counters:
     # We can't math the value for the widget, but it's 300px wide
     count_complete_value: 300
     count_interval: 5
+  arrival_stage_counter:
+    starting_count: 0
+    count_events: advance_arrival
 
 shot_groups:
   arrival_ramps:
@@ -496,6 +504,10 @@ slides:
         text: Jackpot Value
         style: body_xs, row_sub, col_left_anchor
         casing: uppercase
+      - type: text
+        text: (score)
+        style: body_sm, row_bottom, col_left_anchor, num
+        opacity: 0.5
       - widget: background_console
   arrival_escape_slide:
     widgets:
@@ -508,6 +520,10 @@ slides:
       - type: text
         text: Lock balls for Jackpot
         style: body_sm, row_sub, col_left_anchor
+      - type: text
+        text: (score)
+        style: body_sm, row_bottom, col_left_anchor, num
+        opacity: 0.5
       - widget: background_console
   arrival_explosion_slide:
     widgets:
@@ -542,7 +558,7 @@ slides:
       text: "Arrival"
       style: codex_title
     - type: text
-      text: "Shepard escaped and activated the\nProject, destroying the Alpha Relay\nand preventing the Reaper invasion.\n\nTotal jackpot award: (player|temp_hurryup_value)"
+      text: "Shepard escaped and activated the\nProject, destroying the Alpha Relay\nand preventing the Reaper invasion.\n\nTotal Score: (player|temp_hurryup_value)"
       style: codex_text
     - widget: dossier_recruit_base
 
