@@ -30,8 +30,10 @@ class Match(MatchBase):
 
     def _on_tick(self, **kwargs):
         if self.total_ticks == 30:
+            # match_number is an int, force double-zero if it's zero
+            num = self.match_number or "00"
             self.machine.events.post("show_match_%s" % ("success" if self.is_match else "failure"),
-                                     num=self.match_number)
+                                     num=num)
             self.machine.events.post("match_complete")
             self.total_ticks = -1
             return

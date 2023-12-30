@@ -23,7 +23,7 @@ event_player:
     # We know a mode has been played if it is "stopped" rather than "enabled"
     - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled"}
     # Try this: on normal difficulty, arrival takes one bank to light the first time
-    - enable_fmball_lock{device.achievements.arrival.state=="enabled" and current_player.difficulty==0}
+    # - enable_fmball_lock{device.achievements.arrival.state=="enabled" and current_player.difficulty==0}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{state=='lit' and not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
