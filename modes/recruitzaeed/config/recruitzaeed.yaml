@@ -167,10 +167,10 @@ sound_pools:
     type: random_force_all
   # Next two: Not random because choices are shared with initial reputation selection
   explosionchoice_1_renegade:
-    sounds: shep_lets_get_moving_before_vido_gets_away, shep_you_want_him_dead_then_he_dies
+    sounds: shep_lets_get_moving_before_vido_gets_away
     track: voice
   explosionchoice_2_paragon:
-    sounds: shep_the_mission_is_to_save_these_workers, shep_we_dont_sacrifice_lives
+    sounds: shep_the_mission_is_to_save_these_workers, shep_were_here_to_free_these_people
     track: voice
   explosionchoice_2_renegade:
     sounds: zaeed_if_we_keep_up_the_pressure, zaeed_glad_you_see_it_my_way

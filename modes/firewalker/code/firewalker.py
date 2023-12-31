@@ -164,8 +164,6 @@ class Firewalker(Mode):
     for shot in SHOT_KEYS:
       if player[f"fwps_{shot}"] == 1:
         player[f"fwps_{shot}"] = 2 if success else 0
-        # Only one shot can be state 1 at a time, so no need to keep iterating
-        break
 
   def _play_sound(self, sound_name, context="firewalker"):
       settings = {
