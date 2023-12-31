@@ -261,11 +261,10 @@ show_player:
         leds: light_mass_relay
         color: color_paragon
   balldevice_bd_lock_ball_eject_attempt:
-    color_flashing_fast:
+    airlock_release_warning:
       action: play
       loops: 6
       speed: 4
       priority: 1000
       show_tokens:
-        leds: l_battering_ram_top
         color: color_shields

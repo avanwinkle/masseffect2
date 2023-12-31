@@ -43,7 +43,7 @@ event_player:
     - stop_mode_environment
     - stop_wizards
     - flippers_off
-    - clear_slide_queue
+    - clear_recruit_slide_queue
   mode_type_wizard_started:
     - stop_mode_global
   mode_type_wizard_stopped{not mode.base.stopping}:
@@ -152,7 +152,8 @@ ball_saves:
     grace_period: 2s
     hurry_up_time: 5s
     enable_events:
-      - mode_base_started
+      # - mode_base_started
+      - fakeeventfortesting
     timer_start_events:
       - balldevice_bd_plunger_ball_eject_success
     disable_events:
@@ -675,11 +676,13 @@ sounds:
 track_player:
   # Bring the music out asap to allow for the bonus music to fade in
   ball_will_end:
+    # Only fade the music, not the levelup
     music:
       action: stop_all_sounds
       fade: 2s
-  # In case a mode has audio that wants to queue-block on ball_ending
-  ball_ending:
+  # In case a mode has audio that wants to queue-block on ball_ending,
+  # wait for the bonus mode to start before killing it.
+  bonus_queue_clear:
     __all__:
       action: stop_all_sounds
       fade: 2s
