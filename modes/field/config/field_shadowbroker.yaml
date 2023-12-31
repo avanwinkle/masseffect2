@@ -30,6 +30,7 @@ event_player:
   ball_hold_sb_hold_held_ball: start_shadowbroker_from_hold
   trough_eject_blocked_by_sbhold: start_shadowbroker_from_hold
   start_shadowbroker_from_hold:
+    - clear_recruit_slide_queue
     # Get a ball in the ball hold to begin Vasir
     - start_mode_shadowbroker_vasir{current_player.state_machine_shadowbroker=="vasir"}
     # Get a ball in the ball hold to begin Boss Combat

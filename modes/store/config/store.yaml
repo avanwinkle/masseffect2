@@ -37,9 +37,10 @@ queue_relay_player:
     wait_for: store_item_selected
 
 light_player:
-  # Upgrades are in global and need to be overridden
+  # Disable all lights on the playfield
   mode_store_started:
-    light_upgrades:
+    light_pf:
+      priority: 1000
       color: black
 
 slide_player:
