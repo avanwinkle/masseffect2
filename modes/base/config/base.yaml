@@ -2,6 +2,7 @@
 mode:
   start_events: ball_starting
   stop_events: ball_will_end
+  code: base.Base
   priority: 100
 
 config:
@@ -107,16 +108,6 @@ event_player:
     - start_mode_instantinfo
   # Defer the awarding of points to avoid a blip in the slide.
   # Do this in base so starting missionselect won't miss it
-  levelup.1:
-    queue_slide:
-      slide: levelup_slide
-      mission_name:
-        value: mission_name
-      portrait:
-        value: portrait
-        type: string
-      priority: 1999 # Normandy attack runs at 2000
-      expire: 10s
   n7_assignment_success:
     queue_slide:
       slide: n7_complete_slide
@@ -198,15 +189,6 @@ counters:
 variable_player:
   defer_recruit_advance_score:
     score: 500
-  levelup:
-    level: 1
-    earned_level: 1
-    # Reset the ship upgrade every levelup. Once missed, gone forever!
-    shipupgrade_available:
-      action: set
-      int: 0
-    # Block the playback of field music
-    levelup_pending: 1
   # Use a variable to know whether a ship upgrade is available
   shipupgrade_available:
     available_shipupgrades: 1
@@ -488,7 +470,7 @@ slides:
     transition_out: fade
     widgets:
       - type: text
-        text: LEVEL UP!
+        text: (title_text)
         style: header_lg, row_main, row_main_dmd_high
       - type: text
         text: (mission_name)
@@ -576,10 +558,10 @@ sound_player:
     music_mission_success:
       action: stop
   # Whether starting a mission or game over, kill the "levelup" music if field stops
-  mode_field_will_stop:
-    music_mission_success:
-      action: stop
-      fade_out: 1s
+  # mode_field_will_stop:
+  #   music_mission_success:
+  #     action: stop
+  #     fade_out: 1s
   skillshot_lit_hit: skillshot_sound
   # It's worth keeping sounds cached until all players have played ball one
   mode_base_started{current_player.number==1 and current_player.ball==2}:
