@@ -40,11 +40,16 @@ event_player:
       # Start the orbits at "pending" so we know where they are after rotation
       starting_shots: 2, 1, 0, 0, 2
   # After completion more shots will keep adding hurryup, but won't reset
-  logicblock_thane_ascent_counter_hit:
+  logicblock_thane_ascent_counter_updated:
     mission_shot_hit:
       is_bonus_shot:
         value: 1 if device.counters.thane_ascent_counter.value>3 else 0
         type: int
+    update_thane_shots_widget{not device.counters.thane_ascent_counter.complete}:
+      value:
+        value: 4 - device.counters.thane_ascent_counter.value
+        type: int
+
   # When one shot is hit, switch it
   left_ramp_lit_hit.1:
     advance_mission_shots:
@@ -110,6 +115,12 @@ show_player:
       loops: 4
       priority: 100
       show_tokens:
+        color: color_thane
+  power_shots_hit:
+    single_flash_color:
+      loops: 0
+      show_tokens:
+        leds: light_backwall_gi
         color: color_thane
 
 shows:
@@ -195,3 +206,13 @@ sounds:
   asari_youll_have_to_get_up_to_the_bridge:
     file: en_us_twrasa_quest_giver_twrasa_shuttle_ride_d_00187374_m.ogg
     track: voice
+
+widget_player:
+  update_thane_shots_widget:
+    shots_remaining_widget:
+      action: update
+      slide: recruit_mission_slide
+  logicblock_thane_ascent_counter_complete:
+    shots_remaining_widget:
+      action: remove
+      slide: recruit_mission_slide

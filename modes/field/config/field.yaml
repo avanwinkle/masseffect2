@@ -161,8 +161,6 @@ sounds:
   #   file: mus_endgm1_attackplan.ogg
   #   track: music
 
-
-
 slide_player:
   mode_field_started{machine.has_secondscreen}:
     squadicon_slide:
