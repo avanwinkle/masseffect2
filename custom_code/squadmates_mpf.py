@@ -276,15 +276,15 @@ class MPFSquadmateHandlers(CustomCode):
         self._current_mate = mate
         self.machine.events.post("start_mode_recruit{}".format(mate))
 
-        self.machine.events.add_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
-        self.machine.events.add_handler("mode_recruit{}_stopped".format(mate), self._on_stop, squadmate=mate)
+        self.machine.events.replace_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
+        self.machine.events.replace_handler("mode_recruit{}_stopped".format(mate), self._on_stop, squadmate=mate)
 
         # If we selected the mission via resume, note it
         if mate == self.machine.game.player["resume_mission"]:
             self._just_resumed = True
 
         # Set a listener for the mode starting so we can play the intro show if not-resume
-        self.machine.events.add_handler("mode_recruit{}_started".format(mate), self._on_mission_started)
+        self.machine.events.replace_handler("mode_recruit{}_started".format(mate), self._on_mission_started)
 
     def _on_mission_started(self, **kwargs):
         del kwargs

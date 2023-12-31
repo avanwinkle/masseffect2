@@ -15,7 +15,7 @@ class RecruitLegion(Mode):
     def __init__(self, *args, **kwargs):
         """Initialize logger and local vars."""
         super().__init__(*args, **kwargs)
-        self.log = logging.getLogger("RecruitLegion Heretics")
+        self.log = logging.getLogger("RecruitLegion")
         self.log.setLevel(10)
         self._timer = None
         # Track an array of ticks that _might_ need handling, to avoid over-processing
@@ -144,7 +144,7 @@ class RecruitLegion(Mode):
         self.log.debug("Shot {} was hit, clearing it.".format(shot_name))
         self._clear_shot(shot_name)
         shot.restart()
-        
+
         # If we are done?
         if player["heretic_progress"] == TOTAL_PROGRESS:
             self.machine.events.post("recruit_legion_precomplete")
@@ -194,4 +194,3 @@ class RecruitLegion(Mode):
         # And do the rotation as well
         self._shot_group.rotate(direction=direction)
         self._block_on_rotate = False
-        

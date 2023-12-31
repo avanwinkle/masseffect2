@@ -71,6 +71,8 @@ class Powers(Mode):
 
         # Disable all power shots before we get started, to ensure a clean slate
         for shot in self.shots:
+            self.log.debug("Disabling shot %s during startup flow", shot)
+            shot.jump(0)
             shot.disable()
 
         # LEGION special case: don't deal with shots
