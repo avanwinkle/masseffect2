@@ -230,6 +230,7 @@ modes:
   - env_bluesuns
   - env_cars
   - env_collectors
+  - env_eclipse
   - env_field
   - env_geth
   - env_gunfight

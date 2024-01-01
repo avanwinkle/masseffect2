@@ -1,0 +1,86 @@
+#config_version=6
+mode:
+  start_events: start_mode_env_eclipse
+  stop_events: stop_mode_env_eclipse, stop_mode_environment
+  events_when_started: start_mode_env_gunfight
+  events_when_stopped: stop_mode_env_gunfight
+  priority: 400
+
+sound_player:
+  envshot_left_ramp_entrance_hit: asari_hit
+  envshot_left_orbit_hit: asari_hit
+  envshot_right_ramp_entrance_hit: salarian_hit
+  envshot_right_orbit_hit: salarian_hit
+  envshot_kickback_hit:
+    eclipse_talking:
+      max_queue_time: 100ms
+
+sound_pools:
+  asari_hit:
+    sounds: asari_hit_short_1, asari_hit_short_2, asari_hit_short_3, asari_hit_short_4
+    type: random_force_all
+    track: sfx
+  salarian_hit:
+    sounds: salarian_hit_short_1, salarian_hit_short_2
+    type: random_force_all
+    track: sfx
+  eclipse_talking:
+    sounds: asari_eclipse_leave_no_survivors, asari_eclipse_weapons_free, salarian_eclipse_eclipse_forever, salarian_eclipse_now_it_gets_fun
+    track: voice
+    type: random_force_all
+
+sounds:
+  asari_eclipse_leave_no_survivors:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304752_m.ogg
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
+  asari_eclipse_weapons_free:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304911_m.ogg
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
+  asari_hit_short_1:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304737_m.ogg
+    track: sfx
+  asari_hit_short_2:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304739_m.ogg
+    track: sfx
+  asari_hit_short_3:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304815_m.ogg
+    track: sfx
+  asari_hit_short_4:
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304816_m.ogg
+    track: sfx
+  salarian_eclipse_eclipse_forever:
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292917_m.ogg
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
+  salarian_eclipse_now_it_gets_fun:
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292937_m.ogg
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
+  salarian_hit_short_1:
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292930_m.ogg
+    track: sfx
+  salarian_hit_short_2:
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292933_m.ogg
+    track: sfx

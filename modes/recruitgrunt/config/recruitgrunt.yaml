@@ -178,21 +178,57 @@ sounds:
   grunt_bossdialogue_1:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_bossdialogue_2:
     file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282306_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_dialogue_1:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310955_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_dialogue_2:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310956_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_dialogue_3:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310953_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   grunt_dialogue_4:
     file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.ogg
     track: voice
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
 
 widget_player:
   logicblock_grunt_shots_counter_updated:

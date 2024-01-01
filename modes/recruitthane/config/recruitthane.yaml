@@ -40,12 +40,12 @@ event_player:
       # Start the orbits at "pending" so we know where they are after rotation
       starting_shots: 2, 1, 0, 0, 2
   # After completion more shots will keep adding hurryup, but won't reset
-  logicblock_thane_ascent_counter_updated:
+  logicblock_thane_ascent_counter_updated.2:
     mission_shot_hit:
       is_bonus_shot:
         value: 1 if device.counters.thane_ascent_counter.value>3 else 0
         type: int
-    update_thane_shots_widget{not device.counters.thane_ascent_counter.complete}:
+    update_thane_shots_widget{not device.counters.thane_ascent_counter.completed}:
       value:
         value: 4 - device.counters.thane_ascent_counter.value
         type: int
@@ -150,10 +150,10 @@ sound_player:
       action: stop
     nas_no_one_gets_across_bridge:
       action: stop
-  logicblock_thane_ascent_counter_hit{count!=3}:
+  logicblock_thane_ascent_counter_hit{remaining>0}:
     nas_misc_sounds:
       max_queue_time: 2s
-  logicblock_thane_ascent_counter_hit{count==3}: nas_no_one_gets_across_bridge
+  logicblock_thane_ascent_counter_hit{remaining==0}: nas_no_one_gets_across_bridge
   envshot_outlane_hit:
     failure_sound:
       max_queue_time: 3s
@@ -173,39 +173,123 @@ sounds:
   nas_damn_it:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00178710_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_where_is_everyone:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189124_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_give_me_a_report:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189125_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_answer_me_dammit:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189126_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_find_out_whats_going_on:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00189127_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_no_one_gets_across_bridge:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199419_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_just_kill_them:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199421_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_finish_them_off:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199422_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_sending_reinforcements:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199425_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_thats_more_like_it:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199423_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   nas_good_work:
     file: en_us_twrasa_nassana_twrasa_bridge_orders_a_00199750_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
   asari_youll_have_to_get_up_to_the_bridge:
     file: en_us_twrasa_quest_giver_twrasa_shuttle_ride_d_00187374_m.ogg
     track: voice
+    volume: 0.9
+    ducking:
+      target: music
+      attenuation: 0.8
+      attack: 10ms
+      release: 10ms
+      release_point: 0
 
 widget_player:
   update_thane_shots_widget:

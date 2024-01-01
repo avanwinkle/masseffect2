@@ -310,6 +310,12 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_thane_1, missioncomplete_voice_thane_2, missioncomplete_voice_thane_3, missioncomplete_voice_thane_low_survival_odds_dont_concern_me
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 100ms
+      release_point: 200ms
   missioncomplete_voice_zaeed_renegade:
     type: random
     track: voice

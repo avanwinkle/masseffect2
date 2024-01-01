@@ -79,11 +79,12 @@ class EnvShot():
         self.machine = machine
         self.mode = mode
         self.name = tag
+        self.targets = self.machine.device_manager.collections["shots"].items_tagged(f"envshot_{self.name}")
         self.log = log
         self._event_handlers = []
 
         try:
-            self._shot = self.machine.device_manager.collections["shots"]["envshot_{}".format(self.name)]
+            self._shot = self.machine.device_manager.collections["shots"][f"envshot_{self.name}"]
             self._shot.disable()  # Disable by default, for safety
             # self.mode.add_mode_event_handler('s_{}{}_inactive'.format(
             #   self.name, "_exit" if self.name.endswith("_ramp") else ""), self.check_shot)
@@ -93,25 +94,18 @@ class EnvShot():
 
     def reset(self):
         """Remove old handlers from this shot and find new tagged shots to add handlers for."""
-        do_enable = True
         # Remove any old handlers
         for handler in self._event_handlers:
             self.machine.events.remove_handler_by_key(handler)
         self._event_handlers = []
 
-        for target in self.get_targets():
+        for target in self.targets:
             # Attach handlers for if this target changes state
             for evt in self.target_statechange_events:
                 self._event_handlers.append(
                     self.mode.add_mode_event_handler(evt.format(target.name), self._check_shot))
-            # If it's already enabled? This envshot is disabled
-            if target.enabled:
-                do_enable = False
 
-        if do_enable:
-            self._enable()
-        else:
-            self._disable()
+        self._check_shot()
 
     def _check_shot(self, **kwargs):
         del kwargs
@@ -139,7 +133,7 @@ class EnvShot():
 
     def get_enabled_shots(self):
         """Return a list of shots tagged with this env_shot name that are enabled and not "off" state."""
-        return list(filter(lambda x: x.enabled and x.state_name != "off", self.get_targets()))
+        return list(filter(lambda x: x.enabled and x.state_name in ("lit", "final"), self.targets))
 
     def get_targets(self):
         """Return all shots tagged as environment shots for this EnvShot."""
