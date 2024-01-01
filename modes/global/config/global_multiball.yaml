@@ -27,6 +27,8 @@ event_player:
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{state=='lit' and not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
+  # When resuming the global mode, re-enable the lock and shot but no slide
+  mode_global_started{current_player.persist_lock>0}: restore_fmball_lock
   # We don't start the multiball during a mission, so hide the show...
   # ... if a mission starts and 2 balls are locked
   mode_type_mission_started.2{device.multiball_locks.fmball_lock.locked_balls==2}: hide_fmball_lock_show
@@ -114,7 +116,7 @@ shot_groups:
 shots:
   fmball_lock_shot:
     hit_events: sw_lock_entrance_active
-    enable_events: enable_fmball_lock
+    enable_events: enable_fmball_lock, restore_fmball_lock
     disable_events:
       - multiball_lock_fmball_lock_locked_ball
       # When we switch from Overlord to Arrival, reset the lock state

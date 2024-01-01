@@ -52,6 +52,9 @@ event_player:
     - enable_captive_1{device.ball_devices.bd_lock.balls==1}
     - enable_captive_2{device.ball_devices.bd_lock.balls==2}
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
+  # Because we use timed enable, manually set an event to re-enable captive
+  bypass_lock_release_pulse_short: cancel_lock_release_pulse|190ms
+  bypass_lock_release_pulse_long: cancel_lock_release_pulse|700ms
   # Fire the hold post to capture a ball
   s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}:
     - fire_hold_post{current_player.high_flow==0 or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}
@@ -200,7 +203,7 @@ multiball_locks:
       - start_mode_suicide_base
     enable_events:
       - enable_fmball_lock
-      - mode_field_started{current_player.persist_lock>0}
+      - restore_fmball_lock
     disable_events:
       - mode_field_will_stop{device.multiball_locks.fmball_lock.locked_balls==2}
       - multiball_lock_fmball_lock_locked_ball
