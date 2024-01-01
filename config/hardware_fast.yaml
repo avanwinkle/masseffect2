@@ -156,7 +156,7 @@ coils:
     number: 0-2
     default_pulse_ms: 50  # Increase from Spike 32
     default_hold_power: 0.12
-    default_timed_enable_ms: 190
+    default_timed_enable_ms: 150  # Decreased from 190
     pulse_with_timed_enable: true
     timed_enable_events: bypass_lock_release_pulse
     disable_events: cancel_lock_release_pulse, ball_will_end

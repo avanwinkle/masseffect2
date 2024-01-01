@@ -14,7 +14,7 @@ While MPF supports LED sequences in "strip" and "ring" form, there's no easy way
 
 ### Sample usage
 
-The LED Ring shows use three tokens: 
+The LED Ring shows use three tokens:
 * `ledring` for the led device (could be light_ring or light_stripe)
 * `color` for the fully-lit color value
 * `fade` for the fade between states
@@ -35,6 +35,6 @@ show_player:
       speed: 1
       show_tokens:
         ledring: test_ring_16
-        color: 009900
+        color: "009900"
         fade: 60ms
 ```

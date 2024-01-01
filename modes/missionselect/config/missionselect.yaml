@@ -141,7 +141,15 @@ show_player:
       speed: 4
       show_tokens:
         ledring: l_mass_relay
-        color: 090000  # color_paragon
+        color: color_health
+        fade: 250ms
+    # Ring the Omega 4 Relay on the playfield
+    led_12_chase_duo:
+      speed: 6
+      sync_ms: 800
+      show_tokens:
+        ledring: l_omega_relay
+        color: "440000"
         fade: 250ms
 
 shows:

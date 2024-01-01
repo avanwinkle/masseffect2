@@ -266,7 +266,7 @@ shows:
     - time: '+1'
       lights:
         (leds):
-          color: 000000
+          color: "000000"
           fade: 100ms
   praet_attack_show_pre:
     - time: 0

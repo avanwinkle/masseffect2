@@ -26,7 +26,7 @@ show_player:
       speed: 4
       show_tokens:
         ledring: l_mass_relay
-        color: 0B0000  # color_paragon
+        color: "0B0000"  # color_paragon
         fade: 250ms
   start_button_flash:
     attract_start_button_flash:
@@ -37,7 +37,7 @@ show_player:
       speed: 8
       show_tokens:
         ledring: l_omega_relay
-        color: 0B0000
+        color: "0B0000"
         fade: 125ms
     explode_center:
       speed: 20

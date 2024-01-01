@@ -7,6 +7,10 @@ class Global(Mode):
 
     __slots__ = ("standups", "is_lock_slide_active")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.is_lock_slide_active = None
+
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
         shots = self.machine.device_manager.collections["shots"]

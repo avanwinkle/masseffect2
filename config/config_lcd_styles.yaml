@@ -379,7 +379,7 @@ widget_styles:
     width: 121
     height: 154
   sqicon_style_background_specialist:
-    color: 007eff
+    color: "007eff"
     opacity: 0.8
   sqicon_style_background_available:
     color: FFFFFF

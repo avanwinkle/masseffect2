@@ -38,8 +38,8 @@ event_player:
   # Enumerate the tension values so MC players don't get duplicate events
   player_tension{player_num==current_player.number}:
     - set_tension_0{value==0 and change<0}
-    - set_tension_1{value==1}
-    - set_tension_2{value==2}
+    - set_tension_1{value==1 and change>0}
+    - set_tension_2{value==2 and change>0}
   set_tension_1:
     - increase_infiltration
     # These two have to be split here because sound_player can't parse the condition
