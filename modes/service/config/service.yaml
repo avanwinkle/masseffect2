@@ -7,6 +7,9 @@ mode:
   stop_events: shutdown
   stop_on_ball_end: False
 
+mode_settings:
+  sort_devices_by_number: false
+
 sounds:
   power_off:
     file: SFXGame.649.ogg

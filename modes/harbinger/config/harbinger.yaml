@@ -171,20 +171,6 @@ shows:
             color: color_harbinger
             leds: light_lock_lit
 
-light_player:
-  player_harbinger_multiplier.1{value>=2}:
-    l_2x_multiplier: on
-  player_harbinger_multiplier.2{value>=3}:
-    l_3x_multiplier: on
-  player_harbinger_multiplier.3{value>=4}:
-    l_4x_multiplier: on
-  player_harbinger_multiplier.4{value>=5}:
-    l_4x_multiplier: on
-  player_harbinger_multiplier.5{value==1}:
-    l_multipliers: off
-  mode_harbinger_will_stop:
-    l_multipliers: off
-
 sound_player:
   enable_harbinger_lockshot:
     harbinger_enabledsound:  # "Assuming direct control..."
