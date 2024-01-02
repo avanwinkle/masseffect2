@@ -30,6 +30,9 @@ event_player:
   play_edi:
     set_environment:
       env: collectors
+  normandy_plunge_hit:
+    post_subtitles:
+      subtitle_text: "Emergency floor lighting will guide you.\nGood luck."
   normandyattack_begin:
     - flippers_on
     - bumpers_on
@@ -43,6 +46,7 @@ event_player:
   normandy_dropbank_lit_hit.1:
     levelup:
       mission_name: Normandy Escaped
+      portrait: normandyattack
   normandy_dropbank_lit_hit.2:
     - stop_mode_normandyattack
   # Add a slight delay to Joker's "shit" for the env collector noise
@@ -208,7 +212,10 @@ shots:
     tags: envshot_outlane
 
 show_player:
-  mode_normandyattack_started: normandyattack_shutdown_show
+  mode_normandyattack_started:
+    normandyattack_shutdown_show:
+      action: play
+      loops: 0
   ball_save_normandyattack_openingsave_saving_ball:
     led_14_chase:
       action: play
@@ -218,20 +225,36 @@ show_player:
         fade: 100ms
         color: 990000
   normandyattack_begin:
+    normandyattack_shutdown_show:
+      action: stop
     normandyattack_show:
       action: play
+      loops: 0
 
 shows:
   normandyattack_shutdown_show:
-    - duration: -1
+    - time: 0
       slides:
         blank_slide:
           action: play
-          target: window
+          target: main
+        blank_portrait:
+          action: play
+          target: lcd_right
       tracks:
         __all__:
           action: stop_all_sounds
           fade: 0
+    - time: '+1'
+    - duration: 4s
+      events:
+        post_subtitles:
+          subtitle_text: "Collectors have invaded the ship.\nUh oh!"
+    - duration: 500ms
+    - duration: 4s
+      events:
+        post_subtitles:
+          subtitle_text: "Follow the lit shots and stuff"
   normandy_light_chase:
     - time: 0
       lights:
@@ -283,8 +306,51 @@ shows:
     - lights:
         light_medigel: color_health%50
 
+slide_player:
+  normandyattack_begin:
+    blank_slide:
+      action: remove
+      target: main
+    blank_portrait:
+      action: remove
+      target: lcd_right
+    normandyattack_slide:
+      action: play
+      target: main
+    normandyattack_portrait:
+      action: play
+      target: lcd_right
+
 slides:
   blank_slide: []
+  blank_portrait: []
+  normandyattack_slide:
+    transition:
+      type: fade
+      duration: 5s
+    widgets:
+      - type: text
+        text: Normandy Attack
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: "Follow the lit shots to evade and\nescape the Collectors"
+        halign: left
+        style: body_sm, row_sub_under, col_left_anchor, color_ui_orange
+        animations:
+          show_slide: pulse_text_slow
+      - type: text
+        text: (score)
+        style: recruitslide_score, row_main, col_left_anchor, num
+        opacity: 0.7
+      - widget: background_console
+        opacity: 0.5
+  normandyattack_portrait:
+    transition:
+      type: fade
+      duration: 5s
+    widgets:
+    - type: image
+      image: portrait_normandyattack
 
 sound_player:
   play_normandy_tension: normandyattack_music
@@ -428,3 +494,15 @@ sounds:
   joker_death:
     file: en_us_hench_joker_norcr3_mission_failure_c_00312044_m.ogg
     track: voice
+
+widgets:
+  normandy_subtitles:
+    - type: text
+      text: (subtitle_text)
+      style: body_sm, row_bottom_margin, col_center
+
+widget_player:
+  post_subtitles:
+    normandy_subtitles:
+      action: update
+      target: main
