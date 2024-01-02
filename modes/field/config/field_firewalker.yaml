@@ -81,27 +81,46 @@ shot_profiles:
       - name: green
 
 show_player:
-  mode_field_started:
-    fw_complete_show{current_player.fwps_lo==2 and (current_player.status_grunt==3 or (current_player.status_grunt==4 and current_player.status_zaeed>=3))}:
-        key: fw_complete_lo
+  fw_packet_left_orbit_hit{state!="green"}:
+    fw_hit_show:
+        key: fw_hit_lo
+        loops: 0
         show_tokens:
           ledring: l_left_orbit_ring
-    fw_complete_show{current_player.fwps_kb==2 and (current_player.status_jack==3 or (current_player.status_jack==4 and current_player.status_legion>=3))}:
-        key: fw_complete_kb
+          color1: ("color_door_red" if state=="red" else "color_door_orange")
+          color2: ("color_door_orange" if state=="red" else "color_door_green")
+  fw_packet_kickback_hit{state!="green"}:
+    fw_hit_show:
+        key: fw_hit_kb
+        loops: 0
         show_tokens:
           ledring: l_kickback_ring
-    fw_complete_show{current_player.fwps_lr==2 and (current_player.status_garrus==3 or (current_player.status_garrus==4 and current_player.status_samara>=3))}:
-        key: fw_complete_lr
+          color1: ("color_door_red" if state=="red" else "color_door_orange")
+          color2: ("color_door_orange" if state=="red" else "color_door_green")
+  fw_packet_left_ramp_hit{state!="green"}:
+    fw_hit_show:
+        key: fw_hit_lr
+        loops: 0
         show_tokens:
           ledring: l_left_ramp_ring
-    fw_complete_show{current_player.fwps_rr==2 and (current_player.status_kasumi==3 or (current_player.status_kasumi==4 and current_player.status_thane>=3))}:
-        key: fw_complete_rr
+          color1: ("color_door_red" if state=="red" else "color_door_orange")
+          color2: ("color_door_orange" if state=="red" else "color_door_green")
+  fw_packet_right_ramp_hit{state!="green"}:
+    fw_hit_show:
+        key: fw_hit_rr
+        loops: 0
         show_tokens:
           ledring: l_right_ramp_ring
-    fw_complete_show{current_player.fwps_ro==2 and (current_player.status_mordin==3 or (current_player.status_mordin==4 and current_player.status_tali>=3))}:
-        key: fw_complete_ro
+          color1: ("color_door_red" if state=="red" else "color_door_orange")
+          color2: ("color_door_orange" if state=="red" else "color_door_green")
+  fw_packet_right_orbit_hit{state!="green"}:
+    fw_hit_show:
+        key: fw_hit_ro
+        loops: 0
         show_tokens:
           ledring: l_right_orbit_ring
+          color1: ("color_door_red" if state=="red" else "color_door_orange")
+          color2: ("color_door_orange" if state=="red" else "color_door_green")
 
 shows:
   fw_packet_show:
@@ -117,9 +136,231 @@ shows:
         (ledring)_light_1: color_door_green%10
         (ledring)_light_3: color_door_green%10
         (ledring)_light_5: color_door_green%10
-  fw_complete_show:
+  fw_hit_show:
+    - duration: 120ms
+      lights:
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color1)%10
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color1)%10
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color1)%10
+        (ledring)_light_1:
+          color: black
+        (ledring)_light_3:
+          color: black
+        (ledring)_light_5:
+          color: black
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color1)%30
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color1)%30
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color1)%30
+        (ledring)_light_0:
+          color: black
+          fade: 60ms
+        (ledring)_light_2:
+          color: black
+          fade: 60ms
+        (ledring)_light_4:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color1)%50
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color1)%50
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color1)%50
+        (ledring)_light_1:
+          color: black
+          fade: 60ms
+        (ledring)_light_3:
+          color: black
+          fade: 60ms
+        (ledring)_light_5:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color1)%70
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color1)%70
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color1)%70
+        (ledring)_light_0:
+          color: black
+          fade: 60ms
+        (ledring)_light_2:
+          color: black
+          fade: 60ms
+        (ledring)_light_4:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color1)%90
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color1)%90
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color1)%90
+        (ledring)_light_1:
+          color: black
+          fade: 60ms
+        (ledring)_light_3:
+          color: black
+          fade: 60ms
+        (ledring)_light_5:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color1)
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color1)
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color1)
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color2)
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color2)
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color2)
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color2)%90
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color2)%90
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color2)%90
+        (ledring)_light_0:
+          color: black
+          fade: 60ms
+        (ledring)_light_2:
+          color: black
+          fade: 60ms
+        (ledring)_light_4:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color2)%70
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color2)%70
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color2)%70
+        (ledring)_light_1:
+          color: black
+          fade: 60ms
+        (ledring)_light_3:
+          color: black
+          fade: 60ms
+        (ledring)_light_5:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color2)%50
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color2)%50
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color2)%50
+        (ledring)_light_0:
+          color: black
+          fade: 60ms
+        (ledring)_light_2:
+          color: black
+          fade: 60ms
+        (ledring)_light_4:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_0:
+          fade: 60ms
+          color: (color2)%30
+        (ledring)_light_2:
+          fade: 60ms
+          color: (color2)%30
+        (ledring)_light_4:
+          fade: 60ms
+          color: (color2)%30
+        (ledring)_light_1:
+          color: black
+          fade: 60ms
+        (ledring)_light_3:
+          color: black
+          fade: 60ms
+        (ledring)_light_5:
+          color: black
+          fade: 60ms
+    - duration: 120ms
+      lights:
+        (ledring)_light_1:
+          fade: 60ms
+          color: (color2)%10
+        (ledring)_light_3:
+          fade: 60ms
+          color: (color2)%10
+        (ledring)_light_5:
+          fade: 60ms
+          color: (color2)%10
+        (ledring)_light_0:
+          fade: 60ms
+          color: stop
+        (ledring)_light_2:
+          fade: 60ms
+          color: stop
+        (ledring)_light_4:
+          fade: 60ms
+          color: stop
     - lights:
-        # ...can't figure out anything that looks good :(
-        (ledring)_light_1: off
-        (ledring)_light_3: off
-        (ledring)_light_5: off
+        (ledring)_light_1:
+          fade: 60ms
+          color: stop
+        (ledring)_light_3:
+          fade: 60ms
+          color: stop
+        (ledring)_light_5:
+          fade: 60ms
+          color: stop
