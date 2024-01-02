@@ -47,6 +47,9 @@ event_player:
     - release_captive_hold
   multiball_collectorship_multiball_ended: release_captive_hold
   mode_harbinger_will_stop: disable_harbinger
+  # MC doesn't have access to running modes, so relay the harbinger taunts
+  ball_drain{not mode.suicide_base.active and game.balls_in_play>1}: play_harbinger_taunt
+  ball_will_end{not mode.suicide_base.active}: play_harbinger_failed
 
 timers:
   # This timer runs while Harbinger is ENABLED and the shot is LIT
@@ -185,10 +188,10 @@ sound_player:
     harbinger_killedsound:   # "This form means nothing..."
       max_queue_time: 1s
   # If harbinger mode is enabled, give a taunt on multiball drain
-  ball_drain{not mode.suicide_base.active and game.balls_in_play>1}:
+  play_harbinger_taunt:
     harbinger_taunt:
-      max_queue_time: 0
-  ball_will_end{not mode.suicide_base.active}:
+      max_queue_time: 100ms
+  play_harbinger_failed:
     harbinger_you_have_failed:
       max_queue_time: 1s
 

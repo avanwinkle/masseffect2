@@ -46,24 +46,24 @@ event_player:
     - start_mode_collectorship_ambush
   # If the player drains to one ball AFTER defeating the praetorian, stop the mode
   multiball_collectorship_multiball_ended.1{device.achievements.collectorship.state=="completed"}:
-    - stop_mode_collectorship_base
+    - stop_mode_harbinger
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
     - stop_mode_collectorship_praetorian
-    - stop_mode_harbinger
-  multiball_collectorship_multiball_ended.2{device.achievements.collectorship.state=="completed"}:
-    levelup:
-      mission_name: Collector Ship Escaped
+    - stop_mode_collectorship_base
   # If the player hasn't defeated the praetorian, the mode continues until end of ball
   ball_will_end.1:
-    - stop_mode_collectorship_base
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
     - stop_mode_collectorship_praetorian
-  ball_will_end.2{device.achievements.collectorship.state!="completed"}:
+    - stop_mode_collectorship_base
+  mode_collectorship_base_will_stop:
     levelup:
-      mission_name: Collector Ship
-      is_failure: true
+      mission_name: Collector Ship Escaped
+      portrait: collectorship_complete
+      is_failure:
+        value: 0 if device.achievements.collectorship.state=="completed" else 1
+        type: int
 
 multiballs:
   collectorship_multiball:

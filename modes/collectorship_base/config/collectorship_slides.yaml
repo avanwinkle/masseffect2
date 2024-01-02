@@ -158,3 +158,14 @@ widgets:
       style: header_sm, row_bottom, row_dmd_sub, col_left_center
       animations:
         add_to_slide: pulse_text
+  portrait_collectorship_complete:
+    - type: image
+      image: codex_collectorship
+      style: codex_image
+    - type: text
+      text: "Disabled Collector Ship"
+      style: codex_title
+    - type: text
+      text: "Shepard escaped the Collectors'\nambush and confirmed that their\nbase lies beyond the Omega 4 Relay.\n\nYou must now find an IFF to allow\nthe Normandy safe passage through."
+      style: codex_text
+    - widget: dossier_recruit_base

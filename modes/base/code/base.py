@@ -20,7 +20,7 @@ class Base(Mode):
       expire="10s"
     )
 
-    # If the levelup is a failure, don't award player vars
+    # If the levelup is a failure, don't award player vars or upgrades
     if kwargs.get("is_failure"):
         return
 
