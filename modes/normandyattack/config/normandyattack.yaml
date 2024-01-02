@@ -26,20 +26,10 @@ event_player:
     - flippers_off
     - bumpers_off
     - slingshots_off
-    - play_edi|2s
-  play_edi:
-    set_environment:
-      env: collectors
-  normandy_plunge_hit:
-    post_subtitles:
-      subtitle_text: "Emergency floor lighting will guide you.\nGood luck."
   normandyattack_begin:
     - flippers_on
     - bumpers_on
     - slingshots_on
-  normandyattack_launchball:
-    # If it's time to begin and the ball is in the plunger lane, fire it out!
-    - pulse_plunger
   # Make sure the dropbank is up so we have a fair shot to hit it
   # (this is a rotation so it's 'value', not 'enabled')
   player_shot_normandy_dropbank{value==1}: reset_dropbank
@@ -51,6 +41,9 @@ event_player:
     - stop_mode_normandyattack
   # Add a slight delay to Joker's "shit" for the env collector noise
   logicblock_normandyattack_shit_hit: play_shit|1500ms
+  clear_subtitles:
+    post_subtitles:
+      subtitle_text: " "
 
 ball_saves:
   # This ball save recovers from the forced drain at power outage
@@ -217,6 +210,9 @@ show_player:
       action: play
       loops: 0
   ball_save_normandyattack_openingsave_saving_ball:
+    normandyattack_openingsave_show:
+      action: play
+      loops: 0
     led_14_chase:
       action: play
       speed: 10
@@ -245,16 +241,42 @@ shows:
         __all__:
           action: stop_all_sounds
           fade: 0
-    - time: '+1'
-    - duration: 4s
+    - time: '+2'
+      events:
+        set_environment:
+          env: collectors
+        post_subtitles:
+          subtitle_text: "Propulsion systems are disabled."
+      sounds: edi_propulsion_disabled_virus_detected
+    - time: '+2'
       events:
         post_subtitles:
-          subtitle_text: "Collectors have invaded the ship.\nUh oh!"
-    - duration: 500ms
-    - duration: 4s
+          subtitle_text: "I'm detecting a virus\nin the ship's computers."
+    - duration: 2s
+  normandyattack_openingsave_show:
+    - time: 0
+      sounds:
+        edi_ballsave:
+          track: voice
+          events_when_played: play_normandy_tension
+      events:
+        play_normandy_tension: {}
+        post_subtitles:
+          subtitle_text: "Main corridors are no longer safe.\nThe Collectors have boarded."
+    - time: '+4'
+      events: normandyattack_saveball
+    - time: '+0.5'
       events:
         post_subtitles:
-          subtitle_text: "Follow the lit shots and stuff"
+          subtitle_text: "The emergency floor lighting will\nguide you, Mr. Moreau."
+      sounds: edi_emergency_floor_lighting
+    - time: '+2.5'
+      events:
+        - clear_subtitles
+        - normandyattack_begin
+        # Force-eject the ball
+        - pulse_plunger
+
   normandy_light_chase:
     - time: 0
       lights:
@@ -356,20 +378,9 @@ sound_player:
   play_normandy_tension: normandyattack_music
   play_horizon_tension: horizon_tension_music
   play_edi: edi_propulsion_disabled_virus_detected
-  ball_save_normandyattack_openingsave_saving_ball:
-    edi_ballsave:
-      track: voice
-      events_when_played: play_normandy_tension
-      events_when_stopped: normandyattack_saveball
   ball_save_normandyattack_save_saving_ball:
     edi_ballsave:
       events_when_stopped: normandyattack_saveball
-  # For the opening intro, play a sound between the trough eject and the plunge
-  normandy_plunge_hit:
-    edi_emergency_floor_lighting:
-      events_when_stopped:
-        - normandyattack_begin
-        - normandyattack_launchball
   logicblock_normandyattack_counter_hit:
     normandy_advance:
       max_queue_time: 3s
@@ -499,7 +510,7 @@ widgets:
   normandy_subtitles:
     - type: text
       text: (subtitle_text)
-      style: body_sm, row_bottom_margin, col_center
+      style: body_sm, row_sub_under, col_center
 
 widget_player:
   post_subtitles:
