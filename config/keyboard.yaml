@@ -36,6 +36,10 @@ keyboard:
     switch: s_target4
   shift+5:
     switch: s_target5
+  shift+6:
+    switch: s_dropbank_top
+  shift+7:
+    switch: s_dropbank_bottom
   shift+8:
     switch: s_lock_1
     toggle: true
@@ -49,6 +53,8 @@ keyboard:
     switch: s_top_lane_left
   "=":
     switch: s_top_lane_right
+  "\\":
+    switch: s_plunger_lane
   l:
     event: bypass_lock_release_pulse
   n:

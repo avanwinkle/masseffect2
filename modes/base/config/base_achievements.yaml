@@ -34,7 +34,7 @@ achievements:
   normandyattack:
     enable_events: mode_derelictreaper_will_stop # Automatically enabled after derelict reaper
     start_events: mode_normandyattack_started
-    complete_events: mode_normandyattack_will_stop # Only played once, completed after playing
+    complete_events: normandyattack_begin # Only played once, completed after playing
     restart_on_next_ball_when_started: false
   # This achievement tracks whether the Suicide Mission is being played or not, overall.
   # There is a state machine below to track where in the mission the player is.
