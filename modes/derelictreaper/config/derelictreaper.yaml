@@ -98,9 +98,6 @@ event_player:
     - stop_mode_frenzy
     # If we destroy the core and there's only one ball in play, end the mode
     - stop_mode_derelictreaper{game.balls_in_play==1}
-  derelictreaper_complete:
-    levelup:
-      mission_name: Reaper IFF Acquired
   # If the multiball ends and a ball is captive, release it and continue the mode
   multiball_reapercoremb_ended.1{device.ball_holds.captive_hold.balls_held>0}: release_captive_hold
   # If the multiball ends with no captive ball and we've already destroyed the core, end the mode
@@ -108,7 +105,15 @@ event_player:
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
   ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
   # Award whatever was accumulated when the mode ends
-  mode_derelictreaper_will_stop: mission_collect_score
+  mode_derelictreaper_will_stop.1: mission_collect_score
+  # Show a levelup slide when the mode ends
+  mode_derelictreaper_will_stop.2:
+    levelup:
+      mission_name: Reaper IFF Acquired
+      portrait: derelictreaper_complete
+      is_failure:
+        value: 0 if device.achievements.derelictreaper.state=="completed" else 1
+        type: int
 
 counters:
   reaperhusk_counter:
@@ -496,3 +501,14 @@ widgets:
     - type: text
       text: "Hits: (value)"
       style: header_xs, row_gutter, col_left_center
+  portrait_derelictreaper_complete:
+    - type: image
+      image: codex_derelictreaper
+      style: codex_image
+    - type: text
+      text: "Derelict Reaper"
+      style: codex_title
+    - type: text
+      text: "The Reaper IFF has been recovered\nand can be installed in the Normandy\nto enter the Omega 4 Relay and\ntake the fight to the Collectors.\n\nContinue exploring until the IFF\nis ready to be tested."
+      style: codex_text
+    - widget: dossier_recruit_base

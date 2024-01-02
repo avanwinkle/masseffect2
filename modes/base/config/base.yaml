@@ -475,7 +475,6 @@ slides:
       - type: text
         text: (mission_name)
         style: body_md, row_sub_under
-        casing: title
       - widget: levelup_background
   n7_complete_slide:
     transition:
