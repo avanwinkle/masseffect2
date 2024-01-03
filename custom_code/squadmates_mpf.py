@@ -429,7 +429,12 @@ class MPFSquadmateHandlers(CustomCode):
         self.machine.events.post("sqicon_update")
 
     def _update_blinken(self, **kwargs):
+        action = kwargs.get("action")
         blinken = self.machine.blinkenlights["missions_available_blinken"]
+
+        # Don't update if the mode is about to end
+        if self.machine.modes["base"].stopping or not self.machine.modes["base"].active:
+            action = "stop"
         if kwargs.get("action") == "stop":
             blinken.remove_all_colors()
             return

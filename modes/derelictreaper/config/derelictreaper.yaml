@@ -158,16 +158,27 @@ variable_player:
 
 shots:
   reaper_lock_shot:
-    enable_events: enable_reaperfrenzy
+    enable_events:
+      - enable_reaperfrenzy
+      # Re-enable the shot if a ball goes missing
+      - ball_device_bd_lock_ball_missing
     disable_events: ball_hold_captive_hold_held_ball
+    profile: color_flashing_static
+    show_tokens:
+      leds: light_lock_lit
+      color: color_shields
   reaper_captive_shot:
     hit_events:
-      - s_battering_ram_active  # For Spike
-      - captive_ball_hit  # For FAST
+      - captive_ball_hit
     enable_events:
       - enable_reapercore
     disable_events:
       - reaper_captive_shot_hit
+      - ball_device_bd_lock_ball_missing
+    profile: color_flashing_fast_static
+    show_tokens:
+      leds: light_reapercore
+      color: color_shields
 
 light_player:
   mode_derelictreaper_started:
@@ -189,28 +200,13 @@ show_player:
     pulse_playfield_smooth:
       speed: 1
       loops: -1
+      # Lower the priority so the shots play through
+      # priority: -100
       show_tokens:
         color: color_husk
-    # For the lock shot
-    color_flashing_default:
-      priority: 100
-      show_tokens:
-        leds: light_lock_lit
-        color: color_shields
-    color_flashing_fast:
-      action: stop
-  ball_hold_captive_hold_held_ball:
-    color_flashing_default:
-      action: stop
   logicblock_reaperhusk_counter_complete:
     pulse_playfield_smooth:
       action: stop
-    # For the captive ball
-    color_flashing_fast:
-      priority: 101
-      show_tokens:
-        leds: light_reapercore
-        color: color_shields
   reaperhusk_hit:
     color_flashing_fast:
       priority: 2

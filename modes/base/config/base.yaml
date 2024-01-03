@@ -604,6 +604,7 @@ sounds:
     start_at: 1500ms
     fade_in: 500ms
     fade_out: 2s
+    mode_end_action: stop
     ducking:
       target: music
       delay: 1500ms

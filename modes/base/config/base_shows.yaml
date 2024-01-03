@@ -357,12 +357,14 @@ shot_profiles:
       - name: lit
         show: color_flashing_default
         sync_ms: 800
+        priority: 100
   color_flashing_fast_static:
     show_when_disabled: false
     states:
       - name: lit
         show: color_flashing_fast
         sync_ms: 800
+        priority: 100
   color_flashing_profile:
     show_when_disabled: false
     states:
@@ -370,6 +372,7 @@ shot_profiles:
         show: color_flashing_default
         speed: 1
         sync_ms: 800
+        priority: 100
       - name: hit
         show: off
   color_flashing_fast_profile:
@@ -379,6 +382,7 @@ shot_profiles:
         show: color_flashing_default
         speed: 2
         sync_ms: 800
+        priority: 100
       - name: hit
         show: off
   color_flashing_to_solid_profile:
