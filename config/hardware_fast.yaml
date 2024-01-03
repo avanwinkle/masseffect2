@@ -45,6 +45,7 @@ ball_devices:
     eject_timeouts: 1500ms
     exit_count_delay: 1s
     ball_missing_timeouts: 2500ms  # In case of balldevice_bd_lock_ball_missing
+    idle_missing_ball_timeout: 2s
     ball_search_order: 20
   bd_hold:
     eject_coil: c_hold_post_release
@@ -100,7 +101,7 @@ coils:
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0
-    default_pulse_ms: 24 # Mk2 was 20, upping to 22. 28 was too much.
+    default_pulse_ms: 22 # Mk2 was 20, upping to 22. 28 was too much.
     default_pulse_power: 1.0
     # debug: true
     # pulse_power: 2
