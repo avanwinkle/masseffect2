@@ -23,6 +23,10 @@ class Airlock(Mode):
         self.add_mode_event_handler("s_airlock_entrance_active", self._debug_enter)
         self.add_mode_event_handler("achievement_arrival_state_enabled", self._set_multiball_color)
 
+        # Use a switch handler for faster & more reliable control
+        self.machine.switch_controller.add_switch_handler(
+               's_airlock_entrance', self._check_bypass)
+
         # On mode start, set the color_mball value based on which multiball is active
         self._set_multiball_color()
 
@@ -51,6 +55,25 @@ class Airlock(Mode):
             self._lockshot = self.machine.shots["{}_shot".format(self._logicallockdevice.name)]
         except KeyError:
             self.log.info("Airlock has no {} lock shot, locking will be disabled")
+
+    def check_bypass(self, **kwargs):
+        # These are the conditions in which we should bypass. Using this inverse
+        # (double negative) so it can bail on the first *and* instead of processing
+        # every *or*
+        if not self.machine.multiball_locks.fmball_lock.enabled and \
+            (self.machine.ball_holds.captive_hold.balls_held>=0 or not self.machine.ball_holds.captive_hold.enabled) and \
+            not self.machine.ball_holds.store_hold.enabled and \
+            not self.machine.ball_holds.arrival_hold.enabled and \
+            not self.machine.ball_holds.sb_hold.enabled:
+                self.log.debug("Bypass check failed, holding ball.")
+                return
+        # No balls? Longer pulse
+        if self.machine.ball_devices.bd_lock.balls==0:
+            self.machine.coils['c_lock_release'].timed_enable(timed_enable_ms=700)
+        # Balls? Pulse with the default_timed_enable_ms
+        else:
+            self.machine.coils['c_lock_release'].timed_enable()
+
 
     def _set_multiball_color(self, **kwargs):
         # Re-define the named_color according to which multiball it is

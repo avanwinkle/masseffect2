@@ -6,11 +6,11 @@ machine:
   balls_installed: 6
   min_balls: 6
 
-event_player:
-  bypass_lock_release_pulse_short: bypass_lock_release_pulse
-  bypass_lock_release_pulse_long:
-      bypass_lock_release_pulse:
-        timed_enable_ms: 700
+# event_player:
+#   bypass_lock_release_pulse_short: bypass_lock_release_pulse
+#   bypass_lock_release_pulse_long:
+#       bypass_lock_release_pulse:
+#         timed_enable_ms: 700
 
 ball_devices:
   bd_plunger:
@@ -157,10 +157,12 @@ coils:
     number: 0-2
     default_pulse_ms: 50  # Increase from Spike 32
     default_hold_power: 0.12
-    default_timed_enable_ms: 150  # Decreased from 190
+    default_timed_enable_ms: 125  # Decreased from 150 to prevent ball loss
     pulse_with_timed_enable: true
-    timed_enable_events: bypass_lock_release_pulse
-    disable_events: cancel_lock_release_pulse, ball_will_end
+    # Use airlock.py to pulse explicitly
+    # timed_enable_events: bypass_lock_release_pulse
+    # disable_events: cancel_lock_release_pulse, ball_will_end
+    disable_events: ball_will_end
     # debug: true
     tags: coil_airlock
   c_orbit_gates:
