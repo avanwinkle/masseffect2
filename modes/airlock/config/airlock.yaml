@@ -35,12 +35,6 @@ event_player:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-  # Hold open the gates if no balls are there, or quickly pop the gates
-  # if a ball is there that we don't want to lock or hold
-  # TODO: Integrate airlock and lockhandler and utilize bypass_lock logic
-  # s_airlock_entrance_active.1{not device.multiball_locks.fmball_lock.enabled and current_player.lost_balls==0 and (device.ball_holds.captive_hold.balls_held>0 or not device.ball_holds.captive_hold.enabled) and not device.ball_holds.store_hold.enabled and not device.ball_holds.arrival_hold.enabled and not device.ball_holds.sb_hold.enabled}:
-  #   - bypass_lock_release_pulse_long{device.ball_devices.bd_lock.balls==0}
-  #   - bypass_lock_release_pulse_short{device.ball_devices.bd_lock.balls>0}
   # Start suicide huddle when a ball is captured
   infiltration_complete: start_mode_suicide_huddle
   longwalk_complete: start_mode_suicide_huddle
@@ -52,9 +46,6 @@ event_player:
     - enable_captive_1{device.ball_devices.bd_lock.balls==1}
     - enable_captive_2{device.ball_devices.bd_lock.balls==2}
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
-  # Because we use timed enable, manually set an event to re-enable captive
-  bypass_lock_release_pulse_short: cancel_lock_release_pulse|190ms
-  bypass_lock_release_pulse_long: cancel_lock_release_pulse|700ms
   # Fire the hold post to capture a ball
   s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}:
     - fire_hold_post{current_player.high_flow==0 or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}
@@ -118,7 +109,6 @@ ball_saves:
     balls_to_save: 1
     enable_events:
       - balldevice_bd_lock_ejecting_ball{not mode.suicide_huddle.active and current_player.lost_balls==0}
-      - bypass_lock_release_pulse_short{current_player.lost_balls==0}
     active_time: 3s
     auto_launch: true
 
@@ -211,12 +201,9 @@ counters:
   captive_ball:
     enable_events:
       - enable_captive
-      - cancel_lock_release_pulse{device.ball_devices.bd_lock.balls}
       - ball_hold_captive_hold_held_ball
     disable_events:
       - disable_captive
-      - bypass_lock_release_pulse_short
-      - bypass_lock_release_pulse_long
       - ball_hold_captive_hold_balls_released
     count_events: captive_ball_1_hit, captive_ball_2_hit, captive_ball_3_hit
     multiple_hit_window: 500ms

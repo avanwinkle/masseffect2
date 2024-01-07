@@ -1,4 +1,5 @@
 import logging
+from mpf.core.delays import DelayManager
 from mpf.core.mode import Mode
 from mpf.core.rgb_color import RGBColor
 
@@ -8,6 +9,7 @@ class Airlock(Mode):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Airlock")
         self.log.setLevel(10)
+        self.delay = DelayManager(self.machine)
         self.settings = self.config.get("mode_settings")
 
         self._bd_physical_lock = None
@@ -34,6 +36,9 @@ class Airlock(Mode):
         # (copied logic from lockhandler.py)
         if self._lockshot.enabled:
             self._post_event('enable_{}'.format(self._logicallockdevice.name))
+
+    def mode_stop(self, **kwargs):
+        self.delay.remove("captive_ball_suspend")
 
     def _find_devices(self):
         # We need a pointer to the physical ball device to count physically locked balls
@@ -81,6 +86,22 @@ class Airlock(Mode):
             self.log.debug("Bypass active and balls held, short pulse enable.")
             self.machine.coils['c_lock_release'].timed_enable()
 
+        # Enable the airlock save
+        self.machine.ball_saves['airlock_save'].enable()
+
+        # Check if the captive ball is enabled, and suspend it
+        if self.machine.counters['captive_ball'].enabled:
+            self.machine.counters['captive_ball'].disable()
+
+            self.delay.reset(name="captive_ball_suspend",
+                             ms=600,
+                             callback=self._restore_captive)
+
+    def _restore_captive(self, **kwargs):
+        del kwargs
+        # In case we lost a ball, don't restore the captive
+        if self.machine.ball_devices.bd_lock.balls>0:
+            self.machine.counters['captive_ball'].enable()
 
     def _set_multiball_color(self, **kwargs):
         # Re-define the named_color according to which multiball it is
