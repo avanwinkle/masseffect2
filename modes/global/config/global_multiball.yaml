@@ -159,6 +159,16 @@ blinkenlight_player:
     airlock_blinken:
       action: remove
       key: color_mball
+  restore_fmball_lock{device.achievements.arrival.state=="disabled"}:
+    airlock_blinken:
+      action: add
+      color: color_overlord
+      key: color_mball
+  restore_fmball_lock{device.achievements.arrival.state!="disabled"}:
+    airlock_blinken:
+      action: add
+      color: color_arrival
+      key: color_mball
 
 show_player:
   fmball_light_shot_lit_hit:
