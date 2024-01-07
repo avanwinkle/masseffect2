@@ -56,22 +56,29 @@ class Airlock(Mode):
         except KeyError:
             self.log.info("Airlock has no {} lock shot, locking will be disabled")
 
-    def check_bypass(self, **kwargs):
+    def _check_bypass(self, **kwargs):
         # These are the conditions in which we should bypass. Using this inverse
         # (double negative) so it can bail on the first *and* instead of processing
-        # every *or*
+        # every *or*. So put them in order of most-likely-to-be-true.
+        do_bypass = False
         if not self.machine.multiball_locks.fmball_lock.enabled and \
             (self.machine.ball_holds.captive_hold.balls_held>=0 or not self.machine.ball_holds.captive_hold.enabled) and \
             not self.machine.ball_holds.store_hold.enabled and \
             not self.machine.ball_holds.arrival_hold.enabled and \
             not self.machine.ball_holds.sb_hold.enabled:
-                self.log.debug("Bypass check failed, holding ball.")
-                return
+                do_bypass = True
+
+        if not do_bypass:
+            self.log.debug("Bypass check failed, holding ball.")
+            return
+
         # No balls? Longer pulse
         if self.machine.ball_devices.bd_lock.balls==0:
-            self.machine.coils['c_lock_release'].timed_enable(timed_enable_ms=700)
+            self.log.debug("Bypass active and no balls held, long pulse enable.")
+            self.machine.coils['c_lock_release'].timed_enable(timed_enable_ms=600)
         # Balls? Pulse with the default_timed_enable_ms
         else:
+            self.log.debug("Bypass active and balls held, short pulse enable.")
             self.machine.coils['c_lock_release'].timed_enable()
 
 
