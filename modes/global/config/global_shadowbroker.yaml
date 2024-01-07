@@ -42,6 +42,7 @@ event_player:
       slide: shadowbroker_advance_slide
       portrait: shadowbroker_advance_2
       clear_recruits: true
+      expire: 6s  # Some of these run up to 9s! But aren't individually customizable
       count:
         value: device.counters.sbdrops_counter.value
         type: int

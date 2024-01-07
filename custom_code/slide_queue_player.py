@@ -27,23 +27,34 @@ class SlideQueuePlayer(CustomCode):
     def on_load(self):
         """Load: create a queue and create event handlers for adding slides."""
         self.machine.events.add_handler("queue_slide", self._add_slide_to_queue)
-        self.machine.events.add_handler("clear_recruit_slide_queue", self._clear_recruit_queue)
+        self.machine.events.add_handler("clear_recruit_slide_queue", self._clear_queue,
+                                        filter_to_clear="recruit_advance",
+                                        clear_current=False)
         self.machine.events.add_handler("check_slide_queue", self._check_queue_clear)
         self.machine.events.add_handler("clear_slide_queue", self._clear_queue)
         self.info_log("Slide Queue Player Ready!")
 
-    def _clear_recruit_queue(self, **kwargs):
+    def _clear_queue(self, filter_to_clear=None, filter_to_keep=None, clear_current=False, **kwargs):
         del kwargs
-        self.info_log("Clearing recruit slides from queue: %s", self._queue)
-        self._queue[:] = [s for s in self._queue if not s[0].startswith("recruit_advance")]
+        self.info_log("Clearing slides from queue: %s", self._queue)
+        if filter_to_keep:
+            self._queue[:] = [s for s in self._queue if s[0].startswith(filter_to_clear)]
+        if filter_to_clear:
+            self._queue[:] = [s for s in self._queue if not s[0].startswith(filter_to_clear)]
         self.info_log("All recruit slides cleared from queue? %s", self._queue)
 
-    def _add_slide_to_queue(self, **kwargs):
+        if clear_current:
+            self._advance_queue()
+
+    def _add_slide_to_queue(self, clear_current=True, **kwargs):
         slide_name = kwargs.pop("slide")
 
         # Some slides may want to accelerate themselves by removing queued recruits
         if kwargs.get("clear_recruits"):
-            self._clear_recruit_queue()
+            self._clear_queue(filter_to_clear="recruit_advance", **kwargs)
+        # Or allow slides to clear anything they like
+        elif kwargs.get("clear"):
+            self._clear_queue(**kwargs)
 
         # Check to see if the last item in the queue matches this one
         # If so, select an alternate version of the slide to avoid a
@@ -67,7 +78,7 @@ class SlideQueuePlayer(CustomCode):
         self._queue.append((slide_name, kwargs))
 
         if not self._current_timeout:
-            self._advance_queue()
+            self._advance_queue(clear_current)
 
     def _advance_queue(self, _dt=None, **kwargs):
         del kwargs
@@ -180,11 +191,6 @@ class SlideQueuePlayer(CustomCode):
                 ),
             }
         return slide_settings
-
-    def _clear_queue(self, **kwargs):
-        del kwargs
-        self._queue = []
-        self._advance_queue()
 
     def _check_queue_clear(self, **kwargs):
         del kwargs

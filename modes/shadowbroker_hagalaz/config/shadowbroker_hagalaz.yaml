@@ -30,12 +30,14 @@ mode:
 
 event_player:
   mode_shadowbroker_hagalaz_started.2:
+    - enable_random_shuntshot|2s
     - capacitors_charged_ready|10s
   # Fake the counter event to get the widget onscreen
   mode_shadowbroker_hagalaz_started.1:
     logicblock_shunt_counter_hit:
       value: device.counters.shunt_counter.value
     set_mission_shots:
+      env: gunfight
       shots_total: 9
       is_resumable: 1 # Not actually, but don't reset hurryup after shots
       ticks: 60
@@ -46,6 +48,7 @@ event_player:
     - capacitors_charged_ready|10s
   logicblock_shunt_counter_complete:
     - enable_hatch
+    - play_hatch_is_open|3s
     - enable_sb_hold
     - missiontimer_stop
     - mission_collect_score
@@ -125,6 +128,7 @@ shot_groups:
   shunt_shot:
     shots: shunt_left_orbit, shunt_right_orbit, shunt_left_ramp, shunt_right_ramp, shunt_kickback
     disable_events: mode_shadowbroker_hagalaz_started, enable_hatch
+    reset_events: mode_shadowbroker_hagalaz_started
   capacitor_shot:
     shots: hagalaz_target1, hagalaz_target2, hagalaz_target3, hagalaz_target4, hagalaz_target5
     # shot_groups don't actually have advance_events, so have to advance each shot individually
@@ -151,8 +155,6 @@ shots:
     hit_events: sh_kickback_hit
     enable_events: enable_hatch
     profile: hatch_profile
-    show_tokens:
-      leds: l_kickback_shield_rgb
   shunt_left_orbit:
     hit_events: sh_left_orbit_hit, hagalaz_target1_charged_hit
     enable_events: enable_shunt_left_orbit
@@ -161,6 +163,7 @@ shots:
     show_tokens:
       leds: l_left_orbit_shield_rgb
       color: color_shields
+    tags: envshot_left_orbit
   shunt_kickback:
     hit_events: sh_kickback_hit, hagalaz_target1_charged_hit, hagalaz_target2_charged_hit
     enable_events: enable_shunt_kickback
@@ -169,6 +172,7 @@ shots:
     show_tokens:
       leds: l_kickback_shield_rgb
       color: color_shields
+    tags: envshot_kickback
   shunt_left_ramp:
     hit_events: sh_left_ramp_hit, hagalaz_target2_charged_hit, hagalaz_target3_charged_hit
     enable_events: enable_shunt_left_ramp
@@ -177,6 +181,7 @@ shots:
     show_tokens:
       leds: l_left_ramp_shield_rgb
       color: color_shields
+    tags: envshot_left_ramp
   shunt_right_ramp:
     hit_events: sh_right_ramp_hit, hagalaz_target4_charged_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_ramp
@@ -185,6 +190,7 @@ shots:
     show_tokens:
       leds: l_right_ramp_shield_rgb
       color: color_shields
+    tags: envshot_right_ramp
   shunt_right_orbit:
     hit_events: sh_right_orbit_hit, hagalaz_target5_charged_hit
     enable_events: enable_shunt_right_orbit
@@ -193,6 +199,7 @@ shots:
     show_tokens:
       leds: l_right_orbit_shield_rgb
       color: color_shields
+    tags: envshot_right_orbit
   hagalaz_target1:
     switch: s_target1
     advance_events: capacitors_charged_ready
@@ -224,33 +231,102 @@ shots:
     show_tokens:
       leds: l_standup_5
 
+light_player:
+  mode_shadowbroker_hagalaz_started:
+    gi:
+      color: color_dirt_75
+      fade: 5s
+
 show_player:
   # Make some lightning!
   mode_shadowbroker_hagalaz_started:
+    hagalaz_intro_show:
+      loops: 0
     lightning_show:
       loops: 2
+    led_12_chase_pulse:
+      key: mass_relay_chase
+      speed: 2
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_armor
+        fade: 20ms
+    led_14_chase_ambient:
+      loops: -1
+      speed: 10
+      show_tokens:
+        ledring: l_backwall_ambient
+        ambient: color_space
+        color: color_armor
+        fade: 200ms
+  enable_hatch:
+    mass_relay_chase:
+      action: stop
+    led_12_chase_pulse:
+      speed: 1
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_door_green
+        fade: 20ms
+    flash_color_show:
+      loops: 1
+      speed: 4
+      priority: 200
+      show_tokens:
+        leds: l_backwall_gi
+        color: color_door_green
+  shunt_shot_hit:
+    single_flash_color:
+      loops: 0
+      priority: 100
+      show_tokens:
+        leds: l_backwall_gi
+        color: color_lightning
   capacitors_charged_ready:
     lightning_show:
-      loops: 2
-    pulse_playfield_smooth:
+      loops: 1
+    pulse_playfield:
       loops: 0
+      speed: 4
       show_tokens:
         color: color_lightning
   capacitor_shot_charged_hit:
+    lightning_show:
+      loops: 3
+      speed: 3
     pulse_playfield:
       loops: 4
-      speed: 2
+      speed: 4
       show_tokens:
         color: color_lightning
 
 shows:
+  hagalaz_intro_show:
+    - time: 1s
+      sounds:
+        liara_its_locked_ive_got_a_shunt_program:
+          action: play
+    - time: 2s
+      events: play_sbagent_music
+    - time: 8200ms
+      events: mode_intro_complete
   hatch_show:
-    - time: 0
+    - duration: 400ms
       lights:
-        (leds): color_door_green
-    - time: '+1'
+        l_kickback_shield_rgb:
+          color: color_door_green
+          fade: 200ms
+        l_kickback_arrow:
+          color: color_shields
+          fade: 200ms
+    - duration: 400ms
       lights:
-        (leds): color_shields
+        l_kickback_shield_rgb:
+          color: color_shields
+          fade: 200ms
+        l_kickback_arrow:
+          color: color_door_green
+          fade: 200ms
   capacitor_charging_show:
     - time: 0
       lights:
@@ -275,43 +351,52 @@ shows:
           fade: 250ms
   lightning_show:
     - time: 0
-      flashers:
-        # l_flash_throne: 120ms
-        light_top_lane: 120ms
-        l_flash_left_orbit: 120ms
+      shows:
+        single_flash:
+          loops: 0
+          show_tokens:
+            leds: light_top_lane, l_flash_left_orbit
+            color: white
     - time: 400ms
-      flashers:
-        # l_flash_kickback: 200ms
-        # l_flash_right_ramp: 200ms
-        l_mass_relay: 200ms
+      shows:
+        single_flash:
+          loops: 0
+          show_tokens:
+            leds: l_mass_relay
+            color: white
     - time: 500ms
-      flashers:
-        l_targets: 120ms
+      shows:
+        single_flash:
+          loops: 0
+          show_tokens:
+            leds: l_targets
+            color: white
     - time: 700ms
-      flashers:
-        # l_flash_dragon_right: 120ms
-        # l_flash_slingshots: 200ms
-        l_backwall_gi: 200ms
+      shows:
+        single_flash:
+          loops: 0
+          show_tokens:
+            leds: l_backwall_gi
+            color: white
     - time: 800ms
-      flashers:
-        l_gi_bottom: 200ms
+      shows:
+        single_flash:
+          loops: 0
+          show_tokens:
+            leds: gi_bottom
+            color: white
     - time: 2s
 
 sound_player:
-  mode_shadowbroker_hagalaz_started:
-    shadowbroker_agent_music:
-      action: play
-      mode_end_action: stop
-    liara_its_locked_ive_got_a_shunt_program:
-      action: play
-      events_when_stopped: mode_intro_complete
   enable_hatch:
-    liara_hatch_is_open:
-      action: play
     shadowbroker_agent_music:
       action: stop
       fade_out: 3s
     shadowbroker_enter_music:
+      action: play
+  # Delay the "hatch is open" until the music is mostly out
+  play_hatch_is_open:
+    liara_hatch_is_open:
       action: play
   # Stub out some music loops
   play_sbagent_music: shadowbroker_agent_music
@@ -389,9 +474,11 @@ sound_pools:
       - liara_try_firing_at_capacitors
   capacitor_charged_sound:
     track: sfx
+    volume: 1.0
     sounds: capacitor_tech_charge_1, capacitor_tech_charge_2
   capacitor_explode_sound:
     track: sfx
+    volume: 1.0
     sounds: capacitor_tech_expl_1, capacitor_tech_expl_2
 
 sounds:
@@ -500,7 +587,14 @@ sounds:
 slide_player:
   mode_shadowbroker_hagalaz_started:
     hagalaz_slide: {}
+    hagalaz_intro:
+      target: lcd_right
+      priority: 100
     hagalaz_portrait:
+      target: lcd_right
+  mode_intro_complete:
+    hagalaz_intro:
+      action: remove
       target: lcd_right
   logicblock_shunt_counter_complete: hagalaz_complete_slide
 
@@ -511,11 +605,16 @@ slides:
         text: Lair of the Shadow Broker
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
-        text: Infiltrate the Ship
-        style: header_md, row_main, col_left_anchor
+        text: "Infiltrate the\nShip"
+        style: header_md, row_sub, col_left_anchor
         animations:
           mode_intro_complete: pulse_text
       - widget: background_console
+  hagalaz_intro:
+    widgets:
+      - type: video
+        video: shadowbroker_hagalaz_intro
+        volume: 0.7
   hagalaz_portrait:
     widgets:
       - type: image
@@ -526,8 +625,8 @@ slides:
         text: Lair of the Shadow Broker
         style: header_xs, row_top, col_left_anchor, mission_title
       - type: text
-        text: ENTER THE SHIP
-        style: header_md, row_main, col_left_anchor
+        text: "ENTER\nTHE SHIP"
+        style: header_md, row_sub, col_center
         animations:
           show_slide: pulse_text_slow
       - widget: background_console

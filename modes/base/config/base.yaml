@@ -143,8 +143,7 @@ ball_saves:
     grace_period: 2s
     hurry_up_time: 5s
     enable_events:
-      # - mode_base_started
-      - fakeeventfortesting
+      - mode_base_started
     timer_start_events:
       - balldevice_bd_plunger_ball_eject_success
     disable_events:

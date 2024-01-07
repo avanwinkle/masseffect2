@@ -101,22 +101,25 @@ shot_profiles:
   sbboss_shot_profile:
     states:
       - name: shields
-        show: lane_shot_profile
-        speed: 1
+        show: led_6_chase
+        speed: 10
         show_tokens:
           color: color_shields
+          fade: 20ms
       - name: armor
-        show: lane_shot_profile
-        speed: 2
+        show: led_6_chase
+        speed: 20
         show_tokens:
           color: color_armor
+          fade: 20ms
   sbboss_health_profile:
     states:
       - name: health
-        show: lane_shot_profile
-        speed: 3
+        show: led_6_chase
+        speed: 30
         show_tokens:
           color: color_health
+          fade: 20ms
 
 shot_groups:
   sbboss_shot:
@@ -280,6 +283,7 @@ sound_player:
   mode_intro_complete:
     shadowbroker_boss_music:
       action: play
+      fade_in: 500ms
     # Preload the sound assets for the show
     liara_energy_projectiles_bouncing_off:
       action: load
