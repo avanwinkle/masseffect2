@@ -121,9 +121,9 @@ credits:
     - event: high_score_credit
       type: high_score
       credits: 1
-    - event: match
+    - event: match_has_match
       type: match
-      credits: 1
+      credits: winners  # Award credits equal to the number of winners
   fractional_credit_expiration_time: 15m
   credit_expiration_time: 2h
   persist_credits_while_off_time: 1h
