@@ -80,6 +80,16 @@ shot_profiles:
       - name: orange
       - name: green
 
+sounds:
+  fw_packet_sound:
+    file: SFXGame.622.ogg
+    track: sfx
+
+sound_player:
+  fw_packet_shots_hit:
+    fw_packet_sound:
+      track: sfx
+
 show_player:
   fw_packet_left_orbit_hit{state!="green"}:
     fw_hit_show:

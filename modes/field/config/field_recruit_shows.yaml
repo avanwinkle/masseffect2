@@ -9,69 +9,18 @@ event_player:
 
 show_player:
   # TODO: Abstract these to be programmatic
-  recruit_garrus_shot_active_hit:
+  squadmate_advance:
     flash_all_shields_show:
       loops: 4
       speed: 12
       priority: 100
       show_tokens:
-        color: color_garrus
-  recruit_grunt_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
+        color: (color)
+    single_flash_color:
+      loops: 0
       show_tokens:
-        color: color_grunt
-  recruit_jack_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_jack
-  recruit_kasumi_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_kasumi
-  recruit_legion_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_legion
-  recruit_mordin_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_mordin
-  recruit_tali_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_tali
-  recruit_thane_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_thane
-  recruit_zaeed_shot_active_hit:
-    flash_all_shields_show:
-      loops: 4
-      speed: 12
-      priority: 100
-      show_tokens:
-        color: color_zaeed
+        leds: light_backwall_gi
+        color: (color)
   mode_field_started.1:
     # TODO: Write a show with steps for each progress phase of miniwizards
     color_alternating_default{device.achievements.collectorship.state=="enabled"}:

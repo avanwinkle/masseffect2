@@ -267,7 +267,7 @@ class MPFSquadmateHandlers(CustomCode):
 
             player["status_{}".format(mate)] = future_mate_status
             player["recruits_color"] = COLORS[mate]
-            self.machine.events.post("flash_all_shields")
+            self.machine.events.post("squadmate_advance", mate=mate, color=COLORS[mate])
 
             if do_update_shows:
                 self._play_squadmates_show()
