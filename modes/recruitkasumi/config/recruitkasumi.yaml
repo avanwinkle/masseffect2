@@ -381,24 +381,24 @@ sound_pools:
 
 sounds:
   recruit_music_kasumi_1:
-    file: KAS.03.Infiltration.ogg
+    file: KAS.03.Infiltration.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_2:
-    file: KAS.02.Making_Our_Escape.ogg
+    file: KAS.02.Making_Our_Escape.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   recruit_music_kasumi_3:
-    file: KAS.01.Death_from_Above.ogg
+    file: KAS.01.Death_from_Above.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
     fade_in: 1s
     start_at: 15s
   kasumi_list_of_items:
-    file: DLC_HEN_MT_Int.468.ogg
+    file: DLC_HEN_MT_Int.468.wav
     track: voice
     ducking:
       target: music
@@ -407,10 +407,10 @@ sounds:
       release_point: 200ms
       release: 500ms
   kasumi_barrier_is_down:
-    file: DLC_HEN_MT_Int.446.ogg
+    file: DLC_HEN_MT_Int.446.wav
     track: voice
   kasumi_got_voice:
-    file: DLC_HEN_MT_Int.555.ogg
+    file: DLC_HEN_MT_Int.555.wav
     track: voice
     ducking:
       target: music
@@ -419,16 +419,16 @@ sounds:
       release_point: 200ms
       release: 500ms
   kasumi_lets_crack_voice:
-    file: DLC_HEN_MT_Int.592.ogg
+    file: DLC_HEN_MT_Int.592.wav
     track: voice
   kasumi_need_dna:
-    file: DLC_HEN_MT_Int.453.ogg
+    file: DLC_HEN_MT_Int.453.wav
     track: voice
   kasumi_look_for_dna:
-    file: DLC_HEN_MT_Int.665.ogg
+    file: DLC_HEN_MT_Int.665.wav
     track: voice
   kasumi_not_great_saliva_sample:
-    file: DLC_HEN_MT_Int.678.ogg
+    file: DLC_HEN_MT_Int.678.wav
     track: voice
     ducking:
       target: music
@@ -437,61 +437,61 @@ sounds:
       release_point: 200ms
       release: 500ms
   kasumi_that_should_do_it: # Done with DNA but not explicit
-    file: DLC_HEN_MT_Int.657.ogg
+    file: DLC_HEN_MT_Int.657.wav
     track: voice
   kasumi_need_password_and_voice:
-    file: DLC_HEN_MT_Int.415.ogg
+    file: DLC_HEN_MT_Int.415.wav
     track: voice
   kasumi_weve_got_the_password_need_voice:
-    file: DLC_HEN_MT_Int.417.ogg
+    file: DLC_HEN_MT_Int.417.wav
     track: voice
   kasumi_still_need_password_and_voice:
-    file: DLC_HEN_MT_Int.420.ogg
+    file: DLC_HEN_MT_Int.420.wav
     track: voice
   kasumi_still_need_voice_1:
-    file: DLC_HEN_MT_Int.422.ogg
+    file: DLC_HEN_MT_Int.422.wav
     track: voice
   kasumi_still_need_voice_2:
-    file: DLC_HEN_MT_Int.437.ogg
+    file: DLC_HEN_MT_Int.437.wav
     track: voice
   kasumi_this_is_where_your_special_skills:
-    file: DLC_HEN_MT_Int.779.ogg
+    file: DLC_HEN_MT_Int.779.wav
     track: voice
   kasumi_damn_you_hock:
-    file: DLC_HEN_MT_Int.794.ogg
+    file: DLC_HEN_MT_Int.794.wav
     track: voice
   kasumi_careful_barrier_up:
-    file: DLC_HEN_MT_Int.440.ogg
+    file: DLC_HEN_MT_Int.440.wav
     track: voice
   kasumi_dont_touch_that_without_dna_set_off_alarm:
-    file: DLC_HEN_MT_Int.451.ogg
+    file: DLC_HEN_MT_Int.451.wav
     track: voice
   kasumi_hey_no_touching:
-    file: DLC_HEN_MT_Int.452.ogg
+    file: DLC_HEN_MT_Int.452.wav
     track: voice
   kasumi_damn:
-    file: DLC_HEN_MT_Int.176.ogg
+    file: DLC_HEN_MT_Int.176.wav
     track: voice
   kasumi_try_again:
-    file: DLC_HEN_MT_Int.174.ogg
+    file: DLC_HEN_MT_Int.174.wav
     track: voice
   # guard_room_off_limits:
-  #   file: DLC_HEN_MT_Int.681.ogg
+  #   file: DLC_HEN_MT_Int.681.wav
   #   track: voice
   # guard_i_told_you_room_off_limits:
-  #   file: DLC_HEN_MT_Int.683.ogg
+  #   file: DLC_HEN_MT_Int.683.wav
   #   track: voice
   # guard_turn_around_now:
-  #   file: DLC_HEN_MT_Int.691.ogg
+  #   file: DLC_HEN_MT_Int.691.wav
   #   track: voice
   # guard_you_stop:
-  #   file: DLC_HEN_MT_Int.717.ogg
+  #   file: DLC_HEN_MT_Int.717.wav
   #   track: voice
   shepard_password_is_perrugia:
-    file: DLC_HEN_MT_Int.442.ogg
+    file: DLC_HEN_MT_Int.442.wav
     track: voice
   shepard_damn:
-    file: DLC_HEN_MT_Int.669.ogg
+    file: DLC_HEN_MT_Int.669.wav
     track: voice
 
 widgets:

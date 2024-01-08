@@ -360,7 +360,7 @@ sound_pools:
 
 sounds:
   missioncomplete_voice_garrus_1:
-    file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.wav
     track: voice
     ducking:
       target: levelup
@@ -369,7 +369,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_garrus_2:
-    file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.ogg
+    file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.wav
     track: voice
     ducking:
       target: levelup
@@ -378,7 +378,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   garrus_fit_for_duty_whenever:
-    file: en_us_hench_garrus_norgra_debriefing_d_00225772_m.ogg
+    file: en_us_hench_garrus_norgra_debriefing_d_00225772_m.wav
     track: voice
     ducking:
       target: levelup
@@ -387,13 +387,13 @@ sounds:
       release: 300ms
       release_point: 500ms
   # garrus_hold_fire:
-  #   file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+  #   file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.wav
   #   track: voice
   garrus_that_did_nothing:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303091_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303091_m.wav
     track: voice
   missioncomplete_voice_grunt_1:
-    file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.ogg
+    file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.wav
     track: voice
     ducking:
       target: levelup
@@ -402,7 +402,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_grunt_2:
-    file: en_us_hench_grunt_norkg_relationship_03_h_00274203_m.ogg
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274203_m.wav
     track: voice
     ducking:
       target: levelup
@@ -411,7 +411,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_grunt_3:
-    file: en_us_hench_grunt_norkg_relationship_03_h_00274197_m.ogg
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274197_m.wav
     track: voice
     ducking:
       target: levelup
@@ -420,7 +420,7 @@ sounds:
       release: 30ms
       release_point: 50ms
   missioncomplete_voice_grunt_4:
-    file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.ogg
+    file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.wav
     track: voice
     ducking:
       target: levelup
@@ -429,7 +429,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_grunt_5:
-    file: en_us_hench_grunt_norkg_relationship_03_h_00274200_m.ogg
+    file: en_us_hench_grunt_norkg_relationship_03_h_00274200_m.wav
     track: voice
     ducking:
       target: levelup
@@ -438,7 +438,7 @@ sounds:
       release: 30ms
       release_point: 50ms
   missioncomplete_voice_jack_1:
-    file: en_us_hench_convict_prscva_cv_join_d_00198389_m.ogg
+    file: en_us_hench_convict_prscva_cv_join_d_00198389_m.wav
     track: voice
     ducking:
       target: levelup
@@ -447,7 +447,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_jack_2:
-    file: en_us_hench_convict_prscva_cv_join_d_00200320_m.ogg
+    file: en_us_hench_convict_prscva_cv_join_d_00200320_m.wav
     track: voice
     ducking:
       target: levelup
@@ -456,7 +456,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   jack_nice_little_group_and_ship:
-    file: en_us_hench_convict_norcv_starter_h_00191411_m.ogg
+    file: en_us_hench_convict_norcv_starter_h_00191411_m.wav
     track: voice
     ducking:
       target: levelup
@@ -465,7 +465,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_1:
-    file: DLC_HEN_MT_Int.773.ogg
+    file: DLC_HEN_MT_Int.773.wav
     track: voice
     ducking:
       target: levelup
@@ -474,7 +474,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_2:
-    file: DLC_HEN_MT_Int.022.ogg
+    file: DLC_HEN_MT_Int.022.wav
     track: voice
     ducking:
       target: levelup
@@ -483,7 +483,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_3:
-    file: DLC_HEN_MT_Int.061.ogg
+    file: DLC_HEN_MT_Int.061.wav
     track: voice
     # end_at: 3230ms
     ducking:
@@ -493,7 +493,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_4:
-    file: DLC_HEN_MT_Int.067.ogg
+    file: DLC_HEN_MT_Int.067.wav
     track: voice
     start_at: 1500ms
     ducking:
@@ -503,7 +503,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_5:
-    file: DLC_HEN_MT_Int.081.ogg
+    file: DLC_HEN_MT_Int.081.wav
     track: voice
     ducking:
       target: levelup
@@ -512,7 +512,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_kasumi_6:
-    file: DLC_HEN_MT_Int.086.ogg
+    file: DLC_HEN_MT_Int.086.wav
     track: voice
     ducking:
       target: levelup
@@ -521,7 +521,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_legion_1:
-    file: en_us_hench_geth_norgt_relationship00_h_00275284_m.ogg
+    file: en_us_hench_geth_norgt_relationship00_h_00275284_m.wav
     track: voice
     ducking:
       target: levelup
@@ -530,7 +530,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_legion_2:
-    file: en_us_hench_geth_norgt_relationship00_h_00275287_m.ogg
+    file: en_us_hench_geth_norgt_relationship00_h_00275287_m.wav
     track: voice
     ducking:
       target: levelup
@@ -539,7 +539,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_legion_3:
-    file: en_us_hench_geth_norgt_relationship00_h_00275294_m.ogg
+    file: en_us_hench_geth_norgt_relationship00_h_00275294_m.wav
     track: voice
     ducking:
       target: levelup
@@ -548,7 +548,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_mordin_1:
-    file: en_us_hench_professor_omgpra_mordin_d_00210601_m.ogg
+    file: en_us_hench_professor_omgpra_mordin_d_00210601_m.wav
     track: voice
     ducking:
       target: levelup
@@ -557,7 +557,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_mordin_2:
-    file: en_us_hench_professor_omgpra_mordin_d_00210653_m.ogg
+    file: en_us_hench_professor_omgpra_mordin_d_00210653_m.wav
     track: voice
     ducking:
       target: levelup
@@ -566,7 +566,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_samara_1:
-    file: en_us_hench_mystic_twrmwa_mw02_d_00197868_m.ogg
+    file: en_us_hench_mystic_twrmwa_mw02_d_00197868_m.wav
     track: voice
     ducking:
       target: levelup
@@ -575,7 +575,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_samara_2:
-    file: en_us_hench_mystic_twrmwa_mw02_d_00197872_m.ogg
+    file: en_us_hench_mystic_twrmwa_mw02_d_00197872_m.wav
     track: voice
     ducking:
       target: levelup
@@ -584,7 +584,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_samara_3:
-    file: en_us_hench_mystic_twrmwa_mw02_d_00216220_m.ogg
+    file: en_us_hench_mystic_twrmwa_mw02_d_00216220_m.wav
     track: voice
     ducking:
       target: levelup
@@ -593,7 +593,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_tali:
-    file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.ogg
+    file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.wav
     track: voice
     ducking:
       target: levelup
@@ -602,7 +602,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_thane_1:
-    file: en_us_hench_assassin_norasa_debrief_d_00223267_m.ogg
+    file: en_us_hench_assassin_norasa_debrief_d_00223267_m.wav
     track: voice
     ducking:
       target: levelup
@@ -611,7 +611,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_thane_2:
-    file: en_us_hench_assassin_norasa_debrief_d_00223275_m.ogg
+    file: en_us_hench_assassin_norasa_debrief_d_00223275_m.wav
     track: voice
     ducking:
       target: levelup
@@ -620,7 +620,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_thane_3:
-    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.ogg
+    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.wav
     track: voice
     ducking:
       target: levelup
@@ -629,7 +629,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_thane_low_survival_odds_dont_concern_me:
-    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00307859_m.ogg
+    file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00307859_m.wav
     track: voice
     ducking:
       target: levelup
@@ -638,7 +638,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_renegade_1:
-    file: DLC_HEN_VT_Int.213.ogg
+    file: DLC_HEN_VT_Int.213.wav
     track: voice
     ducking:
       target: levelup
@@ -647,7 +647,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_renegade_2:
-    file: DLC_HEN_VT_Int.505.ogg
+    file: DLC_HEN_VT_Int.505.wav
     track: voice
     ducking:
       target: levelup
@@ -656,7 +656,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_renegade_3:
-    file: DLC_HEN_VT_Int.506.ogg
+    file: DLC_HEN_VT_Int.506.wav
     track: voice
     ducking:
       target: levelup
@@ -665,7 +665,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_paragon_1:
-    file: DLC_HEN_VT_Int.216.ogg
+    file: DLC_HEN_VT_Int.216.wav
     track: voice
     ducking:
       target: levelup
@@ -674,7 +674,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_paragon_2:
-    file: DLC_HEN_VT_Int.476.ogg
+    file: DLC_HEN_VT_Int.476.wav
     track: voice
     ducking:
       target: levelup
@@ -683,7 +683,7 @@ sounds:
       release: 300ms
       release_point: 500ms
   missioncomplete_voice_zaeed_paragon_3:
-    file: DLC_HEN_VT_Int.485.ogg
+    file: DLC_HEN_VT_Int.485.wav
     track: voice
     ducking:
       target: levelup
@@ -692,48 +692,48 @@ sounds:
       release: 300ms
       release_point: 500ms
   kasumi_damn_it:
-    file: DLC_HEN_MT_Int.173.ogg
+    file: DLC_HEN_MT_Int.173.wav
     track: voice
   kasumi_look_out:
-    file: DLC_HEN_MT_Int.110.ogg
+    file: DLC_HEN_MT_Int.110.wav
     track: voice
   kasumi_damn_it_we_have_to_find_another_way:
-    file: DLC_HEN_MT_Int.817.ogg
+    file: DLC_HEN_MT_Int.817.wav
     track: voice
   # From field_recruit_sounds
   garrus_shot_sound_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303204_m.wav
     track: voice
   garrus_shot_sound_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00330893_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330893_m.wav
     track: voice
   garrus_shot_sound_3:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00330906_m.wav
     track: voice
   garrus_nice_work:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303089_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303089_m.wav
     track: voice
   garrus_impressive:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303126_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303126_m.wav
     track: voice
   samara_shot_sound_1:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00316732_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00316732_m.wav
     track: voice
   samara_shot_sound_2:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331131_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331131_m.wav
     track: voice
   samara_shot_sound_3:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331153_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331153_m.wav
     track: voice
   samara_shot_sound_4:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331158_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331158_m.wav
     track: voice
   samara_shot_sound_5:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00331164_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00331164_m.wav
     track: voice
   ws_you_cant_stop_us:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244289_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244289_m.wav
     track: voice
   ws_this_isnt_over:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244235_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244235_m.wav
     track: voice

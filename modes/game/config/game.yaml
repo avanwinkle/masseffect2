@@ -266,59 +266,59 @@ sound_pools:
 
 sounds:
   garrus_im_with_you:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303032_m.ogg # "I'm with you"
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303032_m.wav # "I'm with you"
     track: voice
   garrus_lets_try_this:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303208_m.ogg # "Let's try this"
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303208_m.wav # "Let's try this"
     track: voice
   garrus_back_in_the_game:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00314420_m.ogg # "Back in the game"
+    file: en_us_hench_garrus_ss_global_hench_garrus_00314420_m.wav # "Back in the game"
     track: voice
   grunt_im_here_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295701_m.ogg # "I'm here"
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295701_m.wav # "I'm here"
     track: voice
   grunt_im_here_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295709_m.ogg # "I'm here"
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295709_m.wav # "I'm here"
     track: voice
   grunt_shotgun_ready:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295719_m.ogg # "Shotgun ready"
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295719_m.wav # "Shotgun ready"
     track: voice
   grunt_one_more:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295883_m.ogg # "One more"
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295883_m.wav # "One more"
     track: voice
   grunt_im_back:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00317208_m.ogg # "I'm back!"
+    file: en_us_hench_grunt_ss_global_hench_grunt_00317208_m.wav # "I'm back!"
     track: voice
   jack_want_some_more:
-    file: en_us_hench_convict_ss_global_hench_convict_00296189_m.ogg # "Want some more?"
+    file: en_us_hench_convict_ss_global_hench_convict_00296189_m.wav # "Want some more?"
     track: voice
   jack_on_my_way:
-    file: en_us_hench_convict_ss_global_hench_convict_00296332_m.ogg # "On my way"
+    file: en_us_hench_convict_ss_global_hench_convict_00296332_m.wav # "On my way"
     track: voice
   jack_im_back:
-    file: en_us_hench_convict_ss_global_hench_convict_00316548_m.ogg # "I'm back"
+    file: en_us_hench_convict_ss_global_hench_convict_00316548_m.wav # "I'm back"
     track: voice
   jack_ready_to_roll:
-    file: en_us_hench_convict_ss_global_hench_convict_00316552_m.ogg # "Ready to roll"
+    file: en_us_hench_convict_ss_global_hench_convict_00316552_m.wav # "Ready to roll"
     track: voice
   tali_im_here:
-    file: en_us_hench_tali_ss_global_hench_tali_00285145_m.ogg # "I'm here"
+    file: en_us_hench_tali_ss_global_hench_tali_00285145_m.wav # "I'm here"
     track: voice
   tali_with_you_shepard:
-    file: en_us_hench_tali_ss_global_hench_tali_00285147_m.ogg # "With you Shepard"
+    file: en_us_hench_tali_ss_global_hench_tali_00285147_m.wav # "With you Shepard"
     track: voice
   tali_weapons_ready:
-    file: en_us_hench_tali_ss_global_hench_tali_00285167_m.ogg # "Weapons ready"
+    file: en_us_hench_tali_ss_global_hench_tali_00285167_m.wav # "Weapons ready"
     track: voice
   tali_ready_to_help:
-    file: en_us_hench_tali_ss_global_hench_tali_00314434_m.ogg # "Ready to help"
+    file: en_us_hench_tali_ss_global_hench_tali_00314434_m.wav # "Ready to help"
     track: voice
   shep_i_should_go_1:
-    file: en_us_player_f_krohub_merchant_d_00193498_f.ogg
+    file: en_us_player_f_krohub_merchant_d_00193498_f.wav
     track: voice
   shep_ill_just_be_going:
-    file: en_us_player_f_omghub_gavorn_d_00271276_f.ogg
+    file: en_us_player_f_omghub_gavorn_d_00271276_f.wav
     track: voice
   shep_i_should_be_going:
-    file: en_us_player_f_cithub_info_giver_d_00248676_f.ogg
+    file: en_us_player_f_cithub_info_giver_d_00248676_f.wav
     track: voice

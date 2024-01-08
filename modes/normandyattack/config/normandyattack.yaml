@@ -439,7 +439,7 @@ sound_pools:
 
 sounds:
   normandyattack_music:
-    file: mus_critpath3_tension_1.ogg
+    file: mus_critpath3_tension_1.wav
     track: music
     fade_in: 1s
     mode_end_action: stop
@@ -447,7 +447,7 @@ sounds:
       - time: 12s
         events: play_horizon_tension
   horizon_tension_music:
-    file: mus_critpath1_tension_2.ogg
+    file: mus_critpath1_tension_2.wav
     track: music
     fade_in: 1s
     mode_end_action: stop
@@ -455,7 +455,7 @@ sounds:
       - time: 36s
         events: play_normandy_tension
   edi_propulsion_disabled_virus_detected:
-    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.ogg
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274631_m.wav
     track: voice
     volume: 1.0
     ducking:
@@ -465,7 +465,7 @@ sounds:
       release: 100ms
       release_point: 100ms
   edi_main_corridors_no_longer_safe:
-    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.ogg
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274637_m.wav
     track: voice
     volume: 1.0
     ducking:
@@ -475,7 +475,7 @@ sounds:
       release: 100ms
       release_point: 100ms
   edi_emergency_floor_lighting:
-    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.ogg
+    file: en_us_hench_ai_norcr3_ai_cockpit_d_00274640_m.wav
     track: voice
     volume: 1.0
     ducking:
@@ -485,70 +485,70 @@ sounds:
       release: 100ms
       release_point: 100ms
   edi_i_have_control:
-    file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.ogg
+    file: en_us_hench_ai_norcr3_ai_engines_d_00320051_m.wav
     track: voice
   edi_instr_maint_shaft_far_end:
-    file: en_us_hench_ai_norcr3_ai_level1_a_00211038_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level1_a_00211038_m.wav
     track: voice
   edi_instr_go_through_medical_to_reach_core:
-    file: en_us_hench_ai_norcr3_ai_level2_a_00225609_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level2_a_00225609_m.wav
     track: voice
   edi_instr_connect_core:
-    file: en_us_hench_ai_norcr3_ai_core_d_00193456_m.ogg
+    file: en_us_hench_ai_norcr3_ai_core_d_00193456_m.wav
     track: voice
   edi_instr_shaft_behind_to_engineering:
-    file: en_us_hench_ai_norcr3_ai_core_d_00193458_m.ogg
+    file: en_us_hench_ai_norcr3_ai_core_d_00193458_m.wav
     track: voice
   edi_instr_engineering_is_clear:
-    file: en_us_hench_ai_norcr3_ai_level3_a_00193624_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level3_a_00193624_m.wav
     track: voice
   edi_instr_activate_the_drive:
-    file: en_us_hench_ai_norcr3_ai_engines_d_00224561_m.ogg
+    file: en_us_hench_ai_norcr3_ai_engines_d_00224561_m.wav
     track: voice
   edi_hostiles_approaching:
-    file: en_us_hench_ai_norcr3_ai_level1_a_00211037_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level1_a_00211037_m.wav
     track: voice
   edi_hostiles_closing_in:
-    file: en_us_hench_ai_norcr3_ai_level2_a_00314751_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level2_a_00314751_m.wav
     track: voice
   edi_hostiles_returning:
-    file: en_us_hench_ai_norcr3_ai_level3_a_00314752_m.ogg
+    file: en_us_hench_ai_norcr3_ai_level3_a_00314752_m.wav
     track: voice
   edi_finished:
-    file: en_us_hench_ai_norcr3_escape_c_00193467_m.ogg
+    file: en_us_hench_ai_norcr3_escape_c_00193467_m.wav
     track: voice
   joker_ah_shit:
-    file: en_us_hench_joker_norcr3_ai_cockpit_d_00331879_m.ogg
+    file: en_us_hench_joker_norcr3_ai_cockpit_d_00331879_m.wav
     track: voice
   joker_shit_1:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312046_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312046_m.wav
     track: voice
   joker_shit_2:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312047_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312047_m.wav
     track: voice
   joker_shit_3:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312048_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312048_m.wav
     track: voice
   joker_shit_4:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312049_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312049_m.wav
     track: voice
   joker_shit_5:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312050_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312050_m.wav
     track: voice
   joker_shit_6:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312051_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312051_m.wav
     track: voice
   joker_shit_7:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312052_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312052_m.wav
     track: voice
   joker_shit_8:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312053_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312053_m.wav
     track: voice
   joker_shit_9:
-    file: en_us_hench_joker_norcr3_jokershit_a_00312054_m.ogg
+    file: en_us_hench_joker_norcr3_jokershit_a_00312054_m.wav
     track: voice
   joker_death:
-    file: en_us_hench_joker_norcr3_mission_failure_c_00312044_m.ogg
+    file: en_us_hench_joker_norcr3_mission_failure_c_00312044_m.wav
     track: voice
 
 widgets:

@@ -35,16 +35,16 @@ sound_pools:
 
 sounds:
   asscompl_1:
-    file: SFXGame.749.ogg
+    file: SFXGame.749.wav
     track: sfx
   asscompl_2:
-    file: SFXGame.750.ogg
+    file: SFXGame.750.wav
     track: sfx
   asscompl_3:
-    file: SFXGame.751.ogg
+    file: SFXGame.751.wav
     track: sfx
   david_sqrt_seemed_harmless:
-    file: DLC_UNC_Pack01_Int.438.ogg
+    file: DLC_UNC_Pack01_Int.438.wav
     track: voice
     volume: 1.0
     ducking:
@@ -54,7 +54,7 @@ sounds:
       release_point: 200ms
       release: 500ms
   david_please_make_it_stop:
-    file: DLC_UNC_Pack01_Int.462.ogg
+    file: DLC_UNC_Pack01_Int.462.wav
     track: voice
     volume: 1.0
     ducking:
@@ -64,12 +64,12 @@ sounds:
       release_point: 200ms
       release: 500ms
   liara_we_lost_her:
-    file: DLC_EXP_Part01_Int.695.ogg
+    file: DLC_EXP_Part01_Int.695.wav
     track: voice
     max_queue_time: 1s
     volume: 1.0
   liara_its_finally_over:
-    file: DLC_EXP_Part01_Int.1167.ogg
+    file: DLC_EXP_Part01_Int.1167.wav
     track: voice
     ducking:
       target: music, levelup
@@ -78,23 +78,23 @@ sounds:
       release_point: 1s
       release: 1s
   shepard_everyone_on_to_the_normandy:
-    file: en_us_player_f_cspcr2_normandy_escape_c_00189682_f.ogg
+    file: en_us_player_f_cspcr2_normandy_escape_c_00189682_f.wav
     track: voice
   explosion_long_one:
-    file: SFXGame.213.ogg
+    file: SFXGame.213.wav
     track: sfx
   explosion_long_two:
-    file: SFXGame.214.ogg
+    file: SFXGame.214.wav
     track: sfx
   explosion_long_three:
-    file: SFXGame.215.ogg
+    file: SFXGame.215.wav
     track: sfx
   explosion_short_one:
-    file: SFXGame.216.ogg
+    file: SFXGame.216.wav
     track: sfx
   explosion_short_two:
-    file: SFXGame.217.ogg
+    file: SFXGame.217.wav
     track: sfx
   explosion_short_three:
-    file: SFXGame.218.ogg
+    file: SFXGame.218.wav
     track: sfx

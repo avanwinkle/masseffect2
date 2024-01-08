@@ -62,110 +62,110 @@ sound_pools:
 
 sounds:
   powerdown_hard:
-    file: SFXGame.562.ogg
+    file: SFXGame.562.wav
     track: sfx
   powerdown_empty:
-    file: SFXGame.564.ogg
+    file: SFXGame.564.wav
     track: sfx
   shuttle_flyby_1:
-    file: SFXGame.558.ogg
+    file: SFXGame.558.wav
     track: sfx
   shuttle_flyby_2:
-    file: SFXGame.559.ogg
+    file: SFXGame.559.wav
     track: sfx
   incinerate_up_1:
-    file: SFXPower_Incinerate.02.ogg
+    file: SFXPower_Incinerate.02.wav
     track: sfx
   singularity_active_1:
-    file: SFXPower_Singularity.09.ogg
+    file: SFXPower_Singularity.09.wav
     track: sfx
   bioticcharge_up_1:
-    file: SFXPower_BioticCharge.01.ogg
+    file: SFXPower_BioticCharge.01.wav
     track: sfx
   bioticcharge_up_2:
-    file: SFXPower_BioticCharge.02.ogg
+    file: SFXPower_BioticCharge.02.wav
     track: sfx
   bioticcharge_boom_1:
-    file: SFXPower_BioticCharge.03.ogg
+    file: SFXPower_BioticCharge.03.wav
     track: sfx
   bioticcharge_boom_2:
-    file: SFXPower_BioticCharge.04.ogg
+    file: SFXPower_BioticCharge.04.wav
     track: sfx
   bioticcharge_down:
-    file: SFXPower_BioticCharge.11.ogg
+    file: SFXPower_BioticCharge.11.wav
     track: sfx
   incinerate_hit_1:
-    file: SFXPower_Incinerate.03.ogg
+    file: SFXPower_Incinerate.03.wav
     track: sfx
   incinerate_hit_2:
-    file: SFXPower_Incinerate.04.ogg
+    file: SFXPower_Incinerate.04.wav
     track: sfx
   throw_up_1:
-    file: SFXPower_Throw.01.ogg
+    file: SFXPower_Throw.01.wav
     track: sfx
   throw_up_2:
-    file: SFXPower_Throw.02.ogg
+    file: SFXPower_Throw.02.wav
     track: sfx
   throw_up_3:
-    file: SFXPower_Throw.03.ogg
+    file: SFXPower_Throw.03.wav
     track: sfx
   throw_up_4:
-    file: SFXPower_Throw.04.ogg
+    file: SFXPower_Throw.04.wav
     track: sfx
   throw_hit_1:
-    file: SFXPower_Throw.05.ogg
+    file: SFXPower_Throw.05.wav
     track: sfx
   throw_hit_2:
-    file: SFXPower_Throw.06.ogg
+    file: SFXPower_Throw.06.wav
     track: sfx
   throw_boom_1:
-    file: SFXPower_Throw.09.ogg
+    file: SFXPower_Throw.09.wav
     track: sfx
   throw_boom_2:
-    file: SFXPower_Throw.10.ogg
+    file: SFXPower_Throw.10.wav
     track: sfx
   pull_up_1:
-    file: SFXPower_Pull.1.ogg
+    file: SFXPower_Pull.1.wav
     track: sfx
   pull_up_2:
-    file: SFXPower_Pull.2.ogg
+    file: SFXPower_Pull.2.wav
     track: sfx
   pull_hit_1:
-    file: SFXPower_Pull.3.ogg
+    file: SFXPower_Pull.3.wav
     track: sfx
   pull_hit_2:
-    file: SFXPower_Pull.4.ogg
+    file: SFXPower_Pull.4.wav
     track: sfx
   shockwave_up_1:
-    file: SFXPower_Shockwave.01.ogg
+    file: SFXPower_Shockwave.01.wav
     track: sfx
   shockwave_up_2:
-    file: SFXPower_Shockwave.02.ogg
+    file: SFXPower_Shockwave.02.wav
     track: sfx
   shockwave_hit_1:
-    file: SFXPower_Shockwave.13.ogg
+    file: SFXPower_Shockwave.13.wav
     track: sfx
   shockwave_hit_2:
-    file: SFXPower_Shockwave.14.ogg
+    file: SFXPower_Shockwave.14.wav
     track: sfx
   singularity_up_1:
-    file: SFXPower_Singularity.01.ogg
+    file: SFXPower_Singularity.01.wav
     track: sfx
   singularity_up_2:
-    file: SFXPower_Singularity.02.ogg
+    file: SFXPower_Singularity.02.wav
     track: sfx
   singularity_hit_1:
-    file: SFXPower_Singularity.03.ogg
+    file: SFXPower_Singularity.03.wav
     track: sfx
   singularity_hit_2:
-    file: SFXPower_Singularity.04.ogg
+    file: SFXPower_Singularity.04.wav
     track: sfx
   warp_up_1:
-    file: SFXPower_Warp.01.ogg
+    file: SFXPower_Warp.01.wav
     track: sfx
   warp_up_2:
-    file: SFXPower_Warp.02.ogg
+    file: SFXPower_Warp.02.wav
     track: sfx
   warp_hit:
-    file: SFXPower_Warp.03.ogg
+    file: SFXPower_Warp.03.wav
     track: sfx

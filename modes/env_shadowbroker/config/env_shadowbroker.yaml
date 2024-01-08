@@ -46,44 +46,44 @@ sound_pools:
 
 sounds:
   broker_attack_1:
-    file: DLC_EXP_Part01_Int.1022.ogg
+    file: DLC_EXP_Part01_Int.1022.wav
     track: voice
   broker_attack_2:
-    file: DLC_EXP_Part01_Int.1023.ogg
+    file: DLC_EXP_Part01_Int.1023.wav
     track: voice
   broker_attack_3:
-    file: DLC_EXP_Part01_Int.1024.ogg
+    file: DLC_EXP_Part01_Int.1024.wav
     track: voice
   broker_attack_4:
-    file: DLC_EXP_Part01_Int.1025.ogg
+    file: DLC_EXP_Part01_Int.1025.wav
     track: voice
   broker_attack_5:
-    file: DLC_EXP_Part01_Int.1026.ogg
+    file: DLC_EXP_Part01_Int.1026.wav
     track: voice
   broker_attack_6:
-    file: DLC_EXP_Part01_Int.1027.ogg
+    file: DLC_EXP_Part01_Int.1027.wav
     track: voice
   broker_attack_7:
-    file: DLC_EXP_Part01_Int.1036.ogg
+    file: DLC_EXP_Part01_Int.1036.wav
     track: voice
   broker_hit_1:
-    file: DLC_EXP_Part01_Int.1030.ogg
+    file: DLC_EXP_Part01_Int.1030.wav
     track: sfx
   broker_hit_2:
-    file: DLC_EXP_Part01_Int.1031.ogg
+    file: DLC_EXP_Part01_Int.1031.wav
     track: sfx
   broker_hit_3:
-    file: DLC_EXP_Part01_Int.1040.ogg
+    file: DLC_EXP_Part01_Int.1040.wav
     track: sfx
   broker_hit_4:
-    file: DLC_EXP_Part01_Int.1041.ogg
+    file: DLC_EXP_Part01_Int.1041.wav
     track: sfx
   broker_hit_5:
-    file: DLC_EXP_Part01_Int.1042.ogg
+    file: DLC_EXP_Part01_Int.1042.wav
     track: sfx
   broker_hit_6:
-    file: DLC_EXP_Part01_Int.1044.ogg
+    file: DLC_EXP_Part01_Int.1044.wav
     track: sfx
   broker_hit_7:
-    file: DLC_EXP_Part01_Int.1045.ogg
+    file: DLC_EXP_Part01_Int.1045.wav
     track: sfx

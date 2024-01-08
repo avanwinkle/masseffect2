@@ -394,13 +394,13 @@ sound_pools:
 
 sounds:
   car_takeoff_1:
-    file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_car_takeoff_01.ogg
+    file: biod_cat003_550balconycombat.Wwise_Cat003_Streaming.env_cat003_car_takeoff_01.wav
     track: sfx
   car_takeoff_2:
-    file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_car_takeoff_02.ogg
+    file: biod_cat003_580balconyrear.Wwise_Cat003_Streaming.env_cat003_car_takeoff_02.wav
     track: sfx
   liara_come_on_shes_getting_away:
-    file: DLC_EXP_Part01_Int.640.ogg
+    file: DLC_EXP_Part01_Int.640.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -410,7 +410,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_shes_getting_away_1:
-    file: DLC_EXP_Part01_Int.313.ogg
+    file: DLC_EXP_Part01_Int.313.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -421,7 +421,7 @@ sounds:
       release_point: 120ms
     events_when_stopped: play_shepard_reply
   liara_shes_getting_away_3:
-    file: DLC_EXP_Part01_Int.698.ogg
+    file: DLC_EXP_Part01_Int.698.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -431,7 +431,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_youre_enjoying_this:
-    file: DLC_EXP_Part01_Int.650.ogg
+    file: DLC_EXP_Part01_Int.650.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -441,22 +441,22 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_truck_1:
-    file: DLC_EXP_Part01_Int.665.ogg
+    file: DLC_EXP_Part01_Int.665.wav
     events_when_stopped: play_shepard_sound_truck
     track: voice
     max_queue_time: 200ms
   liara_truck_2:
-    file: DLC_EXP_Part01_Int.680.ogg
+    file: DLC_EXP_Part01_Int.680.wav
     events_when_stopped: play_shepard_sound_truck
     track: voice
     max_queue_time: 200ms
   liara_truck_3:
-    file: DLC_EXP_Part01_Int.688.ogg
+    file: DLC_EXP_Part01_Int.688.wav
     events_when_stopped: play_shepard_sound_truck
     track: voice
     max_queue_time: 200ms
   liara_right_no_left:
-    file: DLC_EXP_Part01_Int.690.ogg
+    file: DLC_EXP_Part01_Int.690.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -466,7 +466,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_left:
-    file: DLC_EXP_Part01_Int.691.ogg
+    file: DLC_EXP_Part01_Int.691.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -476,7 +476,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_not_letting_her_escape:
-    file: DLC_EXP_Part01_Int.681.ogg
+    file: DLC_EXP_Part01_Int.681.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -486,7 +486,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_dont_lose_her:
-    file: DLC_EXP_Part01_Int.684.ogg
+    file: DLC_EXP_Part01_Int.684.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -496,7 +496,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_shes_almost_out_of_range:
-    file: DLC_EXP_Part01_Int.693.ogg
+    file: DLC_EXP_Part01_Int.693.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -507,7 +507,7 @@ sounds:
       release_point: 120ms
     events_when_stopped: play_shepard_reply
   liara_were_losing_her:
-    file: DLC_EXP_Part01_Int.694.ogg
+    file: DLC_EXP_Part01_Int.694.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -518,7 +518,7 @@ sounds:
       release_point: 120ms
     events_when_stopped: play_shepard_reply
   liara_need_to_go_faster:
-    file: DLC_EXP_Part01_Int.685.ogg
+    file: DLC_EXP_Part01_Int.685.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -529,7 +529,7 @@ sounds:
       release_point: 120ms
     events_when_stopped: play_shepard_im_going
   liara_head_on_collision:
-    file: DLC_EXP_Part01_Int.666.ogg
+    file: DLC_EXP_Part01_Int.666.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -539,7 +539,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_its_a_taxi:
-    file: DLC_EXP_Part01_Int.667.ogg
+    file: DLC_EXP_Part01_Int.667.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -549,7 +549,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_go_go_go:
-    file: DLC_EXP_Part01_Int.671.ogg
+    file: DLC_EXP_Part01_Int.671.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -559,7 +559,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   liara_oncoming_traffic:
-    file: DLC_EXP_Part01_Int.672.ogg
+    file: DLC_EXP_Part01_Int.672.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -570,7 +570,7 @@ sounds:
       release_point: 120ms
     events_when_stopped: play_shepard_well_be_fine
   liara_going_the_wrong_way:
-    file: DLC_EXP_Part01_Int.673.ogg
+    file: DLC_EXP_Part01_Int.673.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -580,7 +580,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_there_we_go:
-    file: DLC_EXP_Part01_Int.649.ogg
+    file: DLC_EXP_Part01_Int.649.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -590,7 +590,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_again:
-    file: DLC_EXP_Part01_Int.652.ogg
+    file: DLC_EXP_Part01_Int.652.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -600,7 +600,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_what_kind_of_guns:
-    file: DLC_EXP_Part01_Int.656.ogg
+    file: DLC_EXP_Part01_Int.656.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -610,7 +610,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_im_going:
-    file: DLC_EXP_Part01_Int.660.ogg
+    file: DLC_EXP_Part01_Int.660.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -620,7 +620,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_well_be_fine:
-    file: DLC_EXP_Part01_Int.662.ogg
+    file: DLC_EXP_Part01_Int.662.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -630,7 +630,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_im_on_her:
-    file: DLC_EXP_Part01_Int.664.ogg
+    file: DLC_EXP_Part01_Int.664.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -640,7 +640,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_i_know_1:
-    file: DLC_EXP_Part01_Int.677.ogg
+    file: DLC_EXP_Part01_Int.677.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -650,7 +650,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_i_know_2:
-    file: DLC_EXP_Part01_Int.675.ogg
+    file: DLC_EXP_Part01_Int.675.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -660,7 +660,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_i_noticed:
-    file: DLC_EXP_Part01_Int.679.ogg
+    file: DLC_EXP_Part01_Int.679.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -670,7 +670,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_im_working_on_it:
-    file: DLC_EXP_Part01_Int.647.ogg
+    file: DLC_EXP_Part01_Int.647.wav
     track: voice
     max_queue_time: 1s
     ducking:
@@ -680,7 +680,7 @@ sounds:
       release: 100ms
       release_point: 120ms
   shepard_i_hear_those_can_be_bad:
-    file: DLC_EXP_Part01_Int.654.ogg
+    file: DLC_EXP_Part01_Int.654.wav
     track: voice
     max_queue_time: 1s
     ducking:

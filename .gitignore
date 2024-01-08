@@ -21,3 +21,4 @@ modes/attract_carousel/images/pinstrat_player*.png
 dist
 *.pyc
 me2-wav
+*.wav

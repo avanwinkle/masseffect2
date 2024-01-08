@@ -347,27 +347,27 @@ sound_player:
 
 sounds:
   derelictreaper_music:
-    file: mus_legion_acq_bossbattle.ogg
+    file: mus_legion_acq_bossbattle.wav
     track: music
     mode_end_action: stop
     start_at: 3s
     fade_in: 200ms
     fade_out: 1.5s
   derelictreaper_music_tension:
-    file: mus_legion_acq_bossbattle_low.ogg
+    file: mus_legion_acq_bossbattle_low.wav
     track: music
     start_at: 3s
     fade_in: 200ms
     fade_out: 500ms
     mode_end_action: stop
   derelictreaper_close_stinger:
-    file: mus_legion_acq_sting_2.ogg
+    file: mus_legion_acq_sting_2.wav
     track: sfx
   derelictreaper_intro:
-    file: mus_legion_acq_combat_2_low_b.ogg
+    file: mus_legion_acq_combat_2_low_b.wav
     track: music
   squadmate_garrus_destroy_core:
-    file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.ogg
+    file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.wav
     track: voice
     ducking:
       target: music
@@ -376,7 +376,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_grunt_destroy_core:
-    file: en_us_hench_grunt_rprgta_reminder_h_00185233_m.ogg
+    file: en_us_hench_grunt_rprgta_reminder_h_00185233_m.wav
     track: voice
     ducking:
       target: music
@@ -385,7 +385,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_jack_destroy_core:
-    file: en_us_hench_convict_rprgta_reminder_h_00185232_m.ogg
+    file: en_us_hench_convict_rprgta_reminder_h_00185232_m.wav
     track: voice
     ducking:
       target: music
@@ -394,7 +394,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_kasumi_destroy_core:
-    file: en_us_hench_thief_rprgta_reminder_h_00185230_m.ogg
+    file: en_us_hench_thief_rprgta_reminder_h_00185230_m.wav
     track: voice
     ducking:
       target: music
@@ -403,7 +403,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_miranda_destroy_core:
-    file: en_us_hench_vixen_rprgta_reminder_h_00185234_m.ogg
+    file: en_us_hench_vixen_rprgta_reminder_h_00185234_m.wav
     track: voice
     ducking:
       target: music
@@ -412,7 +412,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_mordin_destroy_core:
-    file: en_us_hench_professor_rprgta_reminder_h_00185228_m.ogg
+    file: en_us_hench_professor_rprgta_reminder_h_00185228_m.wav
     track: voice
     ducking:
       target: music
@@ -421,7 +421,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_samara_destroy_core:
-    file: en_us_hench_mystic_rprgta_reminder_h_00185235_m.ogg
+    file: en_us_hench_mystic_rprgta_reminder_h_00185235_m.wav
     track: voice
     ducking:
       target: music
@@ -430,7 +430,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_tali_destroy_core:
-    file: en_us_hench_tali_rprgta_reminder_h_00185229_m.ogg
+    file: en_us_hench_tali_rprgta_reminder_h_00185229_m.wav
     track: voice
     ducking:
       target: music
@@ -439,7 +439,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_thane_destroy_core:
-    file: en_us_hench_assassin_rprgta_reminder_h_00185231_m.ogg
+    file: en_us_hench_assassin_rprgta_reminder_h_00185231_m.wav
     track: voice
     ducking:
       target: music
@@ -448,7 +448,7 @@ sounds:
       release: 10ms
       release_point: 0
   squadmate_zaeed_destroy_core:
-    file: en_us_hench_veteran_rprgta_reminder_h_00185237_m.ogg
+    file: en_us_hench_veteran_rprgta_reminder_h_00185237_m.wav
     track: voice
     ducking:
       target: music

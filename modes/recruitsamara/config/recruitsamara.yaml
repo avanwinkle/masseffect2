@@ -236,78 +236,78 @@ sound_pools:
 
 sounds:
   music_recruit_samara:
-    file: mus_samara_acq_bossbattle_2.ogg
+    file: mus_samara_acq_bossbattle_2.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   wasea_everythings_gone_to_hell:
-    file: en_us_twrmwa_boss_twrmwa_boss_d_00197753_m.ogg
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00197753_m.wav
     track: voice
   wasea_pulpy_mass:
-    file: en_us_twrmwa_boss_twrmwa_boss_d_00197755_m.ogg
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00197755_m.wav
     track: voice
   wasea_first_justicar_now_you:
-    file: en_us_twrmwa_boss_twrmwa_boss_d_00301600_m.ogg
+    file: en_us_twrmwa_boss_twrmwa_boss_d_00301600_m.wav
     track: voice
   ws_payback_human:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244270_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244270_m.wav
     track: voice
   ws_i_like_killing_humans:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244276_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244276_m.wav
     track: voice
   ws_kill_them_all:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244290_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244290_m.wav
     track: voice
   ws_this_ends_now:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244278_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244278_m.wav
     track: voice
   ws_you_wont_get_away:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244288_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244288_m.wav
     track: voice
   ws_hit_four:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244300_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244300_m.wav
     track: voice
   ws_hit_two:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244237_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244237_m.wav
     track: voice
   ws_hit_three:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244238_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244238_m.wav
     track: voice
   ws_hit_one:
-    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244239_m.ogg
+    file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244239_m.wav
     track: voice
   gunship_thane:
-    file: en_us_hench_assassin_twrmwa_gun_ship_amb_h_00212350_m.ogg
+    file: en_us_hench_assassin_twrmwa_gun_ship_amb_h_00212350_m.wav
     track: voice
   gunship_jack:
-    file: en_us_hench_convict_twrmwa_gun_ship_amb_h_00212346_m.ogg
+    file: en_us_hench_convict_twrmwa_gun_ship_amb_h_00212346_m.wav
     track: voice
   gunship_garrus:
-    file: en_us_hench_garrus_twrmwa_gun_ship_amb_h_00212343_m.ogg
+    file: en_us_hench_garrus_twrmwa_gun_ship_amb_h_00212343_m.wav
     track: voice
   gunship_legion:
-    file: en_us_hench_geth_twrmwa_gun_ship_amb_h_00212345_m.ogg
+    file: en_us_hench_geth_twrmwa_gun_ship_amb_h_00212345_m.wav
     track: voice
   gunship_grunt:
-    file: en_us_hench_grunt_twrmwa_gun_ship_amb_h_00212342_m.ogg
+    file: en_us_hench_grunt_twrmwa_gun_ship_amb_h_00212342_m.wav
     track: voice
   gunship_jacob:
-    file: en_us_hench_leading_twrmwa_gun_ship_amb_h_00212341_m.ogg
+    file: en_us_hench_leading_twrmwa_gun_ship_amb_h_00212341_m.wav
     track: voice
   gunship_mordin:
-    file: en_us_hench_professor_twrmwa_gun_ship_amb_h_00212348_m.ogg
+    file: en_us_hench_professor_twrmwa_gun_ship_amb_h_00212348_m.wav
     track: voice
   gunship_tali:
-    file: en_us_hench_tali_twrmwa_gun_ship_amb_h_00212344_m.ogg
+    file: en_us_hench_tali_twrmwa_gun_ship_amb_h_00212344_m.wav
     track: voice
   gunship_kasumi:
-    file: en_us_hench_thief_twrmwa_gun_ship_amb_h_00212349_m.ogg
+    file: en_us_hench_thief_twrmwa_gun_ship_amb_h_00212349_m.wav
     track: voice
   gunship_zaeed:
-    file: en_us_hench_veteran_twrmwa_gun_ship_amb_h_00212347_m.ogg
+    file: en_us_hench_veteran_twrmwa_gun_ship_amb_h_00212347_m.wav
     track: voice
   gunship_miranda:
-    file: en_us_hench_vixen_twrmwa_gun_ship_amb_h_00212340_m.ogg
+    file: en_us_hench_vixen_twrmwa_gun_ship_amb_h_00212340_m.wav
     track: voice
 
 widget_player:

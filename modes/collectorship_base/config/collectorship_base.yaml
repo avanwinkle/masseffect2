@@ -201,103 +201,103 @@ sound_pools:
 
 sounds:
   music_ambush:
-    file: mus_critpath2_action.ogg
+    file: mus_critpath2_action.wav
     track: music
   music_husk:
-    file: mus_critpath2_combat_2_low.ogg
+    file: mus_critpath2_combat_2_low.wav
     track: music
   music_praetorian:
-    file: mus_critpath1_boss.ogg
+    file: mus_critpath1_boss.wav
     track: music
   music_stinger:
-    file: mus_generic_stinger_111.ogg
+    file: mus_generic_stinger_111.wav
     track: sfx
   edi_sending_coordinates_for_shuttle_extraction:
-    file: en_us_hench_ai_cspcr2_bridge_trap_d_00253366_m.ogg
+    file: en_us_hench_ai_cspcr2_bridge_trap_d_00253366_m.wav
     track: voice
     start_at: 2800ms
   edi_not_a_malfunction_this_was_a_trap:
-    file: en_us_hench_ai_cspcr2_bridge_console_d_00269362_m.ogg
+    file: en_us_hench_ai_cspcr2_bridge_console_d_00269362_m.wav
     track: voice
   joker_were_out_of_time_we_have_to_go:
-    file: en_us_hench_joker_cspcr2_normandy_escape_c_00189679_m.ogg
+    file: en_us_hench_joker_cspcr2_normandy_escape_c_00189679_m.wav
     track: voice
   shepard_we_need_a_little_help_here_edi:
-    file: en_us_player_f_cspcr2_bridge_console_d_00307216_f.ogg
+    file: en_us_player_f_cspcr2_bridge_console_d_00307216_f.wav
     track: voice
   shepard_edi_we_got_a_problem_here:
-    file: en_us_player_f_cspcr2_edi_door2_a_00252669_f.ogg
+    file: en_us_player_f_cspcr2_edi_door2_a_00252669_f.wav
     track: voice
   shepard_what_the_hell_just_happened:
-    file: en_us_player_f_cspcr2_bridge_console_d_00253279_f.ogg
+    file: en_us_player_f_cspcr2_bridge_console_d_00253279_f.wav
     track: voice
   collector_noise_1:
-    file: sfx_ss_collector_ss_collector_00349721_m.ogg
+    file: sfx_ss_collector_ss_collector_00349721_m.wav
     track: sfx
   collector_noise_2:
-    file: sfx_ss_collector_ss_collector_00349722_m.ogg
+    file: sfx_ss_collector_ss_collector_00349722_m.wav
     track: sfx
   collector_noise_3:
-    file: sfx_ss_collector_ss_collector_00349723_m.ogg
+    file: sfx_ss_collector_ss_collector_00349723_m.wav
     track: sfx
   collector_noise_4:
-    file: sfx_ss_collector_ss_collector_00349724_m.ogg
+    file: sfx_ss_collector_ss_collector_00349724_m.wav
     track: sfx
   collector_noise_5:
-    file: sfx_ss_collector_ss_collector_00349725_m.ogg
+    file: sfx_ss_collector_ss_collector_00349725_m.wav
     track: sfx
   collector_noise_6:
-    file: sfx_ss_collector_ss_collector_00349736_m.ogg
+    file: sfx_ss_collector_ss_collector_00349736_m.wav
     track: sfx
   husk_short_1:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288225_m.ogg
+    file: sfx_ss_husk_ss_husk_00288225_m.wav
   husk_short_2:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288226_m.ogg
+    file: sfx_ss_husk_ss_husk_00288226_m.wav
   husk_short_3:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288227_m.ogg
+    file: sfx_ss_husk_ss_husk_00288227_m.wav
   husk_short_4:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288231_m.ogg
+    file: sfx_ss_husk_ss_husk_00288231_m.wav
   husk_short_5:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288237_m.ogg
+    file: sfx_ss_husk_ss_husk_00288237_m.wav
   husk_short_6:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288238_m.ogg
+    file: sfx_ss_husk_ss_husk_00288238_m.wav
   husk_short_7:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288239_m.ogg
+    file: sfx_ss_husk_ss_husk_00288239_m.wav
   husk_long_1:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288233_m.ogg
+    file: sfx_ss_husk_ss_husk_00288233_m.wav
   husk_long_2:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288234_m.ogg
+    file: sfx_ss_husk_ss_husk_00288234_m.wav
   husk_long_3:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00288235_m.ogg
+    file: sfx_ss_husk_ss_husk_00288235_m.wav
   husk_long_4:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00300983_m.ogg
+    file: sfx_ss_husk_ss_husk_00300983_m.wav
   husk_long_5:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00300984_m.ogg
+    file: sfx_ss_husk_ss_husk_00300984_m.wav
   husk_long_6:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_husk_ss_husk_00300986_m.ogg
+    file: sfx_ss_husk_ss_husk_00300986_m.wav

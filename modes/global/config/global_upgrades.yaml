@@ -171,31 +171,31 @@ sound_pools:
 
 sounds:
   this_should_come_in_handy:
-    file: en_us_player_f_ss_global_player_female_00333977_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333977_f.wav
     track: voice
     max_queue_time: 2s
   we_can_use_this:
-    file: en_us_player_f_ss_global_player_female_00333980_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333980_f.wav
     track: voice
     max_queue_time: 2s
   this_might_be_useful:
-    file: en_us_player_f_ss_global_player_female_00333981_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333981_f.wav
     track: voice
     max_queue_time: 2s
   ill_take_it:
-    file: en_us_player_f_ss_global_player_female_00333984_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333984_f.wav
     track: voice
     max_queue_time: 2s
   this_is_valuable:
-    file: en_us_player_f_ss_global_player_female_00333989_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333989_f.wav
     track: voice
     max_queue_time: 2s
   this_looks_interesting:
-    file: en_us_player_f_ss_global_player_female_00333997_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333997_f.wav
     track: voice
     max_queue_time: 2s
   oh_whats_this:
-    file: en_us_player_f_ss_global_player_female_00333999_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333999_f.wav
     track: voice
     max_queue_time: 2s
 

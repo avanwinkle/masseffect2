@@ -330,89 +330,89 @@ sound_pools:
 
 sounds:
   shep_hit_1:
-    file: en_us_player_f_ss_global_player_female_00288336_f.ogg
+    file: en_us_player_f_ss_global_player_female_00288336_f.wav
     track: voice
   shep_hit_2:
-    file: en_us_player_f_ss_global_player_female_00288339_f.ogg
+    file: en_us_player_f_ss_global_player_female_00288339_f.wav
     track: voice
   shep_hit_3:
-    file: en_us_player_f_ss_global_player_female_00288340_f.ogg
+    file: en_us_player_f_ss_global_player_female_00288340_f.wav
     track: voice
   shepard_come_on_lets_move:
-    file: en_us_player_f_cspcr2_bridge_trap_d_00269440_f.ogg
+    file: en_us_player_f_cspcr2_bridge_trap_d_00269440_f.wav
     track: voice
   shepard_taking_heavy_fire:
-    file: en_us_player_f_ss_global_player_female_00331516_f.ogg
+    file: en_us_player_f_ss_global_player_female_00331516_f.wav
     track: voice
   shepard_ive_got_no_shields:
-    file: en_us_player_f_ss_global_player_female_00331518_f.ogg
+    file: en_us_player_f_ss_global_player_female_00331518_f.wav
     track: voice
   shepard_my_shields_are_down:
-    file: en_us_player_f_ss_global_player_female_00331511_f.ogg
+    file: en_us_player_f_ss_global_player_female_00331511_f.wav
     track: voice
   praet_hit_1:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306911_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306911_m.wav
   praet_hit_2:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306912_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306912_m.wav
   praet_hit_3:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306913_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306913_m.wav
   praet_hit_4:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306914_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306914_m.wav
   praet_hit_5:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306918_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306918_m.wav
   praet_attack_1:
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306954_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306954_m.wav
   praet_attack_2:
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306955_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306955_m.wav
   praet_attack_3:
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306956_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306956_m.wav
   praet_intro:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306917_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306917_m.wav
   praet_death:
     max_queue_time: 1s
     track: sfx
-    file: sfx_ss_praetorian_ss_praetorian_00306925_m.ogg
+    file: sfx_ss_praetorian_ss_praetorian_00306925_m.wav
   praet_alarm:
     track: sfx
-    file: mus_generic_stinger_053.ogg
+    file: mus_generic_stinger_053.wav
   sqmate_praetorian_enter_jack:
-    file: en_us_hench_convict_horcr1_spaceport_fight02_a_00318563_m.ogg
+    file: en_us_hench_convict_horcr1_spaceport_fight02_a_00318563_m.wav
     track: voice
   sqmate_praetorian_enter_garrus:
-    file: en_us_hench_garrus_horcr1_spaceport_fight02_a_00318567_m.ogg
+    file: en_us_hench_garrus_horcr1_spaceport_fight02_a_00318567_m.wav
     track: voice
   sqmate_praetorian_enter_jacob:
-    file: en_us_hench_leading_horcr1_spaceport_fight02_a_00318565_m.ogg
+    file: en_us_hench_leading_horcr1_spaceport_fight02_a_00318565_m.wav
     track: voice
   sqmate_praetorian_enter_mordin:
-    file: en_us_hench_professor_horcr1_spaceport_fight02_a_00318569_m.ogg
+    file: en_us_hench_professor_horcr1_spaceport_fight02_a_00318569_m.wav
     track: voice
   sqmate_praetorian_enter_tali:
-    file: en_us_hench_tali_horcr1_spaceport_fight02_a_00318566_m.ogg
+    file: en_us_hench_tali_horcr1_spaceport_fight02_a_00318566_m.wav
     track: voice
   sqmate_praetorian_enter_kasumi:
-    file: en_us_hench_thief_horcr1_spaceport_fight02_a_00318568_m.ogg
+    file: en_us_hench_thief_horcr1_spaceport_fight02_a_00318568_m.wav
     track: voice
   sqmate_praetorian_enter_zaeed:
-    file: en_us_hench_veteran_horcr1_spaceport_fight02_a_00318562_m.ogg
+    file: en_us_hench_veteran_horcr1_spaceport_fight02_a_00318562_m.wav
     track: voice
   sqmate_praetorian_enter_miranda:
-    file: en_us_hench_vixen_horcr1_spaceport_fight02_a_00318564_m.ogg
+    file: en_us_hench_vixen_horcr1_spaceport_fight02_a_00318564_m.wav
     track: voice
 
 widget_player:

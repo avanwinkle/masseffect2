@@ -154,17 +154,17 @@ sound_pools:
 
 sounds:
   music_recruit_grunt_1:
-    file: mus_grunt_acq_combat_1.ogg
+    file: mus_grunt_acq_combat_1.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   music_recruit_grunt_2:
-    file: mus_grunt_acq_combat_2b.ogg
+    file: mus_grunt_acq_combat_2b.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   intro_shep_1:
-    file: en_us_player_f_jnkkga_arrival_c_00255073_f.ogg
+    file: en_us_player_f_jnkkga_arrival_c_00255073_f.wav
     track: voice
     ducking:
       target: music
@@ -173,7 +173,7 @@ sounds:
       release: 10ms
       release_point: 0
   intro_shep_2:
-    file: en_us_player_f_jnkkga_arrival_c_00283297_f.ogg
+    file: en_us_player_f_jnkkga_arrival_c_00283297_f.wav
     track: voice
     ducking:
       target: music
@@ -182,7 +182,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_bossdialogue_1:
-    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.ogg
+    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282305_m.wav
     track: voice
     ducking:
       target: music
@@ -191,7 +191,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_bossdialogue_2:
-    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282306_m.ogg
+    file: en_us_jnkkga_boss_jnkkga_mercbossfight_a_00282306_m.wav
     track: voice
     ducking:
       target: music
@@ -200,7 +200,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_dialogue_1:
-    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310955_m.ogg
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310955_m.wav
     track: voice
     ducking:
       target: music
@@ -209,7 +209,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_dialogue_2:
-    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310956_m.ogg
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310956_m.wav
     track: voice
     ducking:
       target: music
@@ -218,7 +218,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_dialogue_3:
-    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310953_m.ogg
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310953_m.wav
     track: voice
     ducking:
       target: music
@@ -227,7 +227,7 @@ sounds:
       release: 10ms
       release_point: 0
   grunt_dialogue_4:
-    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.ogg
+    file: en_us_jnkkga_moremercs_jnkkga_moremercs_a_00310959_m.wav
     track: voice
     ducking:
       target: music

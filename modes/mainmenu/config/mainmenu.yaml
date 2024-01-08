@@ -311,17 +311,17 @@ sound_player:
 
 sounds:
   mus_gui_char_create:
-    file: mus_reconstruction_a.ogg
+    file: mus_reconstruction_a.wav
     track: music
     start_at: 3s
     fade_in: 500ms
     fade_out: 1s
     mode_end_action: stop
   galaxy_zoom_in:
-    file: SFXGame.566.ogg
+    file: SFXGame.566.wav
     track: sfx
   galaxy_zoom_out:
-    file: SFXGame.587.ogg
+    file: SFXGame.587.wav
     track: sfx
 
 widget_player:

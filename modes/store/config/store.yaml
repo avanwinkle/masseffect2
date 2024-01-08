@@ -330,14 +330,14 @@ sound_pools:
 
 sounds:
   shep_fave_store_1:
-    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.ogg
+    file: en_us_player_f_cithub_vend_biotic_d_00249952_f.wav
     track: voice
   shep_fave_store_2:
-    file: en_us_player_f_cithub_vend_omni_d_00253591_f.ogg
+    file: en_us_player_f_cithub_vend_omni_d_00253591_f.wav
     track: voice
   shep_fave_store_3:
-    file: en_us_player_f_cithub_vend_decor_d_00252280_f.ogg
+    file: en_us_player_f_cithub_vend_decor_d_00252280_f.wav
     track: voice
   shep_fave_store_4:
-    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.ogg
+    file: en_us_player_f_cithub_vend_sniper_d_00253684_f.wav
     track: voice

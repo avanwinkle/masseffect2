@@ -80,95 +80,95 @@ sound_pools:
 
 sounds:
   ricochet_1:
-    file: SFXGame.128.ogg
+    file: SFXGame.128.wav
     track: sfx
   ricochet_2:
-    file: SFXGame.129.ogg
+    file: SFXGame.129.wav
     track: sfx
   ricochet_3:
-    file: SFXGame.130.ogg
+    file: SFXGame.130.wav
     track: sfx
   ricochet_4:
-    file: SFXGame.131.ogg
+    file: SFXGame.131.wav
     track: sfx
   ricochet_5:
-    file: SFXGame.032.ogg
+    file: SFXGame.032.wav
     track: sfx
   ricochet_6:
-    file: SFXGame.033.ogg
+    file: SFXGame.033.wav
     track: sfx
   ricochet_7:
-    file: SFXGame.034.ogg
+    file: SFXGame.034.wav
     track: sfx
   ricochet_8:
-    file: SFXGame.035.ogg
+    file: SFXGame.035.wav
     track: sfx
   bullet_thud_1:
-    file: SFXGame.100.ogg
+    file: SFXGame.100.wav
     track: sfx
   bullet_thud_2:
-    file: SFXGame.101.ogg
+    file: SFXGame.101.wav
     track: sfx
   bullet_whizz_1:
-    file: SFXGame.178.ogg
+    file: SFXGame.178.wav
     track: sfx
   bullet_whizz_2:
-    file: SFXGame.179.ogg
+    file: SFXGame.179.wav
     track: sfx
   bullet_whizz_3:
-    file: SFXGame.180.ogg
+    file: SFXGame.180.wav
     track: sfx
   bullet_whizz_4:
-    file: SFXGame.181.ogg
+    file: SFXGame.181.wav
     track: sfx
   loading_weapon_1:
-    file: SFXGame.879.ogg
+    file: SFXGame.879.wav
     track: sfx
   loading_weapon_2:
-    file: SFXGame.880.ogg
+    file: SFXGame.880.wav
     track: sfx
   loading_weapon_3:
-    file: SFXGame.881.ogg
+    file: SFXGame.881.wav
     track: sfx
   loading_weapon_4:
-    file: SFXGame.882.ogg
+    file: SFXGame.882.wav
     track: sfx
   loading_weapon_5:
-    file: SFXGame.883.ogg
+    file: SFXGame.883.wav
     track: sfx
   loading_weapon_6:
-    file: SFXGame.884.ogg
+    file: SFXGame.884.wav
     track: sfx
   shepdead_garrus_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303119_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303119_m.wav
     track: voice
   shepdead_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303120_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303120_m.wav
     track: voice
   shepdead_grunt:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295819_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295819_m.wav
     track: voice
   shepdead_jack:
-    file: en_us_hench_convict_ss_global_hench_convict_00286938_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286938_m.wav
     track: voice
   shepdead_jacob_1:
-    file: en_us_hench_leading_ss_global_hench_leading_00299244_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299244_m.wav
     track: voice
   shepdead_jacob_2:
-    file: en_us_hench_leading_ss_global_hench_leading_00299253_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299253_m.wav
     track: voice
   shepdead_jacob_3:
-    file: en_us_hench_leading_ss_global_hench_leading_00299254_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299254_m.wav
     track: voice
   shepdead_miranda_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257458_m.wav
     track: voice
   shepdead_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257459_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257459_m.wav
     track: voice
   shepdead_miranda_3:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310106_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310106_m.wav
     track: voice
   shepdead_miranda_4:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310107_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310107_m.wav
     track: voice

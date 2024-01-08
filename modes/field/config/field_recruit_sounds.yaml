@@ -70,133 +70,133 @@ sound_pools:
 
 sounds:
   grunt_shot_sound_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00331030_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331030_m.wav
     track: voice
     volume: 0.7
   grunt_shot_sound_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00317212_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00317212_m.wav
     track: voice
     volume: 0.7
   grunt_shot_sound_3:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00331036_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331036_m.wav
     track: voice
     volume: 0.7
   grunt_shot_sound_4:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00331040_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00331040_m.wav
     track: voice
     volume: 0.7
   grunt_shot_sound_5:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295739_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295739_m.wav
     track: voice
     volume: 0.7
   jack_shot_sound_1:
-    file: en_us_hench_convict_ss_global_hench_convict_00286790_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286790_m.wav
     track: voice
   jack_shot_sound_2:
-    file: en_us_hench_convict_ss_global_hench_convict_00286854_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286854_m.wav
     track: voice
   jack_shot_sound_3:
-    file: en_us_hench_convict_ss_global_hench_convict_00286835_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286835_m.wav
     track: voice
   jack_shot_sound_4:
-    file: en_us_hench_convict_ss_global_hench_convict_00286855_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286855_m.wav
     track: voice
   jack_shot_sound_5:
-    file: en_us_hench_convict_ss_global_hench_convict_00286853_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286853_m.wav
     track: voice
   jack_shot_sound_6:
-    file: en_us_hench_convict_ss_global_hench_convict_00286921_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286921_m.wav
     track: voice
   kasumi_shot_sound_1:
-    file: DLC_HEN_MT_Int.096.ogg
+    file: DLC_HEN_MT_Int.096.wav
     track: voice
   kasumi_shot_sound_2:
-    file: DLC_HEN_MT_Int.152.ogg
+    file: DLC_HEN_MT_Int.152.wav
     track: voice
   kasumi_shot_sound_3:
-    file: DLC_HEN_MT_Int.146.ogg
+    file: DLC_HEN_MT_Int.146.wav
     track: voice
   kasumi_shot_sound_4:
-    file: DLC_HEN_MT_Int.155.ogg
+    file: DLC_HEN_MT_Int.155.wav
     track: voice
   kasumi_shot_sound_5:
-    file: DLC_HEN_MT_Int.159.ogg
+    file: DLC_HEN_MT_Int.159.wav
     track: voice
   kasumi_shot_sound_6:
-    file: DLC_HEN_MT_Int.221.ogg
+    file: DLC_HEN_MT_Int.221.wav
     track: voice
   legion_shot_sound_1:
-    file: en_us_hench_geth_ss_global_hench_geth_00240681_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240681_m.wav
     track: voice
   legion_shot_sound_2:
-    file: en_us_hench_geth_ss_global_hench_geth_00240710_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240710_m.wav
     track: voice
   legion_shot_sound_3:
-    file: en_us_hench_geth_ss_global_hench_geth_00242502_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00242502_m.wav
     track: voice
   legion_shot_sound_4:
-    file: en_us_hench_geth_ss_global_hench_geth_00315331_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315331_m.wav
     track: voice
   legion_shot_sound_5:
-    file: en_us_hench_geth_ss_global_hench_geth_00315345_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315345_m.wav
     track: voice
   mordin_shot_sound_1:
-    file: en_us_hench_professor_ss_global_hench_professor_00331212_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00331212_m.wav
     track: voice
   mordin_shot_sound_2:
-    file: en_us_hench_professor_ss_global_hench_professor_00316952_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316952_m.wav
     track: voice
   mordin_shot_sound_3:
-    file: en_us_hench_professor_ss_global_hench_professor_00316963_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316963_m.wav
     track: voice
   mordin_shot_sound_4:
-    file: en_us_hench_professor_ss_global_hench_professor_00316964_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316964_m.wav
     track: voice
   mordin_shot_sound_5:
-    file: en_us_hench_professor_ss_global_hench_professor_00331211_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00331211_m.wav
     track: voice
   tali_shot_sound_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00285102_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285102_m.wav
     track: voice
   tali_shot_sound_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00285168_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285168_m.wav
     track: voice
   tali_shot_sound_3:
-    file: en_us_hench_tali_ss_global_hench_tali_00289284_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289284_m.wav
     track: voice
   tali_shot_sound_4:
-    file: en_us_hench_tali_ss_global_hench_tali_00289285_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289285_m.wav
     track: voice
   thane_shot_sound_1:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286433_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286433_m.wav
     track: voice
   thane_shot_sound_2:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00297586_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00297586_m.wav
     track: voice
   thane_shot_sound_3:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00316484_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00316484_m.wav
     track: voice
   thane_shot_sound_4:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00330846_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00330846_m.wav
     track: voice
   thane_shot_sound_5:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286432_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286432_m.wav
     track: voice
   zaeed_shot_sound_1:
-    file: DLC_HEN_VT_Int.002.ogg
+    file: DLC_HEN_VT_Int.002.wav
     track: voice
   zaeed_shot_sound_2:
-    file: DLC_HEN_VT_Int.007.ogg
+    file: DLC_HEN_VT_Int.007.wav
     track: voice
   zaeed_shot_sound_3:
-    file: DLC_HEN_VT_Int.020.ogg
+    file: DLC_HEN_VT_Int.020.wav
     track: voice
   zaeed_shot_sound_4:
-    file: DLC_HEN_VT_Int.030.ogg
+    file: DLC_HEN_VT_Int.030.wav
     track: voice
   zaeed_shot_sound_5:
-    file: DLC_HEN_VT_Int.060.ogg
+    file: DLC_HEN_VT_Int.060.wav
     track: voice
   zaeed_shot_sound_6:
-    file: DLC_HEN_VT_Int.116.ogg
+    file: DLC_HEN_VT_Int.116.wav
     track: voice

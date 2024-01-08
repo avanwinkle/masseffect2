@@ -505,7 +505,7 @@ player_vars:
     initial_value: 0
 
 sound_system:
-  buffer: 4096  # upped from 2048 on UP Core Plus  # previous value was 512
+  buffer: 2048  # upped from 2048 on UP Core Plus  # previous value was 512
   frequency: 24000
   channels: 1
   enabled: true

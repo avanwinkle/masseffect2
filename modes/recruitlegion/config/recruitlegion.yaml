@@ -422,20 +422,20 @@ sound_pools:
 
 sounds:
   music_legion:
-    file: mus_legion_acq_combat_1.ogg
+    file: mus_legion_acq_combat_1.wav
     track: music
     fade_in: 2s
     fade_out: 1s
   music_legion_low:
-    file: mus_legion_acq_tension_1.ogg
+    file: mus_legion_acq_tension_1.wav
     track: music
     fade_in: 1s
     fade_out: 1s
   shepard_start_your_upload:
-    file: en_us_player_f_gthgtl_core_h_00183211_f.ogg
+    file: en_us_player_f_gthgtl_core_h_00183211_f.wav
     track: voice
   legion_alert_mobile_platforms:
-    file: en_us_hench_geth_gthgtl_towerdef_h_00183217_m.ogg
+    file: en_us_hench_geth_gthgtl_towerdef_h_00183217_m.wav
     track: voice
     ducking:
       target: music
@@ -444,7 +444,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   legion_alert_close_combat:
-    file: en_us_hench_geth_gthgtl_towerdef_h_00183218_m.ogg
+    file: en_us_hench_geth_gthgtl_towerdef_h_00183218_m.wav
     track: voice
     ducking:
       target: music
@@ -453,7 +453,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   legion_clear_reactivate_defense_turrets:
-    file: en_us_hench_geth_gthgtl_towerdef_h_00193277_m.ogg
+    file: en_us_hench_geth_gthgtl_towerdef_h_00193277_m.wav
     track: voice
     ducking:
       target: music
@@ -462,7 +462,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   legion_hack_complete:
-    file: en_us_hench_geth_gthgtl_towerdef_h_00183219_m.ogg
+    file: en_us_hench_geth_gthgtl_towerdef_h_00183219_m.wav
     track: voice
     ducking:
       target: music
@@ -472,47 +472,47 @@ sounds:
       release_point: 50ms
   # Hit sounds for lane shots
   legion_attacking_target:
-    file: en_us_hench_geth_ss_global_hench_geth_00240680_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240680_m.wav
     track: voice
   legion_hostiles_eliminated:
-    file: en_us_hench_geth_ss_global_hench_geth_00240768_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240768_m.wav
     track: voice
   legion_targets_eliminated:
-    file: en_us_hench_geth_ss_global_hench_geth_00240769_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240769_m.wav
     track: voice
   legion_engaging_hostiles:
-    file: en_us_hench_geth_ss_global_hench_geth_00315342_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315342_m.wav
     track: voice
   legion_attacking_requested_target:
-    file: en_us_hench_geth_ss_global_hench_geth_00315352_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315352_m.wav
     track: voice
   legion_critical_target_strike:
-    file: en_us_hench_geth_ss_global_hench_geth_00315407_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315407_m.wav
     track: voice
   legion_enemy_hit:
-    file: en_us_hench_geth_ss_global_hench_geth_00315451_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315451_m.wav
     track: voice
   legion_successful_shot:
-    file: en_us_hench_geth_ss_global_hench_geth_00315453_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315453_m.wav
     track: voice
   legion_target_eliminated:
-    file: en_us_hench_geth_ss_global_hench_geth_00315458_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315458_m.wav
     track: voice
   legion_enemy_disabled:
-    file: en_us_hench_geth_ss_global_hench_geth_00315466_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315466_m.wav
     track: voice
   # Sounds for banks
   legion_target_positive_y:
-    file: en_us_hench_geth_ss_global_hench_geth_00242507_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00242507_m.wav
     track: voice
   legion_target_negative_x:
-    file: en_us_hench_geth_ss_global_hench_geth_00242508_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00242508_m.wav
     track: voice
   legion_target_positive_x:
-    file: en_us_hench_geth_ss_global_hench_geth_00242509_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00242509_m.wav
     track: voice
   legion_target_negative_y:
-    file: en_us_hench_geth_ss_global_hench_geth_00242510_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00242510_m.wav
     track: voice
 
 widget_player:

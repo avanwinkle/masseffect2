@@ -217,86 +217,86 @@ sound_pools:
 
 sounds:
   harbinger_enabledsound_1:
-    file: en_us_global_collector_general_ss_collector_general_00346726_m.ogg # "We are Harbinger"
+    file: en_us_global_collector_general_ss_collector_general_00346726_m.wav # "We are Harbinger"
     track: voice
   harbinger_enabledsound_2:
-    file: en_us_global_collector_general_ss_collector_general_00346727_m.ogg # "Assuming direct control"
+    file: en_us_global_collector_general_ss_collector_general_00346727_m.wav # "Assuming direct control"
     track: voice
   harbinger_enabledsound_3:
-    file: en_us_global_collector_general_ss_collector_general_00346725_m.ogg # "We are assuming control"
+    file: en_us_global_collector_general_ss_collector_general_00346725_m.wav # "We are assuming control"
     track: voice
   harbinger_enabledsound_4:
-    file: en_us_global_collector_general_ss_collector_general_00346724_m.ogg # "Assuming control of this form"
+    file: en_us_global_collector_general_ss_collector_general_00346724_m.wav # "Assuming control of this form"
     track: voice
   harbinger_enabledsound_5:
-    file: en_us_global_collector_general_ss_collector_general_00332646_m.ogg # "Face your annihilation"
+    file: en_us_global_collector_general_ss_collector_general_00332646_m.wav # "Face your annihilation"
     track: voice
   harbinger_enabledsound_6:
-    file: en_us_global_collector_general_ss_collector_general_00332610_m.ogg # "I am unstoppable"
+    file: en_us_global_collector_general_ss_collector_general_00332610_m.wav # "I am unstoppable"
     track: voice
   harbinger_enabledsound_7:
-    file: en_us_global_collector_general_ss_collector_general_00332562_m.ogg # "I will direct this personally"
+    file: en_us_global_collector_general_ss_collector_general_00332562_m.wav # "I will direct this personally"
     track: voice
   harbinger_enabledsound_8:
-    file: en_us_global_collector_general_ss_collector_general_00332558_m.ogg # "Assuming control"
+    file: en_us_global_collector_general_ss_collector_general_00332558_m.wav # "Assuming control"
     track: voice
   harbinger_enabledsound_9:
-    file: en_us_global_collector_general_ss_collector_general_00332557_m.ogg # "Direct intervention is necessary"
+    file: en_us_global_collector_general_ss_collector_general_00332557_m.wav # "Direct intervention is necessary"
     track: voice
   harbinger_hitsound_1:
-    file: en_us_global_collector_general_ss_collector_general_00346818_m.ogg # "We are the harbinger of your ascendance"
+    file: en_us_global_collector_general_ss_collector_general_00346818_m.wav # "We are the harbinger of your ascendance"
     track: voice
   harbinger_hitsound_2:
-    file: en_us_global_collector_general_ss_collector_general_00346733_m.ogg # "You cannot stop us"
+    file: en_us_global_collector_general_ss_collector_general_00346733_m.wav # "You cannot stop us"
     track: voice
   harbinger_hitsound_3:
-    file: en_us_global_collector_general_ss_collector_general_00346734_m.ogg # "We are the harbinger of your destiny"
+    file: en_us_global_collector_general_ss_collector_general_00346734_m.wav # "We are the harbinger of your destiny"
     track: voice
   harbinger_hitsound_4:
-    file: en_us_global_collector_general_ss_collector_general_00346736_m.ogg # "This form is irrelevant"
+    file: en_us_global_collector_general_ss_collector_general_00346736_m.wav # "This form is irrelevant"
     track: voice
   harbinger_hitsound_5:
-    file: en_us_global_collector_general_ss_collector_general_00346738_m.ogg # "You cannot stop us, Shepard"
+    file: en_us_global_collector_general_ss_collector_general_00346738_m.wav # "You cannot stop us, Shepard"
     track: voice
   harbinger_hitsound_6:
-    file: en_us_global_collector_general_ss_collector_general_00346804_m.ogg # "I sense your weakness"
+    file: en_us_global_collector_general_ss_collector_general_00346804_m.wav # "I sense your weakness"
     track: voice
   harbinger_hitsound_7:
-    file: en_us_global_collector_general_ss_collector_general_00332635_m.ogg # "I know you feel this"
+    file: en_us_global_collector_general_ss_collector_general_00332635_m.wav # "I know you feel this"
     track: voice
   harbinger_hitsound_8:
-    file: en_us_global_collector_general_ss_collector_general_00332611_m.ogg # "You only damage the vessel"
+    file: en_us_global_collector_general_ss_collector_general_00332611_m.wav # "You only damage the vessel"
     track: voice
   harbinger_killedsound_1:
-    file: en_us_global_collector_general_ss_collector_general_00346728_m.ogg # "Releasing this form"
+    file: en_us_global_collector_general_ss_collector_general_00346728_m.wav # "Releasing this form"
     track: voice
   harbinger_killedsound_2:
-    file: en_us_global_collector_general_ss_collector_general_00346729_m.ogg # "This form is redundant"
+    file: en_us_global_collector_general_ss_collector_general_00346729_m.wav # "This form is redundant"
     track: voice
   harbinger_killedsound_3:
-    file: en_us_global_collector_general_ss_collector_general_00346732_m.ogg # "Releasing control of this form"
+    file: en_us_global_collector_general_ss_collector_general_00346732_m.wav # "Releasing control of this form"
     track: voice
   harbinger_killedsound_4:
-    file: en_us_global_collector_general_ss_collector_general_00332641_m.ogg # "You will know pain, Shepard"
+    file: en_us_global_collector_general_ss_collector_general_00332641_m.wav # "You will know pain, Shepard"
     track: voice
   harbinger_killedsound_5:
-    file: en_us_global_collector_general_ss_collector_general_00332603_m.ogg # "This changes nothing, Shepard"
+    file: en_us_global_collector_general_ss_collector_general_00332603_m.wav # "This changes nothing, Shepard"
     track: voice
   harbinger_taunt_1:
-    file: en_us_global_collector_general_ss_collector_general_00332540_m.ogg # "Shepard, your interference has ended"
+    file: en_us_global_collector_general_ss_collector_general_00332540_m.wav # "Shepard, your interference has ended"
     track: voice
   harbinger_taunt_2:
-    file: en_us_global_collector_general_ss_collector_general_00332559_m.ogg # "You will not stop me"
+    file: en_us_global_collector_general_ss_collector_general_00332559_m.wav # "You will not stop me"
     track: voice
   harbinger_taunt_3:
-    file: en_us_global_collector_general_ss_collector_general_00332650_m.ogg # "Nothing stands against us"
+    file: en_us_global_collector_general_ss_collector_general_00332650_m.wav # "Nothing stands against us"
     track: voice
   harbinger_taunt_4:
-    file: en_us_global_collector_general_endgm2_boss_fight_a_00314679_m.ogg # "The cycle cannot be broken"
+    file: en_us_global_collector_general_endgm2_boss_fight_a_00314679_m.wav # "The cycle cannot be broken"
     track: voice
   harbinger_taunt_5:
-    file: en_us_global_collector_general_endgm2_collector_reaper_c_00346713_m.ogg # "You are no longer relevant"
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00346713_m.wav # "You are no longer relevant"
     track: voice
   harbinger_you_have_failed:
-    file: en_us_global_collector_general_endgm2_collector_reaper_c_00349248_m.ogg # You have failed
+    file: en_us_global_collector_general_endgm2_collector_reaper_c_00349248_m.wav # You have failed
     track: voice

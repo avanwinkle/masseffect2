@@ -286,92 +286,92 @@ sound_pools:
 
 sounds:
   firewalker_music_2:
-    file: mus_critpath1_combat_1.ogg
+    file: mus_critpath1_combat_1.wav
     track: music
     start_at: 2s
     fade_in: 1s
     fade_out: 2s
   firewalker_music_1:
-    file: mus_n7_8_combat_2.ogg
+    file: mus_n7_8_combat_2.wav
     track: music
     start_at: 1.5s
     fade_in: 500ms
     fade_out: 2s
   firewalker_music_3:
-    file: mus_tali_acq_combat_2a.ogg
+    file: mus_tali_acq_combat_2a.wav
     track: music
     start_at: 1.5s
     fade_in: 500ms
     fade_out: 2s
   firewalker_music_4:
-    file: mus_thane_acq_miniboss.ogg
+    file: mus_thane_acq_miniboss.wav
     track: music
     start_at: 1s
     fade_in: 500ms
     fade_out: 2s
   # Hammerhead callouts
   hmd_intro_location_unstable:
-    file: DLC_UNC_Pack01_Int.181.ogg
+    file: DLC_UNC_Pack01_Int.181.wav
     track: voice
   hmd_intro_find_safer_ground:
-    file: DLC_UNC_Pack01_Int.182.ogg
+    file: DLC_UNC_Pack01_Int.182.wav
     track: voice
   hmd_intro_initiating_emergency_reset:
-    file: DLC_UNC_Pack01_Int.183.ogg
+    file: DLC_UNC_Pack01_Int.183.wav
     track: voice
   hmd_intro_temperatures_not_recommended:
-    file: DLC_UNC_Pack01_Int.184.ogg
+    file: DLC_UNC_Pack01_Int.184.wav
     track: voice
   hmd_warning_temperatures_degrees:
-    file: DLC_UNC_Pack01_Int.185.ogg
+    file: DLC_UNC_Pack01_Int.185.wav
     track: voice
   hmd_warning_hull_integrity:
-    file: DLC_UNC_Pack01_Int.186.ogg
+    file: DLC_UNC_Pack01_Int.186.wav
     track: voice
   hmd_warning_lava:
-    file: DLC_UNC_Pack01_Int.187.ogg
+    file: DLC_UNC_Pack01_Int.187.wav
     track: voice
   hmd_warning_hull_temperature:
-    file: DLC_UNC_Pack01_Int.188.ogg
+    file: DLC_UNC_Pack01_Int.188.wav
     track: voice
   hmd_warning_conditions_deteriorating:
-    file: DLC_UNC_Pack01_Int.189.ogg
+    file: DLC_UNC_Pack01_Int.189.wav
     track: voice
   hmd_warning_hull_damage:
-    file: DLC_UNC_Pack01_Int.520.ogg
+    file: DLC_UNC_Pack01_Int.520.wav
     track: voice
   hmd_that_direction_is_not_advisable:
-    file: DLC_UNC_Pack01_Int.515.ogg
+    file: DLC_UNC_Pack01_Int.515.wav
     track: voice
   hmd_proximity_alert_hostiles_detected:
-    file: DLC_UNC_Pack01_Int.516.ogg
+    file: DLC_UNC_Pack01_Int.516.wav
     track: voice
   hmd_threat_detection:
-    file: DLC_UNC_Pack01_Int.517.ogg
+    file: DLC_UNC_Pack01_Int.517.wav
     track: voice
   hmd_hostile_activity_detected:
-    file: DLC_UNC_Pack01_Int.519.ogg
+    file: DLC_UNC_Pack01_Int.519.wav
     track: voice
   hmd_1_remains:
-    file: DLC_UNC_Pack01_Int.503.ogg
+    file: DLC_UNC_Pack01_Int.503.wav
     track: voice
   hmd_2_remains:
-    file: DLC_UNC_Pack01_Int.492.ogg
+    file: DLC_UNC_Pack01_Int.492.wav
     track: voice
   hmd_3_remains:
-    file: DLC_UNC_Pack01_Int.504.ogg
+    file: DLC_UNC_Pack01_Int.504.wav
     track: voice
   hmd_4_remains:
-    file: DLC_UNC_Pack01_Int.505.ogg
+    file: DLC_UNC_Pack01_Int.505.wav
     track: voice
   hmd_5_remains:
-    file: DLC_UNC_Pack01_Int.506.ogg
+    file: DLC_UNC_Pack01_Int.506.wav
     track: voice
   hmd_all_data_packets_recovered:
-    file: DLC_UNC_Pack01_Int.502.ogg
+    file: DLC_UNC_Pack01_Int.502.wav
     track: voice
   hmd_humanity_one_wildlife_zero:
-    file: DLC_UNC_Pack01_Int.495.ogg
+    file: DLC_UNC_Pack01_Int.495.wav
     track: voice
 
 widget_player:

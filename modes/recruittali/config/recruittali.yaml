@@ -278,110 +278,110 @@ sound_pools:
 
 sounds:
   music_recruit_tali:
-    file: mus_tali_acq_bossbattle.ogg
+    file: mus_tali_acq_bossbattle.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   tali_attack_shields_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00289271_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289271_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_shields_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00289272_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289272_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_shields_3:
-    file: en_us_hench_tali_ss_global_hench_tali_00289273_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289273_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_shields_4:
-    file: en_us_hench_tali_ss_global_hench_tali_00289274_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289274_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_armor_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00289276_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289276_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_armor_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00289277_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289277_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_armor_3:
-    file: en_us_hench_tali_ss_global_hench_tali_00289278_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289278_m.wav
     track: voice
     max_queue_time: 0
   tali_attack_armor_4:
-    file: en_us_hench_tali_ss_global_hench_tali_00289279_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289279_m.wav
     track: voice
     max_queue_time: 0
   reegar_missionstart:
-    file: en_us_suntla_quarianleader_suntla_quarianleader_d_00253414_m.ogg
+    file: en_us_suntla_quarianleader_suntla_quarianleader_d_00253414_m.wav
     track: voice
   reegar_its_repairing_itself:
-    file: en_us_suntla_quarianleader_suntla_turret_a_00261804_m.ogg
+    file: en_us_suntla_quarianleader_suntla_turret_a_00261804_m.wav
     track: voice
   reegar_its_coming_back_online:
-    file: en_us_suntla_quarianleader_suntla_turret_a_00261805_m.ogg
+    file: en_us_suntla_quarianleader_suntla_turret_a_00261805_m.wav
     track: voice
   squadmate_garrus_its_getting_up:
-    file: en_us_hench_garrus_suntla_colossusretwarn_h_00203088_m.ogg
+    file: en_us_hench_garrus_suntla_colossusretwarn_h_00203088_m.wav
     track: voice
   squadmate_grunt_its_getting_up:
-    file: en_us_hench_grunt_suntla_colossusretwarn_h_00203091_m.ogg
+    file: en_us_hench_grunt_suntla_colossusretwarn_h_00203091_m.wav
     track: voice
   squadmate_jack_its_getting_up:
-    file: en_us_hench_convict_suntla_colossusretwarn_h_00203093_m.ogg
+    file: en_us_hench_convict_suntla_colossusretwarn_h_00203093_m.wav
     track: voice
   squadmate_jacob_its_getting_up:
-    file: en_us_hench_leading_suntla_colossusretwarn_h_00203085_m.ogg
+    file: en_us_hench_leading_suntla_colossusretwarn_h_00203085_m.wav
     track: voice
   squadmate_kasumi_its_getting_up:
-    file: en_us_hench_thief_suntla_colossusretwarn_h_00203094_m.ogg
+    file: en_us_hench_thief_suntla_colossusretwarn_h_00203094_m.wav
     track: voice
   squadmate_legion_its_getting_up:
     track: voice
-    file: en_us_hench_geth_suntla_colossusretwarn_h_00203087_m.ogg
+    file: en_us_hench_geth_suntla_colossusretwarn_h_00203087_m.wav
   squadmate_miranda_its_getting_up:
-    file: en_us_hench_vixen_suntla_colossusretwarn_h_00203090_m.ogg
+    file: en_us_hench_vixen_suntla_colossusretwarn_h_00203090_m.wav
     track: voice
   squadmate_mordin_its_getting_up:
-    file: en_us_hench_professor_suntla_colossusretwarn_h_00278339_m.ogg
+    file: en_us_hench_professor_suntla_colossusretwarn_h_00278339_m.wav
     track: voice
   squadmate_samara_its_getting_up:
-    file: en_us_hench_mystic_suntla_colossusretwarn_h_00203089_m.ogg
+    file: en_us_hench_mystic_suntla_colossusretwarn_h_00203089_m.wav
     track: voice
   squadmate_thane_its_getting_up:
-    file: en_us_hench_assassin_suntla_colossusretwarn_h_00203092_m.ogg
+    file: en_us_hench_assassin_suntla_colossusretwarn_h_00203092_m.wav
     track: voice
   squadmate_zaeed_its_getting_up:
-    file: en_us_hench_veteran_suntla_colossusretwarn_h_00203086_m.ogg
+    file: en_us_hench_veteran_suntla_colossusretwarn_h_00203086_m.wav
     track: voice
   colossus_sound_1:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313097_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313097_m.wav
     track: sfx
   colossus_sound_2:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313104_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313104_m.wav
     track: sfx
   colossus_sound_3:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313117_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313117_m.wav
     track: sfx
   colossus_sound_4:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313100_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313100_m.wav
     track: sfx
   colossus_sound_5:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313106_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313106_m.wav
     track: sfx
   colossus_sound_6:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313118_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313118_m.wav
     track: sfx
   colossus_sound_7:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313102_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313102_m.wav
     track: sfx
   colossus_sound_8:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313108_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313108_m.wav
     track: sfx
   colossus_sound_9:
-    file: sfx_ss_geth_colossus_ss_geth_colossus_00313122_m.ogg
+    file: sfx_ss_geth_colossus_ss_geth_colossus_00313122_m.wav
     track: sfx
 
 widget_player:

@@ -93,29 +93,29 @@ sound_pools:
 
 sounds:
   squadmate_garrus_nice_shot:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303124_m.wav
     track: voice
   squadmate_grunt_nice_shot:
     track: voice
-    file: en_us_hench_grunt_ss_global_hench_grunt_00316600_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00316600_m.wav
   squadmate_jack_nice_shot:
-      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.ogg
+      file: en_us_hench_convict_ss_global_hench_convict_00316556_m.wav
       track: voice
   squadmate_jacob_nice_shot:
     track: voice
-    file: en_us_hench_leading_ss_global_hench_leading_00316637_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00316637_m.wav
   squadmate_kasumi_nice_shot:
     track: voice
-    file: DLC_HEN_MT_Int.117.ogg
+    file: DLC_HEN_MT_Int.117.wav
   squadmate_miranda_nice_shot:
     track: voice
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310127_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310127_m.wav
   squadmate_mordin_nice_shot:
     track: voice
-    file: en_us_hench_professor_ss_global_hench_professor_00316910_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316910_m.wav
   squadmate_thane_nice_shot:
     track: voice
-    file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.wav
 
 timers:
   skillshot_timer:

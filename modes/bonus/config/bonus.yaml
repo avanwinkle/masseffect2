@@ -153,20 +153,20 @@ sound_player:
 
 sounds:
   music_death:
-    file: mus_death.ogg
+    file: mus_death.wav
     track: music
     loops: 0
     fade_in: 500ms
     fade_out: 500ms
     mode_end_action: stop
   music_gameover_sad:
-    file: mus_endgm3_cine_2.ogg
+    file: mus_endgm3_cine_2.wav
     track: music
     loops: 0
     mode_end_action: stop
     fade_out: 1s
   music_gamover_win:
-    file: mus_endgm3_cine_1.ogg
+    file: mus_endgm3_cine_1.wav
     track: music
     loops: 0
     mode_end_action: stop

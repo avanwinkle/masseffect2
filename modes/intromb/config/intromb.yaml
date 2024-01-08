@@ -79,6 +79,6 @@ sound_player:
 
 sounds:
   intromb_music:
-    file: mus_pro_nor_end_seq.ogg
+    file: mus_pro_nor_end_seq.wav
     track: music
     start_at: 20s

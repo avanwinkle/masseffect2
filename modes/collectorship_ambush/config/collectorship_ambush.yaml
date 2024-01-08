@@ -161,50 +161,50 @@ sound_pools:
 
 sounds:
   shepard_edi_get_us_out_of_here:
-    file: en_us_player_f_cspcr2_platform_approach_h_00269530_f.ogg
+    file: en_us_player_f_cspcr2_platform_approach_h_00269530_f.wav
     track: voice
   shepard_come_on_edi_speed_it_up:
-    file: en_us_player_f_cspcr2_platform_approach_h_00253358_f.ogg
+    file: en_us_player_f_cspcr2_platform_approach_h_00253358_f.wav
     track: voice
   jol_garrus_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303076_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303076_m.wav
     track: voice
   jol_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303077_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303077_m.wav
     track: voice
   jol_garrus_3:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303078_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303078_m.wav
     track: voice
   jol_kasumi_1:
-    file: DLC_HEN_MT_Int.193.ogg
+    file: DLC_HEN_MT_Int.193.wav
     track: voice
   jol_kasumi_2:
-    file: DLC_HEN_MT_Int.195.ogg
+    file: DLC_HEN_MT_Int.195.wav
     track: voice
   jol_miranda_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257402_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257402_m.wav
     track: voice
   jol_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257403_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257403_m.wav
     track: voice
   jol_miranda_3:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257404_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257404_m.wav
     track: voice
   # To be used?
   squadmate_legion_enemyseen:  # contact
-    file: en_us_hench_geth_ss_global_hench_geth_00240735_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240735_m.wav
     track: voice
   squadmate_mordin_enemyseen:  # enemies inbound
-    file: en_us_hench_professor_ss_global_hench_professor_00241374_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241374_m.wav
     track: voice
   squadmate_tali_enemyseen:  # hostiles spotted
-    file: en_us_hench_tali_ss_global_hench_tali_00285164_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285164_m.wav
     track: voice
   squadmate_thane_enemyseen:  # get_ready
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286497_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286497_m.wav
     track: voice
   squadmate_zaeed_enemyseen: # here they come
-    file: DLC_HEN_VT_Int.056.ogg
+    file: DLC_HEN_VT_Int.056.wav
     track: voice
 
 

@@ -380,94 +380,94 @@ sound_pools:
 
 sounds:
   archer_lockdown_cancelled_1:
-    file: DLC_UNC_Pack01_Int.097.ogg
+    file: DLC_UNC_Pack01_Int.097.wav
     track: voice
   archer_lockdown_cancelled_2:
-    file: DLC_UNC_Pack01_Int.099.ogg
+    file: DLC_UNC_Pack01_Int.099.wav
     track: voice
   archer_lockdown_cancelled_3:
-    file: DLC_UNC_Pack01_Int.491.ogg
+    file: DLC_UNC_Pack01_Int.491.wav
     track: voice
   archer_lockdown_cancelled_short:
-    file: DLC_UNC_Pack01_Int.098.ogg
+    file: DLC_UNC_Pack01_Int.098.wav
     track: voice
   archer_still_need_to_go_to_vulcan_1:
-    file: DLC_UNC_Pack01_Int.100.ogg
+    file: DLC_UNC_Pack01_Int.100.wav
     track: voice
   archer_still_need_to_go_to_vulcan_2:
-    file: DLC_UNC_Pack01_Int.485.ogg
+    file: DLC_UNC_Pack01_Int.485.wav
     track: voice
   archer_still_need_to_go_to_prometheus_1:
-    file: DLC_UNC_Pack01_Int.102.ogg
+    file: DLC_UNC_Pack01_Int.102.wav
     track: voice
   archer_still_need_to_go_to_prometheus_2:
-    file: DLC_UNC_Pack01_Int.487.ogg
+    file: DLC_UNC_Pack01_Int.487.wav
     track: voice
   archer_still_need_to_go_to_both:
-    file: DLC_UNC_Pack01_Int.104.ogg
+    file: DLC_UNC_Pack01_Int.104.wav
     track: voice
   archer_need_to_go_to_both:
-    file: DLC_UNC_Pack01_Int.484.ogg
+    file: DLC_UNC_Pack01_Int.484.wav
     track: voice
   archer_prometheus_success:
-    file: DLC_UNC_Pack01_Int.486.ogg
+    file: DLC_UNC_Pack01_Int.486.wav
     track: voice
   archer_vulcan_success:
-    file: DLC_UNC_Pack01_Int.488.ogg
+    file: DLC_UNC_Pack01_Int.488.wav
     track: voice
   shepard_hit_override_vulcan:
-    file: DLC_UNC_Pack01_Int.219.ogg
+    file: DLC_UNC_Pack01_Int.219.wav
     track: voice
   vi_override_accepted_atlas_1:
-    file: DLC_UNC_Pack01_Int.221.ogg
+    file: DLC_UNC_Pack01_Int.221.wav
     track: voice
   vi_override_accepted_atlas_2:
-    file: DLC_UNC_Pack01_Int.289.ogg
+    file: DLC_UNC_Pack01_Int.289.wav
     track: voice
   geth_hit_1:
-    file: sfx_ss_geth_trooper_ss_geth_trooper_00307868_m.ogg
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307868_m.wav
     track: sfx
   geth_hit_2:
-    file: sfx_ss_geth_trooper_ss_geth_trooper_00307894_m.ogg
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307894_m.wav
     track: sfx
   geth_hit_3:
-    file: sfx_ss_geth_trooper_ss_geth_trooper_00307881_m.ogg
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307881_m.wav
     track: sfx
   geth_hit_4:
-    file: sfx_ss_geth_trooper_ss_geth_trooper_00307899_m.ogg
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307899_m.wav
     track: sfx
   batarian_hit_1:
-    file: DLC_EXP_Part02_Int.378.ogg
+    file: DLC_EXP_Part02_Int.378.wav
     track: sfx
   batarian_hit_2:
-    file: DLC_EXP_Part02_Int.381.ogg
+    file: DLC_EXP_Part02_Int.381.wav
     track: sfx
   batarian_hit_3:
-    file: DLC_EXP_Part02_Int.432.ogg
+    file: DLC_EXP_Part02_Int.432.wav
     track: sfx
   batarian_hit_4:
-    file: DLC_EXP_Part02_Int.451.ogg
+    file: DLC_EXP_Part02_Int.451.wav
     track: sfx
   arr_ken_keep_shepard_contained:
-    file: DLC_EXP_Part02_Int.644.ogg
+    file: DLC_EXP_Part02_Int.644.wav
     track: voice
   arr_ken_shepards_escaped:
-    file: DLC_EXP_Part02_Int.244.ogg
+    file: DLC_EXP_Part02_Int.244.wav
     track: voice
   arr_annc_cooling_rod_a_inserted:
-    file: DLC_EXP_Part02_Int.599.ogg
+    file: DLC_EXP_Part02_Int.599.wav
     track: voice
   arr_annc_cooling_rod_b_inserted:
-    file: DLC_EXP_Part02_Int.023.ogg
+    file: DLC_EXP_Part02_Int.023.wav
     track: voice
   arr_annc_warning_temperature_critical:
-    file: DLC_EXP_Part02_Int.004.ogg
+    file: DLC_EXP_Part02_Int.004.wav
     track: voice
   arr_annc_warning_temperature_rising:
-    file: DLC_EXP_Part02_Int.017.ogg
+    file: DLC_EXP_Part02_Int.017.wav
     track: voice
   arr_shep_i_wanna_activate_the_project:
-    file: DLC_EXP_Part02_Int.674.ogg
+    file: DLC_EXP_Part02_Int.674.wav
     track: voice
 
 widgets:

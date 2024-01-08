@@ -174,52 +174,52 @@ sound_pools:
 
 sounds:
   music_recruit_garrus:
-    file: mus_garrus_acq_combat_1.ogg
+    file: mus_garrus_acq_combat_1.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   garrus_give_these_bastards_everything:
-    file: en_us_hench_garrus_omggra_garrus_intro_d_00206435_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_intro_d_00206435_m.wav
     track: voice
   garrus_get_those_doors_closed:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00227793_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00227793_m.wav
     track: voice
   garrus_you_deal_with_shutters:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00228351_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00228351_m.wav
     track: voice
   garrus_two_more_shutters:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205199_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205199_m.wav
     track: voice
   garrus_one_more_shutter:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205200_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00205200_m.wav
     track: voice
   garrus_taking_too_much_damage:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206067_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206067_m.wav
     track: voice
   garrus_i_need_help_with_this_guy:
-    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206056_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave2_a_00206056_m.wav
     track: voice
   garrus_theyve_gotten_through:
-    file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave1_a_00206090_m.wav
     track: voice
   garrus_theyre_coming_in:
-    file: en_us_hench_garrus_omggra_second_boss_c_00228863_m.ogg
+    file: en_us_hench_garrus_omggra_second_boss_c_00228863_m.wav
     track: voice
   garrus_taking_damage_1:
-    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206041_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206041_m.wav
     track: voice
   garrus_taking_damage_2:
-    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206042_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206042_m.wav
     track: voice
   garrus_taking_damage_3:
-    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206043_m.ogg
+    file: en_us_hench_garrus_omggra_garrus_wave3_a_00206043_m.wav
     track: voice
   boss_finish_her:
-    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243130_m.ogg
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243130_m.wav
     track: voice
   boss_now_youre_mine_archangel:
-    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243152_m.ogg
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243152_m.wav
     track: voice
   boss_i_told_you_id_finish_you:
-    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243158_m.ogg
+    file: en_us_omggra_bloodpack_boss_ss_omggra_bloodpack_boss_00243158_m.wav
     track: voice

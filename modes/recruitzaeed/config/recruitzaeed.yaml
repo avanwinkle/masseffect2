@@ -187,13 +187,13 @@ sound_pools:
 
 sounds:
   music_recruit_zaeed:
-    file: mus_jacob_loy_combat_1.ogg
+    file: mus_jacob_loy_combat_1.wav
     track: music
     mode_end_action: stop
     fade_in: 5s
     fade_out: 1s
   zaeed_here_we_go:
-    file: DLC_HEN_VT_Int.334.ogg
+    file: DLC_HEN_VT_Int.334.wav
     track: voice
     ducking:
       target: music
@@ -202,7 +202,7 @@ sounds:
       release: 20ms
       release_point: 10ms
   zaeed_bring_it_on:
-    file: DLC_HEN_VT_Int.345.ogg
+    file: DLC_HEN_VT_Int.345.wav
     track: voice
     ducking:
       target: music
@@ -211,7 +211,7 @@ sounds:
       release: 20ms
       release_point: 10ms
   shep_we_dont_sacrifice_lives:
-    file: DLC_HEN_VT_Int.377.ogg
+    file: DLC_HEN_VT_Int.377.wav
     track: voice
     ducking:
       target: music
@@ -220,10 +220,10 @@ sounds:
       release: 20ms
       release_point: 10ms
   shep_this_isnt_the_time:
-    file: DLC_HEN_VT_Int.385.ogg
+    file: DLC_HEN_VT_Int.385.wav
     track: voice
   shep_the_mission_is_to_save_these_workers:
-    file: DLC_HEN_VT_Int.389.ogg
+    file: DLC_HEN_VT_Int.389.wav
     track: voice
     ducking:
       target: music
@@ -232,7 +232,7 @@ sounds:
       release: 20ms
       release_point: 10ms
   shep_you_want_him_dead_then_he_dies:
-    file: DLC_HEN_VT_Int.405.ogg
+    file: DLC_HEN_VT_Int.405.wav
     track: voice
     ducking:
       target: music
@@ -241,7 +241,7 @@ sounds:
       release: 20ms
       release_point: 10ms
   shep_lets_get_moving_before_vido_gets_away:
-    file: DLC_HEN_VT_Int.418.ogg
+    file: DLC_HEN_VT_Int.418.wav
     track: voice
     ducking:
       target: music
@@ -250,7 +250,7 @@ sounds:
       release: 20ms
       release_point: 10ms
   shep_were_here_to_free_these_people:
-    file: DLC_HEN_VT_Int.420.ogg
+    file: DLC_HEN_VT_Int.420.wav
     track: voice
     ducking:
       target: music
@@ -259,7 +259,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   shep_ill_save_you_on_one_condition:
-    file: DLC_HEN_VT_Int.495.ogg
+    file: DLC_HEN_VT_Int.495.wav
     track: voice
     ducking:
       target: music
@@ -268,7 +268,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_you_wanna_waste_time:
-    file: DLC_HEN_VT_Int.393.ogg
+    file: DLC_HEN_VT_Int.393.wav
     track: voice
     ducking:
       target: music
@@ -277,7 +277,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_let_these_people_burn:
-    file: DLC_HEN_VT_Int.395.ogg
+    file: DLC_HEN_VT_Int.395.wav
     track: voice
     ducking:
       target: music
@@ -286,7 +286,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_if_we_keep_up_the_pressure:
-    file: DLC_HEN_VT_Int.400.ogg
+    file: DLC_HEN_VT_Int.400.wav
     track: voice
     ducking:
       target: music
@@ -295,7 +295,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_glad_you_see_it_my_way:
-    file: DLC_HEN_VT_Int.424.ogg
+    file: DLC_HEN_VT_Int.424.wav
     track: voice
     ducking:
       target: music
@@ -304,7 +304,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_burn_you_son_of_a:
-    file: DLC_HEN_VT_Int.430.ogg
+    file: DLC_HEN_VT_Int.430.wav
     track: voice
     ducking:
       target: music
@@ -313,7 +313,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_fry_you_son_of_a:
-    file: DLC_HEN_VT_Int.520.ogg
+    file: DLC_HEN_VT_Int.520.wav
     track: voice
     ducking:
       target: music
@@ -322,7 +322,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   zaeed_vido_come_fight_me:
-    file: DLC_HEN_VT_Int.473.ogg
+    file: DLC_HEN_VT_Int.473.wav
     track: voice
     ducking:
       target: music
@@ -331,7 +331,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   vido_all_squads_sweep_jungle:
-    file: DLC_HEN_VT_Int.336.ogg
+    file: DLC_HEN_VT_Int.336.wav
     track: voice
     ducking:
       target: music
@@ -340,7 +340,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   vido_you_finally_tracked_me_down:
-    file: DLC_HEN_VT_Int.438.ogg
+    file: DLC_HEN_VT_Int.438.wav
     track: voice
     ducking:
       target: music
@@ -349,7 +349,7 @@ sounds:
       release: 100ms
       release_point: 50ms
   vido_see_you_in_twenty:
-    file: DLC_HEN_VT_Int.518.ogg
+    file: DLC_HEN_VT_Int.518.wav
     track: voice
     ducking:
       target: music

@@ -217,28 +217,28 @@ sound_pools:
 
 sounds:
   boss_your_interference:
-    file: DLC_EXP_Part01_Int.1058.ogg
+    file: DLC_EXP_Part01_Int.1058.wav
     track: voice
   boss_its_pointless_to_challenge_me:
-    file: DLC_EXP_Part01_Int.1065.ogg
+    file: DLC_EXP_Part01_Int.1065.wav
     track: voice
   boss_you_travel_with_fascinating_companions:
-    file: DLC_EXP_Part01_Int.1056.ogg
+    file: DLC_EXP_Part01_Int.1056.wav
     track: voice
   boss_reckless_even_for_you_commander:
-    file: DLC_EXP_Part01_Int.1089.ogg
+    file: DLC_EXP_Part01_Int.1089.wav
     track: voice
   liara_vasir_its_over:
-    file: DLC_EXP_Part01_Int.790.ogg
+    file: DLC_EXP_Part01_Int.790.wav
     track: voice
   liara_theres_vasirs_car:
-    file: DLC_EXP_Part01_Int.700.ogg
+    file: DLC_EXP_Part01_Int.700.wav
     track: voice
   liara_we_can_climb_over:
-    file: DLC_EXP_Part01_Int.702.ogg
+    file: DLC_EXP_Part01_Int.702.wav
     track: voice
   vasir_ive_crashed_on_azure:
-    file: DLC_EXP_Part01_Int.699.ogg
+    file: DLC_EXP_Part01_Int.699.wav
     track: voice
 
 widgets:

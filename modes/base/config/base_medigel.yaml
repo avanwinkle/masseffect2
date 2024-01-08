@@ -138,7 +138,7 @@ sound_pools:
 
 sounds:
   deploying_medigel_1:
-    file: en_us_player_f_ss_global_player_female_00314495_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314495_f.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -148,7 +148,7 @@ sounds:
       release: 10ms
       release_point: 0
   deploying_medigel_2:
-    file: en_us_player_f_ss_global_player_female_00314496_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314496_f.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -158,7 +158,7 @@ sounds:
       release: 10ms
       release_point: 0
   on_your_feet_1:
-    file: en_us_player_f_ss_global_player_female_00314499_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314499_f.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -168,7 +168,7 @@ sounds:
       release: 10ms
       release_point: 0
   on_your_feet_2:
-    file: en_us_player_f_ss_global_player_female_00314500_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314500_f.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -178,7 +178,7 @@ sounds:
       release: 10ms
       release_point: 0
   first_aid_1:
-    file: en_us_player_f_ss_global_player_female_00314501_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314501_f.wav
     track: voice
     max_queue_time: 3s
     ducking:
@@ -188,7 +188,7 @@ sounds:
       release: 10ms
       release_point: 0
   first_aid_2:
-    file: en_us_player_f_ss_global_player_female_00314502_f.ogg
+    file: en_us_player_f_ss_global_player_female_00314502_f.wav
     track: voice
     max_queue_time: 3s
     ducking:

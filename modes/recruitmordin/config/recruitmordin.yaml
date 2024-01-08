@@ -221,115 +221,115 @@ sound_pools:
 
 sounds:
   music_recruit_mordin:
-    file: mus_mordin_acq_bossbattle_a.ogg
+    file: mus_mordin_acq_bossbattle_a.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
   mordin_intro_sound:
     track: voice
-    file: en_us_hench_professor_omgpra_mordin_d_00210618_m.ogg
+    file: en_us_hench_professor_omgpra_mordin_d_00210618_m.wav
   step0_voice_jack:
     track: voice
-    file: en_us_hench_convict_omgpra_plant_shutdown_a_00211827_m.ogg
+    file: en_us_hench_convict_omgpra_plant_shutdown_a_00211827_m.wav
   step0_voice_tali:
     track: voice
-    file: en_us_hench_tali_omgpra_plant_shutdown_a_00211819_m.ogg
+    file: en_us_hench_tali_omgpra_plant_shutdown_a_00211819_m.wav
   step0_voice_garrus:
     track: voice
-    file: en_us_hench_garrus_omgpra_plant_shutdown_a_00211828_m.ogg
+    file: en_us_hench_garrus_omgpra_plant_shutdown_a_00211828_m.wav
   step0_voice_kasumi:
     track: voice
-    file: en_us_hench_thief_omgpra_plant_shutdown_a_00211826_m.ogg
+    file: en_us_hench_thief_omgpra_plant_shutdown_a_00211826_m.wav
   step0_voice_zaeed:
     track: voice
-    file: en_us_hench_veteran_omgpra_plant_shutdown_a_00211831_m.ogg
+    file: en_us_hench_veteran_omgpra_plant_shutdown_a_00211831_m.wav
   step0_voice_jacob:
     track: voice
-    file: en_us_hench_leading_omgpra_plant_shutdown_a_00211829_m.ogg
+    file: en_us_hench_leading_omgpra_plant_shutdown_a_00211829_m.wav
   step0_voice_miranda:
     track: voice
-    file: en_us_hench_vixen_omgpra_plant_shutdown_a_00211830_m.ogg
+    file: en_us_hench_vixen_omgpra_plant_shutdown_a_00211830_m.wav
   step1_voice_garrus:
     track: voice
-    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.ogg
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235508_m.wav
   step2_voice_garrus:
     track: voice
-    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235498_m.ogg
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235498_m.wav
   step3_voice_garrus:
     track: voice
-    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235488_m.ogg
+    file: en_us_hench_garrus_omgpra_end_puzzle_a_00235488_m.wav
   step1_voice_grunt:
     track: voice
-    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235486_m.ogg
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235486_m.wav
   step2_voice_grunt:
     track: voice
-    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235504_m.ogg
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235504_m.wav
   step3_voice_grunt:
     track: voice
-    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235494_m.ogg
+    file: en_us_hench_grunt_omgpra_end_puzzle_a_00235494_m.wav
   step1_voice_jack:
     track: voice
-    file: en_us_hench_convict_omgpra_end_puzzle_a_00235485_m.ogg
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235485_m.wav
   step2_voice_jack:
     track: voice
-    file: en_us_hench_convict_omgpra_end_puzzle_a_00235503_m.ogg
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235503_m.wav
   step3_voice_jack:
     track: voice
-    file: en_us_hench_convict_omgpra_end_puzzle_a_00235493_m.ogg
+    file: en_us_hench_convict_omgpra_end_puzzle_a_00235493_m.wav
   step1_voice_jacob:
     track: voice
-    file: en_us_hench_leading_omgpra_end_puzzle_a_00235509_m.ogg
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235509_m.wav
   step2_voice_jacob:
     track: voice
-    file: en_us_hench_leading_omgpra_end_puzzle_a_00235499_m.ogg
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235499_m.wav
   step3_voice_jacob:
     track: voice
-    file: en_us_hench_leading_omgpra_end_puzzle_a_00235489_m.ogg
+    file: en_us_hench_leading_omgpra_end_puzzle_a_00235489_m.wav
   step1_voice_kasumi:
     track: voice
-    file: en_us_hench_thief_omgpra_end_puzzle_a_00235511_m.ogg
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235511_m.wav
   step2_voice_kasumi:
     track: voice
-    file: en_us_hench_thief_omgpra_end_puzzle_a_00235501_m.ogg
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235501_m.wav
   step3_voice_kasumi:
     track: voice
-    file: en_us_hench_thief_omgpra_end_puzzle_a_00235491_m.ogg
+    file: en_us_hench_thief_omgpra_end_puzzle_a_00235491_m.wav
   step1_voice_miranda:
     track: voice
-    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235510_m.ogg
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235510_m.wav
   step2_voice_miranda:
     track: voice
-    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235500_m.ogg
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235500_m.wav
   step3_voice_miranda:
     track: voice
-    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235490_m.ogg
+    file: en_us_hench_vixen_omgpra_end_puzzle_a_00235490_m.wav
   step1_voice_tali:
     track: voice
-    file: en_us_hench_tali_omgpra_end_puzzle_a_00235507_m.ogg
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235507_m.wav
   step2_voice_tali:
     track: voice
-    file: en_us_hench_tali_omgpra_end_puzzle_a_00235497_m.ogg
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235497_m.wav
   step3_voice_tali:
     track: voice
-    file: en_us_hench_tali_omgpra_end_puzzle_a_00235483_m.ogg
+    file: en_us_hench_tali_omgpra_end_puzzle_a_00235483_m.wav
   step1_voice_zaeed:
     track: voice
-    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235484_m.ogg
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235484_m.wav
   step2_voice_zaeed:
     track: voice
-    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235502_m.ogg
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235502_m.wav
   step3_voice_zaeed:
     track: voice
-    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235492_m.ogg
+    file: en_us_hench_veteran_omgpra_end_puzzle_a_00235492_m.wav
   vorcha_got_you:
     track: voice
-    file: en_us_ss_vorcha_ss_vorcha_00312966_m.ogg
+    file: en_us_ss_vorcha_ss_vorcha_00312966_m.wav
   vorcha_laughing:
     track: voice
-    file: en_us_ss_vorcha_ss_vorcha_00312970_m.ogg
+    file: en_us_ss_vorcha_ss_vorcha_00312970_m.wav
   krogan_strong_survive:
     track: voice
-    file: en_us_ss_sub_krogan_ss_sub_krogan_00304056_m.ogg
+    file: en_us_ss_sub_krogan_ss_sub_krogan_00304056_m.wav
   krogan_fear_the_battlemaster:
     track: voice
-    file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.ogg
+    file: en_us_ss_sub_krogan_ss_sub_krogan_00303964_m.wav

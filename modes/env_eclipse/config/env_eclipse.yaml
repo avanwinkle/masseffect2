@@ -31,7 +31,7 @@ sound_pools:
 
 sounds:
   asari_eclipse_leave_no_survivors:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304752_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304752_m.wav
     track: voice
     ducking:
       target: music
@@ -40,7 +40,7 @@ sounds:
       release: 10ms
       release_point: 0
   asari_eclipse_weapons_free:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304911_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304911_m.wav
     track: voice
     ducking:
       target: music
@@ -49,19 +49,19 @@ sounds:
       release: 10ms
       release_point: 0
   asari_hit_short_1:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304737_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304737_m.wav
     track: sfx
   asari_hit_short_2:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304739_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304739_m.wav
     track: sfx
   asari_hit_short_3:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304815_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304815_m.wav
     track: sfx
   asari_hit_short_4:
-    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304816_m.ogg
+    file: en_us_ss_eclipse_minion_female_ss_eclipse_asari_elite_x_00304816_m.wav
     track: sfx
   salarian_eclipse_eclipse_forever:
-    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292917_m.ogg
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292917_m.wav
     track: voice
     ducking:
       target: music
@@ -70,7 +70,7 @@ sounds:
       release: 10ms
       release_point: 0
   salarian_eclipse_now_it_gets_fun:
-    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292937_m.ogg
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292937_m.wav
     track: voice
     ducking:
       target: music
@@ -79,8 +79,8 @@ sounds:
       release: 10ms
       release_point: 0
   salarian_hit_short_1:
-    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292930_m.ogg
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292930_m.wav
     track: sfx
   salarian_hit_short_2:
-    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292933_m.ogg
+    file: en_us_ss_eclipse_minion_male_ss_eclipse_sal_male_x_00292933_m.wav
     track: sfx

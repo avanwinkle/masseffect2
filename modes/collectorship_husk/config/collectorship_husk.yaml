@@ -169,62 +169,62 @@ sound_player:
 
 sounds:
   joker_collector_ship_is_powering_up:
-    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253364_m.ogg
+    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253364_m.wav
     track: voice
   joker_you_need_to_get_out_of_there:
-    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253365_m.ogg
+    file: en_us_hench_joker_cspcr2_bridge_trap_d_00253365_m.wav
     track: voice
   # Squadmate-based husk callouts played at random via play_squadmate_sound
   squadmate_garrus_husks:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303132_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303132_m.wav
     track: voice
   squadmate_grunt_husks:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295838_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295838_m.wav
     track: voice
   squadmate_jack_husks:
-    file: en_us_hench_convict_ss_global_hench_convict_00296157_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00296157_m.wav
     track: voice
   squadmate_jacob_husks:
-    file: en_us_hench_leading_ss_global_hench_leading_00299273_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299273_m.wav
     track: voice
   squadmate_kasumi_husks:
-    file: DLC_HEN_MT_Int.101.ogg
+    file: DLC_HEN_MT_Int.101.wav
     track: voice
   squadmate_legion_husks:
-    file: en_us_hench_geth_ss_global_hench_geth_00315415_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00315415_m.wav
     track: voice
   squadmate_miranda_husks:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00310134_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00310134_m.wav
     track: voice
   squadmate_mordin_husks:
-    file: en_us_hench_professor_ss_global_hench_professor_00316915_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316915_m.wav
     track: voice
   squadmate_thane_husks:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00297541_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00297541_m.wav
     track: voice
   squadmate_tali_husks:
-    file: en_us_hench_tali_ss_global_hench_tali_00289253_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00289253_m.wav
     track: voice
   squadmate_zaeed_husks:
-    file: DLC_HEN_VT_Int.012.ogg
+    file: DLC_HEN_VT_Int.012.wav
     track: voice
 
   # Unused sounds, saved here so I don't have to dig them up again
   # husk_garrus_2:
-  #   file: en_us_hench_garrus_ss_global_hench_garrus_00303133_m.ogg
+  #   file: en_us_hench_garrus_ss_global_hench_garrus_00303133_m.wav
   #   track: voice
   # husk_grunt_2:
-  #   file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.ogg
+  #   file: en_us_hench_grunt_ss_global_hench_grunt_00295839_m.wav
   #   track: voice
   # husk_jack_2:
-  #   file: en_us_hench_convict_ss_global_hench_convict_00296158_m.ogg
+  #   file: en_us_hench_convict_ss_global_hench_convict_00296158_m.wav
   #   track: voice
   # husk_jacob_2:
-  #   file: en_us_hench_leading_ss_global_hench_leading_00299274_m.ogg
+  #   file: en_us_hench_leading_ss_global_hench_leading_00299274_m.wav
   #   track: voice
   # husk_miranda_2:
-  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310135_m.ogg
+  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310135_m.wav
   #   track: voice
   # husk_miranda_3:
-  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.ogg
+  #   file: en_us_hench_vixen_ss_global_hench_vixen_00310136_m.wav
   #   track: voice

@@ -27,26 +27,26 @@ sound_pools:
 
 sounds:
   scion_groan_1:
-    file: sfx_ss_scion_ss_scion_00293501_m.ogg
+    file: sfx_ss_scion_ss_scion_00293501_m.wav
     track: sfx
   scion_groan_2:
-    file: sfx_ss_scion_ss_scion_00293502_m.ogg
+    file: sfx_ss_scion_ss_scion_00293502_m.wav
     track: sfx
   scion_groan_3:
-    file: sfx_ss_scion_ss_scion_00293505_m.ogg
+    file: sfx_ss_scion_ss_scion_00293505_m.wav
     track: sfx
   scion_groan_4:
-    file: sfx_ss_scion_ss_scion_00293506_m.ogg
+    file: sfx_ss_scion_ss_scion_00293506_m.wav
     track: sfx
   scion_hit_1:
-    file: sfx_ss_scion_ss_scion_00293509_m.ogg
+    file: sfx_ss_scion_ss_scion_00293509_m.wav
     track: sfx
   scion_hit_2:
-    file: sfx_ss_scion_ss_scion_00293510_m.ogg
+    file: sfx_ss_scion_ss_scion_00293510_m.wav
     track: sfx
   scion_hit_3:
-    file: sfx_ss_scion_ss_scion_00293519_m.ogg
+    file: sfx_ss_scion_ss_scion_00293519_m.wav
     track: sfx
   scion_hit_4:
-    file: sfx_ss_scion_ss_scion_00293521_m.ogg
+    file: sfx_ss_scion_ss_scion_00293521_m.wav
     track: sfx

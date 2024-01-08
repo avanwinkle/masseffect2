@@ -483,14 +483,14 @@ sound_pools:
 
 sounds:
   shadowbroker_agent_music:
-    file: SBK.03.Agent_Combat.ogg
+    file: SBK.03.Agent_Combat.wav
     track: music
     fade_out: 1s
     markers:
       - time: 60s
         events: play_sbagent_music
   shadowbroker_enter_music:
-    file: SBK.01.As_They_Enter.ogg
+    file: SBK.01.As_They_Enter.wav
     track: music
     fade_out: 1s
     mode_end_action: stop
@@ -498,7 +498,7 @@ sounds:
       - time: 67s
         events: play_sbcross_music
   shadowbroker_double_cross_music:
-    file: SBK.04.Double_Cross.ogg
+    file: SBK.04.Double_Cross.wav
     track: music
     fade_out: 1s
     mode_end_action: stop
@@ -506,82 +506,82 @@ sounds:
       - time: 66s
         events: play_sbenter_music
   capacitor_tech_expl_1:
-    file: SFXGame.834.ogg
+    file: SFXGame.834.wav
     track: sfx
   capacitor_tech_expl_2:
-    file: SFXGame.835.ogg
+    file: SFXGame.835.wav
     track: sfx
   capacitor_tech_charge_1:
-    file: SFXGame.836.ogg
+    file: SFXGame.836.wav
     track: sfx
   capacitor_tech_charge_2:
-    file: SFXGame.837.ogg
+    file: SFXGame.837.wav
     track: sfx
   liara_now_therell_be_fewer_inside:
-    file: DLC_EXP_Part01_Int.902.ogg
+    file: DLC_EXP_Part01_Int.902.wav
     track: voice
   liara_no_time_to_talk:
-    file: DLC_EXP_Part01_Int.912.ogg
+    file: DLC_EXP_Part01_Int.912.wav
     track: voice
   liara_next_wave_looks_big:
-    file: DLC_EXP_Part01_Int.913.ogg
+    file: DLC_EXP_Part01_Int.913.wav
     track: voice
   liara_more_on_the_way:
-    file: DLC_EXP_Part01_Int.922.ogg
+    file: DLC_EXP_Part01_Int.922.wav
     track: voice
   liara_here_come_more:
-    file: DLC_EXP_Part01_Int.925.ogg
+    file: DLC_EXP_Part01_Int.925.wav
     track: voice
   liara_their_attacks_are_disorganized:
-    file: DLC_EXP_Part01_Int.942.ogg
+    file: DLC_EXP_Part01_Int.942.wav
     track: voice
   liara_that_security_upgrade:
-    file: DLC_EXP_Part01_Int.923.ogg
+    file: DLC_EXP_Part01_Int.923.wav
     track: voice
   liara_it_wont_be_much_longer:
-    file: DLC_EXP_Part01_Int.924.ogg
+    file: DLC_EXP_Part01_Int.924.wav
     track: voice
   liara_it_didnt_come_with_a_warranty:
-    file: DLC_EXP_Part01_Int.926.ogg
+    file: DLC_EXP_Part01_Int.926.wav
     track: voice
   liara_hatch_is_open:
-    file: DLC_EXP_Part01_Int.935.ogg
+    file: DLC_EXP_Part01_Int.935.wav
     track: voice
   liara_careful_capacitors:
-    file: DLC_EXP_Part01_Int.939.ogg
+    file: DLC_EXP_Part01_Int.939.wav
     track: voice
   liara_try_firing_at_capacitors:
-    file: DLC_EXP_Part01_Int.938.ogg
+    file: DLC_EXP_Part01_Int.938.wav
     track: voice
   liara_ive_never_broken_into_sb_before:
-    file: DLC_EXP_Part01_Int.953.ogg
+    file: DLC_EXP_Part01_Int.953.wav
     track: voice
   liara_its_locked_ive_got_a_shunt_program:
-    file: DLC_EXP_Part01_Int.954.ogg
+    file: DLC_EXP_Part01_Int.954.wav
     track: voice
   shepard_you_had_to_give_them_tactical_advice:
-    file: DLC_EXP_Part01_Int.895.ogg
+    file: DLC_EXP_Part01_Int.895.wav
     track: voice
   shepard_please_dont_give_the_mercs_ideas:
-    file: DLC_EXP_Part01_Int.899.ogg
+    file: DLC_EXP_Part01_Int.899.wav
     track: voice
   shepard_so_much_for_covert_infiltration:
-    file: DLC_EXP_Part01_Int.901.ogg
+    file: DLC_EXP_Part01_Int.901.wav
     track: voice
   shepard_tell_me_you_tested_it:
-    file: DLC_EXP_Part01_Int.911.ogg
+    file: DLC_EXP_Part01_Int.911.wav
     track: voice
   shepard_you_tested_it_right:
-    file: DLC_EXP_Part01_Int.919.ogg
+    file: DLC_EXP_Part01_Int.919.wav
     track: voice
   shepard_you_sure_shunt_is_working:
-    file: DLC_EXP_Part01_Int.921.ogg
+    file: DLC_EXP_Part01_Int.921.wav
     track: voice
   shepard_slap_omnigel:
-    file: DLC_EXP_Part01_Int.915.ogg
+    file: DLC_EXP_Part01_Int.915.wav
     track: voice
   shepard_how_long_will_it_take:
-    file: DLC_EXP_Part01_Int.951.ogg
+    file: DLC_EXP_Part01_Int.951.wav
     track: voice
 
 slide_player:

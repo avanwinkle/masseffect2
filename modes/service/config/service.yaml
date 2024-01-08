@@ -12,10 +12,10 @@ mode_settings:
 
 sounds:
   power_off:
-    file: SFXGame.649.ogg
+    file: SFXGame.649.wav
     track: sfx
   switch_hit:
-    file: SFXGame.646.ogg
+    file: SFXGame.646.wav
     track: sfx
 
 

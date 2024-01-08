@@ -82,7 +82,7 @@ shot_profiles:
 
 sounds:
   fw_packet_sound:
-    file: SFXGame.622.ogg
+    file: SFXGame.622.wav
     track: sfx
 
 sound_player:

@@ -205,38 +205,38 @@ sound_pools:
 
 sounds:
   biotic_hit_1:
-    file: SFXGame.190.ogg
+    file: SFXGame.190.wav
     track: sfx
   biotic_hit_2:
-    file: SFXGame.191.ogg
+    file: SFXGame.191.wav
     track: sfx
   biotic_hit_3:
-    file: SFXGame.192.ogg
+    file: SFXGame.192.wav
     track: sfx
   biotic_hit_4:
-    file: SFXGame.193.ogg
+    file: SFXGame.193.wav
     track: sfx
   biotic_hit_5:
-    file: SFXGame.194.ogg
+    file: SFXGame.194.wav
     track: sfx
   biotic_hit_6:
-    file: SFXGame.195.ogg
+    file: SFXGame.195.wav
     track: sfx
   biotic_explosion_1:
-    file: SFXGame.844.ogg
+    file: SFXGame.844.wav
     track: sfx
   biotic_explosion_2:
-    file: SFXGame.845.ogg
+    file: SFXGame.845.wav
     track: sfx
   biotic_explosion_3:
-    file: SFXGame.846.ogg
+    file: SFXGame.846.wav
     track: sfx
   edi_new_upgrades_available_at_research:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00345536_m.ogg
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345536_m.wav
     track: voice
   edi_research_station_has_new_information:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00345537_m.ogg
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00345537_m.wav
     track: voice
   edi_new_upgrades_available_in_cabin:
-    file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.ogg
+    file: en_us_hench_ai_nor_ai_edi_remind_h_00347168_m.wav
     track: voice

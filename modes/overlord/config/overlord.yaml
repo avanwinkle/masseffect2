@@ -447,7 +447,7 @@ sound_pools:
 
 sounds:
   overlord_music_1:
-    file: OVR.04.Combat_Troops.ogg
+    file: OVR.04.Combat_Troops.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
@@ -455,7 +455,7 @@ sounds:
       - time: 90s
         events: play_music_2
   overlord_music_2:
-    file: OVR.02.Boss_Combat.ogg
+    file: OVR.02.Boss_Combat.wav
     track: music
     fade_out: 1s
     mode_end_action: stop
@@ -463,55 +463,55 @@ sounds:
       - time: 96s
         events: play_music_1
   archer_get_to_server_room:
-    file: DLC_UNC_Pack01_Int.291.ogg
+    file: DLC_UNC_Pack01_Int.291.wav
     track: voice
   archer_you_have_to_hurry:
-    file: DLC_UNC_Pack01_Int.012.ogg
+    file: DLC_UNC_Pack01_Int.012.wav
     track: voice
   upload_1:
-    file: DLC_UNC_Pack01_Int.475.ogg
+    file: DLC_UNC_Pack01_Int.475.wav
     track: voice
   upload_2:
-    file: DLC_UNC_Pack01_Int.477.ogg
+    file: DLC_UNC_Pack01_Int.477.wav
     track: voice
   upload_3:
-    file: DLC_UNC_Pack01_Int.479.ogg
+    file: DLC_UNC_Pack01_Int.479.wav
     track: voice
   upload_4:
-    file: DLC_UNC_Pack01_Int.480.ogg
+    file: DLC_UNC_Pack01_Int.480.wav
     track: voice
   upload_lost:
-    file: DLC_UNC_Pack01_Int.478.ogg
+    file: DLC_UNC_Pack01_Int.478.wav
     track: voice
   vi_quietplease_1:
-    file: DLC_UNC_Pack01_Int.124.ogg
+    file: DLC_UNC_Pack01_Int.124.wav
     track: sfx
   vi_quietplease_2:
-    file: DLC_UNC_Pack01_Int.125.ogg
+    file: DLC_UNC_Pack01_Int.125.wav
     track: sfx
   vi_quietplease_3:
-    file: DLC_UNC_Pack01_Int.126.ogg
+    file: DLC_UNC_Pack01_Int.126.wav
     track: sfx
   vi_quietplease_4:
-    file: DLC_UNC_Pack01_Int.127.ogg
+    file: DLC_UNC_Pack01_Int.127.wav
     track: sfx
   vi_scream_1:
-    file: DLC_UNC_Pack01_Int.162.ogg
+    file: DLC_UNC_Pack01_Int.162.wav
     track: sfx
   vi_scream_2:
-    file: DLC_UNC_Pack01_Int.163.ogg
+    file: DLC_UNC_Pack01_Int.163.wav
     track: sfx
   vi_scream_3:
-    file: DLC_UNC_Pack01_Int.164.ogg
+    file: DLC_UNC_Pack01_Int.164.wav
     track: sfx
   vi_yell_1:
-    file: DLC_UNC_Pack01_Int.168.ogg
+    file: DLC_UNC_Pack01_Int.168.wav
     track: sfx
   vi_yell_2:
-    file: DLC_UNC_Pack01_Int.196.ogg
+    file: DLC_UNC_Pack01_Int.196.wav
     track: sfx
   vi_yell_3:
-    file: DLC_UNC_Pack01_Int.197.ogg
+    file: DLC_UNC_Pack01_Int.197.wav
     track: sfx
 
 widget_player:

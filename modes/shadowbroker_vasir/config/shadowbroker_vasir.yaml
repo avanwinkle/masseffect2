@@ -487,79 +487,79 @@ sound_pools:
 
 sounds:
   shuttle_land:
-    file: biod_krogar_100landing.Wwise_KroGar_Streaming.env_krogar_shuttle_land.ogg
+    file: biod_krogar_100landing.Wwise_KroGar_Streaming.env_krogar_shuttle_land.wav
     track: sfx
   shepard_smart_move_taking_a_hostage:
-    file: DLC_EXP_Part01_Int.741.ogg
+    file: DLC_EXP_Part01_Int.741.wav
     track: voice
   vasir_drop_the_clips:
-    file: DLC_EXP_Part01_Int.749.ogg
+    file: DLC_EXP_Part01_Int.749.wav
     track: voice
   vasir_hrrg:
-    file: DLC_EXP_Part01_Int.754.ogg
+    file: DLC_EXP_Part01_Int.754.wav
     track: voice
   vasir_damn_it:
-    file: DLC_EXP_Part01_Int.755.ogg
+    file: DLC_EXP_Part01_Int.755.wav
     track: voice
   vasir_this_will_be_fun:
-    file: DLC_EXP_Part01_Int.282.ogg
+    file: DLC_EXP_Part01_Int.282.wav
     track: voice
   vasir_ill_finish_you_myself:
-    file: DLC_EXP_Part01_Int.723.ogg
+    file: DLC_EXP_Part01_Int.723.wav
     track: voice
   vasir_you_cant_take_me:
-    file: DLC_EXP_Part01_Int.240.ogg
+    file: DLC_EXP_Part01_Int.240.wav
     track: voice
   vasir_youre_dead_shepard:
-    file: DLC_EXP_Part01_Int.242.ogg
+    file: DLC_EXP_Part01_Int.242.wav
     track: voice
   vasir_faster_than_you:
-    file: DLC_EXP_Part01_Int.245.ogg
+    file: DLC_EXP_Part01_Int.245.wav
     track: voice
   vasir_heads_up:
-    file: DLC_EXP_Part01_Int.246.ogg
+    file: DLC_EXP_Part01_Int.246.wav
     track: voice
   vasir_ready_or_not:
-    file: DLC_EXP_Part01_Int.247.ogg
+    file: DLC_EXP_Part01_Int.247.wav
     track: voice
   vasir_here_i_come:
-    file: DLC_EXP_Part01_Int.248.ogg
+    file: DLC_EXP_Part01_Int.248.wav
     track: voice
   vasir_try_to_keep_up:
-    file: DLC_EXP_Part01_Int.259.ogg
+    file: DLC_EXP_Part01_Int.259.wav
     track: voice
   vasir_see_ya:
-    file: DLC_EXP_Part01_Int.260.ogg
+    file: DLC_EXP_Part01_Int.260.wav
     track: voice
   vasir_having_trouble:
-    file: DLC_EXP_Part01_Int.261.ogg
+    file: DLC_EXP_Part01_Int.261.wav
     track: voice
   vasir_can_you_keep_up:
-    file: DLC_EXP_Part01_Int.262.ogg
+    file: DLC_EXP_Part01_Int.262.wav
     track: voice
   vasir_come_and_get_me:
-    file: DLC_EXP_Part01_Int.266.ogg
+    file: DLC_EXP_Part01_Int.266.wav
     track: voice
   vasir_catch_me_if_you_can:
-    file: DLC_EXP_Part01_Int.267.ogg
+    file: DLC_EXP_Part01_Int.267.wav
     track: voice
   vasir_hit_1:
-    file: DLC_EXP_Part01_Int.273.ogg
+    file: DLC_EXP_Part01_Int.273.wav
     track: voice
   vasir_hit_2:
-    file: DLC_EXP_Part01_Int.277.ogg
+    file: DLC_EXP_Part01_Int.277.wav
     track: voice
   vasir_hit_3:
-    file: DLC_EXP_Part01_Int.278.ogg
+    file: DLC_EXP_Part01_Int.278.wav
     track: voice
   vasir_hit_4:
-    file: DLC_EXP_Part01_Int.279.ogg
+    file: DLC_EXP_Part01_Int.279.wav
     track: voice
   vasir_hit_5:
-    file: DLC_EXP_Part01_Int.280.ogg
+    file: DLC_EXP_Part01_Int.280.wav
     track: voice
   vasir_hit_damn_it:
-    file: DLC_EXP_Part01_Int.809.ogg
+    file: DLC_EXP_Part01_Int.809.wav
     track: voice
 
 timers:

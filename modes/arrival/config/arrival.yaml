@@ -648,7 +648,7 @@ sound_player:
 
 sounds:
   arrival_music_1:
-    file: ARR.06.Object_Rho.ogg
+    file: ARR.06.Object_Rho.wav
     track: music
     fade_in: 1s
     fade_out: 1s
@@ -658,49 +658,49 @@ sounds:
     loops: -1
     mode_end_action: stop
   arrival_music_2:
-    file: ARR.09.Escaping_The_Station.ogg
+    file: ARR.09.Escaping_The_Station.wav
     track: music
     fade_in: 3s
     fade_out: 4s
     start_at: 65s
     mode_end_action: stop
   arr_annc_engine_at_25pct:
-    file: DLC_EXP_Part02_Int.026.ogg
+    file: DLC_EXP_Part02_Int.026.wav
     track: voice
     max_queue_time: 5s
   arr_annc_engine_at_50pct:
-    file: DLC_EXP_Part02_Int.027.ogg
+    file: DLC_EXP_Part02_Int.027.wav
     track: voice
     max_queue_time: 5s
   arr_annc_engine_at_75pct:
-    file: DLC_EXP_Part02_Int.028.ogg
+    file: DLC_EXP_Part02_Int.028.wav
     track: voice
     max_queue_time: 5s
   arr_annc_engine_at_100pct:
-    file: DLC_EXP_Part02_Int.029.ogg
+    file: DLC_EXP_Part02_Int.029.wav
     track: voice
     max_queue_time: 5s
   arr_annc_get_to_escape_shuttles:
-    file: DLC_EXP_Part02_Int.620.ogg
+    file: DLC_EXP_Part02_Int.620.wav
     track: voice
   arr_annc_warning_collision_imminent:
-    file: DLC_EXP_Part02_Int.623.ogg
+    file: DLC_EXP_Part02_Int.623.wav
     track: voice
   arr_shep_joker_i_need_a_pickup:
-    file: DLC_EXP_Part02_Int.627.ogg
+    file: DLC_EXP_Part02_Int.627.wav
     track: voice
   arr_shep_joker_do_you_read:
-    file: DLC_EXP_Part02_Int.727.ogg
+    file: DLC_EXP_Part02_Int.727.wav
     track: voice
   arr_ken_i_can_still_override_engines:
-    file: DLC_EXP_Part02_Int.589.ogg
+    file: DLC_EXP_Part02_Int.589.wav
     track: voice
   arr_normandy_inbound:
-    file: DLC_EXP_Part02_Int.729.ogg
+    file: DLC_EXP_Part02_Int.729.wav
     track: voice
   arr_harb_prepare_yourself:
-    file: DLC_EXP_Part02_Int.716.ogg
+    file: DLC_EXP_Part02_Int.716.wav
     track: voice
   arr_annc_project_activated_collision_imminent:
-    file: DLC_EXP_Part02_Int.676.ogg
+    file: DLC_EXP_Part02_Int.676.wav
     track: voice

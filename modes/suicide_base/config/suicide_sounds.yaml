@@ -91,50 +91,50 @@ sounds:
 ### MUSIC
   # Intro / Reset
     suicide_music_base:
-      file: mus_endgm1_attackplan.ogg
+      file: mus_endgm1_attackplan.wav
       track: music
       fade_in: 6s
       fade_out: 1s
   # Omega 4 Relay
     omegarelay_music:
-      file: mus_endgm1_gunsuccess.ogg
+      file: mus_endgm1_gunsuccess.wav
       track: music
       mode_end_action: stop
   # Infiltration
     infiltration_low:
-      file: mus_endgm2_tension_1.ogg
+      file: mus_endgm2_tension_1.wav
       track: music
       fade_in: 1s
       fade_out: 2s
     infiltration_med:
-      file: mus_endgm2_combat_1_low.ogg
+      file: mus_endgm2_combat_1_low.wav
       track: music
       fade_in: 1s
       fade_out: 2s
     infiltration_high:
-      file: mus_endgm2_combat_1.ogg
+      file: mus_endgm2_combat_1.wav
       track: music
       fade_in: 1500ms
       fade_out: 2s
   # Long Walk
     longwalk_low:
-      file: mus_endgm2_tension_2.ogg
+      file: mus_endgm2_tension_2.wav
       track: music
       fade_in: 3s
       fade_out: 2s
     longwalk_med:
-      file: mus_endgm2_combat_2_low.ogg
+      file: mus_endgm2_combat_2_low.wav
       track: music
       fade_in: 1s
       fade_out: 2s
     longwalk_high:
-      file: mus_endgm2_combat_2.ogg
+      file: mus_endgm2_combat_2.wav
       track: music
       fade_in: 1s
       fade_out: 2s
   # Final Battle
     platforms_low:
-      file: mus_endgm2_speech_conv_b.ogg
+      file: mus_endgm2_speech_conv_b.wav
       track: music
       start_at: 1s
       fade_in: 200ms
@@ -143,19 +143,19 @@ sounds:
       #   - time: 37s
       #     events: platforms_low_med_transition_marker
     platforms_med:
-      file: mus_endgm2_combat_3a.ogg
+      file: mus_endgm2_combat_3a.wav
       track: music
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
     platforms_high:
-      file: mus_endgm2_combat_3b.ogg
+      file: mus_endgm2_combat_3b.wav
       track: music
       start_at: 5s
       fade_in: 1.5s
       fade_out: 2s
     reaper_high:
-      file: mus_endgm2_reaperdeath.ogg
+      file: mus_endgm2_reaperdeath.wav
       track: music
       fade_in: 500ms
       fade_out: 2s
@@ -168,1159 +168,1159 @@ sounds:
 ### SQUADMATE DEATHS AND CALLBACKS
   # Death Groan (Infiltration)
     squadmate_thane_killed_infiltration:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00245891_m.wav
       track: voice
     squadmate_garrus_killed_infiltration:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00245890_m.wav
       track: voice
     squadmate_legion_killed_infiltration:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00245888_m.wav
       track: voice
     squadmate_jacob_killed_infiltration:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00245886_m.wav
       track: voice
     squadmate_mordin_killed_infiltration:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00245893_m.wav
       track: voice
     squadmate_tali_killed_infiltration:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00245892_m.wav
       track: voice
     squadmate_kasumi_killed_infiltration:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00245889_m.wav
       track: voice
   # Death Groan (Generic)
     squadmate_garrus_killed:
-      file: en_us_hench_garrus_endgm1_debris_field_c_00311442_m.ogg # en_us_hench_garrus_ss_global_hench_garrus_00239418_m.ogg
+      file: en_us_hench_garrus_endgm1_debris_field_c_00311442_m.wav # en_us_hench_garrus_ss_global_hench_garrus_00239418_m.wav
       track: voice
     squadmate_thane_killed:
-      file: en_us_hench_assassin_endgm1_debris_field_c_00311441_m.ogg # en_us_hench_assassin_ss_global_hench_assassin_00286552_m.ogg
+      file: en_us_hench_assassin_endgm1_debris_field_c_00311441_m.wav # en_us_hench_assassin_ss_global_hench_assassin_00286552_m.wav
       track: voice
     squadmate_jack_killed:
-      file: en_us_hench_convict_endgm1_debris_field_c_00311445_m.ogg # en_us_hench_convict_ss_global_hench_convict_00286905_m.ogg
+      file: en_us_hench_convict_endgm1_debris_field_c_00311445_m.wav # en_us_hench_convict_ss_global_hench_convict_00286905_m.wav
       track: voice
     squadmate_legion_killed:
-      file: en_us_hench_geth_endgm1_debris_field_c_00311439_m.ogg # en_us_hench_geth_ss_global_hench_geth_00240776_m.ogg
+      file: en_us_hench_geth_endgm1_debris_field_c_00311439_m.wav # en_us_hench_geth_ss_global_hench_geth_00240776_m.wav
       track: voice
     squadmate_grunt_killed:
-      file: en_us_hench_grunt_endgm1_debris_field_c_00311444_m.ogg # en_us_hench_grunt_ss_global_hench_grunt_00295793_m.ogg
+      file: en_us_hench_grunt_endgm1_debris_field_c_00311444_m.wav # en_us_hench_grunt_ss_global_hench_grunt_00295793_m.wav
       track: voice
     squadmate_jacob_killed:
-      file: en_us_hench_leading_ss_global_hench_leading_00299225_m.ogg
+      file: en_us_hench_leading_ss_global_hench_leading_00299225_m.wav
       track: voice
     squadmate_samara_killed:
-      file: en_us_hench_mystic_endgm1_debris_field_c_00311446_m.ogg # en_us_hench_mystic_ss_global_hench_mystic_00241020_m.ogg
+      file: en_us_hench_mystic_endgm1_debris_field_c_00311446_m.wav # en_us_hench_mystic_ss_global_hench_mystic_00241020_m.wav
       track: voice
     squadmate_mordin_killed:
-      file: en_us_hench_professor_endgm1_debris_field_c_00311448_m.ogg # en_us_hench_professor_ss_global_hench_professor_00241415_m.ogg
+      file: en_us_hench_professor_endgm1_debris_field_c_00311448_m.wav # en_us_hench_professor_ss_global_hench_professor_00241415_m.wav
       track: voice
     squadmate_tali_killed:
-      file: en_us_hench_tali_endgm1_debris_field_c_00311440_m.ogg # en_us_hench_tali_ss_global_hench_tali_00285221_m.ogg
+      file: en_us_hench_tali_endgm1_debris_field_c_00311440_m.wav # en_us_hench_tali_ss_global_hench_tali_00285221_m.wav
       track: voice
     squadmate_miranda_killed:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00257356_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257356_m.wav
       track: voice
     squadmate_zaeed_killed:
-      file: en_us_hench_veteran_endgm1_debris_field_c_00311443_m.ogg # DLC_HEN_VT_Int.103.ogg
+      file: en_us_hench_veteran_endgm1_debris_field_c_00311443_m.wav # DLC_HEN_VT_Int.103.wav
       track: voice
     squadmate_kasumi_killed:
-      file: en_us_hench_thief_endgm1_debris_field_c_00311438_m.ogg # DLC_HEN_MT_Int.202.ogg
+      file: en_us_hench_thief_endgm1_debris_field_c_00311438_m.wav # DLC_HEN_MT_Int.202.wav
       track: voice
     # shepard_killed:
-    #   file: en_us_player_f_ss_global_player_female_00288344_f.ogg
+    #   file: en_us_player_f_ss_global_player_female_00288344_f.wav
     #   track: voice
     # squadmate_miranda_killed_callback_shepard: DOES NOT EXIST
   # Killed Callback (Infiltration)
     squadmate_jacob_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282111_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282111_f.wav
       track: voice
     squadmate_legion_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282112_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282112_f.wav
       track: voice
     squadmate_kasumi_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282113_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282113_f.wav
       track: voice
     squadmate_garrus_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282114_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282114_f.wav
       track: voice
     squadmate_thane_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282115_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282115_f.wav
       track: voice
     squadmate_tali_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282116_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282116_f.wav
       track: voice
     squadmate_mordin_killed_callback_shepard_infiltration:
-      file: en_us_player_f_endgm2_tech_culmination_c_00282117_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00282117_f.wav
       track: voice
   # Killed Callback (Generic/Longwalk)
     squadmate_jacob_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266791_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266791_f.wav
       track: voice
     squadmate_samara_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266792_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266792_f.wav
       track: voice
     squadmate_grunt_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266793_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266793_f.wav
       track: voice
     squadmate_garrus_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266794_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266794_f.wav
       track: voice
     squadmate_tali_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266795_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266795_f.wav
       track: voice
     squadmate_legion_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266796_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266796_f.wav
       track: voice
     squadmate_jack_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266797_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266797_f.wav
       track: voice
     squadmate_zaeed_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266798_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266798_f.wav
       track: voice
     squadmate_mordin_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266799_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266799_f.wav
       track: voice
     squadmate_kasumi_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266800_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266800_f.wav
       track: voice
     squadmate_thane_killed_callback_shepard:
-      file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00266801_f.wav
       track: voice
 
 ### OMEGA 4 RELAY
   # Intro
     shepard_collectors_about_to_find_out_what_happens:
-      file: en_us_player_f_endgm1_relay_confirm_d_00278792_f.ogg
+      file: en_us_player_f_endgm1_relay_confirm_d_00278792_f.wav
       track: voice
     joker_i_have_to_try_and_lose_them:
-      file: en_us_hench_joker_endgm1_enter_debris_field_a_00279538_m.ogg
+      file: en_us_hench_joker_endgm1_enter_debris_field_a_00279538_m.wav
       track: voice
   # Joker callouts during dogfight
     joker_taking_evasive_maneuvers: #1
-      file: en_us_hench_joker_endgm1_dogfight_c_00278990_m.ogg
+      file: en_us_hench_joker_endgm1_dogfight_c_00278990_m.wav
       track: voice
     joker_come_on_come_on: #2
-      file: en_us_hench_joker_endgm1_jump_drive_c_00311341_m.ogg
+      file: en_us_hench_joker_endgm1_jump_drive_c_00311341_m.wav
       track: voice
     edi_kinetic_barriers_at_forty_percent: #3
-      file: en_us_hench_ai_endgm1_debris_field_c_00311434_m.ogg
+      file: en_us_hench_ai_endgm1_debris_field_c_00311434_m.wav
       track: voice
     joker_everybody_hold_on: #4
-      file: en_us_hench_joker_endgm1_warship_c_00279812_m.ogg
+      file: en_us_hench_joker_endgm1_warship_c_00279812_m.wav
       track: voice
     joker_how_do_you_like_that: #5
-      file: en_us_hench_joker_endgm1_warship_c_00279811_m.ogg
+      file: en_us_hench_joker_endgm1_warship_c_00279811_m.wav
       track: voice
     shepard_get_in_close_finish_them_off: #6
-      file: en_us_player_f_endgm1_warship_c_00279857_f.ogg
+      file: en_us_player_f_endgm1_warship_c_00279857_f.wav
       track: voice
     joker_mass_effect_generators_offline: #7
-      file: en_us_hench_joker_endgm1_crash_landing_c_00311398_m.ogg
+      file: en_us_hench_joker_endgm1_crash_landing_c_00311398_m.wav
       track: voice
   # Outro crash
     joker_rerouting:
-      file: en_us_hench_joker_endgm1_jump_drive_c_00311340_m.ogg
+      file: en_us_hench_joker_endgm1_jump_drive_c_00311340_m.wav
       track: voice
     joker_ah_shit:
-      file: en_us_hench_joker_endgm1_arrival_c_00311317_m.ogg
+      file: en_us_hench_joker_endgm1_arrival_c_00311317_m.wav
       track: voice
     normandy_crash:
-      file: cineanim_endgm1_100_crash_part2.ogg
+      file: cineanim_endgm1_100_crash_part2.wav
       track: sfx
 
 ### INFILTRATION
   # Specialist Callouts
     specialist_thane_blocked_again:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258859_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258859_m.wav
       track: voice
     specialist_thane_gate_is_open:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258866_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258866_m.wav
       track: voice
     specialist_thane_gate_blocking:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258873_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258873_m.wav
       track: voice
     specialist_thane_that_valve:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258884_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258884_m.wav
       track: voice
     specialist_thane_hurry_shepard_its_heating_up:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258892_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258892_m.wav
       track: voice
     specialist_thane_being_cooked_alive:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318060_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318060_m.wav
       track: voice
     specialist_thane_burning_up:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318067_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318067_m.wav
       track: voice
     specialist_thane_im_on_fire:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318074_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318074_m.wav
       track: voice
     specialist_thane_one_more_valve_to_go:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318081_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318081_m.wav
       track: voice
     specialist_thane_moving_on_near_the_end:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318088_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318088_m.wav
       track: voice
     specialist_thane_waiting_on_you:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318095_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318095_m.wav
       track: voice
     specialist_thane_i_knew_i_could_count_on_you:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318102_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318102_m.wav
       track: voice
     specialist_thane_another_obstacle_in_the_way:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318109_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318109_m.wav
       track: voice
     specialist_thane_all_clear_moving_on:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318116_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318116_m.wav
       track: voice
     specialist_thane_another_thing_in_the_way:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318123_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318123_m.wav
       track: voice
     specialist_thane_nice_work:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318130_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00318130_m.wav
       track: voice
     specialist_garrus_blocked_again:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258858_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258858_m.wav
       track: voice
     specialist_garrus_gate_is_open:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258865_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258865_m.wav
       track: voice
     specialist_garrus_gate_blocking:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258872_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258872_m.wav
       track: voice
     specialist_garrus_that_valve:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258879_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258879_m.wav
       track: voice
     specialist_garrus_hurry_shepard_its_heating_up:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258891_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258891_m.wav
       track: voice
     specialist_garrus_being_cooked_alive:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318059_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318059_m.wav
       track: voice
     specialist_garrus_burning_up:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318066_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318066_m.wav
       track: voice
     specialist_garrus_im_on_fire:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318073_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318073_m.wav
       track: voice
     specialist_garrus_one_more_valve_to_go:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318080_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318080_m.wav
       track: voice
     specialist_garrus_moving_on_near_the_end:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318087_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318087_m.wav
       track: voice
     specialist_garrus_waiting_on_you:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318094_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318094_m.wav
       track: voice
     specialist_garrus_i_knew_i_could_count_on_you:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318101_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318101_m.wav
       track: voice
     specialist_garrus_another_obstacle_in_the_way:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318108_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318108_m.wav
       track: voice
     specialist_garrus_all_clear_moving_on:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318115_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318115_m.wav
       track: voice
     specialist_garrus_another_thing_in_the_way:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318122_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318122_m.wav
       track: voice
     specialist_garrus_nice_work:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318129_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00318129_m.wav
       track: voice
     specialist_legion_blocked_again:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258856_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258856_m.wav
       track: voice
     specialist_legion_gate_is_open:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258863_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258863_m.wav
       track: voice
     specialist_legion_gate_blocking:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258870_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258870_m.wav
       track: voice
     specialist_legion_that_valve:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258881_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258881_m.wav
       track: voice
     specialist_legion_hurry_shepard_its_heating_up:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258889_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258889_m.wav
       track: voice
     specialist_legion_being_cooked_alive:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318057_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318057_m.wav
       track: voice
     specialist_legion_burning_up:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318064_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318064_m.wav
       track: voice
     specialist_legion_im_on_fire:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318071_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318071_m.wav
       track: voice
     specialist_legion_one_more_valve_to_go:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318078_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318078_m.wav
       track: voice
     specialist_legion_moving_on_near_the_end:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318085_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318085_m.wav
       track: voice
     specialist_legion_waiting_on_you:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318092_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318092_m.wav
       track: voice
     specialist_legion_i_knew_i_could_count_on_you:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318099_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318099_m.wav
       track: voice
     specialist_legion_another_obstacle_in_the_way:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318106_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318106_m.wav
       track: voice
     specialist_legion_all_clear_moving_on:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318113_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318113_m.wav
       track: voice
     specialist_legion_another_thing_in_the_way:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318120_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318120_m.wav
       track: voice
     specialist_legion_nice_work:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00318127_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00318127_m.wav
       track: voice
     specialist_jacob_gate_is_open:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258862_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258862_m.wav
       track: voice
     specialist_jacob_gate_blocking:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258869_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258869_m.wav
       track: voice
     specialist_jacob_that_valve:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258877_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258877_m.wav
       track: voice
     specialist_jacob_hurry_shepard_its_heating_up:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258888_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258888_m.wav
       track: voice
     specialist_jacob_blocked_again:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258902_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258902_m.wav
       track: voice
     specialist_jacob_being_cooked_alive:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318056_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318056_m.wav
       track: voice
     specialist_jacob_burning_up:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318063_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318063_m.wav
       track: voice
     specialist_jacob_im_on_fire:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318070_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318070_m.wav
       track: voice
     specialist_jacob_one_more_valve_to_go:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318077_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318077_m.wav
       track: voice
     specialist_jacob_moving_on_near_the_end:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318084_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318084_m.wav
       track: voice
     specialist_jacob_waiting_on_you:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318091_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318091_m.wav
       track: voice
     specialist_jacob_i_knew_i_could_count_on_you:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318098_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318098_m.wav
       track: voice
     specialist_jacob_another_obstacle_in_the_way:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318105_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318105_m.wav
       track: voice
     specialist_jacob_all_clear_moving_on:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318112_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318112_m.wav
       track: voice
     specialist_jacob_another_thing_in_the_way:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318119_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318119_m.wav
       track: voice
     specialist_jacob_nice_work:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00318126_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00318126_m.wav
       track: voice
     specialist_mordin_blocked_again:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258861_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258861_m.wav
       track: voice
     specialist_mordin_gate_is_open:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258868_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258868_m.wav
       track: voice
     specialist_mordin_gate_blocking:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258875_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258875_m.wav
       track: voice
     specialist_mordin_that_valve:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258883_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258883_m.wav
       track: voice
     specialist_mordin_hurry_shepard_its_heating_up:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258894_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258894_m.wav
       track: voice
     specialist_mordin_being_cooked_alive:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318062_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318062_m.wav
       track: voice
     specialist_mordin_burning_up:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318069_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318069_m.wav
       track: voice
     specialist_mordin_im_on_fire:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318076_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318076_m.wav
       track: voice
     specialist_mordin_one_more_valve_to_go:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318083_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318083_m.wav
       track: voice
     specialist_mordin_moving_on_near_the_end:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318090_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318090_m.wav
       track: voice
     specialist_mordin_waiting_on_you:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318097_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318097_m.wav
       track: voice
     specialist_mordin_i_knew_i_could_count_on_you:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318104_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318104_m.wav
       track: voice
     specialist_mordin_another_obstacle_in_the_way:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318111_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318111_m.wav
       track: voice
     specialist_mordin_all_clear_moving_on:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318118_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318118_m.wav
       track: voice
     specialist_mordin_another_thing_in_the_way:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318125_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318125_m.wav
       track: voice
     specialist_mordin_nice_work:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00318132_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00318132_m.wav
       track: voice
     specialist_tali_blocked_again:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258860_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258860_m.wav
       track: voice
     specialist_tali_gate_is_open:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258867_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258867_m.wav
       track: voice
     specialist_tali_gate_blocking:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258874_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258874_m.wav
       track: voice
     specialist_tali_that_valve:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258880_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258880_m.wav
       track: voice
     specialist_tali_hurry_shepard_its_heating_up:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258893_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258893_m.wav
       track: voice
     specialist_tali_being_cooked_alive:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318061_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318061_m.wav
       track: voice
     specialist_tali_burning_up:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318068_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318068_m.wav
       track: voice
     specialist_tali_im_on_fire:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318075_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318075_m.wav
       track: voice
     specialist_tali_one_more_valve_to_go:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318082_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318082_m.wav
       track: voice
     specialist_tali_moving_on_near_the_end:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318089_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318089_m.wav
       track: voice
     specialist_tali_waiting_on_you:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318096_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318096_m.wav
       track: voice
     specialist_tali_i_knew_i_could_count_on_you:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318103_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318103_m.wav
       track: voice
     specialist_tali_another_obstacle_in_the_way:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318110_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318110_m.wav
       track: voice
     specialist_tali_all_clear_moving_on:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318117_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318117_m.wav
       track: voice
     specialist_tali_another_thing_in_the_way:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318124_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318124_m.wav
       track: voice
     specialist_tali_nice_work:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00318131_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00318131_m.wav
       track: voice
     specialist_kasumi_blocked_again:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258857_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258857_m.wav
       track: voice
     specialist_kasumi_gate_is_open:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258864_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258864_m.wav
       track: voice
     specialist_kasumi_gate_blocking:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258871_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258871_m.wav
       track: voice
     specialist_kasumi_that_valve:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258886_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258886_m.wav
       track: voice
     specialist_kasumi_hurry_shepard_its_heating_up:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258890_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258890_m.wav
       track: voice
     specialist_kasumi_being_cooked_alive:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318058_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318058_m.wav
       track: voice
     specialist_kasumi_burning_up:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318065_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318065_m.wav
       track: voice
     specialist_kasumi_im_on_fire:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318072_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318072_m.wav
       track: voice
     specialist_kasumi_one_more_valve_to_go:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318079_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318079_m.wav
       track: voice
     specialist_kasumi_moving_on_near_the_end:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318086_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318086_m.wav
       track: voice
     specialist_kasumi_waiting_on_you:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318093_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318093_m.wav
       track: voice
     specialist_kasumi_i_knew_i_could_count_on_you:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318100_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318100_m.wav
       track: voice
     specialist_kasumi_another_obstacle_in_the_way:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318107_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318107_m.wav
       track: voice
     specialist_kasumi_all_clear_moving_on:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318114_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318114_m.wav
       track: voice
     specialist_kasumi_another_thing_in_the_way:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318121_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318121_m.wav
       track: voice
     specialist_kasumi_nice_work:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00318128_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00318128_m.wav
       track: voice
   # Infiltration specialist complete
     specialist_thane_im_through_opening_doors_now:
-      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258899_m.ogg
+      file: en_us_hench_assassin_endgm2_gutterrunner_a_00258899_m.wav
       track: voice
     specialist_garrus_im_through_opening_doors_now:
-      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.ogg
+      file: en_us_hench_garrus_endgm2_gutterrunner_a_00258898_m.wav
       track: voice
     specialist_legion_im_through_opening_doors_now:
-      file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.ogg
+      file: en_us_hench_geth_endgm2_gutterrunner_a_00258896_m.wav
       track: voice
     specialist_jacob_im_through_opening_doors_now:
-      file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.ogg
+      file: en_us_hench_leading_endgm2_gutterrunner_a_00258895_m.wav
       track: voice
     specialist_mordin_im_through_opening_doors_now:
-      file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.ogg
+      file: en_us_hench_professor_endgm2_gutterrunner_a_00258901_m.wav
       track: voice
     specialist_tali_im_through_opening_doors_now:
-      file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.ogg
+      file: en_us_hench_tali_endgm2_gutterrunner_a_00258900_m.wav
       track: voice
     specialist_kasumi_im_through_opening_doors_now:
-      file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.ogg
+      file: en_us_hench_thief_endgm2_gutterrunner_a_00258897_m.wav
       track: voice
 
 ### LONG WALK
   # Specialist callouts
     specialist_miranda_hurry_shepard:
-      file: en_us_hench_vixen_endgm2_biotic_fail_c_00282821_m.ogg
+      file: en_us_hench_vixen_endgm2_biotic_fail_c_00282821_m.wav
       track: voice
     specialist_thane_hurry_shepard:
-      file: en_us_hench_assassin_endgm2_biotic_fail_c_00295269_m.ogg
+      file: en_us_hench_assassin_endgm2_biotic_fail_c_00295269_m.wav
       track: voice
     specialist_jack_hurry_shepard:
-      file: en_us_hench_convict_endgm2_biotic_fail_c_00282817_m.ogg
+      file: en_us_hench_convict_endgm2_biotic_fail_c_00282817_m.wav
       track: voice
     specialist_jacob_hurry_shepard:
-      file: en_us_hench_leading_endgm2_biotic_fail_c_00282818_m.ogg
+      file: en_us_hench_leading_endgm2_biotic_fail_c_00282818_m.wav
       track: voice
     specialist_samara_hurry_shepard:
-      file: en_us_hench_mystic_endgm2_biotic_fail_c_00282815_m.ogg
+      file: en_us_hench_mystic_endgm2_biotic_fail_c_00282815_m.wav
       track: voice
     specialist_thane_leaving_the_barrier:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266720_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266720_m.wav
       track: voice
     specialist_thane_strain_substantial:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266721_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266721_m.wav
       track: voice
     specialist_thane_i_can_see_the_entrance:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266722_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266722_m.wav
       track: voice
     specialist_thane_dont_know_how_much_more_i_can_take:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266723_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266723_m.wav
       track: voice
     specialist_thane_moving_out_commander:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266724_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266724_m.wav
       track: voice
     specialist_thane_ill_hold_this_position:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266725_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266725_m.wav
       track: voice
     specialist_thane_moving_out:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266726_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266726_m.wav
       track: voice
     specialist_thane_moving_to_cover:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266727_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266727_m.wav
       track: voice
     specialist_thane_hostiles:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266728_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266728_m.wav
       track: voice
     specialist_thane_ready:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266729_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266729_m.wav
       track: voice
     specialist_thane_taking_cover:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266730_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266730_m.wav
       track: voice
     specialist_thane_incoming:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266731_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266731_m.wav
       track: voice
     specialist_thane_lets_go:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266732_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266732_m.wav
       track: voice
     specialist_thane_what_are_they_making:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266733_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266733_m.wav
       track: voice
     specialist_thane_moving_out_stay_close:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00266734_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00266734_m.wav
       track: voice
     specialist_thane_all_clear:
-      file: en_us_hench_assassin_endgm2_longwalk_a_00289180_m.ogg
+      file: en_us_hench_assassin_endgm2_longwalk_a_00289180_m.wav
       track: voice
     specialist_jack_ready:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266649_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266649_m.wav
       track: voice
     specialist_jack_ill_hold_this_position:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266650_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266650_m.wav
       track: voice
     specialist_jack_incoming:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266651_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266651_m.wav
       track: voice
     specialist_jack_lets_go:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266652_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266652_m.wav
       track: voice
     specialist_jack_what_are_they_making:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266653_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266653_m.wav
       track: voice
     specialist_jack_moving_out_stay_close:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266654_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266654_m.wav
       track: voice
     specialist_jack_leaving_the_barrier:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266736_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266736_m.wav
       track: voice
     specialist_jack_strain_substantial:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266737_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266737_m.wav
       track: voice
     specialist_jack_i_can_see_the_entrance:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266738_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266738_m.wav
       track: voice
     specialist_jack_dont_know_how_much_more_i_can_take:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266739_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266739_m.wav
       track: voice
     specialist_jack_moving_out_commander:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266740_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266740_m.wav
       track: voice
     specialist_jack_taking_cover:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266741_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266741_m.wav
       track: voice
     specialist_jack_moving_out:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266742_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266742_m.wav
       track: voice
     specialist_jack_moving_to_cover:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266743_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266743_m.wav
       track: voice
     specialist_jack_hostiles:
-      file: en_us_hench_convict_endgm2_longwalk_a_00266744_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00266744_m.wav
       track: voice
     specialist_jack_all_clear:
-      file: en_us_hench_convict_endgm2_longwalk_a_00289182_m.ogg
+      file: en_us_hench_convict_endgm2_longwalk_a_00289182_m.wav
       track: voice
     specialist_jacob_leaving_the_barrier:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266688_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266688_m.wav
       track: voice
     specialist_jacob_strain_substantial:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266689_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266689_m.wav
       track: voice
     specialist_jacob_i_can_see_the_entrance:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266690_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266690_m.wav
       track: voice
     specialist_jacob_dont_know_how_much_more_i_can_take:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266691_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266691_m.wav
       track: voice
     specialist_jacob_moving_out_commander:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266692_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266692_m.wav
       track: voice
     specialist_jacob_ill_hold_this_position:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266693_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266693_m.wav
       track: voice
     specialist_jacob_moving_out:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266694_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266694_m.wav
       track: voice
     specialist_jacob_moving_to_cover:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266695_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266695_m.wav
       track: voice
     specialist_jacob_hostiles:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266696_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266696_m.wav
       track: voice
     specialist_jacob_ready:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266697_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266697_m.wav
       track: voice
     specialist_jacob_taking_cover:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266698_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266698_m.wav
       track: voice
     specialist_jacob_incoming:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266699_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266699_m.wav
       track: voice
     specialist_jacob_lets_go:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266700_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266700_m.wav
       track: voice
     specialist_jacob_what_are_they_making:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266701_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266701_m.wav
       track: voice
     specialist_jacob_moving_out_stay_close:
-      file: en_us_hench_leading_endgm2_longwalk_a_00266702_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00266702_m.wav
       track: voice
     specialist_jacob_all_clear:
-      file: en_us_hench_leading_endgm2_longwalk_a_00289178_m.ogg
+      file: en_us_hench_leading_endgm2_longwalk_a_00289178_m.wav
       track: voice
     specialist_samara_leaving_the_barrier:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266656_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266656_m.wav
       track: voice
     specialist_samara_strain_substantial:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266657_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266657_m.wav
       track: voice
     specialist_samara_i_can_see_the_entrance:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266658_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266658_m.wav
       track: voice
     specialist_samara_dont_know_how_much_more_i_can_take:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266659_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266659_m.wav
       track: voice
     specialist_samara_moving_out_commander:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266660_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266660_m.wav
       track: voice
     specialist_samara_ill_hold_this_position:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266661_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266661_m.wav
       track: voice
     specialist_samara_moving_out:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266662_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266662_m.wav
       track: voice
     specialist_samara_moving_to_cover:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266663_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266663_m.wav
       track: voice
     specialist_samara_hostiles:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266664_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266664_m.wav
       track: voice
     specialist_samara_ready:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266665_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266665_m.wav
       track: voice
     specialist_samara_taking_cover:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266666_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266666_m.wav
       track: voice
     specialist_samara_incoming:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266667_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266667_m.wav
       track: voice
     specialist_samara_lets_go:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266668_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266668_m.wav
       track: voice
     specialist_samara_what_are_they_making:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266669_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266669_m.wav
       track: voice
     specialist_samara_moving_out_stay_close:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00266670_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00266670_m.wav
       track: voice
     specialist_samara_all_clear:
-      file: en_us_hench_mystic_endgm2_longwalk_a_00289176_m.ogg
+      file: en_us_hench_mystic_endgm2_longwalk_a_00289176_m.wav
       track: voice
     specialist_miranda_leaving_the_barrier:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266672_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266672_m.wav
       track: voice
     specialist_miranda_strain_substantial:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266673_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266673_m.wav
       track: voice
     specialist_miranda_i_can_see_the_entrance:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266674_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266674_m.wav
       track: voice
     specialist_miranda_dont_know_how_much_more_i_can_take:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266675_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266675_m.wav
       track: voice
     specialist_miranda_moving_out_commander:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266676_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266676_m.wav
       track: voice
     specialist_miranda_ill_hold_this_position:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266677_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266677_m.wav
       track: voice
     specialist_miranda_moving_out:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266678_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266678_m.wav
       track: voice
     specialist_miranda_moving_to_cover:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266679_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266679_m.wav
       track: voice
     specialist_miranda_hostiles:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266680_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266680_m.wav
       track: voice
     specialist_miranda_ready:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266681_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266681_m.wav
       track: voice
     specialist_miranda_taking_cover:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266682_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266682_m.wav
       track: voice
     specialist_miranda_incoming:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266683_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266683_m.wav
       track: voice
     specialist_miranda_lets_go:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266684_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266684_m.wav
       track: voice
     specialist_miranda_what_are_they_making:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266685_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266685_m.wav
       track: voice
     specialist_miranda_moving_out_stay_close:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00266686_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00266686_m.wav
       track: voice
     specialist_miranda_all_clear:
-      file: en_us_hench_vixen_endgm2_longwalk_a_00289177_m.ogg
+      file: en_us_hench_vixen_endgm2_longwalk_a_00289177_m.wav
       track: voice
   # Ending
     shep_everyone_through_the_doors:
-      file: en_us_player_f_endgm2_biotic_fail_c_00282838_f.ogg
+      file: en_us_player_f_endgm2_biotic_fail_c_00282838_f.wav
       track: voice
 
 ### TUBES
   # Tubes intro
     shep_we_win_or_lose_it_all:
-      file: en_us_player_f_endgm2_huddle_03b_d_00266971_f.ogg
+      file: en_us_player_f_endgm2_huddle_03b_d_00266971_f.wav
       track: voice
   # Squadmate tube hints
     tube_hint_thane:
-      file: en_us_hench_assassin_endgm2_boss_fight_a_00286142_m.ogg
+      file: en_us_hench_assassin_endgm2_boss_fight_a_00286142_m.wav
       track: voice
     tube_hint_jack:
-      file: en_us_hench_convict_endgm2_boss_fight_a_00286140_m.ogg
+      file: en_us_hench_convict_endgm2_boss_fight_a_00286140_m.wav
       track: voice
     tube_hint_garrus:
-      file: en_us_hench_garrus_endgm2_boss_fight_a_00286137_m.ogg
+      file: en_us_hench_garrus_endgm2_boss_fight_a_00286137_m.wav
       track: voice
     tube_hint_legion:
-      file: en_us_hench_geth_endgm2_boss_fight_a_00286139_m.ogg
+      file: en_us_hench_geth_endgm2_boss_fight_a_00286139_m.wav
       track: voice
     tube_hint_grunt:
-      file: en_us_hench_grunt_endgm2_boss_fight_a_00286136_m.ogg
+      file: en_us_hench_grunt_endgm2_boss_fight_a_00286136_m.wav
       track: voice
     tube_hint_jacob:
-      file: en_us_hench_leading_endgm2_boss_fight_a_00286134_m.ogg
+      file: en_us_hench_leading_endgm2_boss_fight_a_00286134_m.wav
       track: voice
     tube_hint_samara:
-      file: en_us_hench_mystic_endgm2_boss_fight_a_00286135_m.ogg
+      file: en_us_hench_mystic_endgm2_boss_fight_a_00286135_m.wav
       track: voice
     tube_hint_mordin:
-      file: en_us_hench_professor_endgm2_boss_fight_a_00286141_m.ogg
+      file: en_us_hench_professor_endgm2_boss_fight_a_00286141_m.wav
       track: voice
     tube_hint_tali:
-      file: en_us_hench_tali_endgm2_boss_fight_a_00286138_m.ogg
+      file: en_us_hench_tali_endgm2_boss_fight_a_00286138_m.wav
       track: voice
     tube_hint_kasumi:
-      file: en_us_hench_thief_endgm2_boss_fight_a_00286104_m.ogg
+      file: en_us_hench_thief_endgm2_boss_fight_a_00286104_m.wav
       track: voice
     tube_hint_zaeed:
-      file: en_us_hench_veteran_endgm2_boss_fight_a_00286105_m.ogg
+      file: en_us_hench_veteran_endgm2_boss_fight_a_00286105_m.wav
       track: voice
     tube_hint_miranda:
-      file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.ogg
+      file: en_us_hench_vixen_endgm2_boss_fight_a_00286133_m.wav
       track: voice
   # Squadmate got one
     garrus_there_we_go:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303175_m.ogg
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303175_m.wav
       track: voice
     garrus_scratch_one:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303179_m.ogg
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303179_m.wav
       track: voice
     jack_one_down:
-      file: en_us_hench_convict_ss_global_hench_convict_00296197_m.ogg
+      file: en_us_hench_convict_ss_global_hench_convict_00296197_m.wav
       track: voice
     jack_got_one:
-      file: en_us_hench_convict_ss_global_hench_convict_00296198_m.ogg
+      file: en_us_hench_convict_ss_global_hench_convict_00296198_m.wav
       track: voice
     miranda_got_one:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00257437_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257437_m.wav
       track: voice
     miranda_one_down:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00257438_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257438_m.wav
       track: voice
     miranda_thats_another_one:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00257439_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00257439_m.wav
       track: voice
   # Squadmate down to two
     garrus_down_to_two:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303102_m.ogg
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303102_m.wav
       track: voice
   # Squadmate one left
     legion_one_left:
-      file: en_us_hench_geth_ss_global_hench_geth_00315376_m.ogg
+      file: en_us_hench_geth_ss_global_hench_geth_00315376_m.wav
       track: voice
   # Squadmate that's all
 ### FINAL BATTLE
   # Final battle intro
     shep_give_us_a_minute_edi:
-      file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.ogg
+      file: en_us_player_f_endgm2_huddle_03b_d_00285921_f.wav
       track: voice
   # Transition from reaper to platforms (on successful hit only)
     shepard_theyve_seen_us:
-      file: en_us_player_f_ss_global_player_female_00288359_f.ogg
+      file: en_us_player_f_ss_global_player_female_00288359_f.wav
       track: voice
     shepard_here_they_come:
-      file: en_us_player_f_endgm2_tech_culmination_c_00281204_f.ogg
+      file: en_us_player_f_endgm2_tech_culmination_c_00281204_f.wav
       track: voice
     shepard_lets_move:
-      file: en_us_player_f_endgm2_biotic_success_c_00286091_f.ogg
+      file: en_us_player_f_endgm2_biotic_success_c_00286091_f.wav
       track: voice
     garrus_enemies_incoming:
-      file: en_us_hench_garrus_endgm2_boss_fight_a_00286111_m.ogg
+      file: en_us_hench_garrus_endgm2_boss_fight_a_00286111_m.wav
       track: voice
     grunt_enemies_incoming:
-      file: en_us_hench_grunt_endgm2_boss_fight_a_00286110_m.ogg
+      file: en_us_hench_grunt_endgm2_boss_fight_a_00286110_m.wav
       track: voice
     jack_enemies_incoming:
-      file: en_us_hench_convict_endgm2_boss_fight_a_00286114_m.ogg
+      file: en_us_hench_convict_endgm2_boss_fight_a_00286114_m.wav
       track: voice
     jacob_enemies_incoming:
-      file: en_us_hench_leading_endgm2_boss_fight_a_00286108_m.ogg
+      file: en_us_hench_leading_endgm2_boss_fight_a_00286108_m.wav
       track: voice
     kasumi_enemies_incoming:
-      file: en_us_hench_thief_endgm2_boss_fight_a_00286118_m.ogg
+      file: en_us_hench_thief_endgm2_boss_fight_a_00286118_m.wav
       track: voice
     legion_enemies_incoming:
-      file: en_us_hench_geth_endgm2_boss_fight_a_00286113_m.ogg
+      file: en_us_hench_geth_endgm2_boss_fight_a_00286113_m.wav
       track: voice
     miranda_enemies_incoming:
-      file: en_us_hench_vixen_endgm2_boss_fight_a_00286107_m.ogg
+      file: en_us_hench_vixen_endgm2_boss_fight_a_00286107_m.wav
       track: voice
     mordin_enemies_incoming:
-      file: en_us_hench_professor_endgm2_boss_fight_a_00286115_m.ogg
+      file: en_us_hench_professor_endgm2_boss_fight_a_00286115_m.wav
       track: voice
     samara_enemies_incoming:
-      file: en_us_hench_mystic_endgm2_boss_fight_a_00286109_m.ogg
+      file: en_us_hench_mystic_endgm2_boss_fight_a_00286109_m.wav
       track: voice
     tali_enemies_incoming:
-      file: en_us_hench_tali_endgm2_boss_fight_a_00286112_m.ogg
+      file: en_us_hench_tali_endgm2_boss_fight_a_00286112_m.wav
       track: voice
     thane_enemies_incoming:
-      file: en_us_hench_assassin_endgm2_boss_fight_a_00286116_m.ogg
+      file: en_us_hench_assassin_endgm2_boss_fight_a_00286116_m.wav
       track: voice
     zaeed_enemies_incoming:
-      file: en_us_hench_veteran_endgm2_boss_fight_a_00286119_m.ogg
+      file: en_us_hench_veteran_endgm2_boss_fight_a_00286119_m.wav
       track: voice
     thane_reinforcements:
-      file: en_us_hench_assassin_endgm2_warnings_a_00317951_m.ogg
+      file: en_us_hench_assassin_endgm2_warnings_a_00317951_m.wav
       track: voice
     garrus_reinforcements:
-      file: en_us_hench_garrus_endgm2_warnings_a_00317956_m.ogg
+      file: en_us_hench_garrus_endgm2_warnings_a_00317956_m.wav
       track: voice
     legion_reinforcements:
-      file: en_us_hench_geth_endgm2_warnings_a_00317954_m.ogg
+      file: en_us_hench_geth_endgm2_warnings_a_00317954_m.wav
       track: voice
     grunt_reinforcements:
-      file: en_us_hench_grunt_endgm2_warnings_a_00317957_m.ogg
+      file: en_us_hench_grunt_endgm2_warnings_a_00317957_m.wav
       track: voice
     jacob_reinforcements:
-      file: en_us_hench_leading_endgm2_warnings_a_00317953_m.ogg
+      file: en_us_hench_leading_endgm2_warnings_a_00317953_m.wav
       track: voice
     samara_reinforcements:
-      file: en_us_hench_mystic_endgm2_warnings_a_00317950_m.ogg
+      file: en_us_hench_mystic_endgm2_warnings_a_00317950_m.wav
       track: voice
     mordin_reinforcements:
-      file: en_us_hench_professor_endgm2_warnings_a_00317952_m.ogg
+      file: en_us_hench_professor_endgm2_warnings_a_00317952_m.wav
       track: voice
     tali_reinforcements:
-      file: en_us_hench_tali_endgm2_warnings_a_00317949_m.ogg
+      file: en_us_hench_tali_endgm2_warnings_a_00317949_m.wav
       track: voice
     kasumi_reinforcements:
-      file: en_us_hench_thief_endgm2_warnings_a_00317948_m.ogg
+      file: en_us_hench_thief_endgm2_warnings_a_00317948_m.wav
       track: voice
     zaeed_reinforcements:
-      file: en_us_hench_veteran_endgm2_warnings_a_00317958_m.ogg
+      file: en_us_hench_veteran_endgm2_warnings_a_00317958_m.wav
       track: voice
     miranda_reinforcements:
-      file: en_us_hench_vixen_endgm2_warnings_a_00317955_m.ogg
+      file: en_us_hench_vixen_endgm2_warnings_a_00317955_m.wav
       track: voice
     jack_reinforcements:
-      file: en_us_hench_convict_endgm2_warnings_a_00317935_m.ogg
+      file: en_us_hench_convict_endgm2_warnings_a_00317935_m.wav
       track: voice
   # On reaper firing timer, get to cover!
     shepard_get_to_cover_1:
-      file: en_us_player_f_ss_global_player_female_00314488_f.ogg
+      file: en_us_player_f_ss_global_player_female_00314488_f.wav
       track: voice
     shepard_get_to_cover_2:
-      file: en_us_player_f_ss_global_player_female_00314489_f.ogg
+      file: en_us_player_f_ss_global_player_female_00314489_f.wav
       track: voice
     shepard_take_cover_1:
-      file: en_us_player_f_ss_global_player_female_00314490_f.ogg
+      file: en_us_player_f_ss_global_player_female_00314490_f.wav
       track: voice
     shepard_take_cover_2:
-      file: en_us_player_f_ss_global_player_female_00314491_f.ogg
+      file: en_us_player_f_ss_global_player_female_00314491_f.wav
       track: voice
     miranda_watch_out:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00310094_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310094_m.wav
       track: voice
   # Hit a ball lock/hold, squadmates confirm cover
     garrus_grabbing_cover:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303052_m.ogg
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303052_m.wav
       track: voice
     garrus_heading_to_cover:
-      file: en_us_hench_garrus_ss_global_hench_garrus_00303053_m.ogg
+      file: en_us_hench_garrus_ss_global_hench_garrus_00303053_m.wav
       track: voice
     miranda_taking_cover:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00310045_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310045_m.wav
       track: voice
     miranda_heading_to_cover:
-      file: en_us_hench_vixen_ss_global_hench_vixen_00310042_m.ogg
+      file: en_us_hench_vixen_ss_global_hench_vixen_00310042_m.wav
       track: voice
     jacob_grabbing_cover:
-      file: en_us_hench_leading_ss_global_hench_leading_00299161_m.ogg
+      file: en_us_hench_leading_ss_global_hench_leading_00299161_m.wav
       track: voice
     jacob_moving_to_cover:
-      file: en_us_hench_leading_ss_global_hench_leading_00299159_m.ogg
+      file: en_us_hench_leading_ss_global_hench_leading_00299159_m.wav
       track: voice
   # Harbinger taunts when all squadmates are dead
     harbinger_shepard_alone_1:
       # "And now you stand alone, Shepard"
-      file: en_us_global_collector_general_ss_collector_general_00332626_m.ogg
+      file: en_us_global_collector_general_ss_collector_general_00332626_m.wav
       track: voice
     harbinger_shepard_alone_2:
       # "Your allies have fallen, Shepard"
-      file: en_us_global_collector_general_ss_collector_general_00332627_m.ogg
+      file: en_us_global_collector_general_ss_collector_general_00332627_m.wav
       track: voice
     harbinger_shepard_alone_3:
       # "You have no one left, Shepard"
-      file: en_us_global_collector_general_ss_collector_general_00332628_m.ogg
+      file: en_us_global_collector_general_ss_collector_general_00332628_m.wav
       track: voice
     harbinger_shepard_alone_4:
       # "Your minions have failed, Shepard"
-      file: en_us_global_collector_general_ss_collector_general_00332629_m.ogg
+      file: en_us_global_collector_general_ss_collector_general_00332629_m.wav
       track: voice
   # Misc reaper noises
     reaper_explosion_short:
-      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_1.ogg
+      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_1.wav
       track: sfx
     reaper_explosion_long:
-      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_2.ogg
+      file: bioa_krogar_bg2.Wwise_Weapons_Heavy_MiniNuke.weapon_heavy_nuke_explode_2.wav
       track: sfx
     reaper_cannon_crackling:
-      file: BioD_Gth002_320ReaperDeath.11.ogg
+      file: BioD_Gth002_320ReaperDeath.11.wav
       track: sfx
     # Just two buzzes, there are a bunch more in this folder
     reaper_cannon_buzz_1:
-      file: BioD_Gth002_310OnFoot_LOC_INT.41.ogg
+      file: BioD_Gth002_310OnFoot_LOC_INT.41.wav
       track: sfx
     reaper_cannon_buzz_2:
-      file: BioD_Gth002_310OnFoot_LOC_INT.42.ogg
+      file: BioD_Gth002_310OnFoot_LOC_INT.42.wav
       track: sfx
     reaper_cannon_bwomp_1:
-      file: BioD_Gth002_310OnFoot_LOC_INT.47.ogg
+      file: BioD_Gth002_310OnFoot_LOC_INT.47.wav
       track: sfx
     reaper_cannon_bwomp_2:
-      file: BioD_Gth002_310OnFoot_LOC_INT.48.ogg
+      file: BioD_Gth002_310OnFoot_LOC_INT.48.wav
       track: sfx
     reaper_cannon_hum:
-      file: BioD_Gth002_310OnFoot_LOC_INT.51.ogg
+      file: BioD_Gth002_310OnFoot_LOC_INT.51.wav
       track: sfx
     reaper_cannon_fire:
-      file: SFXGame.538.ogg
+      file: SFXGame.538.wav
       track: sfx
 
 ### HUDDLES
   # Infiltration: Huddle Intro
     shepard_some_could_sneak_in_this_shaft:
-      file: en_us_player_f_endgm1_huddle_01a_d_00317445_f.ogg
+      file: en_us_player_f_endgm1_huddle_01a_d_00317445_f.wav
       track: voice
     jacob_who_do_we_send_into_the_shaft:
-      file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.ogg
+      file: en_us_hench_leading_endgm1_huddle_01a_d_00257104_m.wav
       track: voice
   # Infiltration: Confirmation/Outro
     specialist_inf_outro_thane:
-      file: en_us_hench_assassin_endgm2_vent_update1_a_00258656_m.ogg
+      file: en_us_hench_assassin_endgm2_vent_update1_a_00258656_m.wav
       track: voice
     specialist_inf_outro_garrus:
-      file: en_us_hench_garrus_endgm2_vent_update1_a_00258654_m.ogg
+      file: en_us_hench_garrus_endgm2_vent_update1_a_00258654_m.wav
       track: voice
     specialist_inf_outro_legion:
-      file: en_us_hench_geth_endgm2_vent_update1_a_00258657_m.ogg
+      file: en_us_hench_geth_endgm2_vent_update1_a_00258657_m.wav
       track: voice
     specialist_inf_outro_jacob:
-      file: en_us_hench_leading_endgm2_vent_update1_a_00258653_m.ogg
+      file: en_us_hench_leading_endgm2_vent_update1_a_00258653_m.wav
       track: voice
     specialist_inf_outro_mordin:
-      file: en_us_hench_professor_endgm2_vent_update1_a_00258655_m.ogg
+      file: en_us_hench_professor_endgm2_vent_update1_a_00258655_m.wav
       track: voice
     specialist_inf_outro_tali:
-      file: en_us_hench_tali_endgm2_vent_update1_a_00258658_m.ogg
+      file: en_us_hench_tali_endgm2_vent_update1_a_00258658_m.wav
       track: voice
     specialist_inf_outro_kasumi:
-      file: en_us_hench_thief_endgm2_vent_update1_a_00258659_m.ogg
+      file: en_us_hench_thief_endgm2_vent_update1_a_00258659_m.wav
       track: voice
     shep_selection_inf_jacob:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258303_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258303_f.wav
       track: voice
     shep_selection_inf_garrus:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258305_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258305_f.wav
       track: voice
     shep_selection_inf_tali:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258306_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258306_f.wav
       track: voice
     shep_selection_inf_legion:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258307_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258307_f.wav
       track: voice
     shep_selection_inf_mordin:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258309_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258309_f.wav
       track: voice
     shep_selection_inf_thane:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258310_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258310_f.wav
       track: voice
     shep_selection_inf_kasumi:
-      file: en_us_player_f_endgm1_huddle_01b_d_00258311_f.ogg
+      file: en_us_player_f_endgm1_huddle_01b_d_00258311_f.wav
       track: voice
     selection_inf_confirm_thane:
-      file: en_us_hench_assassin_endgm1_huddle_01b_d_00258292_m.ogg
+      file: en_us_hench_assassin_endgm1_huddle_01b_d_00258292_m.wav
       track: voice
     selection_inf_confirm_garrus:
-      file: en_us_hench_garrus_endgm1_huddle_01b_d_00258282_m.ogg
+      file: en_us_hench_garrus_endgm1_huddle_01b_d_00258282_m.wav
       track: voice
     selection_inf_confirm_legion:
-      file: en_us_hench_geth_endgm1_huddle_01b_d_00258286_m.ogg
+      file: en_us_hench_geth_endgm1_huddle_01b_d_00258286_m.wav
       track: voice
     selection_inf_confirm_jacob:
-      file: en_us_hench_leading_endgm1_huddle_01b_d_00258275_m.ogg
+      file: en_us_hench_leading_endgm1_huddle_01b_d_00258275_m.wav
       track: voice
     selection_inf_confirm_mordin:
-      file: en_us_hench_professor_endgm1_huddle_01b_d_00258290_m.ogg
+      file: en_us_hench_professor_endgm1_huddle_01b_d_00258290_m.wav
       track: voice
     selection_inf_confirm_tali:
-      file: en_us_hench_tali_endgm1_huddle_01b_d_00258284_m.ogg
+      file: en_us_hench_tali_endgm1_huddle_01b_d_00258284_m.wav
       track: voice
     selection_inf_confirm_kasumi:
-      file: en_us_hench_thief_endgm1_huddle_01b_d_00258294_m.ogg
+      file: en_us_hench_thief_endgm1_huddle_01b_d_00258294_m.wav
       track: voice
   # Long Walk: Huddle Intro
     shepard_what_about_biotics:
-      file: en_us_player_f_endgm2_huddle_02a_d_00282594_f.ogg
+      file: en_us_player_f_endgm2_huddle_02a_d_00282594_f.wav
       track: voice
     shepard_conventional_weapons_useless:
-      file: en_us_player_f_endgm2_huddle_02a_d_00282560_f.ogg
+      file: en_us_player_f_endgm2_huddle_02a_d_00282560_f.wav
       track: voice
     edi_chamber_overrun_with_seeker_swarms:
-      file: en_us_hench_ai_endgm2_huddle_02a_d_00282512_m.ogg
+      file: en_us_hench_ai_endgm2_huddle_02a_d_00282512_m.wav
       track: voice
       start_at: 1500ms
     miranda_any_biotic_could:
-      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282526_m.ogg
+      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282526_m.wav
       track: voice
     specialist_biotic_field_yes_thane:
-      file: en_us_hench_assassin_endgm2_huddle_02a_d_00282695_m.ogg
+      file: en_us_hench_assassin_endgm2_huddle_02a_d_00282695_m.wav
       track: voice
     specialist_biotic_field_no_thane:
-      file: en_us_hench_assassin_endgm2_huddle_02a_d_00282698_m.ogg
+      file: en_us_hench_assassin_endgm2_huddle_02a_d_00282698_m.wav
       track: voice
     specialist_biotic_field_yes_jack:
-      file: en_us_hench_convict_endgm2_huddle_02a_d_00282515_m.ogg
+      file: en_us_hench_convict_endgm2_huddle_02a_d_00282515_m.wav
       track: voice
     specialist_biotic_field_no_jack:
-      file: en_us_hench_convict_endgm2_huddle_02a_d_00282522_m.ogg
+      file: en_us_hench_convict_endgm2_huddle_02a_d_00282522_m.wav
       track: voice
     specialist_biotic_field_yes_jacob:
-      file: en_us_hench_leading_endgm2_huddle_02a_d_00282516_m.ogg
+      file: en_us_hench_leading_endgm2_huddle_02a_d_00282516_m.wav
       track: voice
     specialist_biotic_field_no_jacob:
-      file: en_us_hench_leading_endgm2_huddle_02a_d_00282524_m.ogg
+      file: en_us_hench_leading_endgm2_huddle_02a_d_00282524_m.wav
       track: voice
     specialist_biotic_field_yes_samara:
-      file: en_us_hench_mystic_endgm2_huddle_02a_d_00282513_m.ogg
+      file: en_us_hench_mystic_endgm2_huddle_02a_d_00282513_m.wav
       track: voice
     specialist_biotic_field_no_samara:
-      file: en_us_hench_mystic_endgm2_huddle_02a_d_00282518_m.ogg
+      file: en_us_hench_mystic_endgm2_huddle_02a_d_00282518_m.wav
       track: voice
     specialist_biotic_field_yes_miranda:
-      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282517_m.ogg
+      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282517_m.wav
       track: voice
     specialist_biotic_field_no_miranda:
-      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282527_m.ogg
+      file: en_us_hench_vixen_endgm2_huddle_02a_d_00282527_m.wav
       track: voice
   # Long Walk: Confirmation/Outro
     specialist_im_ready_samara:
-      file: en_us_hench_mystic_endgm2_huddle_03b_d_00267109_m.ogg
+      file: en_us_hench_mystic_endgm2_huddle_03b_d_00267109_m.wav
       track: voice
     specialist_im_ready_jack:
-      file: en_us_hench_convict_endgm2_huddle_03b_d_00267114_m.ogg
+      file: en_us_hench_convict_endgm2_huddle_03b_d_00267114_m.wav
       track: voice
     specialist_im_ready_jacob:
-      file: en_us_hench_leading_endgm2_huddle_03b_d_00267107_m.ogg
+      file: en_us_hench_leading_endgm2_huddle_03b_d_00267107_m.wav
       track: voice
     specialist_im_ready_miranda:
-      file: en_us_hench_vixen_endgm2_huddle_03b_d_00267106_m.ogg
+      file: en_us_hench_vixen_endgm2_huddle_03b_d_00267106_m.wav
       track: voice
     specialist_must_move_quickly_thane:
-      file: en_us_hench_assassin_endgm2_biotic_fail_c_00319752_m.ogg
+      file: en_us_hench_assassin_endgm2_biotic_fail_c_00319752_m.wav
       track: voice

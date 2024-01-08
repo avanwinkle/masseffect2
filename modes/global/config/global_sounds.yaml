@@ -8,242 +8,242 @@
 
 sounds:
   target_center_garrus_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303068_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303068_m.wav
     track: voice
   target_center_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303069_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303069_m.wav
     track: voice
   target_left_garrus_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303070_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303070_m.wav
     track: voice
   target_left_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303071_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303071_m.wav
     track: voice
   target_right_garrus_1:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303072_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303072_m.wav
     track: voice
   target_right_garrus_2:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00303073_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00303073_m.wav
     track: voice
   target_center_grunt_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295746_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295746_m.wav
     track: voice
   target_center_grunt_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295747_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295747_m.wav
     track: voice
   target_left_grunt_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295748_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295748_m.wav
     track: voice
   target_left_grunt_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295749_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295749_m.wav
     track: voice
   target_right_grunt_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295750_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295750_m.wav
     track: voice
   target_right_grunt_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00295751_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00295751_m.wav
     track: voice
   target_center_jack_1:
-    file: en_us_hench_convict_ss_global_hench_convict_00286862_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286862_m.wav
     track: voice
   target_center_jack_2:
-    file: en_us_hench_convict_ss_global_hench_convict_00286863_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286863_m.wav
     track: voice
   target_left_jack_1:
-    file: en_us_hench_convict_ss_global_hench_convict_00286864_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286864_m.wav
     track: voice
   target_left_jack_2:
-    file: en_us_hench_convict_ss_global_hench_convict_00286865_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286865_m.wav
     track: voice
   target_right_jack_1:
-    file: en_us_hench_convict_ss_global_hench_convict_00286866_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286866_m.wav
     track: voice
   target_right_jack_2:
-    file: en_us_hench_convict_ss_global_hench_convict_00286867_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00286867_m.wav
     track: voice
   target_center_jacob_1:
-    file: en_us_hench_leading_ss_global_hench_leading_00299179_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299179_m.wav
     track: voice
   target_center_jacob_2:
-    file: en_us_hench_leading_ss_global_hench_leading_00299180_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299180_m.wav
     track: voice
   target_left_jacob_1:
-    file: en_us_hench_leading_ss_global_hench_leading_00299181_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299181_m.wav
     track: voice
   target_left_jacob_2:
-    file: en_us_hench_leading_ss_global_hench_leading_00299182_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299182_m.wav
     track: voice
   target_right_jacob_1:
-    file: en_us_hench_leading_ss_global_hench_leading_00299183_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299183_m.wav
     track: voice
   target_right_jacob_2:
-    file: en_us_hench_leading_ss_global_hench_leading_00299184_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00299184_m.wav
     track: voice
   target_center_kasumi_1:
-    file: DLC_HEN_MT_Int.246.ogg
+    file: DLC_HEN_MT_Int.246.wav
     track: voice
   target_center_kasumi_2:
-    file: DLC_HEN_MT_Int.248.ogg
+    file: DLC_HEN_MT_Int.248.wav
     track: voice
   target_left_kasumi_1:
-    file: DLC_HEN_MT_Int.244.ogg
+    file: DLC_HEN_MT_Int.244.wav
     track: voice
   target_left_kasumi_2:
-    file: DLC_HEN_MT_Int.245.ogg
+    file: DLC_HEN_MT_Int.245.wav
     track: voice
   target_right_kasumi_1:
-    file: DLC_HEN_MT_Int.241.ogg
+    file: DLC_HEN_MT_Int.241.wav
     track: voice
   target_right_kasumi_2:
-    file: DLC_HEN_MT_Int.240.ogg
+    file: DLC_HEN_MT_Int.240.wav
     track: voice
   target_center_legion_1:
-    file: en_us_hench_geth_ss_global_hench_geth_00240743_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240743_m.wav
     track: voice
   target_center_legion_2:
-    file: en_us_hench_geth_ss_global_hench_geth_00240744_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240744_m.wav
     track: voice
   target_left_legion_1:
-    file: en_us_hench_geth_ss_global_hench_geth_00240745_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240745_m.wav
     track: voice
   target_left_legion_2:
-    file: en_us_hench_geth_ss_global_hench_geth_00240746_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240746_m.wav
     track: voice
   target_right_legion_1:
-    file: en_us_hench_geth_ss_global_hench_geth_00240747_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240747_m.wav
     track: voice
   target_right_legion_2:
-    file: en_us_hench_geth_ss_global_hench_geth_00240748_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00240748_m.wav
     track: voice
   target_center_miranda_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257393_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257393_m.wav
     track: voice
   target_center_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257394_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257394_m.wav
     track: voice
   target_left_miranda_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257395_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257395_m.wav
     track: voice
   target_left_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257396_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257396_m.wav
     track: voice
   target_right_miranda_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257397_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257397_m.wav
     track: voice
   target_right_miranda_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00257398_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00257398_m.wav
     track: voice
   target_center_mordin_1:
-    file: en_us_hench_professor_ss_global_hench_professor_00241383_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241383_m.wav
     track: voice
   target_center_mordin_2:
-    file: en_us_hench_professor_ss_global_hench_professor_00241384_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241384_m.wav
     track: voice
   target_left_mordin_1:
-    file: en_us_hench_professor_ss_global_hench_professor_00241385_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241385_m.wav
     track: voice
   target_left_mordin_2:
-    file: en_us_hench_professor_ss_global_hench_professor_00241386_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241386_m.wav
     track: voice
   target_right_mordin_1:
-    file: en_us_hench_professor_ss_global_hench_professor_00241387_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241387_m.wav
     track: voice
   target_right_mordin_2:
-    file: en_us_hench_professor_ss_global_hench_professor_00241388_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00241388_m.wav
     track: voice
   target_center_samara_1:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241063_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241063_m.wav
     track: voice
   target_center_samara_2:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241064_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241064_m.wav
     track: voice
   target_left_samara_1:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241065_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241065_m.wav
     track: voice
   target_left_samara_2:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241066_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241066_m.wav
     track: voice
   target_right_samara_1:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241067_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241067_m.wav
     track: voice
   target_right_samara_2:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00241068_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00241068_m.wav
     track: voice
   target_center_tali_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00285175_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285175_m.wav
     track: voice
   target_center_tali_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00285176_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285176_m.wav
     track: voice
   target_left_tali_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00285177_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285177_m.wav
     track: voice
   target_left_tali_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00285178_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285178_m.wav
     track: voice
   target_right_tali_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00285179_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285179_m.wav
     track: voice
   target_right_tali_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00285180_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00285180_m.wav
     track: voice
   target_center_thane_1:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286505_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286505_m.wav
     track: voice
   target_center_thane_2:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286506_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286506_m.wav
     track: voice
   target_left_thane_1:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286507_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286507_m.wav
     track: voice
   target_left_thane_2:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286508_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286508_m.wav
     track: voice
   target_right_thane_1:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286509_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286509_m.wav
     track: voice
   target_right_thane_2:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00286510_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00286510_m.wav
     track: voice
   target_center_zaeed_1:
-    file: DLC_HEN_VT_Int.069.ogg
+    file: DLC_HEN_VT_Int.069.wav
     track: voice
   target_center_zaeed_2:
-    file: DLC_HEN_VT_Int.070.ogg
+    file: DLC_HEN_VT_Int.070.wav
     track: voice
   target_left_zaeed_1:
-    file: DLC_HEN_VT_Int.072.ogg
+    file: DLC_HEN_VT_Int.072.wav
     track: voice
   target_left_zaeed_2:
-    file: DLC_HEN_VT_Int.073.ogg
+    file: DLC_HEN_VT_Int.073.wav
     track: voice
   target_right_zaeed_1:
-    file: DLC_HEN_VT_Int.074.ogg
+    file: DLC_HEN_VT_Int.074.wav
     track: voice
   target_right_zaeed_2:
-    file: DLC_HEN_VT_Int.075.ogg
+    file: DLC_HEN_VT_Int.075.wav
     track: voice
   # It didn't work
   tali_didnt_work_1:
-    file: en_us_hench_tali_ss_global_hench_tali_00314368_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00314368_m.wav
     track: voice
   tali_didnt_work_2:
-    file: en_us_hench_tali_ss_global_hench_tali_00314369_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00314369_m.wav
     track: voice
   tali_didnt_work_3:
-    file: en_us_hench_tali_ss_global_hench_tali_00314370_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00314370_m.wav
     track: voice
   tali_didnt_work_4:
-    file: en_us_hench_tali_ss_global_hench_tali_00314371_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00314371_m.wav
     track: voice
   mordin_no_good:
-    file: en_us_hench_professor_ss_global_hench_professor_00316881_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316881_m.wav
     track: voice
   mordin_ineffective_attack:
-    file: en_us_hench_professor_ss_global_hench_professor_00316882_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316882_m.wav
     track: voice
   mordin_negative_effect:
-    file: en_us_hench_professor_ss_global_hench_professor_00316884_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00316884_m.wav
     track: voice
 
 
@@ -294,29 +294,29 @@ sounds:
 # 964 : stinger for ... Infiltration?
 #####
 # SQUADMATES
-# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg    "Shepard!" (also 00310106, 107)
-# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.ogg    "Shepard's down"
-# en_us_hench_vixen_ss_global_hench_vixen_00310048_m.ogg    "Need Assistance", "Little help?", "I'm Exposed"
-# en_us_hench_vixen_ss_global_hench_vixen_00310066_m.ogg    "Watch out!"
-# en_us_hench_vixen_ss_global_hench_vixen_00310074_m.ogg    "Only one left
-# en_us_hench_vixen_ss_global_hench_vixen_00310083_m.ogg    "Damn it!", "That didn't work", "Shit!"
-# en_us_hench_vixen_ss_global_hench_vixen_00310088_m.ogg    "That was ineffective"
-# en_us_hench_vixen_ss_global_hench_vixen_00310095_m.ogg    "Friendly down"
-# en_us_hench_vixen_ss_global_hench_vixen_00310124_m.ogg    "Nice shot" (through 129)
-# en_us_hench_vixen_ss_global_hench_vixen_00310188_m.ogg    "Perfect!" (lots of good nearby)
-# en_us_hench_vixen_ss_global_hench_vixen_00332051_m.ogg    "Careful, Shepard" (also 52)
+# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.wav    "Shepard!" (also 00310106, 107)
+# en_us_hench_vixen_ss_global_hench_vixen_00257458_m.wav    "Shepard's down"
+# en_us_hench_vixen_ss_global_hench_vixen_00310048_m.wav    "Need Assistance", "Little help?", "I'm Exposed"
+# en_us_hench_vixen_ss_global_hench_vixen_00310066_m.wav    "Watch out!"
+# en_us_hench_vixen_ss_global_hench_vixen_00310074_m.wav    "Only one left
+# en_us_hench_vixen_ss_global_hench_vixen_00310083_m.wav    "Damn it!", "That didn't work", "Shit!"
+# en_us_hench_vixen_ss_global_hench_vixen_00310088_m.wav    "That was ineffective"
+# en_us_hench_vixen_ss_global_hench_vixen_00310095_m.wav    "Friendly down"
+# en_us_hench_vixen_ss_global_hench_vixen_00310124_m.wav    "Nice shot" (through 129)
+# en_us_hench_vixen_ss_global_hench_vixen_00310188_m.wav    "Perfect!" (lots of good nearby)
+# en_us_hench_vixen_ss_global_hench_vixen_00332051_m.wav    "Careful, Shepard" (also 52)
 #
 # SHEPARD
-# en_us_player_f_ss_global_player_female_00288377_f.ogg     "I'm hit"
-# en_us_player_f_ss_global_player_female_00288378_f.ogg     "Damn it"
-# en_us_player_f_ss_global_player_female_00314495_f.ogg     "Deploying medigel" (also 96)
-# en_us_player_f_ss_global_player_female_00314497_f.ogg     "Wake up! That's an order" also 98)
-# en_us_player_f_ss_global_player_female_00314499_f.ogg     "On your feet, soldier" (also 500)
-# en_us_player_f_ss_global_player_female_00314501_f.ogg     "First aid deployed" (also 502)
-# en_us_player_f_ss_global_player_female_00333977_f.ogg     "This should come in handy", "I'll take it", "We can use this" (through 999)
-# en_us_player_f_ss_global_player_female_00334010_f.ogg     "Can't do it yet", "Need a second", "Not ready yet"
-# en_us_player_f_ss_global_player_female_00334232_f.ogg     "Running on empty"
-# en_us_player_f_ss_global_player_female_00337524_f.ogg     "Out of clips" (also 527)
+# en_us_player_f_ss_global_player_female_00288377_f.wav     "I'm hit"
+# en_us_player_f_ss_global_player_female_00288378_f.wav     "Damn it"
+# en_us_player_f_ss_global_player_female_00314495_f.wav     "Deploying medigel" (also 96)
+# en_us_player_f_ss_global_player_female_00314497_f.wav     "Wake up! That's an order" also 98)
+# en_us_player_f_ss_global_player_female_00314499_f.wav     "On your feet, soldier" (also 500)
+# en_us_player_f_ss_global_player_female_00314501_f.wav     "First aid deployed" (also 502)
+# en_us_player_f_ss_global_player_female_00333977_f.wav     "This should come in handy", "I'll take it", "We can use this" (through 999)
+# en_us_player_f_ss_global_player_female_00334010_f.wav     "Can't do it yet", "Need a second", "Not ready yet"
+# en_us_player_f_ss_global_player_female_00334232_f.wav     "Running on empty"
+# en_us_player_f_ss_global_player_female_00337524_f.wav     "Out of clips" (also 527)
 # en_us_player_f_ss_global_player_female_00288380_f Shepard hit noises (380-384, 961-964)
 # en_us_player_f_ss_global_player_female_00333954_f "Can't reach the target" (954, 957, 959)
 # en_us_player_f_ss_global_player_female_00334010_f "Can't do it yet"
@@ -377,8 +377,8 @@ sounds:
 # en_us_player_f_norcr2_team_meeting_d_00310498_f "Tough choice: continue to build up the team or go after the derelict reaper?"
 # en_us_player_f_norcr2_team_meeting_d_00310670_f "The more people we have the better our chances. We need to keep building the team"
 # en_us_hench_vixen_norcr3_denoument2_d_00224600_m "We've done everything we can. It's time to take the fight to the collectors"
-# en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.ogg "Your team will need to be strong, as will their resolve"
-# en_us_global_illusive_man_norcr1_debriefing_d_00320983_m.ogg "I've forwarded three more dossiers. Keep building your team while I find a way through the relay"
+# en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.wav "Your team will need to be strong, as will their resolve"
+# en_us_global_illusive_man_norcr1_debriefing_d_00320983_m.wav "I've forwarded three more dossiers. Keep building your team while I find a way through the relay"
 # en_us_hench_vixen_norcr3_denoument2_d_00294616_m "We've got good people but more potential recruiting options. I'd be hesitant to go in short-handed"
 # en_us_global_illusive_man_profre_illusive_d_00252066_m "You're a leader, Shepard. You'll get who you need"
 # en_us_global_illusive_man_profre_illusive_d_00252067_m "I've made it clear to Miranda that you're in charge. (pause) You decide who joins your squad."
@@ -394,14 +394,14 @@ sounds:
 # en_us_player_f_profre_illusive_d_00252123_f "If this is a war I'll need an army. Or a really good team."
 #
 # EDI
-# en_us_hench_ai_nor_ai_edi_hint_h_00333682_m.ogg "Something on our sensors" (also 683)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333684_m.ogg "I have found something" (also 685)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333686_m.ogg "Scans have found something" (also 687)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333689_m.ogg "Probe launched", "Launching Probe", "Probe away" (through 694)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333696_m.ogg "Anomaly detected" (through 699)
-# en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.ogg "I am receiving a distress signal" (through 704)
-# en_us_hench_ai_nor_ai_edi_hint_h_00345722_m.ogg "Research projects: Iridium"
-# en_us_hench_ai_nor_ai_edi_hint_h_00345723_m.ogg "Research projects: Platinum"
-# en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.ogg "Research projects: Palladium"
+# en_us_hench_ai_nor_ai_edi_hint_h_00333682_m.wav "Something on our sensors" (also 683)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333684_m.wav "I have found something" (also 685)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333686_m.wav "Scans have found something" (also 687)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333689_m.wav "Probe launched", "Launching Probe", "Probe away" (through 694)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333696_m.wav "Anomaly detected" (through 699)
+# en_us_hench_ai_nor_ai_edi_hint_h_00333701_m.wav "I am receiving a distress signal" (through 704)
+# en_us_hench_ai_nor_ai_edi_hint_h_00345722_m.wav "Research projects: Iridium"
+# en_us_hench_ai_nor_ai_edi_hint_h_00345723_m.wav "Research projects: Platinum"
+# en_us_hench_ai_nor_ai_edi_hint_h_00345724_m.wav "Research projects: Palladium"
 #
 #####

@@ -24,29 +24,29 @@ random_event_player:
 
 sounds:
   collector_death_1:
-    file: sfx_ss_collector_ss_collector_00315575_m.ogg
+    file: sfx_ss_collector_ss_collector_00315575_m.wav
     track: sfx
   collector_death_2:
-    file: sfx_ss_collector_ss_collector_00315577_m.ogg
+    file: sfx_ss_collector_ss_collector_00315577_m.wav
     track: sfx
   collector_death_3:
-    file: sfx_ss_collector_ss_collector_00315578_m.ogg
+    file: sfx_ss_collector_ss_collector_00315578_m.wav
     track: sfx
   collector_death_4:
-    file: sfx_ss_collector_ss_collector_00315579_m.ogg
+    file: sfx_ss_collector_ss_collector_00315579_m.wav
     track: sfx
   collector_passing_1:
-    file: sfx_ss_collector_ss_collector_00315581_m.ogg
+    file: sfx_ss_collector_ss_collector_00315581_m.wav
     track: sfx
   collector_passing_2:
-    file: sfx_ss_collector_ss_collector_00315582_m.ogg
+    file: sfx_ss_collector_ss_collector_00315582_m.wav
     track: sfx
   collector_passing_3:
-    file: sfx_ss_collector_ss_collector_00315583_m.ogg
+    file: sfx_ss_collector_ss_collector_00315583_m.wav
     track: sfx
   collector_passing_4:
-    file: sfx_ss_collector_ss_collector_00315584_m.ogg
+    file: sfx_ss_collector_ss_collector_00315584_m.wav
     track: sfx
   collector_passing_5:
-    file: sfx_ss_collector_ss_collector_00315585_m.ogg
+    file: sfx_ss_collector_ss_collector_00315585_m.wav
     track: sfx

@@ -126,13 +126,13 @@ slides:
 
 sounds:
   credits_complete:
-    file: SFXGame.586.ogg
+    file: SFXGame.586.wav
     track: sfx
   credits_incomplete:
-    file: SFXGame.628.ogg
+    file: SFXGame.628.wav
     track: sfx
   credits_needed:
-    file: SFXGame.650.ogg
+    file: SFXGame.650.wav
     track: sfx
 
 sound_player:

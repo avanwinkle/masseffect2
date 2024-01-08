@@ -182,13 +182,13 @@ sound_pools:
 
 sounds:
   shadowbroker_vasir_music:
-    file: SBK.05.Vasir_Combat.ogg
+    file: SBK.05.Vasir_Combat.wav
     track: music
     fade_out: 1s
     loops: -1
   # Dropbanks for Vasir
   shepard_sounds_like_liara_found_something_big:
-    file: DLC_EXP_Part01_Int.143.ogg
+    file: DLC_EXP_Part01_Int.143.wav
     track: voice
     ducking:
       target: music, levelup
@@ -197,7 +197,7 @@ sounds:
       release_point: 500ms
       release: 500ms
   shepard_ive_got_something_here:
-    file: DLC_EXP_Part01_Int.146.ogg
+    file: DLC_EXP_Part01_Int.146.wav
     track: voice
     ducking:
       target: music, levelup
@@ -206,7 +206,7 @@ sounds:
       release_point: 500ms
       release: 500ms
   shepard_liara_knew_i_was_coming:
-    file: DLC_EXP_Part01_Int.179.ogg
+    file: DLC_EXP_Part01_Int.179.wav
     track: voice
     ducking:
       target: music, levelup
@@ -215,7 +215,7 @@ sounds:
       release_point: 500ms
       release: 500ms
   shepard_liaras_in_there:
-    file: DLC_EXP_Part01_Int.636.ogg
+    file: DLC_EXP_Part01_Int.636.wav
     track: voice
     ducking:
       target: music, levelup
@@ -224,54 +224,54 @@ sounds:
       release_point: 500ms
       release: 500ms
   shepard_ill_start_down_here:
-    file: DLC_EXP_Part01_Int.628.ogg
+    file: DLC_EXP_Part01_Int.628.wav
     track: voice
   vasir_i_know_where_the_trade_center_is:
-    file: DLC_EXP_Part01_Int.169.ogg
+    file: DLC_EXP_Part01_Int.169.wav
     track: voice
   vasir_they_took_out_three_floors:
-    file: DLC_EXP_Part01_Int.634.ogg
+    file: DLC_EXP_Part01_Int.634.wav
     track: voice
   liara_she_found_suket_and_stole_the_datapad:
-    file: DLC_EXP_Part01_Int.616.ogg
+    file: DLC_EXP_Part01_Int.616.wav
     track: voice
   # After Vasir
   liara_shepard_im_glad_youre_here:
-    file: DLC_EXP_Part01_Int.871.ogg
+    file: DLC_EXP_Part01_Int.871.wav
     track: voice
   # Dropbanks for Hagalaz
   liara_sukets_datapad_this_has_what_we_need:
-    file: DLC_EXP_Part01_Int.797.ogg
+    file: DLC_EXP_Part01_Int.797.wav
     track: voice
   liara_sb_agents_still_shooting_illium:
-    file: DLC_EXP_Part01_Int.878.ogg
+    file: DLC_EXP_Part01_Int.878.wav
     track: voice
   liara_well_need_normandy_stealth_system:
-    file: DLC_EXP_Part01_Int.879.ogg
+    file: DLC_EXP_Part01_Int.879.wav
     track: voice
   liara_i_can_get_us_there:
-    file: DLC_EXP_Part01_Int.885.ogg
+    file: DLC_EXP_Part01_Int.885.wav
     track: voice
   liara_we_can_be_at_base_in_a_few_hours:
-    file: DLC_EXP_Part01_Int.884.ogg
+    file: DLC_EXP_Part01_Int.884.wav
     track: voice
   liara_land_outside_and_hunt_for_a_hatch:
-    file: DLC_EXP_Part01_Int.944.ogg
+    file: DLC_EXP_Part01_Int.944.wav
     track: voice
   glyph_operations_almost_fully_recovered:
-    file: DLC_EXP_Part01_Int.1289.ogg
+    file: DLC_EXP_Part01_Int.1289.wav
     track: voice
   glyph_i_can_log_that_in_the_archives:
-    file: DLC_EXP_Part01_Int.1291.ogg
+    file: DLC_EXP_Part01_Int.1291.wav
     track: voice
   glyph_repairs_are_underway:
-    file: DLC_EXP_Part01_Int.1314.ogg
+    file: DLC_EXP_Part01_Int.1314.wav
     track: voice
   glyph_let_me_know_if_i_can_organize:
-    file: DLC_EXP_Part01_Int.1316.ogg
+    file: DLC_EXP_Part01_Int.1316.wav
     track: voice
   glyph_welcome_back_shadowbroker:
-    file: DLC_EXP_Part01_Int.1317.ogg
+    file: DLC_EXP_Part01_Int.1317.wav
     track: voice
 
 widgets:

@@ -594,10 +594,10 @@ sound_pools:
       - illusive_find_mordin{current_player.status_mordin<4}
 sounds:
   galaxy_whoosh:
-    file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.ogg
+    file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.wav
     track: sfx
   music_mission_success:
-    file: mus_gui_mission_completion.ogg
+    file: mus_gui_mission_completion.wav
     track: levelup # Use a special track to avoid music fadeout conflicts
     volume: 1.0
     start_at: 1500ms
@@ -618,40 +618,40 @@ sounds:
     # In case some other mode (e.g. research) stops the music, also mark levelup complete
     events_when_stopped: levelup_complete_stopped
   illusive_already_compiled_dossiers_four:
-    file: en_us_global_illusive_man_profre_illusive_d_00332317_m.ogg
+    file: en_us_global_illusive_man_profre_illusive_d_00332317_m.wav
     track: voice
   illusive_already_compiled_dossiers_five:
-    file: en_us_global_illusive_man_profre_illusive_d_00332318_m.ogg
+    file: en_us_global_illusive_man_profre_illusive_d_00332318_m.wav
     track: voice
   illusive_find_mordin:
-    file: en_us_global_illusive_man_profre_illusive_d_00324686_m.ogg
+    file: en_us_global_illusive_man_profre_illusive_d_00324686_m.wav
     track: voice
   shep_ill_need_a_really_good_team:
-    file: en_us_player_f_profre_illusive_d_00252123_f.ogg
+    file: en_us_player_f_profre_illusive_d_00252123_f.wav
     track: voice
   illusive_more_dossiers:
-    file: en_us_global_illusive_man_norcr1_debriefing_d_00320983_m.ogg
+    file: en_us_global_illusive_man_norcr1_debriefing_d_00320983_m.wav
     track: voice
   miranda_more_recruiting_options:
-    file: en_us_hench_vixen_norcr3_denoument2_d_00294616_m.ogg
+    file: en_us_hench_vixen_norcr3_denoument2_d_00294616_m.wav
     track: voice
   shepard_more_people_we_have_the_better:
-    file: en_us_player_f_norcr2_team_meeting_d_00310670_f.ogg
+    file: en_us_player_f_norcr2_team_meeting_d_00310670_f.wav
     track: voice
   illusive_youll_get_who_you_need:
-    file: en_us_global_illusive_man_profre_illusive_d_00252066_m.ogg
+    file: en_us_global_illusive_man_profre_illusive_d_00252066_m.wav
     track: voice
   illusive_your_team_will_need_to_be_strong:
-    file: en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.ogg
+    file: en_us_global_illusive_man_norcr1_debriefing_d_00320977_m.wav
     track: voice
   chambers_the_illusive_man_wishes_to_speak_with_you:
-    file: en_us_nor_yeoman_nor_yeoman_a_00275675_m.ogg
+    file: en_us_nor_yeoman_nor_yeoman_a_00275675_m.wav
     track: voice
   chambers_edi_ready_to_install_iff:
-    file: en_us_nor_yeoman_nor_yeoman_a_00295517_m.ogg
+    file: en_us_nor_yeoman_nor_yeoman_a_00295517_m.wav
     track: voice
   joker_change_of_plans_patching_illusive_man_through:
-    file: en_us_hench_joker_nor_galaxy_map_a_00275671_m.ogg
+    file: en_us_hench_joker_nor_galaxy_map_a_00275671_m.wav
     track: voice
 
 track_player:

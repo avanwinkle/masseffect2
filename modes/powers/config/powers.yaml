@@ -618,32 +618,32 @@ sound_pools:
 sounds:
   # These three sounds are in global_recruit
   shepard_cant_reach_target_1:
-    file: en_us_player_f_ss_global_player_female_00333954_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333954_f.wav
     track: voice
   shepard_cant_reach_target_2:
-    file: en_us_player_f_ss_global_player_female_00333957_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333957_f.wav
     track: voice
   shepard_cant_reach_target_3:
-    file: en_us_player_f_ss_global_player_female_00333959_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333959_f.wav
     track: voice
   shepard_cant_do_it_yet:
-    file: en_us_player_f_ss_global_player_female_00334010_f.ogg
+    file: en_us_player_f_ss_global_player_female_00334010_f.wav
     track: voice
   shepard_need_a_second:
-    file: en_us_player_f_ss_global_player_female_00334012_f.ogg
+    file: en_us_player_f_ss_global_player_female_00334012_f.wav
     track: voice
   shepard_not_ready_yet:
-    file: en_us_player_f_ss_global_player_female_00334014_f.ogg
+    file: en_us_player_f_ss_global_player_female_00334014_f.wav
     track: voice
   shepard_locked_on:
-    file: en_us_player_f_ss_global_player_female_00288362_f.ogg
+    file: en_us_player_f_ss_global_player_female_00288362_f.wav
     track: voice
   shepard_attack_long_1:
-    file: en_us_player_f_ss_global_player_female_00333967_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333967_f.wav
     track: voice
   shepard_attack_long_2:
-    file: en_us_player_f_ss_global_player_female_00333968_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333968_f.wav
     track: voice
   shepard_attack_long_3:
-    file: en_us_player_f_ss_global_player_female_00333969_f.ogg
+    file: en_us_player_f_ss_global_player_female_00333969_f.wav
     track: voice

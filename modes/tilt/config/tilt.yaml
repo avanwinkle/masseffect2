@@ -92,92 +92,92 @@ sound_pools:
 
 sounds:
   tilt_thane_watch_your_shots:
-    file: en_us_hench_assassin_ss_global_hench_assassin_00332074_m.ogg
+    file: en_us_hench_assassin_ss_global_hench_assassin_00332074_m.wav
     track: voice
   tilt_jack_damn_it_watch_where_youre_shooting:
-    file: en_us_hench_convict_ss_global_hench_convict_00332096_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00332096_m.wav
     track: voice
   tilt_jack_hold_your_fire_shepard:
-    file: en_us_hench_convict_ss_global_hench_convict_00332100_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00332100_m.wav
     track: voice
   tilt_jack_get_off_my_ass:
-    file: en_us_hench_convict_ss_global_hench_convict_00332108_m.ogg
+    file: en_us_hench_convict_ss_global_hench_convict_00332108_m.wav
     track: voice
   tilt_garrus_careful:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00332123_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00332123_m.wav
     track: voice
   tilt_garrus_hold_fire:
-    file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.ogg
+    file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.wav
     track: voice
   tilt_legion_adjust_aim:
-    file: en_us_hench_geth_ss_global_hench_geth_00332150_m.ogg
+    file: en_us_hench_geth_ss_global_hench_geth_00332150_m.wav
     track: voice
   tilt_grunt_stop_it_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00332170_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332170_m.wav
     track: voice
   tilt_grunt_stop_it_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00332171_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332171_m.wav
     track: voice
   tilt_grunt_hold_fire_shepard_1:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00332174_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332174_m.wav
     track: voice
   tilt_grunt_hold_fire_shepard_2:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00332175_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332175_m.wav
     track: voice
   tilt_grunt_stop_firing_at_me_idiot:
-    file: en_us_hench_grunt_ss_global_hench_grunt_00332176_m.ogg
+    file: en_us_hench_grunt_ss_global_hench_grunt_00332176_m.wav
     track: voice
   tilt_jacob_back_off:
-    file: en_us_hench_leading_ss_global_hench_leading_00331101_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00331101_m.wav
     track: voice
   tilt_jacob_watch_your_fire:
-    file: en_us_hench_leading_ss_global_hench_leading_00332194_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00332194_m.wav
     track: voice
   tilt_jacob_damnit_shepard:
-    file: en_us_hench_leading_ss_global_hench_leading_00332197_m.ogg
+    file: en_us_hench_leading_ss_global_hench_leading_00332197_m.wav
     track: voice
   tilt_samara_cease_fire_shepard:
-    file: en_us_hench_mystic_ss_global_hench_mystic_00332221_m.ogg
+    file: en_us_hench_mystic_ss_global_hench_mystic_00332221_m.wav
     track: voice
   tilt_mordin_stop_shooting_shepard:
-    file: en_us_hench_professor_ss_global_hench_professor_00332246_m.ogg
+    file: en_us_hench_professor_ss_global_hench_professor_00332246_m.wav
     track: voice
   tilt_tali_hold_your_fire:
-    file: en_us_hench_tali_ss_global_hench_tali_00332269_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00332269_m.wav
     track: voice
   tilt_tali_shepard_back_off:
-    file: en_us_hench_tali_ss_global_hench_tali_00332272_m.ogg
+    file: en_us_hench_tali_ss_global_hench_tali_00332272_m.wav
     track: voice
   tilt_miranda_watch_it:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00332048_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332048_m.wav
     track: voice
   tilt_miranda_careful_shepard_1:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00332051_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332051_m.wav
     track: voice
   tilt_miranda_careful_shepard_2:
-    file: en_us_hench_vixen_ss_global_hench_vixen_00332052_m.ogg
+    file: en_us_hench_vixen_ss_global_hench_vixen_00332052_m.wav
     track: voice
   tilt_kasumi_watch_where_youre_shooting:
-    file: DLC_HEN_MT_Int.119.ogg
+    file: DLC_HEN_MT_Int.119.wav
     track: voice
   tilt_kasumi_watch_it:
-    file: DLC_HEN_MT_Int.123.ogg
+    file: DLC_HEN_MT_Int.123.wav
     track: voice
   tilt_zaeed_watch_it:
-    file: DLC_HEN_VT_Int.032.ogg
+    file: DLC_HEN_VT_Int.032.wav
     track: voice
   tilt_zaeed_watch_your_aim:
-    file: DLC_HEN_VT_Int.037.ogg
+    file: DLC_HEN_VT_Int.037.wav
     track: voice
   tilt_joker_commander_1:
-    file: en_us_hench_joker_endgm2_escape_c_00311920_m.ogg
+    file: en_us_hench_joker_endgm2_escape_c_00311920_m.wav
     track: voice
   tilt_joker_commander_2:
-    file: en_us_hench_joker_endgm2_escape_c_00333854_m.ogg
+    file: en_us_hench_joker_endgm2_escape_c_00333854_m.wav
     track: voice
   tilt_joker_shepard:
-    file: en_us_hench_joker_endgm2_escape_c_00333855_m.ogg
+    file: en_us_hench_joker_endgm2_escape_c_00333855_m.wav
     track: voice
   tilt_reaper:
-    file: BioD_Gth002_220ReaperAwakes.36.ogg
+    file: BioD_Gth002_220ReaperAwakes.36.wav
     track: sfx
