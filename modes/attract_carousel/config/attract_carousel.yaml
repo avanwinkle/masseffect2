@@ -17,6 +17,9 @@ mode_settings:
     - 2player_pinstrat{settings.enable_pinstrat and machine.player2_score}
     - 3player_pinstrat{settings.enable_pinstrat and machine.player3_score}
     - 4player_pinstrat{settings.enable_pinstrat and machine.player4_score}
+    - gc_score
+    - high_scores_1
+    - high_scores_2
   next_item_events: s_flipper_right_active, timer_attract_timer_complete
   previous_item_events: s_flipper_left_active
 
@@ -98,6 +101,8 @@ slide_player:
   attract_carousel_2player_score_highlighted: 2player_score_slide
   attract_carousel_3player_score_highlighted: 3player_score_slide
   attract_carousel_4player_score_highlighted: 4player_score_slide
+  attract_carousel_gc_score_highlighted: gc_score_slide
+  show_high_scores_slide: high_scores_slide
   play_pinstrat_slide:
     pinstrat_slide:
       action: play
@@ -123,6 +128,42 @@ slides:
       - type: text
         text: Balls Missing
         style: header_sm, row_main
+  gc_score_slide:
+    widgets:
+      - type: text
+        text: (machine|score1_label)
+        style: body_md, row_top
+      - type: text
+        text: (machine|score1_name)
+        style: header_md, row_above
+      - type: text
+        text: (machine|score1_value)
+        style: header_md, row_sub, num
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
+  high_scores_slide:
+    widgets:
+      - type: text
+        text: "High Scores"
+        style: body_md, row_top
+      - type: text
+        text: (names)
+        style: body_sm, col_left_anchor
+        halign: left
+      - type: text
+        text: (scores)
+        style: body_sm, col_right_anchor, num
+        halign: right
+      - type: image
+        image: splashscreen
+        anchor_x: left
+        x: 0
+        z: 0
+        opacity: 0.5
 
 sounds:
   credits_complete:

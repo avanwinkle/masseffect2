@@ -207,9 +207,10 @@ modes:
   - bonus
   - createprofile
   - credits
+  - field
   - gameover
   - global
-  - field
+  - high_score
   - instantinfo
   - mainmenu
   - match

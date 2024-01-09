@@ -1,0 +1,128 @@
+#config_version=6
+mode:
+  code: high_score.HighScore
+  priority: 1500
+  start_events: game_ending, start_high_score
+  game_mode: false
+  use_wait_queue: true
+
+event_player:
+  s_flipper_right_active:
+    item_highlighted:
+      button: right
+  s_flipper_left_active:
+    item_highlighted:
+      button: left
+  s_credit_active:
+    item_highlighted:
+      button: select
+
+high_score:
+  _overwrite: true
+  enter_initials_timeout: 20s
+  award_slide_display_time: 8s
+  categories: !!omap
+    - score:
+        - GRAND CHAMPION
+        - HIGH SCORE 1
+        - HIGH SCORE 2
+        - HIGH SCORE 3
+        - HIGH SCORE 4
+        - HIGH SCORE 5
+        - HIGH SCORE 6
+        - HIGH SCORE 7
+        - HIGH SCORE 8
+  defaults:
+    # These values are not parsed by python when copied to the default
+    # high_scores file, so do *not* underscore-separate them
+    score:
+      - SHEPARD: 20000000
+      - GARRUS: 16000000
+      - GRUNT: 12000000
+      - TALI: 10000000
+      - JACK: 8000000
+      - ANDERSON: 6000000
+      - THANE: 5000000
+      - MORDIN: 4000000
+      - JACOB: 2000
+
+slide_player:
+  _overwrite: true
+  show_high_score_enter_initials:
+    high_score_enter_initials:
+      target: main
+    score_award_display:
+      action: remove
+      target: main
+    high_score_player_score:
+      target: lcd_right
+    score_award_portrait:
+      action: remove
+      target: lcd_right
+  show_score_award_display:
+    score_award_display:
+      target: main
+    score_award_portrait:
+      target: lcd_right
+    high_score_enter_initials:
+      action: remove
+      target: main
+    high_score_player_score:
+      action: remove
+      target: lcd_right
+
+slides:
+  _overwrite: true
+  high_score_enter_initials:
+    transition_out: fade
+    widgets:
+      - type: text
+        text: PLAYER (player_num)
+        style: body_sm, row_top, col_left_anchor
+      - type: text_input
+        key: high_score
+        style: header_md, row_main, col_left_anchor
+        max_chars: 10
+        char_list: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        shift_left_event: s_flipper_left_inactive
+        shift_right_event: s_flipper_right_inactive
+        select_event: flipper_cancel
+        abort_event: flipper_cradle
+        block_events: flipper_cancel
+        release_events: both_flippers_inactive
+      - type: text
+        text: ""
+        key: high_score
+        style: header_md, row_main, col_left_anchor
+      - type: text
+        text: "Use flippers to scroll, press both to select."
+        color: BBBBBB
+        style: body_xs, row_bottom, col_left_anchor
+        halign: left
+      - widget: background_console
+  high_score_player_score:
+    widgets:
+      - type: text
+        text: (award_text)
+        style: body_sm, row_top
+      - type: text
+        text: (value)
+        style: header_md, row_main, num
+  score_award_display:
+    transition: fade
+    widgets:
+      - type: text
+        text: PLAYER (player_num)
+        style: body_sm, row_top
+      - type: text
+        text: (value)
+        style: header_lg, row_main, num
+      - type: text
+        text: (award)
+        style: body_sm, row_bottom
+      - widget: background_console
+  score_award_portrait:
+    widgets:
+    - widget: (portrait)
+    - type: image
+      image: texture_console

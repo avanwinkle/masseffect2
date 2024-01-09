@@ -2,12 +2,6 @@
 slides:
   # Core slides
   attract_slide_main:
-    transition:
-      type: fade
-      duration: 200ms
-    transition_out:
-      type: fade
-      duration: 200ms
     widgets:
       - type: image
         image: logo_fullscreen
@@ -27,20 +21,12 @@ slides:
         x: 0
         z: 0
   attract_slide_right:
-    transition:
-      type: fade
-      duration: 200ms
-    transition_out:
-      type: fade
-      duration: 200ms
     widgets:
       - type: image
         image: splashscreen
         anchor_x: right
         x: 110%
   credits_slide_free_play:
-    transition: fade
-    transition_out: fade
     widgets:
       - type: text
         text: FREE PLAY
@@ -52,7 +38,6 @@ slides:
         z: 0
         opacity: 0.5
   credits_slide_not_enough:
-    transition_out: fade
     widgets:
       - type: text
         text: "INSERT\nCOINS"
@@ -67,7 +52,6 @@ slides:
         z: 0
         opacity: 0.5
   credits_slide_press_start:
-    transition_out: fade
     widgets:
       - type: text
         text: "PRESS\nSTART"
@@ -95,8 +79,6 @@ slides:
       - type: image
         image: texture_console
   gameover_slide:
-    transition: fade
-    transition_out: fade
     widgets:
       - type: text
         text: (machine|gameover_text)
@@ -108,8 +90,6 @@ slides:
         z: 0
         opacity: 0.5
   singleplayer_slide:
-    transition: fade
-    transition_out: fade
     widgets:
       - type: text
         text: (score)
@@ -433,8 +413,6 @@ slides:
       image: portrait_recruitzaeed
   # Core slides
   1player_score_slide:
-    transition: fade
-    transition_out: fade
     widgets:
       - type: text
         text: (machine|player1_score)
@@ -446,8 +424,6 @@ slides:
         x: 0
         z: 0
   2player_score_slide:
-    transition: fade
-    transition_out: fade
     widgets:
       - type: text
         text: (machine|last_career_player_1)
@@ -569,7 +545,6 @@ slides:
       x: 0
       z: 0
   pinstrat_slide:
-    transition: fade
     widgets:
       - type: text
         text: "Scan code for your\nPinstrat summary!"
@@ -584,7 +559,6 @@ slides:
         z: 0
         opacity: 0.5
   pinstrat_portrait_slide:
-    transition: fade
     widgets:
       - widget: pinstrat_player_(player_num)
       - type: rectangle

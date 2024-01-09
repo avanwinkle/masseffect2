@@ -529,6 +529,7 @@ slides:
         style: header_xs, row_sub_under
       - widget: background_console
   intro_missions_slide_mp:
+    transition_out: fade
     widgets:
       - type: text
         text: Build Your Team
