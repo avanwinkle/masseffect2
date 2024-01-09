@@ -43,9 +43,9 @@ counters:
 variable_player:
   award_planet:
     planets: 1
-    score: 200
+    score: machine.base_points // 50
   mineral_shots_hit:
-    score: 10
+    score: machine.base_points // 500
   eezo_shot_hit:
     mineral_eezo: 0.01 * machine.base_points * current_player.research_mineral_rate_perk // 10 * 10
   captive_ball_hit:

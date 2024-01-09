@@ -157,7 +157,7 @@ variable_player:
     temp_hurryup_value: current_player.temp_build_value * device.ball_holds.arrival_hold.balls_held
   # Base scoring per frenzy hit, doubles with each phase
   frenzy_hit:
-    score: 100 * (2^device.counters.arrival_stage_counter.value)
+    score: machine.base_points // 100 * (2^device.counters.arrival_stage_counter.value)
     # Also track this scoring for the final/total score awarded
     temp_hurryup_value:  100 * (2^device.counters.arrival_stage_counter.value)
 

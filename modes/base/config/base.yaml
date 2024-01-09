@@ -187,7 +187,7 @@ counters:
 
 variable_player:
   defer_recruit_advance_score:
-    score: 500
+    score: machine.base_points // 50
   # Use a variable to know whether a ship upgrade is available
   shipupgrade_available:
     available_shipupgrades: 1

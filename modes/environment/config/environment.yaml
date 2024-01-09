@@ -47,18 +47,18 @@ shots:
 # Generic points
 variable_player:
   envshot_standuptarget_hit:
-    score: 20
+    score: machine.base_points // 500
   envshot_dropbank_hit:
-    score: 50
+    score: machine.base_points // 200
   envshot_hitbank_hit:
-    score: 50
+    score: machine.base_points // 200
   envshot_left_orbit_hit:
-    score: 100
+    score: machine.base_points // 200
   envshot_right_orbit_hit:
-    score: 100
+    score: machine.base_points // 200
   envshot_left_ramp_hit:
-    score: 100
+    score: machine.base_points // 200
   envshot_kickback_hit:
-    score: 100
+    score: machine.base_points // 200
   envshot_tenpoints_hit:
     score: 10

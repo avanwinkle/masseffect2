@@ -168,7 +168,7 @@ machine_vars:
     persist: true
   # These point reference values are here globally, but don't need to be saved
   base_points:
-    initial_value: 10000
+    initial_value: 100000
     persist: false
   mission_xp:
     initial_value: 1000
@@ -388,11 +388,11 @@ player_vars:
   minerals_total:
     initial_value: 0
   mineral_iridium:
-    initial_value: 30000
+    initial_value: 20000
   mineral_palladium:
-    initial_value: 30000
+    initial_value: 20000
   mineral_platinum:
-    initial_value: 30000
+    initial_value: 20000
   mineral_eezo:
     initial_value: 2500
   # These "perks" are for purchased upgrades

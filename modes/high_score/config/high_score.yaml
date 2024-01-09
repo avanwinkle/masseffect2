@@ -44,7 +44,7 @@ high_score:
       - ANDERSON: 6000000
       - THANE: 5000000
       - MORDIN: 4000000
-      - JACOB: 2000
+      - JACOB: 200000
 
 slide_player:
   _overwrite: true

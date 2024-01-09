@@ -48,14 +48,14 @@ event_player:
 variable_player:
   shipupgrade_completed:
     available_shipupgrades: -1
-    score: 4000
+    score: machine.base_points // 5
     # We can't collect both a ship upgrade _and_ weapon upgrade for a levelup
     upgrade_available:
       action: set
       int: 0
   upgrades_completed:
     upgrades_completed: 1
-    score: 1000 * (1 + 0.5 * current_player.upgrades_completed)
+    score: machine.base_points // 10 * (1 + 0.5 * current_player.upgrades_completed)
     # Weapon upgrades can't be stacked, collecting one resets to zero
     upgrade_available:
       action: set

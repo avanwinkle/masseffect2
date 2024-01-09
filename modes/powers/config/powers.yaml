@@ -86,11 +86,11 @@ event_player:
 # Looking for variable_player? Probably in the python code
 variable_player:
   power_shots_lit_hit:
-    score: 500
+    score: machine.base_points // 20
   power_shots_off_hit:
-    score: 50
+    score: machine.base_points // 200
   frenzy_hit:
-    score: 10
+    score: machine.base_points // 1000
 
 counters:
   powers_cooldown:
