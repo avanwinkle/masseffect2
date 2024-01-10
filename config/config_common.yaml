@@ -127,6 +127,7 @@ credits:
   fractional_credit_expiration_time: 15m
   credit_expiration_time: 2h
   persist_credits_while_off_time: 1h
+  service_credits_switch: s_service_esc
   free_play_string: FREE PLAY
   credits_string: CREDITS
 
