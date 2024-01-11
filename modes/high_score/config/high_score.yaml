@@ -19,7 +19,7 @@ event_player:
 
 high_score:
   _overwrite: true
-  enter_initials_timeout: 20s
+  enter_initials_timeout: 60s
   award_slide_display_time: 8s
   categories: !!omap
     - score:
@@ -45,6 +45,13 @@ high_score:
       - THANE: 5000000
       - MORDIN: 4000000
       - JACOB: 200000
+
+timers:
+  high_score_entry_timer:
+    start_value: 60
+    start_running: true
+    end_value: 0
+    direction: down
 
 slide_player:
   _overwrite: true
@@ -99,6 +106,9 @@ slides:
         color: BBBBBB
         style: body_xs, row_bottom, col_left_anchor
         halign: left
+      - type: text
+        text: (high_score_high_score_entry_timer_tick)
+        style: header_xs, row_gutter, col_left_center, color_ui_yellow
       - widget: background_console
   high_score_player_score:
     widgets:
