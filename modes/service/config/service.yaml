@@ -336,3 +336,39 @@ widgets:
     type: text
     text: Settings
     style: header_md, row_main, col_center
+
+sound_player:
+  service_volume_start{focus_change=="enter" and track=="music"}:
+    endrun_explosion_music:
+      track: music
+      fade_in: 0
+      fade_out: 500ms
+      mode_end_action: stop
+      loops: -1
+  service_volume_start{focus_change=="enter" and track=="levelup"}:
+    music_mission_success:
+      track: levelup
+      fade_in: 0
+      fade_out: 500ms
+      mode_end_action: stop
+      loops: -1
+  service_volume_edit{track=="voice"}:
+    medigel_sound:
+      track: voice
+      fade_in: 0
+      fade_out: 0
+      max_queue_time: 100ms
+  service_volume_edit{track=="sfx"}:
+    assignment_complete:
+      track: sfx
+      fade_in: 0
+      fade_out: 0
+      max_queue_time: 100ms
+  service_volume_start{focus_change=="exit" and track=="music"}:
+    endrun_explosion_music:
+      action: stop
+      track: music
+  service_volume_start{focus_change=="exit" and track=="levelup"}:
+    music_mission_success:
+      action: stop
+      track: levelup
