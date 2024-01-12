@@ -513,9 +513,11 @@ sound_system:
   enabled: true
   tracks:
     music:
+      label: "Music"
       simultaneous_sounds: 2
       volume: 1.0
     voice:
+      label: "Dialog"
       priority: 2
       simultaneous_sounds: 1
       #preload: true
@@ -527,11 +529,13 @@ sound_system:
         release: 100ms
         release_point: 100ms
     sfx:
+      label: "Effects"
       simultaneous_sounds: 7
       volume: 0.5
       #preload: true
       priority: 1
     levelup:
+      label: "Level Up"
       simultaneous_sounds: 1
       volume: 0.8
 
