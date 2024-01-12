@@ -62,6 +62,10 @@ event_player:
   # In expo demo mode, 3 recruits is enough for collector ship
   player_squadmates_count{player_num==current_player.number and value==5 and settings.demo_mode}:
     - enable_collectorship
+  # Clear the intro slide on skillshot slide
+  slide_skillshot_slide_active:
+    clear_slide_queue:
+      clear_current: true
 
   missionselect_collectorship_selected:
     - start_mode_collectorship_base
@@ -119,17 +123,6 @@ event_player:
         type: str
       rating:
         value: rating
-        type: int
-  award_skillshot:
-    queue_slide:
-      slide: skillshot_slide
-      portrait: reputation
-      expire: 4s
-      morality:
-        value: morality
-        type: str
-      value:
-        value: value
         type: int
   recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
@@ -454,6 +447,16 @@ slide_player:
       priority: 1000  # Higher priority than the sqicon slide
       expire: 5726ms
       target: lcd_right
+  # Don't queue the skillshot slide, play it immediately
+  award_skillshot:
+    skillshot_slide:
+      expire: 4s
+      priority: 10000
+    reputation_portrait_slide:
+      expire: 4s
+      priority: 10000
+      target: lcd_right
+
 
 slides:
   player_added_slide:
