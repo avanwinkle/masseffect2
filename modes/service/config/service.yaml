@@ -10,6 +10,11 @@ mode:
 mode_settings:
   sort_devices_by_number: false
 
+event_player:
+  service_volume_start{is_platform or track=="music"}:
+    - play_test_music{focus_change=="enter"}
+    - stop_test_music{focus_change=="exit"}
+
 sounds:
   power_off:
     file: SFXGame.649.wav
@@ -338,7 +343,7 @@ widgets:
     style: header_md, row_main, col_center
 
 sound_player:
-  service_volume_start{focus_change=="enter" and track=="music"}:
+  play_test_music:
     endrun_explosion_music:
       track: music
       fade_in: 0
@@ -364,7 +369,7 @@ sound_player:
       fade_in: 0
       fade_out: 0
       max_queue_time: 100ms
-  service_volume_start{focus_change=="exit" and track=="music"}:
+  stop_test_music:
     endrun_explosion_music:
       action: stop
       track: music

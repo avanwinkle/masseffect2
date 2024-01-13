@@ -34,6 +34,11 @@ fast:
         order: 4
   rgb:
     ignore_reboot: true
+  aud:
+    headphones_amp_enabled: false
+    port: /dev/tty.usbserial-DN04S6GH
+    link_main_to_main: false
+    link_sub_to_main: false
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
