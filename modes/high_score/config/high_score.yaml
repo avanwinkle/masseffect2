@@ -136,3 +136,26 @@ slides:
     - widget: (portrait)
     - type: image
       image: texture_console
+
+sound_player:
+  show_high_score_enter_initials: joker_high_score_callouts
+  show_score_award_display: me3_war_asset_complete
+
+sound_pools:
+  joker_high_score_callouts:
+    sounds: joker_space_jazz, joker_come_here_often, joker_fuzzy_bunny_planet
+    track: voice
+
+sounds:
+  me3_war_asset_complete:
+    file: SFXGame.752.ogg
+    track: sfx
+  joker_space_jazz:
+    file: en_us_hench_joker_nor_joker_rec_last_a_00319860_m.ogg
+    track: voice
+  joker_come_here_often:
+    file: en_us_hench_joker_nor_joker_rec_last_a_00319870_m.ogg
+    track: voice
+  joker_fuzzy_bunny_planet:
+    file: en_us_hench_joker_nor_joker_rec_last_a_00319968_m.ogg
+    track: voice
