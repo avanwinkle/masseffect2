@@ -22,3 +22,4 @@ dist
 *.pyc
 me2-wav
 *.wav
+packages

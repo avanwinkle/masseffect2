@@ -88,14 +88,17 @@ def generate_hash(path):
     return checksum
 
 
-def generate_update_file():
+def generate_update_file(package_list=None):
     with open(os.path.join(DEST_PATH, "UPDATE"), "w") as f:
         f.writelines([
             f"timestamp={now.strftime('%a %b %d %H:%M:S %Z %Y')}\n",
             f"version={timestamp.replace('_', '.')}\n",
             f"mpf_config.bundle={generate_hash(os.path.join(DEST_PATH, 'mpf_config.bundle'))}\n"
         ])
-
+        if package_list:
+            f.write(
+                f"packages={','.join(package_list)}\n"
+            )
 
 def make_zip():
     filename = "ME2UPDATE-%s" % timestamp
@@ -117,7 +120,21 @@ def main():
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
 
-    generate_update_file()
+    """Packages can be entered with the -p argument, comma separated"""
+    if "-p" in sys.argv:
+        package_idx = sys.argv.index("-p")
+        package_list = sys.argv[package_idx + 1].split(",")
+        package_source_path = os.path.join("packages")
+        package_dest_path = os.path.join(DEST_PATH, "packages")
+        log.info("Bundling packages: %s", package_list)
+        os.makedirs(os.path.join(DEST_PATH, "packages"))
+        for p in package_list:
+            shutil.copyfile(os.path.join(package_source_path, p),
+                            os.path.join(package_dest_path, p))
+    else:
+        package_list = None
+
+    generate_update_file(package_list)
 
     # Check for a copy path
     if "-c" in sys.argv:
