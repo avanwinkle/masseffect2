@@ -11,7 +11,7 @@ mode_settings:
   sort_devices_by_number: false
 
 event_player:
-  service_volume_start{is_platform or track=="music"}:
+  service_volume_start{(is_platform and track!="write_to_firmware") or track=="music"}:
     - play_test_music{focus_change=="enter"}
     - stop_test_music{focus_change=="exit"}
 
