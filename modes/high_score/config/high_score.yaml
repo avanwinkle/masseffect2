@@ -52,6 +52,9 @@ timers:
     start_running: true
     end_value: 0
     direction: down
+    control_events:
+      - event: score_award_display
+        action: stop
 
 slide_player:
   _overwrite: true
@@ -106,9 +109,6 @@ slides:
         color: BBBBBB
         style: body_xs, row_bottom, col_left_anchor
         halign: left
-      - type: text
-        text: (high_score_high_score_entry_timer_tick)
-        style: header_xs, row_gutter, col_left_center, color_ui_yellow
       - widget: background_console
   high_score_player_score:
     widgets:
@@ -137,9 +137,25 @@ slides:
     - type: image
       image: texture_console
 
+widget_player:
+  timer_high_score_entry_timer_tick:
+    high_score_timer_widget:
+      action: update
+      slide: high_score_enter_initials
+
+widgets:
+  high_score_timer_widget:
+    - type: text
+      text: (ticks_remaining)
+      style: header_xs, row_gutter, col_right_indent, color_ui_yellow
+
 sound_player:
   show_high_score_enter_initials: joker_high_score_callouts
-  show_score_award_display: me3_war_asset_complete
+  show_score_award_display:
+    me3_war_asset_complete:
+      action: play
+    joker_high_score_callouts:
+      action: stop
 
 sound_pools:
   joker_high_score_callouts:
@@ -150,9 +166,11 @@ sounds:
   me3_war_asset_complete:
     file: SFXGame.752.ogg
     track: sfx
+    volume: 1.0
   joker_space_jazz:
     file: en_us_hench_joker_nor_joker_rec_last_a_00319860_m.ogg
     track: voice
+    fade_out: 500ms
   joker_come_here_often:
     file: en_us_hench_joker_nor_joker_rec_last_a_00319870_m.ogg
     track: voice
