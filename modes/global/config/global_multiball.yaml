@@ -317,11 +317,13 @@ sound_player:
     vulcan_success:
       action: play
       max_queue_time: 2s
+      mode_end_action: stop
       delay: 2s
   play_queued_slide_fmball_ball_locked_slide.2{ball==2 and mball_name=="overlord"}:
     archer_lockdown_cancelled_short:
       action: play
       max_queue_time: 2s
+      mode_end_action: stop
       delay: 2s
   #### ARRIVAL ####
   play_arrival_hit_sound{not current_player.disable_mball_light_sounds}:
@@ -348,10 +350,12 @@ sound_player:
     arr_ken_shepards_escaped:
       action: play
       max_queue_time: 2s
+      mode_end_action: stop
   play_queued_slide_fmball_ball_locked_slide.5{ball==2 and mball_name=="arrival"}:
     arr_annc_cooling_rod_b_inserted:
       action: play
       max_queue_time: 2s
+      mode_end_action: stop
 
 sound_pools:
   geth_hit_sfx:
