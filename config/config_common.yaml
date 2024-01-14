@@ -386,7 +386,7 @@ player_vars:
     value_type: str
   medigel:
     initial_value: 0
-  minerals_total:
+  mineral_total:
     initial_value: 0
   mineral_iridium:
     initial_value: 20000

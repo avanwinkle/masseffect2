@@ -76,6 +76,12 @@ shots:
 
 # Slides and sound_player are in base.yaml to persist after this mode stops
 
+sound_player:
+  timer_idle_timer_complete: grunt_keystone
+  skillshot_hit:
+    grunt_keystone:
+      action: stop
+
 sound_pools:
   skillshot_sound:
     track: voice
@@ -90,6 +96,14 @@ sound_pools:
       - squadmate_miranda_nice_shot
       - squadmate_mordin_nice_shot{current_player.status_mordin==4}
       - squadmate_thane_nice_shot{current_player.status_thane==4}
+  grunt_keystone:
+    track: voice
+    max_queue_time: 100ms
+    sounds:
+      - grunt_keystone_1
+      - grunt_keystone_2
+      - grunt_keystone_3
+      - grunt_keystone_4
 
 sounds:
   squadmate_garrus_nice_shot:
@@ -116,6 +130,18 @@ sounds:
   squadmate_thane_nice_shot:
     track: voice
     file: en_us_hench_assassin_ss_global_hench_assassin_00316486_m.wav
+  grunt_keystone_1:
+    track: voice
+    file: en_us_hench_grunt_krokgl_crateramb_h_00323983_m.ogg
+  grunt_keystone_2:
+    track: voice
+    file: en_us_hench_grunt_krokgl_crateramb_h_00279957_m.ogg
+  grunt_keystone_3:
+    track: voice
+    file: en_us_hench_grunt_krokgl_crateramb_h_00279958_m.ogg
+  grunt_keystone_4:
+    track: voice
+    file: en_us_hench_grunt_krokgl_crateramb_h_00279959_m.ogg
 
 timers:
   skillshot_timer:
@@ -127,3 +153,9 @@ timers:
         action: restart
       - event: skillshot_hit
         action: stop
+  idle_timer:
+    start_running: true
+    start_value: 40
+    end_value: 0
+    direction: down
+    restart_on_complete: true
