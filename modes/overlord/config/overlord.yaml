@@ -384,7 +384,7 @@ slides:
       - type: video
         video: overlord_lock_atlas
         end_behavior: pause
-        volume: 0.5
+        volume: 0.35
   overlord_slide:
     transition: fade
     transition_out: fade

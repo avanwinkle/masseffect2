@@ -1087,37 +1087,37 @@ widgets:
   portrait_recruit_intro_jack:
     - type: video
       video: recruitjack_warden_sniping
-      volume: 0.4
+      volume: 0.3
       end_behavior: pause
   portrait_recruit_jack_awakening:
     - type: video
       video : recruitjack_awakening
       end_behavior: pause
-      volume: 0.5
+      volume: 0.4
       z: 100
   portrait_recruit_jack_jackattack:
     - type: video
       video: recruitjack_jackattack
       end_behavior: pause
-      volume: 0.5
+      volume: 0.3
       z: 101
   portrait_recruit_jack_approach:
     - type: video
       video: recruitjack_approach
       end_behavior: pause
-      volume: 0.5
+      volume: 0.4
       z: 102
   portrait_recruit_jack_valuable_shepard:
     - type: video
       video: recruitjack_valuable_shepard
       end_behavior: pause
-      volume: 0.5
+      volume: 0.4
       z: 103
   portrait_recruit_jack_not_happening:
     - type: video
       video: recruitjack_not_happening
       end_behavior: pause
-      volume: 0.5
+      volume: 0.4
       z: 104
   portrait_recruit_intro_kasumi:
     - type: video

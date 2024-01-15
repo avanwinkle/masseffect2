@@ -75,6 +75,10 @@ show_player:
       action: stop
     flash:
       action: stop
+    start_button_flash:
+      action: stop
+    start_button_solid:
+      action: stop
 
 sound_player:
   mode_attract_started.10:
