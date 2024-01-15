@@ -53,6 +53,18 @@ shows:
           color: black
           fade: 100ms
         l_null: (color)
+  color_flashing_transparent:
+    - duration: 400ms
+      lights:
+        (leds):
+          color: (color)
+          fade: 100ms
+    - duration: 400ms
+      lights:
+        (leds):
+          color: stop
+          fade: 100ms
+        l_null: (color)
   color_flashing_fast:
     - duration: 200ms
       lights:

@@ -4,8 +4,10 @@ event_player:
     - start_mode_attract_carousel
     - start_mode_mainmenu
     # Add a delay on the start button
-    - start_button_solid{machine.free_play}|1s
-    - start_button_flash{machine.credits_whole_num>0 and not machine.free_play}|1s
+    - start_button_solid{machine.free_play}|500ms
+    - start_button_flash{machine.credits_whole_num>0 and not machine.free_play}|500ms
+    # It looks nicer to have the dropbank up
+    - reset_dropbank|1s
   machine_var_credits_whole_num:
     - start_button_flash{value>0}
 

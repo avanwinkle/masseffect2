@@ -608,27 +608,27 @@ lights:
     previous: l_power_adrenaline
     type: grb
     default_on_color: color_grunt
-    tags: light-powers, armor
+    tags: light_powers, armor
   l_power_adrenaline:
     previous: l_power_cloak
     type: grb
     default_on_color: color_grunt
-    tags: light-powers, adrenaline
+    tags: light_powers, adrenaline
   l_power_cloak:
     previous: l_power_drone
     type: grb
     default_on_color: color_grunt
-    tags: light-powers, cloak
+    tags: light_powers, cloak
   l_power_drone:
     previous: l_power_singularity
     type: grb
     default_on_color: color_grunt
-    tags: light-powers, drone
+    tags: light_powers, drone
   l_power_singularity:
     previous: l_progress_derelictreaper
     type: grb
     default_on_color: color_grunt
-    tags: light-powers, singularity
+    tags: light_powers, singularity
   # Career ladder
   l_progress_collectorship:
     previous: l_power_charge

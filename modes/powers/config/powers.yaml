@@ -319,6 +319,12 @@ show_player:
       show_tokens:
         leds: (power)
         color: BBBBBB
+    color_flashing_transparent:
+      loops: 6
+      speed: 2
+      show_tokens:
+        leds: light_powers
+        color: color_armor
   power_activation_success:
     color_flashing_fast:
       key: current_power_show

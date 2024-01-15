@@ -74,6 +74,9 @@ light_player:
   missing_switch_warning:
     l_bbsquad_kasumi:
       color: bb_squad_color
+  mode_attract_carousel_will_stop:
+    l_bbsquad_kasumi:
+      color: off
 
 slide_player:
   mode_attract_carousel_started:
