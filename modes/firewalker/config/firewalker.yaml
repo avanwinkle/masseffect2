@@ -188,6 +188,13 @@ shot_profiles:
         speed: 3
 
 show_player:
+  # The timer restarts, so each time it's at 20 reset the show
+  timer_fwtimer_tick{ticks==20}:
+    ladder_timer:
+      start_step: 23  # For a 20s timer
+      priority: 1000
+      speed: 1  # No fake speeds on this timer
+      start_running: true
   firewalker_shots_red_hit:
     single_flash_color:
       loops: 0
