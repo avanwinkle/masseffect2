@@ -12,9 +12,9 @@ from custom_code.squadmate_status import SquadmateStatus
 PLAYER_VARS = (
     # These are the variables that are saved in a career. Everything else resets.
     "balls_played", "career_name", "career_started", "difficulty", "readonly", "level",
-    "assignments_completed", "recruits_lit_count", "counter_sbdrops_counter", "xp",
+    "assignments_completed", "assignments_played", "recruits_lit_count", "xp",
     "avatar", "high_flow", "fwps_lo", "fwps_kb", "fwps_lr", "fwps_rr", "fwps_ro",
-    "trophies", "total_ball_time")
+    "trophies", "total_ball_time", "counter_sbdrops_counter")
 
 ACHIEVEMENT_MISSIONS = (
     # These are achievements that qualify as available_missions if enabled/stopped

@@ -28,7 +28,7 @@ event_player:
       shots_remaining: 1
       ticks: 12
       multiplier:
-        value: 1.0 + (0.25 * current_player.assignments_completed)
+        value: 1.0 + (0.25 * current_player.earned_assignments_completed)
         type: float
   mode_n7_assignments_started.1:
     - missiontimer_start|1s
@@ -53,17 +53,6 @@ random_event_player:
       - enable_n7_right_orbit
       - enable_n7_left_orbit
       - enable_n7_kickback
-
-variable_player:
-  # Assign a priority so the new values are available in the dossier slied
-  n7_assignment_hit.10:
-    # In addition to the shot amount, multiply by the number of missions completed
-    score:
-      int: current_player.mission_shot_value * current_player.assignments_completed
-    assignments_completed: 1
-    earned_assignments_completed: 1
-    reputation: 3
-    xp: machine.assignment_xp
 
 shot_groups:
   n7_assignment:

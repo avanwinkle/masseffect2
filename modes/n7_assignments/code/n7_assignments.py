@@ -63,7 +63,6 @@ class N7Assignments(Mode):
         """Initialize mode with no mission and track that it hasn't been played yet."""
         super().__init__(*args, **kwargs)
         self._mission = None
-        self._is_first = True
 
     def start(self, mode_priority=None, callback=None, **kwargs):
         """Override the initial start method so we can prevent start if there are no missions."""
@@ -95,21 +94,19 @@ class N7Assignments(Mode):
         #     target_mission = next(x for x in MERC_MISSIONS if x.id == TEST_MISSION)
 
         # If we made it this far, there's a mission to do. Proceed with the mode starting
-        super().start(mode_priority, callback, **kwargs)
         self._mission = target_mission
-        self.player["assignments_played"] += 1
-
-        self.add_mode_event_handler("n7_assignment_hit", self._on_hit)
+        super().start(mode_priority, callback, **kwargs)
 
     def mode_start(self, **kwargs):
         """Setup the event for populating slide data on start."""
         del kwargs
+        self.player["assignments_played"] += 1
+
         # If this is the first mission, 100%
-        if self._is_first:
+        if self.player["assignments_played"] == 1:
             rating = 100
-            self._is_first = False
         else:
-            rating = math.ceil(100 * self.player["earned_assignments_completed"] / self.player["assignments_played"])
+            rating = math.ceil(100 * self.player["assignments_completed"] / self.player["assignments_played"])
         self.machine.events.post("set_n7_mission",
                                  title=self._mission.name,
                                  long_title=self._mission.long_name,
@@ -117,6 +114,7 @@ class N7Assignments(Mode):
                                  id=self._mission.id,
                                  rating=rating)
 
+        self.add_mode_event_handler("n7_assignment_hit", self._on_hit)
         self.machine.clock.schedule_once(self._play_callout, 1)
 
     def _check_achievement(self, rating):
@@ -148,7 +146,13 @@ class N7Assignments(Mode):
 
     def _on_hit(self, **kwargs):
         del kwargs
+        # Add some scoring!
+        self.player["assignments_completed"] += 1
+        self.player["earned_assignments_completed"] += 1
+        self.player["reputation"] += 3
+        self.player["xp"] += self.machine.variables.get_machine_var("assignment_xp")
+        self.player["score"] += self.player["mission_shot_value"] * self.player["earned_assignments_completed"]
         rating = math.ceil(100 *
-            self.player["earned_assignments_completed"] / self.player["assignments_played"])
+            self.player["assignments_completed"] / self.player["assignments_played"])
         achievement = self._check_achievement(rating)
         self.machine.events.post("n7_assignment_success", rating=rating, achievement=achievement)
