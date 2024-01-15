@@ -17,18 +17,18 @@ mode_settings:
       score: machine.base_points // 1000 * 10
       player_score_entry: earned_squadmates_count
     - event: bonus_reputation
-      score: current_player.reputation * (current_player.paragon + current_player.renegade) * 100
+      score: current_player.reputation * (current_player.paragon + current_player.renegade) * 50
     - event: bonus_credits
       score: machine.base_points // 10000 * 10
       player_score_entry: credits
     - event: bonus_minerals
       # Mineral values are weighted against 5000, so compensate the base points
-      score: (current_player.planets * current_player.mineral_total * (machine.base_points * 0.0001)) // 300000 * 1000
+      score: (current_player.planets * current_player.mineral_total * (machine.base_points * 0.0001)) // 600000 * 1000
     - event: bonus_assignments
       score: (machine.base_points // 1000 * 30)
       player_score_entry: earned_assigments_completed
     - event: bonus_intel
-      score: (machine.base_points // 1000 * 50)
+      score: (machine.base_points // 10000 * 50)
       player_score_entry: earned_intel
     - event: bonus_upgrades
       # Award an extra 2% score for every weapon upgrade
