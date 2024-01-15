@@ -146,11 +146,12 @@ class N7Assignments(Mode):
 
     def _on_hit(self, **kwargs):
         del kwargs
-        # Add some scoring!
+        # Increment assignments count, reputation, and xp
         self.player["assignments_completed"] += 1
         self.player["earned_assignments_completed"] += 1
         self.player["reputation"] += 3
         self.player["xp"] += self.machine.variables.get_machine_var("assignment_xp")
+        # In addition to the shot amount, multiply by the number of missions completed
         self.player["score"] += self.player["mission_shot_value"] * self.player["earned_assignments_completed"]
         rating = math.ceil(100 *
             self.player["assignments_completed"] / self.player["assignments_played"])

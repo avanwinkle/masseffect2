@@ -58,6 +58,12 @@ config:
   - field_recruit.yaml
   - field_shadowbroker.yaml
 
+variable_player:
+  mode_field_started:
+    color_airlock:
+      action: set
+      string: color_shields
+
 show_player:
   mode_field_started:
     gi_show:
@@ -65,7 +71,6 @@ show_player:
       manual_advance: True
       show_tokens:
         backwall_color: color_space
-
 
 sound_player:
   play_field_music{current_player.high_flow==1}:
@@ -95,7 +100,6 @@ sound_player:
       mode_end_action: stop
       fade_in: 500ms
       fade_out: 2s
-
 
 sound_pools:
   high_flow_field_music:

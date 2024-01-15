@@ -121,6 +121,9 @@ multiballs:
 variable_player:
   # Temp multiplier: 0 == orbits, 1 == ramps
   mode_arrival_started:
+    color_airlock:
+      action: set
+      string: color_arrival
     temp_multiplier:
       action: set
       int: 0

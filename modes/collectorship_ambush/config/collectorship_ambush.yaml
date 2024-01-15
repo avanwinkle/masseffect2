@@ -207,7 +207,6 @@ sounds:
     file: DLC_HEN_VT_Int.056.wav
     track: voice
 
-
 widget_player:
   logicblock_collector_shots_counter_updated:
     collector_shots_widget:

@@ -78,6 +78,12 @@ multiballs:
     # accidentally slip out and mess up the playfield count, which causes a premature ball_will_end
     ball_locks: bd_lock
 
+variable_player:
+  mode_collectorship_base_started:
+    color_airlock:
+      action: set
+      string: color_harbinger
+
 light_player:
   mode_collectorship_ambush_started:
     light_backwall_ambient: color_collectors

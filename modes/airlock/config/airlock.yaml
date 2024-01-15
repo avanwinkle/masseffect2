@@ -256,4 +256,4 @@ show_player:
       speed: 4
       priority: 1000
       show_tokens:
-        color: (color_overlord if mode.overlord.active else color_shields)
+        color: (current_player.color_airlock)

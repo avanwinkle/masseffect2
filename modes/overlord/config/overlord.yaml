@@ -114,6 +114,10 @@ counters:
     count_events: jackpotshot_hit
 
 variable_player:
+  mode_overlord_started:
+    color_airlock:
+      action: set
+      string: color_overlord
   hackshots_lit_hit:
     score:
       action: add
