@@ -148,7 +148,8 @@ sound_pools:
       delay: 0
       attenuation: 0.5
       attack: 100ms
-      release: 100ms
+      release: 600ms
+      release_point: 300ms
     sounds:
       - jol_garrus_1{current_player.status_garrus==4}
       - jol_garrus_2{current_player.status_garrus==4}

@@ -306,10 +306,10 @@ sound_pools:
       - liara_his_shields_deactivated
     ducking:
       target: music
-      attenuation: 0.7
-      attac2: 1s
-      release_poin1: 1s
-      releas3: 1s
+      attenuation: 0.5
+      attack: 100ms
+      release_point: 400ms
+      release: 800ms
   sbboss_armor_down:
     track: voice
     type: random_force_all
@@ -318,10 +318,10 @@ sound_pools:
       - liara_quick_while_hes_vulnerable
     ducking:
       target: music
-      attenuation: 0.7
-      attac2: 1s
-      release_poin1: 1s
-      releas3: 1s
+      attenuation: 0.5
+      attack: 100ms
+      release_point: 400ms
+      release: 800ms
 
 sounds:
   shadowbroker_boss_music:
@@ -336,66 +336,36 @@ sounds:
   liara_his_shields_deactivated:
     file: DLC_EXP_Part01_Int.1008.wav
     track: voice
-    ducking:
-      target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
   liara_were_through_his_shields:
     file: DLC_EXP_Part01_Int.1013.wav
     track: voice
-    ducking:
-      target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
   liara_his_shields_are_down:
     file: DLC_EXP_Part01_Int.1015.wav
     track: voice
-    ducking:
-      target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
   liara_hit_him_now:
     file: DLC_EXP_Part01_Int.1014.wav
     track: voice
-    ducking:
-      target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
   liara_quick_while_hes_vulnerable:
     file: DLC_EXP_Part01_Int.1012.wav
     track: voice
-    ducking:
-      target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
   liara_energy_projectiles_bouncing_off:
     file: DLC_EXP_Part01_Int.1052.wav
     track: voice
     ducking:
       target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
+      attenuation: 0.5
+      attack: 100ms
+      release_point: 400ms
+      release: 800ms
   liara_if_you_can_get_him_to:
     file: DLC_EXP_Part01_Int.1051.wav
     track: voice
     ducking:
       target: music
-      attenuation: 0.7
-      attack: 200ms
-      release_point: 200ms
-      release: 1200ms
+      attenuation: 0.5
+      attack: 100ms
+      release_point: 400ms
+      release: 800ms
   shepard_then_we_do_this_the_hard_way:
     file: DLC_EXP_Part01_Int.1054.wav
     track: voice

@@ -132,9 +132,6 @@ sound_pools:
     sounds: deploying_medigel_1, deploying_medigel_2, on_your_feet_1, on_your_feet_2, first_aid_1, first_aid_2
     type: random_force_all
     track: voice
-    ducking:
-      track: music
-      attack: 0.5
 
 sounds:
   deploying_medigel_1:

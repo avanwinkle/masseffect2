@@ -219,9 +219,10 @@ sound_pools:
     track: voice
     ducking:
       target: music
-      attenuation: 0.5
+      attenuation: 0.7
       attack: 50ms
-      release: 100ms
+      release: 400ms
+      release_point: 100ms
 
 sounds:
   something_sensors_1:

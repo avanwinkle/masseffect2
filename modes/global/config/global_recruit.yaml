@@ -269,31 +269,67 @@ sound_pools:
     track: voice
     sounds: missioncomplete_voice_garrus_1, missioncomplete_voice_garrus_2, garrus_fit_for_duty_whenever
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_grunt:
     type: random
     track: voice
     sounds: missioncomplete_voice_grunt_3, missioncomplete_voice_grunt_5
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_jack:
     type: random
     track: voice
     sounds: missioncomplete_voice_jack_1, missioncomplete_voice_jack_2, jack_nice_little_group_and_ship
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_kasumi:
     type: random
     track: voice
     sounds: missioncomplete_voice_kasumi_1, missioncomplete_voice_kasumi_2, missioncomplete_voice_kasumi_3, missioncomplete_voice_kasumi_4, missioncomplete_voice_kasumi_5, missioncomplete_voice_kasumi_6
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_legion:
     type: random
     track: voice
     sounds: missioncomplete_voice_legion_1, missioncomplete_voice_legion_2, missioncomplete_voice_legion_3
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_mordin:
     type: random
     track: voice
     sounds: missioncomplete_voice_mordin_1, missioncomplete_voice_mordin_2
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_samara:
     type: random
     track: voice
@@ -303,8 +339,8 @@ sound_pools:
       target: levelup
       attenuation: 0.3
       attack: 200ms
-      release_point: 100ms
-      release: 500ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_thane:
     type: random
     track: voice
@@ -314,18 +350,30 @@ sound_pools:
       target: levelup
       attenuation: 0.3
       attack: 200ms
-      release: 100ms
-      release_point: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_zaeed_renegade:
     type: random
     track: voice
     sounds: missioncomplete_voice_zaeed_renegade_1, missioncomplete_voice_zaeed_renegade_2, missioncomplete_voice_zaeed_renegade_3
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   missioncomplete_voice_zaeed_paragon:
     type: random
     track: voice
     sounds: missioncomplete_voice_zaeed_paragon_1, missioncomplete_voice_zaeed_paragon_2, missioncomplete_voice_zaeed_paragon_3
     max_queue_time: 1s
+    ducking:
+      target: levelup
+      attenuation: 0.3
+      attack: 200ms
+      release: 800ms
+      release_point: 400ms
   garrus_failed:
     type: random
     track: voice
@@ -362,30 +410,12 @@ sounds:
   missioncomplete_voice_garrus_1:
     file: en_us_hench_garrus_omggra_garrus_intro_d_00206434_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_garrus_2:
     file: en_us_hench_garrus_omggra_2nd_intermission_d_00205620_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   garrus_fit_for_duty_whenever:
     file: en_us_hench_garrus_norgra_debriefing_d_00225772_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   # garrus_hold_fire:
   #   file: en_us_hench_garrus_ss_global_hench_garrus_00332124_m.wav
   #   track: voice
@@ -395,75 +425,27 @@ sounds:
   missioncomplete_voice_grunt_1:
     file: en_us_hench_grunt_norkg_relationship_00_h_00284136_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_grunt_2:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274203_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_grunt_3:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274197_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 10ms
-      release: 30ms
-      release_point: 50ms
   missioncomplete_voice_grunt_4:
     file: en_us_hench_grunt_norkg_relationship_03_h_00299828_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_grunt_5:
     file: en_us_hench_grunt_norkg_relationship_03_h_00274200_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.8
-      attack: 10ms
-      release: 30ms
-      release_point: 50ms
   missioncomplete_voice_jack_1:
     file: en_us_hench_convict_prscva_cv_join_d_00198389_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_jack_2:
     file: en_us_hench_convict_prscva_cv_join_d_00200320_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   jack_nice_little_group_and_ship:
     file: en_us_hench_convict_norcv_starter_h_00191411_m.wav
     track: voice
-    ducking:
-      target: levelup
-      attenuation: 0.5
-      attack: 100ms
-      release: 300ms
-      release_point: 500ms
   missioncomplete_voice_kasumi_1:
     file: DLC_HEN_MT_Int.773.wav
     track: voice
