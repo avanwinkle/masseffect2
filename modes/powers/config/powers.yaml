@@ -325,18 +325,119 @@ show_player:
       show_tokens:
         leds: light_powers
         color: color_armor
+  timer_activate_power_started:
+    ladder_power_chargeup:
+      priority: 2000
+      show_tokens:
+        color: (current_player.color_power)
+  timer_activate_power_stopped:
+    ladder_power_chargeup:
+      action: stop
   power_activation_success:
+    ladder_power_chargeup:
+      action: stop
     color_flashing_fast:
       key: current_power_show
       show_tokens:
         leds: (power)
         color: DDDDDD
+  timer_power_active_started:
+    ladder_power_active:
+      priority: 2000
+      show_tokens:
+        color: (current_player.color_power)
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: (current_player.color_power)
+        fade: 250ms
+  timer_power_active_tick{ticks==5}:
+    ladder_power_active:
+      action: update
+      speed: 4
+      priority: 2000
+      show_tokens:
+        color: (current_player.color_power)
+  timer_power_active_stopped:
+    ladder_power_active:
+      action: stop
+    led_12_chase_pulse:
+      action: stop
+  power_activation_failure:
+    ladder_power_chargeup:
+      action: stop
   power_activation_complete:
     current_power_show:
       action: stop
   mode_powers_will_stop:
     current_power_show:
       action: stop
+
+shows:
+  ladder_power_chargeup:
+    - duration: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_0:
+          color: (color)
+          fade: 100ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_1:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_2:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_3:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_4:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_5:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_6:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_7:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_8:
+          color: (color)
+          fade: 200ms
+    - duration: 200ms
+      lights:
+        l_ladder_light_9:
+          color: (color)
+          fade: 200ms
+  ladder_power_active:
+    - duration: 400ms
+      lights:
+        light_ladder:
+          color: (color)
+          fade: 400ms
+    - duration: 400ms
+      lights:
+        light_ladder:
+          color: (color)%30
+          fade: 400ms
 
 flasher_player:
   play_power_widget_singularity:
@@ -653,3 +754,40 @@ sounds:
   shepard_attack_long_3:
     file: en_us_player_f_ss_global_player_female_00333969_f.wav
     track: voice
+  # Power sound effects
+  power_armor_available:
+    file: SFXPower_TechArmor.1.ogg
+    track: sfx
+  power_armor_active:
+    file: SFXPower_TechArmor.3.ogg
+    track: sfx
+  power_adrenaline_available:
+    file: SFXPower_AdrenalineRush.1.ogg
+    track: sfx
+  power_adrenaline_active:
+    file: SFXPower_AdrenalineRush.2.ogg
+    track: sfx
+  power_charge_available:
+    file: SFXPower_BioticCharge.01.ogg
+    track: sfx
+  power_charge_active:
+    file: SFXPower_BioticCharge.09.ogg
+    track: sfx
+  power_cloak_available:
+    file: SFXPower_Cloak.3.ogg
+    track: sfx
+  power_cloak_active:
+    file: SFXPower_Cloak.2.ogg
+    track: sfx
+  power_drone_available:
+    file: SFXPower_CombatDrone.10.ogg
+    track: sfx
+  power_drone_active:
+    file: SFXPower_CombatDrone.03.ogg
+    track: sfx
+  power_singularity_available:
+    file: SFXPower_Singularity.07.ogg
+    track: sfx
+  power_singularity_active:
+    file: SFXPower_Singularity.05.ogg
+    track: sfx

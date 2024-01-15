@@ -23,6 +23,14 @@ TIMES = {
     "singularity": 20,
     "charge": 0
 }
+POWER_COLORS = {
+    "adrenaline": "color_health",
+    "cloak": "color_collectors",
+    "armor": "color_armor",
+    "drone": "color_kasumi",
+    "singularity": "color_barrier",
+    "charge": "color_paragon"
+}
 POWER_WIDGET_HEIGHT = 92  # Height of the widget in pixels, to calculate cooldown mask height
 
 
@@ -110,21 +118,26 @@ class Powers(Mode):
         self.log.info("Activating power {}".format(power))
         try:
             self.power_handlers[power]()
-            self.machine.events.post("power_activation_success", power=power)
+            self.machine.events.post("power_activation_success",
+                                     power=power, ticks=self.timer.ticks,
+                                     color=POWER_COLORS[power])
             if self.timer.ticks > 0:
                 self.timer.start()
+            self._play_sound(f"power_{power}_active")
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
     def _award_power(self, **kwargs):
         power = TEST_POWER or kwargs["power"]
-        # variable_player can't sub values, so do it manually
-        self.machine.game.player["power"] = power
+        self.player["power"] = power
+        self.player["color_power"] = POWER_COLORS[power]
         self.machine.events.post("power_awarded",
                                  power=power,
+                                 color=POWER_COLORS[power],
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
         self.timer.ticks = TIMES[power]
+        self._play_sound(f"power_{power}_available")
 
     def _update_cooldown_progress(self, **kwargs):
         value = kwargs["value"]
@@ -303,6 +316,23 @@ class Powers(Mode):
         if self.persisted_name:
             self.log.debug("Updating persistence as the result of shot advancement")
             self._update_persistence()
+
+    def _play_sound(self, sound_name, context="powers"):
+      settings = {
+        sound_name: {
+          "action": "play",
+          "delay": 0,
+          "track": "sfx",
+          "block": False,
+          "volume": 1.0,
+        }
+      }
+      self.machine.events.post("sounds_play",
+        settings=settings,
+        context=context,
+        calling_context=None,
+        priority=2
+      )
 
     # SPECIFIC POWERS
     def _activate_adrenaline(self):
