@@ -25,7 +25,7 @@ event_player:
   flipper_cradle_release: stop_mode_instantinfo
   instantinfo_player_highlighted:
     play_instantinfo_mission_slide{current_player.casual}:
-      mission_title: "Casual Play"
+      mission_title: "Player (player|number)"
       mission_text: "Balls played: (player|balls_played)\nScore: (score)\nAssignments: (assignments_completed)"
     play_instantinfo_mission_slide{not current_player.casual}:
       mission_title: (player|career_name)
@@ -34,43 +34,43 @@ event_player:
   instantinfo_recruitgarrus_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Garrus
-      mission_text: "Hit 3 shots to light ramp.\nHit ramp to complete.\nProgress partially saved."
+      mission_text: "Hit all lit shots to light ramp.\nHit ramp to complete.\n\nProgress not saved."
   instantinfo_recruitgrunt_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Grunt
-      mission_text: "Hit each shot to complete.\nTimer restarts after a hit.\nProgress is saved."
+      mission_text: "Hit each shot to complete.\nTimer restarts after a hit.\n\nProgress is saved."
   instantinfo_recruitjack_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Jack
-      mission_text: "Hit a lane to light bank.\nHit bank 3X to complete.\nProgress partially saved."
+      mission_text: "Hit a lit lane to light bank.\nHit bank 3X to complete.\n\nProgress partially saved."
   instantinfo_recruitkasumi_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Kasumi
-      mission_text: "Complete all UNLIT shots.\nFailure if 3 lit shots hit.\nProgress is saved."
+      mission_text: "Hit all YELLOW shots to complete.\nFailure if RED shots hit 3 times.\n\nProgress is saved."
   instantinfo_recruitlegion_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Legion
-      mission_text: "Hit lanes to elapse 30s.\nTimer paused if banks lit.\nProgress is saved."
+      mission_text: "Hit lit targets to defend position.\nProgress paused if either bank lit.\n\nProgress is saved."
   instantinfo_recruitmordin_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Mordin
-      mission_text: "Hit orbits to light ramps.\nHit ramps to complete.\nProgress partially saved."
+      mission_text: "Hit orbits to light ramps.\nHit ramps to complete.\n\nProgress partially saved."
   instantinfo_recruitsamara_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Samara
-      mission_text: "Hit targets to light lanes.\nHit 5 lanes to complete.\nProgress is saved."
+      mission_text: "Hit targets to light lanes.\nHit 5 lanes to complete.\n\nProgress is saved."
   instantinfo_recruittali_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Tali
-      mission_text: "Hit ramp 6X to complete.\nCount backsteps after 10s.\nProgress is saved."
+      mission_text: "Hit lit shot 6X to complete.\nProgress regresses after 10s.\n\nProgress is saved."
   instantinfo_recruitthane_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Thane
-      mission_text: "Hit ramps to light orbits.\nHit an orbit to complete.\nProgress not saved."
+      mission_text: "Hit ramps to light orbits.\nHit either orbit to complete.\n\nProgress not saved."
   instantinfo_recruitzaeed_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Recruit Zaeed
-      mission_text: "Hit orbits to light lane.\nHit lane to complete.\nProgress not saved."
+      mission_text: "Hit orbits to light airlock lane.\nHit airlock lane to complete.\n\nProgress not saved."
   # EVENTS for MISSION SLIDES
   instantinfo_collectorship_disabled_highlighted:
     play_instantinfo_mission_slide:
@@ -125,7 +125,7 @@ event_player:
   instantinfo_shadowbroker_chase_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Lair of the Shadow Broker
-      mission_text: "Complete drop targets\nto pursue Vasir.\nProgress is saved."
+      mission_text: "Complete drop targets\nto pursue Vasir.\n\nProgress partially saved."
   instantinfo_shadowbroker_vasir_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Lair of the Shadow Broker
@@ -140,7 +140,7 @@ event_player:
   instantinfo_shadowbroker_hagalaz_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Lair of the Shadow Broker
-      mission_text: "Complete drop targets to\nboard Shadow Brokers ship.\nProgress is not saved."
+      mission_text: "Complete drop targets to\nboard Shadow Brokers ship.\n\nProgress not saved."
   instantinfo_shadowbroker_boss_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Lair of the Shadow Broker
@@ -152,17 +152,17 @@ event_player:
   # EVENTS for MULTIBALLS ETC
   instantinfo_overlord_highlighted:
     play_instantinfo_mission_slide:
-      mission_title: Project Overlord
-      mission_text: "Green lanes to light bank,\nbank to collect. Hits req'd\nincreases each time."
+      mission_title: Project Overlord Multiball
+      mission_text: "Green lanes to light right bank,\nhit bank to collect jackpot.\n\nHits to light increases each time."
   instantinfo_arrival_highlighted:
     play_instantinfo_mission_slide:
-      mission_title: Arrival
+      mission_title: Arrival Multiball
       mission_text: "Survive the countdown to\nlight the escape shot.\nEscape before destruction."
   # POWERS
   instantinfo_powers_none_highlighted:
     play_instantinfo_mission_slide:
       mission_title: Unlockable Powers
-      mission_text: "Hit bumpers during missions\nto enable a power. Hold\nflippers 3s to activate."
+      mission_text: "Hit bumpers during missions\nto enable a power. Hold\nflippers 4s to activate."
   instantinfo_powers_adrenaline_highlighted:
     play_instantinfo_mission_slide:
       mission_title: "Power: Adrenaline Rush"
@@ -218,11 +218,13 @@ slides:
     - type: text
       text: Instant Info
       style: header_md, row_main
+    - widget: background_console
   instantinfo_missionslide:
     - type: text
       text: (mission_title)
       style: header_xs, mission_title, row_top, col_left_anchor
     - type: text
       text: (mission_text)
-      style: body_md, row_main_under, col_left_anchor
+      style: body_sm, row_main_under, col_left_anchor
       halign: left
+    - widget: background_console
