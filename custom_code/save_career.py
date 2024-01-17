@@ -32,7 +32,6 @@ class SaveCareer(CustomCode):
     def on_load(self):
         """Initialize the module by setting handlers for load/save-related events."""
         self.log = logging.getLogger("SaveCareer")
-        self.log.setLevel(20)
         self._achievement_handlers = {}
         self._career_data = {}
         self._savepath = "{}/savegames".format(self.machine.machine_path)
@@ -40,7 +39,7 @@ class SaveCareer(CustomCode):
         self.machine.events.add_handler("new_career", self._new_career)
         self.machine.events.add_handler("set_career", self._set_career)
         self.machine.events.add_handler("player_turn_will_end", self._save_career)
-        self.log.info("SaveCareer loaded")
+        self.log.debug("SaveCareer loaded")
 
     def _set_career(self, **kwargs):
         if self.machine.game and self.machine.game.player:
@@ -59,11 +58,11 @@ class SaveCareer(CustomCode):
 
             # It's okay to set initial-only status_** here, resumed games will overwrite
             # these properties in _load_career() (only status and available_missions)
-            if self.machine.settings.free_starting_mission == 0 or (
+            if (self.machine.settings.free_starting_mission == 2) or (
                 self.machine.settings.free_starting_mission == 1 and player["casual"]
             ):
                 starting_recruit = SquadmateStatus.random_recruit()
-                self.machine.log.info("Found a random recruit: %s", starting_recruit)
+                self.log.debug("Found a random recruit: %s", starting_recruit)
                 player["status_{}".format(starting_recruit)] = 3
                 player["available_missions"] = 1
 

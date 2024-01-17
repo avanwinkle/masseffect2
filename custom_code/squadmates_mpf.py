@@ -316,7 +316,7 @@ class MPFSquadmateHandlers(CustomCode):
                 self.machine.events.post("recruit_failure_{}".format(kwargs.get("squadmate")))
                 self.machine.game.player["resume_mission"] = " "
             # If we drained, store this mission so we can resume if it fails
-            elif not self._just_resumed:
+            elif self.machine.settings.allow_mission_resume and (self.machine.settings.allow_mission_resume==2 or not self._just_resumed):
                 self.machine.game.player["resume_mission"] = kwargs.get("squadmate")
             else:
                 # Clear the resume mission
