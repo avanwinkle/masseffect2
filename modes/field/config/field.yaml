@@ -11,6 +11,7 @@
 mode:
   start_events: start_mode_field
   stop_events: stop_mode_field
+  code: field.Field
   priority: 310
 
 event_player:
@@ -57,6 +58,14 @@ config:
   - field_firewalker.yaml
   - field_recruit.yaml
   - field_shadowbroker.yaml
+
+timers:
+  field_hints_timer:
+    start_value: 12
+    end_value: 0
+    direction: down
+    start_running: false
+    restart_on_complete: true
 
 variable_player:
   mode_field_started:
@@ -216,3 +225,13 @@ slides:
         style: body_md
         anchor_y: bottom
         y: 1
+
+widget_player:
+  update_field_hint_sp:
+    field_hint_widget:
+      action: update
+      slide: singleplayer_slide
+  update_field_hint_mp:
+    field_hint_widget:
+      action: update
+      slide: multiplayer_slide

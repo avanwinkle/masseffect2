@@ -20,7 +20,8 @@ event_player:
     - multiplayer_turn_end_3{number==3}
     - multiplayer_turn_end_4{number==4}
   # If a second player joins during player1's turn, swap singleplayer_slide for multiplayer_slide
-  multiplayer_game{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
+  # Do this at a high priority so the field hints will have the right slide to target
+  multiplayer_game.1000{mode["field"].active and not mode["field"].stopping}: show_multiplayer_slide
   # Move these here, to fix flippers not enabling?
   mode_base_will_start: flippers_on
 

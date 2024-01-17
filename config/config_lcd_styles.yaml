@@ -8,10 +8,14 @@ widget_styles:
   #---------------------------
   color_ui_yellow:
     color: f3dc90
+  color_ui_yellow_strong:
+    color: ffcc22
   color_ui_orange_dark:
     color: 8f541c
   color_ui_orange:
     color: fbc795 # 0.984, 0.78, 0.584
+  color_ui_orange_strong:
+    color: ff8108
   color_ui_green_dark:
     color: 5b8c55
   color_ui_green:
@@ -71,6 +75,13 @@ widget_styles:
     adjust_top: 20
     adjust_bottom: 2
     line_height: 0.9
+    z: 110
+  body_sm_paragraph:
+    font_name: jupiter
+    font_size: 56
+    adjust_top: 20
+    adjust_bottom: 2
+    line_height: 0.6
     z: 110
   body_xs:
     font_name: jupiter

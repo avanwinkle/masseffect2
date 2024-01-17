@@ -593,6 +593,19 @@ widgets:
     - type: image
       image: texture_console
       z: 1
+  field_hint_widget:
+    - type: text
+      text: (title)
+      style: header_xs, color_ui_orange #, row_sub
+      outline_color: color_ui_orange_dark
+      outline_width: 1
+      anchor_y: bottom
+      y: 28%  # Slightly below the row_sub 31%
+    - type: text
+      text: (description)
+      style: body_sm_paragraph, color_ui_yellow_strong # , row_bottom
+      anchor_y: top
+      y: 24%
   derelict_core_widget:
     - type: text
       text: (message)

@@ -152,6 +152,7 @@ ball_saves:
     only_last_ball: true
 
 extra_balls:
+  # TODO: Make this a shot that has to be hit to earn
   recruits_extraball:
     award_events: player_recruited_squadmates_count{player_num==current_player.number and value==3}
   omegarelay_extraball:
