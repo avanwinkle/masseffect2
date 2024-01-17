@@ -22,6 +22,7 @@ from custom_code.version_checker import REQUIRED_MPF_VERSION as me2version
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
+EXPORT_PREFIX = "ME2UPDATE"
 machine_path = "/home/pi/me2"
 
 
@@ -101,7 +102,7 @@ def generate_update_file(package_list=None):
             )
 
 def make_zip():
-    filename = "ME2UPDATE-%s" % timestamp
+    filename = f"{EXPORT_PREFIX}-{timestamp}"
     shutil.make_archive(filename, 'zip', DEST_PATH)
     return f"{filename}.zip"
 
@@ -140,6 +141,19 @@ def main():
     if "-c" in sys.argv:
         copy_idx = sys.argv.index("-c")
         copy_path = sys.argv[copy_idx + 1]
+        # Optionally remove all previous on the copy destination
+        if "-r" in sys.argv:
+            log.info("Looking for previous update files to delete from %s", copy_path)
+            files_deleted = 0
+            for __path, __dirs, files in os.walk(copy_path):
+                for file in files:
+                    if file.startswith(EXPORT_PREFIX):
+                        os.remove(os.path.join(copy_path, file))
+                        files_deleted += 1
+            if files_deleted:
+                log.info(" - Deleted %s previous update file%s from storage device.", files_deleted, "" if files_deleted==1 else "s")
+            else:
+                log.info(" - No previous update files found.")
         log.info("Compressing and copying to path %s", copy_path)
         filename = make_zip()
         shutil.copyfile(filename, os.path.join(copy_path, filename))
