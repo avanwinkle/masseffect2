@@ -46,7 +46,7 @@ class SlideQueuePlayer(CustomCode):
         if clear_current:
             self._advance_queue()
 
-    def _add_slide_to_queue(self, clear_current=True, **kwargs):
+    def _add_slide_to_queue(self, clear_current=False, **kwargs):
         slide_name = kwargs.pop("slide")
 
         # Some slides may want to accelerate themselves by removing queued recruits
@@ -77,8 +77,8 @@ class SlideQueuePlayer(CustomCode):
                     "_QUEUE_" in slide_name, preceding_name)
         self._queue.append((slide_name, kwargs))
 
-        if not self._current_timeout:
-            self._advance_queue(clear_current)
+        if clear_current or not self._current_timeout:
+            self._advance_queue()
 
     def _advance_queue(self, _dt=None, **kwargs):
         del kwargs

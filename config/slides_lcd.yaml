@@ -1178,6 +1178,10 @@ widgets:
       video: recruitintro_zaeed
       end_behavior: pause
       z: 108
+  portrait_shoot_again:
+    - type: image
+      # TODO: Capture Lazarus Station wakeup video
+      image: portrait_intromb
   # This underlays the right lcd during mission select
   dossier_recruit_base:
     - type: image

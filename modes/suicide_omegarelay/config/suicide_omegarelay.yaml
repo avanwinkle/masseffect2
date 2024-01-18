@@ -43,6 +43,10 @@ event_player:
     - mission_collect_score
     - omegarelay_complete|1s
 
+extra_balls:
+  omegarelay_extraball:
+    award_events: omegarelay_shots_hit_complete
+
 variable_player:
   omegarelay_shots_hit_complete:
     # Completing the final shot doubles the score!
@@ -150,3 +154,11 @@ show_player:
       speed: 3
       show_tokens:
         color: color_collectors
+  logicblock_omegarelay_extraball_counter_complete:
+    flash:
+      key: omega_extraball_lit_show
+      show_tokens:
+        leds: l_kickback_arrow
+  extra_ball_awarded:
+    omega_extraball_lit_show:
+      action: stop

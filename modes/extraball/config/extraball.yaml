@@ -1,12 +1,13 @@
 #config_version=6
 mode:
   start_events: start_mode_extraball
-  stop_events: stop_mode_extraball
+  stop_events: stop_mode_extraball, ball_will_end
   priority: 2000
 
 shots:
   extraball_shot:
     switch: s_right_ramp_exit
+    disable_events: extraball_shot_hit
 
 show_player:
   mode_extraball_started:
@@ -14,7 +15,7 @@ show_player:
       key: extraball_lit_show
       loops: -1
       show_tokens:
-        leds: l_kickback_arrow
+        leds: l_right_ramp_arrow
   extraball_shot_hit:
     extraball_lit_show:
       action: stop
@@ -24,56 +25,78 @@ show_player:
 shows:
   extraball_award_show:
     - time: 0
-      events: award_extra_ball
+      events:
+        award_extra_ball: {}
+        queue_slide:
+          slide: extra_ball_awarded_slide
+          portrait: extra_ball_awarded
+          priority: 10000
+          expire: 5s
+          clear: true
+          clear_current: true
       variables:
         extra_balls_available: -1
       shows:
         extraball_light_show:
-          loops: 10
-          speed: 1.5
+          loops: 8
+          speed: 1
           show_tokens:
             leds: light_backwall_gi, light_mass_relay, light_pf
       sounds:
         heavy_blackstar_explode:
           action: play
+      # Just in case the other non-queued slide is playing
       slides:
-        extraball_awarded_slide:
-          target: main
-    - time: 8s
-      shows:
-        extraball_light_show:
-          action: stop
-      slides:
-        extraball_awarded_slide:
+        extra_ball_lit_slide:
           action: remove
-          target: main
+        portrait_extra_ball:
+          action: remove
+          target: lcd_right
+    - time: 1s
+      sounds: shepard_extra_ball
+    - time: 5s
       events: stop_mode_extraball
 
   extraball_light_show:
-    - duration: 200ms
+    - duration: 180ms
       lights:
-        (leds): color_armor
-    - duration: 200ms
+        (leds):
+          color: color_armor
+          fade: 180ms
+    - duration: 180ms
       lights:
-        (leds): color_shields
-    - duration: 200ms
+        (leds):
+          color: color_shields
+          fade: 180ms
+    - duration: 180ms
       lights:
-        (leds): color_health
-    - duration: 200ms
+        (leds):
+          color: color_health
+          fade: 180ms
+    - duration: 180ms
       lights:
-        (leds): color_barrier
+        (leds):
+          color: color_barrier
+          fade: 180ms
 
 slides:
-  extraball_awarded_slide:
+  extra_ball_awarded_slide:
     widgets:
       - type: text
         text: "EXTRA\nBALL!"
         style: header_lg
       - widget: background_console
 
+widgets:
+  portrait_extra_ball_awarded:
+    - type: image
+      # TODO: What image/video to use for portrait?
+      image: portrait_citadel_approach
+
 sound_player:
-  mode_extraball_started: shepard_extra_ball
-  s_right_ramp_entrance_active: heavy_cain_chargeup
+  envshot_right_ramp_entrance_hit:
+    heavy_cain_chargeup:
+      block: true  # Prevent underlying field sound
 
 sound_pools:
   shepard_extra_ball:

@@ -54,7 +54,7 @@ slide_player:
   mode_intromb_started:
     intromb_slide:
       action: play
-    intromb_portrait:
+    portrait_intromb:
       action: play
       target: lcd_right
 
@@ -66,7 +66,7 @@ slides:
     - type: text
       text: (player|temp_counter) Crewmates Saved
       style: body_sm, row_sub
-  intromb_portrait:
+  portrait_intromb:
     # - type: video
     #   video: intro_mb
     - type: image

@@ -24,7 +24,8 @@ event_player:
     # If we are starting a new game, give some instructional audio
     # If we are starting a game and have recruited, different sounds
     # Disable this line for debug speed
-    - play_intro_show{not settings.intro_mb}
+    - play_intro_show{not settings.intro_mb and not is_extra_ball}
+    - play_shoot_again{is_extra_ball}
   # Give skillshot a higher priority than global, to avoid race condition with planets
   mode_base_started.10{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
@@ -156,12 +157,8 @@ ball_saves:
     only_last_ball: true
 
 extra_balls:
-  # TODO: Make this a shot that has to be hit to earn
   recruits_extraball:
     award_events: award_extra_ball
-  # TODO: Move the omega extra ball to suicide_base
-  omegarelay_extraball:
-    award_events: omegarelay_shots_hit_complete
 
 counters:
   # Vasir and Hagalaz are wizard modes, so global_shadowbroker misses their complete events
@@ -211,9 +208,6 @@ variable_player:
   # For save careers, how many balls has the player played in total?
   mode_base_started:
     balls_played: 1
-    intro_played:
-      action: set
-      int: 0
     # To award bonuses based on points earned, track the score when the ball starts
     ball_starting_score:
       action: set
@@ -238,8 +232,6 @@ variable_player:
     levelup_pending:
       action: set
       int: 0
-  play_intro_show:
-    intro_played: 1
   # Store a variable that is true while a mode intro is running, so that we can cancel shows
   mode_intro_started:
     mode_intro_running:
@@ -319,13 +311,14 @@ show_player:
   ball_save_default_enabled:
     ball_save_preshow:
       action: play
+      priority: 5  # Higher than the extra ball
   ball_save_default_timer_start:
     ball_save_preshow:
       action: stop
     ball_save_show:
       action: play
       speed: 3
-      priority: 10
+      priority: 10  # Higher than the preshow
   ball_save_default_hurry_up:
     ball_save_show:
       action: play
@@ -338,27 +331,14 @@ show_player:
       action: stop
     ball_save_show:
       action: stop
-  logicblock_omegarelay_extraball_counter_complete:
-    flash:
-      key: extraball_lit_show
-      show_tokens:
-        leds: l_kickback_arrow
-  extra_ball_awarded:
-    extraball_lit_show:
-      action: stop
-    on:
-      key: extraball_awarded_show
-      show_tokens:
-        leds: l_ball_save
-  mode_suicide_omegarelay_stopped:
-    extraball_lit_show:
-      action: stop
-  player_extra_balls{player_num==current_player.number and value==0}:
-    extraball_lit_show:
-      action: stop
-  # Don't play an intro show if we have a mission to resume
+  mode_base_started{current_player.extra_balls}: extra_ball_available
+  player_extra_balls{player_num==current_player.number and value>0}: extra_ball_available
+  # Don't play an intro show if we have a mission to resume or are in suicide mission
   play_intro_show{current_player.resume_mission==" " and device.achievements.suicidemission.state=="disabled"}:
     introshow_missions:
+      loops: 0
+  play_shoot_again:
+    introshow_shoot_again:
       loops: 0
   # Bumpers!
   s_bumper_bottom_active:
@@ -438,6 +418,14 @@ shows:
         - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual and device.achievements.collectorship.state=="disabled"}
         - play_gameintro_long{current_player.ball==1 and device.achievements.collectorship.state!="disabled"}
         - play_gameintro_short{current_player.ball==3}
+  introshow_shoot_again:
+    - time: 0
+      events:
+        queue_slide:
+          slide: shoot_again_slide
+          portrait: shoot_again
+          transition_type: none
+          expire: 6s
 
 slide_player:
   player_added:
@@ -470,7 +458,10 @@ slide_player:
     extra_ball_lit_slide:
       expire: 5s
       priority: 10000
-
+    portrait_extra_ball:
+      target: lcd_right
+      expire: 5s
+      priority: 10000
 
 slides:
   player_added_slide:
@@ -503,6 +494,10 @@ slides:
         text: "Hit Right Ramp to Collect"
         style: header_sm, row_bottom, color_ui_yellow
       - widget: background_console
+  portrait_extra_ball:
+    widgets:
+      - type: image
+        image: portrait_citadel_approach
   n7_complete_slide:
     transition:
       type: fade
@@ -536,6 +531,15 @@ slides:
     transition: fade
     transition_out: fade
     widgets: []  # Will be dynamically populated by squadmates_mc.py
+  shoot_again_slide:
+    transition_out: fade
+    widgets:
+      - type: text
+        text: "SHOOT\nAGAIN"
+        style: header_lg
+        animations:
+          show_slide: pulse_text
+      - widget: background_console
   intro_no_missions_slide:
     transition_out: fade
     widgets:

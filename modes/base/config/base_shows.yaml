@@ -18,7 +18,7 @@ shows:
     - time: 0
       lights:
         l_ball_save:
-          color: off
+          color: stop  # To reveal extra ball underneath
     - time: '+1'
       lights:
         l_ball_save:
@@ -95,6 +95,10 @@ shows:
     - duration: 400ms
       lights:
         (leds): (color2)
+  extra_ball_available:
+    - time: 0
+      lights:
+        l_ball_save: color_barrier
   single_flash:
     - duration: 120ms
       lights:
