@@ -105,13 +105,6 @@ variable_player:
       action: set
       string: "Heavy Weapon Ammo"
 
-shot_profiles:
-  upgrade_shot_profile:
-    show_when_disabled: False
-    states:
-      - name: lit
-        show: flash
-
 shots:
   collect_upgrade_shot:
     hit_events: sh_right_ramp_hit
@@ -121,10 +114,10 @@ shots:
       - player_available_shipupgrades{player_num==current_player.number and change>0}
     disable_events:
       - collect_upgrade_shot_hit
-    profile: upgrade_shot_profile
+    profile: color_flashing_static
     show_tokens:
       leds: light_upgrades
-      color: FFFFFF
+      color: color_kasumi
 
 slide_player:
   shipupgrade_available:

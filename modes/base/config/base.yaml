@@ -155,6 +155,7 @@ extra_balls:
   # TODO: Make this a shot that has to be hit to earn
   recruits_extraball:
     award_events: player_recruited_squadmates_count{player_num==current_player.number and value==3}
+  # TODO: Move the omega extra ball to suicide_base
   omegarelay_extraball:
     award_events: omegarelay_shots_hit_complete
 
@@ -333,7 +334,7 @@ show_player:
     flash:
       key: extraball_lit_show
       show_tokens:
-        leds: light_extraball
+        leds: l_kickback_arrow
   extra_ball_awarded:
     extraball_lit_show:
       action: stop
