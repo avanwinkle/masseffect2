@@ -427,7 +427,7 @@ lights:
     tags: outer_circles, light_bbsquad_samara
   l_kickback_arrow_amber: # Kickback Lane Arrow (Amber) [#46]
     number: 9-40
-    tags: lane_wedges, light_extraball, l_store
+    tags: lane_wedges, l_store
   l_kickback_arrow_clear: # Kickback Lane Arrow (Clear) [#45]
     number: 9-39
     tags: light_shadowbroker_start, light_store, lane_wedges, l_kickback_arrow

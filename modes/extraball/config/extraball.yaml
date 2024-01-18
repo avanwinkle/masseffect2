@@ -1,0 +1,102 @@
+#config_version=6
+mode:
+  start_events: start_mode_extraball
+  stop_events: stop_mode_extraball
+  priority: 2000
+
+shots:
+  extraball_shot:
+    switch: s_right_ramp_exit
+
+show_player:
+  mode_extraball_started:
+    extraball_light_show:
+      key: extraball_lit_show
+      loops: -1
+      show_tokens:
+        leds: l_kickback_arrow
+  extraball_shot_hit:
+    extraball_lit_show:
+      action: stop
+    extraball_award_show:
+      action: play
+
+shows:
+  extraball_award_show:
+    - time: 0
+      events: award_extra_ball
+      variables:
+        extra_balls_available: -1
+      shows:
+        extraball_light_show:
+          loops: 10
+          speed: 1.5
+          show_tokens:
+            leds: light_backwall_gi, light_mass_relay, light_pf
+      sounds:
+        heavy_blackstar_explode:
+          action: play
+      slides:
+        extraball_awarded_slide:
+          target: main
+    - time: 8s
+      shows:
+        extraball_light_show:
+          action: stop
+      slides:
+        extraball_awarded_slide:
+          action: remove
+          target: main
+      events: stop_mode_extraball
+
+  extraball_light_show:
+    - duration: 200ms
+      lights:
+        (leds): color_armor
+    - duration: 200ms
+      lights:
+        (leds): color_shields
+    - duration: 200ms
+      lights:
+        (leds): color_health
+    - duration: 200ms
+      lights:
+        (leds): color_barrier
+
+slides:
+  extraball_awarded_slide:
+    widgets:
+      - type: text
+        text: "EXTRA\nBALL!"
+        style: header_lg
+      - widget: background_console
+
+sound_player:
+  mode_extraball_started: shepard_extra_ball
+  s_right_ramp_entrance_active: heavy_cain_chargeup
+
+sound_pools:
+  shepard_extra_ball:
+    type: random_force_all
+    sounds: shepard_wanna_dance, shepard_free_drinks_for_everyone, shepard_im_a_spectre
+    track: voice
+
+sounds:
+  shepard_wanna_dance:
+    file: en_us_player_f_omgmwl_asari_dance_c_00234205_f.ogg
+    track: voice
+  shepard_free_drinks_for_everyone:
+    file: en_us_player_f_omgmwl_buy_drinks_d_00236782_f.ogg
+    track: voice
+  shepard_im_a_spectre:
+    file: en_us_player_f_citasl_interrogation_d_00281364_f.ogg
+    track: voice
+  heavy_cain_chargeup:
+    file: SFXWeapon_Heavy_Cain.102.ogg
+    track: sfx
+    # If the ball falls back down the ramp, don't play the sound again
+    simultaneous_limit: 1
+    stealing_method: skip
+  heavy_blackstar_explode:
+    file: SFXWeapon_Heavy_Blackstar.2.ogg
+    track: sfx

@@ -221,6 +221,7 @@ modes:
   - tilt
   - service
   # Support Modes
+  - extraball
   - frenzy
   - powers
   - reputation

@@ -18,6 +18,7 @@ event_player:
     - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
     - start_mode_lockhandler
     - start_mode_environment
+    - start_mode_extraball{current_player.extra_balls_available}
     - enable_orbitswitches
     - reset_missionselect_bypass
     # If we are starting a new game, give some instructional audio
@@ -32,6 +33,7 @@ event_player:
   # Fun Normandy attack multiball shenanigans to start
   mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
     - start_mode_intromb
+  extra_ball_lit: start_mode_extraball
   # After the normandy attack multiball, proceed as usual
   mode_intromb_will_stop:
     - start_mode_global
@@ -59,9 +61,11 @@ event_player:
   # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
   player_squadmates_count{player_num==current_player.number and value==6 and not settings.demo_mode}:
     - enable_collectorship
-  # In expo demo mode, 3 recruits is enough for collector ship
-  player_squadmates_count{player_num==current_player.number and value==5 and settings.demo_mode}:
-    - enable_collectorship
+  player_squadmates_count{player_num==current_player.number}:
+    # In expo demo mode, 3 recruits is enough for collector ship
+    - enable_collectorship{settings.demo_mode and value==5}
+    # Third squadmate, extra ball is lit!
+    - extra_ball_lit{value==3 and change==1}
   # Clear the intro slide on skillshot slide
   slide_skillshot_slide_active:
     clear_slide_queue:
@@ -154,7 +158,7 @@ ball_saves:
 extra_balls:
   # TODO: Make this a shot that has to be hit to earn
   recruits_extraball:
-    award_events: player_recruited_squadmates_count{player_num==current_player.number and value==3}
+    award_events: award_extra_ball
   # TODO: Move the omega extra ball to suicide_base
   omegarelay_extraball:
     award_events: omegarelay_shots_hit_complete
@@ -248,6 +252,10 @@ variable_player:
   # At the end of each ball, round up to the nearest 10 points
   mode_base_will_stop:
     score: 10 + current_player.score % 10
+  # Track available extra balls to re-light on next ball
+  extra_ball_lit:
+    extra_balls_available: 1
+    score: machine.base_points // 50
 
 shots:
   # These "core" shots for the main shots
@@ -458,6 +466,10 @@ slide_player:
       expire: 4s
       priority: 10000
       target: lcd_right
+  extra_ball_lit:
+    extra_ball_lit_slide:
+      expire: 5s
+      priority: 10000
 
 
 slides:
@@ -480,6 +492,17 @@ slides:
         text: (mission_name)
         style: body_md, row_sub_under
       - widget: levelup_background
+  extra_ball_lit_slide:
+    widgets:
+      - type: text
+        text: "EXTRA BALL\nIS LIT!"
+        style: header_md, row_main, color_ui_green_strong
+        animations:
+          show_slide: pulse_text
+      - type: text
+        text: "Hit Right Ramp to Collect"
+        style: header_sm, row_bottom, color_ui_yellow
+      - widget: background_console
   n7_complete_slide:
     transition:
       type: fade

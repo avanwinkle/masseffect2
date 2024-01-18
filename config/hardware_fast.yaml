@@ -529,7 +529,7 @@ lights:
   l_kickback_arrow:  # Kickback Lane Arrow (Clear) [#45]
     previous: l_standup_2  # shadowbroker mission start
     type: grb
-    tags: light_pf, light_lock_lit, light_shadowbroker_start, lane_wedges, light_extraball
+    tags: light_pf, light_lock_lit, light_shadowbroker_start, lane_wedges
     default_on_color: ff1f00  # color_shadowbroker
   l_store:
     previous: l_standup_1
