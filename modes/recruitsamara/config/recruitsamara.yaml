@@ -26,7 +26,7 @@ event_player:
       squadmate: samara
       portrait: recruitsamara
       instructions_main: Defeat Captain Wasea
-      instructions_sub: " "
+      instructions_sub: "Hit red sand targets\nto light lane shots"
   mode_powers_started:
     set_mission_shots:
       color: color_samara
@@ -188,6 +188,8 @@ sound_player:
   mode_recruitsamara_started:
     music_recruit_samara:
       action: play
+      delay: 4s
+      loops: -1  # Unlikely to be used b/c track is 1:27 long, but safety first
   samara_targets_lit_hit: explosion  # Defined in base_endsounds
   mission_shot_hit:
     wasea_hit:
@@ -236,7 +238,7 @@ sound_pools:
 
 sounds:
   music_recruit_samara:
-    file: mus_samara_acq_bossbattle_2.wav
+    file: mus_samara_acq_bossbattle_2.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s

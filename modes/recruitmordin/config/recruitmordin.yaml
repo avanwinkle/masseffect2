@@ -22,7 +22,7 @@ mode:
   priority: 500
 
 event_player:
-  mode_recruitmordin_started.1:
+  mode_recruitmordin_started:
     show_recruit_instructions:
       squadmate: mordin
       portrait: recruitmordin
@@ -150,9 +150,21 @@ shows:
 
 sound_player:
   mode_recruitmordin_started:
+    # Use the sound pool for selecting the starting track
     music_recruit_mordin:
       action: play
-      loops: -1
+      delay: 3s
+      fade_in: 2s
+    music_recruit_mordin_2:
+      action: load
+  play_music_recruit_mordin_1:
+    music_recruit_mordin_1:
+      action: play
+      fade_in: 1s
+  play_music_recruit_mordin_2:
+    music_recruit_mordin_2:
+      action: play
+      fade_in: 1s
   play_intro_sound: mordin_intro_sound
   play_cure_sound_1:
     step0_voice:
@@ -172,6 +184,9 @@ sound_player:
       max_queue_time: 500ms
 
 sound_pools:
+  music_recruit_mordin:
+    sounds: music_recruit_mordin_1, music_recruit_mordin_2
+    track: music
   # Step zero: hitting the first orbit to ready the cure
   step0_voice:
     type: random
@@ -220,11 +235,23 @@ sound_pools:
     type: random_force_all
 
 sounds:
-  music_recruit_mordin:
-    file: mus_mordin_acq_bossbattle_a.wav
+  music_recruit_mordin_1:
+    file: mus_mordin_acq_bossbattle_a.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 61s
+        events: play_music_recruit_mordin_2
+  music_recruit_mordin_2:
+    file: mus_mordin_acq_bossbattle_b.ogg
+    track: music
+    mode_end_action: stop
+    start_at: 4s
+    fade_out: 1s
+    markers:
+      - time: 64s
+        events: play_music_recruit_mordin_2
   mordin_intro_sound:
     track: voice
     file: en_us_hench_professor_omgpra_mordin_d_00210618_m.wav

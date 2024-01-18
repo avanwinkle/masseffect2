@@ -124,7 +124,18 @@ sound_player:
   mode_recruitgrunt_started:
     music_recruit_grunt:
       fade_in: 1s
-      loops: -1
+    music_recruit_grunt_1:
+      action: load
+    music_recruit_grunt_2:
+      action: load
+  play_grunt_music_1:
+    music_recruit_grunt_1:
+      action: play
+      fade_in: 1s
+  play_grunt_music_2:
+    music_recruit_grunt_2:
+      action: play
+      fade_in: 1s
   logicblock_grunt_shots_counter_hit{count>2}:
     grunt_dialogue:
       max_queue_time: 500ms
@@ -137,7 +148,6 @@ sound_player:
 
 sound_pools:
   music_recruit_grunt:
-    type: random
     sounds: music_recruit_grunt_1, music_recruit_grunt_2
     track: music
   grunt_intro:
@@ -154,15 +164,21 @@ sound_pools:
 
 sounds:
   music_recruit_grunt_1:
-    file: mus_grunt_acq_combat_1.wav
+    file: mus_grunt_acq_combat_1.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 61s
+        events: play_grunt_music_2
   music_recruit_grunt_2:
-    file: mus_grunt_acq_combat_2b.wav
+    file: mus_grunt_acq_combat_2b.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 61s
+        events: play_grunt_music_1
   intro_shep_1:
     file: en_us_player_f_jnkkga_arrival_c_00255073_f.wav
     track: voice

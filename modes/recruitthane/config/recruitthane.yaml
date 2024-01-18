@@ -140,11 +140,21 @@ shows:
         shot_shields: black
 
 sound_player:
-  mode_recruitthane_started:
+  mode_recruitthane_started.1:
     music_thane:
       action: play
-      fade_out: 2s
-      mode_end_action: stop
+      delay: 2s
+  mode_recruitthane_started.2:
+    music_thane_1:
+      action: load
+    music_thane_2:
+      action: load
+  play_music_thane_1:
+    music_thane_1:
+      fade_in: 1s
+  play_music_thane_2:
+    music_thane_2:
+      fade_in: 1s
   mode_recruitthane_complete:
     nas_misc_sounds:
       action: stop
@@ -159,6 +169,9 @@ sound_player:
       max_queue_time: 3s
 
 sound_pools:
+  music_thane:
+    sounds: music_thane_1, music_thane_2
+    track: music
   nas_misc_sounds:
     sounds: nas_damn_it, nas_where_is_everyone, nas_give_me_a_report, nas_answer_me_dammit, nas_find_out_whats_going_on, nas_just_kill_them, nas_finish_them_off, nas_sending_reinforcements
     track: voice
@@ -167,9 +180,22 @@ sound_pools:
     track: voice
 
 sounds:
-  music_thane:
-    file: mus_thane_acq_combat_3b.wav
+  music_thane_1:
+    file: mus_thane_acq_combat_2.ogg
     track: music
+    fade_out: 1s
+    mode_end_action: stop
+    markers:
+      - time: 62s
+        events: play_music_thane_2
+  music_thane_2:
+    file: mus_thane_acq_combat_3b.ogg
+    track: music
+    fade_out: 1s
+    mode_end_action: stop
+    markers:
+      - time: 62s
+        events: play_music_thane_1
   nas_damn_it:
     file: en_us_twrasa_nassana_twrasa_officeslowlevel_d_00178710_m.wav
     track: voice

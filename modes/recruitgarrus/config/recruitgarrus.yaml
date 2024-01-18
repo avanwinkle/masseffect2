@@ -22,6 +22,7 @@ mode:
 
 event_player:
   mode_recruitgarrus_started.1:
+    play_garrus_music_1: {}
     show_recruit_instructions:
       squadmate: garrus
       portrait: recruitgarrus
@@ -123,10 +124,16 @@ slides:
 
 sound_player:
   mode_recruitgarrus_started:
-    music_recruit_garrus:
+    music_recruit_garrus_2:
+      action: load
+  play_garrus_music_1:
+    music_recruit_garrus_1:
       action: play
       start_at: 1s
-      loops: -1
+  play_garrus_music_2:
+    music_recruit_garrus_2:
+      action: play
+      start_at: 1s
   logicblock_doors_closed_counter_hit{count==2}:
     garrus_two_more_shutters:
       max_queue_time: 1s
@@ -173,11 +180,23 @@ sound_pools:
       release_point: 0
 
 sounds:
-  music_recruit_garrus:
-    file: mus_garrus_acq_combat_1.wav
+  music_recruit_garrus_1:
+    file: mus_garrus_acq_combat_1.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
+    markers:
+      - time: 57s
+        events: play_garrus_music_2
+    about_to_finish_time: 5s
+  music_recruit_garrus_2:
+    file: mus_garrus_acq_combat_2.ogg
+    track: music
+    mode_end_action: stop
+    fade_out: 1s
+    markers:
+      - time: 57s
+        events: play_garrus_music_2
   garrus_give_these_bastards_everything:
     file: en_us_hench_garrus_omggra_garrus_intro_d_00206435_m.wav
     track: voice

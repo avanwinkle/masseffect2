@@ -236,7 +236,13 @@ sound_player:
   mode_recruitjack_started:
     music_recruit_jack_1:
       action: play
-      fade_in: 4s
+      delay: 3s
+    music_recruit_jack_2:
+      action: load
+  play_music_recruit_jack_1:
+    music_recruit_jack_1:
+      action: play
+      fade_in: 2s
   play_music_recruit_jack_2:
     music_recruit_jack_2:
       action: play
@@ -249,7 +255,7 @@ sound_pools:
 
 sounds:
   music_recruit_jack_1:
-    file: mus_jack_acq_combat_1.wav
+    file: mus_jack_acq_combat_1.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
@@ -257,10 +263,13 @@ sounds:
       - time: 40s
         events: play_music_recruit_jack_2
   music_recruit_jack_2:
-    file: mus_jack_acq_combat_2.wav
+    file: mus_jack_acq_combat_2.ogg
     track: music
     fade_out: 1s
     mode_end_action: stop
+    markers:
+      - time: 47s
+        events: play_music_recruit_jack_1
   warden_start:
     file: en_us_prscva_warden_prscva_warden_pa_a_00282485_m.wav
     track: voice

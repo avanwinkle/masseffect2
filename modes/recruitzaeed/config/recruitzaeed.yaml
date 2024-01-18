@@ -129,9 +129,19 @@ shows:
 
 sound_player:
   mode_recruitzaeed_started:
-    music_recruit_zaeed:
+    music_recruit_zaeed_1:
       action: play
-      mode_end_action: stop
+      delay: 3s
+    music_recruit_zaeed_2:
+      action: load
+  play_music_recruit_zaeed_1:
+    music_recruit_zaeed_1:
+      action: play
+      fade_in: 2s
+  play_music_recruit_zaeed_2:
+    music_recruit_zaeed_2:
+      action: play
+      fade_in: 1s
   player_zaeed_path_renegade{change>0 and value==0}:
     shep_we_dont_sacrifice_lives:
       max_queue_time: 1s
@@ -186,12 +196,24 @@ sound_pools:
     type: random_force_all
 
 sounds:
-  music_recruit_zaeed:
-    file: mus_jacob_loy_combat_1.wav
+  music_recruit_zaeed_1:
+    file: mus_jacob_loy_combat_1.ogg
     track: music
     mode_end_action: stop
-    fade_in: 5s
+    start_at: 1s
     fade_out: 1s
+    markers:
+      - time: 56s
+        events: play_music_recruit_zaeed_2
+  music_recruit_zaeed_2:
+    file: mus_jacob_loy_boss.ogg
+    track: music
+    mode_end_action: stop
+    start_at: 1s
+    fade_out: 1s
+    markers:
+      - time: 56s
+        events: play_music_recruit_zaeed_1
   zaeed_here_we_go:
     file: DLC_HEN_VT_Int.334.wav
     track: voice

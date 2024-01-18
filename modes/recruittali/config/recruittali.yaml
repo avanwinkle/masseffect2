@@ -225,10 +225,14 @@ light_player:
       color: color_tali
 
 sound_player:
-  mode_recruittali_started:
+  mode_recruittali_started.2:
+    music_recruit_tali:
+      action: load
+  mode_recruittali_started.1:
     music_recruit_tali:
       action: play
-      loops: -1
+      loops: -1  # Track is 1:38 long, should be safe
+      delay: 3s
   power_shots_lit_hit:
     colossus_hit_sound:
       action: play
@@ -278,7 +282,7 @@ sound_pools:
 
 sounds:
   music_recruit_tali:
-    file: mus_tali_acq_bossbattle.wav
+    file: mus_tali_acq_bossbattle.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s

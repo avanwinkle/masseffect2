@@ -381,22 +381,10 @@ sound_pools:
 
 sounds:
   recruit_music_kasumi_1:
-    file: KAS.03.Infiltration.wav
+    file: KAS.03.Infiltration.ogg
     track: music
     mode_end_action: stop
     fade_out: 1s
-  recruit_music_kasumi_2:
-    file: KAS.02.Making_Our_Escape.wav
-    track: music
-    mode_end_action: stop
-    fade_out: 1s
-  recruit_music_kasumi_3:
-    file: KAS.01.Death_from_Above.wav
-    track: music
-    mode_end_action: stop
-    fade_out: 1s
-    fade_in: 1s
-    start_at: 15s
   kasumi_list_of_items:
     file: DLC_HEN_MT_Int.468.wav
     track: voice

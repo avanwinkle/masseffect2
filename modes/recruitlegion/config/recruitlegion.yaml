@@ -35,7 +35,7 @@ event_player:
       squadmate: legion
       portrait: recruitlegion
       instructions_main: Fill meter to hack heretics
-      instructions_sub: "Meter locked when geth\nreach your position"
+      instructions_sub: "Meter locked if geth\nreach your position"
     set_mission_shots:
       is_resumable: 1
       shots_total: 5
@@ -371,8 +371,10 @@ sound_player:
   mode_recruitlegion_started:
     music_legion:
       action: play
-      loops: -1
-      mode_end_action: stop
+      fade_in: 2s
+  play_music_legion:
+    music_legion:
+      action: play
   # If the progress goes up, play a shot confirmation sound
   player_heretic_progress{change>1}:
     legion_shot_sound:
@@ -386,7 +388,8 @@ sound_player:
   recruit_legion_precomplete:
     music_legion_low:
       action: play
-      mode_end_action: stop
+      fade_in: 1s
+      loops: -1
     music_legion:
       action: stop
 
@@ -422,15 +425,18 @@ sound_pools:
 
 sounds:
   music_legion:
-    file: mus_legion_acq_combat_1.wav
+    file: mus_legion_acq_combat_1.ogg
     track: music
-    fade_in: 2s
     fade_out: 1s
+    mode_end_action: stop
+    markers:
+      - time: 61s
+        events: play_music_legion
   music_legion_low:
-    file: mus_legion_acq_tension_1.wav
+    file: mus_legion_acq_tension_1.ogg
     track: music
-    fade_in: 1s
     fade_out: 1s
+    mode_end_action: stop
   shepard_start_your_upload:
     file: en_us_player_f_gthgtl_core_h_00183211_f.wav
     track: voice
