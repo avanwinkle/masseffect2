@@ -439,7 +439,7 @@ sound_pools:
 
 sounds:
   normandyattack_music:
-    file: mus_critpath3_tension_1.wav
+    file: mus_critpath3_tension_1.ogg
     track: music
     fade_in: 1s
     mode_end_action: stop
@@ -447,7 +447,7 @@ sounds:
       - time: 12s
         events: play_horizon_tension
   horizon_tension_music:
-    file: mus_critpath1_tension_2.wav
+    file: mus_critpath1_tension_2.ogg
     track: music
     fade_in: 1s
     mode_end_action: stop

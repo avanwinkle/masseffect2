@@ -393,7 +393,7 @@ sound_player:
 
 sounds:
   endrun_music:
-    file: mus_endgm2_endrun_alive.wav
+    file: mus_endgm2_endrun_alive.ogg
     track: music
   endrun_success_music:
     file: mus_endgm2_endrunsuccess.wav

@@ -91,50 +91,50 @@ sounds:
 ### MUSIC
   # Intro / Reset
     suicide_music_base:
-      file: mus_endgm1_attackplan.wav
+      file: mus_endgm1_attackplan.ogg
       track: music
       fade_in: 6s
       fade_out: 1s
   # Omega 4 Relay
     omegarelay_music:
-      file: mus_endgm1_gunsuccess.wav
+      file: mus_endgm1_gunsuccess.ogg
       track: music
       mode_end_action: stop
   # Infiltration
     infiltration_low:
-      file: mus_endgm2_tension_1.wav
+      file: mus_endgm2_tension_1.ogg
       track: music
       fade_in: 1s
       fade_out: 2s
     infiltration_med:
-      file: mus_endgm2_combat_1_low.wav
+      file: mus_endgm2_combat_1_low.ogg
       track: music
       fade_in: 1s
       fade_out: 2s
     infiltration_high:
-      file: mus_endgm2_combat_1.wav
+      file: mus_endgm2_combat_1.ogg
       track: music
       fade_in: 1500ms
       fade_out: 2s
   # Long Walk
     longwalk_low:
-      file: mus_endgm2_tension_2.wav
+      file: mus_endgm2_tension_2.ogg
       track: music
       fade_in: 3s
       fade_out: 2s
     longwalk_med:
-      file: mus_endgm2_combat_2_low.wav
+      file: mus_endgm2_combat_2_low.ogg
       track: music
       fade_in: 1s
       fade_out: 2s
     longwalk_high:
-      file: mus_endgm2_combat_2.wav
+      file: mus_endgm2_combat_2.ogg
       track: music
       fade_in: 1s
       fade_out: 2s
   # Final Battle
     platforms_low:
-      file: mus_endgm2_speech_conv_b.wav
+      file: mus_endgm2_speech_conv_b.ogg
       track: music
       start_at: 1s
       fade_in: 200ms
@@ -143,19 +143,19 @@ sounds:
       #   - time: 37s
       #     events: platforms_low_med_transition_marker
     platforms_med:
-      file: mus_endgm2_combat_3a.wav
+      file: mus_endgm2_combat_3a.ogg
       track: music
       start_at: 2.5s
       fade_in: 1s
       fade_out: 2s
     platforms_high:
-      file: mus_endgm2_combat_3b.wav
+      file: mus_endgm2_combat_3b.ogg
       track: music
       start_at: 5s
       fade_in: 1.5s
       fade_out: 2s
     reaper_high:
-      file: mus_endgm2_reaperdeath.wav
+      file: mus_endgm2_reaperdeath.ogg
       track: music
       fade_in: 500ms
       fade_out: 2s

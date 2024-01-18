@@ -111,7 +111,7 @@ sound_player:
 
 sounds:
   mus_main_menu:
-    file: mus_main_menu.wav
+    file: mus_main_menu.ogg
     track: music
     fade_out: 1s
     markers:

@@ -347,14 +347,14 @@ sound_player:
 
 sounds:
   derelictreaper_music:
-    file: mus_legion_acq_bossbattle.wav
+    file: mus_legion_acq_bossbattle.ogg
     track: music
     mode_end_action: stop
     start_at: 3s
     fade_in: 200ms
     fade_out: 1.5s
   derelictreaper_music_tension:
-    file: mus_legion_acq_bossbattle_low.wav
+    file: mus_legion_acq_bossbattle_low.ogg
     track: music
     start_at: 3s
     fade_in: 200ms
@@ -364,7 +364,7 @@ sounds:
     file: mus_legion_acq_sting_2.wav
     track: sfx
   derelictreaper_intro:
-    file: mus_legion_acq_combat_2_low_b.wav
+    file: mus_legion_acq_combat_2_low_b.ogg
     track: music
   squadmate_garrus_destroy_core:
     file: en_us_hench_garrus_rprgta_reminder_h_00185236_m.wav

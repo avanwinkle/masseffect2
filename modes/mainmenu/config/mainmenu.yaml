@@ -311,7 +311,7 @@ sound_player:
 
 sounds:
   mus_gui_char_create:
-    file: mus_reconstruction_a.wav
+    file: mus_reconstruction_a.ogg
     track: music
     start_at: 3s
     fade_in: 500ms

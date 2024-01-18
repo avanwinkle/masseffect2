@@ -207,13 +207,13 @@ sound_pools:
 
 sounds:
   music_ambush:
-    file: mus_critpath2_action.wav
+    file: mus_critpath2_action.ogg
     track: music
   music_husk:
-    file: mus_critpath2_combat_2_low.wav
+    file: mus_critpath2_combat_2_low.ogg
     track: music
   music_praetorian:
-    file: mus_critpath1_boss.wav
+    file: mus_critpath1_boss.ogg
     track: music
   music_stinger:
     file: mus_generic_stinger_111.wav

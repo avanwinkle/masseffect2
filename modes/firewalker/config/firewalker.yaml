@@ -293,25 +293,25 @@ sound_pools:
 
 sounds:
   firewalker_music_2:
-    file: mus_critpath1_combat_1.wav
+    file: mus_critpath1_combat_1.ogg
     track: music
     start_at: 2s
     fade_in: 1s
     fade_out: 2s
   firewalker_music_1:
-    file: mus_n7_8_combat_2.wav
+    file: mus_n7_8_combat_2.ogg
     track: music
     start_at: 1.5s
     fade_in: 500ms
     fade_out: 2s
   firewalker_music_3:
-    file: mus_tali_acq_combat_2a.wav
+    file: mus_tali_acq_combat_2a.ogg
     track: music
     start_at: 1.5s
     fade_in: 500ms
     fade_out: 2s
   firewalker_music_4:
-    file: mus_thane_acq_miniboss.wav
+    file: mus_thane_acq_miniboss.ogg
     track: music
     start_at: 1s
     fade_in: 500ms
