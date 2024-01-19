@@ -19,6 +19,12 @@ sound_player:
   envshot_left_ramp_hit:
     geth_killed_short:
       max_queue_time: 500ms
+  envshot_dropbank_hit:
+    geth_ack:
+      max_queue_time: 200ms
+  envshot_hitbank_hit:
+    geth_ack:
+      max_queue_time: 200ms
 
 sound_pools:
   geth_killed_short:
@@ -29,8 +35,24 @@ sound_pools:
     sounds: geth_killed_long_1, geth_killed_long_2, geth_killed_long_3
     track: sfx
     type: random_force_next
+  geth_ack:
+    sounds: geth_ack_1, geth_ack_2, geth_ack_3, geth_ack_4
+    type: random_force_next
+    track: sfx
 
 sounds:
+  geth_ack_1:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307880_m.ogg
+    track: sfx
+  geth_ack_2:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307886_m.ogg
+    track: sfx
+  geth_ack_3:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307869_m.ogg
+    track: sfx
+  geth_ack_4:
+    file: sfx_ss_geth_trooper_ss_geth_trooper_00307870_m.ogg
+    track: sfx
   geth_killed_short_1:
     file: sfx_ss_geth_trooper_ss_geth_trooper_00307874_m.wav
     track: sfx

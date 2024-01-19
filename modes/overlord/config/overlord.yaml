@@ -34,14 +34,12 @@ mode:
   priority: 1000
 
 event_player:
-  mode_overlord_started:
-    set_environment:
-      env: geth
   mode_intro_complete.2:
     set_mission_shots:
       shots_total: 5
       shots_remaining: 5
       is_resumable: 0
+      env: geth
       ticks: 30
   mode_intro_complete.1:
     - reset_hackshots
@@ -121,11 +119,11 @@ variable_player:
   hackshots_lit_hit:
     score:
       action: add
-      int: 1000 * current_player.temp_multiplier
+      int: (machine.base_points * current_player.temp_multiplier) // 500 * 10
   hackshots_frozen_hit:
     score:
       action: add
-      int: 500 * current_player.temp_multiplier
+      int: (machine.base_points * current_player.temp_multiplier) // 2000 * 10
   jackpotshot_hit:
     # Every jackpot adds 1X the value of the next round's shots
     temp_multiplier:
@@ -262,21 +260,48 @@ show_player:
       key: overlord_hackshots_show
       action: play
       priority: 1 # Lowest priority so individual shots will supercede
+  jackpotshot_hit:
+    color_flashing_fast:
+      loops: 4
+      speed: 4
+      show_tokens:
+        leds: light_backwall_gi, light_mass_relay, light_pf
+        color: color_overlord_orange
+    led_12_chase_pulse:
+      action: stop
   enable_jackpotshot:
     overlord_hackshots_solid_show:
       key: overlord_hackshots_show
       action: play
       priority: 10  # Higher than lit hackshots, lower than frozen hackshots
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_overlord_orange
+        fade: 50ms
   disable_hackshots:
     overlord_hackshots_frozen_show:
       key: overlord_hackshots_show
       action: play
       priority: 20 # Higher than all other hackshot shows, lower than jackpot show
-  hackshots_hit:
-    flasher_show_triple:
-      priority: 50
+  hackshots_lit_hit:
+    color_flashing_fast:
+      loops: 3
+      priority: 40
       show_tokens:
-        flashers: l_flash_slingshots, l_flash_right_orbit, l_flash_throne
+        leds: light_backwall_gi, light_mass_relay
+        color: color_overlord_orange
+  hackshots_frozen_hit:
+    color_dual_alternating_default:
+      loops: 6
+      speed: 2
+      priority: 30
+      show_tokens:
+        color1: color_overlord
+        color2: color_overlord_orange
+        leds1: l_backwall_gi_light_0, l_backwall_gi_light_2, l_backwall_gi_light_4, l_backwall_gi_light_6, l_backwall_gi_light_8, l_backwall_gi_light_10, l_backwall_gi_light_12
+        leds2: l_backwall_gi_light_1, l_backwall_gi_light_3, l_backwall_gi_light_5, l_backwall_gi_light_7, l_backwall_gi_light_9, l_backwall_gi_light_11, l_backwall_gi_light_13
   mode_overlord_will_stop:
     overlord_hackshots_show:
       action: stop
