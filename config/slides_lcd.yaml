@@ -1178,6 +1178,9 @@ widgets:
       video: recruitintro_zaeed
       end_behavior: pause
       z: 108
+  portrait_extra_ball_lit:
+    - type: image
+      image: portrait_citadel_approach
   portrait_shoot_again:
     - type: image
       # TODO: Capture Lazarus Station wakeup video

@@ -59,14 +59,6 @@ event_player:
   # If a new mission becomes available, remove the player-selected bypass
   player_available_missions{player_num==current_player.number and change>0}:
     - reset_missionselect_bypass
-  # When we have 6 squadmates (aka 4 recruits completed), go to collector ship
-  player_squadmates_count{player_num==current_player.number and value==6 and not settings.demo_mode}:
-    - enable_collectorship
-  player_squadmates_count{player_num==current_player.number}:
-    # In expo demo mode, 3 recruits is enough for collector ship
-    - enable_collectorship{settings.demo_mode and value==5}
-    # Third squadmate, extra ball is lit!
-    - extra_ball_lit{value==3 and change==1}
   # Clear the intro slide on skillshot slide
   slide_skillshot_slide_active:
     clear_slide_queue:
@@ -454,14 +446,6 @@ slide_player:
       expire: 4s
       priority: 10000
       target: lcd_right
-  extra_ball_lit:
-    extra_ball_lit_slide:
-      expire: 5s
-      priority: 10000
-    portrait_extra_ball:
-      target: lcd_right
-      expire: 5s
-      priority: 10000
 
 slides:
   player_added_slide:
@@ -494,10 +478,6 @@ slides:
         text: "Hit Right Ramp to Collect"
         style: header_sm, row_bottom, color_ui_yellow
       - widget: background_console
-  portrait_extra_ball:
-    widgets:
-      - type: image
-        image: portrait_citadel_approach
   n7_complete_slide:
     transition:
       type: fade
@@ -608,6 +588,7 @@ sound_player:
       action: unload
     illusive_already_compiled_dossiers_five:
       action: unload
+  slide_extra_ball_lit_slide_active: stinger_reward
 
 sound_pools:
   gameintro_long:
@@ -625,7 +606,21 @@ sound_pools:
       - illusive_youll_get_who_you_need
       - shep_ill_need_a_really_good_team
       - illusive_find_mordin{current_player.status_mordin<4}
+
 sounds:
+  # stinger_klaxon:
+  #   file: mus_generic_stinger_053.ogg
+  #   track: sfx
+  stinger_reward:
+    file: SFXGame.637.ogg
+    track: sfx
+    volume: 1.5
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 100ms
+      release_point: 200ms
+      release: 500ms
   galaxy_whoosh:
     file: sfxgame.Wwise_Generic_Galaxy_Map.gui_galaxy_whoosh_long.wav
     track: sfx
@@ -646,7 +641,7 @@ sounds:
       release: 4s
     # As the song is finishing, bring in the field music
     markers:
-      - time: 8s
+      - time: 9s
         events: levelup_complete
     # In case some other mode (e.g. research) stops the music, also mark levelup complete
     events_when_stopped: levelup_complete_stopped

@@ -450,7 +450,7 @@ sounds:
     file: DLC_HEN_MT_Int.773.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -459,7 +459,7 @@ sounds:
     file: DLC_HEN_MT_Int.022.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -469,7 +469,7 @@ sounds:
     track: voice
     # end_at: 3230ms
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -479,7 +479,7 @@ sounds:
     track: voice
     start_at: 1500ms
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -488,7 +488,7 @@ sounds:
     file: DLC_HEN_MT_Int.081.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -497,7 +497,7 @@ sounds:
     file: DLC_HEN_MT_Int.086.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -506,7 +506,7 @@ sounds:
     file: en_us_hench_geth_norgt_relationship00_h_00275284_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -515,7 +515,7 @@ sounds:
     file: en_us_hench_geth_norgt_relationship00_h_00275287_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -524,7 +524,7 @@ sounds:
     file: en_us_hench_geth_norgt_relationship00_h_00275294_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -533,7 +533,7 @@ sounds:
     file: en_us_hench_professor_omgpra_mordin_d_00210601_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -542,7 +542,7 @@ sounds:
     file: en_us_hench_professor_omgpra_mordin_d_00210653_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -551,7 +551,7 @@ sounds:
     file: en_us_hench_mystic_twrmwa_mw02_d_00197868_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -560,7 +560,7 @@ sounds:
     file: en_us_hench_mystic_twrmwa_mw02_d_00197872_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -569,7 +569,7 @@ sounds:
     file: en_us_hench_mystic_twrmwa_mw02_d_00216220_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -578,7 +578,7 @@ sounds:
     file: en_us_hench_tali_suntla_taliobserv_d_00208252_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -587,7 +587,7 @@ sounds:
     file: en_us_hench_assassin_norasa_debrief_d_00223267_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -596,7 +596,7 @@ sounds:
     file: en_us_hench_assassin_norasa_debrief_d_00223275_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -605,7 +605,7 @@ sounds:
     file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00301164_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -614,7 +614,7 @@ sounds:
     file: en_us_hench_assassin_twrasa_pinnacle_assassin_d_00307859_m.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -623,7 +623,7 @@ sounds:
     file: DLC_HEN_VT_Int.213.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -632,7 +632,7 @@ sounds:
     file: DLC_HEN_VT_Int.505.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -641,7 +641,7 @@ sounds:
     file: DLC_HEN_VT_Int.506.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -650,7 +650,7 @@ sounds:
     file: DLC_HEN_VT_Int.216.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -659,7 +659,7 @@ sounds:
     file: DLC_HEN_VT_Int.476.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms
@@ -668,7 +668,7 @@ sounds:
     file: DLC_HEN_VT_Int.485.wav
     track: voice
     ducking:
-      target: levelup
+      target: levelup, music
       attenuation: 0.5
       attack: 100ms
       release: 300ms

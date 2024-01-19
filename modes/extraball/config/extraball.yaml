@@ -52,7 +52,7 @@ shows:
         portrait_extra_ball:
           action: remove
           target: lcd_right
-    - time: 1s
+    - time: 1500ms
       sounds: shepard_extra_ball
     - time: 5s
       events: stop_mode_extraball
@@ -123,3 +123,4 @@ sounds:
   heavy_blackstar_explode:
     file: SFXWeapon_Heavy_Blackstar.2.ogg
     track: sfx
+    volume: 1.8
