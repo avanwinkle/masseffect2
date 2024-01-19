@@ -29,7 +29,7 @@ class Base(Mode):
     self.player["level"] += 1
     self.player["earned_level"] += 1
     # Reset the ship upgrade every levelup. Once missed, gone forever!
-    self.player["shipupgrade_available"] = 0
+    self.player["available_shipupgrades"] = 0
     # Block the playback of field music
     self.player["levelup_pending"] = 1
 

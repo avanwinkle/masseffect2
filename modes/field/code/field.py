@@ -84,6 +84,17 @@ class Field(Mode):
                 "Complete drop bank to\nstart Hagalaz attack."
             ))
 
+        if self.player.available_shipupgrades:
+            self._hints.append((
+                "NORMANDY UPGRADE",
+                "Shoot right ramp to collect an\nupgrade for the Normandy."
+            ))
+        elif self.player.available_upgrades:
+            self._hints.append((
+                "WEAPON UPGRADE",
+                "Shoot right ramp to collect\na weapon upgrade."
+            ))
+
         if self.player.available_missions:
             self._hints.append((
                 "MISSION%s AVAILABLE" % ("" if self.player.available_missions == 1 else "S"),

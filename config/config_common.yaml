@@ -495,7 +495,7 @@ player_vars:
     initial_value: 0
   temp_counter:
     initial_value: 0
-  upgrade_available:
+  available_upgrades:
     initial_value: 0
   upgrade_name:
     initial_value: " "

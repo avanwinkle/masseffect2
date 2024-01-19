@@ -24,7 +24,6 @@ event_player:
   collect_upgrade_shot_hit:
     - shipupgrade_completed{current_player.available_shipupgrades>0}
     - upgrade_completed{current_player.available_shipupgrades==0}
-  capture_shipupgrade_shot_hit: shipupgrade_completed
   upgrade_completed:
     queue_slide:
       slide: upgrade_slide
@@ -50,19 +49,19 @@ variable_player:
     available_shipupgrades: -1
     score: machine.base_points // 5
     # We can't collect both a ship upgrade _and_ weapon upgrade for a levelup
-    upgrade_available:
+    upgrades_available:
       action: set
       int: 0
   upgrades_completed:
     upgrades_completed: 1
     score: machine.base_points // 10 * (1 + 0.5 * current_player.upgrades_completed)
     # Weapon upgrades can't be stacked, collecting one resets to zero
-    upgrade_available:
+    upgrades_available:
       action: set
       int: 0
   # Completing _any_ recruit mission sets an upgrade available
   recruit_success.1:
-    upgrade_available: 1
+    upgrades_available: 1
   # Each squadmate enables a specific upgrade (meaningless distinctions)
   recruit_success_garrus:
     upgrade_name:
@@ -109,9 +108,8 @@ shots:
   collect_upgrade_shot:
     hit_events: sh_right_ramp_hit
     enable_events:
-      - mode_global_started{current_player.upgrade_available>0 or current_player.available_shipupgrades>0}
-      - player_upgrade_available{player_num==current_player.number and change>0}
-      - player_available_shipupgrades{player_num==current_player.number and change>0}
+      - mode_global_started{current_player.available_upgrades>0 or current_player.available_shipupgrades>0}
+      - recruit_success
     disable_events:
       - collect_upgrade_shot_hit
     profile: color_flashing_static
