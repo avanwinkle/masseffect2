@@ -190,6 +190,10 @@ sound_player:
       action: play
       delay: 4s
       loops: -1  # Unlikely to be used b/c track is 1:27 long, but safety first
+  mode_intro_skipped:
+    music_recruit_samara:
+      action: play
+      loops: -1
   samara_targets_lit_hit: explosion  # Defined in base_endsounds
   mission_shot_hit:
     wasea_hit:
@@ -223,18 +227,6 @@ sound_pools:
       attack: 60ms
       release: 40ms
       release_point: 0
-  gunship_sound:
-    track: voice
-    type: random_force_all
-    sounds:
-      - gunship_miranda
-      - gunship_jacob
-      - gunship_garrus{current_player.status_garrus>3}
-      - gunship_kasumi{current_player.status_kasumi>3}
-      - gunship_grunt{current_player.status_grunt>3}
-      - gunship_zaeed{current_player.status_zaeed>3}
-      - gunship_tali{current_player.status_tali>3}
-      - gunship_jack{current_player.status_jack>3}
 
 sounds:
   music_recruit_samara:
@@ -242,6 +234,8 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+    simultaneous_limit: 1
+    stealing_method: skip
   wasea_everythings_gone_to_hell:
     file: en_us_twrmwa_boss_twrmwa_boss_d_00197753_m.wav
     track: voice
@@ -277,39 +271,6 @@ sounds:
     track: voice
   ws_hit_one:
     file: en_us_twrmwa_boss_ss_twrmwa_eclipse_boss_00244239_m.wav
-    track: voice
-  gunship_thane:
-    file: en_us_hench_assassin_twrmwa_gun_ship_amb_h_00212350_m.wav
-    track: voice
-  gunship_jack:
-    file: en_us_hench_convict_twrmwa_gun_ship_amb_h_00212346_m.wav
-    track: voice
-  gunship_garrus:
-    file: en_us_hench_garrus_twrmwa_gun_ship_amb_h_00212343_m.wav
-    track: voice
-  gunship_legion:
-    file: en_us_hench_geth_twrmwa_gun_ship_amb_h_00212345_m.wav
-    track: voice
-  gunship_grunt:
-    file: en_us_hench_grunt_twrmwa_gun_ship_amb_h_00212342_m.wav
-    track: voice
-  gunship_jacob:
-    file: en_us_hench_leading_twrmwa_gun_ship_amb_h_00212341_m.wav
-    track: voice
-  gunship_mordin:
-    file: en_us_hench_professor_twrmwa_gun_ship_amb_h_00212348_m.wav
-    track: voice
-  gunship_tali:
-    file: en_us_hench_tali_twrmwa_gun_ship_amb_h_00212344_m.wav
-    track: voice
-  gunship_kasumi:
-    file: en_us_hench_thief_twrmwa_gun_ship_amb_h_00212349_m.wav
-    track: voice
-  gunship_zaeed:
-    file: en_us_hench_veteran_twrmwa_gun_ship_amb_h_00212347_m.wav
-    track: voice
-  gunship_miranda:
-    file: en_us_hench_vixen_twrmwa_gun_ship_amb_h_00212340_m.wav
     track: voice
 
 widget_player:

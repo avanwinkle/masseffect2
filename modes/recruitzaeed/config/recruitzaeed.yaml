@@ -30,7 +30,7 @@ event_player:
       squadmate: zaeed
       portrait: recruitzaeed
       instructions_main: Choose your Path
-      instructions_sub: "< Paragon       Renegade >"
+      instructions_sub: "< Paragon             Renegade >"
     show_recruit_instructions{current_player.zaeed_path_renegade==0}:
       squadmate: zaeed
       portrait: recruitzaeed
@@ -142,6 +142,9 @@ sound_player:
     music_recruit_zaeed_2:
       action: play
       fade_in: 1s
+  mode_intro_skipped:
+    music_recruit_zaeed_1:
+      action: play
   player_zaeed_path_renegade{change>0 and value==0}:
     shep_we_dont_sacrifice_lives:
       max_queue_time: 1s
@@ -202,6 +205,8 @@ sounds:
     mode_end_action: stop
     start_at: 1s
     fade_out: 1s
+    simultaneous_limit: 1
+    stealing_method: skip
     markers:
       - time: 56s
         events: play_music_recruit_zaeed_2

@@ -125,6 +125,8 @@ show_player:
 
 shows:
   recruitintro_thane:
+    - time: 2s
+      events: play_music_thane_pool
     - time: 4s
       sounds:
         asari_youll_have_to_get_up_to_the_bridge:
@@ -140,21 +142,25 @@ shows:
         shot_shields: black
 
 sound_player:
-  mode_recruitthane_started.1:
-    music_thane:
-      action: play
-      delay: 2s
   mode_recruitthane_started.2:
     music_thane_1:
       action: load
     music_thane_2:
       action: load
+  play_music_thane_pool:
+    music_thane:
+      action: play
   play_music_thane_1:
     music_thane_1:
       fade_in: 1s
   play_music_thane_2:
     music_thane_2:
       fade_in: 1s
+  mode_intro_skipped:
+    music_thane:
+      action: play
+      start_at: 1500ms
+      fade_in: 500ms
   mode_recruitthane_complete:
     nas_misc_sounds:
       action: stop
@@ -172,6 +178,8 @@ sound_pools:
   music_thane:
     sounds: music_thane_1, music_thane_2
     track: music
+    simultaneous_limit: 1
+    stealing_method: skip
   nas_misc_sounds:
     sounds: nas_damn_it, nas_where_is_everyone, nas_give_me_a_report, nas_answer_me_dammit, nas_find_out_whats_going_on, nas_just_kill_them, nas_finish_them_off, nas_sending_reinforcements
     track: voice

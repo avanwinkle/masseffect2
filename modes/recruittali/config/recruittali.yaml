@@ -232,7 +232,11 @@ sound_player:
     music_recruit_tali:
       action: play
       loops: -1  # Track is 1:38 long, should be safe
-      delay: 3s
+      delay: 4s
+  mode_intro_skipped:
+    music_recruit_tali:
+      action: play
+      loops: -1
   power_shots_lit_hit:
     colossus_hit_sound:
       action: play
@@ -286,6 +290,8 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+    simultaneous_limit: 1
+    stealing_method: skip
   tali_attack_shields_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289271_m.wav
     track: voice
