@@ -51,6 +51,9 @@ class MissionSelect(Carousel):
             # Disable the intro slide after a time
             self.delay.add(callback=self._remove_intro, ms=intro_time)
 
+        # Disable the start button adding players
+        self.add_mode_event_handler('player_add_request', self._player_add_request)
+
     def _build_items_list(self):
         player = self.machine.game.player
         achievements = self.machine.device_manager.collections["achievements"]
@@ -114,6 +117,7 @@ class MissionSelect(Carousel):
         return items
 
     def _select_item(self, **kwargs):
+        del kwargs
         # If select was hit while the intro still showed, pick the next one
         if self._get_highlighted_item() == self._intro:
             self.log.debug("Intro was picked as mission, advancing to next item")
@@ -143,6 +147,7 @@ class MissionSelect(Carousel):
                     can_bypass = False
             if can_bypass:
                 self.machine.game.player['bypass_missionselect'] = 1
+        self.stop()
 
     def _update_highlighted_item(self, direction):
         h = self._get_highlighted_item()
@@ -178,3 +183,8 @@ class MissionSelect(Carousel):
     def _previous_item(self, **kwargs):
         if len(self._items) > 1:
             super()._previous_item(**kwargs)
+
+    def _player_add_request(self, **kwargs):
+        del kwargs
+        self._select_item()
+        return False

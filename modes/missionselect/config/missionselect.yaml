@@ -15,7 +15,7 @@
 
 mode:
   start_events: start_mode_missionselect
-  stop_events: stop_mode_missionselect, missionselect_item_selected, s_return_lane_right_active
+  stop_events: stop_mode_missionselect, s_return_lane_right_active
   priority: 3000
   code: missionselect.MissionSelect
   file_log: full
