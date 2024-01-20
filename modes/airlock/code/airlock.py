@@ -38,7 +38,10 @@ class Airlock(Mode):
             self._post_event('enable_{}'.format(self._logicallockdevice.name))
 
     def mode_stop(self, **kwargs):
+        del kwargs
         self.delay.remove("captive_ball_suspend")
+        self.machine.switch_controller.remove_switch_handler(
+            's_airlock_entrance', self._check_bypass)
 
     def _find_devices(self):
         # We need a pointer to the physical ball device to count physically locked balls

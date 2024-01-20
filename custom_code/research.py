@@ -151,7 +151,6 @@ RESEARCH = {key: ResearchUpgrade(perk=key, **value) for (key, value) in UPGRADES
 class Research(CustomCode):
     def on_load(self):
         self.log = logging.getLogger("Research")
-        self.log.setLevel(1)
         self.log.debug("Research custom code started!")
         self.machine.events.add_handler("check_research", self._on_check)
         self.machine.events.add_handler("start_mode_store", self._on_store)
@@ -162,9 +161,8 @@ class Research(CustomCode):
         self.machine.events.add_handler("check_double_medigel", self._check_double_medigel)
         # On drain, check for a random save
         self.machine.events.add_handler("ball_drain", self._check_random_ball_save)
-
-        # Track handlers we create for the store, so we can release them
-        self._store_handlers = []
+        # Track handlers we create for the store
+        self.machine.events.add_handler("store_item_highlighted", self._on_store_item)
 
     def get_purchaseable_options(self):
         options = []
@@ -237,9 +235,6 @@ class Research(CustomCode):
         self.machine.game.player["store_options"] = "|".join(result)
         self.machine.events.post("research_options", options=result)
 
-        # Create handlers for store events
-        self._store_handlers.append(
-            self.machine.events.add_handler("store_item_highlighted", self._on_store_item))
 
     def _on_store_item(self, **kwargs):
         if kwargs["item"] == "nothing":
