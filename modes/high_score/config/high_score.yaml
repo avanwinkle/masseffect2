@@ -107,7 +107,7 @@ slides:
       - type: text
         text: "Use flippers to scroll, press both to select."
         color: BBBBBB
-        style: body_xs, row_bottom, col_left_anchor
+        style: body_xs, row_bottom, col_left_indent
         halign: left
       - widget: background_console
   high_score_player_score:
@@ -164,7 +164,7 @@ sound_pools:
 
 sounds:
   me3_war_asset_complete:
-    file: SFXGame.752.ogg
+    file: SFXGame.752.wav
     track: sfx
     volume: 1.0
   joker_space_jazz:

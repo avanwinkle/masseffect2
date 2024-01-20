@@ -756,38 +756,38 @@ sounds:
     track: voice
   # Power sound effects
   power_armor_available:
-    file: SFXPower_TechArmor.1.ogg
+    file: SFXPower_TechArmor.1.wav
     track: sfx
   power_armor_active:
-    file: SFXPower_TechArmor.3.ogg
+    file: SFXPower_TechArmor.3.wav
     track: sfx
   power_adrenaline_available:
-    file: SFXPower_AdrenalineRush.1.ogg
+    file: SFXPower_AdrenalineRush.1.wav
     track: sfx
   power_adrenaline_active:
-    file: SFXPower_AdrenalineRush.2.ogg
+    file: SFXPower_AdrenalineRush.2.wav
     track: sfx
   power_charge_available:
-    file: SFXPower_BioticCharge.01.ogg
+    file: SFXPower_BioticCharge.08.ogg
     track: sfx
   power_charge_active:
-    file: SFXPower_BioticCharge.09.ogg
+    file: SFXPower_BioticCharge.09.wav
     track: sfx
   power_cloak_available:
-    file: SFXPower_Cloak.3.ogg
+    file: SFXPower_Cloak.3.wav
     track: sfx
   power_cloak_active:
-    file: SFXPower_Cloak.2.ogg
+    file: SFXPower_Cloak.2.wav
     track: sfx
   power_drone_available:
-    file: SFXPower_CombatDrone.10.ogg
+    file: SFXPower_CombatDrone.10.wav
     track: sfx
   power_drone_active:
-    file: SFXPower_CombatDrone.03.ogg
+    file: SFXPower_CombatDrone.03.wav
     track: sfx
   power_singularity_available:
-    file: SFXPower_Singularity.07.ogg
+    file: SFXPower_Singularity.07.wav
     track: sfx
   power_singularity_active:
-    file: SFXPower_Singularity.05.ogg
+    file: SFXPower_Singularity.05.wav
     track: sfx

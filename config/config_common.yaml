@@ -5,8 +5,8 @@ config:
 - hardware_common.yaml
 - keyboard.yaml
 
-# auditor:
-#   missing_switch_min_games: 10
+auditor:
+  missing_switch_min_games: 20
 
 smart_virtual:
   console_log: basic

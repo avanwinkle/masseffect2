@@ -115,12 +115,12 @@ sounds:
     file: en_us_player_f_citasl_interrogation_d_00281364_f.ogg
     track: voice
   heavy_cain_chargeup:
-    file: SFXWeapon_Heavy_Cain.102.ogg
+    file: SFXWeapon_Heavy_Cain.102.wav
     track: sfx
     # If the ball falls back down the ramp, don't play the sound again
     simultaneous_limit: 1
     stealing_method: skip
   heavy_blackstar_explode:
-    file: SFXWeapon_Heavy_Blackstar.2.ogg
+    file: SFXWeapon_Heavy_Blackstar.2.wav
     track: sfx
     volume: 1.8

@@ -612,7 +612,7 @@ sounds:
   #   file: mus_generic_stinger_053.ogg
   #   track: sfx
   stinger_reward:
-    file: SFXGame.637.ogg
+    file: SFXGame.637.wav
     track: sfx
     volume: 1.5
     ducking:
