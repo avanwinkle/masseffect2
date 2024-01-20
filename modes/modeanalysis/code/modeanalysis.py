@@ -19,8 +19,6 @@ class ModeAnalysis(Mode):
         self.analytics_log = None
         # Default log output goes to the main MPF logger
         self.log = logging.getLogger("ModeAnalysis")
-        if self.settings.get("debug"):
-            self.log.setLevel(1)
 
     def mode_start(self, **kwargs):
         # If we are starting for the first time, setup our log

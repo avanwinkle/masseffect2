@@ -16,7 +16,6 @@ class MissionSelect(Carousel):
         """Init: create a logger."""
         super().mode_init()
         self.log = logging.getLogger("MissionSelect")
-        self.log.setLevel(1)
         self._mates = []
         self._specialist = "jacob"
 

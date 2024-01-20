@@ -28,7 +28,6 @@ machine_path = "/home/pi/me2"
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 log = logging.getLogger("GenerateCodeTree")
-log.setLevel(1)
 
 
 now = datetime.now()

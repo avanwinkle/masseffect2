@@ -8,7 +8,6 @@ class Bonus(BonusBase):
     __slots__ = ("standups", "is_lock_slide_active")
 
     def mode_start(self, **kwargs):
-        self.log.setLevel(10)
         if self.machine.modes["global"].active:
             self.log.debug("Bonus mode starting, waiting for global")
             self.add_mode_event_handler("slide_queue_clear", self._on_proceed, **kwargs)

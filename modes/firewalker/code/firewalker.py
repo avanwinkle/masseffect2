@@ -110,7 +110,6 @@ class Firewalker(Mode):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.log = logging.getLogger("Firewalker")
-    self.log.setLevel(10)
 
   def mode_start(self, **kwargs):
     super().mode_start(**kwargs)

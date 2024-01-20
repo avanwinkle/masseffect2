@@ -32,7 +32,6 @@ class LockHandler(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("LockHandler")
-        self.log.setLevel(10)
         self.settings = self.config.get("mode_settings")
 
         # We want to track whether to lock this ball, so when handling external events we can act accordingly

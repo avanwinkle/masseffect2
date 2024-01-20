@@ -27,7 +27,6 @@ class MainMenu(Carousel):
         self._selected_difficulty = None
         self._selected_flow = None
         self.log = logging.getLogger("MainMenu")
-        self.log.setLevel(20)
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""

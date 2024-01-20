@@ -16,7 +16,6 @@ class RecruitLegion(Mode):
         """Initialize logger and local vars."""
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("RecruitLegion")
-        self.log.setLevel(10)
         self._timer = None
         # Track an array of ticks that _might_ need handling, to avoid over-processing
         self._significant_ticks = []

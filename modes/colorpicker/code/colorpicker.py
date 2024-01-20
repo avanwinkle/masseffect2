@@ -7,7 +7,6 @@ class ColorPicker(Mode):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.log = logging.getLogger("ColorPicker")
-    self.log.setLevel("DEBUG")
     self.color = RGBColor((255, 0, 0))
     self.white = 255
 

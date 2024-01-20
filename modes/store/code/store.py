@@ -47,7 +47,6 @@ class Store(Carousel):
     def mode_init(self):
         super().mode_init()
         self.log = logging.getLogger("Store")
-        self.log.setLevel(20)
         self.mineral = None
 
     def mode_start(self, **kwargs):
@@ -65,7 +64,7 @@ class Store(Carousel):
             self.machine.events.post("store_high_flow_skip", purchase=self._items[0])
             self.machine.events.post("mode_store_will_stop")
             return
-        
+
         self._all_items.append("nothing")
         super().mode_start(**kwargs)
         self.log.debug("Store is starting")

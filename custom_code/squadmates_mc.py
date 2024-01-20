@@ -11,7 +11,6 @@ class MCSquadmateHandlers(McCustomCode):
     def on_load(self):
         """Initialize module and create event handlers."""
         self.log = logging.getLogger("SquadmatesMC")
-        self.log.setLevel(20)
         self.mc.events.add_handler("slide_squadicon_slide_created", self._update_sqicons)
         self.mc.events.add_handler("slide_huddle_slide_created", self._update_huddle)
         self.mc.events.add_handler("mode_suicide_base_started", self._update_sqicons, is_suicide=True)
@@ -211,4 +210,3 @@ class MCSquadmateHandlers(McCustomCode):
         if do_offset:
             y -= spacing / 2
         return (x, y)
-

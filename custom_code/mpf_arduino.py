@@ -32,7 +32,6 @@ class MPFArduino(Scriptlet):
 
   def on_load(self):
     self.log = logging.getLogger("MPFArduino")
-    self.log.setLevel("INFO")
 
     # Bind event handlers to send commands to Arduino
     # TODO: Get this into a config file

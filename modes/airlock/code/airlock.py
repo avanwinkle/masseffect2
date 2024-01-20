@@ -8,7 +8,6 @@ class Airlock(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Airlock")
-        self.log.setLevel(10)
         self.delay = DelayManager(self.machine)
         self.settings = self.config.get("mode_settings")
 
