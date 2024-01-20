@@ -47,15 +47,8 @@ class MainMenu(Carousel):
         if not self.machine.settings.enable_careers:
             self.log.info("Casual mode only, skipping menu")
             if self.machine.settings.demo_mode:
-                player = self.machine.game.player
-                self.log.info(" - Expo demo mode, juicing the player start conditions for player %d", player.number)
                 # Advance shadowbroker faster
-                player["counter_sbdrops_counter"] = 2
-                # Start with one recruit lit
-                starting_recruit = SquadmateStatus.random_recruit()
-                self.machine.log.info("Found a random recruit: %s", starting_recruit)
-                player["status_{}".format(starting_recruit)] = 3
-                player["available_missions"] = 1
+                self.machine.game.player["counter_sbdrops_counter"] = 2
             # If not demo mode, use the default career profile setup
             self.machine.events.post("set_career", casual=True)
             # Post the item_selected event to free the player_turn_starting queue
@@ -70,6 +63,8 @@ class MainMenu(Carousel):
         self._load_mainmenu()
 
         self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))
+        # Post an event to identify that we are not skipping the menu
+        self.machine.events.post("mainmenu_ready")
         self._shown_menu = self.mainmenu
 
         if self._selected_career:

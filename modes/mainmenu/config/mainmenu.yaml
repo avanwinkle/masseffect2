@@ -278,7 +278,7 @@ slides:
         image: portrait_avatar_5
 
 show_player:
-  show_mainmenu: mainmenu_show
+  mainmenu_ready: mainmenu_show
   mainmenu_item_selected:
     mainmenu_show:
       action: stop
@@ -299,7 +299,7 @@ shows:
           fade: 3s
 
 sound_player:
-  show_mainmenu:
+  mainmenu_ready:
     mus_gui_char_create:
       loops: -1
   mainmenu_change_career_selected: galaxy_zoom_in
