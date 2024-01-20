@@ -22,9 +22,11 @@ class MCSquadmateHandlers(McCustomCode):
         self._squadmate_select_target = None
 
     def on_connect(self, **kwargs):
+        del kwargs
         self.add_mpf_event_handler("squadmate_select", self._select_squadmate)
         self.add_mpf_event_handler("squadmate_select_clear", self._select_squadmate_clear)
         self.add_mpf_event_handler("sqicon_update", self._update_sqicons)
+        self.add_mpf_event_handler("request_mc_stats", self._post_stats)
 
     def _get_slide(self, slide_name, display):
         display = self.mc.displays[display]
@@ -210,3 +212,16 @@ class MCSquadmateHandlers(McCustomCode):
         if do_offset:
             y -= spacing / 2
         return (x, y)
+
+    def _post_stats(self, **kwargs):
+        del kwargs
+        children = {}
+        for display in self.mc.displays:
+            children[display.name] = 0
+            for _ in display.walk():
+                children[display.name] += 1
+        self.mc.events.post("mc_stats",
+            slides=len(self.mc.active_slides),
+            refs=len(self.mc.debug_refs),
+            **children
+        )

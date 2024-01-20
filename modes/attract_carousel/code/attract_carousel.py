@@ -1,6 +1,8 @@
 """Custom mode code for Attract carousel."""
 
-
+import datetime
+import psutil
+import time
 from mpf.modes.carousel.code.carousel import Carousel
 
 
@@ -18,6 +20,8 @@ class AttractCarousel(Carousel):
         # Format strings for the high scores
         self.add_mode_event_handler("attract_carousel_high_scores_1_highlighted", self._on_high_scores, value=1)
         self.add_mode_event_handler("attract_carousel_high_scores_2_highlighted", self._on_high_scores, value=2)
+        # Stats for nerds
+        self.add_mode_event_handler("flipper_cradle", self._on_flipper_cradle)
 
         # Set listeners for credit-related events, except on free play
         if self.machine.variables.get_machine_var("free_play"):
@@ -49,3 +53,36 @@ class AttractCarousel(Carousel):
         self._update_highlighted_item(None)
         # Pause the timer
         self.machine.events.post("pause_attract_rotation_credits")
+
+    def _on_flipper_cradle(self, **kwargs):
+        # TBD: is there a kwarg?
+        del kwargs
+        # Left flipper - nothing yet
+        if self.machine.switches.s_flipper_left.state:
+            return
+        # Right flipper: stats
+        self._post_stats()
+
+    def _post_stats(self, **kwargs):
+        del kwargs
+        # Generate the stats
+        du = psutil.disk_usage("/")
+        mem = psutil.virtual_memory()
+        mb = 1024 * 1024
+        gb = 1024 * 1024 * 1024
+        uptime = datetime.timedelta(seconds=time.time() - psutil.boot_time())
+        earnings = self.machine.modes['credits'].earnings
+        self.machine.log.info("EARNINGS: %s", earnings)
+
+        stats = {
+            "uptime": f"{uptime}".split(".")[0],
+            "cpu_percent": f"{psutil.cpu_percent():0.1f}%%",
+            "memory": f"{mem.available / mb:0.0f}MB available ({mem.total / mb:0.0f}MB total)",
+            "disk_usage": f"{du.free / gb:0.1f}GB free ({du.total / gb:0.1f}GB total)",
+            "balls_played": f"{self.machine.variables.get_machine_var('balls_played_since_launch')}",
+            "games_played": f"{self.machine.variables.get_machine_var('games_played_since_launch')}",
+            "audit": f"{earnings['3 Total Paid Games']} / {earnings['2 Total Earnings Dollars']}",
+            "mpf_handlers": len(self.machine.events.registered_handlers),
+        }
+        self.machine.events.post("stats_for_nerds", **stats)
+        self.machine.events.post("request_mc_stats")
