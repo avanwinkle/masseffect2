@@ -709,7 +709,7 @@ widget_player:
 widgets:
   intro_slide_mp_name:
     - type: text
-      text: Player (player|number)
+      text: (player|career_name)
       color: DDDDDD
       style: header_sm, row_top
   portrait_n7_complete:

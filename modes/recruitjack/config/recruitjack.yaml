@@ -105,6 +105,8 @@ shows:
       sounds:
         warden_start:
           action: play
+    - time: 3s
+      events: play_music_recruit_jack_1
     - time: 6s
       events: mode_intro_complete
     - time: 6170ms
@@ -235,8 +237,7 @@ show_player:
 sound_player:
   mode_recruitjack_started:
     music_recruit_jack_1:
-      action: play
-      delay: 3s
+      action: load
     music_recruit_jack_2:
       action: load
   play_music_recruit_jack_1:
@@ -246,6 +247,10 @@ sound_player:
   play_music_recruit_jack_2:
     music_recruit_jack_2:
       action: play
+  mode_intro_skipped:
+    music_recruit_jack_1:
+      action: play
+      fade_in: 500ms
 
 sound_pools:
   jack_shot_hit_sound:
@@ -259,6 +264,8 @@ sounds:
     track: music
     mode_end_action: stop
     fade_out: 1s
+    simultaneous_limit: 1
+    stealing_method: skip
     markers:
       - time: 40s
         events: play_music_recruit_jack_2

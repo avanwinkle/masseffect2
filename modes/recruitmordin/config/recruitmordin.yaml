@@ -165,6 +165,10 @@ sound_player:
     music_recruit_mordin_2:
       action: play
       fade_in: 1s
+  mode_intro_skipped:
+    music_recruit_mordin:
+      action: play
+      fade_in: 500ms
   play_intro_sound: mordin_intro_sound
   play_cure_sound_1:
     step0_voice:
@@ -187,6 +191,8 @@ sound_pools:
   music_recruit_mordin:
     sounds: music_recruit_mordin_1, music_recruit_mordin_2
     track: music
+    simultaneous_limit: 1
+    stealing_method: skip
   # Step zero: hitting the first orbit to ready the cure
   step0_voice:
     type: random
