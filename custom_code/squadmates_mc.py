@@ -1,7 +1,6 @@
 """MC Handlers for Squadmate batching."""
 
 import logging
-from psutil import boot_time, cpu_percent, disk_usage, virtual_memory, Process
 from mpfmc.core.mc_custom_code import McCustomCode
 from .squadmate_status import SquadmateStatus
 from .research import RESEARCH
@@ -27,7 +26,6 @@ class MCSquadmateHandlers(McCustomCode):
         self.add_mpf_event_handler("squadmate_select", self._select_squadmate)
         self.add_mpf_event_handler("squadmate_select_clear", self._select_squadmate_clear)
         self.add_mpf_event_handler("sqicon_update", self._update_sqicons)
-        self.add_mpf_event_handler("request_mc_stats", self._post_stats)
 
     def _get_slide(self, slide_name, display):
         display = self.mc.displays[display]
@@ -213,26 +211,3 @@ class MCSquadmateHandlers(McCustomCode):
         if do_offset:
             y -= spacing / 2
         return (x, y)
-
-    def _post_stats(self, **kwargs):
-        del kwargs
-        mc_process = Process()
-        cpu = mc_process.cpu_percent()
-        rss = mc_process.memory_info().rss
-        vms = mc_process.memory_info().vms
-        mc_cpu = 'MC CPU RSS/VMS: {}%% {}/{} MB '.format(
-            round(cpu),
-            round(rss / 1048576),
-            round(vms / 1048576))
-
-        children = {}
-        for display in self.mc.displays:
-            children[display.name] = 0
-            for _ in display.walk():
-                children[display.name] += 1
-        self.mc.events.post("mc_stats",
-            mc_cpu=mc_cpu,
-            slides=len(self.mc.active_slides),
-            refs=len(self.mc.debug_refs),
-            **children
-        )

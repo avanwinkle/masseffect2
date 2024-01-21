@@ -42,6 +42,7 @@ fast:
 
 # Custom code can't be included, or it will get double-inits
 custom_code:
+  - custom_code.mpf_stats.MPFStats
   - custom_code.squadmates_mpf.MPFSquadmateHandlers
   - custom_code.save_career.SaveCareer
   - custom_code.slide_queue_player.SlideQueuePlayer
@@ -49,4 +50,5 @@ custom_code:
   - custom_code.version_checker.VersionChecker
 
 mc_custom_code:
+  - custom_code.mpf_stats.MCStats
   - custom_code.squadmates_mc.MCSquadmateHandlers
