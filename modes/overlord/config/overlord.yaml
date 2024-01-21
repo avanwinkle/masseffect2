@@ -267,19 +267,20 @@ show_player:
       show_tokens:
         leds: light_backwall_gi, light_mass_relay, light_pf
         color: color_overlord_orange
-    led_12_chase_pulse:
+    color_dual_alternating_default:
       action: stop
   enable_jackpotshot:
     overlord_hackshots_solid_show:
       key: overlord_hackshots_show
       action: play
       priority: 10  # Higher than lit hackshots, lower than frozen hackshots
-    led_12_chase_pulse:
-      speed: 4
+    color_dual_alternating_default:
+      speed: 2
       show_tokens:
-        ledring: l_mass_relay
-        color: color_overlord_orange
-        fade: 50ms
+        leds1: l_mass_relay_light_0, l_mass_relay_light_2, l_mass_relay_light_4, l_mass_relay_light_6, l_mass_relay_light_8, l_mass_relay_light_10
+        leds2: l_mass_relay_light_1, l_mass_relay_light_3, l_mass_relay_light_5, l_mass_relay_light_7, l_mass_relay_light_9, l_mass_relay_light_11
+        color1: color_overlord
+        color2: color_overlord_orange
   disable_hackshots:
     overlord_hackshots_frozen_show:
       key: overlord_hackshots_show
@@ -291,7 +292,7 @@ show_player:
       priority: 40
       show_tokens:
         leds: light_backwall_gi, light_mass_relay
-        color: color_overlord_orange
+        color: color_overlord
   hackshots_frozen_hit:
     color_dual_alternating_default:
       loops: 6

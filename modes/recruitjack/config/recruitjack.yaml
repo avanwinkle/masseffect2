@@ -227,12 +227,20 @@ show_player:
       priority: 100
       show_tokens:
         color: color_jack
+    led_12_chase_pulse:
+      speed: 4
+      show_tokens:
+        ledring: l_mass_relay
+        color: color_jack
+        fade: 50ms
   logicblock_jack_rounds_counter_hit:
     pulse_playfield_transparent:
       loops: 0
       speed: 2
       show_tokens:
         color: color_jack
+    led_12_chase_pulse:
+      action: stop
 
 sound_player:
   mode_recruitjack_started:
