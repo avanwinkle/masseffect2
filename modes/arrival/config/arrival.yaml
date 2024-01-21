@@ -505,6 +505,7 @@ slides:
     widgets:
       - type: video
         video: arrival_lock_activate
+        volume: 0.6
         end_behavior: pause
   arrival_slide:
     widgets:
@@ -563,6 +564,7 @@ slides:
     widgets:
       - type: video
         video: arrival_portrait_normandy
+        volume: 0.7
         end_behavior: pause
   portrait_arrival_summary:
     - type: image

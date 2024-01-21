@@ -613,21 +613,26 @@ widgets:
   bg_arrival_light_0:
     - type: video
       video: arrival_light_medbay
+      volume: 0.5
       # end_behavior: pause
   bg_arrival_lock_1:
     - type: video
       video: arrival_lock_medbay
+      volume: 0.5
       # end_behavior: pause
   bg_arrival_light_1:
     - type: video
       video: arrival_light_coolingrod
+      volume: 0.5
       # end_behavior: pause
   bg_arrival_lock_2:
     - type: video
       video: arrival_lock_coolingrod
+      volume: 0.5
   bg_arrival_light_2:
     - type: video
       video: arrival_light_activate
+      volume: 0.5
   bg_arrival:
     - type: image
       image: bg_arrival

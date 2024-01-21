@@ -277,6 +277,7 @@ slides:
     widgets:
       - type: video
         video: derelictreaper_cineanim
+        volume: 0.5
   derelictreaper_dossier:
     transition:
       type: fade

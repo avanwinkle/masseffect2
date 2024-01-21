@@ -235,3 +235,31 @@ widget_player:
     field_hint_widget:
       action: update
       slide: multiplayer_slide
+  mode_field_started.2{machine.credits_value!='0' and game.num_players==1}:
+    field_credits_widget_sp:
+      action: add
+      slide: singleplayer_slide
+  mode_field_started.1{machine.credits_value!='0' and game.num_players>1 and game.num_players<4}:
+    field_credits_widget_mp:
+      action: add
+      slide: multiplayer_slide
+  machine_var_credits_value.4{value!='0' and game.num_players==1}:
+    field_credits_widget_sp:
+      action: update
+      slide: singleplayer_slide
+  machine_var_credits_value.3{value!='0' and game.num_players>1 and game.num_players<4}:
+    field_credits_widget_mp:
+      action: update
+      slide: multiplayer_slide
+  machine_var_credits_value.2{value=='0'}:
+    field_credits_widget_mp:
+      action: remove
+      slide: multiplayer_slide
+  player_added.2{machine.credits_value!='0' and num==2}:
+    field_credits_widget_mp:
+      action: add
+      slide: multiplayer_slide
+  player_added.1{num==4}:
+    field_credits_widget_mp:
+      action: remove
+      slide: multiplayer_slide

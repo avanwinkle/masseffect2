@@ -593,6 +593,16 @@ widgets:
     - type: image
       image: texture_console
       z: 1
+  field_credits_widget_sp:
+    - type: text
+      text: (machine|credits_string)
+      style: header_xs, pos_player_2
+      color: AAAAAA
+  field_credits_widget_mp:
+    - type: text
+      text: (machine|credits_string)
+      style: header_xs, pos_player_4
+      color: AAAAAA
   field_hint_widget:
     - type: text
       text: (title)
@@ -1136,6 +1146,7 @@ widgets:
     - type: video
       video: recruitintro_kasumi
       end_behavior: pause
+      volume: 0.8
       z: 105
   portrait_recruit_intro_legion:
     - type: video
@@ -1153,30 +1164,36 @@ widgets:
     - type: video
       video: recruitintro_mordin
       end_behavior: pause
+      volume: 0.5
   portrait_recruit_intro_samara:
     - type: video
       video: recruitintro_samara
       end_behavior: pause
+      volume: 0.7
       z: 106
   portrait_recruit_intro_tali:
     - type: video
       video: recruitintro_tali
       end_behavior: pause
+      volume: 0.7
       z: 105
   portrait_recruit_tali_repair:
     - type: video
       video: recruittali_repair
       end_behavior: pause
+      volume: 0.7
       z: 106
   portrait_recruit_intro_thane:
     - type: video
       video: recruitintro_thane
       end_behavior: pause
+      volume: 0.8
       z: 107
   portrait_recruit_intro_zaeed:
     - type: video
       video: recruitintro_zaeed
       end_behavior: pause
+      volume: 0.7
       z: 108
   portrait_extra_ball_lit:
     - type: image

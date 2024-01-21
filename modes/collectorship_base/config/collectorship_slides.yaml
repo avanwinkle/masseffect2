@@ -38,6 +38,7 @@ slides:
     widgets:
       - type: video
         video: collectorship_cineanim
+        volume: 0.4
         end_behavior: pause
   collectorship_dossier:
     transition:
