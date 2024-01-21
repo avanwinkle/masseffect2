@@ -72,7 +72,9 @@ shot_groups:
 
 shot_profiles:
   medigel_profile:
-    show_when_disabled: false
+    # Even if a ball save prevents the medigel from being used,
+    # keep the shots lit so the player knows they have medigel
+    show_when_disabled: true
     advance_on_hit: false
     states:
       - name: unlit
