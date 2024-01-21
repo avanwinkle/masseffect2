@@ -75,6 +75,14 @@ class Airlock(Mode):
             not self.machine.ball_holds.sb_hold.enabled:
                 do_bypass = True
 
+        # Check if the captive ball is enabled, and suspend it
+        if self.machine.counters['captive_ball'].enabled:
+            self.machine.counters['captive_ball'].disable()
+
+            self.delay.reset(name="captive_ball_suspend",
+                             ms=1000,
+                             callback=self._restore_captive)
+
         if not do_bypass:
             self.log.debug("Bypass check failed, holding ball.")
             return
@@ -90,14 +98,6 @@ class Airlock(Mode):
 
         # Enable the airlock save
         self.machine.ball_saves['airlock_save'].enable()
-
-        # Check if the captive ball is enabled, and suspend it
-        if self.machine.counters['captive_ball'].enabled:
-            self.machine.counters['captive_ball'].disable()
-
-            self.delay.reset(name="captive_ball_suspend",
-                             ms=600,
-                             callback=self._restore_captive)
 
     def _restore_captive(self, **kwargs):
         del kwargs

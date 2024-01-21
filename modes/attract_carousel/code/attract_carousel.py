@@ -1,7 +1,7 @@
 """Custom mode code for Attract carousel."""
 
 import datetime
-import psutil
+from psutil import boot_time, cpu_percent, disk_usage, virtual_memory, Process
 import time
 from mpf.modes.carousel.code.carousel import Carousel
 
@@ -22,12 +22,18 @@ class AttractCarousel(Carousel):
         self.add_mode_event_handler("attract_carousel_high_scores_2_highlighted", self._on_high_scores, value=2)
         # Stats for nerds
         self.add_mode_event_handler("flipper_cradle", self._on_flipper_cradle)
+        self.add_mode_event_handler("flipper_cradle_release", self._on_flipper_cradle_release)
+        self.stats_interval = None
 
         # Set listeners for credit-related events, except on free play
         if self.machine.variables.get_machine_var("free_play"):
             return
         self.add_mode_event_handler("machine_var_credit_units", self._on_credits)
         self.add_mode_event_handler("not_enough_credits", self._on_credits)
+
+    def mode_stop(self, **kwargs):
+        del kwargs
+        self._on_flipper_cradle_release()
 
     def _on_high_scores(self, value, **kwargs):
         names = []
@@ -62,21 +68,29 @@ class AttractCarousel(Carousel):
             return
         # Right flipper: stats
         self._post_stats()
+        if not self.stats_interval:
+            self.stats_interval = self.machine.clock.schedule_interval(self._post_stats, 1)
 
     def _post_stats(self, **kwargs):
         del kwargs
         # Generate the stats
-        du = psutil.disk_usage("/")
-        mem = psutil.virtual_memory()
+        du = disk_usage("/")
+        mem = virtual_memory()
         mb = 1024 * 1024
         gb = 1024 * 1024 * 1024
-        uptime = datetime.timedelta(seconds=time.time() - psutil.boot_time())
+        uptime = datetime.timedelta(seconds=time.time() - boot_time())
         earnings = self.machine.modes['credits'].earnings
-        self.machine.log.info("EARNINGS: %s", earnings)
+
+        mpf_process = Process()
+        mpf_cpu = 'MPF CPU RSS/VMS: {}%% {}/{} MB    '.format(
+            round(mpf_process.cpu_percent()),
+            round(mpf_process.memory_info().rss / 1048576),
+            round(mpf_process.memory_info().vms / 1048576))
 
         stats = {
             "uptime": f"{uptime}".split(".")[0],
-            "cpu_percent": f"{psutil.cpu_percent():0.1f}%%",
+            "cpu_percent": f"{cpu_percent():0.1f}%%",
+            "mpf_cpu": mpf_cpu,
             "memory": f"{mem.available / mb:0.0f}MB available ({mem.total / mb:0.0f}MB total)",
             "disk_usage": f"{du.free / gb:0.1f}GB free ({du.total / gb:0.1f}GB total)",
             "balls_played": f"{self.machine.variables.get_machine_var('balls_played_since_launch')}",
@@ -86,3 +100,9 @@ class AttractCarousel(Carousel):
         }
         self.machine.events.post("stats_for_nerds", **stats)
         self.machine.events.post("request_mc_stats")
+
+    def _on_flipper_cradle_release(self, **kwargs):
+        del kwargs
+        if self.stats_interval:
+            self.machine.clock.unschedule(self.stats_interval)
+            self.stats_interval = None
