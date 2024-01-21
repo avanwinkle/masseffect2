@@ -51,6 +51,19 @@ widget_player:
   remove_grid:
     grid_widget:
       action: remove
+  stats_for_nerds:
+    stats_widget_main:
+      action: update
+      target: window
+  mc_stats:
+    stats_widget_mc:
+      action: update
+      target: window
+  cancel_stats:
+    stats_widget_main:
+      action: remove
+    stats_widget_mc:
+      action: remove
 
 slides:
   window_slide_container:
@@ -77,7 +90,60 @@ slides:
       #   image: dual_lcd_mask_shadow
       #   z: 4
 
-# assets:
-#   images:
-#     default:
-#       load: preload
+widgets:
+  stats_widget_main:
+    - type: rectangle
+      width: 1280
+      height: 480
+      color: black
+      opacity: 0.7
+      z: 99
+    - type: text
+      text: "Stats for Nerds"
+      style: header_xs, row_title
+      z: 10000
+    - type: text
+      text: "Uptime: (uptime)"
+      style: body_xs, row_top, col_left_anchor
+      z: 10000
+    - type: text
+      text: "CPU: (cpu_percent)"
+      style: body_xs, row_top, col_right_anchor
+      z: 10000
+    - type: text
+      text: (mpf_cpu)
+      style: body_xs, row_super, col_left_anchor
+      z: 10000
+    - type: text
+      text: "MEM: (memory)"
+      style: body_xs, row_main, col_left_anchor
+      z: 10000
+    - type: text
+      text: "HDD: (disk_usage)"
+      style: body_xs, row_sub, col_left_anchor
+      z: 10000
+    - type: text
+      text: "Handlers: (mpf_handlers)"
+      style: body_xs, row_super, col_right_anchor
+      z: 10000
+    - type: text
+      text: "Inp: (audit)"
+      style: body_xs, row_bottom, col_right_anchor
+      z: 10000
+  stats_widget_mc:
+    - type: text
+      text: (mc_cpu)
+      style: body_xs, row_above, col_left_anchor
+      z: 10000
+    - type: text
+      text: "Slides: (slides)"
+      style: body_xs, row_above, col_right_anchor
+      z: 10000
+    - type: text
+      text: "Children: (window) / (main) / (lcd_right)"
+      style: body_xs, row_main, col_right_anchor
+      z: 10000
+    - type: text
+      text: "Refs: (refs)"
+      style: body_xs, row_sub, col_right_anchor
+      z: 10000

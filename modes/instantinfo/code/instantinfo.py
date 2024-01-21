@@ -2,7 +2,7 @@
 
 from custom_code.squadmate_status import SquadmateStatus
 from mpf.modes.carousel.code.carousel import Carousel
-
+from mpf.core.delays import DelayManager
 
 class InstantInfo(Carousel):
     """Carousel mode with custom code to control items list."""
@@ -13,7 +13,14 @@ class InstantInfo(Carousel):
         if self.machine.modes.normandyattack.active:
             return
         self._all_items = self._build_items_list()
+        self.delay = DelayManager(self.machine)
+        self.add_mode_event_handler("flipper_cancel", self._on_flipper_cancel)
+        self.add_mode_event_handler("both_flippers_one", self._on_flipper_release)
         super().mode_start(**kwargs)
+
+    def mode_stop(self, **kwargs):
+        del kwargs
+        self.delay.remove("cancel_stats")
 
     def _build_items_list(self):
         player = self.machine.game.player
@@ -89,3 +96,16 @@ class InstantInfo(Carousel):
                      "collectorship_base", "derelictreaper", "normandyattack", "suicide_base"]:
             if self.machine.modes[mode].active:
                 return mode
+
+    def _on_flipper_cancel(self, **kwargs):
+        del kwargs
+        self.machine.events.post("cancel_stats")
+        self.delay.reset(name="instantinfo_stats", ms=5000, callback=self._show_stats)
+
+    def _on_flipper_release(self, **kwargs):
+        del kwargs
+        self.delay.remove("cancel_stats")
+
+    def _show_stats(self, **kwargs):
+        del kwargs
+        self.machine.events.post("request_stats", update_interval=5)

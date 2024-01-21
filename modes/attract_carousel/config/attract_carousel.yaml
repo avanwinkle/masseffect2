@@ -116,22 +116,6 @@ slide_player:
     pinstrat_portrait_slide:
       action: play
       target: lcd_right
-  stats_for_nerds:
-    stats_slide:
-      action: play
-      target: main
-      priority: 1000
-    stats_portrait_slide:
-      action: play
-      target: lcd_right
-      priority: 1000
-  flipper_cradle_release:
-    stats_slide:
-      action: remove
-      target: main
-    stats_portrait_slide:
-      action: remove
-      target: lcd_right
 
 slides:
   ball_search_slide:
@@ -183,46 +167,6 @@ slides:
         x: 0
         z: 0
         opacity: 0.5
-  stats_slide:
-    widgets:
-      - type: text
-        text: "Stats for Nerds"
-        style: header_xs, row_title
-      - type: text
-        text: "Uptime: (uptime)"
-        style: body_xs, row_top, col_left_anchor
-      - type: text
-        text: "CPU: (cpu_percent)"
-        style: body_xs, row_top, col_right_anchor
-      - type: text
-        text: (mpf_cpu)
-        style: body_xs, row_super, col_left_anchor
-      - type: text
-        text: "MEM: (memory)"
-        style: body_xs, row_main, col_left_anchor
-      - type: text
-        text: "HDD: (disk_usage)"
-        style: body_xs, row_sub, col_left_anchor
-      - type: image
-        image: splashscreen
-        anchor_x: left
-        x: 0
-        z: 0
-        opacity: 0.5
-  stats_portrait_slide:
-    widgets:
-      - type: text
-        text: "Handlers: (mpf_handlers)"
-        style: body_xs, row_super, col_left_anchor
-      - type: text
-        text: "Inp: (audit)"
-        style: body_xs, row_bottom, col_left_anchor
-      - type: image
-        image: splashscreen
-        anchor_x: right
-        x: 110%
-        z: 0
-        opacity: 0.5
 
 sounds:
   credits_complete:
@@ -239,17 +183,6 @@ sound_player:
   not_enough_credits: credits_needed
   machine_var_credits_numerator{value>0}: credits_incomplete
   machine_var_credits_whole_num{value>0}: credits_complete
-
-widget_player:
-  mc_stats:
-    mc_stats_main_widget:
-      action: update
-      slide: stats_slide
-      target: main
-    mc_stats_side_widget:
-      action: update
-      slide: stats_portrait_slide
-      target: lcd_right
 
 widgets:
   attract_widget_dmd:
@@ -274,20 +207,6 @@ widgets:
     - type: image
       image: pinstrat_player_4
       style: pinstrat_image
-  mc_stats_main_widget:
-    - type: text
-      text: (mc_cpu)
-      style: body_xs, row_above, col_left_anchor
-  mc_stats_side_widget:
-    - type: text
-      text: "Slides: (slides)"
-      style: body_xs, row_above, col_left_anchor
-    - type: text
-      text: "Children: (window) / (main) / (lcd_right)"
-      style: body_xs, row_main, col_left_anchor
-    - type: text
-      text: "Refs: (refs)"
-      style: body_xs, row_sub, col_left_anchor
 
 images:
   pinstrat_player_1:
