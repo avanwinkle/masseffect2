@@ -305,6 +305,7 @@ class MPFSquadmateHandlers(CustomCode):
         self.log.info("on_stop called for recruit mission, kwargs are %s", kwargs)
         self.machine.events.remove_handler(self._on_stop)
         self.machine.events.remove_handler(self._on_complete)
+        self.machine.events.remove_handler(self._on_mission_resumed)
 
         # If we drained on legion but completed the recruitment, that's fine
         if kwargs.get("squadmate") == "legion" and self.machine.game.player["status_legion"] == 4:

@@ -100,7 +100,7 @@ widgets:
       z: 99
     - type: text
       text: "Stats for Nerds"
-      style: header_xs, row_title
+      style: header_xs, row_title, col_left_indent
       z: 10000
     - type: text
       text: "Uptime: (uptime)"

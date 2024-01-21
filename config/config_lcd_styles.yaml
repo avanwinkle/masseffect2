@@ -241,24 +241,25 @@ widget_styles:
     anchor_y: bottom
     y: 568
     opacity: 0
-    z: 6
+    z: 203
   reputation_paragon:
     anchor_x: right
     anchor_y: top
     y: 548
     x: center-2
-    z: 5
+    z: 201
     opacity: 0
   reputation_renegade:
     anchor_x: left
     anchor_y: top
     y: 548
     x: center+2
-    z: 5
+    z: 201
     opacity: 0
   reputation_label:
     anchor_y: top
     y: 510
+    z: 203
     opacity: 0
 
   # SQUAD SPECIALISTS

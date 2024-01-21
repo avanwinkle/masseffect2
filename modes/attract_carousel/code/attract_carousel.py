@@ -27,6 +27,8 @@ class AttractCarousel(Carousel):
         self.add_mode_event_handler("machine_var_credit_units", self._on_credits)
         self.add_mode_event_handler("not_enough_credits", self._on_credits)
 
+        self.delay.add(name="attract_check_modes", callback=self._validate_clean_slate, ms=1000)
+
     def mode_stop(self, **kwargs):
         del kwargs
         self.machine.events.post("cancel_stats")
@@ -69,3 +71,12 @@ class AttractCarousel(Carousel):
     def _on_flipper_cradle_release(self, **kwargs):
         del kwargs
         self.machine.events.post("cancel_stats")
+
+    def _validate_clean_slate(self, **kwargs):
+        del kwargs
+        expected_modes = ['attract', 'attract_carousel', 'credits', 'mainmenu', 'service', 'tilt']
+        actual_modes = sorted([m.name for m in self.machine.mode_controller.active_modes])
+        if expected_modes != actual_modes:
+            self.machine.log.warning("Unexpected mode found during attract. Current active modes: %s", actual_modes)
+        else:
+            self.machine.log.info("All and only expected modes running during attract.")

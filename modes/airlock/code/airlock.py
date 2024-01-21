@@ -1,5 +1,4 @@
 import logging
-from mpf.core.delays import DelayManager
 from mpf.core.mode import Mode
 from mpf.core.rgb_color import RGBColor
 
@@ -8,7 +7,6 @@ class Airlock(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Airlock")
-        self.delay = DelayManager(self.machine)
         self.settings = self.config.get("mode_settings")
 
         self._bd_physical_lock = None
@@ -38,7 +36,6 @@ class Airlock(Mode):
 
     def mode_stop(self, **kwargs):
         del kwargs
-        self.delay.remove("captive_ball_suspend")
         self.machine.switch_controller.remove_switch_handler(
             's_airlock_entrance', self._check_bypass)
 

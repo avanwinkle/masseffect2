@@ -14,7 +14,7 @@ def get_process_stats(process_name):
     return '{} C/R/V: {} / {}/{} MB'.format(
         process_name,
         # For some reason as_dict doesn't update on intervals
-        _process.cpu_percent(),
+        f"{_process.cpu_percent():0.1f}",
         round(_attrs['memory_info'].rss / 1048576),
         round(_attrs['memory_info'].vms / 1048576))
 
@@ -56,7 +56,7 @@ class MPFStats(CustomCode):
 
         stats = {
             "uptime": f"{uptime}".split(".")[0],
-            "cpu_percent": f"{cpu_percent():0.1f} %",
+            "cpu_percent": f"{cpu_percent():0.1f}",
             "mpf_cpu": get_process_stats("MPF"),
             "memory": f"{mem.available / mb:0.0f}MB available ({mem.total / mb:0.0f}MB total)",
             "disk_usage": f"{du.free / gb:0.1f}GB free ({du.total / gb:0.1f}GB total)",

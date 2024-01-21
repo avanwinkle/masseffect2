@@ -1,5 +1,4 @@
 import logging
-from mpf.core.delays import DelayManager
 from mpf.core.mode import Mode
 from mpf.core.rgb_color import RGBColor
 
@@ -12,7 +11,6 @@ class Field(Mode):
         self.log = logging.getLogger("Field")
         self._hints = None
         self._hint_index = None
-        self.delay = DelayManager(self.machine)
 
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
@@ -23,15 +21,12 @@ class Field(Mode):
         self.add_mode_event_handler("multiplayer_game", self._update_hints)
         self.add_mode_event_handler("timer_field_hints_timer_complete", self._update_hints)
 
-    def mode_stop(self, **kwargs):
-        del kwargs
-        self.delay.remove("generate_hints")
-
     def generate_hints(self, **kwargs):
         """Assemble a list of hints for the main slide."""
         if kwargs.get("delay_ms"):
             # Sometimes we want to delay the slide update, e.g. if an
-            # overlay slide is fading in over the main slide
+            # overlay slide is fading in over the main slide.
+            # Mode delays will automatically be removed on mode end.
             self.delay.reset(name="generate_hints",
                              ms=kwargs['delay_ms'],
                              callback=self.generate_hints)

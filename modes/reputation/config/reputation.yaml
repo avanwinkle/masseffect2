@@ -134,14 +134,12 @@ widgets:
       - type: text
         text: "  +1 Reputation"
         style: reputation_title, col_left_anchor, color_ui_green_light
-        z: 203
         animations:
           add_to_slide: reputation_slide_in
           reputation_fadeout: reputation_slide_out
       - type: text
         text: Paragon
         font_size: 18
-        z: 203
         style: reputation_label, col_left_anchor, color_ui_green_light
         animations:
           add_to_slide: reputation_slide_in
@@ -149,7 +147,6 @@ widgets:
       - type: text
         text: Renegade
         font_size: 18
-        z: 203
         style: reputation_label, col_right_anchor, color_ui_green_light
         animations:
           add_to_slide: reputation_slide_in
@@ -166,7 +163,6 @@ widgets:
       - type: image
         image: reputation_paragon
         style: reputation_paragon
-        z: 201
         auto_play: false
         animations:
           add_to_slide: reputation_slide_in
@@ -175,7 +171,6 @@ widgets:
       - type: image
         image: reputation_renegade
         style: reputation_renegade
-        z: 201
         auto_play: false
         animations:
           add_to_slide: reputation_slide_in
