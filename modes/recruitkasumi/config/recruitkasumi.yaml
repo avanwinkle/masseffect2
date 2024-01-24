@@ -29,6 +29,7 @@ event_player:
       instructions_sub: Don't touch the alarms!
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitkasumi
       env: kasumi
       color: color_kasumi_dark
       shot_profile: alarmed_shot_profile

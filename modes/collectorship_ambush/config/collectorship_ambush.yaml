@@ -21,6 +21,7 @@ mode:
 event_player:
   mode_collectorship_ambush_started.2:
     set_mission_shots:
+      mission_name: collectorship_ambush
       shots_total: 5
       is_resumable: 0
       ticks: 20
@@ -105,6 +106,9 @@ show_player:
         flashers: l_flash_back_panel_left
     ambush_show:
       action: play
+    gi_massrelay:
+      show_tokens:
+        color: color_collectors
   stop_mode_collectorship_ambush:
     ambush_flasher_backpanel:
       action: stop

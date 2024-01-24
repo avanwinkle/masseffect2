@@ -19,6 +19,7 @@ mode:
 event_player:
   mode_collectorship_husk_started.2:
     set_mission_shots:
+      set_mission_name: collectorship_husk
       shots_total: 10
       is_resumable: 1
       ticks: 20
@@ -114,6 +115,9 @@ show_player:
   mode_collectorship_husk_started:
     husk_standup_show:
       action: play
+    gi_massrelay:
+      show_tokens:
+        color: color_husk
   husk_build_shot_hit:
     husk_standup_flash_show:
       action: play

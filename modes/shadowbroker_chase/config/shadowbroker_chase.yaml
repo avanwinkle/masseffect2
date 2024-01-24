@@ -315,23 +315,23 @@ sound_player:
   # --- calls for unsuccessful shots
   play_liara_oncoming_traffic:
     liara_oncoming_traffic:
-      max_queue_time: 0.2s
+      max_queue_time: 200ms
       events_when_stopped: callback_shepard_well_be_fine
   play_liara_need_to_go_faster:
     liara_need_to_go_faster:
-      max_queue_time: 0.2s
+      max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
   play_liara_shes_getting_away_3:
     liara_shes_getting_away_3:
-      max_queue_time: 0.2s
+      max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
   play_liara_shes_almost_out_of_range:
     liara_shes_almost_out_of_range:
-      max_queue_time: 0.2s
+      max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
   play_liara_were_losing_her:
     liara_were_losing_her:
-      max_queue_time: 0.2s
+      max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
   # -- unsuccessful shots without callbacks
   play_liara_dont_lose_her: liara_dont_lose_her

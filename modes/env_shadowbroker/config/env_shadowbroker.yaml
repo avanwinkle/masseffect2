@@ -11,16 +11,16 @@ sound_player:
   envshot_right_orbit_hit: broker_hit
   envshot_kickback_hit:
     broker_attack:
-      max_queue_time: 0
+      max_queue_time: 100ms
   envshot_dropbank_hit:
     broker_attack:
-      max_queue_time: 0
+      max_queue_time: 100ms
   envshot_hitbank_hit:
     broker_attack:
-      max_queue_time: 0
+      max_queue_time: 100ms
   envshot_outlane_hit:
     broker_attack:
-      max_queue_time: 0
+      max_queue_time: 100ms
 
 sound_pools:
   broker_attack:

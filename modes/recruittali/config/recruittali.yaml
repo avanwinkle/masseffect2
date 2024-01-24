@@ -22,8 +22,6 @@ mode:
 
 event_player:
   mode_recruittali_started.1:
-    set_environment:
-      env: geth
     show_recruit_instructions:
       squadmate: tali
       portrait: recruittali
@@ -295,35 +293,35 @@ sounds:
   tali_attack_shields_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289271_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_shields_2:
     file: en_us_hench_tali_ss_global_hench_tali_00289272_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_shields_3:
     file: en_us_hench_tali_ss_global_hench_tali_00289273_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_shields_4:
     file: en_us_hench_tali_ss_global_hench_tali_00289274_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_armor_1:
     file: en_us_hench_tali_ss_global_hench_tali_00289276_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_armor_2:
     file: en_us_hench_tali_ss_global_hench_tali_00289277_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_armor_3:
     file: en_us_hench_tali_ss_global_hench_tali_00289278_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   tali_attack_armor_4:
     file: en_us_hench_tali_ss_global_hench_tali_00289279_m.wav
     track: voice
-    max_queue_time: 0
+    max_queue_time: 500ms
   reegar_missionstart:
     file: en_us_suntla_quarianleader_suntla_quarianleader_d_00253414_m.wav
     track: voice

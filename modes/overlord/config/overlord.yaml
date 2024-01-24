@@ -36,6 +36,7 @@ mode:
 event_player:
   mode_intro_complete.2:
     set_mission_shots:
+      mission_name: overlord
       shots_total: 5
       shots_remaining: 5
       is_resumable: 0
@@ -277,8 +278,8 @@ show_player:
     color_dual_alternating_default:
       speed: 2
       show_tokens:
-        leds1: l_mass_relay_light_0, l_mass_relay_light_2, l_mass_relay_light_4, l_mass_relay_light_6, l_mass_relay_light_8, l_mass_relay_light_10
-        leds2: l_mass_relay_light_1, l_mass_relay_light_3, l_mass_relay_light_5, l_mass_relay_light_7, l_mass_relay_light_9, l_mass_relay_light_11
+        leds1: l_mass_relay_light_0, l_mass_relay_light_1, l_mass_relay_light_2, l_mass_relay_light_9, l_mass_relay_light_10, l_mass_relay_light_11
+        leds2: l_mass_relay_light_3, l_mass_relay_light_4, l_mass_relay_light_5, l_mass_relay_light_6, l_mass_relay_light_7, l_mass_relay_light_8
         color1: color_overlord
         color2: color_overlord_orange
   disable_hackshots:

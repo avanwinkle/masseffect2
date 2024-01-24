@@ -37,6 +37,7 @@ event_player:
       instructions_main: Fill meter to hack heretics
       instructions_sub: "Meter locked if geth\nreach your position"
     set_mission_shots:
+      mission_name: recruitlegion
       is_resumable: 1
       shots_total: 5
       ticks: 60

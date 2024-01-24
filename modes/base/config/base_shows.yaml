@@ -95,7 +95,7 @@ shows:
     - duration: 400ms
       lights:
         (leds): (color2)
-  color_dual_alternating_default:
+  color_dual_flashing_default:
     - duration: 400ms
       lights:
         (leds1): (color1)
@@ -104,6 +104,15 @@ shows:
       lights:
         (leds1): (color2)
         (leds2): (color1)
+  color_dual_alternating_default:
+    - duration: 400ms
+      lights:
+        (leds1): (color1)
+        (leds2): off
+    - duration: 400ms
+      lights:
+        (leds1): off
+        (leds2): (color2)
   extra_ball_available:
     - time: 0
       lights:

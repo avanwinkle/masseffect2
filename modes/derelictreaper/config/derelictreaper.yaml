@@ -63,6 +63,7 @@ event_player:
   # Reset the mission shots on each reapercore, to reduce values on "resume"
   enable_reapercore.2:
     set_mission_shots:
+      mission_name: derelictreaper
       shots_total: 3
       ticks: 20
       is_resumable: 1
@@ -193,6 +194,11 @@ show_player:
   mode_derelictreaper_started:
     derelictreaper_cineanim:
       loops: 0
+    led_12_chase_single:
+      speed: 4
+      show_tokens:
+        color: color_husk
+        fade: 250ms
   mode_intro_skipped:
     derelictreaper_cineanim:
       action: stop

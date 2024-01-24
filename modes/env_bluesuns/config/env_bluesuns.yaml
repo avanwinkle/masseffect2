@@ -13,7 +13,7 @@ sound_player:
   envshot_right_orbit_hit: batarian_hit
   envshot_kickback_hit:
     bluesuns_talking:
-      max_queue_time: 0
+      max_queue_time: 100ms
 
 sound_pools:
   turian_hit:

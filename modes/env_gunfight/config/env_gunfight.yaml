@@ -30,23 +30,23 @@ sound_player:
   shepdead_garrus:
     shepdead_garrus:
       action: play
-      max_queue_time: 0
+      max_queue_time: 100ms
   shepdead_grunt:
     shepdead_grunt:
       action: play
-      max_queue_time: 0
+      max_queue_time: 100ms
   shepdead_jack:
     shepdead_jack:
       action: play
-      max_queue_time: 0
+      max_queue_time: 100ms
   shepdead_jacob:
     shepdead_jacob:
       action: play
-      max_queue_time: 0
+      max_queue_time: 100ms
   shepdead_miranda:
     shepdead_miranda:
       action: play
-      max_queue_time: 0
+      max_queue_time: 100ms
 
 sound_pools:
   shepdead_garrus:

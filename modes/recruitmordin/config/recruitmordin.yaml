@@ -30,8 +30,9 @@ event_player:
       instructions_sub: Both Ramps to turn on fans
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitmordin
       color: color_mordin
-      env: bloodback
+      env: bloodpack
       persist_name: recruitmordin
       shots_total: 4
       is_resumable: 1

@@ -24,6 +24,7 @@ mode:
 event_player:
   mode_n7_assignments_started.2:
     set_mission_shots:
+      mission_name: n7_assignments
       shots_total: 5  # Will yield base value / 25 = 4,000pts
       shots_remaining: 1
       ticks: 12
@@ -175,9 +176,6 @@ slide_player:
 
 slides:
   n7_hurryupslide:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 500ms
@@ -197,9 +195,6 @@ slides:
       - widget: n7_logo
       - widget: background_console
   n7_dossier:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 500ms

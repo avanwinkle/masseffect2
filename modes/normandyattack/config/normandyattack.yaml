@@ -232,6 +232,11 @@ show_player:
     normandyattack_show:
       action: play
       loops: 0
+    led_12_chase_single:
+      speed: 2
+      show_tokens:
+        color: color_health
+        fade: 50ms
 
 shows:
   normandyattack_shutdown_show:

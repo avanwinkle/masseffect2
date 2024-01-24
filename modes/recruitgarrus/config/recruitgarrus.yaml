@@ -30,6 +30,7 @@ event_player:
       instructions_sub: Close the Shutters
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitgarrus
       color: color_garrus
       env: bloodpack
       shots_total: 4
@@ -71,6 +72,10 @@ show_player:
   mode_intro_skipped:
     recruitintro_garrus:
       action: stop
+  mode_intro_complete:
+    gi_massrelay:
+      show_tokens:
+        color: color_garrus%50
   logicblock_doors_closed_counter_hit:
     flash_all_shields_show:
       loops: 6
@@ -118,7 +123,7 @@ slides:
       - type: video
         video: recruitgarrus_garm
         end_behavior: pause
-        volume: 0.4
+        volume: 0.7
       - type: image
         image: portrait_recruitgarrus
 
@@ -161,7 +166,7 @@ sound_pools:
     type: random_force_all
     track: voice
     sounds: garrus_taking_too_much_damage, garrus_i_need_help_with_this_guy, garrus_theyve_gotten_through, garrus_taking_damage_1, garrus_taking_damage_2, garrus_taking_damage_3
-    max_queue_time: 0
+    max_queue_time: 100ms
     ducking:
       target: music
       attenuation: 0.8

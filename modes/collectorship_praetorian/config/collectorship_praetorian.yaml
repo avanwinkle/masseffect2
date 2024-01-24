@@ -30,6 +30,7 @@ event_player:
     - missiontimer_start
   mode_collectorship_praetorian_started.2:
     set_mission_shots:
+      mission_name: collectorship_praetorian
       shots_total: 2 # Undercut the number of shots for bigger score
       is_resumable: 0
       ticks: 20
@@ -219,31 +220,25 @@ show_player:
       priority: 100
       show_tokens:
         leds: shot_shields
-    flash:
-      action: play
-      speed: 50
-      loops: 10
-      priority: 100
-      show_tokens:
-        leds: l_flash_dragon_right, l_flash_battering_ram, l_flash_left_orbit
-    flasher_show_triple:
-      action: play
-      loops: 3
-      speed: 7
-      show_tokens:
-        flashers: l_flash_kickback, l_flash_right_orbit, l_flash_dragon_left
-    pulse_playfield:
-      loops: 5
-      show_tokens:
-        color: color_praetorian
-  praetorian_attack_three:
-    flash:
+    color_flashing:
       action: play
       speed: 20
       loops: 10
       priority: 100
       show_tokens:
-        leds: l_flash_slingshots
+        leds: light_mass_relay
+        color: color_praetorian
+    pulse_playfield:
+      loops: 5
+      show_tokens:
+        color: color_praetorian
+  praetorian_attack_three:
+    led_12_chase_duo:
+      loops: 10
+      speed: 8
+      show_tokens:
+        color: color_praetorian
+        fade: 0
     color_flashing_fast:
       loops: 8
       speed: 4
@@ -272,7 +267,7 @@ shows:
     - time: 0
       lights:
         gi: off
-        l_dragon_fire: on
+        light_mass_relay: color_praetorian
     - time: '+1'  # This is just so there's duration and we can "loop" to stop the show
 
 sound_player:

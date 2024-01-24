@@ -29,6 +29,7 @@ event_player:
   mode_powers_started:
     # For jack, we don't persist shots through Powers because we reset on rounds
     set_mission_shots:
+      mission_name: recruitjack
       color: color_jack
       env: bluesuns
       is_resumable: 1
