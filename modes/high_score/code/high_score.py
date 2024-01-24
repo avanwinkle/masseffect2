@@ -1,6 +1,9 @@
 """Contains the custom High Scoresmode code."""
 
+from random import choice
 from mpf.modes.high_score.code.high_score import HighScore as HighScoreBase
+
+DEFAULT_NAMES = ("ANDERSON", "JACOB", "BLASTO", "CONRAD", "ARIA", "ASHLEY", "KAIDEN", "SAREN", "ARCHANGEL", "RYDER", "WREX", "SOVERIGN", "BROOKS")
 
 
 class HighScore(HighScoreBase):
@@ -31,3 +34,12 @@ class HighScore(HighScoreBase):
                 medal = "default"
         self.machine.events.post("show_score_award_display", medal=medal,
                                  portrait=f"n7_achievement_{medal}", **kwargs)
+
+    # pylint: disable-msg=too-many-arguments
+    async def _ask_player_for_initials(self, *args, **kwargs) -> str:
+        """Override base class initials to provide defaults."""
+        input_initials = await super()._ask_for_initials(*args, **kwargs)
+        if not input_initials:
+            existing_initials = self.high_scores.keys()
+            input_initials = choice([n for n in DEFAULT_NAMES if n not in existing_initials])
+        return input_initials

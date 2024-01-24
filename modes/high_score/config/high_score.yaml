@@ -36,15 +36,15 @@ high_score:
     # These values are not parsed by python when copied to the default
     # high_scores file, so do *not* underscore-separate them
     score:
-      - SHEPARD: 20000000
-      - GARRUS: 16000000
-      - GRUNT: 12000000
-      - TALI: 10000000
-      - JACK: 8000000
-      - ANDERSON: 6000000
-      - THANE: 5000000
-      - MORDIN: 4000000
-      - JACOB: 200000
+      - SHEPARD: 12000000
+      - GARRUS: 10000000
+      - GRUNT: 8000000
+      - TALI: 6000000
+      - JACK: 5000000
+      - ANDERSON: 4000000
+      - THANE: 3000000
+      - MORDIN: 2000000
+      - JACOB: 1000000
 
 timers:
   high_score_entry_timer:
