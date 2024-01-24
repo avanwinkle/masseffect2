@@ -24,7 +24,7 @@ ACHIEVEMENT_MISSIONS = (
 
 DO_SAVE_DEATHS = False  # Should dead squadmates be saved?
 SAVE_SUICIDE_PROGRESS = True  # Should suicide mission progress be saved to the career?
-
+FORCE_INITIAL = None
 
 class SaveCareer(CustomCode):
     """A custom code module for reading and writing savegame data."""
@@ -61,7 +61,7 @@ class SaveCareer(CustomCode):
             if (self.machine.settings.free_starting_mission == 2) or (
                 self.machine.settings.free_starting_mission == 1 and player["casual"]
             ):
-                starting_recruit = SquadmateStatus.random_recruit()
+                starting_recruit = FORCE_INITIAL or SquadmateStatus.random_recruit()
                 self.log.debug("Found a random recruit: %s", starting_recruit)
                 player["status_{}".format(starting_recruit)] = 3
                 player["available_missions"] = 1

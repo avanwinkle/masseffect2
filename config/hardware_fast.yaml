@@ -123,9 +123,9 @@ coils:
     # default_recycle: true
   c_dropbank_reset:
     number: 1-5
-    default_pulse_ms: 32  # Bumped up from 25
-    default_hold_power: 0.25
-    default_timed_enable_ms: 80
+    default_pulse_ms: 34  # Bumped up from 25, 32
+    default_hold_power: 0.5
+    default_timed_enable_ms: 90
     pulse_with_timed_enable: true
     pulse_events: ball_search_phase_1
   c_hold_post_up:

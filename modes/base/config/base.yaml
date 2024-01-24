@@ -235,7 +235,7 @@ variable_player:
       int: 0
   # At the end of each ball, round up to the nearest 10 points
   mode_base_will_stop:
-    score: 10 + current_player.score % 10
+    score: 10 - (current_player.score % 10)
   # Track available extra balls to re-light on next ball
   extra_ball_lit:
     extra_balls_available: 1

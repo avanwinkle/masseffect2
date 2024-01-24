@@ -74,9 +74,7 @@ class AttractCarousel(Carousel):
 
     def _validate_clean_slate(self, **kwargs):
         del kwargs
-        expected_modes = ['attract', 'attract_carousel', 'credits', 'mainmenu', 'service', 'tilt']
-        actual_modes = sorted([m.name for m in self.machine.mode_controller.active_modes])
-        if expected_modes != actual_modes:
-            self.machine.log.warning("Unexpected mode found during attract. Current active modes: %s", actual_modes)
-        else:
-            self.machine.log.info("All and only expected modes running during attract.")
+        expected_modes = ['attract', 'attract_carousel', 'credits', 'mainmenu', 'service', 'tilt', 'pinstrat']
+        for m in self.machine.mode_controller.active_modes:
+            if m.name not in expected_modes:
+                self.machine.log.warning("Unexpected mode %s found during attract.", m)

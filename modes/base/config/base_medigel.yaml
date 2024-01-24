@@ -1,8 +1,6 @@
 #config_version=6
 
 event_player:
-  medigel_enabled_shot_lit_hit:
-    - do_medigel_save
   # Disable medigel during story wizard modes because they have many saves. Completing
   # them will levelup and restore medigel anyway. Suicide also manages its
   # own ball saves, so disable for the entire suicide mission
@@ -23,6 +21,7 @@ shots:
   medigel_left_shot:
     switch: s_outlane_left
     profile: medigel_profile
+    priority: 2000
     # Enabling the shot group will auto-advance the left shot to be lit
     advance_events: player_shot_medigel_left_shot_enabled, double_medigel_success
     show_tokens:
@@ -32,6 +31,7 @@ shots:
   medigel_right_shot:
     switch: s_outlane_right
     profile: medigel_profile
+    priority: 2000
     advance_events: double_medigel_success
     show_tokens:
       leds: l_right_medigel
@@ -46,29 +46,12 @@ shot_groups:
       - s_flipper_left_active
       - s_flipper_right_active
     enable_events:
-      - levelup
-      - award_medigel_success
-      - ball_save_recruitsave_disabled{current_player.medigel>0}
-      - ball_save_default_disabled{current_player.medigel>0}
-      - ball_save_sbchase_save_disabled{current_player.medigel>0}
-      - ball_save_sbvasir_save_disabled{current_player.medigel>0}
-      - ball_save_sbhagalaz_save_disabled{current_player.medigel>0}
-      - ball_save_sbboss_save_disabled{current_player.medigel>0}
-      - ball_save_armor_disabled{current_player.medigel>0}
-      - player_lost_balls{value==0 and current_player.medigel>0}
+      - levelup{not current_player.medigel}
+      - award_medigel_success{not current_player.medigel}
     disable_events:
       - ball_save_medigel_save_saving_ball{balls>0}
-      - ball_save_recruitsave_enabled
-      - ball_save_default_enabled
-      # TODO: Create shadowbroker_base and unify the ball saves
-      - ball_save_sbchase_save_enabled
-      - ball_save_sbvasir_save_enabled
-      - ball_save_sbhagalaz_save_enabled
-      - ball_save_sbboss_save_enabled
-      - ball_save_armor_enabled
       - ball_will_end
       - cancel_medigel
-      - player_lost_balls{value>0}
 
 shot_profiles:
   medigel_profile:

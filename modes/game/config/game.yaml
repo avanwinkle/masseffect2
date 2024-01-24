@@ -87,6 +87,7 @@ widget_player:
   add_player_3:
     mp_score_widget_player_3:
       slide: multiplayer_slide
+      priority: 11
   remove_level:
     # Remove the "Level" widget and place the player3 score
     base_level_widget:
@@ -95,6 +96,7 @@ widget_player:
   add_player_4:
     mp_score_widget_player_4:
       slide: multiplayer_slide
+      priority: 12
   remove_ball:
     # Remove the "Ball" widget and place the player4 score
     base_ball_widget:

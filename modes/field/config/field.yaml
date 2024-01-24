@@ -72,6 +72,9 @@ variable_player:
     color_airlock:
       action: set
       string: color_shields
+    mission_name:
+      action: set
+      string: unset_mission_name
 
 show_player:
   mode_field_started:

@@ -34,6 +34,7 @@ event_player:
       is_resumable: 0
   shadowbroker_vasir_complete: stop_mode_shadowbroker_vasir
   vasir_shot_health_2_hit:
+    mission_collect_score: {}
     shadowbroker_vasir_complete: {}
     levelup:
       mission_name: "Datapad Recovered"
@@ -41,6 +42,8 @@ event_player:
   # Wait for the show to complete before releasing the ball
   mode_intro_complete: release_sb_hold
   release_sb_hold: disable_sb_hold|1s
+  # Scoring
+  logicblock_vasir_hits_counter_hit: mission_shot_hit
   # Relay some sounds to delay
   vasir_shot_barrier_2_hit: play_vasir_start_sound|2s
   vasir_shot_armor_2_hit: play_vasir_start_sound|2s

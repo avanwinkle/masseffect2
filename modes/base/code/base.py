@@ -1,13 +1,20 @@
 """Custom mode code for Base."""
 
+from uuid import uuid4
 from mpf.core.mode import Mode
-from custom_code.squadmates_mpf import SquadmateStatus
 
 class Base(Mode):
 
   def mode_start(self, **kwargs):
     del kwargs
     self.add_mode_event_handler("levelup", self._on_levelup)
+    self.add_mode_event_handler("medigel_enabled_shot_lit_hit", self._check_medigel)
+    self.add_mode_event_handler("mission_shot_hit", self._on_mission_hit, priority=90)
+    self.add_mode_event_handler("mission_collect_score", self._on_mission_score, priority=80)
+
+    # Assign a UUID to this user
+    if self.machine.settings.enable_analytics and not self.player.uuid:
+      self.player.uuid = uuid4()
 
   def _on_levelup(self, **kwargs):
     self.machine.events.post("queue_slide",
@@ -59,3 +66,37 @@ class Base(Mode):
         priority=1998,
         expire="5s"
         )
+
+  def _check_medigel(self, **kwargs):
+    del kwargs
+    # Don't use medigel during multiball
+    for mb in self.machine.multiballs:
+      if mb.enabled:
+        return
+    # The medigel shot will happen before the ball save takes effect
+    # because it has highest priority on the switch event
+    for bs in self.machine.ball_saves:
+      if bs.enabled:
+        return
+
+    self.machine.events.post("do_medigel_save")
+
+  def _on_mission_hit(self, **kwargs):
+    del kwargs
+    # For charity, include a bit of score even if the ultimate score doesn't get collected
+    self.player.add_with_kwargs("score",
+                                self.player['mission_shot_value'] // 100 * 100,
+                                source=self.player['mission_name'])
+
+  def _on_mission_score(self, **kwargs):
+    del kwargs
+    self.player.add_with_kwargs("score",
+                                self.player['temp_build_value'] // 100 * 100,
+                                source=self.player['mission_name'])
+    self.player['temp_build_value'] = 0
+
+    # mission_collect_score.80:
+    #   score: current_player.temp_build_value // 100 * 100
+    #   temp_build_value:
+    #     action: set
+    #     int: 0
