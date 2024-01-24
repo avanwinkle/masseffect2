@@ -22,6 +22,7 @@ shots:
     switch: s_outlane_left
     profile: medigel_profile
     priority: 2000
+    start_enabled: False
     # Enabling the shot group will auto-advance the left shot to be lit
     advance_events: player_shot_medigel_left_shot_enabled, double_medigel_success
     show_tokens:
@@ -32,6 +33,7 @@ shots:
     switch: s_outlane_right
     profile: medigel_profile
     priority: 2000
+    start_enabled: False
     advance_events: double_medigel_success
     show_tokens:
       leds: l_right_medigel
@@ -41,7 +43,7 @@ shots:
 shot_groups:
   medigel_enabled_shot:
     shots: medigel_left_shot, medigel_right_shot
-    reset_events: do_medigel_save
+    reset_events: do_medigel_save, cancel_medigel, ball_will_end
     rotate_events:
       - s_flipper_left_active
       - s_flipper_right_active
@@ -49,8 +51,7 @@ shot_groups:
       - levelup{not current_player.medigel}
       - award_medigel_success{not current_player.medigel}
     disable_events:
-      - ball_save_medigel_save_saving_ball{balls>0}
-      - ball_will_end
+      - ball_save_medigel_save_saving_ball
       - cancel_medigel
 
 shot_profiles:
@@ -76,6 +77,8 @@ ball_saves:
 variable_player:
   levelup:
     medigel: 1
+  award_medigel_success:
+    medigel: 1
   ball_save_medigel_save_saving_ball:
     medigel:
       action: set
@@ -84,8 +87,6 @@ variable_player:
     medigel:
       action: set
       int: 0
-  award_medigel_success:
-    medigel: 1
 
 slide_player:
   play_medigel_slide:

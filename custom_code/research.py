@@ -177,8 +177,12 @@ class Research(CustomCode):
         self.machine.events.post("research_check_{}".format("passed" if success else "failed"))
 
     def _check_award_medigel(self, **kwargs):
+        del kwargs
         # Player's "reputation" is an int grown by lane completions and N7 assignments.
         # Reputation is a 1% chance for award medigel, multiplied by the perk
+        # But not if the player already has medigel
+        if self.player["medigel"]:
+            return
         chance = (self.machine.game.player["reputation"] *
             (1 + self.machine.game.player["research_award_medigel_perk"])) / 100
         self.info_log("Checking award medigel with %s reputation and %s perk, total chance is %s",
