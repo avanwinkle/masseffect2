@@ -124,8 +124,6 @@ slides:
         video: recruitgarrus_garm
         end_behavior: pause
         volume: 0.7
-      - type: image
-        image: portrait_recruitgarrus
 
 sound_player:
   mode_recruitgarrus_started:

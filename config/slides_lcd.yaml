@@ -317,9 +317,6 @@ slides:
     widgets:
       - widget: (portrait_name)
   portrait_overlord_outro_complete:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 500ms
@@ -329,9 +326,6 @@ slides:
         end_behavior: pause
         volume: 0.5
   portrait_overlord_outro_incomplete:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 500ms
@@ -356,71 +350,51 @@ slides:
       video: recruitgarrus_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitgarrus
   recruit_complete_portrait_slide_grunt:
     - type: video
       video: recruitgrunt_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitgrunt
   recruit_complete_portrait_slide_jack:
     - type: video
       video: recruitjack_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitjack
   recruit_complete_portrait_slide_kasumi:
     - type: video
       video: recruitkasumi_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitkasumi
   recruit_complete_portrait_slide_legion:
     - type: video
       video: recruitlegion_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitlegion
   recruit_complete_portrait_slide_mordin:
     - type: video
       video: recruitmordin_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitmordin
   recruit_complete_portrait_slide_samara:
     - type: video
       video: recruitsamara_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitsamara
   recruit_complete_portrait_slide_tali:
     - type: video
       video: recruittali_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruittali
   recruit_complete_portrait_slide_thane:
     - type: video
       video: recruitthane_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitthane
   recruit_complete_portrait_slide_zaeed:
     - type: video
       video: recruitzaeed_complete
       volume: 0
       end_behavior: pause
-    - type: image
-      image: portrait_recruitzaeed
   # Core slides
   1player_score_slide:
     widgets:
