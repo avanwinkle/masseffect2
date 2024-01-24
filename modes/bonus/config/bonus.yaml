@@ -7,32 +7,29 @@ mode:
   use_wait_queue: true
 
 mode_settings:
-  display_delay_ms: 800ms
-  hurry_up_delay_ms: 0
+  display_delay_ms: 900ms
+  hurry_up_delay_ms: 200ms
   bonus_entries:
     - event: bonus_level
-      score: machine.base_points // 200 * 10
+      score: machine.base_points // 20000 * 1000
       player_score_entry: earned_level
     - event: bonus_squadmates
-      score: machine.base_points // 1000 * 10
+      score: machine.base_points // 100000 * 1000
       player_score_entry: earned_squadmates_count
-    - event: bonus_reputation
-      score: current_player.reputation * (current_player.paragon + current_player.renegade) * 50
-    - event: bonus_credits
-      score: machine.base_points // 10000 * 10
-      player_score_entry: credits
+    # - event: bonus_reputation
+    #   score: current_player.reputation * (current_player.paragon + current_player.renegade) * 50
     - event: bonus_minerals
       # Mineral values are weighted against 5000, so compensate the base points
       score: (current_player.planets * current_player.mineral_total * (machine.base_points * 0.0001)) // 600000 * 1000
     - event: bonus_assignments
-      score: (machine.base_points // 1000 * 30)
+      score: (machine.base_points // 100000 * 3000)
       player_score_entry: earned_assigments_completed
     - event: bonus_intel
-      score: (machine.base_points // 10000 * 50)
+      score: (machine.base_points // 1000000 * 5000)
       player_score_entry: earned_intel
     - event: bonus_upgrades
       # Award an extra 2% score for every weapon upgrade
-      score: (current_player.score - current_player.ball_starting_score) // 1000 * 20
+      score: (current_player.score - current_player.ball_starting_score) // 100000 * 2000
       player_score_entry: upgrades_completed
 
 event_player:
@@ -51,12 +48,12 @@ slide_player:
   bonus_start.2{current_player.state_machine_suicide_progress=="completed"}: end_slide_gameover
   bonus_level: bonus_level_slide
   bonus_squadmates: bonus_squadmates_slide
-  bonus_reputation: bonus_reputation_slide
-  bonus_credits: bonus_credits_slide
   bonus_minerals: bonus_minerals_slide
   bonus_assignments: bonus_assignments_slide
   bonus_intel: bonus_intel_slide
   bonus_upgrades: bonus_upgrades_slide
+  bonus_subtotal: bonus_subtotal_slide
+  show_bonus_multiplier_slide: bonus_multiplier_slide
   bonus_total: bonus_total_slide
 
 slides:
@@ -82,21 +79,6 @@ slides:
     - type: text
       text: (score)
       style: header_md, row_main, num
-  bonus_reputation_slide:
-    - type: text
-      text: "Reputation"
-      style: header_sm, row_sub
-    - type: text
-      text: (score)
-      style: header_md, row_main, num
-      # TODO: visuals for paragon/renegade
-  bonus_credits_slide:
-    - type: text
-      text: "Credits Bonus"
-      style: header_sm, row_sub
-    - type: text
-      text: (score)
-      style: header_md, row_main, num
   bonus_minerals_slide:
     - type: text
       text: "Minerals Collected"
@@ -106,7 +88,7 @@ slides:
       style: header_md, row_main, num
   bonus_assignments_slide:
     - type: text
-      text: "N7 Bonus"
+      text: "N7 Assignments"
       style: header_sm, row_sub
     - type: text
       text: (score)
@@ -130,7 +112,14 @@ slides:
       text: "Reputation Multiplier"
       style: header_sm, row_sub
     - type: text
-      text: "(multiplier)X"
+      text: "(multiplier)"
+      style: header_md, row_main, num
+  bonus_subtotal_slide:
+    - type: text
+      text: "Bonus Subtotal"
+      style: header_sm, row_sub
+    - type: text
+      text: (score)
       style: header_md, row_main, num
   bonus_total_slide:
     - type: text
