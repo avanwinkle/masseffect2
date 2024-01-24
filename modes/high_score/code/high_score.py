@@ -32,8 +32,15 @@ class HighScore(HighScoreBase):
                 medal = "bronze"
             else:
                 medal = "default"
+        if self.machine.settings.get_setting_value("free_play"):
+            award_string = "Bragging Rights"
+        else:
+            # High score earns a free credit
+            self.machine.events.post("high_score_credit")
+            award_string = "Free Game"
         self.machine.events.post("show_score_award_display", medal=medal,
-                                 portrait=f"n7_achievement_{medal}", **kwargs)
+                                 portrait=f"n7_achievement_{medal}",
+                                 award_string=award_string, **kwargs)
 
     # pylint: disable-msg=too-many-arguments
     async def _ask_player_for_initials(self, *args, **kwargs) -> str:

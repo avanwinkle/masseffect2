@@ -122,7 +122,7 @@ slides:
     transition: fade
     widgets:
       - type: text
-        text: PLAYER (player_num)
+        text: (player_name)
         style: body_sm, row_top
       - type: text
         text: (value)
@@ -134,6 +134,9 @@ slides:
   score_award_portrait:
     widgets:
     - widget: (portrait)
+    - type: text
+      text: "Reward:\n(award_string)"
+      style: body_md, row_bottom
     - type: image
       image: texture_console
 
