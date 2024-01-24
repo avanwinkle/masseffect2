@@ -173,6 +173,7 @@ class Research(CustomCode):
         return options
 
     def _on_check(self, **kwargs):
+        del kwargs
         success = len(self.get_purchaseable_options()) > 0
         self.machine.events.post("research_check_{}".format("passed" if success else "failed"))
 
@@ -181,7 +182,7 @@ class Research(CustomCode):
         # Player's "reputation" is an int grown by lane completions and N7 assignments.
         # Reputation is a 1% chance for award medigel, multiplied by the perk
         # But not if the player already has medigel
-        if self.player["medigel"]:
+        if self.machine.game.player["medigel"]:
             return
         chance = (self.machine.game.player["reputation"] *
             (1 + self.machine.game.player["research_award_medigel_perk"])) / 100
@@ -193,6 +194,7 @@ class Research(CustomCode):
             self.machine.events.post("award_medigel_success")
 
     def _check_double_medigel(self, **kwargs):
+        del kwargs
         chance = self.machine.game.player["research_double_medigel_perk"]
         if chance > 0 and random.random() < chance:
             self.machine.events.post("double_medigel_success")

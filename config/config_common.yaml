@@ -434,6 +434,8 @@ player_vars:
   #   initial_value: 0
   reputation:
     initial_value: 0
+  bonus_multiplier:
+    initial_value: 1
   resume_mission:
     initial_value: " "
     value_type: str

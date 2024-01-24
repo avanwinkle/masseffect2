@@ -23,7 +23,7 @@ mode_settings:
       score: (current_player.planets * current_player.mineral_total * (machine.base_points * 0.0001)) // 600000 * 1000
     - event: bonus_assignments
       score: (machine.base_points // 100000 * 3000)
-      player_score_entry: earned_assigments_completed
+      player_score_entry: earned_assignments_completed
     - event: bonus_intel
       score: (machine.base_points // 1000000 * 5000)
       player_score_entry: earned_intel
@@ -53,7 +53,7 @@ slide_player:
   bonus_intel: bonus_intel_slide
   bonus_upgrades: bonus_upgrades_slide
   bonus_subtotal: bonus_subtotal_slide
-  show_bonus_multiplier_slide: bonus_multiplier_slide
+  bonus_multiplier: bonus_multiplier_slide
   bonus_total: bonus_total_slide
 
 slides:
@@ -112,8 +112,8 @@ slides:
       text: "Reputation Multiplier"
       style: header_sm, row_sub
     - type: text
-      text: "(multiplier)"
-      style: header_md, row_main, num
+      text: "(multiplier:d)X"
+      style: header_md, row_main
   bonus_subtotal_slide:
     - type: text
       text: "Bonus Subtotal"
