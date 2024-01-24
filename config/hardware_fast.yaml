@@ -81,13 +81,14 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    default_pulse_ms: 55  # Increased from Spike 35
-    default_pulse_power: 0.85 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
+    # Flippers at 50/0.8 was a little weak, 55/0.85 too strong.
+    default_pulse_ms: 52  # Increased from Spike 35
+    default_pulse_power: 0.825 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 55  # Increased from Spike 35
-    default_pulse_power: 0.85
+    default_pulse_ms: 52  # Increased from Spike 35, down
+    default_pulse_power: 0.825
     default_hold_power: 0.125
   c_plunger:
     number: 1-1

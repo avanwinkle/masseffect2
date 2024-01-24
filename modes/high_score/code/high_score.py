@@ -38,7 +38,7 @@ class HighScore(HighScoreBase):
     # pylint: disable-msg=too-many-arguments
     async def _ask_player_for_initials(self, *args, **kwargs) -> str:
         """Override base class initials to provide defaults."""
-        input_initials = await super()._ask_for_initials(*args, **kwargs)
+        input_initials = await super()._ask_player_for_initials(*args, **kwargs)
         if not input_initials:
             existing_initials = self.high_scores.keys()
             input_initials = choice([n for n in DEFAULT_NAMES if n not in existing_initials])

@@ -104,6 +104,8 @@ light_player:
     light_backwall_ambient:
       color: color_door_red
       fade: 500ms
+    light_backwall_gi:
+      color: color_grunt
   firewalker_shots_red_hit:
     light_backwall_ambient:
       color: color_door_orange
@@ -112,13 +114,13 @@ light_player:
     light_backwall_ambient:
       color: color_door_green
       fade: 1s
-  mode_firewalker_will_stop:
-    gi:
-      color: on
-      fade: 500ms
-    light_backwall_ambient:
-      color: off
-      fade: 500ms
+  # mode_firewalker_will_stop:
+  #   gi:
+  #     color: on
+  #     fade: 500ms
+  #   light_backwall_ambient:
+  #     color: off
+  #     fade: 500ms
 
 shot_groups:
   firewalker_shots:
