@@ -319,7 +319,7 @@ show_player:
       key: current_power_show
       show_tokens:
         leds: (power)
-        color: BBBBBB
+        color: CC9933
     color_flashing_transparent:
       loops: 6
       speed: 2
@@ -341,7 +341,7 @@ show_player:
       key: current_power_show
       show_tokens:
         leds: (power)
-        color: DDDDDD
+        color: color_grunt
   timer_power_active_started:
     ladder_power_active:
       priority: 2000

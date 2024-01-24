@@ -47,6 +47,7 @@ class Powers(Mode):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.log = logging.getLogger("Powers")
+        self.is_power_active = None
         self.shots = []
         self.shot_group = None
         self.timer = None
@@ -64,6 +65,7 @@ class Powers(Mode):
 
     def mode_will_start(self, **kwargs):
         # These four steps are needed before the legion bailout
+        self.is_power_active = False
         self.timer = self.machine.device_manager.collections["timers"]["power_active"]
         self._base_cooldown = self.machine.variables.get("base_cooldown")
 
@@ -101,6 +103,12 @@ class Powers(Mode):
         self.add_mode_event_handler('set_mission_shots', self._set_mission_shots)
         self.add_mode_event_handler('advance_mission_shots', self._advance_mission_shots)
 
+    def mode_stop(self, **kwargs):
+        del kwargs
+        # Clear the current power
+        if self.is_power_active:
+            self._complete(is_stopping=True)
+
     def _mode_intro_complete(self, **kwargs):
         # On mode intro complete, if there's a power the player has then enable it immediately
         power = self.machine.game.player["power"]
@@ -124,6 +132,7 @@ class Powers(Mode):
             if self.timer.ticks > 0:
                 self.timer.start()
             self._play_sound(f"power_{power}_active")
+            self.is_power_active = True
         except IndexError:
             self.machine.events.post("power_activation_failure", power=power)
 
@@ -160,13 +169,17 @@ class Powers(Mode):
                                  opacity=opacity
                                  )
 
-    def _complete(self, **kwargs):
+    def _complete(self, is_stopping=False, **kwargs):
+        del kwargs
         self.machine.game.player["power"] = " "
+        self.is_power_active = False
         self.shot_group.disable_rotation()
         # Clear out specific handlers we added to manage the power while it was active
         for handler in self.handlers:
             self.machine.events.remove_handler_by_key(handler)
-        self.machine.events.post("power_activation_complete")
+        self.handlers = []
+        if not is_stopping:
+            self.machine.events.post("power_activation_complete")
 
     def _get_power_shots(self, include_off=False, explicit_state=None, explicit_target=None):
         shots = []
@@ -355,10 +368,6 @@ class Powers(Mode):
         self.handlers.append(self.add_mode_event_handler(
             'flipper_cancel',
             self._rotate_cloak))
-        self.handlers.append(self.add_mode_event_handler(
-            'timer_power_active_complete',
-            self._complete
-        ))
 
     def _rotate_cloak(self, **kwargs):
         # TODO: Update MPF with triggering_switch kwarg to allow rotation
@@ -390,7 +399,4 @@ class Powers(Mode):
         self.machine.events.post("enable_drone")
 
     def _activate_singularity(self):
-        self.handlers.append(self.add_mode_event_handler(
-            'timer_power_active_complete', self._complete
-        ))
         self.machine.events.post("enable_singularity")
