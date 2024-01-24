@@ -6,6 +6,23 @@ tilt:
   multiple_hit_window: 3s
   settle_time: 5s
 
+show_player:
+  tilt_warning:
+    tilt_warning_show:
+      action: play
+      loops: 0
+
+shows:
+  tilt_warning_show:
+    - time: 0
+      lights:
+        light_pf: black
+        light_backwall_ambient: black
+        light_backwall_gi: color_health
+        light_mass_relay: black
+        gi: black
+    - time: 2s
+
 slide_player:
   tilt_warning_1:
     tilt_warning_1:
@@ -34,11 +51,17 @@ slides:
       - type: text
         text: WARNING
         style: header_lg, row_main
+      - type: text
+        text: "This game was built by hand.\nPlease be gentle."
+        style: body_sm, row_bottom_margin
       - widget: background_console
   tilt_warning_2:
       - type: text
         text: DANGER!
         style: header_lg, row_main
+      - type: text
+        text: "This game is the only one in existence.\nPlease take care of it."
+        style: body_sm, row_bottom_margin
       - widget: background_console
   tilt_portrait:
       - type: image
@@ -58,6 +81,12 @@ sound_pools:
   tilt_warning_normal:
     track: voice
     type: random_force_all
+    ducking:
+      target: music, levelup
+      attenuation: 0.5
+      attack: 100ms
+      release: 500ms
+      release_point: 200ms
     sounds:
       - tilt_kasumi_watch_where_youre_shooting{current_player.status_kasumi==4}
       - tilt_kasumi_watch_it{current_player.status_kasumi==4}
@@ -80,6 +109,12 @@ sound_pools:
   tilt_warning_severe:
     track: voice
     type: random_force_all
+    ducking:
+      target: music, levelup
+      attenuation: 0.5
+      attack: 100ms
+      release: 500ms
+      release_point: 200ms
     sounds:
       - tilt_jack_get_off_my_ass{current_player.status_jack==4}
       - tilt_garrus_hold_fire{current_player.status_garrus==4}
