@@ -476,48 +476,30 @@ widget_styles:
     font_size: 12
 
 animations:
-  popup_enter_animation:
-    - property: y
-      value: 50
-      relative: true
-      duration: 500ms
-      easing: out_circ
-    - property: opacity
-      value: 1
-      duration: 500ms
-      easing: out_circ
-      timing: with_previous
-  popup_exit_animation:
-    - property: opacity
-      value: 0
-      duration: 500ms
-      easing: in_sine
-    - property: y
-      value: -50
-      relative: true
-      duration: 500ms
-      timing: with_previous
-      easing: in_sine
   pulse_power_cooldown:
     - property: opacity
       value: 0.4
       duration: 900ms
       easing: in_sine
+      step: 0.1
       timing: with_previous
     - property: opacity
       value: 0.2
       duration: 900ms
       easing: in_sine
+      step: 0.1
       repeat: true
   pulse_power_highlight:
     - property: opacity
       value: 1.0
       duration: 500ms
       easing: in_sine
+      step: 0.1
     - property: opacity
       value: 0.5
       duration: 500ms
       easing: in_sine
+      step: 0.1
       repeat: true
   power_widget_cooldown_complete:
     - property: opacity
@@ -533,16 +515,6 @@ animations:
       value: (complete_height)
       duration: 50ms
       repeat: false
-  portrait_enter_animation:
-    - property: opacity
-      value: 1
-      duration: 500ms
-      easing: out_circ
-  portrait_exit_animation:
-    - property: opacity
-      value: 0
-      duration: 500ms
-      easing: in_sine
   reputation_slide_in:
     - property: y, opacity
       value: -140, 1

@@ -17,7 +17,7 @@ mpf:
   report_crashes: never
 
 mpf-mc:
-  fps: 60
+  fps: 30
 
 kivy_config:
   graphics:
@@ -309,38 +309,37 @@ player_vars:
   color_mball:
     initial_value: "22FF33"  # color_overlord
     value_type: str
-  difficulty:
-    initial_value: 0
-  readonly:
-    initial_value: 0
-  balls_played:
-    initial_value: 0
-  ball_time:
-    initial_value: 0
-  total_ball_time:
-    initial_value: 0
-  bypass_missionselect:
-    initial_value: 0
-  assignments_played:
-    initial_value: 0
+  # difficulty:
+  #   initial_value: 0
+  # readonly:
+  #   initial_value: 0
+  # balls_played:
+  #   initial_value: 0
+  # ball_time:
+  #   initial_value: 0
+  # total_ball_time:
+  #   initial_value: 0
+  # bypass_missionselect:
+  #   initial_value: 0
+  # assignments_played:
+  #   initial_value: 0
   assignments_completed:
     initial_value: 0
-  available_missions:
-    initial_value: 0
+  # available_missions:
+  #   initial_value: 0
   missionname:
     initial_value: " "
     value_type: str
   mission_instructions:
     initial_value: " "
     value_type: str
-  available_shipupgrades:
-    initial_value: 0
+  # available_shipupgrades:
+  #   initial_value: 0
   casual:
     initial_value: 1
-  credits:
-    initial_value: 0
   # some values are tracked through a career but only get bonus for
-  # what's "earned" during the game
+  # what's "earned" during the game. Initialize as value 0 because
+  # the MPF bonus mode erroneously defaults to 1 for unset values
   earned_assignments_completed:
     initial_value: 0
   earned_intel:
@@ -350,29 +349,29 @@ player_vars:
   earned_squadmates_count:
     initial_value: 0
   # Track which Firewalker Packet Shots have been completed
-  fwps_lo:
-    initial_value: 0
-  fwps_kb:
-    initial_value: 0
-  fwps_lr:
-    initial_value: 0
-  fwps_rr:
-    initial_value: 0
-  fwps_ro:
-    initial_value: 0
+  # fwps_lo:
+  #   initial_value: 0
+  # fwps_kb:
+  #   initial_value: 0
+  # fwps_lr:
+  #   initial_value: 0
+  # fwps_rr:
+  #   initial_value: 0
+  # fwps_ro:
+  #   initial_value: 0
   geth_colossus_state:
     initial_value: 6
   harbinger_multiplier:
     initial_value: 1
-  heretic_progress:
-    initial_value: 0
-  high_flow:
-    initial_value: 0
+  # heretic_progress:
+  #   initial_value: 0
+  # high_flow:
+  #   initial_value: 0
   high_flow_resume:
     initial_value: " "
     value_type: str
-  intel:
-    initial_value: 0
+  # intel:
+  #   initial_value: 0
   level:
     initial_value: 1
   last_mission:
@@ -390,13 +389,13 @@ player_vars:
   mineral_total:
     initial_value: 0
   mineral_iridium:
-    initial_value: 20000
+    initial_value: 15000
   mineral_palladium:
-    initial_value: 20000
+    initial_value: 15000
   mineral_platinum:
-    initial_value: 20000
+    initial_value: 15000
   mineral_eezo:
-    initial_value: 2500
+    initial_value: 1500
   # These "perks" are for purchased upgrades
   research_tick_interval_perk:
     # Timer tick value is 1s, increases with each perk
@@ -431,8 +430,8 @@ player_vars:
     initial_value: 0
     value_type: float
   # Track the score for suicide mission before starting it
-  presuicide_score:
-    initial_value: 0
+  # presuicide_score:
+  #   initial_value: 0
   reputation:
     initial_value: 0
   resume_mission:
@@ -570,19 +569,24 @@ animations:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
       duration: .25s          # duration for this step (how long it takes to get there)
+      step: 0.1
     - property: opacity      # second step in the animation (starts with a hyphen)
       value: 0.5
       duration: .25s
+      step: 0.1
       repeat: true
   pulse_text_slow:
     - property: opacity      # name of the widget property we're animating
       value: 1               # target value of that property for this step
       duration: .75s          # duration for this step (how long it takes to get there)
+      step: 0.1
     - property: opacity      # second step in the animation (starts with a hyphen)
       value: 0.5
       duration: .75s
+      step: 0.1
       repeat: true
   solid_text:
     - property: opacity
       value: 1
       duration: 0.25s
+      step: 0.1
