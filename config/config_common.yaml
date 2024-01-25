@@ -87,12 +87,12 @@ event_player:
   master_volume_decrease:
     update_volume:
       value:
-        value: ((machine.master_volume - 0.05) if machine.master_volume > 0.05 else 0) * 100
+        value: volume * 100
         type: int
   master_volume_increase:
     update_volume:
       value:
-        value: ((machine.master_volume + 0.05) if machine.master_volume < 0.95 else 1) * 100
+        value: volume * 100
         type: int
 
 credits:

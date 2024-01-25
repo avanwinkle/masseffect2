@@ -7,7 +7,7 @@ mode:
   use_wait_queue: true
 
 mode_settings:
-  display_delay_ms: 900ms
+  display_delay_ms: 1000ms
   hurry_up_delay_ms: 200ms
   bonus_entries:
     - event: bonus_level
@@ -112,11 +112,11 @@ slides:
       text: "Reputation Multiplier"
       style: header_sm, row_sub
     - type: text
-      text: "(multiplier:d)X"
+      text: "(multiplier)X"
       style: header_md, row_main
   bonus_subtotal_slide:
     - type: text
-      text: "Bonus Subtotal"
+      text: "Base Bonus"
       style: header_sm, row_sub
     - type: text
       text: (score)
