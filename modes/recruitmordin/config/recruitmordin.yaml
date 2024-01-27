@@ -86,7 +86,6 @@ counters:
   # The counter lets us play the correct sound for each fan hit,
   # and know which shots to revert/advance
   cure_counter:
-    debug: true
     starting_count: 4
     count_complete_value: 0
     direction: down

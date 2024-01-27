@@ -98,7 +98,6 @@ multiballs:
     ball_locks: bd_lock
     shoot_again: 20s
     start_events: mode_intro_complete
-    debug: true
 
 counters:
   hackshots_hit_counter:

@@ -149,7 +149,6 @@ shot_groups:
     disable_events: mode_recruitlegion_started
   # Define a group so we can rotate them for cloak power
   heretic_shots:
-    debug: true
     shots: heretic_shot_left_orbit, heretic_shot_kickback, heretic_shot_left_ramp, heretic_shot_right_ramp, heretic_shot_right_orbit
 
 shots:

@@ -121,7 +121,6 @@ ball_holds:
   missionselect_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
-    debug: true
     enable_events:
       - enable_airlock_missionselect_hold
       # Listen directly to this event, for expediency
@@ -136,27 +135,23 @@ ball_holds:
   suicide_hold:
     balls_to_hold: 1
     hold_devices: bd_hold
-    debug: true
     enable_events: enable_transition_hold
     disable_events: mode_suicide_huddle_will_stop
     release_all_events: release_suicide_hold
   captive_hold:
     balls_to_hold: 1
-    debug: true
     hold_devices: bd_lock
     enable_events: enable_captive_hold
     disable_events: disable_captive_hold
     release_all_events: release_captive_hold, disable_captive_hold
   sb_hold:
     balls_to_hold: 1
-    debug: true
     hold_devices: bd_lock
     enable_events: enable_sb_hold
     disable_events: disable_sb_hold, mode_field_will_stop, ball_will_end
     release_one_events: release_sb_hold
   store_hold:
     balls_to_hold: 1
-    debug: true
     hold_devices: bd_lock
     # TODO: Use the storeshot shot enabled/disabled to prevent duplication of conditions?
     enable_events:
@@ -199,7 +194,6 @@ multiball_locks:
       - start_mode_collectorship_base
       - start_mode_derelictreaper
       - start_mode_suicide_base
-    debug: true
 
 counters:
   # We use a counter so we can consolidate multiple events into one "hit"

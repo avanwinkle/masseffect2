@@ -34,13 +34,13 @@ autofire_coils:
     coil: c_slingshot_left
     enable_events: player_turn_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
-    debug: true
+    #debug: true
   left_bumper:
     switch: s_bumper_left
     coil: c_bumper_left
     enable_events: player_turn_started, bumpers_on
     disable_events: ball_ending, service_mode_entered, bumpers_off
-    debug: true
+    #debug: true
   right_bumper:
     switch: s_bumper_right
     coil: c_bumper_right
@@ -62,7 +62,6 @@ autofire_coils:
     coil: c_slingshot_right
     enable_events: player_turn_started, slingshots_on
     disable_events: ball_ending, service_mode_entered, slingshots_off
-    debug: true
 
 playfields:
   playfield:

@@ -309,6 +309,9 @@ player_vars:
   color_mball:
     initial_value: "22FF33"  # color_overlord
     value_type: str
+  color_power:
+    initial_value: "ff7700"  # color_zaeed
+    value_type: str
   # difficulty:
   #   initial_value: 0
   # readonly:
