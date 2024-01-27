@@ -42,6 +42,9 @@ mode_settings:
     recruitthane:
       key: 19
       priority: 202
+    firewalker:
+      key: 55
+      priority: 200
     sbintel:
       key: 60
       priority: 60
@@ -119,6 +122,7 @@ mode_settings:
       recruittali{squadmate=="tali"}: 9
       recruitzaeed{squadmate=="zaeed" and current_player.zaeed_path_renegade==0}: 8
       recruitzaeed{squadmate=="zaeed" and current_player.zaeed_path_renegade==1}: 9
+      firewalker: 0
     # GRUNT
     logicblock_grunt_shots_counter_hit:
       recruitgrunt: (7 - count)
@@ -191,6 +195,12 @@ mode_settings:
     logicblock_jackpots_hit_counter_hit:
       overlord{count<4}: (2 + count)
       overlord{count==4}: 9
+    # FIREWALKER
+    mode_firewalker_started:
+      firewalker{current_player.state_machine_firewalker=="rosalie"}: 1
+      firewalker{current_player.state_machine_firewalker=="survey_sites"}: 2
+      firewalker{current_player.state_machine_firewalker=="geth_incursion"}: 3
+      firewalker{current_player.state_machine_firewalker=="volcano_station"}: 4
     # COLLECTOR SHIP
     enable_collectorship:
       collectorship: 0
