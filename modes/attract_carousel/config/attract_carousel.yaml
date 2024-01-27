@@ -172,12 +172,15 @@ sounds:
   credits_complete:
     file: SFXGame.586.wav
     track: sfx
+    volume: 0.9
   credits_incomplete:
     file: SFXGame.628.wav
     track: sfx
+    volume: 0.8
   credits_needed:
     file: SFXGame.650.wav
     track: sfx
+    volume: 0.6
 
 sound_player:
   not_enough_credits: credits_needed

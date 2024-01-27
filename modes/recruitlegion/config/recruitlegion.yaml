@@ -426,7 +426,7 @@ sound_pools:
 
 sounds:
   music_legion:
-    file: mus_legion_acq_combat_1.ogg
+    file: mus_legion_acq_combat_1.wav
     track: music
     fade_out: 1s
     mode_end_action: stop
@@ -434,7 +434,7 @@ sounds:
       - time: 61s
         events: play_music_legion
   music_legion_low:
-    file: mus_legion_acq_tension_1.ogg
+    file: mus_legion_acq_tension_1.wav
     track: music
     fade_out: 1s
     mode_end_action: stop

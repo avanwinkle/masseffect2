@@ -230,7 +230,7 @@ sound_pools:
 
 sounds:
   music_recruit_samara:
-    file: mus_samara_acq_bossbattle_2.ogg
+    file: mus_samara_acq_bossbattle_2.wav
     track: music
     mode_end_action: stop
     fade_out: 1s

@@ -127,10 +127,10 @@ sound_pools:
 
 sounds:
   music_normandy_walkin_intro:
-    file: mus_nor_normandy_walkin_intro.ogg
+    file: mus_nor_normandy_walkin_intro.wav
     track: music
   music_galaxy_map:
-    file: mus_galaxy_map_loop.ogg
+    file: mus_galaxy_map_loop.wav
     track: music
   # Ideas for more exciting field music
   # Throwback radio

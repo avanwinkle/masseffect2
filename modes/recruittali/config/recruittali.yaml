@@ -284,7 +284,7 @@ sound_pools:
 
 sounds:
   music_recruit_tali:
-    file: mus_tali_acq_bossbattle.ogg
+    file: mus_tali_acq_bossbattle.wav
     track: music
     mode_end_action: stop
     fade_out: 1s

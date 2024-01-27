@@ -382,7 +382,7 @@ sound_pools:
 
 sounds:
   recruit_music_kasumi_1:
-    file: KAS.03.Infiltration.ogg
+    file: KAS.03.Infiltration.wav
     track: music
     mode_end_action: stop
     fade_out: 1s

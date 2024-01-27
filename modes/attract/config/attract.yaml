@@ -30,6 +30,7 @@ show_player:
         ledring: l_mass_relay
         color: "0B0000"  # color_paragon
         fade: 250ms
+    attract_main_show: {}
   start_button_flash:
     attract_start_button_flash:
       loops: -1
@@ -81,7 +82,7 @@ show_player:
       action: stop
 
 sound_player:
-  mode_attract_started.10:
+  mode_attract_started.10{settings.attract_mode_music}:
     mus_main_menu:
       action: play
       mode_end_action: stop
@@ -111,14 +112,9 @@ sound_player:
 
 sounds:
   mus_main_menu:
-    file: mus_main_menu.ogg
+    file: mus_main_menu.wav
     track: music
     fade_out: 1s
-    markers:
-      - time: 32ms
-        events: attract_music_started
-      - time: 29245ms
-        events: attract_music_main
   gui_splashstart:
     file: sfxgame.Wwise_Generic_GUI.gui_splashstart.wav
     track: sfx
@@ -133,3 +129,8 @@ shows:
       coils:
         c_start_button_light:
           action: disable
+  attract_main_show:
+    - time: 32ms
+      events: attract_music_started
+    - time: 29245ms
+      events: attract_music_main

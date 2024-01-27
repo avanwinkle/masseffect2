@@ -28,6 +28,15 @@ settings:
     values:
       0: "OFF"
       1: "ON"
+  attract_mode_music:
+    label: "Attract Mode Music"
+    settingType: feature
+    sort: 40
+    key_type: int
+    default: 0
+    values:
+      0: "Disabled"
+      1: "Enabled"
   balls_per_game:
     label: "Balls Per Game"
     settingType: standard

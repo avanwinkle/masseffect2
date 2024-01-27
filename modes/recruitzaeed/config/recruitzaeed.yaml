@@ -200,7 +200,7 @@ sound_pools:
 
 sounds:
   music_recruit_zaeed_1:
-    file: mus_jacob_loy_combat_1.ogg
+    file: mus_jacob_loy_combat_1.wav
     track: music
     mode_end_action: stop
     start_at: 1s
@@ -211,7 +211,7 @@ sounds:
       - time: 56s
         events: play_music_recruit_zaeed_2
   music_recruit_zaeed_2:
-    file: mus_jacob_loy_boss.ogg
+    file: mus_jacob_loy_boss.wav
     track: music
     mode_end_action: stop
     start_at: 1s

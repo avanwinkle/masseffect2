@@ -184,7 +184,7 @@ sound_pools:
 
 sounds:
   music_recruit_garrus_1:
-    file: mus_garrus_acq_combat_1.ogg
+    file: mus_garrus_acq_combat_1.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
@@ -193,7 +193,7 @@ sounds:
         events: play_garrus_music_2
     about_to_finish_time: 5s
   music_recruit_garrus_2:
-    file: mus_garrus_acq_combat_2.ogg
+    file: mus_garrus_acq_combat_2.wav
     track: music
     mode_end_action: stop
     fade_out: 1s

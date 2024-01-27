@@ -509,7 +509,7 @@ player_vars:
     initial_value: 0
 
 sound_system:
-  buffer: 2048  # upped from 2048 on UP Core Plus  # previous value was 512
+  buffer: 4096  # upped from 2048 on UP Core Plus  # previous value was 512
   frequency: 24000
   channels: 1
   enabled: true
@@ -517,29 +517,29 @@ sound_system:
     music:
       label: "Music"
       simultaneous_sounds: 2
-      volume: 1.0
+      volume: 0.7
     voice:
       label: "Dialog"
       priority: 2
       simultaneous_sounds: 1
       #preload: true
-      volume: 0.7
+      volume: 0.8
       ducking:
         target: music
         attenuation: 0.8
-        attack: 100ms
-        release: 100ms
-        release_point: 100ms
+        attack: 200ms
+        release: 400ms
+        release_point: 200ms
     sfx:
       label: "Effects"
       simultaneous_sounds: 7
-      volume: 0.5
+      volume: 0.75
       #preload: true
       priority: 1
     levelup:
       label: "Level Up"
       simultaneous_sounds: 1
-      volume: 0.8
+      volume: 0.5
 
 assets:
   images:

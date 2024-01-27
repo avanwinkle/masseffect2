@@ -243,7 +243,7 @@ sound_pools:
 
 sounds:
   music_recruit_mordin_1:
-    file: mus_mordin_acq_bossbattle_a.ogg
+    file: mus_mordin_acq_bossbattle_a.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
@@ -251,7 +251,7 @@ sounds:
       - time: 61s
         events: play_music_recruit_mordin_2
   music_recruit_mordin_2:
-    file: mus_mordin_acq_bossbattle_b.ogg
+    file: mus_mordin_acq_bossbattle_b.wav
     track: music
     mode_end_action: stop
     start_at: 4s

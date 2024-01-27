@@ -269,7 +269,7 @@ sound_pools:
 
 sounds:
   music_recruit_jack_1:
-    file: mus_jack_acq_combat_1.ogg
+    file: mus_jack_acq_combat_1.wav
     track: music
     mode_end_action: stop
     fade_out: 1s
@@ -279,7 +279,7 @@ sounds:
       - time: 40s
         events: play_music_recruit_jack_2
   music_recruit_jack_2:
-    file: mus_jack_acq_combat_2.ogg
+    file: mus_jack_acq_combat_2.wav
     track: music
     fade_out: 1s
     mode_end_action: stop

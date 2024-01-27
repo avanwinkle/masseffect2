@@ -240,22 +240,22 @@ sound_pools:
 
 sounds:
   music_n7_stationalert:
-    file: ARR.03.Station_Alert.ogg
+    file: ARR.03.Station_Alert.wav
     start_at: 35s
     track: music
     fade: 1s
   music_n7_breakingout:
-    file: ARR.05.Breaking_Out.ogg
+    file: ARR.05.Breaking_Out.wav
     track: music
     fade: 1s
   music_n7_combat_12:
-    file: mus_n7_1_combat_2.ogg
+    file: mus_n7_1_combat_2.wav
     track: music
   music_n7_combat_72:
-    file: mus_n7_7_combat_2.ogg
+    file: mus_n7_7_combat_2.wav
     track: music
   music_n7_combat_81:
-    file: mus_n7_8_combat_1.ogg
+    file: mus_n7_8_combat_1.wav
     track: music
   intro_imminent_ship_crash:
     file: en_us_hench_ai_n7mmnt4_impact_imminent_00344656_m.wav  # "Warning: collision imminent"
