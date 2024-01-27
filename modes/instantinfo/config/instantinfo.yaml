@@ -166,7 +166,7 @@ event_player:
   instantinfo_powers_adrenaline_highlighted:
     play_instantinfo_mission_slide:
       mission_title: "Power: Adrenaline Rush"
-      mission_text: "Pauses mission timer for\n10 seconds.\nHold flippers to activate."
+      mission_text: "Pauses mission timer for\n15 seconds.\nHold flippers to activate."
   instantinfo_powers_armor_highlighted:
     play_instantinfo_mission_slide:
       mission_title: "Power: Tech Armor"

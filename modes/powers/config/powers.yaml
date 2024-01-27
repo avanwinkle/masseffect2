@@ -133,7 +133,6 @@ timers:
   power_active:
     # Starting value and start() of this timer are in powers.py
     start_value: 30
-    tick_interval: current_player.research_tick_interval_perk
     end_value: 0
     direction: down
 
@@ -646,7 +645,7 @@ widgets:
       text: "Adrenaline\nRush"
       style: header_sm, row_main
     - type: text
-      text: "All timers stopped\nfor 10 seconds"
+      text: "Mode timer\nstopped!"
       style: body_sm, row_sub_under
     - type: image
       image: portrait_power_adrenaline_active
@@ -658,7 +657,7 @@ widgets:
       text: "Tech\nArmor"
       style: header_sm, row_main
     - type: text
-      text: "Ball save for\n20 seconds"
+      text: "Ball save\nenabled!"
       style: body_sm, row_sub_under
     - type: image
       image: portrait_power_armor_active

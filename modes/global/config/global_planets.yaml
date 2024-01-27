@@ -57,13 +57,14 @@ variable_player:
     mineral_platinum: 0.0871 * 5000 * (1 + current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
   mineral_shot_iridium_hit:
     mineral_iridium: 0.2096 * 5000 * (1 + current_player.planets * 0.05) * current_player.research_mineral_rate_perk // 10 * 10
-  player_mineral_palladium{player_num==current_player.number}:
+  # Increment total minerals for bonus, but don't subtract for purchases
+  player_mineral_palladium{player_num==current_player.number and change>0}:
     mineral_total: (change)
-  player_mineral_platinum{player_num==current_player.number}:
+  player_mineral_platinum{player_num==current_player.number and change>0}:
     mineral_total: (change)
-  player_mineral_iridium{player_num==current_player.number}:
+  player_mineral_iridium{player_num==current_player.number and change>0}:
     mineral_total: (change)
-  player_mineral_eezo{player_num==current_player.number}:
+  player_mineral_eezo{player_num==current_player.number and change>0}:
     mineral_total: (change) * 5
 
 flasher_player:

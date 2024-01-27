@@ -10,15 +10,15 @@ TEST_POWER = None
 DESCRIPTIONS = {
     "adrenaline": "Pauses all timers\nfor 15 seconds",
     "cloak": "Allows flippers to\nrotate lanes",
-    "armor": "Enables a 10s\nball save",
+    "armor": "Enables a brief\nball save",
     "drone": "Instant multiball or\nadd-a-ball",
     "singularity": "Target hits count\nas lane hits",
-    "charge": "Hits a lit lane\nat random",
+    "charge": "Spots a lit lane\nat random",
 }
 TIMES = {
     "adrenaline": 15,
     "cloak": 30,
-    "armor": 10,
+    "armor": 8,
     "drone": 0,
     "singularity": 20,
     "charge": 0
@@ -145,7 +145,7 @@ class Powers(Mode):
                                  color=POWER_COLORS[power],
                                  power_name=self._get_power_name(power),
                                  description=DESCRIPTIONS[power])
-        self.timer.ticks = TIMES[power]
+        self.timer.ticks = int(TIMES[power] * self.player["research_power_tick_interval_perk"])
         self._play_sound(f"power_{power}_available")
 
     def _update_cooldown_progress(self, **kwargs):

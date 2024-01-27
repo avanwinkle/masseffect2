@@ -20,7 +20,7 @@ UPGRADES = {
         "description": "Earn {}% more minerals\nwhen scanning",
         "amount": 0.1,
         "mineral": "iridium",
-        "cost": 90000,
+        "cost": 60000,
         "product": "Argus Scanner Array",
         "image": "scanner"
     },
@@ -45,10 +45,11 @@ UPGRADES = {
     # },
     "award_medigel": {
         "name": "Medigel Capacity",
+        "description" :"Extra {}% chance of earning\nmedigel when completing\nreputation lanes",
         "description": "Earn medigel {}% faster\nwhen completing\nreputation lanes",
-        "amount": 0.1,
+        "amount": 0.05,
         "mineral": "platinum",
-        "cost": 25000,
+        "cost": 30000,
         "product": "Microscanner",
         "image": "armor_microscanner",
     },
@@ -66,7 +67,7 @@ UPGRADES = {
         "description": "Increase power durations\nby {}%",
         "amount": 0.1,
         "mineral": "eezo",
-        "cost": 2500,
+        "cost": 3000,
         "product": "Neural Mask",
         "image": "biotics_neuralmask",
     },
@@ -75,7 +76,7 @@ UPGRADES = {
         "description": "Accelerate power\ncooldown rate by {}%",
         "amount": 0.1,
         "mineral": "eezo",
-        "cost": 7500,
+        "cost": 6000,
         "product": "Smart Amplifier",
         "image": "biotics_hyperamp"
     },
@@ -91,10 +92,11 @@ class Upgrade:
         self.name = name
         self.description = description
         self.mineral = mineral
-        self.cost = cost
+        self._cost = cost
 
-    def is_affordable(self, player):
-        return player["mineral_{}".format(self.mineral)] >= self.cost
+    def get_cost(self, player):
+        # The cost goes up by 20% each time, rounded to 100
+        return int((self._cost * (1 + 0.2 * player[f"research_{self.perk}_level"])) // 100 * 100)
 
 
 class ResearchUpgrade(Upgrade):
@@ -109,40 +111,48 @@ class ResearchUpgrade(Upgrade):
         return "<ArmorUpgrade.{}:{} '{}''>".format(self.perk, self.amount, self.name)
 
     def to_kwargs(self, player, next_level=False):
+        # A player can only purchase an upgrade once per level
         level = player["research_{}_level".format(self.perk)] + (1 if next_level else 0)
+        next_amount = self.amount * level
         return {
             "title": self.name,
             "image": self.image,
             "full_title": "{} {}".format(self.name, level),
-            "description": self.description.format(int(self.amount * 100 * level)),
+            "description": self.description.format(int(next_amount * 100)),
             "mineral": self.mineral,
             "mineral_name": "Element Zero" if self.mineral == "eezo" else self.mineral,
             "player_mineral": player["mineral_{}".format(self.mineral)],
-            "cost": self.cost,
+            "cost": self.get_cost(player),
             "level": level,
             "product": "{} {}/6".format(self.product, level),
         }
 
     def check(self, player):
-        next_level = player["research_{}_level".format(self.perk)] + 1
+        next_level = player[f"research_{self.perk}_level"] + 1
+        # Maximum of six levels per upgrade
+        if next_level > 6:
+            return False
         # If the player already purchased this research at this level, no good
-        if player["level"] == player["research_{}_last_player_level".format(self.perk)]:
+        if player["level"] == player[f"research_{self.perk}_last_player_level"]:
             return False
         # If the player's level is too low to purchase the next level of research
+        # (e.g. must be level 6 to purchase level 3 upgrades)
         if (next_level * 2) - 1 > player["level"]:
             return False
         # Can the player afford it?
-        return player["mineral_{}".format(self.mineral)] >= self.cost
+        cost = self.get_cost(player)
+        print(f"Calculated cost of {self.perk} (level {next_level}) at {cost}")
+        return player["mineral_{}".format(self.mineral)] >= cost
 
     def award(self, player):
+        # Pay for it first, before the level (and price) goes up
+        player["mineral_{}".format(self.mineral)] -= self.get_cost(player)
         # Increase the player's perk by the research perk amount
         player["research_{}_perk".format(self.perk)] += self.amount
         # Track the level of this research project
         player["research_{}_level".format(self.perk)] += 1
         # Track the level at which the player purchased this research
         player["research_{}_last_player_level".format(self.perk)] = player["level"]
-        # And of course, pay for it
-        player["mineral_{}".format(self.mineral)] -= self.cost
 
 
 RESEARCH = {key: ResearchUpgrade(perk=key, **value) for (key, value) in UPGRADES.items()}

@@ -185,7 +185,7 @@ timers:
       # Adrenaline rush pauses the timer
       - event: missiontimer_pause_adrenaline
         action: pause
-        value: 15
+        value: 15 * current_player.research_power_tick_interval_perk
       # By default, the timer starts when the intro completes
       - event: mode_intro_complete
         action: start
