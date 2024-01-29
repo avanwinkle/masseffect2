@@ -75,6 +75,9 @@ mode_settings:
     normandyattack:
       key: 72
       priority: 302
+    powers:
+      key: 90
+      priority: 10
   events:
     # Don't immediately display new squadmates, get at least one hit
     recruit_advance:
@@ -226,3 +229,11 @@ mode_settings:
       normandyattack: (count)
     normandy_dropbank_lit_hit:
       normandyattack: 9
+    # POWERS
+    power_awarded:
+      powers{power=="adrenaline"}: 0
+      powers{power=="cloak"}: 1
+      powers{power=="armor"}: 2
+      powers{power=="drone"}: 3
+      powers{power=="singularity"}: 4
+      powers{power=="charge"}: 5
