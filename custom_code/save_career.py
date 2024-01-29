@@ -59,9 +59,9 @@ class SaveCareer(CustomCode):
 
             # It's okay to set initial-only status_** here, resumed games will overwrite
             # these properties in _load_career() (only status and available_missions)
-            if (self.machine.settings.free_starting_mission == 2) or (
+            if ((self.machine.settings.free_starting_mission == 2) or (
                 self.machine.settings.free_starting_mission == 1 and player["casual"]
-            ):
+            )) and not player["available_missions"]:
                 starting_recruit = FORCE_INITIAL or SquadmateStatus.random_recruit()
                 # In a multiplayer game, make sure everybody gets a different starter
                 if player["number"] == 1:

@@ -72,3 +72,6 @@ playfields:
     ball_search_interval: 2s
     ball_search_block_events: flipper_cradle, service_mode_entered
     ball_search_unblock_events: flipper_cradle_release, service_mode_exited
+    ball_search_phase_1_searches: single|int|2
+    ball_search_phase_2_searches: single|int|2
+    ball_search_phase_3_searches: single|int|3
