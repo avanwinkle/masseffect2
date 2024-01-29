@@ -194,12 +194,26 @@ slides:
       - widget: background_console
 
 sound_player:
+  drop_target_bank_dropbank_mixed:
+    sb_hit_sound:
+      max_queue_time: 100ms
+      volume: 0.8
   play_queued_slide_shadowbroker_ready_slide.1{mname=="vasir"}: vasir_hold_enabled_sounds
   play_queued_slide_shadowbroker_ready_slide.2{mname=="shadowbroker"}:
     boss_intro_cineanim_diag:
       mode_end_action: stop
 
 sound_pools:
+  sb_hit_sound:
+    sounds: liara_good_shooting, liara_my_targets_down, liara_got_them, liara_just_like_old_times, liara_one_down, liara_this_should_slow_them_down, liara_enemies_incoming
+    type: random_force_all
+    track: voice
+    ducking:
+      target: music
+      attenuation: 0.7
+      attack: 200ms
+      release_point: 100ms
+      release: 400ms
   boss_intro_cineanim_diag:
     sounds: boss_your_interference, boss_its_pointless_to_challenge_me, boss_reckless_even_for_you_commander
     type: random_force_all
@@ -216,6 +230,27 @@ sound_pools:
     track: voice
 
 sounds:
+  liara_good_shooting:
+    file: DLC_EXP_Part01_Int.060.ogg
+    track: voice
+  liara_my_targets_down:
+    file: DLC_EXP_Part01_Int.063.ogg
+    track: voice
+  liara_got_them:
+    file: DLC_EXP_Part01_Int.068.ogg
+    track: voice
+  liara_just_like_old_times:
+    file: DLC_EXP_Part01_Int.081.ogg
+    track: voice
+  liara_one_down:
+    file: DLC_EXP_Part01_Int.066.ogg
+    track: voice
+  liara_this_should_slow_them_down:
+    file: DLC_EXP_Part01_Int.115.ogg
+    track: voice
+  liara_enemies_incoming:
+    file: DLC_EXP_Part01_Int.122.ogg
+    track: voice
   boss_your_interference:
     file: DLC_EXP_Part01_Int.1058.wav
     track: voice

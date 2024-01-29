@@ -297,42 +297,51 @@ sound_player:
       action: play
       max_queue_time: 1s
       events_when_stopped: callback_shepard_i_hear_those_can_be_bad
+      volume: 1.0
   play_shepard_there_we_go:
     shepard_there_we_go:
       action: play
       max_queue_time: 1s
       events_when_stopped: callback_liara_youre_enjoying_this
+      volume: 1.0
   play_shepard_what_kind_of_guns:
     shepard_what_kind_of_guns:
       action: play
       max_queue_time: 1s
       events_when_stopped: callback_liara_its_a_taxi
+      volume: 1.0
   play_liara_go_go_go:
     liara_go_go_go:
       action: play
       max_queue_time: 1s
       events_when_stopped: callback_shepard_im_going
+      volume: 1.0
   # --- calls for unsuccessful shots
   play_liara_oncoming_traffic:
     liara_oncoming_traffic:
       max_queue_time: 200ms
       events_when_stopped: callback_shepard_well_be_fine
+      volume: 1.0
   play_liara_need_to_go_faster:
     liara_need_to_go_faster:
       max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
+      volume: 1.0
   play_liara_shes_getting_away_3:
     liara_shes_getting_away_3:
       max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
+      volume: 1.0
   play_liara_shes_almost_out_of_range:
     liara_shes_almost_out_of_range:
       max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
+      volume: 1.0
   play_liara_were_losing_her:
     liara_were_losing_her:
       max_queue_time: 200ms
       events_when_stopped: callback_shepard_generic_reply
+      volume: 1.0
   # -- unsuccessful shots without callbacks
   play_liara_dont_lose_her: liara_dont_lose_her
   play_liara_going_the_wrong_way: liara_going_the_wrong_way
@@ -341,29 +350,37 @@ sound_player:
     liara_sound_truck:
       max_queue_time: 100ms
       events_when_stopped: callback_shepard_truck
+      volume: 1.0
 
   # -- callbacks
   callback_shepard_i_hear_those_can_be_bad:
     shepard_i_hear_those_can_be_bad:
       max_queue_time: 500ms
+      volume: 1.0
   callback_shepard_im_going:
     shepard_im_going:
       max_queue_time: 500ms
+      volume: 1.0
   callback_shepard_well_be_fine:
     shepard_well_be_fine:
       max_queue_time: 500ms
+      volume: 1.0
   callback_liara_youre_enjoying_this:
     liara_youre_enjoying_this:
       max_queue_time: 500ms
+      volume: 1.0
   callback_liara_its_a_taxi:
     liara_its_a_taxi:
       max_queue_time: 500ms
+      volume: 1.0
   callback_shepard_truck:
     shepard_truck_reply:
       max_queue_time: 500ms
+      volume: 1.0
   callback_shepard_generic_reply:
     shepard_generic_reply:
       max_queue_time: 500ms
+      volume: 1.0
 
 sound_pools:
   car_takeoff:
