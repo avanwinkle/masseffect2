@@ -68,6 +68,20 @@ settings:
     values:
       0: "Disabled"
       1: "Enabled"
+  recruit_save_duration:
+    label: "Recruit Ball Save Time"
+    settingType: game
+    sort: 55
+    key_type: int
+    default: 8
+    values:
+      0: "Disabled"
+      5: "5s"
+      8: "8s"
+      10: "10s"
+      12: "12s"
+      15: "15s"
+      20: "20s"
   demo_mode:
     label: "Expo Demo Mode"
     settingType: game

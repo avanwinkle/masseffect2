@@ -280,7 +280,7 @@ slides:
     widgets:
       - type: video
         video: shadowbroker_chase
-        volume: 0.5
+        volume: 0.4
 
 sound_player:
   play_shadowbroker_chase_music:

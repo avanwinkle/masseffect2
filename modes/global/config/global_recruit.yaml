@@ -74,9 +74,9 @@ variable_player:
 #####
 ball_saves:
   recruitsave:
-    active_time: 12 if current_player.difficulty==0 else 6
-    # No ball save on insanity
-    enable_events: mode_type_mission_started{current_player.difficulty<2}
+    active_time: settings.recruit_save_duration * (0.5 if current_player.difficulty else 1)
+    # No ball save on insanity, or if disabled in settings
+    enable_events: mode_type_mission_started{current_player.difficulty<2 and settings.recruit_save_duration}
     disable_events: mode_type_mission_stopped
     hurry_up_time: 4s
     grace_period: 2s
