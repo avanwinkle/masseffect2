@@ -81,13 +81,13 @@ named_colors:
 coils:
   c_flipper_left_main:
     number: 1-7
-    # Flippers at 50/0.8 was a little weak, 55/0.85 too strong.
-    default_pulse_ms: 52  # Increased from Spike 35
+    # Flippers at 50/0.8 was a little weak, 55/0.85 too strong. 52/0.825 a little strong.
+    default_pulse_ms: 50  # Increased from Spike 35
     default_pulse_power: 0.825 # Was 1.0 for mk2, but mk3 is much faster. Dropping to 0.8
     default_hold_power: 0.125
   c_flipper_right_main:
     number: 1-4
-    default_pulse_ms: 52  # Increased from Spike 35, down
+    default_pulse_ms: 50  # Increased from Spike 35, down
     default_pulse_power: 0.825
     default_hold_power: 0.125
   c_plunger:
@@ -124,9 +124,9 @@ coils:
     # default_recycle: true
   c_dropbank_reset:
     number: 1-5
-    default_pulse_ms: 34  # Bumped up from 25, 32
-    default_hold_power: 0.5
-    default_timed_enable_ms: 90
+    default_pulse_ms: 36  # Bumped up from 25, 34
+    default_hold_power: 0.625
+    default_timed_enable_ms: 110
     pulse_with_timed_enable: true
     pulse_events: ball_search_phase_1
   c_hold_post_up:

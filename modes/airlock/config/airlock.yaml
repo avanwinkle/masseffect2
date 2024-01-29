@@ -124,7 +124,7 @@ ball_holds:
     enable_events:
       - enable_airlock_missionselect_hold
       # Listen directly to this event, for expediency
-      - s_left_ramp_exit_active{mode.field.active and (current_player.status_garrus==2 or current_player.status_samara==2)}
+      - s_left_ramp_exit_active{mode.field.active and (current_player.status_garrus==2 or current_player.status_samara==2) and not mode.firewalker.starting}
     disable_events:
       - mode_field_stopped
       - mode_missionselect_stopped
