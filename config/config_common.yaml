@@ -7,6 +7,11 @@ config:
 
 auditor:
   missing_switch_min_games: 20
+  enable_events: init_phase_5
+  disable_events: []
+  audit_shots: false
+  autosave: false
+  save_events: credits_added, ball_will_end, game_ended
 
 smart_virtual:
   console_log: basic
