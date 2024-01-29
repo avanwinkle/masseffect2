@@ -24,6 +24,9 @@ mode_settings:
   previous_item_events: s_flipper_left_active
 
 event_player:
+  # Don't play credit sounds immediately, wait for the mode to ready
+  machine_var_credits_numerator{value>0 and mode.attract_carousel.is_ready}: play_credits_incomplete
+  machine_var_credits_whole_num{value>0 and mode.attract_carousel.is_ready}: play_credits_complete
   attract_carousel_1player_pinstrat_highlighted:
     play_pinstrat_slide:
       player_num: 1
@@ -184,8 +187,8 @@ sounds:
 
 sound_player:
   not_enough_credits: credits_needed
-  machine_var_credits_numerator{value>0}: credits_incomplete
-  machine_var_credits_whole_num{value>0}: credits_complete
+  play_credits_incomplete: credits_incomplete
+  play_credits_complete: credits_complete
 
 widgets:
   attract_widget_dmd:

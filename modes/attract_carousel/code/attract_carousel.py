@@ -5,6 +5,10 @@ from mpf.modes.carousel.code.carousel import Carousel
 
 class AttractCarousel(Carousel):
 
+    def mode_will_start(self, **kwargs):
+        del kwargs
+        self.is_ready = False
+
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
 
@@ -78,3 +82,4 @@ class AttractCarousel(Carousel):
         for m in self.machine.mode_controller.active_modes:
             if m.name not in expected_modes:
                 self.warning_log("Unexpected mode %s found during attract.", m)
+        self.is_ready = True
