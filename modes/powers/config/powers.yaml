@@ -481,7 +481,7 @@ slides:
       style: header_md, row_main_under
       color: ffffff
     - type: text
-      text: "Hold both flippers 2s to activate"
+      text: "Hold both flippers 4s to activate"
       style: body_xs, row_bottom, col_left_anchor
       color: f3dc90  # color_ui_yellow
     - widget: power_widget_(power)
