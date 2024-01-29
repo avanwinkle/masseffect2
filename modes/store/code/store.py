@@ -46,7 +46,6 @@ POWERS = ["adrenaline", "armor", "cloak", "charge", "drone", "singularity"]
 class Store(Carousel):
     def mode_init(self):
         super().mode_init()
-        self.log = logging.getLogger("Store")
         self.mineral = None
 
     def mode_start(self, **kwargs):
@@ -54,7 +53,7 @@ class Store(Carousel):
 
         # For high-flow mode, pick an item at random and purchase it
         if self.machine.game.player["high_flow"]:
-            self.log.debug("Store is in high-flow, randomly selecting an item")
+            self.debug_log("Store is in high-flow, randomly selecting an item")
             self._items = [random.choice(self._all_items)]
             self._select_item()
             # Play an event for the sound
@@ -67,7 +66,6 @@ class Store(Carousel):
 
         self._all_items.append("nothing")
         super().mode_start(**kwargs)
-        self.log.debug("Store is starting")
         self.machine.events.post("store_{}_highlighted".format(self._all_items[0]))
         self.add_mode_event_handler("slide_store_slide_active", self._update_highlighted_item)
 

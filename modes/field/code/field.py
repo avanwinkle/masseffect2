@@ -8,7 +8,6 @@ class Field(Mode):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.log = logging.getLogger("Field")
         self._hints = None
         self._hint_index = None
 

@@ -15,7 +15,6 @@ class RecruitLegion(Mode):
     def __init__(self, *args, **kwargs):
         """Initialize logger and local vars."""
         super().__init__(*args, **kwargs)
-        self.log = logging.getLogger("RecruitLegion")
         self._timer = None
         # Track an array of ticks that _might_ need handling, to avoid over-processing
         self._significant_ticks = []
@@ -49,7 +48,7 @@ class RecruitLegion(Mode):
             self.add_mode_event_handler("heretic_shot_{}_hit".format(shot_name),
                                         self._on_bank,
                                         shot_name=shot_name)
-        self.log.debug("Added mode event handlers for shots: {}".format(SHOTS))
+        self.debug_log("Added mode event handlers for shots: {}".format(SHOTS))
 
     def mode_will_stop(self, **kwargs):
         # If the mode stops during precomplete, sneak in a levelup
@@ -65,11 +64,11 @@ class RecruitLegion(Mode):
 
         timestamp = self._timer.ticks_remaining
         ticks = [timestamp - interval for interval in TICK_WINDOW]
-        self.log.debug("Setting up shot times for shot {} with ticks: {}".format(shot_name, ticks))
+        self.debug_log("Setting up shot times for shot {} with ticks: {}".format(shot_name, ticks))
         self._shot_times[shot_name] = ticks
         # Calculate some significant ticks
         self._significant_ticks += ticks
-        self.log.debug("Added significant ticks for {} based at {}: {}".format(shot_name, timestamp, ticks))
+        self.debug_log("Added significant ticks for {} based at {}: {}".format(shot_name, timestamp, ticks))
 
     def _on_tick(self, **kwargs):
         tick = kwargs["ticks_remaining"]
@@ -86,7 +85,7 @@ class RecruitLegion(Mode):
             # The rotation creates a None value for 'times', so check its truthiness first
             if times and tick in times:
                 shot = self._get_shot(shot_name)
-                self.log.debug("Found a significant event at tick {} for shot {}".format(tick, shot_name))
+                self.debug_log("Found a significant event at tick {} for shot {}".format(tick, shot_name))
                 shot.advance()
                 # If that's the last tick? Restart to set to the "off" state
                 if tick == times[3]:
@@ -109,7 +108,7 @@ class RecruitLegion(Mode):
                 bankshot.disable()
             # If it's not the one that was hit, is the other enabled?
             elif bankshot.enabled:
-                self.log.debug("Bank {} hit but {} is still enabled, skipping".format(hit_shot_name, shot_name))
+                self.debug_log("Bank {} hit but {} is still enabled, skipping".format(hit_shot_name, shot_name))
                 banks_disabled = False
 
         # Both banks are disabled? Allow shots again
@@ -126,21 +125,21 @@ class RecruitLegion(Mode):
         player = self.machine.game.player
 
         if player["temp_multiplier"] == 0:
-            self.log.debug("Shot {} was hit but banks are enabled. No progress awarded.".format(shot_name))
+            self.debug_log("Shot {} was hit but banks are enabled. No progress awarded.".format(shot_name))
         elif not self._shot_times[shot_name]:
-            self.log.debug("Shot {} was hit but it's been rotated away. No action.".format(shot_name))
+            self.debug_log("Shot {} was hit but it's been rotated away. No action.".format(shot_name))
         else:
-            self.log.debug("Shot {} was hit, shot times are {}".format(shot_name, self._shot_times))
+            self.debug_log("Shot {} was hit, shot times are {}".format(shot_name, self._shot_times))
             # Award a point of progress for every second left on the shot
             progress_points = self._timer.ticks_remaining - self._shot_times[shot_name][3]
-            self.log.info("Shot {} was hit at {} and timeout was {}, awarding {} points!".format(
+            self.info_log("Shot {} was hit at {} and timeout was {}, awarding {} points!".format(
                           shot_name, self._timer.ticks_remaining, self._shot_times[shot_name][3], progress_points))
             if progress_points < 0:
-                self.log.warn("PROGRESS POINTS LESS THAN ZERO?!")
+                self.warning_log("PROGRESS POINTS LESS THAN ZERO?!")
                 progress_points = 0
             player["heretic_progress"] = min(
                 player["heretic_progress"] + (progress_points * int(TOTAL_PROGRESS/60)), TOTAL_PROGRESS)
-        self.log.debug("Shot {} was hit, clearing it.".format(shot_name))
+        self.debug_log("Shot {} was hit, clearing it.".format(shot_name))
         self._clear_shot(shot_name)
         shot.restart()
 
@@ -149,7 +148,7 @@ class RecruitLegion(Mode):
             self.machine.events.post("recruit_legion_precomplete")
         # If there are no shots, enable one
         elif not self._shot_times:
-            self.log.info("All heretic shots have been hit, forcing one to enable.")
+            self.info_log("All heretic shots have been hit, forcing one to enable.")
             self.machine.events.post("enable_random_heretic")
 
     def _on_precomplete(self, **kwargs):

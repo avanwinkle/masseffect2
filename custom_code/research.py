@@ -161,6 +161,7 @@ RESEARCH = {key: ResearchUpgrade(perk=key, **value) for (key, value) in UPGRADES
 class Research(CustomCode):
     def on_load(self):
         self.log = logging.getLogger("Research")
+        self.log.setLevel(30)  # TODO: Use LogMixin
         self.log.debug("Research custom code started!")
         self.machine.events.add_handler("check_research", self._on_check)
         self.machine.events.add_handler("start_mode_store", self._on_store)

@@ -77,6 +77,7 @@ class MPFSquadmateHandlers(CustomCode):
     def on_load(self):
         """Instantiate the module by creating listeners for squadmate-related events."""
         self.log = logging.getLogger("MESquadmates")
+        self.log.setLevel(30)  # TODO: Use LogMixin
         self._current_recruit = None
         self._just_resumed = False
 

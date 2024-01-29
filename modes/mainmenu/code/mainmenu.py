@@ -26,7 +26,6 @@ class MainMenu(Carousel):
         self._selected_career = None
         self._selected_difficulty = None
         self._selected_flow = None
-        self.log = logging.getLogger("MainMenu")
 
     def mode_start(self, **kwargs):
         """Mode start: create event handlers."""
@@ -45,7 +44,7 @@ class MainMenu(Carousel):
         """Load career data and display the main menu."""
 
         if not self.machine.settings.enable_careers:
-            self.log.info("Casual mode only, skipping menu")
+            self.info_log("Casual mode only, skipping menu")
             if self.machine.settings.demo_mode:
                 # Advance shadowbroker faster
                 self.machine.game.player["counter_sbdrops_counter"] = 2
@@ -62,7 +61,7 @@ class MainMenu(Carousel):
         self._load_careers()
         self._load_mainmenu()
 
-        self.log.debug("Showing career menu for player {}".format(self.machine.game.player.number))
+        self.debug_log("Showing career menu for player {}".format(self.machine.game.player.number))
         # Post an event to identify that we are not skipping the menu
         self.machine.events.post("mainmenu_ready")
         self._shown_menu = self.mainmenu
@@ -90,7 +89,7 @@ class MainMenu(Carousel):
                 menu = ["resume_game"] + menu
         self.mainmenu = menu
         self._highlighted_item_index = 0
-        self.log.debug("Created main menu with {}".format(", ".join(self.mainmenu)))
+        self.debug_log("Created main menu with {}".format(", ".join(self.mainmenu)))
 
     def _load_careers(self):
         gamepath = self.machine.machine_path + "/savegames/"
@@ -103,10 +102,10 @@ class MainMenu(Carousel):
         # Don't include careers chosen by previous players
         already_chosen = [self.machine.variables.get_machine_var("last_career_player_{}".format(x))
                           for x in range(1, player_num)]
-        self.log.debug("Already chosen careers: {}".format(already_chosen))
+        self.debug_log("Already chosen careers: {}".format(already_chosen))
 
         for path, dirs, files in os.walk(gamepath):
-            self.log.debug("Searching savegame files: {}".format(files))
+            self.debug_log("Searching savegame files: {}".format(files))
             for file in files:
                 if file.endswith(".json") and not file.endswith(".pinstrat.json"):
                     with open("{}/{}".format(path, file)) as f:
@@ -131,7 +130,7 @@ class MainMenu(Carousel):
 
         # Sort by the date last played (newest first)
         self.careers.sort(key=itemgetter("last_played"), reverse=True)
-        self.log.debug("Created player {} career menu with [{}]; initial selection is {}".format(player_num,
+        self.debug_log("Created player {} career menu with [{}]; initial selection is {}".format(player_num,
                        ", ".join([c["career_name"] for c in self.careers]), self._selected_career))
 
     def _get_available_items(self):
@@ -145,7 +144,7 @@ class MainMenu(Carousel):
 
     def _select_item(self, force=None, **kwargs):
         selection = force or self._get_highlighted_item()
-        self.log.debug("Selecting item {} for shown menu {}".format(selection, self._shown_menu))
+        self.debug_log("Selecting item {} for shown menu {}".format(selection, self._shown_menu))
         # If a career was selected, track it and return to main menu
         if self._shown_menu == self.careers:
             # Use the index of the selected name to get the entire career object
@@ -203,15 +202,15 @@ class MainMenu(Carousel):
             return
         else:
             self.log.error("Unknown selection '{}' from main menu!".format(selection))
-        self.log.debug("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
+        self.debug_log("*** Exiting menu, player is now {}".format(self.machine.game.player.vars))
         super()._select_item()
 
     def _update_highlighted_item(self, direction=None):
         # If create mode is open, don't highlight anything
         if self.machine.modes.createprofile.active:
-            self.log.debug("Highlight selected but Create Profile active, so aborting")
+            self.debug_log("Highlight selected but Create Profile active, so aborting")
             return
-        self.log.debug("Highlight selected, look for the next event:")
+        self.debug_log("Highlight selected, look for the next event:")
         # Career menu: select the highlighted career to post the name/level and update the widget
         if self._shown_menu == self.careers:
             career = self.careers[self._highlighted_item_index]
@@ -273,12 +272,12 @@ class MainMenu(Carousel):
 
     def _set_selected_career(self, career):
         self._selected_career = career
-        self.log.debug("Setting career to {}".format(self._selected_career))
+        self.debug_log("Setting career to {}".format(self._selected_career))
         self._post_career_event("set_career")
 
     def _create_profile(self, **kwargs):
         if not kwargs.get('name') or not kwargs['name'].strip():
-            self.log.info("Invalid profile name '{}'.".format(kwargs.get('name')))
+            self.info_log("Invalid profile name '{}'.".format(kwargs.get('name')))
             return
 
         name = kwargs['name']

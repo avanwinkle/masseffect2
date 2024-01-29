@@ -6,7 +6,6 @@ class Airlock(Mode):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.log = logging.getLogger("Airlock")
         self.settings = self.config.get("mode_settings")
 
         self._bd_physical_lock = None
@@ -15,7 +14,6 @@ class Airlock(Mode):
 
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
-        self.log.info("Airlock Mode is starting")
         if not self._lockshot:
             self._find_devices()
         self.add_mode_event_handler("fmball_lightshot_hit", self._debug_lightshot_hit)
@@ -58,7 +56,7 @@ class Airlock(Mode):
         try:
             self._lockshot = self.machine.shots["{}_shot".format(self._logicallockdevice.name)]
         except KeyError:
-            self.log.info("Airlock has no {} lock shot, locking will be disabled")
+            self.info_log("Airlock has no {} lock shot, locking will be disabled")
 
     def _check_bypass(self, **kwargs):
         # These are the conditions in which we should bypass. Using this inverse
@@ -81,16 +79,16 @@ class Airlock(Mode):
                              callback=self._restore_captive)
 
         if not do_bypass:
-            self.log.debug("Bypass check failed, holding ball.")
+            self.debug_log("Bypass check failed, holding ball.")
             return
 
         # No balls? Longer pulse
         if self.machine.ball_devices.bd_lock.balls==0:
-            self.log.debug("Bypass active and no balls held, long pulse enable.")
+            self.debug_log("Bypass active and no balls held, long pulse enable.")
             self.machine.coils['c_lock_release'].timed_enable(timed_enable_ms=600)
         # Balls? Pulse with the default_timed_enable_ms
         else:
-            self.log.debug("Bypass active and balls held, short pulse enable.")
+            self.debug_log("Bypass active and balls held, short pulse enable.")
             self.machine.coils['c_lock_release'].timed_enable()
 
         # Enable the airlock save
@@ -112,15 +110,15 @@ class Airlock(Mode):
         self.machine.events.post(event, **kwargs)
 
     def _debug_lightshot_hit(self, **kwargs):
-        self.log.info("FMBALL was hit, where we at?")
-        self.log.info("Achievements are {}".format(self.player.achievements))
+        self.debug_log("FMBALL was hit, where we at?")
+        self.debug_log("Achievements are {}".format(self.player.achievements))
 
-        self.log.info("FMBALL lock is {}".format(self._logicallockdevice))
-        self.log.info(" - enabled? {}".format(self._logicallockdevice.enabled))
-        self.log.debug("At this moment, multiball color is: {}".format(self.player["color_mball"]))
+        self.debug_log("FMBALL lock is {}".format(self._logicallockdevice))
+        self.debug_log(" - enabled? {}".format(self._logicallockdevice.enabled))
+        self.debug_log("At this moment, multiball color is: {}".format(self.player["color_mball"]))
 
     def _debug_enter(self, **kwargs):
-        self.log.info("Ball has entered the airlock, lock is enabled? {}".format(self._logicallockdevice.enabled))
-        self.log.info(" - logical lock has {} balls locked, physical device has {} balls".format(
+        self.debug_log("Ball has entered the airlock, lock is enabled? {}".format(self._logicallockdevice.enabled))
+        self.debug_log(" - logical lock has {} balls locked, physical device has {} balls".format(
             self._logicallockdevice.locked_balls,
             self._bd_physical_lock.balls))

@@ -77,4 +77,4 @@ class AttractCarousel(Carousel):
         expected_modes = ['attract', 'attract_carousel', 'credits', 'mainmenu', 'service', 'tilt', 'pinstrat']
         for m in self.machine.mode_controller.active_modes:
             if m.name not in expected_modes:
-                self.machine.log.warning("Unexpected mode %s found during attract.", m)
+                self.warning_log("Unexpected mode %s found during attract.", m)

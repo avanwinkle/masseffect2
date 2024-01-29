@@ -32,6 +32,7 @@ class SaveCareer(CustomCode):
     def on_load(self):
         """Initialize the module by setting handlers for load/save-related events."""
         self.log = logging.getLogger("SaveCareer")
+        self.log.setLevel(30)  # TODO: Use LogMixin
         self._achievement_handlers = {}
         self._career_data = {}
         self._savepath = "{}/savegames".format(self.machine.machine_path)

@@ -159,8 +159,9 @@ coils:
     tags: coil_airlock
   c_orbit_gates:
     number: 2-3
-    default_pulse_ms: 60
+    default_pulse_ms: 70
     default_hold_power: 0.75
+    max_hold_duration: 10
     enable_events: enable_gates
     disable_events: disable_gates
     pulse_events: ball_search_phase_1

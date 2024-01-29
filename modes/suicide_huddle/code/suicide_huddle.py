@@ -34,7 +34,7 @@ class SuicideHuddle(Carousel):
         while self._specialist not in self._items:
             self._specialist = self._mates[self._mates.index(self._specialist) + 1]
 
-        self.machine.log.info("Huddle specialist mates are: {}".format(self._mates))
+        self.info_log("Huddle specialist mates are: {}".format(self._mates))
         self._render_specialists()
 
     def _render_specialists(self, **kwargs):

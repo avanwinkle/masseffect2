@@ -64,11 +64,11 @@ class Service(BaseService):
                 elif len(bits) == 4:
                     _, chain, addr, color = bits
                 else:
-                    self.machine.log.warning("What is this bits? %s", bits)
+                    self.warning_log("What is this bits? %s", bits)
             else:
                 chain = "XX"
                 addr = number
-            self.machine.log.info("  - identified chain '%s' and addr '%s'", chain, addr)
+            self.info_log("  - identified chain '%s' and addr '%s'", chain, addr)
 
             for platform in l.platforms:
                 platform_name = type(platform).__name__
@@ -77,14 +77,10 @@ class Service(BaseService):
                 if not chain in chain_lookup[platform_name]:
                     chain_lookup[platform_name][chain] = []
                 chain_lookup[platform_name][chain].append((addr, l))
-        self.machine.log.info("*** CHAINS ***")
-        self.machine.log.info("%s", chain_lookup)
         items = []
         for platform_name, chains in chain_lookup.items():
             for chain_name, chain in chains.items():
                 items.append(LightChainMap(platform_name, chain_name, chain))
-        self.machine.log.info("*** ITEMS ***")
-        self.machine.log.info("%s", items)
 
         # do not crash if no lights are configured
         if not items:   # pragma: no cover

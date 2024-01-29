@@ -15,7 +15,6 @@ class MissionSelect(Carousel):
     def mode_init(self):
         """Init: create a logger."""
         super().mode_init()
-        self.log = logging.getLogger("MissionSelect")
         self._mates = []
         self._specialist = "jacob"
 
@@ -26,14 +25,14 @@ class MissionSelect(Carousel):
 
         # For high-flow players, reduce the options to one
         if player["high_flow"]:
-            self.machine.log.info("High flow player has items: {}".format(self._all_items))
+            self.info_log("High flow player has items: {}".format(self._all_items))
             # If no mission to resume, pick at random
             if player["high_flow_resume"] == " " or not player["high_flow_resume"] in self._all_items:
                 choice = random.choice(self._all_items)
                 player["high_flow_resume"] = choice
             # Reduce the items to just the single option
             self._all_items = [player["high_flow_resume"]]
-            self.machine.log.info("high flow setting choce to {}".format(self._all_items))
+            self.info_log("high flow setting choce to {}".format(self._all_items))
 
         # Normal flow players can't skip a single recruit but can skip other missions.
         # High flow players will *always*
@@ -90,10 +89,10 @@ class MissionSelect(Carousel):
         # be non-recruitments that are resumed by high-flow? If no, consolidate.
         last_mission = player["last_mission"]
         if last_mission in items:
-            self.machine.log.info("MissionSelect found last_mission {} in items {}".format(last_mission, items))
+            self.info_log("MissionSelect found last_mission {} in items {}".format(last_mission, items))
             items.remove(last_mission)
             items.insert(0, last_mission)
-            self.machine.log.info("  - missionselect moved last_mission {} to the front: {}".format(last_mission, items))
+            self.info_log("  - missionselect moved last_mission {} to the front: {}".format(last_mission, items))
 
         # If high-flow, nothing else
         if player["high_flow"]:
@@ -120,7 +119,7 @@ class MissionSelect(Carousel):
         del kwargs
         # If select was hit while the intro still showed, pick the next one
         if self._get_highlighted_item() == self._intro:
-            self.log.debug("Intro was picked as mission, advancing to next item")
+            self.debug_log("Intro was picked as mission, advancing to next item")
             self._highlighted_item_index += 1
         # If we are in high-flow mode, there is only one item
         elif self.machine.game.player["high_flow"]:
@@ -170,7 +169,7 @@ class MissionSelect(Carousel):
             self.machine.events.post("missionselect_force_mission")
 
     def _remove_intro(self):
-        self.log.debug("Removing intro slide, highlighted is {} and items are: {}".format(
+        self.debug_log("Removing intro slide, highlighted is {} and items are: {}".format(
                        self._highlighted_item_index, self._items))
         if self._items[0] == self._intro and self._highlighted_item_index == 0:
             self._next_item()

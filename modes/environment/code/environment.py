@@ -15,7 +15,6 @@ class Environment(Mode):
     def __init__(self, *args, **kwargs):
         """Initialize mode, create logger, set environment."""
         super().__init__(*args, **kwargs)
-        self.log = logging.getLogger("Environment")
         self.shots = []
         self._environment = None
         self._removal_handlers = None
@@ -28,7 +27,7 @@ class Environment(Mode):
         self._register_handlers()
 
     def _set_environment(self, **kwargs):
-        self.log.debug("Setting environment with kwargs: %s", kwargs)
+        self.debug_log("Setting environment with kwargs: %s", kwargs)
         for shot in self.shots:
             shot.reset()
 
@@ -51,7 +50,7 @@ class Environment(Mode):
                     ]
 
             self._environment = env
-            self.log.debug("Environment is now %s", self._environment)
+            self.debug_log("Environment is now %s", self._environment)
 
     def _register_handlers(self):
         self.add_mode_event_handler('set_environment', self._set_environment)
@@ -63,7 +62,7 @@ class Environment(Mode):
             self.machine.events.remove_handlers_by_keys(self._removal_handlers)
             self._removal_handlers = None
         self._environment = None
-        self.log.debug("Environment cleared and removal handlers removed.")
+        self.debug_log("Environment cleared and removal handlers removed.")
 
 
 class EnvShot():
