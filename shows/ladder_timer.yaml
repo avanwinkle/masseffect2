@@ -13,61 +13,61 @@
 # desired color. Using start_running=False will start the fades
 # to the next color when the show is unpaused.
 
-# Step 1: 60-second mark [All Green]
+# Step 1: 60-second mark [All Green] = 61
 - duration: 1.9
   lights:
     l_ladder:
       color: color_timer_green
       fade: 1900ms
-# Step 2: Begin fade to yellow
+# Step 2: Begin fade to yellow = 59.1
 - duration: 1.9
   lights:
     l_ladder_light_9:
       color: color_timer_yellow
       fade: 1900ms
-# Step 3
+# Step 3 = 57.2
 - duration: 1.9
   lights:
     l_ladder_light_8:
       color: color_timer_yellow
       fade: 1900ms
-# Step 4
+# Step 4 = 55.3
 - duration: 1.9
   lights:
     l_ladder_light_7:
       color: color_timer_yellow
       fade: 1900ms
-# Step 5
+# Step 5 = 53.4
 - duration: 1.9
   lights:
     l_ladder_light_6:
       color: color_timer_yellow
       fade: 1900ms
-# Step 6
+# Step 6 = 51.5
 - duration: 1.9
   lights:
     l_ladder_light_5:
       color: color_timer_yellow
       fade: 1900ms
-# Step 7
+# Step 7 = 49.6
 - duration: 1.9
   lights:
     l_ladder_light_4:
       color: color_timer_yellow
       fade: 1900ms
-# Step 8
+# Step 8 = 47.7
 - duration: 1.9
   lights:
     l_ladder_light_3:
       color: color_timer_yellow
       fade: 1900ms
-# Step 9
+# Step 9 = 45.8
 - duration: 1.9
   lights:
     l_ladder_light_2:
       color: color_timer_yellow
       fade: 1900ms
-# Step 10
+# Step 10 = 43.9
 - duration: 1.9
   lights:
     l_ladder_light_1:

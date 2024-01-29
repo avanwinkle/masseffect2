@@ -89,24 +89,24 @@ show_player:
     ladder_timer:
       start_step: 1
       priority: 1000
-      speed: 0.8
+      speed: 0.8 / current_player.research_tick_interval_perk
       start_running: device.timers.missiontimer.running
   missiontimer_set_40:
     ladder_timer:
       start_step: 11
       priority: 1000
-      speed: 0.8
+      speed: 0.8 / current_player.research_tick_interval_perk
       start_running: device.timers.missiontimer.running
   missiontimer_set_20:
     ladder_timer:
       start_step: 23
       priority: 1000
-      speed: 0.8
+      speed: 0.8 / current_player.research_tick_interval_perk
       start_running: device.timers.missiontimer.running
   missiontimer_set_12:
     ladder_timer:
       start_step: 31
-      speed: 0.8
+      speed: 0.8 / current_player.research_tick_interval_perk
       start_running: device.timers.missiontimer.running
   increase_ladder_speed:
     ladder_timer:
@@ -127,8 +127,8 @@ timers:
     start_value: 60
     max_value: 60
     end_value: 0
-    # Normal difficulty gets 1.25s per tick, hardcore/insanity gets 1s
-    tick_interval: current_player.research_tick_interval_perk * (1.25 if current_player.difficulty==0 else 1)
+    # Normal difficulty gets 1.2s per tick, hardcore/insanity gets 1s
+    tick_interval: current_player.research_tick_interval_perk * (1.2 if current_player.difficulty==0 else 1)
     direction: down
     control_events:
       # Some missions use different timing, so a few handlers to adjust the clock
