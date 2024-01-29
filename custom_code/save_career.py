@@ -62,6 +62,14 @@ class SaveCareer(CustomCode):
                 self.machine.settings.free_starting_mission == 1 and player["casual"]
             ):
                 starting_recruit = FORCE_INITIAL or SquadmateStatus.random_recruit()
+                # In a multiplayer game, make sure everybody gets a different starter
+                if player["number"] == 1:
+                    self.chosen_random_recruits = [starting_recruit]
+                elif not FORCE_INITIAL:
+                    while starting_recruit in self.chosen_random_recruits:
+                        starting_recruit = SquadmateStatus.random_recruit()
+                    self.chosen_random_recruits.append(starting_recruit)
+
                 self.log.debug("Found a random recruit: %s", starting_recruit)
                 player["status_{}".format(starting_recruit)] = 3
                 player["available_missions"] = 1
