@@ -5,30 +5,17 @@ import random
 from mpf.core.custom_code import CustomCode
 from .squadmate_status import SquadmateStatus
 
-LEDS = {
-    "garrus": "color_shield_blue",
-    "grunt": "color_shield_orange",
-    "jack": "color_shield_purple",
-    "kasumi": "color_shield_yellow",
-    "legion": "color_shield_white",
-    "mordin": "color_shield_red",
-    "samara": "l_iron_throne",
-    "tali": "l_right_return_lane",
-    "thane": "color_shield_green",
-    "zaeed": "l_hand_of_the_king",
-}
-
 COLORS = {
-    "garrus": "0E1B4F",
-    "grunt": "EF521F",
-    "jack": "7B3FB8",
-    "kasumi": "F7F315",
+    "garrus": "0055FF",
+    "grunt": "FF6611",
+    "jack": "4D00CC",
+    "kasumi": "EEFF00",
     "legion": "FFFFFF",
-    "mordin": "BD000A",
-    "samara": "0037FF",
-    "tali": "D323FF",
-    "thane": "00FF00",
-    "zaeed": "FF0000",
+    "mordin": "440000",
+    "samara": "008899",
+    "tali": "FF11DD",
+    "thane": "00FF11",
+    "zaeed": "FF7700",
 }
 
 MATE_PAIRS = (

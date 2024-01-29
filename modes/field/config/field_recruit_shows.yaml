@@ -29,7 +29,7 @@ show_player:
       show_tokens:
         leds: l_progress_collectorship
         color1: color_grunt
-        color2: color_grunt%20
+        color2: color_legion
         fade: 2s
     color_flashing{device.achievements.derelictreaper.state=="enabled"}:
       speed: 0.5
