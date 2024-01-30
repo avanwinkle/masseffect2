@@ -456,6 +456,7 @@ slides:
       - type: text
         text: Player (num)
         style: header_md, row_main
+      - widget: background_console
   levelup_slide:
     transition: fade
     transition_out: fade

@@ -12,6 +12,8 @@ mode_settings:
   rounding_value: 100
   rounding_direction: up
   bonus_entries:
+    - event: bonus_reputation
+      score: machine.base_points // 1000 * (current_player.reputation + current_player.paragon + current_player.renegade)
     - event: bonus_level
       score: machine.base_points // 40
       player_score_entry: earned_level
@@ -19,7 +21,7 @@ mode_settings:
       score: machine.base_points // 100
       player_score_entry: earned_squadmates_count
     - event: bonus_minerals
-      score: (1 + current_player.planets) * current_player.mineral_total * machine.base_points // 4000000
+      score: (1 + current_player.planets) * current_player.mineral_total * machine.base_points // 5000000
     - event: bonus_assignments
       score: machine.base_points // 50
       player_score_entry: earned_assignments_completed
@@ -43,9 +45,13 @@ queue_relay_player:
     wait_for: mode_gameover_stopped
 
 slide_player:
-  bonus_start.1{current_player.state_machine_suicide_progress!="completed"}: end_slide
+  bonus_start.3{current_player.state_machine_suicide_progress!="completed"}: end_slide
   bonus_start.2{current_player.state_machine_suicide_progress=="completed"}: end_slide_gameover
+  bonus_start.1:
+    end_slide_player_info:
+      target: lcd_right
   bonus_level: bonus_level_slide
+  bonus_reputation: bonus_reputation_slide
   bonus_squadmates: bonus_squadmates_slide
   bonus_minerals: bonus_minerals_slide
   bonus_assignments: bonus_assignments_slide
@@ -64,6 +70,20 @@ slides:
     - type: text
       text: Game Over
       style: header_lg
+  end_slide_player_info:
+    - type: text
+      text: Ball (player|ball)
+      style: header_sm, row_main
+    - type: text
+      text: (player|score)
+      style: header_sm, row_sub, num
+  bonus_reputation_slide:
+    - type: text
+      text: "Reputation"
+      style: header_sm, row_sub
+    - type: text
+      text: (score)
+      style: header_md, row_main, num
   bonus_level_slide:
     - type: text
       text: "Level (player|level)"
