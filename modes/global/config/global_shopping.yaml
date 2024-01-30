@@ -16,7 +16,7 @@ event_player:
   mode_global_started:
     - enable_captive{device.ball_devices.bd_lock.balls}
   mode_global_will_stop:
-    - disable_captive
+    - disable_captive{not mode.derelictreaper.active}
   balldevice_bd_lock_ball_count_changed:
     - enable_captive{balls>0}
     - disable_captive{balls==0}
