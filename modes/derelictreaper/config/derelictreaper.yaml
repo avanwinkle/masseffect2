@@ -197,6 +197,7 @@ show_player:
     led_12_chase_single:
       speed: 4
       show_tokens:
+        ledring: l_mass_relay
         color: color_husk
         fade: 250ms
   mode_intro_skipped:
@@ -283,11 +284,9 @@ slides:
     widgets:
       - type: video
         video: derelictreaper_cineanim
+        end_behavior: pause
         volume: 0.5
   derelictreaper_dossier:
-    transition:
-      type: fade
-      duration: 2s
     transition_out:
       type: fade
       duration: 500ms
@@ -303,9 +302,6 @@ slides:
       style: codex_text
     - widget: dossier_recruit_base
   derelictreaper_slide:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 1s
