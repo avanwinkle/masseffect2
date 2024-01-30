@@ -72,11 +72,14 @@ slides:
       style: header_lg
   end_slide_player_info:
     - type: text
-      text: Ball (player|ball)
-      style: header_sm, row_main
+      text: Player (player|number)
+      style: header_xs, row_super
     - type: text
       text: (player|score)
-      style: header_sm, row_sub, num
+      style: header_sm, row_main, num
+    - type: text
+      text: Ball (player|ball)
+      style: header_xs, row_sub
   bonus_reputation_slide:
     - type: text
       text: "Reputation"

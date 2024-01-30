@@ -26,7 +26,7 @@ class Base(Mode):
       clear_current=True,
       priority=1999,
       # TODO: Customize expiration times based on video length
-      expire="10s"
+      expire="10s" if not self.stopping else "5s"
     )
 
     # If the levelup is a failure, don't award player vars or upgrades
