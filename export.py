@@ -3,6 +3,7 @@
 This file must be run with a working directory of project root.
 """
 import os
+import subprocess
 import sys
 import shutil
 import logging
@@ -93,7 +94,8 @@ def generate_update_file(package_list=None):
         f.writelines([
             f"timestamp={now.strftime('%a %b %d %H:%M:S %Z %Y')}\n",
             f"version={timestamp.replace('_', '.')}\n",
-            f"mpf_config.bundle={generate_hash(os.path.join(DEST_PATH, 'mpf_config.bundle'))}\n"
+            f"mpf_config.bundle={generate_hash(os.path.join(DEST_PATH, 'mpf_config.bundle'))}\n",
+            f"mpf_mc_config.bundle={generate_hash(os.path.join(DEST_PATH, 'mpf_mc_config.bundle'))}\n"
         ])
         if package_list:
             f.write(
@@ -104,6 +106,53 @@ def make_zip():
     filename = f"{EXPORT_PREFIX}-{timestamp}"
     shutil.make_archive(filename, 'zip', DEST_PATH)
     return f"{filename}.zip"
+
+def generate_packages():
+
+    if not "-b" in sys.argv and not "-p" in sys.argv:
+        return
+
+    package_list = []
+    package_dest_path = os.path.join(DEST_PATH, "packages")
+    os.makedirs(package_dest_path)
+
+    """Packages can be *built* with the -b argument, comma separated"""
+    if "-b" in sys.argv:
+        build_idx = sys.argv.index("-b")
+        build_list = sys.argv[build_idx + 1].split(",")
+        for b in build_list:
+            # By default a wheel will be built, but another extension can be provided
+            if "." in b:
+                b, extension = b.split(".", 1)
+            else:
+                extension = ".whl"
+            # Assume that the repos are in the parent root folder
+            build_source_path = os.path.join("..", b)
+            log.info("Building package modules %s at path %s", build_list, build_source_path)
+            subprocess.check_call([sys.executable, "-m", "build", build_source_path])
+            # Find the wheel
+            build_dist_path = os.path.join(build_source_path, "dist")
+            build_file = newest(build_dist_path, extension)
+            log.info(" - found built module %s", build_file)
+            build_filename = build_file.split("/")[-1]
+            log.info(" - copying %s to %s", build_file, os.path.join(package_dest_path, build_filename))
+            shutil.copyfile(build_file,
+                            os.path.join(package_dest_path, build_filename))
+            package_list.append(build_filename)
+
+    """Packages can be entered with the -p argument, comma separated"""
+    if "-p" in sys.argv:
+        package_idx = sys.argv.index("-p")
+        package_items = sys.argv[package_idx + 1].split(",")
+        package_source_path = os.path.join("packages")
+        package_dest_path = os.path.join(DEST_PATH, "packages")
+        log.info("Bundling packages: %s", package_items)
+        for p in package_items:
+            shutil.copyfile(os.path.join(package_source_path, p),
+                            os.path.join(package_dest_path, p))
+            package_list.append(p)
+
+    return package_list
 
 def main():
     print(f'Found MPF version {mpfversion} and ME2 version {me2version}')
@@ -120,20 +169,7 @@ def main():
     for bundle in ("mpf_config.bundle", "mpf_mc_config.bundle"):
         shutil.copyfile(bundle, os.path.join(DEST_PATH, bundle))
 
-    """Packages can be entered with the -p argument, comma separated"""
-    if "-p" in sys.argv:
-        package_idx = sys.argv.index("-p")
-        package_list = sys.argv[package_idx + 1].split(",")
-        package_source_path = os.path.join("packages")
-        package_dest_path = os.path.join(DEST_PATH, "packages")
-        log.info("Bundling packages: %s", package_list)
-        os.makedirs(os.path.join(DEST_PATH, "packages"))
-        for p in package_list:
-            shutil.copyfile(os.path.join(package_source_path, p),
-                            os.path.join(package_dest_path, p))
-    else:
-        package_list = None
-
+    package_list = generate_packages()
     generate_update_file(package_list)
 
     # Check for a copy path
@@ -160,6 +196,10 @@ def main():
         log.info("Compressing dist folder")
         make_zip()
 
+def newest(path, extension):
+    files = os.listdir(path)
+    paths = [os.path.join(path, basename) for basename in files if basename.endswith(extension)]
+    return max(paths, key=os.path.getctime)
 
 if __name__ == "__main__":
     if "-d" in sys.argv:
