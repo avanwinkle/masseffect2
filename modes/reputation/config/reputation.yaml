@@ -134,13 +134,13 @@ widgets:
   reputation_slide:
       - type: text
         text: "  +1 Reputation"
-        style: reputation_title, col_left_anchor, color_ui_green_light
+        style: reputation_title, col_left_indent, color_ui_green_light
         animations:
           add_to_slide: reputation_slide_in
           reputation_fadeout: reputation_slide_out
       - type: text
         text: "(player|bonus_multiplier)X Bonus"
-        style: reputation_title, col_right_anchor, color_ui_green_light
+        style: reputation_title, col_right_indent, color_ui_green_light
         animations:
           add_to_slide: reputation_slide_in
           reputation_fadeout: reputation_slide_out

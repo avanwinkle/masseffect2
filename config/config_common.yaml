@@ -191,7 +191,7 @@ machine_vars:
     persist: false
   base_cooldown:
     # Start with a nice low number for easy debugging. Later, bump up to... 100?
-    initial_value: 100
+    initial_value: 80
     value_type: int
     persist: false
   # This needs to be a machine variable so that it can exist outside of game modes (i.e. mainmenu)

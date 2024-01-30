@@ -153,7 +153,7 @@ class Powers(Mode):
         if not enabled:
             opacity = 1.0
             complete_height = POWER_WIDGET_HEIGHT
-        elif value == 100:
+        elif value >= self._base_cooldown:
             opacity = 0
             complete_height = 0
         else:
