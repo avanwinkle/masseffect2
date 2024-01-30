@@ -2,7 +2,7 @@
 # Actual "mode" code comes from MPF core tilt mode. This file is just overrides.
 
 tilt:
-  warnings_to_tilt: 3
+  warnings_to_tilt: 4
   multiple_hit_window: 3s
   settle_time: 5s
 
@@ -24,13 +24,14 @@ shows:
     - time: 2s
 
 slide_player:
-  tilt_warning_1:
+  _overwrite: true
+  tilt_warning.2{warnings_remaining>1}:
     tilt_warning_1:
       expire: 4s
     tilt_portrait:
       expire: 4s
       target: lcd_right
-  tilt_warning_2:
+  tilt_warning.1{warnings_remaining==1}:
     tilt_warning_2:
       expire: 4s
     tilt_portrait:
@@ -73,9 +74,15 @@ slides:
       - widget: background_console
 
 sound_player:
-  tilt_warning_1: tilt_warning_normal
-  tilt_warning_2: tilt_warning_severe
-  tilt: tilt_reaper
+  tilt_warning.1{warnings_remaining>2}:
+    tilt_warning_normal:
+      volume: 1.0
+  tilt_warning.2{warnings_remaining<=2}:
+    tilt_warning_severe:
+      volume: 1.0
+  tilt:
+    tilt_reaper:
+      volume: 1.0
 
 sound_pools:
   tilt_warning_normal:
@@ -83,17 +90,17 @@ sound_pools:
     type: random_force_all
     ducking:
       target: music, levelup
-      attenuation: 0.5
+      attenuation: 0.4
       attack: 100ms
-      release: 500ms
-      release_point: 200ms
+      release: 600ms
+      release_point: 240ms
     sounds:
       - tilt_kasumi_watch_where_youre_shooting{current_player.status_kasumi==4}
       - tilt_kasumi_watch_it{current_player.status_kasumi==4}
       - tilt_zaeed_watch_it{current_player.status_zaeed==4}
-      - tilt_zaeed_watch_your_aim{current_player.status_zaeed==4}
+      - tilt_zaeed_watch_your_aim
       - tilt_thane_watch_your_shots{current_player.status_thane==4}
-      - tilt_jack_damn_it_watch_where_youre_shooting{current_player.status_jack==4}
+      - tilt_jack_damn_it_watch_where_youre_shooting
       - tilt_jack_hold_your_fire_shepard{current_player.status_jack==4}
       - tilt_garrus_careful{current_player.status_garrus==4}
       - tilt_legion_adjust_aim{current_player.status_legion==4}
@@ -103,7 +110,7 @@ sound_pools:
       - tilt_samara_cease_fire_shepard{current_player.status_samara==4}
       - tilt_mordin_stop_shooting_shepard{current_player.status_mordin==4}
       - tilt_tali_hold_your_fire{current_player.status_tali==4}
-      - tilt_tali_shepard_back_off{current_player.status_tali==4}
+      - tilt_tali_shepard_back_off
       - tilt_miranda_careful_shepard_1
       - tilt_miranda_careful_shepard_2
   tilt_warning_severe:
@@ -111,16 +118,16 @@ sound_pools:
     type: random_force_all
     ducking:
       target: music, levelup
-      attenuation: 0.5
+      attenuation: 0.4
       attack: 100ms
-      release: 500ms
-      release_point: 200ms
+      release: 600ms
+      release_point: 240ms
     sounds:
       - tilt_jack_get_off_my_ass{current_player.status_jack==4}
-      - tilt_garrus_hold_fire{current_player.status_garrus==4}
+      - tilt_garrus_hold_fire
       - tilt_grunt_stop_it_2{current_player.status_grunt==4}
       - tilt_grunt_hold_fire_shepard_2{current_player.status_grunt==4}
-      - tilt_grunt_stop_firing_at_me_idiot{current_player.status_grunt==4}
+      - tilt_grunt_stop_firing_at_me_idiot
       - tilt_jacob_back_off
       - tilt_jacob_watch_your_fire
       - tilt_miranda_watch_it
