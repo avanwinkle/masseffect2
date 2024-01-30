@@ -97,7 +97,7 @@ coils:
   c_trough_eject:
     number: 1-0
     default_pulse_ms: 22 # Mk2 was 20, upping to 22. 28 was too much.
-    default_pulse_power: 0.825  # Reducing from 1.0, comes out real fast
+    default_pulse_power: 1.0  # Tried 0.825 but ball jammed in trough
     # debug: true
   c_bumper_left:
     number: 2-2
