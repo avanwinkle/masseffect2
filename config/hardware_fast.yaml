@@ -22,9 +22,10 @@ ball_devices:
     eject_coil: c_trough_eject
     tags: trough, home, drain
     jam_switch: s_trough_jam
+    max_eject_attempts: 5
     eject_targets: bd_plunger
     eject_timeouts: 3s
-    eject_coil_jam_pulse: 25ms
+    eject_coil_jam_pulse: 32ms
     # Commenting below to resolve jam switch not triggering
     # confirm_eject_switch: s_plunger_lane
     # confirm_eject_type: switch

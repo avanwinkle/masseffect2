@@ -87,10 +87,6 @@ slide_player:
       target: main
     attract_slide_right:
       target: lcd_right
-  ball_search_started: ball_search_slide
-  ball_search_stopped:
-    ball_search_slide:
-      action: remove
   attract_carousel_title_highlighted:
     attract_slide_main:
       target: main
@@ -121,19 +117,6 @@ slide_player:
       target: lcd_right
 
 slides:
-  ball_search_slide:
-    widgets:
-      - type: text
-        text: Please Wait
-        style: body_sm, row_top
-      - type: text
-        text: Searching For Balls
-        style: body_md, row_sub
-  ball_search_cancel_slide:
-    widgets:
-      - type: text
-        text: Balls Missing
-        style: header_sm, row_main
   gc_score_slide:
     widgets:
       - type: text

@@ -11,6 +11,39 @@ class Service(BaseService):
 
     """Class override for MPF Service class to modify button handlers with toggle state."""
 
+    __slots__ = ("jam_poll",)
+
+    def __init__(self, *args, **kwargs):
+        """Initialize service mode."""
+        super().__init__(*args, **kwargs)
+        self.jam_poll = None
+
+    def mode_start(self, **kwargs):
+        del kwargs
+        self.add_mode_event_handler("trough_jammed_active", self._check_jam)
+        self.add_mode_event_handler("trough_jammed_inactive", self._check_jam)
+        if self.machine.ball_devices.bd_trough.ball_count_handler.counter.is_jammed():
+            self._check_jam()
+        # Re-post the ball search event since we missed it
+        elif self.machine.ball_devices['playfield'].ball_search.started:
+            self.machine.events.post("ball_search_started")
+
+
+    def _check_jam(self, **kwargs):
+        del kwargs
+        if self.machine.ball_devices.bd_trough.ball_count_handler.counter.is_jammed():
+            if self.jam_poll:
+                return
+            self.machine.events.post("show_trough_jammed_active")
+            self.jam_poll = self.machine.clock.schedule_interval(
+                self._check_jam, 1
+            )
+            return
+        self.machine.events.post("show_trough_jammed_inactive")
+        self.jam_poll.cancel()
+        self.jam_poll = None
+
+
     # Adjustments
     def _load_adjustments_menu_entries(self) -> List[ServiceMenuEntry]:
         """Return the adjustments menu items with label and callback."""

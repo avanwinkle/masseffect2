@@ -15,6 +15,11 @@ event_player:
     - play_test_music{focus_change=="enter"}
     - stop_test_music{focus_change=="exit"}
 
+timed_switches:
+  trough_jammed:
+    switches: s_trough_jam
+    time: 10s
+
 sounds:
   power_off:
     file: SFXGame.649.wav
@@ -25,6 +30,22 @@ sounds:
 
 
 slide_player:
+  # jam
+  show_trough_jammed_active:
+    trough_jammed:
+      action: play
+      priority: 100
+  show_trough_jammed_inactive:
+    trough_jammed:
+      action: remove
+  ball_search_started: ball_search_slide
+  ball_search_stopped:
+    ball_search_slide:
+      action: remove
+  ball_search_failed: missing_balls_slide
+  found_new_ball:
+    missing_balls_slide:
+      action: remove
   # door open
   service_door_opened:
     meservice_door_open:
@@ -169,6 +190,30 @@ widget_player:
       slide: meservice_menu
 
 slides:
+  trough_jammed:
+    - type: text
+      text: Ball Jam in Trough
+      style: header_sm, row_super
+    - type: text
+      text: "Please contact a staff\nmember for assistance."
+      style: body_sm, row_sub
+    - widget: background_console
+  ball_search_slide:
+    - type: text
+      text: Balls Missing
+      style: header_sm, row_super
+    - type: text
+      text: Searching For Balls...
+      style: body_md, row_sub
+    - widget: background_console
+  missing_balls_slide:
+    - type: text
+      text: Balls Missing
+      style: header_sm, row_super
+    - type: text
+      text: "Please contact a staff\nmember for assistance."
+      style: body_sm, row_sub
+    - widget: background_console
   # door open
   meservice_door_open:
   - type: text
