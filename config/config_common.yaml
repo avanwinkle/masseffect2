@@ -12,6 +12,64 @@ auditor:
   audit_shots: false
   autosave: false
   save_events: credits_added, ball_will_end, game_ended
+  events:
+    # MODE STARTS
+    - mode_recruitgrunt_started
+    - mode_recruitgarrus_started
+    - mode_recruitjack_started
+    - mode_recruitkasumi_started
+    - mode_recruitlegion_started
+    - mode_recruitmordin_started
+    - mode_recruitsamara_started
+    - mode_recruittali_started
+    - mode_recruitthane_started
+    - mode_recruitzaeed_started
+    - mode_overlord_started
+    - mode_arrival_started
+    - mode_n7_assignments_started
+    - mode_collectorship_ambush_started
+    - mode_collectorship_husk_started
+    - mode_collectorship_praetorian_started
+    - mode_firewalker_started
+    - mode_derelictreaper_started
+    - mode_normandyattack_started
+    - mode_shadowbroker_chase_started
+    - mode_shadowbroker_vasir_started
+    - mode_shadowbroker_hagalaz_started
+    - mode_shadowbroker_boss_started
+    - mode_suicide_omegarelay_started
+    - mode_suicide_infiltration_started
+    - mode_suicide_longwalk_started
+    - mode_suicide_platforms_started
+    - mode_suicide_tubes_started
+    - mode_suicide_humanreaper_started
+    - mode_suicide_endrun_started
+    # ACCOMPLISHMENTS
+    - recruit_grunt_complete
+    - recruit_garrus_complete
+    - recruit_jack_complete
+    - recruit_kasumi_complete
+    - recruit_legion_complete
+    - recruit_mordin_complete
+    - recruit_samara_complete
+    - recruit_tali_complete
+    - recruit_thane_complete
+    - recruit_zaeed_complete
+    - overlord_complete
+    - award_arrival_levelup
+    - collectorship_praetorian_complete
+    - derelictreaper_complete
+    - suicidemission_failed
+    - suicidemission_complete
+    - firewalker_rosalie_complete
+    - firewalker_volcano_station_complete
+    - firewalker_geth_incursion_complete
+    - firewalker_survey_sites_complete
+    - firewalker_prothean_site_complete
+    - shadowbroker_chase_complete
+    - shadowbroker_vasir_complete
+    - shadowbroker_hagalaz_complete
+    - shadowbroker_boss_complete
 
 smart_virtual:
   console_log: basic
