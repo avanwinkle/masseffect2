@@ -139,6 +139,7 @@ class Firewalker(Mode):
     self.add_mode_event_handler("firewalker_mission_complete",
                                 self._on_success, priority=1000,
                                 mission=mission)
+    self.machine.auditor.audit_event(f"mode_firewalker_{mission}_started")
 
   def _on_failure(self, **kwargs):
     del kwargs
@@ -148,9 +149,11 @@ class Firewalker(Mode):
     self._reset_fwps_shots(success=False)
 
   def _on_success(self, **kwargs):
+    mission_event = f"firewalker_{kwargs['mission']}_complete"
     self._play_sound("hmd_all_data_packets_recovered", context="firewalker_ended")
     self._reset_fwps_shots(success=True)
-    self.machine.events.post(f"firewalker_{kwargs['mission']}_complete")
+    self.machine.events.post(mission_event)
+    self.machine.auditor.audit_event(mission_event)
 
   def _handle_hit(self, **kwargs):
     shots_remaining = self.rules.on_hit(kwargs["shotname"])

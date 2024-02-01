@@ -115,6 +115,7 @@ class N7Assignments(Mode):
                                  rating=rating)
 
         self.add_mode_event_handler("n7_assignment_hit", self._on_hit)
+        self.machine.auditor.audit_event("mode_n7_assignments_started")
         self.machine.clock.schedule_once(self._play_callout, 1)
 
     def _check_achievement(self, rating):

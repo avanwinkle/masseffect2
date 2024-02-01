@@ -263,20 +263,23 @@ class MPFSquadmateHandlers(CustomCode):
     def _on_missionselect(self, **kwargs):
         mate = kwargs["squadmate"]
         self._current_mate = mate
-        self.machine.events.post("start_mode_recruit{}".format(mate))
+        self.machine.events.post(f"start_mode_recruit{mate}")
 
-        self.machine.events.replace_handler("recruit_{}_complete".format(mate), self._on_complete, squadmate=mate)
-        self.machine.events.replace_handler("mode_recruit{}_stopped".format(mate), self._on_stop, squadmate=mate)
+        self.machine.events.replace_handler(f"recruit_{mate}_complete",
+                                            self._on_complete, squadmate=mate)
+        self.machine.events.replace_handler(f"mode_recruit{mate}_stopped",
+                                            self._on_stop, squadmate=mate)
 
         # If we selected the mission via resume, note it
         if mate == self.machine.game.player["resume_mission"]:
             self._just_resumed = True
 
         # Set a listener for the mode starting so we can play the intro show if not-resume
-        self.machine.events.replace_handler("mode_recruit{}_started".format(mate), self._on_mission_started)
+        self.machine.events.replace_handler(f"mode_recruit{mate}_started",
+                                            self._on_mission_started, squadmate=mate)
 
     def _on_mission_started(self, **kwargs):
-        del kwargs
+        mate = kwargs["squadmate"]
         # If we aren't resuming a mission, play an intro show
         if not self._just_resumed:
             self.machine.events.post("play_mode_intro")
@@ -284,6 +287,8 @@ class MPFSquadmateHandlers(CustomCode):
             # Wait for the mission shots to update the timer before skipping intro
             self.machine.events.add_handler("set_mission_shots", self._on_mission_resumed, priority=1)
         self.machine.events.remove_handler(self._on_mission_started)
+        # Avoid a bunch of auditor handlers by posting directly
+        self.machine.auditor.audit_event(f"mode_recruit{mate}_started")
 
     def _on_mission_resumed(self, **kwargs):
         self.machine.events.post("mode_intro_complete")
@@ -333,6 +338,7 @@ class MPFSquadmateHandlers(CustomCode):
         player["status_{}".format(mate)] = 4
         self._on_stop(success=True, **kwargs)
         self._play_squadmates_show()
+        self.machine.auditor.audit_event(f"recruit_{mate}_complete")
 
         # See if we had previously failed the Suicide Mission, and if so, do we now
         # have enough tech/biotic squadmates to try again?

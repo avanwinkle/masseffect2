@@ -11,10 +11,24 @@ class SuicideBase(Mode):
     def mode_start(self, **kwargs):
         super().mode_start(**kwargs)
         self.player = self.machine.game.player
+        self.add_mode_event_handler("mode_type_suicide_started", self._on_suicide_started)
         # Listen for the suicide mission to fail and reset dead squadmates
         self.add_mode_event_handler("suicidemission_failed", self._handle_failure)
         self.add_mode_event_handler("kill_squadmate", self._kill_squadmate)
         self.add_mode_event_handler("query_final_squadmates", self._final_squadmates)
+        # Setup audit listeners here instead of the auditor, since nobody will get here
+        self.add_mode_event_handler("mode_suicide_platforms_started",
+                                    self._audit_final_mode, finalmode="suicide_platforms")
+        self.add_mode_event_handler("mode_suicide_humanreaper_started",
+                                    self._audit_final_mode, finalmode="suicide_humanreaper")
+
+    def _on_suicide_started(self, **kwargs):
+        del kwargs
+        current_mode = self._get_current_mode()
+        self.machine.auditor.audit_event(f"mode_suicide_{current_mode}_started")
+
+    def _audit_final_mode(self, **kwargs):
+        self.machine.auditor.audit_event(f"mode_{kwargs['finalmode']}_started")
 
     def _set_status(self, squadmate, status):
         self.player["status_{}".format(squadmate)] = status
@@ -93,6 +107,7 @@ class SuicideBase(Mode):
                 self._set_status(mate, 0)
         # Subtract the Suicide Mission from the available missions
         self.player["available_missions"] = self.player["available_missions"] - 1
+        self.machine.auditor.audit_event("suicidemission_failed")
 
     def _play_sound(self, sound_event):
         self.machine.events.post("play_squadmate_sound", **sound_event)
