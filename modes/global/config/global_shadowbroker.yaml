@@ -49,10 +49,9 @@ event_player:
   drop_target_bank_dropbank_down{current_player.state_machine_shadowbroker=="completed"}:
     queue_slide:
       priority: 3
-      slide: shadowbroker_advance_slide
+      slide: shadowbroker_glyph_slide
       portrait: shadowbroker_advance_3
       clear_recruits: true
-      count: 8
 
 variable_player:
   drop_target_bank_dropbank_down:
@@ -117,12 +116,8 @@ shows:
         l_dropbank_middle: black
         l_dropbank_top: black
 
-
 slides:
   shadowbroker_advance_slide:
-    transition:
-      type: fade
-      duration: 500ms
     transition_out:
       type: fade
       duration: 500ms
@@ -134,6 +129,18 @@ slides:
         text: Intel Collected
         style: header_md, row_bottom, col_left_anchor
       - widget: shadowbroker_drops_(count)
+  shadowbroker_glyph_slide:
+    transition_out:
+      type: fade
+      duration: 500ms
+    widgets:
+      - type: text
+        text: "Greetings, Shadow Broker"
+        style: header_xs, row_top, col_left_anchor, mission_title
+      - type: text
+        text: Intel Collected
+        style: header_md, row_main, col_left_anchor
+      - widget: background_console
 
 sound_player:
   # Have to deal with duplicate events until MC handles event priority with conditions
@@ -165,7 +172,7 @@ sound_player:
   play_shepard_ill_start_down_here:
     shepard_ill_start_down_here:
       max_queue_time: 2s
-  play_queued_slide_shadowbroker_advance_slide{count==8}:
+  play_queued_slide_shadowbroker_glyph_slide:
     glyph:
       max_queue_time: 1s
 
