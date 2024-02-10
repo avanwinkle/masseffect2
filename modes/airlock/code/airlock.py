@@ -64,7 +64,7 @@ class Airlock(Mode):
         # every *or*. So put them in order of most-likely-to-be-true.
         do_bypass = False
         if not self.machine.multiball_locks.fmball_lock.enabled and \
-            not (self.machine.ball_holds.captive_hold.enabled or self.machine.ball_holds.captive_hold.balls_held==0) and \
+            not self.machine.ball_holds.captive_hold.enabled and \
             not self.machine.ball_holds.store_hold.enabled and \
             not self.machine.ball_holds.arrival_hold.enabled and \
             not self.machine.ball_holds.sb_hold.enabled:
