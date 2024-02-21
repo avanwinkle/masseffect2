@@ -89,7 +89,7 @@ class Base(Mode):
   def _on_mission_hit(self, **kwargs):
     del kwargs
     # For charity, include a bit of score even if the ultimate score doesn't get collected
-    self._add_mission_score(self.player['mission_shot_value'] // 100 * 100,)
+    self._add_mission_score(self.player['mission_shot_value'] // 1000 * 100)
 
   def _on_mission_score(self, **kwargs):
     del kwargs

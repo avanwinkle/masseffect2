@@ -37,14 +37,14 @@ high_score:
     # high_scores file, so do *not* underscore-separate them
     score:
       - SHEPARD: 12000000
-      - GARRUS: 10000000
-      - GRUNT: 8000000
-      - TALI: 6000000
-      - JACK: 5000000
-      - ANDERSON: 4000000
-      - THANE: 3000000
-      - MORDIN: 2000000
-      - JACOB: 1000000
+      - GARRUS:   8000000
+      - GRUNT:    6000000
+      - TALI:     4000000
+      - JACK:     3000000
+      - ANDERSON: 2500000
+      - THANE:    2000000
+      - MORDIN:   1500000
+      - JACOB:    1000000
 
 timers:
   high_score_entry_timer:
