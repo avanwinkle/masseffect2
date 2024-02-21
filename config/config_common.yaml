@@ -39,6 +39,17 @@ auditor:
     # OTHER
     - tilt_warning
     - tilt
+  player:
+    - final_score_recruitgarrus
+    - final_score_recruitgrunt
+    - final_score_recruitjack
+    - final_score_recruitkasumi
+    - final_score_recruitlegion
+    - final_score_recruitmordin
+    - final_score_recruitsamara
+    - final_score_recruittali
+    - final_score_recruitzaeed
+    - final_score_recruitthane
 
 smart_virtual:
   console_log: basic

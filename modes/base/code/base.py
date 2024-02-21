@@ -66,6 +66,11 @@ class Base(Mode):
         priority=1998,
         expire="5s"
         )
+    
+    # Avoid a bunch of auditor handlers by posting directly
+    self.machine.auditor.audit_event(f"recruits_completed_{recruits_completed}")
+    # Track the total score for completing the mission
+    self.player[f"final_score_recruit{kwargs['squadmate']}"] = self.player[f"total_score_recruit{kwargs['squadmate']}"]
 
   def _check_medigel(self, **kwargs):
     del kwargs
@@ -84,16 +89,17 @@ class Base(Mode):
   def _on_mission_hit(self, **kwargs):
     del kwargs
     # For charity, include a bit of score even if the ultimate score doesn't get collected
-    self.player.add_with_kwargs("score",
-                                self.player['mission_shot_value'] // 100 * 100,
-                                source=self.player['mission_name'])
+    self._add_mission_score(self.player['mission_shot_value'] // 100 * 100,)
 
   def _on_mission_score(self, **kwargs):
     del kwargs
-    self.player.add_with_kwargs("score",
-                                self.player['temp_build_value'] // 100 * 100,
-                                source=self.player['mission_name'])
+    self._add_mission_score(self.player['temp_build_value'] // 100 * 100)
     self.player['temp_build_value'] = 0
+
+  def _add_mission_score(self, score):
+    mission_name = self.player['mission_name']
+    self.player.add_with_kwargs("score", score, source=mission_name)
+    self.player[f"total_score_{mission_name}"] += score
 
     # mission_collect_score.80:
     #   score: current_player.temp_build_value // 100 * 100
