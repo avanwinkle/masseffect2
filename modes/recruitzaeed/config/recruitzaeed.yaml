@@ -46,6 +46,7 @@ event_player:
       value: device.counters.zaeed_orbits_counter.value
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitzaeed
       env: bluesuns
       color: color_zaeed
       shot_profile: lane_shot_manual_finalshot
@@ -59,7 +60,8 @@ event_player:
   logicblock_zaeed_orbits_counter_complete:
     advance_mission_shots:
       state: pending
-  power_shots_final_hit: mission_collect_score, recruit_zaeed_complete
+  power_shots_final_hit.10: mission_collect_score
+  power_shots_final_hit.9: recruit_zaeed_complete
 
 counters:
   zaeed_orbits_counter:

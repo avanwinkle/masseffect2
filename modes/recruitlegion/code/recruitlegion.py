@@ -139,6 +139,8 @@ class RecruitLegion(Mode):
                 progress_points = 0
             player["heretic_progress"] = min(
                 player["heretic_progress"] + (progress_points * int(TOTAL_PROGRESS/60)), TOTAL_PROGRESS)
+            # Post a shot hit to award some points
+            self.machine.events.post("mission_shot_hit")
         self.debug_log("Shot {} was hit, clearing it.".format(shot_name))
         self._clear_shot(shot_name)
         shot.restart()

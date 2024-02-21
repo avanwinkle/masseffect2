@@ -67,10 +67,9 @@ event_player:
     # It's mean to enable the bonus shot with only a few seconds to spare :(
     - missiontimer_set_12
   # The bonus shot is worth another shot, collected immediately
-  heretic_jackpot_shot_hit:
-    - mission_shot_hit
-    - mission_collect_score
-    - recruit_legion_complete
+  heretic_jackpot_shot_hit.10: mission_shot_hit
+  heretic_jackpot_shot_hit.9: mission_collect_score
+  heretic_jackpot_shot_hit.8: recruit_legion_complete
   # If the mission times out but we are precomplete, count it as complete
   timer_missiontimer_complete{current_player.status_legion==4}:
     - recruit_legion_complete
@@ -88,14 +87,6 @@ light_player:
   mode_recruitlegion_started:
     light_backwall_ambient:
       color: color_legion
-
-counters:
-  hacking_counter:
-    starting_count: 0
-    direction: up
-    count_events:
-      - heretic_sequence_shots_lit_lane_hit
-    events_when_hit: mission_shot_hit
 
 variable_player:
   mode_recruitlegion_started:

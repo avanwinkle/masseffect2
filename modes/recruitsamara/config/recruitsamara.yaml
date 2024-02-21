@@ -29,6 +29,7 @@ event_player:
       instructions_sub: "Hit red sand targets\nto light lane shots"
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitsamara
       color: color_samara
       env: eclipse
       is_resumable: 1

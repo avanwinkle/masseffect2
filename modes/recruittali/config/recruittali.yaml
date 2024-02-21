@@ -29,6 +29,7 @@ event_player:
       instructions_sub: before it self-repairs
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruittali
       env: geth
       color: inherit
       shot_profile: colossus_profile

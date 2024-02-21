@@ -78,9 +78,8 @@ event_player:
     - play_cure_sound_1{count==3}
     - play_cure_sound_2{count==2}
     - play_fan_sound{count==1}
-  logicblock_cure_counter_complete:
-    - recruit_mordin_complete
-    - mission_collect_score
+  logicblock_cure_counter_complete.10: mission_collect_score
+  logicblock_cure_counter_complete.9: recruit_mordin_complete
 
 counters:
   # The counter lets us play the correct sound for each fan hit,

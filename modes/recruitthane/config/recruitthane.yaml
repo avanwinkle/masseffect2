@@ -28,6 +28,7 @@ event_player:
       instructions_sub: Orbits to cross the bridge
   mode_powers_started:
     set_mission_shots:
+      mission_name: recruitthane
       color: color_thane
       shot_profile: lane_shot_manual_finalshot
       env: eclipse
@@ -71,10 +72,9 @@ event_player:
   logicblock_thane_ascent_counter_complete:
     advance_mission_shots:
       state: pending
-  power_shots_final_hit:
-    - mission_shot_hit
-    - mission_collect_score
-    - recruit_thane_complete
+  power_shots_final_hit.10: mission_shot_hit
+  power_shots_final_hit.9: mission_collect_score
+  power_shots_final_hit.8: recruit_thane_complete
 
 counters:
   thane_ascent_counter:
