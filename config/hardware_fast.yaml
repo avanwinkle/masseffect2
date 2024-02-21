@@ -26,6 +26,7 @@ ball_devices:
     eject_targets: bd_plunger
     eject_timeouts: 3s
     eject_coil_jam_pulse: 32ms
+    eject_coil_reorder_pulse: 26ms
     # Commenting below to resolve jam switch not triggering
     # confirm_eject_switch: s_plunger_lane
     # confirm_eject_type: switch
