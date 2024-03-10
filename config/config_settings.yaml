@@ -58,6 +58,15 @@ settings:
     values:
       0: "Disabled"
       1: "Enabled"
+  enable_stats_for_nerds:
+    label: "Runtime Stats for Nerds"
+    settingType: standard
+    sort: 50
+    key_type: int
+    default: 0
+    values:
+      0: "Disabled"
+      1: "Enabled"
   # Game Settings
   intro_mb:
     label: "Intro Multiball"

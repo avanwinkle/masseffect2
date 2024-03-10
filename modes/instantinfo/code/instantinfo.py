@@ -96,7 +96,8 @@ class InstantInfo(Carousel):
         self.machine.events.post("cancel_stats")
         # Create a delay to enable the stats. Mode delays are
         # automatically cancelled when the mode ends.
-        self.delay.reset(name="instantinfo_stats", ms=5000, callback=self._show_stats)
+        if self.machine.settings.enable_stats_for_nerds:
+            self.delay.reset(name="instantinfo_stats", ms=5000, callback=self._show_stats)
 
     def _on_flipper_release(self, **kwargs):
         del kwargs
