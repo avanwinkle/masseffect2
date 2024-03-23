@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"mpfls.executable": "/Users/Anthony/mpf5/bin/mpfls"
+		"mpfls.executable": "/Users/anthony/venvs/mpfdev/bin/mpfls",
+		"python.defaultInterpreterPath": "/Users/anthony/venvs/mpfdev/bin/python"
 	}
 }

@@ -17,7 +17,13 @@ ball_devices:
     entrance_count_delay: 600ms # down from 900ms
     player_controlled_eject_event: force_plunger_launch
     ball_search_order: 1
+    # If a jam ejects two balls into the plunger, the auto-plunger
+    # won't be able to get them out
+    eject_coil_retry_pulse: 50ms
+    retries_before_increasing_pulse: 3
+    max_eject_attempts: 6
   bd_trough:
+    # debug: true
     ball_switches: s_trough1, s_trough2, s_trough3, s_trough4, s_trough5, s_trough6
     eject_coil: c_trough_eject
     tags: trough, home, drain
@@ -26,7 +32,7 @@ ball_devices:
     eject_targets: bd_plunger
     eject_timeouts: 3s
     eject_coil_jam_pulse: 32ms
-    eject_coil_reorder_pulse: 26ms
+    eject_coil_reorder_pulse: 32ms
     # Commenting below to resolve jam switch not triggering
     # confirm_eject_switch: s_plunger_lane
     # confirm_eject_type: switch
@@ -94,7 +100,7 @@ coils:
     default_hold_power: 0.125
   c_plunger:
     number: 1-1
-    default_pulse_ms: 21  # Decreased from 22 due to wear on the plunger lane
+    default_pulse_ms: 24  # Decreased from 22 due to wear, increased to 25 b/c its sluggish
     pulse_events: pulse_plunger
   c_trough_eject:
     number: 1-0

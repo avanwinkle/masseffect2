@@ -195,7 +195,7 @@ slides:
       text: Ball Jam in Trough
       style: header_sm, row_super
     - type: text
-      text: "Please contact a staff\nmember for assistance."
+      text: "Please power cycle the\nmachine to remedy."
       style: body_sm, row_sub
     - widget: background_console
   ball_search_slide:
@@ -213,6 +213,9 @@ slides:
     - type: text
       text: "Please contact a staff\nmember for assistance."
       style: body_sm, row_sub
+    - type: text
+      text: "(Are there two in the plunger lane?)"
+      style: body_xs, row_bottom
     - widget: background_console
   # door open
   meservice_door_open:

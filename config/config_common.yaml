@@ -107,6 +107,7 @@ virtual_platform_start_active_switches:
   - s_trough4
   - s_trough5
   - s_trough6
+  # - s_trough_jam
 
 game:
   balls_per_game: settings.balls_per_game

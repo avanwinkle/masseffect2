@@ -73,5 +73,5 @@ playfields:
     ball_search_block_events: flipper_cradle, service_mode_entered
     ball_search_unblock_events: flipper_cradle_release, service_mode_exited
     ball_search_phase_1_searches: 2
-    ball_search_phase_2_searches: 2
-    ball_search_phase_3_searches: 3
+    ball_search_phase_2_searches: 1
+    ball_search_phase_3_searches: 2
