@@ -77,7 +77,7 @@ class MCStats(McCustomCode):
     def _post_stats(self, **kwargs):
         del kwargs
         children = {}
-        for display in self.mc.displays:
+        for display in self.mc.displays.values():
             children[display.name] = 0
             for _ in display.walk():
                 children[display.name] += 1
