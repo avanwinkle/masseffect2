@@ -95,7 +95,7 @@ class LockHandler(Mode):
 
     def _handle_ball_enter(self, **kwargs):
         """ Logic for assessing desired behavior when a ball enters the physical ball lock device """
-        missions_available = self.machine.modes.field.active and self.player.available_missions > 0
+        missions_available = self.machine.modes['field'].active and self.player.available_missions > 0
         physical_balls_locked = self._bd_physical_lock.balls
         virtual_balls_locked = self._logicallockdevice.locked_balls
         self._will_lock_ball = self._logicallockdevice.enabled
@@ -122,7 +122,7 @@ class LockHandler(Mode):
         selection_event = "lockhandler_start_missionselect"
 
         # SUICIDE MISSION:
-        if self.machine.modes.suicide_base.active:
+        if self.machine.modes['suicide_base'].active:
             # Check if the ball hold is enabled, and don't bypass if it is
             if self._transition_hold.enabled:
                 self.log.info("Suicide Mission wants to hold a ball for transitioning, not going to bypass")
@@ -151,7 +151,7 @@ class LockHandler(Mode):
         # MULTIBALL AND MISSION
         # If a mission mode is active, bypass the lock if we have 2 balls locked already
         # (i.e. do not allow a ball to lock for a multiball to start)
-        elif not self.machine.modes.field.active and self._logicallockdevice.locked_balls == 2:
+        elif not self.machine.modes['field'].active and self._logicallockdevice.locked_balls == 2:
             self.log.info(" - Two balls are locked and field mode isn't active, bypassing lock post")
             self._bypass_lock()
             # Temporarily disable the lock, just in case the bypass post doesn't let a ball out
@@ -187,7 +187,7 @@ class LockHandler(Mode):
         # If no mission currently running (i.e. field mode is active) and a mission is available
         # unless the player has opted to bypass the missions (valid until a new mission is available),
         # or if Garrus/Samara is about to be (since the ball lock shot is also their mission light shot)
-        if self.machine.modes.field.active and \
+        if self.machine.modes['field'].active and \
                 ((self.player.status_garrus == 2 or self.player.status_samara == 2) or
                     (self.player.available_missions > 0 and self.player.bypass_missionselect == 0)):
             self.log.info(" - Field mode is active and missions are available, not going to bypass lock post")

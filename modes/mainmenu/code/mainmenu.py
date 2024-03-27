@@ -207,7 +207,7 @@ class MainMenu(Carousel):
 
     def _update_highlighted_item(self, direction=None):
         # If create mode is open, don't highlight anything
-        if self.machine.modes.createprofile.active:
+        if self.machine.modes['createprofile'].active:
             self.debug_log("Highlight selected but Create Profile active, so aborting")
             return
         self.debug_log("Highlight selected, look for the next event:")
@@ -307,7 +307,7 @@ class MainMenu(Carousel):
         del kwargs
 
         # Don't add players during profile creation, to free up the start button
-        if self.machine.modes.createprofile.active:
+        if self.machine.modes['createprofile'].active:
             # Instead, change the avatar!
             self._current_avatar = max((self._current_avatar % NUM_AVATARS) + 1, 1)
             self.machine.events.post("set_avatar", avatar=self._current_avatar)

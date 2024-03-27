@@ -22,7 +22,7 @@ class Service(BaseService):
         del kwargs
         self.add_mode_event_handler("trough_jammed_active", self._check_jam)
         self.add_mode_event_handler("trough_jammed_inactive", self._check_jam)
-        if self.machine.ball_devices.bd_trough.ball_count_handler.counter.is_jammed():
+        if self.machine.ball_devices['bd_trough'].ball_count_handler.counter.is_jammed():
             self._check_jam()
         # Re-post the ball search event since we missed it
         elif self.machine.ball_devices['playfield'].ball_search.started:
@@ -31,7 +31,7 @@ class Service(BaseService):
 
     def _check_jam(self, **kwargs):
         del kwargs
-        if self.machine.ball_devices.bd_trough.ball_count_handler.counter.is_jammed():
+        if self.machine.ball_devices['bd_trough'].ball_count_handler.counter.is_jammed():
             if self.jam_poll:
                 return
             self.machine.events.post("show_trough_jammed_active")

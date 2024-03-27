@@ -115,7 +115,7 @@ class MPFSquadmateHandlers(CustomCode):
             # If there's a squadmate to light, light them
             if mate:
                 self.machine.shots["recruit_{}_shot".format(mate)].enable()
-                self.machine.modes.field.add_mode_event_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
+                self.machine.modes['field'].add_mode_event_handler("recruit_{}_shot_hit".format(mate), self._on_hit, squadmate=mate)
                 # Disable the firewalker shot (in case it was enabled before collectorship)
                 self.machine.shots["fw_packet_{}".format(shot)].disable()
             # If the shot is firewalker-eligible, light it. This means the mate from it is recruited
@@ -370,7 +370,7 @@ class MPFSquadmateHandlers(CustomCode):
             if mate == self.machine.game.player["specialist"]:
                 mate_lists["specialist"].append(mate)
                 update_sqicons = True
-            elif status == 3 and not self.machine.modes.suicide_base.active:
+            elif status == 3 and not self.machine.modes['suicide_base'].active:
                 mate_lists["lit"].append(mate)
                 update_sqicons = True
             elif status == 4:

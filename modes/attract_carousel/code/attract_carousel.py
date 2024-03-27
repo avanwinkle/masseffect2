@@ -67,7 +67,7 @@ class AttractCarousel(Carousel):
         # TBD: is there a kwarg?
         del kwargs
         # Left flipper - nothing yet
-        if self.machine.switches.s_flipper_left.state:
+        if self.machine['switches'].s_flipper_left.state:
             return
         # Right flipper: stats
         self.machine.events.post("request_stats", update_interval=1)

@@ -202,6 +202,6 @@ class SlideQueuePlayer(CustomCode):
         del kwargs
         if not self._current_timeout:
             self.machine.events.post("slide_queue_clear")
-        elif self.machine.modes.base.stopping:
+        elif self.machine.modes['base'].stopping:
             # Always clear the queue on ball end
             self._clear_queue()

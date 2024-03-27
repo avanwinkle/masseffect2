@@ -9,7 +9,7 @@ class InstantInfo(Carousel):
     def mode_start(self, **kwargs):
         """Start mode: build the list of items in the carousel."""
         # No info during normandy attack
-        if self.machine.modes.normandyattack.active:
+        if self.machine.modes['normandyattack'].active:
             return
         self._all_items = self._build_items_list()
         self.add_mode_event_handler("flipper_cancel", self._on_flipper_cancel)
@@ -77,7 +77,7 @@ class InstantInfo(Carousel):
 
     def _find_current_mode(self):
         # Most likely: field
-        if self.machine.modes.field.active:
+        if self.machine.modes['field'].active:
             return
 
         # Next most likely: a recruit mission

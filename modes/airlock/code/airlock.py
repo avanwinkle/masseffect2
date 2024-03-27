@@ -63,11 +63,11 @@ class Airlock(Mode):
         # (double negative) so it can bail on the first *and* instead of processing
         # every *or*. So put them in order of most-likely-to-be-true.
         do_bypass = False
-        if not self.machine.multiball_locks.fmball_lock.enabled and \
-            not self.machine.ball_holds.captive_hold.enabled and \
-            not self.machine.ball_holds.store_hold.enabled and \
-            not self.machine.ball_holds.arrival_hold.enabled and \
-            not self.machine.ball_holds.sb_hold.enabled:
+        if not self.machine.multiball_locks['fmball_lock'].enabled and \
+            not self.machine.ball_holds['captive_hold'].enabled and \
+            not self.machine.ball_holds['store_hold'].enabled and \
+            not self.machine.ball_holds['arrival_hold'].enabled and \
+            not self.machine.ball_holds['sb_hold'].enabled:
                 do_bypass = True
 
         # Check if the captive ball is enabled, and suspend it
@@ -83,7 +83,7 @@ class Airlock(Mode):
             return
 
         # No balls? Longer pulse
-        if self.machine.ball_devices.bd_lock.balls==0:
+        if self.machine.ball_devices['bd_lock'].balls==0:
             self.debug_log("Bypass active and no balls held, long pulse enable.")
             self.machine.coils['c_lock_release'].timed_enable(timed_enable_ms=600)
         # Balls? Pulse with the default_timed_enable_ms
@@ -97,7 +97,7 @@ class Airlock(Mode):
     def _restore_captive(self, **kwargs):
         del kwargs
         # In case we lost a ball, don't restore the captive
-        if self.machine.ball_devices.bd_lock.balls>0:
+        if self.machine.ball_devices['bd_lock'].balls>0:
             self.machine.counters['captive_ball'].enable()
 
     def _set_multiball_color(self, **kwargs):

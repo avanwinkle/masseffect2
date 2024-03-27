@@ -85,7 +85,7 @@ class Powers(Mode):
             shot.disable()
 
         # LEGION special case: don't deal with shots
-        if self.machine.modes.recruitlegion.active:
+        if self.machine.modes['recruitlegion'].active:
             self.debug_log("Powers sees LEGION, aborting all shot management. {}".format(self.shots))
             return
 
@@ -373,11 +373,11 @@ class Powers(Mode):
         direction = "right" if kwargs.get("triggering_group") == 2 else "left"
         # SAMARA special case: rotate the target shots as well, so the player
         # doesn't get stuck with no more shots to light.
-        if self.machine.modes.recruitsamara.active:
+        if self.machine.modes['recruitsamara'].active:
             targets_group = self.machine.device_manager.collections["shot_groups"]["samara_targets"]
             targets_group.rotate(direction=direction)
         # LEGION special case: post an event so the mode can rotate the _significant_ticks
-        elif self.machine.modes.recruitlegion.active:
+        elif self.machine.modes['recruitlegion'].active:
             self.machine.events.post("powers_cloak_rotation", direction=direction)
         # ALL OTHER CASES rotate
         else:
