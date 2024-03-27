@@ -36,6 +36,10 @@ fast:
     ignore_reboot: true
   aud:
     optional: true
+    # FAST auto-detect only works on 921600-baud ports, so
+    # hard-code the port for the physical machine
+    port: /dev/ttyUSB4
+    baud: 230400
     headphones_amp_enabled: false
     link_main_to_main: false
     link_sub_to_main: false
