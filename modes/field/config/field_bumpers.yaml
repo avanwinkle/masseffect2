@@ -15,10 +15,10 @@ event_player:
   # Force an event to show n7/iff count when the first bumper hits
   # TBD if somebody else is listening for "hit" events we might get bad results
   slide_minerals_slide_active:
-    logicblock_n7_hits_counter_hit{device.achievements.normandyattack.state!="enabled"}:
+    logicblock_n7_hits_counter_hit{device.achievements["normandyattack"].state!="enabled"}:
       count:
         value: device.counters.n7_hits_counter.value
-    logicblock_iff_counter_hit{device.achievements.normandyattack.state=="enabled"}:
+    logicblock_iff_counter_hit{device.achievements["normandyattack"].state=="enabled"}:
       count:
         value: device.counters.iff_counter.value
 
@@ -45,14 +45,14 @@ counters:
 shots:
   n7_advance_shot:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: mode_field_started{device.achievements.normandyattack.state!="enabled"}
+    enable_events: mode_field_started{device.achievements["normandyattack"].state!="enabled"}
     # Won't automatically re-disable on mode start, so explicitly disable
     disable_events:
       - achievement_normandyattack_state_enabled
-      - mode_field_started{device.achievements.normandyattack.state=="enabled"}
+      - mode_field_started{device.achievements["normandyattack"].state=="enabled"}
   iff_advance_shot:
     switches: s_bumper_bottom, s_bumper_right, s_bumper_left
-    enable_events: mode_field_started{device.achievements.normandyattack.state=="enabled"}
+    enable_events: mode_field_started{device.achievements["normandyattack"].state=="enabled"}
     disable_events: logicblock_iff_counter_complete
 
 # Minerals slide is in field, because we have powers during missions

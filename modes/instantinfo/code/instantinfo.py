@@ -31,7 +31,7 @@ class InstantInfo(Carousel):
 
         # MULTIBALL
         if not current_mode or current_mode in ["overlord", "arrival"]:
-            items.append("overlord" if achievements.arrival.state == "disabled" else "arrival")
+            items.append("overlord" if achievements["arrival"].state == "disabled" else "arrival")
 
         # SUICIDE PROGRESS
         if not current_mode or current_mode == "collectorship_base":
@@ -43,7 +43,7 @@ class InstantInfo(Carousel):
                 items.append("collectorship_praetorian")
 
         if not current_mode or current_mode == "derelictreaper":
-            if achievements.derelictreaper.state == "disabled":
+            if achievements["derelictreaper"].state == "disabled":
                 items.append("derelictreaper_disabled")
             else:
                 items.append("derelictreaper_enabled")

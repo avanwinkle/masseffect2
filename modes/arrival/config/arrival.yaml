@@ -43,12 +43,12 @@ event_player:
     - enable_arrival_ramps{not device.counters.arrival_ramps_counter.completed and current_player.temp_multiplier==0}
   multiball_arrival_multiball_ended:
     # If the multiball ended before the hold is enabled, enable it
-    - arrival_stage_escape{not device.ball_holds.arrival_hold.enabled}
+    - arrival_stage_escape{not device.ball_holds["arrival_hold"].enabled}
   # If all balls drains and none are in the hold, that's the end of the mode
   balls_in_play{balls==0}:
     - stop_mode_arrival
   # If a ball drains and all the other "in play" balls are held, that's a success!
-  balls_in_play{balls>0 and balls==device.ball_holds.arrival_hold.balls_held}:
+  balls_in_play{balls>0 and balls==device.ball_holds["arrival_hold"].balls_held}:
     - arrival_complete
     - arrival_complete_needs_save
   ball_hold_arrival_hold_held_ball{total_balls_held==game.balls_in_play}:
@@ -92,7 +92,7 @@ event_player:
   # ball_save_arrival_save_saving_ball{balls>0}:
   arrival_explosion_complete.2:
     # Use the second event so we only award levelup the first time it's completed
-    - award_arrival_levelup{device.achievements.arrival.state!="completed"}
+    - award_arrival_levelup{device.achievements["arrival"].state!="completed"}
     - flippers_on
   arrival_explosion_complete.1:
     - stop_mode_arrival
@@ -156,8 +156,8 @@ variable_player:
     temp_hurryup_value: current_player.temp_build_value
   # Completing the mode by hitting the escape shot *also* scores for the number of balls held
   ball_hold_arrival_escape_hold_held_ball:
-    score: current_player.temp_build_value * device.ball_holds.arrival_hold.balls_held
-    temp_hurryup_value: current_player.temp_build_value * device.ball_holds.arrival_hold.balls_held
+    score: current_player.temp_build_value * device.ball_holds["arrival_hold"].balls_held
+    temp_hurryup_value: current_player.temp_build_value * device.ball_holds["arrival_hold"].balls_held
   # Base scoring per frenzy hit, doubles with each phase
   frenzy_hit:
     score: machine.base_points // 100 * (2^device.counters.arrival_stage_counter.value)

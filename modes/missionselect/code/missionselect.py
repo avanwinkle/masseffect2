@@ -65,14 +65,14 @@ class MissionSelect(Carousel):
         items = []
 
         # If Suicide Mission is ready, it goes first
-        if achievements.suicidemission.state == "enabled":
+        if achievements["suicidemission"].state == "enabled":
             # On high flow, go to suicide mission immediately
             if player["high_flow"]:
                 return ['suicide']
             items.append('suicide')
         # Or if Derelict Reaper is available and not completed, it goes first
-        elif achievements.derelictreaper.state == "enabled" or (
-            ALLOW_DERELICTREAPER_REPLAY and achievements.derelictreaper.state == "started"
+        elif achievements["derelictreaper"].state == "enabled" or (
+            ALLOW_DERELICTREAPER_REPLAY and achievements["derelictreaper"].state == "started"
         ):
             items.append('derelictreaper')
             # On casual mode or high_flow, force the player to play derelict reaper
@@ -99,7 +99,7 @@ class MissionSelect(Carousel):
             return items
 
         # If allowed, the collectorship can be replayed (pre-derelictreaper)
-        if ALLOW_COLLECTORSHIP_REPLAY and achievements.collectorship.state == "started":
+        if ALLOW_COLLECTORSHIP_REPLAY and achievements["collectorship"].state == "started":
             items.append('collectorship')
 
         # "Pass" is the last item in the menu (not available in casual mode except for suicide)

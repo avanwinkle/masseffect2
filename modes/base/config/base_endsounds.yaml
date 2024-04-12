@@ -20,7 +20,7 @@ sound_player:
     david_sqrt_seemed_harmless:
       max_queue_time: 1s
       delay: 3500ms
-  stop_mode_collectorship_base{device.achievements.collectorship.state=="completed"}: shepard_everyone_on_to_the_normandy
+  stop_mode_collectorship_base{device.achievements["collectorship"].state=="completed"}: shepard_everyone_on_to_the_normandy
 
 sound_pools:
   # N7 Assignments

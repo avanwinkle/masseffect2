@@ -45,7 +45,7 @@ event_player:
   collectorship_praetorian_complete:
     - start_mode_collectorship_ambush
   # If the player drains to one ball AFTER defeating the praetorian, stop the mode
-  multiball_collectorship_multiball_ended.1{device.achievements.collectorship.state=="completed"}:
+  multiball_collectorship_multiball_ended.1{device.achievements["collectorship"].state=="completed"}:
     - stop_mode_harbinger
     - stop_mode_collectorship_ambush
     - stop_mode_collectorship_husk
@@ -62,7 +62,7 @@ event_player:
       mission_name: Collector Ship Escaped
       portrait: collectorship_complete
       is_failure:
-        value: 0 if device.achievements.collectorship.state=="completed" else 1
+        value: 0 if device.achievements["collectorship"].state=="completed" else 1
         type: int
 
 multiballs:

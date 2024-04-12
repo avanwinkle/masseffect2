@@ -15,7 +15,7 @@ config:
 
 event_player:
   mode_base_started.20:
-    - start_mode_suicide_base{device.achievements.suicidemission.state=="started"}
+    - start_mode_suicide_base{device.achievements["suicidemission"].state=="started"}
     - start_mode_lockhandler
     - start_mode_environment
     - start_mode_extraball{current_player.extra_balls_available}
@@ -28,9 +28,9 @@ event_player:
     - play_shoot_again{is_extra_ball}
   # Give skillshot a higher priority than global, to avoid race condition with planets
   mode_base_started.10{current_player.balls_played>0 or not settings.intro_mb}:
-    - start_mode_skillshot{device.achievements.suicidemission.state!="started"}
+    - start_mode_skillshot{device.achievements["suicidemission"].state!="started"}
   mode_base_started.9{current_player.balls_played>0 or not settings.intro_mb}:
-    - start_mode_global{device.achievements.suicidemission.state!="started"}
+    - start_mode_global{device.achievements["suicidemission"].state!="started"}
   # Fun Normandy attack multiball shenanigans to start
   mode_base_started.10{current_player.balls_played==0 and settings.intro_mb==1}:
     - start_mode_intromb
@@ -124,8 +124,8 @@ event_player:
   recruit_advance: defer_recruit_advance_score|1s
   fast_rgb_rebooted: emergency_fast_rgb_lighting|2s
   mode_overlord_stopped:
-    - play_overlord_outro_complete{device.achievements.overlord.state=="completed"}
-    - play_overlord_outro_incomplete{device.achievements.overlord.state!="completed"}
+    - play_overlord_outro_complete{device.achievements["overlord"].state=="completed"}
+    - play_overlord_outro_incomplete{device.achievements["overlord"].state!="completed"}
 
 ball_saves:
   default:
@@ -326,7 +326,7 @@ show_player:
   mode_base_started{current_player.extra_balls}: extra_ball_available
   player_extra_balls{player_num==current_player.number and value>0}: extra_ball_available
   # Don't play an intro show if we have a mission to resume or are in suicide mission
-  play_intro_show{current_player.resume_mission==" " and device.achievements.suicidemission.state=="disabled"}:
+  play_intro_show{current_player.resume_mission==" " and device.achievements["suicidemission"].state=="disabled"}:
     introshow_missions:
       loops: 0
   play_shoot_again:
@@ -406,9 +406,9 @@ shows:
           expire: 5s
     - time: 1
       events:
-        - play_gameintro_four_dossiers{current_player.ball==1 and current_player.casual and device.achievements.collectorship.state=="disabled"}
-        - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual and device.achievements.collectorship.state=="disabled"}
-        - play_gameintro_long{current_player.ball==1 and device.achievements.collectorship.state!="disabled"}
+        - play_gameintro_four_dossiers{current_player.ball==1 and current_player.casual and device.achievements["collectorship"].state=="disabled"}
+        - play_gameintro_five_dossiers{current_player.ball==1 and not current_player.casual and device.achievements["collectorship"].state=="disabled"}
+        - play_gameintro_long{current_player.ball==1 and device.achievements["collectorship"].state!="disabled"}
         - play_gameintro_short{current_player.ball==3}
   introshow_shoot_again:
     - time: 0
@@ -596,9 +596,9 @@ sound_pools:
     track: voice
     type: random
     sounds:
-      - illusive_more_dossiers{device.achievements.collectorship.state=="disabled"}
-      - miranda_more_recruiting_options{device.achievements.collectorship.state!="disabled"}
-      - shepard_more_people_we_have_the_better{device.achievements.collectorship.state!="disabled"}
+      - illusive_more_dossiers{device.achievements["collectorship"].state=="disabled"}
+      - miranda_more_recruiting_options{device.achievements["collectorship"].state!="disabled"}
+      - shepard_more_people_we_have_the_better{device.achievements["collectorship"].state!="disabled"}
       - illusive_your_team_will_need_to_be_strong
   gameintro_short:
     track: voice

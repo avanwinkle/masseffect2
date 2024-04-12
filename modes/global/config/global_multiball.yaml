@@ -16,14 +16,14 @@ event_player:
   # This needs to be in event_player because mpf-mc controls sound_player and
   # doesn't have access to machine modes
   fmball_lightshot_hit:
-    - play_overlord_hit_sound{device.achievements.arrival.state=="disabled"}
-    - play_arrival_hit_sound{device.achievements.arrival.state!="disabled"}|100ms
+    - play_overlord_hit_sound{device.achievements["arrival"].state=="disabled"}
+    - play_arrival_hit_sound{device.achievements["arrival"].state!="disabled"}|100ms
   fmball_lightshot_unlit_hit{not device.multiball_locks.fmball_lock.enabled}:
     # If overlord has not been played, a single hit will light. (Arrival always takes both)
     # We know a mode has been played if it is "stopped" rather than "enabled"
-    - enable_fmball_lock{device.achievements.overlord.state=="enabled" and device.achievements.arrival.state=="disabled"}
+    - enable_fmball_lock{device.achievements["overlord"].state=="enabled" and device.achievements["arrival"].state=="disabled"}
     # Try this: on normal difficulty, arrival takes one bank to light the first time
-    # - enable_fmball_lock{device.achievements.arrival.state=="enabled" and current_player.difficulty==0}
+    # - enable_fmball_lock{device.achievements["arrival"].state=="enabled" and current_player.difficulty==0}
   # If the current multiball HAS been played, only a complete shot group will re-light
   fmball_lightshot_complete{state=='lit' and not device.multiball_locks.fmball_lock.enabled}:
     - enable_fmball_lock
@@ -37,11 +37,11 @@ event_player:
   # Start the mode on final lock, using a deferred relay event to check for store.
   # Airlock will delay for queued slides and the mode will play the cineanim to overlay music into gameplay
   advance_fmball_lock{device.multiball_locks.fmball_lock.locked_balls==3}:
-    - start_mode_overlord{device.achievements.arrival.state=="disabled"}
-    - start_mode_arrival{device.achievements.arrival.state!="disabled"}
+    - start_mode_overlord{device.achievements["arrival"].state=="disabled"}
+    - start_mode_arrival{device.achievements["arrival"].state!="disabled"}
 
   # QUEUE SLIDES
-  enable_fmball_lock.1{mode.field.active and device.achievements.arrival.state=="disabled"}:
+  enable_fmball_lock.1{mode.field.active and device.achievements["arrival"].state=="disabled"}:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: overlord_light_(locked_balls)
@@ -52,7 +52,7 @@ event_player:
         # Using bd_lock.balls includes balls being ejected, which miscounts. Use locked_balls instead?
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-  enable_fmball_lock.2{mode.field.active and device.achievements.arrival.state!="disabled"}:
+  enable_fmball_lock.2{mode.field.active and device.achievements["arrival"].state!="disabled"}:
     queue_slide:
       slide: fmball_lock_lit_slide
       portrait: arrival_light_(locked_balls)
@@ -145,12 +145,12 @@ light_player:
       fade: 5s
 
 blinkenlight_player:
-  player_shot_fmball_lock_shot_enabled{value==True and device.achievements.arrival.state=="disabled"}:
+  player_shot_fmball_lock_shot_enabled{value==True and device.achievements["arrival"].state=="disabled"}:
     airlock_blinken:
       action: add
       color: color_overlord
       key: color_mball
-  player_shot_fmball_lock_shot_enabled{value==True and device.achievements.arrival.state!="disabled"}:
+  player_shot_fmball_lock_shot_enabled{value==True and device.achievements["arrival"].state!="disabled"}:
     airlock_blinken:
       action: add
       color: color_arrival
@@ -159,12 +159,12 @@ blinkenlight_player:
     airlock_blinken:
       action: remove
       key: color_mball
-  restore_fmball_lock{device.achievements.arrival.state=="disabled"}:
+  restore_fmball_lock{device.achievements["arrival"].state=="disabled"}:
     airlock_blinken:
       action: add
       color: color_overlord
       key: color_mball
-  restore_fmball_lock{device.achievements.arrival.state!="disabled"}:
+  restore_fmball_lock{device.achievements["arrival"].state!="disabled"}:
     airlock_blinken:
       action: add
       color: color_arrival
@@ -185,12 +185,12 @@ show_player:
       speed: 10
       show_tokens:
         color: (current_player.color_mball)
-  play_queued_slide_fmball_ball_locked_slide{device.achievements.arrival.state=="disabled"}:
+  play_queued_slide_fmball_ball_locked_slide{device.achievements["arrival"].state=="disabled"}:
     lock_sweep_overlord:
       priority: 10000
       speed: 30
       loops: 1
-  play_queued_slide_fmball_ball_locked_slide{device.achievements.arrival.state!="disabled"}:
+  play_queued_slide_fmball_ball_locked_slide{device.achievements["arrival"].state!="disabled"}:
     lock_sweep_arrival:
       priority: 10000
       speed: 30

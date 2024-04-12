@@ -83,10 +83,10 @@ event_player:
   # Frenzy mode must be completed AND a ball must be held in order to enable the core
   reaper_lock_shot_hit{device.counters.reaperhusk_counter.completed}:
     - enable_reapercore
-  logicblock_reaperhusk_counter_complete{device.ball_holds.captive_hold.balls_held==0}:
+  logicblock_reaperhusk_counter_complete{device.ball_holds["captive_hold"].balls_held==0}:
     set_reaper_instructions:
       instructions_main: Expose the Core
-  logicblock_reaperhusk_counter_hit{remaining<=0 and device.ball_holds.captive_hold.balls_held>0}:
+  logicblock_reaperhusk_counter_hit{remaining<=0 and device.ball_holds["captive_hold"].balls_held>0}:
     - enable_reapercore
   ball_hold_captive_hold_full{device.counters.reaperhusk_counter.value<=0}:
     - enable_reapercore
@@ -100,9 +100,9 @@ event_player:
     # If we destroy the core and there's only one ball in play, end the mode
     - stop_mode_derelictreaper{game.balls_in_play==1}
   # If the multiball ends and a ball is captive, release it and continue the mode
-  multiball_reapercoremb_ended.1{device.ball_holds.captive_hold.balls_held>0}: release_captive_hold
+  multiball_reapercoremb_ended.1{device.ball_holds["captive_hold"].balls_held>0}: release_captive_hold
   # If the multiball ends with no captive ball and we've already destroyed the core, end the mode
-  multiball_reapercoremb_ended.2{device.achievements.derelictreaper.state=="completed" and device.ball_holds.captive_hold.balls_held==0}: stop_mode_derelictreaper
+  multiball_reapercoremb_ended.2{device.achievements["derelictreaper"].state=="completed" and device.ball_holds["captive_hold"].balls_held==0}: stop_mode_derelictreaper
   # If the ball drains and all shots have been hit, "complete" the achievement without jackpot
   ball_will_end{device.counters.reapercore_counter.value==0}: derelictreaper_complete
   # Award whatever was accumulated when the mode ends
@@ -113,7 +113,7 @@ event_player:
       mission_name: Reaper IFF Acquired
       portrait: derelictreaper_complete
       is_failure:
-        value: 0 if device.achievements.derelictreaper.state=="completed" else 1
+        value: 0 if device.achievements["derelictreaper"].state=="completed" else 1
         type: int
 
 counters:

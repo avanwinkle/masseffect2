@@ -56,7 +56,7 @@ class Field(Mode):
                 ))
 
         # Shadowbroker
-        is_sbhold = self.machine.ball_holds.sb_hold.enabled
+        is_sbhold = self.machine.ball_holds["sb_hold"].enabled
         if self.player.state_machine_shadowbroker=="vasir":
             self._hints.append((
                 "SHADOW BROKER",

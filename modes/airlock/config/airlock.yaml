@@ -27,11 +27,11 @@ event_player:
     - flippers_on
   # Relay these events to be agnostic with lockhandler
   advance_fmball_lock:
-    overlord_ball_will_lock{device.achievements.arrival.state=="disabled"}:
+    overlord_ball_will_lock{device.achievements["arrival"].state=="disabled"}:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
-    arrival_ball_will_lock{device.achievements.arrival.state!="disabled"}:
+    arrival_ball_will_lock{device.achievements["arrival"].state!="disabled"}:
       total_balls_locked:
         value: device.multiball_locks.fmball_lock.locked_balls
         type: int
@@ -47,12 +47,12 @@ event_player:
     - enable_captive_2{device.ball_devices.bd_lock.balls==2}
     - enable_captive_3{device.ball_devices.bd_lock.balls==3}
   # Fire the hold post to capture a ball
-  s_left_ramp_exit_active{device.ball_holds.missionselect_hold.enabled or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}:
-    - fire_hold_post{current_player.high_flow==0 or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}
-    - start_mode_missionselect{current_player.high_flow==1 and device.ball_holds.missionselect_hold.enabled}
+  s_left_ramp_exit_active{device.ball_holds["missionselect_hold"].enabled or device.ball_holds["suicide_hold"].enabled or device.ball_holds["arrival_escape_hold"].enabled}:
+    - fire_hold_post{current_player.high_flow==0 or device.ball_holds["suicide_hold"].enabled or device.ball_holds["arrival_escape_hold"].enabled}
+    - start_mode_missionselect{current_player.high_flow==1 and device.ball_holds["missionselect_hold"].enabled}
   recruit_lit{squadmate=="garrus" or squadmate=="samara"}:
-    - fire_hold_post{current_player.high_flow==0 or device.ball_holds.suicide_hold.enabled or device.ball_holds.arrival_escape_hold.enabled}
-    - start_mode_missionselect{current_player.high_flow==1 and device.ball_holds.missionselect_hold.enabled}
+    - fire_hold_post{current_player.high_flow==0 or device.ball_holds["suicide_hold"].enabled or device.ball_holds["arrival_escape_hold"].enabled}
+    - start_mode_missionselect{current_player.high_flow==1 and device.ball_holds["missionselect_hold"].enabled}
   # Clear extraneous recruit slides from the queue
   mode_missionselect_will_start: clear_recruit_slide_queue
   mode_store_will_start: clear_recruit_slide_queue
