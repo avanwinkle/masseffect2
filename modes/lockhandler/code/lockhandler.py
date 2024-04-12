@@ -169,7 +169,7 @@ class LockHandler(Mode):
             future_locked_balls = self._logicallockdevice.locked_balls+1
 
             # **Warning** This is a hard-coded conditional, which shouldn't be in a python file
-            fmball = "overlord" if self.machine.device_manager.collections["achievements"].arrival.state == "disabled" else "arrival"
+            fmball = "overlord" if self.machine.device_manager.collections["achievements"]["arrival"].state == "disabled" else "arrival"
             # Show the slide for the upcoming ball while we wait for it to settle into the device
             self.machine.events.post("lockhandler_{}_ball_will_lock".format(fmball),
                                      total_balls_locked=future_locked_balls,

@@ -39,7 +39,7 @@ class Airlock(Mode):
 
     def _find_devices(self):
         # We need a pointer to the physical ball device to count physically locked balls
-        for device in self.machine.ball_devices:
+        for device in self.machine.ball_devices.values():
             if device.name == self.settings['ball_device']:
                 self._bd_physical_lock = device
                 break
@@ -102,7 +102,7 @@ class Airlock(Mode):
 
     def _set_multiball_color(self, **kwargs):
         # Re-define the named_color according to which multiball it is
-        color = "color_overlord" if self.machine.device_manager.collections["achievements"].arrival.state == "disabled" else "color_arrival"
+        color = "color_overlord" if self.machine.device_manager.collections["achievements"]["arrival"].state == "disabled" else "color_arrival"
         self.machine.game.player["color_mball"] = color
 
     def _post_event(self, event, **kwargs):

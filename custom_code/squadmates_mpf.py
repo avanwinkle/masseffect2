@@ -101,7 +101,7 @@ class MPFSquadmateHandlers(CustomCode):
         self._play_squadmates_show()
         player = self.machine.game.player
         is_post_collectorship = self.machine.device_manager.collections["achievements"] \
-            .collectorship.state not in ("disabled", "enabled")
+            ["collectorship"].state not in ("disabled", "enabled")
         # Enable the shots we need
         for mate1, mate2, fw, shot in MATE_PAIRS:
             mate = None
