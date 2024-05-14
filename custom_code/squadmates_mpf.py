@@ -343,7 +343,7 @@ class MPFSquadmateHandlers(CustomCode):
         # See if we had previously failed the Suicide Mission, and if so, do we now
         # have enough tech/biotic squadmates to try again?
         achs = self.machine.device_manager.collections["achievements"]
-        if (achs.normandyattack.state == "completed" and achs.suicidemission.state == "disabled"):
+        if (achs['normandyattack'].state == "completed" and achs['suicidemission'].state == "disabled"):
             self.log.debug("Recruit successful, should we re-enable the suicide mission? %s techs, %s biotics",
                            len(SquadmateStatus.available_techs(player)),
                            len(SquadmateStatus.available_biotics(player)))
