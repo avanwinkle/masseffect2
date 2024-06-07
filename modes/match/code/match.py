@@ -28,6 +28,14 @@ class Match(MatchBase):
         self.add_mode_event_handler("match_has_match", self._set_match, is_match=True, priority=9000)
         self.add_mode_event_handler("timer_match_timer_tick", self._on_tick)
 
+    async def _run(self) -> None:
+        """Run match mode."""
+        # If match is disabled, no match
+        if not self.machine.settings.get_setting_value("enable_match"):
+            return
+
+        super()._run()
+
     def _on_tick(self, **kwargs):
         if self.total_ticks == 30:
             # match_number is an int, force double-zero if it's zero
