@@ -118,7 +118,6 @@ class MCSquadmateHandlers(McCustomCode):
         # Find the current target
         available_mates = SquadmateStatus.available_mates(player)
 
-
         first_mate = player["selected_mate_one"]
         second_mate = player["selected_mate_two"]
         idx_one = available_mates.index(first_mate)

@@ -12,6 +12,7 @@ CASUAL_UNLOCKS = ("grunt", "jack", "garrus", "kasumi", "mordin")
 UNLOCK_WEIGHTS = (3, 3, 3, 1, 3)
 
 def _mate_status_is(player, squadmate, status):
+    # A bug exists where player can be None. Figure out how?!
     return player["status_{}".format(squadmate)] == status
 
 

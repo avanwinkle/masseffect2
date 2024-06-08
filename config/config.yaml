@@ -52,7 +52,9 @@ custom_code:
   - custom_code.slide_queue_player.SlideQueuePlayer
   - custom_code.research.Research
   - custom_code.version_checker.VersionChecker
+  - custom_code.debugger.DebuggerModule
 
 mc_custom_code:
   - custom_code.mpf_stats.MCStats
   - custom_code.squadmates_mc.MCSquadmateHandlers
+  - custom_code.debugger.DebuggerModuleMc

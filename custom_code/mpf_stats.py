@@ -63,7 +63,7 @@ class MPFStats(CustomCode):
             "balls_played": f"{self.machine.variables.get_machine_var('balls_played_since_launch')}",
             "games_played": f"{self.machine.variables.get_machine_var('games_played_since_launch')}",
             "audit": f"{earnings.get('3 Total Paid Games',0)} / {earnings.get('2 Total Earnings Dollars',0)}",
-            "mpf_handlers": len(self.machine.events.registered_handlers),
+            "mpf_handlers": str(len(self.machine.events.registered_handlers)),
         }
         self.machine.events.post("stats_for_nerds", **stats)
         self.machine.events.post("request_mc_stats")
