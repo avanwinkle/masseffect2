@@ -21,17 +21,17 @@ high_score:
   _overwrite: true
   enter_initials_timeout: 60s
   award_slide_display_time: 8s
-  categories: !!omap
-    - score:
-        - GRAND CHAMPION
-        - HIGH SCORE 1
-        - HIGH SCORE 2
-        - HIGH SCORE 3
-        - HIGH SCORE 4
-        - HIGH SCORE 5
-        - HIGH SCORE 6
-        - HIGH SCORE 7
-        - HIGH SCORE 8
+  categories:
+    score:
+      - GRAND CHAMPION
+      - HIGH SCORE 1
+      - HIGH SCORE 2
+      - HIGH SCORE 3
+      - HIGH SCORE 4
+      - HIGH SCORE 5
+      - HIGH SCORE 6
+      - HIGH SCORE 7
+      - HIGH SCORE 8
   defaults:
     # These values are not parsed by python when copied to the default
     # high_scores file, so do *not* underscore-separate them
