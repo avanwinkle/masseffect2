@@ -4,7 +4,7 @@
 tilt:
   warnings_to_tilt: 4
   multiple_hit_window: 3s
-  settle_time: 5s
+  settle_time: 8s
 
 show_player:
   tilt_warning:
