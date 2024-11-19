@@ -237,6 +237,10 @@ class SaveCareer(CustomCode):
     def _fetch_careerdata(self, career_name):
         if not self._career_data.get(career_name):
             with open(self._get_filename(career_name)) as f:
-                self._career_data[career_name] = json.load(f)
+                try:
+                    career_data = json.load(f)
+                    self._career_data[career_name] = career_data
+                except json.decoder.JSONDecodeError:
+                    self.log.error("Error decoding career file %s, will be ignored.", f)
             f.close()
         return self._career_data[career_name]

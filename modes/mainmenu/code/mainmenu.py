@@ -109,7 +109,12 @@ class MainMenu(Carousel):
             for file in files:
                 if file.endswith(".json") and not file.endswith(".pinstrat.json"):
                     with open("{}/{}".format(path, file)) as f:
-                        career = json.load(f)
+                        try:
+                            career = json.load(f)
+                        except json.decoder.JSONDecodeError:
+                            self.error_log("Error decoding career file %s, will be ignored.", f)
+                            f.close()
+                            continue
                         # Rudimentary validation, at least what we need to get started
                         if career["career_name"] and career["last_played"]:
                             if career["career_name"] in already_chosen:
@@ -126,7 +131,7 @@ class MainMenu(Carousel):
                                 self.machine.variables.get_machine_var("last_career_player_{}"
                                                                        .format(player_num)):
                                 self._selected_career = career
-                    f.close()
+                        f.close()
 
         # Sort by the date last played (newest first)
         self.careers.sort(key=itemgetter("last_played"), reverse=True)
