@@ -51,7 +51,6 @@ custom_code:
   - custom_code.save_career.SaveCareer
   - custom_code.slide_queue_player.SlideQueuePlayer
   - custom_code.research.Research
-  - custom_code.version_checker.VersionChecker
   - custom_code.debugger.DebuggerModule
 
 mc_custom_code:

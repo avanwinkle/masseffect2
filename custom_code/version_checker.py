@@ -4,7 +4,7 @@
 from mpf.core.custom_code import CustomCode
 from mpf._version import __version__ as mpfversion
 
-REQUIRED_MPF_VERSION = "0.57.1"
+REQUIRED_MPF_VERSION = "0.57.3.dev1"
 
 
 class VersionChecker(CustomCode):

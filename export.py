@@ -19,7 +19,6 @@ try:
     from mpf._version import __version__ as mpfversion
 except ModuleNotFoundError as e:
     raise ModuleNotFoundError("Unable to find MPF. Please verify pypy or virtual environment.")
-from custom_code.version_checker import REQUIRED_MPF_VERSION as me2version
 
 DEST_PATH = "dist"
 ASSET_FOLDERS = ("fonts", "images", "sounds", "videos")
@@ -155,9 +154,6 @@ def generate_packages():
     return package_list
 
 def main():
-    print(f'Found MPF version {mpfversion} and ME2 version {me2version}')
-    if mpfversion != me2version:
-        raise ValueError(f"Version mismatch! MPF {mpfversion} vs ME2 {me2version}")
     generate_tree()
     mpf_path = os.path.dirname(mpf.__file__)
     log.info("Generating production bundle at path %s", os.getcwd())

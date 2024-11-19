@@ -58,6 +58,7 @@ smart_virtual:
 mpf:
   default_pulse_ms: 10
   report_crashes: never
+  min_mpf_version: 0.57.3
 
 mpf-mc:
   fps: 30
