@@ -118,7 +118,7 @@ settings:
     values:
       0: "Persist Bypass"
       1: "Always Ask"
-      2: "Force Selection"
+      2: "Disable Bypass"
   free_starting_mission:
     label: "Initial Mission Lit"
     settingType: game
