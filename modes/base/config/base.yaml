@@ -26,6 +26,8 @@ event_player:
     # Disable this line for debug speed
     - play_intro_show{not settings.intro_mb and not is_extra_ball}
     - play_shoot_again{is_extra_ball}
+    # Be safe
+    - disable_gates
   # Give skillshot a higher priority than global, to avoid race condition with planets
   mode_base_started.10{current_player.balls_played>0 or not settings.intro_mb}:
     - start_mode_skillshot{device.achievements["suicidemission"].state!="started"}
@@ -42,6 +44,7 @@ event_player:
     - flippers_on
     - play_intro_show
   mode_base_will_stop:
+    - disable_gates
     - stop_mode_global
     - stop_mode_lockhandler
     - stop_mode_environment

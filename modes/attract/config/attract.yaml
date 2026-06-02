@@ -8,6 +8,8 @@ event_player:
     - start_button_flash{machine.free_play or machine.credits_whole_num}|500ms
     # It looks nicer to have the dropbank up
     - reset_dropbank|1s
+    # Just be safe
+    - disable_gates
   machine_var_credits_whole_num:
     - start_button_flash{value>0}
 
